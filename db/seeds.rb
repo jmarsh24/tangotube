@@ -61,7 +61,7 @@ puts "There are now #{Follower.count} followers in the database."
 # end
 # puts "There are now #{Video.count} videos in the database."
 
-Seeding data with relations 
+# Seeding data with relations 
 CSV.foreach('data/tangodb-datasets/videos_w_relation_seed.csv', headers: true) do |column|
   title          = column[1]
   youtube_id     = column[2]

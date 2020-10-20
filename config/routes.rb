@@ -8,11 +8,7 @@ Rails.application.routes.draw do
 
   post 'savenew', to: 'users#savenew'
 
-  resources :videos do
-    collection do
-    get "search", constraints: lambda { |request| request.xhr? }
-    end
-  end
+  resources :videos
   
   namespace :admin do
     resources :users

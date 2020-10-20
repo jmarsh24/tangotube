@@ -32,7 +32,6 @@ export default class extends Controller {
     this.selectTarget.addEventListener('change', this.refresh)
     this.selectTarget.addEventListener('addItem', this.add)
     this.selectTarget.addEventListener('removeItem', this.remove)
-    console.log(this.selectTarget)
   }
 
   disconnect() {

@@ -32,7 +32,7 @@ class VideosController < ApplicationController
     @active_video = Video.find_by(youtube_id: @active_youtube_id)
 
     # Populate Filters 
-    @videotypes  = Videotype.all
+    @videotypes  = @videos_filtered.pluck(:"videotypes.name").compact.uniq.sort
     @leaders     = @videos_filtered.pluck(:"leaders.name").compact.uniq.sort
     @followers   = @videos_filtered.pluck(:"followers.name").compact.uniq.sort
     @events      = @videos_filtered.pluck(:"events.name").compact.uniq.sort

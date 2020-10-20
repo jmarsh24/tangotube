@@ -3,84 +3,77 @@
   <button type='submit' data-action="toggle#toggle" class="filter_button">
     <i class="fas fa-filter fa-lg" aria-hidden="true"></i>
   </button>
-  
+
   <div class="hidden" data-target="toggle.toggleable">
 
-    <%= form_for :video do |f| %>
-    <div data-controller="choices">
-      <datalist data-choices-target="options"></datalist>
-      <%= f.collection_select :videotype, @videotypes, :id, :name, {include_blank: true}, {data: {"choices-target": "select"}} %>
-    </div>
-    <% end %>
-
-    <%
-=begin%>
- <div class="filter_container" data-controller="filter">
+    <div class="filter_container" data-controller="filter">
       <div data-controller="choices">
         <div class="filter_item">
           <label>Type</label>
-          <div data-choices-target="options">
-            <%= select_tag :videotype, 
-                  options_for_select([["Select All #{@videotypes.count} Types", "all"]] + @videotypes,
+          <datalist data-choices-target="options">
+            <%= options_for_select([["Select All #{@videotypes.count} Types"]] + @videotypes) %>
+          </datalist>
+          <%= select_tag :videotype, options_for_select([["Select All #{@videotypes.count} Types", "all"]] + @videotypes,
                       params[:videotype].presence || "all"
-                    ), 
-                    data: {target: "choices.select"} %>
-          </div>
+                      ),
+                       data: {"choices-target": "select"} %>
         </div>
       </div>
-      <div data-controller="choices">
-        <div class="filter_item">
-          <label>Genre</label>
-          <%= select_tag :genre, 
+    <%
+=begin%>
+ <div data-controller="choices">
+      <div class="filter_item">
+        <label>Genre</label>
+        <%= select_tag :genre, 
                   options_for_select([["Select All  #{@genres.count} Genres", "all"]] + @genres, 
                     params[:genre].presence || "all"
                   ),
                   data: {target: "choices.select"} %>
-        </div>
       </div>
-      <div data-controller="choices">
-        <div class="filter_item">
-          <label>Leader</label>
-          <%= select_tag :leader, 
+    </div>
+    <div data-controller="choices">
+      <div class="filter_item">
+        <label>Leader</label>
+        <%= select_tag :leader, 
                   options_for_select([["Select All  #{@leaders.count} Leaders", "all"]]+ @leaders, 
                     params[:leader].presence || "all"
                   ),
                   data: {target: "choices.select"} %>
-        </div>
       </div>
-      <div data-controller="choices">
-        <div class="filter_item">
-          <label>Follower</label>
-          <%= select_tag :follower, 
+    </div>
+    <div data-controller="choices">
+      <div class="filter_item">
+        <label>Follower</label>
+        <%= select_tag :follower, 
                   options_for_select( [["Select All #{@followers.count} Followers", "all"]] + @followers, 
                     params[:follower].presence || "all"
                   ),
                   data: {target: "choices.select"}  %>
-        </div>
       </div>
-      <div data-controller="choices">
-        <div class="filter_item">
-          <label>Event</label>
-          <%= select_tag :event, 
+    </div>
+    <div data-controller="choices">
+      <div class="filter_item">
+        <label>Event</label>
+        <%= select_tag :event, 
                   options_for_select( [["Select All #{@events.count} Events", "all"]] + @events, 
                     params[:event].presence || "all"
                   ),
                   data: {target: "choices.select"}  %>
-        </div>
       </div>
-      <div data-controller="choices">
-        <div class="filter_item">
-          <label>Channel</label>
-          <%= select_tag :channel, 
+    </div>
+    <div data-controller="choices">
+      <div class="filter_item">
+        <label>Channel</label>
+        <%= select_tag :channel, 
                   options_for_select( [["Select All #{@channels.count} Channels", "all"]]+ @channels, 
                   params[:channel].presence || "all"
                 ),
                 data: {target: "choices.select"} %>
-        </div>
       </div>
     </div> 
 <%
 =end%>
   </div>
+</div>
 </div>
 </div>
