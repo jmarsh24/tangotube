@@ -4,19 +4,18 @@
     <i class="fas fa-filter fa-lg" aria-hidden="true"></i>
   </button>
 
-  <div class="hidden" data-target="toggle.toggleable">
+  <div class="hidden" data-toggle-target="toggleable">
 
     <div class="filter_container" data-controller="filter">
-      <div data-controller="choices">
+      <div data-controller="choices" data-item-select-text=" " data-should-sort="false" data-should-sort-items="false">
         <div class="filter_item">
           <label>Type</label>
           <datalist data-choices-target="options">
-            <%= options_for_select([["Select All #{@videotypes.count} Types"]] + @videotypes) %>
+            <%= options_for_select(@videotypes)  %>
           </datalist>
-          <%= select_tag :videotype, options_for_select([["Select All #{@videotypes.count} Types", "all"]] + @videotypes,
-                      params[:videotype].presence || "all"
-                      ),
-                       data: {"choices-target": "select"} %>
+          <%= select_tag :videotype, 
+                options_for_select(@videotypes),
+                {data: { "choices-target": "select" }} %>
         </div>
       </div>
     <%
