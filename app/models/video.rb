@@ -29,7 +29,6 @@
 
 class Video < ApplicationRecord
   include Filterable
-  include PgSearch::Model
 
   # validates :leader, presence: true
   # validates :follower, presence: true

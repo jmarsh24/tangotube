@@ -51,7 +51,7 @@
 
   #SQL match for Follower
   Follower.all.each do |follower|
-    Video.all.where( "unaccent(title) ILIKE unaccent(?)", "%#{follower.name}%").each do |video|
+    Video.all.where(follower_id: nil).where( "unaccent(description) ILIKE unaccent(?)", "%#{follower.name}%").each do |video|
       video.follower = follower
       video.save
     end
@@ -76,11 +76,10 @@
     
 
   Leader.all.each do |leader|
-    Video.all.where( "unaccent(title) ILIKE unaccent(?)", "%#{leader.name}%").each do |video|
+    Video.all.where(leader_id: nil).where( "unaccent(description) ILIKE unaccent(?)", "%#{leader.name}%").each do |video|
       video.leader = leader
       video.save
     end
-    puts Video.pluck(:leader_id).count
   end
 
     #SQL match for Leader using fuzzystrmatch
@@ -116,14 +115,4 @@ Video.all.each do |video|
   video.performance_total  = performance_number.last
 video.save
 end
-
-  Video.all.each do |video|
-    video.leader = Leader.all.find { |leader| video.description.match(leader.name) }
-    video.save
-  end
-
-  Video.all.each do |video|
-    video.follower = Follower.all.find { |follower| video.description.match(follower.name) }
-    video.save
-  end
 
