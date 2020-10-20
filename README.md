@@ -1,24 +1,18 @@
-# README
+Seeding information
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+In order to properly load the database into your system, you will need to comment out the belongs_to relations in the video.rb file.
 
-Things you may want to cover:
+Lines 41-45 in video.rb
 
-* Ruby version
+  belongs_to :leader
 
-* System dependencies
+  belongs_to :follower
 
-* Configuration
+  belongs_to :song
 
-* Database creation
+  belongs_to :videotype
 
-* Database initialization
+  belongs_to :event
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Then seed the database normally. After these will need to be uncommented in order for the application to function.
