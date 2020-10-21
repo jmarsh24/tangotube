@@ -12,7 +12,6 @@ export default class extends Controller {
     const url = `${window.location.pathname}?${this.params}`;
     Turbolinks.clearCache();
     Turbolinks.visit(url);
-    console.log(this.filterTargets)
   }
 
   get params() {

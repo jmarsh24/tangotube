@@ -10,72 +10,84 @@
       <div data-controller="choices" data-item-select-text=" " data-should-sort="false" data-should-sort-items="false" data-position="down">
         <div class="filter_item">
           <label>Type</label>
-          <datalist data-choices-target="options">
+          <div data-choices-target="options">
             <%= options_for_select([["Select All #{@videotypes.count} Types", " "]] + @videotypes,
               params[:videotype].presence || " ") %>
-          </datalist>
+          </div>
           <%= select_tag :videotype, 
-                options_for_select(@videotypes), 
+                options_for_select(@videotypes),  
+                multiple: false, 
+                size: 10,
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
       <div data-controller="choices" data-item-select-text=" " data-should-sort="false" data-should-sort-items="false" data-position="down">
         <div class="filter_item">
           <label>Genre</label>
-          <datalist data-choices-target="options">
+          <div data-choices-target="options">
             <%= options_for_select([["Select All #{@genres.count} Genres", " "]] + @genres,
               params[:genre].presence || " ") %>
-          </datalist>
+          </div>
           <%= select_tag :genre, 
-                options_for_select(@genres), 
+                options_for_select(@genres),  
+                multiple: false, 
+                size: 10,
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
       <div data-controller="choices" data-item-select-text=" " data-should-sort="false" data-should-sort-items="false" data-position="down">
         <div class="filter_item">
           <label>Leader</label>
-          <datalist data-choices-target="options">
+          <div data-choices-target="options">
             <%= options_for_select([["Select All #{@leaders.count} leaders", " "]] + @leaders,
               params[:leader].presence || " ") %>
-          </datalist>
+          </div>
           <%= select_tag :leader, 
-                options_for_select(@leaders), 
+                options_for_select(@leaders),  
+                multiple: false, 
+                size: 10,
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
       <div data-controller="choices" data-item-select-text=" " data-should-sort="false" data-should-sort-items="false" data-position="down">
         <div class="filter_item">
           <label>Follower</label>
-          <datalist data-choices-target="options">
+          <div data-choices-target="options">
             <%= options_for_select([["Select All #{@followers.count} followers", " "]] + @followers,
               params[:follower].presence || " ") %>
-          </datalist>
+          </div>
           <%= select_tag :follower, 
                 options_for_select(@followers), 
+                multiple: false, 
+                size: 10,
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
       <div data-controller="choices" data-item-select-text=" " data-should-sort="false" data-should-sort-items="false" data-position="down">
         <div class="filter_item">
-          <label>Vvent</label>
-          <datalist data-choices-target="options">
+          <label>Event</label>
+          <div data-choices-target="options">
             <%= options_for_select([["Select All #{@events.count} events", " "]] + @events,
               params[:event].presence || " ") %>
-          </datalist>
+          </div>
           <%= select_tag :event, 
-                options_for_select(@events), 
+                options_for_select(@events),  
+                multiple: false, 
+                size: 10,
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
       <div data-controller="choices" data-item-select-text=" " data-should-sort="false" data-should-sort-items="false" data-position="down">
         <div class="filter_item">
           <label>Channel</label>
-          <datalist data-choices-target="options">
+          <div data-choices-target="options">
             <%= options_for_select([["Select All #{@channels.count} channels", " "]] + @channels,
               params[:channel].presence || " ") %>
-          </datalist>
+          </div>
           <%= select_tag :channel, 
-                options_for_select(@channels), 
+                options_for_select(@channels),  
+                multiple: false, 
+                size: 10,
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
