@@ -25,12 +25,7 @@ export default class extends Controller {
   }
 
   setup() {
-    this.choices = new Choices(this.selectTarget, {
-  ...this.options(),
-    callbackOnInit: function () {
-    this.showDropdown()
-  }
-})
+    this.choices = new Choices(this.selectTarget, this.options())
     this.input = this.element.querySelector('input')
     this.refresh()
     if (this.searchPath) this.input.addEventListener('input', this.search)

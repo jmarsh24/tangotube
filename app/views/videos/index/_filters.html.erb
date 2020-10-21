@@ -11,11 +11,14 @@
         <div class="filter_item">
           <label>Type</label>
           <datalist data-choices-target="options">
-            <%= options_for_select(@videotypes)  %>
+            <%= options_for_select([["Select All #{@videotypes.count} Types", " "]] + @videotypes,
+              params[:videotype].presence || " ") %>
           </datalist>
           <%= select_tag :videotype, 
-                options_for_select(@videotypes),
-                {data: { "choices-target": "select" }} %>
+                options_for_select(@videotypes), 
+                multiple: false, 
+                size: 12, 
+                data: { "choices-target": "select", action: "filter#filter", target: "filter.filter" } %>
         </div>
       </div>
     <%
