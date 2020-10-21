@@ -1,7 +1,10 @@
+$video-width: 500px;
+$video-height: calc(.5625 * $video-width)px;
+
 .container {
-  max-height: 540px;
+  max-height: $video-height;
   max-width: 960px;
-  min-width: 801px;
+  min-width: $video-width;
   overflow: hidden;
   margin: 0 auto 20px auto;
 }
@@ -10,8 +13,8 @@
   position: relative;
   display: block;
   margin: 0 auto;
-  min-height: 450px;
-  min-width: 801px;
+  min-height: $video-height;
+  min-width: $video-width;
   width: 100%;
   padding-bottom: 56.25%;
   padding-top: 0px;

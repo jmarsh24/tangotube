@@ -16,8 +16,6 @@
           </datalist>
           <%= select_tag :videotype, 
                 options_for_select(@videotypes), 
-                multiple: false, 
-                size: 12, 
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
@@ -30,8 +28,6 @@
           </datalist>
           <%= select_tag :genre, 
                 options_for_select(@genres), 
-                multiple: false, 
-                size: 12, 
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
@@ -44,8 +40,6 @@
           </datalist>
           <%= select_tag :leader, 
                 options_for_select(@leaders), 
-                multiple: false, 
-                size: 12, 
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
@@ -58,8 +52,6 @@
           </datalist>
           <%= select_tag :follower, 
                 options_for_select(@followers), 
-                multiple: false, 
-                size: 12, 
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
@@ -72,8 +64,6 @@
           </datalist>
           <%= select_tag :event, 
                 options_for_select(@events), 
-                multiple: false, 
-                size: 12, 
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
@@ -86,8 +76,6 @@
           </datalist>
           <%= select_tag :channel, 
                 options_for_select(@channels), 
-                multiple: false, 
-                size: 12, 
                 data: { "choices-target": "select", action: "filter#filter", "filter-target": "filter" } %>
         </div>
       </div>
