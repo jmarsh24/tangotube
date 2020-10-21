@@ -18,5 +18,4 @@ export default class extends Controller {
     // return this.filterTargets.map((t) => `${t.name}=${t.value}`).join("&");
     return this.filterTargets.filter(t => t.value !== "all").map((t) => `${t.name}=${t.value}`).join("&");
   }
-  
 }

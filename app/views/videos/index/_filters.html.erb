@@ -11,8 +11,8 @@
         <div class="filter_item">
           <label>Type</label>
           <div data-choices-target="options">
-            <%= options_for_select([["Select All #{@videotypes.count} Types", " "]] + @videotypes,
-              params[:videotype].presence || " ") %>
+            <%= options_for_select([["Select All #{@videotypes.count} Types", "all"]] + @videotypes,
+              params[:videotype].presence || "all") %>
           </div>
           <%= select_tag :videotype, 
                 options_for_select(@videotypes),  
@@ -25,8 +25,8 @@
         <div class="filter_item">
           <label>Genre</label>
           <div data-choices-target="options">
-            <%= options_for_select([["Select All #{@genres.count} Genres", " "]] + @genres,
-              params[:genre].presence || " ") %>
+            <%= options_for_select([["Select All #{@genres.count} Genres", "all"]] + @genres,
+              params[:genre].presence || "all") %>
           </div>
           <%= select_tag :genre, 
                 options_for_select(@genres),  
@@ -39,8 +39,8 @@
         <div class="filter_item">
           <label>Leader</label>
           <div data-choices-target="options">
-            <%= options_for_select([["Select All #{@leaders.count} leaders", " "]] + @leaders,
-              params[:leader].presence || " ") %>
+            <%= options_for_select([["Select All #{@leaders.count} leaders", "all"]] + @leaders,
+              params[:leader].presence || "all") %>
           </div>
           <%= select_tag :leader, 
                 options_for_select(@leaders),  
@@ -53,8 +53,8 @@
         <div class="filter_item">
           <label>Follower</label>
           <div data-choices-target="options">
-            <%= options_for_select([["Select All #{@followers.count} followers", " "]] + @followers,
-              params[:follower].presence || " ") %>
+            <%= options_for_select([["Select All #{@followers.count} followers", "all"]] + @followers,
+              params[:follower].presence || "all") %>
           </div>
           <%= select_tag :follower, 
                 options_for_select(@followers), 
@@ -67,8 +67,8 @@
         <div class="filter_item">
           <label>Event</label>
           <div data-choices-target="options">
-            <%= options_for_select([["Select All #{@events.count} events", " "]] + @events,
-              params[:event].presence || " ") %>
+            <%= options_for_select([["Select All #{@events.count} events", "all"]] + @events,
+              params[:event].presence || "all") %>
           </div>
           <%= select_tag :event, 
                 options_for_select(@events),  
@@ -81,8 +81,8 @@
         <div class="filter_item">
           <label>Channel</label>
           <div data-choices-target="options">
-            <%= options_for_select([["Select All #{@channels.count} channels", " "]] + @channels,
-              params[:channel].presence || " ") %>
+            <%= options_for_select([["Select All #{@channels.count} channels", "all"]] + @channels,
+              params[:channel].presence || "all") %>
           </div>
           <%= select_tag :channel, 
                 options_for_select(@channels),  
