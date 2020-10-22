@@ -51,6 +51,13 @@
   min-height: 200px;
 }
 
+.select-dropdown {
+  position: static;
+}
+.select-dropdown .select-dropdown--above {
+      margin-top: 336px;
+}
+
 @media (max-width: 1300px) {
   .filter_item{
     max-width: 250px;
