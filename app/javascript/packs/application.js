@@ -9,14 +9,6 @@
  require("turbolinks").start()
  require("@rails/activestorage").start()
  require("channels")
- require("select2")
 
  import "@fortawesome/fontawesome-free/js/all";
  import "controllers";
- import $ from 'jquery'
- import "select2";
- import "select2/dist/css/select2.css"; 
-
-// Import css from js for webpack to process it correctly
-import '../css/application.css'
-
