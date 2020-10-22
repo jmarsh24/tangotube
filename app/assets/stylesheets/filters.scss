@@ -39,6 +39,14 @@
   width: 100%!important;
 }
 
+.select2-selection__arrow b{
+  display:none !important;
+}
+
+.select2-dropdown--below {
+  top: -1.64rem; /*your input height*/
+}
+
 .select2-container--default .select2-results > .select2-results__options {
   min-height: 200px;
 }
