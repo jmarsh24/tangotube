@@ -13,8 +13,6 @@
                 options_for_select([["Select All #{@videotypes.count} Types", "all"]] + @videotypes,
               params[:videotype].presence || "all"),
                 class: "content-search",
-                multiple: false,
-                size: 10,
                 data: { action: "filter#filter", "filter-target": "filter" } %>
         </div>
 
