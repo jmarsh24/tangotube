@@ -31,6 +31,15 @@ class VideosController < ApplicationController
     
     @active_video = Video.find_by(youtube_id: @active_youtube_id)
 
+    # Populate Total Number of Options
+    @videotypes_total_count  = @videos_sorted.pluck(:"videotypes.name").compact.uniq.sort.count
+    @leaders_total_count     = @videos_sorted.pluck(:"leaders.name").compact.uniq.sort.count
+    @followers_total_count   = @videos_sorted.pluck(:"followers.name").compact.uniq.sort.count
+    @events_total_count      = @videos_sorted.pluck(:"events.name").compact.uniq.sort.count
+    @channels_total_count    = @videos_sorted.pluck(:channel).compact.uniq.sort.count
+    @genres_total_count      = @videos_sorted.pluck(:"songs.genre").compact.uniq.sort.count
+    
+
     # Populate Filters 
     @videotypes  = @videos_filtered.pluck(:"videotypes.name").compact.uniq.sort
     @leaders     = @videos_filtered.pluck(:"leaders.name").compact.uniq.sort

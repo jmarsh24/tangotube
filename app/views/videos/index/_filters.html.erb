@@ -10,7 +10,7 @@
         <div class="filter_item" data-controller='select2'>
           <label>Type</label>
           <%= select_tag :videotype, 
-                options_for_select([["Select All #{@videotypes.count} Types", "all"]] + @videotypes,
+                options_for_select([["Select All #{@videotypes_total_count} Types", "all"]] + @videotypes,
               params[:videotype].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
@@ -19,7 +19,7 @@
         <div class="filter_item" data-controller='select2'>
           <label>Genre</label>
           <%= select_tag :genre, 
-                options_for_select([["Select All #{@genres.count} Genres", "all"]] + @genres,
+                options_for_select([["Select All #{@genres_total_count} Genres", "all"]] + @genres,
               params[:genre].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
@@ -28,7 +28,7 @@
         <div class="filter_item" data-controller='select2'>
           <label>Leader</label>
           <%= select_tag :leader, 
-                options_for_select([["Select All #{@leaders.count} leaders", "all"]] + @leaders,
+                options_for_select([["Select All #{@leaders_total_count} leaders", "all"]] + @leaders,
               params[:leader].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
@@ -37,7 +37,7 @@
         <div class="filter_item" data-controller='select2'>
           <label>Follower</label>
           <%= select_tag :follower, 
-                options_for_select([["Select All #{@followers.count} followers", "all"]] + @followers,
+                options_for_select([["Select All #{@followers_total_count } followers", "all"]] + @followers,
               params[:follower].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
@@ -46,7 +46,7 @@
         <div class="filter_item" data-controller='select2'>
           <label>Event</label>
           <%= select_tag :event, 
-                options_for_select([["Select All #{@events.count} events", "all"]] + @events,
+                options_for_select([["Select All #{@events_total_count} events", "all"]] + @events,
               params[:event].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
@@ -55,7 +55,7 @@
         <div class="filter_item" data-controller='select2'>
           <label>Channel</label>
           <%= select_tag :channel, 
-                options_for_select([["Select All #{@channels.count} channels", "all"]] + @channels,
+                options_for_select([["Select All #{@channels_total_count} channels", "all"]] + @channels,
               params[:channel].presence || "all") ,
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
