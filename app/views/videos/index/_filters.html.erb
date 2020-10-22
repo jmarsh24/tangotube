@@ -1,13 +1,16 @@
-<%= "#{@videos_filtered.count} Results" %>
 <div data-controller="toggle">
-  <button type='submit' data-action="toggle#toggle" class="filter_button">
+  <%
+=begin%>
+ <button type='submit' data-action="toggle#toggle" class="filter_button">
     <i class="fas fa-filter fa-lg" aria-hidden="true"></i>
-  </button>
+  </button> 
+<%
+=end%>
 
   <div class="hidden" data-toggle-target="toggleable">
 
     <div class="filter_container" data-controller="filter">
-        <div class="filter_item" data-controller='select2'>
+        <div class="filter_item" data-controller='select2' data-toggle-target="toggleable">
           <label>Type</label>
           <%= select_tag :videotype, 
                 options_for_select([["Select All #{@videotypes_total_count} Types", "all"]] + @videotypes,
@@ -61,6 +64,9 @@
                 data: { action: "filter#filter", "filter-target": "filter" } %>
         </div>
 
+    </div>
+    <div style="padding: 0px 10px 5px 10px">
+    <%= "#{@videos_filtered.count} Results" %>
     </div>
   </div>
 </div>

@@ -10,9 +10,9 @@ export default class extends Controller {
     console.log('Select2 Controller ON')
     var list = $('.content-search').select2({
       closeOnSelect: false,
-      }).on("select2:closing", function() {
+      }).on("select2:closing", function(e) {
         e.preventDefault();
-      }).on("select2:closed", function() {
+      }).on("select2:closed", function(e) {
         list.select2("open");
       }).on("select2:select", function() {
         let event = new Event('change', { bubbles: true })
