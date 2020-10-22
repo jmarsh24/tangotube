@@ -7,11 +7,12 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos_sorted = Video.search(params[:q])
-                          .includes(:song, :leader, :follower, :videotype, :event)
-                          .references(:song, :leader, :follower, :videotype, :event)
-                          .order(sort_column + " " + sort_direction)
-                          .where.not(leader_id: [nil, false], follower_id: [nil, false] )
+    @videos = Video.search(params[:q])
+                   .includes(:song, :leader, :follower, :videotype, :event)
+                   .references(:song, :leader, :follower, :videotype, :event)
+                   
+    @videos_sorted = @videos.order(sort_column + " " + sort_direction)
+                            .where.not(leader_id: [nil, false], follower_id: [nil, false] )
 
     @videos_filtered = @videos_sorted
 
@@ -32,12 +33,12 @@ class VideosController < ApplicationController
     @active_video = Video.find_by(youtube_id: @active_youtube_id)
 
     # Populate Total Number of Options
-    @videotypes_total_count  = @videos_sorted.pluck(:"videotypes.name").compact.uniq.sort.count
-    @leaders_total_count     = @videos_sorted.pluck(:"leaders.name").compact.uniq.sort.count
-    @followers_total_count   = @videos_sorted.pluck(:"followers.name").compact.uniq.sort.count
-    @events_total_count      = @videos_sorted.pluck(:"events.name").compact.uniq.sort.count
-    @channels_total_count    = @videos_sorted.pluck(:channel).compact.uniq.sort.count
-    @genres_total_count      = @videos_sorted.pluck(:"songs.genre").compact.uniq.sort.count
+    @videotypes_total_count  = @videos.pluck(:"videotypes.name").compact.uniq.sort.count
+    @leaders_total_count     = @videos.pluck(:"leaders.name").compact.uniq.sort.count
+    @followers_total_count   = @videos.pluck(:"followers.name").compact.uniq.sort.count
+    @events_total_count      = @videos.pluck(:"events.name").compact.uniq.sort.count
+    @channels_total_count    = @videos.pluck(:channel).compact.uniq.sort.count
+    @genres_total_count      = @videos.pluck(:"songs.genre").compact.uniq.sort.count
     
 
     # Populate Filters 
