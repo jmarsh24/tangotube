@@ -11,7 +11,8 @@ export default class extends Controller {
     var list = $('.content-search').select2({
       closeOnSelect: false,
       dropdownPosition: 'below',
-      searchInputPlaceholder: 'Select filter below or search by keyword'
+      searchInputPlaceholder: 'Select filter below or search by keyword',
+      width: 'resolve'
       }).on("select2:closing", function(e) {
         e.preventDefault();
       }).on("select2:closed", function(e) {

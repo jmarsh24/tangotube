@@ -1,73 +1,72 @@
 <div data-controller="toggle">
   <%
 =begin%>
- <button type='submit' data-action="toggle#toggle" class="filter_button">
+  <button type='submit' data-action="toggle#toggle" class="filter_button">
     <i class="fas fa-filter fa-lg" aria-hidden="true"></i>
-  </button> 
-<%
+  </button>
+  <%
 =end%>
 
   <div class="hidden" data-toggle-target="toggleable">
 
     <div class="filter_container" data-controller="filter">
-        <div class="filter_item" data-controller='select2' data-toggle-target="toggleable">
-          <label>Type</label>
-          <%= select_tag :videotype, 
+      <div class="filter_item" data-controller='select2' data-toggle-target="toggleable">
+        <label>Type</label>
+        <%= select_tag :videotype, 
                 options_for_select([["Select All #{@videotypes_total_count} Types", "all"]] + @videotypes,
               params[:videotype].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
-        </div>
+      </div>
 
-        <div class="filter_item" data-controller='select2'>
-          <label>Genre</label>
-          <%= select_tag :genre, 
+      <div class="filter_item" data-controller='select2'>
+        <label>Genre</label>
+        <%= select_tag :genre, 
                 options_for_select([["Select All #{@genres_total_count} Genres", "all"]] + @genres,
               params[:genre].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
-        </div>
+      </div>
 
-        <div class="filter_item" data-controller='select2'>
-          <label>Leader</label>
-          <%= select_tag :leader, 
+      <div class="filter_item" data-controller='select2'>
+        <label>Leader</label>
+        <%= select_tag :leader, 
                 options_for_select([["Select All #{@leaders_total_count} leaders", "all"]] + @leaders,
               params[:leader].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
-        </div>
+      </div>
 
-        <div class="filter_item" data-controller='select2'>
-          <label>Follower</label>
-          <%= select_tag :follower, 
+      <div class="filter_item" data-controller='select2'>
+        <label>Follower</label>
+        <%= select_tag :follower, 
                 options_for_select([["Select All #{@followers_total_count } followers", "all"]] + @followers,
               params[:follower].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
-        </div>
+      </div>
 
-        <div class="filter_item" data-controller='select2'>
-          <label>Event</label>
-          <%= select_tag :event, 
+      <div class="filter_item" data-controller='select2'>
+        <label>Event</label>
+        <%= select_tag :event, 
                 options_for_select([["Select All #{@events_total_count} events", "all"]] + @events,
               params[:event].presence || "all"),
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
-        </div>
+      </div>
 
-        <div class="filter_item" data-controller='select2'>
-          <label>Channel</label>
-          <%= select_tag :channel, 
+      <div class="filter_item" data-controller='select2'>
+        <label>Channel</label>
+        <%= select_tag :channel, 
                 options_for_select([["Select All #{@channels_total_count} channels", "all"]] + @channels,
               params[:channel].presence || "all") ,
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
-        </div>
+      </div>
 
     </div>
     <div style="padding: 0px 10px 5px 10px">
-    <%= "#{@videos_filtered.count} Results" %>
+      <%= "#{@videos_filtered.count} Results" %>
     </div>
   </div>
-</div>
 </div>
