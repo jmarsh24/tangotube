@@ -14,4 +14,5 @@ class Follower < ApplicationRecord
 
   has_many :videos,  dependent: :destroy
   has_many :leaders, dependent: :destroy
+
 end

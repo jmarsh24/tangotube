@@ -23,7 +23,7 @@ export default class extends Controller {
       }).on('select2-open', function() {
 
         // however much room you determine you need to prevent jumping
-        var requireHeight = 600;
+        var requireHeight = 1000;
         var viewportBottom = $(window).scrollTop() + $(window).height();
 
         // figure out if we need to make changes
