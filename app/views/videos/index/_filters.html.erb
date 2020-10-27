@@ -9,7 +9,7 @@
     
     <div class="filter_container" data-controller="filter">
     <label>Type</label>
-    <%= render "videos/index/filter_item", collections: @videotypes, locals: {model: @videotypes, model_count: @videotypes_total_count, title: :videotype } %>
+    <%= render partial: "videos/index/filter_item", locals: {model: @videotypes, model_count: @videotypes_total_count, title: :videotype } %>
       <div class="filter_item" data-controller='select2' data-toggle-target="toggleable">
         <label>Type</label>
         <%= select_tag :videotype, 

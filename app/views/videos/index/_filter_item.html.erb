@@ -1,0 +1,7 @@
+<div class="filter_item" data-controller='select2' data-toggle-target="toggleable">
+  <%= select_tag "#{:title}", 
+        options_for_select([["Select All #{:model_count} Types", "all"]] + [:model],
+          params["#{:title}"].presence || "all"),
+            class: "content-search",
+            data: { action: "filter#filter", "filter-target": "filter" } %>
+</div>
