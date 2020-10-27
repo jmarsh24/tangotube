@@ -6,7 +6,10 @@
   
   <div class="hidden" data-toggle-target="toggleable">
 
+    
     <div class="filter_container" data-controller="filter">
+    <label>Type</label>
+    <%= render "videos/index/filter_item", collections: @videotypes, locals: {model: @videotypes, model_count: @videotypes_total_count, title: :videotype } %>
       <div class="filter_item" data-controller='select2' data-toggle-target="toggleable">
         <label>Type</label>
         <%= select_tag :videotype, 
@@ -15,7 +18,7 @@
                 class: "content-search",
                 data: { action: "filter#filter", "filter-target": "filter" } %>
       </div>
-
+ 
       <div class="filter_item" data-controller='select2'>
         <label>Genre</label>
         <%= select_tag :genre, 
