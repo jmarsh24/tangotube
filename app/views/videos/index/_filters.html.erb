@@ -1,15 +1,11 @@
-<div data-controller="toggle">
-
-    <div class="filter_container" data-controller="filter">
-      <%= render partial: "videos/index/filter_item", locals: {model: @videotypes, model_count: @videotypes_total_count, title: :videotype } %>
-      <%= render partial: "videos/index/filter_item", locals: {model: @genres, model_count: @genres_total_count, title: :genre } %>
-      <%= render partial: "videos/index/filter_item", locals: {model: @leaders, model_count: @leaders_total_count, title: :leader } %>
-      <%= render partial: "videos/index/filter_item", locals: {model: @followers, model_count: @followers_total_count, title: :follower } %>
-      <%= render partial: "videos/index/filter_item", locals: {model: @events, model_count: @events_total_count, title: :event } %>
-      <%= render partial: "videos/index/filter_item", locals: {model: @channels, model_count: @channels_total_count, title: :channel } %>
-
-    <div style="padding: 5px 10px 5px 10px">
-      <%= "Displaying #{@videos_filtered.count} Results" %>
-    </div>
-  </div>
+<div class="filter_container" data-controller="filter">
+  <%= render partial: "videos/index/filter_item", locals: {model: @videotypes, model_count: @videotypes_total_count, title: :videotype } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @genres, model_count: @genres_total_count, title: :genre } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @leaders, model_count: @leaders_total_count, title: :leader } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @followers, model_count: @followers_total_count, title: :follower } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @events, model_count: @events_total_count, title: :event } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @channels, model_count: @channels_total_count, title: :channel } %>
+</div>
+<div style="padding: 5px 10px 5px 10px">
+  <%= "Displaying #{@videos_filtered.count} Results" %>
 </div>
