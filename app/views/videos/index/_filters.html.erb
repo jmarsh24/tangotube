@@ -1,4 +1,4 @@
-<div class="filter_container" data-controller="filter">
+<div id="filters" class="filter_container" data-controller="filter">
   <%= render partial: "videos/index/filter_item", locals: {model: @videotypes, model_count: @videotypes_total_count, title: :videotype } %>
   <%= render partial: "videos/index/filter_item", locals: {model: @genres, model_count: @genres_total_count, title: :genre } %>
   <%= render partial: "videos/index/filter_item", locals: {model: @leaders, model_count: @leaders_total_count, title: :leader } %>

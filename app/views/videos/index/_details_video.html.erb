@@ -12,7 +12,7 @@
 =end%>
 
 
-<div class="video_details">
+<div id="video_details" class="video_details">
   <div class="items" style="width:100%">
     <h1>Video Info</h1>
   </div>
@@ -35,7 +35,7 @@
   </div>
 
   <div class="items">
-    <h2>Video Info</h2>
+    <h2>Details</h2>
     <h3>Type</h3>
     <h4><%= format_value(@active_video.videotype.try(:name)) %></h4>
     <h3>Channel</h3>
