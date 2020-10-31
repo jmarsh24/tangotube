@@ -9,40 +9,40 @@ export default class extends Controller {
     console.log('Filter-Controller ON')
   }
 
-  // filter() {
-  //   // console.log(this.params)
-  //   console.log(window.location.pathname);
-  //   const url = `${window.location.pathname}?${this.params}`;
-  //   Turbolinks.clearCache();
-  //   Turbolinks.visit(url);
-  // }
-
   filter() {
+    // console.log(this.params)
+    console.log(window.location.pathname);
     const url = `${window.location.pathname}?${this.params}`;
-
-    Rails.ajax({
-     type: "get",
-     url: url,
-     success: (data) => {
-       const newContainerVideos = data.getElementById("videos");
-       const containerVideos = document.getElementById("videos");
-       containerVideos.innerHTML = newContainerVideos.innerHTML;
-       const newContainerFilters = data.getElementById("filters");
-       const containerFilters = document.getElementById("filters");
-       containerFilters.innerHTML = newContainerFilters.innerHTML;
-       const newContainerYoutubeVideo = data.getElementById("youtube_video");
-       const containerYoutubeVideo = document.getElementById("youtube_video");
-       containerYoutubeVideo.innerHTML = newContainerYoutubeVideo.innerHTML;
-       const newContainerVideoDetails = data.getElementById("video_details");
-       const containerVideoDetails = document.getElementById("video_details");
-       containerVideoDetails.innerHTML = newContainerVideoDetails.innerHTML;
-       history.pushState({}, '', `${window.location.pathname}?${this.params}`)
-     },
-     error: (data) => {
-       console.log(data)
-     }
-   });
+    Turbolinks.clearCache();
+    Turbolinks.visit(url);
   }
+
+  // filter() {
+  //   const url = `${window.location.pathname}?${this.params}`;
+
+  //   Rails.ajax({
+  //    type: "get",
+  //    url: url,
+  //    success: (data) => {
+  //      const newContainerVideos = data.getElementById("videos");
+  //      const containerVideos = document.getElementById("videos");
+  //      const containerFilters = document.getElementById("filters");
+  //      const newContainerFilters = data.getElementById("filters");
+  //      const newContainerYoutubeVideo = data.getElementById("youtube_video");
+  //      const containerYoutubeVideo = document.getElementById("youtube_video");
+  //      const newContainerVideoDetails = data.getElementById("video_details");
+  //      const containerVideoDetails = document.getElementById("video_details");
+  //      containerVideos.innerHTML = newContainerVideos.innerHTML;
+  //      containerFilters.innerHTML = newContainerFilters.innerHTML;
+  //      containerYoutubeVideo.innerHTML = newContainerYoutubeVideo.innerHTML;
+  //      containerVideoDetails.innerHTML = newContainerVideoDetails.innerHTML;
+  //      history.pushState({}, '', `${window.location.pathname}?${this.params}`)
+  //    },
+  //    error: (data) => {
+  //      console.log(data)
+  //    }
+  //  });
+  // }
 
   get params() {
     // return this.filterTargets.map((t) => `${t.name}=${t.value}`).join("&");
