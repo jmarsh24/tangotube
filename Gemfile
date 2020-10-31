@@ -25,6 +25,7 @@ gem 'devise',                 '~> 4.7', '>= 4.7.2'
 gem 'omniauth',               '~> 1.9', '>= 1.9.1'
 gem 'font-awesome-rails',     '~> 4.7', '>= 4.7.0.5'
 gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
+gem 'country_select',         '~> 4.0'
 
 group :development, :test do
   gem 'byebug',               '~> 11.1', '>= 11.1.3'
