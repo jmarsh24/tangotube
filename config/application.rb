@@ -17,6 +17,9 @@ module TangoLibrary
     # the framework and any gems in your application.
 
     config.active_record.schema_format = :sql
+
+    RSpotify::authenticate(ENV["SPOTIFY_CLIENT_ID"], ENV["SPOTIFY_SECRET_KEY"])
+
   end
 
 end

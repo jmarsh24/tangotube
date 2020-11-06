@@ -28,12 +28,18 @@ gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
 gem 'country_select',         '~> 4.0'
 gem 'openssl',                '~> 2.2'
 gem 'base64',                 '~> 0.1.0'
-gem 'multipart',              '~> 0.2.1'
-gem 'smarter_csv',            '~> 1.2', '>= 1.2.6'
+gem 'multipart-post',         '~> 2.1', '>= 2.1.1'
+gem 'streamio-ffmpeg',        '~> 3.0', '>= 3.0.2'
+gem 'youtube-dl.rb',          '~> 0.3.1.2016.09.11.1'
+gem 'rspotify',               '~> 2.9', '>= 2.9.2'
+gem 'hashie',                 '~> 4.1'
+
+
 
 group :development, :test do
   gem 'byebug',               '~> 11.1', '>= 11.1.3'
   gem 'rspec-rails',          '~> 4.0', '>= 4.0.1'
+  gem 'amazing_print',        '~> 1.2', '>= 1.2.2'
 end
 
 group :development do

@@ -373,7 +373,18 @@ CREATE TABLE public.videos (
     performance_number integer,
     performance_total integer,
     videotype_id bigint,
-    event_id bigint
+    event_id bigint,
+    confidence_score character varying,
+    acrid character varying,
+    spotify_album_id character varying,
+    spotify_album_name character varying,
+    spotify_artist_id character varying,
+    spotify_artist_id_2 character varying,
+    spotify_artist_name character varying,
+    spotify_artist_name_2 character varying,
+    spotify_track_id character varying,
+    spotify_track_name character varying,
+    youtube_song_id character varying
 );
 
 
@@ -713,6 +724,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201019230935'),
 ('20201102165536'),
 ('20201102165548'),
-('20201102165631');
+('20201102165631'),
+('20201104112926');
 
 
