@@ -58,8 +58,6 @@ class Video < ApplicationRecord
     offset(per_page * page).limit(per_page)
   }
 
-  
-
   class << self
 
     def search(query)
@@ -175,8 +173,8 @@ class Video < ApplicationRecord
           "sample" => UploadIO.new(file, "audio/mp3", file_name),
           'Hound-Request-Authentication' => client_id,
           'Hound-Client-Authentication' => signature,
-          'Hound-Request-Info' => ,
-          'UserID' => 'justin',
+          # 'Hound-Request-Info' => ,
+          # 'UserID' => 'justin',
           'RequestID' => '1',
           # "client_id" => access_key,
           # "data_type"=> data_type,
@@ -191,68 +189,70 @@ class Video < ApplicationRecord
         body
       end
     end
+  end
 
-    def song_match_all(count, offset)
-      Video.limit(count).offset(offset).each do |youtube_video|
-      youtube_audio_full = YoutubeDL.download(
-                              "https://www.youtube.com/watch?v=#{youtube_video.youtube_id}",
-                              {format: '140', output:'~/desktop/environment/data/audio/%(id)s.mp3'}
-                            )
-    
-      song = FFMPEG::Movie.new("#{youtube_audio_full.filename}")
-      
-
-      if song.duration < 60
-    
-        output_file_path = youtube_audio_full.filename.gsub(/.mp3/, '_15s.mp3')
-      
-        song_transcoded = song.transcode( output_file_path,
-                        {custom: %w(-ss 00:015.00 -t 00:00:15.00 )} )         
-      end
-
-      if song.duration.between?(60, 135)
-    
-        output_file_path = youtube_audio_full.filename.gsub(/.mp3/, '_15s.mp3')
-      
-        song_transcoded = song.transcode( output_file_path,
-                        {custom: %w(-ss 00:01:00.00 -t 00:00:15.00 )} )
-      end
-
-      if song.duration > 135
-    
-        output_file_path = youtube_audio_full.filename.gsub(/.mp3/, '_15s.mp3')
-      
-        song_transcoded = song.transcode( output_file_path,
-                        {custom: %w(-ss 00:01:30.00 -t 00:00:15.00 )} )
-      end
-      
-        song_match_output = Video.song_match(output_file_path)
-      
-        video = JSON.parse(song_match_output).extend Hashie::Extensions::DeepFind
-      
-        if video.deep_find("spotify").present?
-
-          spotify_album_id = video.deep_find("spotify")["album"]["id"]
-          spotify_album_name = RSpotify::Album.find(spotify_album_id).name
-          spotify_artist_id = video.deep_find("spotify")["artists"][0]["id"]
-          spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name
-          spotify_artist_id_2 = video.deep_find("spotify")["artists"][1]["id"] if video.deep_find("spotify")["artists"][1].present?
-          spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name if video.deep_find("spotify")["artists"][1].present?
-          spotify_track_id = video.deep_find("spotify")["track"]["id"]
-          spotify_track_name = RSpotify::Track.find(spotify_track_id).name
-          youtube_song_id = video.deep_find("youtube")["vid"] if video.deep_find("youtube").present?
-          
-          youtube_video.update(
-                                spotify_album_id: spotify_album_id,
-                                spotify_album_name: spotify_album_name,
-                                spotify_artist_id: spotify_artist_id,
-                                spotify_artist_name: spotify_artist_name,
-                                spotify_artist_id_2: spotify_artist_id_2,
-                                spotify_artist_name_2: spotify_artist_name_2,
-                                spotify_track_id: spotify_track_id,
-                                spotify_track_name: spotify_track_name,
-                                youtube_song_id: youtube_song_id
+      def song_match_all(count, offset)
+        Video.limit(count).offset(offset).each do |youtube_video|
+        youtube_audio_full = YoutubeDL.download(
+                                "https://www.youtube.com/watch?v=#{youtube_video.youtube_id}",
+                                {format: '140', output:'~/desktop/environment/data/audio/%(id)s.mp3'}
                               )
+      
+        song = FFMPEG::Movie.new("#{youtube_audio_full.filename}")
+        
+
+        if song.duration < 60
+      
+          output_file_path = youtube_audio_full.filename.gsub(/.mp3/, '_15s.mp3')
+        
+          song_transcoded = song.transcode( output_file_path,
+                          {custom: %w(-ss 00:015.00 -t 00:00:15.00 )} )         
+        end
+
+        if song.duration.between?(60, 135)
+      
+          output_file_path = youtube_audio_full.filename.gsub(/.mp3/, '_15s.mp3')
+        
+          song_transcoded = song.transcode( output_file_path,
+                          {custom: %w(-ss 00:01:00.00 -t 00:00:15.00 )} )
+        end
+
+        if song.duration > 135
+      
+          output_file_path = youtube_audio_full.filename.gsub(/.mp3/, '_15s.mp3')
+        
+          song_transcoded = song.transcode( output_file_path,
+                          {custom: %w(-ss 00:01:30.00 -t 00:00:15.00 )} )
+        end
+        
+          song_match_output = Video.song_match(output_file_path)
+        
+          video = JSON.parse(song_match_output).extend Hashie::Extensions::DeepFind
+        
+          if video.deep_find("spotify").present?
+
+            spotify_album_id = video.deep_find("spotify")["album"]["id"]
+            spotify_album_name = RSpotify::Album.find(spotify_album_id).name
+            spotify_artist_id = video.deep_find("spotify")["artists"][0]["id"]
+            spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name
+            # spotify_artist_id_2 = video.deep_find("spotify")["artists"][1]["id"] if video.deep_find("spotify")["artists"][1].present?
+            # spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name if video.deep_find("spotify")["artists"][1].present?
+            spotify_track_id = video.deep_find("spotify")["track"]["id"]
+            spotify_track_name = RSpotify::Track.find(spotify_track_id).name
+            # youtube_song_id = video.deep_find("youtube")["vid"] if video.deep_find("youtube").present?
+            
+            youtube_video.update(
+                                  spotify_album_id: spotify_album_id,
+                                  spotify_album_name: spotify_album_name,
+                                  spotify_artist_id: spotify_artist_id,
+                                  spotify_artist_name: spotify_artist_name,
+                                  spotify_artist_id_2: spotify_artist_id_2,
+                                  spotify_artist_name_2: spotify_artist_name_2,
+                                  spotify_track_id: spotify_track_id,
+                                  spotify_track_name: spotify_track_name,
+                                  youtube_song_id: youtube_song_id
+                                )
+        end
+      end
     end
   end
-end

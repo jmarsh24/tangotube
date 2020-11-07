@@ -639,6 +639,20 @@ CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON public.admin_us
 
 
 --
+-- Name: index_followers_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_followers_on_name ON public.followers USING btree (name);
+
+
+--
+-- Name: index_leaders_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_leaders_on_name ON public.leaders USING btree (name);
+
+
+--
 -- Name: index_songs_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
