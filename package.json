@@ -9,7 +9,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "jquery": "^3.5.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^4.0.0",
     "select2": "^4.0.13",
     "select2-dropdownPosition": "https://github.com/andreivictor/select2-dropdownPosition",
     "stimulus": "https://github.com/stimulusjs/dev-builds/archive/b8cc8c4/stimulus.tar.gz",
