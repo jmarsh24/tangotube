@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ["filter"];
 
   connect() {
-    console.log('Filter-Controller ON')
+    console.log("Filter-Controller ON");
   }
 
   filter() {
@@ -46,6 +46,9 @@ export default class extends Controller {
 
   get params() {
     // return this.filterTargets.map((t) => `${t.name}=${t.value}`).join("&");
-    return this.filterTargets.filter(t => t.value !== "all").map((t) => `${t.name}=${t.value}`).join("&");
+    return this.filterTargets
+      .filter((t) => t.value !== "all")
+      .map((t) => `${t.name}=${t.value}`)
+      .join("&");
   }
 }

@@ -9,26 +9,26 @@
 
   a {
     text-decoration: none;
-    &.current{
+    &.current {
       padding-right: 15px;
       background-repeat: no-repeat;
       background-position: right center;
       background-size: 12px;
     }
-    &.asc{
+    &.asc {
       background-image: url(up_arrow.png);
     }
 
-    &.desc{
+    &.desc {
       background-image: url(down_arrow.png);
     }
-} 
+  }
 }
 
 .video-thumbnails {
   width: 10%;
   min-width: 220px;
-  padding-left:10px;
+  padding-left: 10px;
   img {
     width: 200px;
     height: auto;
@@ -91,16 +91,14 @@
   .video-view_counts,
   .video-events,
   .video-videotypes,
-  .video-channels
-   {
+  .video-channels {
     display: none;
   }
-
 
   .video-thumbnails {
     width: 25%;
     min-width: 220px;
-    padding-left:10px;
+    padding-left: 10px;
     img {
       width: 200px;
       height: auto;
@@ -147,6 +145,6 @@
   }
 }
 
-.is-hidden  {
-  display:none;
+.is-hidden {
+  display: none;
 }

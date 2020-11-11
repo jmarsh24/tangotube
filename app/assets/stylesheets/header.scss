@@ -1,10 +1,10 @@
 .header {
-display: flex;
-flex-wrap: nowrap;
-flex-direction: row;
-justify-content: space-between;
-height: 50px;
-border: 0px solid orange;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
+  border: 0px solid orange;
 }
 
 #logo {
@@ -22,34 +22,33 @@ border: 0px solid orange;
     color: #3d3d3d;
     text-decoration: none;
   }
-}  
+}
 
 nav ul {
-list-style: row;
-margin: 0px;
-padding-top: 5px;
-padding-left: 5px;
-padding-right: 5px;
-padding-bottom: 5px;
-  a{
-    font-size: .2em;
+  list-style: row;
+  margin: 0px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  a {
+    font-size: 0.2em;
   }
 }
 
 $search-height: 30px;
 
 .search_bar {
-  
-  .search_icon{
+  .search_icon {
     position: relative;
     float: left;
     top: 8px;
     left: 25px;
-    color: #CCC;
+    color: #ccc;
   }
 
-  .input { 
-    min-width:500px;
+  .input {
+    min-width: 500px;
     text-indent: 22px;
     padding-left: 8px;
     height: $search-height;
@@ -58,9 +57,9 @@ $search-height: 30px;
     transition: 0.3s all ease;
 
     &:focus {
-      outline: none; 
-      border-radius: 5px;  /* Your border radius here */
-      box-shadow: 0px 0px 0px 2px #308af1,
+      outline: none;
+      border-radius: 5px; /* Your border radius here */
+      box-shadow: 0px 0px 0px 2px #308af1;
     }
   }
 }

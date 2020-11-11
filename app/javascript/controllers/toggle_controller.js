@@ -1,15 +1,14 @@
-import { Controller } from "stimulus"
+import { Controller } from "stimulus";
 
 export default class extends Controller {
-    static targets = ["toggleable"]
-
+  static targets = ["toggleable"];
 
   connect() {
-    console.log('Toggle-Controller ON')
+    console.log("Toggle-Controller ON");
   }
 
-  toggle() {  
-    console.log('clicked')
-    this.toggleableTarget.classList.toggle("show")
+  toggle() {
+    console.log("clicked");
+    this.toggleableTarget.classList.toggle("show");
   }
 }

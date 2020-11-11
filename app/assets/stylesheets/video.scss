@@ -1,5 +1,5 @@
 $video-width: 500px;
-$video-height: calc(.5625 * $video-width)px;
+$video-height: calc(0.5625 * $video-width) px;
 
 .container {
   min-width: $video-width;
@@ -27,7 +27,7 @@ $video-height: calc(.5625 * $video-width)px;
   height: 100%;
   border-radius: 5px;
   box-shadow: 2px 2px 7px #c2c2c2;
-  border: 0px; 
+  border: 0px;
   left: 0;
   top: 0;
 }

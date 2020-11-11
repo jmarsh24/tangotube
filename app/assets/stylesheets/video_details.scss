@@ -1,11 +1,11 @@
 .details {
   width: 100%;
-  max-width:400px;
+  max-width: 400px;
   border: 0px solid orange;
 }
 .video_title_description {
-  padding-top:10px;
-  padding-right:20px;
+  padding-top: 10px;
+  padding-right: 20px;
   align-items: left;
   display: inline-flex;
   max-width: 500px;
@@ -18,19 +18,16 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding-left: 30px;
-  
+
   .items {
-    width:50%;
+    width: 50%;
   }
-
-
 }
 
 @media (max-width: 1300px) {
-
   .details {
     width: 100%;
-    max-width:960px;
+    max-width: 960px;
     margin: 0 auto 0 auto;
   }
   .video_details {
@@ -39,9 +36,9 @@
     flex-wrap: nowrap;
     justify-content: space-around;
     padding-left: 0px;
-    
+
     .items {
-      min-width:0px;
+      min-width: 0px;
     }
   }
 }
