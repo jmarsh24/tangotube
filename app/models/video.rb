@@ -153,7 +153,7 @@ class Video < ApplicationRecord
       client_key = ENV['HOUNDIFY_CLIENT_KEY']
 
       http_method = 'POST'
-      http_uri = '/v1/identify'
+      http_uri = '/v1/audio'
       data_type = 'audio'
       signature_version = '1'
       timestamp = Time.now.utc.to_i.to_s
@@ -170,17 +170,17 @@ class Video < ApplicationRecord
       File.open(file_name) do |file|
         req = Net::HTTP::Post::Multipart.new url.path,
                                              'sample' => UploadIO.new(file, 'audio/wav', file_name),
-                                             # 'Hound-Request-Authentication' => client_id,
-                                             # 'Hound-Client-Authentication' => signature,
-                                             # 'Hound-Request-Info' =>  test,
-                                             # 'UserID' => 'justin',
-                                             'RequestID' => '1',
-                                             # "client_id" => access_key,
-                                             # "data_type"=> data_type,
-                                             # "signature_version"=> signature_version,
-                                             # "signature"=> signature,
-                                             # "sample_bytes"=> sample_bytes,
-                                             'TimeStamp' => timestamp
+                                             'Hound-Request-Authentication' => client_id,
+                                             'Hound-Client-Authentication' => signature,
+                                             'Hound-Request-Info' => 'test',
+                                             #  'UserID' => 'justin',
+                                             'requestID' => '1',
+                                             'client_id' => client_id,
+                                             'data_type' => data_type,
+                                             'signature_version' => signature_version,
+                                             'signature' => signature,
+                                             'sample_bytes' => sample_bytes,
+                                             'timeStamp' => timestamp
         res = Net::HTTP.start(url.host, url.port) do |http|
           http.request(req)
         end

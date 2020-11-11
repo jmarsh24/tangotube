@@ -120,14 +120,14 @@
 youtube_video = Video.find(22)
 youtube_audio_full = YoutubeDL.download(
                         "https://www.youtube.com/watch?v=#{youtube_video.youtube_id}",
-                        {format: '140', output:'~/desktop/environment/data/audio/%(id)s.mp3'}
+                        {format: '140', output:'~/environment/data/audio/%(id)s.wav'}
                       )
 
 song = FFMPEG::Movie.new("#{youtube_audio_full.filename}")
 
 if song.duration > 135
 
-output_file_path = youtube_audio_full.filename.gsub(/.mp3/, '_15s.mp3')
+output_file_path = youtube_audio_full.filename.gsub(/.wav/, '_15s.wav')
 
 song_transcoded = song.transcode( output_file_path,
                 {custom: %w(-ss 00:02:00.00 -t 00:00:15.00 )} )
@@ -163,15 +163,8 @@ youtube_video.update(
 end
 end
 
-
 # confidence_score= video["metadata"]["music"]["score"],
 # acrid= video["metadata"]["music"]["acrid"],
-
-Hound-Request-Authentication
-
-Hound-Client-Authentication
-
-Hound-Request-Info
 
 
 def houndify(file_name)
