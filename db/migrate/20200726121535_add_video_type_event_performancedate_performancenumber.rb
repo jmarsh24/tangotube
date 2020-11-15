@@ -5,7 +5,6 @@ class AddVideoTypeEventPerformancedatePerformancenumber < ActiveRecord::Migratio
     add_column :videos, :performance_date, :datetime
     add_column :videos, :performance_number, :int
     add_column :videos, :performance_total, :int
-
   end
 
   def down

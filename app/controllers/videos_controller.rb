@@ -1,18 +1,18 @@
 class VideosController < ApplicationController
   # before_action :authenticate_user!
 
-  NUMBER_OF_VIDEOS_PER_PAGE = 10.freeze
-  HERO_YOUTUBE_ID = 's6iptZdCcG0'.freeze
+  NUMBER_OF_VIDEOS_PER_PAGE = 10
+  HERO_YOUTUBE_ID = "s6iptZdCcG0".freeze
 
   helper_method :sort_column, :sort_direction
 
   def index
     @videos = Video.search(params[:q])
-                   .includes(:song, :leader, :follower, :videotype, :event)
-                   .references(:song, :leader, :follower, :videotype, :event)
-                   
+      .includes(:song, :leader, :follower, :videotype, :event)
+      .references(:song, :leader, :follower, :videotype, :event)
+
     @videos_sorted = @videos.order(sort_column + " " + sort_direction)
-                            .where.not(leader_id: [nil, false], follower_id: [nil, false] )
+      .where.not(leader_id: [nil, false], follower_id: [nil, false])
 
     @videos_filtered = @videos_sorted
 
@@ -20,50 +20,48 @@ class VideosController < ApplicationController
       @videos_filtered = @videos_filtered.public_send(key, value) if value.present?
     end
 
-    @videos_paginated = @videos_filtered.paginate( page, NUMBER_OF_VIDEOS_PER_PAGE )
+    @videos_paginated = @videos_filtered.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
     first_youtube_id ||= if @videos_filtered.empty?
-                          HERO_YOUTUBE_ID
-                         else
-                          @videos_filtered.first.youtube_id 
-                         end
+      HERO_YOUTUBE_ID
+    else
+      @videos_filtered.first.youtube_id
+    end
 
     @active_youtube_id ||= params[:youtube_id] || first_youtube_id
-    
+
     @active_video = Video.find_by(youtube_id: @active_youtube_id)
 
     # Populate Total Number of Options
-    @videotypes_total_count  = @videos.pluck(:"videotypes.name").compact.uniq.sort.count
-    @leaders_total_count     = @videos.pluck(:"leaders.name").compact.uniq.sort.count
-    @followers_total_count   = @videos.pluck(:"followers.name").compact.uniq.sort.count
-    @events_total_count      = @videos.pluck(:"events.name").compact.uniq.sort.count
-    @channels_total_count    = @videos.pluck(:channel).compact.uniq.sort.count
-    @genres_total_count      = @videos.pluck(:"songs.genre").compact.uniq.sort.count
-    
+    @videotypes_total_count = @videos.pluck(:"videotypes.name").compact.uniq.sort.count
+    @leaders_total_count = @videos.pluck(:"leaders.name").compact.uniq.sort.count
+    @followers_total_count = @videos.pluck(:"followers.name").compact.uniq.sort.count
+    @events_total_count = @videos.pluck(:"events.name").compact.uniq.sort.count
+    @channels_total_count = @videos.pluck(:channel).compact.uniq.sort.count
+    @genres_total_count = @videos.pluck(:"songs.genre").compact.uniq.sort.count
 
-    # Populate Filters 
-    @videotypes  = @videos_filtered.pluck(:"videotypes.name").compact.uniq.sort
-    @leaders     = @videos_filtered.pluck(:"leaders.name").compact.uniq.sort
-    @followers   = @videos_filtered.pluck(:"followers.name").compact.uniq.sort
-    @events      = @videos_filtered.pluck(:"events.name").compact.uniq.sort
-    @channels    = @videos_filtered.pluck(:channel).compact.uniq.sort
-    @genres      = @videos_filtered.pluck(:"songs.genre").compact.uniq.sort
- 
+    # Populate Filters
+    @videotypes = @videos_filtered.pluck(:"videotypes.name").compact.uniq.sort
+    @leaders = @videos_filtered.pluck(:"leaders.name").compact.uniq.sort
+    @followers = @videos_filtered.pluck(:"followers.name").compact.uniq.sort
+    @events = @videos_filtered.pluck(:"events.name").compact.uniq.sort
+    @channels = @videos_filtered.pluck(:channel).compact.uniq.sort
+    @genres = @videos_filtered.pluck(:"songs.genre").compact.uniq.sort
   end
 
   private
 
   def sort_column
-    acceptable_cols = [ "songs.title",
-                        "songs.artist",
-                        "songs.genre",
-                        "leaders.name",
-                        "followers.name",
-                        "channel",
-                        "upload_date",
-                        "view_count",
-                        "videotypes.name",
-                        "events.name"]
+    acceptable_cols = ["songs.title",
+      "songs.artist",
+      "songs.genre",
+      "leaders.name",
+      "followers.name",
+      "channel",
+      "upload_date",
+      "view_count",
+      "videotypes.name",
+      "events.name"]
     acceptable_cols.include?(params[:sort]) ? params[:sort] : "upload_date"
   end
 

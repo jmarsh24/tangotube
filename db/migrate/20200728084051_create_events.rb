@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :name, null: false, unique: true
       t.string :city
       t.string :country
-      t.date :date 
+      t.date :date
       t.timestamps
     end
   end

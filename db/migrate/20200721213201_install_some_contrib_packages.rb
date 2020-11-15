@@ -11,4 +11,3 @@ class InstallSomeContribPackages < ActiveRecord::Migration[6.0]
     execute "DROP EXTENSION IF EXISTS unaccent;"
   end
 end
-  
