@@ -13,8 +13,12 @@ module Houndify
     }
   end
 
-  def self.url
+  def self.url_audio
     "https://api.houndify.com/v1/audio"
+  end
+
+    def self.url_query
+    "https://api.houndify.com/v1/text"
   end
 
   def self.secrets
@@ -36,7 +40,7 @@ module Houndify
     def request(query, options = {})
       @time_stamp = Time.now.to_i.to_s
       @requestID = SecureRandom.uuid
-      uri = URI.parse(Houndify.url)
+      uri = URI.parse(Houndify.url_text)
       headers = generate_headers(Latitude: -27.4519, Longitude: 153.0178)
       params = {query: query}
       uri.query = URI.encode_www_form(params)
@@ -49,10 +53,10 @@ module Houndify
     def sound_match(file_path)
       @time_stamp = Time.now.to_i.to_s
       @requestID = SecureRandom.uuid
-      uri = URI.parse(Houndify.url)
+      uri = URI.parse(Houndify.url_audio)
       headers = generate_headers('Transfer-Encoding': 'chunked')
 
-      connection = Faraday.new(Houndify.url) { |builder|
+      connection = Faraday.new(Houndify.url_audio) { |builder|
         builder.request :multipart
         builder.request :url_encoded
         builder.adapter :net_http

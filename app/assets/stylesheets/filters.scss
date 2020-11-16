@@ -8,7 +8,7 @@
 
 .filter_button {
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 0px;
   border: none;
   background-color: #f2f2f2;
 }
@@ -55,6 +55,7 @@
 
 .select-dropdown {
   position: static;
+  border-radius:0px !important;
 }
 .select-dropdown .select-dropdown--above {
   margin-top: 336px;
