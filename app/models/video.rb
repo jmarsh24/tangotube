@@ -28,7 +28,6 @@
 #
 
 class Video < ApplicationRecord
-  include Filterable
   include Houndify
 
   require "openssl"
@@ -171,97 +170,7 @@ class Video < ApplicationRecord
       response = client.sound_match(file_path)
       response
       ap JSON.parse(response.body)
-
     end
-
-    # Submits Houndify HTTP request
-    # def houndify(file_path)
-    #   http_method = "POST"
-    #   http_uri = "/v1/audio"
-    #   data_type = "audio"
-    #   timestamp = Time.now.utc.to_i.to_s
-
-    #   requrl = "https://api.houndify.com/v1/audio"
-    #   client_id = ENV["HOUNDIFY_CLIENT_ID"]
-    #   client_key = ENV["HOUNDIFY_CLIENT_KEY"]
-
-    #   user_id = "1"
-    #   request_id = "1"
-
-    #   request_data = user_id + ";" + request_id
-
-    #   digest = OpenSSL::Digest.new("sha1")
-
-    #   encoded_data = Base64.encode64(OpenSSL::HMAC.digest(digest, client_key, request_data))
-
-    #   hound_request = {
-    #     Clue: "music",
-    #     RequestID: request_id,
-    #     SessionID: user_id,
-    #     TimeStamp: timestamp,
-    #     ClientID: client_id
-    #   }
-
-    #   headers = {
-    #     'Hound-Request-Authentication': request_data,
-    #     'Hound-Client-Authentication': client_id + ";" + timestamp + ";" + encoded_data,
-    #     'Hound-Request-Info': JSON.parse(hound_request.to_json)
-    #   }
-
-    #   url = URI.parse(requrl)
-
-    #   File.open(file_path) do |file|
-    #     req = Net::HTTP::Post::Multipart.new url.path,
-    #       "file" => UploadIO.new(file, "audio/wav", file_path),
-    #       "headers" => headers
-
-    #     res = Net::HTTP.start(url.host, url.port) { |http|
-    #       binding.irb
-    #       http.request(req)
-    #     }
-    #     body = res.body
-    #     body
-    #   end
-    # end
-
-    # def houndify2(file_path)
-    #   http_method = "POST"
-    #   http_uri = "/v1/audio"
-    #   data_type = "audio"
-    #   timestamp = Time.now.utc.to_i.to_s
-
-    #   requrl = "https://api.houndify.com/v1/audio"
-    #   client_id = ENV["HOUNDIFY_CLIENT_ID"]
-    #   client_key = ENV["HOUNDIFY_CLIENT_KEY"]
-
-    #   user_id = "1"
-    #   request_id = "1"
-
-    #   request_data = user_id + ";" + request_id
-
-    #   digest = OpenSSL::Digest.new("sha1")
-
-    #   encoded_data = Base64.encode64(OpenSSL::HMAC.digest(digest, client_key, request_data))
-
-    #   headers = {
-    #     'Hound-Request-Authentication': request_data,
-    #     'Hound-Client-Authentication': client_id + ";" + timestamp + ";" + encoded_data
-    #   }
-
-    #   field_file_url = "https://api.houndify.com/v1/audio"
-
-    #   connection = Faraday.new(field_file_url) { |builder|
-    #     builder.request :multipart
-    #     builder.request :url_encoded
-    #     builder.adapter :net_http
-    #   }
-
-    #   payload = {file: Faraday::UploadIO.new(file_path, "audio/wav"), headers: headers}
-    #   connection.post do |req|
-    #     # binding.irb
-    #     req.body = payload
-    #   end
-    # end
 
     def song_match_all(count, offset)
       Video.limit(count).offset(offset).each do |youtube_video|
