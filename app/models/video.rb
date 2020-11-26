@@ -115,8 +115,21 @@ class Video < ApplicationRecord
       end
     end
 
+     def youtube_trim(youtube_id, time_1, time_2)
+      youtube_video = YoutubeDL.download(
+        "https://www.youtube.com/watch?v=#{youtube_id}",
+        {format: "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
+        output: "/Users/justin/Library/Mobile Documents/com~apple~CloudDocs/youtube-dl/%(title)s-%(id)s.%(ext)s"}
+      )
+      video = FFMPEG::Movie.new(youtube_video.filename.to_s)
+      timestamp = "#{time_1}".split(":")
+      timestamp_2 = "#{time_2}".split(":")
+      output_file_path = youtube_video.filename.gsub(/.mp4/, "_trimmed_#{timestamp[1]}_#{timestamp[2]}_to_#{timestamp_2[1]}_#{timestamp_2[2]}.mp4")
+          video_transcoded = video.transcode(output_file_path, custom: %W[-ss #{time_1} -to #{time_2}])
+    end
+
     # Submits ACRCloud HTTP request
-    def song_match(file_name)
+    def acrcloud_match(file_name)
       requrl = "http://identify-eu-west-1.acrcloud.com/v1/identify"
       access_key = ENV["ACRCLOUD_ACCESS_KEY"]
       access_secret = ENV["ACRCLOUD_SECRET_KEY"]
@@ -183,39 +196,43 @@ class Video < ApplicationRecord
 
         output_file_path = youtube_audio_full.filename.gsub(/.wav/, "_15s.wav")
 
-        song_transcoded = song.transcode(output_file_path,
-          {audio_codec: "pcm_s16le", audio_channels: 1, audio_bitrate: 16, audio_sample_rate: 16000, custom: %w[-ss 00:01:30.00 -t 00:00:15.00]})
+        time_1 = youtube_audio_full.duration / 2
+        time_2 = time_1 + 15
 
-        song_match_output = Video.houndify(output_file_path)
+        song_transcoded = song.transcode(output_file_path,
+          {audio_codec: "pcm_s16le", audio_channels: 1, audio_bitrate: 16, audio_sample_rate: 16000, custom: %W[-ss #{time_1} -t #{time_2}]})
+
+        song_match_output = Video.acrcloud_match(output_file_path)
+
+        puts ap JSON.parse song_match_output
 
         video = JSON.parse(song_match_output).extend Hashie::Extensions::DeepFind
 
-        spotify_album_id = video.deep_find("spotify")["album"]["id"]
-        spotify_album_name = RSpotify::Album.find(spotify_album_id).name
-        spotify_artist_id = video.deep_find("spotify")["artists"][0]["id"]
-        spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name
-        if video.deep_find("spotify")["artists"][1].present?
-          spotify_artist_id_2 = video.deep_find("spotify")["artists"][1]["id"]
-        end
-        if video.deep_find("spotify")["artists"][1].present?
-          spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name
-        end
-        spotify_track_id = video.deep_find("spotify")["track"]["id"]
-        spotify_track_name = RSpotify::Track.find(spotify_track_id).name
-        youtube_song_id = video.deep_find("youtube")["vid"] if video.deep_find("youtube").present?
+        if video["status"]["code"] == 0 && video.deep_find("spotify").present?
 
-        youtube_video.update(
-          spotify_album_id: spotify_album_id,
-          spotify_album_name: spotify_album_name,
-          spotify_artist_id: spotify_artist_id,
-          spotify_artist_name: spotify_artist_name,
-          spotify_artist_id_2: spotify_artist_id_2,
-          spotify_artist_name_2: spotify_artist_name_2,
-          spotify_track_id: spotify_track_id,
-          spotify_track_name: spotify_track_name,
-          youtube_song_id: youtube_song_id
-        )
+          spotify_album_id = video.deep_find("spotify")["album"]["id"] if video.deep_find("spotify")["album"]["id"].present?
+          spotify_album_name = RSpotify::Album.find(spotify_album_id).name if video.deep_find("spotify")["album"]["id"].present?
+          spotify_artist_id = video.deep_find("spotify")["artists"][0]["id"] if video.deep_find("spotify")["artists"][0].present?
+          spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name if video.deep_find("spotify")["artists"][0].present?
+          spotify_artist_id_2 = video.deep_find("spotify")["artists"][1]["id"] if video.deep_find("spotify")["artists"][1].present?
+          spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name if video.deep_find("spotify")["artists"][1].present?
+          spotify_track_id = video.deep_find("spotify")["track"]["id"] if video.deep_find("spotify")["track"]["id"].present?
+          spotify_track_name = RSpotify::Track.find(spotify_track_id).name if video.deep_find("spotify")["track"]["id"].present?
+          youtube_song_id = video.deep_find("youtube")["vid"] if video.deep_find("youtube").present?
+
+          youtube_video.update(
+            spotify_album_id: spotify_album_id,
+            spotify_album_name: spotify_album_name,
+            spotify_artist_id: spotify_artist_id,
+            spotify_artist_name: spotify_artist_name,
+            spotify_artist_id_2: spotify_artist_id_2,
+            spotify_artist_name_2: spotify_artist_name_2,
+            spotify_track_id: spotify_track_id,
+            spotify_track_name: spotify_track_name,
+            youtube_song_id: youtube_song_id
+          )
+        end
       end
     end
-    end
+  end
 end
