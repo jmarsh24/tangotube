@@ -115,11 +115,11 @@ class Video < ApplicationRecord
       end
     end
 
-     def youtube_trim(youtube_id, time_1, time_2)
+    def youtube_trim(youtube_id, time_1, time_2)
       youtube_video = YoutubeDL.download(
         "https://www.youtube.com/watch?v=#{youtube_id}",
         {format: "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
-        output: "/Users/justin/Library/Mobile Documents/com~apple~CloudDocs/youtube-dl/%(title)s-%(id)s.%(ext)s"}
+        output: "~/downloads/youtube/%(title)s-%(id)s.%(ext)s"}
       )
       video = FFMPEG::Movie.new(youtube_video.filename.to_s)
       timestamp = "#{time_1}".split(":")
@@ -186,7 +186,7 @@ class Video < ApplicationRecord
     end
 
     def song_match_all(count, offset)
-      Video.limit(count).offset(offset).each do |youtube_video|
+      Video.limit(count).offset(offset).order(:id).where(spotify_track_id: nil).each do |youtube_video|
         youtube_audio_full = YoutubeDL.download(
           "https://www.youtube.com/watch?v=#{youtube_video.youtube_id}",
           {format: "140", output: "~/environment/data/audio/%(id)s.wav"}
@@ -194,13 +194,18 @@ class Video < ApplicationRecord
 
         song = FFMPEG::Movie.new(youtube_audio_full.filename.to_s)
 
-        output_file_path = youtube_audio_full.filename.gsub(/.wav/, "_15s.wav")
-
         time_1 = youtube_audio_full.duration / 2
-        time_2 = time_1 + 15
+        time_2 = time_1 + 20
+
+        output_file_path = youtube_audio_full.filename.gsub(/.wav/, "_#{time_1}_#{time_2}.wav")
 
         song_transcoded = song.transcode(output_file_path,
-          {audio_codec: "pcm_s16le", audio_channels: 1, audio_bitrate: 16, audio_sample_rate: 16000, custom: %W[-ss #{time_1} -t #{time_2}]})
+                                          { audio_codec: "pcm_s16le",
+                                            audio_channels: 1,
+                                            audio_bitrate: 16,
+                                            audio_sample_rate: 16000,
+                                            custom: %W[-ss #{time_1} -to #{time_2}]}
+                                        )
 
         song_match_output = Video.acrcloud_match(output_file_path)
 
@@ -215,10 +220,12 @@ class Video < ApplicationRecord
           spotify_artist_id = video.deep_find("spotify")["artists"][0]["id"] if video.deep_find("spotify")["artists"][0].present?
           spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name if video.deep_find("spotify")["artists"][0].present?
           spotify_artist_id_2 = video.deep_find("spotify")["artists"][1]["id"] if video.deep_find("spotify")["artists"][1].present?
+          spotify_artist_id_3 = video.deep_find("spotify")["artists"][2]["id"] if video.deep_find("spotify")["artists"][2].present?
           spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name if video.deep_find("spotify")["artists"][1].present?
           spotify_track_id = video.deep_find("spotify")["track"]["id"] if video.deep_find("spotify")["track"]["id"].present?
           spotify_track_name = RSpotify::Track.find(spotify_track_id).name if video.deep_find("spotify")["track"]["id"].present?
           youtube_song_id = video.deep_find("youtube")["vid"] if video.deep_find("youtube").present?
+          isrc = video.deep_find("external_ids")["isrc"] if video.deep_find("external_ids")["isrc"].present?
 
           youtube_video.update(
             spotify_album_id: spotify_album_id,
@@ -229,7 +236,13 @@ class Video < ApplicationRecord
             spotify_artist_name_2: spotify_artist_name_2,
             spotify_track_id: spotify_track_id,
             spotify_track_name: spotify_track_name,
-            youtube_song_id: youtube_song_id
+            youtube_song_id: youtube_song_id,
+            isrc: isrc,
+            acr_response_code: video["status"]["code"]
+          )
+        else
+          youtube_video.update(
+            acr_response_code: video["status"]["code"]
           )
         end
       end

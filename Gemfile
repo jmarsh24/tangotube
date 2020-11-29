@@ -26,7 +26,6 @@ gem 'devise', '~> 4.7', '>= 4.7.2'
 gem 'omniauth', '~> 1.9', '>= 1.9.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem "webpacker", "4.2.2"
-
 gem 'country_select', '~> 4.0'
 gem 'openssl', '~> 2.2'
 gem 'base64', '~> 0.1.0'
@@ -36,6 +35,7 @@ gem 'youtube-dl.rb', '~> 0.3.1.2016.09.11.1'
 gem 'rspotify', '~> 2.9', '>= 2.9.2'
 gem 'hashie', '~> 4.1'
 gem 'faraday', '~> 1.1.0'
+gem "acoustid-api", "~> 0.0.1"
 
 group :development, :test do
   gem 'byebug', '~> 11.1', '>= 11.1.3'

@@ -384,7 +384,10 @@ CREATE TABLE public.videos (
     spotify_artist_name_2 character varying,
     spotify_track_id character varying,
     spotify_track_name character varying,
-    youtube_song_id character varying
+    youtube_song_id character varying,
+    isrc character varying,
+    acr_response_code integer,
+    spotify_artist_name_3 character varying
 );
 
 
@@ -739,6 +742,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201102165536'),
 ('20201102165548'),
 ('20201102165631'),
-('20201104112926');
+('20201104112926'),
+('20201128194419'),
+('20201128214542'),
+('20201128222120');
 
 

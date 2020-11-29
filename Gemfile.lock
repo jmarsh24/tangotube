@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    acoustid-api (0.0.1)
+      httpi (~> 2.1.0)
+      version (~> 1.0.0)
     actioncable (6.0.3.4)
       actionpack (= 6.0.3.4)
       nio4r (~> 2.0)
@@ -137,6 +140,9 @@ GEM
     hashie (4.1.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httpi (2.1.1)
+      rack
+      rubyntlm (~> 0.3.2)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)
@@ -305,6 +311,7 @@ GEM
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.2)
+    rubyntlm (0.3.4)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -355,6 +362,7 @@ GEM
     unf_ext (0.0.7.7)
     unicode-display_width (1.7.0)
     unicode_utils (1.4.0)
+    version (1.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.0.2)
@@ -381,6 +389,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acoustid-api (~> 0.0.1)
   active_link_to (~> 1.0, >= 1.0.5)
   activeadmin (~> 2.8, >= 2.8.1)
   amazing_print (~> 1.2, >= 1.2.2)
