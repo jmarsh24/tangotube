@@ -67,6 +67,7 @@ class AcrSoundMatchJob < ApplicationJob
           acr_response_code: video["status"]["code"]
         )
       end
+    rescue Terrapin::ExitStatusError
     end
   end
 
