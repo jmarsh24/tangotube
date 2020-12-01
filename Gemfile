@@ -20,7 +20,7 @@ gem 'spring-watcher-listen', '2.0.1'
 gem 'json', '~> 2.3', '>= 2.3.1'
 gem 'pg_search', '~> 2.3', '>= 2.3.2'
 gem 'factory_bot', '~> 6.1'
-gem 'redis', '~> 4.0.1'
+gem 'redis', '~> 4.2', '>= 4.2.5'
 gem 'active_link_to', '~> 1.0', '>= 1.0.5'
 gem 'devise', '~> 4.7', '>= 4.7.2'
 gem 'omniauth', '~> 1.9', '>= 1.9.1'
@@ -35,7 +35,7 @@ gem 'youtube-dl.rb', '~> 0.3.1.2016.09.11.1'
 gem 'rspotify', '~> 2.9', '>= 2.9.2'
 gem 'hashie', '~> 4.1'
 gem 'faraday', '~> 1.1.0'
-gem "acoustid-api", "~> 0.0.1"
+gem 'sidekiq', '~> 6.1', '>= 6.1.2'
 
 group :development, :test do
   gem 'byebug', '~> 11.1', '>= 11.1.3'

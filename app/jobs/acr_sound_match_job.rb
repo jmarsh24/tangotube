@@ -68,6 +68,7 @@ class AcrSoundMatchJob < ApplicationJob
         )
       end
     rescue Terrapin::ExitStatusError
+    rescue RestClient::Exceptions::OpenTimeout
     end
   end
 

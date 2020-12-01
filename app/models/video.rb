@@ -114,7 +114,9 @@ class Video < ApplicationRecord
         video.save
       end
     end
+# To fetch specific snippet from video, run this in the console:
 
+  #  Video.youtube_trim("5HfJ_n3wvLw","00:02:40.00", "00:02:55.00")
     def youtube_trim(youtube_id, time_1, time_2)
       youtube_video = YoutubeDL.download(
         "https://www.youtube.com/watch?v=#{youtube_id}",
