@@ -1,8 +1,8 @@
 class AcrSoundMatchJob < ApplicationJob
   queue_as :default
 
-  def perform(count, offset)
-    Video.limit(count).offset(offset).order(:id).where(acr_response_code: nil).each do |youtube_video|
+  def perform
+    Video.where(acr_response_code: nil).each do |youtube_video|
       youtube_audio_full = YoutubeDL.download(
                             "https://www.youtube.com/watch?v=#{youtube_video.youtube_id}",
                             {format: "140", output: "~/environment/data/audio/%(id)s.wav"}
@@ -30,13 +30,13 @@ class AcrSoundMatchJob < ApplicationJob
 
       if video["status"]["code"] == 0 && video.deep_find("spotify").present?
 
-        spotify_album_id = video.deep_find("spotify")["album"]["id"] if video.deep_find("spotify")["album"]["id"].present?
+        spotify_album_id = video.deep_find("spotify")["album"]["id"] if video.deep_find("spotify")["album"].present?
         spotify_album_name = RSpotify::Album.find(spotify_album_id).name if video.deep_find("spotify")["album"]["id"].present?
         spotify_artist_id = video.deep_find("spotify")["artists"][0]["id"] if video.deep_find("spotify")["artists"][0].present?
-        spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name if video.deep_find("spotify")["artists"][0].present?
+        spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name if video.deep_find("spotify")["artists"][0]["id"].present?
         spotify_artist_id_2 = video.deep_find("spotify")["artists"][1]["id"] if video.deep_find("spotify")["artists"][1].present?
         spotify_artist_id_3 = video.deep_find("spotify")["artists"][2]["id"] if video.deep_find("spotify")["artists"][2].present?
-        spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name if video.deep_find("spotify")["artists"][1].present?
+        spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name if video.deep_find("spotify")["artists"][1]["id"].present?
         spotify_track_id = video.deep_find("spotify")["track"]["id"] if video.deep_find("spotify")["track"]["id"].present?
         spotify_track_name = RSpotify::Track.find(spotify_track_id).name if video.deep_find("spotify")["track"]["id"].present?
         youtube_song_id = video.deep_find("youtube")["vid"] if video.deep_find("youtube").present?

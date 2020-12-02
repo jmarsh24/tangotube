@@ -83,7 +83,8 @@ test:
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 10
+  timeout: 5000
   database: tango_library_production
   username: justin
   password: <%= ENV['TANGO_LIBRARY_DATABASE_PASSWORD'] %>

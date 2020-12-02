@@ -1,9 +1,10 @@
 class AcrSoundMatchWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
+  SIZE = 1000
 
-  def perform(count, offset)
-    Video.limit(count).offset(offset).order(:id).where(acr_response_code: nil).each do |youtube_video|
+  def perform
+    Video.where(acr_response_code: nil).each do |youtube_video|
       youtube_audio_full = YoutubeDL.download(
         "https://www.youtube.com/watch?v=#{youtube_video.youtube_id}",
         {format: "140", output: "~/environment/data/audio/%(id)s.wav"}
@@ -29,9 +30,9 @@ class AcrSoundMatchWorker
 
       video = JSON.parse(song_match_output).extend Hashie::Extensions::DeepFind
 
-      if video["status"]["code"] == 0 && video.deep_find("spotify").present?
+      if video["status"]["code"] == 0 | 2004 && video.deep_find("spotify").present?
 
-        spotify_album_id = video.deep_find("spotify")["album"]["id"] if video.deep_find("spotify")["album"]["id"].present?
+        spotify_album_id = video.deep_find("spotify")["album"]["id"] if video.deep_find("spotify")["album"].present?
         spotify_album_name = RSpotify::Album.find(spotify_album_id).name if video.deep_find("spotify")["album"]["id"].present?
         spotify_artist_id = video.deep_find("spotify")["artists"][0]["id"] if video.deep_find("spotify")["artists"][0].present?
         spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name if video.deep_find("spotify")["artists"][0].present?
@@ -70,6 +71,8 @@ class AcrSoundMatchWorker
       end
     rescue Terrapin::ExitStatusError
     rescue RestClient::Exceptions::OpenTimeout
+    rescue FFMPEG::Error
+    rescue Errno::ENOENT
     end
   end
 
