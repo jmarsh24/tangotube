@@ -64,6 +64,13 @@ class Video < ApplicationRecord
   }
 
   class << self
+    def import
+      # get raw data from youtube dl (100 at a time)
+      # create video oject in your db
+      # make sure it has follower & leader
+      # get the song data
+    end
+
     def search(query)
       if query
         where('leaders.name ILIKE :query or
