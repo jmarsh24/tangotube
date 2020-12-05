@@ -401,6 +401,7 @@ DEPENDENCIES
   json (~> 2.3, >= 2.3.1)
   listen (= 3.2.1)
   multipart-post (~> 2.1, >= 2.1.1)
+  nokogiri (~> 1.10, >= 1.10.10)
   omniauth (~> 1.9, >= 1.9.1)
   openssl (~> 2.2)
   pg (= 1.2.3)
