@@ -77,44 +77,28 @@ class Video < ApplicationRecord
       end
     end
 
-    def import_video(_youtube_id)
-      video = Yt::Video.new id.to_s
-      video = Video.new(
-        youtube_id: video.id,
-        title: video.title,
-        description: youtube_video.description,
-        upload_date: video.publishedAt,
-        channel: video.channelTitle,
-        duration: video.length,
-        channel_id: video.channelId,
-        view_count: video.view_count,
-        tags: video.tags
-      )
-      video.save
-    end
-
     def import_channel(channel_id, limit)
-      channel = Yt::Channel.new channel_id.to_s
+      channel = Yt::Channel.new(id: channel_id)
       channel.videos.take(limit).each do |video|
-        youtube_video = Yt::Video.new id.to_s
+        youtube_video = Yt::Video.new(id: video.id)
 
-        clip_audio(youtube_id)
-        grep_dancers(youtube_id)
-        acr_sound_match(file_name)
-        parse_acr_response(ask_acr_output)
+        # clip_audio(youtube_id)
+        # grep_dancers(youtube_id)
+        # acr_sound_match(file_name)
+        # parse_acr_response(ask_acr_output)
 
-        video = Video.new(
+        video_output = Video.new(
           youtube_id: video.id,
           title: video.title,
           description: youtube_video.description,
-          upload_date: video.publishedAt,
-          channel: video.channelTitle,
+          upload_date: video.published_at,
+          channel: video.channel_title,
           duration: video.length,
-          channel_id: video.channelId,
+          channel_id: video.channel_id,
           view_count: video.view_count,
           tags: video.tags
         )
-        video.save
+        video_output.save
       end
       # make sure it has follower & leader
       # get the song data
@@ -323,6 +307,23 @@ class Video < ApplicationRecord
     #     video.save
     #   end
     # end
+
+    # def import_video(_youtube_id)
+    #   video = Yt::Video.new id.to_s
+    #   video = Video.new(
+    #     youtube_id: video.id,
+    #     title: video.title,
+    #     description: youtube_video.description,
+    #     upload_date: video.publishedAt,
+    #     channel: video.channelTitle,
+    #     duration: video.length,
+    #     channel_id: video.channelId,
+    #     view_count: video.view_count,
+    #     tags: video.tags
+    #   )
+    #   video.save
+    # end
+
     # To fetch specific snippet from video, run this in the console:
 
     #  Video.youtube_trim("5HfJ_n3wvLw","00:02:40.00", "00:02:55.00")
