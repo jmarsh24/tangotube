@@ -90,13 +90,13 @@
       end
     end
 
-        #SQL match for Leader using fuzzystrmatch
-        Leader.all.each do |leader|
-          Video.where(leader_id: nil).where( "levenshtein(unaccent(description), unaccent(?) ) < 4 ", leader.name).each do |video|
-            video.leader = leader
-            video.save
-          end
-        end
+    #SQL match for Leader using fuzzystrmatch
+    Leader.all.each do |leader|
+      Video.where(leader_id: nil).where( "levenshtein(unaccent(description), unaccent(?) ) < 4 ", leader.name).each do |video|
+        video.leader = leader
+        video.save
+      end
+    end
 
     Follower.all.each do |follower|
       Video.where(follower_id: nil).where( "levenshtein(unaccent(title), unaccent(?) ) < 4", follower.name).each do |video|
