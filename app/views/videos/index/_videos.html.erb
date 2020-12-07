@@ -14,10 +14,10 @@
           <%= video.videotype.try(:name) %>
         </div>
         <div class="video-titles">
-          <%= video.try(:spotify_track_name) %>
+          <%= video.try(:spotify_track_name) || video.try(:youtube_song) %>
         </div>
         <div class="video-artists">
-          <%= video.try(:spotify_artist_name) %>
+          <%= video.try(:spotify_artist_name) || video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
         </div>
         <div class="video-genres">
           <%= video.song.try(:genre) %>
