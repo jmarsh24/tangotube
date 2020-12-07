@@ -110,6 +110,7 @@ class Video < ApplicationRecord
         )
         video_output.save
         video = Video.find_by(youtube_id: youtube_video.id)
+
         video_youtube_song_match = JSON.parse(YoutubeDL.download(
           "https://www.youtube.com/watch?v=#{video.youtube_id}",
           { skip_download: true, dump_json: true }
@@ -120,6 +121,7 @@ class Video < ApplicationRecord
           youtube_artist: video_youtube_song_match.deep_find('artist')
         )
         video.save
+
         clipped_audio = Video.clip_audio(youtube_video.id) if video.acr_response_code.nil?
         acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
         Video.parse_acr_response(acr_response_body, youtube_video.id) if video.acr_response_code.nil?

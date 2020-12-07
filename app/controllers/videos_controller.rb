@@ -2,18 +2,18 @@ class VideosController < ApplicationController
   # before_action :authenticate_user!
 
   NUMBER_OF_VIDEOS_PER_PAGE = 10
-  HERO_YOUTUBE_ID = "s6iptZdCcG0".freeze
+  HERO_YOUTUBE_ID = 's6iptZdCcG0'.freeze
 
   helper_method :sort_column, :sort_direction
 
   def index
     @videos = Video.search(params[:q])
-      .includes(:song, :leader, :follower, :videotype, :event)
-      .references(:song, :leader, :follower, :videotype, :event)
+                   .includes(:song, :leader, :follower, :videotype, :event)
+                   .references(:song, :leader, :follower, :videotype, :event)
 
-    @videos_sorted = @videos.order(sort_column + " " + sort_direction)
-      .where.not(leader_id: [nil, false], follower_id: [nil, false])
-
+    @videos_sorted = @videos.order(sort_column + ' ' + sort_direction)
+                            .where.not(leader_id: [nil, false], follower_id: [nil, false])
+    byebug
     @videos_filtered = @videos_sorted
 
     filtering_params(params).each do |key, value|
@@ -23,10 +23,10 @@ class VideosController < ApplicationController
     @videos_paginated = @videos_filtered.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
     first_youtube_id ||= if @videos_filtered.empty?
-      HERO_YOUTUBE_ID
-    else
-      @videos_filtered.first.youtube_id
-    end
+                           HERO_YOUTUBE_ID
+                         else
+                           @videos_filtered.first.youtube_id
+                         end
 
     @active_youtube_id ||= params[:youtube_id] || first_youtube_id
 
@@ -52,21 +52,22 @@ class VideosController < ApplicationController
   private
 
   def sort_column
-    acceptable_cols = ["songs.title",
-      "songs.artist",
-      "songs.genre",
-      "leaders.name",
-      "followers.name",
-      "channel",
-      "upload_date",
-      "view_count",
-      "videotypes.name",
-      "events.name"]
-    acceptable_cols.include?(params[:sort]) ? params[:sort] : "upload_date"
+    acceptable_cols = ['songs.title',
+                       'songs.artist',
+                       'songs.genre',
+                       'leaders.name',
+                       'followers.name',
+                       'channel',
+                       'upload_date',
+                       'view_count',
+                       'videotypes.name',
+                       'events.name']
+
+    acceptable_cols.include?(params[:sort]) ? params[:sort] : 'upload_date'
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   end
 
   def page

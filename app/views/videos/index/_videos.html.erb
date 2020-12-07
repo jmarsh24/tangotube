@@ -1,9 +1,9 @@
 <% if (@videos_paginated.empty?) %>
-    <p style="font-weight:bold">No videos found.</p> 
+    <p style="font-weight:bold">No videos found.</p>
     Try a different search word or click on the TangoTube logo to reset.
   <% else %>
     <% @videos_paginated.each do |video| %>
-      <%= active_link_to current_page_params.merge(youtube_id: video.youtube_id), 
+      <%= active_link_to current_page_params.merge(youtube_id: video.youtube_id),
                 {class: "video", active: :exact} do %>
 
         <div class="video-thumbnails">
@@ -14,10 +14,10 @@
           <%= video.videotype.try(:name) %>
         </div>
         <div class="video-titles">
-          <%= video.song.try(:title) %>
+          <%= video.try(:spotify_track_name) %>
         </div>
         <div class="video-artists">
-          <%= video.song.try(:artist) %>
+          <%= video.try(:spotify_artist_name) %>
         </div>
         <div class="video-genres">
           <%= video.song.try(:genre) %>
