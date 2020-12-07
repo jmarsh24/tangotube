@@ -13,7 +13,7 @@ class VideosController < ApplicationController
 
     @videos_sorted = @videos.order(sort_column + ' ' + sort_direction)
                             .where.not(leader_id: [nil, false], follower_id: [nil, false])
-    byebug
+
     @videos_filtered = @videos_sorted
 
     filtering_params(params).each do |key, value|

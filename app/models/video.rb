@@ -115,7 +115,6 @@ class Video < ApplicationRecord
           "https://www.youtube.com/watch?v=#{video.youtube_id}",
           { skip_download: true, dump_json: true }
         ).to_json).extend Hashie::Extensions::DeepFind
-        # byebug
         video.update(
           youtube_song: video_youtube_song_match.deep_find('track'),
           youtube_artist: video_youtube_song_match.deep_find('artist')
