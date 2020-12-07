@@ -2,29 +2,43 @@
 #
 # Table name: videos
 #
-#  id                 :bigint           not null, primary key
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  title              :text
-#  youtube_id         :string
-#  leader_id          :bigint
-#  follower_id        :bigint
-#  description        :string
-#  channel            :string
-#  channel_id         :string
-#  duration           :integer
-#  upload_date        :date
-#  view_count         :integer
-#  avg_rating         :integer
-#  tags               :string
-#  song_id            :bigint
-#  youtube_song       :string
-#  youtube_artist     :string
-#  performance_date   :datetime
-#  performance_number :integer
-#  performance_total  :integer
-#  videotype_id       :bigint
-#  event_id           :bigint
+#  id                    :bigint           not null, primary key
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  title                 :text
+#  youtube_id            :string
+#  leader_id             :bigint
+#  follower_id           :bigint
+#  description           :string
+#  channel               :string
+#  channel_id            :string
+#  upload_date           :date
+#  view_count            :integer
+#  avg_rating            :integer
+#  tags                  :string
+#  song_id               :bigint
+#  youtube_song          :string
+#  youtube_artist        :string
+#  performance_date      :datetime
+#  performance_number    :integer
+#  performance_total     :integer
+#  videotype_id          :bigint
+#  event_id              :bigint
+#  confidence_score      :string
+#  acrid                 :string
+#  spotify_album_id      :string
+#  spotify_album_name    :string
+#  spotify_artist_id     :string
+#  spotify_artist_id_2   :string
+#  spotify_artist_name   :string
+#  spotify_artist_name_2 :string
+#  spotify_track_id      :string
+#  spotify_track_name    :string
+#  youtube_song_id       :string
+#  isrc                  :string
+#  acr_response_code     :integer
+#  spotify_artist_name_3 :string
+#  length                :time
 #
 
 class Video < ApplicationRecord
@@ -42,8 +56,9 @@ class Video < ApplicationRecord
   # validates :follower, presence: true
   # validates :song, presence: true
   # validates :artist, presence: true
-  # validates :youtube_id, presence: true, uniqueness: true
-  # validates :title, presence: true
+  validates :description, presence: true
+  validates :youtube_id, presence: true, uniqueness: true
+  validates :title, presence: true
 
   belongs_to :leader, required: false
   belongs_to :follower, required: false
@@ -82,76 +97,70 @@ class Video < ApplicationRecord
       channel.videos.take(limit).each do |video|
         youtube_video = Yt::Video.new(id: video.id)
 
-        # clip_audio(youtube_id)
-        # grep_dancers(youtube_id)
-        # acr_sound_match(file_name)
-        # parse_acr_response(ask_acr_output)
-
         video_output = Video.new(
           youtube_id: video.id,
           title: video.title,
           description: youtube_video.description,
           upload_date: video.published_at,
           channel: video.channel_title,
-          duration: video.length,
+          length: video.length,
           channel_id: video.channel_id,
           view_count: video.view_count,
           tags: video.tags
         )
         video_output.save
+        video = Video.find_by(youtube_id: youtube_video.id)
+        clipped_audio = Video.clip_audio(youtube_video.id) if video.acr_response_code.nil?
+        acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
+        Video.parse_acr_response(acr_response_body, youtube_video.id) if video.acr_response_code.nil?
       end
-      # make sure it has follower & leader
-      # get the song data
+      Video.match_dancers
     end
 
-    def grep_dancers(youtube_id)
-      video = Video.find_by(youtube_id: youtube_id)
-
-      # Attempt to parse title for leader and follower
+    def match_dancers
       Leader.all.each do |leader|
-        Video.where(leader_id: nil).where('levenshtein(unaccent(title), unaccent(?) ) < 4 ', leader.name).each do |video|
+        Video.all.where(leader_id: nil).where('unaccent(tags) ILIKE unaccent(?)', "%#{leader.name}%").each do |video|
           video.leader = leader
           video.save
         end
       end
 
       Follower.all.each do |follower|
-        Video.where(follower_id: nil).where('levenshtein(unaccent(title), unaccent(?) ) < 4', follower.name).each do |video|
+        Video.all.where(follower_id: nil).where('unaccent(tags) ILIKE unaccent(?)', "%#{follower.name}%").each do |video|
           video.follower = follower
           video.save
         end
       end
 
-      # Attempt to parse description for leader and follower
       Leader.all.each do |leader|
-        Video.where(leader_id: nil).where('levenshtein(unaccent(description), unaccent(?) ) < 4 ', leader.name).each do |video|
+        Video.all.where(leader_id: nil).where('unaccent(title) ILIKE unaccent(?)', "%#{leader.name}%").each do |video|
           video.leader = leader
           video.save
         end
       end
 
       Follower.all.each do |follower|
-        Video.where(follower_id: nil).where('levenshtein(unaccent(description), unaccent(?) ) < 4', follower.name).each do |video|
+        Video.all.where(follower_id: nil).where('unaccent(title) ILIKE unaccent(?)', "%#{follower.name}%").each do |video|
           video.follower = follower
           video.save
         end
       end
     end
 
-    # Generates audio clip
-    def clip_audio(_youtube_id)
-      youtube_video = Video.find(youtube_id: video_id)
-      youtube_audio_full = YoutubeDL.download(
-        "https://www.youtube.com/watch?v=#{youtube_video.youtube_id}",
+    # Generates audio clip from youtube_id and outputs file path
+    def clip_audio(video_id)
+      video = Video.find_by(youtube_id: video_id)
+      audio_full = YoutubeDL.download(
+        "https://www.youtube.com/watch?v=#{video.youtube_id}",
         { format: '140', output: '~/environment/data/audio/%(id)s.wav' }
       )
 
-      song = FFMPEG::Movie.new(youtube_audio_full.filename.to_s)
+      song = FFMPEG::Movie.new(audio_full.filename.to_s)
 
-      time_1 = youtube_audio_full.duration / 2
+      time_1 = audio_full.duration / 2
       time_2 = time_1 + 20
 
-      output_file_path = youtube_audio_full.filename.gsub(/.wav/, "_#{time_1}_#{time_2}.wav")
+      output_file_path = audio_full.filename.gsub(/.wav/, "_#{time_1}_#{time_2}.wav")
 
       song_transcoded = song.transcode(output_file_path,
                                        { audio_codec: 'pcm_s16le',
@@ -159,38 +168,49 @@ class Video < ApplicationRecord
                                          audio_bitrate: 16,
                                          audio_sample_rate: 16_000,
                                          custom: %W[-ss #{time_1} -to #{time_2}] })
+      output_file_path
     end
 
-    def parse_acr_response
-      video = JSON.parse(ask_acr_output).extend Hashie::Extensions::DeepFind
+    # Parse response spotify, youtube, and isrc information from ACR_sound_match
+    def parse_acr_response(acr_response, youtube_id)
+      youtube_video = Video.find_by(youtube_id: youtube_id)
+      video = JSON.parse(acr_response).extend Hashie::Extensions::DeepFind
 
-      if video['status']['code'] == 0 | 2004 && video.deep_find('spotify').present?
+      if video['status']['code'] == 0 && video.deep_find('spotify').present?
 
         spotify_album_id = video.deep_find('spotify')['album']['id'] if video.deep_find('spotify')['album'].present?
         if video.deep_find('spotify')['album']['id'].present?
           spotify_album_name = RSpotify::Album.find(spotify_album_id).name
         end
+
         if video.deep_find('spotify')['artists'][0].present?
           spotify_artist_id = video.deep_find('spotify')['artists'][0]['id']
         end
+
         if video.deep_find('spotify')['artists'][0].present?
           spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name
         end
+
         if video.deep_find('spotify')['artists'][1].present?
           spotify_artist_id_2 = video.deep_find('spotify')['artists'][1]['id']
         end
+
         if video.deep_find('spotify')['artists'][2].present?
           spotify_artist_id_3 = video.deep_find('spotify')['artists'][2]['id']
         end
+
         if video.deep_find('spotify')['artists'][1].present?
           spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name
         end
+
         if video.deep_find('spotify')['track']['id'].present?
           spotify_track_id = video.deep_find('spotify')['track']['id']
         end
+
         if video.deep_find('spotify')['track']['id'].present?
           spotify_track_name = RSpotify::Track.find(spotify_track_id).name
         end
+
         youtube_song_id = video.deep_find('youtube')['vid'] if video.deep_find('youtube').present?
         isrc = video.deep_find('external_ids')['isrc'] if video.deep_find('external_ids')['isrc'].present?
 
@@ -225,7 +245,8 @@ class Video < ApplicationRecord
     rescue Errno::ENOENT
     end
 
-    def acr_sound_match(file_name)
+    # accepts file path and submits a http request to ACR Cloud API
+    def acr_sound_match(file_path)
       requrl = 'http://identify-eu-west-1.acrcloud.com/v1/identify'
       access_key = ENV['ACRCLOUD_ACCESS_KEY']
       access_secret = ENV['ACRCLOUD_SECRET_KEY']
@@ -241,12 +262,12 @@ class Video < ApplicationRecord
       digest = OpenSSL::Digest.new('sha1')
       signature = Base64.encode64(OpenSSL::HMAC.digest(digest, access_secret, string_to_sign))
 
-      sample_bytes = File.size(file_name)
+      sample_bytes = File.size(file_path)
 
       url = URI.parse(requrl)
-      File.open(file_name) do |file|
+      File.open(file_path) do |file|
         req = Net::HTTP::Post::Multipart.new url.path,
-                                             'sample' => UploadIO.new(file, 'audio/mp3', file_name),
+                                             'sample' => UploadIO.new(file, 'audio/mp3', file_path),
                                              'access_key' => access_key,
                                              'data_type' => data_type,
                                              'signature_version' => signature_version,

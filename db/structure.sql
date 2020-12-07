@@ -361,7 +361,6 @@ CREATE TABLE public.videos (
     description character varying,
     channel character varying,
     channel_id character varying,
-    duration integer,
     upload_date date,
     view_count integer,
     avg_rating integer,
@@ -387,7 +386,8 @@ CREATE TABLE public.videos (
     youtube_song_id character varying,
     isrc character varying,
     acr_response_code integer,
-    spotify_artist_name_3 character varying
+    spotify_artist_name_3 character varying,
+    length time without time zone
 );
 
 
@@ -746,6 +746,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201128194419'),
 ('20201128214542'),
 ('20201128222120'),
-('20201206111332');
+('20201207145709'),
+('20201207145752');
 
 

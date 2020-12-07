@@ -12,7 +12,7 @@ class AcrSoundMatchWorker
 
       song = FFMPEG::Movie.new(youtube_audio_full.filename.to_s)
 
-      time_1 = youtube_audio_full.duration / 2
+      time_1 = youtube_audio_full.length / 2
       time_2 = time_1 + 20
 
       output_file_path = youtube_audio_full.filename.gsub(/.wav/, "_#{time_1}_#{time_2}.wav")
