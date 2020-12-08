@@ -20,7 +20,7 @@
           <%= video.try(:spotify_artist_name) || video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
         </div>
         <div class="video-genres">
-          <%= video.song.try(:genre) %>
+          <%= video.song.try(:genre).titleize%>
         </div>
         <div class="video-leaders">
           <%= video.leader.try(:name) %>

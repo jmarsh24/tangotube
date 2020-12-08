@@ -2,7 +2,7 @@
 <label>
 <%= "#{title}".titleize %>
 </label>
-  <%= select_tag "#{title}", 
+  <%= select_tag "#{title}",
         options_for_select([["Select All #{model_count} Types", "all"]] + model,
           params["#{title}"].presence || "all"),
             class: "content-search",

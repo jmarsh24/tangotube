@@ -292,7 +292,8 @@ CREATE TABLE public.songs (
     artist_2 character varying,
     composer character varying,
     author character varying,
-    date date
+    date date,
+    last_name_search character varying
 );
 
 

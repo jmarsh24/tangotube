@@ -46,7 +46,7 @@ class VideosController < ApplicationController
     @followers = @videos_filtered.pluck(:"followers.name").compact.uniq.sort
     @events = @videos_filtered.pluck(:"events.name").compact.uniq.sort
     @channels = @videos_filtered.pluck(:channel).compact.uniq.sort
-    @genres = @videos_filtered.pluck(:"songs.genre").compact.uniq.sort
+    @genres = @videos_filtered.pluck(:"songs.genre").compact.uniq.map(&:capitalize).sort
   end
 
   private

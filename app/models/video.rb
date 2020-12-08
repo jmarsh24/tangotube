@@ -85,8 +85,9 @@ class Video < ApplicationRecord
                 songs.genre ILIKE :query or
                 songs.title ILIKE :query or
                 songs.artist ILIKE :query or
-                videotypes.name ILIKE :query',
-              query: "%#{query.downcase}%")
+                videotypes.name ILIKE :query or
+                events.title ILIKE :query',
+              query: "%#{mquery}%")
       else
         all
       end
@@ -126,33 +127,62 @@ class Video < ApplicationRecord
         Video.parse_acr_response(acr_response_body, youtube_video.id) if video.acr_response_code.nil?
       end
       Video.match_dancers
+      Video.match_songs
     end
 
     def match_dancers
       Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where('unaccent(tags) ILIKE unaccent(?)', "%#{leader.name}%").each do |video|
+        Video.all.where(leader_id: nil).where('tags ILIKE ?', "%#{leader.name}%").each do |video|
           video.leader = leader
           video.save
         end
       end
 
       Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where('unaccent(tags) ILIKE unaccent(?)', "%#{follower.name}%").each do |video|
+        Video.all.where(follower_id: nil).where('tags ILIKE ?', "%#{follower.name}%").each do |video|
           video.follower = follower
           video.save
         end
       end
 
       Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where('unaccent(title) ILIKE unaccent(?)', "%#{leader.name}%").each do |video|
+        Video.all.where(leader_id: nil).where('title ILIKE ?', "%#{leader.name}%").each do |video|
           video.leader = leader
           video.save
         end
       end
 
       Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where('unaccent(title) ILIKE unaccent(?)', "%#{follower.name}%").each do |video|
+        Video.all.where(follower_id: nil).where('title ILIKE ?', "%#{follower.name}%").each do |video|
           video.follower = follower
+          video.save
+        end
+      end
+    end
+
+    def match_songs
+      Song.all.each do |song|
+        Video.where(song_id: nil)
+             .where('unaccent(spotify_track_name) ILIKE unaccent(?)
+                         OR unaccent(youtube_song) ILIKE unaccent(?)',
+                    "%#{song.title}%",
+                    "%#{song.title}%")
+             .where('spotify_artist_name ILIKE ?
+                          OR unaccent(spotify_artist_name_2) ILIKE unaccent(?)
+                          OR unaccent(youtube_artist) ILIKE unaccent(?)
+                          OR unaccent(description) ILIKE unaccent(?)
+                          OR unaccent(title) ILIKE unaccent(?)
+                          OR unaccent(tags) ILIKE unaccent(?)
+                          OR unaccent(spotify_album_name) ILIKE unaccent(?)',
+                    "%#{song.last_name_search}%",
+                    "%#{song.last_name_search}%",
+                    "%#{song.last_name_search}%",
+                    "%#{song.last_name_search}%",
+                    "%#{song.last_name_search}%",
+                    "%#{song.last_name_search}%",
+                    "%#{song.last_name_search}%")
+             .each do |video|
+          video.song = song
           video.save
         end
       end
