@@ -288,7 +288,11 @@ CREATE TABLE public.songs (
     title character varying,
     artist character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    artist_2 character varying,
+    composer character varying,
+    author character varying,
+    date date
 );
 
 
@@ -747,6 +751,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201128214542'),
 ('20201128222120'),
 ('20201207145709'),
-('20201207145752');
+('20201207145752'),
+('20201208083012');
 
 
