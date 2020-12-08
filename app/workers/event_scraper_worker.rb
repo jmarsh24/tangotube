@@ -24,7 +24,7 @@ class EventScraperWorker
     location = location.flatten
     date = date.flatten
     event_type = event_type.flatten
-    CSV.open("eventinfo_#{offset}_#{limit}.csv", 'a', headers: true) do |csv|
+    CSV.open("~/environment/data/events/eventinfo_#{offset}_#{limit}.csv", 'a', headers: true) do |csv|
       csv << attributes
       [title, location, date, event_type].transpose.each do |row|
         csv << row
