@@ -103,15 +103,22 @@ class Video < ApplicationRecord
 
     def read_batch_urls
       channel_ids = []
+      playlist_ids = []
+      video_ids = []
       File.readlines('data/url_batch.txt', chomp: true).each do |line|
-        if line.starts_with?('#')
-          next
-        else
-          url = Yt::URL.new(line)
-          channel_ids << url.id
-        end
+        next if line.starts_with?('#')
+
+        url = Yt::URL.new(line)
+
+        channel_ids << url.id if url.kind == :channel
+
+        playlist_ids << url.id if url.kind == :playlist
+
+        playlist_ids << url.id if url.kind == :video
       end
-      channel_ids
+      { channel_ids: channel_ids,
+        playlist_ids: playlist_ids,
+        video_ids: video_ids }
     end
 
     def import_channel(channel_id, limit)
@@ -212,7 +219,7 @@ class Video < ApplicationRecord
       video = Video.find_by(youtube_id: video_id)
       audio_full = YoutubeDL.download(
         "https://www.youtube.com/watch?v=#{video.youtube_id}",
-        { format: '140', output: '~/environment/data/audio/%(id)s.wav' }
+        { format: '140', output: '~/environment/data/audio/%(id)s.mp3' }
       )
 
       song = FFMPEG::Movie.new(audio_full.filename.to_s)
@@ -220,14 +227,10 @@ class Video < ApplicationRecord
       time_1 = audio_full.duration / 2
       time_2 = time_1 + 20
 
-      output_file_path = audio_full.filename.gsub(/.wav/, "_#{time_1}_#{time_2}.wav")
+      output_file_path = audio_full.filename.gsub(/.mp3/, "_#{time_1}_#{time_2}.mp3")
 
       song_transcoded = song.transcode(output_file_path,
-                                       { audio_codec: 'pcm_s16le',
-                                         audio_channels: 1,
-                                         audio_bitrate: 16,
-                                         audio_sample_rate: 16_000,
-                                         custom: %W[-ss #{time_1} -to #{time_2}] })
+                                       { custom: %W[-ss #{time_1} -to #{time_2}] })
       output_file_path
     end
 
