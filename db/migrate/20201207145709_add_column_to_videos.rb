@@ -1,5 +1,5 @@
 class AddColumnToVideos < ActiveRecord::Migration[6.0]
   def change
-    add_column :videos, :length, 'time without time zone'
+    add_column :videos, :length, :interval
   end
 end

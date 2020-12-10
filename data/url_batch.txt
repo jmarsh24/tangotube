@@ -1,38 +1,33 @@
-#
-# youtube-dl --download-archive downloaded.txt -i -o  '~/Desktop/environment/data/channel_json/%(uploader)s/%(title)s' --write-info-json --skip-download --batch-file './data/url_batch.txt'
-#
-#
-#
 #030tango
 https://www.youtube.com/channel/UCtdgMR0bmogczrZNpPaO66Q
 #Armin K. Marschall
 https://www.youtube.com/channel/UC9lGGipk4wth0rDyy4419aw
 #TangoNuevo TV
-https://www.youtube.com/user/tangokrakow
+https://www.youtube.com/channel/UCUKptFgKHVYM1GoQvgeDU_A
 #Tangostudent
-https://www.youtube.com/user/tangostudent
+https://www.youtube.com/channel/UC766M5toEZ70hZCLsaxXiOw
 #Tango Natural
-https://www.youtube.com/user/TangoNaturalBelgrade
+https://www.youtube.com/channel/UCOrxTg3siBOMD0XwoDKWC5A
 #TC Tango
-https://www.youtube.com/user/TCTangoVideosEtc
+https://www.youtube.com/channel/UCPSEBKNWfeUQR22qpdYAIgg
 #Tango Element
-https://www.youtube.com/user/juliabella
+https://www.youtube.com/channel/UC47UVQSnunEsdxqqvgeG6YA
 #Prischepov tv
-https://www.youtube.com/user/prischepov1979
+https://www.youtube.com/channel/UCCoOxQMnmwZ-jhezbLfSUgQ
 #Mediterranean Summer Tango Festival
-https://www.youtube.com/user/zmalosej
+https://www.youtube.com/channel/UCg-gK8tVf-evR-P976UlU9w
 #Tango Cazino
 https://www.youtube.com/channel/UC2EyGIesuSnNx5-Kohy1PGg
 #Erdemsel1975
-https://www.youtube.com/c/tangofilm/videos
+https://www.youtube.com/c/tangofilm/UCcHaeCEJcXTmWJpqSe-EBwA
 #lodstangosalonfestival
 https://www.youtube.com/channel/UCS_7mPPJVCZLJUG5iMghpgA
 #studio tango montréal
-https://www.youtube.com/user/studiotango
+https://www.youtube.com/channel/UCuP6Y6F9uDjh5-PKkggUY7w
 #crazyfortango
-https://www.youtube.com/user/Crazyfortango
+https://www.youtube.com/channel/UC2LyNJ-DMc3u7xN9ka-Bygg
 #Pepa Palazon
-https://www.youtube.com/user/elchoclo1970/videos
+https://www.youtube.com/channel/UCV6aDwqqS7yTDsp0v_gUkPA
 #Armelle Tango
 https://www.youtube.com/channel/UClmH-sr3jJH1i8tE6odtONQ
 #Paris Buenos Aires Tango
@@ -40,266 +35,265 @@ https://www.youtube.com/channel/UCuOHtVVqipSeqEWTt5MjeKg
 #Sultans of Istanbul Tango Festival
 https://www.youtube.com/channel/UCRrVjNh5Rf2i2UQC8LPT1Wg
 #ladybrucomela vaghestelle
-https://www.youtube.com/user/ladybrucomela
+https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
 #istanbulTANGO
-https://www.youtube.com/user/eshreph1
+https://www.youtube.com/channel/UCgWHuLjpAcWGEpTSYiMj-FQ
 #Bucharest Tango Groove
 https://www.youtube.com/channel/UCUz8joyeQNPWbnfQWwiVZRQ
 #Ivan&Sara FERALTANGO
-https://www.youtube.com/user/elpibetango
+https://www.youtube.com/channel/UCB1VB9Kzdl06PSgd6PZj3SA
 #Pippifromparis
-https://www.youtube.com/user/Pippifromparis
+https://www.youtube.com/channel/UCy0ltvzc34Bt-0d7q_f6vkg
 #Planetango Club
 https://www.youtube.com/channel/UCv1MYiYRQbDsqVvHuX9PSJQ
 #Lompa TV
 https://www.youtube.com/channel/UC_vxKs5JZlSql7LrtdGYygQ
 #Paula Duarte Tango
-https://www.youtube.com/user/paulaisa1
+https://www.youtube.com/channel/UCUX_gPar_D-gLJsWJ55XlcQ
 #Horacio Fernandez
-https://www.youtube.com/user/horaciofer
+https://www.youtube.com/channel/UC9ewAAEx9ybZRs32F-nmNxA
 #Marko Miljevic
 https://www.youtube.com/channel/UCFyWqbEkWPULVD70PguLmgQ
 #Henryk Gajewski
-https://www.youtube.com/user/henrykgajewski
+https://www.youtube.com/channel/UCp5e5y69xiUdGSw-ANTkYcA
 #A Los Amigos Tango Festival
 https://www.youtube.com/channel/UCEGeTx5mPDinPl1ovVdEsjQ
 #MIRIAM LEONARDO Tango
-https://www.youtube.com/c/MIRIAMLEONARDOTango
+https://www.youtube.com/channel/UCNmXPpwV8t_JzvMhUmAJHjw
 #Paul Holman
-https://www.youtube.com/user/paulrholman
+https://www.youtube.com/channel/UCIf7g_gymaB3NBSvUDMJvuA
 #Sayaka y Joscha
 https://www.youtube.com/channel/UCW_CaKNIl3qqXHkxGZGVIdg
 #TangoBootCampUK
-https://www.youtube.com/user/TangoBootCampUK/
+https://www.youtube.com/channel/UC0iFpFfoCH_ILLuZKpBFf5w
 #VIDEOTEAM1
-https://www.youtube.com/user/VIDEOTEAM1
+https://www.youtube.com/channel/UC8eDyvVLKCg-VxTIPtsfS_Q
 #Tango at home
-https://www.youtube.com/c/Tangoathome
+https://www.youtube.com/channel/UCsqJREb9EaHnJB77UX01FaA
 #yo Tango
-https://www.youtube.com/channel/UCAApa6oVE5sM7aMR2VOB-
+https://www.youtube.com/channel/UCAApa6oVE5sM7aMR2VOB-PQ
 #michelle + joachim | tango
-https://www.youtube.com/c/youndmich
+https://www.youtube.com/channel/UCevmWpkZsILyp6tQSsI6C-Q
 #Rex Boyd
-https://www.youtube.com/channel/
+https://www.youtube.com/channel/UC21v9gnlep9rotIugj_zv9Q
 #Tango Dance
 https://www.youtube.com/channel/UCu9BG31TSZY0NTojZom6lYA
 #Santiago Sarabia
-https://www.youtube.com/user/santornot
+https://www.youtube.com/channel/UC2ZWSFKYu-YRaqXfqXe7C6g
 #Solo Tango Orquesta
-https://www.youtube.com/c/SoloTangoOrquesta
+https://www.youtube.com/channel/UC_xznMN8tPrst0x_H8zRZeQ
 #Juan David y Paulina
 https://www.youtube.com/channel/UCr9PDw18UZMGGFU0TdoBazQ
 #kaidaseviolins
-https://www.youtube.com/user/kaidaseviolins
+https://www.youtube.com/channel/UC_ccWbbOdrqGnPLUjiWw0XA
 #El Cachivache Orkesta Oficial
-https://www.youtube.com/c/ElCachivacheQuintetoOficial
+https://www.youtube.com/channel/UCD3GFnm3hXuD2wnh20attYQ
 #Adornos Center
 https://www.youtube.com/channel/UCYAd7opLAnFxat0ilrQUrxw
 #Mrrodolfoaravena
-https://www.youtube.com/user/Mrrodolfoaravena/videos
+https://www.youtube.com/channel/UCLGqF8AM6VHaUb9QcRRZa_g
 #manuel rodriguez
-https://www.youtube.com/channel/UCeU2Kgbt4oeG3Ds-mqrMCzw/featured
+https://www.youtube.com/channel/UCeU2Kgbt4oeG3Ds-mqrMCzw
 #Antonella Terrazas
-https://www.youtube.com/channel/UCTEoGi-mh-
+https://www.youtube.com/channel/UCTEoGi-mh-u5bnpsbRz5CiQ
 #AiresdeMilonga
-https://www.youtube.com/user/AiresDeMilonga
+https://www.youtube.com/channel/UC7XYTh3FVGU8-W2f26KDR_w
 #Frank Obregón
-https://www.youtube.com/c/FrankObreg%C3%
+https://www.youtube.com/channel/UCInartlQfyH7Pv1fPGTvTuw
 #SITF Tango
 https://www.youtube.com/channel/UCBSil1q787Wo580jUrDZ72g
 #El Bulin Tango
-https://www.youtube.com/user/florenciatango
+https://www.youtube.com/channel/UCL8a40dhLKakn625Gjs3Wcw
 #Philippe Fassier+
-https://www.youtube.com/c/PhilippeFassier94
+https://www.youtube.com/channel/UCfh0Fp2sgnW5XgYvTHOM_Cw
 #calitozzzz
 https://www.youtube.com/channel/UCFs4cRdjW-ZmVdY3peY4VtA
 #Maria Filali
 https://www.youtube.com/channel/UCev8Otao71izyYXCeaaKm_g
 #tangoclasses
-https://www.youtube.com/user/tangoclasses
+https://www.youtube.com/channel/UC53OQiIwfrBD2rHhR-zVSHQ
 #GioKi Tango
 https://www.youtube.com/channel/UC9T3PXF_89R4-ZYdJ3TEhjg
 #Katrinemontoia
-https://www.youtube.com/user/
+https://www.youtube.com/channel/UCvbnSqF81F_Zg8MV33TzMgQ
 #Tengiz Mosidze
-https://www.youtube.com/user/TengizMosidze
+https://www.youtube.com/channel/UC2m7kza71x306eDN9t8AKMg
 #BorisTube7
-https://www.youtube.com/user/
+https://www.youtube.com/channel/UCpk0omVygMxCtsZF_5wAxug
 #dni tango
 https://www.youtube.com/channel/UC12hC6BLAoJrBZwHhStYUyQ
 #Nick Jones
-https://www.youtube.com/user/anicholasjones/videos
+https://www.youtube.com/channel/UCDgsGQ3h3ghJDbCXubqEwVQ
 #Eleonora Kalganova
 https://www.youtube.com/channel/UCmFJ1b146TJXtTgUk6YMm1Q
 #Pablo Inza
-https://www.youtube.com/user/inzaide
+https://www.youtube.com/channel/UCDHBs8mhLVrjb20QREgAwHg
 #Tangomeet
 https://www.youtube.com/channel/UC4q0ayysWhe1ylyetwsYYBw
 #Hai-Ho Tran Photography
-https://www.youtube.com/watch?v=EqskypI3euY&list=PLUF-dHgVdDv5MwipyAGr6PNOT497Z6LwE
+https://www.youtube.com/channel/UCmdTANSakxHXwfz8U93GOiA
 #Les Allumés du Tango
 https://www.youtube.com/channel/UCFiy4O691rgtEaep-39Sjgw
 #Malena7777
-https://www.youtube.com/user/
+https://www.youtube.com/channel/UC7DL99LiaBbekNSk33ZFyIA
 #CUMBRE MUNDIAL DEL TANGO ZARATE 2015
 https://www.youtube.com/channel/UCQ6AdQAWU2Kar8opf0CWumA
 #francoispettiaux
-https://www.youtube.com/watch?v=pYek0rgDGOk&list=PL4821363AEA5F615B
+https://www.youtube.com/channel/UCH3zgLQS8NjKis3NCdDfruA
 #Tango VidaMia Köln, Tanzschule für Tango Argentino
 https://www.youtube.com/channel/UC6yqhyWCcyFljZccUsVtP1g
 #La Maquina Tanguera
-https://www.youtube.com/user/
+https://www.youtube.com/channel/UCdfeQEeB-y5elIXzgQlDjmA
 #calabriatango
-https://www.youtube.com/user/calabriatango
+https://www.youtube.com/channel/UC2tmvKwaHC159Edhd3QenIQ
 #juanayjulio
-https://www.youtube.com/user/juanayjulio
+https://www.youtube.com/channel/UCfdidUXnncqPjBXxyE3ixnw
 #Barbara Newman
-https://www.youtube.com/user/barbaranewman1
+https://www.youtube.com/channel/UCnCSCyuEqB5pG0sAduQoOKg
 #AkselLP
-https://www.youtube.com/user/AkselLP
+https://www.youtube.com/channel/UCvWLLx76_oumdNRyM_5TUuw
 #Argentine Tango
 https://www.youtube.com/channel/UCITyaBTjQtpG6toWO0fH7_Q
 #aletangolab
-https://www.youtube.com/user/aletangolab
+https://www.youtube.com/channel/UC19JJiR46Il0dq60hedbu9A
 #Miki Kamiya
 https://www.youtube.com/channel/UCijpTNQmAE7zj_bnAg5eCVw
 #Clarisa y Jonathan Tango
 https://www.youtube.com/channel/UCMGNG_2LHGejSMAtdAaAn5A
 #sghembo63
-https://www.youtube.com/user/sghembo63
+https://www.youtube.com/channel/UCQDddWul7S_Zdz3H5iFywyQ
 #Leonel Di cocco
 https://www.youtube.com/channel/UCg3ydGIngAYCWVrsS0EgNOQ
 #Bernardi Alessandro
-https://www.youtube.com/user/IFrusta
+https://www.youtube.com/channel/UCW1O_6dnFrn1y218FeHfExA
 #musicat1984
-https://www.youtube.com/user/musicat1984
+https://www.youtube.com/channel/UCaIjR5JCI8b_F8Llxu9LKVA
 #Rhythm & Motion Dance Studio
 https://www.youtube.com/channel/UC4Ky9bsvxDG6Ben724ATPSA
 #X. T.
-https://www.youtube.com/user/vempoa
+https://www.youtube.com/channel/UCYecxmJ-2o3B43toCHxYM_g
 #flora benedetti Milonga Sì
-#ladybrucomela vaghestelle
-https://www.youtube.com/user/ladybrucomela
+https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
 #Que Siga La Milonga
 https://www.youtube.com/channel/UC-YdwYwSP3VuxEt05xppAxQ
 #MrSnoopyT
-https://www.youtube.com/user/MrSnoopyT
+https://www.youtube.com/channel/UCrb4z7buq2ykFqi0dm-_z7w
 #Tango Details
-https://www.youtube.com/user/TangoDetails
+https://www.youtube.com/channel/UC7T1CNO8JhI8C9OgIk2-hfw
 #E-K Tango
-https://www.youtube.com/user/littlegeog
+https://www.youtube.com/channel/UClK91n0Ok1cPEkn2TCWUqRg
 #LeenaTango
-https://www.youtube.com/user/LeenaTango
+https://www.youtube.com/channel/UCNdEZa696S-jUWBDbSBQrbg
 #CamTango
 https://www.youtube.com/channel/UC_etwoVED5SW_rUqYDLPk7Q
 #Dari Kernel
 https://www.youtube.com/channel/UCds0PLpbIq_vVd22l2jwylg
 #Mat MaMoody
-https://www.youtube.com/user/mmamoody
+https://www.youtube.com/channel/UCX1bbCfeoXJxONmelzpM0rQ
 #김진호 jinhoraptor
-https://www.youtube.com/user/jinhoraptor
+https://www.youtube.com/channel/UCIpTAPNzIW7dq73EmZTk2sw
 #Mauro Tonchich
 https://www.youtube.com/channel/UCcsgUhSfsSo96_hTEPnZoCQ
 #La Mariposa - tango
-https://www.youtube.com/user/isis00roberta
+https://www.youtube.com/channel/UCD6r_8iA5csn7dZ68TisAWw
 #Caminito Tango Catania
 https://www.youtube.com/channel/UCS3DPkgDFF-nVoV_4KzQXCA
 #dancerfromsoul
-https://www.youtube.com/user/dancerfromsoul
+https://www.youtube.com/channel/UCv4OwDvK9IC9VzeMLLYEZtg
 #Yori Mayron
-https://www.youtube.com/user/yori5333
+https://www.youtube.com/channel/UCfKG5V4E3RkjSJ1LJnE_Agg
 #Igoris Saburov
-https://www.youtube.com/user/igorissaburov
+https://www.youtube.com/channel/UCs-l_CAo-CgHWWAbNFiliGQ
 #Nom Sic
 https://www.youtube.com/channel/UCQD5-lzW1sAmejC1em4_SMA
 #Nori Polanco
-https://www.youtube.com/user/nmpolanco
+https://www.youtube.com/channel/UCzdNnh1EY4NVZ2j9gHMS8bw
 #MUST MILONGA
 https://www.youtube.com/channel/UCs6DVWDBXasyRiT4-wa9iwg
 #jiteptango
-https://www.youtube.com/user/jiteptango
+https://www.youtube.com/channel/UCwd4DaU3z598jKAe8vIiFuw
 #Infinitango Shanghai
 https://www.youtube.com/channel/UCI4xOXerhWqwZybRQO0AVoQ
 #Jetuelle Tango
-https://www.youtube.com/user/jetuelle
+https://www.youtube.com/channel/UC41Ju3_XOV7Gr7p1XFbbv8g
 #Oleg Khrischanovich
 #https://youtube.com/playlist?list=PL63AB09574273B00C
 https://www.youtube.com/watch?v=z6Kl3ioOHbk&list=PL0E8CEB351486D0A1
 https://www.youtube.com/watch?v=DmJrGrfeiGU&list=PL00C5DC189C3F715A
 #MrsTangoPaula
-https://www.youtube.com/user/MrsTangoPaula/
+https://www.youtube.com/channel/UCkatIDjAbwcE6jSJGLwQGGw
 #Giorgio Scattolini
-https://www.youtube.com/user/Giorgjgno
+https://www.youtube.com/channel/UC-v2IECxsVoaKZYwDskR1Gg
 #tangoloft stuttgart
-https://www.youtube.com/user/tangoloftstuttgart
+https://www.youtube.com/channel/UCeKKZO_lLgLhjgq81oFSWtg
 #Miki Kamiya
 https://www.youtube.com/channel/UCijpTNQmAE7zj_bnAg5eCVw
 #Junando Milongas
-https://www.youtube.com/user/JunandoMilongas
+https://www.youtube.com/channel/UC38Tzsm6oIaQbc2TF7p_N9g
 #genali
-https://www.youtube.com/user/genali
+https://www.youtube.com/channel/UCPx1BQxsY3gt54F_-kjQv6A
 #kerstenruthtango
-https://www.youtube.com/user/schagemannarch
+https://www.youtube.com/channel/UC65GNLfGkAjvYh4EM1oIUOQ
 #Paulo Lee
-https://www.youtube.com/user/mcmlxix1viii
+https://www.youtube.com/channel/UCAtvz7VeX_KpuLpUzt2t7gg
 #EjesTango Union
 https://www.youtube.com/channel/UCpObZXEYOzjLV7G1wZYIK8Q
 #Tangolive Tv
 https://www.youtube.com/channel/UChTAn6PTF0isyVdENuJL0Bw
 #orey71
-https://www.youtube.com/user/orey71
+https://www.youtube.com/channel/UCGeNCSOjGVOZUawOOHHtSOw
 #gotanosney
-https://www.youtube.com/user/gotanosney
+https://www.youtube.com/channel/UCPDJ0s2zAxjgbhw6uUihiOQ
 #Tangostudio el abrazo Tango Hamburg
-https://www.youtube.com/user/oliverquick
+https://www.youtube.com/channel/UC4eYS5vKMrpaGaKrCuNCPJQ
 #Nectaria Films
-https://www.youtube.com/channel/
+https://www.youtube.com/channel/UCKvEEGPa0QYdsvPKUDcJVpw
 #Alexey Sobolev
 https://www.youtube.com/channel/UCGGjLCX5InktmK4jylSR_Gg
 #Massimo Gobbo
-https://www.youtube.com/user/gobbomass
+https://www.youtube.com/channel/UCJTBLzjEVCsx8OmRe2YEe0A
 #Pier Andrea Perini
-https://www.youtube.com/user/pierperini
+https://www.youtube.com/channel/UCsoShEhCqvSJfdMs7McGVIA
 #IsabelTessoro
-https://www.youtube.com/user/IsabelTessoro
+https://www.youtube.com/channel/UCUuhTyiWW4UPvbHT1YowwYg
 #ladybrucomela vaghestelle
-https://www.youtube.com/user/ladybrucomela
+https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
 #Ramiz and Natalya Orlando tango club 814-746-8819
 https://www.youtube.com/channel/UCV9HpuBW231e-2AVfMAfcTw
 #Tangueño
-https://www.youtube.com/channel/
+https://www.youtube.com/channel/UCx2ft9n6iXdT1ax523avHRA
 #Esteban Moreno
-https://www.youtube.com/user/estebanmorenotango
+https://www.youtube.com/channel/UCECVLR_h2B2fZ-AaSHt4wmw
 #Vadim Radionov
 https://www.youtube.com/channel/UC3TLQpdQimPIXIfBLHH-ccA
 #little master
-https://www.youtube.com/user/kleinmeisterlein
+https://www.youtube.com/channel/UC_sSIPLFVQK6JKRlOMvdxeQ
 #Tangodesalon Camaleon
-https://www.youtube.com/user/tangodesalon
+https://www.youtube.com/channel/UCKWGWAsaw7EVWjYtBOVkRig
 #Tanguito, Argentine Tango Academy
-https://www.youtube.com/user/Tanguitoacademy
+https://www.youtube.com/channel/UCeQ9Z3B4V5QTw7nUfuJZqMA
 #Tango Studio Sibiu
 https://www.youtube.com/channel/UCPdiYggIXWPi16cVx33h2NA
 #Jari Aalto
-https://www.youtube.com/user/ytjariaalto
+https://www.youtube.com/channel/UC9HZKt2xNBIEPCt2Jtnk1Rg
 #Miodrag Radulović
 https://www.youtube.com/channel/UCGwziihvqIpHgenD2-cL81g
 #Tengiz Mosidze
-https://www.youtube.com/c/TengizMosidze
+https://www.youtube.com/channel/UC2m7kza71x306eDN9t8AKMg
 #Katrinemontoia
-https://www.youtube.com/user/Katrinemontoia
+https://www.youtube.com/channel/UCvbnSqF81F_Zg8MV33TzMgQ
 #Planetango club
 https://www.youtube.com/channel/UCv1MYiYRQbDsqVvHuX9PSJQ
 #Kyoko & Tzu-Han pipapipa tango
-https://www.youtube.com/user/pipapipatango
+https://www.youtube.com/channel/UCHXk8o_RPExudrKILNRJLiw
 #VideoSigismund
-https://www.youtube.com/user/VideoSigismund
+https://www.youtube.com/channel/UChl-AB86Xshgt-SxGM3oOsQ
 #Infinitango Shanghai
 https://www.youtube.com/channel/UCI4xOXerhWqwZybRQO0AVoQ
 #Rodolfo Vejar
 https://www.youtube.com/channel/UCHggN6prj_6uLAnatq5HYuQ
 #Ulises Delle Ville
-https://www.youtube.com/c/UlisesDelleVille/videos
+https://www.youtube.com/channel/UCM1DyX4d8Jop5Oz9cCalIPQ
 #Thomas Rogon
 https://www.youtube.com/channel/UCfHrwAfmjf8vtHqh_0mqSrA
 #Tango y más e.V. Bamberg
@@ -309,15 +303,15 @@ https://www.youtube.com/channel/UCcqUchtmoNk0d9eO3-AU9TA
 #Milonga Hue Tango Argentina
 https://www.youtube.com/channel/UCHibSzmd5kkHV6Y3UssulrQ
 #Yori Mayron
-https://www.youtube.com/user/yori5333
-Miodrag Radulović
+https://www.youtube.com/channel/UCfKG5V4E3RkjSJ1LJnE_Agg
+#Miodrag Radulović
 https://www.youtube.com/channel/UCGwziihvqIpHgenD2-cL81g
-Pablo Stafforini
-https://www.youtube.com/user/pablostafforini
+#Pablo Stafforini
+https://www.youtube.com/channel/UCaYdfPFz6mWBv54whKtBnpA
 #Ian Cox
-https://www.youtube.com/user/panomanias/featured
+https://www.youtube.com/channel/UCceZHjU9BkQM_Nz14N3wQKw
 #tangogaga
-https://www.youtube.com/user/tangogaga
+https://www.youtube.com/channel/UCk6d9KTAMucA1KPiKrLSR4A
 #Danube Tango
 https://www.youtube.com/channel/UCfNSFKo7UPBbHpDLS0A0y2g
 #ducatidoc
@@ -325,21 +319,21 @@ https://www.youtube.com/channel/UCtBxJsF2AKhPgFSN2MAetUQ
 #El Sabor de Hungría - Tango Festival con Palinka
 https://www.youtube.com/channel/UCt-fjE0kMYFG0bsVTNe10sw
 #Gostango
-https://www.youtube.com/user/Gostango
+https://www.youtube.com/channel/UCoeXk5f3SL-xNED6VoZpfrw
 #El Abrazo Milonga
-https://www.youtube.com/user/TangoMendez
+https://www.youtube.com/channel/UCygnxQqFQdGwJ3PXgbIidvQ
 #Angelo Grasso
-https://www.youtube.com/user/projectotango
+https://www.youtube.com/channel/UCSElUTJ9tRYzUuh98WiL4CA
 #Krasimir Stoyanov
-https://www.youtube.com/user/krasi69
+https://www.youtube.com/channel/UCZn92ZAyUhXVj7tpyGPU9lQ
 #Emil de Jong
 https://www.youtube.com/watch?v=0XBNoYNNccQ
 #Ina Eriksen
-https://www.youtube.com/user/eriksenina
+https://www.youtube.com/channel/UCZXoihhp8PFErUBiUtpZdOw
 #Francois Pettiaux
-https://www.youtube.com/user/francoispettiaux/videos
+https://www.youtube.com/channel/UCH3zgLQS8NjKis3NCdDfruA
 #SMITHTangoVideos
-https://www.youtube.com/user/SMITHTangoVideos
+https://www.youtube.com/channel/UCp_OWVLTx7zKJzzUA06NqkQ
 #Tango Space - Argentine Tango School
 https://www.youtube.com/channel/UCTJ5xuVnWfX0nVhwcITNbUw
 #zirrael
@@ -347,13 +341,13 @@ https://www.youtube.com/channel/UCw2LQ9pO8DiJKo4xayMV_uA
 #Tango Schule Basel
 https://www.youtube.com/channel/UCGJ-GiPvueFGMCHWDCMkL1w
 #TangoFiestaPatras
-https://www.youtube.com/channel/UCkE2ndOW5m9EZ_39WibsgFQ/videos
+https://www.youtube.com/channel/UCkE2ndOW5m9EZ_39WibsgFQ
 #Afonso Duarte
-https://www.youtube.com/user/MrAfonsoDuarte
+https://www.youtube.com/channel/UChzdoUtSyc3M3Z8Zud6oPqg
 #MrsTangoPaula
-https://www.youtube.com/user/MrsTangoPaula
+https://www.youtube.com/channel/UCkatIDjAbwcE6jSJGLwQGGw
 #Elena Sergienko Tango
-https://www.youtube.com/c/ElenaSergienkoTango
+https://www.youtube.com/channel/UC2qxvPDivnR0OigUrYhDksg
 #Raffaella Grassi
 https://www.youtube.com/channel/UC9hBvYb8fU9ENjEtJIlJIew
 #Dance Conexion
@@ -364,396 +358,3 @@ https://www.youtube.com/channel/UCsBQStWi2YjobA6S3JEzPIQ
 https://www.youtube.com/channel/UCEPmZf1D93OucX5s2NYdezw
 #Marko Djokovic
 https://www.youtube.com/channel/UCk3u7sNehuDggxU2QWticsQ
-
-
-#Pablo Safforini Carlitos & Noelia list
-https://youtu.be/WeHGJ0YfYaE&sa=D&ust=1594457595870000&usg=AFQjCNGzgMFLG6S137JGn0dWIDTETdUh4g
-https://youtu.be/DN1b3jYw5Zc&sa=D&ust=1594457595870000&usg=AFQjCNHVZb_dZKV_fE6Ug2oBSoQXlZR8UA
-https://youtu.be/IyMxGI2prvk&sa=D&ust=1594457595871000&usg=AFQjCNFnvfAI6Rdo0t3jGtVs04TPPg-pzg
-https://youtu.be/QmJacJnz0o0&sa=D&ust=1594457595871000&usg=AFQjCNHRdna4RNQ9fAbfG0JwE6SZhidSNQ
-https://youtu.be/Md3wclqOLQk&sa=D&ust=1594457595871000&usg=AFQjCNGYVPJlYXFtmFy38f9ORh5aouMihQ
-https://youtu.be/a58x-A7GcPw&sa=D&ust=1594457595872000&usg=AFQjCNFVxERou7BrBB0P8kFkHtuhzhIkww
-https://youtu.be/vWKDDtlRNys&sa=D&ust=1594457595872000&usg=AFQjCNGnet-tpvi92yxj2P1GcVtLDXsY2Q
-https://youtu.be/u3JnUybbJaQ&sa=D&ust=1594457595872000&usg=AFQjCNERfBvFYUppWq3PcH8V24Diq6Lp7g
-https://youtu.be/AXECiR4bWjo&sa=D&ust=1594457595872000&usg=AFQjCNFgz_dIylg8qQOQeojPUI9cB6WkOw
-https://youtu.be/YVviUz4Z_fk&sa=D&ust=1594457595873000&usg=AFQjCNEouJOYtXYtApn5iLsVnrPhjB6ltw
-https://youtu.be/lSLc5IESqbc&sa=D&ust=1594457595873000&usg=AFQjCNGeBuWqZP8HSdCgFPjj39RI_6B4kw
-https://youtu.be/D4dumMN9__U&sa=D&ust=1594457595873000&usg=AFQjCNF6Ulb-7MwVI8jR05tF_i29ijty_Q
-https://youtu.be/_GEVZxVufwE&sa=D&ust=1594457595873000&usg=AFQjCNFWmszj-l46X2Kyb8vJ4MjN7on1Zw
-https://youtu.be/gvl5kXWZGmo&sa=D&ust=1594457595874000&usg=AFQjCNFHLS0jbYnCRJvkHkWTZHX6gnCY_g
-https://youtu.be/WZste9TII98&sa=D&ust=1594457595874000&usg=AFQjCNG15galY2dUAEIOTT4VtZz0IQQ-iA
-https://youtu.be/0qF7ik1dE9M&sa=D&ust=1594457595874000&usg=AFQjCNFQ64veRWjwpWM6XL6wu8wWWIEKEw
-https://youtu.be/WzpaZsdEQGI&sa=D&ust=1594457595874000&usg=AFQjCNHn_6yMZdkP-KecbuNSU423PIStGQ
-https://youtu.be/BxhgspokY9o&sa=D&ust=1594457595875000&usg=AFQjCNE3EsLqwQhVRM5Zc1Pzvx2f7u7xZg
-https://youtu.be/tgHD6ZQzt1Q&sa=D&ust=1594457595875000&usg=AFQjCNEh-AyLmInmOioObqwsQprE49TPLA
-https://youtu.be/vVhN_AIZQhc&sa=D&ust=1594457595875000&usg=AFQjCNHyCINXdgJ8Cx4x9eyLtrG8q5w5WA
-https://youtu.be/67XYUt-9-fE&sa=D&ust=1594457595876000&usg=AFQjCNEKDgH6CaNJLIrdlQ9m7unP9KPddA
-https://youtu.be/HEzUAcC2TNg&sa=D&ust=1594457595876000&usg=AFQjCNG62wtkhsQD3D8y9FXllua7N5A0WA
-https://youtu.be/uDD9osRbCuQ&sa=D&ust=1594457595876000&usg=AFQjCNE4lcpqDf90zZaUOlIK3QgAhuwYsQ
-https://youtu.be/BNOxhs8sD0w&sa=D&ust=1594457595876000&usg=AFQjCNGNkSDFpsbfp2oVUUoo5S2Tm07-yQ
-https://youtu.be/MD3uMMlEJYs&sa=D&ust=1594457595877000&usg=AFQjCNH3Iw3fYgSvqoFzqkpL9wYFXyda0g
-https://youtu.be/losi2PpUDA8&sa=D&ust=1594457595877000&usg=AFQjCNHBR9SyHLilQ8u1Vv2E2val8mBtsg
-https://youtu.be/U_zJHzId0oc&sa=D&ust=1594457595878000&usg=AFQjCNG-uvVirGiQh1dct2fRRO8Ra0jcvg
-https://youtu.be/SqzdIlTxcwM&sa=D&ust=1594457595878000&usg=AFQjCNHdfW2z_o97q__ifikHrx_CPo_9Zw
-https://youtu.be/6XX9CBVzorA&sa=D&ust=1594457595878000&usg=AFQjCNH2r1Dh7uOO0eE0GxmiPa4JDairag
-https://youtu.be/LWZKXhb0wg4&sa=D&ust=1594457595879000&usg=AFQjCNFoPJyzhx-3od94hZMjgubClffLZQ
-https://youtu.be/gY7XZ6ukIFY&sa=D&ust=1594457595879000&usg=AFQjCNFtVp6-OXuptoo-O1MTambmdwkxyA
-https://youtu.be/B1BU3PhmG1U&sa=D&ust=1594457595879000&usg=AFQjCNEiuXcqjyuwmBv8fZ-F6kVfpRYADw
-https://youtu.be/P1D9hZvCeLc&sa=D&ust=1594457595879000&usg=AFQjCNH2Fu7oUz9BqqxW9rA9B0ZKHryorA
-http://youtu.be/vYRwvw3EQc4&sa=D&ust=1594457595880000&usg=AFQjCNHn7bvG_zjbpMtz-KHNIHOOxgyuzQ
-http://youtu.be/vtvhW1CD_IM&sa=D&ust=1594457595880000&usg=AFQjCNG896CNKxOfskJtxPduqHgizPKjgA
-http://youtu.be/Kvxex0i215g&sa=D&ust=1594457595880000&usg=AFQjCNE-TPcHLc7JBurSxj3vMkHouJ0XoA
-http://youtu.be/blQK8PwaVUw&sa=D&ust=1594457595881000&usg=AFQjCNHqXSTxHvAX3IuOcM9R_lGwh7wPcg
-http://youtu.be/pNYM1V-plMU&sa=D&ust=1594457595881000&usg=AFQjCNEx9SJ-na5PdT5xUQPnSNebzx-Y1Q
-http://youtu.be/FecfnHm4Ed4&sa=D&ust=1594457595881000&usg=AFQjCNEXesbukOz04YHyLQaG1CUwDdwy6g
-http://youtu.be/Ip1O6Y6lhz4&sa=D&ust=1594457595882000&usg=AFQjCNGnm5bvP9C0iNyXmeSygcv9Gr-3fw
-http://youtu.be/HK51z1NiA-o&sa=D&ust=1594457595882000&usg=AFQjCNG6LI09tTnA7-fwqCMgOg3NcwhqeQ
-http://youtu.be/KTpG8KqrXr8&sa=D&ust=1594457595882000&usg=AFQjCNFazt9LKWBX6v4wGgvT7D3tJtuI7g
-http://youtu.be/kVWW6jjCsHw&sa=D&ust=1594457595883000&usg=AFQjCNEAOltzNB7KaygDhElyhtErlsWCuQ
-http://youtu.be/3CJvaWDEblw&sa=D&ust=1594457595883000&usg=AFQjCNEQq3XlgfVPxsdGOr3EcnzdBaI9kA
-http://youtu.be/MXXZGZk4_VM&sa=D&ust=1594457595883000&usg=AFQjCNGQTO_NzZuL2RS1dFj9bPuZnfbb-Q
-http://youtu.be/GYZpSMTEuXw&sa=D&ust=1594457595883000&usg=AFQjCNFBN-yahFc9jeAOCLPoFqJrZ3Y9vw
-http://youtu.be/ys3RIc3Pwic&sa=D&ust=1594457595884000&usg=AFQjCNEAPC2x10HyDYDJ9MHaRtxPmgJ6Jw
-http://youtu.be/QFq3cc30VMU&sa=D&ust=1594457595884000&usg=AFQjCNFuOsHoDlaya5hnSB-SDK234UfrVA
-http://youtu.be/mXgPFGs9BYk&sa=D&ust=1594457595884000&usg=AFQjCNGSZbmykDqx6mcFl60IrTnW-D_-4g
-http://youtu.be/W0N93m7oDiA&sa=D&ust=1594457595885000&usg=AFQjCNG8fd-bIfLNPtuyN7Fh1Ih8xHjziA
-http://youtu.be/ty-twnudvuc&sa=D&ust=1594457595885000&usg=AFQjCNFLrCdw_PsrCJHSgj1OHJ0-Y7_QzA
-http://youtu.be/7LSUF3Xj53M&sa=D&ust=1594457595885000&usg=AFQjCNF_9MDrqQcdm39anaQlz0eodWDTXQ
-http://youtu.be/UdU8DRq050A&sa=D&ust=1594457595886000&usg=AFQjCNERSZTekgGlTbOfN1F3TmpeMt04_A
-http://youtu.be/z18uuU5MkyM&sa=D&ust=1594457595886000&usg=AFQjCNFS-VqeFFirGro5gPLjwZnii2vVrA
-http://youtu.be/NRdRekRAnPw&sa=D&ust=1594457595886000&usg=AFQjCNEG-v3LlnboW6QcheVXLiSQgjdMmA
-http://youtu.be/jthuPDU9l84&sa=D&ust=1594457595887000&usg=AFQjCNEHbfEbooWTn_fwYR7ZFlsAkBgJeA
-http://youtu.be/F653dpMc4Uk&sa=D&ust=1594457595887000&usg=AFQjCNFH7aTKPftq767wb-ATwezySAzZPA
-http://youtu.be/GF035Ims43M&sa=D&ust=1594457595887000&usg=AFQjCNHpGmMxqm-63bcPn35gwFQ_YAeIqg
-http://youtu.be/r4P3Tq6oBMc&sa=D&ust=1594457595888000&usg=AFQjCNHRcDyuJCEjiZXmB1X3ivF2yo48mw
-http://youtu.be/IeN433LmvEk&sa=D&ust=1594457595888000&usg=AFQjCNFx1YQ5b1vCE1v8wQlSxWGy-a9HUQ
-http://youtu.be/k6hT8GLQhpY&sa=D&ust=1594457595888000&usg=AFQjCNEKXjtrkJngIISwiUwB7nEozc2Wbw
-http://youtu.be/E9y-ff8MBGo&sa=D&ust=1594457595889000&usg=AFQjCNHyvo41Mp0li_fcSNrebBqkWy_-FQ
-http://youtu.be/dG-z5OxfiDo&sa=D&ust=1594457595889000&usg=AFQjCNEcI40-a2C_pfyg38gIh5_3Z0NJ4w
-http://youtu.be/HtqweSss2Zo&sa=D&ust=1594457595889000&usg=AFQjCNH9mHxBI39tdiHfcOgG2eAlQS2mQg
-http://youtu.be/ypRLqx3T4wU&sa=D&ust=1594457595890000&usg=AFQjCNF8O_UgwYoyF58zcNbrmVL-jPQfMA
-http://youtu.be/XuEklZZnP1s&sa=D&ust=1594457595890000&usg=AFQjCNGEiPqaus3BG7xLtxLqbkDmlR4XJQ
-http://youtu.be/MtzbBG6_0R0&sa=D&ust=1594457595890000&usg=AFQjCNEUlGUDIG2llPljPrHCHLiN5XVITw
-http://youtu.be/kKUmxOLNAjQ&sa=D&ust=1594457595891000&usg=AFQjCNGuW86nwUO6p-DkRiVoTlDXOQSPoA
-http://youtu.be/TMQrDzA0QHU&sa=D&ust=1594457595891000&usg=AFQjCNGOWjfPBWVdtQjLUkV2-EcfpErw2A
-http://youtu.be/gDawsBFzLZ8&sa=D&ust=1594457595891000&usg=AFQjCNEuOaD3Rwnwgc72uDw0-Zl1xnseTA
-http://youtu.be/pJtdwu3V8Ik&sa=D&ust=1594457595891000&usg=AFQjCNGqs6sItgiAmg0jE6lGsSnrXTlyOw
-http://youtu.be/_YfQ1BZBR-4&sa=D&ust=1594457595892000&usg=AFQjCNFwFl0yRpWL3EemBuygXv1jU8r0cA
-http://youtu.be/ftlLfgE432M&sa=D&ust=1594457595892000&usg=AFQjCNF3HjITXLsoe9uVbUh7me3NE2-lRw
-http://youtu.be/awBwtVhfZ3U&sa=D&ust=1594457595892000&usg=AFQjCNGdCGe33nTCex9d6-ymffQ3K0Uo3Q
-http://youtu.be/jhVVDOdUvFE&sa=D&ust=1594457595892000&usg=AFQjCNEiQ6HbdrWuuEiOmHte8NEpsN6V8w
-http://youtu.be/c3aNlxNrcTE&sa=D&ust=1594457595892000&usg=AFQjCNFEE0g6h4H7-PKiTEnAajzx7OZOMA
-http://youtu.be/bteq0OlYDe0&sa=D&ust=1594457595893000&usg=AFQjCNGHucq4K0aARP1b3X4fDLHCH1F-6A
-http://youtu.be/XG_h7xuzA0E&sa=D&ust=1594457595893000&usg=AFQjCNEllNZBDSljemuHIfsThYVUFADoVw
-http://youtu.be/saGEzNnH9Vc&sa=D&ust=1594457595893000&usg=AFQjCNGsjKVWbomFoIzUFFdmM5vEu9GeuA
-http://youtu.be/EGY_qKBQRhM&sa=D&ust=1594457595894000&usg=AFQjCNFrfiQ-aBh3U5IKfJ0Qx89THH7BtA
-http://youtu.be/R_1hDWM6tBI&sa=D&ust=1594457595894000&usg=AFQjCNGR4A7okAS_MOHoHNzumMYh1JTThw
-http://youtu.be/2-08JemIwWs&sa=D&ust=1594457595894000&usg=AFQjCNFOFF214nHDLy8Iqg50Ha12IK2A_A
-http://youtu.be/0N3ckR7OXbA&sa=D&ust=1594457595895000&usg=AFQjCNHxxF2zJ38-1_3xF2gr-n78RAP4qg
-http://youtu.be/TSWEoJkn67s&sa=D&ust=1594457595895000&usg=AFQjCNH0Ug-t1cbCCOhQ6gxYLPp16HU_NQ
-http://youtu.be/assuZQPmlyI&sa=D&ust=1594457595895000&usg=AFQjCNH2wE_dseRlbxCAHxgTXB0ZSgTbjg
-http://youtu.be/x2gQpPwzu7c&sa=D&ust=1594457595896000&usg=AFQjCNEnobx0qr-VbqrLb0FHvyHf-z666A
-http://youtu.be/6o5aKvJy4cQ&sa=D&ust=1594457595896000&usg=AFQjCNHM2TXdicV6lbF3s9-nVjoFbwZKmA
-http://youtu.be/lUcKR6sGYac&sa=D&ust=1594457595896000&usg=AFQjCNFGCcx_DBtriwxxaCqd6sgagI53Vg
-http://youtu.be/shqFA8DTfU4&sa=D&ust=1594457595897000&usg=AFQjCNHJrM3cQHVFQpaF0AcE8h3NV-bgsQ
-http://youtu.be/RX6imQZyPd0&sa=D&ust=1594457595897000&usg=AFQjCNGhi2K09kkzkzJAtdBTjAm7OSk7lA
-http://youtu.be/UW8LoFr8UDo&sa=D&ust=1594457595897000&usg=AFQjCNEZyHHSzusKTQEyMctuozjgqat6oQ
-http://youtu.be/WsbZCYKJH74&sa=D&ust=1594457595898000&usg=AFQjCNFVzCNumXZ7EKLvD86AZU1ZwgbWIw
-http://youtu.be/UbcpGOYtGhY&sa=D&ust=1594457595898000&usg=AFQjCNHHhCniIaONGyLkO7LOw0NdSHtD1Q
-http://youtu.be/9gcgHx9FJ2U&sa=D&ust=1594457595898000&usg=AFQjCNFPNcWCAtWrG21eudpP88MrZM0zpg
-http://youtu.be/kQoR38C6LCA&sa=D&ust=1594457595899000&usg=AFQjCNE1tArAE5P0R9qq8vBxMsWeWi-TAQ
-http://youtu.be/Z7LoSkDIjRY&sa=D&ust=1594457595899000&usg=AFQjCNF_qfFhmtHzaK4RIf8tl9ep-2Ftcg
-http://youtu.be/2QNHuhgCGFI&sa=D&ust=1594457595899000&usg=AFQjCNGY2fXBH362w5bjZvrBfnmDc5s5gg
-http://youtu.be/iODCh_DsGak&sa=D&ust=1594457595899000&usg=AFQjCNGLoe0iPE2d-Ks8ItJfdkYPzgO1CA
-http://youtu.be/dctdkAgDubc&sa=D&ust=1594457595900000&usg=AFQjCNHYfTOmxyHVQs0ZnzUofXZTGjB6Qw
-http://youtu.be/01R5QxPbsKM&sa=D&ust=1594457595900000&usg=AFQjCNFBF_N-_taX_yYorfIDiYwLt-O9Ug
-http://youtu.be/rtYLwqYjb4A&sa=D&ust=1594457595900000&usg=AFQjCNGNvagZxTlv2WwJHXq-uT_KZn8Rtg
-http://youtu.be/uICApYIzUhQ&sa=D&ust=1594457595900000&usg=AFQjCNGITbWUOfzoSCohjQ9lr5Phrh30Iw
-http://youtu.be/MIgmaaAXWRk&sa=D&ust=1594457595901000&usg=AFQjCNFK0FH8L0G2uYA-qKnK0Hos_7nfHA
-http://youtu.be/2SPvAWzZzRI&sa=D&ust=1594457595901000&usg=AFQjCNHUQogRhj_1Uy_pPMMWsOBYTSYMDQ
-http://youtu.be/7ujaPCzIQ4o&sa=D&ust=1594457595901000&usg=AFQjCNF4z7dsi09Hb0OBjFDg-OSLYPurLw
-http://youtu.be/I3tTKIPZ4Nw&sa=D&ust=1594457595902000&usg=AFQjCNE332t4nLemz7MdgfzYQ8IT8IF8Kw
-http://youtu.be/ZIGNcUmseEM&sa=D&ust=1594457595902000&usg=AFQjCNHIu7Tc15XW3QTojaV8Z24wpfFf1w
-http://youtu.be/RTD-db9kmzo&sa=D&ust=1594457595902000&usg=AFQjCNE6RLbd4jDHxqvViEhYVG8k7jVPaQ
-http://youtu.be/FLyZntosFK8&sa=D&ust=1594457595903000&usg=AFQjCNHOdQil5YoI3E4qh6kz_P7S1bVALA
-http://youtu.be/y_18sYQW4YM&sa=D&ust=1594457595903000&usg=AFQjCNH-95P1aURM2UHcHbKhRF0sZouXoA
-http://youtu.be/s6z-Oky1Psw&sa=D&ust=1594457595903000&usg=AFQjCNGitzDrn830RvLhz7QGnLajsFC1Mg
-http://youtu.be/gNRg28r7mPs&sa=D&ust=1594457595904000&usg=AFQjCNGotMmLIZqhJpMzWyRPkKPty6_0oQ
-http://youtu.be/p-vP31IJrKw&sa=D&ust=1594457595904000&usg=AFQjCNGmwlYJ3S3AmJfxJ8E2v2BdcDRL_Q
-http://youtu.be/XNmH7t7oZa0&sa=D&ust=1594457595904000&usg=AFQjCNEhYlK68M5SI1KAngVWvWKz6uHMRw
-http://youtu.be/xfQMKpIelrI&sa=D&ust=1594457595905000&usg=AFQjCNE89oqAo4FsjJB3isH6RDtN35DwhQ
-http://youtu.be/PHeR7VgEav4&sa=D&ust=1594457595905000&usg=AFQjCNEMveaDsJI5jGOZRR7LAEIYv-7OHg
-http://youtu.be/77cJXv7pCfY&sa=D&ust=1594457595905000&usg=AFQjCNGy6E836jtTiMZQUjAClRfa07q5aQ
-http://youtu.be/72uujHCUswI&sa=D&ust=1594457595905000&usg=AFQjCNHajJnooxbwLWZpUVsY1Oia5gHQug
-http://youtu.be/eoTD2ICu98g&sa=D&ust=1594457595906000&usg=AFQjCNGmUQAp2X1St1AJ80nKztiWSQrsdQ
-http://youtu.be/v_7_M-8s4Rs&sa=D&ust=1594457595906000&usg=AFQjCNHKlSFqy58qWLDm24Veb0HsU2p93Q
-http://youtu.be/BYG6efgeyJM&sa=D&ust=1594457595906000&usg=AFQjCNEMOHHakTJqacZiquc2i0CXq5ztMA
-http://youtu.be/-N_sMYwNIQg&sa=D&ust=1594457595907000&usg=AFQjCNHBomjYfz4Ovs79_FMUmabfCSWZiA
-http://youtu.be/0jJ60K3fW4U&sa=D&ust=1594457595907000&usg=AFQjCNG7-uoW-8KCHib7q5O5c_1XRwKTog
-http://youtu.be/s2nCrmQSaHI&sa=D&ust=1594457595907000&usg=AFQjCNH76QutjqYoocj7FCe2tyNSXSQEcw
-http://youtu.be/jQ31KjCrlCM&sa=D&ust=1594457595908000&usg=AFQjCNGI5gug6Q-19tybN9PMzRPpVzKDVg
-http://youtu.be/3VaIOQc7sAY&sa=D&ust=1594457595908000&usg=AFQjCNFhosB4QLMiKBREIkD5N6yYbA05FA
-http://youtu.be/y6RGsCjY8io&sa=D&ust=1594457595908000&usg=AFQjCNFkszlHbmJv45aNRsR_92TOTXgeGA
-http://youtu.be/HbZb0rYDbQk&sa=D&ust=1594457595908000&usg=AFQjCNHN1TqStL4O8IiG7Z1IEKzDbi8y3w
-http://youtu.be/Ekv-P7YczKQ&sa=D&ust=1594457595908000&usg=AFQjCNHe_DUJga4IOcXf7meCfxgw2pyCOA
-http://youtu.be/z1OKVC4VR04&sa=D&ust=1594457595909000&usg=AFQjCNFwhHAhof_rYyFDbhIlGca4tw4qCQ
-http://youtu.be/TdubxRYaiHY&sa=D&ust=1594457595909000&usg=AFQjCNFR5l-M_gyM5CwVffINPLEFFBuR0A
-http://youtu.be/LKIVFzdBn8o&sa=D&ust=1594457595909000&usg=AFQjCNH5muOf9rl7EdXy66NTJH9IWblSuw
-http://youtu.be/TdubxRYaiHY&sa=D&ust=1594457595910000&usg=AFQjCNH3JA1nA4wM7oq7Zka8kPD1KyELFg
-http://youtu.be/mIMn8kUZCCc&sa=D&ust=1594457595910000&usg=AFQjCNHq7yBiZLzwuBm3On8KCdFwEecKxQ
-http://youtu.be/CnPhUGsh0jM&sa=D&ust=1594457595910000&usg=AFQjCNHXfnV1BjhJbInVbkp7fLPgQhPMxQ
-http://youtu.be/LKIVFzdBn8o&sa=D&ust=1594457595911000&usg=AFQjCNH_9N4tCPW9jb0mPDL61QROZL_mJg
-http://youtu.be/fIfDMOhgpnU&sa=D&ust=1594457595911000&usg=AFQjCNFHg2Ve9TfL-Z0y9plADtNdyQYmVw
-http://youtu.be/IbJhvXFHrh0&sa=D&ust=1594457595911000&usg=AFQjCNGe4HPxI_PVA1x10ujpOzU3KhntVQ
-http://youtu.be/GlLEG0Dgdgc&sa=D&ust=1594457595912000&usg=AFQjCNGrryHEnzXpvfMrlMRF6xUxJ_1KMA
-http://youtu.be/pnaEsNBd_EI&sa=D&ust=1594457595912000&usg=AFQjCNEu7GrMgmTV7CAe8JvHwcjAyGR2_A
-http://youtu.be/XS0-JsZ1Qmc&sa=D&ust=1594457595912000&usg=AFQjCNHIx_2rcyJEbNCsK6V2MkbJgxfWVQ
-http://youtu.be/zdm6DZ6YzKw&sa=D&ust=1594457595913000&usg=AFQjCNEP8OHQJ_eMopCHtzy_-pDwwHFq3A
-http://youtu.be/Y3GO3g-lQnw&sa=D&ust=1594457595913000&usg=AFQjCNGMR6ELSPYgMVmyroUgTxSf_28h-w
-http://youtu.be/e_pnR63tBT0&sa=D&ust=1594457595913000&usg=AFQjCNFAh0kuJ-j_TXQObv4zDxfkEI6gtA
-http://youtu.be/_Bv6JZnNM38&sa=D&ust=1594457595914000&usg=AFQjCNHidzhkOHIwqdO79PF5v9wzVMZbsA
-http://youtu.be/lWCNnOYhjyg&sa=D&ust=1594457595914000&usg=AFQjCNGqoAW7P3dNhhH6Wwwdo3BUSeSaow
-http://youtu.be/m-iNh9zX_y4&sa=D&ust=1594457595914000&usg=AFQjCNGbDRAJzUD6vhIKdcYeE1pbsLxRCA
-http://youtu.be/L2VR-eouF6g&sa=D&ust=1594457595915000&usg=AFQjCNHm7WA3DLTGqfAxZzuC_kF5tYkkKA
-http://youtu.be/TZyN1qDZHgo&sa=D&ust=1594457595915000&usg=AFQjCNFmm_yKDOBABrrv-SWW4rTedA47Sg
-http://youtu.be/L2VR-eouF6g?t%3D6m28s&sa=D&ust=1594457595915000&usg=AFQjCNECTbRhI_PsUZBeC1LX45jEhtH3UQ
-http://youtu.be/L2VR-eouF6g?t%3D9m47s&sa=D&ust=1594457595915000&usg=AFQjCNH2lzNEqpTcwg1989fKMoPCS4CJ5g
-http://youtu.be/FyGvm-cKCpc&sa=D&ust=1594457595916000&usg=AFQjCNEQywHQa7cHrNcrGO0HNttqwyRaSA
-http://youtu.be/NDVZvj_ziJQ&sa=D&ust=1594457595916000&usg=AFQjCNFqiApKOKRN0F14HAn8AjNH7N39Zg
-http://youtu.be/n0kI4aChMps&sa=D&ust=1594457595916000&usg=AFQjCNHB2mb8TXSQW4FtuFv8gRksRGLt7w
-http://youtu.be/Ite6Bp2a5Bc&sa=D&ust=1594457595917000&usg=AFQjCNHmF7XuKHVMWtVqH__KqzEuHR8sIA
-http://youtu.be/UPqb-pL5b4k&sa=D&ust=1594457595917000&usg=AFQjCNGO3GhcJ3cJ6DSrM1wtCkKpO1WmrA
-http://youtu.be/iARO5Znupic&sa=D&ust=1594457595917000&usg=AFQjCNHX5gH9_wAzc5Y5ynMJ_0ArRMuYsA
-http://youtu.be/JIzTbLxzmeA&sa=D&ust=1594457595918000&usg=AFQjCNH76nkApWQmSvJt8apH26FyaKHwKQ
-http://youtu.be/GKM-QhOa-Mg&sa=D&ust=1594457595918000&usg=AFQjCNGyAtimO_iG6iLgBQohzAwlzocE-w
-http://youtu.be/C0BgevHCuBk&sa=D&ust=1594457595918000&usg=AFQjCNGKPW-HnTGYhthQfpfI0An5NzWmnw
-http://youtu.be/kbkvjECPC80&sa=D&ust=1594457595919000&usg=AFQjCNEbqSdOxXSARqa5bLoivthFO4yyxQ
-http://youtu.be/q0Sy3xow0yc&sa=D&ust=1594457595919000&usg=AFQjCNFR_mx0S7-QvfACa-B1f6DtYrZVyQ
-http://youtu.be/XLD-Bpua8nM&sa=D&ust=1594457595919000&usg=AFQjCNFeJoKny2FBSlV1lpoyFzOhubfT6g
-http://youtu.be/yOu00Awdg0E&sa=D&ust=1594457595920000&usg=AFQjCNE_NjABkYfRc1Ew47cb92S7EDzl8Q
-http://youtu.be/zdZyoNlWM-w&sa=D&ust=1594457595920000&usg=AFQjCNH9maor7Cc9q6RfNAjSTaN7b1FB6w
-http://youtu.be/y9PRc4c-b74&sa=D&ust=1594457595920000&usg=AFQjCNFrPHHr5j-WPsAbT0T3OLd0dSIW8w
-http://youtu.be/P8rkqVD-tSU&sa=D&ust=1594457595921000&usg=AFQjCNGMujgblRCG5VX6iDZmi1fssJfBlQ
-http://youtu.be/r4wuw-QPk00&sa=D&ust=1594457595921000&usg=AFQjCNHAgB9p7r9Mm_hM79w8-zzXZ4A0XA
-http://youtu.be/K9BMCYFYJ5I&sa=D&ust=1594457595921000&usg=AFQjCNHMneZW6v84JhFO2_MHKfmDOJ3_5Q
-http://youtu.be/o963W1x9rfI&sa=D&ust=1594457595921000&usg=AFQjCNGzT1QW7OjFax7M1GP_ir-clcItXw
-http://youtu.be/eGqHmjGIVyI&sa=D&ust=1594457595921000&usg=AFQjCNH-UxTeaVCe2W6AdFyryc2t1TUPFQ
-http://youtu.be/Riz_-t6wJwI&sa=D&ust=1594457595922000&usg=AFQjCNHwLyJIy6ySEj-xNi-qMDiit0jwSA
-http://youtu.be/PC6oa_Zhp0Q&sa=D&ust=1594457595922000&usg=AFQjCNEPhFCaReLIBoEI92cn6rOvE46t0Q
-http://youtu.be/zLVIjf0TQqs&sa=D&ust=1594457595922000&usg=AFQjCNHPwtcnZ-MP_0DMB4gOPZuGX949Eg
-http://youtu.be/N-Yoq0rZf0A&sa=D&ust=1594457595922000&usg=AFQjCNFLWJ7xAqpUShACiQELvWBRxibRyA
-http://youtu.be/MrmWevkS6eI&sa=D&ust=1594457595923000&usg=AFQjCNGEHuUZymsaJYAjqFjFD17yHD0psQ
-http://youtu.be/qqL911qU3VE&sa=D&ust=1594457595923000&usg=AFQjCNFGk6S3YJfjo-QWveVh0lEIkPI1sA
-http://youtu.be/aGukPKf9i4o&sa=D&ust=1594457595923000&usg=AFQjCNHTEzbUzTVxhe0h3Ovjfik3Bpd_OQ
-http://youtu.be/ryxMAyqdq4s&sa=D&ust=1594457595923000&usg=AFQjCNEheG6Is60MiszJMnFfGtpcmaGwRA
-http://youtu.be/BR_Umkc92BE&sa=D&ust=1594457595924000&usg=AFQjCNFKeq3xZm7ykgM8HgZTBG6KHS4uTw
-http://youtu.be/dl_aC0iDWKo&sa=D&ust=1594457595924000&usg=AFQjCNE3vkbQD4FZr5mJ_potpiKLs19BZQ
-http://youtu.be/zGIax_254p4&sa=D&ust=1594457595924000&usg=AFQjCNHdsJ8_wsgT-uUInJa1qp6Ij5_QGw
-http://youtu.be/doFO9nVQMws&sa=D&ust=1594457595924000&usg=AFQjCNFa6xw5W-_viaGHaZu_UexreRZILQ
-http://youtu.be/iUtC8_Tc-HI&sa=D&ust=1594457595925000&usg=AFQjCNEYr_euC9QzkqSz6VqidpI9UK3fKA
-http://youtu.be/l28ClmQuTzc&sa=D&ust=1594457595925000&usg=AFQjCNEpUoPi2uV2pcvLS9Yrn7-JDzZbsQ
-http://youtu.be/L3azPVPTRsk&sa=D&ust=1594457595925000&usg=AFQjCNHLb0b9qghuTfhtocxS8aFnfaV7Aw
-http://youtu.be/rylGpOelwvg&sa=D&ust=1594457595925000&usg=AFQjCNHaBjP5aIp8M1CMNB7ElhVniJFH8w
-http://youtu.be/qcTG8naqL9M&sa=D&ust=1594457595926000&usg=AFQjCNFIZp4zL941lX_1Qp7luCKpTQ_sXw
-http://youtu.be/C0ptt2zaP7M&sa=D&ust=1594457595926000&usg=AFQjCNGmfYUyOiBzQ7TJpEuU-HQy92tTUQ
-http://youtu.be/kum5g1wJpBs&sa=D&ust=1594457595926000&usg=AFQjCNHhHt3yKFsBvwCVNS1xsUgVDHEDrQ
-http://youtu.be/-isPA5_YqGc&sa=D&ust=1594457595926000&usg=AFQjCNE15LBiMFWFy8gQgoDNXFcdq1t78g
-http://youtu.be/6RahIWuaezI&sa=D&ust=1594457595927000&usg=AFQjCNFnVZbWsbnWsZRRIi1l86ocVpY8Sg
-http://youtu.be/IuNpJG5H_Wc&sa=D&ust=1594457595927000&usg=AFQjCNHTCq7z-fTr-UhbxuLwRV340UUXng
-http://youtu.be/hydJJXyECQY&sa=D&ust=1594457595927000&usg=AFQjCNHxjo8EIgUz7n-EOh3K4emwBQ9Rnw
-http://youtu.be/PJUh2Rqv1Rg&sa=D&ust=1594457595927000&usg=AFQjCNF9huuDhBAGfp9f9uNvZP7HmDlgrQ
-http://youtu.be/xW_RblhpJK8&sa=D&ust=1594457595928000&usg=AFQjCNHGL82kG4aGRhwJlYzSFZT4wWOa1g
-http://youtu.be/J_v3uUAh1lo&sa=D&ust=1594457595928000&usg=AFQjCNGcxIhTHhkmoCuDUmhUKs00UIubww
-http://youtu.be/lvWm08bvNLQ&sa=D&ust=1594457595928000&usg=AFQjCNE6zy3LAUpU8pGUfYivEPK5l7apwg
-http://youtu.be/e8jgxE5PXzw&sa=D&ust=1594457595929000&usg=AFQjCNGEqHxKTr8Y2ri4ln7zG1thLxPUqg
-http://youtu.be/x87lEZQWHfE&sa=D&ust=1594457595929000&usg=AFQjCNFCvscpWzjksZFoTIfCaAwqdqDYnA
-http://youtu.be/W7spaa46dbI&sa=D&ust=1594457595929000&usg=AFQjCNEzeCmduu3A_nCMt3W9YbzSsZQn0w
-http://youtu.be/jPu40OiscTQ&sa=D&ust=1594457595929000&usg=AFQjCNHY3kQz1igokuEnymv3XMzuB1-ZQg
-http://youtu.be/FSDvCrXj04o&sa=D&ust=1594457595930000&usg=AFQjCNF7OzLHxlbZs0YhF_U31Ac61a7CEg
-http://youtu.be/R1EzNAnCsvU&sa=D&ust=1594457595930000&usg=AFQjCNElgTCFSzWblEV0SVL9huARHdlrFA
-http://youtu.be/hza39WP2Oho&sa=D&ust=1594457595930000&usg=AFQjCNEBbG_8uIjwWHpLsM1fq0jk82dsBg
-http://youtu.be/lGqAug9b07I&sa=D&ust=1594457595930000&usg=AFQjCNGJbNsjnpi7Ytn_XBQ_TgtkithzBA
-http://youtu.be/2T8a-YtBN18&sa=D&ust=1594457595930000&usg=AFQjCNEgfA8Gl_sVXdsApNhCCB-aBQLMSA
-http://youtu.be/7AWWFgwSxzc&sa=D&ust=1594457595931000&usg=AFQjCNFevRP2x-q2OnhR-FybDGPhZIUoeQ
-http://youtu.be/DGtvAG-Zy_U&sa=D&ust=1594457595931000&usg=AFQjCNHRF2wAfWi_zLiJZmJ2JoIrUmJ1_Q
-http://youtu.be/p26uAR_Thlw&sa=D&ust=1594457595931000&usg=AFQjCNG-h0vuce7yv9njLKACXJ68k0XczA
-http://youtu.be/PljBAiQR6zY&sa=D&ust=1594457595931000&usg=AFQjCNFQDSyWQSAHZFf9odeWmED7NnqQRg
-http://youtu.be/qi7ypnkA16U&sa=D&ust=1594457595932000&usg=AFQjCNHOS9xD642v26bvFHurT9hnLgkb4Q
-http://youtu.be/a5vDKtHx5ug&sa=D&ust=1594457595932000&usg=AFQjCNG1qpvV2ebciLxhjFUnIyYyf0BTGQ
-http://youtu.be/JcYol4thwRg&sa=D&ust=1594457595932000&usg=AFQjCNEqeyUbmRv1tOCx1Z4vjeUBS3VNag
-http://youtu.be/8Z-c9Q8RNNQ&sa=D&ust=1594457595933000&usg=AFQjCNH-rtayyVg0eiqsN6AAqGZit9UB6A
-http://youtu.be/K1E8fBZzMAE&sa=D&ust=1594457595933000&usg=AFQjCNFEfoNrfM84qwPA-r42pc8yzWjpow
-http://youtu.be/Go8hV6BoNmw&sa=D&ust=1594457595933000&usg=AFQjCNEnmgCyxXW_xcPrCuw_X3oNydOWWA
-http://youtu.be/GCPpEna8wTI&sa=D&ust=1594457595933000&usg=AFQjCNGLgOWHIO3_IRuq_1mhObk-I75fvw
-http://youtu.be/kWpWwA5luCU&sa=D&ust=1594457595933000&usg=AFQjCNGkQxHArVBfqfykv44e3DkEBkas9Q
-http://youtu.be/mRoHsl5_e44&sa=D&ust=1594457595934000&usg=AFQjCNEhJuplddI7cNobXtwBXIzUbDC8bQ
-http://youtu.be/HUZrnjiTwkI&sa=D&ust=1594457595934000&usg=AFQjCNHK0yJ83L8BTYk-ic2i6y_OCOLOMA
-http://youtu.be/I73aM53L9V0&sa=D&ust=1594457595943000&usg=AFQjCNGwwuMxSXZ9Pck2ycVzuGRsvrUF7Q
-http://youtu.be/CDbl4dLppBE&sa=D&ust=1594457595943000&usg=AFQjCNGUg3fui2MjoRrtYG36GNtfrr-jdQ
-http://youtu.be/nSdM-bG4R-Q&sa=D&ust=1594457595944000&usg=AFQjCNEQ-cNoj5lgcxtcDK72Sckzh02qhw
-http://youtu.be/1URgbp2z9p0&sa=D&ust=1594457595944000&usg=AFQjCNH8lBGtdtx3G1tUs4NL4vt_-IM6sQ
-http://youtu.be/YGoNRXH9g0I&sa=D&ust=1594457595944000&usg=AFQjCNE5FSF95TM4FAiq_LZC0-IHHOmBSw
-http://youtu.be/viBzWAFvMf8&sa=D&ust=1594457595945000&usg=AFQjCNHKFqgwRi0zpS-xY5dQ-jc7KGRQAg
-http://youtu.be/CmcYYRoOUV8&sa=D&ust=1594457595945000&usg=AFQjCNEoyUoe5FTA0I3TsOp6r0bqAXjbAQ
-http://youtu.be/Rx9xZ8S0LAs&sa=D&ust=1594457595945000&usg=AFQjCNFKEv9UQnLMVHz8ZkTNsVJE5oJceg
-http://youtu.be/xHgF_wv47qk&sa=D&ust=1594457595946000&usg=AFQjCNE60x5iINy-k92my3zbdrMx8655Iw
-http://youtu.be/va2YQgib8k8&sa=D&ust=1594457595946000&usg=AFQjCNHbeFL-2i9-VRVfkJ1o8KGh9tZ_3Q
-http://youtu.be/jsW_YhCI7ho&sa=D&ust=1594457595946000&usg=AFQjCNFBqr9mowahCjH_xXd_FU6_Hx4mpQ
-http://youtu.be/kZufpmLplq0&sa=D&ust=1594457595947000&usg=AFQjCNFoc9L7d6EeKsSn8hvI7tri_I66jw
-http://youtu.be/JjCXlUHJIUQ&sa=D&ust=1594457595947000&usg=AFQjCNHSvNn4pjkGXzie5tS8oLnkIWBE8g
-http://youtu.be/neGUtP_lY-Q&sa=D&ust=1594457595947000&usg=AFQjCNGx8Xwgi2Gb0yn9yRcdkqYaWXNQOQ
-http://youtu.be/neGUtP_lY-Q?t%3D3m21s&sa=D&ust=1594457595948000&usg=AFQjCNHaDuEDr5L6I01Sf0Vbt-4VFWywxw
-http://youtu.be/neGUtP_lY-Q?t%3D6m37s&sa=D&ust=1594457595948000&usg=AFQjCNEzrICWnLf4dnoQaaHtfZeyHUzYDA
-http://youtu.be/neGUtP_lY-Q?t%3D9m14s&sa=D&ust=1594457595949000&usg=AFQjCNGZu9j8P3lUxFdHgp4O1zS0XS2JQA
-http://youtu.be/P_8Ve9w8AgM&sa=D&ust=1594457595949000&usg=AFQjCNEAgkIzpqHctKdW5ed9W_5Mx5HEuA
-http://youtu.be/vpBi0Vnkj44&sa=D&ust=1594457595949000&usg=AFQjCNEQuAdZCAvbwC7i6VLKQWQNo4NbFA
-http://youtu.be/tfpsjH2axjE&sa=D&ust=1594457595950000&usg=AFQjCNF7XB8XEunHs2C7XJ8Bbt-GSkAYFA
-http://youtu.be/R19qyxFLEJY&sa=D&ust=1594457595950000&usg=AFQjCNHtcMWl0HkmzPcuDiEAbUoPBUiubw
-http://youtu.be/2cQH219gm1k&sa=D&ust=1594457595950000&usg=AFQjCNGyMDiMudfWB0NI_AR-8Tc82bFelw
-http://youtu.be/YB9yuW6jZP4&sa=D&ust=1594457595951000&usg=AFQjCNFJdamVaBLCMgdgKQQuc0ZVJG-erA
-http://youtu.be/sE5nlW5L5GE&sa=D&ust=1594457595951000&usg=AFQjCNFdhQiNfQJI_h5Li_8Pevj4ZWLq1g
-http://youtu.be/KTza0yioIfI&sa=D&ust=1594457595951000&usg=AFQjCNH3iIlGP12cWfj-xGulAk9a5v_asQ
-http://youtu.be/1qJxmH92BJs&sa=D&ust=1594457595952000&usg=AFQjCNEZrOF4nMyaOIf_CwhM5RU5F51b2A
-http://youtu.be/HD1PaucrHVE&sa=D&ust=1594457595952000&usg=AFQjCNE7hG1Ku1EmHwSTTxSVuPEWsuLGBw
-http://youtu.be/xW8prLq6awc&sa=D&ust=1594457595952000&usg=AFQjCNHJOPFG-SVKH2_H4zVa9K2N9gFTqg
-http://youtu.be/wYNWsgnTtII&sa=D&ust=1594457595953000&usg=AFQjCNG-2eG4311ckS8sxitUgKb1qKhnDg
-http://youtu.be/w5YbbijliEo&sa=D&ust=1594457595953000&usg=AFQjCNHEUx-1BUUwbKgt_AmZuZJzHVxsyg
-http://youtu.be/6D7hFrkqdvQ&sa=D&ust=1594457595953000&usg=AFQjCNGaRKK98sH-xfXpvQbiZ9wAtBo5Ug
-http://youtu.be/nz0WzHG_8uA&sa=D&ust=1594457595954000&usg=AFQjCNGvn-vkiu_hZ0UxkB5aAUzhnk1Eew
-http://youtu.be/FWBP79CBrng&sa=D&ust=1594457595954000&usg=AFQjCNFcJ_O5niF56zCgdTEbQNvfeERRVQ
-http://youtu.be/bi7b_eVhGHw&sa=D&ust=1594457595954000&usg=AFQjCNFPu2O-xaozo2GH6favja_Ws9pvLQ
-http://youtu.be/0EEvrtKLn4U&sa=D&ust=1594457595955000&usg=AFQjCNExuw5GEEDZq73T4OJmd89FcQQcXQ
-http://youtu.be/x9PoY_QRDTQ&sa=D&ust=1594457595955000&usg=AFQjCNEQKjwQMFLHWGiax8oZOX7hqbmYcA
-http://youtu.be/RE8iRTpGqXk&sa=D&ust=1594457595955000&usg=AFQjCNFfrCoUX3lj99SQXj5gOr5Io33Wdg
-http://youtu.be/MgqVOuqeN8o&sa=D&ust=1594457595956000&usg=AFQjCNGhxYtFdJy3Y7CTbVEBm6mjKgf6Uw
-http://youtu.be/k2tuMe9k57E&sa=D&ust=1594457595956000&usg=AFQjCNGZr1bQdY5a6pFI32S3XaRg-_Ss7w
-http://youtu.be/7BeAGAcqDIA&sa=D&ust=1594457595957000&usg=AFQjCNEH1UOWV8GZXbcvPIayyLFv_CyD9A
-http://youtu.be/rbyonkxgxW4&sa=D&ust=1594457595957000&usg=AFQjCNEmqWtOdWqbLYPZsHO19IkrBUHPLQ
-http://youtu.be/B7R98pMY91U&sa=D&ust=1594457595957000&usg=AFQjCNGHV4VKVJnAv3ey5hHEA5Mu9OlnYw
-http://youtu.be/C6qguSeYlSc&sa=D&ust=1594457595957000&usg=AFQjCNHV7kxoIEN51IywdH100ILEaRHyXQ
-http://youtu.be/0X3Y1ogcCEo&sa=D&ust=1594457595958000&usg=AFQjCNFUqYwxEAcyl0zbfx3kvxktnnrZoA
-http://youtu.be/K9Oko95BMwk&sa=D&ust=1594457595958000&usg=AFQjCNEtdPNcTfKQSeU7XthmRa9j9UsB1g
-http://youtu.be/lCfjeozH93g&sa=D&ust=1594457595958000&usg=AFQjCNG9gFVlB98Iku2P98f-9WiDdx8yPg
-http://youtu.be/jVdB7_-RTWI&sa=D&ust=1594457595959000&usg=AFQjCNEXCwnEFUHDMHS_gJjy40TlNuYx1w
-http://youtu.be/vZieSEPM4EM&sa=D&ust=1594457595959000&usg=AFQjCNFQSkYblRiAoPi4DnZ8IyYriSabdw
-http://youtu.be/2frN86Polmg&sa=D&ust=1594457595959000&usg=AFQjCNEXXL6M_TgJ5LnumCc0PLMEqa3mDQ
-http://youtu.be/uDRCMYR6jsU&sa=D&ust=1594457595959000&usg=AFQjCNEfLVglDxDUiA1zAlVXp4dGWmRhYA
-http://youtu.be/qEwpelvVX3U&sa=D&ust=1594457595960000&usg=AFQjCNEn4PQHS4mQrQnsMYwxm12UG66NfQ
-http://youtu.be/I_X9PxOV470&sa=D&ust=1594457595960000&usg=AFQjCNEFpUXUmmtg_sDyiAhqhwbgPA5P7w
-http://youtu.be/RvW79sLnp3A&sa=D&ust=1594457595960000&usg=AFQjCNEjRTNlN-5W5yslDRXcrE-azH8gzw
-http://youtu.be/HQ2Qb_qep0g&sa=D&ust=1594457595960000&usg=AFQjCNGDv24EIvIIXYDWX5YqsXQaXHvEIQ
-http://youtu.be/4KGkG49J7-4&sa=D&ust=1594457595961000&usg=AFQjCNGMcLYhJo8xVG2v2yZbPPtS0GgFug
-http://youtu.be/DgymcF6Oubs&sa=D&ust=1594457595961000&usg=AFQjCNGaJP8ni-npIiBqDMi2LYNdVrvLOQ
-http://youtu.be/mfqMJVe4UNE&sa=D&ust=1594457595961000&usg=AFQjCNEdujnPzuKmMgUJAJDQoYCmGMEarg
-http://youtu.be/0QNDct-OEio&sa=D&ust=1594457595961000&usg=AFQjCNGyF24W5f_rbVAgXZSQyKLu7e0KZA
-http://youtu.be/qcS8A4L7zcs&sa=D&ust=1594457595962000&usg=AFQjCNFdIf7isffO6plwLv_EuTNI614tKQ
-http://youtu.be/ok4spftU-U8&sa=D&ust=1594457595962000&usg=AFQjCNEE-VCDnAfdj3dFkaJWlyJkIy-gdQ
-http://youtu.be/z1R0rs7OwyQ&sa=D&ust=1594457595962000&usg=AFQjCNGmNgeffTK5fbAbjiuGB5IdwP1G9w
-http://youtu.be/BNpEB2WajN4&sa=D&ust=1594457595963000&usg=AFQjCNG2nUxw5-tFgtgSe8vce9ubr7nllw
-http://youtu.be/j4We7AehjnU&sa=D&ust=1594457595963000&usg=AFQjCNHApkdhi2-rzv1JBghSWH0rSGarLg
-http://youtu.be/ZDTEPfF60ck&sa=D&ust=1594457595963000&usg=AFQjCNHbj14FIW9mp0tUH_-gwvGY4EkBjA
-http://youtu.be/akzDnlXnnPk&sa=D&ust=1594457595963000&usg=AFQjCNE_I02Y45-aPBoZd3wW7g701cbZFg
-http://youtu.be/fg0wASh_Yv8&sa=D&ust=1594457595964000&usg=AFQjCNHcpmJAOgNbAzTPrPsHfhu20NyIig
-http://youtu.be/g4A-NXwoxZk&sa=D&ust=1594457595964000&usg=AFQjCNEHH7tn15I2PnRbQh02tjRckkZ_8A
-http://youtu.be/BAltfzpsGmQ&sa=D&ust=1594457595964000&usg=AFQjCNH1s9W1JOFuhlEs9PUhZ-Kn460Txw
-http://youtu.be/ndX_C7Bg4kw&sa=D&ust=1594457595965000&usg=AFQjCNH4mhzm8Kmk1myeosXa8HAfLcCASA
-http://youtu.be/ggUFetrOm2Q&sa=D&ust=1594457595965000&usg=AFQjCNEYgmouHm8WvBTIKVJ-axywLEBD4w
-http://youtu.be/I35gcBCzcgY&sa=D&ust=1594457595965000&usg=AFQjCNFvoiUXBZoDMcYJZuqPIeREM0EF9Q
-http://youtu.be/y5FsCT-ya8M&sa=D&ust=1594457595966000&usg=AFQjCNEXvaGO6hnwZi9ngg46Bu-nQyU-6A
-http://youtu.be/hqlDnMIKxb8&sa=D&ust=1594457595966000&usg=AFQjCNEDLT9emoDKQNolFN3BFaER1EbLtA
-http://youtu.be/YIZxJvcdLAI&sa=D&ust=1594457595966000&usg=AFQjCNE6PcLztcZY6HxaiM9KRhMydzCnyA
-http://youtu.be/NQPrC_L285o&sa=D&ust=1594457595967000&usg=AFQjCNHIg3E_OtmNVJBwXxK9duaySxabig
-http://youtu.be/98N-yyWJsRs&sa=D&ust=1594457595967000&usg=AFQjCNE1W6o981wiTPy1COBYdVxS_ZajxQ
-http://youtu.be/3FSDQQFVxxE&sa=D&ust=1594457595967000&usg=AFQjCNEGB0X1xi9o2p2tOU3bK35D3MT9pA
-http://youtu.be/Fy6VUsNOTkE&sa=D&ust=1594457595967000&usg=AFQjCNEMmJaCb_jAcq9Fnv1SWRdMFYggGg
-http://youtu.be/tpm7iH6Tq3A&sa=D&ust=1594457595968000&usg=AFQjCNEeablhy4wDGLDwEt1EAH6ZK5Jgsw
-http://youtu.be/CTrKRmnkHEQ&sa=D&ust=1594457595968000&usg=AFQjCNHrz-5Y1jAEhsRsvR6v26nMhUtTGw
-http://youtu.be/GBv3hs6tTAw&sa=D&ust=1594457595968000&usg=AFQjCNFvywv9j6Rvq6VEMbma9aAFA1tyFg
-http://youtu.be/bioWrdx7zV0&sa=D&ust=1594457595969000&usg=AFQjCNGF4X5CpeLW65XW6fTyR_dZ3SHcSA
-http://youtu.be/Xm6k2q6yCcM&sa=D&ust=1594457595969000&usg=AFQjCNEYGkg8Okev7hEkCkSd459kSVqocg
-http://youtu.be/wfkDYT7VZf4&sa=D&ust=1594457595969000&usg=AFQjCNE3hw_xwOWWDeZjuA3xqR3dNnTENQ
-http://youtu.be/h1elulBiJX8&sa=D&ust=1594457595970000&usg=AFQjCNGz-mWaakgymHPUDm4ohDK8fMmgFw
-http://youtu.be/ss1XinIJhqM&sa=D&ust=1594457595970000&usg=AFQjCNE8DOvBkg_TX_54iD6NLPP8oE80hg
-http://youtu.be/f5AyE0LurL4&sa=D&ust=1594457595970000&usg=AFQjCNGk4HseYjhC4lyKM6pd6oePftMOmA
-http://youtu.be/HaZJt7s1hGo&sa=D&ust=1594457595970000&usg=AFQjCNHzt4ytK3h6tJkiw4z1CcOwwsOlsg
-http://youtu.be/HaZJt7s1hGo?t%3D3m30s&sa=D&ust=1594457595971000&usg=AFQjCNGJaKHrWbnlh6WqCfq2S6eO7VeTdw
-http://youtu.be/NipxhKctNfI&sa=D&ust=1594457595971000&usg=AFQjCNHpzEW_IYdMwQ4GRh8Y6SirqylNNw
-http://youtu.be/NipxhKctNfI?t%3D2m20s&sa=D&ust=1594457595971000&usg=AFQjCNGMvf3-9U-gF1M9jqFgCMvRxWyMiA
-http://youtu.be/eSjrIoys5bM?t%3D1m31s&sa=D&ust=1594457595971000&usg=AFQjCNE-7NUvXYSMpHL6aZYci-suLnF63A
-http://youtu.be/D7CbiW-IFSA&sa=D&ust=1594457595972000&usg=AFQjCNGneua1Ca5qs-qg9HMNh7ZczOnXBA
-http://youtu.be/M1eBHGArDrc&sa=D&ust=1594457595972000&usg=AFQjCNE3mxBgpG69TKN-avmYjcSK8LaTjA
-http://youtu.be/Vju2l96-2aA&sa=D&ust=1594457595972000&usg=AFQjCNGro7klIrxN8F_FtE8OVxrYp2kBPg
-http://youtu.be/l40c-5q4J10&sa=D&ust=1594457595973000&usg=AFQjCNHSWhc_lF0GZyHsHNLGsyWND5dSpQ
-http://youtu.be/umShm0q4UTQ&sa=D&ust=1594457595973000&usg=AFQjCNG2kJqrQE1PqvyPxtJmLw3lkTXBIQ
-http://youtu.be/ZGqQ6Gp9a48&sa=D&ust=1594457595973000&usg=AFQjCNEw5SQZBsTZRxFoldRswYvvPHUiuw
-http://youtu.be/Emef3Whc2-8&sa=D&ust=1594457595973000&usg=AFQjCNFg-l_ovrcgMP2b5nme335Dmrhx1w
-http://youtu.be/27PrggSFI_A&sa=D&ust=1594457595974000&usg=AFQjCNGtcFPAP202QXPLX5YEgjf8LkJUmw
-http://youtu.be/rRzvlwPS9GE&sa=D&ust=1594457595974000&usg=AFQjCNHvIVDywOgNSdi3Gpkhj4DIJFpXiA
-http://youtu.be/GpTIVAUZIKc&sa=D&ust=1594457595974000&usg=AFQjCNHwiDdKGKmC_4d4UEm_ro_LEwS4SQ
-http://youtu.be/gfjX7iHoOyw&sa=D&ust=1594457595974000&usg=AFQjCNHny7Ih_EHpiQPMeGO0xKRxjdNWIg
-http://youtu.be/Rn8_2k8jSvs&sa=D&ust=1594457595975000&usg=AFQjCNE8xlTDMuL4psPBM5cr9g01Vprj2w
-http://youtu.be/oTZyL-IWYNo&sa=D&ust=1594457595975000&usg=AFQjCNGfTrv6KUKYY_pqkccy9gyKHPluHQ
-http://youtu.be/4KEjxJP431w&sa=D&ust=1594457595975000&usg=AFQjCNEB3ulMwjB6-3jq43lqU_RuY7tP4w
-http://youtu.be/5-t1JbosfU8&sa=D&ust=1594457595976000&usg=AFQjCNFJisgb_1sCRpWmObt7IBlb5bdqvQ
-http://youtu.be/JeDFuDXJm9c&sa=D&ust=1594457595976000&usg=AFQjCNH9A9s9ciakScbYuiSkGGSyi_yaFQ
-http://youtu.be/-nVDfKHBdcM&sa=D&ust=1594457595976000&usg=AFQjCNHG5TvhmhFRy9QyiYtMOoB5gujtww
-http://youtu.be/b3cHU8RUuwI&sa=D&ust=1594457595977000&usg=AFQjCNFlJHlaG5qDRAjbAdpmExsy1VEDWg
-http://youtu.be/zMrpVi46RNs&sa=D&ust=1594457595977000&usg=AFQjCNG0ghHaTixxksQ1wFI1ryXHr_KiYg
-http://youtu.be/hIZjfd9HQ2c&sa=D&ust=1594457595977000&usg=AFQjCNH6JeYamQZmW9uRf_IZja3n39kNsg
-http://youtu.be/Aj246C4mSFc&sa=D&ust=1594457595978000&usg=AFQjCNHbXRXrCyGCTB4A6K1Syn4zG-6u8Q
-http://youtu.be/Zk17QTr7RW4&sa=D&ust=1594457595978000&usg=AFQjCNHrSHg3WQKtAULUF-k841AdTaB54Q
-http://youtu.be/I2NG7uLtIkg&sa=D&ust=1594457595978000&usg=AFQjCNGr4dbdCWXB_rwOHwqr3EhcgZhDog
-http://youtu.be/3Hxuv5CCAPg&sa=D&ust=1594457595979000&usg=AFQjCNFjnYKN9yaqzBoeplid0d0F6kLonA
-http://youtu.be/V0AsoEa9T14&sa=D&ust=1594457595979000&usg=AFQjCNFrAJsArelpfiAp6MD1seZeyFNqgQ
-http://youtu.be/35AYLJ4caFg&sa=D&ust=1594457595979000&usg=AFQjCNEFZYzijykMhuXxheyLKQmOugSSJQ
-http://youtu.be/sBZBxPIVIAY&sa=D&ust=1594457595980000&usg=AFQjCNE1ec46hfSM3wCoEF-B6Y7YZfAiYQ
-http://youtu.be/mzWzN___BQQ&sa=D&ust=1594457595980000&usg=AFQjCNHQCwj3MTHN_h1TfI8E2ZX2S7Q2eg
-http://youtu.be/qdacnEOXotk&sa=D&ust=1594457595980000&usg=AFQjCNHYMM_5h_tFxr5UUEsBdtJwxIS2mA
-http://youtu.be/wsiuNo_SjBA&sa=D&ust=1594457595981000&usg=AFQjCNG5jJTuN-PchBDyYxb1WYmO52rKaA
-http://youtu.be/_ploNOvYUfE&sa=D&ust=1594457595981000&usg=AFQjCNH0AAAtaU0NuRKQlVv-VHorNHZyRg
-http://youtu.be/SD4ouMQ5ZWU&sa=D&ust=1594457595981000&usg=AFQjCNHCzeQxH4ujmIT7G0B8SSdQQ7fReQ
-http://youtu.be/g_b-go3CVGM&sa=D&ust=1594457595982000&usg=AFQjCNHKe5YGA5nJJoOEHTzuTs6IRFMJTw
-http://youtu.be/UqOQBWWWASI&sa=D&ust=1594457595982000&usg=AFQjCNF83Ro4dO2BYV04tt9_CESPBDb91A
-http://youtu.be/oqCh9Gr5HKg&sa=D&ust=1594457595982000&usg=AFQjCNFGhg4zo_h5C9Du8m5B-MZYEJGxWw
-http://youtu.be/yvz-NBK6Jko&sa=D&ust=1594457595982000&usg=AFQjCNG8AENptmQqmCmLKxISim55c9DrBw
-http://youtu.be/JE1EwfGdmhc&sa=D&ust=1594457595983000&usg=AFQjCNEmWaCJqcff7_USqCUWBziVVe4k2A
-http://youtu.be/Fla4j50jO60&sa=D&ust=1594457595983000&usg=AFQjCNEgncZb93qKivrxAgwuqTCSe54uTg
-http://youtu.be/RKC9uGKT_CM&sa=D&ust=1594457595983000&usg=AFQjCNGFtMXJVSSScNL9TSnhPZTMsgoq2w
-http://youtu.be/nR5m-BdMKsI&sa=D&ust=1594457595984000&usg=AFQjCNHQ9DVvf2OmoN3ofN4OHaw9KL9kvA
-http://youtu.be/ufos2o3leiM&sa=D&ust=1594457595984000&usg=AFQjCNFN7jEDIzIUuRkwQNo_YSUpeKy3Pw
-http://youtu.be/1e9zcNEyKk0&sa=D&ust=1594457595984000&usg=AFQjCNEkfFwEtO0JvpDBvpXjOUWBg3CQaQ
-http://youtu.be/q8qiy2UKQEA&sa=D&ust=1594457595984000&usg=AFQjCNHoif09bPb378PjDlWIIu804_OxCQ
-http://youtu.be/txARpzOvRss&sa=D&ust=1594457595985000&usg=AFQjCNHjn5WQ2exyIgkV1j_xWVIY3E9kAQ
-http://youtu.be/TRQsf3vMuZY&sa=D&ust=1594457595985000&usg=AFQjCNFdxrt6Xq0AfjZ1hqTCyYhGjrgpSg
-http://youtu.be/iutCf2XqXAo&sa=D&ust=1594457595985000&usg=AFQjCNHaW6sIZ7NWtgkl56by-H_zCe20wQ
-http://youtu.be/pMjN3yTdvCY&sa=D&ust=1594457595986000&usg=AFQjCNHlsDwmnVN5gp2jVW9qWtf_BAXOwA
-http://youtu.be/LQ-5yco98fg&sa=D&ust=1594457595986000&usg=AFQjCNED9l915B7aAhKOomSWNsEjV6usQg
-http://youtu.be/jDl3VJcvwX4&sa=D&ust=1594457595986000&usg=AFQjCNGCKvvQe4OdRucSC4bHKDu1XzMLMQ
-http://youtu.be/JqAU_nx0N3g&sa=D&ust=1594457595986000&usg=AFQjCNEHwZSyAbi9MiAQN3LhvzGe2c8epg
-http://youtu.be/OIyf-BW4228&sa=D&ust=1594457595987000&usg=AFQjCNFmU7bOO1vExowWnjdJ8r12VXqdXw
-http://youtu.be/1cm0m_TQhkM&sa=D&ust=1594457595987000&usg=AFQjCNHhNl9kgEjCcVq8yXhkUPwAeAjmww
-http://youtu.be/Ll3MCuHEI4g&sa=D&ust=1594457595987000&usg=AFQjCNHXMXFlV1Onk9V-Tckq2pLlFQlTTQ
-http://youtu.be/L2SngmPmswo&sa=D&ust=1594457595988000&usg=AFQjCNEoUAwdeFdTqTTpYqxdLMWvyXZMBw
-http://youtu.be/ZwPW1VaTLII&sa=D&ust=1594457595988000&usg=AFQjCNEY1DeISthDmvAi-x2hIRv72oGgsw
-http://youtu.be/uevdmSjmQbQ&sa=D&ust=1594457595988000&usg=AFQjCNGipasu7XFIyqagStuq6NdUjzoUpw
-http://youtu.be/_YgDZsmsIuE&sa=D&ust=1594457595988000&usg=AFQjCNFpFirRYqsZ6WBqi5W_CRnUHX44ig
-http://youtu.be/mOh4HHh2m6I&sa=D&ust=1594457595989000&usg=AFQjCNGeFdw4fcm9Pw-300oHPti7FbO8HA
-http://youtu.be/ARi9AQs4tsk&sa=D&ust=1594457595989000&usg=AFQjCNG34R3jjR1Zq0Yjq21qGq7l5LScSg
-http://youtu.be/6aKNvPFJcpw&sa=D&ust=1594457595989000&usg=AFQjCNFDuyovXnQvn86E9eirOn_BhPtDvQ
-http://youtu.be/_FwYXQnTbII&sa=D&ust=1594457595989000&usg=AFQjCNFxjU85Dt56UkS54C-7gn-q8XVBmA
-http://youtu.be/5FFa9ZGtwEA&sa=D&ust=1594457595989000&usg=AFQjCNFV2AYAA2m4iGQvtelEXvQ9_NMxNQ
-http://youtu.be/34dYj80KLmU&sa=D&ust=1594457595990000&usg=AFQjCNERnSgYSQmr9oYsYNozpLwLBh7KFg
-http://youtu.be/bhH0_pcc7Sg&sa=D&ust=1594457595990000&usg=AFQjCNHf1UUWhY3TQuN0H_3fKGXRaIhr1g
-http://youtu.be/ez4KoCi5evM&sa=D&ust=1594457595990000&usg=AFQjCNGOdaxbJOkSdVsnNEts9LsmgixsXQ
-http://youtu.be/8QF0reFQdMk&sa=D&ust=1594457595990000&usg=AFQjCNFG3555r_LBUQ3UHyMxDu2t6qzZxA
-http://youtu.be/P0iQBi_rzh8&sa=D&ust=1594457595991000&usg=AFQjCNHKJza4L6ZbSR-h_dtgwucfBLaMHA
-http://youtu.be/momaL6x7vkY&sa=D&ust=1594457595991000&usg=AFQjCNGc7VBZw3W73MSuujydowo9K-VCIg
-http://youtu.be/nwdmmA0z2QA&sa=D&ust=1594457595991000&usg=AFQjCNGL96g53Ybnynw3FB7j7e_ePngveQ
-http://youtu.be/Zlf7PIN5-t4&sa=D&ust=1594457595991000&usg=AFQjCNHDyaJEHBxm24E0-jEd_h1cK-RqeQ
-http://youtu.be/kaiXgxEjmZc&sa=D&ust=1594457595992000&usg=AFQjCNFtwEhNMZORyZaOjKIPjfXB9762YQ
-http://youtu.be/mxTKyl_y-KI&sa=D&ust=1594457595992000&usg=AFQjCNFPXwUKmY2oP8Tm4u-nsYWicDmwlg
-http://youtu.be/TUSL5Ga_wko&sa=D&ust=1594457595992000&usg=AFQjCNF-yeAbN6nPagupvDR5HZyzMFOIOw
-http://youtu.be/lYgm4p1KpMI&sa=D&ust=1594457595992000&usg=AFQjCNFm37JyMMIg2LICdhkVsIiz1xJSuQ
-http://youtu.be/sFBGGYQBvHo&sa=D&ust=1594457595993000&usg=AFQjCNF7A-HoByJ4--I2N0Vn3lPUDw2b-w
-http://youtu.be/oxwBfckHwkg&sa=D&ust=1594457595993000&usg=AFQjCNHmdRIr6hKJRKn2e-1pZWZBM7CyXA
-http://youtu.be/Kb3J2qiPEpo&sa=D&ust=1594457595993000&usg=AFQjCNEpQUHOsaeAincl3TKyuNpGC6VzEw

@@ -392,7 +392,7 @@ CREATE TABLE public.videos (
     isrc character varying,
     acr_response_code integer,
     spotify_artist_name_3 character varying,
-    length time without time zone
+    length interval
 );
 
 

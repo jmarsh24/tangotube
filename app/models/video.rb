@@ -56,9 +56,9 @@ class Video < ApplicationRecord
   # validates :follower, presence: true
   # validates :song, presence: true
   # validates :artist, presence: true
-  validates :description, presence: true
+  # validates :description, presence: true
   validates :youtube_id, presence: true, uniqueness: true
-  validates :title, presence: true
+  # validates :title, presence: true
 
   belongs_to :leader, required: false
   belongs_to :follower, required: false
@@ -91,6 +91,27 @@ class Video < ApplicationRecord
       else
         all
       end
+    end
+
+    def import_all_videos
+      Video.read_batch_urls.each do |channel_id|
+        Video.import_channel(channel_id, 1)
+      end
+      Video.match_dancers
+      Video.match_songs
+    end
+
+    def read_batch_urls
+      channel_ids = []
+      File.readlines('data/url_batch.txt', chomp: true).each do |line|
+        if line.starts_with?('#')
+          next
+        else
+          url = Yt::URL.new(line)
+          channel_ids << url.id
+        end
+      end
+      channel_ids
     end
 
     def import_channel(channel_id, limit)
@@ -126,8 +147,6 @@ class Video < ApplicationRecord
         acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
         Video.parse_acr_response(acr_response_body, youtube_video.id) if video.acr_response_code.nil?
       end
-      Video.match_dancers
-      Video.match_songs
     end
 
     def match_dancers
