@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
 
-  require "sidekiq/web"
+  require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  root "videos#index"
+  root 'videos#index'
 
-  post "savenew", to: "users#savenew"
+  post 'savenew', to: 'users#savenew'
+
+  get 'watch', to: 'watch#watch'
 
   resources :videos
 
