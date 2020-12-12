@@ -13,7 +13,7 @@
     <%= render partial: "video_info_item", locals: {header: "Description", value: @active_video.description || "N/A" } %>
     <%= render partial: "video_info_item", locals: {header: "Video-Type", value: @active_video.videotype.try(:name) || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "View Count", value: @active_video.view_count || "N/A"} %>
-    <%= render partial: "video_info_item", locals: {header: "Duration", value: @active_video.length || "N/A"} %>
+    <%= render partial: "video_info_item", locals: {header: "Duration", value: @active_video.length || @active_video.duration ||"N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Performance Number", value: "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Channel", value: @active_video.channel || "N/A"} %>
 
