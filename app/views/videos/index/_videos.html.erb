@@ -3,7 +3,7 @@
     Try a different search word or click on the TangoTube logo to reset.
   <% else %>
     <% @videos_paginated.each do |video| %>
-      <%= active_link_to current_page_params.merge(youtube_id: video.youtube_id),
+      <%= active_link_to watch_path(v: video.youtube_id),
                 {class: "video", active: :exact} do %>
 
         <div class="video-thumbnails">
