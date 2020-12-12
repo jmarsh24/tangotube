@@ -3,12 +3,6 @@
     <%= render "videos/index/header" %>
   </div>
 
-  <div class="hero-video">
-    <%= render "videos/index/video" %>
-  </div>
-  <div class="details">
-    <%= render "videos/index/details_video" %>
-  </div>
   <div class="content">
     <%= render "videos/index/filters" %>
     <%= render "videos/index/searchresult_details" %>
@@ -51,8 +45,9 @@
       <%= render "videos/index/videos" %>
     </div>
   </div>
-
-  <div id="load-more-container">
-    <%= render "videos/index/load_more" %>
+  <div class="footer">
+    <div id="load-more-container">
+      <%= render "videos/index/load_more" %>
+    </div>
   </div>
 </div>

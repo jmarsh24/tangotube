@@ -38,7 +38,7 @@
 #  isrc                  :string
 #  acr_response_code     :integer
 #  spotify_artist_name_3 :string
-#  length                :time
+#  length                :interval
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

@@ -18,7 +18,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.title) %>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.description) %>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.videotype.try(:name)) %>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.view_count) %>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.length ) %>
         </div>
       </div>
     </div>
@@ -96,7 +96,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.channel) %>
         </div>
       </div>
     </div>
@@ -113,7 +113,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.leader.try(:name)) %>
         </div>
       </div>
     </div>
@@ -126,7 +126,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.follower.try(:name)) %>
         </div>
       </div>
     </div>
@@ -143,7 +143,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.song.try(:title).titleize) %>
         </div>
       </div>
     </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.song.try(:genre).titleize) %>
         </div>
       </div>
     </div>
@@ -170,7 +170,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.song.try(:artist_2).titleize) %>
         </div>
       </div>
     </div>
@@ -187,7 +187,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+        <%= format_value(@active_video.event.try(:name)) %>
         </div>
       </div>
     </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="detail-column">
         <div class="detail-item-value">
-          value
+          <%= format_value(@active_video.song.try(:artist).titleize) %>
         </div>
       </div>
     </div>
