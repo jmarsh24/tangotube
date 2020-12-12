@@ -94,23 +94,11 @@ class Video < ApplicationRecord
     end
 
     def import_all_videos
-      Video.read_batch_urls.each do |channel_id|
+      Channels.limit(1).each do |channel_id|
         Video.import_channel(channel_id, 10)
       end
       Video.match_dancers
       Video.match_songs
-    end
-
-    def read_batch_urls
-      channel_ids = []
-      File.readlines('data/url_batch.txt', chomp: true).each do |line|
-        next if line.starts_with?('#')
-
-        url = Yt::URL.new(line)
-
-        channel_ids << url.id if url.kind == :channel
-      end
-      channel_ids
     end
 
     def import_channel(channel_id, limit)
