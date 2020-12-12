@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   post 'savenew', to: 'users#savenew'
 
-  get 'watch', to: 'watch#watch'
+  # get 'watch', to: 'watch#watch'
 
   resources :videos
 
