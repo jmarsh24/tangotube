@@ -139,24 +139,23 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: dancers; Type: TABLE; Schema: public; Owner: -
+-- Name: channels; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.dancers (
+CREATE TABLE public.channels (
     id bigint NOT NULL,
-    first_dancer character varying,
-    second_dancer character varying,
     title character varying,
+    channel_id character varying,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
 
 
 --
--- Name: dancers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: channels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.dancers_id_seq
+CREATE SEQUENCE public.channels_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -165,10 +164,10 @@ CREATE SEQUENCE public.dancers_id_seq
 
 
 --
--- Name: dancers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: channels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.dancers_id_seq OWNED BY public.dancers.id;
+ALTER SEQUENCE public.channels_id_seq OWNED BY public.channels.id;
 
 
 --
@@ -460,10 +459,10 @@ ALTER TABLE ONLY public.admin_users ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: dancers id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: channels id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.dancers ALTER COLUMN id SET DEFAULT nextval('public.dancers_id_seq'::regclass);
+ALTER TABLE ONLY public.channels ALTER COLUMN id SET DEFAULT nextval('public.channels_id_seq'::regclass);
 
 
 --
@@ -540,11 +539,11 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
--- Name: dancers dancers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: channels channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.dancers
-    ADD CONSTRAINT dancers_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.channels
+    ADD CONSTRAINT channels_pkey PRIMARY KEY (id);
 
 
 --
@@ -753,6 +752,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201128222120'),
 ('20201207145709'),
 ('20201207145752'),
-('20201208083012');
+('20201208083012'),
+('20201212174857');
 
 

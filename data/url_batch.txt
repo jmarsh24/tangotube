@@ -1,294 +1,294 @@
-###030tango
-##https://www.youtube.com/channel/UCtdgMR0bmogczrZNpPaO66Q
-###Armin K. Marschall
-##https://www.youtube.com/channel/UC9lGGipk4wth0rDyy4419aw
-###TangoNuevo TV
-##https://www.youtube.com/channel/UCUKptFgKHVYM1GoQvgeDU_A
-###Tangostudent
-##https://www.youtube.com/channel/UC766M5toEZ70hZCLsaxXiOw
-###Tango Natural
-##https://www.youtube.com/channel/UCOrxTg3siBOMD0XwoDKWC5A
-###TC Tango
-##https://www.youtube.com/channel/UCPSEBKNWfeUQR22qpdYAIgg
-###Tango Element
-##https://www.youtube.com/channel/UC47UVQSnunEsdxqqvgeG6YA
-###Prischepov tv
-##https://www.youtube.com/channel/UCCoOxQMnmwZ-jhezbLfSUgQ
-###Mediterranean Summer Tango Festival
-##https://www.youtube.com/channel/UCg-gK8tVf-evR-P976UlU9w
-###Tango Cazino
-##https://www.youtube.com/channel/UC2EyGIesuSnNx5-Kohy1PGg
-###Erdemsel1975
-##https://www.youtube.com/c/tangofilm/UCcHaeCEJcXTmWJpqSe-EBwA
-###lodstangosalonfestival
-##https://www.youtube.com/channel/UCS_7mPPJVCZLJUG5iMghpgA
-###studio tango montréal
-##https://www.youtube.com/channel/UCuP6Y6F9uDjh5-PKkggUY7w
-###crazyfortango
-##https://www.youtube.com/channel/UC2LyNJ-DMc3u7xN9ka-Bygg
-###Pepa Palazon
-##https://www.youtube.com/channel/UCV6aDwqqS7yTDsp0v_gUkPA
-###Armelle Tango
-##https://www.youtube.com/channel/UClmH-sr3jJH1i8tE6odtONQ
-###Paris Buenos Aires Tango
-##https://www.youtube.com/channel/UCuOHtVVqipSeqEWTt5MjeKg
-###Sultans of Istanbul Tango Festival
-##https://www.youtube.com/channel/UCRrVjNh5Rf2i2UQC8LPT1Wg
-###ladybrucomela vaghestelle
-##https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
-###istanbulTANGO
-##https://www.youtube.com/channel/UCgWHuLjpAcWGEpTSYiMj-FQ
-###Bucharest Tango Groove
-##https://www.youtube.com/channel/UCUz8joyeQNPWbnfQWwiVZRQ
-###Ivan&Sara FERALTANGO
-##https://www.youtube.com/channel/UCB1VB9Kzdl06PSgd6PZj3SA
-###Pippifromparis
-##https://www.youtube.com/channel/UCy0ltvzc34Bt-0d7q_f6vkg
-###Planetango Club
-##https://www.youtube.com/channel/UCv1MYiYRQbDsqVvHuX9PSJQ
-###Lompa TV
-##https://www.youtube.com/channel/UC_vxKs5JZlSql7LrtdGYygQ
-###Paula Duarte Tango
-##https://www.youtube.com/channel/UCUX_gPar_D-gLJsWJ55XlcQ
-###Horacio Fernandez
-##https://www.youtube.com/channel/UC9ewAAEx9ybZRs32F-nmNxA
-###Marko Miljevic
-##https://www.youtube.com/channel/UCFyWqbEkWPULVD70PguLmgQ
-###Henryk Gajewski
-##https://www.youtube.com/channel/UCp5e5y69xiUdGSw-ANTkYcA
-###A Los Amigos Tango Festival
-##https://www.youtube.com/channel/UCEGeTx5mPDinPl1ovVdEsjQ
-###MIRIAM LEONARDO Tango
-##https://www.youtube.com/channel/UCNmXPpwV8t_JzvMhUmAJHjw
-###Paul Holman
-##https://www.youtube.com/channel/UCIf7g_gymaB3NBSvUDMJvuA
-###Sayaka y Joscha
-##https://www.youtube.com/channel/UCW_CaKNIl3qqXHkxGZGVIdg
-###TangoBootCampUK
-##https://www.youtube.com/channel/UC0iFpFfoCH_ILLuZKpBFf5w
-###VIDEOTEAM1
-##https://www.youtube.com/channel/UC8eDyvVLKCg-VxTIPtsfS_Q
-###Tango at home
-##https://www.youtube.com/channel/UCsqJREb9EaHnJB77UX01FaA
-###yo Tango
-##https://www.youtube.com/channel/UCAApa6oVE5sM7aMR2VOB-PQ
-###michelle + joachim | tango
-##https://www.youtube.com/channel/UCevmWpkZsILyp6tQSsI6C-Q
-###Rex Boyd
-##https://www.youtube.com/channel/UC21v9gnlep9rotIugj_zv9Q
-###Tango Dance
-##https://www.youtube.com/channel/UCu9BG31TSZY0NTojZom6lYA
-###Santiago Sarabia
-##https://www.youtube.com/channel/UC2ZWSFKYu-YRaqXfqXe7C6g
-###Solo Tango Orquesta
-##https://www.youtube.com/channel/UC_xznMN8tPrst0x_H8zRZeQ
-###Juan David y Paulina
-##https://www.youtube.com/channel/UCr9PDw18UZMGGFU0TdoBazQ
-###kaidaseviolins
-##https://www.youtube.com/channel/UC_ccWbbOdrqGnPLUjiWw0XA
-###El Cachivache Orkesta Oficial
-##https://www.youtube.com/channel/UCD3GFnm3hXuD2wnh20attYQ
-###Adornos Center
-##https://www.youtube.com/channel/UCYAd7opLAnFxat0ilrQUrxw
-###Mrrodolfoaravena
-##https://www.youtube.com/channel/UCLGqF8AM6VHaUb9QcRRZa_g
-###manuel rodriguez
-##https://www.youtube.com/channel/UCeU2Kgbt4oeG3Ds-mqrMCzw
-###Antonella Terrazas
-##https://www.youtube.com/channel/UCTEoGi-mh-u5bnpsbRz5CiQ
-###AiresdeMilonga
-##https://www.youtube.com/channel/UC7XYTh3FVGU8-W2f26KDR_w
-###Frank Obregón
-##https://www.youtube.com/channel/UCInartlQfyH7Pv1fPGTvTuw
-##SITF Tango
-#https://www.youtube.com/channel/UCBSil1q787Wo580jUrDZ72g
-##El Bulin Tango
-#https://www.youtube.com/channel/UCL8a40dhLKakn625Gjs3Wcw
-##Philippe Fassier+
-#https://www.youtube.com/channel/UCfh0Fp2sgnW5XgYvTHOM_Cw
-##calitozzzz
-#https://www.youtube.com/channel/UCFs4cRdjW-ZmVdY3peY4VtA
-##Maria Filali
-#https://www.youtube.com/channel/UCev8Otao71izyYXCeaaKm_g
-##tangoclasses
-#https://www.youtube.com/channel/UC53OQiIwfrBD2rHhR-zVSHQ
-##GioKi Tango
-#https://www.youtube.com/channel/UC9T3PXF_89R4-ZYdJ3TEhjg
-##Katrinemontoia
-#https://www.youtube.com/channel/UCvbnSqF81F_Zg8MV33TzMgQ
-##Tengiz Mosidze
-#https://www.youtube.com/channel/UC2m7kza71x306eDN9t8AKMg
-##BorisTube7
-#https://www.youtube.com/channel/UCpk0omVygMxCtsZF_5wAxug
-##dni tango
-#https://www.youtube.com/channel/UC12hC6BLAoJrBZwHhStYUyQ
-##Nick Jones
-#https://www.youtube.com/channel/UCDgsGQ3h3ghJDbCXubqEwVQ
-##Eleonora Kalganova
-#https://www.youtube.com/channel/UCmFJ1b146TJXtTgUk6YMm1Q
-##Pablo Inza
-#https://www.youtube.com/channel/UCDHBs8mhLVrjb20QREgAwHg
-##Tangomeet
-#https://www.youtube.com/channel/UC4q0ayysWhe1ylyetwsYYBw
-##Hai-Ho Tran Photography
-#https://www.youtube.com/channel/UCmdTANSakxHXwfz8U93GOiA
-##Les Allumés du Tango
-#https://www.youtube.com/channel/UCFiy4O691rgtEaep-39Sjgw
-##Malena7777
-#https://www.youtube.com/channel/UC7DL99LiaBbekNSk33ZFyIA
-##CUMBRE MUNDIAL DEL TANGO ZARATE 2015
-#https://www.youtube.com/channel/UCQ6AdQAWU2Kar8opf0CWumA
-##francoispettiaux
-#https://www.youtube.com/channel/UCH3zgLQS8NjKis3NCdDfruA
-##Tango VidaMia Köln, Tanzschule für Tango Argentino
-#https://www.youtube.com/channel/UC6yqhyWCcyFljZccUsVtP1g
-##La Maquina Tanguera
-#https://www.youtube.com/channel/UCdfeQEeB-y5elIXzgQlDjmA
-##calabriatango
-#https://www.youtube.com/channel/UC2tmvKwaHC159Edhd3QenIQ
-##juanayjulio
-#https://www.youtube.com/channel/UCfdidUXnncqPjBXxyE3ixnw
-##Barbara Newman
-#https://www.youtube.com/channel/UCnCSCyuEqB5pG0sAduQoOKg
-##AkselLP
-#https://www.youtube.com/channel/UCvWLLx76_oumdNRyM_5TUuw
-##Argentine Tango
-#https://www.youtube.com/channel/UCITyaBTjQtpG6toWO0fH7_Q
-##aletangolab
-#https://www.youtube.com/channel/UC19JJiR46Il0dq60hedbu9A
-##Miki Kamiya
-#https://www.youtube.com/channel/UCijpTNQmAE7zj_bnAg5eCVw
-##Clarisa y Jonathan Tango
-#https://www.youtube.com/channel/UCMGNG_2LHGejSMAtdAaAn5A
-##sghembo63
-#https://www.youtube.com/channel/UCQDddWul7S_Zdz3H5iFywyQ
-##Leonel Di cocco
-#https://www.youtube.com/channel/UCg3ydGIngAYCWVrsS0EgNOQ
-##Bernardi Alessandro
-#https://www.youtube.com/channel/UCW1O_6dnFrn1y218FeHfExA
-##musicat1984
-#https://www.youtube.com/channel/UCaIjR5JCI8b_F8Llxu9LKVA
-##Rhythm & Motion Dance Studio
-#https://www.youtube.com/channel/UC4Ky9bsvxDG6Ben724ATPSA
-##X. T.
-#https://www.youtube.com/channel/UCYecxmJ-2o3B43toCHxYM_g
-##flora benedetti Milonga Sì
-#https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
-##Que Siga La Milonga
-#https://www.youtube.com/channel/UC-YdwYwSP3VuxEt05xppAxQ
-##MrSnoopyT
-#https://www.youtube.com/channel/UCrb4z7buq2ykFqi0dm-_z7w
-##Tango Details
-#https://www.youtube.com/channel/UC7T1CNO8JhI8C9OgIk2-hfw
-##E-K Tango
-#https://www.youtube.com/channel/UClK91n0Ok1cPEkn2TCWUqRg
-##LeenaTango
-#https://www.youtube.com/channel/UCNdEZa696S-jUWBDbSBQrbg
-##CamTango
-#https://www.youtube.com/channel/UC_etwoVED5SW_rUqYDLPk7Q
-##Dari Kernel
-#https://www.youtube.com/channel/UCds0PLpbIq_vVd22l2jwylg
-##Mat MaMoody
-#https://www.youtube.com/channel/UCX1bbCfeoXJxONmelzpM0rQ
-##김진호 jinhoraptor
-#https://www.youtube.com/channel/UCIpTAPNzIW7dq73EmZTk2sw
-##Mauro Tonchich
-#https://www.youtube.com/channel/UCcsgUhSfsSo96_hTEPnZoCQ
-##La Mariposa - tango
-#https://www.youtube.com/channel/UCD6r_8iA5csn7dZ68TisAWw
-##Caminito Tango Catania
-#https://www.youtube.com/channel/UCS3DPkgDFF-nVoV_4KzQXCA
-##dancerfromsoul
-#https://www.youtube.com/channel/UCv4OwDvK9IC9VzeMLLYEZtg
-##Yori Mayron
-#https://www.youtube.com/channel/UCfKG5V4E3RkjSJ1LJnE_Agg
-##Igoris Saburov
-#https://www.youtube.com/channel/UCs-l_CAo-CgHWWAbNFiliGQ
-##Nom Sic
-#https://www.youtube.com/channel/UCQD5-lzW1sAmejC1em4_SMA
-##Nori Polanco
-#https://www.youtube.com/channel/UCzdNnh1EY4NVZ2j9gHMS8bw
-##MUST MILONGA
-#https://www.youtube.com/channel/UCs6DVWDBXasyRiT4-wa9iwg
-##jiteptango
-#https://www.youtube.com/channel/UCwd4DaU3z598jKAe8vIiFuw
-##Infinitango Shanghai
-#https://www.youtube.com/channel/UCI4xOXerhWqwZybRQO0AVoQ
-##Jetuelle Tango
-#https://www.youtube.com/channel/UC41Ju3_XOV7Gr7p1XFbbv8g
-#Oleg Khrischanovich
-##https://youtube.com/playlist?list=PL63AB09574273B00C
-##https://www.youtube.com/watch?v=z6Kl3ioOHbk&list=PL0E8CEB351486D0A1
-##https://www.youtube.com/watch?v=DmJrGrfeiGU&list=PL00C5DC189C3F715A
-##MrsTangoPaula
-#https://www.youtube.com/channel/UCkatIDjAbwcE6jSJGLwQGGw
-##Giorgio Scattolini
-#https://www.youtube.com/channel/UC-v2IECxsVoaKZYwDskR1Gg
-##tangoloft stuttgart
-#https://www.youtube.com/channel/UCeKKZO_lLgLhjgq81oFSWtg
-##Miki Kamiya
-#https://www.youtube.com/channel/UCijpTNQmAE7zj_bnAg5eCVw
-##Junando Milongas
-#https://www.youtube.com/channel/UC38Tzsm6oIaQbc2TF7p_N9g
-##genali
-#https://www.youtube.com/channel/UCPx1BQxsY3gt54F_-kjQv6A
-##kerstenruthtango
-#https://www.youtube.com/channel/UC65GNLfGkAjvYh4EM1oIUOQ
-##Paulo Lee
-#https://www.youtube.com/channel/UCAtvz7VeX_KpuLpUzt2t7gg
-##EjesTango Union
-#https://www.youtube.com/channel/UCpObZXEYOzjLV7G1wZYIK8Q
-##Tangolive Tv
-#https://www.youtube.com/channel/UChTAn6PTF0isyVdENuJL0Bw
-##orey71
-#https://www.youtube.com/channel/UCGeNCSOjGVOZUawOOHHtSOw
-##gotanosney
-#https://www.youtube.com/channel/UCPDJ0s2zAxjgbhw6uUihiOQ
-##Tangostudio el abrazo Tango Hamburg
-#https://www.youtube.com/channel/UC4eYS5vKMrpaGaKrCuNCPJQ
-##Nectaria Films
-#https://www.youtube.com/channel/UCKvEEGPa0QYdsvPKUDcJVpw
-##Alexey Sobolev
-#https://www.youtube.com/channel/UCGGjLCX5InktmK4jylSR_Gg
-##Massimo Gobbo
-#https://www.youtube.com/channel/UCJTBLzjEVCsx8OmRe2YEe0A
-##Pier Andrea Perini
-#https://www.youtube.com/channel/UCsoShEhCqvSJfdMs7McGVIA
-##IsabelTessoro
-#https://www.youtube.com/channel/UCUuhTyiWW4UPvbHT1YowwYg
-##ladybrucomela vaghestelle
-#https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
-##Ramiz and Natalya Orlando tango club 814-746-8819
-#https://www.youtube.com/channel/UCV9HpuBW231e-2AVfMAfcTw
-##Tangueño
-#https://www.youtube.com/channel/UCx2ft9n6iXdT1ax523avHRA
-##Esteban Moreno
-#https://www.youtube.com/channel/UCECVLR_h2B2fZ-AaSHt4wmw
-##Vadim Radionov
-#https://www.youtube.com/channel/UC3TLQpdQimPIXIfBLHH-ccA
-##little master
-#https://www.youtube.com/channel/UC_sSIPLFVQK6JKRlOMvdxeQ
-##Tangodesalon Camaleon
-#https://www.youtube.com/channel/UCKWGWAsaw7EVWjYtBOVkRig
-##Tanguito, Argentine Tango Academy
-#https://www.youtube.com/channel/UCeQ9Z3B4V5QTw7nUfuJZqMA
-##Tango Studio Sibiu
-#https://www.youtube.com/channel/UCPdiYggIXWPi16cVx33h2NA
-##Jari Aalto
-#https://www.youtube.com/channel/UC9HZKt2xNBIEPCt2Jtnk1Rg
-##Miodrag Radulović
-#https://www.youtube.com/channel/UCGwziihvqIpHgenD2-cL81g
-##Tengiz Mosidze
-#https://www.youtube.com/channel/UC2m7kza71x306eDN9t8AKMg
-##Katrinemontoia
-#https://www.youtube.com/channel/UCvbnSqF81F_Zg8MV33TzMgQ
-##Planetango club
-#https://www.youtube.com/channel/UCv1MYiYRQbDsqVvHuX9PSJQ
-##Kyoko & Tzu-Han pipapipa tango
-#https://www.youtube.com/channel/UCHXk8o_RPExudrKILNRJLiw
-##VideoSigismund
-#https://www.youtube.com/channel/UChl-AB86Xshgt-SxGM3oOsQ
+#030tango
+https://www.youtube.com/channel/UCtdgMR0bmogczrZNpPaO66Q
+#Armin K. Marschall
+https://www.youtube.com/channel/UC9lGGipk4wth0rDyy4419aw
+#TangoNuevo TV
+https://www.youtube.com/channel/UCUKptFgKHVYM1GoQvgeDU_A
+#Tangostudent
+https://www.youtube.com/channel/UC766M5toEZ70hZCLsaxXiOw
+#Tango Natural
+https://www.youtube.com/channel/UCOrxTg3siBOMD0XwoDKWC5A
+#TC Tango
+https://www.youtube.com/channel/UCPSEBKNWfeUQR22qpdYAIgg
+#Tango Element
+https://www.youtube.com/channel/UC47UVQSnunEsdxqqvgeG6YA
+#Prischepov tv
+https://www.youtube.com/channel/UCCoOxQMnmwZ-jhezbLfSUgQ
+#Mediterranean Summer Tango Festival
+https://www.youtube.com/channel/UCg-gK8tVf-evR-P976UlU9w
+#Tango Cazino
+https://www.youtube.com/channel/UC2EyGIesuSnNx5-Kohy1PGg
+#Erdemsel1975
+https://www.youtube.com/c/tangofilm/UCcHaeCEJcXTmWJpqSe-EBwA
+#lodstangosalonfestival
+https://www.youtube.com/channel/UCS_7mPPJVCZLJUG5iMghpgA
+#studio tango montréal
+https://www.youtube.com/channel/UCuP6Y6F9uDjh5-PKkggUY7w
+#crazyfortango
+https://www.youtube.com/channel/UC2LyNJ-DMc3u7xN9ka-Bygg
+#Pepa Palazon
+https://www.youtube.com/channel/UCV6aDwqqS7yTDsp0v_gUkPA
+#Armelle Tango
+https://www.youtube.com/channel/UClmH-sr3jJH1i8tE6odtONQ
+#Paris Buenos Aires Tango
+https://www.youtube.com/channel/UCuOHtVVqipSeqEWTt5MjeKg
+#Sultans of Istanbul Tango Festival
+https://www.youtube.com/channel/UCRrVjNh5Rf2i2UQC8LPT1Wg
+#ladybrucomela vaghestelle
+https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
+#istanbulTANGO
+https://www.youtube.com/channel/UCgWHuLjpAcWGEpTSYiMj-FQ
+#Bucharest Tango Groove
+https://www.youtube.com/channel/UCUz8joyeQNPWbnfQWwiVZRQ
+#Ivan&Sara FERALTANGO
+https://www.youtube.com/channel/UCB1VB9Kzdl06PSgd6PZj3SA
+#Pippifromparis
+https://www.youtube.com/channel/UCy0ltvzc34Bt-0d7q_f6vkg
+#Planetango Club
+https://www.youtube.com/channel/UCv1MYiYRQbDsqVvHuX9PSJQ
+#Lompa TV
+https://www.youtube.com/channel/UC_vxKs5JZlSql7LrtdGYygQ
+#Paula Duarte Tango
+https://www.youtube.com/channel/UCUX_gPar_D-gLJsWJ55XlcQ
+#Horacio Fernandez
+https://www.youtube.com/channel/UC9ewAAEx9ybZRs32F-nmNxA
+#Marko Miljevic
+https://www.youtube.com/channel/UCFyWqbEkWPULVD70PguLmgQ
+#Henryk Gajewski
+https://www.youtube.com/channel/UCp5e5y69xiUdGSw-ANTkYcA
+#A Los Amigos Tango Festival
+https://www.youtube.com/channel/UCEGeTx5mPDinPl1ovVdEsjQ
+#MIRIAM LEONARDO Tango
+https://www.youtube.com/channel/UCNmXPpwV8t_JzvMhUmAJHjw
+#Paul Holman
+https://www.youtube.com/channel/UCIf7g_gymaB3NBSvUDMJvuA
+#Sayaka y Joscha
+https://www.youtube.com/channel/UCW_CaKNIl3qqXHkxGZGVIdg
+#TangoBootCampUK
+https://www.youtube.com/channel/UC0iFpFfoCH_ILLuZKpBFf5w
+#VIDEOTEAM1
+https://www.youtube.com/channel/UC8eDyvVLKCg-VxTIPtsfS_Q
+#Tango at home
+https://www.youtube.com/channel/UCsqJREb9EaHnJB77UX01FaA
+#yo Tango
+https://www.youtube.com/channel/UCAApa6oVE5sM7aMR2VOB-PQ
+#michelle + joachim | tango
+https://www.youtube.com/channel/UCevmWpkZsILyp6tQSsI6C-Q
+#Rex Boyd
+https://www.youtube.com/channel/UC21v9gnlep9rotIugj_zv9Q
+#Tango Dance
+https://www.youtube.com/channel/UCu9BG31TSZY0NTojZom6lYA
+#Santiago Sarabia
+https://www.youtube.com/channel/UC2ZWSFKYu-YRaqXfqXe7C6g
+#Solo Tango Orquesta
+https://www.youtube.com/channel/UC_xznMN8tPrst0x_H8zRZeQ
+#Juan David y Paulina
+https://www.youtube.com/channel/UCr9PDw18UZMGGFU0TdoBazQ
+#kaidaseviolins
+https://www.youtube.com/channel/UC_ccWbbOdrqGnPLUjiWw0XA
+#El Cachivache Orkesta Oficial
+https://www.youtube.com/channel/UCD3GFnm3hXuD2wnh20attYQ
+#Adornos Center
+https://www.youtube.com/channel/UCYAd7opLAnFxat0ilrQUrxw
+#Mrrodolfoaravena
+https://www.youtube.com/channel/UCLGqF8AM6VHaUb9QcRRZa_g
+#manuel rodriguez
+https://www.youtube.com/channel/UCeU2Kgbt4oeG3Ds-mqrMCzw
+#Antonella Terrazas
+https://www.youtube.com/channel/UCTEoGi-mh-u5bnpsbRz5CiQ
+#AiresdeMilonga
+https://www.youtube.com/channel/UC7XYTh3FVGU8-W2f26KDR_w
+#Frank Obregón
+https://www.youtube.com/channel/UCInartlQfyH7Pv1fPGTvTuw
+#SITF Tango
+https://www.youtube.com/channel/UCBSil1q787Wo580jUrDZ72g
+#El Bulin Tango
+https://www.youtube.com/channel/UCL8a40dhLKakn625Gjs3Wcw
+#Philippe Fassier+
+https://www.youtube.com/channel/UCfh0Fp2sgnW5XgYvTHOM_Cw
+#calitozzzz
+https://www.youtube.com/channel/UCFs4cRdjW-ZmVdY3peY4VtA
+#Maria Filali
+https://www.youtube.com/channel/UCev8Otao71izyYXCeaaKm_g
+#tangoclasses
+https://www.youtube.com/channel/UC53OQiIwfrBD2rHhR-zVSHQ
+#GioKi Tango
+https://www.youtube.com/channel/UC9T3PXF_89R4-ZYdJ3TEhjg
+#Katrinemontoia
+https://www.youtube.com/channel/UCvbnSqF81F_Zg8MV33TzMgQ
+#Tengiz Mosidze
+https://www.youtube.com/channel/UC2m7kza71x306eDN9t8AKMg
+#BorisTube7
+https://www.youtube.com/channel/UCpk0omVygMxCtsZF_5wAxug
+#dni tango
+https://www.youtube.com/channel/UC12hC6BLAoJrBZwHhStYUyQ
+#Nick Jones
+https://www.youtube.com/channel/UCDgsGQ3h3ghJDbCXubqEwVQ
+#Eleonora Kalganova
+https://www.youtube.com/channel/UCmFJ1b146TJXtTgUk6YMm1Q
+#Pablo Inza
+https://www.youtube.com/channel/UCDHBs8mhLVrjb20QREgAwHg
+#Tangomeet
+https://www.youtube.com/channel/UC4q0ayysWhe1ylyetwsYYBw
+#Hai-Ho Tran Photography
+https://www.youtube.com/channel/UCmdTANSakxHXwfz8U93GOiA
+#Les Allumés du Tango
+https://www.youtube.com/channel/UCFiy4O691rgtEaep-39Sjgw
+#Malena7777
+https://www.youtube.com/channel/UC7DL99LiaBbekNSk33ZFyIA
+#CUMBRE MUNDIAL DEL TANGO ZARATE 2015
+https://www.youtube.com/channel/UCQ6AdQAWU2Kar8opf0CWumA
+#francoispettiaux
+https://www.youtube.com/channel/UCH3zgLQS8NjKis3NCdDfruA
+#Tango VidaMia Köln, Tanzschule für Tango Argentino
+https://www.youtube.com/channel/UC6yqhyWCcyFljZccUsVtP1g
+#La Maquina Tanguera
+https://www.youtube.com/channel/UCdfeQEeB-y5elIXzgQlDjmA
+#calabriatango
+https://www.youtube.com/channel/UC2tmvKwaHC159Edhd3QenIQ
+#juanayjulio
+https://www.youtube.com/channel/UCfdidUXnncqPjBXxyE3ixnw
+#Barbara Newman
+https://www.youtube.com/channel/UCnCSCyuEqB5pG0sAduQoOKg
+#AkselLP
+https://www.youtube.com/channel/UCvWLLx76_oumdNRyM_5TUuw
+#Argentine Tango
+https://www.youtube.com/channel/UCITyaBTjQtpG6toWO0fH7_Q
+#aletangolab
+https://www.youtube.com/channel/UC19JJiR46Il0dq60hedbu9A
+#Miki Kamiya
+https://www.youtube.com/channel/UCijpTNQmAE7zj_bnAg5eCVw
+#Clarisa y Jonathan Tango
+https://www.youtube.com/channel/UCMGNG_2LHGejSMAtdAaAn5A
+#sghembo63
+https://www.youtube.com/channel/UCQDddWul7S_Zdz3H5iFywyQ
+#Leonel Di cocco
+https://www.youtube.com/channel/UCg3ydGIngAYCWVrsS0EgNOQ
+#Bernardi Alessandro
+https://www.youtube.com/channel/UCW1O_6dnFrn1y218FeHfExA
+#musicat1984
+https://www.youtube.com/channel/UCaIjR5JCI8b_F8Llxu9LKVA
+#Rhythm & Motion Dance Studio
+https://www.youtube.com/channel/UC4Ky9bsvxDG6Ben724ATPSA
+#X. T.
+https://www.youtube.com/channel/UCYecxmJ-2o3B43toCHxYM_g
+#flora benedetti Milonga Sì
+https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
+#Que Siga La Milonga
+https://www.youtube.com/channel/UC-YdwYwSP3VuxEt05xppAxQ
+#MrSnoopyT
+https://www.youtube.com/channel/UCrb4z7buq2ykFqi0dm-_z7w
+#Tango Details
+https://www.youtube.com/channel/UC7T1CNO8JhI8C9OgIk2-hfw
+#E-K Tango
+https://www.youtube.com/channel/UClK91n0Ok1cPEkn2TCWUqRg
+#LeenaTango
+https://www.youtube.com/channel/UCNdEZa696S-jUWBDbSBQrbg
+#CamTango
+https://www.youtube.com/channel/UC_etwoVED5SW_rUqYDLPk7Q
+#Dari Kernel
+https://www.youtube.com/channel/UCds0PLpbIq_vVd22l2jwylg
+#Mat MaMoody
+https://www.youtube.com/channel/UCX1bbCfeoXJxONmelzpM0rQ
+#김진호 jinhoraptor
+https://www.youtube.com/channel/UCIpTAPNzIW7dq73EmZTk2sw
+#Mauro Tonchich
+https://www.youtube.com/channel/UCcsgUhSfsSo96_hTEPnZoCQ
+#La Mariposa - tango
+https://www.youtube.com/channel/UCD6r_8iA5csn7dZ68TisAWw
+#Caminito Tango Catania
+https://www.youtube.com/channel/UCS3DPkgDFF-nVoV_4KzQXCA
+#dancerfromsoul
+https://www.youtube.com/channel/UCv4OwDvK9IC9VzeMLLYEZtg
+#Yori Mayron
+https://www.youtube.com/channel/UCfKG5V4E3RkjSJ1LJnE_Agg
+#Igoris Saburov
+https://www.youtube.com/channel/UCs-l_CAo-CgHWWAbNFiliGQ
+#Nom Sic
+https://www.youtube.com/channel/UCQD5-lzW1sAmejC1em4_SMA
+#Nori Polanco
+https://www.youtube.com/channel/UCzdNnh1EY4NVZ2j9gHMS8bw
+#MUST MILONGA
+https://www.youtube.com/channel/UCs6DVWDBXasyRiT4-wa9iwg
+#jiteptango
+https://www.youtube.com/channel/UCwd4DaU3z598jKAe8vIiFuw
 #Infinitango Shanghai
+https://www.youtube.com/channel/UCI4xOXerhWqwZybRQO0AVoQ
+#Jetuelle Tango
+https://www.youtube.com/channel/UC41Ju3_XOV7Gr7p1XFbbv8g
+Oleg Khrischanovich
+#https://youtube.com/playlist?list=PL63AB09574273B00C
+#https://www.youtube.com/watch?v=z6Kl3ioOHbk&list=PL0E8CEB351486D0A1
+#https://www.youtube.com/watch?v=DmJrGrfeiGU&list=PL00C5DC189C3F715A
+#MrsTangoPaula
+https://www.youtube.com/channel/UCkatIDjAbwcE6jSJGLwQGGw
+#Giorgio Scattolini
+https://www.youtube.com/channel/UC-v2IECxsVoaKZYwDskR1Gg
+#tangoloft stuttgart
+https://www.youtube.com/channel/UCeKKZO_lLgLhjgq81oFSWtg
+#Miki Kamiya
+https://www.youtube.com/channel/UCijpTNQmAE7zj_bnAg5eCVw
+#Junando Milongas
+https://www.youtube.com/channel/UC38Tzsm6oIaQbc2TF7p_N9g
+#genali
+https://www.youtube.com/channel/UCPx1BQxsY3gt54F_-kjQv6A
+#kerstenruthtango
+https://www.youtube.com/channel/UC65GNLfGkAjvYh4EM1oIUOQ
+#Paulo Lee
+https://www.youtube.com/channel/UCAtvz7VeX_KpuLpUzt2t7gg
+#EjesTango Union
+https://www.youtube.com/channel/UCpObZXEYOzjLV7G1wZYIK8Q
+#Tangolive Tv
+https://www.youtube.com/channel/UChTAn6PTF0isyVdENuJL0Bw
+#orey71
+https://www.youtube.com/channel/UCGeNCSOjGVOZUawOOHHtSOw
+#gotanosney
+https://www.youtube.com/channel/UCPDJ0s2zAxjgbhw6uUihiOQ
+#Tangostudio el abrazo Tango Hamburg
+https://www.youtube.com/channel/UC4eYS5vKMrpaGaKrCuNCPJQ
+#Nectaria Films
+https://www.youtube.com/channel/UCKvEEGPa0QYdsvPKUDcJVpw
+#Alexey Sobolev
+https://www.youtube.com/channel/UCGGjLCX5InktmK4jylSR_Gg
+#Massimo Gobbo
+https://www.youtube.com/channel/UCJTBLzjEVCsx8OmRe2YEe0A
+#Pier Andrea Perini
+https://www.youtube.com/channel/UCsoShEhCqvSJfdMs7McGVIA
+#IsabelTessoro
+https://www.youtube.com/channel/UCUuhTyiWW4UPvbHT1YowwYg
+#ladybrucomela vaghestelle
+https://www.youtube.com/channel/UCAyDBcBGtolH4P4LBjj_pow
+#Ramiz and Natalya Orlando tango club 814-746-8819
+https://www.youtube.com/channel/UCV9HpuBW231e-2AVfMAfcTw
+#Tangueño
+https://www.youtube.com/channel/UCx2ft9n6iXdT1ax523avHRA
+#Esteban Moreno
+https://www.youtube.com/channel/UCECVLR_h2B2fZ-AaSHt4wmw
+#Vadim Radionov
+https://www.youtube.com/channel/UC3TLQpdQimPIXIfBLHH-ccA
+#little master
+https://www.youtube.com/channel/UC_sSIPLFVQK6JKRlOMvdxeQ
+#Tangodesalon Camaleon
+https://www.youtube.com/channel/UCKWGWAsaw7EVWjYtBOVkRig
+#Tanguito, Argentine Tango Academy
+https://www.youtube.com/channel/UCeQ9Z3B4V5QTw7nUfuJZqMA
+#Tango Studio Sibiu
+https://www.youtube.com/channel/UCPdiYggIXWPi16cVx33h2NA
+#Jari Aalto
+https://www.youtube.com/channel/UC9HZKt2xNBIEPCt2Jtnk1Rg
+#Miodrag Radulović
+https://www.youtube.com/channel/UCGwziihvqIpHgenD2-cL81g
+#Tengiz Mosidze
+https://www.youtube.com/channel/UC2m7kza71x306eDN9t8AKMg
+#Katrinemontoia
+https://www.youtube.com/channel/UCvbnSqF81F_Zg8MV33TzMgQ
+#Planetango club
+https://www.youtube.com/channel/UCv1MYiYRQbDsqVvHuX9PSJQ
+#Kyoko & Tzu-Han pipapipa tango
+https://www.youtube.com/channel/UCHXk8o_RPExudrKILNRJLiw
+#VideoSigismund
+https://www.youtube.com/channel/UChl-AB86Xshgt-SxGM3oOsQ
+Infinitango Shanghai
 https://www.youtube.com/channel/UCI4xOXerhWqwZybRQO0AVoQ
 #Rodolfo Vejar
 https://www.youtube.com/channel/UCHggN6prj_6uLAnatq5HYuQ

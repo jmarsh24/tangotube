@@ -38,7 +38,7 @@
 #  isrc                  :string
 #  acr_response_code     :integer
 #  spotify_artist_name_3 :string
-#  length                :interval
+#  length                :time
 #
 
 class Video < ApplicationRecord
@@ -103,22 +103,14 @@ class Video < ApplicationRecord
 
     def read_batch_urls
       channel_ids = []
-      playlist_ids = []
-      video_ids = []
       File.readlines('data/url_batch.txt', chomp: true).each do |line|
         next if line.starts_with?('#')
 
         url = Yt::URL.new(line)
 
         channel_ids << url.id if url.kind == :channel
-
-        playlist_ids << url.id if url.kind == :playlist
-
-        playlist_ids << url.id if url.kind == :video
       end
-      { channel_ids: channel_ids,
-        playlist_ids: playlist_ids,
-        video_ids: video_ids }
+      channel_ids
     end
 
     def import_channel(channel_id, limit)
