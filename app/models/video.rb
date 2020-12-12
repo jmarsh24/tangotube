@@ -94,7 +94,8 @@ class Video < ApplicationRecord
     end
 
     def import_all_videos
-      Channels.limit(1).each do |channel_id|
+      Channel.limit(1).each do |channel|
+        channel_id = channel.channel_id
         Video.import_channel(channel_id, 10)
       end
       Video.match_dancers
