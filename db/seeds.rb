@@ -34,7 +34,7 @@ puts "There are now #{Follower.count} followers in the database."
 CSV.foreach('data/tangodb-datasets/channels.csv', headers: true) do |column|
   title = column[1]
   channel_id = column[2]
-  Channel.create(name: name, channel_id: channel_id)
+  Channel.create(title: title, channel_id: channel_id)
 end
 puts "There are now #{Channel.count} channels in the database."
 
