@@ -147,7 +147,9 @@ CREATE TABLE public.channels (
     title character varying,
     channel_id character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    scanned boolean DEFAULT false,
+    last_page integer
 );
 
 
@@ -753,6 +755,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201207145709'),
 ('20201207145752'),
 ('20201208083012'),
-('20201212174857');
+('20201212174857'),
+('20201213181144');
 
 
