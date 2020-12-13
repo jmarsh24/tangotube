@@ -1,8 +1,7 @@
 /* Start of grid formatting */
 
 .wrapper {
-   max-width: 1920px;
-   min-width: 600px;
+   min-width: 1300px;
    margin: auto 50px;
  }
 
@@ -42,11 +41,11 @@
      grid-row: 4 / 5;
    }
 
-  //  .footer {
-  //    grid-column: col-start 1 / span 10;
-  //    grid-column: col-start 1 / span 12;
-  //    grid-row: 5 / 6;
-  //  }
+   .footer {
+     grid-column: col-start 1 / span 10;
+     grid-column: col-start 1 / span 12;
+     grid-row: 5 / 6;
+   }
  }
 
 
@@ -57,8 +56,8 @@
     grid-row: 4 / 5;
   }
 
-//   .footer {
-//     grid-column: col-start 1 / span 12;
-//     grid-row: 5 / 6;
-//   }
+  .footer {
+    grid-column: col-start 1 / span 12;
+    grid-row: 5 / 6;
+  }
 }
