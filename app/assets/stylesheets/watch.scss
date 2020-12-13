@@ -26,10 +26,6 @@ body,
   grid-area: 4 / 2 / 5 / 3;
 }
 
-.footer {
-  grid-area: 5 / 2 / 6 / 3;
-}
-
 /* For presentation only, no need to copy the code below */
 .grid-container * {
   border: 0px solid red;
@@ -83,8 +79,4 @@ body,
   height: 100%;
   width: 100%;
   position: absolute;
-}
-
-.footer {
-height:100px;
 }
