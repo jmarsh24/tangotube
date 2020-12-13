@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_28_222120) do
+ActiveRecord::Schema.define(version: 2020_12_12_174857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -44,10 +44,9 @@ ActiveRecord::Schema.define(version: 2020_11_28_222120) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "dancers", force: :cascade do |t|
-    t.string "first_dancer"
-    t.string "second_dancer"
+  create_table "channels", force: :cascade do |t|
     t.string "title"
+    t.string "channel_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -83,6 +82,11 @@ ActiveRecord::Schema.define(version: 2020_11_28_222120) do
     t.string "artist"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "artist_2"
+    t.string "composer"
+    t.string "author"
+    t.date "date"
+    t.string "last_name_search"
     t.index ["title"], name: "index_songs_on_title"
   end
 
@@ -108,7 +112,6 @@ ActiveRecord::Schema.define(version: 2020_11_28_222120) do
     t.string "description"
     t.string "channel"
     t.string "channel_id"
-    t.integer "duration"
     t.date "upload_date"
     t.integer "view_count"
     t.integer "avg_rating"
@@ -135,6 +138,7 @@ ActiveRecord::Schema.define(version: 2020_11_28_222120) do
     t.string "isrc"
     t.integer "acr_response_code"
     t.string "spotify_artist_name_3"
+    t.interval "length"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["follower_id"], name: "index_videos_on_follower_id"
     t.index ["leader_id"], name: "index_videos_on_leader_id"
