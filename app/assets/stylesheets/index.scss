@@ -26,7 +26,6 @@
 }
 
 .video-thumbnails {
-  width: 10%;
   min-width: 220px;
   padding-left: 10px;
   img {
@@ -35,54 +34,45 @@
     border-radius: 3px;
   }
 }
-.video-videotypes {
-  width: 9%;
-  min-width: 80px;
-  padding: 0px 10px 0px 10px;
-}
+// .video-videotypes {
+//   text-align: left;
+//   min-width: 80px;
+//   padding: 0px 10px 0px 10px;
+// }
 .video-titles {
-  width: 9%;
   min-width: 80px;
   padding: 0px 10px 0px 10px;
 }
 .video-artists {
-  width: 9%;
   min-width: 80px;
   padding: 0px 10px 0px 10px;
 }
 .video-genres {
-  width: 5%;
   min-width: 80px;
   padding: 0px 10px 0px 10px;
 }
 .video-leaders {
-  width: 9%;
   min-width: 100px;
   padding: 0px 10px 0px 10px;
 }
 .video-followers {
-  width: 9%;
   min-width: 100px;
   padding: 0px 10px 0px 10px;
 }
 .video-events {
-  width: 10%;
   min-width: 80px;
   padding: 0px 10px 0px 10px;
 }
 .video-channels {
-  width: 10%;
   min-width: 150px;
   padding: 0px 10px 0px 10px;
 }
 .video-view_counts {
-  width: 9%;
   min-width: 100px;
   padding: 0px 10px 0px 10px;
 }
 .video-upload_date {
-  width: 10%;
-  min-width: 150px;
+  min-width: 500px;
   padding: 0px 10px 0px 10px;
 }
 
@@ -107,40 +97,32 @@
   }
 
   .video-titles {
-    width: 15%;
     min-width: 130px;
     padding: 0px 10px 0px 10px;
   }
   .video-artists {
-    width: 15%;
     min-width: 110px;
     padding: 0px 10px 0px 10px;
   }
   .video-leaders {
-    width: 15%;
     min-width: 110px;
     padding: 0px 10px 0px 10px;
   }
   .video-followers {
-    width: 15%;
     min-width: 110px;
     padding: 0px 10px 0px 10px;
   }
 
   .video-genres {
-    width: 5%;
     min-width: 80px;
   }
   .video-channels {
-    width: 10%;
     min-width: 120px;
   }
   .video-view_counts {
-    width: 10%;
     min-width: 80px;
   }
   .video-upload_dates {
-    width: 20%;
     min-width: 150px;
   }
 }

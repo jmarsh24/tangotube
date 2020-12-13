@@ -19,6 +19,7 @@ gem 'devise',                 '~> 4.7', '>= 4.7.2'
 gem 'factory_bot',            '~> 6.1'
 gem 'faraday',                '~> 1.1.0'
 gem 'font-awesome-rails',     '~> 4.7', '>= 4.7.0.5'
+gem 'google-api-client',      '~> 0.11.1'
 gem 'hashie',                 '~> 4.1'
 gem 'json',                   '~> 2.3', '>= 2.3.1'
 gem 'multipart-post',         '~> 2.1', '>= 2.1.1'
@@ -33,7 +34,6 @@ gem 'turbolinks',             '5.2.1'
 gem 'webpacker',              '4.2.2'
 gem 'youtube-dl.rb',          '~> 0.3.1.2016.09.11.1'
 gem 'yt',                     '~> 0.32.0'
-
 
 group :development, :test do
   gem 'amazing_print',        '~> 1.2', '>= 1.2.2'

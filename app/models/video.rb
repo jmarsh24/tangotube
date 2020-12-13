@@ -38,7 +38,7 @@
 #  isrc                  :string
 #  acr_response_code     :integer
 #  spotify_artist_name_3 :string
-#  length                :time
+#  length                :interval
 #
 
 class Video < ApplicationRecord

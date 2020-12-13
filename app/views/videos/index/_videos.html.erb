@@ -10,9 +10,9 @@
           <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg",
                 class: 'thumbnail') %>
         </div>
-        <div class="video-videotypes">
+        <!-- <div class="video-videotypes">
           <%= video.videotype.try(:name) %>
-        </div>
+        </div> -->
         <div class="video-titles">
           <%= video.song.try(:title).titleize || video.try(:youtube_song) %>
         </div>
@@ -28,9 +28,9 @@
         <div class="video-followers">
           <%= video.follower.try(:name) %>
         </div>
-        <div class="video-events">
+        <!-- <div class="video-events">
           <%= video.event.try(:name) %>
-        </div>
+        </div> -->
         <div class="video-channels">
           <%= video.channel %>
         </div>
