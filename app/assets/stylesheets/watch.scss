@@ -3,15 +3,14 @@ body,
 .grid-container {
   height: 100%;
   // max-width: 1920px;
-  min-width: 1600px;
+  // min-width: 1600px;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: 0.3fr 2.4fr 0.3fr;
   gap: 10px 50px;
-  margin:  auto 100px ;
-
+  // margin:  auto 100px ;
 }
 
 .video-responsive {

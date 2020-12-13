@@ -40,8 +40,4 @@
     <%= render partial: "video_info_item", locals: {header: "Name", value: @active_video.event.try(:title) || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Date", value: @active_video.event.try(:date) || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Location", value: @active_video.event.try(:location) || "N/A"} %>
-
-  </div>
-  <div class="footer">
-  </div>
 </div>
