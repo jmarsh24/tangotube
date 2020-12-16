@@ -1,4 +1,4 @@
-@media (min-width: 600px) {
+@media (min-width: 800px) {
   .videos-header {
     display: flex;
     flex-flow: row nowrap;
@@ -88,7 +88,7 @@
   }
   .video-view_count {
     width: 10%;
-    min-width: 50px;
+    min-width: 70px;
     padding: 0px 10px 0px 10px;
   }
   .video-upload_date {
@@ -99,7 +99,7 @@
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
 
   #headers {
     display: none;
