@@ -1,46 +1,71 @@
 <% if (@videos_paginated.empty?) %>
-    <p style="font-weight:bold">No videos found.</p>
-    Try a different search word or click on the TangoTube logo to reset.
-  <% else %>
-    <% @videos_paginated.each do |video| %>
-      <%= active_link_to watch_path(v: video.youtube_id),
-                {class: "video", active: :exact} do %>
-
-        <div class="video-thumbnails">
-          <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg",
+<p style="font-weight:bold">No videos found.</p>
+Try a different search word or click on the TangoTube logo to reset.
+<% else %>
+<% @videos_paginated.each do |video| %>
+<%= active_link_to watch_path(v: video.youtube_id),
+              {class: "video", active: :exact} do %>
+<div class="desktop-details">
+  <div class="video-container">
+    <div class="thumbnail" data-duration="<%= video.length %>">
+      <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg",
                 class: 'thumbnail') %>
-        </div>
-        <!-- <div class="video-videotypes">
-          <%= video.videotype.try(:name) %>
-        </div> -->
-        <div class="video-titles">
+    </div>
+    <div class="video-title-song">
+      <%= video.song.try(:title).titleize || video.try(:youtube_song) %>
+    </div>
+    <div class="video-artist">
+      <%= video.song.try(:artist).titleize || video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
+    </div>
+    <div class="video-genre">
+      <%= video.song.try(:genre).titleize %>
+    </div>
+    <div class="video-leader">
+      <%= video.leader.try(:name) %>
+    </div>
+    <div class="video-follower">
+      <%= video.follower.try(:name) %>
+    </div>
+    <div class="video-channel-name">
+      <%= video.channel %>
+    </div>
+    <div class="video-view_count">
+      <%= video.view_count %>
+    </div>
+    <div class="video-upload_date">
+      <%= video.upload_date %>
+    </div>
+  </div>
+</div>
+<div class="mobile-details">
+  <div class="video-container">
+    <div class="thumbnail" data-duration="<%= video.length %>">
+      <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg",
+                class: 'thumbnail') %>
+    </div>
+    <div class="video-bottom-section">
+      <%= image_tag("https://yt3.ggpht.com/a/AGF-l78OfG5OxzCfyyoFqw-dKeiFNGzTIT4YgpMK4Q=s88-c-k-c0xffffffff-no-rj-mo", class: "channel-icon") %>
+      <div class="testing">
+        <div class="video-title-song">
           <%= video.song.try(:title).titleize || video.try(:youtube_song) %>
         </div>
-        <div class="video-artists">
-          <%= video.song.try(:artist).titleize || video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
+        <div class="video-artist">
+          <%= video.song.try(:genre).titleize %> | <%= video.song.try(:artist).titleize || video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
         </div>
-        <div class="video-genres">
-          <%= video.song.try(:genre).titleize %>
+        <div class="video-dancers">
+          <%= video.leader.try(:name) + " & " + video.follower.try(:name) %>
         </div>
-        <div class="video-leaders">
-          <%= video.leader.try(:name) %>
+        <div class="video-channel-name">
+          <%= video.channel.titleize %>
         </div>
-        <div class="video-followers">
-          <%= video.follower.try(:name) %>
+        <div class="video-metadata">
+          <%= "#{video.view_count} views • #{video.upload_date}" %>
         </div>
-        <!-- <div class="video-events">
-          <%= video.event.try(:name) %>
-        </div> -->
-        <div class="video-channels">
-          <%= video.channel %>
-        </div>
-        <div class="video-view_counts">
-          <%= video.view_count %>
-        </div>
-        <div class="video-upload_dates">
-          <%= video.upload_date %>
-        </div>
-    <% end %>
-      <hr>
-  <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<hr>
+<% end %>
 <% end %>

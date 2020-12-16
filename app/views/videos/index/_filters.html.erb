@@ -6,6 +6,6 @@
   <!-- <%= render partial: "videos/index/filter_item", locals: {model: @events, model_count: @events_total_count, title: :event } %> -->
   <%= render partial: "videos/index/filter_item", locals: {model: @channels, model_count: @channels_total_count, title: :channel } %>
 </div>
-<div style="padding: 5px 10px 5px 10px">
+<div class="filter-results">
   <%= "Displaying #{@videos_filtered.count} Results" %>
 </div>

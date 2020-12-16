@@ -7,9 +7,9 @@ body,
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: 0.3fr 2.4fr 0.3fr;
-  gap: 10px 50px;
+  display: flex;
+  flex-direction:column;
+  // gap: 10px 50px;
   // margin:  auto 100px ;
 }
 
@@ -78,4 +78,12 @@ body,
   height: 100%;
   width: 100%;
   position: absolute;
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    display: flex;
+    flex-direction: column;
+  }
+
 }

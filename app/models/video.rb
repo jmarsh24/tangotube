@@ -42,8 +42,6 @@
 #
 
 class Video < ApplicationRecord
-  include Houndify
-
   require 'openssl'
   require 'base64'
   require 'net/http/post/multipart'

@@ -1,103 +1,46 @@
-.videos-header {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 10px 10px;
-  border-top: 1px solid #c2c2c2;
-  border-bottom: 1px solid #c2c2c2;
+@media (min-width: 600px) {
+  .videos-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: left;
+    padding: 10px 10px;
+    border-top: 1px solid #c2c2c2;
+    border-bottom: 1px solid #c2c2c2;
 
-  a {
-    text-decoration: none;
-    &.current {
-      padding-right: 15px;
-      background-repeat: no-repeat;
-      background-position: right center;
-      background-size: 12px;
-    }
-    &.asc {
-      background-image: url(up_arrow.png);
-    }
+    a {
+      text-decoration: none;
+      &.current {
+        padding-right: 15px;
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: 12px;
+      }
+      &.asc {
+        background-image: url(up_arrow.png);
+      }
 
-    &.desc {
-      background-image: url(down_arrow.png);
+      &.desc {
+        background-image: url(down_arrow.png);
+      }
     }
   }
-}
-
-.video-thumbnails {
-  min-width: 220px;
-  padding-left: 10px;
-  img {
-    width: 200px;
-    height: auto;
-    border-radius: 3px;
+  .desktop-details {
+    width: 100%;
   }
-}
-// .video-videotypes {
-//   text-align: left;
-//   min-width: 80px;
-//   padding: 0px 10px 0px 10px;
-// }
-.video-titles {
-  width:10%;
-  min-width: 120px;
-  padding: 0px 10px 0px 10px;
-}
-.video-artists {
-  width: 10%;
-  min-width: 120px;
-  padding: 0px 10px 0px 10px;
-}
-.video-genres {
-  width: 10%;
-  min-width: 120px;
-  padding: 0px 10px 0px 10px;
-}
-.video-leaders {
-  width: 10%;
-  min-width: 120px;
-  padding: 0px 10px 0px 10px;
-}
-.video-followers {
-  width: 10%;
-  min-width: 120px;
-  padding: 0px 10px 0px 10px;
-}
-.video-events {
-  width: 10%;
-  min-width: 120px;
-  padding: 0px 10px 0px 10px;
-}
-.video-channels {
-  width: 10%;
-  min-width: 100px;
-  padding: 0px 10px 0px 10px;
-}
-.video-view_counts {
-  width: 10%;
-  min-width: 120px;
-  padding: 0px 10px 0px 10px;
-}
-.video-upload_date {
-  width: 10%;
-  min-width: 120px;
-  padding: 0px 10px 0px 10px;
-}
 
-@media (max-width: 1000px) {
-  .video-genres,
-  .video-view_counts,
-  .video-events,
-  .video-videotypes,
-  .video-channels {
+  .mobile-details {
     display: none;
   }
 
-  .video-thumbnails {
-    width: 25%;
-    min-width: 220px;
-    padding-left: 10px;
+  .video-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .thumbnail{
+    padding: 5px 10px 5px 10px;
     img {
       width: 200px;
       height: auto;
@@ -105,37 +48,174 @@
     }
   }
 
-  .video-titles {
-    min-width: 130px;
+  .video-thumbnail {
+    min-width: 240px;
+  }
+  .video-title-song {
+    width:10%;
+    min-width: 70px;
     padding: 0px 10px 0px 10px;
   }
-  .video-artists {
-    min-width: 110px;
+  .video-artist {
+    width: 10%;
+    min-width: 80px;
     padding: 0px 10px 0px 10px;
   }
-  .video-leaders {
-    min-width: 110px;
+  .video-genre {
+    width: 10%;
+    min-width: 50px;
     padding: 0px 10px 0px 10px;
   }
-  .video-followers {
-    min-width: 110px;
+  .video-leader {
+    width: 10%;
+    min-width: 80px;
+    padding: 0px 10px 0px 10px;
+  }
+  .video-follower {
+    width: 10%;
+    min-width: 80px;
+    padding: 0px 10px 0px 10px;
+  }
+  .video-event {
+    width: 10%;
+    min-width: 120px;
+    padding: 0px 10px 0px 10px;
+  }
+  .video-channel-name{
+    width: 10%;
+    min-width: 100px;
+    padding: 0px 10px 0px 10px;
+  }
+  .video-view_count {
+    width: 10%;
+    min-width: 50px;
+    padding: 0px 10px 0px 10px;
+  }
+  .video-upload_date {
+    width: 10%;
+    min-width: 120px;
     padding: 0px 10px 0px 10px;
   }
 
-  .video-genres {
-    min-width: 80px;
-  }
-  .video-channels {
-    min-width: 120px;
-  }
-  .video-view_counts {
-    min-width: 80px;
-  }
-  .video-upload_dates {
-    min-width: 150px;
-  }
 }
 
-.is-hidden {
-  display: none;
+@media (max-width: 600px) {
+
+  #headers {
+    display: none;
+  }
+
+  .desktop-details {
+    display: none;
+  }
+
+  .video-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .mobile-details {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .video-bottom-section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .filter-results {
+    display:none;
+  }
+
+  .thumbnail {
+    position: relative;
+    display: flex;
+    z-index: 0;
+    background-color: #AAA;
+    border-radius: 5px;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .thumbnail::before {
+    content: attr(data-duration);
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, .85);
+    color: white;
+    right: 5px;
+    bottom: 5px;
+    padding: .1em .3em;
+    border-radius: .3em;
+    font-size: .9rem;
+  }
+
+  .video-title-song {
+  min-width: 130px;
+  padding: 0px 10px 0px 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  text-decoration: none;
+  color: black;
+}
+
+  .channel-icon {
+  margin-right: 0.75rem;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #aaa;
+  }
+
+  .video-artist {
+    min-width: 110px;
+    color: #555;
+    padding: 0px 10px 0px 10px;
+    font-size: .9rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .video-dancers{
+    min-width: 110px;
+    color: #555;
+    font-size: 0.9rem;
+    padding: 0px 10px 0px 10px;
+    margin-bottom: 0.2rem;
+  }
+
+  .video-channel-name {
+    margin-bottom: 0.1rem;
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9rem;
+    transition: color 150ms;
+    &:hover {
+      color: #111;
+    }
+  }
+
+  .video-channel-name{
+        min-width: 110px;
+    color: #555;
+    padding: 0px 10px 0px 10px;
+  }
+  .video-metadata {
+    min-width: 110px;
+    color: #555;
+    font-size: 0.9rem;
+    padding: 0px 10px 0px 10px;
+  }
+
 }

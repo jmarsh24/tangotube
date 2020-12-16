@@ -1,5 +1,7 @@
-<%= link_to "Load more",
-    current_page_params
-    .merge(page: @page + 1),
-    remote: true,
-    class: "load-more-link" %>
+<div class="load-more">
+  <%= link_to "Load more",
+        current_page_params
+        .merge(page: @page + 1),
+        remote: true,
+        class: "load-more-link" %>
+</div>
