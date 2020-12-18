@@ -1,3 +1,12 @@
+:verbose: false
+:concurrency: 10
+
+:timeout: 8
+
+production:
+  :concurrency: 25
+staging:
+  :concurrency: 15
 development:
   concurrency: 25
 :queues:
