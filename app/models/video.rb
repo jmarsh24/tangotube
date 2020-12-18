@@ -101,8 +101,12 @@ class Video < ApplicationRecord
       Video.match_songs
     end
 
+    def get_channel_video_ids(channel_id)
+      `youtube-dl https://www.youtube.com/channel/#{channel_id}  --get-id --skip-download`.split
+    end
+
     def import_channel(channel_id)
-      channel_videos = `youtube-dl https://www.youtube.com/channel/#{channel_id}  --get-id --skip-download`.split
+      channel_videos = Video.get_channel_video_ids(channel_id)
       channel_videos.each do |video_id|
         youtube_video = Yt::Video.new(id: video_id)
 
