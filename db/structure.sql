@@ -147,9 +147,7 @@ CREATE TABLE public.channels (
     title character varying,
     channel_id character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    scanned boolean DEFAULT false,
-    last_page integer
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -367,6 +365,7 @@ CREATE TABLE public.videos (
     description character varying,
     channel character varying,
     channel_id character varying,
+    duration integer,
     upload_date date,
     view_count integer,
     avg_rating integer,
@@ -733,7 +732,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200707071332'),
 ('20200714163153'),
 ('20200717075238'),
-('20200721115637'),
 ('20200721213201'),
 ('20200724111424'),
 ('20200726121535'),
@@ -753,9 +751,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201128214542'),
 ('20201128222120'),
 ('20201207145709'),
-('20201207145752'),
 ('20201208083012'),
-('20201212174857'),
-('20201213181144');
+('20201212174857');
 
 

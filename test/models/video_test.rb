@@ -12,6 +12,7 @@
 #  description           :string
 #  channel               :string
 #  channel_id            :string
+#  duration              :integer
 #  upload_date           :date
 #  view_count            :integer
 #  avg_rating            :integer

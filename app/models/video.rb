@@ -12,6 +12,7 @@
 #  description           :string
 #  channel               :string
 #  channel_id            :string
+#  duration              :integer
 #  upload_date           :date
 #  view_count            :integer
 #  avg_rating            :integer
@@ -92,36 +93,37 @@ class Video < ApplicationRecord
     end
 
     def import_all_videos
-      Channel.limit(1).each do |channel|
+      Channel.all.each do |channel|
         channel_id = channel.channel_id
-        Video.import_channel(channel_id, 10)
+        Video.import_channel(channel_id)
       end
       Video.match_dancers
       Video.match_songs
     end
 
-    def import_channel(channel_id, limit)
-      channel = Yt::Channel.new(id: channel_id)
-      channel.videos.take(limit).each do |video|
-        youtube_video = Yt::Video.new(id: video.id)
+    def import_channel(channel_id)
+      channel_videos = `youtube-dl https://www.youtube.com/channel/#{channel_id}  --get-id --skip-download`.split
+      channel_videos.each do |video_id|
+        youtube_video = Yt::Video.new(id: video_id)
 
         video_output = Video.new(
-          youtube_id: video.id,
-          title: video.title,
+          youtube_id: youtube_video.id,
+          title: youtube_video.title,
           description: youtube_video.description,
-          upload_date: video.published_at,
-          channel: video.channel_title,
-          length: video.length,
-          channel_id: video.channel_id,
-          view_count: video.view_count,
-          tags: video.tags
+          upload_date: youtube_video.published_at,
+          channel: youtube_video.channel_title,
+          length: youtube_video.length,
+          duration: youtube_video.duration,
+          channel_id: youtube_video.channel_id,
+          view_count: youtube_video.view_count,
+          tags: youtube_video.tags
         )
         video_output.save
         video = Video.find_by(youtube_id: youtube_video.id)
 
         video_youtube_song_match = JSON.parse(YoutubeDL.download(
           "https://www.youtube.com/watch?v=#{video.youtube_id}",
-          { skip_download: true, dump_json: true }
+          { skip_download: true }
         ).to_json).extend Hashie::Extensions::DeepFind
         video.update(
           youtube_song: video_youtube_song_match.deep_find('track'),
