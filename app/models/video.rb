@@ -84,9 +84,8 @@ class Video < ApplicationRecord
                 songs.genre ILIKE :query or
                 songs.title ILIKE :query or
                 songs.artist ILIKE :query or
-                videotypes.name ILIKE :query or
-                events.title ILIKE :query',
-              query: "%#{mquery}%")
+                channel ILIKE :query',
+              query: "%#{query}%")
       else
         all
       end
