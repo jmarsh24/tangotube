@@ -12,13 +12,13 @@ Try a different search word or click on the TangoTube logo to reset.
                 class: 'thumbnail') %>
     </div>
     <div class="video-title-song">
-      <%= video.song.try(:title).titleize || video.try(:youtube_song) %>
+      <%= video.song.try(:title)|| video.try(:youtube_song) %>
     </div>
     <div class="video-artist">
-      <%= video.song.try(:artist).titleize || video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
+      <%= video.song.try(:artist)|| video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
     </div>
     <div class="video-genre">
-      <%= video.song.try(:genre).titleize %>
+      <%= video.song.try(:genre)%>
     </div>
     <div class="video-leader">
       <%= video.leader.try(:name) %>
@@ -47,16 +47,16 @@ Try a different search word or click on the TangoTube logo to reset.
       <%= image_tag("https://yt3.ggpht.com/a/AGF-l78OfG5OxzCfyyoFqw-dKeiFNGzTIT4YgpMK4Q=s88-c-k-c0xffffffff-no-rj-mo", class: "channel-icon") %>
       <div class="testing">
         <div class="video-title-song">
-          <%= video.song.try(:title).titleize || video.try(:youtube_song) %>
+          <%= video.song.try(:title)|| video.try(:youtube_song) %>
         </div>
         <div class="video-artist">
-          <%= video.song.try(:genre).titleize %> | <%= video.song.try(:artist).titleize || video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
+          <%= video.song.try(:genre)%> | <%= video.song.try(:artist)|| video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
         </div>
         <div class="video-dancers">
           <%= video.leader.try(:name) + " & " + video.follower.try(:name) %>
         </div>
         <div class="video-channel-name">
-          <%= video.channel.titleize %>
+          <%= video.channel%>
         </div>
         <div class="video-metadata">
           <%= "#{video.view_count} views • #{video.upload_date}" %>
