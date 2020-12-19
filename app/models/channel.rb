@@ -10,4 +10,7 @@
 #
 
 class Channel < ApplicationRecord
+  def change
+    add_column :channels, :imported, :boolean, default: false
+  end
 end
