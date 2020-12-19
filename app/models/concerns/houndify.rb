@@ -6,6 +6,7 @@ require "base64"
 
 module Houndify
   attr_reader :secrets
+
   def self.set_secrets(id, key)
     @secrets = {
       id: id,
@@ -17,7 +18,7 @@ module Houndify
     "https://api.houndify.com/v1/audio"
   end
 
-    def self.url_query
+  def self.url_query
     "https://api.houndify.com/v1/text"
   end
 
@@ -42,7 +43,7 @@ module Houndify
       @requestID = SecureRandom.uuid
       uri = URI.parse(Houndify.url_text)
       headers = generate_headers(Latitude: -27.4519, Longitude: 153.0178)
-      params = {query: query}
+      params = { query: query }
       uri.query = URI.encode_www_form(params)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -62,7 +63,7 @@ module Houndify
         builder.adapter :net_http
       }
 
-      payload = {file: Faraday::UploadIO.new(file_path, "audio/wav"), headers: headers}
+      payload = { file: Faraday::UploadIO.new(file_path, "audio/wav"), headers: headers }
 
       connection.post do |req|
         req.headers = payload[:headers]
@@ -73,6 +74,7 @@ module Houndify
     def generate_headers(options = {})
       raise "No Client ID saved" if Houndify.secrets[:id].nil?
       raise "No Client Key saved" if Houndify.secrets[:key].nil?
+
       request_data = @userID + ";" + @requestID
       encoded_data = sign_key(Houndify.secrets[:key], request_data + @time_stamp)
 

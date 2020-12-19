@@ -342,7 +342,8 @@ class Video < ApplicationRecord
       video = FFMPEG::Movie.new(youtube_video.filename.to_s)
       timestamp = time_1.to_s.split(':')
       timestamp_2 = time_2.to_s.split(':')
-      output_file_path = youtube_video.filename.gsub(/.mp4/, "_trimmed_#{timestamp[1]}_#{timestamp[2]}_to_#{timestamp_2[1]}_#{timestamp_2[2]}.mp4")
+      output_file_path = youtube_video.filename.gsub(/.mp4/,
+                                                     "_trimmed_#{timestamp[1]}_#{timestamp[2]}_to_#{timestamp_2[1]}_#{timestamp_2[2]}.mp4")
       video_transcoded = video.transcode(output_file_path, custom: %W[-ss #{time_1} -to #{time_2}])
     end
   end

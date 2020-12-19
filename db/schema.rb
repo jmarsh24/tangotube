@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2020_12_12_174857) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -150,5 +149,4 @@ ActiveRecord::Schema.define(version: 2020_12_12_174857) do
     t.string "name", null: false
     t.string "related_keywords"
   end
-
 end
