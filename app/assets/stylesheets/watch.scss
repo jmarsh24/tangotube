@@ -10,7 +10,7 @@ body,
   display: flex;
   flex-direction:column;
   // gap: 10px 50px;
-  // margin:  auto 100px ;
+  margin:  auto 100px ;
 }
 
 .video-responsive {
@@ -84,6 +84,7 @@ body,
   .grid-container {
     display: flex;
     flex-direction: column;
+    margin: auto 10px;
   }
 
 }
