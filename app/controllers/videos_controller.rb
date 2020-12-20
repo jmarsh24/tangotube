@@ -12,14 +12,14 @@ class VideosController < ApplicationController
                    .references(:song, :leader, :follower, :videotype, :event)
 
     @videos_sorted = @videos.order(sort_column + ' ' + sort_direction)
-                            .where.not(leader_id: [nil, false],
-                                       follower_id: [nil, false],
-                                       spotify_track_name: [nil, false])
+    # .where.not(leader_id: [nil, false],
+    #            follower_id: [nil, false],
+    #            spotify_track_name: [nil, false])
 
     @videos_filtered = @videos_sorted
 
     filtering_params(params).each do |key, value|
-      @videos_filtered = @videos_filtered.public_send(key, value) if value.present?
+      @videos_filtered = @videos_filtered.public_send(key, value.downcase) if value.present?
     end
 
     @videos_paginated = @videos_filtered.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
@@ -61,9 +61,7 @@ class VideosController < ApplicationController
                        'followers.name',
                        'channel',
                        'upload_date',
-                       'view_count',
-                       'videotypes.name',
-                       'events.name']
+                       'view_count']
 
     acceptable_cols.include?(params[:sort]) ? params[:sort] : 'upload_date'
   end
@@ -77,6 +75,6 @@ class VideosController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:genre, :videotype, :leader, :follower, :event, :channel)
+    params.slice(:genre, :leader, :follower, :channel)
   end
 end

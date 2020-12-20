@@ -65,13 +65,12 @@ class Video < ApplicationRecord
   belongs_to :videotype, required: false
   belongs_to :event, required: false
 
-  scope :genre, ->(genre) { joins(:song).where(songs: { genre: genre }) }
-  scope :leader, ->(leader) { joins(:leader).where(leaders: { name: leader }) }
-  scope :follower, ->(follower) { joins(:follower).where(followers: { name: follower }) }
-  scope :channel, ->(channel) { where(channel: channel) }
+  scope :genre, ->(genre) { joins(:song).where('songs.genre ILIKE ?', genre) }
+  scope :leader, ->(leader) { joins(:leader).where('leaders.name ILIKE ?', leader) }
+  scope :follower, ->(follower) { joins(:follower).where('followers.name ILIKE ?', follower) }
+  scope :channel, ->(channel) { where('channel ILIKE ?', channel) }
   # scope :event, ->(event) { joins(:event).where(events: { name: event }) }
   # scope :videotype, ->(videotype) { joins(:videotype).where(videotypes: { name: videotype }) }
-
 
   scope :paginate, lambda { |page, per_page|
     offset(per_page * page).limit(per_page)

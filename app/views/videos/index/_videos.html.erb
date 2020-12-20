@@ -53,10 +53,10 @@ Try a different search word or click on the TangoTube logo to reset.
           <%= video.song.try(:genre)%> | <%= video.song.try(:artist)|| video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
         </div>
         <div class="video-dancers">
-          <%= video.leader.try(:name) + " & " + video.follower.try(:name) %>
+
         </div>
         <div class="video-channel-name">
-          <%= video.channel%>
+          <%= video.channel %>
         </div>
         <div class="video-metadata">
           <%= "#{video.view_count} views • #{video.upload_date}" %>
