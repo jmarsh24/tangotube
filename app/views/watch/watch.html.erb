@@ -14,7 +14,7 @@
     <%= render partial: "video_info_item", locals: {header: "View Count", value: @active_video.view_count || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Duration", value: @active_video.length || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Performance Number", value: "N/A"} %>
-    <%= render partial: "video_info_item", locals: {header: "Channel", value: @active_video.channel || "N/A"} %>
+    <%= render partial: "video_info_item", locals: {header: "Channel", value: @active_video.channel.title || "N/A"} %>
 
     <div class="detail-section-label">
       <h1>Performers</h1>
