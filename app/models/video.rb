@@ -92,7 +92,7 @@ class Video < ApplicationRecord
     end
 
     def import_all_videos
-      Channel.all.offset(1).each do |channel|
+      Channel.all.each do |channel|
         channel_id = channel.channel_id
         Video.import_channel(channel_id)
       end
