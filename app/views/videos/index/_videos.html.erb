@@ -44,7 +44,7 @@ Try a different search word or click on the TangoTube logo to reset.
                 class: 'thumbnail') %>
     </div>
     <div class="video-bottom-section">
-      <%= image_tag("https://yt3.ggpht.com/a/AGF-l78OfG5OxzCfyyoFqw-dKeiFNGzTIT4YgpMK4Q=s88-c-k-c0xffffffff-no-rj-mo", class: "channel-icon") %>
+      <%= image_tag("#{video.channel.thumbnail_url}"", class: "channel-icon") %>
       <div class="testing">
         <div class="video-title-song">
           <%= video.song.try(:title)|| video.try(:youtube_song) %>

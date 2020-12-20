@@ -58,7 +58,3 @@ puts 'Admin User successfully seeded.'
 #   Event.create(name: name)
 # end
 # puts "There are now #{Event.count} events in the database."
-
-# puts "There are now #{Video.count} videos with relations in the database."
-AdminUser.create!(email: 'admin@example.com', password: 'password',
-                  password_confirmation: 'password')

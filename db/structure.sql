@@ -364,8 +364,6 @@ CREATE TABLE public.videos (
     leader_id bigint,
     follower_id bigint,
     description character varying,
-    channel character varying,
-    channel_id character varying,
     duration integer,
     upload_date date,
     view_count integer,
@@ -393,7 +391,8 @@ CREATE TABLE public.videos (
     isrc character varying,
     acr_response_code integer,
     spotify_artist_name_3 character varying,
-    length interval
+    length interval,
+    channel_id bigint
 );
 
 
@@ -683,6 +682,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: index_videos_on_channel_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_channel_id ON public.videos USING btree (channel_id);
+
+
+--
 -- Name: index_videos_on_event_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -754,6 +760,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201207145709'),
 ('20201208083012'),
 ('20201212174857'),
-('20201219105757');
+('20201219105757'),
+('20201220175426');
 
 

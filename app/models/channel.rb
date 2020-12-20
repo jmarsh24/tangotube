@@ -10,7 +10,8 @@
 #
 
 class Channel < ApplicationRecord
-  def change
-    add_column :channels, :imported, :boolean, default: false
-  end
+  validates :channel_id, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: true
+
+  has_many :videos
 end

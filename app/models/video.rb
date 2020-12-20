@@ -48,8 +48,6 @@ class Video < ApplicationRecord
   require 'net/http/post/multipart'
   require 'irb'
   require 'json'
-  require 'securerandom'
-  require 'houndify'
 
   # validates :leader, presence: true
   # validates :follower, presence: true
@@ -62,15 +60,12 @@ class Video < ApplicationRecord
   belongs_to :leader, required: false
   belongs_to :follower, required: false
   belongs_to :song, required: false
-  belongs_to :videotype, required: false
-  belongs_to :event, required: false
+  belongs_to :channel, required: false
 
   scope :genre, ->(genre) { joins(:song).where('songs.genre ILIKE ?', genre) }
   scope :leader, ->(leader) { joins(:leader).where('leaders.name ILIKE ?', leader) }
   scope :follower, ->(follower) { joins(:follower).where('followers.name ILIKE ?', follower) }
   scope :channel, ->(channel) { where('channel ILIKE ?', channel) }
-  # scope :event, ->(event) { joins(:event).where(events: { name: event }) }
-  # scope :videotype, ->(videotype) { joins(:videotype).where(videotypes: { name: videotype }) }
 
   scope :paginate, lambda { |page, per_page|
     offset(per_page * page).limit(per_page)
@@ -127,9 +122,9 @@ class Video < ApplicationRecord
           channel: youtube_video.channel_title,
           length: youtube_video.length,
           duration: youtube_video.duration,
-          channel_id: youtube_video.channel_id,
           view_count: youtube_video.view_count,
-          tags: youtube_video.tags
+          tags: youtube_video.tags,
+          channel: channel
         )
         video_output.save
         video = Video.find_by(youtube_id: youtube_video.id)
