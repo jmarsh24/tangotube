@@ -27,7 +27,7 @@ Try a different search word or click on the TangoTube logo to reset.
       <%= video.follower.try(:name) %>
     </div>
     <div class="video-channel-name">
-      <%= video.channel %>
+      <%= video.channel.title %>
     </div>
     <div class="video-view_count">
       <%= video.view_count %>
@@ -44,7 +44,7 @@ Try a different search word or click on the TangoTube logo to reset.
                 class: 'thumbnail') %>
     </div>
     <div class="video-bottom-section">
-      <%= image_tag("#{video.channel.thumbnail_url}"", class: "channel-icon") %>
+      <%= image_tag("#{video.channel.thumbnail_url}", class: "channel-icon") %>
       <div class="testing">
         <div class="video-title-song">
           <%= video.song.try(:title)|| video.try(:youtube_song) %>
@@ -56,7 +56,7 @@ Try a different search word or click on the TangoTube logo to reset.
           <%= video.leader.try(:name).to_s + " & " + video.follower.try(:name).to_s %>
         </div>
         <div class="video-channel-name">
-          <%= video.channel %>
+          <%= video.channel.try(:title) %>
         </div>
         <div class="video-metadata">
           <%= "#{video.view_count} views • #{video.upload_date}" %>

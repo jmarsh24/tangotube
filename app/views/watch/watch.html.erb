@@ -11,7 +11,6 @@
     </div>
     <%= render partial: "video_info_item", locals: {header: "Title", value: @active_video.title || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Description", value: @active_video.description || "N/A" } %>
-    <%= render partial: "video_info_item", locals: {header: "Video-Type", value: @active_video.videotype.try(:name) || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "View Count", value: @active_video.view_count || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Duration", value: @active_video.length || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Performance Number", value: "N/A"} %>
@@ -32,12 +31,4 @@
     <%= render partial: "video_info_item", locals: {header: "Genre", value: @active_video.song.try(:genre) || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Artist", value: @active_video.song.try(:artist) || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Artist 2", value: @active_video.song.try(:artist_2) || "N/A"} %>
-
-    <div class="detail-section-label">
-      <h1>Event Info</h1>
-    </div>
-
-    <%= render partial: "video_info_item", locals: {header: "Name", value: @active_video.event.try(:title) || "N/A"} %>
-    <%= render partial: "video_info_item", locals: {header: "Date", value: @active_video.event.try(:date) || "N/A"} %>
-    <%= render partial: "video_info_item", locals: {header: "Location", value: @active_video.event.try(:location) || "N/A"} %>
 </div>

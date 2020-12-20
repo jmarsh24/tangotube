@@ -2,7 +2,6 @@ class VideosController < ApplicationController
   # before_action :authenticate_user!
 
   NUMBER_OF_VIDEOS_PER_PAGE = 10
-  HERO_YOUTUBE_ID = 's6iptZdCcG0'.freeze
 
   helper_method :sort_column, :sort_direction
 
@@ -19,16 +18,16 @@ class VideosController < ApplicationController
     @videos_filtered = @videos_sorted
 
     filtering_params(params).each do |key, value|
-      @videos_filtered = @videos_filtered.public_send(key, value.downcase) if value.present?
+      @videos_filtered = @videos_sorted.public_send(key, value.downcase) if value.present?
     end
 
     @videos_paginated = @videos_filtered.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
     # Populate Total Number of Options
-    @leaders_total_count = @videos.pluck(:"leaders.name").compact.uniq.sort.count
-    @followers_total_count = @videos.pluck(:"followers.name").compact.uniq.sort.count
-    @channels_total_count = @videos.pluck(:"channels.title").compact.uniq.sort.count
-    @genres_total_count = @videos.pluck(:"songs.genre").compact.uniq.sort.count
+    @leaders_total_count = @videos.pluck(:"leaders.name").compact.uniq.count
+    @followers_total_count = @videos.pluck(:"followers.name").compact.uniq.count
+    @channels_total_count = @videos.pluck(:"channels.title").compact.uniq.count
+    @genres_total_count = @videos.pluck(:"songs.genre").compact.uniq.count
 
     # Populate Filters
     @leaders = @videos_filtered.pluck(:"leaders.name").compact.uniq.sort
