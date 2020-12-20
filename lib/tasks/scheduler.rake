@@ -1,4 +1,4 @@
-desc 'This task populates videos '
+desc 'This task populates videos'
 task import_videos: :environment do
   puts 'Populating videos'
   Video.import_all_videos

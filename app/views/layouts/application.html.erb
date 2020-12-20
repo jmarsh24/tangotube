@@ -14,8 +14,8 @@
   <%= link_to "TangoTube", root_path, id: "logo" %>
 
   <div class="search_bar">
-    <%= form_tag root_path, method: 'get' do %>
-      <%= text_field_tag :q, params[:q], class: "input" %>
+    <%= form_with url: root_path, method: :get, local: true do |f| %>
+      <%= f.text_field :q, id: :search%>
     <% end %>
   </div>
 

@@ -65,7 +65,7 @@ class Video < ApplicationRecord
   scope :genre, ->(genre) { joins(:song).where('songs.genre ILIKE ?', genre) }
   scope :leader, ->(leader) { joins(:leader).where('leaders.name ILIKE ?', leader) }
   scope :follower, ->(follower) { joins(:follower).where('followers.name ILIKE ?', follower) }
-  scope :channel, ->(channel) { where('channel ILIKE ?', channel) }
+  scope :channel, ->(channel) { where('channels.title ILIKE ?', channel) }
 
   scope :paginate, lambda { |page, per_page|
     offset(per_page * page).limit(per_page)
@@ -79,7 +79,7 @@ class Video < ApplicationRecord
                 songs.genre ILIKE :query or
                 songs.title ILIKE :query or
                 songs.artist ILIKE :query or
-                channel ILIKE :query',
+                channels.title ILIKE :query',
               query: "%#{query}%")
       else
         all

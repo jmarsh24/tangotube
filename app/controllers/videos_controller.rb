@@ -44,7 +44,7 @@ class VideosController < ApplicationController
                        'songs.genre',
                        'leaders.name',
                        'followers.name',
-                       'channel',
+                       'channels.title',
                        'upload_date',
                        'view_count']
 
