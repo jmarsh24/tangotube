@@ -147,7 +147,8 @@ CREATE TABLE public.channels (
     title character varying,
     channel_id character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    thumbnail_url character varying
 );
 
 

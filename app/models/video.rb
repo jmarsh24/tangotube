@@ -106,7 +106,16 @@ class Video < ApplicationRecord
 
     def import_channel(channel_id)
       channel = Yt::Channel.new id: channel_id
+
       channel_videos = channel.videos.map(&:id)
+
+      thumbnail_url = channel.thumbnail_url
+      channel = Channel.find_by(channel_id: channel_id)
+      channel.update(
+        thumbnail_url: thumbnail_url
+      )
+      channel.save
+
       channel_videos.each do |video_id|
         youtube_video = Yt::Video.new(id: video_id)
 

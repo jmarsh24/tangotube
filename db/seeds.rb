@@ -60,7 +60,5 @@ puts 'Admin User successfully seeded.'
 # puts "There are now #{Event.count} events in the database."
 
 # puts "There are now #{Video.count} videos with relations in the database."
-if Rails.env.development?
-  AdminUser.create!(email: 'admin@example.com', password: 'password',
-                    password_confirmation: 'password')
-end
+AdminUser.create!(email: 'admin@example.com', password: 'password',
+                  password_confirmation: 'password')
