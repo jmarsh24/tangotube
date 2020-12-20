@@ -6,7 +6,7 @@ rails db:create && rails db:migrate rails db:seed
 
 Video.import_all_videos
 
-##API Integration
+## APIs
 
 Youtube-data-api
 
