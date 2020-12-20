@@ -87,9 +87,13 @@ class Video < ApplicationRecord
     end
 
     def import_all_videos
-      Channel.all.each do |channel|
+      Channel.where(imported: false).each do |channel|
         channel_id = channel.channel_id
         Video.import_channel(channel_id)
+        channel.update(
+          imported: true
+        )
+        channel.save
       end
       Video.match_dancers
       Video.match_songs
