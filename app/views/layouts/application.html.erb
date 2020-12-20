@@ -15,7 +15,7 @@
 
   <div class="search_bar">
     <%= form_with url: root_path, method: :get, local: true do |f| %>
-      <%= f.text_field :q, id: :search%>
+      <%= f.text_field :q, id: :search, class: "input" %>
     <% end %>
   </div>
 
