@@ -66,11 +66,12 @@ class Video < ApplicationRecord
   belongs_to :event, required: false
 
   scope :genre, ->(genre) { joins(:song).where(songs: { genre: genre }) }
-  scope :videotype, ->(videotype) { joins(:videotype).where(videotypes: { name: videotype }) }
   scope :leader, ->(leader) { joins(:leader).where(leaders: { name: leader }) }
   scope :follower, ->(follower) { joins(:follower).where(followers: { name: follower }) }
-  scope :event, ->(event) { joins(:event).where(events: { name: event }) }
   scope :channel, ->(channel) { where(channel: channel) }
+  # scope :event, ->(event) { joins(:event).where(events: { name: event }) }
+  # scope :videotype, ->(videotype) { joins(:videotype).where(videotypes: { name: videotype }) }
+
 
   scope :paginate, lambda { |page, per_page|
     offset(per_page * page).limit(per_page)

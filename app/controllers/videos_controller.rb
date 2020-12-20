@@ -12,8 +12,9 @@ class VideosController < ApplicationController
                    .references(:song, :leader, :follower, :videotype, :event)
 
     @videos_sorted = @videos.order(sort_column + ' ' + sort_direction)
-                            .where.not(leader_id: [nil,
-                                                   false], follower_id: [nil, false], spotify_track_name: [nil, false])
+                            .where.not(leader_id: [nil, false],
+                                       follower_id: [nil, false],
+                                       spotify_track_name: [nil, false])
 
     @videos_filtered = @videos_sorted
 
