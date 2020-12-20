@@ -1,17 +1,27 @@
-Seeding information
+## To create and seed database
 
-In order to properly load the database into your system, you will need to comment out the belongs_to relations in the video.rb file.
+rails db:create && rails db:migrate rails db:seed
 
-Lines 41-45 in video.rb
+## To import all videos to the app
 
-belongs_to :leader
+Video.import_all_videos
 
-belongs_to :follower
+##API Integration
 
-belongs_to :song
+Youtube-data-api
 
-belongs_to :videotype
+ACR Cloud
 
-belongs_to :event
+## Software depedencies
 
-Then seed the database normally. After these will need to be uncommented in order for the application to function.
+youtube-dl must be installed locally on the computer
+
+##Useful Methods... If you need to use any of the import steps seperately.
+
+Video.import_channel(channel_id)
+
+Video.match_dancers
+
+Video.match_songs
+
+Video.get_channel_video_ids(channel_id)
