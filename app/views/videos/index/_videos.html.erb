@@ -53,7 +53,7 @@ Try a different search word or click on the TangoTube logo to reset.
           <%= video.song.try(:genre)%> | <%= video.song.try(:artist)|| video.try(:spotify_artist_name_2) || video.try(:youtube_artist) %>
         </div>
         <div class="video-dancers">
-
+          <%= video.leader.try(:name).to_s + " & " + video.follower.try(:name).to_s %>
         </div>
         <div class="video-channel-name">
           <%= video.channel %>
