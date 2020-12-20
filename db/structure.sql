@@ -149,7 +149,9 @@ CREATE TABLE public.channels (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     thumbnail_url character varying,
-    imported boolean DEFAULT false
+    imported boolean DEFAULT false,
+    imported_videos_count integer,
+    total_videos_count integer
 );
 
 

@@ -111,7 +111,9 @@ class Video < ApplicationRecord
       thumbnail_url = channel.thumbnail_url
       channel = Channel.find_by(channel_id: channel_id)
       channel.update(
-        thumbnail_url: thumbnail_url
+        thumbnail_url: thumbnail_url,
+        total_view_count: channel.video_count,
+        imported_videos_count: channel.videos.count
       )
       channel.save
 
