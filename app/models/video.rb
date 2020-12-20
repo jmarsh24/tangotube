@@ -105,7 +105,8 @@ class Video < ApplicationRecord
     end
 
     def import_channel(channel_id)
-      channel_videos = Yt::Channel.new id: channel_id
+      channel = Yt::Channel.new id: channel_id
+      channel_videos = channel.videos.map(&:id)
       channel_videos.each do |video_id|
         youtube_video = Yt::Video.new(id: video_id)
 
