@@ -88,8 +88,7 @@ class Video < ApplicationRecord
 
     def import_all_videos
       Channel.where(imported: false).each do |channel|
-        channel_id = channel.channel_id
-        Video.import_channel(channel_id)
+        Video.import_channel(channel.channel_id)
       end
       Video.match_dancers
       Video.match_songs
