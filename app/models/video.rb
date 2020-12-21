@@ -107,9 +107,10 @@ class Video < ApplicationRecord
     def import_channel(channel_id)
       yt_channel = Yt::Channel.new id: channel_id
 
-      channel_videos = yt_channel.videos.map(&:id)
-
+      yt_channel_videos = yt_channel.videos.map(&:id)
       channel = Channel.find_by(channel_id: channel_id)
+      channel_videos = channel.videos.map(&:youtube_id)
+      yt_channel_videos_diff = (channel_videos - yt_channel_videos) | (yt_channel_videos - channel_videos)
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
@@ -117,7 +118,7 @@ class Video < ApplicationRecord
       )
       channel.save
 
-      channel_videos.each do |video_id|
+      yt_channel_videos_diff.each do |video_id|
         youtube_video = Yt::Video.new(id: video_id)
 
         video_output = Video.new(
