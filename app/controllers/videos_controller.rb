@@ -24,16 +24,16 @@ class VideosController < ApplicationController
     @videos_paginated = @videos_filtered.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
     # Populate Total Number of Options
-    @leaders_total_count = @videos.pluck(:"leaders.name").compact.uniq.count
-    @followers_total_count = @videos.pluck(:"followers.name").compact.uniq.count
-    @channels_total_count = @videos.pluck(:"channels.title").compact.uniq.count
-    @genres_total_count = @videos.pluck(:"songs.genre").compact.uniq.count
+    @leaders_total_count    = @videos.pluck(:"leaders.name").compact.uniq.count
+    @followers_total_count  = @videos.pluck(:"followers.name").compact.uniq.count
+    @channels_total_count   = @videos.pluck(:"channels.title").compact.uniq.count
+    @genres_total_count     = @videos.pluck(:"songs.genre").compact.uniq.count
 
     # Populate Filters
-    @leaders = @videos_filtered.pluck(:"leaders.name").compact.uniq.sort
-    @followers = @videos_filtered.pluck(:"followers.name").compact.uniq.sort
-    @channels = @videos_filtered.pluck(:"channels.title").compact.uniq.sort
-    @genres = @videos_filtered.pluck(:"songs.genre").compact.uniq.map(&:capitalize).sort
+    @leaders    = @videos_filtered.pluck(:"leaders.name").compact.uniq.sort
+    @followers  = @videos_filtered.pluck(:"followers.name").compact.uniq.sort
+    @channels   = @videos_filtered.pluck(:"channels.title").compact.uniq.sort
+    @genres     = @videos_filtered.pluck(:"songs.genre").compact.uniq.map(&:capitalize).sort
   end
 
   private

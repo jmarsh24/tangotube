@@ -13,9 +13,9 @@ ActiveAdmin.register Video do
     column :leader
     column :follower
     column :channel
-    column :song.title
-    column :song.artist
-    column :song.genre
+    column :songs.title
+    column :songs.artist
+    column :songs.genre
     actions
   end
 end
