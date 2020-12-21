@@ -6,6 +6,17 @@ ActiveAdmin.register Channel do
   #
   permit_params :title, :channel_id, :thumbnail_url, :imported, :imported_videos_count, :total_videos_count,
                 :yt_api_pull_count
+
+  index do
+    selectable_column
+    id_column
+    column :title
+    column :channel_id
+    column :imported
+    column :imported_videos_count
+    column :total_videos_count
+    actions
+  end
   #
   # or
   #
