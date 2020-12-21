@@ -36,7 +36,7 @@
   </div>
   <div class="footer">
     <div id="load-more-container">
-      <%= render "videos/index/load_more" %>
+      <%= render "videos/index/load_more" unless @videos_pagnated.blank? %>
     </div>
   </div>
 </div>

@@ -1,7 +1,3 @@
-<% if (@videos_paginated.empty?) %>
-<p style="font-weight:bold">No videos found.</p>
-Try a different search word or click on the TangoTube logo to reset.
-<% else %>
 <% @videos_paginated.each do |video| %>
 <%= active_link_to watch_path(v: video.youtube_id),
               {class: "video", active: :exact} do %>
@@ -67,5 +63,4 @@ Try a different search word or click on the TangoTube logo to reset.
 </div>
 <% end %>
 <hr>
-<% end %>
 <% end %>
