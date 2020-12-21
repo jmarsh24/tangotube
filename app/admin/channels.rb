@@ -17,12 +17,4 @@ ActiveAdmin.register Channel do
     column :total_videos_count
     actions
   end
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:title, :channel_id, :thumbnail_url, :imported, :imported_videos_count, :total_videos_count, :yt_api_pull_count]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
 end
