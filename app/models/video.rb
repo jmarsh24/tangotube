@@ -110,7 +110,7 @@ class Video < ApplicationRecord
       yt_channel_videos = yt_channel.videos.map(&:id)
       channel = Channel.find_by(channel_id: channel_id)
       channel_videos = channel.videos.map(&:youtube_id)
-      yt_channel_videos_diff = yt_channel_videos - (channel_videos + yt_channel_videos)
+      yt_channel_videos_diff = yt_channel_videos - (channel_videos + yt_channel_videos).uniq
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
