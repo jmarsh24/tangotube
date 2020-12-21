@@ -91,7 +91,8 @@ class Video < ApplicationRecord
         channel_id = channel.channel_id
         Video.import_channel(channel_id)
         channel.update(
-          imported: true
+          imported: true,
+          imported_videos_count: Channel.find_by(channel_id: channel_id).count
         )
         channel.save
       end
@@ -104,16 +105,14 @@ class Video < ApplicationRecord
     end
 
     def import_channel(channel_id)
-      channel = Yt::Channel.new id: channel_id
+      yt_channel = Yt::Channel.new id: channel_id
 
-      channel_videos = channel.videos.map(&:id)
+      channel_videos = yt_channel.videos.map(&:id)
 
-      thumbnail_url = channel.thumbnail_url
       channel = Channel.find_by(channel_id: channel_id)
       channel.update(
-        thumbnail_url: thumbnail_url,
-        total_view_count: channel.video_count,
-        imported_videos_count: channel.videos.count
+        thumbnail_url: yt_channel.thumbnail_url,
+        total_view_count: yt_channel.video_count
       )
       channel.save
 
