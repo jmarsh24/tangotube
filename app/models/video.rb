@@ -90,11 +90,6 @@ class Video < ApplicationRecord
       Channel.where(imported: false).each do |channel|
         channel_id = channel.channel_id
         Video.import_channel(channel_id)
-        channel.update(
-          imported: true,
-          imported_videos_count: Video.where(channel: channel).count
-        )
-        channel.save
       end
       Video.match_dancers
       Video.match_songs
@@ -150,6 +145,11 @@ class Video < ApplicationRecord
         acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
         Video.parse_acr_response(acr_response_body, youtube_video.id) if video.acr_response_code.nil?
       end
+      channel.update(
+        imported: true,
+        imported_videos_count: Video.where(channel: channel).count
+      )
+      channel.save
     end
 
     def match_dancers
