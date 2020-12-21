@@ -10,8 +10,6 @@
 #  leader_id             :bigint
 #  follower_id           :bigint
 #  description           :string
-#  channel               :string
-#  channel_id            :string
 #  duration              :integer
 #  upload_date           :date
 #  view_count            :integer
@@ -40,6 +38,7 @@
 #  acr_response_code     :integer
 #  spotify_artist_name_3 :string
 #  length                :interval
+#  channel_id            :bigint
 #
 
 or# == Schema Information
