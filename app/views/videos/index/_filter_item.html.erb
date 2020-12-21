@@ -3,7 +3,7 @@
 <%= "#{title}".titleize %>
 </label>
   <%= select_tag "#{title}",
-        options_for_select([["Select All #{model_count} Types", "all"]] + model,
+        options_for_select([["Select All #{model_count} #{title.capitalize}", "all"]] + model,
           params["#{title}"].presence || "all"),
             class: "content-search",
             data: { action: "filter#filter", "filter-target": "filter" } %>
