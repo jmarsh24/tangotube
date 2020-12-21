@@ -113,7 +113,6 @@ class Video < ApplicationRecord
           title: youtube_video.title,
           description: youtube_video.description,
           upload_date: youtube_video.published_at,
-          channel: youtube_video.channel_title,
           length: youtube_video.length,
           duration: youtube_video.duration,
           view_count: youtube_video.view_count,
