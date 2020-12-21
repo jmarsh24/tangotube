@@ -80,7 +80,7 @@ class Video < ApplicationRecord
     end
 
     def import_all_videos
-      Channel.where(imported: false).each do |channel|
+      Channel.where(imported: false).order(:id).each do |channel|
         Video.import_channel(channel.channel_id)
       end
       Video.match_dancers
