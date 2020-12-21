@@ -10,12 +10,12 @@ ActiveAdmin.register Video do
     column :description
     column :tags
     column :youtube_id
-    column :leader_id
-    column :follower_id
-    column :channel_id
-    column :song_id
-    column :youtube_song
-    column :youtube_artist
+    column :leader
+    column :follower
+    column :channel
+    column :song.title
+    column :song.artist
+    column :song.genre
     actions
   end
 end

@@ -48,13 +48,7 @@ class Video < ApplicationRecord
   require 'irb'
   require 'json'
 
-  # validates :leader, presence: true
-  # validates :follower, presence: true
-  # validates :song, presence: true
-  # validates :artist, presence: true
-  # validates :description, presence: true
   validates :youtube_id, presence: true, uniqueness: true
-  # validates :title, presence: true
 
   belongs_to :leader, required: false
   belongs_to :follower, required: false
