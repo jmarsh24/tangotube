@@ -92,7 +92,7 @@ class Video < ApplicationRecord
         Video.import_channel(channel_id)
         channel.update(
           imported: true,
-          imported_videos_count: Channel.find_by(channel_id: channel_id).count
+          imported_videos_count: Video.find_by(channel: channel).count
         )
         channel.save
       end
