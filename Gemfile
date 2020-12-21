@@ -37,13 +37,14 @@ gem 'yt',                     '~> 0.32.0'
 
 group :development, :test do
   gem 'amazing_print',        '~> 1.2', '>= 1.2.2'
-  gem 'byebug',               '~> 11.1', '>= 11.1.3'
+
   gem 'rspec-rails',          '~> 4.0', '>= 4.0.1'
   gem 'standard'
 end
 
 group :development do
   gem 'annotate',             '~> 2.7', '>= 2.7.1'
+  gem 'byebug',               '~> 11.1', '>= 11.1.3'
   gem 'listen',               '3.2.1'
   gem 'web-console',          '4.0.2'
 end
