@@ -113,6 +113,7 @@ class Video < ApplicationRecord
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_view_count: yt_channel.video_count
+        yt_api_pull_count: yt_channel.videos.count
       )
       channel.save
 
