@@ -8,10 +8,10 @@
                 class: 'thumbnail') %>
     </div>
     <div class="video-title-song">
-      <%= video.song.try(:title).to_s.titleize || video.try(:youtube_song).to_s.titleize || video.try(:spotify_track_name).to_s.titleize %>
+      <%= video.song.nil? ? video.song.try(:title).to_s.titleize : video.try(:youtube_song).to_s.titleize %>
     </div>
     <div class="video-artist">
-      <%= video.song.try(:artist).to_s.titleize || video.try(:spotify_artist_name_2).to_s.titleize || video.try(:youtube_artist).to_s.titleize %>
+      <%= video.song.nil? ? video.song.try(:artist).to_s.titleize : video.try(:youtube_artist).to_s.titleize %>
     </div>
     <div class="video-genre">
       <%= video.song.try(:genre).to_s.titleize %>
@@ -20,10 +20,10 @@
       <%= video.leader.try(:name).to_s.titleize %>
     </div>
     <div class="video-follower">
-      <%= video.follower.try(:name) .to_s.titleize%>
+      <%= video.follower.try(:name).to_s.titleize%>
     </div>
     <div class="video-channel-name">
-      <%= video.channel.title.to_s.titleize %>
+      <%= video.channel.title.to_s %>
     </div>
     <div class="video-view_count">
       <%= video.view_count %>
@@ -52,7 +52,7 @@
           <%= video.leader.try(:name).to_s + " & " + video.follower.try(:name).to_s %>
         </div>
         <div class="video-channel-name">
-          <%= video.channel.try(:title).to_s.titleize  %>
+          <%= video.channel.try(:title).to_s  %>
         </div>
         <div class="video-metadata">
           <%= "#{video.view_count} views • #{video.upload_date}" %>
