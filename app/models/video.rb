@@ -181,7 +181,11 @@ class Video < ApplicationRecord
       Song.all.each do |song|
         Video.where(song_id: nil)
              .where('unaccent(spotify_track_name) ILIKE unaccent(?)
-                         OR unaccent(youtube_song) ILIKE unaccent(?)',
+                         OR unaccent(youtube_song) ILIKE unaccent(?) OR
+                         unaccent(title) ILIKE unaccent(?) OR
+                         unaccent(description) ILIKE unaccent(?)',
+                    "%#{song.title}%",
+                    "%#{song.title}%",
                     "%#{song.title}%",
                     "%#{song.title}%")
              .where('spotify_artist_name ILIKE ?
