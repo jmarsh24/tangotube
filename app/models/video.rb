@@ -183,7 +183,9 @@ class Video < ApplicationRecord
              .where('unaccent(spotify_track_name) ILIKE unaccent(?)
                          OR unaccent(youtube_song) ILIKE unaccent(?) OR
                          unaccent(title) ILIKE unaccent(?) OR
-                         unaccent(description) ILIKE unaccent(?)',
+                         unaccent(description) ILIKE unaccent(?) OR
+                         unaccent(tags) ILIKE unaccent(?)',
+                    "%#{song.title}%",
                     "%#{song.title}%",
                     "%#{song.title}%",
                     "%#{song.title}%",
