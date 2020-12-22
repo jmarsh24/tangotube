@@ -149,24 +149,22 @@ class Video < ApplicationRecord
 
     def match_dancers
       Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where(  'tags ILIKE ? OR
-                                                title ILIKE ? OR
-                                                 description ILIKE ?',
-                                                 "%#{leader.name}%",
-                                                "%#{leader.name}%",
-                                                "%#{leader.name}%").each do |video|
+        Video.all.where(leader_id: nil).where(  'unaccent(tags) ILIKE unaccent(:leader_name) OR
+                                                unaccent(title) ILIKE unaccent(:leader_name) OR
+                                                 unaccent(description) ILIKE unaccent(:leader_name)',
+                                                 leader_name: "%#{leader.name}%")
+                                        .each do |video|
           video.leader = leader
           video.save
         end
       end
 
       Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where(  'tags ILIKE ? OR
-                                                  title ILIKE ? OR
-                                                  description ILIKE ?',
-                                                  "%#{follower.name}%",
-                                                  "%#{follower.name}%",
-                                                  "%#{follower.name}%").each do |video|
+        Video.all.where(follower_id: nil).where(  'unaccent(tags) ILIKE unaccent(:follower_name) OR
+                                                  unaccent(title) ILIKE unaccent(:follower_name) OR
+                                                  unaccent(description) ILIKE unaccent(:follower_name)',
+                                                  follower_name: "%#{follower.name}%")
+                                          .each do |video|
           video.follower = follower
           video.save
         end
@@ -176,30 +174,20 @@ class Video < ApplicationRecord
     def match_songs
       Song.all.each do |song|
         Video.where(song_id: nil)
-             .where('unaccent(spotify_track_name) ILIKE unaccent(?)
-                         OR unaccent(youtube_song) ILIKE unaccent(?) OR
-                         unaccent(title) ILIKE unaccent(?) OR
-                         unaccent(description) ILIKE unaccent(?) OR
-                         unaccent(tags) ILIKE unaccent(?)',
-                    "%#{song.title}%",
-                    "%#{song.title}%",
-                    "%#{song.title}%",
-                    "%#{song.title}%",
-                    "%#{song.title}%")
-             .where('spotify_artist_name ILIKE ?
-                          OR unaccent(spotify_artist_name_2) ILIKE unaccent(?)
-                          OR unaccent(youtube_artist) ILIKE unaccent(?)
-                          OR unaccent(description) ILIKE unaccent(?)
-                          OR unaccent(title) ILIKE unaccent(?)
-                          OR unaccent(tags) ILIKE unaccent(?)
-                          OR unaccent(spotify_album_name) ILIKE unaccent(?)',
-                    "%#{song.last_name_search}%",
-                    "%#{song.last_name_search}%",
-                    "%#{song.last_name_search}%",
-                    "%#{song.last_name_search}%",
-                    "%#{song.last_name_search}%",
-                    "%#{song.last_name_search}%",
-                    "%#{song.last_name_search}%")
+             .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title) OR
+                      unaccent(youtube_song) ILIKE unaccent(:song_title) OR
+                      unaccent(title) ILIKE unaccent(:song_title) OR
+                      unaccent(description) ILIKE unaccent(:song_title) OR
+                      unaccent(tags) ILIKE unaccent(:song_title)',
+                    song_title: "%#{song.title}%")
+             .where('spotify_artist_name ILIKE :song_artist_keyword
+                    OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
+                    OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
+                    OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
+                    OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
+                    OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
+                    OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
+                    song_artist_keyword: "%#{song.last_name_search}%")
              .each do |video|
           video.song = song
           video.save
