@@ -8,10 +8,10 @@
                 class: 'thumbnail') %>
     </div>
     <div class="video-title-song">
-      <%= video.song.nil? ? video.song.try(:title).to_s.titleize : video.try(:youtube_song).to_s.titleize %>
+      <%= video.song.try(:title).to_s.titleize || video.try(:youtube_song).to_s.titleize %>
     </div>
     <div class="video-artist">
-      <%= video.song.nil? ? video.song.try(:artist).to_s.titleize : video.try(:youtube_artist).to_s.titleize %>
+      <%= video.song.try(:artist).to_s.titleize || video.try(:youtube_artist).to_s.titleize %>
     </div>
     <div class="video-genre">
       <%= video.song.try(:genre).to_s.titleize %>
