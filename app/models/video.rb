@@ -149,28 +149,24 @@ class Video < ApplicationRecord
 
     def match_dancers
       Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where('tags ILIKE ?', "%#{leader.name}%").each do |video|
+        Video.all.where(leader_id: nil).where(  'tags ILIKE ? OR
+                                                title ILIKE ? OR
+                                                 description ILIKE ?',
+                                                 "%#{leader.name}%",
+                                                "%#{leader.name}%",
+                                                "%#{leader.name}%").each do |video|
           video.leader = leader
           video.save
         end
       end
 
       Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where('tags ILIKE ?', "%#{follower.name}%").each do |video|
-          video.follower = follower
-          video.save
-        end
-      end
-
-      Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where('title ILIKE ?', "%#{leader.name}%").each do |video|
-          video.leader = leader
-          video.save
-        end
-      end
-
-      Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where('title ILIKE ?', "%#{follower.name}%").each do |video|
+        Video.all.where(follower_id: nil).where(  'tags ILIKE ? OR
+                                                  title ILIKE ? OR
+                                                  description ILIKE ?',
+                                                  "%#{follower.name}%",
+                                                  "%#{follower.name}%",
+                                                  "%#{follower.name}%").each do |video|
           video.follower = follower
           video.save
         end
