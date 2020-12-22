@@ -55,14 +55,11 @@ class Video < ApplicationRecord
   belongs_to :song, required: false
   belongs_to :channel, required: false
 
-  scope :genre, ->(genre) { joins(:song).where('songs.genre ILIKE ?', genre) }
-  scope :leader, ->(leader) { joins(:leader).where('leaders.name ILIKE ?', leader) }
-  scope :follower, ->(follower) { joins(:follower).where('followers.name ILIKE ?', follower) }
-  scope :channel, ->(channel) { where('channels.title ILIKE ?', channel) }
-
-  scope :paginate, lambda { |page, per_page|
-    offset(per_page * page).limit(per_page)
-  }
+  scope :genre,     ->(genre)    { joins(:song).where('songs.genre ILIKE ?', genre) }
+  scope :leader,    ->(leader)   { joins(:leader).where('leaders.name ILIKE ?', leader) }
+  scope :follower,  ->(follower) { joins(:follower).where('followers.name ILIKE ?', follower) }
+  scope :channel,   ->(channel)  { where('channels.title ILIKE ?', channel) }
+  scope :paginate,  ->(page, per_page) { offset(per_page * page).limit(per_page)}
 
   class << self
     def search(query)
@@ -77,7 +74,7 @@ class Video < ApplicationRecord
                 spotify_track_name ILIKE :query or
                 youtube_song ILIKE :query or
                 youtube_artist ILIKE :query',
-              query: "%#{query}%")
+                 query: "%#{query}%")
       else
         all
       end
@@ -150,10 +147,9 @@ class Video < ApplicationRecord
     def match_dancers
       Leader.all.each do |leader|
         Video.all.where(leader_id: nil).where(  'unaccent(tags) ILIKE unaccent(:leader_name) OR
-                                                unaccent(title) ILIKE unaccent(:leader_name) OR
-                                                 unaccent(description) ILIKE unaccent(:leader_name)',
-                                                 leader_name: "%#{leader.name}%")
-                                        .each do |video|
+                                                  unaccent(title) ILIKE unaccent(:leader_name) OR
+                                                  unaccent(description) ILIKE unaccent(:leader_name)',
+                                                  leader_name: "%#{leader.name}%").each do |video|
           video.leader = leader
           video.save
         end
@@ -161,10 +157,9 @@ class Video < ApplicationRecord
 
       Follower.all.each do |follower|
         Video.all.where(follower_id: nil).where(  'unaccent(tags) ILIKE unaccent(:follower_name) OR
-                                                  unaccent(title) ILIKE unaccent(:follower_name) OR
-                                                  unaccent(description) ILIKE unaccent(:follower_name)',
-                                                  follower_name: "%#{follower.name}%")
-                                          .each do |video|
+                                                    unaccent(title) ILIKE unaccent(:follower_name) OR
+                                                    unaccent(description) ILIKE unaccent(:follower_name)',
+                                                    follower_name: "%#{follower.name}%").each do |video|
           video.follower = follower
           video.save
         end
@@ -179,15 +174,15 @@ class Video < ApplicationRecord
                       unaccent(title) ILIKE unaccent(:song_title) OR
                       unaccent(description) ILIKE unaccent(:song_title) OR
                       unaccent(tags) ILIKE unaccent(:song_title)',
-                    song_title: "%#{song.title}%")
+                      song_title: "%#{song.title}%")
              .where('spotify_artist_name ILIKE :song_artist_keyword
-                    OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
-                    OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
-                    OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
-                    OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
-                    OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
-                    OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
-                    song_artist_keyword: "%#{song.last_name_search}%")
+                      OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
+                      song_artist_keyword: "%#{song.last_name_search}%")
              .each do |video|
           video.song = song
           video.save
