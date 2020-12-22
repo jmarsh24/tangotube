@@ -72,7 +72,11 @@ class Video < ApplicationRecord
                 songs.genre ILIKE :query or
                 songs.title ILIKE :query or
                 songs.artist ILIKE :query or
-                channels.title ILIKE :query',
+                channels.title ILIKE :query or
+                spotify_artist_name ILIKE :query or
+                spotify_track_name ILIKE :query or
+                youtube_song ILIKE :query or
+                youtube_artist ILIKE :query',
               query: "%#{query}%")
       else
         all
