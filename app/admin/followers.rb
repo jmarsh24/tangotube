@@ -5,6 +5,7 @@ ActiveAdmin.register Follower do
     selectable_column
     id_column
     column :name
+    column :nickname
     column :reviewed
     actions
   end
