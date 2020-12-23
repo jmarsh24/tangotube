@@ -7,7 +7,7 @@ ActiveAdmin.register Leader do
     column :name
     column :nickname
     column :reviewed
-    actions
+    default_actions
   end
 
   form do |f|
@@ -16,7 +16,7 @@ ActiveAdmin.register Leader do
     f.input :nickname
     f.input :reviewed
   end
-  f.actions
+  f.default_actions
 end
 
 end
