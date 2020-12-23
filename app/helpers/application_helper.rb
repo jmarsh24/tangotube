@@ -25,7 +25,8 @@ module ApplicationHelper
                          "videotype",
                          "leader",
                          "follower",
-                         "channel")
+                         "channel",
+                         "keyword")
   end
 
   def format_value(value)
