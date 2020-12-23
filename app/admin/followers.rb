@@ -1,13 +1,12 @@
 ActiveAdmin.register Follower do
   permit_params :name, :reviewed, :nickname
-  actions :all
   index do
     selectable_column
     id_column
     column :name
     column :nickname
     column :reviewed
-    actions
+    actions :all
   end
 
   form do |f|

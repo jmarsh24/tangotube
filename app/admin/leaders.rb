@@ -1,6 +1,5 @@
 ActiveAdmin.register Leader do
   permit_params :name, :reviewed, :nickname
-  actions :all
 
   index do
     selectable_column
@@ -8,7 +7,7 @@ ActiveAdmin.register Leader do
     column :name
     column :nickname
     column :reviewed
-    actions
+    actions :all
   end
 
   form do |f|
