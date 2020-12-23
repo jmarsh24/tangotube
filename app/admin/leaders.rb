@@ -1,5 +1,5 @@
 ActiveAdmin.register Leader do
-  permit_params :name, :reviewed
+  permit_params :name, :reviewed, :nickname
 
   index do
     selectable_column

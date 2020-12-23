@@ -1,5 +1,5 @@
 ActiveAdmin.register Follower do
-  permit_params :name, :reviewed
+  permit_params :name, :reviewed, :nickname
 
   index do
     selectable_column
@@ -12,9 +12,9 @@ ActiveAdmin.register Follower do
 
   form do |f|
     f.inputs do
-    f.input :name
-    f.input :nickname
-    f.input :reviewed
+      f.input :name
+      f.input :nickname
+      f.input :reviewed
     end
     f.actions
   end
