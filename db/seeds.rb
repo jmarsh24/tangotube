@@ -2,7 +2,7 @@ require 'csv'
 
 puts 'Seeding process started'
 
-CSV.foreach('data/tangodb-datasets/el_recodo_songs.csv', headers: true) do |column|
+CSV.foreach('data/tangodb-datasets/el_recodo_songs_2.csv', headers: true) do |column|
   date = column[0]
   artist = column[1]
   title = column[2]
@@ -14,38 +14,38 @@ CSV.foreach('data/tangodb-datasets/el_recodo_songs.csv', headers: true) do |colu
   Song.create(date: date, artist: artist, title: title, artist_2: artist_2, genre: style, composer: composer,
               author: author, last_name_search: last_name_search)
 end
-puts "There are now #{Song.count} Songs in the database."
+# puts "There are now #{Song.count} Songs in the database."
 
-puts 'Seeding leaders into database'
+# puts 'Seeding leaders into database'
 
-CSV.foreach('data/tangodb-datasets/Leaders.csv', headers: true) do |column|
-  name = column[1]
-  Leader.create(name: name)
-end
-puts "There are now #{Leader.count} leaders in the database."
+# CSV.foreach('data/tangodb-datasets/Leaders.csv', headers: true) do |column|
+#   name = column[1]
+#   Leader.create(name: name)
+# end
+# puts "There are now #{Leader.count} leaders in the database."
 
-puts 'Seeding followers into database'
+# puts 'Seeding followers into database'
 
-CSV.foreach('data/tangodb-datasets/Followers.csv', headers: true) do |column|
-  name = column[1]
-  Follower.create(name: name)
-end
-puts "There are now #{Follower.count} followers in the database."
+# CSV.foreach('data/tangodb-datasets/Followers.csv', headers: true) do |column|
+#   name = column[1]
+#   Follower.create(name: name)
+# end
+# puts "There are now #{Follower.count} followers in the database."
 
-CSV.foreach('data/tangodb-datasets/channels.csv', headers: true) do |column|
-  title = column[1]
-  channel_id = column[2]
-  Channel.create(title: title, channel_id: channel_id)
-end
-puts "There are now #{Channel.count} channels in the database."
+# CSV.foreach('data/tangodb-datasets/channels.csv', headers: true) do |column|
+#   title = column[1]
+#   channel_id = column[2]
+#   Channel.create(title: title, channel_id: channel_id)
+# end
+# puts "There are now #{Channel.count} channels in the database."
 
-puts 'Seeding admin user into database'
+# puts 'Seeding admin user into database'
 
-if Rails.env.development?
-  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-end
+# if Rails.env.development?
+#   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+# end
 
-puts 'Admin User successfully seeded.'
+# puts 'Admin User successfully seeded.'
 
 # CSV.foreach("data/tangodb-datasets/Videotypes.csv", headers: true) do |column|
 #   name = column[1]
