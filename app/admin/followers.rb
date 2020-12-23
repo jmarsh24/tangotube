@@ -6,7 +6,7 @@ ActiveAdmin.register Follower do
     column :name
     column :nickname
     column :reviewed
-    default_actions
+    actions
   end
 
   form do |f|
@@ -15,7 +15,7 @@ ActiveAdmin.register Follower do
       f.input :nickname
       f.input :reviewed
     end
-    f.default_actions
+    f.actions
   end
 
 end

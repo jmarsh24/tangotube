@@ -7,16 +7,16 @@ ActiveAdmin.register Leader do
     column :name
     column :nickname
     column :reviewed
-    default_actions
+    actions
   end
 
   form do |f|
     f.inputs do
-    f.input :name
-    f.input :nickname
-    f.input :reviewed
+      f.input :name
+      f.input :nickname
+      f.input :reviewed
+    end
+    f.actions
   end
-  f.default_actions
-end
 
 end
