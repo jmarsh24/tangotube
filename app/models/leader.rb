@@ -10,7 +10,6 @@
 #
 
 class Leader < ApplicationRecord
-  actions :all
   validates :name, presence: true, uniqueness: true
 
   has_many :videos, dependent: :destroy
