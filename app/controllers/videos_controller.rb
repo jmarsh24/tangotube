@@ -6,34 +6,17 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos = Video.search(params[:q])
-                   .includes(:song, :leader, :follower, :channel)
-                   .references(:song, :leader, :follower, :channel)
+    @videos = Video.filter(params.slice( :leader, :follower, :channel, :genre))
+                   .includes(:leader, :follower, :channel, :song)
+                   .order(sort_column + ' ' + sort_direction)
 
-    @videos_sorted = @videos.order(sort_column + ' ' + sort_direction)
-    # .where.not(leader_id: [nil, false],
-    #            follower_id: [nil, false],
-    #            spotify_track_name: [nil, false])
+    @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
-    @videos_filtered = @videos_sorted
+    @leaders    = @videos.pluck(:"leaders.name").compact.uniq.map(&:titleize).sort
+    @followers  = @videos.pluck(:"followers.name").compact.uniq.map(&:titleize).sort
+    @channels   = @videos.pluck(:"channels.title").compact.uniq.sort
+    @genres     = @videos.pluck(:"songs.genre").compact.uniq.map(&:capitalize).sort
 
-    filtering_params(params).each do |key, value|
-      @videos_filtered = @videos_sorted.public_send(key, value.downcase) if value.present?
-    end
-
-    @videos_paginated = @videos_filtered.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
-
-    # Populate Total Number of Options
-    @leaders_total_count    = @videos.pluck(:"leaders.name").compact.uniq.count
-    @followers_total_count  = @videos.pluck(:"followers.name").compact.uniq.count
-    @channels_total_count   = @videos.pluck(:"channels.title").compact.uniq.count
-    @genres_total_count     = @videos.pluck(:"songs.genre").compact.uniq.count
-
-    # Populate Filters
-    @leaders    = @videos_filtered.pluck(:"leaders.name").compact.uniq.sort
-    @followers  = @videos_filtered.pluck(:"followers.name").compact.uniq.sort
-    @channels   = @videos_filtered.pluck(:"channels.title").compact.uniq.sort
-    @genres     = @videos_filtered.pluck(:"songs.genre").compact.uniq.map(&:capitalize).sort
   end
 
   private
