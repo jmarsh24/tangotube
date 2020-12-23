@@ -148,8 +148,12 @@ class Video < ApplicationRecord
       Leader.all.each do |leader|
         Video.all.where(leader_id: nil).where(  'unaccent(tags) ILIKE unaccent(:leader_name) OR
                                                   unaccent(title) ILIKE unaccent(:leader_name) OR
-                                                  unaccent(description) ILIKE unaccent(:leader_name)',
-                                                  leader_name: "%#{leader.name}%").each do |video|
+                                                  unaccent(description) ILIKE unaccent(:leader_name) OR
+                                                  unaccent(tags) ILIKE unaccent(:leader_nickname) OR
+                                                  unaccent(title) ILIKE unaccent(:leader_nickname) OR
+                                                  unaccent(description) ILIKE unaccent(:leader_nickname)',
+                                                  leader_name: "%#{leader.name}%",
+                                                  leader_nickname: "%#{leader.nickname}%").each do |video|
           video.leader = leader
           video.save
         end
@@ -158,8 +162,12 @@ class Video < ApplicationRecord
       Follower.all.each do |follower|
         Video.all.where(follower_id: nil).where(  'unaccent(tags) ILIKE unaccent(:follower_name) OR
                                                     unaccent(title) ILIKE unaccent(:follower_name) OR
-                                                    unaccent(description) ILIKE unaccent(:follower_name)',
-                                                    follower_name: "%#{follower.name}%").each do |video|
+                                                    unaccent(description) ILIKE unaccent(:follower_name) OR
+                                                    unaccent(tags) ILIKE unaccent(:follower_nickname) OR
+                                                    unaccent(title) ILIKE unaccent(:follower_nickname) OR
+                                                    unaccent(description) ILIKE unaccent(:follower_nickname)',
+                                                    follower_name: "%#{follower.name}%",
+                                                    follower_nickname: "%#{follower.nickname}%").each do |video|
           video.follower = follower
           video.save
         end
