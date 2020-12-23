@@ -10,13 +10,13 @@ ActiveAdmin.register Follower do
     actions
   end
 
-  # form do |f|
-  #   f.inputs do
-  #     f.input :name
-  #     f.input :nickname
-  #     f.input :reviewed
-  #   end
-  #   f.actions
-  # end
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :nickname
+      f.input :reviewed
+    end
+    f.actions
+  end
 
 end
