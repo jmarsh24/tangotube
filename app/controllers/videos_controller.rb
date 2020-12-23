@@ -6,7 +6,7 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos = Video.filter(params.slice( :leader, :follower, :channel, :genre))
+    @videos = Video.filter(params.slice( :leader, :follower, :channel, :genre, :keyword ))
                    .includes(:leader, :follower, :channel, :song)
                    .order(sort_column + ' ' + sort_direction)
 
@@ -43,6 +43,6 @@ class VideosController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:genre, :leader, :follower, :channel)
+    params.slice(:genre, :leader, :follower, :channel, :keyword)
   end
 end
