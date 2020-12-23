@@ -290,7 +290,7 @@ class Video < ApplicationRecord
     rescue RestClient::Exceptions::OpenTimeout
     rescue FFMPEG::Error
     rescue Errno::ENOENT
-    rescue NoMethodError::name
+    rescue StandardError
     end
 
     # accepts file path and submits a http request to ACR Cloud API
