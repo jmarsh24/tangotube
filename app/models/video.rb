@@ -74,23 +74,6 @@ class Video < ApplicationRecord
   scope :paginate,  ->(page, per_page) { offset(per_page * page).limit(per_page)}
 
   class << self
-    # def search(query)
-    #   if query
-    #     where('leaders.name ILIKE :query or
-    #             followers.name ILIKE :query or
-    #             songs.genre ILIKE :query or
-    #             songs.title ILIKE :query or
-    #             songs.artist ILIKE :query or
-    #             channels.title ILIKE :query or
-    #             spotify_artist_name ILIKE :query or
-    #             spotify_track_name ILIKE :query or
-    #             youtube_song ILIKE :query or
-    #             youtube_artist ILIKE :query',
-    #              query: "%#{query}%")
-    #   else
-    #     all
-    #   end
-    # end
 
     def import_all_videos
       Channel.where(imported: false).order(:id).each do |channel|
