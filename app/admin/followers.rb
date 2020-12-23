@@ -6,7 +6,7 @@ ActiveAdmin.register Follower do
     column :name
     column :nickname
     column :reviewed
-    actions :all
+    actions
   end
 
   form do |f|
