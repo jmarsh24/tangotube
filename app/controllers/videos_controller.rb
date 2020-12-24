@@ -7,7 +7,7 @@ class VideosController < ApplicationController
 
   def index
     @videos = Video.filter(params.slice( :leader, :follower, :channel, :genre, :keyword ))
-                   .includes(:leader, :follower, :channel, :song)
+                   .joins(:leader, :follower, :channel, :song)
                    .order(sort_column + ' ' + sort_direction)
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)

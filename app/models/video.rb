@@ -61,7 +61,7 @@ class Video < ApplicationRecord
   scope :filter_by_leader,    ->(leader)   { joins(:leader).where('leaders.name ILIKE ?', leader) }
   scope :filter_by_follower,  ->(follower) { joins(:follower).where('followers.name ILIKE ?', follower) }
   scope :filter_by_channel,   ->(channel)  { joins(:channel).where('channels.title ILIKE ?', channel) }
-  scope :filter_by_keyword,   ->(query)    { joins(:song).where('leaders.name ILIKE :query or
+  scope :filter_by_keyword,   ->(query)    { joins(:leader, :follower, :song, :channel).where('leaders.name ILIKE :query or
                                                                   followers.name ILIKE :query or
                                                                   songs.genre ILIKE :query or
                                                                   songs.title ILIKE :query or
@@ -141,12 +141,12 @@ class Video < ApplicationRecord
 
     def match_dancers
       Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where(  'unaccent(tags) ILIKE unaccent(:leader_name) OR
-                                                  unaccent(title) ILIKE unaccent(:leader_name) OR
-                                                  unaccent(description) ILIKE unaccent(:leader_name) OR
-                                                  unaccent(tags) ILIKE unaccent(:leader_nickname) OR
-                                                  unaccent(title) ILIKE unaccent(:leader_nickname) OR
-                                                  unaccent(description) ILIKE unaccent(:leader_nickname)',
+        Video.all.where(leader_id: nil).where(  'unaccent(tags) ILIKE unaccent(:leader_name)
+                                                  OR unaccent(title) ILIKE unaccent(:leader_name)
+                                                  OR unaccent(description) ILIKE unaccent(:leader_name)
+                                                  OR unaccent(tags) ILIKE unaccent(:leader_nickname)
+                                                  OR unaccent(title) ILIKE unaccent(:leader_nickname)
+                                                  OR unaccent(description) ILIKE unaccent(:leader_nickname)',
                                                   leader_name: "%#{leader.name}%",
                                                   leader_nickname: "%#{leader.nickname.nil? ? "Do not match perform match" : leader.nickname }%").each do |video|
           video.leader = leader
@@ -155,12 +155,12 @@ class Video < ApplicationRecord
       end
 
       Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where(  'unaccent(tags) ILIKE unaccent(:follower_name) OR
-                                                    unaccent(title) ILIKE unaccent(:follower_name) OR
-                                                    unaccent(description) ILIKE unaccent(:follower_name) OR
-                                                    unaccent(tags) ILIKE unaccent(:follower_nickname) OR
-                                                    unaccent(title) ILIKE unaccent(:follower_nickname) OR
-                                                    unaccent(description) ILIKE unaccent(:follower_nickname)',
+        Video.all.where(follower_id: nil).where(  'unaccent(tags) ILIKE unaccent(:follower_name)
+                                                    OR unaccent(title) ILIKE unaccent(:follower_name)
+                                                    OR unaccent(description) ILIKE unaccent(:follower_name)
+                                                    OR unaccent(tags) ILIKE unaccent(:follower_nickname)
+                                                    OR unaccent(title) ILIKE unaccent(:follower_nickname)
+                                                    OR unaccent(description) ILIKE unaccent(:follower_nickname)',
                                                     follower_name: "%#{follower.name}%",
                                                     follower_nickname: "%#{follower.nickname.nil? ? "Do not match perform match" : follower.nickname }%").each do |video|
           video.follower = follower
@@ -172,11 +172,11 @@ class Video < ApplicationRecord
     def match_songs
       Song.all.each do |song|
         Video.where(song_id: nil)
-             .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title) OR
-                      unaccent(youtube_song) ILIKE unaccent(:song_title) OR
-                      unaccent(title) ILIKE unaccent(:song_title) OR
-                      unaccent(description) ILIKE unaccent(:song_title) OR
-                      unaccent(tags) ILIKE unaccent(:song_title)',
+             .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
+                      OR unaccent(youtube_song) ILIKE unaccent(:song_title)
+                      OR unaccent(title) ILIKE unaccent(:song_title)
+                      OR unaccent(description) ILIKE unaccent(:song_title)
+                      OR unaccent(tags) ILIKE unaccent(:song_title)',
                       song_title: "%#{song.title}%")
              .where('spotify_artist_name ILIKE :song_artist_keyword
                       OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
