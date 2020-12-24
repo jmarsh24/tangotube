@@ -6,7 +6,7 @@ task import_videos: :environment do
 end
 
 desc 'This task populates videos'
-task import_videos: :environment do
+task match_songs: :environment do
   puts 'Populating songs'
   Video.match_songs
   puts 'done.'
