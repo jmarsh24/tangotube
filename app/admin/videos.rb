@@ -13,6 +13,7 @@ ActiveAdmin.register Video do
     column :leader
     column :follower
     column :channel
+    column :song
     actions
   end
 end
