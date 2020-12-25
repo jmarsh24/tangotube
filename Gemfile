@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
-ruby '2.7.2'
+ruby                          '3.0'
 
-gem 'rails'
+gem 'rails',                  '~> 6.1'
 gem 'tzinfo-data',            '>= 1.2016.7' # Don't rely on OSX/Linux timezone data
 
 gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
