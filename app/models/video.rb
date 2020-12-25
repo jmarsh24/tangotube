@@ -281,7 +281,7 @@ class Video < ApplicationRecord
           acr_response_code: video['status']['code']
         )
       end
-    rescue Terrapin::ExitStatusError
+    rescue Module
     rescue RestClient::Exceptions::OpenTimeout
     rescue FFMPEG::Error
     rescue Errno::ENOENT
