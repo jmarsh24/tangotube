@@ -46,10 +46,11 @@
           <%= video.song.nil? ? video.try(:spotify_track_name).to_s.titleize : video.song.try(:title).to_s.titleize  %>
         </div>
         <div class="video-artist">
-          <%= video.song.try(:genre)%> | <%= video.song.nil? ? video.try(:spotify_artist_name).to_s.titleize : video.song.try(:artist).to_s.titleize %>
+          <%= video.song.try(:genre)%> <%= video.song.nil? ? video.try(:spotify_artist_name).to_s.titleize : video.song.try(:artist).to_s.titleize %>
+          <%= video.song.nil? && video.spotify_artist_name.nil? && video.youtube_artist.nil? ? video.title : " "%>
         </div>
         <div class="video-dancers">
-          <%= video.leader.try(:name).to_s + " & " + video.follower.try(:name).to_s %>
+          <%= !video.leader.nil? && !video.follower.nil? ? video.leader.try(:name).to_s + " & " + video.follower.try(:name).to_s : " " %>
         </div>
         <div class="video-channel-name">
           <%= video.channel.try(:title).to_s  %>
