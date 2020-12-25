@@ -57,12 +57,11 @@ class Video < ApplicationRecord
   belongs_to :song, required: false
   belongs_to :channel, required: false
 
-  scope :filter_by_genre,     ->(genre)    { joins(:song).where('songs.genre ILIKE ?', genre) }
-  scope :filter_by_leader,    ->(leader)   { joins(:leader).where('leaders.name ILIKE ?', leader) }
-  scope :filter_by_follower,  ->(follower) { joins(:follower).where('followers.name ILIKE ?', follower) }
-  scope :filter_by_channel,   ->(channel)  { joins(:channel).where('channels.title ILIKE ?', channel) }
-  scope :filter_by_keyword,   ->(query)    { joins(:leader, :follower, :song, :channel)
-                                              .where('leaders.name ILIKE :query or
+  scope :filter_by_genre,     ->(genre)    { where('songs.genre ILIKE ?', genre) }
+  scope :filter_by_leader,    ->(leader)   { where('leaders.name ILIKE ?', leader) }
+  scope :filter_by_follower,  ->(follower) { where('followers.name ILIKE ?', follower) }
+  scope :filter_by_channel,   ->(channel)  { where('channels.title ILIKE ?', channel) }
+  scope :filter_by_keyword,   ->(query)    { where('leaders.name ILIKE :query or
                                                       followers.name ILIKE :query or
                                                       songs.genre ILIKE :query or
                                                       songs.title ILIKE :query or

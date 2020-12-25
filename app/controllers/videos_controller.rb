@@ -6,12 +6,11 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos_all = Video
 
-    @videos = @videos_all.filter(params.slice( :leader, :follower, :channel, :genre, :keyword ))
-                         .includes(:leader, :follower, :channel, :song)
-                         .references(:leader, :follower, :channel, :song)
-                         .order(sort_column + ' ' + sort_direction)
+    @videos = Video.all.includes(:leader, :follower, :channel, :song)
+                    .filter_videos(params.slice( :leader, :follower, :channel, :genre, :keyword ))
+                    .references(:leader, :follower, :channel, :song)
+                    .order(sort_column + ' ' + sort_direction)
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
