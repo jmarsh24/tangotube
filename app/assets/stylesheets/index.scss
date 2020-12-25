@@ -68,12 +68,12 @@
   }
   .video-leader {
     width: 10%;
-    min-width: 80px;
+    min-width: 30px;
     padding: 0px 10px 0px 10px;
   }
   .video-follower {
     width: 10%;
-    min-width: 80px;
+    min-width: 30px;
     padding: 0px 10px 0px 10px;
   }
   .video-channel-name{
@@ -112,9 +112,6 @@
   }
 
   .mobile-details {
-    // display: flex;
-    // flex-wrap: wrap;
-    // flex-direction: column;
     width: 100%;
     height: 100%;
   }
