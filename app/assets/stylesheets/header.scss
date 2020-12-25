@@ -5,7 +5,11 @@
     justify-content: space-between;
     height: 50px;
     border: 0px solid orange;
+    background: white;
+    padding-top: 10px;
     border-bottom: 1px solid #ccc;
+    position: sticky;
+    top: 0;
   }
 
   #logo {
