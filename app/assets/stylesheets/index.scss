@@ -10,21 +10,12 @@
 
     a {
       text-decoration: none;
-      &.current {
-        padding-right: 15px;
-        background-repeat: no-repeat;
-        background-position: right center;
-        background-size: 12px;
-      }
-      &.asc {
-        background-image: url(up_arrow.png);
-      }
-
-      &.desc {
-        background-image: url(down_arrow.png);
+      svg{
+      font-size: 0.8em;
       }
     }
   }
+
   .desktop-details {
     width: 100%;
   }
