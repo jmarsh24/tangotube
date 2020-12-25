@@ -84,6 +84,11 @@
   color: rgb(153, 153, 153) !important;
 }
 
+.select2-container--open {
+  z-index: 0 !important;
+}
+
+
 @media (max-width: 800px) {
 
   .filter_item {
