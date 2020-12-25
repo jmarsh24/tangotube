@@ -66,7 +66,8 @@
 }
 
 .select2-container *:focus {
-  outline: none;
+  outline-offset: -2px;
+  outline-width: 0px !important;
 }
 
 .select2-results__option:hover {
