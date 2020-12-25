@@ -61,16 +61,17 @@ class Video < ApplicationRecord
   scope :filter_by_leader,    ->(leader)   { joins(:leader).where('leaders.name ILIKE ?', leader) }
   scope :filter_by_follower,  ->(follower) { joins(:follower).where('followers.name ILIKE ?', follower) }
   scope :filter_by_channel,   ->(channel)  { joins(:channel).where('channels.title ILIKE ?', channel) }
-  scope :filter_by_keyword,   ->(query)    { joins(:leader, :follower, :song, :channel).where('leaders.name ILIKE :query or
-                                                                  followers.name ILIKE :query or
-                                                                  songs.genre ILIKE :query or
-                                                                  songs.title ILIKE :query or
-                                                                  songs.artist ILIKE :query or
-                                                                  channels.title ILIKE :query or
-                                                                  spotify_artist_name ILIKE :query or
-                                                                  spotify_track_name ILIKE :query or
-                                                                  youtube_song ILIKE :query or
-                                                                  youtube_artist ILIKE :query', query: "%#{query}%") }
+  scope :filter_by_keyword,   ->(query)    { joins(:leader, :follower, :song, :channel)
+                                              .where('leaders.name ILIKE :query or
+                                                      followers.name ILIKE :query or
+                                                      songs.genre ILIKE :query or
+                                                      songs.title ILIKE :query or
+                                                      songs.artist ILIKE :query or
+                                                      channels.title ILIKE :query or
+                                                      spotify_artist_name ILIKE :query or
+                                                      spotify_track_name ILIKE :query or
+                                                      youtube_song ILIKE :query or
+                                                      youtube_artist ILIKE :query', query: "%#{query}%") }
   scope :paginate,  ->(page, per_page) { offset(per_page * page).limit(per_page)}
 
   class << self

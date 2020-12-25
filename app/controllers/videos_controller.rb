@@ -6,11 +6,19 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos = Video.filter(params.slice( :leader, :follower, :channel, :genre, :keyword ))
-                   .includes(:leader, :follower, :channel, :song)
-                   .order(sort_column + ' ' + sort_direction)
+    @videos_all = Video
+
+    @videos = @videos_all.filter(params.slice( :leader, :follower, :channel, :genre, :keyword ))
+                         .includes(:leader, :follower, :channel, :song)
+                         .references(:leader, :follower, :channel, :song)
+                         .order(sort_column + ' ' + sort_direction)
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
+
+    @leader_count   = Video.pluck(:leader_id).compact.uniq.count
+    @follower_count = Video.pluck(:follower_id).compact.uniq.count
+    @channel_count  = Video.pluck(:channel_id).compact.uniq.count
+    @genre_count    = Video.joins(:song).pluck(:genre).compact.uniq.count
 
     @leaders    = @videos.pluck(:"leaders.name").compact.uniq.map(&:titleize).sort
     @followers  = @videos.pluck(:"followers.name").compact.uniq.map(&:titleize).sort
@@ -45,4 +53,5 @@ class VideosController < ApplicationController
   def filtering_params(params)
     params.slice(:genre, :leader, :follower, :channel, :keyword)
   end
+
 end
