@@ -3,12 +3,13 @@
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
-    height: 50px;
+    height: 40px;
     border: 0px solid orange;
     background: white;
     padding-top: 10px;
     border-bottom: 1px solid #ccc;
     position: sticky;
+    overscroll-behavior: contain;
     top: 0;
     z-index: 1;
   }
