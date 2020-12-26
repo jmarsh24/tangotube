@@ -7,8 +7,9 @@ class VideosController < ApplicationController
 
   def index
 
-    @videos = Video.all.includes(:leader, :follower, :channel, :song)
+    @videos = Video.includes(:leader, :follower, :channel, :song)
                     .filter_videos(params.slice( :leader, :follower, :channel, :genre, :keyword ))
+                    .where.not(leader_id: [nil, false], follower_id: [nil, false], spotify_track_name: [nil, false])
                     .references(:leader, :follower, :channel, :song)
                     .order(sort_column + ' ' + sort_direction)
 

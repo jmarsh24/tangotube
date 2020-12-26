@@ -73,6 +73,14 @@ class Video < ApplicationRecord
                                                       youtube_artist ILIKE :query', query: "%#{query}%") }
   scope :paginate,  ->(page, per_page) { offset(per_page * page).limit(per_page)}
 
+  # Active Admin scopes
+  scope :has_song,          ->   {where.not(song_id: nil)}
+  scope :has_leader,        ->   {where.not(leader_id: nil)}
+  scope :has_follower,      ->   {where.not(follower_id: nil)}
+  scope :has_youtube_match, ->   {where.not(youtube_artist: nil)}
+  scope :has_acr_match,     ->   {where(acr_response_code: 0)}
+  scope :attributes_full,   ->   {where.not(leader_id: [nil, false], follower_id: [nil, false], spotify_track_name: [nil, false])}
+
   class << self
 
     def import_all_videos

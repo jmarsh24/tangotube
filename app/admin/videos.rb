@@ -3,6 +3,14 @@ ActiveAdmin.register Video do
                 :youtube_song, :youtube_artist, :performance_date, :performance_number, :performance_total,
                 :videotype_id, :event_id
 
+  scope :all
+  scope :has_song
+  scope :has_leader
+  scope :has_follower
+  scope :has_youtube_match
+  scope :has_acr_match
+  scope :attributes_full
+
   index do
     selectable_column
     id_column
@@ -15,5 +23,17 @@ ActiveAdmin.register Video do
     column :channel
     column :song
     actions
+  end
+
+  form do |f|
+    inputs "details" do
+      input :title
+      input :description
+      input :leader
+      input :follower
+      input :youtube_id
+      input :channel
+      input :song
+    end
   end
 end
