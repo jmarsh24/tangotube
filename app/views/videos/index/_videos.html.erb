@@ -41,7 +41,7 @@
     </div>
     <div class="video-bottom-section">
       <%= image_tag("#{video.channel.thumbnail_url}", class: "channel-icon") %>
-      <div class="testing">
+      <div class="mobile-details-container">
         <div class="video-title-song">
           <%= video.song.nil? ? video.try(:spotify_track_name).to_s.titleize : video.song.try(:title).to_s.titleize  %>
         </div>

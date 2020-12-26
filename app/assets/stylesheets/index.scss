@@ -110,7 +110,7 @@
   .video-container {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
   }
 
@@ -125,10 +125,6 @@
     flex-direction: row;
     margin-top: 1rem;
     margin-bottom: 1rem;
-  }
-
-  .filter-results {
-    display:none;
   }
 
   .thumbnail {
@@ -159,26 +155,23 @@
   }
 
   .video-title-song {
-  min-width: 130px;
-  padding: 0px 10px 0px 10px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 0.2rem;
-  text-decoration: none;
-  color: black;
-  position: absolute;
-}
+    padding: 0px 10px 0px 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+    text-decoration: none;
+    color: black;
+  }
 
   .channel-icon {
-  margin-right: 0.75rem;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: #aaa;
+    margin-right: 0.75rem;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    background-color: #aaa;
   }
 
   .video-artist {
-    min-width: 110px;
     color: #555;
     padding: 0px 10px 0px 10px;
     font-size: .9rem;
@@ -186,7 +179,6 @@
   }
 
   .video-dancers{
-    min-width: 110px;
     color: #555;
     font-size: 0.9rem;
     padding: 0px 10px 0px 10px;
@@ -205,12 +197,11 @@
   }
 
   .video-channel-name{
-    min-width: 80px;
     color: #555;
     padding: 0px 10px 0px 10px;
   }
+
   .video-metadata {
-    min-width: 110px;
     color: #555;
     font-size: 0.9rem;
     padding: 0px 10px 0px 10px;
