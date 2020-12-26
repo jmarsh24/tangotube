@@ -1,6 +1,8 @@
 ActiveAdmin.register Leader do
   permit_params :name, :reviewed, :nickname
 
+  config.sort_order = 'id_asc'
+
   scope :reviewed
   scope :not_reviewed
 

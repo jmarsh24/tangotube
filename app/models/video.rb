@@ -57,6 +57,8 @@ class Video < ApplicationRecord
   belongs_to :song, required: false
   belongs_to :channel, required: false
 
+  accepts_nested_attributes_for :song, allow_destroy: true
+
   scope :filter_by_genre,     ->(genre)    { where('songs.genre ILIKE ?', genre) }
   scope :filter_by_leader,    ->(leader)   { where('leaders.name ILIKE ?', leader) }
   scope :filter_by_follower,  ->(follower) { where('followers.name ILIKE ?', follower) }
@@ -148,10 +150,8 @@ class Video < ApplicationRecord
 
     def match_dancers
       Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where(  'unaccent(tags) ILIKE unaccent(:leader_name)
-                                                  OR unaccent(title) ILIKE unaccent(:leader_name)
+        Video.all.where(leader_id: nil).where(  ' unaccent(title) ILIKE unaccent(:leader_name)
                                                   OR unaccent(description) ILIKE unaccent(:leader_name)
-                                                  OR unaccent(tags) ILIKE unaccent(:leader_nickname)
                                                   OR unaccent(title) ILIKE unaccent(:leader_nickname)
                                                   OR unaccent(description) ILIKE unaccent(:leader_nickname)',
                                                   leader_name: "%#{leader.name}%",
@@ -162,10 +162,8 @@ class Video < ApplicationRecord
       end
 
       Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where(  'unaccent(tags) ILIKE unaccent(:follower_name)
-                                                    OR unaccent(title) ILIKE unaccent(:follower_name)
+        Video.all.where(follower_id: nil).where(  ' unaccent(title) ILIKE unaccent(:follower_name)
                                                     OR unaccent(description) ILIKE unaccent(:follower_name)
-                                                    OR unaccent(tags) ILIKE unaccent(:follower_nickname)
                                                     OR unaccent(title) ILIKE unaccent(:follower_nickname)
                                                     OR unaccent(description) ILIKE unaccent(:follower_nickname)',
                                                     follower_name: "%#{follower.name}%",
