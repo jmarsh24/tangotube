@@ -19,4 +19,7 @@ class Channel < ApplicationRecord
   validates :title, presence: true, uniqueness: true
 
   has_many :videos
+
+  scope :imported,     ->   { where.not(imported: nil) }
+  scope :not_imported, ->   { where(imported: nil) }
 end

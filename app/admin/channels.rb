@@ -9,6 +9,9 @@ ActiveAdmin.register Channel do
 
   config.sort_order = 'id_asc'
 
+  scope :imported
+  scope :not_imported
+
   index do
     selectable_column
     id_column
