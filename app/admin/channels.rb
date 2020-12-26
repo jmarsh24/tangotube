@@ -1,15 +1,20 @@
 ActiveAdmin.register Channel do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  permit_params :title, :channel_id, :thumbnail_url, :imported, :imported_videos_count, :total_videos_count,
+  permit_params :title,
+                :channel_id,
+                :thumbnail_url,
+                :imported,
+                :imported_videos_count,
+                :total_videos_count,
                 :yt_api_pull_count
+
+  config.sort_order = 'id_asc'
 
   index do
     selectable_column
     id_column
+        column "Image" do |channel|
+        image_tag channel.thumbnail_url,size: "40x40" if channel.thumbnail_url.present?
+    end
     column :title
     column :channel_id
     column :imported
@@ -18,11 +23,13 @@ ActiveAdmin.register Channel do
     actions
   end
 
+
   form do |f|
     f.inputs do
       f.input :title
       f.input :channel_id
       f.input :imported
+      f.input :thumbnail_url
     end
     f.actions
   end

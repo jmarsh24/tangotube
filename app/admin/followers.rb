@@ -1,5 +1,9 @@
 ActiveAdmin.register Follower do
   permit_params :name, :reviewed, :nickname
+
+  scope :reviewed
+  scope :not_reviewed
+
   index do
     selectable_column
     id_column

@@ -14,4 +14,7 @@ class Follower < ApplicationRecord
 
   has_many :videos
 
+  scope :reviewed,     ->   { where.not(reviewed: nil) }
+  scope :not_reviewed, ->   { where(reviewed: nil) }
+
 end

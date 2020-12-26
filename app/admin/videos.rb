@@ -9,7 +9,6 @@ ActiveAdmin.register Video do
   scope :has_follower
   scope :has_youtube_match
   scope :has_acr_match
-  scope :attributes_full
 
   index do
     selectable_column
