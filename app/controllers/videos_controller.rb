@@ -9,7 +9,7 @@ class VideosController < ApplicationController
 
     @videos = Video.includes(:leader, :follower, :channel, :song)
                     .filter_videos(params.slice( :leader, :follower, :channel, :genre, :keyword ))
-                    .where.not(leader_id: [nil, false], follower_id: [nil, false], song_id: [nil, false])
+                    .where.not('leader_id IS NULL OR follower_id IS NULL OR song_id IS NULL ')
                     .references(:leader, :follower, :channel, :song)
                     .order(sort_column + ' ' + sort_direction)
 
