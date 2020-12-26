@@ -7,6 +7,7 @@ ActiveAdmin.register Video do
                 songs_attributes: [:id, :genre, :title, :artist]
 
   config.sort_order = 'id_asc'
+  config.per_page = [10, 50, 100]
 
   scope :all
   scope :has_song
@@ -24,11 +25,22 @@ ActiveAdmin.register Video do
     column :title
     column :description
     column :tags
-    column :youtube_id
+    column "YT ID", :youtube_id
     column :leader
     column :follower
     column :channel
-    column :"song.genre"
+    column :song
+    column "Genre" do |video|
+      video.song.genre.titleize if !video.song.nil?
+    end
+    column "Artist" do |video|
+      video.song.artist.titleize if !video.song.nil?
+    end
+    column :youtube_artist
+    column :youtube_song
+    column "ACR", :acr_response_code
+    column :spotify_track_name
+    column :spotify_artist_name
     actions
   end
 

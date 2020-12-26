@@ -64,15 +64,15 @@ class Video < ApplicationRecord
   scope :filter_by_follower,  ->(follower) { where('followers.name ILIKE ?', follower) }
   scope :filter_by_channel,   ->(channel)  { where('channels.title ILIKE ?', channel) }
   scope :filter_by_keyword,   ->(query)    { where('leaders.name ILIKE :query or
-                                                      followers.name ILIKE :query or
-                                                      songs.genre ILIKE :query or
-                                                      songs.title ILIKE :query or
-                                                      songs.artist ILIKE :query or
-                                                      channels.title ILIKE :query or
-                                                      spotify_artist_name ILIKE :query or
-                                                      spotify_track_name ILIKE :query or
-                                                      youtube_song ILIKE :query or
-                                                      youtube_artist ILIKE :query', query: "%#{query}%") }
+                                                    followers.name ILIKE :query or
+                                                    songs.genre ILIKE :query or
+                                                    songs.title ILIKE :query or
+                                                    songs.artist ILIKE :query or
+                                                    channels.title ILIKE :query or
+                                                    spotify_artist_name ILIKE :query or
+                                                    spotify_track_name ILIKE :query or
+                                                    youtube_song ILIKE :query or
+                                                    youtube_artist ILIKE :query', query: "%#{query}%") }
   scope :paginate,  ->(page, per_page) { offset(per_page * page).limit(per_page)}
 
   # Active Admin scopes
