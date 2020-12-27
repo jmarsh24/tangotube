@@ -4,7 +4,7 @@ git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 ruby '2.7.2'
 
 gem 'rails'
-gem 'tzinfo-data',            '>= 1.2016.7' # Don't rely on OSX/Linux timezone data
+gem 'tzinfo-data',            '~> 1.2020', '>= 1.2020.5' # Don't rely on OSX/Linux timezone data
 
 gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
 gem 'pg',                     '1.2.3'

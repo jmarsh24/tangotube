@@ -345,7 +345,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.8)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2020.4)
+    tzinfo-data (1.2020.5)
       tzinfo (>= 1.0.0)
     unf (0.1.4)
       unf_ext
@@ -411,7 +411,7 @@ DEPENDENCIES
   standard
   streamio-ffmpeg (~> 3.0, >= 3.0.2)
   turbolinks (= 5.2.1)
-  tzinfo-data (>= 1.2016.7)
+  tzinfo-data (~> 1.2020, >= 1.2020.5)
   web-console (= 4.0.2)
   webpacker (= 4.2.2)
   youtube-dl.rb (~> 0.3.1.2016.09.11.1)

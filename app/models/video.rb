@@ -86,10 +86,8 @@ class Video < ApplicationRecord
 
     def import_all_videos
       Channel.where(imported: false).order(:id).each do |channel|
-        ImportChannelWorker.perform(channel.channel_id)
+        ImportChannelWorker.perform_async(channel.channel_id)
       end
-      Video.match_dancers
-      Video.match_songs
     end
 
     def get_channel_video_ids(channel_id)
@@ -97,15 +95,14 @@ class Video < ApplicationRecord
     end
 
     def import_channel(channel_id)
-      yt_channel = GetChannelVideoIdsWorker.perform(channel_id)
-      yt_channel_videos = yt_channel.videos.map(&:id)
+      yt_channel_videos = Video.get_channel_video_ids(channel_id)
+      yt_channel = Yt::Channel.new id: channel_id
       channel = Channel.find_by(channel_id: channel_id)
-      channel_videos = channel.videos.map(&:youtube_id)
+      channel_videos = Channel.find_by(channel_id: channel_id).videos.map(&:youtube_id)
       yt_channel_videos_diff = yt_channel_videos - channel_videos
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
-        total_videos_count: yt_channel.video_count,
-        yt_api_pull_count: yt_channel.videos.count
+        total_videos_count: yt_channel_videos.count,
       )
       channel.save
 
