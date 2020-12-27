@@ -151,7 +151,7 @@ class Video < ApplicationRecord
                                                   OR unaccent(title) ILIKE unaccent(:leader_nickname)
                                                   OR unaccent(description) ILIKE unaccent(:leader_nickname)',
                                                   leader_name: "%#{leader.name}%",
-                                                  leader_nickname: "%#{leader.nickname.nil? ? "Do not match perform match" : leader.nickname }%").each do |video|
+                                                  leader_nickname: "%#{leader.nickname.blank? ? "Do not match perform match" : leader.nickname }%").each do |video|
           video.leader = leader
           video.save
         end
@@ -163,7 +163,7 @@ class Video < ApplicationRecord
                                                     OR unaccent(title) ILIKE unaccent(:follower_nickname)
                                                     OR unaccent(description) ILIKE unaccent(:follower_nickname)',
                                                     follower_name: "%#{follower.name}%",
-                                                    follower_nickname: "%#{follower.nickname.nil? ? "Do not match perform match" : follower.nickname }%").each do |video|
+                                                    follower_nickname: "%#{follower.nickname.blank? ? "Do not match perform match" : follower.nickname }%").each do |video|
           video.follower = follower
           video.save
         end
