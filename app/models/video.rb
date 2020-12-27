@@ -104,7 +104,6 @@ class Video < ApplicationRecord
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel_videos.count,
       )
-      channel.save
 
       yt_channel_videos_diff.each do |video_id|
         youtube_video = Yt::Video.new(id: video_id)
@@ -131,7 +130,6 @@ class Video < ApplicationRecord
           youtube_song: video_youtube_song_match.deep_find('track'),
           youtube_artist: video_youtube_song_match.deep_find('artist')
         )
-        video.save
 
         clipped_audio = Video.clip_audio(youtube_video.id) if video.acr_response_code.nil?
         acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
@@ -141,7 +139,6 @@ class Video < ApplicationRecord
         imported: true,
         imported_videos_count: Video.where(channel: channel).count
       )
-      channel.save
     end
 
     def match_dancers
