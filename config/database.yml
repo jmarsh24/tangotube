@@ -83,7 +83,7 @@ test:
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 10
+  pool: 5
   timeout: 5000
   database: tango_library_production
   username: justin
