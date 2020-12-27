@@ -1,7 +1,7 @@
 development:
   :concurrency: 3
 production:
-  :concurrency: 3
+  :concurrency: 1
 :queues:
   - high
   - default
