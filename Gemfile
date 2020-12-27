@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
-ruby '3.0.0'
+ruby '2.7.2'
 
 gem 'rails'
 gem 'tzinfo-data',            '~> 1.2020', '>= 1.2020.5' # Don't rely on OSX/Linux timezone data
