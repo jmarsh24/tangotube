@@ -1,0 +1,3 @@
+redis:  redis-server
+worker: bundle exec sidekiq
+rails:  PORT=3000 bundle exec rails server
