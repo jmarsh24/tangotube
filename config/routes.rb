@@ -1,7 +1,15 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   devise_for :users
+
+  authenticate :admin_user do
+    mount Sidekiq::Web => '/admin/sidekiq'
+  end
 
   root 'videos#index'
 
@@ -14,4 +22,5 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
   end
+
 end

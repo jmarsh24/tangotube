@@ -3,8 +3,7 @@ ActiveAdmin.register Video do
 
   permit_params :title, :description, :tags, :youtube_id, :leader_id, :follower_id, :channel_id, :song_id,
                 :youtube_song, :youtube_artist, :performance_date, :performance_number, :performance_total,
-                :videotype_id, :event_id,
-                songs_attributes: [:id, :genre, :title, :artist]
+                :videotype_id, :event_id
 
   config.sort_order = 'id_asc'
   config.per_page = [10, 50, 100]

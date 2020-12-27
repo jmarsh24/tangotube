@@ -86,7 +86,7 @@ class Video < ApplicationRecord
 
     def import_all_videos
       Channel.where(imported: false).order(:id).each do |channel|
-        Video.import_channel(channel.channel_id)
+        ImportChannelWorker.perform(channel.channel_id)
       end
       Video.match_dancers
       Video.match_songs
@@ -97,8 +97,7 @@ class Video < ApplicationRecord
     end
 
     def import_channel(channel_id)
-      yt_channel = Yt::Channel.new id: channel_id
-
+      yt_channel = GetChannelVideoIdsWorker.perform(channel_id)
       yt_channel_videos = yt_channel.videos.map(&:id)
       channel = Channel.find_by(channel_id: channel_id)
       channel_videos = channel.videos.map(&:youtube_id)
