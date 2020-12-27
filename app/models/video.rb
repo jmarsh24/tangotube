@@ -199,7 +199,7 @@ class Video < ApplicationRecord
       video = Video.find_by(youtube_id: video_id)
       audio_full = YoutubeDL.download(
         "https://www.youtube.com/watch?v=#{video.youtube_id}",
-        { format: '140' }
+        { format: '140' , output: '~/environment/data/audio/%(id)s.mp3'}
       )
 
       song = FFMPEG::Movie.new(audio_full.filename.to_s)
