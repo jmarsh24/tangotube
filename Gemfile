@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
-ruby '2.7.2'
+ruby '3.0.0'
 
 gem 'rails'
 gem 'tzinfo-data',            '~> 1.2020', '>= 1.2020.5' # Don't rely on OSX/Linux timezone data
@@ -45,7 +45,7 @@ end
 group :development do
   gem 'annotate',             '~> 2.7', '>= 2.7.1'
   gem 'byebug',               '~> 11.1', '>= 11.1.3'
-  gem 'listen',               '3.2.1'
+  gem 'listen',               '~> 3.2'
   gem 'web-console',          '4.0.2'
 end
 
