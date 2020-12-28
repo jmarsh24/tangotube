@@ -20,6 +20,6 @@ class Channel < ApplicationRecord
 
   has_many :videos
 
-  scope :imported,     ->   { where.not(imported: nil) }
-  scope :not_imported, ->   { where(imported: nil) }
+  scope :imported,     ->   { where(imported: true) }
+  scope :not_imported, ->   { where(imported: false) }
 end
