@@ -14,7 +14,7 @@ ActiveAdmin.register Video do
   scope :has_youtube_match
   scope :has_acr_match
 
-  filter :id_cont, label: 'ID'
+  filter :id_cont, label: 'id'
   filter :leader_name_cont,   label: 'Leader',    collection: proc { Leader.order(:name) }
   filter :follower_name_cont, label: 'Follower',  collection: proc { Follower.order(:name) }
   filter :channel_title_cont,  label: 'Channel',   collection: proc { Channel.order(:title) }
@@ -37,7 +37,7 @@ ActiveAdmin.register Video do
     column :title
     column :description
     column :tags
-    column "YT ID", :youtube_id
+    column "Yt Id", :youtube_id
     column :leader
     column :follower
     column :song

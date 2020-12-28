@@ -84,7 +84,7 @@ class Video < ApplicationRecord
 
   class << self
 
-    def import_all_videos
+    def import_all_channels
       Channel.where(imported: false).order(:id).each do |channel|
         ImportChannelWorker.perform_async(channel.channel_id)
       end
@@ -100,45 +100,46 @@ class Video < ApplicationRecord
       channel = Channel.find_by(channel_id: channel_id)
       channel_videos = Channel.find_by(channel_id: channel_id).videos.map(&:youtube_id)
       yt_channel_videos_diff = yt_channel_videos - channel_videos
-      channel.update(
-        thumbnail_url: yt_channel.thumbnail_url,
-        total_videos_count: yt_channel.videos_count
-      )
 
       yt_channel_videos_diff.each do |video_id|
-        youtube_video = Yt::Video.new(id: video_id)
-
-        video_output = Video.new(
-          youtube_id: youtube_video.id,
-          title: youtube_video.title,
-          description: youtube_video.description,
-          upload_date: youtube_video.published_at,
-          length: youtube_video.length,
-          duration: youtube_video.duration,
-          view_count: youtube_video.view_count,
-          tags: youtube_video.tags,
-          channel: channel
-        )
-        video_output.save
-        video = Video.find_by(youtube_id: youtube_video.id)
-
-        video_youtube_song_match = JSON.parse(YoutubeDL.download(
-          "https://www.youtube.com/watch?v=#{video.youtube_id}",
-          { skip_download: true }
-        ).to_json).extend Hashie::Extensions::DeepFind
+        video = Video.import_video(video_id)
         video.update(
-          youtube_song: video_youtube_song_match.deep_find('track'),
-          youtube_artist: video_youtube_song_match.deep_find('artist')
+          channel: Channel.find_by(channel_id: channel_id)
         )
-
-        clipped_audio = Video.clip_audio(youtube_video.id) if video.acr_response_code.nil?
-        acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
-        Video.parse_acr_response(acr_response_body, youtube_video.id) if video.acr_response_code.nil?
       end
+
       channel.update(
+        thumbnail_url: yt_channel.thumbnail_url,
+        total_videos_count: yt_channel.video_count,
         imported: true,
         imported_videos_count: Video.where(channel: channel).count
       )
+    end
+
+    def import_video(yt_video_id)
+      yt_video = Yt::Video.new id: yt_video_id
+
+      youtube_dl_output = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{yt_video_id}",
+                                                         skip_download: true).to_json
+                                    ).extend Hashie::Extensions::DeepFind
+
+      video = Video.create( youtube_id:     yt_video.id,
+                            title:          yt_video.title,
+                            description:    yt_video.description,
+                            upload_date:    yt_video.published_at,
+                            length:         yt_video.length,
+                            duration:       yt_video.duration,
+                            view_count:     yt_video.view_count,
+                            tags:           yt_video.tags,
+                            youtube_song:   youtube_dl_output.deep_find('track'),
+                            youtube_artist: youtube_dl_output.deep_find('artist')
+                          )
+
+      clipped_audio = Video.clip_audio(yt_video_id) if video.acr_response_code.nil?
+      acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
+      Video.parse_acr_response(acr_response_body, yt_video_id) if video.acr_response_code.nil?
+
+      video
     end
 
     def match_dancers
