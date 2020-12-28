@@ -1,5 +1,4 @@
 ActiveAdmin.register Video do
-  includes :leader, :follower, :song, :channel
 
   permit_params :title, :description, :tags, :youtube_id, :leader_id, :follower_id, :channel_id, :song_id,
                 :youtube_song, :youtube_artist, :performance_date, :performance_number, :performance_total,
@@ -15,9 +14,23 @@ ActiveAdmin.register Video do
   scope :has_youtube_match
   scope :has_acr_match
 
+  filter :id_cont, label: 'ID'
+  filter :leader_name_cont,   label: 'Leader',    collection: proc { Leader.order(:name) }
+  filter :follower_name_cont, label: 'Follower',  collection: proc { Follower.order(:name) }
+  filter :channel_title_cont,  label: 'Channel',   collection: proc { Channel.order(:title) }
+  filter :song_genre, as: :select, collections: proc {Songs.genres}
+  filter :youtube_id_cont, label: 'Youtube ID '
+  filter :title_cont, label: 'Title'
+  filter :description_cont, label: 'Description'
+  filter :created_at, as: :date_range
+
   index do
     selectable_column
     id_column
+      column "Logo" do |video|
+      image_tag video.channel.thumbnail_url, height: 30
+    end
+    column :channel
     column "Thumbnail" do |video|
       image_tag "http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100
     end
@@ -27,7 +40,6 @@ ActiveAdmin.register Video do
     column "YT ID", :youtube_id
     column :leader
     column :follower
-    column :channel
     column :song
     column "Genre" do |video|
       video.song.genre.titleize if !video.song.nil?

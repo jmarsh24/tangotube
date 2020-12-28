@@ -102,7 +102,7 @@ class Video < ApplicationRecord
       yt_channel_videos_diff = yt_channel_videos - channel_videos
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
-        total_videos_count: yt_channel_videos.count,
+        total_videos_count: yt_channel.videos_count
       )
 
       yt_channel_videos_diff.each do |video_id|
