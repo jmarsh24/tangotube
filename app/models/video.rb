@@ -108,10 +108,12 @@ class Video < ApplicationRecord
         )
       end
 
+      imported = imported_videos_count >= total_videos_count ? true : false
+
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
-        imported: true,
+        imported: imported,
         imported_videos_count: Video.where(channel: channel).count
       )
     end
