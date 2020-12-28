@@ -86,7 +86,8 @@ class Video < ApplicationRecord
 
     def import_all_channels
       Channel.where(imported: false).order(:id).each do |channel|
-        ImportChannelWorker.perform_async(channel.channel_id)
+        channel_id = channel.channel_id
+        ImportChannelWorker.perform_async(channel_id)
       end
     end
 
