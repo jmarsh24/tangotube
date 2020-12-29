@@ -91,62 +91,14 @@ class Video < ApplicationRecord
       end
     end
 
-    def get_channel_video_ids(channel_id)
-      `youtube-dl https://www.youtube.com/channel/#{channel_id}  --get-id --skip-download`.split
-    end
-
-    def import_channel(channel_id)
-      yt_channel_videos = Video.get_channel_video_ids(channel_id)
-      yt_channel = Yt::Channel.new id: channel_id
-      channel = Channel.find_by(channel_id: channel_id)
-      channel_videos = Channel.find_by(channel_id: channel_id).videos.map(&:youtube_id)
-      yt_channel_videos_diff = yt_channel_videos - channel_videos
-
-      yt_channel_videos_diff.each do |video_id|
-        video = Video.import_video(video_id)
-        video.update(
-          channel: Channel.find_by(channel_id: channel_id)
-        )
+    def match_all_music
+      Video.where(acr_response_code: nil).order(:id).each do |video|
+        video_id = video.id
+        AcrMusicMatchWorker.perform_async(video_id)
       end
-
-      imported = channel.imported_videos_count >= channel.total_videos_count ? true : false
-      imported_videos_count = Video.where(channel_id: channel.id).count
-
-      channel.update(
-        thumbnail_url: yt_channel.thumbnail_url,
-        total_videos_count: yt_channel.video_count,
-        imported: imported,
-        imported_videos_count: imported_videos_count
-      )
     end
 
-    def import_video(yt_video_id)
-      yt_video = Yt::Video.new id: yt_video_id
-
-      youtube_dl_output = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{yt_video_id}",
-                                                         skip_download: true).to_json
-                                    ).extend Hashie::Extensions::DeepFind
-
-      video = Video.create( youtube_id:     yt_video.id,
-                            title:          yt_video.title,
-                            description:    yt_video.description,
-                            upload_date:    yt_video.published_at,
-                            length:         yt_video.length,
-                            duration:       yt_video.duration,
-                            view_count:     yt_video.view_count,
-                            tags:           yt_video.tags,
-                            youtube_song:   youtube_dl_output.deep_find('track'),
-                            youtube_artist: youtube_dl_output.deep_find('artist')
-                          )
-
-      clipped_audio = Video.clip_audio(yt_video_id) if video.acr_response_code.nil?
-      acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
-      Video.parse_acr_response(acr_response_body, yt_video_id) if video.acr_response_code.nil?
-
-      video
-    end
-
-    def match_dancers
+    def match_all_dancers
       Leader.all.each do |leader|
         Video.all.where(leader_id: nil).where(  ' unaccent(title) ILIKE unaccent(:leader_name)
                                                   OR unaccent(description) ILIKE unaccent(:leader_name)
@@ -170,6 +122,63 @@ class Video < ApplicationRecord
           video.save
         end
       end
+    end
+
+    def get_channel_video_ids(channel_id)
+      `youtube-dl https://www.youtube.com/channel/#{channel_id}  --get-id --skip-download`.split
+    end
+
+    def import_channel(channel_id)
+      yt_channel = Yt::Channel.new id: channel_id
+      yt_channel_video_count= yt_channel.video_count
+
+      yt_channel_videos = yt_channel_video_count >= 500 ? Video.get_channel_video_ids(channel_id) : yt_channel.videos.map(&:id)
+
+      channel = Channel.find_by(channel_id: channel_id)
+      channel_videos = channel.videos.map(&:youtube_id)
+      yt_channel_videos_diff = yt_channel_videos - channel_videos
+
+      yt_channel_videos_diff.each do |video_id|
+        video = Video.import_video(video_id)
+        video.update(channel: channel)
+      end
+
+      imported = channel.imported_videos_count >= channel.total_videos_count ? true : false
+      imported_videos_count = Video.where(channel_id: channel.id).count
+
+      channel.update(
+        thumbnail_url: yt_channel.thumbnail_url,
+        total_videos_count: yt_channel.video_count,
+        imported: imported,
+        imported_videos_count: imported_videos_count
+      )
+    end
+
+    def import_video(youtube_id)
+      yt_video = Yt::Video.new id: youtube_id
+
+      youtube_dl_output = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{youtube_id}",
+                                      skip_download: true).to_json).extend Hashie::Extensions::DeepFind
+
+      video = Video.create( youtube_id:     yt_video.id,
+                            title:          yt_video.title,
+                            description:    yt_video.description,
+                            upload_date:    yt_video.published_at,
+                            length:         yt_video.length,
+                            duration:       yt_video.duration,
+                            view_count:     yt_video.view_count,
+                            tags:           yt_video.tags,
+                            youtube_song:   youtube_dl_output.deep_find('track'),
+                            youtube_artist: youtube_dl_output.deep_find('artist')
+                          )
+      video
+    end
+
+    def acr_music_match(youtube_id)
+      video = Video.find_by(youtube_id: youtube_id)
+      clipped_audio = Video.clip_audio(youtube_id) if video.acr_response_code.nil?
+      acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
+      Video.parse_acr_response(acr_response_body, youtube_id) if video.acr_response_code.nil?
     end
 
     def match_songs
@@ -284,11 +293,11 @@ class Video < ApplicationRecord
           acr_response_code: video['status']['code']
         )
       end
-    rescue Module
-    rescue RestClient::Exceptions::OpenTimeout
-    rescue FFMPEG::Error
-    rescue Errno::ENOENT
-    rescue StandardError
+      rescue Module
+      rescue RestClient::Exceptions::OpenTimeout
+      rescue FFMPEG::Error
+      rescue Errno::ENOENT
+      rescue StandardError
     end
 
     # accepts file path and submits a http request to ACR Cloud API

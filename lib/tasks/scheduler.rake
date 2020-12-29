@@ -1,20 +1,26 @@
 desc 'This task populates videos'
 task import_all_channels: :environment do
-  puts 'Populating videos'
+  puts 'Populating videos from channels'
   Video.import_all_channels
   puts 'done.'
 end
 
 desc 'This task populates videos'
 task match_songs: :environment do
-  puts 'Populating songs'
+  puts 'Matching songs'
   Video.match_songs
   puts 'done.'
 end
 
 desc 'This task populates videos'
 task match_dancers: :environment do
-  puts 'Populating songs'
+  puts 'Matching dancers'
   Video.match_dancers
+  puts 'done.'
+end
+desc 'This task populates videos'
+task match_all_music: :environment do
+  puts 'Matching music with ACR Cloud'
+  Video.match_all_music
   puts 'done.'
 end

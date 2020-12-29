@@ -2,7 +2,7 @@ require 'csv'
 
 puts 'Seeding process started'
 
-CSV.foreach('data/tangodb-datasets/el_recodo_songs_2.csv', headers: true) do |column|
+CSV.foreach('data/tangodb-datasets/el_recodo_songs.csv', headers: true) do |column|
   date = column[0]
   artist = column[1]
   title = column[2]
