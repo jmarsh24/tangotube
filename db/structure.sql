@@ -150,9 +150,9 @@ CREATE TABLE public.channels (
     updated_at timestamp(6) without time zone NOT NULL,
     thumbnail_url character varying,
     imported boolean DEFAULT false,
-    imported_videos_count integer,
-    total_videos_count integer,
-    yt_api_pull_count integer
+    imported_videos_count integer DEFAULT 0,
+    total_videos_count integer DEFAULT 0,
+    yt_api_pull_count integer DEFAULT 0
 );
 
 
@@ -770,6 +770,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201220175426'),
 ('20201220232439'),
 ('20201223085023'),
-('20201223085038');
+('20201223085038'),
+('20201229202305');
 
 

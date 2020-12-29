@@ -16,7 +16,7 @@ ActiveAdmin.register Channel do
     selectable_column
     id_column
     column "Image" do |channel|
-      image_tag channel.thumbnail_url,size: "40x40" if channel.thumbnail_url.present?
+      image_tag channel.thumbnail_url, size: "40x40" if channel.thumbnail_url.present?
     end
     column :title
     column :channel_id

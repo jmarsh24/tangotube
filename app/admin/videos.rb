@@ -27,9 +27,9 @@ ActiveAdmin.register Video do
   index do
     selectable_column
     id_column
-    column "Logo" do |video|
-      image_tag video.channel.thumbnail_url, height: 30 if !video.channel.nil?
-    end
+    # column "Logo" do |video|
+    #   image_tag video.channel.thumbnail_url, height: 30
+    # end
     column :channel
     column "Thumbnail" do |video|
       image_tag "http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100

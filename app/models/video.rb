@@ -93,8 +93,8 @@ class Video < ApplicationRecord
 
     def match_all_music
       Video.where(acr_response_code: nil).order(:id).each do |video|
-        video_id = video.id
-        AcrMusicMatchWorker.perform_async(video_id)
+        youtube_id = video.youtube_id
+        AcrMusicMatchWorker.perform_async(youtube_id)
       end
     end
 
@@ -105,7 +105,7 @@ class Video < ApplicationRecord
                                                   OR unaccent(title) ILIKE unaccent(:leader_nickname)
                                                   OR unaccent(description) ILIKE unaccent(:leader_nickname)',
                                                   leader_name: "%#{leader.name}%",
-                                                  leader_nickname: "%#{leader.nickname.blank? ? "Do not match perform match" : leader.nickname }%").each do |video|
+                                                  leader_nickname: "%#{leader.nickname.blank? ? "Do not perform match" : leader.nickname }%").each do |video|
           video.leader = leader
           video.save
         end
@@ -117,8 +117,32 @@ class Video < ApplicationRecord
                                                     OR unaccent(title) ILIKE unaccent(:follower_nickname)
                                                     OR unaccent(description) ILIKE unaccent(:follower_nickname)',
                                                     follower_name: "%#{follower.name}%",
-                                                    follower_nickname: "%#{follower.nickname.blank? ? "Do not match perform match" : follower.nickname }%").each do |video|
+                                                    follower_nickname: "%#{follower.nickname.blank? ? "Do not perform match" : follower.nickname }%").each do |video|
           video.follower = follower
+          video.save
+        end
+      end
+    end
+
+    def match_songs
+      Song.all.each do |song|
+        Video.where(song_id: nil)
+             .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
+                      OR unaccent(youtube_song) ILIKE unaccent(:song_title)
+                      OR unaccent(title) ILIKE unaccent(:song_title)
+                      OR unaccent(description) ILIKE unaccent(:song_title)
+                      OR unaccent(tags) ILIKE unaccent(:song_title)',
+                      song_title: "%#{song.title}%")
+             .where('spotify_artist_name ILIKE :song_artist_keyword
+                      OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
+                      OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
+                      song_artist_keyword: "%#{song.last_name_search}%")
+             .each do |video|
+          video.song = song
           video.save
         end
       end
@@ -130,7 +154,7 @@ class Video < ApplicationRecord
 
     def import_channel(channel_id)
       yt_channel = Yt::Channel.new id: channel_id
-      yt_channel_video_count= yt_channel.video_count
+      yt_channel_video_count = yt_channel.video_count
 
       yt_channel_videos = yt_channel_video_count >= 500 ? Video.get_channel_video_ids(channel_id) : yt_channel.videos.map(&:id)
 
@@ -176,38 +200,14 @@ class Video < ApplicationRecord
 
     def acr_music_match(youtube_id)
       video = Video.find_by(youtube_id: youtube_id)
-      clipped_audio = Video.clip_audio(youtube_id) if video.acr_response_code.nil?
-      acr_response_body = Video.acr_sound_match(clipped_audio) if video.acr_response_code.nil?
-      Video.parse_acr_response(acr_response_body, youtube_id) if video.acr_response_code.nil?
-    end
-
-    def match_songs
-      Song.all.each do |song|
-        Video.where(song_id: nil)
-             .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
-                      OR unaccent(youtube_song) ILIKE unaccent(:song_title)
-                      OR unaccent(title) ILIKE unaccent(:song_title)
-                      OR unaccent(description) ILIKE unaccent(:song_title)
-                      OR unaccent(tags) ILIKE unaccent(:song_title)',
-                      song_title: "%#{song.title}%")
-             .where('spotify_artist_name ILIKE :song_artist_keyword
-                      OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
-                      song_artist_keyword: "%#{song.last_name_search}%")
-             .each do |video|
-          video.song = song
-          video.save
-        end
-      end
+      clipped_audio = Video.clip_audio(youtube_id)
+      acr_response_body = Video.acr_sound_match(clipped_audio)
+      Video.parse_acr_response(acr_response_body, youtube_id)
     end
 
     # Generates audio clip from youtube_id and outputs file path
-    def clip_audio(video_id)
-      video = Video.find_by(youtube_id: video_id)
+    def clip_audio(youtube_id)
+      video = Video.find_by(youtube_id: youtube_id)
       audio_full = YoutubeDL.download(
         "https://www.youtube.com/watch?v=#{video.youtube_id}",
         { format: '140' , output: '~/environment/data/audio/%(id)s.mp3'}
