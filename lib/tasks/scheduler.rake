@@ -6,16 +6,16 @@ task import_all_channels: :environment do
 end
 
 desc 'This task populates videos'
-task match_songs: :environment do
+task match_all_songs: :environment do
   puts 'Matching songs'
-  Video.match_songs
+  Video.match_all_songs
   puts 'done.'
 end
 
 desc 'This task populates videos'
-task match_dancers: :environment do
+task match_all_dancers: :environment do
   puts 'Matching dancers'
-  Video.match_dancers
+  Video.match_all_dancers
   puts 'done.'
 end
 desc 'This task populates videos'

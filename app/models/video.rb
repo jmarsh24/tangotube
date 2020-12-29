@@ -72,7 +72,9 @@ class Video < ApplicationRecord
                                                     spotify_artist_name ILIKE :query or
                                                     spotify_track_name ILIKE :query or
                                                     youtube_song ILIKE :query or
-                                                    youtube_artist ILIKE :query', query: "%#{query}%") }
+                                                    youtube_artist ILIKE :query or
+                                                    title ILIKE :query or
+                                                    description ILIKE :query', query: "%#{query}%") }
   scope :paginate,  ->(page, per_page) { offset(per_page * page).limit(per_page)}
 
   # Active Admin scopes
@@ -124,7 +126,7 @@ class Video < ApplicationRecord
       end
     end
 
-    def match_songs
+    def match_all_songs
       Song.all.each do |song|
         Video.where(song_id: nil)
              .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
