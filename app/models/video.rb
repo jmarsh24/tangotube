@@ -87,7 +87,7 @@ class Video < ApplicationRecord
   class << self
 
     def update_imported_video_counts
-      Channel.each do |channel|
+      Channel.all.each do |channel|
         channel.update(imported_videos_count: channel.videos.count)
       end
     end
