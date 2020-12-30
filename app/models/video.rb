@@ -164,9 +164,8 @@ class Video < ApplicationRecord
       channel_videos = channel.videos.map(&:youtube_id)
       yt_channel_videos_diff = yt_channel_videos - channel_videos
 
-      yt_channel_videos_diff.each do |video_id|
-        video = Video.import_video(video_id)
-        video.update(channel: channel)
+      yt_channel_videos_diff.each do |youtube_id|
+        ImportVideoWorker.perform_async(youtube_id)
       end
 
       imported = channel.imported_videos_count >= channel.total_videos_count ? true : false
@@ -194,10 +193,10 @@ class Video < ApplicationRecord
                             duration:       yt_video.duration,
                             view_count:     yt_video.view_count,
                             tags:           yt_video.tags,
+                            channel:        Channel.find_by(channel_id: yt_video.channel_id),
                             youtube_song:   youtube_dl_output.deep_find('track'),
                             youtube_artist: youtube_dl_output.deep_find('artist')
                           )
-      video
     end
 
     def acr_music_match(youtube_id)
