@@ -73,8 +73,8 @@ class Video < ApplicationRecord
                                                     spotify_track_name ILIKE :query or
                                                     youtube_song ILIKE :query or
                                                     youtube_artist ILIKE :query or
-                                                    title ILIKE :query or
-                                                    description ILIKE :query', query: "%#{query}%") }
+                                                    videos.title ILIKE :query or
+                                                    videos.description ILIKE :query', query: "%#{query}%") }
   scope :paginate,  ->(page, per_page) { offset(per_page * page).limit(per_page)}
 
   # Active Admin scopes
