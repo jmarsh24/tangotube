@@ -173,13 +173,13 @@ class Video < ApplicationRecord
       yt_channel_videos_diff.each do |youtube_id|
         ImportVideoWorker.perform_async(youtube_id)
       end
-
-      imported_videos_count = Video.where(channel_id: channel.id).count
       imported_state = channel.imported_videos_count = channel.total_videos_count ? true : false
+      imported_videos_count = Video.where(channel_id: channel.id).count
+
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
-        imported: imported,
+        imported: imported_state,
         imported_videos_count: imported_videos_count
       )
     end
