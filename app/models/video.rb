@@ -157,7 +157,7 @@ class Video < ApplicationRecord
     end
 
     def get_channel_video_ids(channel_id)
-      `youtube-dl https://www.youtube.com/channel/#{channel_id}  --get-id --skip-download`.split
+      `youtube-dl https://www.youtube.com/channel/#{channel_id}/videos  --get-id --skip-download`.split
     end
 
     def import_channel(channel_id)
