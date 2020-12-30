@@ -174,9 +174,8 @@ class Video < ApplicationRecord
         ImportVideoWorker.perform_async(youtube_id)
       end
 
-      imported = channel.imported_videos_count >= channel.total_videos_count ? true : false
       imported_videos_count = Video.where(channel_id: channel.id).count
-
+      imported_state = channel.imported_videos_count = channel.total_videos_count ? true : false
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
