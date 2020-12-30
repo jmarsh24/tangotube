@@ -24,3 +24,9 @@ task match_all_music: :environment do
   Video.match_all_music
   puts 'done.'
 end
+desc 'This task populates videos'
+task update_imported_video_counts: :environment do
+  puts 'Updating_imported_video_counts'
+  Video.update_imported_video_counts
+  puts 'done.'
+end

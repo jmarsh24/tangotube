@@ -32,12 +32,12 @@ ActiveAdmin.register Video do
     # end
     column :channel
     column "Thumbnail" do |video|
-      image_tag "http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100
+      link_to( image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank )
     end
     column :title
     column :description
     column :tags
-    column "Yt Id", :youtube_id
+    column "Youtube ID", :youtube_id
     column :leader
     column :follower
     column :song
