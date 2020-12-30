@@ -188,8 +188,10 @@ class Video < ApplicationRecord
       yt_video = Yt::Video.new id: youtube_id
 
       if Channel.find_by(channel_id: yt_video.channel_id).nil?
+
         Channel.create( channel_id: yt_video.channel_id,
                         title: yt_video.channel_title )
+
       end
 
       youtube_dl_output = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{youtube_id}",
