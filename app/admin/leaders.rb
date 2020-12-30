@@ -3,6 +3,7 @@ ActiveAdmin.register Leader do
 
   config.sort_order = 'id_asc'
 
+  scope :all
   scope :reviewed
   scope :not_reviewed
 
