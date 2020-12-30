@@ -157,7 +157,7 @@ class Video < ApplicationRecord
     end
 
     def get_channel_video_ids(channel_id)
-      `youtube-dl https://www.youtube.com/channel/#{channel_id}  --get-id --skip-download`.split
+      `youtube-dl https://www.youtube.com/channel/#{channel_id}/videos  --get-id --skip-download`.split
     end
 
     def import_channel(channel_id)
@@ -188,8 +188,8 @@ class Video < ApplicationRecord
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
 
-      Channel.find_by(channel_id: yt_video.channel_id).nil? ? Channel.create( channel_id: yt_video.channel_id,
-                                                                              title: yt_video.channel_title )
+      Channel.create( channel_id: yt_video.channel_id,
+                      title: yt_video.channel_title ) if Channel.find_by(channel_id: yt_video.channel_id).nil?
 
       youtube_dl_output = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{youtube_id}",
                                       skip_download: true).to_json).extend Hashie::Extensions::DeepFind
