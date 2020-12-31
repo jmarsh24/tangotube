@@ -133,26 +133,50 @@ class Video < ApplicationRecord
     end
 
     def match_all_songs
-      Song.filter_by_active.sort_by_popularity.each do |song|
-        Video.where(song_id: nil)
-             .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
-                      OR unaccent(youtube_song) ILIKE unaccent(:song_title)
-                      OR unaccent(title) ILIKE unaccent(:song_title)
-                      OR unaccent(description) ILIKE unaccent(:song_title)
-                      OR unaccent(tags) ILIKE unaccent(:song_title)',
-                      song_title: "%#{song.title}%")
-             .where('spotify_artist_name ILIKE :song_artist_keyword
-                      OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
-                      OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
-                      song_artist_keyword: "%#{song.last_name_search}%").each do |video|
-          video.update( song: song,
-                        scanned_song: true)
-        end
+
+      video_count = Video.all.count
+
+      Video.where.not(song: nil).where(scanned_song: false).order(:id).each do |video|
+        video.update(scanned_song: true)
+        puts "Video id: #{video.id} / #{video_count}"
       end
+
+      Video.where(song: [nil, false])
+           .where(scanned_song: false)
+           .order(:id)
+           .each do |video|
+              song = Song.filter_by_active.sort_by_popularity
+                         .where(   'unaccent(title) ILIKE unaccent(:youtube_song)
+                                 OR unaccent(title) ILIKE unaccent(:spotify_track_name)
+                                 OR unaccent(title) ILIKE unaccent(:title)
+                                 OR unaccent(title) ILIKE unaccent(:description)
+                                 OR unaccent(title) ILIKE unaccent(:tags)',
+                                            youtube_song: "%#{video.youtube_song}%",
+                                      spotify_track_name: "%#{video.spotify_track_name}%",
+                                                   title: "%#{video.title}%",
+                                             description: "%#{video.description}%",
+                                                    tags: "%#{video.tags}%"
+                              )
+                          .where(   'unaccent(last_name_search) ILIKE unaccent(:youtube_artist)
+                                  OR unaccent(last_name_search) ILIKE unaccent(:spotify_artist_name)
+                                  OR unaccent(last_name_search) ILIKE unaccent(:spotify_artist_name_2)
+                                  OR unaccent(last_name_search) ILIKE unaccent(:spotify_artist_name_3)
+                                  OR unaccent(last_name_search) ILIKE unaccent(:spotify_album_name)
+                                  OR unaccent(last_name_search) ILIKE unaccent(:title)
+                                  OR unaccent(last_name_search) ILIKE unaccent(:description)
+                                  OR unaccent(last_name_search) ILIKE unaccent(:tags)',
+                                         youtube_artist: "%#{video.youtube_artist}",
+                                    spotify_artist_name: "%#{video.spotify_artist_name}",
+                                  spotify_artist_name_2: "%#{video.spotify_artist_name_2}",
+                                  spotify_artist_name_3: "%#{video.spotify_artist_name_3}",
+                                     spotify_album_name: "%#{video.spotify_album_name}",
+                                                  title: "%#{video.title}",
+                                            description: "%#{video.description}",
+                                                   tags: "%#{video.tags}"
+                                ).first
+              song.present? ? video.update( song: song, scanned_song: true) : video.update( scanned_song: true )
+              puts "Video id: #{video.id} / #{video_count}"
+            end
     end
 
     def calc_song_popularity
