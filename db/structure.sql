@@ -365,7 +365,8 @@ CREATE TABLE public.videos (
     acr_response_code integer,
     spotify_artist_name_3 character varying,
     length interval,
-    channel_id bigint
+    channel_id bigint,
+    scanned_song boolean DEFAULT false
 );
 
 
@@ -702,6 +703,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201223085023'),
 ('20201223085038'),
 ('20201229202305'),
-('20201231063836');
+('20201231063836'),
+('20201231101018');
 
 

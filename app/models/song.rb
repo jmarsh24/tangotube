@@ -21,4 +21,7 @@ class Song < ApplicationRecord
   validates :artist, presence: true
 
   has_many :videos
+
+  scope :sort_by_popularity, -> { order(popularity: :desc) }
+  scope :filter_by_active, -> { where(active: true) }
 end

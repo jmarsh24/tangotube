@@ -133,7 +133,7 @@ class Video < ApplicationRecord
     end
 
     def match_all_songs
-      Song.all.each do |song|
+      Song.filter_by_active.sort_by_popularity.each do |song|
         Video.where(song_id: nil)
              .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
                       OR unaccent(youtube_song) ILIKE unaccent(:song_title)
@@ -148,10 +148,9 @@ class Video < ApplicationRecord
                       OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
                       OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
                       OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
-                      song_artist_keyword: "%#{song.last_name_search}%")
-             .each do |video|
-          video.song = song
-          video.save
+                      song_artist_keyword: "%#{song.last_name_search}%").each do |video|
+          video.update( song: song,
+                        scanned_song: true)
         end
       end
     end
