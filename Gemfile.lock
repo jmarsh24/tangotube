@@ -40,6 +40,7 @@ GEM
     active_link_to (1.0.5)
       actionpack
       addressable
+    active_material (1.4.2)
     activeadmin (2.9.0)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (>= 3.1, < 5.0)
@@ -49,6 +50,13 @@ GEM
       kaminari (~> 1.0, >= 1.2.1)
       railties (>= 5.2, < 6.2)
       ransack (~> 2.1, >= 2.1.1)
+    activeadmin_addons (1.7.1)
+      active_material
+      railties
+      require_all (~> 1.5)
+      sass
+      select2-rails (~> 4.0)
+      xdan-datetimepicker-rails (~> 2.5.1)
     activejob (6.0.3.4)
       activesupport (= 6.0.3.4)
       globalid (>= 0.3.6)
@@ -251,6 +259,7 @@ GEM
       ffi (~> 1.0)
     redis (4.2.5)
     regexp_parser (1.8.2)
+    require_all (1.5.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -297,6 +306,11 @@ GEM
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.2)
     rubyzip (2.3.0)
+    sass (3.7.4)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -307,6 +321,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    select2-rails (4.0.13)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -364,6 +379,9 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    xdan-datetimepicker-rails (2.5.4)
+      jquery-rails
+      rails (>= 3.2.16)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     youtube-dl.rb (0.3.1.2016.09.11.1)
@@ -378,6 +396,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to (~> 1.0, >= 1.0.5)
   activeadmin (~> 2.8, >= 2.8.1)
+  activeadmin_addons
   amazing_print (~> 1.2, >= 1.2.2)
   annotate (~> 2.7, >= 2.7.1)
   base64 (~> 0.1.0)
