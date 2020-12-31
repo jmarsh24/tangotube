@@ -56,9 +56,7 @@ class Video < ApplicationRecord
   belongs_to :leader, required: false
   belongs_to :follower, required: false
   belongs_to :song, required: false
-  belongs_to :channel, required: false
-
-  accepts_nested_attributes_for :song, allow_destroy: true
+  belongs_to :channel, required: true
 
   scope :filter_by_genre,     ->(genre)    { where('songs.genre ILIKE ?', genre) }
   scope :filter_by_leader,    ->(leader)   { where('leaders.name ILIKE ?', leader) }
@@ -214,13 +212,13 @@ class Video < ApplicationRecord
       yt_channel_videos_diff.each do |youtube_id|
         ImportVideoWorker.perform_async(youtube_id)
       end
-      imported_state = channel.imported_videos_count = channel.total_videos_count ? true : false
+
       imported_videos_count = Video.where(channel_id: channel.id).count
 
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
-        imported: imported_state,
+        imported: true,
         imported_videos_count: imported_videos_count
       )
     end
