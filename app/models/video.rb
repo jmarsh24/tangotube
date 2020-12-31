@@ -156,6 +156,25 @@ class Video < ApplicationRecord
       end
     end
 
+    def calc_song_popularity
+      Song.column_defaults["popularity"]
+      Song.column_defaults["occur_count"]
+
+      occur_num = Video.pluck(:song_id).compact!.tally
+      max_value = occur_num.values.max
+      popularity = occur_num.transform_values {|v| (v.to_f / max_value.to_f * 100).round }
+
+      occur_num.each do |key,value|
+        song = Song.find(key)
+        song.update(occur_count: value)
+      end
+
+      popularity.each do |key,value|
+        song = Song.find(key)
+        song.update(popularity: value)
+      end
+    end
+
     def get_channel_video_ids(channel_id)
       `youtube-dl https://www.youtube.com/channel/#{channel_id}/videos  --get-id --skip-download`.split
     end
