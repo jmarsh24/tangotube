@@ -1,5 +1,6 @@
 ActiveAdmin.register Song do
   permit_params :genre, :title, :artist, :artist_2, :active, :last_name_search, :date
+  actions :all
 
   config.sort_order = 'id_asc'
 
@@ -11,8 +12,8 @@ ActiveAdmin.register Song do
     column :artist
     column :artist_2
     column :last_name_search
-    toggle_bool_column :active
     column :date
+    column :active
     actions
   end
 end

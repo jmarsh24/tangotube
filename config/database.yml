@@ -85,6 +85,8 @@ test:
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 10
   timeout: 5000
+  variables:
+    statement_timeout: <%= ENV["STATEMENT_TIMEOUT"] || "5s" %>
   database: tango_library_production
   username: justin
   password: <%= ENV['TANGO_LIBRARY_DATABASE_PASSWORD'] %>
