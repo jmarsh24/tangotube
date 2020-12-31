@@ -7,6 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  reviewed   :boolean
+#  nickname   :string
 #
 
 class Leader < ApplicationRecord

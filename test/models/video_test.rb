@@ -39,6 +39,7 @@
 #  spotify_artist_name_3 :string
 #  length                :interval
 #  channel_id            :bigint
+#  scanned_song          :boolean          default(FALSE)
 #
 
 or# == Schema Information

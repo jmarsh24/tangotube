@@ -39,6 +39,7 @@
 #  spotify_artist_name_3 :string
 #  length                :interval
 #  channel_id            :bigint
+#  scanned_song          :boolean          default(FALSE)
 #
 
 class Video < ApplicationRecord
@@ -63,7 +64,8 @@ class Video < ApplicationRecord
   scope :filter_by_leader,    ->(leader)   { where('leaders.name ILIKE ?', leader) }
   scope :filter_by_follower,  ->(follower) { where('followers.name ILIKE ?', follower) }
   scope :filter_by_channel,   ->(channel)  { where('channels.title ILIKE ?', channel) }
-  scope :filter_by_keyword,   ->(query)    { where('leaders.name ILIKE :query or
+  scope :filter_by_keyword,   lambda { |query|
+                                where('leaders.name ILIKE :query or
                                                     followers.name ILIKE :query or
                                                     songs.genre ILIKE :query or
                                                     songs.title ILIKE :query or
@@ -74,8 +76,9 @@ class Video < ApplicationRecord
                                                     videos.youtube_song ILIKE :query or
                                                     youtube_artist ILIKE :query or
                                                     videos.title ILIKE :query or
-                                                    videos.description ILIKE :query', query: "%#{query}%") }
-  scope :paginate,  ->(page, per_page) { offset(per_page * page).limit(per_page)}
+                                                    videos.description ILIKE :query', query: "%#{query}%")
+                              }
+  scope :paginate, ->(page, per_page) { offset(per_page * page).limit(per_page) }
 
   # Active Admin scopes
   scope :has_song,          ->   { where.not(song_id: nil) }
@@ -85,7 +88,6 @@ class Video < ApplicationRecord
   scope :has_acr_match,     ->   { where(acr_response_code: 0) }
 
   class << self
-
     def update_imported_video_counts
       Channel.all.each do |channel|
         channel.update(imported_videos_count: channel.videos.count)
@@ -108,24 +110,24 @@ class Video < ApplicationRecord
 
     def match_all_dancers
       Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where(  ' unaccent(title) ILIKE unaccent(:leader_name)
+        Video.all.where(leader_id: nil).where(' unaccent(title) ILIKE unaccent(:leader_name)
                                                   OR unaccent(description) ILIKE unaccent(:leader_name)
                                                   OR unaccent(title) ILIKE unaccent(:leader_nickname)
                                                   OR unaccent(description) ILIKE unaccent(:leader_nickname)',
-                                                  leader_name: "%#{leader.name}%",
-                                                  leader_nickname: "%#{leader.nickname.blank? ? "Do not perform match" : leader.nickname }%").each do |video|
+                                              leader_name: "%#{leader.name}%",
+                                              leader_nickname: "%#{leader.nickname.blank? ? 'Do not perform match' : leader.nickname}%").each do |video|
           video.leader = leader
           video.save
         end
       end
 
       Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where(  ' unaccent(title) ILIKE unaccent(:follower_name)
+        Video.all.where(follower_id: nil).where(' unaccent(title) ILIKE unaccent(:follower_name)
                                                     OR unaccent(description) ILIKE unaccent(:follower_name)
                                                     OR unaccent(title) ILIKE unaccent(:follower_nickname)
                                                     OR unaccent(description) ILIKE unaccent(:follower_nickname)',
-                                                    follower_name: "%#{follower.name}%",
-                                                    follower_nickname: "%#{follower.nickname.blank? ? "Do not perform match" : follower.nickname }%").each do |video|
+                                                follower_name: "%#{follower.name}%",
+                                                follower_nickname: "%#{follower.nickname.blank? ? 'Do not perform match' : follower.nickname}%").each do |video|
           video.follower = follower
           video.save
         end
@@ -133,7 +135,6 @@ class Video < ApplicationRecord
     end
 
     def match_all_songs
-
       video_count = Video.all.count
 
       Video.where.not(song: nil).where(scanned_song: false).order(:id).each do |video|
@@ -145,19 +146,18 @@ class Video < ApplicationRecord
            .where(scanned_song: false)
            .order(:id)
            .each do |video|
-              song = Song.filter_by_active.sort_by_popularity
-                         .where(   'unaccent(title) ILIKE unaccent(:youtube_song)
+        song = Song.filter_by_active.sort_by_popularity
+                   .where('unaccent(title) ILIKE unaccent(:youtube_song)
                                  OR unaccent(title) ILIKE unaccent(:spotify_track_name)
                                  OR unaccent(title) ILIKE unaccent(:title)
                                  OR unaccent(title) ILIKE unaccent(:description)
                                  OR unaccent(title) ILIKE unaccent(:tags)',
-                                            youtube_song: "%#{video.youtube_song}%",
-                                      spotify_track_name: "%#{video.spotify_track_name}%",
-                                                   title: "%#{video.title}%",
-                                             description: "%#{video.description}%",
-                                                    tags: "%#{video.tags}%"
-                              )
-                          .where(   'unaccent(last_name_search) ILIKE unaccent(:youtube_artist)
+                          youtube_song: "%#{video.youtube_song}%",
+                          spotify_track_name: "%#{video.spotify_track_name}%",
+                          title: "%#{video.title}%",
+                          description: "%#{video.description}%",
+                          tags: "%#{video.tags}%")
+                   .where('unaccent(last_name_search) ILIKE unaccent(:youtube_artist)
                                   OR unaccent(last_name_search) ILIKE unaccent(:spotify_artist_name)
                                   OR unaccent(last_name_search) ILIKE unaccent(:spotify_artist_name_2)
                                   OR unaccent(last_name_search) ILIKE unaccent(:spotify_artist_name_3)
@@ -165,34 +165,33 @@ class Video < ApplicationRecord
                                   OR unaccent(last_name_search) ILIKE unaccent(:title)
                                   OR unaccent(last_name_search) ILIKE unaccent(:description)
                                   OR unaccent(last_name_search) ILIKE unaccent(:tags)',
-                                         youtube_artist: "%#{video.youtube_artist}",
-                                    spotify_artist_name: "%#{video.spotify_artist_name}",
-                                  spotify_artist_name_2: "%#{video.spotify_artist_name_2}",
-                                  spotify_artist_name_3: "%#{video.spotify_artist_name_3}",
-                                     spotify_album_name: "%#{video.spotify_album_name}",
-                                                  title: "%#{video.title}",
-                                            description: "%#{video.description}",
-                                                   tags: "%#{video.tags}"
-                                ).first
-              song.present? ? video.update( song: song, scanned_song: true) : video.update( scanned_song: true )
-              puts "Video id: #{video.id} / #{video_count}"
-            end
+                          youtube_artist: "%#{video.youtube_artist}",
+                          spotify_artist_name: "%#{video.spotify_artist_name}",
+                          spotify_artist_name_2: "%#{video.spotify_artist_name_2}",
+                          spotify_artist_name_3: "%#{video.spotify_artist_name_3}",
+                          spotify_album_name: "%#{video.spotify_album_name}",
+                          title: "%#{video.title}",
+                          description: "%#{video.description}",
+                          tags: "%#{video.tags}").first
+        song.present? ? video.update(song: song, scanned_song: true) : video.update(scanned_song: true)
+        puts "Video id: #{video.id} / #{video_count}"
+      end
     end
 
     def calc_song_popularity
-      Song.column_defaults["popularity"]
-      Song.column_defaults["occur_count"]
+      Song.column_defaults['popularity']
+      Song.column_defaults['occur_count']
 
       occur_num = Video.pluck(:song_id).compact!.tally
       max_value = occur_num.values.max
-      popularity = occur_num.transform_values {|v| (v.to_f / max_value.to_f * 100).round }
+      popularity = occur_num.transform_values { |v| (v.to_f / max_value.to_f * 100).round }
 
-      occur_num.each do |key,value|
+      occur_num.each do |key, value|
         song = Song.find(key)
         song.update(occur_count: value)
       end
 
-      popularity.each do |key,value|
+      popularity.each do |key, value|
         song = Song.find(key)
         song.update(popularity: value)
       end
@@ -231,26 +230,25 @@ class Video < ApplicationRecord
 
       if Channel.find_by(channel_id: yt_video.channel_id).nil?
 
-        Channel.create( channel_id: yt_video.channel_id,
-                        title: yt_video.channel_title )
+        Channel.create(channel_id: yt_video.channel_id,
+                       title: yt_video.channel_title)
 
       end
 
       youtube_dl_output = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{youtube_id}",
-                                      skip_download: true).to_json).extend Hashie::Extensions::DeepFind
+                                                        skip_download: true).to_json).extend Hashie::Extensions::DeepFind
 
-      video = Video.create( youtube_id:     yt_video.id,
-                            title:          yt_video.title,
-                            description:    yt_video.description,
-                            upload_date:    yt_video.published_at,
-                            length:         yt_video.length,
-                            duration:       yt_video.duration,
-                            view_count:     yt_video.view_count,
-                            tags:           yt_video.tags,
-                            channel:        Channel.find_by(channel_id: yt_video.channel_id),
-                            youtube_song:   youtube_dl_output.deep_find('track'),
-                            youtube_artist: youtube_dl_output.deep_find('artist')
-                          )
+      video = Video.create(youtube_id: yt_video.id,
+                           title: yt_video.title,
+                           description: yt_video.description,
+                           upload_date: yt_video.published_at,
+                           length: yt_video.length,
+                           duration: yt_video.duration,
+                           view_count: yt_video.view_count,
+                           tags: yt_video.tags,
+                           channel: Channel.find_by(channel_id: yt_video.channel_id),
+                           youtube_song: youtube_dl_output.deep_find('track'),
+                           youtube_artist: youtube_dl_output.deep_find('artist'))
     end
 
     def acr_music_match(youtube_id)
@@ -265,7 +263,7 @@ class Video < ApplicationRecord
       video = Video.find_by(youtube_id: youtube_id)
       audio_full = YoutubeDL.download(
         "https://www.youtube.com/watch?v=#{video.youtube_id}",
-        { format: '140' , output: '~/environment/data/audio/%(id)s.mp3'}
+        { format: '140', output: '~/environment/data/audio/%(id)s.mp3' }
       )
 
       song = FFMPEG::Movie.new(audio_full.filename.to_s)
@@ -348,11 +346,11 @@ class Video < ApplicationRecord
           acr_response_code: video['status']['code']
         )
       end
-      rescue Module
-      rescue RestClient::Exceptions::OpenTimeout
-      rescue FFMPEG::Error
-      rescue Errno::ENOENT
-      rescue StandardError
+    rescue Module
+    rescue RestClient::Exceptions::OpenTimeout
+    rescue FFMPEG::Error
+    rescue Errno::ENOENT
+    rescue StandardError
     end
 
     # accepts file path and submits a http request to ACR Cloud API
