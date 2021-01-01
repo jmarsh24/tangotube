@@ -366,7 +366,11 @@ CREATE TABLE public.videos (
     spotify_artist_name_3 character varying,
     length interval,
     channel_id bigint,
-    scanned_song boolean DEFAULT false
+    scanned_song boolean DEFAULT false,
+    hd boolean DEFAULT false,
+    hidden boolean DEFAULT false,
+    flagged boolean DEFAULT false,
+    approved boolean DEFAULT true
 );
 
 
@@ -704,6 +708,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201223085038'),
 ('20201229202305'),
 ('20201231063836'),
-('20201231101018');
+('20201231101018'),
+('20210101121720');
 
 

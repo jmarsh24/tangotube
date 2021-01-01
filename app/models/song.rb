@@ -25,6 +25,10 @@ class Song < ApplicationRecord
 
   has_many :videos
 
+  # active admin scopes
   scope :sort_by_popularity,  -> { order(popularity: :desc) }
   scope :filter_by_active,    -> { where(active: true) }
+
+  # song match scopes
+  scope :title_match, ->(_model_attribute) { 'unaccent(title) ILIKE unaccent(model_attribute)' }
 end
