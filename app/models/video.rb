@@ -226,9 +226,6 @@ class Video < ApplicationRecord
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
 
-      youtube_dl_output = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{youtube_id}",
-                                                        skip_download: true).to_json).extend Hashie::Extensions::DeepFind
-
       video = Video.create(youtube_id: yt_video.id,
                            title: yt_video.title,
                            description: yt_video.description,
@@ -237,9 +234,16 @@ class Video < ApplicationRecord
                            duration: yt_video.duration,
                            view_count: yt_video.view_count,
                            tags: yt_video.tags,
-                           channel: Channel.find_by(channel_id: yt_video.channel_id),
-                           youtube_song: youtube_dl_output.deep_find('track'),
-                           youtube_artist: youtube_dl_output.deep_find('artist'))
+                           channel: Channel.find_by(channel_id: yt_video.channel_id))
+    end
+
+    def fetch_youtube_song(youtube_id)
+      video = Video.find_by(youtube_id: youtube_id)
+      yt_video = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{youtube_id}", skip_download: true)
+                                  .to_json).extend Hashie::Extensions::DeepFind
+
+      video.update(youtube_song: yt_video.deep_find('track'),
+                   youtube_artist: yt_video.deep_find('artist'))
     end
 
     def acr_music_match(youtube_id)
