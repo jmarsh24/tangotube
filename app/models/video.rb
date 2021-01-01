@@ -226,15 +226,15 @@ class Video < ApplicationRecord
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
 
-      video = Video.create(youtube_id: yt_video.id,
-                           title: yt_video.title,
-                           description: yt_video.description,
-                           upload_date: yt_video.published_at,
-                           length: yt_video.length,
-                           duration: yt_video.duration,
-                           view_count: yt_video.view_count,
-                           tags: yt_video.tags,
-                           channel: Channel.find_by(channel_id: yt_video.channel_id))
+      Video.create(youtube_id: yt_video.id,
+                   title: yt_video.title,
+                   description: yt_video.description,
+                   upload_date: yt_video.published_at,
+                   length: yt_video.length,
+                   duration: yt_video.duration,
+                   view_count: yt_video.view_count,
+                   tags: yt_video.tags,
+                   channel: Channel.find_by(channel_id: yt_video.channel_id))
     end
 
     def fetch_youtube_song(youtube_id)
@@ -244,6 +244,7 @@ class Video < ApplicationRecord
 
       video.update(youtube_song: yt_video.deep_find('track'),
                    youtube_artist: yt_video.deep_find('artist'))
+      sleep(5)
     end
 
     def acr_music_match(youtube_id)
