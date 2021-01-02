@@ -10,7 +10,6 @@ gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
 gem 'pg',                     '1.2.3'
 gem 'puma',                   '4.3.5'
 gem 'sass-rails',             '6.0.0'
-
 gem 'activeadmin_addons'
 gem 'active_link_to',         '~> 1.0', '>= 1.0.5'
 gem 'base64',                 '~> 0.1.0'
@@ -38,7 +37,6 @@ gem 'yt', '~> 0.32.0'
 
 group :development, :test do
   gem 'amazing_print',        '~> 1.2', '>= 1.2.2'
-
   gem 'rspec-rails',          '~> 4.0', '>= 4.0.1'
   gem 'standard'
 end
