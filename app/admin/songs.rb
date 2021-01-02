@@ -4,6 +4,16 @@ ActiveAdmin.register Song do
 
   config.sort_order = 'id_asc'
 
+  config.sort_order = 'id_asc'
+  config.per_page = [100, 500, 1000]
+
+  filter :genre
+  filter :title
+  filter :artist
+  filter :artist_2
+  filter :last_name_search
+  filter :active
+
   index do
     selectable_column
     id_column

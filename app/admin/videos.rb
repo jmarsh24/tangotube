@@ -6,7 +6,7 @@ ActiveAdmin.register Video do
   includes :song, :leader, :follower, :channel
 
   config.sort_order = 'id_asc'
-  config.per_page = [10, 50, 100]
+  config.per_page = [100, 500, 1000]
 
   scope :all
   scope :has_song
@@ -19,7 +19,6 @@ ActiveAdmin.register Video do
   filter :leader_name_cont,   label: 'Leader',    collection: proc { Leader.order(:name) }
   filter :follower_name_cont, label: 'Follower',  collection: proc { Follower.order(:name) }
   filter :channel_title_cont, label: 'Channel',   collection: proc { Channel.order(:title) }
-  filter :song_genre, as: :select, collections: proc { Songs.genres }
   filter :youtube_id_cont, label: 'Youtube ID '
   filter :title_cont, label: 'Title'
   filter :description_cont, label: 'Description'

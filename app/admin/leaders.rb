@@ -7,6 +7,13 @@ ActiveAdmin.register Leader do
   scope :reviewed
   scope :not_reviewed
 
+  filter :name
+  filter :nickname
+  filter :revised
+
+  config.sort_order = 'id_asc'
+  config.per_page = [100, 500, 1000]
+
   index do
     selectable_column
     id_column
@@ -24,5 +31,4 @@ ActiveAdmin.register Leader do
     end
     f.actions
   end
-
 end

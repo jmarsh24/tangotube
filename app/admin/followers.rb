@@ -2,10 +2,17 @@ ActiveAdmin.register Follower do
   permit_params :name, :reviewed, :nickname
 
   config.sort_order = 'id_asc'
+  config.per_page = [100, 500, 1000]
 
   scope :all
   scope :reviewed
   scope :not_reviewed
+
+  filter :name
+  filter :nickname
+  filter :reviewed
+
+
 
   index do
     selectable_column
@@ -24,5 +31,4 @@ ActiveAdmin.register Follower do
     end
     f.actions
   end
-
 end
