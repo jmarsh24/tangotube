@@ -6,6 +6,7 @@ ActiveAdmin.register Channel do
                 :imported_videos_count,
                 :total_videos_count,
                 :yt_api_pull_count
+  s
 
   config.sort_order = 'id_asc'
 
@@ -16,8 +17,8 @@ ActiveAdmin.register Channel do
   index do
     selectable_column
     id_column
-    column "Image" do |channel|
-      image_tag channel.thumbnail_url, size: "40x40" if channel.thumbnail_url.present?
+    column 'Image' do |channel|
+      image_tag channel.thumbnail_url, size: '40x40' if channel.thumbnail_url.present?
     end
     column :title
     column :channel_id
@@ -26,7 +27,6 @@ ActiveAdmin.register Channel do
     column :total_videos_count
     actions
   end
-
 
   form do |f|
     f.inputs do
@@ -37,5 +37,4 @@ ActiveAdmin.register Channel do
     end
     f.actions
   end
-
 end

@@ -1,8 +1,9 @@
 ActiveAdmin.register Video do
-
   permit_params :title, :description, :tags, :youtube_id, :leader_id, :follower_id, :channel_id, :song_id,
                 :youtube_song, :youtube_artist, :performance_date, :performance_number, :performance_total,
                 :videotype_id, :event_id
+
+  includes :song, :leader, :follower, :channel
 
   config.sort_order = 'id_asc'
   config.per_page = [10, 50, 100]
@@ -17,8 +18,8 @@ ActiveAdmin.register Video do
   filter :id_cont, label: 'id'
   filter :leader_name_cont,   label: 'Leader',    collection: proc { Leader.order(:name) }
   filter :follower_name_cont, label: 'Follower',  collection: proc { Follower.order(:name) }
-  filter :channel_title_cont,  label: 'Channel',   collection: proc { Channel.order(:title) }
-  filter :song_genre, as: :select, collections: proc {Songs.genres}
+  filter :channel_title_cont, label: 'Channel',   collection: proc { Channel.order(:title) }
+  filter :song_genre, as: :select, collections: proc { Songs.genres }
   filter :youtube_id_cont, label: 'Youtube ID '
   filter :title_cont, label: 'Title'
   filter :description_cont, label: 'Description'
@@ -31,32 +32,32 @@ ActiveAdmin.register Video do
     #   image_tag video.channel.thumbnail_url, height: 30
     # end
     column :channel
-    column "Thumbnail" do |video|
-      link_to( image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank )
+    column 'Thumbnail' do |video|
+      link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank)
     end
     column :title
     column :description
     column :tags
-    column "Youtube ID", :youtube_id
+    column 'Youtube ID', :youtube_id
     column :leader
     column :follower
     column :song
-    column "Genre" do |video|
-      video.song.genre.titleize if !video.song.nil?
+    column 'Genre' do |video|
+      video.song.genre.titleize unless video.song.nil?
     end
-    column "Artist" do |video|
-      video.song.artist.titleize if !video.song.nil?
+    column 'Artist' do |video|
+      video.song.artist.titleize unless video.song.nil?
     end
     column :youtube_artist
     column :youtube_song
-    column "ACR", :acr_response_code
+    column 'ACR', :acr_response_code
     column :spotify_track_name
     column :spotify_artist_name
     actions
   end
 
-  form do |f|
-    inputs "details" do
+  form do |_f|
+    inputs 'details' do
       input :title
       input :description
       input :leader
