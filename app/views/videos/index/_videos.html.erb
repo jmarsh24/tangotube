@@ -1,6 +1,6 @@
 <% @videos_paginated.each do |video| %>
 <%= active_link_to watch_path(v: video.youtube_id),
-              {class: "video", active: :exact} do %>
+              {class: "video", active: :exact, target: :_blank} do %>
 <div class="desktop-details">
   <div class="video-container">
     <div class="thumbnail" data-duration="<%= video.length %>">

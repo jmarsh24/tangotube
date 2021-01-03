@@ -14,6 +14,8 @@ ActiveAdmin.register Video do
   scope :has_follower
   scope :has_youtube_match
   scope :has_acr_match
+  scope :scanned_acr
+  scope :not_scanned_acr
 
   filter :id_cont, label: 'id'
   filter :leader_name_cont,   label: 'Leader',    collection: proc { Leader.order(:name) }
@@ -30,7 +32,11 @@ ActiveAdmin.register Video do
     # column "Logo" do |video|
     #   image_tag video.channel.thumbnail_url, height: 30
     # end
-    column :channel
+    column 'channel' do |video|
+      link_to(video.channel.title, "/admin/channels/#{video.channel.id}", target: :_blank) + ' ' +
+        link_to('Youtube', "http://youtube.com/channel/#{video.channel.channel_id}", target: :_blank) + ' ' +
+        link_to('Social Blade', "https://socialblade.com/youtube/channel/#{video.channel.channel_id}", target: :_blank)
+    end
     column 'Thumbnail' do |video|
       link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank)
     end

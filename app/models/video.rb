@@ -84,6 +84,8 @@ class Video < ApplicationRecord
   scope :has_follower,      ->   { where.not(follower_id: nil) }
   scope :has_youtube_match, ->   { where.not(youtube_artist: nil) }
   scope :has_acr_match,     ->   { where(acr_response_code: 0) }
+  scope :scanned_acr, -> { where.not(acr_response_code: nil) }
+  scope :not_scanned_acr, -> { where(acr_response_code: nil) }
 
   class << self
     def update_imported_video_counts
