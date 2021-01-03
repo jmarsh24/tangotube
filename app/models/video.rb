@@ -94,6 +94,12 @@ class Video < ApplicationRecord
       end
     end
 
+    def update_import_status
+      Channel.where('imported_videos_count < total_videos_count').each do |channel|
+        channel.update(imported: false)
+      end
+    end
+
     def import_all_channels
       Channel.where(imported: false).order(:id).each do |channel|
         channel_id = channel.channel_id
