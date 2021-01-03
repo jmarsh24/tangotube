@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -15,12 +14,13 @@ Rails.application.routes.draw do
 
   post 'savenew', to: 'users#savenew'
 
-  get 'watch', to: 'watch#watch'
+  get '/watch',    to: 'watch#watch'
+  get '/privacy',  to: 'static_pages#privacy'
+  get '/terms',    to: 'static_pages#terms'
 
   resources :videos
 
   namespace :admin do
     resources :users
   end
-
 end

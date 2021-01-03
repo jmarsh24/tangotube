@@ -37,9 +37,8 @@ ActiveAdmin.register Channel do
   form do |f|
     f.inputs do
       f.input :title
-      f.input :channel_id
+      f.input :channel_id, label: 'Channel ID'
       f.input :imported
-      f.input :thumbnail_url
     end
     f.actions
   end

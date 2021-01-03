@@ -204,7 +204,7 @@ class Video < ApplicationRecord
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
-        imported: true,
+        imported: true
       )
     end
 
@@ -221,7 +221,9 @@ class Video < ApplicationRecord
                            tags: yt_video.tags,
                            channel: Channel.find_by(channel_id: yt_video.channel_id))
       channel = Channel.find(video.channel.id)
-      channel.update(imported_videos_count: Video.where(channel: channel).count)
+      imported = channel.imported_videos_count >= channel.total_videos_count ? true : false
+      channel.update(imported_videos_count: Video.where(channel: channel).count,
+                     imported: imported)
     end
 
     def fetch_youtube_song(youtube_id)
