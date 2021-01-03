@@ -1,8 +1,8 @@
 development:
-  :concurrency: 3
+  :concurrency: 5
   :timeout: 18000
 production:
-  :concurrency: 1
+  :concurrency: 5
   :timeout: 18000
 :queues:
   - high
