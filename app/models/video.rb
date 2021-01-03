@@ -180,7 +180,7 @@ class Video < ApplicationRecord
     end
 
     def import_channel(channel_id)
-    yt_channel = Yt::Channel.new id: channel_id
+      yt_channel = Yt::Channel.new id: channel_id
       yt_channel_video_count = yt_channel.video_count
 
       yt_channel_videos = yt_channel_video_count >= 500 ? Video.get_channel_video_ids(channel_id) : yt_channel.videos.map(&:id)

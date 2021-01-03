@@ -52,6 +52,7 @@ ActiveAdmin.register Video do
     column 'ACR', :acr_response_code
     column :spotify_track_name
     column :spotify_artist_name
+    column :hidden
     actions
   end
 
@@ -64,6 +65,7 @@ ActiveAdmin.register Video do
       input :youtube_id
       input :channel
       input :song
+      input :hidden
     end
   end
 end
