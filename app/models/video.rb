@@ -201,28 +201,27 @@ class Video < ApplicationRecord
         ImportVideoWorker.perform_async(youtube_id)
       end
 
-      imported_videos_count = Video.where(channel_id: channel.id).count
-
       channel.update(
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
         imported: true,
-        imported_videos_count: imported_videos_count
       )
     end
 
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
 
-      Video.create(youtube_id: yt_video.id,
-                   title: yt_video.title,
-                   description: yt_video.description,
-                   upload_date: yt_video.published_at,
-                   length: yt_video.length,
-                   duration: yt_video.duration,
-                   view_count: yt_video.view_count,
-                   tags: yt_video.tags,
-                   channel: Channel.find_by(channel_id: yt_video.channel_id))
+      video = Video.create(youtube_id: yt_video.id,
+                           title: yt_video.title,
+                           description: yt_video.description,
+                           upload_date: yt_video.published_at,
+                           length: yt_video.length,
+                           duration: yt_video.duration,
+                           view_count: yt_video.view_count,
+                           tags: yt_video.tags,
+                           channel: Channel.find_by(channel_id: yt_video.channel_id))
+      channel = Channel.find(video.channel.id)
+      channel.update(imported_videos_count: Video.where(channel: channel).count)
     end
 
     def fetch_youtube_song(youtube_id)

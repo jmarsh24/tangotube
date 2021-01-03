@@ -1,5 +1,5 @@
 development:
-  :concurrency: 5
+  :concurrency: 10
   :timeout: 18000
 production:
   :concurrency: 3
