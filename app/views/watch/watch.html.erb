@@ -31,4 +31,5 @@
     <%= render partial: "video_info_item", locals: {header: "Genre", value: @active_video.song.try(:genre).to_s.titleize || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Artist", value: @active_video.song.try(:artist).to_s.titleize || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Artist 2", value: @active_video.song.try(:artist_2).to_s.titleize || "N/A"} %>
+    <div class="spacer"></div>
 </div>

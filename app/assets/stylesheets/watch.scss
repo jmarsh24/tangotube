@@ -80,6 +80,10 @@ body,
   position: absolute;
 }
 
+.spacer {
+  height: 50px;
+}
+
 @media (max-width: 800px) {
   .grid-container {
     display: flex;
