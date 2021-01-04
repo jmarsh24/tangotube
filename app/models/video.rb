@@ -60,26 +60,12 @@ class Video < ApplicationRecord
   belongs_to :song, required: false
   belongs_to :channel, required: true
 
-  scope :filter_by_genre,     ->(genre)    { where('songs.genre ILIKE ?', genre) }
-  scope :filter_by_leader,    ->(leader)   { where('leaders.name ILIKE ?', leader) }
-  scope :filter_by_follower,  ->(follower) { where('followers.name ILIKE ?', follower) }
-  scope :filter_by_channel,   ->(channel)  { where('channels.title ILIKE ?', channel) }
-  scope :filter_by_hd, -> { where(hd: true) }
-  scope :filter_by_keyword, lambda { |query|
-                              where('leaders.name ILIKE :query or
-                                                    followers.name ILIKE :query or
-                                                    songs.genre ILIKE :query or
-                                                    songs.title ILIKE :query or
-                                                    songs.artist ILIKE :query or
-                                                    channels.title ILIKE :query or
-                                                    videos.spotify_artist_name ILIKE :query or
-                                                    videos.spotify_track_name ILIKE :query or
-                                                    videos.youtube_song ILIKE :query or
-                                                    youtube_artist ILIKE :query or
-                                                    videos.title ILIKE :query or
-                                                    videos.description ILIKE :query', query: "%#{query}%")
-                            }
-  scope :paginate, ->(page, per_page) { offset(per_page * page).limit(per_page) }
+  scope :filter_by_genre,     ->(genre)           { where('songs.genre ILIKE ?', genre) }
+  scope :filter_by_leader,    ->(leader)          { where('leaders.name ILIKE ?', leader) }
+  scope :filter_by_follower,  ->(follower)        { where('followers.name ILIKE ?', follower) }
+  scope :filter_by_channel,   ->(channel)         { where('channels.title ILIKE ?', channel) }
+  scope :filter_by_hd,        ->                 { where(hd: true) }
+  scope :paginate,            ->(page, per_page) { offset(per_page * page).limit(per_page) }
 
   # Active Admin scopes
   scope :has_song,          ->   { where.not(song_id: nil) }
@@ -87,10 +73,31 @@ class Video < ApplicationRecord
   scope :has_follower,      ->   { where.not(follower_id: nil) }
   scope :has_youtube_match, ->   { where.not(youtube_artist: nil) }
   scope :has_acr_match,     ->   { where(acr_response_code: 0) }
-  scope :scanned_acr, -> { where.not(acr_response_code: nil) }
-  scope :not_scanned_acr, -> { where(acr_response_code: nil) }
+  scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
+  scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
   class << self
+    def search(query)
+      keywords = query.to_s.split(' ')
+      queries = keywords.map do |search_term|
+        where('leaders.name ILIKE :q  or
+         followers.name ILIKE :q  or
+         songs.genre ILIKE :q  or
+         songs.title ILIKE :q  or
+         songs.artist ILIKE :q  or
+         channels.title ILIKE :q  or
+         videos.spotify_artist_name ILIKE :q  or
+         videos.spotify_track_name ILIKE :q  or
+         videos.youtube_song ILIKE :q  or
+         youtube_artist ILIKE :q  or
+         videos.title ILIKE :q  or
+         videos.description ILIKE :q', q: "%#{search_term}%")
+      end
+        statement = queries.reduce do |statement, query|
+          statement.or(query)
+        end
+  end
+
     def update_imported_video_counts
       Channel.all.each do |channel|
         channel.update(imported_videos_count: channel.videos.count)

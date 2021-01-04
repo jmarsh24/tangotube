@@ -16,6 +16,7 @@ ActiveAdmin.register Video do
   scope :has_acr_match
   scope :scanned_acr
   scope :not_scanned_acr
+  scope :filter_by_hd
 
   filter :id_cont, label: 'id'
   filter :leader_name_cont,   label: 'Leader',    collection: proc { Leader.order(:name) }
