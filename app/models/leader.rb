@@ -17,5 +17,4 @@ class Leader < ApplicationRecord
 
   scope :reviewed,     ->   { where(reviewed: true) }
   scope :not_reviewed, ->   { where(reviewed: false) }
-
 end

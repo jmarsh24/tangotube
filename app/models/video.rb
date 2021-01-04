@@ -64,8 +64,9 @@ class Video < ApplicationRecord
   scope :filter_by_leader,    ->(leader)   { where('leaders.name ILIKE ?', leader) }
   scope :filter_by_follower,  ->(follower) { where('followers.name ILIKE ?', follower) }
   scope :filter_by_channel,   ->(channel)  { where('channels.title ILIKE ?', channel) }
-  scope :filter_by_keyword,   lambda { |query|
-                                where('leaders.name ILIKE :query or
+  scope :filter_by_hd, -> { where(hd: true) }
+  scope :filter_by_keyword, lambda { |query|
+                              where('leaders.name ILIKE :query or
                                                     followers.name ILIKE :query or
                                                     songs.genre ILIKE :query or
                                                     songs.title ILIKE :query or
@@ -77,7 +78,7 @@ class Video < ApplicationRecord
                                                     youtube_artist ILIKE :query or
                                                     videos.title ILIKE :query or
                                                     videos.description ILIKE :query', query: "%#{query}%")
-                              }
+                            }
   scope :paginate, ->(page, per_page) { offset(per_page * page).limit(per_page) }
 
   # Active Admin scopes
