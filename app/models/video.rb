@@ -224,8 +224,9 @@ class Video < ApplicationRecord
                            hd: yt_video.hd?,
                            channel: Channel.find_by(channel_id: yt_video.channel_id))
       channel = Channel.find(video.channel.id)
-      imported = channel.imported_videos_count >= channel.total_videos_count
-      channel.update(imported_videos_count: Video.where(channel: channel).count,
+      imported_videos_count = Video.where(channel: channel).count
+      imported = imported_videos_count >= channel.total_videos_count
+      channel.update(imported_videos_count: imported_videos_count,
                      imported: imported)
     end
 

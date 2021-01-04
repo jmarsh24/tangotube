@@ -59,6 +59,7 @@ ActiveAdmin.register Video do
     column :spotify_track_name
     column :spotify_artist_name
     column :hidden
+    column :hd
     actions
   end
 
