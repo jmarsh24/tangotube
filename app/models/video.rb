@@ -103,7 +103,7 @@ class Video < ApplicationRecord
     def import_all_channels
       Channel.where(imported: false).order(:id).each do |channel|
         channel_id = channel.channel_id
-        ImportChannelWorker.perform_async(channel_id)
+        Video.import_channel(channel_id)
       end
     end
 
@@ -202,6 +202,7 @@ class Video < ApplicationRecord
       end
 
       channel.update(
+        title: yt_channel.title,
         thumbnail_url: yt_channel.thumbnail_url,
         total_videos_count: yt_channel.video_count,
         imported: true
@@ -221,7 +222,7 @@ class Video < ApplicationRecord
                            tags: yt_video.tags,
                            channel: Channel.find_by(channel_id: yt_video.channel_id))
       channel = Channel.find(video.channel.id)
-      imported = channel.imported_videos_count >= channel.total_videos_count ? true : false
+      imported = channel.imported_videos_count >= channel.total_videos_count
       channel.update(imported_videos_count: Video.where(channel: channel).count,
                      imported: imported)
     end

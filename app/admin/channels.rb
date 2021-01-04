@@ -41,9 +41,7 @@ ActiveAdmin.register Channel do
 
   form do |f|
     f.inputs do
-      f.input :title
       f.input :channel_id, label: 'Channel ID'
-      f.input :imported
     end
     f.actions
   end
