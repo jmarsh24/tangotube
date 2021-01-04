@@ -367,7 +367,9 @@ CREATE TABLE public.videos (
     length interval,
     channel_id bigint,
     scanned_song boolean DEFAULT false,
-    hidden boolean DEFAULT false
+    hidden boolean DEFAULT false,
+    songmatches character varying[] DEFAULT '{}'::character varying[],
+    hd boolean DEFAULT false
 );
 
 
@@ -706,6 +708,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201229202305'),
 ('20201231063836'),
 ('20201231101018'),
-('20210103161704');
+('20210103161704'),
+('20210104081821'),
+('20210104100230');
 
 

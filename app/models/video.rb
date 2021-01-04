@@ -40,6 +40,8 @@
 #  length                :interval
 #  channel_id            :bigint
 #  scanned_song          :boolean          default(FALSE)
+#  hidden                :boolean          default(FALSE)
+#  songmatches           :string           default([]), is an Array
 #
 
 class Video < ApplicationRecord
@@ -204,8 +206,7 @@ class Video < ApplicationRecord
       channel.update(
         title: yt_channel.title,
         thumbnail_url: yt_channel.thumbnail_url,
-        total_videos_count: yt_channel.video_count,
-        imported: true
+        total_videos_count: yt_channel.video_count
       )
     end
 
@@ -220,6 +221,7 @@ class Video < ApplicationRecord
                            duration: yt_video.duration,
                            view_count: yt_video.view_count,
                            tags: yt_video.tags,
+                           hd: yt_video.hd?,
                            channel: Channel.find_by(channel_id: yt_video.channel_id))
       channel = Channel.find(video.channel.id)
       imported = channel.imported_videos_count >= channel.total_videos_count

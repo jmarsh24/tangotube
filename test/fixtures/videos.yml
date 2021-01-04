@@ -40,6 +40,8 @@
 #  length                :interval
 #  channel_id            :bigint
 #  scanned_song          :boolean          default(FALSE)
+#  hidden                :boolean          default(FALSE)
+#  songmatches           :string           default([]), is an Array
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
