@@ -7,8 +7,7 @@ class VideosController < ApplicationController
 
   def index
     @videos = Video.includes(:leader, :follower, :channel, :song)
-                   .filter_videos(params.slice(:leader, :follower, :channel, :genre))
-                   .search(params[:keyword])
+                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :keyword))
                    .where.not('leader_id IS NULL AND follower_id IS NULL AND song_id IS NULL ')
                    .where(hidden: false)
                    .references(:leader, :follower, :channel, :song)

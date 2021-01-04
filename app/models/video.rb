@@ -77,26 +77,26 @@ class Video < ApplicationRecord
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
   class << self
-    def search(query)
+    def filter_by_keyword(query)
       keywords = query.to_s.split(' ')
       queries = keywords.map do |search_term|
-        where('leaders.name ILIKE :q  or
-         followers.name ILIKE :q  or
-         songs.genre ILIKE :q  or
-         songs.title ILIKE :q  or
-         songs.artist ILIKE :q  or
-         channels.title ILIKE :q  or
-         videos.spotify_artist_name ILIKE :q  or
-         videos.spotify_track_name ILIKE :q  or
-         videos.youtube_song ILIKE :q  or
-         youtube_artist ILIKE :q  or
-         videos.title ILIKE :q  or
-         videos.description ILIKE :q', q: "%#{search_term}%")
+        where('unaccent(leaders.name) ILIKE unaccent(:q)  or
+         unaccent(followers.name) ILIKE unaccent(:q)  or
+         unaccent(songs.genre) ILIKE unaccent(:q)  or
+         unaccent(songs.title) ILIKE unaccent(:q)  or
+         unaccent(songs.artist) ILIKE unaccent(:q)  or
+         unaccent(channels.title) ILIKE unaccent(:q)  or
+         unaccent(videos.spotify_artist_name) ILIKE unaccent(:q)  or
+         unaccent(videos.spotify_track_name) ILIKE unaccent(:q)  or
+         unaccent(videos.youtube_song) ILIKE unaccent(:q)  or
+         unaccent(youtube_artist) ILIKE unaccent(:q)  or
+         unaccent(videos.title) ILIKE unaccent(:q)  or
+         unaccent(videos.description) ILIKE unaccent(:q)', q: "%#{search_term}%")
       end
-        statement = queries.reduce do |statement, query|
-          statement.or(query)
-        end
-  end
+      statement = queries.reduce do |statement, query|
+        statement.or(query)
+      end
+    end
 
     def update_imported_video_counts
       Channel.all.each do |channel|
