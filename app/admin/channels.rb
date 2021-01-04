@@ -26,6 +26,11 @@ ActiveAdmin.register Channel do
     column 'Image' do |channel|
       image_tag channel.thumbnail_url, size: '40x40' if channel.thumbnail_url.present?
     end
+    column 'channel' do |channel|
+      link_to(channel.title, "/admin/channels/#{channel.id}", target: :_blank) + ' ' +
+        link_to('Youtube', "http://youtube.com/channel/#{channel.channel_id}", target: :_blank) + ' ' +
+        link_to('Social Blade', "https://socialblade.com/youtube/channel/#{channel.channel_id}", target: :_blank)
+    end
     column :title
     column :channel_id
     column :imported
