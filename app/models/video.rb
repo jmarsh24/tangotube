@@ -52,6 +52,7 @@ class Video < ApplicationRecord
   require 'json'
 
   include Filterable
+  include PgSearch::Model
 
   validates :youtube_id, presence: true, uniqueness: true
 
@@ -76,27 +77,30 @@ class Video < ApplicationRecord
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
+  pg_search_scope :filter_by_query, against: %i[title description],
+                                    ignoring: :accents
+
   class << self
-    def filter_by_keyword(query)
-      keywords = query.to_s.split(' ')
-      queries = keywords.map do |search_term|
-        where('unaccent(leaders.name) ILIKE unaccent(:q)  or
-         unaccent(followers.name) ILIKE unaccent(:q)  or
-         unaccent(songs.genre) ILIKE unaccent(:q)  or
-         unaccent(songs.title) ILIKE unaccent(:q)  or
-         unaccent(songs.artist) ILIKE unaccent(:q)  or
-         unaccent(channels.title) ILIKE unaccent(:q)  or
-         unaccent(videos.spotify_artist_name) ILIKE unaccent(:q)  or
-         unaccent(videos.spotify_track_name) ILIKE unaccent(:q)  or
-         unaccent(videos.youtube_song) ILIKE unaccent(:q)  or
-         unaccent(youtube_artist) ILIKE unaccent(:q)  or
-         unaccent(videos.title) ILIKE unaccent(:q)  or
-         unaccent(videos.description) ILIKE unaccent(:q)', q: "%#{search_term}%")
-      end
-      statement = queries.reduce do |statement, query|
-        statement.or(query)
-      end
-    end
+    # def filter_by_keyword(query)
+    #   keywords = query.to_s.split(' ')
+    #   queries = keywords.map do |search_term|
+    #     where('unaccent(leaders.name) ILIKE unaccent(:q)  or
+    #      unaccent(followers.name) ILIKE unaccent(:q)  or
+    #      unaccent(songs.genre) ILIKE unaccent(:q)  or
+    #      unaccent(songs.title) ILIKE unaccent(:q)  or
+    #      unaccent(songs.artist) ILIKE unaccent(:q)  or
+    #      unaccent(channels.title) ILIKE unaccent(:q)  or
+    #      unaccent(videos.spotify_artist_name) ILIKE unaccent(:q)  or
+    #      unaccent(videos.spotify_track_name) ILIKE unaccent(:q)  or
+    #      unaccent(videos.youtube_song) ILIKE unaccent(:q)  or
+    #      unaccent(youtube_artist) ILIKE unaccent(:q)  or
+    #      unaccent(videos.title) ILIKE unaccent(:q)  or
+    #      unaccent(videos.description) ILIKE unaccent(:q)', q: "%#{search_term}%")
+    #   end
+    #   statement = queries.reduce do |statement, query|
+    #     statement.or(query)
+    #   end
+    # end
 
     def update_imported_video_counts
       Channel.all.each do |channel|

@@ -15,7 +15,7 @@
 
   <div class="search_bar">
     <%= form_with url: root_path, method: :get, local: true do |f| %>
-      <%= f.text_field :keyword, class: "input", placeholder: "Search"%>
+      <%= f.text_field :query, class: "input", placeholder: "Search"%>
       <%= f.button fa_icon("search"), class: "button_search", name: nil %>
     <% end %>
   </div>
