@@ -20,10 +20,10 @@ class VideosController < ApplicationController
     @channel_count  = Video.pluck(:channel_id).compact.uniq.count
     @genre_count    = Video.joins(:song).pluck(:genre).compact.uniq.count
 
-    @leaders    = @videos.pluck(:"leaders.name").compact.uniq.map(&:titleize).sort
-    @followers  = @videos.pluck(:"followers.name").compact.uniq.map(&:titleize).sort
-    @channels   = @videos.pluck(:"channels.title").compact.uniq.sort
-    @genres     = @videos.pluck(:"songs.genre").compact.uniq.map(&:capitalize).sort
+    @leaders    = @videos.joins(:leader).pluck(:"leaders.name").compact.uniq.map(&:titleize).sort
+    @followers  = @videos.joins(:follower).pluck(:"followers.name").compact.uniq.map(&:titleize).sort
+    @channels   = @videos.joins(:channel).pluck(:"channels.title").compact.uniq.sort
+    @genres     = @videos.joins(:song).pluck(:"songs.genre").compact.uniq.map(&:capitalize).sort
   end
 
   private

@@ -77,7 +77,7 @@ class Video < ApplicationRecord
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
   class << self
-    def filter_by_keyword(query)
+    def filter_by_query(query)
       keywords = query.to_s.split(' ')
       queries = keywords.map do |search_term|
         where('unaccent(leaders.name) ILIKE unaccent(:q)  or
