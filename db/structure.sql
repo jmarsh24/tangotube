@@ -609,6 +609,13 @@ CREATE INDEX index_songs_on_artist ON public.songs USING btree (artist);
 
 
 --
+-- Name: index_songs_on_genre; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_songs_on_genre ON public.songs USING btree (genre);
+
+
+--
 -- Name: index_songs_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -717,6 +724,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201231101018'),
 ('20210103161704'),
 ('20210104081821'),
-('20210104100230');
+('20210104100230'),
+('20210107195638');
 
 
