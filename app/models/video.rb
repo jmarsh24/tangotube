@@ -52,7 +52,6 @@ class Video < ApplicationRecord
   require 'json'
 
   include Filterable
-  include PgSearch::Model
 
   validates :youtube_id, presence: true, uniqueness: true
 
