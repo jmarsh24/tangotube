@@ -602,6 +602,13 @@ CREATE INDEX index_leaders_on_name ON public.leaders USING btree (name);
 
 
 --
+-- Name: index_songs_on_artist; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_songs_on_artist ON public.songs USING btree (artist);
+
+
+--
 -- Name: index_songs_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
