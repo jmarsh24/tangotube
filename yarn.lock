@@ -4230,6 +4230,11 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+
 lodash.get@^4.0:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -6757,6 +6762,13 @@ stdout-stream@^1.4.0:
   integrity sha512-j4emi03KXqJWcIeF8eIXkjMFN1Cmb8gUlDYGeBALLPo5qdyTfA9bOtl8m33lRoC+vFMkP3gl0WsDr6+gzxbbTA==
   dependencies:
     readable-stream "^2.0.1"
+
+stimulus-autocomplete@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/stimulus-autocomplete/-/stimulus-autocomplete-1.4.2.tgz#3dba03a03d82f1bba89974b8748b606047592412"
+  integrity sha512-NTh0yXKdRahl/2C/BN1j/4xJUzziMleiQmRtOpLic85T3AAuj5sY3ashU0YP8TJ8a6Lxn7vk/8FV65281dqyfw==
+  dependencies:
+    lodash.debounce "^4.0.8"
 
 "stimulus@https://github.com/stimulusjs/dev-builds/archive/b8cc8c4/stimulus.tar.gz":
   version "1.1.1"

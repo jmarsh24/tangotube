@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :search_suggestions
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   get '/terms',    to: 'static_pages#terms'
 
   resources :videos
+  resources :search_suggestions, only: :index
 
   namespace :admin do
     resources :users

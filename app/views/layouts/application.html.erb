@@ -14,12 +14,17 @@
 
   <%= link_to "TangoTube", root_path, id: "logo" %>
 
-  <div class="search_bar">
-    <%= form_with url: root_path, method: :get, local: true do |f| %>
-      <%= f.text_field :query, class: "input", placeholder: "Search"%>
-      <%= f.button fa_icon("search"), class: "button_search", name: nil %>
-    <% end %>
-  </div>
+    <div class="search_bar">
+      <%= form_with(method: :get, local: true) do |form| %>
+        <%= content_tag :div, 'data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
+          <%= text_field_tag :query, nil, 'data-autocomplete-target': 'input', class: "input" %>
+          <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
+        <% end %>
+    </div>
+        <div>
+          <%= form.button fa_icon("search"), class: "button_search", name: nil %>
+      <% end %>
+    </div>
 
   <nav class = "nav">
     <% if user_signed_in? %>

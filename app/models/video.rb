@@ -60,6 +60,7 @@ class Video < ApplicationRecord
   belongs_to :follower, required: false
   belongs_to :song, required: false
   belongs_to :channel, required: true
+  belongs_to :search_suggestion, required: false
 
   scope :filter_by_genre,     ->(genre)           { where('songs.genre ILIKE ?', genre) }
   scope :filter_by_leader,    ->(leader)          { where('leaders.name ILIKE ?', leader) }

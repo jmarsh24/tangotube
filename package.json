@@ -13,6 +13,7 @@
     "select2": "^4.0.13",
     "select2-dropdownPosition": "https://github.com/andreivictor/select2-dropdownPosition",
     "stimulus": "https://github.com/stimulusjs/dev-builds/archive/b8cc8c4/stimulus.tar.gz",
+    "stimulus-autocomplete": "^1.4.2",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

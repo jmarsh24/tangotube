@@ -8,7 +8,7 @@ class VideosController < ApplicationController
   def index
     @videos = Video.joins(:leader, :follower, :song, :channel)
                    .filter_videos(params.slice(:leader, :follower, :channel, :genre, :query))
-                   .where.not('leader_id IS NULL AND follower_id IS NULL AND song_id IS NULL ')
+                   .where.not('leader_id IS NULL AND follower_id IS NULL AND song_id IS NULL')
                    .where(hidden: false)
                    .order(sort_column + ' ' + sort_direction)
 
