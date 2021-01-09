@@ -4,7 +4,7 @@
     flex-direction: row;
     justify-content: space-between;
     height: 40px;
-    border: 1px solid orange;
+    border: 0px solid orange;
     background: white;
     padding-top: 10px;
     border-bottom: 1px solid #ccc;
@@ -47,6 +47,7 @@
 
   .search_bar {
     width: 30%;
+    border: 0px solid orange;
 
     .input {
       margin: 0 auto;
