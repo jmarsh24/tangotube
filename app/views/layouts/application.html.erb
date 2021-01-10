@@ -13,6 +13,7 @@
   <div class="header">
 
   <%= link_to "TangoTube", root_path, id: "logo" %>
+
     <div class="search_bar">
       <%= form_with(method: :get, local: true) do |form| %>
         <%= content_tag :div, 'data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
