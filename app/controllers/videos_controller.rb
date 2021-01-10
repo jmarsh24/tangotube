@@ -10,16 +10,18 @@ class VideosController < ApplicationController
                                follower_id IS NULL AND
                                song_id IS NULL OR
                                hidden IS true')
-                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :query))
                    .includes(:leader, :follower, :channel, :song)
                    .order(sort_column + ' ' + sort_direction)
+                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :query))
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
-    leader_name   = params[:query].present? ? 'leaders_videos.name'   : 'leaders.name'
-    follower_name = params[:query].present? ? 'followers_videos.name' : 'followers.name'
-    channel_title = params[:query].present? ? 'channels_videos.title' : 'channels.title'
-    songs_genre   = params[:query].present? ? 'songs_videos.genre'    : 'songs.genre'
+    @leader_name   = params[:query].present? ? 'leaders_videos.name'   : 'leaders.name'
+    @follower_name = params[:query].present? ? 'followers_videos.name' : 'followers.name'
+    @channel_title = params[:query].present? ? 'channels_videos.title' : 'channels.title'
+    @songs_genre   = params[:query].present? ? 'songs_videos.genre'    : 'songs.genre'
+    @songs_artist = params[:query].present? ? 'songs_videos.artist' : 'songs.artist'
+    @songs_title = params[:query].present? ? 'songs_videos.title' : 'songs.title'
 
     @leaders    = Leader.joins(:videos).uniq.pluck(:name).sort.map(&:titleize)
     @followers  = Follower.joins(:videos).uniq.pluck(:name).sort.map(&:titleize)

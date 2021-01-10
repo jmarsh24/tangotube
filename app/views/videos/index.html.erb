@@ -4,22 +4,22 @@
     <div class="videos-header">
       <div class="video-thumbnail" id="headers"></div>
       <div class="video-title-song" id="headers">
-        <%= sortable "songs.title", "Song" %>
+        <%= sortable @songs_title, "Song" %>
       </div>
       <div class="video-artist" id="headers">
-        <%= sortable "songs.artist", "Artist" %>
+        <%= sortable @songs_artist, "Artist" %>
       </div>
       <div class="video-genre" id="headers">
-        <%= sortable "songs.genre", "Genre" %>
+        <%= sortable @songs_genre, "Genre" %>
       </div>
       <div class="video-leader" id="headers">
-        <%= sortable "leaders.name", "Leader" %>
+        <%= sortable @leader_name, "Leader" %>
       </div>
       <div class="video-follower" id="headers">
-        <%= sortable "followers.name", "Follower" %>
+        <%= sortable @follower_name, "Follower" %>
       </div>
       <div class="video-channel-name" id="headers">
-        <%= sortable "channels.title", "Channel" %>
+        <%= sortable @channel_title, "Channel" %>
       </div>
       <div class="video-view_count" id="headers">
         <%= sortable "view_count" %>
