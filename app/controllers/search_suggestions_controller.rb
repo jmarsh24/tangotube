@@ -12,7 +12,7 @@ class SearchSuggestionsController < ApplicationController
                         "%#{params[:q]}%",
                         "%#{params[:q]}%")
                  .limit(10)
-                 .pluck("songs.title || ' | ' || songs.artist || ' | ' || songs.genre")
+                 .pluck('songs.title', 'songs.artist', 'songs.genre').map { |songs| songs.join(" - ") }
     @suggestions = [@leaders + @followers + @songs].flatten.first(10).map(&:titleize)
     render layout: false
   end
