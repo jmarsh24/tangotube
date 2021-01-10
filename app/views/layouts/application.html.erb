@@ -15,7 +15,7 @@
   <%= link_to "TangoTube", root_path, id: "logo" %>
 
     <div class="search_bar">
-      <%= form_with(method: :get, local: true) do |form| %>
+      <%= form_with(url: root_path, method: :get, local: true) do |form| %>
         <%= content_tag :div, 'data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
           <%= text_field_tag :query, nil, 'data-autocomplete-target': 'input', class: "input" %>
           <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
