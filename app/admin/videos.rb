@@ -39,7 +39,7 @@ ActiveAdmin.register Video do
         link_to('Social Blade', "https://socialblade.com/youtube/channel/#{video.channel.channel_id}", target: :_blank)
     end
     column 'Thumbnail' do |video|
-      link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank)
+      link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank)
     end
     column :title
     column :description
