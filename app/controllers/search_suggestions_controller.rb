@@ -1,7 +1,7 @@
 class SearchSuggestionsController < ApplicationController
   def index
-    @leaders = Leader.where('unaccent(name) ILIKE unaccent(?)', "%#{params[:q]}_%").limit(10).pluck(:name)
-    @followers = Follower.where('unaccent(name) ILIKE unaccent(?)', "%#{params[:q]}_%").limit(10).pluck(:name)
+    @leaders = Leader.joins(:videos).distinct.where('unaccent(name) ILIKE unaccent(?)', "%#{params[:q]}%").limit(10).pluck(:name)
+    @followers = Follower.joins(:videos).distinct.where('unaccent(name) ILIKE unaccent(?)', "%#{params[:q]}%").limit(10).pluck(:name)
     @songs = Song.joins(:videos).distinct
                  .where('unaccent(songs.artist) ILIKE unaccent(?)
                         OR unaccent(songs.title) ILIKE unaccent(?)
