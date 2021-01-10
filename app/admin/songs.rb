@@ -8,6 +8,7 @@ ActiveAdmin.register Song do
 
   scope :filter_by_active
   scope :filter_by_not_active
+  scope :filter_by_popularity
 
   filter :genre, as: :select, multiple: true
   filter :title

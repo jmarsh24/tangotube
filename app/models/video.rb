@@ -3,45 +3,55 @@
 # Table name: videos
 #
 #  id                    :bigint           not null, primary key
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  title                 :text
-#  youtube_id            :string
-#  leader_id             :bigint
-#  follower_id           :bigint
+#  acr_response_code     :integer
+#  acrid                 :string
+#  avg_rating            :integer
+#  confidence_score      :string
 #  description           :string
 #  duration              :integer
-#  upload_date           :date
-#  view_count            :integer
-#  avg_rating            :integer
-#  tags                  :string
-#  song_id               :bigint
-#  youtube_song          :string
-#  youtube_artist        :string
+#  hd                    :boolean          default(FALSE)
+#  hidden                :boolean          default(FALSE)
+#  isrc                  :string
+#  length                :interval
 #  performance_date      :datetime
 #  performance_number    :integer
 #  performance_total     :integer
-#  videotype_id          :bigint
-#  event_id              :bigint
-#  confidence_score      :string
-#  acrid                 :string
-#  spotify_album_id      :string
+#  scanned_song          :boolean          default(FALSE)
+#  songmatches           :string           default([]), is an Array
 #  spotify_album_name    :string
-#  spotify_artist_id     :string
 #  spotify_artist_id_2   :string
 #  spotify_artist_name   :string
 #  spotify_artist_name_2 :string
-#  spotify_track_id      :string
-#  spotify_track_name    :string
-#  youtube_song_id       :string
-#  isrc                  :string
-#  acr_response_code     :integer
 #  spotify_artist_name_3 :string
-#  length                :interval
+#  spotify_track_name    :string
+#  tags                  :string
+#  title                 :text
+#  upload_date           :date
+#  view_count            :integer
+#  youtube_artist        :string
+#  youtube_song          :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #  channel_id            :bigint
-#  scanned_song          :boolean          default(FALSE)
-#  hidden                :boolean          default(FALSE)
-#  songmatches           :string           default([]), is an Array
+#  event_id              :bigint
+#  follower_id           :bigint
+#  leader_id             :bigint
+#  song_id               :bigint
+#  spotify_album_id      :string
+#  spotify_artist_id     :string
+#  spotify_track_id      :string
+#  videotype_id          :bigint
+#  youtube_id            :string
+#  youtube_song_id       :string
+#
+# Indexes
+#
+#  index_videos_on_channel_id    (channel_id)
+#  index_videos_on_event_id      (event_id)
+#  index_videos_on_follower_id   (follower_id)
+#  index_videos_on_leader_id     (leader_id)
+#  index_videos_on_song_id       (song_id)
+#  index_videos_on_videotype_id  (videotype_id)
 #
 
 class Video < ApplicationRecord
@@ -146,8 +156,7 @@ class Video < ApplicationRecord
                                                   OR unaccent(description) ILIKE unaccent(:leader_nickname)',
                                               leader_name: "%#{leader.name}%",
                                               leader_nickname: "%#{leader.nickname.blank? ? 'Do not perform match' : leader.nickname}%").each do |video|
-          video.leader = leader
-          video.save
+          video.update(leader: leader)
         end
       end
 
@@ -158,14 +167,13 @@ class Video < ApplicationRecord
                                                     OR unaccent(description) ILIKE unaccent(:follower_nickname)',
                                                 follower_name: "%#{follower.name}%",
                                                 follower_nickname: "%#{follower.nickname.blank? ? 'Do not perform match' : follower.nickname}%").each do |video|
-          video.follower = follower
-          video.save
+          video.update(follower: follower)
         end
       end
     end
 
     def match_all_songs
-      Song.filter_by_active.each do |song|
+      Song.filter_by_active.sort_by_popularity.where.not(popularity: [false, nil]).each do |song|
         Video.where(song_id: nil)
              .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
                       OR unaccent(youtube_song) ILIKE unaccent(:song_title)
@@ -182,8 +190,7 @@ class Video < ApplicationRecord
                       OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
                     song_artist_keyword: "%#{song.last_name_search}%")
              .each do |video|
-          video.song = song
-          video.save
+          video.update(song: song)
         end
       end
     end

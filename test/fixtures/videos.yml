@@ -42,6 +42,7 @@
 #  scanned_song          :boolean          default(FALSE)
 #  hidden                :boolean          default(FALSE)
 #  songmatches           :string           default([]), is an Array
+#  hd                    :boolean          default(FALSE)
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

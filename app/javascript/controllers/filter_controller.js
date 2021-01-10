@@ -10,7 +10,6 @@ export default class extends Controller {
   }
 
   filter() {
-    // console.log(this.params)
     console.log(window.location.pathname);
     const url = `${window.location.pathname}?${this.params}`;
     Turbolinks.clearCache();

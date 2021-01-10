@@ -4,10 +4,14 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
+#  nickname   :string
+#  reviewed   :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  reviewed   :boolean
-#  nickname   :string
+#
+# Indexes
+#
+#  index_followers_on_name  (name)
 #
 
 class Follower < ApplicationRecord

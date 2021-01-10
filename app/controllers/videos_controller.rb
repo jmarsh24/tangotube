@@ -20,12 +20,12 @@ class VideosController < ApplicationController
     @follower_name = params[:query].present? ? 'followers_videos.name' : 'followers.name'
     @channel_title = params[:query].present? ? 'channels_videos.title' : 'channels.title'
     @songs_genre   = params[:query].present? ? 'songs_videos.genre'    : 'songs.genre'
-    @songs_artist  = params[:query].present? ? 'songs_videos.artist' : 'songs.artist'
-    @songs_title   = params[:query].present? ? 'songs_videos.title' : 'songs.title'
+    @songs_artist  = params[:query].present? ? 'songs_videos.artist'   : 'songs.artist'
+    @songs_title   = params[:query].present? ? 'songs_videos.title'    : 'songs.title'
 
     @leaders    = Leader.joins(:videos).uniq.pluck(:name).sort.map(&:titleize)
     @followers  = Follower.joins(:videos).uniq.pluck(:name).sort.map(&:titleize)
-    @channels   = Channel.all.pluck(:title).compact.sort
+    @channels   = Channel.joins(:videos).uniq.pluck(:title).compact.sort
     @genres     = Song.joins(:videos).pluck(:genre).uniq.compact.sort.map(&:titleize)
 
     @leader_count   = @leaders.count
