@@ -23,7 +23,6 @@ module ApplicationHelper
                          'channel.title',
                          'upload_date',
                          'view_count',
-                         'videotypes.name',
                          'query',
                          'sort',
                          'direction')

@@ -66,8 +66,8 @@ class Video < ApplicationRecord
   scope :filter_by_leader,    ->(leader)          { joins(:leader).where('leaders.name ILIKE ?', leader) }
   scope :filter_by_follower,  ->(follower)        { joins(:follower).where('followers.name ILIKE ?', follower) }
   scope :filter_by_channel,   ->(channel)         { joins(:channel).where('channels.title ILIKE ?', channel) }
-  scope :filter_by_hd,        ->                 { where(hd: true) }
-  scope :paginate,            ->(page, per_page) { offset(per_page * page).limit(per_page) }
+  scope :filter_by_hd,        ->                  { where(hd: true) }
+  scope :paginate,            ->(page, per_page)  { offset(per_page * page).limit(per_page) }
 
   # Active Admin scopes
   scope :has_song,          ->   { where.not(song_id: nil) }
@@ -84,6 +84,9 @@ class Video < ApplicationRecord
                                       follower: [:name],
                                       song: %i[title artist genre],
                                       channel: [:title]
+                                    },
+                                    using: {
+                                      tsearch: { dictionary: 'simple' }
                                     },
                                     ignoring: :accents
 
