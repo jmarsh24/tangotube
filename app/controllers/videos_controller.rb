@@ -14,6 +14,8 @@ class VideosController < ApplicationController
                    .order(sort_column + ' ' + sort_direction)
                    .filter_videos(params.slice(:leader, :follower, :channel, :genre, :query))
 
+    @current_search = params[:query]
+
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
     @leader_name   = params[:query].present? ? 'leaders_videos.name'   : 'leaders.name'
