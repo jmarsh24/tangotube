@@ -78,7 +78,7 @@ class Video < ApplicationRecord
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
-  pg_search_scope :filter_by_query, against: %i[title description],
+  pg_search_scope :filter_by_query, against: %i[title],
                                     associated_against: {
                                       leader: [:name],
                                       follower: [:name],
