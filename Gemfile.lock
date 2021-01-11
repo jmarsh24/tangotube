@@ -83,9 +83,9 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     amazing_print (1.2.2)
-    annotate (2.7.5)
+    annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
-      rake (>= 10.4, < 13.0)
+      rake (>= 10.4, < 14.0)
     arbre (1.4.0)
       activesupport (>= 3.0.0, < 6.2)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -404,7 +404,7 @@ DEPENDENCIES
   activeadmin (~> 2.8, >= 2.8.1)
   activeadmin_addons
   amazing_print (~> 1.2, >= 1.2.2)
-  annotate (~> 2.7, >= 2.7.1)
+  annotate (~> 3.1, >= 3.1.1)
   base64 (~> 0.1.0)
   bootsnap (= 1.4.6)
   byebug (~> 11.1, >= 11.1.3)
@@ -421,7 +421,7 @@ DEPENDENCIES
   nokogiri (~> 1.10, >= 1.10.10)
   openssl (~> 2.2)
   pg (= 1.2.3)
-  pg_search
+  pg_search (~> 2.3, >= 2.3.5)
   puma (= 4.3.5)
   rack-mini-profiler (~> 2.3)
   rails
@@ -431,7 +431,7 @@ DEPENDENCIES
   rubocop (~> 1.8)
   sass-rails (= 6.0.0)
   selenium-webdriver (= 3.142.7)
-  sidekiq
+  sidekiq (~> 6.1, >= 6.1.2)
   spring (= 2.1.0)
   spring-watcher-listen (= 2.0.1)
   standard
@@ -447,4 +447,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.3
+   2.2.4
