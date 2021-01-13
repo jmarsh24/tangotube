@@ -1,6 +1,5 @@
     $primary-color: rgb(17, 128, 255);
 
-
     .hidden {
       display: block;
     }
@@ -17,14 +16,17 @@
     }
 
     .filter_results {
-      padding: 7px 0px 7px 10px;
+      padding: 0px 0px 0px 10px;
+      max-width: 2250px;
+      // margin: 1.5rem auto;
     }
 
     .filter_container {
       border: 0px solid #963;
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
+      max-width: 2250px;
+      margin: 1.5rem auto;
 
       .filter_item {
         flex: 1;
@@ -42,8 +44,6 @@
         }
       }
     }
-
-
 
 .content-search {
   width: 100% !important;

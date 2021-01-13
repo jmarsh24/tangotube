@@ -1,67 +1,44 @@
-<% @videos_paginated.each do |video| %>
-<%= active_link_to watch_path(v: video.youtube_id),
-              {class: "video", active: :exact, target: :_blank} do %>
-<div class="desktop-details">
-  <div class="video-container">
-    <div class="thumbnail" data-duration="<%= video.length %>">
-      <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg",
-                class: 'thumbnail') %>
-    </div>
-    <div class="video-title-song">
-      <%= video.song.nil? ? video.try(:spotify_track_name).to_s.titleize : video.song.try(:title).to_s.titleize %>
-    </div>
-    <div class="video-artist">
-      <%= video.song.nil? ? video.try(:spotify_artist_name).to_s.titleize : video.song.try(:artist).to_s.titleize  %>
-    </div>
-    <div class="video-genre">
-      <%= video.song.try(:genre).to_s.titleize %>
-    </div>
-    <div class="video-leader">
-      <%= video.leader.try(:name).to_s.titleize %>
-    </div>
-    <div class="video-follower">
-      <%= video.follower.try(:name).to_s.titleize%>
-    </div>
-    <div class="video-channel-name">
-      <%= video.channel.title.to_s %>
-    </div>
-    <div class="video-view_count">
-      <%= video.view_count %>
-    </div>
-    <div class="video-upload_date">
-      <%= video.upload_date %>
-    </div>
-  </div>
-</div>
-<div class="mobile-details">
-  <div class="video-container">
-    <div class="thumbnail" data-duration="<%= video.length %>">
-      <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg",
-                class: 'thumbnail') %>
-    </div>
-    <div class="video-bottom-section">
-      <%= image_tag("#{video.channel.thumbnail_url}", class: "channel-icon") %>
-      <div class="mobile-details-container">
-        <div class="video-title-song">
-          <%= video.song.nil? ? video.try(:spotify_track_name).to_s.titleize : video.song.try(:title).to_s.titleize  %>
+<section class="video-section">
+  <% @videos_paginated.each do |video| %>
+    <article class="video-container">
+        <div href="#" class="thumbnail" data-duration= <%= video.length %> >
+        <%= active_link_to watch_path(v: video.youtube_id),
+                  {active: :exact, target: :_blank} do %>
+              <%= image_tag("http://img.youtube.com/vi_webp/#{video.youtube_id}/maxresdefault.webp", class: "thumbnail-image") %>
         </div>
-        <div class="video-artist">
-          <%= video.song.try(:genre)%> <%= video.song.nil? ? video.try(:spotify_artist_name).to_s.titleize : video.song.try(:artist).to_s.titleize %>
-          <%= video.song.nil? && video.spotify_artist_name.nil? && video.youtube_artist.nil? ? video.title : " "%>
+        <% end %>
+        <div class="video-bottom-section">
+          <div class="video-details">
+          <%= image_tag(video.channel.thumbnail_url, class: 'channel-icon') %>
+              <div class="video-title">
+                <div class="video-dancers">
+                  <%= format_value(video.leader.try(:name)) + ' & ' + format_value(video.follower.try(:name)) %>
+                </div>
+                <div>
+                  <%= video.song.nil? ? "#{format_value(video.try(:spotify_track_name)).to_s.titleize}" : "#{format_value(video.song.try(:title)).to_s.titleize}"%>
+                </div>
+                <div class="video-song-artist">
+                  <%= video.song.nil? ? "#{format_value(video.try(:spotify_artist_name)).to_s.titleize}" : "#{format_value(video.song.try(:artist)).to_s.titleize}" %>
+                </div>
+              </div>
+              <div class="video-metadata">
+                <div class="video-channel-name">
+                  <%= video.channel.title.to_s %>
+                </div>
+                <div class="video-view_count">
+                  <%= "#{video.view_count} views • #{time_ago_in_words(video.upload_date)} ago" %>
+              </div>
+            </div>
+          </div>
+          <div class="video-date-genre">
+           <div class="video-upload_date">
+              <%= video.upload_date.to_s %>
+            </div>
+            <div class="video-genre">
+              <%= video.song.try(:genre).to_s.titleize %>
+            </div>
+          </div>
         </div>
-        <div class="video-dancers">
-          <%= !video.leader.nil? && !video.follower.nil? ? video.leader.try(:name).to_s + " & " + video.follower.try(:name).to_s : " " %>
-        </div>
-        <div class="video-channel-name">
-          <%= video.channel.try(:title).to_s  %>
-        </div>
-        <div class="video-metadata">
-          <%= "#{video.view_count} views • #{video.upload_date}" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<% end %>
-<hr>
-<% end %>
+    </article>
+  <% end %>
+</section>

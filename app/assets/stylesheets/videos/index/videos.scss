@@ -1,19 +1,276 @@
-hr {
-  margin-left: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  border: 0px;
-  border-bottom: 1px solid #ccc;
+// @media (min-width: 800px) {
+//   .videos-header {
+//     display: flex;
+//     flex-flow: row nowrap;
+//     justify-content: flex-start;
+//     align-items: left;
+//     padding: 10px 10px;
+//     border-top: 1px solid #c2c2c2;
+//     border-bottom: 1px solid #c2c2c2;
+
+//     a {
+//       text-decoration: none;
+//       svg{
+//       font-size: 0.8em;
+//       }
+//       &.current{
+//       font-weight:800;
+//       }
+//     }
+//   }
+
+.video-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
+  gap: 2rem 1rem;
+  padding: 0 0;
+  margin:  1.5rem auto;
+  max-width: 2250px;
 }
 
-a.active {
-  background-color: #e8f0fa;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-  &:hover {
-    background-color: #e8f0fa;
-  }
-  &:nth-child(even) {
-    background-color: #e8f0fa;
-  }
+.video-section:first-child {
+  border-top: none;
+  gap-top: none;
 }
+
+.video-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 350px;
+  // border: 1px solid black;
+}
+
+.thumbnail {
+  position: relative;
+  display: flex;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.thumbnail::before {
+  content: attr(data-duration);
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  right: 5px;
+  bottom: 5px;
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  font-size: 0.9rem;
+  z-index: 1;
+}
+
+.thumbnail-image {
+position: absolute;
+left: 0;
+width: 100%;
+top: 50%;
+transform: translateY(-50%);
+  background-color: #aaa;
+  border-radius: 0.3em;
+}
+
+.video-bottom-section {
+  display: flex;
+  align-items: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  // border: 1px solid black;
+}
+
+.channel-icon {
+  margin-top: .5rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #aaa;
+}
+
+.video-details {
+  display: flex;
+  flex-direction: column;
+  // border: 1px solid black;
+}
+
+.video-title {
+  font-size: .9rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  text-decoration: none;
+  color: #555;
+  white-space: nowrap;
+  overflow: clip;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.video-channel-name {
+  text-decoration: none;
+  // transition: color 150ms;
+}
+
+.video-channel-name:hover {
+  // color: #111;
+}
+
+.video-channel-name,
+.video-metadata {
+
+}
+
+.video-date-genre {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: .5rem;
+  margin-bottom: 0.1rem;
+}
+
+.video-genre {
+  text-align: right;
+}
+
+.video-song-artist{
+  color: #888;
+}
+
+.video-dancers{
+  margin-top: 0.2rem;
+  margin-bottom: .2rem;
+}
+
+// .video-section-title {
+//   grid-column: 1 / -1;
+//   margin: -0.5rem 0;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 0 0.5rem;
+// }
+
+// .video-section-title-close {
+//   border: none;
+//   background: none;
+//   padding: 0;
+//   font-size: 2rem;
+//   color: #333;
+//   cursor: pointer;
+// }
+
+.videos {
+  background-color: #f9f9f9;
+}
+
+// }
+
+// @media (max-width: 800px) {
+//   #headers {
+//     display: none;
+//   }
+
+//   .desktop-details {
+//     display: none;
+//   }
+
+//   .video-container {
+//     display: flex;
+//     flex-wrap: wrap;
+//     flex-direction: row;
+//     width: 100%;
+//   }
+
+//   .mobile-details {
+//     width: 100%;
+//     height: 100%;
+//   }
+
+//   .video-bottom-section {
+//     display: flex;
+//     flex-wrap: wrap;
+//     flex-direction: row;
+//     margin-top: 1rem;
+//     margin-bottom: 1rem;
+//   }
+
+//   .thumbnail {
+//     position: relative;
+//     display: flex;
+//     z-index: 0;
+//     background-color: #aaa;
+//     border-radius: 5px;
+//     width: 100%;
+//     height: 100%;
+//     img {
+//       width: 100%;
+//       height: 100%;
+//     }
+//   }
+
+//   .thumbnail::before {
+//     content: attr(data-duration);
+//     position: absolute;
+//     z-index: 1;
+//     background-color: rgba(0, 0, 0, 0.85);
+//     color: white;
+//     right: 5px;
+//     bottom: 5px;
+//     padding: 0.1em 0.3em;
+//     border-radius: 0.3em;
+//     font-size: 0.9rem;
+//   }
+
+//   .video-title-song {
+//     padding: 0px 10px 0px 10px;
+//     font-size: 1.1rem;
+//     font-weight: bold;
+//     margin-bottom: 0.2rem;
+//     text-decoration: none;
+//     color: black;
+//   }
+
+//   .channel-icon {
+//     margin-right: 0.75rem;
+//     border-radius: 50%;
+//     width: 36px;
+//     height: 36px;
+//     background-color: #aaa;
+//   }
+
+//   .video-artist {
+//     color: #555;
+//     padding: 0px 10px 0px 10px;
+//     font-size: 0.9rem;
+//     margin-bottom: 0.3rem;
+//   }
+
+//   .video-dancers {
+//     color: #555;
+//     font-size: 0.9rem;
+//     padding: 0px 10px 0px 10px;
+//     margin-bottom: 0.2rem;
+//   }
+
+//   .video-channel-name {
+//     margin-bottom: 0.1rem;
+//     text-decoration: none;
+//     color: #555;
+//     font-size: 0.9rem;
+//     transition: color 150ms;
+//     &:hover {
+//       color: #111;
+//     }
+//   }
+
+//   .video-channel-name {
+//     color: #555;
+//     padding: 0px 10px 0px 10px;
+//   }
+
+//   .video-metadata {
+//     color: #555;
+//     font-size: 0.9rem;
+//     padding: 0px 10px 0px 10px;
+//   }
+// }

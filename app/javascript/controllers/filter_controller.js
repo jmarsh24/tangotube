@@ -44,10 +44,13 @@ export default class extends Controller {
   // }
 
   get params() {
-    // return this.filterTargets.map((t) => `${t.name}=${t.value}`).join("&");
-    return this.filterTargets
+    let params = this.filterTargets
       .filter((t) => t.value !== "all")
-      .map((t) => `${t.name}=${t.value}`)
-      .join("&");
+      .map((t) => `${t.name}=${t.value}`);
+
+    let search = document.querySelector("#query");
+    params.push(`${search.name}=${search.value}`)
+
+    return params.join("&");
   }
 }

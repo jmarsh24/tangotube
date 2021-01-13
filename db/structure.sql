@@ -401,7 +401,8 @@ CREATE TABLE public.videos (
     scanned_song boolean DEFAULT false,
     hidden boolean DEFAULT false,
     songmatches character varying[] DEFAULT '{}'::character varying[],
-    hd boolean DEFAULT false
+    hd boolean DEFAULT false,
+    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, COALESCE(title, ''::text)), 'A'::"char") || setweight(to_tsvector('english'::regconfig, (COALESCE(description, ''::character varying))::text), 'B'::"char"))) STORED
 );
 
 
@@ -712,6 +713,13 @@ CREATE INDEX index_videos_on_leader_id ON public.videos USING btree (leader_id);
 
 
 --
+-- Name: index_videos_on_searchable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_searchable ON public.videos USING gin (searchable);
+
+
+--
 -- Name: index_videos_on_song_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -774,6 +782,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210104100230'),
 ('20210107195638'),
 ('20210109154316'),
-('20210110182117');
+('20210110182117'),
+('20210112175659'),
+('20210112185333');
 
 

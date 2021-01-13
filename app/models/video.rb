@@ -88,19 +88,32 @@ class Video < ApplicationRecord
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
-  pg_search_scope :filter_by_query, against: %i[title],
-                                    associated_against: {
-                                      leader: [:name],
-                                      follower: [:name],
-                                      song: %i[title artist genre],
-                                      channel: [:title]
-                                    },
+  pg_search_scope :filter_by_query, against: [:title, :description],
                                     using: {
-                                      tsearch: { dictionary: 'simple' }
+                                      tsearch:  {
+                                        dictionary: 'english', tsvector_column: "searchable"
+                                      }
                                     },
                                     ignoring: :accents
 
+  # scope :filter_by_query, -> (query) {includes(:leader, :follower, :channel, :song).filter_by_title_or_description(query).where('leaders_videos.name ILIKE :query OR followers_videos.name ILIKE :query OR songs_videos.genre ILIKE :query OR songs_videos.title ILIKE :query OR songs_videos.artist ILIKE :query OR channels_videos.title ILIKE :query', query: "%#{query}%")}
+
+
+
+
   class << self
+
+    # def filter_by_query(search)
+    #   all :conditions =>  (search ? { :tag_name => search.split} : [])
+    # end
+
+    # def filter_by_query(str)
+    #   return [] if str.blank?
+    #   cond_text   = str.split.map{|w| "title LIKE ? "}.join(" OR ")
+    #   cond_values = str.split.map{|w| "%#{w}%"}
+    #   all(:conditions =>  (str ? [cond_text, *cond_values] : []))
+    # end
+
     # def filter_by_query(query)
     #   keywords = query.to_s.split(' ')
     #   queries = keywords.map do |search_term|
@@ -222,7 +235,7 @@ class Video < ApplicationRecord
       yt_channel = Yt::Channel.new id: channel_id
       yt_channel_video_count = yt_channel.video_count
 
-      yt_channel_videos = yt_channel_video_count >= 500 ? Video.get_channel_video_ids(channel_id) : yt_channel.videos.map(&:id)
+      yt_channel_videos = yt_channel_video_count >= 100 ? Video.get_channel_video_ids(channel_id) : yt_channel.videos.map(&:id)
 
       channel = Channel.find_by(channel_id: channel_id)
       channel_videos = channel.videos.map(&:youtube_id)
