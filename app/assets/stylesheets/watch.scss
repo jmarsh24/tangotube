@@ -10,7 +10,7 @@ body,
   display: flex;
   flex-direction:column;
   // gap: 10px 50px;
-  margin:  auto 100px ;
+  margin:  auto 0 ;
 }
 
 .video-responsive {
@@ -78,6 +78,11 @@ body,
   height: 100%;
   width: 100%;
   position: absolute;
+}
+
+.video_info {
+  margin: auto auto;
+  max-width: 1000px;
 }
 
 .spacer {
