@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
   # before_action :authenticate_user!
 
-  NUMBER_OF_VIDEOS_PER_PAGE = 30
+  NUMBER_OF_VIDEOS_PER_PAGE = 20
 
   helper_method :sort_column, :sort_direction
 
@@ -12,7 +12,7 @@ class VideosController < ApplicationController
                                hidden IS true')
                    .includes(:leader, :follower, :channel, :song)
                    .order(sort_column + ' ' + sort_direction)
-                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :query))
+                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :orchestra, :query))
 
     @current_search = params[:query]
 
@@ -66,6 +66,6 @@ class VideosController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:genre, :leader, :follower, :channel, :query)
+    params.slice(:genre, :leader, :follower, :orchestra, :query)
   end
 end
