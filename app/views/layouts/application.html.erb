@@ -14,19 +14,15 @@
 
   <%= link_to "TangoTube", root_path, id: "logo" %>
 
-     <div class="search_bar">
-       <%= form_with(url: root_path, method: :get, local: true) do |form| %>
-     <div class="search-bar">
-       <%= form_with(url: root_path, method: :get, local: true) do |f| %>
-         <%= content_tag :div, 'data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
-           <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "input" %>
-           <%= f.text_field :query, url: root_path, 'data-autocomplete-target': 'input', placeholder: "Search", class: "search-input" %>
-           <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
-         <% end %>
-           <%= form.button fa_icon("search"), class: "button_search", name: nil %>
-         <%= f.button fa_icon("search"), class: "search-btn", name: nil %>
-       <% end %>
-     </div>
+    <div class="search_bar">
+      <%= form_with(url: root_path, method: :get, local: true) do |form| %>
+        <%= content_tag :div, 'data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
+          <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "input" %>
+          <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
+        <% end %>
+          <%= form.button fa_icon("search"), class: "button_search", name: nil %>
+      <% end %>
+    </div>
 
   <nav class = "nav">
     <% if user_signed_in? %>
