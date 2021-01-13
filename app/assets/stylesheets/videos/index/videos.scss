@@ -23,9 +23,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
   gap: 2rem 1rem;
-  padding: 0 0;
-  margin:  0 4rem;
-  max-width: 2250px;
+  padding: 0 .5rem;
+  margin:  0 auto;
+  max-width: 1900px;
 }
 
 .video-section:first-child {
