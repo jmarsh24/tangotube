@@ -35,7 +35,7 @@
 
 .search-group {
   width: 100%;
-  margin: 0 2rem 0 4rem;
+  margin: 0 .4rem 0 2rem;
 }
 
 .search-input {
@@ -56,7 +56,7 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   cursor: pointer;
-  margin: 0 4rem 0 0rem;
+  margin: 0 4rem 0 0;
 }
 
 .search-btn:hover {
@@ -71,5 +71,4 @@
   display:flex;
   justify-content: space-evenly;
   flex-grow: 1;
-  margin: 0 2rem 0 4rem;
 }

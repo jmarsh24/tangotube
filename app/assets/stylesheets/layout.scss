@@ -28,22 +28,4 @@
    grid-column: col-start 1 / span 12;
    grid-row: 3 / 4;
  }
-
- }
- @media (max-width: 800px) {
-   .main-header {
-     grid-column: col-start 1 / span 12;
-     grid-row: 1 / 2;
-   }
-
-   .content {
-     grid-column: col-start 1 / span 12;
-     grid-row: 4 / 5;
-   }
-
-   .footer {
-     grid-column: col-start 1 / span 10;
-     grid-column: col-start 1 / span 12;
-     grid-row: 5 / 6;
-   }
  }

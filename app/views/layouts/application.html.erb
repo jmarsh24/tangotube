@@ -12,31 +12,31 @@
 
   <div class="header">
 
-  <%= link_to "TangoTube", root_path, id: "logo" %>
+    <%= link_to "TangoTube", root_path, id: "logo" %>
 
-  <div class="search-wrapper">
-      <div class="search-group">
-        <%= form_with(url: root_path, class:"search_bar", method: :get, local: true) do |form| %>
-          <%= content_tag :div, class:'search-group','data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
-            <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "search-input", placeholder: 'Search' %>
-            <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
+    <div class="search-wrapper">
+        <div class="search-group">
+          <%= form_with(url: root_path, class:"search_bar", method: :get, local: true) do |form| %>
+            <%= content_tag :div, class:'search-group','data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
+              <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "search-input", placeholder: 'Search' %>
+              <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
+          <% end %>
+        </div>
+            <%= form.button fa_icon("search"), class: "search-btn", name: nil %>
         <% end %>
-      </div>
-          <%= form.button fa_icon("search"), class: "search-btn", name: nil %>
-      <% end %>
-  </div>
+    </div>
 
-  <nav class = "nav">
-    <% if user_signed_in? %>
-      Logged in as <strong><%= current_user.email %></strong>.
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-      <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-    <% end %>
-  </nav>
-</div>
+    <nav class = "nav">
+      <% if user_signed_in? %>
+        Logged in as <strong><%= current_user.email %></strong>.
+        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+      <% end %>
+    </nav>
+  </div>
 
 
   <body>
