@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
   # before_action :authenticate_user!
 
-  NUMBER_OF_VIDEOS_PER_PAGE = 20
+  NUMBER_OF_VIDEOS_PER_PAGE = 30
 
   helper_method :sort_column, :sort_direction
 

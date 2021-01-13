@@ -4,7 +4,7 @@
         <div href="#" class="thumbnail" data-duration= <%= video.length %> >
         <%= active_link_to watch_path(v: video.youtube_id),
                   {active: :exact, target: :_blank} do %>
-              <%= image_tag("http://img.youtube.com/vi_webp/#{video.youtube_id}/maxresdefault.webp", class: "thumbnail-image") %>
+              <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg", class: "thumbnail-image") %>
         </div>
         <% end %>
         <div class="video-bottom-section">
