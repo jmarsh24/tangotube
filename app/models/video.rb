@@ -236,13 +236,13 @@ class Video < ApplicationRecord
       yt_channel = Yt::Channel.new id: channel_id
       yt_channel_video_count = yt_channel.video_count
 
-      yt_channel_videos = yt_channel_video_count >= 100 ? Video.get_channel_video_ids(channel_id) : yt_channel.videos.map(&:id)
+      yt_channel_videos = yt_channel_video_count >= 10 ? Video.get_channel_video_ids(channel_id) : yt_channel.videos.map(&:id)
 
       channel = Channel.find_by(channel_id: channel_id)
       channel_videos = channel.videos.map(&:youtube_id)
       yt_channel_videos_diff = yt_channel_videos - channel_videos
 
-      yt_channel_videos_diff.each do |youtube_id|
+      yt_channel_videos_diff.each do |youtube_id|local
         ImportVideoWorker.perform_async(youtube_id)
       end
 
