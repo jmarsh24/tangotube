@@ -9,7 +9,6 @@
         <% end %>
         <div class="video-bottom-section">
           <div class="video-details">
-          <%= image_tag(video.channel.thumbnail_url, class: 'channel-icon') %>
               <div class="video-title">
                 <div class="video-dancers">
                   <%= format_value(video.leader.try(:name)) + ' & ' + format_value(video.follower.try(:name)) %>
@@ -22,8 +21,9 @@
                 </div>
               </div>
               <div class="video-metadata">
-                <div class="video-channel-name">
-                  <%= link_to video.channel.title.to_s, root_path(channel: video.channel.title) %>
+                <div class="video-channel">
+                  <%= image_tag(video.channel.thumbnail_url, class: 'channel-icon') %>
+                  <%= link_to video.channel.title.to_s, root_path(channel: video.channel.title), class: "channel-title" %>
                 </div>
                 <div class="video-view_count">
                   <%= "#{video.view_count} views • #{time_ago_in_words(video.upload_date)} ago" %>
