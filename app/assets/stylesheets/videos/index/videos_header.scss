@@ -1,0 +1,31 @@
+
+.videos-header-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .6rem;
+}
+
+.filter_results {
+  font-size: 1rem;
+}
+
+.videos-sortable-container{
+  display: grid;
+  grid-template-columns: repeat(8, auto);
+  gap: .5rem;
+}
+
+.videos-sortable-btn {
+  display:flex;
+  padding: .7rem 1rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  border-radius: 0.3rem;
+  border: 1px solid #666;
+  background-color: #f2f2f2;
+     a {
+      text-decoration: none;
+    }
+}

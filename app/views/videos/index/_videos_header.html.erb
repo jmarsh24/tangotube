@@ -1,0 +1,31 @@
+<div class="videos-header-container">
+  <div class="filter_results">
+    <%= "Displaying #{@videos.size} Results" %>
+  </div>
+  <div class="videos-sortable-container">
+    <div class="videos-sortable-btn">
+      <%= sortable @songs_title, "Song" %>
+    </div>
+    <div class="videos-sortable-btn">
+      <%= sortable @songs_artist, "Artist" %>
+    </div>
+    <div class="videos-sortable-btn">
+      <%= sortable @songs_genre, "Genre" %>
+    </div>
+    <div class="videos-sortable-btn">
+      <%= sortable @leader_name, "Leader" %>
+    </div>
+    <div class="videos-sortable-btn">
+      <%= sortable @follower_name, "Follower" %>
+    </div>
+    <div class="videos-sortable-btn">
+      <%= sortable @channel_title, "Channel" %>
+    </div>
+    <div class="videos-sortable-btn">
+      <%= sortable "view_count" %>
+    </div>
+    <div class="videos-sortable-btn">
+      <%= sortable "upload_date", "Upload Date" %>
+    </div>
+  </div>
+</div>
