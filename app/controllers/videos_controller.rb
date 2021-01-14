@@ -11,8 +11,8 @@ class VideosController < ApplicationController
                                song_id IS NULL OR
                                hidden IS true')
                    .includes(:leader, :follower, :channel, :song)
-                   .order(sort_column + ' ' + sort_direction)
                    .filter_videos(params.slice(:leader, :follower, :channel, :genre, :orchestra, :query))
+                   .order(sort_column + ' ' + sort_direction)
 
     @current_search = params[:query]
 

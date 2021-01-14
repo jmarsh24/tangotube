@@ -25,8 +25,6 @@
 #
 
 class Song < ApplicationRecord
-  include PgSearch
-
   validates :genre, presence: true
   validates :title, presence: true
   validates :artist, presence: true
@@ -40,8 +38,4 @@ class Song < ApplicationRecord
   scope :filter_by_not_active, -> { where(active: false) }
   # song match scopes
   scope :title_match, ->(_model_attribute) { 'unaccent(title) ILIKE unaccent(model_attribute)' }
-
-  pg_search_scope :search,
-                  against: %i( title artist genre ),
-                  ignoring: :accents
 end
