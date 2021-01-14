@@ -23,7 +23,7 @@
               </div>
               <div class="video-metadata">
                 <div class="video-channel-name">
-                  <%= video.channel.title.to_s %>
+                  <%= link_to video.channel.title.to_s, root_path(channel: video.channel.title) %>
                 </div>
                 <div class="video-view_count">
                   <%= "#{video.view_count} views • #{time_ago_in_words(video.upload_date)} ago" %>

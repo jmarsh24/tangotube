@@ -91,7 +91,6 @@ transform: translateY(-50%);
 .video-details {
   display: flex;
   flex-direction: column;
-  // border: 1px solid black;
 }
 
 .video-title {
@@ -106,13 +105,14 @@ transform: translateY(-50%);
   max-width: 250px;
 }
 
-.video-channel-name {
+.video-channel-name a{
+  margin-bottom: 0.1rem;
   text-decoration: none;
-  // transition: color 150ms;
+  transition: color 150ms;
 }
 
 .video-channel-name:hover {
-  // color: #111;
+  color: #111;
 }
 
 .video-channel-name,
@@ -162,115 +162,3 @@ transform: translateY(-50%);
 .videos {
   background-color: #f9f9f9;
 }
-
-// }
-
-// @media (max-width: 800px) {
-//   #headers {
-//     display: none;
-//   }
-
-//   .desktop-details {
-//     display: none;
-//   }
-
-//   .video-container {
-//     display: flex;
-//     flex-wrap: wrap;
-//     flex-direction: row;
-//     width: 100%;
-//   }
-
-//   .mobile-details {
-//     width: 100%;
-//     height: 100%;
-//   }
-
-//   .video-bottom-section {
-//     display: flex;
-//     flex-wrap: wrap;
-//     flex-direction: row;
-//     margin-top: 1rem;
-//     margin-bottom: 1rem;
-//   }
-
-//   .thumbnail {
-//     position: relative;
-//     display: flex;
-//     z-index: 0;
-//     background-color: #aaa;
-//     border-radius: 5px;
-//     width: 100%;
-//     height: 100%;
-//     img {
-//       width: 100%;
-//       height: 100%;
-//     }
-//   }
-
-//   .thumbnail::before {
-//     content: attr(data-duration);
-//     position: absolute;
-//     z-index: 1;
-//     background-color: rgba(0, 0, 0, 0.85);
-//     color: white;
-//     right: 5px;
-//     bottom: 5px;
-//     padding: 0.1em 0.3em;
-//     border-radius: 0.3em;
-//     font-size: 0.9rem;
-//   }
-
-//   .video-title-song {
-//     padding: 0px 10px 0px 10px;
-//     font-size: 1.1rem;
-//     font-weight: bold;
-//     margin-bottom: 0.2rem;
-//     text-decoration: none;
-//     color: black;
-//   }
-
-//   .channel-icon {
-//     margin-right: 0.75rem;
-//     border-radius: 50%;
-//     width: 36px;
-//     height: 36px;
-//     background-color: #aaa;
-//   }
-
-//   .video-artist {
-//     color: #555;
-//     padding: 0px 10px 0px 10px;
-//     font-size: 0.9rem;
-//     margin-bottom: 0.3rem;
-//   }
-
-//   .video-dancers {
-//     color: #555;
-//     font-size: 0.9rem;
-//     padding: 0px 10px 0px 10px;
-//     margin-bottom: 0.2rem;
-//   }
-
-//   .video-channel-name {
-//     margin-bottom: 0.1rem;
-//     text-decoration: none;
-//     color: #555;
-//     font-size: 0.9rem;
-//     transition: color 150ms;
-//     &:hover {
-//       color: #111;
-//     }
-//   }
-
-//   .video-channel-name {
-//     color: #555;
-//     padding: 0px 10px 0px 10px;
-//   }
-
-//   .video-metadata {
-//     color: #555;
-//     font-size: 0.9rem;
-//     padding: 0px 10px 0px 10px;
-//   }
-// }
