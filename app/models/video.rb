@@ -242,7 +242,7 @@ class Video < ApplicationRecord
       channel_videos = channel.videos.map(&:youtube_id)
       yt_channel_videos_diff = yt_channel_videos - channel_videos
 
-      yt_channel_videos_diff.each do |youtube_id|local
+      yt_channel_videos_diff.each do |youtube_id|
         ImportVideoWorker.perform_async(youtube_id)
       end
 
