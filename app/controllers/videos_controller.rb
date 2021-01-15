@@ -20,11 +20,6 @@ class VideosController < ApplicationController
     @channels   = @videos.joins(:channel).pluck('channels.title').uniq.compact.sort
     @artists    = @videos.joins(:song).pluck('songs.artist').uniq.compact.sort.map(&:titleize)
     @genres     = @videos.joins(:song).pluck('songs.genre').uniq.compact.sort.map(&:titleize)
-
-    @leader_count   = Leader.joins(:videos).distinct.size
-    @follower_count = Follower.joins(:videos).distinct.size
-    @artist_count   = Song.joins(:videos).pluck('songs.artist').uniq.size
-    @genre_count    = Song.joins(:videos).pluck('songs.genre').uniq.size
   end
 
   private
