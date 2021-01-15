@@ -4,22 +4,19 @@
   </div>
   <div class="videos-sortable-container">
     <div class="videos-sortable-btn">
-      <%= sortable @songs_title, "Song" %>
+      <%= sortable 'songs.title', "Song Title" %>
     </div>
     <div class="videos-sortable-btn">
-      <%= sortable @songs_artist, "Artist (last name)" %>
+      <%= sortable 'songs.last_name_search', "Artist (last name)" %>
     </div>
     <div class="videos-sortable-btn">
-      <%= sortable @songs_genre, "Genre" %>
+      <%= sortable 'leaders.name', "Leader" %>
     </div>
     <div class="videos-sortable-btn">
-      <%= sortable @leader_name, "Leader" %>
+      <%= sortable 'followers.name', "Follower" %>
     </div>
     <div class="videos-sortable-btn">
-      <%= sortable @follower_name, "Follower" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable @channel_title, "Channel" %>
+      <%= sortable 'channels_title', "Channel" %>
     </div>
     <div class="videos-sortable-btn">
       <%= sortable "view_count" %>

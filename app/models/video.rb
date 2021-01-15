@@ -97,11 +97,6 @@ class Video < ApplicationRecord
                                     },
                                     ignoring: :accents
 
-  # scope :filter_by_query, -> (query) {includes(:leader, :follower, :channel, :song).filter_by_title_or_description(query).where('leaders_videos.name ILIKE :query OR followers_videos.name ILIKE :query OR songs_videos.genre ILIKE :query OR songs_videos.title ILIKE :query OR songs_videos.artist ILIKE :query OR channels_videos.title ILIKE :query', query: "%#{query}%")}
-
-
-
-
   class << self
 
     # def filter_by_query(search)

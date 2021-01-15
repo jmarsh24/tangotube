@@ -52,7 +52,8 @@ class VideosController < ApplicationController
                        'leaders_videos.name',
                        'followers_videos.name',
                        'channels_videos.title',
-                       'songs_videos.genre']
+                       'songs_videos.genre',
+                       'songs.last_name_search']
 
     acceptable_cols.include?(params[:sort]) ? params[:sort] : 'upload_date'
   end
