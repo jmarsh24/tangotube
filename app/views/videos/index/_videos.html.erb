@@ -9,15 +9,20 @@
         <% end %>
         <div class="video-bottom-section">
           <div class="video-details">
-              <div class="video-title">
+              <div class="video-primary">
                 <div class="video-dancers">
-                  <%= format_value(video.leader.try(:name)) + ' & ' + format_value(video.follower.try(:name)) %>
+                  <%= "#{video.leader.name} & #{video.follower.name}" if video.leader.present? && video.follower.present? %>
                 </div>
-                <div>
-                  <%= video.song.nil? ? "#{format_value(video.try(:spotify_track_name)).to_s.titleize}" : "#{format_value(video.song.try(:title)).to_s.titleize}"%>
-                </div>
-                <div class="video-song-artist">
-                  <%= video.song.nil? ? "#{format_value(video.try(:spotify_artist_name)).to_s.titleize}" : "#{format_value(video.song.try(:artist)).to_s.titleize}" %>
+                  <div class="video-title">
+                      <%= video.title if video.leader.blank? || video.follower.blank? %>
+                  <div class="video-song-artist">
+                    <%= "#{video.song.title.to_s.titleize}  - #{video.song.artist.to_s.titleize}" if video.song.present? %>
+                    <%= video.try(:spotify_track_name).to_s.titleize + ' - ' + video.try(:spotify_artist_name).to_s.titleize if video.song.nil? && video.spotify_track_name.present? %>
+                    <%= "#{video.youtube_song.to_s.titleize} - #{video.youtube_artist.to_s.titleize}" if video.song.nil? && video.spotify_track_name.nil? && video.youtube_artist.present? %>
+                  </div>
+                  <div class="video-song-artist">
+                    <%= video.song.genre.to_s.titleize if video.song.present? %>
+                  </div>
                 </div>
               </div>
               <div class="video-metadata">
@@ -31,11 +36,8 @@
             </div>
           </div>
           <div class="video-date-genre">
-           <div class="video-upload_date">
-              <%= video.upload_date.to_s %>
-            </div>
             <div class="video-genre">
-              <%= video.song.try(:genre).to_s.titleize %>
+              <%= video.try('song.genre').to_s.titleize %>
             </div>
           </div>
         </div>

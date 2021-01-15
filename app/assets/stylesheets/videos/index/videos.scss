@@ -84,16 +84,17 @@
   flex-direction: column;
 }
 
-.video-title {
+.video-primary {
   font-size: .9rem;
   font-weight: 500;
   margin-bottom: 0.2rem;
   text-decoration: none;
   color: #555;
-  white-space: nowrap;
-  overflow: clip;
-  text-overflow: ellipsis;
-  max-width: 250px;
+  max-width: 25rem;
+}
+
+.video-title {
+
 }
 
 .video-metadata{
