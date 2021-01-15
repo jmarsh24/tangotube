@@ -25,7 +25,7 @@
 #
 
 class Song < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
 
   validates :genre, presence: true
   validates :title, presence: true
