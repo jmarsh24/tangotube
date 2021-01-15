@@ -1,10 +1,10 @@
 <div class="filter_item" data-controller='select2' data-toggle-target="toggleable">
 <label>
-<%= "#{title}".titleize %>
+<%= title.to_s.titleize %>
 </label>
-  <%= select_tag "#{title}",
-        options_for_select([["Select All #{pluralize(model_count, title.to_s) }", "all"]] + model,
-          params["#{title}"].presence || "all"),
+  <%= select_tag title.to_s,
+        options_for_select([["Select All #{pluralize(model_count, title.to_s.titleize) }", "all"]] + model,
+          params[title.to_s].presence || "all"),
             class: "content-search",
             data: { action: "filter#filter", "filter-target": "filter" } %>
 </div>
