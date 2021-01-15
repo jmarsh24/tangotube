@@ -1,6 +1,6 @@
 <div id="filters" class="filter_container" data-controller="filter">
-  <%= render partial: "videos/index/filter_item", locals: {model: @genres, model_count: @genre_count, title: :genres } %>
-  <%= render partial: "videos/index/filter_item", locals: {model: @leaders, model_count: @leader_count, title: :leaders } %>
-  <%= render partial: "videos/index/filter_item", locals: {model: @followers, model_count: @follower_count, title: :followers } %>
-  <%= render partial: "videos/index/filter_item", locals: {model: @artists, model_count: @artist_count, title: :orchestras } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @genres, model_count: @genre_count, title: :genre } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @leaders, model_count: @leader_count, title: :leader } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @followers, model_count: @follower_count, title: :follower } %>
+  <%= render partial: "videos/index/filter_item", locals: {model: @artists, model_count: @artist_count, title: :orchestra } %>
 </div>
