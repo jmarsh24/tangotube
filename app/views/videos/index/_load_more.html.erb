@@ -1,7 +1,9 @@
 <div class="load-more">
+<% if !@videos.paginate(@page + 1, 30).empty? %>
   <%= link_to "Load more",
         current_page_params
         .merge(page: @page + 1),
         remote: true,
         class: "load-more-link" %>
+<%end%>
 </div>
