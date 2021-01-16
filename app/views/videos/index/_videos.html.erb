@@ -4,7 +4,7 @@
         <div href="#" class="thumbnail" data-duration= <%= Time.at(video.duration).utc.strftime("%M:%S") %> >
         <%= active_link_to watch_path(v: video.youtube_id),
                   {active: :exact} do %>
-              <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg", class: "thumbnail-image") %>
+              <%= image_tag("http://img.youtube.com/vi_webp/#{video.youtube_id}/maxresdefault.webp", class: "thumbnail-image") %>
         </div>
         <% end %>
         <div class="video-bottom-section">
