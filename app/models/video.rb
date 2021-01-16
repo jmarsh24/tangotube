@@ -136,6 +136,24 @@ class Video < ApplicationRecord
     #   end
     # end
 
+    def split_first_last_names
+      Leader.all.each do |leader|
+        leader_name_split = leader.name.split(' ')
+        if leader_name_split.size == 2
+          leader.update(first_name: leader_name_split.first,
+                        last_name: leader_name_split.second)
+        end
+      end
+
+      Follower.all.each do |follower|
+        follower_name_split = follower.name.split(' ')
+        if follower_name_split.size == 2
+          follower.update(first_name: follower_name_split.first,
+                          last_name: follower_name_split.second)
+        end
+      end
+    end
+
     def update_imported_video_counts
       Channel.all.each do |channel|
         channel.update(imported_videos_count: channel.videos.count)
