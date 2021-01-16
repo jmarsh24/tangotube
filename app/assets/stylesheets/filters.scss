@@ -93,6 +93,10 @@ $primary-color: rgb(17, 128, 255);
   z-index: 0 !important;
 }
 
+.select2-search__field  {
+  border-radius: .25rem !important;
+}
+
 
 @media (max-width: 800px) {
 

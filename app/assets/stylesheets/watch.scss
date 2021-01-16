@@ -10,7 +10,7 @@ body,
   display: flex;
   flex-direction:column;
   // gap: 10px 50px;
-  margin:  auto 0 ;
+  margin:  auto 15rem ;
 }
 
 .video-responsive {
@@ -89,13 +89,13 @@ body,
   height: 50px;
 }
 
-// @media (max-width: 800px) {
-//   .grid-container {
-//     display: flex;
-//     flex-direction: column;
-//     margin: auto .5rem;
-//   }
-
+@media (max-width: 1024px) {
+  .grid-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto 1rem;
+  }
+}
 //   .detail-item-heading {
 //     text-align: left;
 //     font-weight: 600;
