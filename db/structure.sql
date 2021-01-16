@@ -526,35 +526,11 @@ ALTER TABLE ONLY public.videotypes ALTER COLUMN id SET DEFAULT nextval('public.v
 
 
 --
--- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.admin_users
-    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
-
-
---
--- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.ar_internal_metadata
-    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
-
-
---
 -- Name: channels channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.channels
     ADD CONSTRAINT channels_pkey PRIMARY KEY (id);
-
-
---
--- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.events
-    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
 --
@@ -574,6 +550,62 @@ ALTER TABLE ONLY public.leaders
 
 
 --
+-- Name: songs songs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.songs
+    ADD CONSTRAINT songs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: videos videos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.videos
+    ADD CONSTRAINT videos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mat_videos; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+--
+
+CREATE MATERIALIZED VIEW public.mat_videos AS
+ SELECT videos.id AS video_id,
+    (((((((((((((((to_tsvector('english'::regconfig, COALESCE(videos.title, ''::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.description, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.genre, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.artist, ''::character varying))::text)) AS tsv_document
+   FROM ((((public.videos
+     JOIN public.channels ON ((channels.id = videos.channel_id)))
+     JOIN public.followers ON ((followers.id = videos.follower_id)))
+     JOIN public.leaders ON ((leaders.id = videos.leader_id)))
+     JOIN public.songs ON ((songs.id = videos.song_id)))
+  GROUP BY videos.id, channels.id, followers.id, leaders.id, songs.id
+  WITH NO DATA;
+
+
+--
+-- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_users
+    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -590,27 +622,11 @@ ALTER TABLE ONLY public.search_suggestions
 
 
 --
--- Name: songs songs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.songs
-    ADD CONSTRAINT songs_pkey PRIMARY KEY (id);
-
-
---
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: videos videos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.videos
-    ADD CONSTRAINT videos_pkey PRIMARY KEY (id);
 
 
 --
@@ -647,6 +663,13 @@ CREATE INDEX index_followers_on_name ON public.followers USING btree (name);
 --
 
 CREATE INDEX index_leaders_on_name ON public.leaders USING btree (name);
+
+
+--
+-- Name: index_mat_videos_on_tsv_document; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mat_videos_on_tsv_document ON public.mat_videos USING gin (tsv_document);
 
 
 --
@@ -784,6 +807,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210109154316'),
 ('20210110182117'),
 ('20210112175659'),
-('20210112185333');
+('20210112185333'),
+('20210115171517');
 
 

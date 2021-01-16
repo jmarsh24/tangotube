@@ -18,15 +18,24 @@ task match_all_dancers: :environment do
   Video.match_all_dancers
   puts 'done.'
 end
+
 desc 'This task populates videos'
 task match_all_music: :environment do
   puts 'Matching music with ACR Cloud'
   Video.match_all_music
   puts 'done.'
 end
+
 desc 'This task populates videos'
 task update_imported_video_counts: :environment do
   puts 'Updating_imported_video_counts'
   Video.update_imported_video_counts
   puts 'done.'
+end
+
+namespace :refreshers do
+desc "Refresh materialized view for Videos"
+  task mat_videos: :environment do
+    MatVideo.refresh
+  end
 end

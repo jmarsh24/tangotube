@@ -78,7 +78,7 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-  production:
+production:
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide

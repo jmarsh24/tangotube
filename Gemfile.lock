@@ -318,6 +318,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    scenic (1.5.4)
+      activerecord (>= 4.0.0)
+      railties (>= 4.0.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -414,6 +417,7 @@ DEPENDENCIES
   rspotify (~> 2.9, >= 2.9.2)
   rubocop (~> 1.8)
   sass-rails (= 6.0.0)
+  scenic (~> 1.5, >= 1.5.4)
   selenium-webdriver (= 3.142.7)
   sidekiq (~> 6.1, >= 6.1.2)
   spring (= 2.1.0)

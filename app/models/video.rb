@@ -89,7 +89,7 @@ class Video < ApplicationRecord
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
-  pg_search_scope :filter_by_query, against: [:title, :description],
+  pg_search_scope :slower_search, against: [:title, :description],
                                     using: {
                                       tsearch:  {
                                         dictionary: 'english', tsvector_column: "searchable"
@@ -98,6 +98,11 @@ class Video < ApplicationRecord
                                     ignoring: :accents
 
   class << self
+
+    def filter_by_query(query)
+      # protip: when using `select` instead of `pluck` we have one query less
+      where(id: MatVideo.search(query).select(:video_id))
+    end
 
     # def filter_by_query(search)
     #   all :conditions =>  (search ? { :tag_name => search.split} : [])
