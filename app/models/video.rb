@@ -139,8 +139,12 @@ class Video < ApplicationRecord
       Video.where(hd: nil).each do |video|
         youtube_id = video.youtube_id
         ImportVideoWorker.perform_async(youtube_id)
-        video.update(hd: yt_video.hd?)
       end
+    end
+
+    def update_video_hd(youtube_id)
+      yt_video = Yt::Video.new id: youtube_id
+      video.update(hd: yt_video.hd?)
     end
 
     def split_first_last_names
