@@ -6,7 +6,9 @@ class MatVideo < ApplicationRecord
   pg_search_scope( :search, against: :tsv_document,
                     using: {
                       tsearch: {
-                        dictionary: 'english', tsvector_column: 'tsv_document'
+                        dictionary: 'english',
+                        tsvector_column: 'tsv_document',
+                        prefix: true
                       },
                     },
                     ignoring: :accents
