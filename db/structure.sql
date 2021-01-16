@@ -673,6 +673,13 @@ CREATE INDEX index_mat_videos_on_tsv_document ON public.mat_videos USING gin (ts
 
 
 --
+-- Name: index_mat_videos_on_video_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_mat_videos_on_video_id ON public.mat_videos USING btree (video_id);
+
+
+--
 -- Name: index_songs_on_artist; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -808,6 +815,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210110182117'),
 ('20210112175659'),
 ('20210112185333'),
-('20210115171517');
+('20210115171517'),
+('20210116124900');
 
 
