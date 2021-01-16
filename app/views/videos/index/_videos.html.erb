@@ -1,7 +1,7 @@
 <section class="video-section">
   <% @videos_paginated.each do |video| %>
     <article class="video-container">
-        <div href="#" class="thumbnail" data-duration= <%= video.length %> >
+        <div href="#" class="thumbnail" data-duration= <%= Time.at(video.duration).utc.strftime("%M:%S") %> >
         <%= active_link_to watch_path(v: video.youtube_id),
                   {active: :exact} do %>
               <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg", class: "thumbnail-image") %>
