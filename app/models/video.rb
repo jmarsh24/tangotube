@@ -138,7 +138,7 @@ class Video < ApplicationRecord
     def update_hd_columns
       Video.where(hd: nil).each do |video|
         youtube_id = video.youtube_id
-        ImportVideoWorker.perform_async(youtube_id)
+        UpdateHdColumnWorker.perform_async(youtube_id)
       end
     end
 
