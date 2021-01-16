@@ -144,6 +144,7 @@ class Video < ApplicationRecord
 
     def update_video_hd(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
+      video = Video.find_by(youtube_id: youtube_id)
       video.update(hd: yt_video.hd?)
     end
 
