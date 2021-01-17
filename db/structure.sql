@@ -140,40 +140,6 @@ ALTER SEQUENCE public.channels_id_seq OWNED BY public.channels.id;
 
 
 --
--- Name: events; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.events (
-    id bigint NOT NULL,
-    name character varying NOT NULL,
-    city character varying,
-    country character varying,
-    date date,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.events_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
-
-
---
 -- Name: followers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -376,17 +342,10 @@ CREATE TABLE public.videos (
     duration integer,
     upload_date date,
     view_count integer,
-    avg_rating integer,
     tags character varying,
     song_id bigint,
     youtube_song character varying,
     youtube_artist character varying,
-    performance_date timestamp without time zone,
-    performance_number integer,
-    performance_total integer,
-    videotype_id bigint,
-    event_id bigint,
-    confidence_score character varying,
     acrid character varying,
     spotify_album_id character varying,
     spotify_album_name character varying,
@@ -430,36 +389,6 @@ ALTER SEQUENCE public.videos_id_seq OWNED BY public.videos.id;
 
 
 --
--- Name: videotypes; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.videotypes (
-    id bigint NOT NULL,
-    name character varying NOT NULL,
-    related_keywords character varying
-);
-
-
---
--- Name: videotypes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.videotypes_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: videotypes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.videotypes_id_seq OWNED BY public.videotypes.id;
-
-
---
 -- Name: admin_users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -471,13 +400,6 @@ ALTER TABLE ONLY public.admin_users ALTER COLUMN id SET DEFAULT nextval('public.
 --
 
 ALTER TABLE ONLY public.channels ALTER COLUMN id SET DEFAULT nextval('public.channels_id_seq'::regclass);
-
-
---
--- Name: events id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.events ALTER COLUMN id SET DEFAULT nextval('public.events_id_seq'::regclass);
 
 
 --
@@ -520,13 +442,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 ALTER TABLE ONLY public.videos ALTER COLUMN id SET DEFAULT nextval('public.videos_id_seq'::regclass);
-
-
---
--- Name: videotypes id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.videotypes ALTER COLUMN id SET DEFAULT nextval('public.videotypes_id_seq'::regclass);
 
 
 --
@@ -602,14 +517,6 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
--- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.events
-    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
-
-
---
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -631,14 +538,6 @@ ALTER TABLE ONLY public.search_suggestions
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: videotypes videotypes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.videotypes
-    ADD CONSTRAINT videotypes_pkey PRIMARY KEY (id);
 
 
 --
@@ -726,13 +625,6 @@ CREATE INDEX index_videos_on_channel_id ON public.videos USING btree (channel_id
 
 
 --
--- Name: index_videos_on_event_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_videos_on_event_id ON public.videos USING btree (event_id);
-
-
---
 -- Name: index_videos_on_follower_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -758,13 +650,6 @@ CREATE INDEX index_videos_on_searchable ON public.videos USING gin (searchable);
 --
 
 CREATE INDEX index_videos_on_song_id ON public.videos USING btree (song_id);
-
-
---
--- Name: index_videos_on_videotype_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_videos_on_videotype_id ON public.videos USING btree (videotype_id);
 
 
 --
@@ -822,6 +707,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210115171517'),
 ('20210116124900'),
 ('20210116154216'),
-('20210116203557');
+('20210116203557'),
+('20210117064902'),
+('20210117065523'),
+('20210117065539');
 
 
