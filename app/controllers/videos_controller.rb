@@ -9,7 +9,7 @@ class VideosController < ApplicationController
     @videos = Video.where.not('hidden IS true')
                    .includes(:leader, :follower, :channel, :song)
                    .order(sort_column + ' ' + sort_direction)
-                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :orchestra, :query))
+                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query))
 
     @current_search = params[:query]
 
@@ -33,10 +33,6 @@ class VideosController < ApplicationController
                        'channels.title',
                        'upload_date',
                        'view_count',
-                       'leaders_videos.name',
-                       'followers_videos.name',
-                       'channels_videos.title',
-                       'songs_videos.genre',
                        'songs.last_name_search']
 
     acceptable_cols.include?(params[:sort]) ? params[:sort] : 'upload_date'

@@ -6,7 +6,6 @@ ruby '2.7.2'
 gem 'rails'
 gem 'tzinfo-data',            '~> 1.2020', '>= 1.2020.5' # Don't rely on OSX/Linux timezone data
 gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
-gem 'active_link_to',         '~> 1.0', '>= 1.0.5'
 gem 'base64',                 '~> 0.1.0'
 gem 'bootsnap',               '1.4.6', require: false
 gem 'country_select',         '~> 4.0'

@@ -72,11 +72,12 @@ class Video < ApplicationRecord
   belongs_to :channel, required: true
   belongs_to :search_suggestion, required: false
 
-  scope :filter_by_orchestra, ->(artist)          { joins(:song).where('songs.artist ILIKE ?', artist) }
-  scope :filter_by_genre,     ->(genre)           { joins(:song).where('songs.genre ILIKE ?', genre) }
-  scope :filter_by_leader,    ->(leader)          { joins(:leader).where('leaders.name ILIKE ?', leader) }
-  scope :filter_by_follower,  ->(follower)        { joins(:follower).where('followers.name ILIKE ?', follower) }
-  scope :filter_by_channel,   ->(channel)         { joins(:channel).where('channels.title ILIKE ?', channel) }
+  scope :filter_by_orchestra, ->(song_artist)     { joins(:song).where('songs.artist ILIKE ?', song_artist) }
+  scope :filter_by_genre,     ->(song_genre)      { joins(:song).where('songs.genre ILIKE ?', song_genre) }
+  scope :filter_by_leader,    ->(leader_name)     { joins(:leader).where('leaders.name ILIKE ?', leader_name) }
+  scope :filter_by_follower,  ->(follower_name)   { joins(:follower).where('followers.name ILIKE ?', follower_name) }
+  scope :filter_by_channel,   ->(channel_title)   { joins(:channel).where('channels.title ILIKE ?', channel_title) }
+  scope :filter_by_song_id,      ->(song_id)         { where(song_id: song_id) }
   scope :filter_by_hd,        ->                  { where(hd: true) }
   scope :paginate,            ->(page, per_page)  { offset(per_page * page).limit(per_page) }
 
@@ -104,7 +105,7 @@ class Video < ApplicationRecord
       where(id: MatVideo.search(query).select(:video_id))
     end
 
-    # def filter_by_query(search)
+  # def filter_by_query(search)
     #   all :conditions =>  (search ? { :tag_name => search.split} : [])
     # end
 

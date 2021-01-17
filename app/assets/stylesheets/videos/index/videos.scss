@@ -36,7 +36,7 @@
 .video-container {
   display: flex;
   flex-direction: column;
-  min-height: 350px;
+  min-height: 300px;
   // border: 1px solid black;
 }
 
@@ -94,13 +94,23 @@
 }
 
 .video-title {
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+  text-decoration: none;
+  &:hover {
+    color: #111;
+  }
+}
 
+.video-details-spotify-info {
+  font-size: 0.7rem;
+  text-decoration: none;
 }
 
 .video-metadata{
   display:flex;
   flex-direction: column;
-  // border: 1px solid orange;
+  font-size: .7rem;
 }
 
 .channel-icon {
@@ -110,30 +120,27 @@
   width: 18px;
   height: 18px;
   background-color: #aaa;
-  // border: 1px solid orange;
 }
 
 .video-channel {
   display: flex;
   flex-direction: row;
   align-items: center;
-  // border: 1px solid orange;
 }
 
 .channel-title {
   display: flex;
   margin: 0 .5rem;
+  font-size: 0.7rem;
 }
 
 .video-channel a {
   margin-bottom: 0.1rem;
   text-decoration: none;
   transition: color 150ms;
-  // border: 1px solid orange;
-
 }
 
-.video-channel-name:hover a{
+.video-channel a:hover {
   color: #111;
 }
 
@@ -149,13 +156,26 @@
   text-align: right;
 }
 
-.video-song-artist{
-  color: #888;
+.video-song-artist a{
+  font-size: .7rem;
+  text-decoration: none;
+  &:hover {
+    color: #111;
+  }
 }
 
-.video-dancers{
+.video-dancers {
+
   margin-top: 0.2rem;
   margin-bottom: .2rem;
+}
+
+.video-details-section-dancers {
+  text-decoration: none;
+  font-size: inherit;
+  &:hover{
+    color: #111;
+  }
 }
 
 // .video-section-title {

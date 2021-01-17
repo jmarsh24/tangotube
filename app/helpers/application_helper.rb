@@ -22,7 +22,8 @@ module ApplicationHelper
                          'view_count',
                          'query',
                          'sort',
-                         'direction')
+                         'direction',
+                         'song_id')
   end
 
   def format_value(value)

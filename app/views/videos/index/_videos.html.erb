@@ -10,24 +10,41 @@
         <div class="video-bottom-section">
           <div class="video-details">
               <div class="video-primary">
-                <div class="video-dancers">
-                  <%= "#{video.leader.name} & #{video.follower.name}" if video.leader.present? && video.follower.present? %>
+                <div class="video-details-section-dancers">
+                  <% if video.leader.present? && video.follower.present? %>
+                    <%= link_to video.leader.name.to_s, root_path(leader: video.leader.name), class: "video-details-section-dancers" %>
+                    <%= ' & ' %>
+                    <%= link_to video.follower.name.to_s, root_path(follower: video.follower.name), class: "video-details-section-dancers" %>
+                  <% end %>
                 </div>
-                  <div class="video-title">
-                      <%= video.title if video.leader.blank? || video.follower.blank? %>
-                  <div class="video-song-artist">
-                    <%= "#{video.song.title.to_s.titleize}  - #{video.song.artist.to_s.titleize}" if video.song.present? %>
-                    <%= video.try(:spotify_track_name).to_s.titleize + ' - ' + video.try(:spotify_artist_name).to_s.titleize if video.song.nil? && video.spotify_track_name.present? %>
-                    <%= "#{video.youtube_song.to_s.titleize} - #{video.youtube_artist.to_s.titleize}" if video.song.nil? && video.spotify_track_name.nil? && video.youtube_artist.present? %>
-                  </div>
-                  <div class="video-song-artist">
-                    <%= video.song.genre.to_s.titleize if video.song.present? %>
-                  </div>
+                  <div class="video-details-primary">
+                    <% if video.leader.blank? || video.follower.blank? %>
+                      <div class="video-title">
+                        <%= link_to video.title.to_s, watch_path(v: video.youtube_id), class: "video-title" %>
+                      </div>
+                    <% end %>
+                    <% if video.song.present? %>
+                      <%= link_to root_path(song_id: video.song_id) do %>
+                        <div class="video-song-artist">
+                          <%= video.song.title.to_s.titleize + ' - ' + video.song.artist.to_s.titleize %>
+                          <br>
+                          <%= video.song.genre.to_s.titleize %>
+                          <% end %>
+                        </div>
+                    <% end %>
+                    <div class="video-details-spotify-info">
+                      <% if video.song.nil? && video.spotify_track_name.present? %>
+                        <%= video.try(:spotify_track_name).to_s.titleize + ' - ' + video.try(:spotify_artist_name).to_s.titleize %>
+                      <% end %>
+                      <% if video.song.nil? && video.spotify_track_name.nil? && video.youtube_artist.present? %>
+                        <%= "#{video.youtube_song.to_s.titleize} - #{video.youtube_artist.to_s.titleize}"  %>
+                      <% end %>
+                    </div>
                 </div>
               </div>
               <div class="video-metadata">
                 <div class="video-channel">
-                  <%= image_tag(video.channel.thumbnail_url, class: 'channel-icon') %>
+                  <%= link_to image_tag(video.channel.thumbnail_url, class: 'channel-icon'), root_path(channel: video.channel.title) %>
                   <%= link_to video.channel.title.to_s, root_path(channel: video.channel.title), class: "channel-title" %>
                 </div>
                 <div class="video-view_count">
