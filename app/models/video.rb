@@ -365,10 +365,6 @@ class Video < ApplicationRecord
           spotify_artist_id_2 = video.deep_find('spotify')['artists'][1]['id']
         end
 
-        if video.deep_find('spotify')['artists'][2].present?
-          spotify_artist_id_3 = video.deep_find('spotify')['artists'][2]['id']
-        end
-
         if video.deep_find('spotify')['artists'][1].present?
           spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name
         end

@@ -8,5 +8,8 @@ class RemoveUnusedVideoAttributes < ActiveRecord::Migration[6.1]
     remove_column :videos, :confidence_score
     remove_column :videos, :event_id
     remove_column :videos, :length
+    remove_column :videos, :searchable
+    remove_column :videos, :songmatches
+    remove_column :videos, :spotify_artist_name_3
   end
 end
