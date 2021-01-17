@@ -18,7 +18,7 @@ class MatVideo < ApplicationRecord
     Scenic.database.refresh_materialized_view(:mat_videos, concurrently: false, cascade: false)
   end
 
-    def readonly?
+  def readonly?
     true
   end
 end

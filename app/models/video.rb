@@ -77,7 +77,7 @@ class Video < ApplicationRecord
   scope :filter_by_leader,    ->(leader_name)     { joins(:leader).where('leaders.name ILIKE ?', leader_name) }
   scope :filter_by_follower,  ->(follower_name)   { joins(:follower).where('followers.name ILIKE ?', follower_name) }
   scope :filter_by_channel,   ->(channel_title)   { joins(:channel).where('channels.title ILIKE ?', channel_title) }
-  scope :filter_by_song_id,      ->(song_id)         { where(song_id: song_id) }
+  scope :filter_by_song_id,   ->(song_id)         { where(song_id: song_id) }
   scope :filter_by_hd,        ->                  { where(hd: true) }
   scope :paginate,            ->(page, per_page)  { offset(per_page * page).limit(per_page) }
 
@@ -90,52 +90,12 @@ class Video < ApplicationRecord
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
-  pg_search_scope :slower_search, against: [:title, :description],
-                                    using: {
-                                      tsearch:  {
-                                        dictionary: 'english', tsvector_column: "searchable"
-                                      }
-                                    },
-                                    ignoring: :accents
-
   class << self
 
     def filter_by_query(query)
-      # protip: when using `select` instead of `pluck` we have one query less
       where(id: MatVideo.search(query).select(:video_id))
     end
 
-  # def filter_by_query(search)
-    #   all :conditions =>  (search ? { :tag_name => search.split} : [])
-    # end
-
-    # def filter_by_query(str)
-    #   return [] if str.blank?
-    #   cond_text   = str.split.map{|w| "title LIKE ? "}.join(" OR ")
-    #   cond_values = str.split.map{|w| "%#{w}%"}
-    #   all(:conditions =>  (str ? [cond_text, *cond_values] : []))
-    # end
-
-    # def filter_by_query(query)
-    #   keywords = query.to_s.split(' ')
-    #   queries = keywords.map do |search_term|
-    #     where('unaccent(leaders.name) ILIKE unaccent(:q)  or
-    #      unaccent(followers.name) ILIKE unaccent(:q)  or
-    #      unaccent(songs.genre) ILIKE unaccent(:q)  or
-    #      unaccent(songs.title) ILIKE unaccent(:q)  or
-    #      unaccent(songs.artist) ILIKE unaccent(:q)  or
-    #      unaccent(channels.title) ILIKE unaccent(:q)  or
-    #      unaccent(videos.spotify_artist_name) ILIKE unaccent(:q)  or
-    #      unaccent(videos.spotify_track_name) ILIKE unaccent(:q)  or
-    #      unaccent(videos.youtube_song) ILIKE unaccent(:q)  or
-    #      unaccent(youtube_artist) ILIKE unaccent(:q)  or
-    #      unaccent(videos.title) ILIKE unaccent(:q)  or
-    #      unaccent(videos.description) ILIKE unaccent(:q)', q: "%#{search_term}%")
-    #   end
-    #   statement = queries.reduce do |statement, query|
-    #     statement.or(query)
-    #   end
-    # end
     def update_hd_columns
       Video.where(hd: nil).each do |video|
         youtube_id = video.youtube_id
