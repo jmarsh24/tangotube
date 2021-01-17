@@ -347,9 +347,6 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     thor (1.0.1)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2020.6)
@@ -420,7 +417,6 @@ DEPENDENCIES
   spring-watcher-listen (= 2.0.1)
   standard
   streamio-ffmpeg (~> 3.0, >= 3.0.2)
-  turbolinks (= 5.2.1)
   tzinfo-data (~> 1.2020, >= 1.2020.5)
   web-console (= 4.0.2)
   webpacker (= 4.2.2)
