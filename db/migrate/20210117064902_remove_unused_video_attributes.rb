@@ -7,5 +7,6 @@ class RemoveUnusedVideoAttributes < ActiveRecord::Migration[6.1]
     remove_column :videos, :videotype_id
     remove_column :videos, :confidence_score
     remove_column :videos, :event_id
+    remove_column :videos, :length
   end
 end
