@@ -62,7 +62,6 @@ class Video < ApplicationRecord
   require 'json'
 
   include Filterable
-  include PgSearch::Model
 
   validates :youtube_id, presence: true, uniqueness: true
 
@@ -94,7 +93,7 @@ class Video < ApplicationRecord
 
     def filter_by_query(query)
       where(id: MatVideo.search(query).select(:video_id))
-    end
+  end
 
     def update_hd_columns
       Video.where(hd: nil).each do |video|
@@ -251,7 +250,6 @@ class Video < ApplicationRecord
                            title: yt_video.title,
                            description: yt_video.description,
                            upload_date: yt_video.published_at,
-                           length: yt_video.length,
                            duration: yt_video.duration,
                            view_count: yt_video.view_count,
                            tags: yt_video.tags,
@@ -271,7 +269,6 @@ class Video < ApplicationRecord
 
       video.update(youtube_song: yt_video.deep_find('track'),
                    youtube_artist: yt_video.deep_find('artist'))
-      sleep(5)
     end
 
     def acr_music_match(youtube_id)

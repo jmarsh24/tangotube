@@ -22,4 +22,4 @@ JOIN channels ON channels.id = videos.channel_id
 JOIN followers ON followers.id = videos.follower_id
 JOIN leaders ON leaders.id = videos.leader_id
 JOIN songs ON songs.id = videos.song_id
-GROUP BY videos.id, channels.id, followers.id, leaders.id, songs.id;
+GROUP BY channels.id, followers.id, leaders.id, songs.id;
