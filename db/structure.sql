@@ -358,14 +358,10 @@ CREATE TABLE public.videos (
     youtube_song_id character varying,
     isrc character varying,
     acr_response_code integer,
-    spotify_artist_name_3 character varying,
-    length interval,
     channel_id bigint,
     scanned_song boolean DEFAULT false,
     hidden boolean DEFAULT false,
-    songmatches character varying[] DEFAULT '{}'::character varying[],
-    hd boolean DEFAULT false,
-    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, COALESCE(title, ''::text)), 'A'::"char") || setweight(to_tsvector('english'::regconfig, (COALESCE(description, ''::character varying))::text), 'B'::"char"))) STORED
+    hd boolean DEFAULT false
 );
 
 
@@ -386,6 +382,35 @@ CREATE SEQUENCE public.videos_id_seq
 --
 
 ALTER SEQUENCE public.videos_id_seq OWNED BY public.videos.id;
+
+
+--
+-- Name: videos_search_results; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.videos_search_results AS
+ SELECT videos.id AS video_id,
+    (((((((((((((((to_tsvector('english'::regconfig, COALESCE(videos.title, ''::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.description, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.genre, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.artist, ''::character varying))::text)) AS tsv_document
+   FROM ((((public.videos
+     LEFT JOIN public.channels ON ((channels.id = videos.channel_id)))
+     LEFT JOIN public.followers ON ((followers.id = videos.follower_id)))
+     LEFT JOIN public.leaders ON ((leaders.id = videos.leader_id)))
+     LEFT JOIN public.songs ON ((songs.id = videos.song_id)));
+
+
+--
+-- Name: videos_searches; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+--
+
+CREATE MATERIALIZED VIEW public.videos_searches AS
+ SELECT videos.id AS video_id,
+    (((((((((((((((to_tsvector('english'::regconfig, COALESCE(videos.title, ''::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.description, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.genre, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.artist, ''::character varying))::text)) AS tsv_document
+   FROM ((((public.videos
+     LEFT JOIN public.channels ON ((channels.id = videos.channel_id)))
+     LEFT JOIN public.followers ON ((followers.id = videos.follower_id)))
+     LEFT JOIN public.leaders ON ((leaders.id = videos.leader_id)))
+     LEFT JOIN public.songs ON ((songs.id = videos.song_id)))
+  WITH NO DATA;
 
 
 --
@@ -639,17 +664,17 @@ CREATE INDEX index_videos_on_leader_id ON public.videos USING btree (leader_id);
 
 
 --
--- Name: index_videos_on_searchable; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_videos_on_searchable ON public.videos USING gin (searchable);
-
-
---
 -- Name: index_videos_on_song_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_videos_on_song_id ON public.videos USING btree (song_id);
+
+
+--
+-- Name: index_videos_searches_on_tsv_document; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_searches_on_tsv_document ON public.videos_searches USING gin (tsv_document);
 
 
 --
@@ -710,6 +735,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210116203557'),
 ('20210117064902'),
 ('20210117065523'),
-('20210117065539');
+('20210117065539'),
+('20210118122245'),
+('20210118123830');
 
 

@@ -92,8 +92,8 @@ class Video < ApplicationRecord
   class << self
 
     def filter_by_query(query)
-      where(id: MatVideo.search(query).select(:video_id))
-  end
+      where(id: VideosSearch.search(query).select(:video_id))
+    end
 
     def update_hd_columns
       Video.where(hd: nil).each do |video|
