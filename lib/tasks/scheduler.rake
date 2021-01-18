@@ -35,7 +35,7 @@ end
 
 namespace :refreshers do
 desc "Refresh materialized view for Videos"
-  task mat_videos: :environment do
-    MatVideo.refresh
+  task videos_searches: :environment do
+    VideosSearch.refresh
   end
 end
