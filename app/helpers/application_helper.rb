@@ -10,20 +10,11 @@ module ApplicationHelper
   end
 
   def current_page_params
-    request.params.slice('songs.title',
-                         'songs.artist',
-                         'songs.genre',
-                         'songs.last_name_search',
-                         'leaders.name',
-                         'followers.name',
-                         'ochestra',
-                         'channels.title',
-                         'upload_date',
-                         'view_count',
-                         'query',
-                         'sort',
-                         'direction',
-                         'song_id')
+    request.params.slice('ochestra',
+                         'leader',
+                         'follower',
+                         'genre',
+                         'query')
   end
 
   def format_value(value)
