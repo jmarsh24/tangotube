@@ -1,5 +1,5 @@
 class WatchController < ApplicationController
-  def watch
+  def show
     @active_video = Video.find_by(youtube_id: params[:v])
   end
 end
