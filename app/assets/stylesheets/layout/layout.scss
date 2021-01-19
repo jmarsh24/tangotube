@@ -1,0 +1,31 @@
+/* Start of grid formatting */
+ @media (min-width: 800px) {
+.wrapper {
+  //  min-width: 1300px;
+  //  margin: auto 50px;
+ }
+
+ .wrapper > * {
+   border: 0px solid #f08c00;
+ }
+
+ .wrapper {
+   display: grid;
+   grid-template-columns: repeat(12, [col-start] 1fr);
+   grid-gap: 0px;
+ }
+
+ .wrapper > * {
+   grid-column: col-start / span 12;
+ }
+
+ .content {
+   grid-column: col-start 1 / span 12;
+   grid-row: 1 / 2;
+ }
+
+ .footer {
+   grid-column: col-start 1 / span 12;
+   grid-row: 3 / 4;
+ }
+ }

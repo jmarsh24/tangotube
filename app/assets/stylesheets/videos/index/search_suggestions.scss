@@ -1,0 +1,19 @@
+// Place all the styles related to the search_suggestions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+ul.autocomplete {
+  list-style-type: none;
+  border: 1px black solid;
+  background: white;
+}
+
+.autocomplete li {
+  display: relative;
+  list-style: none;
+  padding: 10px;
+}
+
+.autocomplete li:hover {
+  background-color: #f2f2f2;
+}

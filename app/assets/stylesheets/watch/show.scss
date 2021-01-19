@@ -1,0 +1,110 @@
+html,
+body,
+.grid-container {
+  height: 100%;
+  // max-width: 1920px;
+  // min-width: 1600px;
+}
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  // gap: 10px 50px;
+  margin:  auto 15rem ;
+}
+
+.video-responsive {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+.header {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.video_info {
+  grid-area: 4 / 2 / 5 / 3;
+}
+
+/* For presentation only, no need to copy the code below */
+.grid-container * {
+  border: 0px solid red;
+  position: relative;
+}
+
+.detail-section-label {
+  width: 100%;
+  padding-bottom: 10px;
+  padding-top: 24px;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 1px solid grey;
+  padding-top:12px;
+  padding-bottom: 12px;
+}
+
+.detail-column {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.detail-item-heading {
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.detail-item-value {
+  text-align: right;
+  font-size: 14px;
+}
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.video-info-container {
+  margin: auto .5rem;
+  max-width: 1000px;
+}
+
+.spacer {
+  height: 50px;
+}
+
+@media (max-width: 1024px) {
+  .grid-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto 1rem;
+  }
+}
+//   .detail-item-heading {
+//     text-align: left;
+//     font-weight: 600;
+//     font-size: 17px;
+//   }
+
+//   .detail-item-value {
+//     text-align: right;
+//     font-size: 17px;
+//   }
+
+// }

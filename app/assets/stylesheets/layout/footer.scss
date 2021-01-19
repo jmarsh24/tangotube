@@ -1,0 +1,38 @@
+.footer {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 12px;
+  color: rgb(88, 96, 105);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+}
+
+.footer nav {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  li {
+    display: flex;
+    text-decoration: none;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+    a {
+    display: flex;
+    text-decoration: none;
+  }
+
+    a:hover {
+    text-decoration: underline;
+    color: rgb(3, 102, 214);
+  }
+
+}
