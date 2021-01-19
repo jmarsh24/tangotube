@@ -77,3 +77,17 @@
   flex-grow: 1;
   max-width: 800px;
 }
+
+.navbar-link#sign-up {
+  border: 1px solid;
+  border-radius: .2rem;
+  padding: .4rem;
+  margin: .5rem;
+  // transition-delay: 1000ms;
+  // transition-property: border-color;
+  // transition-timing-function: ease;
+  &:hover {
+    color:#222222;
+    border-color: #222222;
+  }
+}
