@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   post 'savenew', to: 'users#savenew'
 
-  get '/watch',    to: 'watch#watch'
+  get '/watch',    to: 'watch#show'
   get '/privacy',  to: 'static_pages#privacy'
   get '/terms',    to: 'static_pages#terms'
 

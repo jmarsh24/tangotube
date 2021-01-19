@@ -16,15 +16,8 @@
 
 @import "font-awesome";
 
-@import "layout";
-@import "filters";
-@import "header";
-@import "typography";
-@import "index";
-@import "watch";
-@import 'footer';
-@import "search_suggestions";
-
-
 @import "videos/**/*";
 @import "devise/**/*";
+@import "pages/**/*";
+@import "watch/**/*";
+@import 'layout/**/*';
