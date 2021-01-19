@@ -54,12 +54,11 @@
 }
 
 .search-btn {
-  // align-items: flex-start;
   padding: 0 1.25rem;
   height: 29px;
   border: 1px solid #777;
   background-color: #f8f8f8;
-  color: black;
+  color: #333;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   cursor: pointer;
@@ -73,7 +72,7 @@
 
 .search-wrapper {
   display:flex;
-  justify-content: flex-end;
+  justify-content: center;
   flex-grow: 1;
   max-width: 800px;
 }
