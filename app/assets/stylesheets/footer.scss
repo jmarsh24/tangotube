@@ -10,14 +10,14 @@
   background: #f9f9f9;
 }
 
-nav ul {
+.footer-nav nav ul {
   display:flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
-nav li {
+.footer-nav nav li {
   display: flex;
   text-decoration: none;
   padding-left: .5rem;
@@ -25,12 +25,12 @@ nav li {
 }
 
 
-nav a{
+.footer-nav nav a{
   display:flex;
   text-decoration: none;
 }
 
-nav a:hover {
+.footer-nav nav a:hover {
   text-decoration: underline;
   color: rgb(3, 102, 214);
 }

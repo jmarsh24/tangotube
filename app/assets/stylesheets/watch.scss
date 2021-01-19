@@ -8,7 +8,7 @@ body,
 
 .grid-container {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   // gap: 10px 50px;
   margin:  auto 15rem ;
 }
@@ -40,7 +40,6 @@ body,
 .detail-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   width: 100%;
   border-bottom: 1px solid grey;
   padding-top:12px;
@@ -49,6 +48,7 @@ body,
 
 .detail-column {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;

@@ -39,6 +39,7 @@
 
 .search-group {
   width: 100%;
+  max-width: 400px;
   margin: 0 .4rem 0 2rem;
 }
 
@@ -53,7 +54,7 @@
 }
 
 .search-btn {
-  align-items: center;
+  // align-items: flex-start;
   padding: 0 1.25rem;
   height: 1.9rem;
   border: 1px solid #777;
