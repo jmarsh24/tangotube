@@ -10,27 +10,29 @@
   background: #f9f9f9;
 }
 
-.footer-nav nav ul {
-  display:flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
+.footer nav {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 
-.footer-nav nav li {
-  display: flex;
-  text-decoration: none;
-  padding-left: .5rem;
-  padding-right: .5rem;
-}
+  li {
+    display: flex;
+    text-decoration: none;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 
+    a {
+    display: flex;
+    text-decoration: none;
+  }
 
-.footer-nav nav a{
-  display:flex;
-  text-decoration: none;
-}
+    a:hover {
+    text-decoration: underline;
+    color: rgb(3, 102, 214);
+  }
 
-.footer-nav nav a:hover {
-  text-decoration: underline;
-  color: rgb(3, 102, 214);
 }
