@@ -9,6 +9,8 @@ ActiveAdmin.register Follower do
   scope :not_reviewed
 
   filter :name
+  filter :first_name
+  filter :last_name
   filter :nickname
   filter :reviewed
 

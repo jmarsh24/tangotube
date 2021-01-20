@@ -32,6 +32,7 @@ gem 'webpacker',              '4.2.2'
 gem 'youtube-dl.rb',          '~> 0.3.1.2016.09.11.1'
 gem 'yt',                     '~> 0.32.0'
 gem 'scenic',                 '~> 1.5', '>= 1.5.4'
+gem 'hotwire-rails',          '~> 0.1.3'
 
 group :development, :test do
   gem 'amazing_print',        '~> 1.2', '>= 1.2.2'

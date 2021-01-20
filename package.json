@@ -4,6 +4,7 @@
   "dependencies": {
     "@activeadmin/activeadmin": "^2.8.1",
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "@hotwired/turbo-rails": "^7.0.0-beta.4",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -12,9 +13,8 @@
     "node-sass": "^4.0.0",
     "select2": "^4.0.13",
     "select2-dropdownPosition": "https://github.com/andreivictor/select2-dropdownPosition",
-    "stimulus": "https://github.com/stimulusjs/dev-builds/archive/b8cc8c4/stimulus.tar.gz",
-    "stimulus-autocomplete": "^1.4.2",
-    "turbolinks": "^5.2.0"
+    "stimulus": "^2.0.0",
+    "stimulus-autocomplete": "^1.4.2"
   },
   "version": "0.1.0",
   "devDependencies": {
