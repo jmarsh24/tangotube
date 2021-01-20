@@ -1,0 +1,37 @@
+.channels-index-container {
+  display: flex;
+  flex-direction: column;
+  margin: 64px auto;
+  width: 900px;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 50px;
+}
+
+.channel-form {
+  display: flex;
+  margin-bottom: 50px;
+  font-size: 2rem;
+
+  input {
+    height: 1rem;
+    padding: .5rem;
+    border: 1px solid grey;
+    border-radius: .2rem;
+    font-size: 1rem;
+  }
+}
+
+.channels-index-row {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.channels-index-item {
+  width: 300px;
+  border-bottom: 1px solid #f2f2f2;
+}

@@ -1,9 +1,13 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :search_suggestions
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  namespace :admin do
+    resources :users
+  end
 
   devise_for :users
 
@@ -22,7 +26,4 @@ Rails.application.routes.draw do
   resources :videos
   resources :channels
   resources :search_suggestions, only: :index
-  namespace :admin do
-    resources :users
-  end
 end
