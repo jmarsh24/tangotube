@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   get '/terms',    to: 'static_pages#terms'
 
   resources :videos
+  resources :channels
   resources :search_suggestions, only: :index
-
   namespace :admin do
     resources :users
   end
