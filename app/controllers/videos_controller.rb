@@ -22,6 +22,17 @@ class VideosController < ApplicationController
     @genres     = @videos.joins(:song).pluck('songs.genre').uniq.compact.sort.map(&:titleize)
   end
 
+  def edit
+    @video = Video.find_by(id: params[:id])
+  end
+
+  def update
+    @video = Video.find(params[:id])
+    @video.update(video_params)
+    flash[:notice] = "Updated Video Successfully"
+    redirect_to root_path
+  end
+
   private
 
   def sort_column
@@ -49,4 +60,9 @@ class VideosController < ApplicationController
   def filtering_params(params)
     params.permit.slice(:genre, :leader, :follower, :orchestra, :query)
   end
+
+  def video_params
+    params.require(:video).permit(:hidden)
+  end
+
 end

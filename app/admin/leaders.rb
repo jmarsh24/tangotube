@@ -27,6 +27,7 @@ ActiveAdmin.register Leader do
 
   form do |f|
     f.inputs do
+      f.input :name
       f.input :first_name
       f.input :last_name
       f.input :nickname

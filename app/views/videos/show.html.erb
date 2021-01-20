@@ -1,0 +1,11 @@
+Editing Video #<%= @video.try(:id) %>
+<%= @video.try(:title) %>
+<%= @video.try(:descrition) %>
+<%= @video.try(:id) %>
+<%= @video.follower.try(:name) %>
+<%= @video.leader.try(:name) %>
+<%= @video.song.try(:title) %>
+<%= @video.song.try(:artist) %>
+<%= @video.hidden %>
+
+<%= link_to 'Edit', edit_video_path, class:'videos_show_button' %>

@@ -1,7 +1,7 @@
 ActiveAdmin.register Video do
   permit_params :title, :description, :tags, :youtube_id, :leader_id, :follower_id, :channel_id, :song_id,
                 :youtube_song, :youtube_artist, :performance_date, :performance_number, :performance_total,
-                :videotype_id, :event_id
+                :videotype_id, :event_id, :hidden
 
   includes :song, :leader, :follower, :channel
 
@@ -17,6 +17,7 @@ ActiveAdmin.register Video do
   scope :scanned_acr
   scope :not_scanned_acr
   scope :filter_by_hd
+  scope :filter_by_hidden
 
   filter :id_cont, label: 'id'
   filter :leader_name_cont,   label: 'Leader',    collection: proc { Leader.order(:name) }
@@ -39,7 +40,7 @@ ActiveAdmin.register Video do
         link_to('Social Blade', "https://socialblade.com/youtube/channel/#{video.channel.channel_id}", target: :_blank)
     end
     column 'Thumbnail' do |video|
-      link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank)
+      link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank)
     end
     column :title
     column :description
@@ -74,6 +75,12 @@ ActiveAdmin.register Video do
       input :channel
       input :song
       input :hidden
+    end
+  end
+
+  batch_action :hide do |video|
+    Video.find(selection).each do |video|
+      video.hidden!
     end
   end
 end

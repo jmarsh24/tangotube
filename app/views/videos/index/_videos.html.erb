@@ -31,6 +31,7 @@
                           <%= video.song.genre.to_s.titleize %>
                           <% end %>
                         </div>
+
                     <% end %>
                     <div class="video-details-spotify-info">
                       <% if video.song.nil? && video.spotify_track_name.present? %>
@@ -50,6 +51,7 @@
                 <div class="video-view_count">
                   <%= "#{video.view_count} views • #{time_ago_in_words(video.upload_date)} ago" %>
               </div>
+              <%# <%= link_to 'edit', edit_video_path(id: video.id) %>
             </div>
           </div>
         </div>
