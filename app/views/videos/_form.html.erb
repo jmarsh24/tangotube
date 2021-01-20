@@ -1,0 +1,10 @@
+<%= form_with model: @video do |f| %>
+  <div>
+    <%= f.label 'hidden?' %>
+    <%= f.check_box :hidden ,{}, "true", "false" %>
+  </div>
+  <div>
+    <%= f.submit 'Update Video' %>
+  </div>
+  <% end %>
+</div>
