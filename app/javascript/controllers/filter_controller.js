@@ -27,14 +27,8 @@ export default class extends Controller {
        const containerVideos = document.getElementById("videos");
        const containerFilters = document.getElementById("filters");
        const newContainerFilters = data.getElementById("filters");
-       const newContainerYoutubeVideo = data.getElementById("youtube_video");
-       const containerYoutubeVideo = document.getElementById("youtube_video");
-       const newContainerVideoDetails = data.getElementById("video_details");
-       const containerVideoDetails = document.getElementById("video_details");
        containerVideos.innerHTML = newContainerVideos.innerHTML;
        containerFilters.innerHTML = newContainerFilters.innerHTML;
-       containerYoutubeVideo.innerHTML = newContainerYoutubeVideo.innerHTML;
-       containerVideoDetails.innerHTML = newContainerVideoDetails.innerHTML;
        history.pushState({}, '', `${window.location.pathname}?${this.params}`)
      },
      error: (data) => {

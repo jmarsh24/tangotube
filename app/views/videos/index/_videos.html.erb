@@ -54,7 +54,7 @@
                 <div class="video-view_count">
                   <%= "#{video.view_count} views • #{time_ago_in_words(video.upload_date)} ago" %>
               </div>
-              <%# <%= link_to 'edit', edit_video_path(id: video.id) %>
+              <%= link_to fa_icon("ellipsis-h"), edit_video_path(id: video.id) %>
             </div>
           </div>
         </div>
