@@ -27,6 +27,7 @@ ActiveAdmin.register Song do
     column :last_name_search
     column :date
     column :active
+    column :popularity
     actions
   end
 end
