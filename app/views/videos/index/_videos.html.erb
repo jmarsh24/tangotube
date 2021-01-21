@@ -12,6 +12,9 @@
               <div class="video-primary">
                 <div class="video-details-section-dancers">
                   <% if video.leader.present? && video.follower.present? %>
+                    <% if video.song.blank? && video.spotify_track_name.blank? && video.youtube_song.blank? %>
+                      <%= link_to video.title.to_s, watch_path(v: video.youtube_id), class: "video-title" %>
+                    <% end %>
                     <%= link_to video.leader.name.to_s, root_path(leader: video.leader.name), class: "video-details-section-dancers" %>
                     <%= ' & ' %>
                     <%= link_to video.follower.name.to_s, root_path(follower: video.follower.name), class: "video-details-section-dancers" %>
