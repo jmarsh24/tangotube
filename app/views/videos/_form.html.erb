@@ -4,7 +4,16 @@
     <%= f.check_box :hidden ,{}, "true", "false" %>
   </div>
   <div>
+  <%= f.fields_for :leader do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  <% end %>
+  </div>
+  <div>
     <%= f.submit 'Update Video' %>
+  </div>
+  <div>
+  <%= link_to 'Cancel',  root_path %>
   </div>
   <% end %>
 </div>
