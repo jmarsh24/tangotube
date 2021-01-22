@@ -159,7 +159,7 @@ class Video < ApplicationRecord
                                                   OR unaccent(description) ILIKE unaccent(:leader_name)
                                                   OR unaccent(title) ILIKE unaccent(:leader_nickname)
                                                   OR unaccent(description) ILIKE unaccent(:leader_nickname)',
-                                              leader_name: "%#{leader.name}%",
+                                              leader_name: "%#{leader.first_name.present? && leader.last_name.present?  ? leader.first_name + ' ' + leader.last_name : leader.name }%",
                                               leader_nickname: "%#{leader.nickname.blank? ? 'Do not perform match' : leader.nickname}%").each do |video|
           video.update(leader: leader)
         end
@@ -170,7 +170,7 @@ class Video < ApplicationRecord
                                                     OR unaccent(description) ILIKE unaccent(:follower_name)
                                                     OR unaccent(title) ILIKE unaccent(:follower_nickname)
                                                     OR unaccent(description) ILIKE unaccent(:follower_nickname)',
-                                                follower_name: "%#{follower.name}%",
+                                                follower_name: "%#{follower.first_name.present? && follower.last_name.present? ? follower.first_name + ' ' + follower.last_name : follower.name}%",
                                                 follower_nickname: "%#{follower.nickname.blank? ? 'Do not perform match' : follower.nickname}%").each do |video|
           video.update(follower: follower)
         end
