@@ -50,7 +50,7 @@
                     <div class="video-channel">
                       <%= link_to image_tag(video.channel.thumbnail_url, class: 'channel-icon'), root_path(channel: video.channel.title) %>
                       <%= link_to video.channel.title.to_s, root_path(channel: video.channel.title), class: "channel-title" %>
-                    <%# </div>
+                    </div>
                     <div class="video-view_count">
                       <%= "#{video.view_count} views • #{time_ago_in_words(video.upload_date)} ago" %>
                   </div>

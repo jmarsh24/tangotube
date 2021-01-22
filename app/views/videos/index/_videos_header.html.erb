@@ -3,6 +3,14 @@
     <%= "Displaying #{@videos.size} Results" %>
   </div>
   <div class="videos-sortable-container">
+    <div class="videos-sortable-btn" data-controller="filter">
+     <%= form_with do |f| %>
+      <div>
+        <%= f.check_box :hd, data: { action: "filter#filter", 'filter-target': "filter" } %>
+        <%= f.label :hd %>
+      </div>
+    <% end %>
+    </div>
     <div class="videos-sortable-btn">
       <%= sortable 'songs.title', "Song Title" %>
     </div>

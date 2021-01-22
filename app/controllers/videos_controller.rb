@@ -9,7 +9,7 @@ class VideosController < ApplicationController
     @videos = Video.where.not('hidden IS true')
                    .includes(:leader, :follower, :channel, :song)
                    .order(sort_column + ' ' + sort_direction)
-                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query))
+                   .filter_videos(params.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd))
 
     @current_search = params[:query]
 
@@ -58,7 +58,7 @@ class VideosController < ApplicationController
   end
 
   def filtering_params(params)
-    params.permit.slice(:genre, :leader, :follower, :orchestra, :query)
+    params.permit.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd)
   end
 
   def video_params

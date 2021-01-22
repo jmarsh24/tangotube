@@ -15,7 +15,8 @@ module ApplicationHelper
                          'follower',
                          'genre',
                          'query',
-                         'song_id')
+                         'song_id',
+                         'hd')
   end
 
   def format_value(value)
