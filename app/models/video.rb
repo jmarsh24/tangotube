@@ -91,7 +91,6 @@ class Video < ApplicationRecord
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
   class << self
-
     def filter_by_query(query)
       where(id: VideosSearch.search(query).select(:video_id))
     end
@@ -159,7 +158,7 @@ class Video < ApplicationRecord
                                                   OR unaccent(description) ILIKE unaccent(:leader_name)
                                                   OR unaccent(title) ILIKE unaccent(:leader_nickname)
                                                   OR unaccent(description) ILIKE unaccent(:leader_nickname)',
-                                              leader_name: "%#{leader.first_name.present? && leader.last_name.present?  ? leader.first_name + ' ' + leader.last_name : leader.name }%",
+                                              leader_name: "%#{leader.first_name.present? && leader.last_name.present? ? leader.first_name + ' ' + leader.last_name : leader.name}%",
                                               leader_nickname: "%#{leader.nickname.blank? ? 'Do not perform match' : leader.nickname}%").each do |video|
           video.update(leader: leader)
         end
@@ -206,7 +205,7 @@ class Video < ApplicationRecord
 
       occur_num = Video.pluck(:song_id).compact!.tally
       max_value = occur_num.values.max
-      popularity = occur_num.transform_values { |v| (v.to_f / max_value.to_f * 100).round }
+      popularity = occur_num.transform_values { |v| (v.to_f / max_value * 100).round }
 
       occur_num.each do |key, value|
         song = Song.find(key)
