@@ -15,6 +15,10 @@
 
     <%= link_to "TangoTube", root_path, id: "logo" %>
 
+    <div class="static-pages-nav">
+      <%= link_to 'About', about_path %>
+    </div>
+
     <div class="search-wrapper">
         <div class="search-group">
           <%= form_with(url: root_path, class:"search_bar", method: :get, local: true) do |form| %>

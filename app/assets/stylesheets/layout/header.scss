@@ -28,6 +28,15 @@
   }
 }
 
+.static-pages-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    text-decoration: none;
+  }
+}
+
 .navbar-link {
   text-decoration: none;
 }

@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
   get '/watch',    to: 'watch#show'
   get '/privacy',  to: 'static_pages#privacy'
   get '/terms',    to: 'static_pages#terms'
+  get '/about',    to: 'static_pages#about'
 
   resources :videos
   resources :channels
