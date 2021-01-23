@@ -34,7 +34,13 @@
   align-items: center;
   a {
     text-decoration: none;
+    font-size: 14px;
+    &:hover{
+    color: #222222;
   }
+
+}
+
 }
 
 .navbar-link {

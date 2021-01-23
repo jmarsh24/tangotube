@@ -1,32 +1,11 @@
-html,
-body,
-.grid-container {
-  height: 100%;
-  // max-width: 1920px;
-  // min-width: 1600px;
-}
-
-.grid-container {
+.grid-container-show {
   display: flex;
   flex-direction: column;
-  // gap: 10px 50px;
   margin:  auto 15rem ;
 }
 
-.video-responsive {
-  grid-area: 2 / 2 / 3 / 3;
-}
-
-.header {
-  grid-area: 1 / 2 / 2 / 3;
-}
-
-.video_info {
-  grid-area: 4 / 2 / 5 / 3;
-}
-
 /* For presentation only, no need to copy the code below */
-.grid-container * {
+.grid-container-show * {
   border: 0px solid red;
   position: relative;
 }
@@ -90,7 +69,7 @@ body,
 }
 
 @media (max-width: 1024px) {
-  .grid-container {
+  .grid-container-show {
     display: flex;
     flex-direction: column;
     margin: auto 1rem;
