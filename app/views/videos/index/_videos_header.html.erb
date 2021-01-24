@@ -19,10 +19,13 @@
       <%= sortable 'channels.title', "Channel" %>
     </div>
     <div class="videos-sortable-btn">
-      <%= sortable "view_count" %>
+      <%= sortable "videos.view_count", "View Count" %>
     </div>
     <div class="videos-sortable-btn">
-      <%= sortable "upload_date" %>
+      <%= sortable "videos.upload_date", "Upload Date" %>
+    </div>
+     <div class="videos-sortable-btn">
+      <%= sortable 'videos.popularity', "Popularity" %>
     </div>
   </div>
 </div>

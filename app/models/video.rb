@@ -243,6 +243,15 @@ class Video < ApplicationRecord
       )
     end
 
+    def import_playlist(playlist_id)
+      yt_playlist = Yt::Playlist.new id: playlist_id
+      playlist_items = yt_playlist.playlist_items
+      playlist_items.map(&:video_id).each do |video_id|
+        video = Video.find_by(youtube_id: video_id)
+        video.update(popularity: 1) if video.present?
+      end
+    end
+
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
 

@@ -29,7 +29,7 @@ class VideosController < ApplicationController
   def update
     @video = Video.find(params[:id])
     @video.update(video_params)
-    flash[:notice] = "Updated Video Successfully"
+    flash[:notice] = 'Updated Video Successfully'
     redirect_to root_path
   end
 
@@ -42,11 +42,12 @@ class VideosController < ApplicationController
                        'leaders.name',
                        'followers.name',
                        'channels.title',
-                       'upload_date',
-                       'view_count',
-                       'songs.last_name_search']
+                       'videos.upload_date',
+                       'videos.view_count',
+                       'songs.last_name_search',
+                       'videos.popularity']
 
-    acceptable_cols.include?(params[:sort]) ? params[:sort] : 'upload_date'
+    acceptable_cols.include?(params[:sort]) ? params[:sort] : 'videos.popularity'
   end
 
   def sort_direction
@@ -64,5 +65,4 @@ class VideosController < ApplicationController
   def video_params
     params.require(:video).permit(:hidden)
   end
-
 end
