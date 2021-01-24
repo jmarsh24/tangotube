@@ -245,8 +245,8 @@ class Video < ApplicationRecord
 
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
-
-      video = Video.update(hd: yt_video.hd?)
+      video = Video.find_by(youtube_id: youtube_id)
+      video = video.update(hd: yt_video.hd?)
       channel = Channel.find(video.channel.id)
       imported_videos_count = Video.where(channel: channel).count
       imported = imported_videos_count >= channel.total_videos_count
