@@ -1,7 +1,7 @@
 .grid-container-show {
   display: flex;
   flex-direction: column;
-  margin:  auto 15rem ;
+  margin:  auto 15rem 100px;
 }
 
 /* For presentation only, no need to copy the code below */
@@ -62,10 +62,6 @@
 .video-info-container {
   margin: auto .5rem;
   max-width: 1000px;
-}
-
-.spacer {
-  height: 50px;
 }
 
 @media (max-width: 1024px) {
