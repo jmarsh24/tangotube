@@ -25,9 +25,9 @@
             <%= content_tag :div, class:'search-group','data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
               <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "search-input", placeholder: 'Search' %>
               <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
-          <% end %>
-        </div>
+              </div>
             <%= form.button fa_icon("search"), class: "search-btn", name: nil %>
+          <% end %>
         <% end %>
     </div>
 
