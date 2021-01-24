@@ -210,6 +210,45 @@ ALTER SEQUENCE public.leaders_id_seq OWNED BY public.leaders.id;
 
 
 --
+-- Name: playlists; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.playlists (
+    id bigint NOT NULL,
+    slug character varying,
+    title character varying,
+    description character varying,
+    channel_title character varying,
+    channel_id character varying,
+    video_count character varying,
+    imported boolean DEFAULT false,
+    videos_id bigint,
+    user_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: playlists_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.playlists_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: playlists_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.playlists_id_seq OWNED BY public.playlists.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -429,6 +468,13 @@ ALTER TABLE ONLY public.leaders ALTER COLUMN id SET DEFAULT nextval('public.lead
 
 
 --
+-- Name: playlists id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.playlists ALTER COLUMN id SET DEFAULT nextval('public.playlists_id_seq'::regclass);
+
+
+--
 -- Name: search_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -529,6 +575,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: playlists playlists_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.playlists
+    ADD CONSTRAINT playlists_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -592,6 +646,20 @@ CREATE INDEX index_mat_videos_on_tsv_document ON public.mat_videos USING gin (ts
 --
 
 CREATE UNIQUE INDEX index_mat_videos_on_video_id ON public.mat_videos USING btree (video_id);
+
+
+--
+-- Name: index_playlists_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_playlists_on_user_id ON public.playlists USING btree (user_id);
+
+
+--
+-- Name: index_playlists_on_videos_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_playlists_on_videos_id ON public.playlists USING btree (videos_id);
 
 
 --
@@ -665,6 +733,22 @@ CREATE INDEX index_videos_searches_on_tsv_document ON public.videos_searches USI
 
 
 --
+-- Name: playlists fk_rails_180bd29355; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.playlists
+    ADD CONSTRAINT fk_rails_180bd29355 FOREIGN KEY (videos_id) REFERENCES public.videos(id);
+
+
+--
+-- Name: playlists fk_rails_d67ef1eb45; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.playlists
+    ADD CONSTRAINT fk_rails_d67ef1eb45 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -724,6 +808,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210117065523'),
 ('20210117065539'),
 ('20210118123830'),
-('20210124151237');
+('20210124151237'),
+('20210124180841');
 
 

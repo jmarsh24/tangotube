@@ -243,12 +243,27 @@ class Video < ApplicationRecord
       )
     end
 
+    def import_all_playlists
+      Playlist.where(imported: false).each do |playlist|
+        Video.import_playlist(playlist.slug)
+      end
+    end
+
     def import_playlist(playlist_id)
       yt_playlist = Yt::Playlist.new id: playlist_id
-      playlist_items = yt_playlist.playlist_items
-      playlist_items.map(&:video_id).each do |video_id|
-        video = Video.find_by(youtube_id: video_id)
-        video.update(popularity: 1) if video.present?
+      yt_playlist_items = yt_playlist.playlist_items
+      playlist = Playlist.create(slug: playlist_id,
+                                 title: yt_playlist,
+                                 description: yt_playlist.title,
+                                 channel_title: yt_playlist.channel_title,
+                                 channel_id: yt_playlist.channel_id,
+                                 video_count: yt_playlist_items.size,
+                                 imported: true)
+
+      yt_playlist_items.map(&:video_id).each do |yt_video_id|
+        video = Video.find_by(youtube_id: yt_video_id)
+        video.update(popularity: video.popularity + 1) if video.present?
+        ImportVideoWorker.perform_async(yt_video_id) if video.blank?
       end
     end
 
