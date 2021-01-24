@@ -4,6 +4,10 @@ ActiveAdmin.register Playlist do
   config.sort_order = 'id_asc'
   config.per_page = [100, 500, 1000]
 
+  filter :slug
+  filter :channel_id
+  filter :channel_title
+
   index do
     selectable_column
     id_column
@@ -18,7 +22,7 @@ ActiveAdmin.register Playlist do
 
   form do |f|
     f.inputs do
-      f.input :slug, label: 'Channel ID'
+      f.input :slug, label: 'Playlist_ID'
     end
     f.actions
   end
