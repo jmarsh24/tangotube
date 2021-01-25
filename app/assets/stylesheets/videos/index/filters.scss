@@ -13,6 +13,15 @@ $primary-color: rgb(17, 128, 255);
   background: #f2f2f2;
   border-radius: .2rem;
   align-items: center;
+  margin: 0 1rem 0 0;
+}
+
+.filter-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justifiy-content: center;
+  margin-bottom: 1rem;
 }
 
 #filter-button-text {
@@ -20,18 +29,28 @@ $primary-color: rgb(17, 128, 255);
   margin: 0 0 0 .5rem;
 }
 
+.filter_results {
+  display: flex;
+  font-size: 1rem;
+  align-items: center;
+  justifiy-content: center;
+}
+
+
 .filter-container {
   border: 0px solid #963;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   max-width: 1900px;
   margin: 0 auto;
+  height: 300px;
 
   .filter-item {
     flex: 1;
     width: 100%;
     min-width:120px;
-    height: 275px;
+    height: 270px;
     margin: 0 .5rem;
     border: 0px solid #963;
     label {
@@ -53,7 +72,7 @@ $primary-color: rgb(17, 128, 255);
 }
 
 .select2-dropdown--below {
-  top: -1.25rem; /*your input height*/
+  top: -1.55rem; /*your input height*/
 }
 
 .select2-container--default .select2-results > .select2-results__options {
