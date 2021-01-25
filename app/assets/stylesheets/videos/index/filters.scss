@@ -4,6 +4,10 @@ $primary-color: rgb(17, 128, 255);
   display: none !important;
 }
 
+.hidden.show {
+  display: none;
+}
+
 .filter-button {
   display: flex;
   text-decoration: none;
@@ -125,7 +129,7 @@ $primary-color: rgb(17, 128, 255);
   display: grid;
   grid-template-columns: repeat(auto, 8);
   gap: 0.5rem;
-  margin: 0 1rem 1.5rem 1rem;
+  margin: 0 1rem 1rem 1rem;
   label {
     color: black;
     font-weight: 600;

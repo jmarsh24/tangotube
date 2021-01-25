@@ -235,13 +235,12 @@ class Video < ApplicationRecord
       yt_playlist = Yt::Playlist.new id: playlist_id
       yt_playlist_items = yt_playlist.playlist_items
       playlist = Playlist.find_by(slug: playlist_id)
-                          .update(  title: yt_playlist.title,
-                                    description: yt_playlist.description,
-                                    channel_title: yt_playlist.channel_title,
-                                    channel_id: yt_playlist.channel_id,
-                                    video_count: yt_playlist_items.size,
-                                    imported: true
-                                  )
+                         .update(title: yt_playlist.title,
+                                 description: yt_playlist.description,
+                                 channel_title: yt_playlist.channel_title,
+                                 channel_id: yt_playlist.channel_id,
+                                 video_count: yt_playlist_items.size,
+                                 imported: true)
 
       yt_playlist_items.map(&:video_id).each do |yt_video_id|
         video = Video.find_by(youtube_id: yt_video_id)
@@ -252,6 +251,8 @@ class Video < ApplicationRecord
 
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
+
+      Channel.create(channel_id: yt_video.channel_id) if Channel.find_by(channel_id: yt_video.channel_id).blank?
 
       video = Video.create(youtube_id: yt_video.id,
                            title: yt_video.title,
