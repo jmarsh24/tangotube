@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   resources :videos
   resources :channels
+  resources :playlists
   resources :search_suggestions, only: :index
 end

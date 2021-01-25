@@ -1,0 +1,32 @@
+.playlists-index-container {
+  display: flex;
+  flex-direction: column;
+  margin: 64px auto;
+  width: 900px;
+  align-items: center;
+  justify-content: center;
+}
+
+.playlist-form {
+  display: flex;
+  margin-bottom: 50px;
+  font-size: 2rem;
+
+  input {
+    height: 1rem;
+    padding: 0.5rem;
+    border: 1px solid grey;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+  }
+}
+
+.playlists-index-row {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.playlists-index-item {
+  width: 300px;
+  border-bottom: 1px solid #f2f2f2;
+}

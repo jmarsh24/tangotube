@@ -1,7 +1,6 @@
 /* Start of grid formatting */
- @media (min-width: 800px) {
 .wrapper {
-  //  min-width: 1300px;
+   min-width: 575px;
   //  margin: auto 50px;
  }
 
@@ -27,5 +26,4 @@
  .footer {
    grid-column: col-start 1 / span 12;
    grid-row: 3 / 4;
- }
  }
