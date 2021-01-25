@@ -22,6 +22,7 @@ $primary-color: rgb(17, 128, 255);
   align-items: center;
   justifiy-content: center;
   margin-bottom: 1rem;
+  margin: 0 .5rem .5rem .5rem;
 }
 
 #filter-button-text {
@@ -35,7 +36,6 @@ $primary-color: rgb(17, 128, 255);
   align-items: center;
   justifiy-content: center;
 }
-
 
 .filter-container {
   border: 0px solid #963;
