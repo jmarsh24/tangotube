@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["toggleable"];
+static targets = ["toggleable"];
 
   connect() {
     console.log("Toggle-Controller ON");
@@ -9,6 +9,8 @@ export default class extends Controller {
 
   toggle() {
     console.log("clicked");
-    this.toggleableTarget.classList.toggle("show");
+    this.toggleableTarget.classList.toggle("hidden");
+    var select2 = document.querySelectorAll('.select2-container')
+    select2.forEach(element => element.classList.toggle('hidden'));
   }
 }

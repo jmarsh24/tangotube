@@ -1,4 +1,3 @@
-
 .videos-header-container{
   display: flex;
   justify-content: space-between;
@@ -12,24 +11,6 @@
   font-size: 1rem;
 }
 
-.videos-sortable-container{
-  display: grid;
-  grid-template-columns: repeat(8, auto);
-  gap: .5rem;
-}
-
-.videos-sortable-btn {
-  display:flex;
-  padding: .7rem 1rem;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  border-radius: 0.3rem;
-  background-color: #f2f2f2;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-     a {
-      text-decoration: none;
-    }
-}
+// .videos-sortable-container {
+//   display: none;
+// }

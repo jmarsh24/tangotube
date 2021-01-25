@@ -1,32 +1,37 @@
 $primary-color: rgb(17, 128, 255);
 
 .hidden {
-  display: block;
+  display: none !important;
 }
 
-.hidden.show {
-  display: none;
+.filter-button {
+  display: flex;
+  text-decoration: none;
+  color: rgb(71, 71, 71);
+  padding: .5rem;
+  border: 1px #f2f2f2 solid;
+  background: #f2f2f2;
+  border-radius: .2rem;
+  align-items: center;
 }
 
-.filter_button {
-  padding: 10px;
-  border-radius: 0px;
-  border: none;
-  background-color: #f2f2f2;
+#filter-button-text {
+  font-size: 1.1rem;
+  margin: 0 0 0 .5rem;
 }
 
-.filter_container {
+.filter-container {
   border: 0px solid #963;
   display: flex;
   justify-content: space-between;
   max-width: 1900px;
   margin: 0 auto;
 
-  .filter_item {
+  .filter-item {
     flex: 1;
     width: 100%;
     min-width:120px;
-    height: 265px;
+    height: 275px;
     margin: 0 .5rem;
     border: 0px solid #963;
     label {
@@ -34,7 +39,7 @@ $primary-color: rgb(17, 128, 255);
       text-align: center;
       color: rgb(36, 36, 36);
       font-weight: 600;
-      padding: 0 0 2px 0;
+      padding: 0 0 .5rem 0;
     }
   }
 }
@@ -48,7 +53,7 @@ $primary-color: rgb(17, 128, 255);
 }
 
 .select2-dropdown--below {
-  top: -1.55rem; /*your input height*/
+  top: -1.25rem; /*your input height*/
 }
 
 .select2-container--default .select2-results > .select2-results__options {
@@ -97,6 +102,32 @@ $primary-color: rgb(17, 128, 255);
   border-radius: .25rem !important;
 }
 
+.videos-sortable-container {
+  display: grid;
+  grid-template-columns: repeat(auto, 8);
+  gap: 0.5rem;
+  margin: 0 1rem 1rem 1rem;
+  label {
+    color: black;
+    font-weight: 600;
+  }
+}
+
+.videos-sortable-btn {
+  display: flex;
+  // padding: 0.7rem 1rem;
+  // justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  // background-color: #f2f2f2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  a {
+    text-decoration: none;
+  }
+}
 
 @media (max-width: 800px) {
 

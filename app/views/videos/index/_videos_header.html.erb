@@ -2,30 +2,4 @@
   <div class="filter_results">
     <%= "Displaying #{@videos.size} Results" %>
   </div>
-  <div class="videos-sortable-container">
-    <div class="videos-sortable-btn">
-      <%= sortable 'songs.title', "Song Title" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'songs.last_name_search', "Orchestra (last name)" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'leaders.name', "Leader" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'followers.name', "Follower" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'channels.title', "Channel" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable "videos.view_count", "View Count" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable "videos.upload_date", "Upload Date" %>
-    </div>
-     <div class="videos-sortable-btn">
-      <%= sortable 'videos.popularity', "Popularity" %>
-    </div>
-  </div>
 </div>
