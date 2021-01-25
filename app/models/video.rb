@@ -3,55 +3,37 @@
 # Table name: videos
 #
 #  id                    :bigint           not null, primary key
-#  acr_response_code     :integer
-#  acrid                 :string
-#  avg_rating            :integer
-#  confidence_score      :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  title                 :text
+#  youtube_id            :string
+#  leader_id             :bigint
+#  follower_id           :bigint
 #  description           :string
 #  duration              :integer
-#  hd                    :boolean          default(FALSE)
-#  hidden                :boolean          default(FALSE)
-#  isrc                  :string
-#  length                :interval
-#  performance_date      :datetime
-#  performance_number    :integer
-#  performance_total     :integer
-#  scanned_song          :boolean          default(FALSE)
-#  songmatches           :string           default([]), is an Array
+#  upload_date           :date
+#  view_count            :integer
+#  tags                  :string
+#  song_id               :bigint
+#  youtube_song          :string
+#  youtube_artist        :string
+#  acrid                 :string
+#  spotify_album_id      :string
 #  spotify_album_name    :string
+#  spotify_artist_id     :string
 #  spotify_artist_id_2   :string
 #  spotify_artist_name   :string
 #  spotify_artist_name_2 :string
-#  spotify_artist_name_3 :string
-#  spotify_track_name    :string
-#  tags                  :string
-#  title                 :text
-#  upload_date           :date
-#  view_count            :integer
-#  youtube_artist        :string
-#  youtube_song          :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  channel_id            :bigint
-#  event_id              :bigint
-#  follower_id           :bigint
-#  leader_id             :bigint
-#  song_id               :bigint
-#  spotify_album_id      :string
-#  spotify_artist_id     :string
 #  spotify_track_id      :string
-#  videotype_id          :bigint
-#  youtube_id            :string
+#  spotify_track_name    :string
 #  youtube_song_id       :string
-#
-# Indexes
-#
-#  index_videos_on_channel_id    (channel_id)
-#  index_videos_on_event_id      (event_id)
-#  index_videos_on_follower_id   (follower_id)
-#  index_videos_on_leader_id     (leader_id)
-#  index_videos_on_song_id       (song_id)
-#  index_videos_on_videotype_id  (videotype_id)
+#  isrc                  :string
+#  acr_response_code     :integer
+#  channel_id            :bigint
+#  scanned_song          :boolean          default(FALSE)
+#  hidden                :boolean          default(FALSE)
+#  hd                    :boolean          default(FALSE)
+#  popularity            :integer          default(0)
 #
 
 class Video < ApplicationRecord

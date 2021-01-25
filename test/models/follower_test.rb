@@ -8,6 +8,8 @@
 #  updated_at :datetime         not null
 #  reviewed   :boolean
 #  nickname   :string
+#  first_name :string
+#  last_name  :string
 #
 
 require "test_helper"

@@ -1,3 +1,10 @@
+# == Schema Information
+#
+# Table name: videos_searches
+#
+#  video_id     :bigint           primary key
+#  tsv_document :tsvector
+#
 class VideosSearch < ApplicationRecord
   self.primary_key = :video_id
 

@@ -3,11 +3,7 @@ class PlaylistsController < ApplicationController
     @playlists = Playlist.all.order(:id)
   end
 
-  def show; end
-
-  private
-
-  def set_playlist
+  def show
     @playlist = Playlist.find(params[:id])
   end
 end

@@ -3,25 +3,19 @@
 # Table name: songs
 #
 #  id               :bigint           not null, primary key
-#  active           :boolean          default(TRUE)
-#  artist           :string
-#  artist_2         :string
-#  author           :string
-#  composer         :string
-#  date             :date
 #  genre            :string
+#  title            :string
+#  artist           :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  artist_2         :string
+#  composer         :string
+#  author           :string
+#  date             :date
 #  last_name_search :string
 #  occur_count      :integer          default(0)
 #  popularity       :integer          default(0)
-#  title            :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#
-# Indexes
-#
-#  index_songs_on_artist  (artist)
-#  index_songs_on_genre   (genre)
-#  index_songs_on_title   (title)
+#  active           :boolean          default(TRUE)
 #
 
 class Song < ApplicationRecord
