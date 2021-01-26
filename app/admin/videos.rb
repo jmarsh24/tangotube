@@ -37,10 +37,13 @@ ActiveAdmin.register Video do
     column 'channel' do |video|
       link_to(video.channel.title, "/admin/channels/#{video.channel.id}", target: :_blank) + ' ' +
         link_to('Youtube', "http://youtube.com/channel/#{video.channel.channel_id}", target: :_blank) + ' ' +
-        link_to('Social Blade', "https://socialblade.com/youtube/channel/#{video.channel.channel_id}", target: :_blank)
+        link_to('Social Blade', "https://socialblade.com/youtube/channel/#{video.channel.channel_id}",
+                target: :_blank) + ' ' +
+        link_to('TangoTube', root_path(channel: video.channel.title), target: :_blank)
     end
     column 'Thumbnail' do |video|
-      link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100), "/watch?v=#{video.youtube_id}", target: :_blank)
+      link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100),
+              "/watch?v=#{video.youtube_id}", target: :_blank)
     end
     column :title
     column :description
@@ -78,7 +81,7 @@ ActiveAdmin.register Video do
     end
   end
 
-  batch_action :hide do |video|
+  batch_action :hide do |_video|
     Video.find(selection).each do |video|
       video.hidden!
     end
