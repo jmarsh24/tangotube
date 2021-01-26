@@ -6,5 +6,5 @@
         options_for_select([["Select All #{title.to_s.titleize + 's'}", "all"]] + model,
           params[title.to_s].presence || "all"),
             class: "content-search",
-            data: { action: "filter#filter toggle#toggle select2#open", "filter-target": "filter" } %>
+            data: { action: "filter#filter", "filter-target": "filter" } %>
 </div>
