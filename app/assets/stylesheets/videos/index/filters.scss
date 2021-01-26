@@ -1,11 +1,7 @@
 $primary-color: rgb(17, 128, 255);
 
-.hidden {
+.is-hidden {
   display: none !important;
-}
-
-.hidden.show {
-  display: none;
 }
 
 .filter-button {

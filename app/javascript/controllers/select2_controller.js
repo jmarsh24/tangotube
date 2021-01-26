@@ -17,16 +17,27 @@ export default class extends Controller {
         width: "resolve",
         dropdownPosition: "below",
       })
-      .on("select2:closing", function (e) {
-        e.preventDefault();
-      })
-      .on("select2:closed", function (e) {
-        list.select2("open");
-      })
-      .on("select2:select", function () {
-        let event = new Event("change", { bubbles: true });
-        this.dispatchEvent(event);
-      })
-      .select2("open");
+  }
+
+  open() {
+    console.log('Select2 Dropdown Fire')
+    var list = $('.content-search').select2({
+    closeOnSelect: false,
+    dropdownPosition: 'below',
+    searchInputPlaceholder: 'Select filter below or search by keyword',
+    width: 'resolve',
+    dropdownPosition: 'below'
+    })
+    .on("select2:closing", function (e) {
+      e.preventDefault();
+    })
+    .on("select2:closed", function (e) {
+      list.select2("open");
+    })
+    .on("select2:select", function () {
+      let event = new Event("change", { bubbles: true });
+      this.dispatchEvent(event);
+    })
+    .select2("open");
   }
 }
