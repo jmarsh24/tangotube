@@ -52,7 +52,7 @@
                       <%= link_to video.channel.title, root_path(channel: video.channel.title), class: "channel-title" %>
                     </div>
                     <div class="video-view_count">
-                      <%= "#{video.view_count} views • #{time_ago_in_words(video.upload_date)} ago" %>
+                      <%= "#{video.view_count.to_s(:delimited)} views • #{time_ago_in_words(video.upload_date)} ago" %>
                   </div>
                   <%# <%= link_to fa_icon("ellipsis-h"), edit_video_path(id: video.id) %>
                 </div>

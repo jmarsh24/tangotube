@@ -10,7 +10,5 @@ static targets = ["toggleable"];
   toggle() {
     console.log("clicked");
     this.toggleableTarget.classList.toggle("is-hidden");
-    // var select2 = document.querySelectorAll('.select2-container')
-    // select2.forEach(element => element.classList.toggle('show'));
   }
 }
