@@ -1,4 +1,4 @@
-<div data-controller="toggle select2">
+<div data-controller="toggle select2 filter">
   <div class="filter-header">
     <button data-action="click->toggle#toggle click->select2#open" class="filter-button"><%= fa_icon "sliders-h 2x", left: true %>
       <div id="filter-button-text">Filters</div>
@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-  <div class="filter-container is-hidden" data-controller="filter" data-toggle-target="toggleable">
+  <div class="filter-container is-hidden" data-toggle-target="toggleable">
     <%= render partial: "videos/index/filter_item", locals: {model: @genres, model_count: @genre_count, title: :genre } %>
     <%= render partial: "videos/index/filter_item", locals: {model: @leaders, model_count: @leader_count, title: :leader } %>
     <%= render partial: "videos/index/filter_item", locals: {model: @followers, model_count: @follower_count, title: :follower } %>

@@ -20,7 +20,6 @@ $primary-color: rgb(17, 128, 255);
   display: flex;
   flex-direction: row;
   align-items: center;
-  justifiy-content: center;
   margin-bottom: 1rem;
   margin: 0 .5rem .5rem .5rem;
 }
@@ -34,7 +33,7 @@ $primary-color: rgb(17, 128, 255);
   display: flex;
   font-size: 1rem;
   align-items: center;
-  justifiy-content: center;
+  justify-content: center;
 }
 
 .filter-container {
