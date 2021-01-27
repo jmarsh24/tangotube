@@ -47,7 +47,6 @@ export default class extends Controller {
     if (search.value) {
     params.push(`${search.name}=${search.value}`)
     }
-
-    return params.join('&')
+    return params.join("&");
   }
 }

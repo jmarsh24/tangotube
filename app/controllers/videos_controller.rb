@@ -13,6 +13,8 @@ class VideosController < ApplicationController
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
+    @current_search = params[:query]
+
     @leaders    = @videos.joins(:leader).pluck('leaders.name').uniq.sort.map(&:titleize)
     @followers  = @videos.joins(:follower).pluck('followers.name').uniq.sort.map(&:titleize)
     @channels   = @videos.joins(:channel).pluck('channels.title').uniq.compact.sort
