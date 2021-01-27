@@ -1,5 +1,10 @@
 .header {
   display: flex;
+  flex-direction: column;
+}
+
+.header-search-container {
+  display: flex;
   justify-content: space-between;
   height: 2.5rem;
   background: white;
@@ -8,7 +13,7 @@
   position: sticky;
   overscroll-behavior: contain;
   top: 0;
-  z-index: 1;
+  z-index: 10;
 }
 
 #logo {
@@ -30,15 +35,15 @@
 
 .static-pages-nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   a {
     text-decoration: none;
     font-size: 14px;
+    margin-right: 2rem;
     &:hover{
     color: #222222;
   }
-
 }
 
 }
