@@ -25,7 +25,7 @@
           <div class="search-group">
             <%= form_with(url: root_path, class:"search_bar", method: :get, local: true) do |form| %>
               <%= content_tag :div, class:'search-group','data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
-                <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "search-input", placeholder: "Search #{@videos_total.size.to_s(:delimited)} videos..." %>
+                <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "search-input", placeholder: "Search All Videos..." %>
                 <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
                 </div>
               <%= form.button fa_icon("search"), class: "search-btn", name: nil %>
