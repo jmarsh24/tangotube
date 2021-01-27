@@ -13,6 +13,7 @@ ActiveAdmin.register Channel do
   scope :all
   scope :imported
   scope :not_imported
+  scope :reviewed
 
   filter :id
   filter :title
@@ -34,6 +35,7 @@ ActiveAdmin.register Channel do
     column :title
     column :channel_id
     column :imported
+    column :reviewed
     column :imported_videos_count
     column :total_videos_count
     actions
@@ -43,6 +45,7 @@ ActiveAdmin.register Channel do
     f.inputs do
       f.input :channel_id, label: 'Channel ID'
       f.input :imported
+      f.input :reviewed
     end
     f.actions
   end

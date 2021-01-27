@@ -20,4 +20,5 @@ class Channel < ApplicationRecord
 
   scope :imported,     ->   { where(imported: true) }
   scope :not_imported, ->   { where(imported: false) }
+  scope :reviewed,     ->   { where(reviewed: false).where.not('title ILIKE ?', '%tango%') }
 end

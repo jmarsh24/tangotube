@@ -117,7 +117,7 @@ CREATE TABLE public.channels (
     imported_videos_count integer DEFAULT 0,
     total_videos_count integer DEFAULT 0,
     yt_api_pull_count integer DEFAULT 0,
-    reviewed boolean
+    reviewed boolean DEFAULT false
 );
 
 
