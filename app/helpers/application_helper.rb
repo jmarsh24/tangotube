@@ -16,7 +16,9 @@ module ApplicationHelper
                          'genre',
                          'query',
                          'song_id',
-                         'hd')
+                         'hd',
+                         'sort',
+                         'direction')
   end
 
   def format_value(value)

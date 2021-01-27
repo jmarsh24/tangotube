@@ -6,13 +6,10 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos_total = Video.all
     @videos = Video.where.not('hidden IS true')
                    .includes(:leader, :follower, :channel, :song)
                    .order(sort_column + ' ' + sort_direction)
                    .filter_videos(params.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd))
-
-    @current_search = params[:query]
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
