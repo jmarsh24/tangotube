@@ -252,7 +252,12 @@ class Video < ApplicationRecord
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
 
-      Channel.create(channel_id: yt_video.channel_id) if Channel.find_by(channel_id: yt_video.channel_id).blank?
+      if Channel.find_by(channel_id: yt_video.channel_id).blank?
+        yt_channel = Yt::Channel.new id: yt_video.channel_id
+        Channel.create(channel_id: yt_channel.channel_id,
+                       thumbnail_url: yt_channel.thumbnail_url,
+                       title: yt_channel.title)
+      end
 
       video = Video.create(youtube_id: yt_video.id,
                            title: yt_video.title,
