@@ -116,7 +116,8 @@ CREATE TABLE public.channels (
     imported boolean DEFAULT false,
     imported_videos_count integer DEFAULT 0,
     total_videos_count integer DEFAULT 0,
-    yt_api_pull_count integer DEFAULT 0
+    yt_api_pull_count integer DEFAULT 0,
+    reviewed boolean
 );
 
 
@@ -809,6 +810,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210117065539'),
 ('20210118123830'),
 ('20210124151237'),
-('20210124180841');
+('20210124180841'),
+('20210127131318');
 
 

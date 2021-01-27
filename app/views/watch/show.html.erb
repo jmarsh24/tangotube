@@ -9,7 +9,7 @@
     </div>
     <%= render partial: "video_info_item", locals: {header: "Title", value: @active_video.title || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Description", value: @active_video.description || "N/A" } %>
-    <%= render partial: "video_info_item", locals: {header: "Upload Date", value: @active_video.upload_date.strftime("%d/%m/%Y") || "N/A"} %>
+    <%= render partial: "video_info_item", locals: {header: "Upload Date", value: @active_video.upload_date.to_formatted_s(:long) } %>
     <%= render partial: "video_info_item", locals: {header: "View Count", value: @active_video.view_count || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Duration", value: Time.at(@active_video.duration).utc.strftime("%M:%S") || "N/A"} %>
     <%= render partial: "video_info_item", locals: {header: "Performance Number", value: "N/A"} %>

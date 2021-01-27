@@ -7,6 +7,7 @@ static targets = ["toggleable"];
     console.log("Toggle-Controller ON");
   }
 
+
   toggle() {
     console.log("clicked");
     this.toggleableTarget.classList.toggle("is-hidden");
