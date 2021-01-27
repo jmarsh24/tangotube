@@ -53,7 +53,7 @@
                     </div>
                     <div class="video-view_count">
                     <% if video.upload_date.present? && video.view_count.present? %>
-                      <%= "#{video.view_count.to_s(:delimited)} views • #{time_ago_in_words(video.upload_date).gsub('about ','').gsub('over ','').gsub('almost ','')} ago" %>
+                      <%= "#{number_to_human(video.view_count, :format => '%n%u', :precision => 2, :units => { :thousand => 'K', :million => 'M', :billion => 'B' })} views • #{time_ago_in_words(video.upload_date).gsub('about ','').gsub('over ','').gsub('almost ','')} ago" %>
                     <% end %>
                   </div>
                   <%# <%= link_to fa_icon("ellipsis-h"), edit_video_path(id: video.id) %>
