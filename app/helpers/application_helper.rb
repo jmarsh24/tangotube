@@ -11,10 +11,14 @@ module ApplicationHelper
 
   def current_page_params
     request.params.slice('orchestra',
+                         'channel',
                          'leader',
                          'follower',
                          'genre',
                          'query',
+                         'view_count',
+                         'upload_date',
+                         'popularity',
                          'song_id',
                          'hd',
                          'sort',
