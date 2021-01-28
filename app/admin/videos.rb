@@ -16,7 +16,6 @@ ActiveAdmin.register Video do
   scope :has_acr_match
   scope :scanned_acr
   scope :not_scanned_acr
-  scope :filter_by_hd
   scope :filter_by_hidden
 
   filter :id_cont, label: 'id'
