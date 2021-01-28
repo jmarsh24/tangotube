@@ -17,12 +17,37 @@ $primary-color: rgb(17, 128, 255);
   letter-spacing: .05em;
 }
 
+.filter-hd-button {
+  display: flex;
+  text-decoration: none;
+  color: rgb(71, 71, 71);
+  padding: 0.5rem;
+  border: 1px #f2f2f2 solid;
+  background: #f2f2f2;
+  border-radius: 0.2rem;
+  align-items: center;
+  margin: 0 0 0 .5rem;
+  letter-spacing: 0.05em;
+}
+
+.filter-container-button-results {
+  display: flex;
+  flex-direction: row;
+}
+
 .filter-header {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
   margin: 0 .5rem .5rem .5rem;
+}
+
+.filter-hd {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 #filter-button-text {

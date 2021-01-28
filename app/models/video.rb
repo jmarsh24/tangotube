@@ -59,7 +59,7 @@ class Video < ApplicationRecord
   scope :filter_by_follower,  ->(follower_name)   { joins(:follower).where('followers.name ILIKE ?', follower_name) }
   scope :filter_by_channel,   ->(channel_title)   { joins(:channel).where('channels.title ILIKE ?', channel_title) }
   scope :filter_by_song_id,   ->(song_id)         { where(song_id: song_id) }
-  scope :filter_by_hd,        ->                  { where(hd: true) }
+  scope :filter_by_hd,        ->(boolean)         { where(hd: boolean) }
   scope :filter_by_hidden,    ->                  { where(hidden: true) }
   scope :paginate,            ->(page, per_page)  { offset(per_page * page).limit(per_page) }
 
