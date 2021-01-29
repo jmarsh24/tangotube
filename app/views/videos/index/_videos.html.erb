@@ -1,57 +1,56 @@
 <section class="video-section">
   <% @videos_paginated.each do |video| %>
-        <article class="video-container">
-            <%= link_to watch_path(v: video.youtube_id),
+    <article class="video-container">
+      <%= link_to watch_path(v: video.youtube_id),
                       {active: :exact} do %>
-            <div class="thumbnail-container" data-duration= "<%= video.hd? ? "HD #{Time.at(video.duration).utc.strftime("%M:%S")}" : Time.at(video.duration).utc.strftime("%M:%S") %>" >
-              <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg", class: "thumbnail-image") %>
+        <div class="thumbnail-container" data-duration= "<%= video.hd? ? "HD #{Time.at(video.duration).utc.strftime("%M:%S")}" : Time.at(video.duration).utc.strftime("%M:%S") %>" >
+          <%= image_tag("http://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg", class: "thumbnail-image") %>
+        </div>
+      <% end %>
+      <div class="video-bottom-section">
+        <div class="video-details">
+          <div class="video-primary">
+            <div class="video-title">
+              <% if video.leader.present? && video.follower.present? && video.song.present? %>
+                <%= link_to "#{video.leader.name.to_s} & #{video.follower.name.to_s}", watch_path(v: video.youtube_id), class: "video-details-section-dancers" %>
+              <% else %>
+                <%= link_to video.title.to_s, watch_path(v: video.youtube_id), class: "video-title" %>
+              <% end %>
             </div>
-            <% end %>
-            <div class="video-bottom-section">
-              <div class="video-details">
-                  <div class="video-primary">
-                    <div class="video-title">
-                      <% if video.leader.present? && video.follower.present? && video.song.present? %>
-                        <%= link_to "#{video.leader.name.to_s} & #{video.follower.name.to_s}", watch_path(v: video.youtube_id), class: "video-details-section-dancers" %>
-                      <% else %>
-                        <%= link_to video.title.to_s, watch_path(v: video.youtube_id), class: "video-title" %>
-                      <% end %>
-                    </div>
-                      <div class="video-details-primary">
-                        <% if video.song.present? %>
-                          <%= link_to root_path(song_id: video.song_id) do %>
-                            <div class="video-song-info">
-                              <%= video.song.title.to_s.titleize + ' - ' + video.song.artist.to_s.titleize %>
-                              <br>
-                              <%= video.song.genre.to_s.titleize %>
-                              <% end %>
-                            </div>
-
-                        <% end %>
-                        <div class="video-details-spotify-info">
-                          <% if video.song.nil? && video.spotify_track_name.present? %>
-                            <%= video.try(:spotify_track_name).to_s.titleize + ' - ' + video.try(:spotify_artist_name).to_s.titleize %>
-                          <% end %>
-                          <% if video.song.nil? && video.spotify_track_name.nil? && video.youtube_artist.present? %>
-                            <%= "#{video.youtube_song.to_s.titleize} - #{video.youtube_artist.to_s.titleize}"  %>
-                          <% end %>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="video-metadata">
-                    <div class="video-channel">
-                      <%= link_to image_tag(video.channel.thumbnail_url, class: 'channel-icon'), root_path(channel: video.channel.title) if video.channel.thumbnail_url.present? %>
-                      <%= link_to video.channel.title, root_path(channel: video.channel.title), class: "channel-title" if video.channel.title.present? %>
-                    </div>
-                    <div class="video-view_count">
-                    <% if video.upload_date.present? && video.view_count.present? %>
-                      <%= "#{number_to_human(video.view_count, :format => '%n%u', :precision => 2, :units => { :thousand => 'K', :million => 'M', :billion => 'B' })} views • #{time_ago_in_words(video.upload_date).gsub('about ','').gsub('over ','').gsub('almost ','')} ago" %>
-                    <% end %>
-                  </div>
-                  <%# <%= link_to fa_icon("ellipsis-h"), edit_video_path(id: video.id) %>
+            <div class="video-details-primary">
+              <% if video.song.present? %>
+                <%= link_to root_path(song_id: video.song_id) do %>
+                  <div class="video-song-info">
+                    <%= video.song.title.to_s.titleize + ' - ' + video.song.artist.to_s.titleize %>
+                    <br>
+                    <%= video.song.genre.to_s.titleize %>
+                  <% end %>
                 </div>
+              <% end %>
+              <div class="video-details-spotify-info">
+                <% if video.song.nil? && video.spotify_track_name.present? %>
+                  <%= video.try(:spotify_track_name).to_s.titleize + ' - ' + video.try(:spotify_artist_name).to_s.titleize %>
+                <% end %>
+                <% if video.song.nil? && video.spotify_track_name.nil? && video.youtube_artist.present? %>
+                  <%= "#{video.youtube_song.to_s.titleize} - #{video.youtube_artist.to_s.titleize}"  %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="video-metadata">
+            <div class="video-channel">
+              <%= link_to image_tag(video.channel.thumbnail_url, class: 'channel-icon'), root_path(channel: video.channel.title) if video.channel.thumbnail_url.present? %>
+              <%= link_to video.channel.title, root_path(channel: video.channel.title), class: "channel-title" if video.channel.title.present? %>
+            </div>
+            <div class="video-view_count">
+              <% if video.upload_date.present? && video.view_count.present? %>
+                <%= "#{number_to_human(video.view_count, :format => '%n%u', :precision => 2, :units => { :thousand => 'K', :million => 'M', :billion => 'B' })} views • #{time_ago_in_words(video.upload_date).gsub('about ','').gsub('over ','').gsub('almost ','')} ago" %>
+              <% end %>
+            </div>
+            <%# <%= link_to fa_icon("ellipsis-h"), edit_video_path(id: video.id) %>
           </div>
         </div>
+      </div>
     </article>
   <% end %>
 </section>

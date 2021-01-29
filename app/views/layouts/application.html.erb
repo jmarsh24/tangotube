@@ -4,52 +4,48 @@
     <title>TangoTube</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= turbo_include_tags %>
   </head>
-
-  <div class="header">
-    <div class="static-pages-nav">
-      <%= link_to 'Home', root_path %>
-      <%= link_to 'About', about_path %>
-    </div>
-  <div>
-
-  </div>
-  <div class="header-search-container">
-  <%= link_to "TangoTube", root_path, id: "logo" %>
-      <div class="search-wrapper">
-          <div class="search-group">
-            <%= form_with(url: root_path, class:"search_bar", method: :get, local: true) do |form| %>
-              <%= content_tag :div, class:'search-group','data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
-                <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "search-input", placeholder: "Search All Videos..." %>
-                <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
-                </div>
-              <%= form.button fa_icon("search"), class: "search-btn", name: nil %>
-            <% end %>
-          <% end %>
-      </div>
-
-      <nav class ="nav">
-        <% if user_signed_in? %>
-          Logged in as <strong><%= current_user.email %></strong>.
-          <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
-        <% else %>
-          <%= link_to "Login", new_user_session_path, class:'navbar-link'  %>
-          <%= link_to "Sign up", new_user_registration_path, class:'navbar-link', id: 'sign-up' %>
-        <% end %>
-      </nav>
-    </div>
-  </div>
-
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body >
+    <div id="pageContainer" data-controller="toggle">
+      <div id="mastHeadContainer">
+        <button data-action="click->toggle#navShowHide">
+          <%= fa_icon "bars 2x" %>
+        </button>
+        <div class="logoContainer">
+          <%= link_to "TangoTube", root_path %>
+        </div>
+        <%= form_with(url: root_path, class:"searchBarContainer", method: :get, local: true) do |form| %>
+          <%= content_tag :div, class:'searchStimulusGroup','data-controller': "autocomplete", "data-autocomplete-url": search_suggestions_path do %>
+            <%= text_field_tag :query, @current_search, 'data-autocomplete-target': 'input', class: "searchInput", placeholder: "Search All Videos..." %>
+            <%= tag :ul, 'data-autocomplete-target': 'results', class: 'autocomplete' %>
+          <% end %>
+          <%= form.button fa_icon("search"), class: "searchButton", name: nil %>
+        <% end %>
+        <nav class ="nav">
+          <% if user_signed_in? %>
+            Logged in as <strong><%= current_user.email %></strong>.
+            <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, class:'navbar-link'  %>
+            <%= link_to "Sign up", new_user_registration_path, class:'navbar-link', id: 'sign-up' %>
+          <% end %>
+        </nav>
+        <%#= render 'layouts/header' %>
+      </div>
+      <div id="sideNavContainer" class="isHidden" data-toggle-target="sideNavContainer">
+      </div>
+      <div id="mainSectionContainer" data-toggle-target="mainSectionContainer">
+        <div id="mainContentContainer">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= yield %>
+        </body>
+      </div>
+    </div>
+  </div>
   <%= render 'layouts/footer' %>
 </html>
