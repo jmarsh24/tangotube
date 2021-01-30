@@ -10,9 +10,24 @@
   background: #f9f9f9;
 }
 
+.footerContainer{
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  max-width: 893px;
+}
+
+.footerTitle {
+  flex: 1;
+  text-align: center;
+}
+
 .footer nav {
+  flex: 1;
+  justify-content: center;
   ul {
     display: flex;
+    flex: 1;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
