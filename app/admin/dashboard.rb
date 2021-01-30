@@ -84,5 +84,5 @@ ActiveAdmin.register_page 'Dashboard' do
     #       render 'recent_posts' # => this will render /app/views/admin/dashboard/_recent_posts.html.erb
     #     end
     #   end
-  end # content
+  end
 end
