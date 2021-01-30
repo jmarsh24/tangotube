@@ -23,7 +23,7 @@ export default class extends Controller {
         }
       }
     ]).on('autocomplete:selected', (event, suggestion, dataset, context) => {
-      this.ac.autocomplete.setVal(suggestion.name)
+      this.ac.autocomplete.setVal(suggestion)
     })
   }
 }

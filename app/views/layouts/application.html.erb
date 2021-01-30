@@ -20,7 +20,7 @@
 
         <div class="searchBarContainer" data-controller="autocomplete">
           <%= form_with(url: root_path, method: :get, local: true) do |form| %>
-              <%= form.text_field :query, class: 'searchBar', 'data-autocomplete-target': "field", 'data-autocomplete-url': "/search_suggestions" %>
+              <%= form.text_field :query, value: @current_search, class: 'searchBar', 'data-autocomplete-target': "field", 'data-autocomplete-url': "/search_suggestions" %>
               <%= form.button fa_icon("search"), class: "searchButton", name: nil %>
           <% end %>
         </div>
