@@ -165,7 +165,7 @@ class Video < ApplicationRecord
 
       sql_query = sql_query.join(' OR ')
 
-      Video.where("#{dancer.class.name.downcase}": nil).where(sql_query, keywords).each do |video|
+      Video.where(sql_query, keywords).each do |video|
         video.update("#{dancer.class.name.downcase}": dancer)
       end
     end
