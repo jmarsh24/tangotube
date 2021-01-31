@@ -14,8 +14,7 @@ export default class extends Controller {
         closeOnSelect: false,
         dropdownPosition: "below",
         searchInputPlaceholder: "Select filter below or search by keyword",
-        width: "resolve",
-        dropdownPosition: "below",
+        width: "resolve"
       })
   }
 
@@ -25,8 +24,7 @@ export default class extends Controller {
     closeOnSelect: false,
     dropdownPosition: 'below',
     searchInputPlaceholder: 'Select filter below or search by keyword',
-    width: 'resolve',
-    dropdownPosition: 'below'
+    width: 'resolve'
     })
     .on("select2:closing", function (e) {
       e.preventDefault();
@@ -40,4 +38,26 @@ export default class extends Controller {
     })
     .select2("open");
   }
+
+  close() {
+    console.log('Select2 Dropdown Fire')
+    var list = $('.content-search').select2({
+    closeOnSelect: false,
+    dropdownPosition: 'below',
+    searchInputPlaceholder: 'Select filter below or search by keyword',
+    width: 'resolve'
+    })
+    .on("select2:closing", function (e) {
+      e.preventDefault();
+    })
+    .on("select2:closed", function (e) {
+      list.select2("close");
+    })
+    .on("select2:select", function () {
+      let event = new Event("change", { bubbles: true });
+      this.dispatchEvent(event);
+    })
+    .select2("close");
+  }
+
 }

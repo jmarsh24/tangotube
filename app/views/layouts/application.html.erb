@@ -8,9 +8,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <div id="pageContainer" data-controller="toggle">
+    <div id="pageContainer" data-controller="toggle select2">
       <div id="mastHeadContainer">
-        <button data-action="click->toggle#navShowHide">
+        <button data-action="click->toggle#navShowHide click->select2#close click->select2#open">
           <%= fa_icon "bars 2x" %>
         </button>
         <div class="logoContainer">
