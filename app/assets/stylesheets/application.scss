@@ -121,7 +121,8 @@ a {
       width: 100%;
       background-color: #fff;
       border: 1px solid #999;
-      border-top: none;
+      position: absolute;
+      margin-top: 12px;
     }
     .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
       cursor: pointer;
