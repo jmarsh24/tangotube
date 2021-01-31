@@ -135,26 +135,38 @@ class Video < ApplicationRecord
     end
 
     def match_all_dancers
+      Follower.all.each do |follower|
+        Video.match_dancer(follower)
+      end
       Leader.all.each do |leader|
-        Video.all.where(leader_id: nil).where(' unaccent(title) ILIKE unaccent(:leader_name)
-                                                  OR unaccent(description) ILIKE unaccent(:leader_name)
-                                                  OR unaccent(title) ILIKE unaccent(:leader_nickname)
-                                                  OR unaccent(description) ILIKE unaccent(:leader_nickname)',
-                                              leader_name: "%#{leader.first_name.present? && leader.last_name.present? ? leader.first_name + ' ' + leader.last_name : leader.name}%",
-                                              leader_nickname: "%#{leader.nickname.blank? ? 'Do not perform match' : leader.nickname}%").each do |video|
-          video.update(leader: leader)
-        end
+        Video.match_dancer(leader)
+      end
+    end
+
+    def match_dancer(dancer)
+      keywords = {}
+
+      if dancer.first_name.present? && dancer.last_name.present?
+        keywords.merge!(name: "%#{dancer.first_name} #{dancer.last_name}%")
+        keywords.merge!(name_1: "%#{dancer.first_name[0, 1]}.#{dancer.last_name}%")
+        keywords.merge!(name_2: "%#{dancer.first_name[0, 1]}. #{dancer.last_name}%")
+      else
+        keywords.merge!(name: "%#{dancer.name}%")
+      end
+      keywords.merge!(nickname: "%#{dancer.nickname}%") if dancer.nickname.present?
+
+      model_attributes = %w[title description]
+      keyword_names = keywords.map { |k, _v| k }
+      combined_hash = model_attributes.product(keyword_names)
+
+      sql_query = combined_hash.map do |attribute, keyword|
+        "unaccent(#{attribute}) ILIKE unaccent(:#{keyword})"
       end
 
-      Follower.all.each do |follower|
-        Video.all.where(follower_id: nil).where(' unaccent(title) ILIKE unaccent(:follower_name)
-                                                    OR unaccent(description) ILIKE unaccent(:follower_name)
-                                                    OR unaccent(title) ILIKE unaccent(:follower_nickname)
-                                                    OR unaccent(description) ILIKE unaccent(:follower_nickname)',
-                                                follower_name: "%#{follower.first_name.present? && follower.last_name.present? ? follower.first_name + ' ' + follower.last_name : follower.name}%",
-                                                follower_nickname: "%#{follower.nickname.blank? ? 'Do not perform match' : follower.nickname}%").each do |video|
-          video.update(follower: follower)
-        end
+      sql_query = sql_query.join(' OR ')
+
+      Video.where("#{dancer.class.name.downcase}": nil).where(sql_query, keywords).each do |video|
+        video.update("#{dancer.class.name.downcase}": dancer)
       end
     end
 
