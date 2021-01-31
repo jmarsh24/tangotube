@@ -155,7 +155,7 @@ class Video < ApplicationRecord
       end
       keywords.merge!(nickname: "%#{dancer.nickname}%") if dancer.nickname.present?
 
-      model_attributes = %w[title description]
+      model_attributes = %w[title]
       keyword_names = keywords.map { |k, _v| k }
       combined_hash = model_attributes.product(keyword_names)
 
