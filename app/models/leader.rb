@@ -16,6 +16,7 @@ class Leader < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   has_many :videos
+  has_many :follower, through: :videos
 
   scope :reviewed,     ->   { where(reviewed: true) }
   scope :not_reviewed, ->   { where(reviewed: false) }
