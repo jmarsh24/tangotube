@@ -6,9 +6,9 @@
 #  tsv_document :tsvector
 #
 class VideosSearch < ApplicationRecord
-  self.primary_key = :video_id
-
   include PgSearch::Model
+
+  self.primary_key = :video_id
 
   pg_search_scope(:search, against: :tsv_document,
                            using: {
