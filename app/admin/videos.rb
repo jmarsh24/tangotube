@@ -12,6 +12,8 @@ ActiveAdmin.register Video do
   scope :has_song
   scope :has_leader
   scope :has_follower
+  scope :missing_leader
+  scope :missing_follower
   scope :has_youtube_match
   scope :has_acr_match
   scope :scanned_acr

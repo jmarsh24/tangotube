@@ -67,6 +67,8 @@ class Video < ApplicationRecord
   scope :has_song,          ->   { where.not(song_id: nil) }
   scope :has_leader,        ->   { where.not(leader_id: nil) }
   scope :has_follower,      ->   { where.not(follower_id: nil) }
+  scope :missing_follower,  ->   { where(leader_id: nil) }
+  scope :missing_leader, -> { where(follower_id: nil) }
   scope :has_youtube_match, ->   { where.not(youtube_artist: nil) }
   scope :has_acr_match,     ->   { where(acr_response_code: 0) }
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
