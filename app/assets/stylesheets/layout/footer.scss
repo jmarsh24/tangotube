@@ -2,12 +2,14 @@
   padding-top: 12px;
   padding-bottom: 12px;
   font-size: 12px;
-  color: rgb(88, 96, 105);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   background: #f9f9f9;
+  a {
+    color: rgb(96, 96, 96);
+  }
 }
 
 .footerContainer{
@@ -20,6 +22,7 @@
 .footerTitle {
   flex: 1;
   text-align: center;
+  color: rgb(96, 96, 96);
 }
 
 .footer nav {

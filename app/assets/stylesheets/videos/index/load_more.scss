@@ -6,12 +6,15 @@
 .loadMoreResults {
   flex: 1;
   margin: 0 auto;
+  color: rgb(96, 96, 96);
+  font-size: .9rem;
 }
 
 .load-more-link {
   flex: 1;
   display: block;
   color: #363636;
+  font-size: .8rem;
   background-color: #F5F5F5;
   border: 2px solid #929292;
   border-radius: 5px;

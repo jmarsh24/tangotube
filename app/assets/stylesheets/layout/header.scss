@@ -12,6 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   button:not(.searchButton) {
     cursor: pointer;
     width: 40px;
@@ -53,7 +54,7 @@
       flex: 1;
       display: flex;
       height: 100%;
-      width: 97%;
+      width: 100%;
       max-width: 600px;
       color: #111;
       padding: 2px 6px;
@@ -63,7 +64,7 @@
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
       border-right: none;
-      height: 26px;
+      height: 30px;
       box-shadow: #eee 0px 1px 2px 0px inset;
     }
 
@@ -77,6 +78,7 @@
       width: 100%;
       background-color: #fff;
       border: 1px solid #999;
+      color: #999;
       position: absolute;
       margin-top: 12px;
     }
@@ -113,6 +115,7 @@
   .navbar-link {
     display: flex;
     padding: 5px;
+    font-size: .8rem;
   }
 
   .navbar-link#sign-up {

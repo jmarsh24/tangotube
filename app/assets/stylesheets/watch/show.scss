@@ -4,12 +4,6 @@
   margin:  auto 15rem 100px;
 }
 
-/* For presentation only, no need to copy the code below */
-.grid-container-show * {
-  border: 0px solid red;
-  position: relative;
-}
-
 .detail-section-label {
   width: 100%;
   padding-bottom: 10px;
@@ -37,11 +31,13 @@
   text-align: left;
   font-weight: 600;
   font-size: 14px;
+  color: rgb(96, 96, 96);
 }
 
 .detail-item-value {
   text-align: right;
   font-size: 14px;
+  color: rgb(96, 96, 96);
 }
 
 .video-responsive {
@@ -56,7 +52,8 @@
   top: 0;
   height: 100%;
   width: 100%;
-  border-radius: .25rem;
+  border: 0px;
+  border-radius: .4rem;
   position: absolute;
 }
 
@@ -72,15 +69,3 @@
     margin: auto 1rem;
   }
 }
-//   .detail-item-heading {
-//     text-align: left;
-//     font-weight: 600;
-//     font-size: 17px;
-//   }
-
-//   .detail-item-value {
-//     text-align: right;
-//     font-size: 17px;
-//   }
-
-// }
