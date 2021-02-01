@@ -135,10 +135,10 @@ class Video < ApplicationRecord
     end
 
     def match_all_dancers
-      Follower.all.each do |follower|
+      Follower.all.order(:id).each do |follower|
         Video.match_dancer(follower)
       end
-      Leader.all.each do |leader|
+      Leader.all.order(:id).each do |leader|
         Video.match_dancer(leader)
       end
     end
@@ -165,9 +165,9 @@ class Video < ApplicationRecord
 
       sql_query = sql_query.join(' OR ')
 
-      Video.where(sql_query, keywords).each do |video|
-        video.update("#{dancer.class.name.downcase}": dancer)
-      end
+      videos = Video.where(sql_query, keywords)
+
+      videos.update_all("#{dancer.class.name.downcase}_id": dancer.id) if videos.present?
     end
 
     def match_all_songs
