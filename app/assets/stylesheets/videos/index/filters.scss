@@ -84,65 +84,6 @@ $primary-color: rgb(17, 128, 255);
   }
 }
 
-.content-search {
-  width: 100% !important;
-}
-
-.select2-selection__arrow b {
-  display: none !important;
-}
-
-.select2-dropdown--below {
-  top: -1.55rem; /*your input height*/
-}
-
-.select2-container--default .select2-results > .select2-results__options {
-  min-height: 200px;
-  overscroll-behavior-y: contain !important;
-}
-
-.select-dropdown {
-  position: static;
-  border-radius:0px !important;
-  color: rgb(153, 153, 153) !important;
-}
-.select-dropdown .select-dropdown--above {
-  margin-top: 336px;
-}
-
-.select2-container *:focus {
-  outline-offset: -2px;
-  outline-width: 0px !important;
-}
-
-.select2-results__option:hover {
-  background: none !important;
-  color: rgb(153, 153, 153) !important; /*text highlight color*/
-}
-
-.select2-results__option--highlighted {
-  background: none !important;
-  color: rgb(153, 153, 153) !important;
-}
-
-.select2-results__option--highlighted[aria-selected="true"] {
-  background: $primary-color !important;
-  color: white !important;
-}
-
-.select2-container--default .select2-results__option[aria-selected=true] {
-  background: $primary-color !important;
-  color: white !important;
-}
-
-.select2-container--open {
-  z-index: 0 !important;
-}
-
-.select2-search__field  {
-  border-radius: .25rem !important;
-}
-
 .videos-sortable-container {
   display: grid;
   grid-template-columns: repeat(auto, 8);
@@ -152,21 +93,26 @@ $primary-color: rgb(17, 128, 255);
     color: black;
     font-weight: 600;
   }
+  a {
+    text-decoration: none;
+    color: rgb(96, 96, 96);
+    &:hover {
+      color: rgb(3, 3, 3);
+    }
+  }
 }
 
 .videos-sortable-btn {
   display: flex;
-  // padding: 0.7rem 1rem;
-  // justify-content: center;
+  color: rgb(96, 96, 96);
   align-items: center;
   font-size: 1rem;
   border-radius: 0.3rem;
-  // background-color: #f2f2f2;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  a {
-    text-decoration: none;
+  svg {
+    color: rgb(96, 96, 96);
   }
 }
 

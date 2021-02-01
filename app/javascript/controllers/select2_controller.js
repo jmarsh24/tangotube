@@ -1,10 +1,9 @@
 import { Controller } from "stimulus";
 import $ from "jquery";
+import Select2 from 'select2'
 
 require("select2/dist/css/select2");
 require("select2-dropdownPosition/select2-dropdownPosition.js");
-
-import Select2 from "select2";
 
 export default class extends Controller {
   connect() {

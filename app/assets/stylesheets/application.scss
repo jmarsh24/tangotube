@@ -36,9 +36,7 @@ a {
   text-decoration: none;
 }
 
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   color: rgb(3, 3, 3);
