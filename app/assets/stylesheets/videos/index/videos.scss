@@ -61,23 +61,24 @@
   color: #333;
   font-size: .9rem;
   font-weight: 500;
+  margin: .2rem 0;
   &:hover {
     color: black;
   }
 }
 
-.video-song{
+.video-song {
   font-size: 0.7rem;
   text-decoration: none;
 
   a {
   font-size: 0.7rem;
   text-decoration: none;
-  color: #555;
-  }
+  color:rgb(97, 97, 97);
 
   &:hover {
-    color: #111;
+    color: rgb(3, 3, 3);
+  }
   }
 }
 
