@@ -69,7 +69,7 @@ ActiveAdmin.register Video do
     actions
   end
 
-  form do |_f|
+  form do |f|
     inputs 'details' do
       input :title
       input :description
@@ -80,6 +80,7 @@ ActiveAdmin.register Video do
       input :song
       input :hidden
     end
+    f.actions
   end
 
   batch_action :hide do |_video|
