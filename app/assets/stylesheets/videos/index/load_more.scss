@@ -1,4 +1,15 @@
+.loadMoreContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.loadMoreResults {
+  flex: 1;
+  margin: 0 auto;
+}
+
 .load-more-link {
+  flex: 1;
   display: block;
   color: #363636;
   background-color: #F5F5F5;

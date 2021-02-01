@@ -14,6 +14,7 @@ class VideosController < ApplicationController
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
 
     @current_search = params[:query]
+    @videos_paginated_size = @videos_paginated.size * (@page + 1)
 
     @leaders    = @videos.joins(:leader).pluck('leaders.name').uniq.sort.map(&:titleize)
     @followers  = @videos.joins(:follower).pluck('followers.name').uniq.sort.map(&:titleize)

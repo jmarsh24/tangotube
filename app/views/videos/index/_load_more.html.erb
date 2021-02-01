@@ -1,9 +1,12 @@
-<div class="load-more">
-<% unless @videos.paginate(@page + 1, 32).empty?  %>
-  <%= link_to "Load more",
-        current_page_params
-        .merge(page: @page + 1),
-        remote: true,
-        class: "load-more-link" %>
-<% end %>
+<div class="loadMoreContainer">
+  <div class="loadMoreResults">
+    <%= "Displaying #{@videos_paginated_size} / #{@videos.size} Results" %>
+  </div>
+  <% unless @videos.paginate(@page + 1, 32).empty?  %>
+    <%= link_to "Load more",
+          current_page_params
+          .merge(page: @page + 1),
+          remote: true,
+          class: "load-more-link" %>
+  <% end %>
 </div>
