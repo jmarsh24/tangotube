@@ -28,8 +28,13 @@ export default class extends Controller {
        const containerVideos = document.getElementById("videos");
        const containerFilters = document.getElementById("filters");
        const newContainerFilters = data.getElementById("filters");
+       const newContainerFilters = data.getElementById('filters')
+       const newContainerLoadMore = data.getElementById('load_more')
+       const newContainerLoadMore = data.getElementById('load_more')
+
        containerVideos.innerHTML = newContainerVideos.innerHTML;
        containerFilters.innerHTML = newContainerFilters.innerHTML;
+       containerLoadMore.innerHTML = newContainerLoadMore.innerHTML;
        history.pushState({}, '', `${window.location.pathname}?${this.params}`)
      },
      error: (data) => {
