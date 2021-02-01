@@ -3,14 +3,15 @@ git_source(:github) { |_repo| 'https://github.com/#{repo}.git' }
 
 ruby '2.7.2'
 
-gem 'activeadmin', '~> 2.8', '>= 2.8.1'
-gem 'base64', '~> 0.1.0'
-gem 'bootsnap', '1.4.6', require: false
-gem 'country_select', '~> 4.0'
-gem 'devise', '~> 4.7', '>= 4.7.2'
-gem 'factory_bot', '~> 6.1'
-gem 'faraday', '~> 1.1.0'
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
+gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
+gem 'ahoy_matey',             '~> 3.1'
+gem 'base64',                 '~> 0.1.0'
+gem 'bootsnap',               '1.4.6', require: false
+gem 'country_select',         '~> 4.0'
+gem 'devise',                 '~> 4.7', '>= 4.7.2'
+gem 'factory_bot',            '~> 6.1'
+gem 'faraday',                '~> 1.1.0'
+gem 'font-awesome-rails',     '~> 4.7', '>= 4.7.0.5'
 gem 'hashie',                 '~> 4.1'
 gem 'hotwire-rails',          '~> 0.1.3'
 gem 'json',                   '~> 2.3', '>= 2.3.1'

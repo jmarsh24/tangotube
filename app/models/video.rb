@@ -195,6 +195,22 @@ class Video < ApplicationRecord
       end
     end
 
+    def match_song(_song)
+      model_attributes = %w[spotify_track_name youtube_song title description tags]
+      keyword_names = keywords.map { |k, _v| k }
+      combined_hash = model_attributes.product(keyword_names)
+
+      sql_query = combined_hash.map do |attribute, keyword|
+        "unaccent(#{attribute}) ILIKE unaccent(:#{keyword})"
+      end
+
+      sql_query = sql_query.join(' OR ')
+
+      videos = Video.where(sql_query, keywords)
+
+      videos.update_all("#{dancer.class.name.downcase}_id": dancer.id) if videos.present?
+    end
+
     def calc_song_popularity
       Song.column_defaults['popularity']
       Song.column_defaults['occur_count']
