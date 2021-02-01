@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   connect () {
-    this.ac = autocomplete(this.fieldTarget, { hint: true }, [
+    this.ac = autocomplete(this.fieldTarget, { hint: false }, [
       {
         source: this.search,
         debounce: 200,
