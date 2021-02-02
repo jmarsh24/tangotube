@@ -28,7 +28,7 @@ $primary-color: rgb(17, 128, 255);
   background: #f2f2f2;
   border-radius: 0.2rem;
   align-items: center;
-  margin: 0 1rem 0 0;
+  margin: 0 1rem 0 5px;
   letter-spacing: 0.05em;
 }
 
@@ -88,8 +88,7 @@ $primary-color: rgb(17, 128, 255);
 .videos-sortable-container {
   display: grid;
   grid-template-columns: repeat(auto, 8);
-  gap: 0.5rem;
-  margin: 0 1rem 1rem 1rem;
+  margin: 0 1rem 2rem 1rem;
   label {
     color: black;
     font-weight: 600;
@@ -97,6 +96,7 @@ $primary-color: rgb(17, 128, 255);
   a {
     text-decoration: none;
     color: rgb(96, 96, 96);
+    font-size: .8rem;
     &:hover {
       color: rgb(3, 3, 3);
     }
