@@ -1,6 +1,6 @@
 
 <div id="mastHeadContainer">
-  <button data-action="click->toggle#navShowHide click->select2#close click->select2#open">
+  <button data-action="click->toggle#navShowHide click->select2#close click->select2#open" class="buttonSideBar">
     <%= fa_icon "bars 2x" %>
   </button>
   <div class="logoContainer">
@@ -12,7 +12,7 @@
       <%= form.button fa_icon("search"), class: "searchButton", name: nil %>
     <% end %>
   </div>
-  <nav class ="nav">
+  <nav id="Login">
     <% if user_signed_in? %>
       Logged in as <strong><%= current_user.email %></strong>.
       <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>

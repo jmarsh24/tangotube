@@ -117,10 +117,14 @@ $primary-color: rgb(17, 128, 255);
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1280px) {
 
   .filter_item {
-    display:none;
+    display: none;
+  }
+
+  .filter-header {
+    display: none;
   }
 
 }

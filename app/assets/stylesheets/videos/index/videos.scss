@@ -115,6 +115,14 @@
   font-size: .7rem;
 }
 
-@media (min-width: 1280px) {
+@media (max-width: 1280px) {
+  .video-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  .video-bottom-section {
+    margin: 10px;
+  }
 
 }
