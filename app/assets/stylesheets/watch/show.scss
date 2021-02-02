@@ -30,13 +30,13 @@
 .detail-item-heading {
   text-align: left;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1rem;
   color: rgb(96, 96, 96);
 }
 
 .detail-item-value {
   text-align: right;
-  font-size: 14px;
+  font-size: 1rem;
   color: rgb(96, 96, 96);
 }
 
@@ -62,10 +62,10 @@
   margin: auto .5rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
   .grid-container-show {
     display: flex;
     flex-direction: column;
-    margin: auto 1rem;
+    margin: 0 0 200px 0;
   }
 }
