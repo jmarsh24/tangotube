@@ -1,17 +1,17 @@
 $primary-color: rgb(17, 128, 255);
 
-.filter-container-button-results {
-  display: flex;
-  flex-direction: row;
-}
-
 .filter-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  margin: 0 .5rem .5rem .5rem;
+  margin: .5rem .5rem .5rem .5rem;
+  padding: 10px 0 ;
+}
+
+.filter-container-button-results {
+  display: flex;
+  flex-direction: row;
 }
 
 .filter-hd {
