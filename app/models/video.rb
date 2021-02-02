@@ -68,7 +68,7 @@ class Video < ApplicationRecord
   scope :has_leader,        ->   { where.not(leader_id: nil) }
   scope :has_follower,      ->   { where.not(follower_id: nil) }
   scope :missing_follower,  ->   { where(leader_id: nil) }
-  scope :missing_leader, -> { where(follower_id: nil) }
+  scope :missing_leader,    ->   { where(follower_id: nil) }
   scope :has_youtube_match, ->   { where.not(youtube_artist: nil) }
   scope :has_acr_match,     ->   { where(acr_response_code: 0) }
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
@@ -145,13 +145,30 @@ class Video < ApplicationRecord
       end
     end
 
+    #
+    # carlos and mirella santos david
+    # mirella santos david, nickname: nil
+    # carlos santos david, nickname: nil
+    # guille barrionuevo, nickname: 'el peque'
+
+    # array of followers = Leader.followers.map(&:first_name)
+
+    # array of followers.each do |match|
+    # if follower.first_name and "#{Leader.first_name} #{Leader.middle_name} #{Leader.last_name}" present in title?
+    #   video.update(follower: follower)
+    # end
+
+    # mirella and carlos santos david
+
     def match_dancer(dancer)
       keywords = {}
+      # what about a Leader#partners and a Follower#partners method?
+      # partners = dancer.partners
       partners = dancer.leader.uniq.map(&:name) if dancer.leader.present?
       partners = dancer.follower.uniq.map(&:name) if dancer.follower.present?
 
+      # [dancer.first_name, dancer.last_name].compact.join('.')
       if dancer.first_name.present? && dancer.last_name.present?
-        keywords.merge!(name: "%#{dancer.first_name} #{dancer.last_name}%")
         keywords.merge!(name_1: "%#{dancer.first_name[0, 1]}.#{dancer.last_name}%")
         keywords.merge!(name_2: "%#{dancer.first_name[0, 1]}. #{dancer.last_name}%")
       else
@@ -160,7 +177,7 @@ class Video < ApplicationRecord
       keywords.merge!(nickname: "%#{dancer.nickname}%") if dancer.nickname.present?
 
       model_attributes = %w[title]
-      keyword_names = keywords.map { |k, _v| k }
+      keyword_names = keywords.map { |k, _| k }
       combined_hash = model_attributes.product(keyword_names)
 
       sql_query = combined_hash.map do |attribute, keyword|

@@ -28,9 +28,10 @@ export default class extends Controller {
   //      const containerVideos = document.getElementById("videos");
   //      const containerFilters = document.getElementById("filters");
   //      const newContainerFilters = data.getElementById("filters");
-  //      const newContainerFilters = data.getElementById('filters');
 
   //      containerVideos.innerHTML = newContainerVideos.innerHTML;
+  //      console.log('container', containerFilters.innerHTML)
+  //      console.log('new container', newContainerFilters.innerHTML)
   //      containerFilters.innerHTML = newContainerFilters.innerHTML;
   //      history.pushState({}, '', `${window.location.pathname}?${this.params}`)
   //    },
