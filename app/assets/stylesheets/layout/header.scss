@@ -27,6 +27,7 @@
     display: flex;
     flex: 1;
     justify-content: flex-start;
+
     a {
       font-size: 24px;
       color: black;
@@ -108,18 +109,19 @@ nav {
 }
 }
 
-  .static-pages-nav {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    a {
-      text-decoration: none;
-      font-size: 14px;
-      margin-right: 2rem;
-      &:hover {
-        color: #222222;
-      }
+.static-pages-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 2rem;
+    &:hover {
+      color: #222222;
     }
+  }
 }
 
 
@@ -134,7 +136,13 @@ nav {
   }
 
   #mastHeadContainer {
-      height: 100px;
+    height: 100px;
+
+    .logoContainer {
+      a {
+        font-size: 46px;
+      }
+    }
 
     .autocompleteContainer {
       flex: 3;
@@ -142,16 +150,15 @@ nav {
       margin: 0;
     }
 
-    .searchBarContainer button {
-      font-size: 20px;
-    }
-
-    .searchBar {
-      font-size: 30px;
-    }
-
-    .searchButton {
-
+    .searchBarContainer {
+      .searchBar {
+        font-size: 30px;
+      }
+      .searchButton {
+        height: 54px;
+        width: 100px;
+        font-size: 20px;
+      }
     }
   }
 }
