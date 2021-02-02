@@ -80,4 +80,12 @@ a {
   #mainContentContainer {
     padding: 5px 5px;
   }
+
+  * {
+    box-sizing: border-box;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    color: rgb(3, 3, 3);
+    font-size: 1.5rem;
+  }
+
 }
