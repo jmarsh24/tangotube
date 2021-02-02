@@ -58,8 +58,8 @@
 }
 
 .video-info-container {
+  flex: 1;
   margin: auto .5rem;
-  max-width: 1000px;
 }
 
 @media (max-width: 1024px) {
