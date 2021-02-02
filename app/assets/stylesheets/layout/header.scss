@@ -28,7 +28,7 @@
     flex: 1;
     justify-content: flex-start;
     a {
-      font-size: 20px;
+      font-size: 24px;
       color: black;
       letter-spacing: -1px;
       margin-left: 8px;
@@ -40,82 +40,86 @@
     }
   }
 
-  .searchBarContainer {
-    margin: 0 40px;
-    flex: 1;
-    display: flex;
-
-    form {
-      flex: 1;
-      display: flex;
-    }
-
-    .searchBar {
-      flex: 1;
-      width: 100%;
-      max-width: 600px;
-      color: #111;
-      padding: 2px 6px;
-      font-size: 14px;
-      font-weight: 400;
-      border: 1px solid #ccc;
-      border-top-left-radius: 3px;
-      border-bottom-left-radius: 3px;
-      border-right: none;
-      height: 30px;
-      box-shadow: #eee 0px 1px 2px 0px inset;
-    }
-
-    .searchButton {
-      height: 30px;
-      background-color: #f8f8f8;
-      border: 1px solid #d3d3d3;
-      border-bottom-right-radius: 3px;
-      border-top-right-radius: 3px;
-      cursor: pointer;
-      width: 65px;
-    }
-  }
-
-  nav {
+  .autocompleteContainer {
     display: flex;
     flex: 1;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
   }
 
-  .navbar-link {
+  .searchBarContainer {
+    margin: 0 40px;
+    width: 100%;
+    max-width: 600px;
+    flex: 1;
     display: flex;
-    padding: 5px;
-    font-size: .8rem;
-    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+
+  .searchBar {
+    flex: 1;
+    width: 100%;
+    color: #111;
+    padding: 8px 10px;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid #ccc;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-right: none;
+    box-shadow: #eee 0px 1px 2px 0px inset;
   }
 
-  .navbar-link#sign-up {
-    display: flex;
-    border: 1px solid;
-    border-radius: 0.2rem;
-    padding: 0.4rem;
-    margin: 0.5rem;
-    &:hover {
-      color: #222222;
-      border-color: #222222;
-    }
+  .searchButton {
+    height: 37px;
+    background-color: #f8f8f8;
+    border: 1px solid #d3d3d3;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    cursor: pointer;
+    width: 65px;
   }
 }
 
-.static-pages-nav {
+nav {
   display: flex;
-  justify-content: flex-start;
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
-  a {
-    text-decoration: none;
-    font-size: 14px;
-    margin-right: 2rem;
-    &:hover {
-      color: #222222;
-    }
+}
+
+.navbar-link {
+  display: flex;
+  padding: 5px;
+  font-size: .8rem;
+  text-decoration: none;
+}
+
+.navbar-link#sign-up {
+  display: flex;
+  border: 1px solid;
+  border-radius: 0.2rem;
+  padding: 0.4rem;
+  margin: 0.5rem;
+  &:hover {
+    color: #222222;
+    border-color: #222222;
   }
+}
+}
+
+  .static-pages-nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    a {
+      text-decoration: none;
+      font-size: 14px;
+      margin-right: 2rem;
+      &:hover {
+        color: #222222;
+      }
+    }
 }
 
 
@@ -129,13 +133,25 @@
     display: none;
   }
 
-  #mastHeadContainer .searchBarContainer {
-    flex: 2;
-    justify-content: flex-end;
-    margin: 0;
-  }
+  #mastHeadContainer {
+      height: 100px;
 
-  .searchBarContainer button{
-    font-size: 20px;
+    .autocompleteContainer {
+      flex: 3;
+      justify-content: flex-end;
+      margin: 0;
+    }
+
+    .searchBarContainer button {
+      font-size: 20px;
+    }
+
+    .searchBar {
+      font-size: 30px;
+    }
+
+    .searchButton {
+
+    }
   }
 }

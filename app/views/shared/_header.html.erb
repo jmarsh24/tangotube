@@ -6,12 +6,12 @@
   <div class="logoContainer">
     <%= link_to "TangoTube", root_path %>
   </div>
-  <div class="searchBarContainer" data-controller="autocomplete">
-    <%= form_with(url: root_path, method: :get, local: true) do |form| %>
+  <div class="autocompleteContainer" data-controller="autocomplete">
+    <%= form_with(url: root_path, method: :get, local: true, class: "searchBarContainer") do |form| %>
       <%= form.text_field :query, value: @current_search, placeholder: "Search #{number_with_delimiter(@videos_total.size)} videos...", class: 'searchBar', 'data-autocomplete-target': "field", 'data-autocomplete-url': "/search_suggestions" %>
       <%= form.button fa_icon("search"), class: "searchButton", name: nil %>
     <% end %>
-  </div>
+    </div>
   <nav id="Login">
     <% if user_signed_in? %>
       Logged in as <strong><%= current_user.email %></strong>.
