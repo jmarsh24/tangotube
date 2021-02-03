@@ -252,7 +252,7 @@ class Video < ApplicationRecord
       channel.update(
         title: yt_channel.title,
         thumbnail_url: yt_channel.thumbnail_url,
-        total_videos_count: yt_channel.videos.size
+        total_videos_count: yt_channel.video_count
       )
     end
 
