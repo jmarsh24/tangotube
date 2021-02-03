@@ -145,29 +145,11 @@ class Video < ApplicationRecord
       end
     end
 
-    #
-    # carlos and mirella santos david
-    # mirella santos david, nickname: nil
-    # carlos santos david, nickname: nil
-    # guille barrionuevo, nickname: 'el peque'
-
-    # array of followers = Leader.followers.map(&:first_name)
-
-    # array of followers.each do |match|
-    # if follower.first_name and "#{Leader.first_name} #{Leader.middle_name} #{Leader.last_name}" present in title?
-    #   video.update(follower: follower)
-    # end
-
-    # mirella and carlos santos david
-
     def match_dancer(dancer)
       keywords = {}
-      # what about a Leader#partners and a Follower#partners method?
-      # partners = dancer.partners
       partners = dancer.leader.uniq.map(&:name) if dancer.leader.present?
       partners = dancer.follower.uniq.map(&:name) if dancer.follower.present?
 
-      # [dancer.first_name, dancer.last_name].compact.join('.')
       if dancer.first_name.present? && dancer.last_name.present?
         keywords.merge!(name_1: "%#{dancer.first_name[0, 1]}.#{dancer.last_name}%")
         keywords.merge!(name_2: "%#{dancer.first_name[0, 1]}. #{dancer.last_name}%")
@@ -303,7 +285,7 @@ class Video < ApplicationRecord
 
       if Channel.find_by(channel_id: yt_video.channel_id).blank?
         yt_channel = Yt::Channel.new id: yt_video.channel_id
-        Channel.create(channel_id: yt_channel.channel_id,
+        Channel.create(channel_id: yt_channel.id,
                        thumbnail_url: yt_channel.thumbnail_url,
                        title: yt_channel.title)
       end
