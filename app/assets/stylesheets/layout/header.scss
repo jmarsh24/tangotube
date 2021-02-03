@@ -12,6 +12,10 @@
   justify-content: space-between;
   align-items: center;
 
+  .buttonSideBar {
+    display: none;
+  }
+
   button:not(.searchButton) {
     cursor: pointer;
     width: 40px;
