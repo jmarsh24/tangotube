@@ -137,13 +137,13 @@ nav {
   }
 
   #mastHeadContainer {
-    height: 100px;
+    height: 50px;
     margin: 0;
 
     .logoContainer {
-      flex:1;
+      flex: 1;
       a {
-        font-size: 46px;
+        font-size: 20px;
       }
     }
 
@@ -152,16 +152,16 @@ nav {
       margin: 0;
 
         .searchBarContainer {
-          margin: 0 0 0 50px;
+          margin: 0 0 0 20px;
           max-width: 1000px;
 
         .searchBar {
-          font-size: 30px;
-          height: 54px;
+          font-size: 18px;
+          height: 30px;
         }
         .searchButton {
-          height: 54px;
-          width: 100px;
+          height: 30px;
+          width: 50px;
           font-size: 20px;
         }
       }
