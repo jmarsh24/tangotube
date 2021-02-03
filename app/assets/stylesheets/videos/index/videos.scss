@@ -118,9 +118,12 @@
   .video-section {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
+    margin: 0;
   }
   .video-bottom-section {
     margin: 10px;
+  }
+  .thumbnail {
+  border-radius: 0;
   }
 }
