@@ -58,59 +58,57 @@
     justify-content: center;
     align-items: center;
 
-  .searchBar {
+    .searchBar {
+      flex: 1;
+      width: 100%;
+      color: #111;
+      height: 38px;
+      padding: 0 10px;
+      font-size: 16px;
+      font-weight: 400;
+      border: 1px solid #ccc;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      border-right: none;
+      box-shadow: #eee 0px 1px 2px 0px inset;
+    }
+
+    .searchButton {
+      height: 38px;
+      background-color: #f8f8f8;
+      border: 1px solid #d3d3d3;
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 3px;
+      cursor: pointer;
+      width: 65px;
+    }
+  }
+
+  nav {
+    display: flex;
     flex: 1;
-    width: 100%;
-    color: #111;
-    height: 38px;
-    padding: 0 10px;
-    font-size: 16px;
-    font-weight: 400;
-    border: 1px solid #ccc;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-right: none;
-    box-shadow: #eee 0px 1px 2px 0px inset;
+    justify-content: flex-end;
+    align-items: center;
   }
 
+  .navbar-link {
+    display: flex;
+    padding: 5px;
+    font-size: 0.8rem;
+    text-decoration: none;
   }
 
-  .searchButton {
-    height: 38px;
-    background-color: #f8f8f8;
-    border: 1px solid #d3d3d3;
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    cursor: pointer;
-    width: 65px;
+  .navbar-link#sign-up {
+    display: flex;
+    border: 1px solid;
+    border-radius: 0.2rem;
+    padding: 0.4rem;
+    margin: 0.5rem;
+    &:hover {
+      color: #222222;
+      border-color: #222222;
+    }
   }
-}
-
-nav {
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.navbar-link {
-  display: flex;
-  padding: 5px;
-  font-size: .8rem;
-  text-decoration: none;
-}
-
-.navbar-link#sign-up {
-  display: flex;
-  border: 1px solid;
-  border-radius: 0.2rem;
-  padding: 0.4rem;
-  margin: 0.5rem;
-  &:hover {
-    color: #222222;
-    border-color: #222222;
-  }
-}
 }
 
 .static-pages-nav {
@@ -127,8 +125,6 @@ nav {
     }
   }
 }
-
-
 
 @media (max-width: 500px) {
   .buttonSideBar {
@@ -157,8 +153,8 @@ nav {
         margin: 0 0 0 20px;
         min-width: 100px;
         .searchBar {
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
         }
       }
     }
