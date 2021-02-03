@@ -1,7 +1,7 @@
 .grid-container-show {
   display: flex;
   flex-direction: column;
-  margin:  auto 15rem 100px;
+  margin:  10px 10px;
 }
 
 .detail-section-label {
@@ -21,7 +21,6 @@
 
 .detail-column {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
@@ -62,10 +61,13 @@
   margin: auto .5rem;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 500px) {
   .grid-container-show {
     display: flex;
     flex-direction: column;
     margin: 0 0 200px 0;
+  }
+  .video-responsive iframe {
+  border-radius: 0;
   }
 }
