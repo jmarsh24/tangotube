@@ -78,16 +78,3 @@ a {
 .isHidden {
   display: none !important;
 }
-
-@media (max-width: 500px) {
-  #mainContentContainer {
-    padding: 5px 5px;
-  }
-
-  * {
-    box-sizing: border-box;
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    color: rgb(3, 3, 3);
-  }
-
-}
