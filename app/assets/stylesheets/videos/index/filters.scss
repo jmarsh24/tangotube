@@ -5,7 +5,7 @@ $primary-color: rgb(17, 128, 255);
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0px;
+  padding: 10px 10px;
 }
 
 .filter-container-button-results {
@@ -22,12 +22,10 @@ $primary-color: rgb(17, 128, 255);
 .filter-button {
   display: flex;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 10px;
   border: 1px #f2f2f2 solid;
   background: #f2f2f2;
-  border-radius: 0.2rem;
-  align-items: center;
-  margin: 0 1rem 0 5px;
+  border-radius: 3px;
   letter-spacing: 0.05em;
 }
 
@@ -53,6 +51,7 @@ $primary-color: rgb(17, 128, 255);
 .filter_results {
   display: flex;
   font-size: .9rem;
+  margin: 0 10px;
   color: rgb(96, 96, 96);
   align-items: center;
   justify-content: center;
