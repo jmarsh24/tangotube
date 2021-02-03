@@ -153,6 +153,10 @@ nav {
       .searchBarContainer {
         margin: 0 0 0 20px;
         max-width: 1000px;
+
+        .searchBar {
+          border-right: none;
+        }
       }
     }
   }
