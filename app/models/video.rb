@@ -241,7 +241,7 @@ class Video < ApplicationRecord
 
       yt_channel_videos = yt_channel_video_count >= 500 ? Video.get_channel_video_ids(channel_id) : yt_channel.videos.map(&:id)
 
-      channel = Channel.find_by(channel_id: channel_id)
+      channel = Channel.find_by(channel_id: yt_channel.id)
       channel_videos = channel.videos.map(&:youtube_id)
       yt_channel_videos_diff = yt_channel_videos - channel_videos
 

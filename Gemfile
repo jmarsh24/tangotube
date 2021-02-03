@@ -47,8 +47,9 @@ group :development do
   gem 'listen',               '~> 3.2'
   gem 'rack-mini-profiler',   '~> 2.3'
   gem 'rubocop',              '~> 1.8'
-  gem 'rubocop-rails', '~> 2.9'
-  gem 'rubocop-rspec', '~> 2.1'
+  gem 'rubocop-rails',        '~> 2.9'
+  gem 'rubocop-rspec',        '~> 2.1'
+  gem 'solargraph',           '~> 0.40.2'
   gem 'web-console',          '4.0.2'
 end
 
