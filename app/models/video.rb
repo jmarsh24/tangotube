@@ -302,8 +302,7 @@ class Video < ApplicationRecord
       channel = Channel.find(video.channel.id)
       imported_videos_count = Video.where(channel: channel).count
       imported = imported_videos_count >= channel.total_videos_count
-      channel.update(imported_videos_count: imported_videos_count,
-                     imported: imported)
+      channel.update(imported_videos_count: imported_videos_count)
     end
 
     def fetch_youtube_song(youtube_id)
