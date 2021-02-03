@@ -1,7 +1,7 @@
 .grid-container-show {
   display: flex;
   flex-direction: column;
-  margin:  10px 10px;
+  margin: 10px 10px;
 }
 
 .detail-section-label {
@@ -47,6 +47,7 @@
 }
 
 .video-responsive iframe {
+  margin: 10px 0;
   left: 0;
   top: 0;
   height: 100%;
