@@ -10,9 +10,13 @@
         <div class="video-details">
           <div class="video-title">
             <% if video.leader.present? && video.follower.present? && video.song.present? %>
-              <%= link_to "#{video.leader.name.to_s} & #{video.follower.name.to_s}", watch_path(v: video.youtube_id), class: "video-details-section-dancers" %>
+              <%= link_to "#{video.leader.name} & #{video.follower.name}", watch_path(v: video.youtube_id), class: "video-details-section-dancers" %>
+            <% elsif video.leader.present? && video.follower.present? && video.spotify_track_name.present? %>
+            <%= link_to "#{video.leader.name} & #{video.follower.name}", watch_path(v: video.youtube_id), class: "video-details-section-dancers" %>
+            <% elsif video.leader.present? && video.follower.present? && video.youtube_song.present? %>
+            <%= link_to "#{video.leader.name} & #{video.follower.name}", watch_path(v: video.youtube_id), class: "video-details-section-dancers" %>
             <% else %>
-              <%= link_to truncate(video.title.to_s, length: 85), watch_path(v: video.youtube_id), class: "video-title" %>
+              <%= link_to truncate(video.title, length: 85), watch_path(v: video.youtube_id), class: "video-title" %>
             <% end %>
           </div>
           <div class="video-song">
