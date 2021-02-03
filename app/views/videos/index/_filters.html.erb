@@ -1,49 +1,51 @@
-<div class="filter-header" data-controller="filter">
-  <div class="filter-container-button-results">
-    <button data-action="click->toggle#toggle click->select2#open" class="filter-button"><%= fa_icon "sliders-h 2x", left: true %>
-      <div id="filter-button-text">Filters</div>
-    </button>
-    <div class="filter_results">
-      <%= "Displaying #{number_with_delimiter(@videos.size)} Results" %>
+<div data-controller="filter">
+  <div class="filter-header">
+    <div class="filter-container-button-results">
+      <button data-action="click->toggle#toggle click->select2#open" class="filter-button"><%= fa_icon "sliders-h 2x", left: true %>
+        <div id="filter-button-text">Filters</div>
+      </button>
+      <div class="filter_results">
+        <%= "Displaying #{number_with_delimiter(@videos.size)} Results" %>
+      </div>
+    </div>
+    <div class="filter-hd">
+      <%= link_to "All", current_page_params.except(:hd) , class: "filter-hd-button", 'data-action':"click->filter#filter" %>
+      <%= link_to "HD", current_page_params.merge(hd: 1) , class: "filter-hd-button", 'data-action':"click->filter#filter" %>
     </div>
   </div>
-  <div class="filter-hd">
-    <%= link_to "All", current_page_params.except(:hd) , class: "filter-hd-button", 'data-action':"click->filter#filter" %>
-    <%= link_to "HD", current_page_params.merge(hd: 1) , class: "filter-hd-button", 'data-action':"click->filter#filter" %>
-  </div>
-</div>
-<div class="filter-container isHidden" data-toggle-target="toggleable" id="filters">
-  <%= render partial: "videos/index/filter_item", locals: {model: @genres, model_count: @genre_count, title: :genre } %>
-  <%= render partial: "videos/index/filter_item", locals: {model: @leaders, model_count: @leader_count, title: :leader } %>
-  <%= render partial: "videos/index/filter_item", locals: {model: @followers, model_count: @follower_count, title: :follower } %>
-  <%= render partial: "videos/index/filter_item", locals: {model: @artists, model_count: @artist_count, title: :orchestra } %>
-  <div class="videos-sortable-container">
-    <label>
-      Sort By
-    </label>
-    <div class="videos-sortable-btn">
-      <%= sortable 'songs.title', "Song Title" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'songs.last_name_search', "Orchestra (last name)" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'leaders.name', "Leader" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'followers.name', "Follower" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'channels.title', "Channel" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable "videos.view_count", "View Count" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable "videos.upload_date", "Upload Date" %>
-    </div>
-    <div class="videos-sortable-btn">
-      <%= sortable 'videos.popularity', "Popularity" %>
+  <div class="filter-container isHidden" data-toggle-target="toggleable" id="filters">
+    <%= render partial: "videos/index/filter_item", locals: {model: @genres, model_count: @genre_count, title: :genre } %>
+    <%= render partial: "videos/index/filter_item", locals: {model: @leaders, model_count: @leader_count, title: :leader } %>
+    <%= render partial: "videos/index/filter_item", locals: {model: @followers, model_count: @follower_count, title: :follower } %>
+    <%= render partial: "videos/index/filter_item", locals: {model: @artists, model_count: @artist_count, title: :orchestra } %>
+    <div class="videos-sortable-container">
+      <label>
+        Sort By
+      </label>
+      <div class="videos-sortable-btn">
+        <%= sortable 'songs.title', "Song Title" %>
+      </div>
+      <div class="videos-sortable-btn">
+        <%= sortable 'songs.last_name_search', "Orchestra (last name)" %>
+      </div>
+      <div class="videos-sortable-btn">
+        <%= sortable 'leaders.name', "Leader" %>
+      </div>
+      <div class="videos-sortable-btn">
+        <%= sortable 'followers.name', "Follower" %>
+      </div>
+      <div class="videos-sortable-btn">
+        <%= sortable 'channels.title', "Channel" %>
+      </div>
+      <div class="videos-sortable-btn">
+        <%= sortable "videos.view_count", "View Count" %>
+      </div>
+      <div class="videos-sortable-btn">
+        <%= sortable "videos.upload_date", "Upload Date" %>
+      </div>
+      <div class="videos-sortable-btn">
+        <%= sortable 'videos.popularity', "Popularity" %>
+      </div>
     </div>
   </div>
 </div>
