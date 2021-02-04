@@ -72,6 +72,8 @@
       border: 1px solid #ccc;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
       border-right: none;
       box-shadow: #eee 0px 1px 2px 0px inset;
     }
@@ -156,10 +158,6 @@
       .searchBarContainer {
         margin: 0 0 0 20px;
         min-width: 100px;
-        .searchBar {
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-        }
       }
     }
   }
