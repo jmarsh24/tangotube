@@ -488,7 +488,11 @@ CREATE TABLE public.videos (
     scanned_song boolean DEFAULT false,
     hidden boolean DEFAULT false,
     hd boolean DEFAULT false,
-    popularity integer DEFAULT 0
+    popularity integer DEFAULT 0,
+    like_count integer DEFAULT 0,
+    dislike_count integer DEFAULT 0,
+    favorite_count integer DEFAULT 0,
+    comment_count integer DEFAULT 0
 );
 
 
@@ -970,6 +974,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210124151237'),
 ('20210124180841'),
 ('20210127131318'),
-('20210201102317');
+('20210201102317'),
+('20210205075009');
 
 

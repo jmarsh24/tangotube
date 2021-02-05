@@ -281,12 +281,12 @@ class Video < ApplicationRecord
     def import_video(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
 
-      if Channel.find_by(channel_id: yt_video.channel_id).blank?
-        yt_channel = Yt::Channel.new id: yt_video.channel_id
-        Channel.create(channel_id: yt_channel.id,
-                       thumbnail_url: yt_channel.thumbnail_url,
-                       title: yt_channel.title)
-      end
+      # if Channel.find_by(channel_id: yt_video.channel_id).blank?
+      #   yt_channel = Yt::Channel.new id: yt_video.channel_id
+    #   Channel.create(channel_id: yt_channel.id,
+      #                  thumbnail_url: yt_channel.thumbnail_url,
+      #                  title: yt_channel.title)
+      # end
 
       video = Video.create(youtube_id: yt_video.id,
                            title: yt_video.title,
@@ -296,6 +296,10 @@ class Video < ApplicationRecord
                            view_count: yt_video.view_count,
                            tags: yt_video.tags,
                            hd: yt_video.hd?,
+                           favorite_count: yt_video.favorite_count,
+                           comment_count: yt_video.comment_count,
+                           like_count: yt_video.like_count,
+                           dislike_count: yt_video.dislike_count,
                            channel: Channel.find_by(channel_id: yt_video.channel_id))
       channel = Channel.find(video.channel.id)
       imported_videos_count = Video.where(channel: channel).count

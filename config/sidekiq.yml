@@ -1,9 +1,9 @@
 development:
   :concurrency: 10
-  :timeout: 18000
+  :timeout: 10
 production:
   :concurrency: 5
-  :timeout: 18000
+  :timeout: 10
 :queues:
   - high
   - default
