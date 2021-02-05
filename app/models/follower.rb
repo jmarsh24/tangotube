@@ -17,8 +17,8 @@ class Follower < ApplicationRecord
 
   has_many :videos
   has_many :leader, through: :videos
+  has_many :song, through: :videos
 
   scope :reviewed,     ->   { where(reviewed: true) }
   scope :not_reviewed, ->   { where(reviewed: false) }
-
 end

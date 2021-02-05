@@ -66,6 +66,7 @@ ActiveAdmin.register Video do
     column :spotify_artist_name
     column :hidden
     column :hd
+    column :popularity
     actions
   end
 
@@ -79,6 +80,7 @@ ActiveAdmin.register Video do
       input :channel
       input :song
       input :hidden
+      input :popularity
     end
     f.actions
   end
