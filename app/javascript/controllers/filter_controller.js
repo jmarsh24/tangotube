@@ -18,6 +18,7 @@ export default class extends Controller {
   }
 
   // filter() {
+  //   console.log(window.location.pathname)
   //   const url = `${window.location.pathname}?${this.params}`;
 
   //   Rails.ajax({
@@ -26,13 +27,25 @@ export default class extends Controller {
   //    success: (data) => {
   //      const newContainerVideos = data.getElementById("videos");
   //      const containerVideos = document.getElementById("videos");
-  //      const containerFilters = document.getElementById("filters");
-  //      const newContainerFilters = data.getElementById("filters");
+  //      const newContainerGenreFilters = data.getElementById("select2-genre-results");
+  //      const containerGenreFilters = document.getElementById("select2-genre-results");
+  //      const newContainerLeaderFilters = data.getElementById("select2-leader-results");
+  //      const containerLeaderFilters = document.getElementById("select2-leader-results");
+  //      const newContainerFollowerFilters = data.getElementById("select2-follower-results");
+  //      const containerFollowerFilters = document.getElementById("select2-follower-results");
+  //      const newContainerOrchestraFilters = data.getElementById("select2-orchestra-results");
+  //      const containerOrchestraFilters = document.getElementById("select2-orchestra-results");
+
+  //     //  console.log('container', containerGenreFilters.innerHTML);
+  //     //  console.log('new container', newContainerGenreFilters.innerHTML);
 
   //      containerVideos.innerHTML = newContainerVideos.innerHTML;
-  //      console.log('container', containerFilters.innerHTML)
-  //      console.log('new container', newContainerFilters.innerHTML)
-  //      containerFilters.innerHTML = newContainerFilters.innerHTML;
+
+  //      containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML;
+  //      containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML;
+  //      containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML;
+  //      containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML;
+
   //      history.pushState({}, '', `${window.location.pathname}?${this.params}`)
   //    },
   //    error: (data) => {

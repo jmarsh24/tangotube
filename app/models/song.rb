@@ -36,6 +36,35 @@ class Song < ApplicationRecord
   scope :title_match, ->(_model_attribute) { 'unaccent(title) ILIKE unaccent(model_attribute)' }
 
   pg_search_scope :search,
-                  against: %i( title artist genre ),
+                  against: %i[title artist genre],
                   ignoring: :accents
+
+  class << self
+    def scrape_lyrics
+      (16_400..20_000).each do |id|
+        puts "Page Number: #{id}"
+
+        response = Faraday.get("https://www.el-recodo.com/music?id=#{id}&lang=en")
+
+        doc = Nokogiri::HTML(response.body)
+
+        lyrics = doc.css('p#geniusText').text if doc.css('p#geniusText').present?
+
+        date = doc.css('div.list-group.lead a')[0].text.strip.split[1] if doc.css('div.list-group.lead a')[0].present?
+
+        if doc.css('div.list-group.lead a')[1].present?
+          title = doc.css('div.list-group.lead a')[1].text.strip.split[1..-1].join(' ')
+        end
+
+        if doc.css('div.list-group.lead a')[3].present?
+          artist = doc.css('div.list-group.lead a')[3].text.strip.split[1..-1].join(' ')
+        end
+
+        if lyrics.present?
+          song = Song.where('title ILIKE ? AND artist ILIKE ?', title, artist)
+          song.update(lyrics: lyrics)
+        end
+      end
+    end
+  end
 end

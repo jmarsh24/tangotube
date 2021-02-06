@@ -51,6 +51,7 @@ class Video < ApplicationRecord
   belongs_to :follower, required: false
   belongs_to :song, required: false
   belongs_to :channel, required: true
+  belongs_to :event, required: true
   belongs_to :search_suggestion, required: false
 
   scope :filter_by_orchestra, ->(song_artist)     { joins(:song).where('songs.artist ILIKE ?', song_artist) }
@@ -283,7 +284,7 @@ class Video < ApplicationRecord
 
       # if Channel.find_by(channel_id: yt_video.channel_id).blank?
       #   yt_channel = Yt::Channel.new id: yt_video.channel_id
-    #   Channel.create(channel_id: yt_channel.id,
+      #   Channel.create(channel_id: yt_channel.id,
       #                  thumbnail_url: yt_channel.thumbnail_url,
       #                  title: yt_channel.title)
       # end
@@ -305,6 +306,21 @@ class Video < ApplicationRecord
       imported_videos_count = Video.where(channel: channel).count
       imported = imported_videos_count >= channel.total_videos_count
       channel.update(imported_videos_count: imported_videos_count)
+    end
+
+    def update_all_videos
+      Video.where('favorite_count = 0 AND like_count = 0').each do |video|
+        UpdateVideoWorker.perform_async(video.youtube_id)
+      end
+    end
+
+    def update_video(youtube_id)
+      yt_video = Yt::Video.new id: youtube_id
+      video = Video.find_by(youtube_id: youtube_id)
+      video.update(favorite_count: yt_video.favorite_count,
+                   comment_count: yt_video.comment_count,
+                   like_count: yt_video.like_count,
+                   dislike_count: yt_video.dislike_count)
     end
 
     def fetch_youtube_song(youtube_id)

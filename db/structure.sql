@@ -227,6 +227,42 @@ ALTER SEQUENCE public.channels_id_seq OWNED BY public.channels.id;
 
 
 --
+-- Name: events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.events (
+    id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    title character varying,
+    city character varying,
+    country character varying,
+    category character varying,
+    start_date date,
+    end_date date
+);
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
+
+
+--
 -- Name: followers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -394,7 +430,8 @@ CREATE TABLE public.songs (
     last_name_search character varying,
     occur_count integer DEFAULT 0,
     popularity integer DEFAULT 0,
-    active boolean DEFAULT true
+    active boolean DEFAULT true,
+    lyrics text
 );
 
 
@@ -559,6 +596,13 @@ ALTER TABLE ONLY public.channels ALTER COLUMN id SET DEFAULT nextval('public.cha
 
 
 --
+-- Name: events id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.events ALTER COLUMN id SET DEFAULT nextval('public.events_id_seq'::regclass);
+
+
+--
 -- Name: followers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -693,6 +737,14 @@ ALTER TABLE ONLY public.ahoy_visits
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
 --
@@ -975,6 +1027,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210124180841'),
 ('20210127131318'),
 ('20210201102317'),
-('20210205075009');
+('20210205075009'),
+('20210206151011'),
+('20210206172109');
 
 
