@@ -239,7 +239,9 @@ CREATE TABLE public.events (
     country character varying,
     category character varying,
     start_date date,
-    end_date date
+    end_date date,
+    active boolean DEFAULT true,
+    reviewed boolean DEFAULT false
 );
 
 
@@ -529,7 +531,8 @@ CREATE TABLE public.videos (
     like_count integer DEFAULT 0,
     dislike_count integer DEFAULT 0,
     favorite_count integer DEFAULT 0,
-    comment_count integer DEFAULT 0
+    comment_count integer DEFAULT 0,
+    event_id bigint
 );
 
 
@@ -836,6 +839,13 @@ CREATE UNIQUE INDEX index_ahoy_visits_on_visit_token ON public.ahoy_visits USING
 
 
 --
+-- Name: index_events_on_title; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_events_on_title ON public.events USING btree (title);
+
+
+--
 -- Name: index_followers_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -920,6 +930,13 @@ CREATE INDEX index_videos_on_channel_id ON public.videos USING btree (channel_id
 
 
 --
+-- Name: index_videos_on_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_event_id ON public.videos USING btree (event_id);
+
+
+--
 -- Name: index_videos_on_follower_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -953,6 +970,14 @@ CREATE INDEX index_videos_searches_on_tsv_document ON public.videos_searches USI
 
 ALTER TABLE ONLY public.playlists
     ADD CONSTRAINT fk_rails_180bd29355 FOREIGN KEY (videos_id) REFERENCES public.videos(id);
+
+
+--
+-- Name: videos fk_rails_7ebce950d2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.videos
+    ADD CONSTRAINT fk_rails_7ebce950d2 FOREIGN KEY (event_id) REFERENCES public.events(id);
 
 
 --
@@ -1029,6 +1054,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210201102317'),
 ('20210205075009'),
 ('20210206151011'),
-('20210206172109');
+('20210206172109'),
+('20210206223104'),
+('20210207085038'),
+('20210207115746');
 
 

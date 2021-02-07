@@ -12,6 +12,7 @@
 #  imported_videos_count :integer          default(0)
 #  total_videos_count    :integer          default(0)
 #  yt_api_pull_count     :integer          default(0)
+#  reviewed              :boolean          default(FALSE)
 #
 class Channel < ApplicationRecord
   validates :channel_id, presence: true, uniqueness: true

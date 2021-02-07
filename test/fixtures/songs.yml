@@ -17,6 +17,7 @@
 #  occur_count      :integer          default(0)
 #  popularity       :integer          default(0)
 #  active           :boolean          default(TRUE)
+#  lyrics           :text
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

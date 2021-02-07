@@ -114,6 +114,21 @@
   font-size: .7rem;
 }
 
+.video-event {
+  font-size: 0.7rem;
+  text-decoration: none;
+  margin: 3px 0;
+  a {
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: rgb(97, 97, 97);
+
+    &:hover {
+      color: rgb(3, 3, 3);
+    }
+  }
+}
+
 @media (max-width: 500px) {
   .video-section {
     display: flex;

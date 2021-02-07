@@ -34,6 +34,11 @@
 #  hidden                :boolean          default(FALSE)
 #  hd                    :boolean          default(FALSE)
 #  popularity            :integer          default(0)
+#  like_count            :integer          default(0)
+#  dislike_count         :integer          default(0)
+#  favorite_count        :integer          default(0)
+#  comment_count         :integer          default(0)
+#  event_id              :bigint
 #
 
 class Video < ApplicationRecord
@@ -59,6 +64,7 @@ class Video < ApplicationRecord
   scope :filter_by_leader,    ->(leader_name)     { joins(:leader).where('leaders.name ILIKE ?', leader_name) }
   scope :filter_by_follower,  ->(follower_name)   { joins(:follower).where('followers.name ILIKE ?', follower_name) }
   scope :filter_by_channel,   ->(channel_title)   { joins(:channel).where('channels.title ILIKE ?', channel_title) }
+  scope :filter_by_event_id,  ->(event_id)        { where(event_id: event_id) }
   scope :filter_by_song_id,   ->(song_id)         { where(song_id: song_id) }
   scope :filter_by_hd,        ->(boolean)         { where(hd: boolean) }
   scope :filter_by_hidden,    ->                  { where(hidden: true) }
@@ -309,7 +315,7 @@ class Video < ApplicationRecord
     end
 
     def update_all_videos
-      Video.where('favorite_count = 0 AND like_count = 0').each do |video|
+      Video.where('dislike_count = 0 AND like_count = 0 AND favorite_count = 0').each do |video|
         UpdateVideoWorker.perform_async(video.youtube_id)
       end
     end

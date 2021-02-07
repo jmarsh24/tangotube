@@ -20,6 +20,7 @@ module ApplicationHelper
                          'upload_date',
                          'popularity',
                          'song_id',
+                         'event_id',
                          'hd',
                          'sort',
                          'direction')

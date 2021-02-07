@@ -3,12 +3,14 @@
 # Table name: events
 #
 #  id         :bigint           not null, primary key
-#  name       :string           not null
-#  city       :string
-#  country    :string
-#  date       :date
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  title      :string
+#  city       :string
+#  country    :string
+#  category   :string
+#  start_date :date
+#  end_date   :date
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

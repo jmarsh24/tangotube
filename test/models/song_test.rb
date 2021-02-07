@@ -16,6 +16,7 @@
 #  occur_count      :integer          default(0)
 #  popularity       :integer          default(0)
 #  active           :boolean          default(TRUE)
+#  lyrics           :text
 #
 
 require "test_helper"

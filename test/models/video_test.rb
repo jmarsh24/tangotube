@@ -34,6 +34,11 @@
 #  hidden                :boolean          default(FALSE)
 #  hd                    :boolean          default(FALSE)
 #  popularity            :integer          default(0)
+#  like_count            :integer          default(0)
+#  dislike_count         :integer          default(0)
+#  favorite_count        :integer          default(0)
+#  comment_count         :integer          default(0)
+#  event_id              :bigint
 #
 
 or# == Schema Information

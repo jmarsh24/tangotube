@@ -27,5 +27,26 @@ class Event < ApplicationRecord
         end
       end
     end
+
+    def match_all_events
+      Event.all.order(:id).each do |event|
+        MatchEventWorker.perform_async(event.id)
+      end
+    end
+
+    def match_event(event_id)
+      event = Event.find(event_id)
+      event_title = event.title.split('-')[0].strip
+
+      if event_title.split.size > 3
+
+        videos = Video.joins(:channel)
+                      .where(event_id: nil)
+                      .where('videos.title ILIKE ? OR videos.description ILIKE ? OR videos.tags ILIKE ? OR channels.title ILIKE ?', "%#{event_title}%",
+                             "%#{event_title}%", "%#{event_title}%", "%#{event_title}%")
+
+        videos.update_all(event_id: event.id) if videos.present?
+      end
+    end
   end
 end
