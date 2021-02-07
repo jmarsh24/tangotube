@@ -28,10 +28,10 @@
               <% end %>
             <% end %>
             <% if video.song.nil? && video.spotify_track_name.present? %>
-              <%= video.try(:spotify_track_name).to_s.titleize + ' - ' + video.try(:spotify_artist_name).to_s.titleize %>
+              <%= link_to video.try(:spotify_track_name).to_s.titleize + ' - ' + video.try(:spotify_artist_name).to_s.titleize, root_path(query: video.try(:spotify_track_name).to_s.titleize + ' - ' + video.try(:spotify_artist_name).to_s.titleize) %>
             <% end %>
             <% if video.song.nil? && video.spotify_track_name.nil? && video.youtube_artist.present? %>
-              <%= "#{video.youtube_song.to_s.titleize} - #{video.youtube_artist.to_s.titleize}"  %>
+              <%= link_to "#{video.youtube_song.to_s.titleize} - #{video.youtube_artist.to_s.titleize}", root_path(query: "#{video.youtube_song.to_s.titleize} - #{video.youtube_artist.to_s.titleize}")  %>
             <% end %>
           </div>
           <div class="video-event">
