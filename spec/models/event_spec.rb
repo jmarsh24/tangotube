@@ -11,6 +11,8 @@
 #  category   :string
 #  start_date :date
 #  end_date   :date
+#  active     :boolean          default(TRUE)
+#  reviewed   :boolean          default(FALSE)
 #
 require 'rails_helper'
 

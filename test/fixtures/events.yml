@@ -11,6 +11,8 @@
 #  category   :string
 #  start_date :date
 #  end_date   :date
+#  active     :boolean          default(TRUE)
+#  reviewed   :boolean          default(FALSE)
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
