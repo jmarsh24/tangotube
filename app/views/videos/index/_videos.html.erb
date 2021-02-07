@@ -22,9 +22,9 @@
           <div class="video-song">
             <% if video.song.present? %>
               <%= link_to root_path(song_id: video.song_id) do %>
-                <%= video.song.title.to_s.titleize + ' - ' + video.song.artist.to_s.titleize %>
+                <%= video.song.title.to_s.titleize + ' - ' + video.song.artist.to_s.titleize + ' - ' + video.song.genre.to_s.titleize %>
                 <br>
-                <%= video.song.genre.to_s.titleize %>
+
               <% end %>
             <% end %>
             <% if video.song.nil? && video.spotify_track_name.present? %>

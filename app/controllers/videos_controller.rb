@@ -64,8 +64,4 @@ class VideosController < ApplicationController
   def filtering_params(params)
     params.permit.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd, :event_id)
   end
-
-  def video_params
-    params.require(:video).permit(:hidden)
-  end
 end
