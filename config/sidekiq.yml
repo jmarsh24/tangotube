@@ -2,7 +2,7 @@ development:
   :concurrency: 5
   :timeout: 500
 production:
-  :concurrency: 5
+  :concurrency: ENV['SIDEKIQ_CONCURRENCY_VALUE'] || 5
   :timeout: 10
 :queues:
   - high
