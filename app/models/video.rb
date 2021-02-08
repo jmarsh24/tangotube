@@ -343,7 +343,6 @@ class Video < ApplicationRecord
       clipped_audio = Video.clip_audio(youtube_id)
       acr_response_body = Video.acr_sound_match(clipped_audio)
       Video.parse_acr_response(acr_response_body, youtube_id)
-      File.delete('diagram.txt') if File.exist?
     end
 
     # Generates audio clip from youtube_id and outputs file path
