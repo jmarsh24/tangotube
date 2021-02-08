@@ -5,6 +5,7 @@ ruby '2.7.2'
 
 gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
 gem 'ahoy_matey',             '~> 3.1'
+gem 'barnes',                 '~> 0.0.8'
 gem 'base64',                 '~> 0.1.0'
 gem 'bootsnap',               '1.4.6', require: false
 gem 'country_select',         '~> 4.0'
