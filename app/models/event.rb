@@ -19,7 +19,7 @@ class Event < ApplicationRecord
   validates :city, presence: true
   validates :country, presence: true
 
-  has_many :videos
+  has_many :videos, dependent: :nullify
 
   class << self
     def scrape_events
@@ -58,12 +58,10 @@ class Event < ApplicationRecord
       event = Event.find(event_id)
       event_title = event.title.split('-')[0].strip
 
-      if event_title.split.size > 3
+      if event_title.split.size > 2
 
-        videos = Video.joins(:channel)
-                      .where(event_id: nil)
-                      .where('videos.title ILIKE ? OR videos.description ILIKE ? OR videos.tags ILIKE ? OR channels.title ILIKE ?', "%#{event_title}%",
-                             "%#{event_title}%", "%#{event_title}%", "%#{event_title}%")
+        videos = Video.joins(:channel).where(event_id: nil).where('unaccent(videos.title) ILIKE unaccent(?) OR unaccent(videos.description) ILIKE unaccent(?) OR unaccent(videos.tags) ILIKE unaccent(?) OR unaccent(channels.title) ILIKE unaccent(?)', "%#{event_title}%",
+                                                                  "%#{event_title}%", "%#{event_title}%", "%#{event_title}%")
 
         videos.update_all(event_id: event.id) if videos.present?
       end

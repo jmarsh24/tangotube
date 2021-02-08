@@ -77,8 +77,8 @@ ActiveAdmin.register Video do
       input :leader
       input :follower
       input :youtube_id
-      input :channel
-      input :song
+      input :channel_id
+      input :song_id
       input :hidden
       input :popularity
     end
