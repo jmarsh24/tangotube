@@ -23,7 +23,7 @@ export default class extends Controller {
     .on("select2:select", function () {
       let event = new Event("change", { bubbles: true });
       this.dispatchEvent(event);
-    }).select2("open");
+    })
   }
 
   open() {
