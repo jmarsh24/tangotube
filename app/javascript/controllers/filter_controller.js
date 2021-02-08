@@ -60,9 +60,27 @@ export default class extends Controller {
       .map((t) => `${t.name}=${t.value}`);
 
     let search = document.querySelector("#query");
+
     if (search.value) {
-    params.push(`${search.name}=${search.value}`)
+      params.push(`${search.name}=${search.value}`)
     }
+
+    const queryString = window.location.search;
+
+    const urlParams = new URLSearchParams(queryString);
+
+    let songID = urlParams.getAll('song_id');
+
+    let eventID = urlParams.getAll('event_id');
+
+    if (songID.length > 0 ) {
+      params.push(`song_id=${songID}`)
+    }
+
+    if (eventID.length > 0) {
+      params.push(`event_id=${eventID}`)
+    }
+
     return params.join("&");
   }
 }
