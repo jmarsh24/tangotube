@@ -8,8 +8,8 @@
     <div class="detail-section-label">
       <h3>Video Info</h3>
     </div>
-    <%= render partial: "video_info_item", locals: {header: "Title", value: @active_video.title || "N/A"} %>
-    <%= render partial: "video_info_item", locals: {header: "Description", value: @active_video.description || "N/A" } %>
+    <%= render partial: "video_info_item", locals: {header: "Title", value:  simple_format(@active_video.title) || "N/A"} %>
+    <%= render partial: "video_info_item", locals: {header: "Description", value:  simple_format(@active_video.description) || "N/A" } %>
     <%= render partial: "video_info_item", locals: {header: "Upload Date", value: @active_video.upload_date.to_formatted_s(:long) } %>
     <%= render partial: "video_info_item", locals: {header: "View Count", value: "#{number_with_delimiter(@active_video.view_count)} views"} %>
     <%= render partial: "video_info_item", locals: {header: "Duration", value: Time.at(@active_video.duration).utc.strftime("%M:%S") || "N/A"} %>
