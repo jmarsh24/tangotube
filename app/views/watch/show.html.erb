@@ -14,12 +14,13 @@
     <%= render partial: "video_info_item", locals: {header: "View Count", value: "#{number_with_delimiter(@active_video.view_count)} views" } %>
     <%= render partial: "video_info_item", locals: {header: "Duration", value: Time.at(@active_video.duration).utc.strftime("%M:%S") } %>
     <%= render partial: "video_info_item", locals: {header: "Channel", value: link_to(@active_video.channel.title, root_path(channel: @active_video.channel.title)) } %>
-
-    <div class="detail-section-label">
-      <h3>Event Info</h3>
-      <%= render partial: "video_info_item", locals: {header: "Title", value:  link_to(@active_video.event.title.to_s.titleize, root_path(event_id: @active_video.event.id)) } %>
-      <%= render partial: "video_info_item", locals: {header: "Location", value:  link_to(@active_video.event.city.to_s.titleize + ', ' + @active_video.event.country.to_s.titleize, root_path(event_id: @active_video.event.id)) } %>
-    </div>
+    <% if @active_video.event.present? %>
+      <div class="detail-section-label">
+        <h3>Event Info</h3>
+        <%= render partial: "video_info_item", locals: {header: "Title", value:  link_to(@active_video.event.title.to_s.titleize, root_path(event_id: @active_video.event.id)) } %>
+        <%= render partial: "video_info_item", locals: {header: "Location", value:  link_to(@active_video.event.city.to_s.titleize + ', ' + @active_video.event.country.to_s.titleize, root_path(event_id: @active_video.event.id)) } if @active_video.event.present? %>
+      </div>
+    <% end %>
 
     <div class="detail-section-label">
       <h3>Performers</h3>
