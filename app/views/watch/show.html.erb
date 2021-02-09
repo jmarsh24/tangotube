@@ -6,21 +6,27 @@
   </div>
   <div class="video-info-container">
     <div class="detail-section-label">
-      <h3>Video Info</h3>
+    <h3>Video Info</h3>
     </div>
-    <%= render partial: "video_info_item", locals: {header: "Title", value:  simple_format(@active_video.title) || "N/A"} %>
-    <%= render partial: "video_info_item", locals: {header: "Description", value:  auto_link(simple_format(@active_video.description), html: { target: '_blank' }) || "N/A" } %>
+    <%= render partial: "video_info_item", locals: {header: "Title", value:  simple_format(@active_video.title) } %>
+    <%= render partial: "video_info_item", locals: {header: "Description", value:  auto_link(simple_format(@active_video.description), html: { target: '_blank' }) } %>
     <%= render partial: "video_info_item", locals: {header: "Upload Date", value: @active_video.upload_date.to_formatted_s(:long) } %>
-    <%= render partial: "video_info_item", locals: {header: "View Count", value: "#{number_with_delimiter(@active_video.view_count)} views"} %>
-    <%= render partial: "video_info_item", locals: {header: "Duration", value: Time.at(@active_video.duration).utc.strftime("%M:%S") || "N/A"} %>
-    <%= render partial: "video_info_item", locals: {header: "Channel", value: @active_video.channel.title || "N/A"} %>
+    <%= render partial: "video_info_item", locals: {header: "View Count", value: "#{number_with_delimiter(@active_video.view_count)} views" } %>
+    <%= render partial: "video_info_item", locals: {header: "Duration", value: Time.at(@active_video.duration).utc.strftime("%M:%S") } %>
+    <%= render partial: "video_info_item", locals: {header: "Channel", value: link_to(@active_video.channel.title, root_path(channel: @active_video.channel.title)) } %>
+
+    <div class="detail-section-label">
+      <h3>Event Info</h3>
+      <%= render partial: "video_info_item", locals: {header: "Title", value:  link_to(@active_video.event.title.to_s.titleize, root_path(event_id: @active_video.event.id)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Location", value:  link_to(@active_video.event.city.to_s.titleize + ', ' + @active_video.event.country.to_s.titleize, root_path(event_id: @active_video.event.id)) } %>
+    </div>
 
     <div class="detail-section-label">
       <h3>Performers</h3>
     </div>
 
-    <%= render partial: "video_info_item", locals: {header: "Leader", value: @active_video.leader.try(:name) || "N/A"} %>
-    <%= render partial: "video_info_item", locals: {header: "Follower", value: @active_video.follower.try(:name) || "N/A"} %>
+    <%= render partial: "video_info_item", locals: {header: "Leader", value: link_to(@active_video.leader.try(:name), root_path(leader: @active_video.leader.name)) } %>
+    <%= render partial: "video_info_item", locals: {header: "Follower", value: link_to(@active_video.follower.try(:name), root_path(follower: @active_video.follower.name)) } %>
 
     <div class="detail-section-label">
     <% if @active_video.song.present? || @active_video.spotify_track_name.present? || @active_video.youtube_song.present? %>
@@ -28,21 +34,21 @@
     <% end %>
     </div>
     <% if @active_video.song.present? %>
-      <%= render partial: "video_info_item", locals: {header: "Title", value: @active_video.song.try(:title).to_s.titleize || "N/A"} %>
-      <%= render partial: "video_info_item", locals: {header: "Genre", value: @active_video.song.try(:genre).to_s.titleize || "N/A"} %>
-      <%= render partial: "video_info_item", locals: {header: "Artist", value: @active_video.song.try(:artist).to_s.titleize || "N/A"} %>
-      <%= render partial: "video_info_item", locals: {header: "Artist 2", value: @active_video.song.try(:artist_2).to_s.titleize || "N/A"} %>
+      <%= render partial: "video_info_item", locals: {header: "Title", value: link_to(@active_video.song.try(:title).to_s.titleize, root_path(song_id: @active_video.song.id)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Genre", value: link_to(@active_video.song.try(:genre).to_s.titleize , root_path(song_id: @active_video.song.id)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Artist", value: link_to(@active_video.song.try(:artist).to_s.titleize, root_path(song_id: @active_video.song.id)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Artist 2", value: link_to(@active_video.song.try(:artist_2).to_s.titleize, root_path(song_id: @active_video.song.id)) } %>
     <% end %>
 
     <% if @active_video.song.blank? && @active_video.spotify_track_name.present? %>
-      <%= render partial: "video_info_item", locals: {header: "Title", value: @active_video.spotify_track_name.to_s.titleize || "N/A"} %>
-      <%= render partial: "video_info_item", locals: {header: "Artist", value: @active_video.spotify_artist_name.to_s.titleize || "N/A"} %>
-      <%= render partial: "video_info_item", locals: {header: "Artist 2", value: @active_video.spotify_artist_name_2.to_s.titleize  } %>
+      <%= render partial: "video_info_item", locals: {header: "Title", value: link_to(@active_video.spotify_track_name.to_s.titleize, root_path(query: @active_video.spotify_track_name.to_s.titleize + @active_video.spotify_artist_name.to_s.titleize)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Artist", value: link_to(@active_video.spotify_artist_name.to_s.titleize, root_path(query: @active_video.spotify_artist_name.to_s.titleize)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Artist 2", value: link_to(@active_video.spotify_artist_name_2.to_s.titleize, root_path(query: @active_video.spotify_artist_name_2.to_s.titleize)) }%>
     <% end %>
 
     <% if @active_video.song.blank? && @active_video.spotify_track_name.blank? && @active_video.youtube_song.present? %>
-      <%= render partial: "video_info_item", locals: {header: "Title", value: @active_video.youtube_song.to_s.titleize || "N/A"} %>
-      <%= render partial: "video_info_item", locals: {header: "Artist", value: @active_video.youtube_artist.to_s.titleize || "N/A"} %>
+      <%= render partial: "video_info_item", locals: {header: "Title", value: link_to(@active_video.youtube_song.to_s.titleize, root_path(query: @active_video.song.id)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Artist", value: link_to(@active_video.youtube_artist.to_s.titleize, root_path(query: @active_video.song.id)) } %>
     <% end %>
   </div>
 </div>
