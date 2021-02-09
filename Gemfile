@@ -59,3 +59,5 @@ group :test do
   gem 'selenium-webdriver',   '3.142.7'
   gem 'shoulda-matchers',     '~> 4.0'
 end
+
+gem "rails_autolink", "~> 1.1"
