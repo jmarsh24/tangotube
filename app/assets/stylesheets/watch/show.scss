@@ -67,6 +67,24 @@
   }
 }
 
+.detail-item-value  {
+
+  a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  img {
+    display: flex;
+    height: 32px;
+    width: 32px ;
+    margin: 2px 15px;
+    border-radius: 16px;
+  }
+}
+
 @media (max-width: 926px) {
   .grid-container-show {
     display: flex;

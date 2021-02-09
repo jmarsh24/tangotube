@@ -13,7 +13,8 @@
     <%= render partial: "video_info_item", locals: {header: "Upload Date", value: @active_video.upload_date.to_formatted_s(:long) } %>
     <%= render partial: "video_info_item", locals: {header: "View Count", value: "#{number_with_delimiter(@active_video.view_count)} views" } %>
     <%= render partial: "video_info_item", locals: {header: "Duration", value: Time.at(@active_video.duration).utc.strftime("%M:%S") } %>
-    <%= render partial: "video_info_item", locals: {header: "Channel", value: link_to(@active_video.channel.title, root_path(channel: @active_video.channel.title)) } %>
+    <%= render partial: "video_info_item", locals: {header: "Channel", value: link_to(image_tag(@active_video.channel.thumbnail_url) + @active_video.channel.title, root_path(channel: @active_video.channel.title)) } %>
+
     <% if @active_video.event.present? %>
       <div class="detail-section-label">
         <h3>Event Info</h3>
@@ -48,8 +49,8 @@
     <% end %>
 
     <% if @active_video.song.blank? && @active_video.spotify_track_name.blank? && @active_video.youtube_song.present? %>
-      <%= render partial: "video_info_item", locals: {header: "Title", value: link_to(@active_video.youtube_song.to_s.titleize, root_path(query: @active_video.song.id)) } %>
-      <%= render partial: "video_info_item", locals: {header: "Artist", value: link_to(@active_video.youtube_artist.to_s.titleize, root_path(query: @active_video.song.id)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Title", value: link_to(@active_video.youtube_song.to_s.titleize, root_path(query: @active_video.youtube_song.to_s.titleize)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Artist", value: link_to(@active_video.youtube_artist.to_s.titleize, root_path(query: @active_video.youtube_artist.to_s.titleize)) } %>
     <% end %>
   </div>
 </div>
