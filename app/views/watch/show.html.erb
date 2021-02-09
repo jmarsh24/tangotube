@@ -25,8 +25,8 @@
       <h3>Performers</h3>
     </div>
 
-    <%= render partial: "video_info_item", locals: {header: "Leader", value: link_to(@active_video.leader.try(:name), root_path(leader: @active_video.leader.name)) } %>
-    <%= render partial: "video_info_item", locals: {header: "Follower", value: link_to(@active_video.follower.try(:name), root_path(follower: @active_video.follower.name)) } %>
+    <%= render partial: "video_info_item", locals: {header: "Leader", value: link_to(@active_video.leader.try(:name), root_path(leader: @active_video.leader.name)) } if @active_video.leader.name.present? %>
+    <%= render partial: "video_info_item", locals: {header: "Follower", value: link_to(@active_video.follower.try(:name), root_path(follower: @active_video.follower.name)) } if @active_video.follower.name.present? %>
 
     <div class="detail-section-label">
     <% if @active_video.song.present? || @active_video.spotify_track_name.present? || @active_video.youtube_song.present? %>
@@ -37,7 +37,7 @@
       <%= render partial: "video_info_item", locals: {header: "Title", value: link_to(@active_video.song.try(:title).to_s.titleize, root_path(song_id: @active_video.song.id)) } %>
       <%= render partial: "video_info_item", locals: {header: "Genre", value: link_to(@active_video.song.try(:genre).to_s.titleize , root_path(song_id: @active_video.song.id)) } %>
       <%= render partial: "video_info_item", locals: {header: "Artist", value: link_to(@active_video.song.try(:artist).to_s.titleize, root_path(song_id: @active_video.song.id)) } %>
-      <%= render partial: "video_info_item", locals: {header: "Artist 2", value: link_to(@active_video.song.try(:artist_2).to_s.titleize, root_path(song_id: @active_video.song.id)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Artist 2", value: link_to(@active_video.song.try(:artist_2).to_s.titleize, root_path(song_id: @active_video.song.id)) } if @active_video.song.artist_2.present? %>
     <% end %>
 
     <% if @active_video.song.blank? && @active_video.spotify_track_name.present? %>
