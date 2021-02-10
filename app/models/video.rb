@@ -138,8 +138,13 @@ class Video < ApplicationRecord
 
     def match_all_music
       Video.where(acr_response_code: [nil, 3003]).order(:id).each do |video|
-        youtube_id = video.youtube_id
-        AcrMusicMatchWorker.perform_async(youtube_id)
+        AcrMusicMatchWorker.perform_async(video.youtube_id)
+      end
+    end
+
+    def fetch_all_youtube_matches
+      Video.where(scanned_youtube_music: false).each do |video|
+        YoutubeMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
 
@@ -335,7 +340,8 @@ class Video < ApplicationRecord
                                   .to_json).extend Hashie::Extensions::DeepFind
 
       video.update(youtube_song: yt_video.deep_find('track'),
-                   youtube_artist: yt_video.deep_find('artist'))
+                   youtube_artist: yt_video.deep_find('artist'),
+                   scanned_youtube_music: true)
     end
 
     def acr_music_match(youtube_id)

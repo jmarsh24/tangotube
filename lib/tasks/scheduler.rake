@@ -26,6 +26,13 @@ task match_all_music: :environment do
   puts 'done.'
 end
 
+desc 'This task fetches music data which exists on youtube'
+task fetch_all_youtube_matches: :environment do
+  puts 'Fetching all missing youtube matches'
+  Video.fetch_all_youtube_matches
+  puts 'done.'
+end
+
 desc 'This task populates videos'
 task update_imported_video_counts: :environment do
   puts 'Updating_imported_video_counts'
@@ -34,7 +41,7 @@ task update_imported_video_counts: :environment do
 end
 
 namespace :refreshers do
-desc "Refresh materialized view for Videos"
+  desc 'Refresh materialized view for Videos'
   task videos_searches: :environment do
     VideosSearch.refresh
   end
