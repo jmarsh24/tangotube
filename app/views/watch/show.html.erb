@@ -27,8 +27,8 @@
       <h3>Performers</h3>
     </div>
 
-    <%= render partial: "video_info_item", locals: {header: "Leader", value: link_to(@active_video.leader.try(:name), root_path(leader: @active_video.leader.name)) } if @active_video.leader.name.present? %>
-    <%= render partial: "video_info_item", locals: {header: "Follower", value: link_to(@active_video.follower.try(:name), root_path(follower: @active_video.follower.name)) } if @active_video.follower.name.present? %>
+    <%= render partial: "video_info_item", locals: {header: "Leader", value: link_to(@active_video.leader.try(:name), root_path(leader: @active_video.leader.name)) } if @active_video.leader.present? %>
+    <%= render partial: "video_info_item", locals: {header: "Follower", value: link_to(@active_video.follower.try(:name), root_path(follower: @active_video.follower.name)) } if @active_video.follower.present? %>
 
     <div class="detail-section-label">
     <% if @active_video.song.present? || @active_video.spotify_track_name.present? || @active_video.youtube_song.present? %>
