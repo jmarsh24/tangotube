@@ -7,8 +7,6 @@
 
 .detail-section-label {
   width: 100%;
-  padding-bottom: 10px;
-  padding-top: 24px;
 }
 
 .detail-row {
@@ -16,8 +14,7 @@
   flex-direction: row;
   width: 100%;
   border-bottom: 1px solid grey;
-  padding-top:12px;
-  padding-bottom: 12px;
+  padding: 5px 0;
 }
 
 .detail-column {

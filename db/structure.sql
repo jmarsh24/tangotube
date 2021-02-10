@@ -719,22 +719,6 @@ ALTER TABLE ONLY public.admin_users
 
 
 --
--- Name: ahoy_events ahoy_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.ahoy_events
-    ADD CONSTRAINT ahoy_events_pkey PRIMARY KEY (id);
-
-
---
--- Name: ahoy_visits ahoy_visits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.ahoy_visits
-    ADD CONSTRAINT ahoy_visits_pkey PRIMARY KEY (id);
-
-
---
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
