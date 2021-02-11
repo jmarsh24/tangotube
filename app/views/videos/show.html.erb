@@ -43,7 +43,7 @@
     <% end %>
 
     <% if @video.song.blank? && @video.spotify_track_name.present? %>
-      <%= render partial: "video_info_item", locals: {header: "Title", value: link_to(@video.spotify_track_name.to_s.titleize, root_path(query: @video.spotify_track_name.to_s.titleize + @video.spotify_artist_name.to_s.titleize)) } %>
+      <%= render partial: "video_info_item", locals: {header: "Title", value: link_to(@video.spotify_track_name.to_s.titleize, root_path(query: @video.spotify_track_name.to_s.titleize + ' ' + @video.spotify_artist_name.to_s.titleize)) } %>
       <%= render partial: "video_info_item", locals: {header: "Artist", value: link_to(@video.spotify_artist_name.to_s.titleize, root_path(query: @video.spotify_artist_name.to_s.titleize)) } %>
       <%= render partial: "video_info_item", locals: {header: "Artist 2", value: link_to(@video.spotify_artist_name_2.to_s.titleize, root_path(query: @video.spotify_artist_name_2.to_s.titleize)) }%>
     <% end %>
