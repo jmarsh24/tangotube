@@ -338,10 +338,16 @@ class Video < ApplicationRecord
       video = Video.find_by(youtube_id: youtube_id)
       yt_video = JSON.parse(YoutubeDL.download("https://www.youtube.com/watch?v=#{youtube_id}", skip_download: true)
                                   .to_json).extend Hashie::Extensions::DeepFind
-
-      video.update(youtube_song: yt_video.deep_find('track'),
-                   youtube_artist: yt_video.deep_find('artist'),
-                   scanned_youtube_music: true)
+      if yt_video.present?
+        video.update(youtube_song: yt_video.deep_find('track'),
+                     youtube_artist: yt_video.deep_find('artist'),
+                     scanned_youtube_music: true)
+      else
+        queue = Sidekiq::Queue.new('default')
+        queue.count
+        queue.clear
+        queue.each { |job| job.item }
+      end
     end
 
     def acr_music_match(youtube_id)
@@ -404,12 +410,10 @@ class Video < ApplicationRecord
           spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name if spotify_artist_id_2.present?
         end
 
-        if video.deep_find('spotify')['track'].present?
-          if video.deep_find('spotify')['track']['id'].present?
-            spotify_track_id = video.deep_find('spotify')['track']['id']
-            spotify_track_name = video.deep_find('spotify')['track']['name']
-            spotify_track_name = RSpotify::Track.find(spotify_track_id).name
-          end
+        if video.deep_find('spotify')['track'].present? && video.deep_find('spotify')['track']['id'].present?
+          spotify_track_id = video.deep_find('spotify')['track']['id']
+          spotify_track_name = video.deep_find('spotify')['track']['name']
+          spotify_track_name = RSpotify::Track.find(spotify_track_id).name
         end
         youtube_song_id = video.deep_find('youtube')['vid'] if video.deep_find('youtube').present?
 
