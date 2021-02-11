@@ -15,7 +15,7 @@ class SearchSuggestionsController < ApplicationController
     @channels = Channel.where('unaccent(title) ILIKE unaccent(?)',
                               "%#{params[:query]}%").limit(10).pluck(:title)
 
-    @suggestions = [@leaders + @followers + @songs + @channels].flatten.first(10).map(&:titleize)
+    @suggestions = [@leaders + @followers + @songs + @channels].flatten.uniq.first(10).map(&:titleize)
     render json: @suggestions
   end
 end
