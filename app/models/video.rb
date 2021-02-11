@@ -159,6 +159,11 @@ class Video < ApplicationRecord
 
     def match_dancer(dancer)
       keywords = {}
+      partners = {}
+
+      partners.merge if dancer.follower.present?
+
+      partner.merge!(partner_last_name: '%last_name%') if dancer.leader.present?
 
       if dancer.first_name.present? && dancer.last_name.present?
         keywords.merge!(name_1: "%#{dancer.first_name[0, 1]}.#{dancer.last_name}%")
