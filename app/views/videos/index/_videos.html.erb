@@ -43,7 +43,7 @@
           </div>
           <div class="video-metadata">
             <% if video.upload_date.present? && video.view_count.present? %>
-              <%= "#{number_to_human(video.view_count, :format => '%n%u', :precision => 2, :units => { :thousand => 'K', :million => 'M', :billion => 'B' })} views • #{time_ago_in_words(video.upload_date).gsub('about ','').gsub('over ','').gsub('almost ','')} ago" %>
+              <%= "#{number_to_human(video.view_count, :format => '%n%u', :precision => 2, :units => { :thousand => 'K', :million => 'M', :billion => 'B' })} views • #{video.upload_date.strftime('%b %Y')}" %>
             <% end %>
           </div>
         </div>
