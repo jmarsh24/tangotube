@@ -15,6 +15,11 @@
   width: 100%;
   border-bottom: 1px solid grey;
   padding: 5px 0;
+
+  &:last-child {
+  border-bottom: none;
+  }
+
 }
 
 .detail-column {
@@ -86,9 +91,10 @@
   .grid-container-show {
     display: flex;
     flex-direction: column;
-    margin: 0 0 200px 0;
+    margin: 0;
   }
   .video-responsive iframe {
   border-radius: 0;
   }
+
 }
