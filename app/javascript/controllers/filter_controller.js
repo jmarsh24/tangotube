@@ -73,12 +73,18 @@ export default class extends Controller {
 
     let eventID = urlParams.getAll('event_id');
 
+    let hd = urlParams.getAll('hd');
+
     if (songID.length > 0 ) {
       params.push(`song_id=${songID}`)
     }
 
     if (eventID.length > 0) {
       params.push(`event_id=${eventID}`)
+    }
+
+    if (hd.length > 0) {
+      params.push(`hd=${hd}`)
     }
 
     return params.join("&");
