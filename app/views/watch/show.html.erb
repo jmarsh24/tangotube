@@ -53,8 +53,10 @@
       <%= render partial: "video_info_item", locals: {header: "Artist", value: link_to(@active_video.youtube_artist.to_s.titleize, root_path(query: @active_video.youtube_artist.to_s.titleize)) } %>
     <% end %>
         <div class="detail-section-label">
-    <% if @active_video.song.lyrics.present? %>
-      <%= render partial: "video_info_item", locals: {header: "Lyrics", value: simple_format(@active_video.song.lyrics.to_s.titleize) } %>
+    <% if @active_video.song.present? %>
+      <% if @active_video.song.lyrics.present? %>
+        <%= render partial: "video_info_item", locals: {header: "Lyrics", value: simple_format(@active_video.song.lyrics.to_s.titleize) } %>
+      <% end %>
     <% end %>
     </div>
   </div>
