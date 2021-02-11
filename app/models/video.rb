@@ -161,6 +161,7 @@ class Video < ApplicationRecord
       keywords = {}
 
       if dancer.first_name.present? && dancer.last_name.present?
+        keywords.merge!(full_name: "%#{dancer.first_name} #{dancer.last_name}%")
         keywords.merge!(name_1: "%#{dancer.first_name[0, 1]}.#{dancer.last_name}%")
         keywords.merge!(name_2: "%#{dancer.first_name[0, 1]}. #{dancer.last_name}%")
       else
@@ -169,7 +170,7 @@ class Video < ApplicationRecord
       keywords.merge!(nickname: "%#{dancer.nickname}%") if dancer.nickname.present?
 
       model_attributes = %w[title]
-      keyword_names = keywords.map { |k, _| k }
+      keyword_names = keywords.map { |k, _v| k }
       combined_hash = model_attributes.product(keyword_names)
 
       sql_query = combined_hash.map do |attribute, keyword|
