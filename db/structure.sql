@@ -533,7 +533,8 @@ CREATE TABLE public.videos (
     favorite_count integer DEFAULT 0,
     comment_count integer DEFAULT 0,
     event_id bigint,
-    scanned_youtube_music boolean DEFAULT false
+    scanned_youtube_music boolean DEFAULT false,
+    click_count integer DEFAULT 0
 );
 
 
@@ -1043,6 +1044,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210206223104'),
 ('20210207085038'),
 ('20210207115746'),
-('20210210140250');
+('20210210140250'),
+('20210211153442');
 
 
