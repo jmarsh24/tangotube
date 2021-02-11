@@ -372,44 +372,48 @@ class Video < ApplicationRecord
     end
 
     # Parse response spotify, youtube, and isrc information from ACR_sound_match
-    def parse_acr_response(acr_response, youtube_id)
+    def parse_acr_response(acr_response_body, youtube_id)
       youtube_video = Video.find_by(youtube_id: youtube_id)
-      video = JSON.parse(acr_response).extend Hashie::Extensions::DeepFind
+      video = JSON.parse(acr_response_body).extend Hashie::Extensions::DeepFind
 
       if video['status']['code'] == 0 && video.deep_find('spotify').present?
 
-        spotify_album_id = video.deep_find('spotify')['album']['id'] if video.deep_find('spotify')['album'].present?
-        if video.deep_find('spotify')['album']['id'].present?
-          spotify_album_name = RSpotify::Album.find(spotify_album_id).name
+        if video.deep_find('spotify')['album'].present?
+          if video.deep_find('spotify')['album']['id'].present?
+            spotify_album_id = video.deep_find('spotify')['album']['id']
+          end
+          if video.deep_find('spotify')['album']['name'].present?
+            spotify_album_name = video.deep_find('spotify')['album']['name']
+          end
+          if video.deep_find('spotify')['album']['id'].present?
+            spotify_album_name = RSpotify::Album.find(spotify_album_id).name
+          end
         end
 
         if video.deep_find('spotify')['artists'][0].present?
-          spotify_artist_id = video.deep_find('spotify')['artists'][0]['id']
+          if video.deep_find('spotify')['artists'][0]['id'].present?
+            spotify_artist_id = video.deep_find('spotify')['artists'][0]['id']
+          end
+          if video.deep_find('spotify')['artists'][0]['name'].present?
+            spotify_artist_name = video.deep_find('spotify')['artists'][0]['name']
+          end
+          if video.deep_find('spotify')['artists'][1].present?
+            spotify_artist_id_2 = video.deep_find('spotify')['artists'][1]['id']
+          end
+          spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name if spotify_artist_id.present?
+          spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name if spotify_artist_id_2.present?
         end
 
-        if video.deep_find('spotify')['artists'][0].present?
-          spotify_artist_name = RSpotify::Artist.find(spotify_artist_id).name
+        if video.deep_find('spotify')['track'].present?
+          if video.deep_find('spotify')['track']['id'].present?
+            spotify_track_id = video.deep_find('spotify')['track']['id']
+            spotify_track_name = video.deep_find('spotify')['track']['name']
+            spotify_track_name = RSpotify::Track.find(spotify_track_id).name
+          end
         end
-
-        if video.deep_find('spotify')['artists'][1].present?
-          spotify_artist_id_2 = video.deep_find('spotify')['artists'][1]['id']
-        end
-
-        if video.deep_find('spotify')['artists'][1].present?
-          spotify_artist_name_2 = RSpotify::Artist.find(spotify_artist_id_2).name
-        end
-
-        if video.deep_find('spotify')['track']['id'].present?
-          spotify_track_id = video.deep_find('spotify')['track']['id']
-        end
-
-        if video.deep_find('spotify')['track']['id'].present?
-          spotify_track_name = RSpotify::Track.find(spotify_track_id).name
-        end
-
         youtube_song_id = video.deep_find('youtube')['vid'] if video.deep_find('youtube').present?
-        isrc = video.deep_find('external_ids')['isrc'] if video.deep_find('external_ids')['isrc'].present?
 
+        isrc = video.deep_find('external_ids')['isrc'] if video.deep_find('external_ids')['isrc'].present?
         youtube_video.update(
           spotify_album_id: spotify_album_id,
           spotify_album_name: spotify_album_name,
