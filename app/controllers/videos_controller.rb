@@ -25,6 +25,12 @@ class VideosController < ApplicationController
     @genres     = @videos.joins(:song).pluck('songs.genre').uniq.compact.sort.map(&:titleize)
   end
 
+  def show
+    @videos_total = Video.all
+    @video = Video.find_by(youtube_id: params[:v])
+    @video.clicked!
+  end
+
   def edit
     @video = Video.find_by(id: params[:id])
   end

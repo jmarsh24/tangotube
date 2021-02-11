@@ -81,6 +81,11 @@ class Video < ApplicationRecord
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
+  def clicked!
+    self.click_count += 1
+    save!
+  end
+
   class << self
     def filter_by_query(query)
       where(id: VideosSearch.search(query).select(:video_id))
