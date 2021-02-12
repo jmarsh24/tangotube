@@ -1,9 +1,11 @@
 <%= render 'shared/header' %>
 <div class="grid-container-show">
+<div class="video-container">
   <div class="video-responsive">
     <iframe width="100%" height="600px" scrolling="no" src="https://www.youtube.com/embed/<%= @video.youtube_id %>?rel=0&modestbranding=1&autoplay=1" allowfullscreen>
     </iframe>
   </div>
+</div>
   <div class="video-info-container">
     <div class="video-info-container-left">
       <%= render partial: "videos/show/video_info_primary" %>
