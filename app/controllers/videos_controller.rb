@@ -6,7 +6,7 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos_total = Video.all
+    @videos_total = Video.all.size
     @videos = Video.where.not('hidden IS true')
                    .includes(:leader, :follower, :channel, :song, :event)
                    .order(sort_column + ' ' + sort_direction)
@@ -29,8 +29,10 @@ class VideosController < ApplicationController
   end
 
   def show
-    @videos_total = Video.all
+    @videos_total = Video.all.size
     @video = Video.find_by(youtube_id: params[:v])
+    channel_id = @video.channel_id
+    @videos = Video.where(channel_id: channel_id).where.not(id: @video.id).order('popularity DESC').limit(5)
     @video.clicked!
   end
 
