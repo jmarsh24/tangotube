@@ -55,11 +55,11 @@
                     value: link_to(@video.song.try(:genre).to_s.titleize ,
                                     root_path(song_id: @video.song.id)) } %>
   <%= render partial: "videos/show/video_info_item",
-                    locals: { header: "Artist",
+                    locals: { header: "Orchestra",
                     value: link_to(@video.song.try(:artist).to_s.titleize,
                                     root_path(song_id: @video.song.id)) } %>
   <%= render partial: "videos/show/video_info_item",
-                    locals: { header: "Artist 2",
+                    locals: { header: "Singer",
                               value: link_to(@video.song.try(:artist_2).to_s.titleize,
                                               root_path(song_id: @video.song.id)) } if @video.song.artist_2.present? %>
 <% end %>
