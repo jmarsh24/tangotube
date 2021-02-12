@@ -36,13 +36,14 @@
 }
 
 .video-info-container {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
 }
 
 .video-info-container-left {
   flex: 3;
   margin: 1rem 1.5rem;
+  min-width: 300px;
   a {
     color: rgb(6, 95, 212);
     font-size: 0.8rem;
@@ -57,8 +58,22 @@
   display: flex;
   flex-direction: column;
   min-width: 200px;
-  margin: 0 2rem 0 1.5rem;
+  margin: 0 2rem 0 2rem;
 }
+
+.detail-row-lyrics {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-column-lyrics {
+  flex: 1;
+  margin: 0 2rem;
+  line-height: 1.5rem;
+}
+
 
 @media (max-width: 926px) {
   .grid-container-show {

@@ -87,11 +87,4 @@
                               value: link_to(@video.youtube_artist.to_s.titleize,
                                               root_path(query: @video.youtube_artist.to_s.titleize)) } %>
 <% end %>
-<% if @video.song.present? %>
-  <% if @video.song.lyrics.present? %>
-    <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Lyrics",
-                                  value: simple_format(@video.song.lyrics.to_s.titleize)} %>
-  <% end %>
-<% end %>
 </div>
