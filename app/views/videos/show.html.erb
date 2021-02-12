@@ -38,8 +38,7 @@
                       value:  link_to(@video.event.title.to_s.titleize, root_path(event_id: @video.event.id)) } %>
           <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Location",
-                      value:  link_to(@video.event.city.to_s.titleize + ', ' + @video.event.country.to_s.titleize,
-                                        root_path(event_id: @video.event.id)) } if @video.event.present? %>
+                      value:  "#{@video.event.city.to_s.titleize}, #{@video.event.country.to_s.titleize}" } %>
         </div>
       <% end %>
 
