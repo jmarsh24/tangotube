@@ -1,0 +1,15 @@
+.video-edit-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 420px;
+}
+.video-edit-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: .2rem;
+  width: 350px;
+  padding: 1rem;
+}

@@ -1,0 +1,138 @@
+.grid-container-show {
+  display: flex;
+  flex-direction: column;
+  margin: 0 200px;
+  padding-bottom: 100px;
+}
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  margin: 10px 0;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border: 0px;
+  border-radius: 5px;
+  position: absolute;
+}
+
+.video-info-container {
+  display: flex;
+  flex-flow: row;
+}
+
+.video-info-container-left {
+  flex: 2;
+  margin-right: 50px;
+}
+
+.video-show-right-container {
+  flex: 1;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  h3 {
+    text-align: center;
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin-block-start: 0;
+      color: #909090;
+      line-height: 1.3rem;
+    }
+  }
+
+  .detail-lyrics-value {
+    text-align: center;
+  }
+}
+
+.detail-section-label {
+  width: 100%;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 1px solid grey;
+  padding: 5px 0;
+
+  &:last-child {
+  border-bottom: none;
+  }
+
+}
+
+.detail-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.detail-item-heading {
+  text-align: left;
+  font-weight: 600;
+  font-size: .8rem;
+  color: rgb(96, 96, 96);
+}
+
+.detail-item-value {
+  text-align: right;
+  font-size: .8rem;
+  color: rgb(96, 96, 96);
+}
+
+.video-info-container {
+  flex: 3;
+  margin: auto .5rem;
+  a {
+  color: rgb(6, 95, 212);
+  font-size: .8rem;
+  }
+}
+
+.detail-item-value  {
+
+  a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  img {
+    display: flex;
+    height: 32px;
+    width: 32px ;
+    margin: 2px 15px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 926px) {
+  .grid-container-show {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  .video-responsive iframe {
+  border-radius: 0;
+  }
+
+}
