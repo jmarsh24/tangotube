@@ -3,9 +3,6 @@
   <h4>Video Info</h4>
 </div>
   <%= render partial: "videos/show/video_info_item",
-                  locals: { header: "Title",
-                  value:  simple_format(@video.title) } %>
-  <%= render partial: "videos/show/video_info_item",
                   locals: { header: "Description",
                   value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: '')), html: { target: '_blank' }) } %>
   <%= render partial: "videos/show/video_info_item",
