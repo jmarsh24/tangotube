@@ -28,7 +28,7 @@
 }
 
 .video-info-container > div {
-  margin: 1rem;
+  margin: 0 1rem;
 }
 
 .video-info-container-left {
@@ -40,6 +40,13 @@
   p {
     line-height: 1.2rem;
   }
+}
+
+.recomended-videos-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
 }
 
 .detail-section-label {
