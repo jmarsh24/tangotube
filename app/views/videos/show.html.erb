@@ -28,7 +28,7 @@
                   value:  simple_format(@video.title) } %>
       <%= render partial: "videos/show/video_info_item",
                   locals: { header: "Description",
-                  value:  auto_link(simple_format(@video.description), html: { target: '_blank' }) } %>
+                  value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: '')), html: { target: '_blank' }) } %>
 
       <% if @video.event.present? %>
         <div class="detail-section-label">
