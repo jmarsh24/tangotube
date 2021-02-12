@@ -6,44 +6,8 @@
   </div>
   <div class="video-info-container">
     <div class="video-info-container-left">
-      <div class="detail-section-label">
-      <h3>Video Info</h3>
-      </div>
-      <%= render partial: "videos/show/video_info_item",
-                  locals: { header: "Upload Date",
-                  value: @video.upload_date.to_formatted_s(:long) } %>
-      <%= render partial: "videos/show/video_info_item",
-                  locals: { header: "View Count",
-                  value: "#{number_with_delimiter(@video.view_count)} views" } %>
-      <%= render partial: "videos/show/video_info_item",
-                  locals: { header: "Duration",
-                  value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
-      <%= render partial: "videos/show/video_info_item",
-                  locals: { header: "Channel",
-                  value: link_to(image_tag(@video.channel.thumbnail_url) + @video.channel.title,
-                                  root_path(channel: @video.channel.title)) } %>
-
-      <%= render partial: "videos/show/video_info_item",
-                  locals: { header: "Title",
-                  value:  simple_format(@video.title) } %>
-      <%= render partial: "videos/show/video_info_item",
-                  locals: { header: "Description",
-                  value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: '')), html: { target: '_blank' }) } %>
-
-      <% if @video.event.present? %>
-        <div class="detail-section-label">
-          <h3>Event Info</h3>
-          <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Title",
-                      value:  link_to(@video.event.title.to_s.titleize, root_path(event_id: @video.event.id)) } %>
-          <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Location",
-                      value:  "#{@video.event.city.to_s.titleize}, #{@video.event.country.to_s.titleize}" } %>
-        </div>
-      <% end %>
-
-      <div class="detail-section-label">
-        <h3>Performers</h3>
+    <div class="detail-section-label">
+        <h4>Performers</h4>
       </div>
 
       <%= render partial: "videos/show/video_info_item",
@@ -55,9 +19,20 @@
                   value: link_to(@video.follower.try(:name),
                                   root_path(follower: @video.follower.name)) } if @video.follower.present? %>
 
-      <div class="detail-section-label">
+      <% if @video.event.present? %>
+        <div class="detail-section-label">
+          <h4>Event Info</h4>
+          <%= render partial: "videos/show/video_info_item",
+                      locals: { header: "Title",
+                      value:  link_to(@video.event.title.to_s.titleize, root_path(event_id: @video.event.id)) } %>
+          <%= render partial: "videos/show/video_info_item",
+                      locals: { header: "Location",
+                      value:  "#{@video.event.city.to_s.titleize}, #{@video.event.country.to_s.titleize}" } %>
+        </div>
+      <% end %>
       <% if @video.song.present? || @video.spotify_track_name.present? || @video.youtube_song.present? %>
-        <h3>Music</h3>
+      <div class="detail-section-label">
+        <h4>Music</h4>
       <% end %>
       </div>
       <% if @video.song.present? %>
@@ -91,7 +66,7 @@
         <%= render partial: "videos/show/video_info_item",
                     locals: { header: "Artist 2",
                               value: link_to(@video.spotify_artist_name_2.to_s.titleize,
-                                              root_path(query: @video.spotify_artist_name_2.to_s.titleize)) }%>
+                                              root_path(query: @video.spotify_artist_name_2.to_s.titleize)) } if @video.spotify_artist_name_2.present? %>
       <% end %>
 
       <% if @video.song.blank? && @video.spotify_track_name.blank? && @video.youtube_song.present? %>
@@ -111,10 +86,35 @@
                                   value: simple_format(@video.song.lyrics.to_s.titleize)} %>
         <% end %>
       <% end %>
+      <div class="detail-section-label">
+      <h4>Video Info</h4>
+      </div>
+      <%= render partial: "videos/show/video_info_item",
+                  locals: { header: "Upload Date",
+                  value: @video.upload_date.to_formatted_s(:long) } %>
+      <%= render partial: "videos/show/video_info_item",
+                  locals: { header: "View Count",
+                  value: "#{number_with_delimiter(@video.view_count)} views" } %>
+      <%= render partial: "videos/show/video_info_item",
+                  locals: { header: "Duration",
+                  value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
+      <%= render partial: "videos/show/video_info_item",
+                  locals: { header: "Channel",
+                  value: link_to(image_tag(@video.channel.thumbnail_url) + @video.channel.title,
+                                  root_path(channel: @video.channel.title)) } %>
+
+      <%= render partial: "videos/show/video_info_item",
+                  locals: { header: "Title",
+                  value:  simple_format(@video.title) } %>
+      <%= render partial: "videos/show/video_info_item",
+                  locals: { header: "Description",
+                  value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: '')), html: { target: '_blank' }) } %>
+
+
     </div>
     <div class="recomended-videos-section">
       <div class="detail-section-label">
-        <h3>Related Videos</h3>
+        <h4>Related Videos</h4>
         <%= render partial: "videos/show/recommended_videos" %>
       </div>
     </div>
