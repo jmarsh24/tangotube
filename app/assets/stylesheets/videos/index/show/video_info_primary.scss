@@ -1,0 +1,75 @@
+.show-video-title {
+  text-decoration: none;
+  font-size: inherit;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0.2rem 0;
+  padding-top: 1rem;
+  &:hover {
+    color: black;
+  }
+}
+
+.show-video-song {
+  font-size: 1rem;
+  text-decoration: none;
+
+  a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: rgb(97, 97, 97);
+
+    &:hover {
+      color: rgb(3, 3, 3);
+    }
+  }
+}
+
+.show-channel-icon {
+  margin: 0.2rem 0.5rem 0 0.2rem;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  background-color: #aaa;
+}
+
+.show-channel-title {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.show-video-channel {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  a {
+    margin-bottom: 0.1rem;
+    text-decoration: none;
+    transition: color 150ms;
+  }
+
+  a:hover {
+    color: #111;
+  }
+}
+
+.show-video-metadata {
+  color: #555;
+  font-size: 0.7rem;
+}
+
+.show-video-event {
+  font-size: 1rem;
+  text-decoration: none;
+  margin: 3px 0;
+  a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: rgb(97, 97, 97);
+
+    &:hover {
+      color: rgb(3, 3, 3);
+    }
+  }
+}
