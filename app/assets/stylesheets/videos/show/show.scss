@@ -4,22 +4,35 @@
   padding-bottom: 100px;
   min-width: 300px;
   max-width: 1600px;
+  justify-content: center;
+}
+
+.video-responsive-background {
+  flex: 1;
+  background-color: black;
+}
+
+.video-responsive-container {
+  width: 100%;
+  max-width: 1068px; //set your `max-width` here
+  max-height: auto; //necessary to keep proportion
+  margin: 0 auto; //centering
 }
 
 .video-responsive {
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  position: relative;
-  height: 0;
+width: 100%;
+position: relative;
+padding-top: 56.25%;
+overflow: hidden;
 }
 
 .video-responsive iframe {
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  border: 0px;
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .video-info-container {
@@ -27,12 +40,9 @@
   flex-wrap: wrap;
 }
 
-.video-info-container > div {
-  margin: 0 1rem;
-}
-
 .video-info-container-left {
-  flex: 2;
+  flex: 3;
+  margin: 0 1rem;
   a {
     color: rgb(6, 95, 212);
     font-size: 0.8rem;
@@ -46,7 +56,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 300px;
+  min-width: 200px;
+  margin: 0 1rem;
 }
 
 .detail-section-label {
