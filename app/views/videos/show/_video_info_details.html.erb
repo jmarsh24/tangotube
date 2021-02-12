@@ -57,11 +57,19 @@
   <%= render partial: "videos/show/video_info_item",
                     locals: { header: "Orchestra",
                     value: link_to(@video.song.try(:artist).to_s.titleize,
-                                    root_path(song_id: @video.song.id)) } %>
+                                    root_path(orchestra: @video.song.artist)) } %>
   <%= render partial: "videos/show/video_info_item",
                     locals: { header: "Singer",
-                              value: link_to(@video.song.try(:artist_2).to_s.titleize,
-                                              root_path(song_id: @video.song.id)) } if @video.song.artist_2.present? %>
+                              value: @video.song.try(:artist_2).to_s.titleize } if @video.song.artist_2.present? %>
+  <%= render partial: "videos/show/video_info_item",
+                    locals: { header: "Recording Date",
+                    value: @video.song.date.strftime('%B %d, %Y') } if @video.song.date.present? %>
+  <%= render partial: "videos/show/video_info_item",
+                    locals: { header: "Composer",
+                    value: @video.song.composer.to_s.titleize } if @video.song.composer.present? %>
+  <%= render partial: "videos/show/video_info_item",
+                    locals: { header: "Lyricist",
+                    value: @video.song.author.to_s.titleize } if @video.song.author.present? %>
 <% end %>
 <% if @video.song.blank? && @video.spotify_track_name.present? %>
   <%= render partial: "videos/show/video_info_item",
