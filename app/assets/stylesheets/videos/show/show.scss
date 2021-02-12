@@ -20,10 +20,10 @@
 }
 
 .video-responsive {
-width: 100%;
-position: relative;
-padding-top: 56.25%;
-overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding-top: 56.25%;
+  overflow: hidden;
 }
 
 .video-responsive iframe {
@@ -42,7 +42,7 @@ overflow: hidden;
 
 .video-info-container-left {
   flex: 3;
-  margin: 0 1rem;
+  margin: 1.5rem 1.5rem;
   a {
     color: rgb(6, 95, 212);
     font-size: 0.8rem;
@@ -57,7 +57,7 @@ overflow: hidden;
   display: flex;
   flex-direction: column;
   min-width: 200px;
-  margin: 0 1rem;
+  margin: 0 2rem 0 1.5rem;
 }
 
 .detail-section-label {

@@ -32,7 +32,7 @@ class VideosController < ApplicationController
     @videos_total = Video.all.size
     @video = Video.find_by(youtube_id: params[:v])
     song_id = @video.song_id
-    @videos = Video.where(song_id: song_id).where.not(id: @video.id).order('popularity DESC').limit(5)
+    @videos = Video.where(song_id: song_id).where.not(id: @video.id).order('popularity DESC').limit(3)
     @video.clicked!
   end
 
