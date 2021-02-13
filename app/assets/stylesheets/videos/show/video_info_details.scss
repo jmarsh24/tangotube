@@ -6,10 +6,16 @@
 .video-info-details-main {
   flex: 2;
   flex-direction: column;
+  margin: 0 1rem 0 0;
 }
 
 .video-info-details-secondary {
   flex: 1;
+}
+
+.detail-column-lyrics {
+  text-align: center;
+  margin: 0;
 }
 
 .detail-section-label {

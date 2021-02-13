@@ -69,7 +69,7 @@
                       locals: { header: "Composer",
                       value: @video.song.composer.to_s.titleize } if @video.song.composer.present? %>
     <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Lyricist",
+                      locals: { header: "Author",
                       value: @video.song.author.to_s.titleize } if @video.song.author.present? %>
   <% end %>
   <% if @video.song.blank? && @video.spotify_track_name.present? %>
