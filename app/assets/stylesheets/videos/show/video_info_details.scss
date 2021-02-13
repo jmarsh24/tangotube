@@ -1,12 +1,14 @@
 .video-info-container-details {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .video-info-details-main {
   flex: 2;
   flex-direction: column;
   margin: 0 1rem 0 0;
+  min-width: 400px;
 }
 
 .video-info-details-secondary {
