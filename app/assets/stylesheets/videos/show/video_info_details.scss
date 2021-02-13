@@ -1,3 +1,17 @@
+.video-info-container-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.video-info-details-main {
+  flex: 2;
+  flex-direction: column;
+}
+
+.video-info-details-secondary {
+  flex: 1;
+}
+
 .detail-section-label {
   width: 100%;
 }
