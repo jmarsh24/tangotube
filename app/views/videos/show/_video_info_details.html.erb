@@ -97,9 +97,9 @@
                                                 root_path(query: @video.youtube_artist.to_s.titleize)) } %>
   <% end %>
   </div>
-  <div class="video-info-details-secondary">
-    <% if @video.song.present? %>
+      <% if @video.song.present? %>
       <% if @video.song.lyrics.present? %>
+  <div class="video-info-details-secondary">
     <div class="video-info-lyrics">
       <div class="detail-row-lyrics">
           <div class="detail-item-heading-lyrics">
@@ -109,8 +109,8 @@
             <%= simple_format(@video.song.lyrics.to_s.titleize) %>
         </div>
       </div>
-      <% end %>
-      <% end %>
     </div>
   </div>
+            <% end %>
+      <% end %>
 </div>
