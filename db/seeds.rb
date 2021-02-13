@@ -63,7 +63,7 @@ CSV.foreach('data/tangodb-datasets/youtube_song_update.csv', headers: false) do 
   youtube_song = column[1]
   youtube_artist = column[2]
   video = Video.find(id)
-  video.update(youtube_id: youtube_id, youtube_song: youtube_song, youtube_artist: youtube_artist)
+  video.update(youtube_song: youtube_song, youtube_artist: youtube_artist)
 end
 
 puts 'Succesfully seeded youtube music update into database'
