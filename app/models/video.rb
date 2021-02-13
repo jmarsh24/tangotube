@@ -83,7 +83,7 @@ class Video < ApplicationRecord
 
   def clicked!
     self.click_count += 1
-    self.popularity_count += 1
+    self.popularity += 1
     save!
   end
 
