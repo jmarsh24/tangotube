@@ -13,7 +13,6 @@ class VideosController < ApplicationController
                    .filter_videos(params.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query,
                                                :hd, :event_id))
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
-    @videos_paginated = @videos_paginated.shuffle
 
     @current_search = params[:query]
     @videos_paginated_size = @videos_paginated.size * (@page + 1)
