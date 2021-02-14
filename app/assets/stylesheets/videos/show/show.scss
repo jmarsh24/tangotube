@@ -63,8 +63,10 @@
   display: flex;
   flex-direction: column;
   min-width: 300px;
-  max-width: 350px;
-  margin: .5rem 1rem 5rem 1rem;
+  // max-width: 350px;
+  padding: .5rem 1rem 5rem 1rem;
+  margin: 0 auto;
+
 }
 
 .detail-row-lyrics {
