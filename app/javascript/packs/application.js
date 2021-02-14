@@ -4,9 +4,10 @@
 // that code so it'll be compiled.
 //= require select2
 
-require("@rails/ujs").start();
-require("@rails/activestorage").start();
-require("channels");
+require("@rails/ujs").start()
+require("@rails/activestorage").start()
+require("channels")
+require("@hotwired/turbo-rails")
 
-import "@fortawesome/fontawesome-free/js/all";
-import "controllers";
+import "@fortawesome/fontawesome-free/js/all"
+import "controllers"

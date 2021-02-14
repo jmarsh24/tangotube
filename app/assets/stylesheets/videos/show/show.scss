@@ -69,21 +69,6 @@
 
 }
 
-.detail-row-lyrics {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 300px;
-}
-
-.detail-column-lyrics {
-  flex: 1;
-  margin: 0 2rem;
-  line-height: 1.5rem;
-}
-
-
 @media (max-width: 926px) {
   .grid-container-show {
     display: flex;

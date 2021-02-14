@@ -1,8 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :events
-  resources :playlists
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -25,8 +23,9 @@ Rails.application.routes.draw do
   get '/terms',    to: 'static_pages#terms'
   get '/about',    to: 'static_pages#about'
 
-  resources :videos
   resources :channels
+  resources :events
   resources :playlists
+  resources :videos
   resources :search_suggestions, only: :index
 end
