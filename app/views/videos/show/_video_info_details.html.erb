@@ -1,4 +1,3 @@
-<div class="video-info-container-details">
   <div class="video-info-details-main">
     <div class="detail-section-label">
       <h4>Video Info</h4>
@@ -98,20 +97,3 @@
                                                   root_path(query: @video.youtube_artist.to_s.titleize)) } %>
     <% end %>
   </div>
-  <% if @video.song.present? %>
-    <% if @video.song.lyrics.present? %>
-      <div class="video-info-details-secondary">
-        <div class="video-info-lyrics">
-          <div class="detail-row-lyrics">
-            <div class="detail-item-heading-lyrics">
-              <h4>Lyrics</h4>
-            </div>
-            <div class="detail-column-lyrics">
-              <%= simple_format(@video.song.lyrics.to_s.titleize) %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>

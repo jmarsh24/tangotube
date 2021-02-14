@@ -9,11 +9,14 @@
   </div>
 </div>
 <div class="video-info-container">
-  <div class="video-info-container-left">
-    <%= render partial: "videos/show/video_info_primary" %>
+<%= render partial: "videos/show/video_info_primary" %>
+  <div class="video-info-container-secondary">
+    <div class="video-info-details-main">
     <%= render partial: "videos/show/video_info_details" %>
-  </div>
-  <div class="recomended-videos-section">
-    <%= render partial: "videos/show/recommended_videos" %>
+    </div>
+      <%= render partial: "videos/show/lyrics" %>
+    <div class="recommended-videos-section">
+      <%= render partial: "videos/show/recommended_videos" %>
+    </div>
   </div>
 </div>
