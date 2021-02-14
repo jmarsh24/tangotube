@@ -72,5 +72,3 @@ class VideosController < ApplicationController
     params.permit.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd, :event_id)
   end
 end
-
-[e5dnF7ZLH7o]
