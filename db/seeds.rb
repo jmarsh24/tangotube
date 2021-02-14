@@ -58,12 +58,12 @@ puts 'Seeding process started'
 
 # puts 'Admin User successfully seeded.'
 
-CSV.foreach('data/tangodb-datasets/youtube_song_update.csv', headers: true) do |column|
-  video_id = column[0]
-  youtube_song = column[1]
-  youtube_artist = column[2]
-  video = Video.find_by(id: video_id)
-  video.update(youtube_song: youtube_song, youtube_artist: youtube_artist)
-end
+# CSV.foreach('data/tangodb-datasets/youtube_song_update.csv', headers: true) do |column|
+#   video_id = column[0]
+#   youtube_song = column[1]
+#   youtube_artist = column[2]
+#   video = Video.find_by(id: video_id)
+#   video.update(youtube_song: youtube_song, youtube_artist: youtube_artist)
+# end
 
-puts 'Succesfully seeded youtube music update into database'
+# puts 'Succesfully seeded youtube music update into database'
