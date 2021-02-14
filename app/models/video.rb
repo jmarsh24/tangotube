@@ -191,7 +191,7 @@ class Video < ApplicationRecord
     end
 
     def match_all_songs
-      Song.filter_by_active.sort_by_popularity.where.not(popularity: [false, nil]).each do |song|
+      Song.filter_by_active.sort_by_popularity.each do |song|
         Video.where(song_id: nil)
              .where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
                       OR unaccent(youtube_song) ILIKE unaccent(:song_title)
