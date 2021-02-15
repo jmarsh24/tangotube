@@ -1,6 +1,7 @@
 .loadMoreContainer {
   display: flex;
   flex-direction: column;
+  margin: 1rem 0;
 }
 
 .loadMoreResults {
@@ -28,7 +29,7 @@
   .load-more-link {
     width: 200px;
     padding: 20px;
-    margin: 20px auto 120px auto;
+    margin: 1rem auto;
   }
 
 @media (max-width: 500px) {
