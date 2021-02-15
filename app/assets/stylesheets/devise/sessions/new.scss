@@ -1,12 +1,13 @@
 .sessions-new-body {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
 .sessions-new-container {
   width: 308px;
-  margin: 64px auto;
+  height: 375px;
   background-color: rgb(246, 248, 250);
   border-radius: .5rem;
   border: 1px solid rgb(234, 236, 239);
@@ -18,9 +19,10 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+
   h1 {
     color: rgb(106, 115, 125);
-  font-size: 24px;
+    font-size: 24px;
     font-weight: 300;
     letter-spacing: -0.5px;
     margin: 0;

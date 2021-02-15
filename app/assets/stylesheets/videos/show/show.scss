@@ -1,23 +1,13 @@
-.grid-container-show {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 100px;
-  min-width: 300px;
-  max-width: 1600px;
-  margin: 0 auto;
-  justify-content: center;
-}
-
-.video-responsive-background {
-  flex: 1;
-  background-color: black;
-}
 
 .video-responsive-container {
   width: 100%;
   max-width: 1060px; //set your `max-width` here
   max-height: auto; //necessary to keep proportion
   margin: 0 auto; //centering
+}
+
+.video-responsive-background {
+  background-color: black;
 }
 
 .video-responsive {
@@ -66,7 +56,6 @@
   // max-width: 350px;
   padding: .5rem 1rem 5rem 1rem;
   margin: 0 auto;
-
 }
 
 @media (max-width: 926px) {

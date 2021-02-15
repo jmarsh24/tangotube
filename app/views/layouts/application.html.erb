@@ -14,13 +14,11 @@
       <div id="sideNavContainer" class="isHidden" data-toggle-target="sideNavContainer">
       </div>
       <div id="mainSectionContainer" data-toggle-target="mainSectionContainer">
-        <div id="mainContentContainer">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
-          <%= yield %>
-          <%= render 'layouts/footer' %>
-        </div>
+        <%= yield %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
       </div>
+      <%= render 'layouts/footer' %>
     </div>
   </body>
 </html>

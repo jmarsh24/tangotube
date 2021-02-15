@@ -1,17 +1,14 @@
 .footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f9f9f9;
   padding-top: 2rem;
   padding-bottom: 1rem;
   font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  background: #f9f9f9;
-  clear: both;
-  position: relative;
-  height: 100px;
-  margin-top: -50px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   a {
     color: rgb(96, 96, 96);
   }

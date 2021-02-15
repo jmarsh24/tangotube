@@ -1,23 +1,25 @@
 <%= render 'shared/header' %>
-<div class="grid-container-show">
-  <div class="video-responsive-background">
-    <div class="video-responsive-container">
-      <div class="video-responsive">
-        <iframe src="https://www.youtube.com/embed/<%= @video.youtube_id %>?rel=0&modestbranding=1&autoplay=1" allowfullscreen>
-        </iframe>
-      </div>
+<div class="video-responsive-background">
+  <div class="video-responsive-container">
+    <div class="video-responsive">
+      <iframe src="https://www.youtube.com/embed/<%= @video.youtube_id %>?rel=0&modestbranding=1&autoplay=1" allowfullscreen>
+      </iframe>
     </div>
   </div>
-  <div class="video-info-container">
-    <%= render partial: "videos/show/video_info_primary" %>
-    <div class="video-info-container-secondary">
-      <div class="video-info-details-main">
-        <%= render partial: "videos/show/video_info_details" %>
-      </div>
-        <%= render partial: "videos/show/lyrics" %>
-      <div class="recommended-videos-section">
-        <%= render partial: "videos/show/recommended_videos" %>
-      </div>
+</div>
+<div class="video-info-container">
+  <%= render partial: "videos/show/video_info_primary" %>
+  <div class="video-info-container-secondary">
+    <div class="video-info-details-main">
+      <%= render partial: "videos/show/video_info_details" %>
+    </div>
+      <% if @video.song.present? %>
+        <% if @video.song.lyrics.present? %>
+          <%= render partial: "videos/show/lyrics" %>
+        <% end %>
+      <% end %>
+    <div class="recommended-videos-section">
+      <%= render partial: "videos/show/recommended_videos" %>
     </div>
   </div>
 </div>
