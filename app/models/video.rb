@@ -143,7 +143,7 @@ class Video < ApplicationRecord
     end
 
     def match_all_music
-      Video.where.not(acr_response_code: [0, 1001]).order(:id).each do |video|
+      Video.where.not(acr_response_code: 0).order(:id).each do |video|
         AcrMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
