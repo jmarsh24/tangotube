@@ -24,7 +24,7 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
       <% if @minimum_password_length %>
-        <p>Make sure it's at least <%= @minimum_password_length %> characters OR at least 8 characters including a number and a lowercase letter.</p>
+        <p>Make sure it's at least <%= @minimum_password_length %> characters. </p>
       <% end %>
       <div class="actions">
         <%= f.submit "Create account" %>

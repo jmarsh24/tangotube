@@ -18,11 +18,13 @@
   padding: 1rem;
   h1 {
     color: rgb(106, 115, 125);
+    margin: 0;
   }
   h2 {
-  color: rgb(36, 41, 46);
-  font-size: 48px;
+  color: rgb(71, 71, 71);
+  font-size: 32px;
   font-weight: 500;
+  margin: 0;
   }
 }
 
@@ -36,8 +38,8 @@
   font-weight: 600;
   color: rgb(36, 41, 46);
   input {
-    width: 544px;
-    height: 20px;
+    width: 400px;
+    height: 32px;
     margin: .5rem;
     padding-left: .5rem;
     border-radius: .3rem;
@@ -54,7 +56,7 @@
     padding-left: .5rem;
   }
   .actions input{
-    width: 544px;
+    width: 400px;
     height: 55px;
     font-size: 14px;
     font-weight: 500;

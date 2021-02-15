@@ -20,14 +20,16 @@
   padding: 1rem;
   h1 {
     color: rgb(106, 115, 125);
-    font-size: 24px;
+  font-size: 24px;
     font-weight: 300;
     letter-spacing: -0.5px;
+    margin: 0;
   }
   h2 {
     color: rgb(36, 41, 46);
     font-size: 48px;
     font-weight: 500;
+    margin: 0;
   }
 }
 
@@ -41,22 +43,26 @@
   color: rgb(36, 41, 46);
   padding: 1rem;
 
+  #remember_me {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #user_remember_me {
+    width: 20px;
+  }
+
   input {
     width: 266px;
-    height: 20px;
+    height: 32px;
     margin: .5rem;
+    padding-left: .5rem;
     border-radius: 0.3rem;
     border: 1px solid rgb(225, 228, 232);
+
   }
-  input#user_remember_me {
-    width: 15px;
-    font-size: 10px;
-  }
-  label#remember_me {
-    font-size: 10px;
-    font-weight: 400;
-    padding: 0px;
-  }
+
   label {
     padding-left: 0.5rem;
   }
