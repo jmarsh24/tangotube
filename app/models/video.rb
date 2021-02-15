@@ -389,7 +389,7 @@ class Video < ApplicationRecord
       youtube_video = Video.find_by(youtube_id: youtube_id)
       video = JSON.parse(acr_response_body).extend Hashie::Extensions::DeepFind
 
-      if video['status']['code'] == 0 && video.deep_find('spotify').present?
+      if video['status']['code'] == 0
 
         if video.deep_find('spotify')['album'].present?
           if video.deep_find('spotify')['album']['id'].present?
@@ -437,12 +437,6 @@ class Video < ApplicationRecord
           youtube_song_id: youtube_song_id,
           isrc: isrc,
           acr_response_code: video['status']['code']
-        )
-
-      elsif video['status']['code'] == 0 && video.deep_find('external_ids')['isrc'].present?
-        youtube_video.update(
-          acr_response_code: video['status']['code'],
-          isrc: video.deep_find('external_ids')['isrc']
         )
 
       else
