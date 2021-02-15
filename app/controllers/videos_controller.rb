@@ -13,7 +13,6 @@ class VideosController < ApplicationController
                    .filter_videos(filtering_params(params))
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
-    # byebug
     @videos_paginated = @videos_paginated.shuffle if filtering_params(params).blank?
 
     @current_search = params[:query]
