@@ -7,6 +7,10 @@
   align-items: center;
   justify-content: center;
   background: #f9f9f9;
+  clear: both;
+  position: relative;
+  height: 80px;
+  margin-top: -80px;
   a {
     color: rgb(96, 96, 96);
   }

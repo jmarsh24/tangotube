@@ -5,6 +5,9 @@ require File.expand_path('../config/environment', __dir__)
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'rspec/rails'
+# NOTE: require 'devise' after require 'rspec/rails'
+require 'devise'
+require_relative 'support/controller_macros'
 
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 
@@ -35,6 +38,13 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  # For Devise > 4.1.1
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  # Use the following instead if you are on Devise <= 4.1.1
+  # config.include Devise::TestHelpers, :type => :controller
+  config.extend ControllerMacros, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
