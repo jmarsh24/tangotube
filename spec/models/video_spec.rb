@@ -41,6 +41,7 @@
 #  event_id              :bigint
 #
 require 'rails_helper'
+require_relative '../support/devise'
 
 RSpec.describe Video, type: :model do
   it { is_expected.to belong_to(:channel) }
