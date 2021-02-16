@@ -57,7 +57,6 @@ class Video < ApplicationRecord
   belongs_to :song, required: false
   belongs_to :channel, required: true
   belongs_to :event, required: false
-  belongs_to :search_suggestion, required: false
 
   scope :filter_by_orchestra, ->(song_artist)     { joins(:song).where('songs.artist ILIKE ?', song_artist) }
   scope :filter_by_genre,     ->(song_genre)      { joins(:song).where('songs.genre ILIKE ?', song_genre) }
