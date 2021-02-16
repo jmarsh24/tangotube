@@ -1,8 +1,7 @@
 <div class="registrations-new-body">
   <div class="registrations-new-container">
     <div class="registrations-new-header-container">
-      <h4>Join TangoTube</h4>
-      <h2>Create your Acccount</h2>
+      <h3>Create your Acccount</h3>
     </div>
 
     <div class="registrations-new-form-container">
@@ -10,7 +9,7 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
-        <%= f.label :email %><br />
+        <%= f.label :email %><br>
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
 

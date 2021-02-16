@@ -2,19 +2,18 @@
 <html>
   <head>
     <title>TangoTube</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap' %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <div id="pageContainer" data-controller="toggle select2">
       <div id="sideNavContainer" class="isHidden" data-toggle-target="sideNavContainer">
       </div>
       <div id="mainSectionContainer" data-toggle-target="mainSectionContainer">
-        <%= render 'shared/flash' %>
         <%= yield %>
       </div>
       <%= render 'layouts/footer' %>
