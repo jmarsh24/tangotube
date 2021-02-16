@@ -14,9 +14,8 @@
       <div id="sideNavContainer" class="isHidden" data-toggle-target="sideNavContainer">
       </div>
       <div id="mainSectionContainer" data-toggle-target="mainSectionContainer">
+        <%= render 'shared/flash' %>
         <%= yield %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
       </div>
       <%= render 'layouts/footer' %>
     </div>
