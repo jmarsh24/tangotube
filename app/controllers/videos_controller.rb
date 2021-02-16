@@ -10,10 +10,10 @@ class VideosController < ApplicationController
     @videos = Video.where.not('hidden IS true')
                    .includes(:leader, :follower, :channel, :song, :event)
                    .order(sort_column + ' ' + sort_direction)
-                   .filter_videos(filtering_params(params))
+                   .filter_videos(filtering_params)
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
-    @videos_paginated = @videos_paginated.shuffle if filtering_params(params).blank?
+    @videos_paginated = @videos_paginated.shuffle if filtering_params.blank?
 
     @current_search = params[:query]
     @videos_paginated_size = @videos_paginated.size * (@page + 1)
@@ -69,7 +69,7 @@ class VideosController < ApplicationController
     @page ||= params.permit(:page).fetch(:page, 0).to_i
   end
 
-  def filtering_params(params)
-    params.slice(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd, :event_id)
+  def filtering_params
+    params.permit(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd, :event_id)
   end
 end
