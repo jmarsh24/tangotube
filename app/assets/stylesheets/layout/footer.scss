@@ -1,4 +1,5 @@
 .footer {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,8 +7,6 @@
   padding-top: 2rem;
   padding-bottom: 1rem;
   font-size: 12px;
-  position: absolute;
-  bottom: 0;
   width: 100%;
   a {
     color: rgb(96, 96, 96);
