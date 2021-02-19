@@ -21,4 +21,8 @@ class Leader < ApplicationRecord
 
   scope :reviewed,     ->   { where(reviewed: true) }
   scope :not_reviewed, ->   { where(reviewed: false) }
+
+  def full_name
+    first_name.present? && last_name.present? ? "#{first_name} #{last_name}" : name
+  end
 end

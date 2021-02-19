@@ -26,6 +26,15 @@ export default class extends Controller {
     })
   }
 
+  // connect() {
+  //   $('.select2').select2({
+  //     width: '100%',
+  //     delay: 250,
+  //     minimumInputLength: 3,
+  //     tags: true
+  //   })
+  // }
+
   open() {
     console.log('Select2 Open')
     var list = $('.content-search').select2({

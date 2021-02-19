@@ -1,4 +1,4 @@
-  
+<%= turbo_frame_tag dom_id(@video) do %>
 <div class="video-info-details-main">
   <div class="detail-section-label">
     <h4>Video Info</h4>
@@ -6,6 +6,7 @@
   <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Description",
                       value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: '')), html: { target: '_blank' }) } %>
+
   <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Upload Date",
                       value: @video.upload_date.to_formatted_s(:long) } %>
@@ -96,4 +97,8 @@
                                   value: link_to(@video.youtube_artist.to_s.titleize,
                                                   root_path(query: @video.youtube_artist.to_s.titleize)) } %>
   <% end %>
+  <% if user_signed_in? %>
+    <%= link_to 'Edit', edit_video_path(@video) %>
+  <% end %>
 </div>
+<% end %>

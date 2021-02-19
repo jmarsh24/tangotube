@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   # before_action :authenticate_user!
+  before_action :set_video, only: %i[show edit]
 
   NUMBER_OF_VIDEOS_PER_PAGE = 120
 
@@ -27,24 +28,33 @@ class VideosController < ApplicationController
 
   def show
     @videos_total = Video.all.size
-    @video = Video.find_by(youtube_id: params[:v])
-    song_id = @video.song_id
-    @videos = Video.where(song_id: song_id).where.not(id: @video.id).order('popularity DESC').limit(3)
+    @recommended_videos = Video.where(song_id: @video.song_id).where.not(youtube_id: @video.youtube_id).order('popularity DESC').limit(3)
     @video.clicked!
   end
 
   def edit
     @video = Video.find_by(id: params[:id])
+    @leader_options = Leader.all.pluck(:name, :id)
+    @follower_options = Follower.all.pluck(:name, :id)
+    @song_options = Song.all.map { |song| [song.full_title, song.id] }
+    @event_options = Event.all.pluck(:title, :id)
   end
 
   def update
-    @video = Video.find(params[:id])
+    @video = Video.find_by(id: params[:id])
     @video.update(video_params)
-    flash[:notice] = 'Updated Video Successfully'
-    redirect_to root_path
+    redirect_to watch_path(v: @video.youtube_id)
+  end
+
+  def more
+    render(partial: 'videos/show/full_description')
   end
 
   private
+
+  def set_video
+    @video = Video.find_by(youtube_id: params[:v])
+  end
 
   def sort_column
     acceptable_cols = ['songs.title',
@@ -67,6 +77,10 @@ class VideosController < ApplicationController
 
   def page
     @page ||= params.permit(:page).fetch(:page, 0).to_i
+  end
+
+  def video_params
+    params.require(:video).permit(:leader_id, :follower_id, :song_id, :event_id)
   end
 
   def filtering_params

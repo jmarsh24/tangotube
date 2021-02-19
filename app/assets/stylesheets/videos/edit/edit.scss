@@ -13,3 +13,24 @@
   width: 350px;
   padding: 1rem;
 }
+
+.edit-video-form {
+ display: flex;
+ flex-direction: column;
+ width: 50%;
+ margin: 0 auto;
+}
+
+#leader,
+#follower,
+#song,
+#event {
+  grid-row: 1 / 5;
+}
+
+#attribute {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 0;
+}

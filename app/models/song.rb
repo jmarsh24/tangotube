@@ -40,6 +40,10 @@ class Song < ApplicationRecord
                   against: %i[title artist genre],
                   ignoring: :accents
 
+  def full_title
+    "#{title.titleize} - #{artist.titleize} - #{genre.titleize}"
+  end
+
   class << self
     def scrape_lyrics
       (16_400..20_000).each do |id|
