@@ -1,0 +1,47 @@
+<%= turbo_frame_tag dom_id(@video) do %>
+  <div class="video-info-details-main">
+    <div class="detail-section-label">
+      <h4>Video Info</h4>
+    </div>
+    <%= render partial: "videos/show/video_info_item",
+                        locals: { header: "Description",
+                        value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: '')), html: { target: '_blank' }) } %>
+    <%= render partial: "videos/show/video_info_item",
+                        locals: { header: "Upload Date",
+                        value: @video.upload_date.to_formatted_s(:long) } %>
+    <%= render partial: "videos/show/video_info_item",
+                        locals: { header: "View Count",
+                        value: "#{number_with_delimiter(@video.view_count)} views" } %>
+    <%= render partial: "videos/show/video_info_item",
+                        locals: { header: "Duration",
+                        value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
+    <%= render partial: "videos/show/video_info_item",
+                        locals: { header: "Channel",
+                        value: link_to(image_tag(@video.channel.thumbnail_url) + @video.channel.title,
+                                        root_path(channel: @video.channel.title)) } %>
+    <div class="detail-section-label">
+      <h4>Performers</h4>
+    </div>
+    <%= form_with model: @video do |f| %>
+      <%= render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :leader_id, data: @leader_options, id: 'leader', f: f } %>
+      <%= render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :follower_id, data: @follower_options, id: 'follower', f: f } %>
+      <div class="detail-section-label">
+        <h4>Event Info</h4>
+      </div>
+      <%= render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :event_id, data: @event_options, id: 'event' , f: f } %>
+      <div class="detail-section-label">
+        <h4>Music</h4>
+      </div>
+      <%= render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :song_id, data: @song_options, id: 'song', f: f } %>
+      <div class="edit-video-item-container">
+        <div>
+          <%= f.submit 'Update Video' %>
+        </div>
+      <% end %>
+
+      <div>
+        <%= link_to 'Back', watch_path(v: @video.youtube_id) %>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
