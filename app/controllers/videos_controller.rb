@@ -34,20 +34,16 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find_by(id: params[:id])
-    @leader_options = Leader.all.pluck(:name, :id)
-    @follower_options = Follower.all.pluck(:name, :id)
-    @song_options = Song.all.map { |song| [song.full_title, song.id] }
-    @event_options = Event.all.pluck(:title, :id)
+    @leader_options = Leader.all.order(:first_name).pluck(:name, :id)
+    @follower_options = Follower.all.order(:first_name).pluck(:name, :id)
+    @song_options = Song.all.order(:title).map { |song| [song.full_title, song.id] }
+    @event_options = Event.all.order(:title).pluck(:title, :id)
   end
 
   def update
     @video = Video.find_by(id: params[:id])
     @video.update(video_params)
     redirect_to watch_path(v: @video.youtube_id)
-  end
-
-  def more
-    render(partial: 'videos/show/full_description')
   end
 
   private
