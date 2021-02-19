@@ -483,7 +483,7 @@ DEPENDENCIES
   spring-watcher-listen (= 2.0.1)
   standard
   streamio-ffmpeg (~> 3.0, >= 3.0.2)
-  turbo-rails
+  turbo-rails (~> 0.5.8)
   tzinfo-data (~> 1.2020, >= 1.2020.5)
   web-console (= 4.0.2)
   webpacker (= 4.2.2)

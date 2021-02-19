@@ -32,7 +32,7 @@ gem 'sidekiq',                '~> 6.1', '>= 6.1.2'
 gem 'spring',                 '2.1.0'
 gem 'spring-watcher-listen',  '2.0.1'
 gem 'streamio-ffmpeg', '~> 3.0', '>= 3.0.2'
-gem 'turbo-rails'
+gem 'turbo-rails', '~> 0.5.8'
 gem 'tzinfo-data', '~> 1.2020', '>= 1.2020.5' # Don't rely on OSX/Linux timezone data
 gem 'webpacker', '4.2.2'
 gem 'youtube-dl.rb', '~> 0.3.1.2016.09.11.1'
