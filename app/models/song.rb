@@ -20,8 +20,6 @@
 #
 
 class Song < ApplicationRecord
-  include PgSearch::Model
-
   validates :genre, presence: true
   validates :title, presence: true
   validates :artist, presence: true
@@ -36,9 +34,12 @@ class Song < ApplicationRecord
   # song match scopes
   scope :title_match, ->(_model_attribute) { 'unaccent(title) ILIKE unaccent(model_attribute)' }
 
-  pg_search_scope :search,
-                  against: %i[title artist genre],
-                  ignoring: :accents
+  scope :full_title_search, lambda { |query|
+                              where('unaccent(songs.title) ILIKE unaccent(:query) OR
+                                    unaccent(artist) ILIKE unaccent(:query) OR
+                                    unaccent(genre) ILIKE unaccent(:query)',
+                                    query: "%#{query}%")
+                            }
 
   def full_title
     "#{title.titleize} - #{artist.titleize} - #{genre.titleize}"
