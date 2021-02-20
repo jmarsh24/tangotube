@@ -16,7 +16,9 @@
     "node-sass": "^4.0.0",
     "select2": "^4.0.13",
     "select2-dropdownPosition": "https://github.com/andreivictor/select2-dropdownPosition",
-    "stimulus": "^2.0.0"
+    "slim-select": "^1.27.0",
+    "stimulus": "^2.0.0",
+    "stimulus-slimselect": "^0.1.0"
   },
   "version": "0.1.0",
   "devDependencies": {

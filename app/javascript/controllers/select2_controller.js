@@ -26,14 +26,11 @@ export default class extends Controller {
     })
   }
 
-  // connect() {
-  //   $('.select2').select2({
-  //     width: '100%',
-  //     delay: 250,
-  //     minimumInputLength: 3,
-  //     tags: true
-  //   })
-  // }
+  connect() {
+    new SlimSelect({
+      select: '#select2'
+    })
+  }
 
   open() {
     console.log('Select2 Open')
