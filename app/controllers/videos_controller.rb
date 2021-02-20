@@ -8,7 +8,7 @@ class VideosController < ApplicationController
 
   def index
     @videos_total = Video.all.size
-    @videos = Video.where.not('hidden IS true')
+    @videos = Video.where.not(hidden: true)
                    .includes(:leader, :follower, :channel, :song, :event)
                    .order(sort_column + ' ' + sort_direction)
                    .filter_videos(filtering_params)
@@ -76,7 +76,7 @@ class VideosController < ApplicationController
   end
 
   def video_params
-    params.require(:video).permit(:leader_id, :follower_id, :song_id, :event_id)
+    params.require(:video).permit(:leader_id, :follower_id, :song_id, :event_id, :hidden)
   end
 
   def filtering_params
