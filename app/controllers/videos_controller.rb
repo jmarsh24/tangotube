@@ -7,8 +7,8 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos_total = Video.all.where.not(hidden: true).size
-    @videos = Video.where.not(hidden: true)
+    @videos_total = Video.all.where(hidden: false).size
+    @videos = Video.where(hidden: false)
                    .includes(:leader, :follower, :channel, :song, :event)
                    .order(sort_column + ' ' + sort_direction)
                    .filter_videos(filtering_params)
@@ -27,8 +27,11 @@ class VideosController < ApplicationController
   end
 
   def show
-    @videos_total = Video.all.where.not(hidden: true).size
-    @recommended_videos = Video.where(song_id: @video.song_id).where.not(youtube_id: @video.youtube_id).order('popularity DESC').limit(3)
+    @videos_total = Video.all.where(hidden: false).size
+    @recommended_videos = Video.where(song_id: @video.song_id)
+                               .where.not(youtube_id: @video.youtube_id)
+                               .order('popularity DESC')
+                               .limit(3)
     @video.clicked!
   end
 
