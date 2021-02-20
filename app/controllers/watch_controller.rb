@@ -2,7 +2,7 @@ class WatchController < ApplicationController
   before_action :set_video, only: :show
 
   def show
-    @videos_total = Video.all.size
+    @videos_total = Video.all.where.not(hidden: true).size
     @recommended_videos = Video.where(song_id: @video.song_id).where.not(youtube_id: @video.youtube_id).order('popularity DESC').limit(3)
     @video.clicked!
   end
