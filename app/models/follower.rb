@@ -23,9 +23,9 @@ class Follower < ApplicationRecord
   scope :not_reviewed, ->   { where(reviewed: false) }
   scope :full_name_search, lambda { |query|
                              where('unaccent(name) ILIKE unaccent(:query) OR
-                                              unaccent(first_name) ILIKE unaccent(:query) OR
-                                              unaccent(last_name) ILIKE unaccent(:query)',
-                                   query: "%#{query}%")
+                                    unaccent(first_name) ILIKE unaccent(:query) OR
+                                    unaccent(last_name) ILIKE unaccent(:query)',
+                                    query: "%#{query}%")
                            }
 
   def full_name

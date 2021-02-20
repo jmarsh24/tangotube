@@ -1,26 +1,5 @@
 <%= turbo_frame_tag dom_id(@video) do %>
 <div class="video-info-details-main">
-  <div class="detail-section-label">
-    <h4>Video Info</h4>
-  </div>
-  <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Description",
-                      value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: ''), {'data-turbo-frame': "_top"}), html: { target: '_blank' }) } %>
-
-  <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Upload Date",
-                      value: @video.upload_date.to_formatted_s(:long) } %>
-  <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "View Count",
-                      value: "#{number_with_delimiter(@video.view_count)} views" } %>
-  <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Duration",
-                      value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
-  <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Channel",
-                      value: link_to(image_tag(@video.channel.thumbnail_url) + @video.channel.title,
-                                      root_path(channel: @video.channel.title), {'data-turbo-frame': "_top"}) } %>
-  <div class="detail-section-label">
     <h4>Performers</h4>
   </div>
   <%= render partial: "videos/show/video_info_item",
@@ -96,6 +75,20 @@
                                   value: link_to(@video.youtube_artist.to_s.titleize,
                                                   root_path(query: @video.youtube_artist.to_s.titleize), {'data-turbo-frame': "_top"}) } %>
   <% end %>
+    <div class="detail-section-label">
+    <h4>Video Info</h4>
+  </div>
+  <%= render partial: "videos/show/video_info_item",
+                      locals: { header: "Description",
+                      value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: ''), {'data-turbo-frame': "_top"}), html: { target: '_blank' }) } %>
+
+  <%= render partial: "videos/show/video_info_item",
+                      locals: { header: "Upload Date",
+                      value: @video.upload_date.to_formatted_s(:long) } %>
+  <%= render partial: "videos/show/video_info_item",
+                      locals: { header: "Duration",
+                      value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
+  <div class="detail-section-label">
   <% if user_signed_in? %>
     <%= link_to 'Edit', edit_video_path(@video) %>
   <% end %>

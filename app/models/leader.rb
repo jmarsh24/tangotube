@@ -24,8 +24,8 @@ class Leader < ApplicationRecord
 
   scope :full_name_search, lambda { |query|
                              where('unaccent(name) ILIKE unaccent(:query) OR
-                                                unaccent(first_name) ILIKE unaccent(:query) OR
-                                                unaccent(last_name) ILIKE unaccent(:query)',
+                                    unaccent(first_name) ILIKE unaccent(:query) OR
+                                    unaccent(last_name) ILIKE unaccent(:query)',
                                    query: "%#{query}%")
                            }
 

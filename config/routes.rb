@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   resources :playlists, only: :index
   resources :videos
   resources :search_suggestions, only: :index
+  resources :leaders, only: :index
 end
