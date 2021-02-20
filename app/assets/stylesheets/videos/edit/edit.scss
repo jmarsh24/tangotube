@@ -21,16 +21,24 @@
  margin: 0 auto;
 }
 
+.attribute-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.attribute-label {
+  flex: 1;
+}
+
+.attribute-value {
+  flex: 1;
+}
+
 #leader,
 #follower,
 #song,
 #event {
-  grid-row: 1 / 5;
-}
-
-#attribute {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: .5rem 0;
+  width: 100%;
 }
