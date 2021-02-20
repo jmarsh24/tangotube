@@ -9,10 +9,10 @@ class WatchController < ApplicationController
 
   def edit
     @video = Video.find_by(id: params[:id])
-    @leader_options = Leader.all.pluck(:name, :id)
-    @follower_options = Follower.all.pluck(:name, :id)
-    @song_options = Song.all.map { |song| [song.full_title, song.id] }
-    @event_options = Event.all.pluck(:title, :id)
+    @leader_options = Leader.all.order(:name).pluck(:name, :id)
+    @follower_options = Follower.all.order(:name).pluck(:name, :id)
+    @song_options = Song.all.order(:title).map { |song| [song.full_title, song.id] }
+    @event_options = Event.all.order(:title).pluck(:title, :id)
   end
 
   private
