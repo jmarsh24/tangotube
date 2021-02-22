@@ -10,6 +10,8 @@ export default class extends Controller {
 
     new SlimSelect({
       select: this.element,
+      searchHighlight: true,
+      closeOnSelect: false,
       searchingText: 'Searching...', // Optional - Will show during ajax request
       ajax: function (search, callback) {
         // Check search value. If you dont like it callback(false) or callback('Message String')
@@ -43,20 +45,15 @@ export default class extends Controller {
     })
   }
 
-  open()  {
-    const limit = this.data.get('limit')
-    const placeholder = this.data.get('placeholder')
-    const searchText = this.data.get('no-results')
-    const closeOnSelect = this.single
-    const allowDeselect = !this.element.required
-    new SlimSelect({
-    select: this.element,
-    closeOnSelect,
-    allowDeselect,
-    limit,
-    placeholder,
-    searchText
-  }).select.open()
-  console.log('slimselect open fired')
+  open() {
+    console.log('slimselect open fired')
+    var select = document.querySelector('select#genre')
+    select.slim.open()
+    var select = document.querySelector('select#leader')
+    select.slim.open()
+    var select = document.querySelector('select#follower')
+    select.slim.open()
+    var select = document.querySelector('select#orchestra')
+    select.slim.open()
   }
 }
