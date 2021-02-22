@@ -17,6 +17,6 @@
 require 'rails_helper'
 
 RSpec.describe Channel, type: :model do
-
   it { is_expected.to have_many(:videos) }
+  it { should validate_uniqueness_of(:channel_id) }
 end

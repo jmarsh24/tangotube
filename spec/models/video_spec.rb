@@ -46,11 +46,5 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe Video, type: :model do
-  subject do
-    described_class.new(youtube_id: 'AZRZtSPPTKo',
-                        title: 'Anything',
-                        description: 'Lorem ipsum',
-                        start_date: DateTime.now,
-                        end_date: DateTime.now + 1.week)
-  end
+  it { should validate_uniqueness_of(:youtube_id) }
 end
