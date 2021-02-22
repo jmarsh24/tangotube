@@ -7002,10 +7002,10 @@ select-hose@^2.0.0:
   version "0.0.0"
   resolved "https://github.com/andreivictor/select2-dropdownPosition#dcd765236fe83bed0cec4d50e4874c846dffaebd"
 
-select2@^4.0.13:
-  version "4.0.13"
-  resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.13.tgz#0dbe377df3f96167c4c1626033e924372d8ef44d"
-  integrity sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==
+select2@^4.1.0-rc.0:
+  version "4.1.0-rc.0"
+  resolved "https://registry.yarnpkg.com/select2/-/select2-4.1.0-rc.0.tgz#ba3cd3901dda0155e1c0219ab41b74ba51ea22d8"
+  integrity sha512-Hr9TdhyHCZUtwznEH2CBf7967mEM0idtJ5nMtjvk3Up5tPukOLXbHUNmh10oRfeNIhj+3GD3niu+g6sVK+gK0A==
 
 selfsigned@^1.10.8:
   version "1.10.8"
@@ -7405,11 +7405,6 @@ stdout-stream@^1.4.0:
   integrity sha512-j4emi03KXqJWcIeF8eIXkjMFN1Cmb8gUlDYGeBALLPo5qdyTfA9bOtl8m33lRoC+vFMkP3gl0WsDr6+gzxbbTA==
   dependencies:
     readable-stream "^2.0.1"
-
-stimulus-slimselect@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/stimulus-slimselect/-/stimulus-slimselect-0.1.0.tgz#15c56974eff611ad947b5f7efa8d5b594506eddb"
-  integrity sha512-g1QS6ze+hQNRzSa/V8y6IWxKgPLi4BgCdm7unEUZb8rT4zx+Q7iV/m/Y5YDq9odZUzn7VVGX8GLvaltDv/wnGg==
 
 stimulus@^2.0.0:
   version "2.0.0"

@@ -37,10 +37,6 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find_by(id: params[:id])
-    @leader_options = Leader.all.order(:first_name).pluck(:name, :id)
-    @follower_options = Follower.all.order(:first_name).pluck(:name, :id)
-    @song_options = Song.all.order(:title).map { |song| [song.full_title, song.id] }
-    @event_options = Event.all.order(:title).pluck(:title, :id)
   end
 
   def update

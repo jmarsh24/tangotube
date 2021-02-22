@@ -3,6 +3,10 @@
     <%= f.label id %>
   </div>
   <div class="attribute-value">
-    <%= f.select params_name, data, { include_blank: true }, { data: { controller: 'slimselect'}, id: id, f: f } %>
+    <%= f.select params_name, [],
+                              {},
+                              { data: { controller: "slimselect",
+                                        'slimselect-target': 'field',
+                                        'slimselect-url': url }, id: id } %>
   </div>
 </div>

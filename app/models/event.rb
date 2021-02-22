@@ -21,6 +21,11 @@ class Event < ApplicationRecord
 
   has_many :videos, dependent: :nullify
 
+  scope :title_search, lambda { |query|
+                         where('unaccent(title) ILIKE unaccent(:query)',
+                               query: "%#{query}%")
+                       }
+
   class << self
     def scrape_events
       (14..469).each do |id|

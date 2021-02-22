@@ -38,7 +38,7 @@ class Song < ApplicationRecord
                               where('unaccent(songs.title) ILIKE unaccent(:query) OR
                                     unaccent(artist) ILIKE unaccent(:query) OR
                                     unaccent(genre) ILIKE unaccent(:query)',
-                                    query: "%#{query}%")
+                                    query: "%#{query}%").references(:song)
                             }
 
   def full_title

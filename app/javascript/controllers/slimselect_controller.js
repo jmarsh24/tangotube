@@ -3,14 +3,12 @@ import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.min.css'
 
 export default class extends Controller {
-  connect () {
-    // const limit = this.data.get('limit')
-    // const placeholder = this.data.get('placeholder')
-    // const searchText = this.data.get('no-results')
-    // const closeOnSelect = this.single
-    // const allowDeselect = !this.element.required
+   static targets = ['field']
 
-    this.select = new SlimSelect({
+  connect() {
+    const url = this.fieldTarget.dataset.slimselectUrl
+
+    new SlimSelect({
       select: this.element,
       searchingText: 'Searching...', // Optional - Will show during ajax request
       ajax: function (search, callback) {
@@ -21,19 +19,20 @@ export default class extends Controller {
         }
 
         // Perform your own ajax request here
-        fetch('/leaders')
+        fetch(url + '?q=' + search)
         .then(function (response) {
           return response.json()
         })
         .then(function (json) {
           let data = []
           for (let i = 0; i < json.length; i++) {
-            data.push({text: json[i].name})
+            data.push({ value: json[i][1], text: json[i][0] })
           }
 
           // Upon successful fetch send data to callback function.
           // Be sure to send data back in the proper format.
           // Refer to the method setData for examples of proper format.
+          console.log(data)
           callback(data)
         })
         .catch(function(error) {
@@ -42,5 +41,22 @@ export default class extends Controller {
         })
       }
     })
+  }
+
+  open()  {
+    const limit = this.data.get('limit')
+    const placeholder = this.data.get('placeholder')
+    const searchText = this.data.get('no-results')
+    const closeOnSelect = this.single
+    const allowDeselect = !this.element.required
+    new SlimSelect({
+    select: this.element,
+    closeOnSelect,
+    allowDeselect,
+    limit,
+    placeholder,
+    searchText
+  }).select.open()
+  console.log('slimselect open fired')
   }
 }
