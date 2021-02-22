@@ -12,6 +12,7 @@ export default class extends Controller {
       select: this.element,
       searchHighlight: true,
       closeOnSelect: false,
+      showContent: 'down',
       searchingText: 'Searching...', // Optional - Will show during ajax request
       ajax: function (search, callback) {
         // Check search value. If you dont like it callback(false) or callback('Message String')
