@@ -18,33 +18,29 @@ export default class extends Controller {
   }
 
   // filter() {
-  //   console.log(window.location.pathname)
+  //   // console.log(window.location.pathname)
   //   const url = `${window.location.pathname}?${this.params}`;
 
   //   Rails.ajax({
   //    type: "get",
   //    url: url,
   //    success: (data) => {
-  //      const newContainerVideos = data.getElementById("videos");
-  //      const containerVideos = document.getElementById("videos");
-  //      const newContainerGenreFilters = data.getElementById("select2-genre-results");
-  //      const containerGenreFilters = document.getElementById("select2-genre-results");
-  //      const newContainerLeaderFilters = data.getElementById("select2-leader-results");
-  //      const containerLeaderFilters = document.getElementById("select2-leader-results");
-  //      const newContainerFollowerFilters = data.getElementById("select2-follower-results");
-  //      const containerFollowerFilters = document.getElementById("select2-follower-results");
-  //      const newContainerOrchestraFilters = data.getElementById("select2-orchestra-results");
-  //      const containerOrchestraFilters = document.getElementById("select2-orchestra-results");
+  //      const newContainerVideos = data.getElementById("videos")
+  //      const containerVideos = document.getElementById("videos")
+  //      const newContainerGenreFilters = data.getElementById('genre-filter')
+  //      const containerGenreFilters = document.getElementById('genre-filter')
+  //      const newContainerLeaderFilters = data.getElementById('leader-filter')
+  //      const containerLeaderFilters = document.getElementById('leader-filter')
+  //      const newContainerFollowerFilters = data.getElementById('follower-filter')
+  //      const containerFollowerFilters = document.getElementById('follower-filter')
+  //      const newContainerOrchestraFilters = data.getElementById("orchestra-filter")
+  //      const containerOrchestraFilters = document.getElementById("orchestra-filter")
 
-  //     //  console.log('container', containerGenreFilters.innerHTML);
-  //     //  console.log('new container', newContainerGenreFilters.innerHTML);
-
-  //      containerVideos.innerHTML = newContainerVideos.innerHTML;
-
-  //      containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML;
-  //      containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML;
-  //      containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML;
-  //      containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML;
+  //      containerVideos.innerHTML = newContainerVideos.innerHTML
+  //      containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML
+  //      containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML
+  //      containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
+  //      containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML
 
   //      history.pushState({}, '', `${window.location.pathname}?${this.params}`)
   //    },
@@ -55,9 +51,11 @@ export default class extends Controller {
   // }
 
   get params() {
+    console.log(this.filterTargets);
     let params = this.filterTargets
       .filter((t) => t.value !== "all")
       .map((t) => `${t.name}=${t.value}`);
+
 
     let search = document.querySelector("#query");
 
@@ -88,5 +86,6 @@ export default class extends Controller {
     }
 
     return params.join("&");
+
   }
 }
