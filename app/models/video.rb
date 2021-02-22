@@ -39,6 +39,8 @@
 #  favorite_count        :integer          default(0)
 #  comment_count         :integer          default(0)
 #  event_id              :bigint
+#  scanned_youtube_music :boolean          default(FALSE)
+#  click_count           :integer          default(0)
 #
 
 class Video < ApplicationRecord

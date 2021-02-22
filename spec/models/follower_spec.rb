@@ -15,4 +15,13 @@ require 'rails_helper'
 
 RSpec.describe Follower, type: :model do
   it { is_expected.to have_many(:videos) }
+
+  context 'validation tests' do
+    it 'ensures name presence' do
+      leader = Leader.new(first_name: 'first', last_name: 'last').save
+      expect(leader).to eq(false)
+    end
+  end
+  context 'scope tests' do
+  end
 end

@@ -2,7 +2,7 @@
 #
 # Table name: ahoy_events
 #
-#  id         :bigint           not null, primary key
+#  id         :bigint           not null
 #  visit_id   :bigint
 #  user_id    :bigint
 #  name       :string

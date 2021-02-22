@@ -18,3 +18,17 @@
 #  active           :boolean          default(TRUE)
 #  lyrics           :text
 #
+FactoryBot.define do
+  factory :songs do
+    genre { 'MyText' }
+    artist { 'MyText' }
+    artist_2 { 'MyText' }
+    composer { 'MyText' }
+    author { 'MyText' }
+    date { 'MyText' }
+    popularity { 'MyText' }
+    active { true }
+    lyrics { 'MyText' }
+    last_name_search { 'MyText' }
+  end
+end

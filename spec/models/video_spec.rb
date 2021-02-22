@@ -39,10 +39,18 @@
 #  favorite_count        :integer          default(0)
 #  comment_count         :integer          default(0)
 #  event_id              :bigint
+#  scanned_youtube_music :boolean          default(FALSE)
+#  click_count           :integer          default(0)
 #
 require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe Video, type: :model do
-  it { is_expected.to belong_to(:channel) }
+  subject do
+    described_class.new(youtube_id: 'AZRZtSPPTKo',
+                        title: 'Anything',
+                        description: 'Lorem ipsum',
+                        start_date: DateTime.now,
+                        end_date: DateTime.now + 1.week)
+  end
 end

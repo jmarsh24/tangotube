@@ -10,7 +10,6 @@ gem 'base64',                 '~> 0.1.0'
 gem 'bootsnap',               '1.4.6', require: false
 gem 'country_select',         '~> 4.0'
 gem 'devise',                 '~> 4.7', '>= 4.7.2'
-gem 'factory_bot',            '~> 6.1'
 gem 'faraday',                '~> 1.1.0'
 gem 'font-awesome-rails',     '~> 4.7', '>= 4.7.0.5'
 gem 'hashie',                 '~> 4.1'
@@ -40,7 +39,10 @@ gem 'yt',                     '~> 0.32.0'
 
 group :development, :test do
   gem 'amazing_print',        '~> 1.2', '>= 1.2.2'
-  gem 'rspec-rails',          '~> 4.0', '>= 4.0.1'
+  gem 'factory_bot_rails',    '~> 6.1'
+  gem 'faker',                '~> 2.16'
+  gem 'rspec-rails',          '~> 4.0'
+  gem 'simplecov',            '~> 0.21.2'
   gem 'standard'
 end
 

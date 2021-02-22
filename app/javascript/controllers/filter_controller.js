@@ -56,7 +56,6 @@ export default class extends Controller {
       .filter((t) => t.value !== "all")
       .map((t) => `${t.name}=${t.value}`);
 
-
     let search = document.querySelector("#query");
 
     if (search.value) {

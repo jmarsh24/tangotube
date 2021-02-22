@@ -14,3 +14,12 @@
 #  yt_api_pull_count     :integer          default(0)
 #  reviewed              :boolean          default(FALSE)
 #
+
+FactoryBot.define do
+  factory :channels do
+    channel_id { 'MyText' }
+    title { 'MyText' }
+    imported { true }
+    thumbnail_url { 'MyText' }
+  end
+end

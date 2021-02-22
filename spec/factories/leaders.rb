@@ -11,3 +11,12 @@
 #  first_name :string
 #  last_name  :string
 #
+FactoryBot.define do
+  factory :leaders do
+    name { 'MyText' }
+    first_name { 'MyText' }
+    last_name { 'MyText' }
+    nickname { 'MyText' }
+    reviewed { true }
+  end
+end
