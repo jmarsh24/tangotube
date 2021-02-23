@@ -1,15 +1,15 @@
 // filters_controller.js
-import { Controller } from "stimulus";
-import Rails from "@rails/ujs";
-import * as Turbo from '@hotwired/turbo';
+import { Controller } from "stimulus"
+import Rails from "@rails/ujs"
+import * as Turbo from '@hotwired/turbo'
 import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.min.css'
 
 export default class extends Controller {
-  static targets = ["filter"];
+  static targets = ["filter"]
 
   connect() {
-    console.log("Filter-Controller ON");
+    console.log("Filter-Controller ON")
   }
 
   // filter() {
@@ -62,9 +62,9 @@ export default class extends Controller {
     console.log(this.filterTargets);
     let params = this.filterTargets
       .filter((t) => t.value !== "all")
-      .map((t) => `${t.name}=${t.value}`);
+      .map((t) => `${t.name}=${t.value}`)
 
-    let search = document.querySelector("#query");
+    let search = document.querySelector("#query")
 
     if (search.value) {
       params.push(`${search.name}=${search.value}`)
@@ -72,13 +72,13 @@ export default class extends Controller {
 
     const queryString = window.location.search;
 
-    const urlParams = new URLSearchParams(queryString);
+    const urlParams = new URLSearchParams(queryString)
 
-    let songID = urlParams.getAll('song_id');
+    let songID = urlParams.getAll('song_id')
 
-    let eventID = urlParams.getAll('event_id');
+    let eventID = urlParams.getAll('event_id')
 
-    let hd = urlParams.getAll('hd');
+    let hd = urlParams.getAll('hd')
 
     if (songID.length > 0 ) {
       params.push(`song_id=${songID}`)
@@ -92,7 +92,7 @@ export default class extends Controller {
       params.push(`hd=${hd}`)
     }
 
-    return params.join("&");
+    return params.join("&")
 
   }
 }
