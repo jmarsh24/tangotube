@@ -53,10 +53,9 @@ export default class extends Controller {
     const showContent = 'down'
     const searchFocus = false
 
-
     var select = new SlimSelect({
         select: this.element,
-        beforeClose: function () { select.open()},
+        beforeClose: function (event) { event.preventDefault().select.open()},
         closeOnSelect,
         allowDeselect,
         limit,
