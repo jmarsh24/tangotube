@@ -23,7 +23,7 @@ class VideosController < ApplicationController
     @followers  = @videos.joins(:follower).pluck('followers.name').uniq.sort.map(&:titleize)
     @channels   = @videos.joins(:channel).pluck('channels.title').uniq.compact.sort
     @artists    = @videos.joins(:song).pluck('songs.artist').uniq.compact.sort.map(&:titleize)
-    @genres     = @videos.joins(:song).pluck('songs.genre').downcase.uniq.compact.sort.map(&:titleize)
+    @genres     = @videos.joins(:song).pluck('songs.genre').uniq.compact.sort.map(&:titleize).uniq
   end
 
   def show
