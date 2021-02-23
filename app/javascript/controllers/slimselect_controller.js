@@ -50,6 +50,7 @@ export default class extends Controller {
     const searchText = this.data.get('no-results')
     const closeOnSelect = false
     const allowDeselect = !this.element.required
+    const showContent = 'down'
 
       new SlimSelect({
         select: this.element,
@@ -57,7 +58,8 @@ export default class extends Controller {
         allowDeselect,
         limit,
         placeholder,
-        searchText
+        searchText,
+        showContent,
       })
     }
 
