@@ -51,27 +51,26 @@ export default class extends Controller {
     const closeOnSelect = false
     const allowDeselect = !this.element.required
     const showContent = 'down'
+    const searchFocus = false
 
-      new SlimSelect({
+
+    var select = new SlimSelect({
         select: this.element,
+        beforeClose: function () { select.open()},
         closeOnSelect,
         allowDeselect,
         limit,
         placeholder,
         searchText,
         showContent,
+        searchFocus
       })
-    }
+      select.open()
+  }
 
   open() {
     console.log('slimselect open fired')
-    var select = document.querySelector('select#genre')
-    select.slim.open()
-    var select = document.querySelector('select#leader')
-    select.slim.open()
-    var select = document.querySelector('select#follower')
-    select.slim.open()
-    var select = document.querySelector('select#orchestra')
-    select.slim.open()
+    var select = document.querySelectorAll('select')
+    select.forEach(select => select.slim.open())
   }
 }

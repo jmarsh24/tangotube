@@ -4,7 +4,7 @@
 </label>
   <%= select_tag title.to_s,
         options_for_select(model, params[title.to_s].presence), include_blank: true, multiple: false,
-            data: { action: "filter#filter",
+            data: { action: "filter#filter slimselect#open",
                     "filter-target": "filter",
                     "slimselect-target": "field",
                     controller:'slimselect'

@@ -2,6 +2,8 @@
 import { Controller } from "stimulus";
 import Rails from "@rails/ujs";
 import * as Turbo from '@hotwired/turbo';
+import SlimSelect from 'slim-select'
+import 'slim-select/dist/slimselect.min.css'
 
 export default class extends Controller {
   static targets = ["filter"];
@@ -10,45 +12,45 @@ export default class extends Controller {
     console.log("Filter-Controller ON");
   }
 
-  filter() {
-    console.log(window.location.pathname);
-    const url = `${window.location.pathname}?${this.params}`;
-    Turbo.clearCache();
-    Turbo.visit(url);
-  }
-
   // filter() {
-  //   // console.log(window.location.pathname)
+  //   console.log(window.location.pathname);
   //   const url = `${window.location.pathname}?${this.params}`;
-
-  //   Rails.ajax({
-  //    type: "get",
-  //    url: url,
-  //    success: (data) => {
-  //      const newContainerVideos = data.getElementById("videos")
-  //      const containerVideos = document.getElementById("videos")
-  //      const newContainerGenreFilters = data.getElementById('genre-filter')
-  //      const containerGenreFilters = document.getElementById('genre-filter')
-  //      const newContainerLeaderFilters = data.getElementById('leader-filter')
-  //      const containerLeaderFilters = document.getElementById('leader-filter')
-  //      const newContainerFollowerFilters = data.getElementById('follower-filter')
-  //      const containerFollowerFilters = document.getElementById('follower-filter')
-  //      const newContainerOrchestraFilters = data.getElementById("orchestra-filter")
-  //      const containerOrchestraFilters = document.getElementById("orchestra-filter")
-
-  //      containerVideos.innerHTML = newContainerVideos.innerHTML
-  //      containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML
-  //      containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML
-  //      containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
-  //      containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML
-
-  //      history.pushState({}, '', `${window.location.pathname}?${this.params}`)
-  //    },
-  //    error: (data) => {
-  //      console.log(data)
-  //    }
-  //  });
+  //   Turbo.clearCache();
+  //   Turbo.visit(url);
   // }
+
+  filter() {
+    // console.log(window.location.pathname)
+    const url = `${window.location.pathname}?${this.params}`;
+
+    Rails.ajax({
+     type: "get",
+     url: url,
+     success: (data) => {
+       const newContainerVideos = data.getElementById("videos")
+       const containerVideos = document.getElementById("videos")
+       const newContainerGenreFilters = data.getElementById('genre-filter')
+       const containerGenreFilters = document.getElementById('genre-filter')
+       const newContainerLeaderFilters = data.getElementById('leader-filter')
+       const containerLeaderFilters = document.getElementById('leader-filter')
+       const newContainerFollowerFilters = data.getElementById('follower-filter')
+       const containerFollowerFilters = document.getElementById('follower-filter')
+       const newContainerOrchestraFilters = data.getElementById("orchestra-filter")
+       const containerOrchestraFilters = document.getElementById("orchestra-filter")
+
+       containerVideos.innerHTML = newContainerVideos.innerHTML
+       containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML
+       containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML
+       containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
+       containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML
+
+       history.pushState({}, '', `${window.location.pathname}?${this.params}`)
+     },
+     error: (data) => {
+       console.log(data)
+     }
+   })
+  }
 
   get params() {
     console.log(this.filterTargets);
