@@ -27,8 +27,6 @@ export default class extends Controller {
      type: "get",
      url: url,
      success: (data) => {
-       const newContainerVideos = data.getElementById("videos")
-       const containerVideos = document.getElementById("videos")
        const newContainerGenreFilters = data.getElementById('genre-filter')
        const containerGenreFilters = document.getElementById('genre-filter')
        const newContainerLeaderFilters = data.getElementById('leader-filter')
@@ -37,12 +35,20 @@ export default class extends Controller {
        const containerFollowerFilters = document.getElementById('follower-filter')
        const newContainerOrchestraFilters = data.getElementById("orchestra-filter")
        const containerOrchestraFilters = document.getElementById("orchestra-filter")
+       const newContainerVideos = data.getElementById('videos')
+       const containerVideos = document.getElementById('videos')
+       const newContainerLoadmore = data.getElementById('load-more-container')
+       const containerLoadmore = document.getElementById('load-more-container')
+       const newContainerFilterresults = data.getElementById('filter_results')
+       const containerFilterresults = document.getElementById('filter_results')
 
-       containerVideos.innerHTML = newContainerVideos.innerHTML
        containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML
        containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML
        containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
        containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML
+       containerVideos.innerHTML = newContainerVideos.innerHTML
+       containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
+       containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
 
        history.pushState({}, '', `${window.location.pathname}?${this.params}`)
      },

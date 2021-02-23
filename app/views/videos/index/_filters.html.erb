@@ -4,7 +4,7 @@
       <button data-action="click->toggle#toggle click->slimselect#open" class="filter-button"><%= fa_icon "sliders-h 2x", left: true %>
         <div id="filter-button-text">Filters</div>
       </button>
-      <div class="filter_results">
+      <div id="filter_results">
         <%= "Displaying #{number_with_delimiter(@videos.size)} Results" %>
       </div>
     </div>
