@@ -1,0 +1,18 @@
+.ss-open {
+  height: 245px !important;
+}
+
+.ss-disabled {
+  display: none;
+}
+
+.ss-search {
+  input:focus {
+    box-shadow: none !important;
+    border: 2px solid #5897fb !important;
+  }
+}
+
+.ss-arrow {
+  display: none !important;
+}
