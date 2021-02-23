@@ -12,11 +12,17 @@
 #  last_name  :string
 #
 FactoryBot.define do
-  factory :followers do
-    name { 'MyText' }
-    first_name { 'MyText' }
-    last_name { 'MyText' }
-    nickname { 'MyText' }
+  factory :follower do
+    name { 'Noelia Hurtado' }
+    first_name { 'Noelia' }
+    last_name { 'Hurtado' }
+    nickname { '' }
     reviewed { true }
+  end
+
+  factory :random_follower do
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    name { Faker::Name.first_name + ' ' + Faker::Name.last_name }
   end
 end

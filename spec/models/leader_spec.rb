@@ -16,10 +16,12 @@ require 'rails_helper'
 RSpec.describe Leader, type: :model do
   it { is_expected.to have_many(:videos) }
 
+  let(:leader) { build(:leader) }
+
   context 'validation tests' do
     it 'ensures name presence' do
-      leader = Leader.new(first_name: 'first', last_name: 'last').save
-      expect(leader).to eq(false)
+      leader.name = nil
+      expect(leader.save).to eq(false)
     end
   end
   context 'scope tests' do
