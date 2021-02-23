@@ -1,7 +1,6 @@
 import { Controller } from 'stimulus'
 import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.min.css'
-import '../stylesheets/slimselect-customized.scss'
 
 export default class extends Controller {
    static targets = ['field']

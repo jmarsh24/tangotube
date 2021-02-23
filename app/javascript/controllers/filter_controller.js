@@ -2,8 +2,6 @@
 import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 import * as Turbo from '@hotwired/turbo'
-import SlimSelect from 'slim-select'
-import 'slim-select/dist/slimselect.min.css'
 
 export default class extends Controller {
   static targets = ["filter"]
