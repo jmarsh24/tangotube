@@ -14,8 +14,6 @@
     "axios": "^0.21.1",
     "jquery": "^3.5.1",
     "node-sass": "^4.0.0",
-    "select2": "^4.1.0-rc.0",
-    "select2-dropdownPosition": "https://github.com/andreivictor/select2-dropdownPosition",
     "slim-select": "^1.27.0",
     "stimulus": "^2.0.0"
   },
