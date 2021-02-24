@@ -41,7 +41,9 @@ a {
 }
 
 input {
-  border-radius: 4px !important;
+  -webkit-appearance: none !important;
+  -webkit-border-radius: 4px !important;
+  -webkit-border-radius: 4px !important;
 }
 
 #pageContainer {
