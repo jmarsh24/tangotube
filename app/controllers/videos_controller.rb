@@ -28,10 +28,16 @@ class VideosController < ApplicationController
 
   def show
     @videos_total = Video.all.where(hidden: false).size
-    @recommended_videos = Video.where(song_id: @video.song_id)
-                               .where.not(youtube_id: @video.youtube_id)
-                               .order('popularity DESC')
-                               .limit(3)
+    videos = if Video.where(song_id: @video.song_id).size > 3
+               Video.where(song_id: @video.song_id)
+             else
+               Video.where(channel_id: @video.channel_id)
+             end
+
+    @recommended_videos = videos.where(hidden: false)
+                                .where.not(youtube_id: @video.youtube_id)
+                                .order('popularity DESC')
+                                .limit(3)
     @video.clicked!
   end
 
