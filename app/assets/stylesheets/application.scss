@@ -41,9 +41,10 @@ a {
 }
 
 input {
-  -webkit-appearance: none;
-  -webkit-border-radius: 0px;
-  border-radius: 0px;
+  -webkit-appearance: none !important;
+  -webkit-border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  border-radius: 0px !important;
 }
 
 #pageContainer {
