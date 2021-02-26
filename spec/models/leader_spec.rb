@@ -22,6 +22,8 @@ RSpec.describe Leader, type: :model do
     it { is_expected.to have_many(:follower) }
     it { is_expected.to have_many(:song) }
     it { should validate_uniqueness_of(:name) }
+    it { should have_many(:song).through(:videos) }
+    it { should have_many(:follower).through(:videos) }
 
     it 'ensures name presence' do
       leader.name = nil
@@ -38,6 +40,32 @@ RSpec.describe Leader, type: :model do
     it 'includes leaders without reviewed flagged' do
       leader = create(:leader, reviewed: false)
       expect(Leader.not_reviewed).to include(leader)
+    end
+
+    it 'finds a searched leader by name' do
+      leader = create(:leader, name: 'Test leader')
+      @result = Leader.full_name_search('Test leader')
+      expect(@result).to eq([leader])
+    end
+
+    it 'finds a searched leader by ending of name' do
+      leader = create(:leader, name: 'Test leader')
+      @result = Leader.full_name_search('est leader')
+      expect(@result).to eq([leader])
+    end
+
+    it 'finds a searched leader by beginning of name' do
+      leader = create(:leader, name: 'Test leader')
+      @result = Leader.full_name_search('Test leade')
+      expect(@result).to eq([leader])
+    end
+
+    it 'finds a searched leader by with case insensitivity' do
+      leader = create(:leader, name: 'Test leader')
+      @result = Leader.full_name_search('TEST LEADER')
+      expect(@result).to eq([leader])
+      @result = Leader.full_name_search('test leader')
+      expect(@result).to eq([leader])
     end
   end
 
