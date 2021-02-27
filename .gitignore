@@ -22,6 +22,9 @@
 /storage/*
 !/storage/.keep
 
+# Ignore coverage files .
+/coverage/*
+
 /public/assets
 .byebug_history
 
