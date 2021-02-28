@@ -21,10 +21,32 @@ class Channel < ApplicationRecord
 
   scope :imported,     ->   { where(imported: true) }
   scope :not_imported, ->   { where(imported: false) }
-  scope :reviewed,     ->   { where(reviewed: false).where.not('title ILIKE ?', '%tango%') }
+  scope :reviewed,     ->   { where(reviewed: false).where.not("title ILIKE ?", "%tango%") }
 
   scope :title_search, lambda { |query|
-                         where('unaccent(title) ILIKE unaccent(?)',
+                         where("unaccent(title) ILIKE unaccent(?)",
                                "%#{query}%")
                        }
+
+  class << self
+    def update_imported_video_counts
+      Channel.all.find_each do |channel|
+        channel.update(imported_videos_count: channel.videos.count)
+      end
+    end
+
+    def update_import_status
+      Channel.where('imported_videos_count < total_videos_count').each do |channel|
+        channel.update(imported: false)
+      end
+    end
+
+
+    def import_all_channels
+      Channel.where(imported: false).order(:id).each do |channel|
+        channel_id = channel.channel_id
+        Video.import_channel(channel_id)
+      end
+    end
+  end
 end

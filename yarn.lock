@@ -7397,11 +7397,6 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
-stimulus-read-more@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/stimulus-read-more/-/stimulus-read-more-1.0.1.tgz#cdfcc356cb660cbf3af37872b018c28715ec1a61"
-  integrity sha512-0Fn5NvXM9tCL0q4VCJke/X2sjhr77qQqiJrFxaK3106spBBGYECGiHE9AynsLxViY6saAzlCF6VN3/RFQIxAag==
-
 stimulus@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/stimulus/-/stimulus-2.0.0.tgz#713c8b91a72ef90914b90955f0e705f004403047"
