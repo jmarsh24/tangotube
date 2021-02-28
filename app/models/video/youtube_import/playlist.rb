@@ -4,8 +4,12 @@ class Video::YoutubeImport::Playlist
       new(playlist_id).import
     end
 
-    def import_videos(channel_id)
-      new(channel_id).import_videos
+    def import_videos(playlist_id)
+      new(playlist_id).import_videos
+    end
+
+    def import_channels(playlist_id)
+      new(playlist_id).import_channels
     end
   end
 
@@ -20,6 +24,12 @@ class Video::YoutubeImport::Playlist
   def import_videos
     new_videos.each do |youtube_id|
       ImportVideoWorker.perform_async(youtube_id)
+    end
+  end
+
+  def import_channels
+    new_channels.each do |channel_id|
+      Video::YoutubeImport::Channel.import(channel_id)
     end
   end
 
@@ -53,32 +63,22 @@ class Video::YoutubeImport::Playlist
   end
 
   def youtube_playlist_channels
-    @youtube_playlist.playlist_items.map(&:channel_id).uniq
+    @youtube_playlist.playlist_items.map { |video| video.snippet.data.dig("videoOwnerChannelId") }.uniq
   end
 
-  def new_channels; end
-
-  def import_all_playlists
-    Playlist.where(imported: false).find_each do |playlist|
-      Video.import_playlist(playlist.slug)
-    end
+  def channels
+    Channel.all.map(&:channel_id).to_a
   end
 
-  def import_playlist(playlist_id)
-    yt_playlist = Yt::Playlist.new id: playlist_id
-    yt_playlist_items = yt_playlist.playlist_items
-    playlist = Playlist.find_by(slug: playlist_id)
-                       .update(title:         yt_playlist.title,
-                               description:   yt_playlist.description,
-                               channel_title: yt_playlist.channel_title,
-                               channel_id:    yt_playlist.channel_id,
-                               video_count:   yt_playlist_items.size,
-                               imported:      true)
+  def new_channels
+    youtube_playlist_channels - channels
+  end
 
-    yt_playlist_items.map(&:video_id).each do |yt_video_id|
-      video = Video.find_by(youtube_id: yt_video_id)
-      video.update(popularity: video.popularity + 1) if video.present?
-      ImportVideoWorker.perform_async(yt_video_id) if video.blank?
-    end
+  def videos
+    Video.all.map(&:youtube_id).to_a
+  end
+
+  def new_videos
+    youtube_playlist_videos - videos
   end
 end
