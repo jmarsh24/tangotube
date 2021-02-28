@@ -1,0 +1,130 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  Enabled: true
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/GuardClause:
+ Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/ClassLength:
+  Max: 200
+
+
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Layout/LineLength:
+  Max: 150
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+Layout/FirstParameterIndentation:
+  Exclude:
+    # When chaining change expectations is better to have all changes at the same line,
+    # like this:
+    # expect { something }.to change { something }.and \
+    #                         change { something }
+    - 'spec/**/*.rb'
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+  AllowInnerSlashes: true
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - lib/tasks/*
+    - script/**/*
+    - spec/support/**/*
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+    - vendor/**/*
+    - config.ru
+    - Gemfile
+    - Rakefile
+  TargetRubyVersion: 2.7.2
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/MessageChain:
+  Enabled: false
+
+RSpec/AlignLeftLetBrace:
+  Enabled: false
+
+RSpec/AlignRightLetBrace:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+RSpec/MessageExpectation:
+  Enabled: false
+
+RSpec/ItBehavesLike:
+  EnforcedStyle: it_behaves_like
+
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/ImplicitExpect:
+  EnforcedStyle: is_expected
+
+RSpec/ExpectChange:
+  EnforcedStyle: method_call
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/ReturnFromStub:
+  EnforcedStyle: and_return
+
+Rails:
+  Enabled: true

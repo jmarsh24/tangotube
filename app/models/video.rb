@@ -44,6 +44,7 @@
 #
 
 class Video < ApplicationRecord
+  # FIXME: none of these requires should be here. All of this is loaded on app initialization.
   require 'openssl'
   require 'base64'
   require 'net/http/post/multipart'
@@ -82,6 +83,7 @@ class Video < ApplicationRecord
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
 
+  # FIXME: class methods first, this should go below
   def clicked!
     self.click_count += 1
     self.popularity += 1
@@ -89,11 +91,14 @@ class Video < ApplicationRecord
   end
 
   class << self
+    # FIXME: not used anywhere
     def filter_by_query(query)
       where(id: VideosSearch.search(query).select(:video_id))
     end
 
+    # FIXME: not used anywhere
     def update_hd_columns
+      # FIXME: your within Video class, 'Video' is not needed you can do `where` directly
       Video.where(hd: nil).each do |video|
         youtube_id = video.youtube_id
         UpdateHdColumnWorker.perform_async(youtube_id)
@@ -102,10 +107,12 @@ class Video < ApplicationRecord
 
     def update_video_hd(youtube_id)
       yt_video = Yt::Video.new id: youtube_id
+      # FIXME: same here `Video` is not needed
       video = Video.find_by(youtube_id: youtube_id)
       video.update(hd: yt_video.hd?)
     end
 
+    # FIXME: not used anywhere
     def split_first_last_names
       Leader.all.each do |leader|
         leader_name_split = leader.name.split(' ')
@@ -124,18 +131,21 @@ class Video < ApplicationRecord
       end
     end
 
+    # FIXME: this really should be a method on the channel class `Channel.update_imported_video_counts`
     def update_imported_video_counts
       Channel.all.each do |channel|
         channel.update(imported_videos_count: channel.videos.count)
       end
     end
 
+    # FIXME: same here, this belongs in channel.
     def update_import_status
       Channel.where('imported_videos_count < total_videos_count').each do |channel|
         channel.update(imported: false)
       end
     end
 
+    # FIXME: and here, this belongs in channel.
     def import_all_channels
       Channel.where(imported: false).order(:id).each do |channel|
         channel_id = channel.channel_id
@@ -144,18 +154,22 @@ class Video < ApplicationRecord
     end
 
     def match_all_music
+      # FIXME;  'Video' not needed
       Video.where.not(acr_response_code: 0).order(:id).each do |video|
         AcrMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
 
     def fetch_all_youtube_matches
+      # FIXME;  'Video' not needed
       Video.where(scanned_youtube_music: false).each do |video|
         YoutubeMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
 
     def match_all_dancers
+      # FIXME;  `all.each` is bad practice for stuff like that as it loads everything in memory,
+      # do `all.find_each` instead which iterate and grab 1000 at a time.
       Follower.all.order(:id).each do |follower|
         Video.match_dancer(follower)
       end
@@ -164,6 +178,8 @@ class Video < ApplicationRecord
       end
     end
 
+    # FIXME; way too many lines in this method. What does it do, a method should do one or two manipulation max!
+    # Break that down in smaller parts.
     def match_dancer(dancer)
       keywords = {}
 
@@ -191,6 +207,8 @@ class Video < ApplicationRecord
       videos.update_all("#{dancer.class.name.downcase}_id": dancer.id) if videos.present?
     end
 
+    # FIXME; way too many lines in this method too. You should make scopes for these long strings
+    # for instance: scope :with_song_title, ->(song_title) { where("your_horrible_query") }
     def match_all_songs
       Song.filter_by_active.sort_by_popularity.each do |song|
         Video.where(song_id: nil)
@@ -214,6 +232,8 @@ class Video < ApplicationRecord
       end
     end
 
+    # FIXME; way too many lines in this method. What does it do, a method should do one or two manipulation max!
+    # Break that down in smaller parts.
     def match_song(_song)
       model_attributes = %w[spotify_track_name youtube_song title description tags]
       keyword_names = keywords.map { |k, _v| k }
@@ -230,6 +250,8 @@ class Video < ApplicationRecord
       videos.update_all("#{dancer.class.name.downcase}_id": dancer.id) if videos.present?
     end
 
+    # FIXME; way too many lines in this method. What does it do, a method should do one or two manipulation max!
+    # Break that down in smaller parts.
     def calc_song_popularity
       Song.column_defaults['popularity']
       Song.column_defaults['occur_count']
@@ -252,6 +274,9 @@ class Video < ApplicationRecord
     def get_channel_video_ids(channel_id)
       `youtube-dl https://www.youtube.com/channel/#{channel_id}/videos  --get-id --skip-download`.split
     end
+
+    # FIX ME: All that import business should be in a separate sub class. The Video class shouldn't have to dial with importing things.
+    # So you can call something like: `Video::Import::Channel.import(channel_id)` and this method goes away. Same for playlist and videos.
 
     def import_channel(channel_id)
       yt_channel = Yt::Channel.new id: channel_id
