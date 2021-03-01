@@ -123,7 +123,7 @@ class Video < ApplicationRecord
     # All videos where the response code is not successfully identified,
     # send a request to acrcloud to search for a match
     def fetch_all_acr_cloud_matches
-      where.not(acr_response_code: 0).find_each do |video|
+      where.unscanned_acrcloud.find_each do |video|
         AcrMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
@@ -177,12 +177,6 @@ class Video < ApplicationRecord
         next if videos.empty?
 
         videos.update_all(song_id: song.id)
-      end
-    end
-
-    def match_all_music
-      unscanned_acrcloud.each do |video|
-        AcrMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
 
