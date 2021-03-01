@@ -76,7 +76,7 @@ class Song < ApplicationRecord
     # FIXME; way too many lines in this method. What does it do, a method should do one or two manipulation max!
     # Break that down in smaller parts.
     def calc_song_popularity
-      occur_num = Video.pluck(:song_id).compact!.tally
+      occur_num = Video.group(:song_id).count
       max_value = occur_num.values.max
       popularity = occur_num.transform_values { |v| (v.to_f / max_value * 100).round }
 
