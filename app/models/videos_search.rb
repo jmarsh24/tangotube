@@ -12,11 +12,11 @@ class VideosSearch < ApplicationRecord
 
   pg_search_scope(:search,
                   against: :description,
-                  using: {
+                  using:   {
                     tsearch: {
-                      dictionary: 'english',
-                      tsvector_column: 'tsv_document',
-                      prefix: true
+                      dictionary:      "english",
+                      tsvector_column: "tsv_document",
+                      prefix:          true
                     }
                   })
 

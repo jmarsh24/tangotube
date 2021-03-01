@@ -10,7 +10,7 @@ class VideosController < ApplicationController
     @videos_total = Video.all.where(hidden: false).size
     @videos = Video.where(hidden: false)
                    .includes(:leader, :follower, :channel, :song, :event)
-                   .order(sort_column + ' ' + sort_direction)
+                   .order(sort_column + " " + sort_direction)
                    .filter_videos(filtering_params)
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
@@ -19,11 +19,11 @@ class VideosController < ApplicationController
     @current_search = params[:query]
     @videos_paginated_size = @videos_paginated.size * (@page + 1)
 
-    @leaders    = @videos.joins(:leader).pluck('leaders.name').uniq.sort.map(&:titleize)
-    @followers  = @videos.joins(:follower).pluck('followers.name').uniq.sort.map(&:titleize)
-    @channels   = @videos.joins(:channel).pluck('channels.title').uniq.compact.sort
-    @artists    = @videos.joins(:song).pluck('songs.artist').uniq.compact.sort.map(&:titleize)
-    @genres     = @videos.joins(:song).pluck('songs.genre').uniq.compact.sort.map(&:titleize).uniq
+    @leaders    = @videos.joins(:leader).pluck("leaders.name").uniq.sort.map(&:titleize)
+    @followers  = @videos.joins(:follower).pluck("followers.name").uniq.sort.map(&:titleize)
+    @channels   = @videos.joins(:channel).pluck("channels.title").uniq.compact.sort
+    @artists    = @videos.joins(:song).pluck("songs.artist").uniq.compact.sort.map(&:titleize)
+    @genres     = @videos.joins(:song).pluck("songs.genre").uniq.compact.sort.map(&:titleize).uniq
   end
 
   def show
@@ -36,7 +36,7 @@ class VideosController < ApplicationController
 
     @recommended_videos = videos.where(hidden: false)
                                 .where.not(youtube_id: @video.youtube_id)
-                                .order('popularity DESC')
+                                .order("popularity DESC")
                                 .limit(3)
     @video.clicked!
   end
@@ -58,22 +58,22 @@ class VideosController < ApplicationController
   end
 
   def sort_column
-    acceptable_cols = ['songs.title',
-                       'songs.artist',
-                       'songs.genre',
-                       'leaders.name',
-                       'followers.name',
-                       'channels.title',
-                       'videos.upload_date',
-                       'videos.view_count',
-                       'songs.last_name_search',
-                       'videos.popularity']
+    acceptable_cols = ["songs.title",
+                       "songs.artist",
+                       "songs.genre",
+                       "leaders.name",
+                       "followers.name",
+                       "channels.title",
+                       "videos.upload_date",
+                       "videos.view_count",
+                       "songs.last_name_search",
+                       "videos.popularity"]
 
-    acceptable_cols.include?(params[:sort]) ? params[:sort] : 'videos.popularity'
+    acceptable_cols.include?(params[:sort]) ? params[:sort] : "videos.popularity"
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def page

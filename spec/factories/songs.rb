@@ -20,16 +20,16 @@
 #
 FactoryBot.define do
   factory :song do
-    genre { 'MyText' }
-    artist { 'MyText' }
-    artist_2 { 'MyText' }
-    composer { 'MyText' }
-    author { 'MyText' }
-    date { 'MyText' }
-    popularity { 'MyText' }
+    genre { "MyText" }
+    artist { "MyText" }
+    artist_2 { "MyText" }
+    composer { "MyText" }
+    author { "MyText" }
+    date { "MyText" }
+    popularity { "MyText" }
     active { true }
-    lyrics { 'MyText' }
-    last_name_search { 'MyText' }
+    lyrics { "MyText" }
+    last_name_search { "MyText" }
   end
 
   factory :random_song do
@@ -38,10 +38,10 @@ FactoryBot.define do
     artist_2 { Faker::Name.name }
     composer { Faker::Name.name }
     author { Faker::Name.name }
-    date { 'MyText' }
-    popularity { 'MyText' }
+    date { "MyText" }
+    popularity { "MyText" }
     active { true }
-    lyrics { 'MyText' }
-    last_name_search { 'MyText' }
+    lyrics { "MyText" }
+    last_name_search { "MyText" }
   end
 end

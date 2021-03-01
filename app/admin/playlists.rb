@@ -1,7 +1,7 @@
 ActiveAdmin.register Playlist do
   permit_params :slug, :title, :description, :channel_title, :channel_id, :video_count
 
-  config.sort_order = 'id_asc'
+  config.sort_order = "id_asc"
   config.per_page = [100, 500, 1000]
 
   filter :slug
@@ -22,7 +22,7 @@ ActiveAdmin.register Playlist do
 
   form do |f|
     f.inputs do
-      f.input :slug, label: 'Playlist_ID'
+      f.input :slug, label: "Playlist_ID"
     end
     f.actions
   end

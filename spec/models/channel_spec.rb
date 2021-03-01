@@ -14,9 +14,9 @@
 #  yt_api_pull_count     :integer          default(0)
 #  reviewed              :boolean          default(FALSE)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Channel, type: :model do
   it { is_expected.to have_many(:videos) }
-  it { should validate_uniqueness_of(:channel_id) }
+  it { is_expected.to validate_uniqueness_of(:channel_id) }
 end
