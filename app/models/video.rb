@@ -104,7 +104,7 @@ class Video < ApplicationRecord
   # Combined Scopes
 
   scope :title_match_missing_leader, ->(leader_name) { missing_leader.with_dancer_name_in_title(leader_name) }
-  scope :title_match_missing_follower, ->(follower_name) { missing_leader.with_dancer_name_in_title(follower_name) }
+  scope :title_match_missing_follower, ->(follower_name) { missing_follower.with_dancer_name_in_title(follower_name) }
 
   class << self
     # Filters videos by the results from the materialized
