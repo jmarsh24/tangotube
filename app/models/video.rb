@@ -103,8 +103,8 @@ class Video < ApplicationRecord
 
   # Combined Scopes
 
-  scope :title_match_with_missing_leader, ->(leader_name) { missing_leader.with_dancer_name_in_title(leader_name) }
-  scope :title_match_with_missing_follower, ->(follower_name) { missing_leader.with_dancer_name_in_title(follower_name) }
+  scope :title_match_missing_leader, ->(leader_name) { missing_leader.with_dancer_name_in_title(leader_name) }
+  scope :title_match_missing_follower, ->(follower_name) { missing_leader.with_dancer_name_in_title(follower_name) }
 
   class << self
     # Filters videos by the results from the materialized
@@ -134,10 +134,10 @@ class Video < ApplicationRecord
     ## Update all videos with leader name match in video title with leader relation.
     def match_all_leaders
       Leader.all.find_each do |leader|
-        videos = Video.title_match_with_missing_leader(leader.name) if leader.name.present?
-        videos = videos.or(Video.title_match_with_missing_leader(leader.abrev_name)) if leader.abrev_name.present?
-        videos = videos.or(Video.title_match_with_missing_leader(leader.abrev_name_nospace)) if leader.abrev_name_nospace.present?
-        videos = videos.or(Video.title_match_with_missing_leader(leader.nickname)) if leader.nickname.present?
+        videos = Video.title_match_missing_leader(leader.name) if leader.name.present?
+        videos = videos.or(Video.title_match_missing_leader(leader.abrev_name)) if leader.abrev_name.present?
+        videos = videos.or(Video.title_match_missing_leader(leader.abrev_name_nospace)) if leader.abrev_name_nospace.present?
+        videos = videos.or(Video.title_match_missing_leader(leader.nickname)) if leader.nickname.present?
 
         next if videos.empty?
 
@@ -148,10 +148,10 @@ class Video < ApplicationRecord
     ## Update all videos with follower name match in video title with follower relation.
     def match_all_followers
       Follower.all.find_each do |follower|
-        videos = Video.title_match_with_missing_follower(follower.name) if follower.name.present?
-        videos = videos.or(Video.title_match_with_missing_follower(follower.abrev_name)) if follower.abrev_name.present?
-        videos = videos.or(Video.title_match_with_missing_follower(follower.abrev_name_nospace)) if follower.abrev_name_nospace.present?
-        videos = videos.or(Video.title_match_with_missing_follower(follower.nickname)) if follower.nickname.present?
+        videos = Video.title_match_missing_follower(follower.name) if follower.name.present?
+        videos = videos.or(Video.title_match_missing_follower(follower.abrev_name)) if follower.abrev_name.present?
+        videos = videos.or(Video.title_match_missing_follower(follower.abrev_name_nospace)) if follower.abrev_name_nospace.present?
+        videos = videos.or(Video.title_match_missing_follower(follower.nickname)) if follower.nickname.present?
 
         next if videos.empty?
 
