@@ -42,7 +42,7 @@ class Channel < ApplicationRecord
     end
 
     def import_all_channels
-      where(imported: false).order(:id).each do |channel|
+      where(imported: false).find_each do |channel|
         channel_id = channel.channel_id
         Video::YoutubeImport.from_channel(channel_id)
       end
