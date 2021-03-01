@@ -54,20 +54,20 @@ class Song < ApplicationRecord
 
         doc = Nokogiri::HTML(response.body)
 
-        lyrics = doc.css('p#geniusText').text if doc.css('p#geniusText').present?
+        lyrics = doc.css("p#geniusText").text if doc.css("p#geniusText").present?
 
-        date = doc.css('div.list-group.lead a')[0].text.strip.split[1] if doc.css('div.list-group.lead a')[0].present?
+        date = doc.css("div.list-group.lead a")[0].text.strip.split[1] if doc.css("div.list-group.lead a")[0].present?
 
-        if doc.css('div.list-group.lead a')[1].present?
-          title = doc.css('div.list-group.lead a')[1].text.strip.split[1..-1].join(' ')
+        if doc.css("div.list-group.lead a")[1].present?
+          title = doc.css("div.list-group.lead a")[1].text.strip.split[1..-1].join(" ")
         end
 
-        if doc.css('div.list-group.lead a')[3].present?
-          artist = doc.css('div.list-group.lead a')[3].text.strip.split[1..-1].join(' ')
+        if doc.css("div.list-group.lead a")[3].present?
+          artist = doc.css("div.list-group.lead a")[3].text.strip.split[1..-1].join(" ")
         end
 
         if lyrics.present?
-          song = Song.where('title ILIKE ? AND artist ILIKE ?', title, artist)
+          song = Song.where("title ILIKE ? AND artist ILIKE ?", title, artist)
           song.update(lyrics: lyrics)
         end
       end
@@ -76,9 +76,6 @@ class Song < ApplicationRecord
     # FIXME; way too many lines in this method. What does it do, a method should do one or two manipulation max!
     # Break that down in smaller parts.
     def calc_song_popularity
-      Song.column_defaults["popularity"]
-      Song.column_defaults["occur_count"]
-
       occur_num = Video.pluck(:song_id).compact!.tally
       max_value = occur_num.values.max
       popularity = occur_num.transform_values { |v| (v.to_f / max_value * 100).round }
