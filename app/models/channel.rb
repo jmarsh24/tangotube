@@ -30,22 +30,21 @@ class Channel < ApplicationRecord
 
   class << self
     def update_imported_video_counts
-      Channel.all.find_each do |channel|
+      all.find_each do |channel|
         channel.update(imported_videos_count: channel.videos.count)
       end
     end
 
     def update_import_status
-      Channel.where('imported_videos_count < total_videos_count').each do |channel|
+      where("imported_videos_count < total_videos_count").find_each do |channel|
         channel.update(imported: false)
       end
     end
 
-
     def import_all_channels
-      Channel.where(imported: false).order(:id).each do |channel|
+      where(imported: false).order(:id).each do |channel|
         channel_id = channel.channel_id
-        Video.import_channel(channel_id)
+        Video::YoutubeImport.from_channel(channel_id)
       end
     end
   end
