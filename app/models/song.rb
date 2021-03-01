@@ -32,12 +32,12 @@ class Song < ApplicationRecord
   scope :filter_by_active,     -> { where(active: true) }
   scope :filter_by_not_active, -> { where(active: false) }
   # song match scopes
-  scope :title_match, ->(model_attribute) { where('unaccent(title) ILIKE unaccent(?)', "%#{model_attribute}%") }
+  scope :title_match, ->(model_attribute) { where("unaccent(title) ILIKE unaccent(?)", "%#{model_attribute}%") }
 
   scope :full_title_search, lambda { |query|
-                              where('unaccent(songs.title) ILIKE unaccent(:query) OR
+                              where("unaccent(songs.title) ILIKE unaccent(:query) OR
                                     unaccent(artist) ILIKE unaccent(:query) OR
-                                    unaccent(genre) ILIKE unaccent(:query)',
+                                    unaccent(genre) ILIKE unaccent(:query)",
                                     query: "%#{query}%").references(:song)
                             }
 

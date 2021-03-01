@@ -79,21 +79,21 @@ class Video < ApplicationRecord
 
   # Attribute Matching Scopes
   scope :with_song_title, lambda { |song_title|
-                            where('unaccent(spotify_track_name) ILIKE unaccent(:song_title)
+                            where("unaccent(spotify_track_name) ILIKE unaccent(:song_title)
                                                   OR unaccent(youtube_song) ILIKE unaccent(:song_title)
                                                   OR unaccent(title) ILIKE unaccent(:song_title)
                                                   OR unaccent(description) ILIKE unaccent(:song_title)
-                                                  OR unaccent(tags) ILIKE unaccent(:song_title)',
+                                                  OR unaccent(tags) ILIKE unaccent(:song_title)",
                                   song_title: "%#{song_title}%")
                           }
   scope :with_song_artist_keyword, lambda { |song_artist_keyword|
-                                     where('spotify_artist_name ILIKE :song_artist_keyword
+                                     where("spotify_artist_name ILIKE :song_artist_keyword
                                             OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
                                             OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
                                             OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
                                             OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
                                             OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)',
+                                            OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)",
                                            song_artist_keyword: "%#{song_artist_keyword}%")
                                    }
 

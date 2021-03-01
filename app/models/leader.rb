@@ -23,9 +23,9 @@ class Leader < ApplicationRecord
   scope :not_reviewed, ->   { where(reviewed: false) }
 
   scope :full_name_search, lambda { |query|
-                             where('unaccent(name) ILIKE unaccent(:query) OR
+                             where("unaccent(name) ILIKE unaccent(:query) OR
                                     unaccent(first_name) ILIKE unaccent(:query) OR
-                                    unaccent(last_name) ILIKE unaccent(:query)',
+                                    unaccent(last_name) ILIKE unaccent(:query)",
                                    query: "%#{query}%")
                            }
 
