@@ -47,7 +47,7 @@ class Song < ApplicationRecord
 
   class << self
     def scrape_lyrics
-      (16_400..20_000).each do |id|
+      (1..20_000).each do |id|
         puts "Page Number: #{id}"
 
         response = Faraday.get("https://www.el-recodo.com/music?id=#{id}&lang=en")
