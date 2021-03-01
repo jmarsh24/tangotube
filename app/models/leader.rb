@@ -32,4 +32,13 @@ class Leader < ApplicationRecord
   def full_name
     first_name.present? && last_name.present? ? "#{first_name} #{last_name}" : name
   end
+
+  def abrev_name
+    first_name.present? && last_name.present? ? "#{first_name.first}. #{last_name}"
+  end
+
+  def abrev_name_nospace
+    first_name.present? && last_name.present? ? "#{first_name.first}.#{last_name}"
+  end
+
 end
