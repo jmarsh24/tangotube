@@ -33,10 +33,10 @@ class Follower < ApplicationRecord
   end
 
   def abrev_name
-    first_name.present? && last_name.present? ? "#{first_name.first}. #{last_name}"
+    first_name.present? && last_name.present? ? "#{first_name.first}. #{last_name}" : nil
   end
 
   def abrev_name_nospace
-    first_name.present? && last_name.present? ? "#{first_name.first}.#{last_name}"
+    first_name.present? && last_name.present? ? "#{first_name.first}.#{last_name}" : nil
   end
 end
