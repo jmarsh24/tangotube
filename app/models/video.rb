@@ -101,11 +101,20 @@ class Video < ApplicationRecord
                                       where("unaccent(title) ILIKE unaccent(:dancer_name)", dancer_name: "%#{dancer_name}%")
                                     }
 
+  # Combined Scopes
+
+  scope :title_match_with_missing_leader, ->(leader_name) { missing_leader.with_dancer_name_in_title(leader_name) }
+  scope :title_match_with_missing_follower, ->(follower_name) { missing_leader.with_dancer_name_in_title(follower_name) }
+
   class << self
     # Filters videos by the results from the materialized
     # full text search out of from VideosSearch
     def filter_by_query(query)
       where(id: VideosSearch.search(query).select(:video_id))
+    end
+
+    def self.chaining(multiple_method)
+      multiple_method.inject(self, :send)
     end
 
     # All videos where the response code is not successfully identified,
@@ -129,13 +138,10 @@ class Video < ApplicationRecord
     ## Update all videos with leader name match in video title with leader relation.
     def match_all_leaders
       Leader.all.find_each do |leader|
-        videos = if leader.first_name.present? && leader.last_name.present?
-                   Video.missing_leader.with_dancer_name_in_title(leader.name)
-                        .or(Video.missing_leader.with_dancer_name_in_title(leader.abrev_name))
-                        .or(Video.missing_leader.with_dancer_name_in_title(leader.abrev_name_nospace))
-                 else
-                   Video.missing_leader.with_dancer_name_in_title(leader.name)
-                 end
+        videos = Video.title_match_with_missing_leader(leader.name) if leader.name.present?
+        videos = videos.or(Video.title_match_with_missing_leader(leader.abrev_name)) if leader.abrev_name.present?
+        videos = videos.or(Video.title_match_with_missing_leader(leader.abrev_name_nospace)) if leader.abrev_name_nospace.present?
+        videos = videos.or(Video.title_match_with_missing_leader(leader.nickname)) if leader.nickname.present?
 
         next if videos.empty?
 
@@ -146,13 +152,10 @@ class Video < ApplicationRecord
     ## Update all videos with follower name match in video title with follower relation.
     def match_all_followers
       Follower.all.find_each do |follower|
-        videos = if follower.first_name.present? && follower.last_name.present?
-                   Video.missing_follower.with_dancer_name_in_title(follower.name)
-                        .or(Video.missing_follower.with_dancer_name_in_title(follower.abrev_name))
-                        .or(Video.missing_follower.with_dancer_name_in_title(follower.abrev_name_nospace))
-                 else
-                   Video.missing_follower.with_dancer_name_in_title(follower.name)
-                 end
+        videos = Video.title_match_with_missing_follower(follower.name) if follower.name.present?
+        videos = videos.or(Video.title_match_with_missing_follower(follower.abrev_name)) if follower.abrev_name.present?
+        videos = videos.or(Video.title_match_with_missing_follower(follower.abrev_name_nospace)) if follower.abrev_name_nospace.present?
+        videos = videos.or(Video.title_match_with_missing_follower(follower.nickname)) if follower.nickname.present?
 
         next if videos.empty?
 
