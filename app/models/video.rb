@@ -169,7 +169,7 @@ class Video < ApplicationRecord
                       .with_song_artist_keyword(song.last_name_search)
         next if videos.empty?
 
-        videos.update_all(song: song)
+        videos.update_all(song_id: song.id)
       end
     end
 
