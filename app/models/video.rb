@@ -113,10 +113,6 @@ class Video < ApplicationRecord
       where(id: VideosSearch.search(query).select(:video_id))
     end
 
-    def self.chaining(multiple_method)
-      multiple_method.inject(self, :send)
-    end
-
     # All videos where the response code is not successfully identified,
     # send a request to acrcloud to search for a match
     def fetch_all_acr_cloud_matches
