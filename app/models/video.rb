@@ -73,8 +73,8 @@ class Video < ApplicationRecord
   scope :has_acr_match,     ->   { where(acr_response_code: 0) }
   scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
   scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
-  scope :missing_follower,  ->   { where(leader_id: nil) }
-  scope :missing_leader,    ->   { where(follower_id: nil) }
+  scope :missing_follower,  ->   { where(follower_id: nil) }
+  scope :missing_leader,    ->   { where(leader_id: nil) }
   scope :missing_song,      ->   { where(song_id: nil) }
 
   # Attribute Matching Scopes
@@ -129,8 +129,14 @@ class Video < ApplicationRecord
     ## Update all videos with leader name match in video title with leader relation.
     def match_all_leaders
       Leader.all.find_each do |leader|
-        videos = Video.missing_leader
-                      .with_dancer_name_in_title(leader.name)
+        videos = if leader.first_name.present? && leader.last_name.present?
+                   Video.missing_leader.with_dancer_name_in_title(leader.name)
+                        .or(Video.missing_leader.with_dancer_name_in_title(leader.abrev_name))
+                        .or(Video.missing_leader.with_dancer_name_in_title(leader.abrev_name_nospace))
+                 else
+                   Video.missing_leader.with_dancer_name_in_title(leader.name)
+                 end
+
         next if videos.empty?
 
         videos.update_all(leader_id: leader.id)
@@ -140,8 +146,14 @@ class Video < ApplicationRecord
     ## Update all videos with follower name match in video title with follower relation.
     def match_all_followers
       Follower.all.find_each do |follower|
-        videos = Video.missing_follower
-                      .with_dancer_name_in_title(follower.name)
+        videos = if follower.first_name.present? && follower.last_name.present?
+                   Video.missing_follower.with_dancer_name_in_title(follower.name)
+                        .or(Video.missing_follower.with_dancer_name_in_title(follower.abrev_name))
+                        .or(Video.missing_follower.with_dancer_name_in_title(follower.abrev_name_nospace))
+                 else
+                   Video.missing_follower.with_dancer_name_in_title(follower.name)
+                 end
+
         next if videos.empty?
 
         videos.update_all(follower_id: follower.id)
