@@ -21,8 +21,8 @@ end
 
 desc 'This task populates videos'
 task match_all_music: :environment do
-  puts 'Matching music with ACR Cloud'
-  Video.match_all_music
+  puts 'Fetching all missing music matches with ACR Cloud'
+  Video.fetch_all_acr_cloud_matches
   puts 'done.'
 end
 

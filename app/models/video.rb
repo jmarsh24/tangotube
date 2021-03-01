@@ -110,8 +110,8 @@ class Video < ApplicationRecord
 
     # All videos where the response code is not successfully identified,
     # send a request to acrcloud to search for a match
-    def match_all_music
-      where.not(acr_response_code: 0).order(:id).each do |video|
+    def fetch_all_acr_cloud_matches
+      where.not(acr_response_code: 0).find_each do |video|
         AcrMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
@@ -128,7 +128,7 @@ class Video < ApplicationRecord
 
     ## Update all videos with leader name match in video title with leader relation.
     def match_all_leaders
-      Leader.all.order(:id).find_each do |leader|
+      Leader.all.find_each do |leader|
         videos = Video.missing_leader
                       .with_dancer_name_in_title(leader.name)
         next if videos.empty?
@@ -139,7 +139,7 @@ class Video < ApplicationRecord
 
     ## Update all videos with follower name match in video title with follower relation.
     def match_all_followers
-      Follower.all.order(:id).find_each do |follower|
+      Follower.all.find_each do |follower|
         videos = Video.missing_follower
                       .with_dancer_name_in_title(follower.name)
         next if videos.empty?
