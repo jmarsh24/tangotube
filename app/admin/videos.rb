@@ -16,8 +16,8 @@ ActiveAdmin.register Video do
   scope :missing_follower
   scope :has_youtube_match
   scope :has_acr_match
-  scope :scanned_acr
-  scope :not_scanned_acr
+  scope :successful_acrcloud
+  scope :unsuccessful_acrcloud
   scope :filter_by_hidden
 
   filter :id_cont, label: "id"

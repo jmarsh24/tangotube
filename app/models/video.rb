@@ -70,12 +70,19 @@ class Video < ApplicationRecord
   scope :has_leader,        ->   { where.not(leader_id: nil) }
   scope :has_follower,      ->   { where.not(follower_id: nil) }
   scope :has_youtube_match, ->   { where.not(youtube_artist: nil) }
-  scope :has_acr_match,     ->   { where(acr_response_code: 0) }
-  scope :scanned_acr,       ->   { where.not(acr_response_code: nil) }
-  scope :not_scanned_acr,   ->   { where(acr_response_code: nil) }
   scope :missing_follower,  ->   { where(follower_id: nil) }
   scope :missing_leader,    ->   { where(leader_id: nil) }
   scope :missing_song,      ->   { where(song_id: nil) }
+
+  # Youtube Music Scopes
+  scope :scanned_youtube_music,   -> { where(scanned_youtube_music: true) }
+  scope :unscanned_youtube_music, -> { where(scanned_youtube_music: false) }
+
+  # AcrCloud Response scopes
+  scope :successful_acrcloud,     -> { where(acr_response_code: 0) }
+  scope :unsuccesful_acrcloud,    -> { where.not(acr_response_code: [0, 1001]) }
+  scope :scanned_acrcloud,        -> { where(acr_response_code: [0, 1001]) }
+  scope :unscanned_acrcloud,      -> { where.not(acr_response_code: [0, 1001]) }
 
   # Attribute Matching Scopes
   scope :with_song_title, lambda { |song_title|
@@ -126,7 +133,7 @@ class Video < ApplicationRecord
     # Create a import youtube worker which will
     # check if youtube has identified the music contained in the video.
     def fetch_all_youtube_matches
-      where(scanned_youtube_music: false).find_each do |video|
+      unscanned_youtube_music.find_each do |video|
         YoutubeMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
@@ -170,6 +177,12 @@ class Video < ApplicationRecord
         next if videos.empty?
 
         videos.update_all(song_id: song.id)
+      end
+    end
+
+    def match_all_music
+      unscanned_acrcloud.each do |video|
+        AcrMusicMatchWorker.perform_async(video.youtube_id)
       end
     end
 
