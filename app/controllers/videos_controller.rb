@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[edit update]
   before_action :set_video, only: %i[show edit]
 
   NUMBER_OF_VIDEOS_PER_PAGE = 120
