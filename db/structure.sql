@@ -534,7 +534,9 @@ CREATE TABLE public.videos (
     comment_count integer DEFAULT 0,
     event_id bigint,
     scanned_youtube_music boolean DEFAULT false,
-    click_count integer DEFAULT 0
+    click_count integer DEFAULT 0,
+    spotify_artist_id_1 character varying,
+    spotify_artist_name_1 character varying
 );
 
 
@@ -1045,6 +1047,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210207085038'),
 ('20210207115746'),
 ('20210210140250'),
-('20210211153442');
+('20210211153442'),
+('20210302162536');
 
 
