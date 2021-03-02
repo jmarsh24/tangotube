@@ -15,7 +15,8 @@ end
 desc 'This task populates videos'
 task match_all_dancers: :environment do
   puts 'Matching dancers'
-  Video.match_all_dancers
+  Video.match_all_leaders
+  Video.match_all_followers
   puts 'done.'
 end
 
@@ -35,8 +36,15 @@ end
 
 desc 'This task populates videos'
 task update_imported_video_counts: :environment do
-  puts 'Updating_imported_video_counts'
+  puts 'Updating imported video counts'
   Video.update_imported_video_counts
+  puts 'done.'
+end
+
+desc 'This task populates playlists'
+task update_imported_video_counts: :environment do
+  puts 'Adding all new playlists'
+  Video.import_all_playlists
   puts 'done.'
 end
 
