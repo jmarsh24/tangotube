@@ -2,11 +2,9 @@
   <div class="loadMoreResults">
     <%= "Displaying #{@videos_paginated_size} / #{@videos.size} Results" %>
   </div>
-  <% unless @videos.paginate(@page + 1, 32).empty?  %>
-    <%= link_to "Load more",
-          current_page_params
-          .merge(page: @page + 1),
-          remote: true,
-          class: "load-more-link" %>
+  <% unless @videos.paginate(page + 1, 32).empty?  %>
+    <button class="load-more-link" data-action='click->loadmore#loadMore' data-loadmore-page-value="<%= page %>" >
+    Load More
+    </button>
   <% end %>
 </div>

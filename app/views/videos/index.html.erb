@@ -4,9 +4,11 @@
 <div id="filters">
   <%= render "videos/index/filters" %>
 </div>
-<div id="videos" class="video-section">
-  <%= render "videos/index/videos" %>
-</div>
-<div id="load-more-container">
-  <%= render "videos/index/load_more" %>
+<div data-controller="loadmore">
+  <div id="videos" class="video-section" data-loadmore-target="videos">
+    <%= render "videos/index/videos", videos: @videos_paginated %>
+  </div>
+  <div id="load-more-container" data-loadmore-target="loadmore">
+    <%= render "videos/index/load_more", page: @page %>
+  </div>
 </div>
