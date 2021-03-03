@@ -16,7 +16,7 @@ class SearchSuggestionsController < ApplicationController
                  .distinct
                  .full_title_search(params[:query])
                  .limit(10)
-                 .map { |songs| songs.full_title }
+                 .map(&:full_title)
 
     @channels = Channel.title_search(params[:query])
                        .limit(10)

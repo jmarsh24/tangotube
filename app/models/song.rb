@@ -59,11 +59,11 @@ class Song < ApplicationRecord
         date = doc.css("div.list-group.lead a")[0].text.strip.split[1] if doc.css("div.list-group.lead a")[0].present?
 
         if doc.css("div.list-group.lead a")[1].present?
-          title = doc.css("div.list-group.lead a")[1].text.strip.split[1..-1].join(" ")
+          title = doc.css("div.list-group.lead a")[1].text.strip.split[1..].join(" ")
         end
 
         if doc.css("div.list-group.lead a")[3].present?
-          artist = doc.css("div.list-group.lead a")[3].text.strip.split[1..-1].join(" ")
+          artist = doc.css("div.list-group.lead a")[3].text.strip.split[1..].join(" ")
         end
 
         if lyrics.present?

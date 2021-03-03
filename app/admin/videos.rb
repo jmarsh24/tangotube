@@ -54,10 +54,10 @@ ActiveAdmin.register Video do
     column :follower
     column :song
     column "Genre" do |video|
-      video.song.genre.titleize unless video.song.nil?
+      video.song&.genre&.titleize
     end
     column "Artist" do |video|
-      video.song.artist.titleize unless video.song.nil?
+      video.song&.artist&.titleize
     end
     column :youtube_artist
     column :youtube_song
@@ -86,8 +86,6 @@ ActiveAdmin.register Video do
   end
 
   batch_action :hide do |_video|
-    Video.find(selection).each do |video|
-      video.hidden!
-    end
+    Video.find(selection).each(&:hidden!)
   end
 end

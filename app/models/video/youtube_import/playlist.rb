@@ -63,7 +63,7 @@ class Video::YoutubeImport::Playlist
   end
 
   def youtube_playlist_channels
-    @youtube_playlist.playlist_items.map { |video| video.snippet.data.dig("videoOwnerChannelId") }.uniq
+    @youtube_playlist.playlist_items.map { |video| video.snippet.data["videoOwnerChannelId"] }.uniq
   end
 
   def channels

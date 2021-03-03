@@ -26,6 +26,6 @@ FactoryBot.define do
   factory :random_channel do
     title { Faker::Name.first_name }
     thumbnail_url { Faker::Name.last_name }
-    name { Faker::Name.first_name + " " + Faker::Name.last_name }
+    name { "#{Faker::Name.first_name} #{Faker::Name.last_name}" }
   end
 end

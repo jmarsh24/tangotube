@@ -36,7 +36,7 @@ def authorize
   credentials = authorizer.get_credentials(user_id)
   if credentials.nil?
     url = authorizer.get_authorization_url(base_url: REDIRECT_URI)
-    puts "Open the following URL in the browser and enter the " +
+    puts "Open the following URL in the browser and enter the " \
       "resulting code after authorization"
     puts url
     code = gets
@@ -58,8 +58,8 @@ def channels_list_by_username(service, part, **params)
   response = service.list_channels(part, params).to_json
   item = JSON.parse(response).fetch("items")[0]
 
-  puts("This channel's ID is #{item.fetch('id')}. " +
-        "Its title is '#{item.fetch('snippet').fetch('title')}', and it has " +
+  puts("This channel's ID is #{item.fetch('id')}. " \
+        "Its title is '#{item.fetch('snippet').fetch('title')}', and it has " \
         "#{item.fetch('statistics').fetch('viewCount')} views.")
 end
 

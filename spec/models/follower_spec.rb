@@ -35,37 +35,37 @@ RSpec.describe Follower, type: :model do
   context "scope tests" do
     it "includes followers with reviewed flagged" do
       follower = create(:follower, reviewed: true)
-      expect(Follower.reviewed).to include(follower)
+      expect(described_class.reviewed).to include(follower)
     end
 
     it "includes followers without reviewed flagged" do
       follower = create(:follower, reviewed: false)
-      expect(Follower.not_reviewed).to include(follower)
+      expect(described_class.not_reviewed).to include(follower)
     end
 
     it "finds a searched follower by name" do
       follower = create(:follower, name: "Test follower")
-      @result = Follower.full_name_search("Test follower")
+      @result = described_class.full_name_search("Test follower")
       expect(@result).to eq([follower])
     end
 
     it "finds a searched follower by ending of name" do
       follower = create(:follower, name: "Test follower")
-      @result = Follower.full_name_search("est follower")
+      @result = described_class.full_name_search("est follower")
       expect(@result).to eq([follower])
     end
 
     it "finds a searched follower by beginning of name" do
       follower = create(:follower, name: "Test follower")
-      @result = Follower.full_name_search("Test followe")
+      @result = described_class.full_name_search("Test followe")
       expect(@result).to eq([follower])
     end
 
     it "finds a searched follower by with case insensitivity" do
       follower = create(:follower, name: "Test follower")
-      @result = Follower.full_name_search("TEST follower")
+      @result = described_class.full_name_search("TEST follower")
       expect(@result).to eq([follower])
-      @result = Follower.full_name_search("test follower")
+      @result = described_class.full_name_search("test follower")
       expect(@result).to eq([follower])
     end
   end
@@ -73,7 +73,7 @@ RSpec.describe Follower, type: :model do
   context "method tests" do
     it 'tests full_name to return "first_name last_name"' do
       follower = create(:follower)
-      expect(follower.full_name).to eq(follower.first_name + " " + follower.last_name)
+      expect(follower.full_name).to eq("#{follower.first_name} #{follower.last_name}")
     end
   end
 end

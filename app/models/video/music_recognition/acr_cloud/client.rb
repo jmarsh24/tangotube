@@ -26,7 +26,7 @@ class Video::MusicRecognition::AcrCloud::Client
     signature_version = "1"
     timestamp = Time.now.utc.to_i.to_s
 
-    string_to_sign = http_method + "\n" + http_uri + "\n" + access_key + "\n" + data_type + "\n" + signature_version + "\n" + timestamp
+    string_to_sign = "#{http_method}\n#{http_uri}\n#{access_key}\n#{data_type}\n#{signature_version}\n#{timestamp}"
 
     digest = OpenSSL::Digest.new("sha1")
     signature = Base64.encode64(OpenSSL::HMAC.digest(digest, access_secret, string_to_sign))

@@ -32,8 +32,8 @@ class Video::MusicRecognition::AcrCloud::Parse
       @spotify_track_id      = parsed_data.deep_find("spotify").dig("track", "id")
     end
 
-    @youtube_song_id       = parsed_data.deep_find("youtube").dig("vid") if parsed_data.deep_find("youtube").present?
-    @isrc                  = parsed_data.deep_find("external_ids").dig("isrc") if parsed_data.deep_find("external_ids").present?
+    @youtube_song_id       = parsed_data.deep_find("youtube")["vid"] if parsed_data.deep_find("youtube").present?
+    @isrc                  = parsed_data.deep_find("external_ids")["isrc"] if parsed_data.deep_find("external_ids").present?
 
     if parsed_data.deep_find("spotify").present?
       @spotify_album_name    = RSpotify::Album.find(@spotify_album_id).name if @spotify_album_id.present?

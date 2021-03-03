@@ -35,37 +35,37 @@ RSpec.describe Leader, type: :model do
   context "scope tests" do
     it "includes leaders with reviewed flagged" do
       leader = create(:leader, reviewed: true)
-      expect(Leader.reviewed).to include(leader)
+      expect(described_class.reviewed).to include(leader)
     end
 
     it "includes leaders without reviewed flagged" do
       leader = create(:leader, reviewed: false)
-      expect(Leader.not_reviewed).to include(leader)
+      expect(described_class.not_reviewed).to include(leader)
     end
 
     it "finds a searched leader by name" do
       leader = create(:leader, name: "Test leader")
-      @result = Leader.full_name_search("Test leader")
+      @result = described_class.full_name_search("Test leader")
       expect(@result).to eq([leader])
     end
 
     it "finds a searched leader by ending of name" do
       leader = create(:leader, name: "Test leader")
-      @result = Leader.full_name_search("est leader")
+      @result = described_class.full_name_search("est leader")
       expect(@result).to eq([leader])
     end
 
     it "finds a searched leader by beginning of name" do
       leader = create(:leader, name: "Test leader")
-      @result = Leader.full_name_search("Test leade")
+      @result = described_class.full_name_search("Test leade")
       expect(@result).to eq([leader])
     end
 
     it "finds a searched leader by with case insensitivity" do
       leader = create(:leader, name: "Test leader")
-      @result = Leader.full_name_search("TEST LEADER")
+      @result = described_class.full_name_search("TEST LEADER")
       expect(@result).to eq([leader])
-      @result = Leader.full_name_search("test leader")
+      @result = described_class.full_name_search("test leader")
       expect(@result).to eq([leader])
     end
   end
@@ -73,7 +73,7 @@ RSpec.describe Leader, type: :model do
   context "method tests" do
     it 'tests full_name to return "first_name last_name"' do
       leader = create(:leader)
-      expect(leader.full_name).to eq(leader.first_name + " " + leader.last_name)
+      expect(leader.full_name).to eq("#{leader.first_name} #{leader.last_name}")
     end
   end
 end

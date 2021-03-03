@@ -9,7 +9,7 @@ class VideosController < ApplicationController
     @videos_total = Video.filter_by_not_hidden.size
     @videos = Video.filter_by_not_hidden
                    .includes(:leader, :follower, :channel, :song, :event)
-                   .order(sort_column + " " + sort_direction)
+                   .order("#{sort_column} #{sort_direction}")
                    .filter_videos(filtering_params)
 
     @videos_paginated = @videos.paginate(page_params, NUMBER_OF_VIDEOS_PER_PAGE)
