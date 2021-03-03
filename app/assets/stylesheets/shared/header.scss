@@ -73,27 +73,34 @@
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-right: none;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 24px;
+      -webkit-appearance: none;
+      -webkit-font-smoothing: antialiased;
+
+      &:focus {
+        outline: none;
+        border: 1px solid #719ECE;
+      }
       input {
         color: rgb(17, 17, 17);
         margin: 2px 4px;
         padding: 1px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
       }
     }
 
     .searchButton {
       height: 34px;
       font-size: .9rem;
-      background-color: #f8f8f8;
+      background-color: rgb(248, 248, 248);
       border: 1px solid #d3d3d3;
       border-bottom-right-radius: 3px;
       border-top-right-radius: 3px;
       cursor: pointer;
       width: 65px;
+      &:hover {
+        background-color: rgb(240, 240, 240);
+      }
     }
   }
 
