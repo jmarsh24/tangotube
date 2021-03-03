@@ -64,22 +64,30 @@
     .searchBar {
       flex: 1;
       width: 100%;
-      color: #111;
+      color: rgb(17, 17, 17);
       height: 34px;
-      padding: 0 10px;
-      font-size: 16px;
-      font-weight: 400;
+      padding: 4px 10px;
       border: 1px solid #ccc;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-right: none;
+      font-size: 16px;
+      line-height: 24px;
+      input {
+        color: rgb(17, 17, 17);
+        margin: 2px 4px;
+        padding: 1px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
     }
 
     .searchButton {
       height: 34px;
-      font-size: 1rem;
+      font-size: 0.9rem;
       background-color: #f8f8f8;
       border: 1px solid #d3d3d3;
       border-bottom-right-radius: 3px;
