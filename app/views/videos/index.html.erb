@@ -4,11 +4,11 @@
 <div id="filters">
   <%= render "videos/index/filters" %>
 </div>
-<div data-controller="loadmore" data-loadmore-page-value="<%= @page + 1 %>">
+<div data-controller="loadmore" data-loadmore-nextpage-value="<%= @page + 1 %>">
   <div id="videos" class="video-section" data-loadmore-target="videos">
     <%= render "videos/index/videos" %>
   </div>
-  <div id="load-more-container" data-loadmore-target="loadmore" >
+  <div id="load-more-container" data-loadmore-target="loadmore">
     <%= render "videos/index/load_more" %>
   </div>
 </div>

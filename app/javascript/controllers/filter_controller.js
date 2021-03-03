@@ -6,19 +6,7 @@ import * as Turbo from '@hotwired/turbo'
 export default class extends Controller {
   static targets = ["filter"]
 
-  connect() {
-    console.log("Filter-Controller ON")
-  }
-
-  // filter() {
-  //   console.log(window.location.pathname);
-  //   const url = `${window.location.pathname}?${this.params}`;
-  //   Turbo.clearCache();
-  //   Turbo.visit(url);
-  // }
-
   filter() {
-    // console.log(window.location.pathname)
     const url = `${window.location.pathname}?${this.params}`;
 
     Rails.ajax({

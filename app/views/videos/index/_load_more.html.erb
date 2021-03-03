@@ -1,8 +1,8 @@
 <div class="loadMoreContainer">
   <div class="loadMoreResults">
-    <%= "Displaying #{ number_with_delimiter(@items_display_count)} / #{number_with_delimiter(@videos.size)} Results" %>
+    <%= "Displaying #{@items_display_count} / #{number_with_delimiter(@videos.size)} Results" %>
   </div>
-  <% unless @next_page.empty?  %>
+  <% unless @next_page_items.empty?  %>
     <button class="load-more-link" data-action='click->loadmore#loadMore'>
       Load More
     </button>

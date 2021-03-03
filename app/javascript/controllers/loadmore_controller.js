@@ -3,28 +3,24 @@
 
   export default class extends Controller {
     static targets = ['videos', 'loadmore']
-    static values = { page: Number }
-
-    connect() {
-      console.log('loadmore controller on!')
-    }
+    static values = { nextpage: Number }
 
     loadMore () {
       const url = new URL(window.document.location)
 
       if (url.searchParams == '') {
-          url.searchParams.append('page', this.pageValue++)
+          url.searchParams.append('page', this.nextpageValue++)
         } else {
-          url.searchParams.set('page', this.pageValue++)
+          url.searchParams.set('page', this.nextpageValue++)
         }
 
       Rails.ajax({
         type: 'GET',
         url: url,
-        dataType: 'html',
+        dataType: 'json',
         success: data => {
-          this.videosTarget.insertAdjacentHTML('beforeend', data.getElementById('videos').innerHTML)
-          document.getElementById('load-more-container').innerHTML = data.getElementById('load-more-container').innerHTML
+          document.getElementById('videos').insertAdjacentHTML('beforeend', data.videos )
+          document.getElementById('load-more-container').innerHTML = data.loadmore
         }
       })
     }

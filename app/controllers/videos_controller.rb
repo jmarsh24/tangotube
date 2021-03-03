@@ -1,8 +1,6 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
   before_action :set_video, only: %i[show edit]
-  before_action :set_page, only: [:index]
-
   NUMBER_OF_VIDEOS_PER_PAGE = 120
 
   helper_method :sort_column, :sort_direction
@@ -14,17 +12,25 @@ class VideosController < ApplicationController
                    .order(sort_column + " " + sort_direction)
                    .filter_videos(filtering_params)
 
-    @videos_paginated = @videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+    @videos_paginated = @videos.paginate(page_params, NUMBER_OF_VIDEOS_PER_PAGE)
     @videos_paginated = @videos_paginated.shuffle if filtering_params.blank?
 
-    @items_display_count = items_display_count
-    @next_page = next_page
+    @next_page_items = @videos.paginate(page_params + 1, NUMBER_OF_VIDEOS_PER_PAGE)
+    @items_display_count = (@videos.size - (@videos.size - (page_params * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
 
     @leaders    = @videos.joins(:leader).pluck("leaders.name").uniq.sort.map(&:titleize)
     @followers  = @videos.joins(:follower).pluck("followers.name").uniq.sort.map(&:titleize)
     @channels   = @videos.joins(:channel).pluck("channels.title").uniq.compact.sort
     @artists    = @videos.joins(:song).pluck("songs.artist").uniq.compact.sort.map(&:titleize)
     @genres     = @videos.joins(:song).pluck("songs.genre").uniq.compact.sort.map(&:titleize).uniq
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: { videos:   render_to_string(partial: "videos/index/videos", formats: [:html]),
+                       loadmore: render_to_string(partial: "videos/index/load_more", formats: [:html]) }
+      end
+    end
   end
 
   def show
@@ -54,14 +60,6 @@ class VideosController < ApplicationController
 
   private
 
-  def items_display_count
-    (@videos.size - (@videos.size - (@page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
-  end
-
-  def next_page
-    @next_page = @videos.paginate(@page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
-  end
-
   def current_search
     @current_search = params[:query]
   end
@@ -89,7 +87,7 @@ class VideosController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
-  def set_page
+  def page_params
     @page ||= params.permit(:page).fetch(:page, 1).to_i
   end
 
