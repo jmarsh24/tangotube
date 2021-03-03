@@ -45,26 +45,19 @@ export default class extends Controller {
   }
 
   get params() {
-    console.log(this.filterTargets);
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    let search = document.querySelector('#query')
+    let songID = urlParams.getAll('song_id')
+    let eventID = urlParams.getAll('event_id')
+    let hd = urlParams.getAll('hd')
     let params = this.filterTargets
       .filter((t) => t.value !== '')
       .map((t) => `${t.name}=${t.value}`)
 
-    let search = document.querySelector("#query")
-
     if (search.value) {
       params.push(`${search.name}=${search.value}`)
     }
-
-    const queryString = window.location.search;
-
-    const urlParams = new URLSearchParams(queryString)
-
-    let songID = urlParams.getAll('song_id')
-
-    let eventID = urlParams.getAll('event_id')
-
-    let hd = urlParams.getAll('hd')
 
     if (songID.length > 0 ) {
       params.push(`song_id=${songID}`)
