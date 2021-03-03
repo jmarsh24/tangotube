@@ -1,23 +1,24 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
   before_action :set_video, only: %i[show edit]
+  before_action :set_page, only: [:index]
 
   NUMBER_OF_VIDEOS_PER_PAGE = 120
 
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos_total = Video.all.where(hidden: false).size
-    @videos = Video.where(hidden: false)
+    @videos_total = Video.filter_by_not_hidden.size
+    @videos = Video.filter_by_not_hidden
                    .includes(:leader, :follower, :channel, :song, :event)
                    .order(sort_column + " " + sort_direction)
                    .filter_videos(filtering_params)
 
-    @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
+    @videos_paginated = @videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
     @videos_paginated = @videos_paginated.shuffle if filtering_params.blank?
 
-    @current_search = params[:query]
-    @videos_paginated_size = @videos_paginated.size * (@page + 1)
+    @items_display_count = items_display_count
+    @next_page = next_page
 
     @leaders    = @videos.joins(:leader).pluck("leaders.name").uniq.sort.map(&:titleize)
     @followers  = @videos.joins(:follower).pluck("followers.name").uniq.sort.map(&:titleize)
@@ -27,7 +28,7 @@ class VideosController < ApplicationController
   end
 
   def show
-    @videos_total = Video.all.where(hidden: false).size
+    @videos_total = Video.filter_by_not_hidden.size
     videos = if Video.where(song_id: @video.song_id).size > 3
                Video.where(song_id: @video.song_id)
              else
@@ -53,6 +54,18 @@ class VideosController < ApplicationController
 
   private
 
+  def items_display_count
+    (@videos.size - (@videos.size - (@page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
+  end
+
+  def next_page
+    @next_page = @videos.paginate(@page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
+  end
+
+  def current_search
+    @current_search = params[:query]
+  end
+
   def set_video
     @video = Video.find_by(youtube_id: params[:v])
   end
@@ -76,8 +89,8 @@ class VideosController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
-  def page
-    @page ||= params.permit(:page).fetch(:page, 0).to_i
+  def set_page
+    @page ||= params.permit(:page).fetch(:page, 1).to_i
   end
 
   def video_params

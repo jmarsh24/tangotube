@@ -1,4 +1,4 @@
-<% videos.each do |video| %>
+<% @videos_paginated.each do |video| %>
     <article class="video-container">
       <%= link_to watch_path(v: video.youtube_id), {active: :exact} do %>
         <div class="thumbnail" data-duration= "<%= video.hd? ? "HD #{Time.at(video.duration).utc.strftime("%M:%S")}" : Time.at(video.duration).utc.strftime("%M:%S") %>" >

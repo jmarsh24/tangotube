@@ -10,9 +10,13 @@
     }
 
     loadMore () {
-      this.pageValue++
+      const url = new URL(window.document.location)
 
-      const url = `${window.location.href}/?page=${this.pageValue}`
+      if (url.searchParams == '') {
+          url.searchParams.append('page', this.pageValue++)
+        } else {
+          url.searchParams.set('page', this.pageValue++)
+        }
 
       Rails.ajax({
         type: 'GET',

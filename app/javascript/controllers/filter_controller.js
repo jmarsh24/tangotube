@@ -59,7 +59,7 @@ export default class extends Controller {
   get params() {
     console.log(this.filterTargets);
     let params = this.filterTargets
-      .filter((t) => t.value !== "all")
+      .filter((t) => t.value !== '')
       .map((t) => `${t.name}=${t.value}`)
 
     let search = document.querySelector("#query")
