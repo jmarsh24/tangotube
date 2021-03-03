@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="filter-hd">
-      <%= link_to "All", current_page_params.except(:hd) , class: "filter-hd-button", 'data-action':"click->filter#filter" %>
-      <%= link_to "HD", current_page_params.merge(hd: 1) , class: "filter-hd-button", 'data-action':"click->filter#filter" %>
+      <%= link_to "All", current_page_params.except(:hd) , class: "filter-hd-button", 'data-action': "click->filter#filter" %>
+      <%= link_to "HD", current_page_params.merge(hd: 1) , class: "filter-hd-button", 'data-action': "click->filter#filter" %>
     </div>
   </div>
   <div class="filter-container isHidden" data-toggle-target="toggleable" id="filters">
