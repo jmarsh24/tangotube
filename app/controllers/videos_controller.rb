@@ -12,11 +12,11 @@ class VideosController < ApplicationController
                    .order("#{sort_column} #{sort_direction}")
                    .filter_videos(filtering_params)
 
-    @videos_paginated = @videos.paginate(page_params, NUMBER_OF_VIDEOS_PER_PAGE)
+    @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
     @videos_paginated = @videos_paginated.shuffle if filtering_params.blank?
 
-    @next_page_items = @videos.paginate(page_params + 1, NUMBER_OF_VIDEOS_PER_PAGE)
-    @items_display_count = (@videos.size - (@videos.size - (page_params * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
+    @next_page_items = @videos.paginate(page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
+    @items_display_count = (@videos.size - (@videos.size - (page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
 
     @leaders    = @videos.joins(:leader).pluck("leaders.name").uniq.sort.map(&:titleize)
     @followers  = @videos.joins(:follower).pluck("followers.name").uniq.sort.map(&:titleize)
@@ -87,7 +87,7 @@ class VideosController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
-  def page_params
+  def page
     @page ||= params.permit(:page).fetch(:page, 1).to_i
   end
 
