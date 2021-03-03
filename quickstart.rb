@@ -1,25 +1,25 @@
 # Sample Ruby code for user authorization
 
-require 'rubygems'
-gem 'google-api-client', '>0.7'
-require 'google/apis'
-require 'google/apis/youtube_v3'
-require 'googleauth'
-require 'googleauth/stores/file_token_store'
+require "rubygems"
+gem "google-api-client", ">0.7"
+require "google/apis"
+require "google/apis/youtube_v3"
+require "googleauth"
+require "googleauth/stores/file_token_store"
 
-require 'fileutils'
-require 'json'
+require "fileutils"
+require "json"
 
 # REPLACE WITH VALID REDIRECT_URI FOR YOUR CLIENT
-REDIRECT_URI = 'http://localhost'.freeze
-APPLICATION_NAME = 'YouTube Data API Ruby Tests'.freeze
+REDIRECT_URI = "http://localhost".freeze
+APPLICATION_NAME = "YouTube Data API Ruby Tests".freeze
 
 # REPLACE WITH NAME/LOCATION OF YOUR client_secrets.json FILE
-CLIENT_SECRETS_PATH = 'client_secret.json'.freeze
+CLIENT_SECRETS_PATH = "client_secret.json".freeze
 
 # REPLACE FINAL ARGUMENT WITH FILE WHERE CREDENTIALS WILL BE STORED
-CREDENTIALS_PATH = File.join(Dir.home, '.credentials',
-                             'youtube-quickstart-ruby-credentials.yaml')
+CREDENTIALS_PATH = File.join(Dir.home, ".credentials",
+                             "youtube-quickstart-ruby-credentials.yaml")
 
 # SCOPE FOR WHICH THIS SCRIPT REQUESTS AUTHORIZATION
 SCOPE = Google::Apis::YoutubeV3::AUTH_YOUTUBE_READONLY
@@ -32,12 +32,12 @@ def authorize
   authorizer = Google::Auth::UserAuthorizer.new(
     client_id, SCOPE, token_store
   )
-  user_id = 'default'
+  user_id = "default"
   credentials = authorizer.get_credentials(user_id)
   if credentials.nil?
     url = authorizer.get_authorization_url(base_url: REDIRECT_URI)
-    puts 'Open the following URL in the browser and enter the ' +
-         'resulting code after authorization'
+    puts "Open the following URL in the browser and enter the " \
+      "resulting code after authorization"
     puts url
     code = gets
     credentials = authorizer.get_and_store_credentials_from_code(
@@ -56,11 +56,11 @@ service.authorization = authorize
 
 def channels_list_by_username(service, part, **params)
   response = service.list_channels(part, params).to_json
-  item = JSON.parse(response).fetch('items')[0]
+  item = JSON.parse(response).fetch("items")[0]
 
-  puts("This channel's ID is #{item.fetch('id')}. " +
-        "Its title is '#{item.fetch('snippet').fetch('title')}', and it has " +
+  puts("This channel's ID is #{item.fetch('id')}. " \
+        "Its title is '#{item.fetch('snippet').fetch('title')}', and it has " \
         "#{item.fetch('statistics').fetch('viewCount')} views.")
 end
 
-channels_list_by_username(service, 'snippet,contentDetails,statistics', for_username: 'GoogleDevelopers')
+channels_list_by_username(service, "snippet,contentDetails,statistics", for_username: "GoogleDevelopers")

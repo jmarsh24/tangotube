@@ -17,15 +17,15 @@
 
 FactoryBot.define do
   factory :channel do
-    channel_id { 'MyText' }
-    title { 'MyText' }
+    channel_id { "MyText" }
+    title { "MyText" }
     imported { true }
-    thumbnail_url { 'MyText' }
+    thumbnail_url { "MyText" }
   end
 
   factory :random_channel do
     title { Faker::Name.first_name }
     thumbnail_url { Faker::Name.last_name }
-    name { Faker::Name.first_name + ' ' + Faker::Name.last_name }
+    name { "#{Faker::Name.first_name} #{Faker::Name.last_name}" }
   end
 end

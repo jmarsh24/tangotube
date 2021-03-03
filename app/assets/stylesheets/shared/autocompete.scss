@@ -9,7 +9,7 @@
   background-color: #fff;
   border: 1px solid #999;
   position: absolute;
-  margin-top: 12px;
+  margin-top: 10px;
   border-radius: 5px;
 }
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
@@ -23,4 +23,7 @@
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
   font-weight: bold;
   font-style: normal;
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
+
 }

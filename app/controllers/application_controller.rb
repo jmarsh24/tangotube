@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   private
 
   def track_action
-    ahoy.track 'Ran action', request.params
+    ahoy.track "Ran action", request.params
   end
 end

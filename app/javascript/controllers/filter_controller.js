@@ -6,19 +6,7 @@ import * as Turbo from '@hotwired/turbo'
 export default class extends Controller {
   static targets = ["filter"]
 
-  connect() {
-    console.log("Filter-Controller ON")
-  }
-
-  // filter() {
-  //   console.log(window.location.pathname);
-  //   const url = `${window.location.pathname}?${this.params}`;
-  //   Turbo.clearCache();
-  //   Turbo.visit(url);
-  // }
-
   filter() {
-    // console.log(window.location.pathname)
     const url = `${window.location.pathname}?${this.params}`;
 
     Rails.ajax({
@@ -57,26 +45,19 @@ export default class extends Controller {
   }
 
   get params() {
-    console.log(this.filterTargets);
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    let search = document.querySelector('#query')
+    let songID = urlParams.getAll('song_id')
+    let eventID = urlParams.getAll('event_id')
+    let hd = urlParams.getAll('hd')
     let params = this.filterTargets
-      .filter((t) => t.value !== "all")
+      .filter((t) => t.value !== '')
       .map((t) => `${t.name}=${t.value}`)
-
-    let search = document.querySelector("#query")
 
     if (search.value) {
       params.push(`${search.name}=${search.value}`)
     }
-
-    const queryString = window.location.search;
-
-    const urlParams = new URLSearchParams(queryString)
-
-    let songID = urlParams.getAll('song_id')
-
-    let eventID = urlParams.getAll('event_id')
-
-    let hd = urlParams.getAll('hd')
 
     if (songID.length > 0 ) {
       params.push(`song_id=${songID}`)

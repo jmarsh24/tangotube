@@ -2,7 +2,7 @@ ActiveAdmin.register Song do
   permit_params :genre, :title, :artist, :artist_2, :active, :last_name_search, :date
   actions :all
 
-  config.sort_order = 'id_asc'
+  config.sort_order = "id_asc"
 
   config.per_page = [100, 500, 1000]
 

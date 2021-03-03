@@ -42,9 +42,9 @@
 #  scanned_youtube_music :boolean          default(FALSE)
 #  click_count           :integer          default(0)
 #
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe Video, type: :model do
-  it { should validate_uniqueness_of(:youtube_id) }
+  it { is_expected.to validate_uniqueness_of(:youtube_id) }
 end

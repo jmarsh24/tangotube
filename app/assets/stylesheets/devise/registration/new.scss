@@ -2,12 +2,17 @@
   display: flex;
   align-items: center;
   min-height: 70vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .registrations-new-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  width: 308px;
+  background: rgb(246, 248, 250);
+  border-radius: 0.5rem;
+  border: 1px solid rgb(234, 236, 239);
 }
 
 .registrations-new-header-container {
@@ -16,15 +21,22 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  width: 308px;
+  background: rgb(246, 248, 250);
+
   h1 {
-    color: rgb(106, 115, 125);
+    color: #707070;
     margin: 0;
   }
   h2 {
-  color: rgb(71, 71, 71);
-  font-size: 32px;
-  font-weight: 500;
-  margin: 0;
+    color: #707070;
+    font-size: 32px;
+    font-weight: 500;
+    margin: 0;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 100;
   }
 }
 
@@ -32,12 +44,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 300px;
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: rgb(36, 41, 46);
+  color: #707070;
   input {
-    width: 400px;
+    width: 266px;
     height: 32px;
     margin: .5rem;
     padding-left: .5rem;
@@ -46,20 +59,24 @@
   }
   label {
     padding-left: .5rem;
+    color: #707070;
+    font-size: .8rem;
+    font-weight: 400;
   }
   p {
-    color: rgb(88, 96, 105);
+    color: #707070;
     font-size: 10px;
     line-height: 18px;
     font-weight: 400;
     padding-left: .5rem;
   }
   .actions input{
-    width: 400px;
-    height: 55px;
+    width: 266px;
+    height: 40px;
+    margin-bottom: 15px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     color: white;
-    background-color: #1074e7;;
+    background-color: #1d77f5;
   }
 }

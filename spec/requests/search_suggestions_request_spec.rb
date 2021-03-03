@@ -1,5 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "SearchSuggestions", type: :request do
-
 end

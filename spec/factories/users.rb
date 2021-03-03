@@ -13,8 +13,8 @@
 #
 FactoryBot.define do
   factory :user do
-    email { 'john.doe@example.com' }
-    password { '123456789' }
+    email { "john.doe@example.com" }
+    password { "123456789" }
   end
 
   factory :random_user do
