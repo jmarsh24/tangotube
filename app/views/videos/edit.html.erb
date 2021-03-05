@@ -42,6 +42,9 @@
         <%= f.submit 'Update Video' %>
       </div>
     <% end %>
+      <div>
+        <%= link_to 'Back', watch_path(v: @video.youtube_id) %>
+      </div>
       <div class="detail-section-label">
         <h4>Video Info</h4>
       </div>
@@ -58,8 +61,6 @@
                             locals: { header: "Duration",
                             value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
       <div class="edit-video-item-container">
-     <div>
-        <%= link_to 'Back', watch_path(v: @video.youtube_id) %>
-      </div>
+
     </div>
-  <% end %>
+<% end %>
