@@ -1,4 +1,4 @@
-<div class="filter-item" id=<%= id %>>
+<div class="filter-item">
 <label>
 <%= title.to_s.titleize %>
 </label>
@@ -6,8 +6,8 @@
         options_for_select(model, params[title.to_s].presence), include_blank: true, multiple: false,
             data: { action: "filter#filter",
                     "filter-target": "filter",
-                    "slimselect-target": "field",
                     controller:'slimselect'
                   },
-                    class: 'select' %>
+                    class: 'select-filter',
+                    id: id %>
 </div>

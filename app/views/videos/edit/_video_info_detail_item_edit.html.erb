@@ -5,8 +5,8 @@
   <div class="attribute-value">
     <%= f.select params_name, [],
                               {},
-                              { data: { controller: "slimselect",
-                                        'slimselect-target': 'field',
-                                        'slimselect-url': url }, id: id } %>
+                              { data: { controller: "slimselect-edit",
+                                        'slimselect-url': url,
+                                        'slimselect-data-value': value }, id: id, class: 'select-edit' } %>
   </div>
 </div>

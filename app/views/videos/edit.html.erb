@@ -9,12 +9,14 @@
                   locals: { params_name: :leader_id,
                             id: 'leader',
                             f: f,
-                            url: '/leaders' } %>
+                            url: '/leaders',
+                            value: @video.leader.name } %>
       <%= render partial: "videos/edit/video_info_detail_item_edit",
                   locals: { params_name: :follower_id,
                             id: 'follower',
                             f: f,
-                            url: '/followers' } %>
+                            url: '/followers',
+                            value: @video.follower.name } %>
       <div class="detail-section-label">
         <h4>Event Info</h4>
       </div>
@@ -22,22 +24,24 @@
                   locals: { params_name: :event_id,
                             id: 'event',
                             f: f,
-                            url: '/events' } %>
+                            url: '/events',
+                            value: @video.event.title } %>
         <h4>Music</h4>
       </div>
       <%= render partial: "videos/edit/video_info_detail_item_edit",
                         locals: { params_name: :song_id,
                                   id: 'song',
                                   f: f,
-                                  url: '/songs' } %>
+                                  url: '/songs',
+                                  value: @video.song.title } %>
       <div>
         <%= f.label 'hidden?' %>
         <%= f.check_box :hidden ,{}, "true", "false" %>
       </div>
-          <div>
-            <%= f.submit 'Update Video' %>
-          </div>
-      <% end %>
+      <div>
+        <%= f.submit 'Update Video' %>
+      </div>
+    <% end %>
       <div class="detail-section-label">
         <h4>Video Info</h4>
       </div>
