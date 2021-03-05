@@ -10,13 +10,13 @@
                             id: 'leader',
                             f: f,
                             url: '/leaders',
-                            value: @video.leader.name } %>
+                            value: @video.leader.try(:name) } %>
       <%= render partial: "videos/edit/video_info_detail_item_edit",
                   locals: { params_name: :follower_id,
                             id: 'follower',
                             f: f,
                             url: '/followers',
-                            value: @video.follower.name } %>
+                            value: @video.follower.try(:name) } %>
       <div class="detail-section-label">
         <h4>Event Info</h4>
       </div>
@@ -25,7 +25,7 @@
                             id: 'event',
                             f: f,
                             url: '/events',
-                            value: @video.event.title } %>
+                            value: @video.event.try(:title) } %>
         <h4>Music</h4>
       </div>
       <%= render partial: "videos/edit/video_info_detail_item_edit",
@@ -33,7 +33,7 @@
                                   id: 'song',
                                   f: f,
                                   url: '/songs',
-                                  value: @video.song.title } %>
+                                  value: @video.song.try(:title) } %>
       <div>
         <%= f.label 'hidden?' %>
         <%= f.check_box :hidden ,{}, "true", "false" %>
