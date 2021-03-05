@@ -75,6 +75,10 @@
                                     value: link_to(@video.youtube_artist.to_s.titleize,
                                                     root_path(query: @video.youtube_artist.to_s.titleize), {'data-turbo-frame': "_top"}) } %>
     <% end %>
+<% end %>
+    <% if user_signed_in? %>
+      <%= link_to 'Edit', edit_video_path(@video) %>
+    <% end %>
       <div class="detail-section-label">
       <h4>Video Info</h4>
     </div>
@@ -91,8 +95,4 @@
                         locals: { header: "Duration",
                         value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
     <div class="detail-section-label">
-    <% if user_signed_in? %>
-      <%= link_to 'Edit', edit_video_path(@video) %>
-    <% end %>
   </div>
-<% end %>
