@@ -433,7 +433,8 @@ CREATE TABLE public.songs (
     occur_count integer DEFAULT 0,
     popularity integer DEFAULT 0,
     active boolean DEFAULT true,
-    lyrics text
+    lyrics text,
+    el_recodo_song_id integer
 );
 
 
@@ -1048,6 +1049,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210207115746'),
 ('20210210140250'),
 ('20210211153442'),
-('20210302162536');
+('20210302162536'),
+('20210306201925');
 
 
