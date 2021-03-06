@@ -25,7 +25,5 @@ module TangoLibrary
     config.active_record.schema_format = :sql
 
     config.active_job.queue_adapter = :sidekiq
-
-    RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_KEY'])
   end
 end
