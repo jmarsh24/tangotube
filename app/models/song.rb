@@ -24,7 +24,7 @@ class Song < ApplicationRecord
   validates :title, presence: true
   validates :artist, presence: true
 
-  has_many :videos, dependent: :destroy
+  has_many :videos
 
   # active admin scopes
   scope :sort_by_popularity,   -> { order(popularity: :desc) }
