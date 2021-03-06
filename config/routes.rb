@@ -19,8 +19,7 @@ Rails.application.routes.draw do
 
   root 'videos#index'
 
-  post 'savenew', to: 'users#savenew'
-
+  post 'savenew',  to: 'users#savenew'
   get '/watch',    to: 'videos#show'
   get '/privacy',  to: 'static_pages#privacy'
   get '/terms',    to: 'static_pages#terms'
@@ -28,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :channels, only: :index
   resources :playlists, only: :index
-  resources :videos
+  resources :videos, except: :show
   resources :search_suggestions, only: :index
   resources :leaders, only: :index
   resources :followers, only: :index

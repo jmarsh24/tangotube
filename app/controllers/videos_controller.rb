@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
-  before_action :set_video, only: %i[show edit]
+  before_action :current_search, only: %i[index show]
   NUMBER_OF_VIDEOS_PER_PAGE = 120
 
   helper_method :sort_column, :sort_direction
@@ -34,6 +34,7 @@ class VideosController < ApplicationController
   end
 
   def show
+    @video = Video.find_by(youtube_id: params[:v])
     @videos_total = Video.filter_by_not_hidden.size
     videos = if Video.where(song_id: @video.song_id).size > 3
                Video.where(song_id: @video.song_id)
@@ -49,11 +50,11 @@ class VideosController < ApplicationController
   end
 
   def edit
-    @video = Video.find_by(id: params[:id])
+    @video = Video.find(params[:id])
   end
 
   def update
-    @video = Video.find_by(id: params[:id])
+    @video = Video.find(params[:id])
     @video.update(video_params)
     redirect_to watch_path(v: @video.youtube_id)
   end
@@ -62,10 +63,6 @@ class VideosController < ApplicationController
 
   def current_search
     @current_search = params[:query]
-  end
-
-  def set_video
-    @video = Video.find_by(youtube_id: params[:v])
   end
 
   def sort_column
@@ -92,7 +89,7 @@ class VideosController < ApplicationController
   end
 
   def video_params
-    params.require(:video).permit(:leader_id, :follower_id, :song_id, :event_id, :hidden)
+    params.require(:video).permit(:leader_id, :follower_id, :song_id, :event_id, :hidden, :id)
   end
 
   def filtering_params

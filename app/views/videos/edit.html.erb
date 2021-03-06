@@ -1,10 +1,9 @@
 <%= turbo_frame_tag dom_id(@video) do %>
+  <%= form_with model: @video do |f| %>
   <div class="video-info-details-main">
-
     <div class="detail-section-label">
       <h4>Performers</h4>
     </div>
-    <%= form_with model: @video do |f| %>
       <%= render partial: "videos/edit/video_info_detail_item_edit",
                   locals: { params_name: :leader_id,
                             id: 'leader',
@@ -41,7 +40,7 @@
       <div>
         <%= f.submit 'Update Video' %>
       </div>
-    <% end %>
+
       <div>
         <%= link_to 'Back', watch_path(v: @video.youtube_id) %>
       </div>
@@ -63,4 +62,5 @@
       <div class="edit-video-item-container">
 
     </div>
+  <% end %>
 <% end %>
