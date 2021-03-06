@@ -51,6 +51,17 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find(params[:id])
+    @videos_total = Video.filter_by_not_hidden.size
+    videos = if Video.where(song_id: @video.song_id).size > 3
+               Video.where(song_id: @video.song_id)
+             else
+               Video.where(channel_id: @video.channel_id)
+             end
+
+    @recommended_videos = videos.where(hidden: false)
+                                .where.not(youtube_id: @video.youtube_id)
+                                .order("popularity DESC")
+                                .limit(3)
   end
 
   def update

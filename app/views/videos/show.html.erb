@@ -7,6 +7,7 @@
     </div>
   </div>
 </div>
+<%= turbo_frame_tag dom_id(@video) do %>
 <div class="video-info-container">
   <%= render partial: "videos/show/video_info_primary" %>
   <div class="video-info-container-secondary">
@@ -23,3 +24,4 @@
     </div>
   </div>
 </div>
+<% end %>

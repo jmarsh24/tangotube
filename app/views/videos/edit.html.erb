@@ -1,66 +1,27 @@
+<%= render 'shared/header' %>
+<div class="video-responsive-background">
+  <div class="video-responsive-container">
+    <div class="video-responsive">
+      <iframe src="https://www.youtube.com/embed/<%= @video.youtube_id %>?rel=0&modestbranding=1&autoplay=1" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
 <%= turbo_frame_tag dom_id(@video) do %>
-  <%= form_with model: @video do |f| %>
-  <div class="video-info-details-main">
-    <div class="detail-section-label">
-      <h4>Performers</h4>
+  <div class="video-info-container">
+    <%= render partial: "videos/show/video_info_primary" %>
+    <div class="video-info-container-secondary">
+      <div class="video-info-details-main">
+        <%= render partial: "videos/show/video_info_details_form" %>
+      </div>
+        <% if @video.song.present? %>
+          <% if @video.song.lyrics.present? %>
+            <%= render partial: "videos/show/lyrics" %>
+          <% end %>
+        <% end %>
+      <div class="recommended-videos-section">
+        <%= render partial: "videos/show/recommended_videos" %>
+      </div>
     </div>
-      <%= render partial: "videos/edit/video_info_detail_item_edit",
-                  locals: { params_name: :leader_id,
-                            id: 'leader',
-                            f: f,
-                            url: '/leaders',
-                            value: @video.leader.try(:name) } %>
-      <%= render partial: "videos/edit/video_info_detail_item_edit",
-                  locals: { params_name: :follower_id,
-                            id: 'follower',
-                            f: f,
-                            url: '/followers',
-                            value: @video.follower.try(:name) } %>
-      <div class="detail-section-label">
-        <h4>Event Info</h4>
-      </div>
-      <%= render partial: "videos/edit/video_info_detail_item_edit",
-                  locals: { params_name: :event_id,
-                            id: 'event',
-                            f: f,
-                            url: '/events',
-                            value: @video.event.try(:title) } %>
-        <h4>Music</h4>
-      </div>
-      <%= render partial: "videos/edit/video_info_detail_item_edit",
-                        locals: { params_name: :song_id,
-                                  id: 'song',
-                                  f: f,
-                                  url: '/songs',
-                                  value: @video.song.try(:title) } %>
-      <div>
-        <%= f.label 'hidden?' %>
-        <%= f.check_box :hidden ,{}, "true", "false" %>
-      </div>
-      <div>
-        <%= f.submit 'Update Video' %>
-      </div>
-
-      <div>
-        <%= link_to 'Back', watch_path(v: @video.youtube_id) %>
-      </div>
-      <div class="detail-section-label">
-        <h4>Video Info</h4>
-      </div>
-        <%= render partial: "videos/show/video_info_item",
-                    locals: { header: "Title",
-                    value:  @video.title } %>
-        <%= render partial: "videos/show/video_info_item",
-                            locals: { header: "Description",
-                            value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: '')), html: { target: '_blank' }) } if @video.description.present? %>
-        <%= render partial: "videos/show/video_info_item",
-                            locals: { header: "Upload Date",
-                            value: @video.upload_date.to_formatted_s(:long) } %>
-        <%= render partial: "videos/show/video_info_item",
-                            locals: { header: "Duration",
-                            value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
-      <div class="edit-video-item-container">
-
-    </div>
-  <% end %>
+  </div>
 <% end %>

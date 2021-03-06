@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(@video) do %>
+
   <div class="video-info-details-main">
       <h4>Performers</h4>
     </div>
@@ -78,8 +78,6 @@
     <% if user_signed_in? %>
       <%= link_to 'Edit', edit_video_path(@video) %>
     <% end %>
-<% end %>
-
       <div class="detail-section-label">
       <h4>Video Info</h4>
     </div>
