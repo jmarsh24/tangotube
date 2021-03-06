@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |_repo| 'https://github.com/#{repo}.git' }
 
-ruby '2.7.2'
+ruby '3.0.0'
 
 gem 'activeadmin',            '~> 2.8', '>= 2.8.1'
 gem 'ahoy_matey',             '~> 3.1'
