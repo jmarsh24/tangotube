@@ -13,10 +13,10 @@
 #
 FactoryBot.define do
   factory :leader do
-    name { "MyText" }
-    first_name { "MyText" }
-    last_name { "MyText" }
-    nickname { "MyText" }
+    name { "Carlitos Espinoza" }
+    first_name { "Carlitos" }
+    last_name { "Espinoza" }
+    nickname { "Carlitos" }
     reviewed { true }
   end
 

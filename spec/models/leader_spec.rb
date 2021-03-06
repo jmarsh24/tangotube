@@ -75,5 +75,15 @@ RSpec.describe Leader, type: :model do
       leader = create(:leader)
       expect(leader.full_name).to eq("#{leader.first_name} #{leader.last_name}")
     end
+
+    it 'tests full_name to return "first_initial. last_name"' do
+      leader = create(:leader)
+      expect(leader.abrev_name).to eq("#{leader.first_name.first}. #{leader.last_name}")
+    end
+
+    it 'tests full_name to return "first_initial.last_name"' do
+      leader = create(:leader)
+      expect(leader.abrev_name_nospace).to eq("#{leader.first_name.first}.#{leader.last_name}")
+    end
   end
 end
