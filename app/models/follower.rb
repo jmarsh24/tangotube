@@ -14,6 +14,8 @@
 
 class Follower < ApplicationRecord
   include FullNameable
+  include Reviewable
+
   validates :name, presence: true, uniqueness: true
 
   has_many :videos

@@ -2,8 +2,6 @@ module FullNameable
   extend ActiveSupport::Concern
 
   included do
-    scope :reviewed, -> { where(reviewed: true) }
-    scope :not_reviewed, -> { where(reviewed: false) }
     scope :full_name_search, lambda { |query|
                                where("unaccent(name) ILIKE unaccent(:query) OR
                                   unaccent(first_name) ILIKE unaccent(:query) OR
