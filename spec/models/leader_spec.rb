@@ -16,6 +16,8 @@ require "rails_helper"
 RSpec.describe Leader, type: :model do
   let(:leader) { build(:leader) }
 
+  it_behaves_like "a full nameable"
+
   context "validation tests" do
     subject { FactoryBot.build(:leader) }
 
@@ -43,21 +45,10 @@ RSpec.describe Leader, type: :model do
       expect(described_class.not_reviewed).to include(leader)
     end
 
-    it "finds a searched leader by name" do
-      leader = create(:leader, name: "Test leader")
-      @result = described_class.full_name_search("Test leader")
-      expect(@result).to eq([leader])
-    end
-
-    it "finds a searched leader by ending of name" do
-      leader = create(:leader, name: "Test leader")
-      @result = described_class.full_name_search("est leader")
-      expect(@result).to eq([leader])
-    end
 
     it "finds a searched leader by beginning of name" do
       leader = create(:leader, name: "Test leader")
-      @result = described_class.full_name_search("Test leade")
+      @result = described_class.full_name_search("Test leader")
       expect(@result).to eq([leader])
     end
 
@@ -71,19 +62,5 @@ RSpec.describe Leader, type: :model do
   end
 
   context "method tests" do
-    it 'tests full_name to return "first_name last_name"' do
-      leader = create(:leader)
-      expect(leader.full_name).to eq("#{leader.first_name} #{leader.last_name}")
-    end
-
-    it 'tests full_name to return "first_initial. last_name"' do
-      leader = create(:leader)
-      expect(leader.abrev_name).to eq("#{leader.first_name.first}. #{leader.last_name}")
-    end
-
-    it 'tests full_name to return "first_initial.last_name"' do
-      leader = create(:leader)
-      expect(leader.abrev_name_nospace).to eq("#{leader.first_name.first}.#{leader.last_name}")
-    end
   end
 end

@@ -16,6 +16,8 @@ require "rails_helper"
 RSpec.describe Follower, type: :model do
   let(:follower) { build(:follower) }
 
+  it_behaves_like "a full nameable"
+
   context "validation tests" do
     subject { FactoryBot.build(:follower) }
 
@@ -35,12 +37,12 @@ RSpec.describe Follower, type: :model do
   context "scope tests" do
     it "includes followers with reviewed flagged" do
       follower = create(:follower, reviewed: true)
-      expect(described_class.reviewed).to include(follower)
+      expect(follower.reviewed).to include(follower)
     end
 
     it "includes followers without reviewed flagged" do
       follower = create(:follower, reviewed: false)
-      expect(described_class.not_reviewed).to include(follower)
+      expect(follower.not_reviewed).to include(follower)
     end
 
     it "finds a searched follower by name" do
@@ -71,19 +73,5 @@ RSpec.describe Follower, type: :model do
   end
 
   context "method tests" do
-    it 'tests full_name to return "first_name last_name"' do
-      follower = create(:follower)
-      expect(follower.full_name).to eq("#{follower.first_name} #{follower.last_name}")
-    end
-
-    it 'tests full_name to return "first_initial. last_name"' do
-      leader = create(:leader)
-      expect(leader.abrev_name).to eq("#{leader.first_name.first}. #{leader.last_name}")
-    end
-
-    it 'tests full_name to return "first_initial.last_name"' do
-      leader = create(:leader)
-      expect(leader.abrev_name_nospace).to eq("#{leader.first_name.first}.#{leader.last_name}")
-    end
   end
 end
