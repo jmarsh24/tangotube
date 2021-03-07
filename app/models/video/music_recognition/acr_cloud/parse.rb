@@ -21,7 +21,13 @@ class Video::MusicRecognition::AcrCloud::Parse
 
   def initialize(data)
     @data = data
+    parse_acr_data
+    parse_spotify_data
+  end
 
+  private
+
+  def parse_acr_data
     @acr_response_code = parsed_data.dig("status", "code")
 
     if parsed_data.deep_find("spotify").present?
@@ -34,7 +40,9 @@ class Video::MusicRecognition::AcrCloud::Parse
 
     @youtube_song_id       = parsed_data.deep_find("youtube")["vid"] if parsed_data.deep_find("youtube").present?
     @isrc                  = parsed_data.deep_find("external_ids")["isrc"] if parsed_data.deep_find("external_ids").present?
+  end
 
+  def parse_spotify_data
     if parsed_data.deep_find("spotify").present?
       @spotify_album_name    = RSpotify::Album.find(@spotify_album_id).name if @spotify_album_id.present?
       @spotify_artist_name   = RSpotify::Artist.find(@spotify_artist_id).name if @spotify_artist_id.present?
@@ -43,8 +51,6 @@ class Video::MusicRecognition::AcrCloud::Parse
       @spotify_track_name    = RSpotify::Track.find(@spotify_track_id).name if @spotify_track_id.present?
     end
   end
-
-  private
 
   def parsed_data
     JSON.parse(@data).extend Hashie::Extensions::DeepFind
