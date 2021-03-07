@@ -1,5 +1,5 @@
 class Song::RecodoLyrics
-  SONG_ID_MAX_NUMBER = 20_000 # your obviously want to rename this constant
+  SONG_ID_MAX_NUMBER = 20_000
 
   class << self
     delegate :fetch, to: :new
