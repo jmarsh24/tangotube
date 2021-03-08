@@ -55,7 +55,7 @@ class Song < ApplicationRecord
       @count_of_videos_for_most_popular_song = counts_of_videos_by_song_id.values.max
     end
 
-    def generate_popularity_value_by_song_id
+    def generate_popularity_value_of_each_song
       count_of_videos_for_most_popular_song
       @counts_of_videos_by_song_id.transform_values { |v| (v.to_f / @counts_of_videos_by_song_id * 100).round }
     end
@@ -68,7 +68,7 @@ class Song < ApplicationRecord
     end
 
     def update_all_popularity
-      generate_popularity_value_by_song_id.each do |key, value|
+      generate_popularity_value_of_each_song.each do |key, value|
         song = Song.find(key)
         song.update(popularity: value)
       end
