@@ -55,9 +55,7 @@ class Song < ApplicationRecord
       @count_of_most_popular_song_id = counts_of_videos_by_song_id.values.max
     end
 
-    # creates a normalized popularity value between 0-100 based upon the occurance count
-    # and max number of occurances of each song
-    def calc_popularity_all
+    def generate_popularity_value_by_song_id
       count_of_most_popular_song_id
       @counts_of_videos_by_song_id.transform_values { |v| (v.to_f / @counts_of_videos_by_song_id * 100).round }
     end
@@ -70,7 +68,7 @@ class Song < ApplicationRecord
     end
 
     def update_all_popularity
-      counts_of_videos_by_song_id.each do |key, value|
+      generate_popularity_value_by_song_id.each do |key, value|
         song = Song.find(key)
         song.update(popularity: value)
       end
