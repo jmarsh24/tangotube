@@ -4,7 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
-#  created_at :datetime         not null
+#  buildd_at :datetime         not null
 #  updated_at :datetime         not null
 #  reviewed   :boolean
 #  nickname   :string
@@ -17,6 +17,7 @@ RSpec.describe Follower, type: :model do
   let(:follower) { build(:follower) }
 
   it_behaves_like "a full nameable"
+  it_behaves_like "reviewable"
 
   context "validation tests" do
     subject { FactoryBot.build(:follower) }
@@ -35,41 +36,6 @@ RSpec.describe Follower, type: :model do
   end
 
   context "scope tests" do
-    it "includes followers with reviewed flagged" do
-      follower = create(:follower, reviewed: true)
-      expect(follower.reviewed).to include(follower)
-    end
-
-    it "includes followers without reviewed flagged" do
-      follower = create(:follower, reviewed: false)
-      expect(follower.not_reviewed).to include(follower)
-    end
-
-    it "finds a searched follower by name" do
-      follower = create(:follower, name: "Test follower")
-      @result = described_class.full_name_search("Test follower")
-      expect(@result).to eq([follower])
-    end
-
-    it "finds a searched follower by ending of name" do
-      follower = create(:follower, name: "Test follower")
-      @result = described_class.full_name_search("est follower")
-      expect(@result).to eq([follower])
-    end
-
-    it "finds a searched follower by beginning of name" do
-      follower = create(:follower, name: "Test follower")
-      @result = described_class.full_name_search("Test followe")
-      expect(@result).to eq([follower])
-    end
-
-    it "finds a searched follower by with case insensitivity" do
-      follower = create(:follower, name: "Test follower")
-      @result = described_class.full_name_search("TEST follower")
-      expect(@result).to eq([follower])
-      @result = described_class.full_name_search("test follower")
-      expect(@result).to eq([follower])
-    end
   end
 
   context "method tests" do
