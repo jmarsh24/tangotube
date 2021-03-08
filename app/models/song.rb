@@ -51,12 +51,12 @@ class Song < ApplicationRecord
       Video.group(:song_id).count.without(nil)
     end
 
-    def count_of_most_popular_song_id
-      @count_of_most_popular_song_id = counts_of_videos_by_song_id.values.max
+    def count_of_videos_for_most_popular_song
+      @count_of_videos_for_most_popular_song = counts_of_videos_by_song_id.values.max
     end
 
     def generate_popularity_value_by_song_id
-      count_of_most_popular_song_id
+      count_of_videos_for_most_popular_song
       @counts_of_videos_by_song_id.transform_values { |v| (v.to_f / @counts_of_videos_by_song_id * 100).round }
     end
 
