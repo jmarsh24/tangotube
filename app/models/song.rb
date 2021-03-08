@@ -64,7 +64,6 @@ class Song < ApplicationRecord
       occur_count_all.transform_values { |v| (v.to_f / @max_occur_count_all * 100).round }
     end
 
-    # updates each song in the database with an occurance count
     def update_all_occur_count
       occur_count_all.each do |key, value|
         song = Song.find(key)
@@ -72,7 +71,6 @@ class Song < ApplicationRecord
       end
     end
 
-    # updates all songs in the database with a popularity number
     def update_all_popularity
       occur_count_all.each do |key, value|
         song = Song.find(key)
