@@ -1,4 +1,4 @@
-class WebScrape < ApplicationRecord
+class WebScrape
   class << self
     def tangopolix_events
       (1..469).each do |id|
