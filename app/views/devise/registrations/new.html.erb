@@ -1,0 +1,38 @@
+<div id="header">
+  <%= render 'shared/header' %>
+</div>
+
+<div class="registrations-new-body">
+  <div class="registrations-new-container">
+    <div class="registrations-new-header-container">
+      <h3>Create your Acccount</h3>
+    </div>
+
+    <div class="registrations-new-form-container">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email %><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+      <% if @minimum_password_length %>
+        <p>Make sure it's at least <%= @minimum_password_length %> characters. </p>
+      <% end %>
+      <div class="actions">
+        <%= f.submit "Create account" %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

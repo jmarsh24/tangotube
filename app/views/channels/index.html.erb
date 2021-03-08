@@ -1,0 +1,20 @@
+<div class="channels-index-container">
+  <h2>All Channels</h2>
+  <%= form_with model: @video, class: 'channel-form' do |f| %>
+    <%= f.label 'youtube.com/channel/' %>
+    <%= f.text_field :channel_id, placeholder: 'insert channel id here...'%>
+  <% end %>
+  <% @channels.each do |channel| %>
+  <div class="channels-index-row">
+    <div class="channels-index-item" id="id">
+      <%= channel.id %>
+    </div>
+    <div class="channels-index-item" id="title">
+      <%= channel.title %>
+    </div>
+    <div class="channels-index-item" id="channel_id">
+      <%= channel.channel_id %>
+    </div>
+  </div>
+  <% end %>
+</div>
