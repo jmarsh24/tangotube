@@ -63,11 +63,11 @@ class Video::YoutubeImport::Channel
     Channel.find_by(channel_id: @youtube_channel.id)
   end
 
-  def channel_videos
+  def channel_existing_youtube_video_ids
     @channel.videos.map(&:youtube_id).to_a
   end
 
   def new_videos
-    youtube_channel_video_ids - channel_videos
+    youtube_channel_video_ids - channel_existing_youtube_video_ids
   end
 end
