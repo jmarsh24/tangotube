@@ -91,7 +91,7 @@ end
 desc 'This task populates playlists'
 task import_all_playlists: :environment do
   puts 'Adding all new playlists'
-  Playlist.where(imported: false).find_each do |playlist|
+  Playlist.not_imported.find_each do |playlist|
     Video.import_playlist(playlist.slug)
   end
   puts 'done.'
