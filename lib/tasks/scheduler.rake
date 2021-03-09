@@ -87,7 +87,7 @@ task update_imported_video_counts: :environment do
 end
 
 desc 'This task populates playlists'
-task update_imported_video_counts: :environment do
+task import_all_playlists: :environment do
   puts 'Adding all new playlists'
   Playlist.where(imported: false).find_each do |playlist|
     Video.import_playlist(playlist.slug)

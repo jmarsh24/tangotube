@@ -64,7 +64,7 @@ class Video::YoutubeImport::Channel
   end
 
   def channel_existing_youtube_video_ids
-    @channel.videos.map(&:youtube_id).to_a
+    @channel.videos.pluck(&:youtube_id).uniq
   end
 
   def new_videos

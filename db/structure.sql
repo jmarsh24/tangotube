@@ -947,6 +947,13 @@ CREATE INDEX index_videos_on_song_id ON public.videos USING btree (song_id);
 
 
 --
+-- Name: index_videos_on_youtube_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_youtube_id ON public.videos USING btree (youtube_id);
+
+
+--
 -- Name: index_videos_searches_on_tsv_document; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -986,6 +993,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('0'),
 ('20210306201925'),
-('20210308100534');
+('20210308100534'),
+('20210309200926');
 
 
