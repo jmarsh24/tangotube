@@ -15,10 +15,10 @@ module FullNameable
   end
 
   def abrev_name
-    first_name.present? && last_name.present? ? "#{first_name.first}. #{last_name}" : nil
+    "#{first_name.first}. #{last_name}" if first_name.present? && last_name.present?
   end
 
   def abrev_name_nospace
-    abrev_name.delete(" ")
+    abrev_name.delete(" ") if abrev_name.present?
   end
 end
