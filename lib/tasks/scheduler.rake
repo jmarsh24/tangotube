@@ -1,7 +1,9 @@
 desc 'This task populates videos'
 task import_all_channels: :environment do
   puts 'Populating videos from channels'
-  Channel.import_all_channels
+  Channel.not_imported.reviewed.find_each do |channel|
+    Video::YoutubeImport.from_channel(channel.channel_id)
+  end
   puts 'done.'
 end
 

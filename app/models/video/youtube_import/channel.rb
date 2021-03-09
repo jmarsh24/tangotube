@@ -12,6 +12,7 @@ class Video::YoutubeImport::Channel
   def initialize(channel_id)
     @youtube_channel = fetch_by_id(channel_id)
     @channel = channel
+    @channel_id = channel_id
   end
 
   def import
@@ -19,6 +20,7 @@ class Video::YoutubeImport::Channel
   end
 
   def import_videos
+    byebug
     new_videos.each do |youtube_id|
       ImportVideoWorker.perform_async(youtube_id)
     end
@@ -28,6 +30,10 @@ class Video::YoutubeImport::Channel
 
   def fetch_by_id(channel_id)
     Yt::Channel.new id: channel_id
+  end
+
+  def channel
+    Channel.find_by(channel_id: @youtube_channel.id)
   end
 
   def to_channel_params
@@ -48,8 +54,8 @@ class Video::YoutubeImport::Channel
     }
   end
 
-  def get_channel_video_ids(channel_id)
-    `youtube-dl https://www.youtube.com/channel/#{channel_id}/videos  --get-id --skip-download`.split
+  def get_channel_video_ids
+    `youtube-dl https://www.youtube.com/channel/#{@channel_id}/videos  --get-id --skip-download`.split
   rescue StandardError => e
     Rails.logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
     "" # NOTE: the empty string return so your split method works always.
@@ -57,10 +63,6 @@ class Video::YoutubeImport::Channel
 
   def youtube_channel_video_ids
     @youtube_channel.video_count >= 500 ? get_channel_video_ids(channel_id) : @youtube_channel.videos.map(&:id)
-  end
-
-  def channel
-    Channel.find_by(channel_id: @youtube_channel.id)
   end
 
   def channel_existing_youtube_video_ids

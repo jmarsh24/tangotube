@@ -1,7 +1,7 @@
 class Video::YoutubeImport::Video
   class << self
-    def import(video_id)
-      new(video_id).import
+    def import(youtube_id)
+      new(youtube_id).import
     end
   end
 
