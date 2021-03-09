@@ -13,7 +13,7 @@ RSpec.shared_examples "a full nameable" do
     end
   end
 
-  describe ".abrev_name_nospace" do
+  describe "#abrev_name_nospace" do
     it "returns first name initial and last name without space" do
       object = described_class.new(first_name: "John", last_name: "Doe")
       expect(object.abrev_name_nospace).to eq("J.Doe")
