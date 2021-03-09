@@ -21,7 +21,8 @@ class Channel < ApplicationRecord
 
   scope :imported,     ->   { where(imported: true) }
   scope :not_imported, ->   { where(imported: false) }
-  scope :reviewed,     ->   { where(reviewed: false).where.not("title ILIKE ?", "%tango%") }
+  scope :reviewed,     ->   { where(reviewed: false) }
+  scope :not_reviewed, ->   { where.not(reviewed: false) }
 
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
@@ -42,7 +43,7 @@ class Channel < ApplicationRecord
     end
 
     def import_all_channels
-      where(imported: false).find_each do |channel|
+      not_imported.reviewed.find_each do |channel|
         channel_id = channel.channel_id
         Video::YoutubeImport.from_channel(channel_id)
       end
