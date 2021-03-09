@@ -203,7 +203,8 @@ CREATE TABLE public.channels (
     imported_videos_count integer DEFAULT 0,
     total_videos_count integer DEFAULT 0,
     yt_api_pull_count integer DEFAULT 0,
-    reviewed boolean DEFAULT false
+    reviewed boolean DEFAULT false,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -241,7 +242,8 @@ CREATE TABLE public.events (
     start_date date,
     end_date date,
     active boolean DEFAULT true,
-    reviewed boolean DEFAULT false
+    reviewed boolean DEFAULT false,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -276,7 +278,8 @@ CREATE TABLE public.followers (
     reviewed boolean,
     nickname character varying,
     first_name character varying,
-    last_name character varying
+    last_name character varying,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -311,7 +314,8 @@ CREATE TABLE public.leaders (
     reviewed boolean,
     nickname character varying,
     first_name character varying,
-    last_name character varying
+    last_name character varying,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -434,7 +438,8 @@ CREATE TABLE public.songs (
     popularity integer DEFAULT 0,
     active boolean DEFAULT true,
     lyrics text,
-    el_recodo_song_id integer
+    el_recodo_song_id integer,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -994,6 +999,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('0'),
 ('20210306201925'),
 ('20210308100534'),
-('20210309200926');
+('20210309200926'),
+('20210309222823'),
+('20210309222936'),
+('20210309222950'),
+('20210309223000'),
+('20210309223723');
 
 

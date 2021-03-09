@@ -48,11 +48,11 @@ class Video < ApplicationRecord
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  belongs_to :leader, optional: true
-  belongs_to :follower, optional: true
-  belongs_to :song, optional: true
-  belongs_to :channel, optional: false
-  belongs_to :event, optional: true
+  belongs_to :leader, optional: true, counter_cache: true
+  belongs_to :follower, optional: true, counter_cache: true
+  belongs_to :song, optional: true, counter_cache: true
+  belongs_to :channel, optional: false, counter_cache: true
+  belongs_to :event, optional: true, counter_cache: true
 
   scope :filter_by_orchestra, ->(song_artist)     { joins(:song).where("songs.artist ILIKE ?", song_artist) }
   scope :filter_by_genre,     ->(song_genre)      { joins(:song).where("songs.genre ILIKE ?", song_genre) }
