@@ -3,6 +3,6 @@ class YoutubeMusicMatchWorker
   sidekiq_options queue: :default, retry: false
 
   def perform(youtube_id)
-    Video.fetch_youtube_song(youtube_id)
+    Video::YoutubeDlImport.from_video(youtube_id)
   end
 end
