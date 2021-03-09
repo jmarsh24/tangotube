@@ -19,7 +19,6 @@ class Video::MusicRecognition::AcrCloud::Client
   end
 
   def send_audio_file_to_acr_cloud
-    byebug
     faraday = Faraday.new do |f|
       f.request :multipart
       f.request :url_encoded

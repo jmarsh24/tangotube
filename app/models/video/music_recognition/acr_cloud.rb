@@ -1,33 +1,31 @@
 class Video::MusicRecognition::AcrCloud
   class << self
     def fetch(youtube_id)
-      new(youtube_id).call
+      new(youtube_id).update_video
     end
   end
 
   def initialize(youtube_id)
     @youtube_id = youtube_id
     @video = Video.find_by(youtube_id: youtube_id)
-    @video_attributes = video_attributes
   end
 
-  def call
-    byebug
+  def update_video
     @video.update(video_params)
   end
 
   private
 
   def file_path
-    Audio.import(@youtube_id)
+    @file_path ||= Audio.import(@youtube_id)
   end
 
-  def data
-    Client.send_audio(file_path)
+  def acr_cloud_response
+    @acr_cloud_reponse ||= Client.send_audio(file_path)
   end
 
   def video_attributes
-    Parse.parse(data)
+    @video_attributes ||= Parse.parse(acr_cloud_reponse)
   end
 
   def video_params
