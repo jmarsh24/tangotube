@@ -17,7 +17,7 @@ RSpec.describe Follower, type: :model do
   let(:follower) { build(:follower) }
 
   it_behaves_like "a full nameable"
-  it_behaves_like "reviewable"
+  it_behaves_like "a reviewable"
 
   context "validation tests" do
     subject { FactoryBot.build(:follower) }
@@ -33,11 +33,5 @@ RSpec.describe Follower, type: :model do
       follower.name = nil
       expect(follower.save).to eq(false)
     end
-  end
-
-  context "scope tests" do
-  end
-
-  context "method tests" do
   end
 end

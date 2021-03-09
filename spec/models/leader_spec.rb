@@ -17,7 +17,7 @@ RSpec.describe Leader, type: :model do
   let(:leader) { build(:leader) }
 
   it_behaves_like "a full nameable"
-  it_behaves_like "reviewable"
+  it_behaves_like "a reviewable"
 
   context "validation tests" do
     subject { FactoryBot.build(:leader) }
@@ -33,11 +33,5 @@ RSpec.describe Leader, type: :model do
       leader.name = nil
       expect(leader.save).to eq(false)
     end
-  end
-
-  context "scope tests" do
-  end
-
-  context "method tests" do
   end
 end
