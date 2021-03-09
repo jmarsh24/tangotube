@@ -9,13 +9,12 @@ class Song::RecodoLyrics::Page
   end
 
   def update_song_from_lyrics
-
     return if lyrics.blank?
 
     song = ::Song.where("unaccent(title) ILIKE unaccent(?) AND unaccent(artist) ILIKE unaccent(?)", title, artist).first
     return unless song
 
-    song.update(el_recodo_song_id: @id, lyrics: lyrics)
+    song.update(el_recodo_song_id: @id, lyrics: lyrics, artist: artist, title: title)
   end
 
   private
