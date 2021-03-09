@@ -50,6 +50,9 @@ class Video::YoutubeImport::Channel
 
   def get_channel_video_ids(channel_id)
     `youtube-dl https://www.youtube.com/channel/#{channel_id}/videos  --get-id --skip-download`.split
+  rescue StandardError => e
+    Rails.logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
+    "" # NOTE: the empty string return so your split method works always.
   end
 
   def youtube_channel_videos
