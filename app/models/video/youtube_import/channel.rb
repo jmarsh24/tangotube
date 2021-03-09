@@ -55,7 +55,7 @@ class Video::YoutubeImport::Channel
     "" # NOTE: the empty string return so your split method works always.
   end
 
-  def youtube_channel_videos
+  def youtube_channel_video_ids
     @youtube_channel.video_count >= 500 ? get_channel_video_ids(channel_id) : @youtube_channel.videos.map(&:id)
   end
 
@@ -68,6 +68,6 @@ class Video::YoutubeImport::Channel
   end
 
   def new_videos
-    youtube_channel_videos - channel_videos
+    youtube_channel_video_ids - channel_videos
   end
 end
