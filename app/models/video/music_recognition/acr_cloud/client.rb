@@ -1,4 +1,13 @@
 class Video::MusicRecognition::AcrCloud::Client
+  HTTP_METHOD = "POST".freeze
+  HTTP_URI = "/v1/identify".freeze
+  DATA_TYPE = "audio".freeze
+  SIGNATURE_VERSION = "1".freeze
+  TIMESTAMP = Time.now.utc.to_i.to_s.freeze
+  ACCESS_KEY = ENV["ACRCLOUD_ACCESS_KEY"]
+  ACCESS_SECRET = ENV["ACRCLOUD_SECRET_KEY"]
+  REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify".freeze
+
   class << self
     def send_audio(file_path)
       new(file_path).send_audio_file_to_acr_cloud
@@ -7,62 +16,55 @@ class Video::MusicRecognition::AcrCloud::Client
 
   def initialize(file_path)
     @file_path = file_path
-
-    set_url
-    set_access_keys
-    create_string
-    create_signed_string
-    create_signature
-    set_sample_size
   end
 
   def send_audio_file_to_acr_cloud
+    byebug
     faraday = Faraday.new do |f|
       f.request :multipart
       f.request :url_encoded
       f.adapter :net_http
     end
 
-    response = faraday.post(@url, sample:            Faraday::UploadIO.new(@file_path, "audio/mp3"),
-                                  access_key:        @access_key,
-                                  data_type:         @data_type,
-                                  signature_version: @signature_version,
-                                  signature:         @signature,
-                                  sample_bytes:      @sample_bytes,
-                                  timestamp:         @timestamp)
+    response = faraday.post(url, body)
     response.body
   end
 
   private
 
-  def set_url
-    @requrl ||= "http://identify-eu-west-1.acrcloud.com/v1/identify"
-    @url ||= URI.parse(@requrl)
+  def body
+    {
+      sample:            sample_file,
+      access_key:        ACCESS_KEY,
+      data_type:         DATA_TYPE,
+      signature_version: SIGNATURE_VERSION,
+      signature:         signature,
+      sample_bytes:      sample_bytes,
+      timestamp:         TIMESTAMP
+    }
   end
 
-  def set_access_keys
-    @access_key ||= ENV["ACRCLOUD_ACCESS_KEY"]
-    @access_secret ||= ENV["ACRCLOUD_SECRET_KEY"]
+  def sample_file
+    Faraday::UploadIO.new(@file_path, "audio/mp3")
   end
 
-  def set_sample_size
-    @sample_bytes ||= File.size(@file_path)
+  def url
+    URI.parse(REQ_URL)
   end
 
-  def create_string
-    @http_method ||= "POST"
-    @http_uri ||= "/v1/identify"
-    @data_type ||= "audio"
-    @signature_version ||= "1"
-    @timestamp ||= Time.now.utc.to_i.to_s
+  def sample_bytes
+    File.size(@file_path)
   end
 
-  def create_signed_string
-    @string_to_sign ||= "#{@http_method}\n#{@http_uri}\n#{@access_key}\n#{@data_type}\n#{@signature_version}\n#{@timestamp}"
+  def unsigned_string
+    "#{HTTP_METHOD}\n#{HTTP_URI}\n#{ACCESS_KEY}\n#{DATA_TYPE}\n#{SIGNATURE_VERSION}\n#{TIMESTAMP}"
   end
 
-  def create_signature
-    digest = OpenSSL::Digest.new("sha1")
-    @signature ||= Base64.encode64(OpenSSL::HMAC.digest(digest, @access_secret, @string_to_sign))
+  def digest
+    OpenSSL::Digest.new("sha1")
+  end
+
+  def signature
+    Base64.encode64(OpenSSL::HMAC.digest(digest, ACCESS_SECRET, unsigned_string)).strip
   end
 end
