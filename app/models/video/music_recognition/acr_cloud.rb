@@ -26,19 +26,23 @@ class Video::MusicRecognition::AcrCloud
 
   def video_params
     {
-      acr_response_code:     acr_response_code,
-      spotify_album_id:      spotify_album_id,
-      spotify_album_name:    spotify_album_name,
-      spotify_artist_id:     spotify_artist_id,
-      spotify_artist_id_1:   spotify_artist_id_1,
-      spotify_artist_id_2:   spotify_artist_id_2,
-      spotify_artist_name:   spotify_artist_name,
-      spotify_artist_name_1: spotify_artist_name_1,
-      spotify_artist_name_2: spotify_artist_name_2,
-      spotify_track_id:      spotify_track_id,
-      spotify_track_name:    spotify_track_name,
-      youtube_song_id:       youtube_song_id,
-      isrc:                  isrc
+      acr_response_code:       acr_response_code,
+      spotify_album_id:        spotify_album_id,
+      spotify_album_name:      spotify_album_name,
+      spotify_artist_id:       spotify_artist_id,
+      spotify_artist_id_1:     spotify_artist_id_1,
+      spotify_artist_id_2:     spotify_artist_id_2,
+      spotify_artist_name:     spotify_artist_name,
+      spotify_artist_name_1:   spotify_artist_name_1,
+      spotify_artist_name_2:   spotify_artist_name_2,
+      spotify_track_id:        spotify_track_id,
+      spotify_track_name:      spotify_track_name,
+      acr_cloud_artist_name:   acr_cloud_artist_name,
+      acr_cloud_artist_name_1: acr_cloud_artist_name_1,
+      acr_cloud_album_name:    acr_cloud_album_name,
+      acr_cloud_track_name:    acr_cloud_track_name,
+      youtube_song_id:         youtube_song_id,
+      isrc:                    isrc
     }
   end
 
@@ -124,6 +128,36 @@ class Video::MusicRecognition::AcrCloud
     return if @spotify_track_id.blank?
 
     @spotify_track_name ||= RSpotify::Track.find(@spotify_track_id).name
+  end
+
+  def acr_cloud_artists
+    return if parsed_acr_cloud_data.deep_find("artists").blank?
+
+    parsed_acr_cloud_data.deep_find("artists")
+  end
+
+  def acr_cloud_artist_name
+    return if acr_cloud_artists.dig(0).blank?
+
+    acr_cloud_artists.dig(0, "name")
+  end
+
+  def acr_cloud_artist_name_1
+    return if acr_cloud_artists.dig(1).blank?
+
+    acr_cloud_artists.dig(1, "name")
+  end
+
+  def acr_cloud_album_name
+    return if parsed_acr_cloud_data.deep_find("album").blank?
+
+    parsed_acr_cloud_data.deep_find("album").dig("name")
+  end
+
+  def acr_cloud_track_name
+    return if parsed_acr_cloud_data.deep_find("title").blank?
+
+    parsed_acr_cloud_data.deep_find("title")
   end
 
   def parsed_acr_cloud_data

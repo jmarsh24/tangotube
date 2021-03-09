@@ -542,7 +542,11 @@ CREATE TABLE public.videos (
     scanned_youtube_music boolean DEFAULT false,
     click_count integer DEFAULT 0,
     spotify_artist_id_1 character varying,
-    spotify_artist_name_1 character varying
+    spotify_artist_name_1 character varying,
+    acr_cloud_artist_name character varying,
+    acr_cloud_artist_name_1 character varying,
+    acr_cloud_album_name character varying,
+    acr_cloud_track_name character varying
 );
 
 
@@ -1004,6 +1008,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210309222936'),
 ('20210309222950'),
 ('20210309223000'),
-('20210309223723');
+('20210309223723'),
+('20210309233622');
 
 
