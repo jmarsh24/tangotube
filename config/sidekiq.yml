@@ -1,5 +1,5 @@
 development:
-  :concurrency: 3
+  :concurrency: 1
   :timeout: 500
 production:
   :concurrency: <%= ENV["SIDEKIQ_CONCURRENCY_VALUE"] || 5 %>

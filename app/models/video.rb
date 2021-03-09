@@ -81,9 +81,9 @@ class Video < ApplicationRecord
 
   # AcrCloud Response scopes
   scope :successful_acrcloud,     -> { where(acr_response_code: 0) }
-  scope :unsuccesful_acrcloud,    -> { where.not(acr_response_code: [0, 1001]) }
+  scope :unsuccesful_acrcloud,    -> { where.not(acr_response_code: [0, 1001]).or(Video.where(acr_response_code: nil)) }
   scope :scanned_acrcloud,        -> { where(acr_response_code: [0, 1001]) }
-  scope :unscanned_acrcloud,      -> { where.not(acr_response_code: [0, 1001]) }
+  scope :unscanned_acrcloud,      -> { where.not(acr_response_code: [0, 1001]).or(Video.where(acr_response_code: nil)) }
 
   # Attribute Matching Scopes
   scope :with_song_title, lambda { |song_title|
