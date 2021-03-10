@@ -10,17 +10,17 @@ class Video::YoutubeImport::Channel
   end
 
   def initialize(channel_id)
+    @channel_id = channel_id
     @youtube_channel = fetch_by_id(channel_id)
     @channel = channel
-    @channel_id = channel_id
   end
 
   def import
-    @channel = Channel.create(to_channel_params)
+    @channel.update(to_channel_params) if @channel.present?
+    @channel = Channel.create(to_channel_params) if @channel.blank?
   end
 
   def import_videos
-    byebug
     new_videos.each do |youtube_id|
       ImportVideoWorker.perform_async(youtube_id)
     end
@@ -33,7 +33,7 @@ class Video::YoutubeImport::Channel
   end
 
   def channel
-    Channel.find_by(channel_id: @youtube_channel.id)
+    Channel.find_by(channel_id: @channel_id)
   end
 
   def to_channel_params
@@ -66,7 +66,7 @@ class Video::YoutubeImport::Channel
   end
 
   def channel_existing_youtube_video_ids
-    @channel.videos.pluck(&:youtube_id).uniq
+    @channel.videos.pluck(:youtube_id)
   end
 
   def new_videos
