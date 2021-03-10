@@ -65,7 +65,7 @@ task match_all_music: :environment do
   Video.unscanned_acrcloud.find_each do |video|
     youtube_id = video.youtube_id
     AcrMusicMatchWorker.perform_async(youtube_id)
-  end
+end
   puts 'done.'
 end
 

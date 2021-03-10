@@ -1,4 +1,4 @@
-class Video::YoutubeDlImport::Video
+class Video::MusicRecognition::Youtube::Video
   class << self
     def import(video_id)
       new(video_id).import
