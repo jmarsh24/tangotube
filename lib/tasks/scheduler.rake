@@ -1,8 +1,17 @@
 desc 'This task populates videos'
-task import_all_channels: :environment do
+task import_all_reviewed_channels: :environment do
   puts 'Populating videos from channels'
   Channel.not_imported.reviewed.find_each do |channel|
     Video::YoutubeImport.from_channel(channel.channel_id)
+  end
+  puts 'done.'
+end
+
+desc 'This task populates playlists'
+task import_all_playlists: :environment do
+  puts 'Adding all new playlists'
+  Playlist.not_imported.reviewed.find_each do |playlist|
+    Video.import_playlist(playlist.slug)
   end
   puts 'done.'
 end
@@ -60,11 +69,10 @@ end
 # All videos where the response code is not successfully identified,
 # send a request to acrcloud to search for a match
 desc 'This task performs all music matches from acrcloud'
-task match_all_music: :environment do
+task match_all_unscanned_unrecognized_videos: :environment do
   puts 'Fetching all missing music matches with ACR Cloud'
   Video.unscanned_acrcloud.find_each do |video|
-    youtube_id = video.youtube_id
-    AcrMusicMatchWorker.perform_async(youtube_id)
+    AcrMusicMatchWorker.perform_async(video.youtube_id)
 end
   puts 'done.'
 end
@@ -89,14 +97,7 @@ task update_imported_video_counts: :environment do
   puts 'done.'
 end
 
-desc 'This task populates playlists'
-task import_all_playlists: :environment do
-  puts 'Adding all new playlists'
-  Playlist.not_imported.find_each do |playlist|
-    Video.import_playlist(playlist.slug)
-  end
-  puts 'done.'
-end
+
 
 namespace :refreshers do
   desc 'Refresh materialized view for Videos'
