@@ -42,6 +42,7 @@ class Video::MusicRecognition::AcrCloud
       acr_cloud_album_name:    acr_cloud_album_name,
       acr_cloud_track_name:    acr_cloud_track_name,
       youtube_song_id:         youtube_song_id,
+      acrid:                   acrid,
       isrc:                    isrc
     }
   end
@@ -158,6 +159,12 @@ class Video::MusicRecognition::AcrCloud
     return if parsed_acr_cloud_data.deep_find("title").blank?
 
     parsed_acr_cloud_data.deep_find("title")
+  end
+
+  def acrid
+    return if parsed_acr_cloud_data.deep_find("acrid").blank?
+
+    parsed_acr_cloud_data.deep_find("acrid")
   end
 
   def parsed_acr_cloud_data
