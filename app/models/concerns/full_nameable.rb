@@ -15,7 +15,7 @@ module FullNameable
   end
 
   def abrev_name
-    "#{first_name.first}. #{last_name}" if first_name.present? && last_name.present?
+    [first_name.first, last_name].compact.map(&:titleize).join(". ") if first_name.present? && last_name.present?
   end
 
   def abrev_name_nospace
