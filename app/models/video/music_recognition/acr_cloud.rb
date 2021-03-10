@@ -137,13 +137,13 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def acr_cloud_artist_name
-    return if acr_cloud_artists.dig(0).blank?
+    return if acr_cloud_artists.blank?
 
     acr_cloud_artists.dig(0, "name")
   end
 
   def acr_cloud_artist_name_1
-    return if acr_cloud_artists.dig(1).blank?
+    return if acr_cloud_artists.blank?
 
     acr_cloud_artists.dig(1, "name")
   end

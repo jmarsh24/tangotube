@@ -63,7 +63,8 @@ desc 'This task performs all music matches from acrcloud'
 task match_all_music: :environment do
   puts 'Fetching all missing music matches with ACR Cloud'
   Video.unscanned_acrcloud.find_each do |video|
-    AcrMusicMatchWorker.perform_async(video.youtube_id)
+    youtube_id = video.youtube_id
+    AcrMusicMatchWorker.perform_async(youtube_id)
   end
   puts 'done.'
 end
