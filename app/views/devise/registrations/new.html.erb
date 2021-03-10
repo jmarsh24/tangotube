@@ -2,6 +2,8 @@
   <%= render 'shared/header' %>
 </div>
 
+<%= render "devise/shared/error_messages", resource: resource %>
+
 <div class="registrations-new-body">
   <div class="registrations-new-container">
     <div class="registrations-new-header-container">
@@ -10,7 +12,7 @@
 
     <div class="registrations-new-form-container">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+
 
       <div class="field">
         <%= f.label :email %><br>
