@@ -152,7 +152,7 @@ class Video::MusicRecognition::AcrCloud
   def acr_cloud_album_name
     return if parsed_acr_cloud_data.deep_find("album").blank?
 
-    parsed_acr_cloud_data.deep_find("album").dig("name")
+    parsed_acr_cloud_data.deep_find("album")["name"]
   end
 
   def acr_cloud_track_name
