@@ -1,4 +1,4 @@
-class Event::TangopolixEvents::Page
+class Event::Tangopolix::Page
   TANGOPOLIX_URL_PREFIX = "https://www.tangopolix.com/archived-events/page-".freeze
   TANGOPOLIX_ARTICLE_METADATA_HTML_MARKER = "article".freeze
   TANGOPOLIX_TITLE_HTML_MARKER = "h1 a".freeze

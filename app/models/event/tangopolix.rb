@@ -1,4 +1,4 @@
-class Event::TangopolixEvents
+class Event::Tangopolix
   PAGINATION_MAX_NUMBER = 469
 
   class << self
