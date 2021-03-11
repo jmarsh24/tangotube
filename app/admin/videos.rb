@@ -33,17 +33,17 @@ ActiveAdmin.register Video do
     column "Logo" do |video|
       image_tag video.channel.thumbnail_url, height: 30
     end
-    # column "channel" do |video|
-    #   link_to(video.channel.title, "/admin/channels/#{video.channel.id}", target: :_blank, rel: :noopener) + " " +
-    #     link_to("Youtube", "http://youtube.com/channel/#{video.channel.channel_id}", target: :_blank, rel: :noopener) + " " +
-    #     link_to("Social Blade", "https://socialblade.com/youtube/channel/#{video.channel.channel_id}",
-    #             target: :_blank, rel: :noopener) + " " +
-    #     link_to("TangoTube", root_path(channel: video.channel.title), target: :_blank, rel: :noopener)
-    # end
-    # column "Thumbnail" do |video|
-    #   link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100),
-    #           "/watch?v=#{video.youtube_id}", target: :_blank, rel: :noopener)
-    # end
+    column "channel" do |video|
+      link_to(video.channel.title, "/admin/channels/#{video.channel.id}", target: :_blank, rel: :noopener) + " " +
+        link_to("Youtube", "http://youtube.com/channel/#{video.channel.channel_id}", target: :_blank, rel: :noopener) + " " +
+        link_to("Social Blade", "https://socialblade.com/youtube/channel/#{video.channel.channel_id}",
+                target: :_blank, rel: :noopener) + " " +
+        link_to("TangoTube", root_path(channel: video.channel.title), target: :_blank, rel: :noopener)
+    end
+    column "Thumbnail" do |video|
+      link_to(image_tag("http://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg", height: 100),
+              "/watch?v=#{video.youtube_id}", target: :_blank, rel: :noopener)
+    end
     column :title
     column :description
     column :tags
@@ -51,12 +51,12 @@ ActiveAdmin.register Video do
     column :leader
     column :follower
     column :song
-    # column "Genre" do |video|
-    #   video.song&.genre&.titleize
-    # end
-    # column "Artist" do |video|
-    #   video.song&.artist&.titleize
-    # end
+    column "Genre" do |video|
+      video.song&.genre&.titleize
+    end
+    column "Artist" do |video|
+      video.song&.artist&.titleize
+    end
     column :youtube_artist
     column :youtube_song
     column "ACR", :acr_response_code
@@ -82,8 +82,4 @@ ActiveAdmin.register Video do
     end
     f.actions
   end
-
-  # batch_action :hide do |video|
-  #   video.find(selection).each(&:hidden!)
-  # end
 end
