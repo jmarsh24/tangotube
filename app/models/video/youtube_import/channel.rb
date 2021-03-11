@@ -1,4 +1,6 @@
 class Video::YoutubeImport::Channel
+YOUTUBE_DL_COMMAND = "youtube-dl https://www.youtube.com/channel/#{@channel_id}/videos  --get-id --skip-download".freeze
+
   class << self
     def import(channel_id)
       new(channel_id).import
@@ -55,7 +57,7 @@ class Video::YoutubeImport::Channel
   end
 
   def get_channel_video_ids
-    `youtube-dl https://www.youtube.com/channel/#{@channel_id}/videos  --get-id --skip-download`.split
+    YOUTUBE_DL_COMMAND.split
   rescue StandardError => e
     Rails.logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
     "" # NOTE: the empty string return so your split method works always.
