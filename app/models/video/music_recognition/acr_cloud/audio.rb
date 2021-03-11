@@ -28,20 +28,20 @@ class Video::MusicRecognition::AcrCloud::Audio
   end
 
   def output_file_path
-    @output_file_path ||= youtube_audio_file_path.gsub(/.mp3/, "_#{time1}_#{time2}.mp3")
+    @output_file_path ||= youtube_audio_file_path.gsub(/.mp3/, "_#{sample_start_time}_#{sample_end_time}.mp3")
   end
 
-  def time1
-    @time1 ||= @youtube_video_audio_file.duration / 2
+  def sample_start_time
+    @sample_start_time ||= @youtube_video_audio_file.duration / 2
   end
 
-  def time2
-    @time2 ||= time1 + 20
+  def sample_end_time
+    @sample_end_time ||= sample_start_time + 20
   end
 
   def transcode_audio_file
     song = FFMPEG::Movie.new(youtube_audio_file_path)
-    song.transcode(output_file_path, { custom: %W[-ss #{time1} -to #{time2}] })
+    song.transcode(output_file_path, { custom: %W[-ss #{sample_start_time} -to #{sample_end_time}] })
     output_file_path
   end
 end
