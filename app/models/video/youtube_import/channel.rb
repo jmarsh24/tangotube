@@ -19,8 +19,11 @@ class Video::YoutubeImport::Channel
   end
 
   def import
-    @channel.update(to_channel_params) if @channel.present?
-    @channel = Channel.create(to_channel_params) if @channel.blank?
+    if @channel.present?
+      @channel.update(to_channel_params)
+    else
+      @channel = Channel.create(to_channel_params)
+    end
   end
 
   def import_videos
