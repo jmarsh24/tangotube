@@ -10,7 +10,7 @@ class Video::MusicRecognition::AcrCloud::Client
 
   class << self
     def send_audio(file_path)
-      new(file_path).send_audio_file_to_acr_cloud
+      new(file_path).get_audio_from_acr_cloud
     end
   end
 
@@ -18,7 +18,7 @@ class Video::MusicRecognition::AcrCloud::Client
     @file_path = file_path
   end
 
-  def send_audio_file_to_acr_cloud
+  def get_audio_from_acr_cloud
     faraday = Faraday.new do |f|
       f.request :multipart
       f.request :url_encoded
