@@ -18,10 +18,10 @@
 class Playlist < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
 
+  include Reviewable
+
   has_many :videos
 
   scope :imported,     ->   { where(imported: true) }
   scope :not_imported, ->   { where(imported: false) }
-  scope :reviewed,     ->   { where(reviewed: true) }
-  scope :not_reviewed, ->   { where(reviewed: false) }
 end
