@@ -21,6 +21,6 @@ module FullNameable
   end
 
   def abrev_name_nospace
-    abrev_name.delete(" ") if abrev_name.present?
+    abrev_name.try(:delete, " ") if abrev_name.present?
   end
 end
