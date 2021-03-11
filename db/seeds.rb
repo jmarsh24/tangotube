@@ -47,8 +47,8 @@ data.each do |e|
 end
 puts "There are now #{VideosSearch.count} videos searches in the database."
 
+# Seed Admin User in Development
 puts 'Seeding admin user into database'
-
 if Rails.env.development?
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 end
