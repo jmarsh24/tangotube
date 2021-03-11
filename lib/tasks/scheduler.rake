@@ -99,131 +99,114 @@ end
 
 namespace :export do
   desc "Export videos"
-  task :export_videos_to_seeds => :environment do
-    Video.all.each do |videos|
-      excluded_keys = ['created_at', 'updated_at', 'id']
-      serialized = videos
-        .serializable_hash
-        .delete_if{|key,value| excluded_keys.include?(key)}
-      puts "Video.create(#{serialized})"
+  task :videos_to_seeds => :environment do
+    FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
+    data = Video.all.map do |e|
+      e.attributes.except('created_at', 'updated_at', 'id')
+    end
+    File.open(Rails.root.join('seed', 'data', 'videos.yml'), 'w+') do |f|
+      f.puts(YAML.dump(data))
     end
   end
 end
 
 namespace :export do
   desc "Export leaders"
-  task :export_leaders_to_seeds => :environment do
-    Leader.all.each do |leaders|
-      excluded_keys = ['created_at', 'updated_at', 'id']
-      serialized = leaders
-        .serializable_hash
-        .delete_if{|key,value| excluded_keys.include?(key)}
-      puts "Leader.create(#{serialized})"
+  task :leader_to_seeds => :environment do
+    FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
+    data = Leader.all.map do |e|
+      e.attributes.except('created_at', 'updated_at', 'id')
+    end
+
+    File.open(Rails.root.join('seed', 'data', 'leader.yml'), 'w+') do |f|
+      f.puts(YAML.dump(data))
     end
   end
 end
 
 namespace :export do
   desc "Export followers"
-  task :export_followers_to_seeds => :environment do
-    Follower.all.each do |followers|
-      excluded_keys = ['created_at', 'updated_at', 'id']
-      serialized = followers
-        .serializable_hash
-        .delete_if{|key,value| excluded_keys.include?(key)}
-      puts "Follower.create(#{serialized})"
-  end
+  task :follower_to_seeds => :environment do
+    FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
+    data = Follower.all.map do |e|
+      e.attributes.except('created_at', 'updated_at', 'id')
+    end
+
+    File.open(Rails.root.join('seed', 'data', 'follower.yml'), 'w+') do |f|
+      f.puts(YAML.dump(data))
+    end
   end
 end
 
 namespace :export do
   desc "Export songs"
-  task :export_songs_to_seeds => :environment do
-    Song.all.each do |songs|
-      excluded_keys = ['created_at', 'updated_at', 'id']
-      serialized = songs
-        .serializable_hash
-        .delete_if{|key,value| excluded_keys.include?(key)}
-      puts "Song.create(#{serialized})"
+  task :song_to_seeds => :environment do
+      FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
+    data = Song.all.map do |e|
+      e.attributes.except('created_at', 'updated_at', 'id')
+    end
+
+    File.open(Rails.root.join('seed', 'data', 'song.yml'), 'w+') do |f|
+      f.puts(YAML.dump(data))
     end
   end
 end
 
 namespace :export do
   desc "Export events"
-  task :export_events_to_seeds => :environment do
-    Event.all.each do |events|
-      excluded_keys = ['created_at', 'updated_at', 'id']
-      serialized = events
-        .serializable_hash
-        .delete_if{|key,value| excluded_keys.include?(key)}
-      puts "Event.create(#{serialized})"
+  task :event_to_seeds => :environment do
+    FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
+    data = Event.all.map do |e|
+      e.attributes.except('created_at', 'updated_at', 'id')
+    end
+
+    File.open(Rails.root.join('seed', 'data', 'event.yml'), 'w+') do |f|
+      f.puts(YAML.dump(data))
     end
   end
 end
 
 namespace :export do
   desc "Export channels"
-  task :export_channels_to_seeds => :environment do
-    Channel.all.each do |channels|
-      excluded_keys = ['created_at', 'updated_at', 'id']
-      serialized = channels
-        .serializable_hash
-        .delete_if{|key,value| excluded_keys.include?(key)}
-      puts "Channel.create(#{serialized})"
+  task :channel_to_seeds => :environment do
+    FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
+    data = Channel.all.map do |e|
+      e.attributes.except('created_at', 'updated_at', 'id')
+    end
+
+    File.open(Rails.root.join('seed', 'data', 'channel.yml'), 'w+') do |f|
+      f.puts(YAML.dump(data))
     end
   end
 end
 
 namespace :export do
   desc "Export playlists"
-  task :export_playlists_to_seeds => :environment do
-    Playlist.all.each do |playlists|
-      excluded_keys = ['created_at', 'updated_at', 'id']
-      serialized = playlists
-        .serializable_hash
-        .delete_if{|key,value| excluded_keys.include?(key)}
-      puts "Playlist.create(#{serialized})"
+  task :playlist_to_seeds => :environment do
+    FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
+    data = Playlist.all.map do |e|
+      e.attributes.except('created_at', 'updated_at', 'id')
+    end
+
+    File.open(Rails.root.join('seed', 'data', 'playlist.yml'), 'w+') do |f|
+      f.puts(YAML.dump(data))
     end
   end
 end
 
-namespace :db do
-
-  desc "Dumps the database to db/APP_NAME.dump"
-  task :dump => :environment do
-    cmd = nil
-    with_config do |app, host, db, user|
-      cmd = "pg_dump --host #{host} --username #{user} --verbose --clean --no-owner --no-acl --format=c #{db} > #{Rails.root}/db/#{app}.dump"
+namespace :export do
+  desc "Export Videos Search"
+  task :videos_search_to_seeds => :environment do
+    FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
+    data = VideosSearch.all.map do |e|
+      e.attributes.except('created_at', 'updated_at', 'id')
     end
-    puts cmd
-    exec cmd
-  end
 
-  desc "Restores the database dump at db/APP_NAME.dump."
-  task :restore => :environment do
-    cmd = nil
-    with_config do |app, host, db, user|
-      cmd = "pg_restore --verbose --host #{host} --username #{user} --clean --no-owner --no-acl --dbname #{db} #{Rails.root}/db/#{app}.dump"
+    File.open(Rails.root.join('seed', 'data', 'videos_search.yml'), 'w+') do |f|
+      f.puts(YAML.dump(data))
     end
-    Rake::Task["db:drop"].invoke
-    Rake::Task["db:create"].invoke
-    puts cmd
-    exec cmd
   end
-
-  private
-
-  def with_config
-    yield Rails.application.class,
-      ActiveRecord::Base.connection_config[:host],
-      ActiveRecord::Base.connection_config[:database],
-      ActiveRecord::Base.connection_config[:username]
-  end
-
 end
-
-
 
 namespace :refreshers do
   desc 'Refresh materialized view for Videos'
