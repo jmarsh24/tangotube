@@ -19,8 +19,8 @@ class Video::YoutubeImport::Channel
   end
 
   def import
-    if @channel.present?
-      @channel.update(to_channel_params)
+    if channel.present?
+      channel.update(to_channel_params)
     else
       @channel = Channel.create(to_channel_params)
     end
@@ -39,7 +39,7 @@ class Video::YoutubeImport::Channel
   end
 
   def channel
-    Channel.find_by(channel_id: @channel_id)
+    @channel ||= Channel.find_by(channel_id: @channel_id)
   end
 
   def to_channel_params
@@ -61,7 +61,7 @@ class Video::YoutubeImport::Channel
   end
 
   def get_channel_video_ids
-    `#{YOUTUBE_DL_COMMAND_PREFIX + @channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
+    `#{YOUTUBE_DL_COMMAND_PREFIX + channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
   rescue StandardError => e
     Rails.logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
     "" # NOTE: the empty string return so your split method works always.
@@ -72,7 +72,7 @@ class Video::YoutubeImport::Channel
   end
 
   def channel_existing_youtube_video_ids
-    @channel.videos.pluck(:youtube_id)
+    channel.videos.pluck(:youtube_id)
   end
 
   def new_videos
