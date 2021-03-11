@@ -6,8 +6,8 @@ class VideosController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @videos_total = Video.filter_by_not_hidden.size
-    @videos = Video.filter_by_not_hidden
+    @videos_total = Video.not_hidden.size
+    @videos = Video.not_hidden
                    .includes(:leader, :follower, :channel, :song, :event)
                    .order("#{sort_column} #{sort_direction}")
                    .filter_videos(filtering_params)
@@ -35,7 +35,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find_by(youtube_id: params[:v])
-    @videos_total = Video.filter_by_not_hidden.size
+    @videos_total = Video.not_hidden.size
     videos = if Video.where(song_id: @video.song_id).size > 3
                Video.where(song_id: @video.song_id)
              else
@@ -51,7 +51,7 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find(params[:id])
-    @videos_total = Video.filter_by_not_hidden.size
+    @videos_total = Video.not_hidden.size
     videos = if Video.where(song_id: @video.song_id).size > 3
                Video.where(song_id: @video.song_id)
              else

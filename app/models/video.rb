@@ -63,29 +63,29 @@ class Video < ApplicationRecord
   scope :filter_by_event_id, ->(event_id) { where(event_id: event_id) }
   scope :filter_by_song_id, ->(song_id) { where(song_id: song_id) }
   scope :filter_by_hd, ->(boolean) { where(hd: boolean) }
-  scope :filter_by_hidden, -> { where(hidden: true) }
-  scope :filter_by_not_hidden, -> { where(hidden: false) }
+  scope :hidden, -> { where(hidden: true) }
+  scope :not_hidden, -> { where(hidden: false) }
   scope :paginate, ->(page, per_page) { offset(per_page * (page - 1)).limit(per_page) }
 
   # Active Admin scopes
   scope :has_song, -> { where.not(song_id: nil) }
   scope :has_leader, -> { where.not(leader_id: nil) }
   scope :has_follower, -> { where.not(follower_id: nil) }
-  scope :has_youtube_match, -> { where.not(youtube_artist: nil) }
+  scope :has_youtube_song, -> { where.not(youtube_song: nil) }
   scope :missing_follower, -> { where(follower_id: nil) }
   scope :missing_leader, -> { where(leader_id: nil) }
   scope :missing_song, -> { where(song_id: nil) }
 
   # Youtube Music Scopes
   scope :scanned_youtube_music, -> { where(scanned_youtube_music: true) }
-  scope :unscanned_youtube_music, -> { where(scanned_youtube_music: false) }
+  scope :not_scanned_youtube_music, -> { where(scanned_youtube_music: false) }
   scope :has_youtube_song, -> { where.not(youtube_song: nil) }
 
   # AcrCloud Response scopes
   scope :successful_acrcloud, -> { where(acr_response_code: 0) }
-  scope :unsuccesful_acrcloud, -> { where.not(acr_response_code: [0, 1001]).or(Video.where(acr_response_code: nil)) }
+  scope :not_successful_acrcloud, -> { where.not(acr_response_code: [0, 1001]).or(Video.where(acr_response_code: nil)) }
   scope :scanned_acrcloud, -> { where(acr_response_code: [0, 1001]) }
-  scope :unscanned_acrcloud, -> { where.not(acr_response_code: [0, 1001]).or(Video.where(acr_response_code: nil)) }
+  scope :not_scanned_acrcloud, -> { where.not(acr_response_code: [0, 1001]).or(Video.where(acr_response_code: nil)) }
 
   # Attribute Matching Scopes
   scope :with_song_title, lambda { |song_title|
