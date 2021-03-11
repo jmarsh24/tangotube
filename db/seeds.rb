@@ -57,6 +57,13 @@ CSV.foreach('data/tangodb-datasets/channels.csv', headers: true) do |column|
 end
 puts "There are now #{Channel.count} channels in the database."
 
+# Seed read
+data = YAML.load_file(Rails.root.join('seed', 'data', 'video.yml').to_s)
+data.each do |e|
+  Video.create!(e)
+end
+puts "There are now #{Video.count} videos in the database."
+
 puts 'Seeding admin user into database'
 
 if Rails.env.development?
@@ -64,6 +71,3 @@ if Rails.env.development?
 end
 
 puts 'Admin User successfully seeded.'
-# Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
-#   load seed
-# end

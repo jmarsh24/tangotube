@@ -224,6 +224,7 @@ namespace :db do
 end
 
 
+
 namespace :refreshers do
   desc 'Refresh materialized view for Videos'
   task videos_searches: :environment do
