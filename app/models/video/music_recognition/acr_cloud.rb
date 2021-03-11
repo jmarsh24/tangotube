@@ -2,6 +2,8 @@ class Video::MusicRecognition::AcrCloud
   class << self
     def fetch(youtube_id)
       new(youtube_id).update_video
+      rescue StandardError => e
+      Rails.logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e.backtrace.join("\n\t")}"
     end
   end
 
