@@ -97,6 +97,13 @@ task update_imported_video_counts: :environment do
   puts 'done.'
 end
 
+namespace :refreshers do
+  desc 'Refresh materialized view for Videos'
+  task videos_searches: :environment do
+    VideosSearch.refresh
+  end
+end
+
 namespace :export do
   desc "Export videos"
   task :videos_to_seeds => :environment do
@@ -191,26 +198,5 @@ namespace :export do
     File.open(Rails.root.join('seed', 'data', 'playlist.yml'), 'w+') do |f|
       f.puts(YAML.dump(data))
     end
-  end
-end
-
-namespace :export do
-  desc "Export Videos Search"
-  task :videos_search_to_seeds => :environment do
-    FileUtils.mkdir_p(Rails.root.join('seed', 'data'))
-    data = VideosSearch.all.map do |e|
-      e.attributes.except('created_at', 'updated_at', 'id')
-    end
-
-    File.open(Rails.root.join('seed', 'data', 'videos_search.yml'), 'w+') do |f|
-      f.puts(YAML.dump(data))
-    end
-  end
-end
-
-namespace :refreshers do
-  desc 'Refresh materialized view for Videos'
-  task videos_searches: :environment do
-    VideosSearch.refresh
   end
 end
