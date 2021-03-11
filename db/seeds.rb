@@ -1,7 +1,3 @@
-# Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
-#   load seed
-# end
-
 require 'csv'
 
 CSV.foreach('data/tangodb-datasets/songs.csv', headers: true) do |column|
@@ -19,7 +15,7 @@ CSV.foreach('data/tangodb-datasets/songs.csv', headers: true) do |column|
   lyrics = column[14]
   Song.create(genre: genre, title: title, artist: artist, artist_2: artist_2,
               composer: composer, author: author, date: date,
-              last_name_search: last_name_search, occur_count: occur_count,
+              last_name_search: last_name_search,
               popularity: popularity, active: active, lyrics: lyrics)
 end
 puts "There are now #{Song.count} Songs in the database."
@@ -51,13 +47,13 @@ puts "There are now #{Follower.count} followers in the database."
 
 CSV.foreach('data/tangodb-datasets/channels.csv', headers: true) do |column|
   title = column[1]
-  channel_id = column[5]
-  imported = column[6]
-  imported_videos_count = column[7]
-  total_videos_count = column[8]
-  yt_api_pull_count = column[9]
-  reviewed = column[10]
-  Channel.create(title: title, channel_id: channel_id)
+  channel_id = column[2]
+  imported = column[5]
+  imported_videos_count = column[6]
+  total_videos_count = column[7]
+  yt_api_pull_count = column[8]
+  reviewed = column[9]
+  Channel.create(title: title, channel_id: channel_id, reviewed: reviewed)
 end
 puts "There are now #{Channel.count} channels in the database."
 
@@ -68,3 +64,6 @@ if Rails.env.development?
 end
 
 puts 'Admin User successfully seeded.'
+# Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
+#   load seed
+# end
