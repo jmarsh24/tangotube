@@ -43,7 +43,6 @@ group :development, :test do
   gem "faker", "~> 2.16"
   gem "rspec-rails", "~> 4.0"
   gem "standard"
-  gem "rails-controller-testing", "~> 1.0"
 end
 
 group :development do
