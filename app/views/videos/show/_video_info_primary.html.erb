@@ -6,11 +6,18 @@
     <%= link_to_song(@video.el_recodo_attributes, @video.external_song_attributes) %>
   </div>
   <div class="show-video-event">
-    <%= link_to @video.event.title.titleize, root_path(event_id: @video.event.id), {'data-turbo-frame': "_top"} if @video.event.present? %>
+    <%= link_to @video.event.title.titleize,
+                root_path(event_id: @video.event.id),
+                {'data-turbo-frame': "_top"} if @video.event.present? %>
   </div>
   <div class="show-video-channel">
-    <%= link_to image_tag(@video.channel.thumbnail_url, class: 'channel-icon'), root_path(channel: @video.channel.title) if @video.channel.thumbnail_url.present? %>
-    <%= link_to truncate(@video.channel.title, length: 45, omission: ''), root_path(channel: @video.channel.title), class: "channel-title" if @video.channel.title.present? %>
+    <%= link_to image_tag(@video.channel.thumbnail_url,
+                class: 'channel-icon'),
+                root_path(channel: @video.channel.title) if @video.channel.thumbnail_url.present? %>
+    <%= link_to truncate(@video.channel.title,
+                length: 45, omission: ''),
+                root_path(channel: @video.channel.title),
+                class: "channel-title" if @video.channel.title.present? %>
   </div>
   <div class="show-video-metadata">
     <%= formatted_metadata(@video) %>
