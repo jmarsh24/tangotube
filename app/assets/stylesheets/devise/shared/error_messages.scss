@@ -1,5 +1,4 @@
 #error_explanation {
-  position: relative;
   padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
@@ -7,10 +6,5 @@
   color: #0c5460;
   background-color: #d1ecf1;
   border-color: #bee5eb;
-  font-size: .7rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-text: left;
+  font-size: .6rem;
 }

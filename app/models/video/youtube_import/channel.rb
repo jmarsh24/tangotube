@@ -1,4 +1,7 @@
 class Video::YoutubeImport::Channel
+  YOUTUBE_DL_COMMAND_PREFIX = "youtube-dl https://www.youtube.com/channel/".freeze
+  YOUTUBE_DL_COMMAND_SUFFIX = "/videos  --get-id --skip-download".freeze
+
   class << self
     def import(channel_id)
       new(channel_id).import
@@ -10,12 +13,17 @@ class Video::YoutubeImport::Channel
   end
 
   def initialize(channel_id)
+    @channel_id = channel_id
     @youtube_channel = fetch_by_id(channel_id)
     @channel = channel
   end
 
   def import
-    @channel = Channel.create(to_channel_params)
+    if channel.present?
+      channel.update(to_channel_params)
+    else
+      @channel = Channel.create(to_channel_params)
+    end
   end
 
   def import_videos
@@ -28,6 +36,10 @@ class Video::YoutubeImport::Channel
 
   def fetch_by_id(channel_id)
     Yt::Channel.new id: channel_id
+  end
+
+  def channel
+    @channel ||= Channel.find_by(channel_id: @channel_id)
   end
 
   def to_channel_params
@@ -48,23 +60,22 @@ class Video::YoutubeImport::Channel
     }
   end
 
-  def get_channel_video_ids(channel_id)
-    `youtube-dl https://www.youtube.com/channel/#{channel_id}/videos  --get-id --skip-download`.split
+  def get_channel_video_ids
+    `#{YOUTUBE_DL_COMMAND_PREFIX + channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
+  rescue StandardError => e
+    Rails.logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
+    "" # NOTE: the empty string return so your split method works always.
   end
 
-  def youtube_channel_videos
+  def youtube_channel_video_ids
     @youtube_channel.video_count >= 500 ? get_channel_video_ids(channel_id) : @youtube_channel.videos.map(&:id)
   end
 
-  def channel
-    Channel.find_by(channel_id: @youtube_channel.id)
-  end
-
-  def channel_videos
-    @channel.videos.map(&:youtube_id).to_a
+  def channel_existing_youtube_video_ids
+    channel.videos.pluck(:youtube_id)
   end
 
   def new_videos
-    youtube_channel_videos - channel_videos
+    youtube_channel_video_ids - channel_existing_youtube_video_ids
   end
 end

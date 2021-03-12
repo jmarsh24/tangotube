@@ -14,16 +14,14 @@ ActiveAdmin.register Video do
   scope :has_follower
   scope :missing_leader
   scope :missing_follower
-  scope :has_youtube_match
-  scope :has_acr_match
-  scope :successful_acrcloud
-  scope :unsuccessful_acrcloud
-  scope :filter_by_hidden
+  scope :has_youtube_song
+  scope :hidden
+  scope :not_hidden
 
   filter :id_cont, label: "id"
-  filter :leader_name_cont,   label: "Leader",    collection: proc { Leader.order(:name) }
-  filter :follower_name_cont, label: "Follower",  collection: proc { Follower.order(:name) }
-  filter :channel_title_cont, label: "Channel",   collection: proc { Channel.order(:title) }
+  filter :leader_name_cont, label: "Leader", collection: proc { Leader.order(:name) }
+  filter :follower_name_cont, label: "Follower", collection: proc { Follower.order(:name) }
+  filter :channel_title_cont, label: "Channel", collection: proc { Channel.order(:title) }
   filter :youtube_id_cont, label: "Youtube ID "
   filter :title_cont, label: "Title"
   filter :description_cont, label: "Description"
@@ -32,9 +30,9 @@ ActiveAdmin.register Video do
   index do
     selectable_column
     id_column
-    # column "Logo" do |video|
-    #   image_tag video.channel.thumbnail_url, height: 30
-    # end
+    column "Logo" do |video|
+      image_tag video.channel.thumbnail_url, height: 30
+    end
     column "channel" do |video|
       link_to(video.channel.title, "/admin/channels/#{video.channel.id}", target: :_blank, rel: :noopener) + " " +
         link_to("Youtube", "http://youtube.com/channel/#{video.channel.channel_id}", target: :_blank, rel: :noopener) + " " +
@@ -83,9 +81,5 @@ ActiveAdmin.register Video do
       input :popularity
     end
     f.actions
-  end
-
-  batch_action :hide do |_video|
-    Video.find(selection).each(&:hidden!)
   end
 end

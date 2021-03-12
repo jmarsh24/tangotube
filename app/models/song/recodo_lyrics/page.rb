@@ -11,10 +11,13 @@ class Song::RecodoLyrics::Page
   def update_song_from_lyrics
     return if lyrics.blank?
 
-    song = ::Song.where("title ILIKE ? AND artist ILIKE ?", title, artist).first
+    song = ::Song.where("unaccent(title) ILIKE unaccent(?)
+                        AND unaccent(artist) ILIKE unaccent(?)",
+                        title,
+                        artist).first
     return unless song
 
-    song.update(el_recodo_song_id: @id, lyrics: lyrics)
+    song.update(el_recodo_song_id: @id, lyrics: lyrics, artist: artist, title: title)
   end
 
   private
@@ -44,6 +47,6 @@ class Song::RecodoLyrics::Page
   end
 
   def raw
-    ::Faraday.get(RECODO_URL_PREFIX + @id + RECODO_URL_SUFFIX)
+    ::Faraday.get(RECODO_URL_PREFIX + @id.to_s + RECODO_URL_SUFFIX)
   end
 end

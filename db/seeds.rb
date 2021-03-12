@@ -1,61 +1,54 @@
-require 'csv'
-
-puts 'Seeding process started'
-
-CSV.foreach('data/tangodb-datasets/el_recodo_songs.csv', headers: true) do |column|
-  date = column[0]
-  artist = column[1]
-  title = column[2]
-  artist_2 = column[3]
-  style = column[4]
-  composer = column[5]
-  author = column[6]
-  last_name_search = column[7]
-  Song.create(date: date, artist: artist, title: title, artist_2: artist_2, genre: style, composer: composer,
-              author: author, last_name_search: last_name_search)
-end
-puts "There are now #{Song.count} Songs in the database."
-
-puts 'Seeding process started'
-
-CSV.foreach('data/tangodb-datasets/solotango_music_seed.csv', headers: false) do |column|
-  genre = column[0]
-  title = column[1]
-  artist = column[2]
-  last_name_search = column[5]
-  Song.create(artist: artist, title: title, genre: genre, last_name_search: last_name_search)
-end
-puts "There are now #{Song.count} Songs in the database."
-
-puts 'Seeding leaders into database'
-
-CSV.foreach('data/tangodb-datasets/Leaders.csv', headers: true) do |column|
-  name = column[1]
-  Leader.create(name: name)
-end
-puts "There are now #{Leader.count} leaders in the database."
-
-puts 'Seeding followers into database'
-
-CSV.foreach('data/tangodb-datasets/Followers.csv', headers: true) do |column|
-  name = column[1]
-  Follower.create(name: name)
-end
-puts "There are now #{Follower.count} followers in the database."
-
-CSV.foreach('data/tangodb-datasets/channels.csv', headers: true) do |column|
-  title = column[1]
-  channel_id = column[2]
-  Channel.create(title: title, channel_id: channel_id)
+# Seed read Channels
+data = YAML.load_file(Rails.root.join("seed", "data", "channel.yml").to_s)
+data.each do |e|
+  Channel.create!(e)
 end
 puts "There are now #{Channel.count} channels in the database."
 
-puts 'Seeding admin user into database'
-
-if Rails.env.development?
-  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+# Seed read Playlists
+data = YAML.load_file(Rails.root.join("seed", "data", "playlist.yml").to_s)
+data.each do |e|
+  Playlist.create!(e)
 end
+puts "There are now #{Playlist.count} playlists in the database."
 
-puts 'Admin User successfully seeded.'
+# Seed read Events
+data = YAML.load_file(Rails.root.join("seed", "data", "event.yml").to_s)
+data.each do |e|
+  Event.create!(e)
+end
+puts "There are now #{Event.count} events in the database."
 
-puts 'Succesfully seeded youtube music update into database'
+# Seed read Leaders
+data = YAML.load_file(Rails.root.join("seed", "data", "leader.yml").to_s)
+data.each do |e|
+  Leader.create!(e)
+end
+puts "There are now #{Leader.count} leaders in the database."
+
+# Seed read Followers
+data = YAML.load_file(Rails.root.join("seed", "data", "follower.yml").to_s)
+data.each do |e|
+  Follower.create!(e)
+end
+puts "There are now #{Follower.count} followers in the database."
+
+# Seed read Videos
+data = YAML.load_file(Rails.root.join("seed", "data", "song.yml").to_s)
+data.each do |e|
+  Song.create!(e)
+end
+puts "There are now #{Song.count} songs in the database."
+
+# Seed read Videos
+data = YAML.load_file(Rails.root.join("seed", "data", "videos.yml").to_s)
+data.each do |e|
+  Video.create!(e)
+end
+puts "There are now #{Video.count} videos in the database."
+
+# Seed Admin User in Development
+puts "Seeding admin user into database"
+if Rails.env.development?
+  AdminUser.create!(email: "admin@example.com", password: "password", password_confirmation: "password")
+end

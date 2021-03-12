@@ -203,7 +203,8 @@ CREATE TABLE public.channels (
     imported_videos_count integer DEFAULT 0,
     total_videos_count integer DEFAULT 0,
     yt_api_pull_count integer DEFAULT 0,
-    reviewed boolean DEFAULT false
+    reviewed boolean DEFAULT false,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -241,7 +242,8 @@ CREATE TABLE public.events (
     start_date date,
     end_date date,
     active boolean DEFAULT true,
-    reviewed boolean DEFAULT false
+    reviewed boolean DEFAULT false,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -276,7 +278,8 @@ CREATE TABLE public.followers (
     reviewed boolean,
     nickname character varying,
     first_name character varying,
-    last_name character varying
+    last_name character varying,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -311,7 +314,8 @@ CREATE TABLE public.leaders (
     reviewed boolean,
     nickname character varying,
     first_name character varying,
-    last_name character varying
+    last_name character varying,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -434,7 +438,8 @@ CREATE TABLE public.songs (
     popularity integer DEFAULT 0,
     active boolean DEFAULT true,
     lyrics text,
-    el_recodo_song_id integer
+    el_recodo_song_id integer,
+    videos_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -537,7 +542,11 @@ CREATE TABLE public.videos (
     scanned_youtube_music boolean DEFAULT false,
     click_count integer DEFAULT 0,
     spotify_artist_id_1 character varying,
-    spotify_artist_name_1 character varying
+    spotify_artist_name_1 character varying,
+    acr_cloud_artist_name character varying,
+    acr_cloud_artist_name_1 character varying,
+    acr_cloud_album_name character varying,
+    acr_cloud_track_name character varying
 );
 
 
@@ -947,6 +956,13 @@ CREATE INDEX index_videos_on_song_id ON public.videos USING btree (song_id);
 
 
 --
+-- Name: index_videos_on_youtube_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_youtube_id ON public.videos USING btree (youtube_id);
+
+
+--
 -- Name: index_videos_searches_on_tsv_document; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -986,6 +1002,13 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('0'),
 ('20210306201925'),
-('20210308100534');
+('20210308100534'),
+('20210309200926'),
+('20210309222823'),
+('20210309222936'),
+('20210309222950'),
+('20210309223000'),
+('20210309223723'),
+('20210309233622');
 
 

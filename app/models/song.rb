@@ -47,37 +47,9 @@ class Song < ApplicationRecord
   end
 
   class << self
-    # groups videos by song id and calculates the occur_count of each song
-    def occur_count_all
-      Video.group(:song_id).count.without(nil)
-    end
-
-    # calculates the maximum amount of occurances
-    def max_occur_count_all
-      @max_occur_count_all = occur_count_all.values.max
-    end
-
-    # creates a normalized popularity value between 0-100 based upon the occurance count
-    # and max number of occurances of each song
-    def calc_popularity_all
-      max_occur_count_all
-      occur_count_all.transform_values { |v| (v.to_f / @max_occur_count_all * 100).round }
-    end
-
-    # updates each song in the database with an occurance count
-    def update_all_occur_count
-      occur_count_all.each do |key, value|
-        song = Song.find(key)
-        song.update(occur_count: value)
-      end
-    end
-
-    # updates all songs in the database with a popularity number
-    def update_all_popularity
-      occur_count_all.each do |key, value|
-        song = Song.find(key)
-        song.update(popularity: value)
-      end
+    def set_all_popularity_values
+      max_count = Song.maximum(:videos_count).to_f
+      update_all("popularity = CAST(videos_count AS FLOAT) / #{max_count} * 100.0")
     end
   end
 end

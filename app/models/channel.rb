@@ -15,13 +15,12 @@
 #  reviewed              :boolean          default(FALSE)
 #
 class Channel < ApplicationRecord
+  include Reviewable
+  include Importable
+
   validates :channel_id, presence: true, uniqueness: true
 
   has_many :videos, dependent: :destroy
-
-  scope :imported,     ->   { where(imported: true) }
-  scope :not_imported, ->   { where(imported: false) }
-  scope :reviewed,     ->   { where(reviewed: false).where.not("title ILIKE ?", "%tango%") }
 
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
@@ -38,13 +37,6 @@ class Channel < ApplicationRecord
     def update_import_status
       where("imported_videos_count < total_videos_count").find_each do |channel|
         channel.update(imported: false)
-      end
-    end
-
-    def import_all_channels
-      where(imported: false).find_each do |channel|
-        channel_id = channel.channel_id
-        Video::YoutubeImport.from_channel(channel_id)
       end
     end
   end
