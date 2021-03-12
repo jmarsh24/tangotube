@@ -45,8 +45,6 @@ module VideosHelper
   end
 
   def formatted_metadata(video)
-    [formatted_upload_date(video.upload_date),
-     video.view_count.to_s + " views",
-     video.like_count.to_s + " likes"].compact.join(" • ")
+    "#{formatted_upload_date(video.upload_date)} • #{video.view_count} views • #{video.like_count} likes"
   end
 end
