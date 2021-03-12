@@ -15,7 +15,7 @@
       <%= render partial: "videos/show/video_info_details" %>
     </div>
       <% if @video.song.present? %>
-          <%= render partial: "videos/show/lyrics" if @video.song.lyrics.present?%>
+          <%= render partial: "videos/show/lyrics" if @video.song.lyrics.present? %>
       <% end %>
     <div class="recommended-videos-section">
       <%= render partial: "videos/show/recommended_videos" %>

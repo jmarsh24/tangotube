@@ -1,6 +1,10 @@
 .video-info-lyrics {
-  padding: 1.5rem;
-  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  padding: 0 .5rem;
+  margin: 1rem auto;
 }
 
 .detail-row-lyrics {
@@ -8,10 +12,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 300px;
-  max-width: 400px;
+  min-width: 150px;
+  max-width: 300px;
   border: 1px solid #c5c5c5;
   border-radius: 4px;
+  padding: 0 1rem;
 }
 
 .detail-column-lyrics {
