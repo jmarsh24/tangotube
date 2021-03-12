@@ -4,22 +4,10 @@
   flex-wrap: wrap;
 }
 
-.video-info-details-main {
-  flex: 2;
-  flex-direction: column;
-  min-width: 300px;
-  max-width: 800px;
-  a {
-    color: rgb(6, 95, 212);
-    font-size: 0.8rem;
-  }
-  p {
-    line-height: 1.2rem;
-  }
-}
-
 .video-info-details-secondary {
   flex: 1;
+
+  // margin: 1rem 0;
 }
 
 .detail-column-lyrics {

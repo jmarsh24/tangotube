@@ -17,7 +17,7 @@
   <div class="show-video-channel">
     <%= link_to image_tag(@video.channel.thumbnail_url,
                 class: "channel-icon"),
-                root_path(channel: @video.channel.title), { "data-turbo-frame": "_top" } %>
+                root_path(channel: @video.channel.title), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?  %>
     <%= link_to truncate(@video.channel.title,
                 length: 45, omission: ""),
                 root_path(channel: @video.channel.title),
