@@ -16,12 +16,11 @@
 #  updated_at    :datetime         not null
 #
 class Playlist < ApplicationRecord
-  validates :slug, presence: true, uniqueness: true
-
   include Reviewable
+  include Importable
+
+  validates :slug, presence: true, uniqueness: true
 
   has_many :videos
 
-  scope :imported,     ->   { where(imported: true) }
-  scope :not_imported, ->   { where(imported: false) }
 end

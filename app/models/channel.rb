@@ -15,14 +15,12 @@
 #  reviewed              :boolean          default(FALSE)
 #
 class Channel < ApplicationRecord
+  include Reviewable
+  include Importable
+
   validates :channel_id, presence: true, uniqueness: true
 
-  include Reviewable
-
   has_many :videos, dependent: :destroy
-
-  scope :imported,     ->   { where(imported: true) }
-  scope :not_imported, ->   { where(imported: false) }
 
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
