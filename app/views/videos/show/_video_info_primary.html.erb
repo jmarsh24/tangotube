@@ -1,9 +1,13 @@
 <div class="video-info-primary-container">
   <div class="show-video-title">
-    <%= link_to_primary_title(@video.dancer_names, @video.title, @video.any_song_attributes, @video.youtube_id) %>
+    <%= link_to_primary_title(@video.display.dancer_names,
+                              @video.title,
+                              @video.display.any_song_attributes,
+                              @video.youtube_id) %>
   </div>
   <div class="show-video-song">
-    <%= link_to_song(@video.el_recodo_attributes, @video.external_song_attributes) %>
+    <%= link_to_song( @video.display.el_recodo_attributes,
+                      @video.display.external_song_attributes) %>
   </div>
   <div class="show-video-event">
     <%= link_to @video.event.title.titleize,

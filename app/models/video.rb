@@ -45,7 +45,6 @@
 
 class Video < ApplicationRecord
   include Filterable
-  include Displayable
 
   validates :youtube_id, presence: true, uniqueness: true
 
@@ -126,6 +125,10 @@ class Video < ApplicationRecord
     def filter_by_query(query)
       where(id: VideosSearch.search(query).select(:video_id))
     end
+  end
+
+  def display
+    @display ||= Video::Display.new(self)
   end
 
   def clicked!
