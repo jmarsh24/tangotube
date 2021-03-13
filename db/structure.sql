@@ -1001,6 +1001,7 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('0'),
+('1'),
 ('20210306201925'),
 ('20210308100534'),
 ('20210309200926'),
@@ -1011,3 +1012,5 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210309223723'),
 ('20210309233622'),
 ('20210312174239');
+
+
