@@ -65,11 +65,41 @@ RSpec.describe Video, type: :model do
     expect(video.click_count).to eq(1)
   end
 
-  it "displays full title of song attribute if it exists" do
-    channel = create(:channel)
-    song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
-    video = create(:video, click_count: 0, channel: channel, song: song, youtube_song: "No Vendrá", youtube_artist: "")
+  describe ".display.any_song_attribute" do
+    it "only song exists" do
+      channel = create(:channel)
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      video = create(:video, click_count: 0, channel: channel, song: song)
 
-    expect(video.display.any_song_attributes).to eq("No Vendrá - Angel D'agostino - Tango")
+      expect(video.display.any_song_attributes).to eq("No Vendrá - Angel D'agostino - Tango")
+    end
+
+    it "song doesn't exist" do
+      channel = create(:channel)
+      video = create(:video, click_count: 0, channel: channel)
+
+      expect(video.display.any_song_attributes).to eq(nil)
+    end
+
+    it "only youtube song exists" do
+      channel = create(:channel)
+      video = create(:video, click_count: 0, channel: channel, youtube_song: "No Vendrá", youtube_artist: "Angel D'agostino")
+
+      expect(video.display.any_song_attributes).to eq("No Vendrá - Angel D'agostino")
+    end
+
+    it "only acr_cloud exists" do
+      channel = create(:channel)
+      video = create(:video, click_count: 0, channel: channel, acr_cloud_track_name: "No Vendrá", acr_cloud_artist_name: "Angel D'agostino")
+
+      expect(video.display.any_song_attributes).to eq("No Vendrá - Angel D'agostino")
+    end
+
+    it "only spotify exists" do
+      channel = create(:channel)
+      video = create(:video, click_count: 0, channel: channel, spotify_track_name: "No Vendrá", spotify_artist_name: "Angel D'agostino")
+
+      expect(video.display.any_song_attributes).to eq("No Vendrá - Angel D'agostino")
+    end
   end
 end
