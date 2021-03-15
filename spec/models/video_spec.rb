@@ -108,31 +108,35 @@ RSpec.describe Video, type: :model do
       channel = create(:channel)
       video = create(:video, channel: channel, spotify_track_name: "No Vendrá", spotify_artist_name: "Angel D'agostino")
 
-      expect(video.display.any_song_attributes).to eq(nil)
+      expect(video.display.external_song_attributes).to eq("No Vendrá - Angel D'agostino")
     end
 
     it "only youtube exists" do
       channel = create(:channel)
       video = create(:video, channel: channel, youtube_song: "No Vendrá", youtube_artist: "Angel D'agostino")
-      expect(video.display.any_song_attributes).to eq(nil)
+      expect(video.display.external_song_attributes).to eq("No Vendrá - Angel D'agostino")
     end
 
     it "only acr cloud exists" do
       channel = create(:channel)
       video = create(:video, channel: channel, acr_cloud_track_name: "No Vendrá", acr_cloud_artist_name: "Angel D'agostino")
 
-      expect(video.display.any_song_attributes).to eq("No Vendrá - Angel D'agostino")
+      expect(video.display.external_song_attributes).to eq("No Vendrá - Angel D'agostino")
     end
   end
 
   describe ".display.el_recodo_attributes" do
-    it "missing track_name" do
+    it "missing song" do
+      channel = create(:channel)
+      video = create(:video, channel: channel)
+      expect(video.display.el_recodo_attributes).to eq(nil)
     end
 
-    it "missing artist_name exists" do
-    end
-
-    it "has both track_name and artist_name" do
+    it "has all attributes" do
+      channel = create(:channel)
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      video = create(:video, channel: channel, song: song)
+      expect(video.display.el_recodo_attributes).to eq("No Vendrá - Angel D'agostino - Tango")
     end
   end
 
@@ -178,5 +182,8 @@ RSpec.describe Video, type: :model do
 
     it "has both track_name and artist_name" do
     end
+  end
+
+  describe "scopes" do
   end
 end
