@@ -12,11 +12,8 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
-COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
 CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
-COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
 CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
-COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 SET default_tablespace = '';
 SET default_table_access_method = heap;
 CREATE TABLE public.admin_users (
