@@ -115,5 +115,4 @@ RSpec.describe Song, type: :model do
       expect(song.full_title).to eq("No Vendrá - Angel D'agostino - Tango")
     end
   end
-
 end

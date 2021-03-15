@@ -46,5 +46,30 @@ require "rails_helper"
 require_relative "../support/devise"
 
 RSpec.describe Video, type: :model do
+  let(:video) { build(:video) }
+  let(:channel) { build(:channel) }
+
+  it { is_expected.to validate_presence_of(:youtube_id) }
   it { is_expected.to validate_uniqueness_of(:youtube_id) }
+
+  it { is_expected.to belong_to(:leader).optional }
+  it { is_expected.to belong_to(:follower).optional }
+  it { is_expected.to belong_to(:song).optional }
+  it { is_expected.to belong_to(:channel) }
+  it { is_expected.to belong_to(:event).optional }
+
+  it "click_count should == 1 " do
+    channel = create(:channel)
+    video = create(:video, click_count: 0, channel: channel)
+    video.clicked!
+    expect(video.click_count).to eq(1)
+  end
+
+  it "displays full title of song attribute if it exists" do
+    channel = create(:channel)
+    song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+    video = create(:video, click_count: 0, channel: channel, song: song, youtube_song: "No Vendrá", youtube_artist: "")
+
+    expect(video.display.any_song_attributes).to eq("No Vendrá - Angel D'agostino - Tango")
+  end
 end
