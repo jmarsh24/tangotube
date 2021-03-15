@@ -73,6 +73,6 @@ FactoryBot.define do
     popularity { Faker::Number.between(from: 1, to: 100) }
     active { true }
     lyrics { Faker::Quote.famous_last_words }
-    last_name_search { Faker::Name.last_name }
+    last_name_search { artist.last }
   end
 end

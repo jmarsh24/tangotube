@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Song, type: :model do
-  let(:song) { build(:leader) }
+  let(:song) { build(:song) }
+
   it { is_expected.to validate_presence_of(:genre) }
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:artist) }
@@ -11,8 +12,108 @@ RSpec.describe Song, type: :model do
   it { is_expected.to have_many(:follower).through(:videos) }
 
   describe ".sort_by_popularity" do
-    it "includes users with admin flag" do
-      admin = Song.create!(admin: true)
-      expect(User.admins).to include(admin)
+    it "order songs in database in descending order" do
+      song = create(:song, popularity: 100)
+      song2 = create(:song, popularity: 99)
+      expect(Song.sort_by_popularity.first).to eq(song)
     end
+  end
+
+  describe ".filter_by_active" do
+    it "order songs in database in descending order" do
+      song = create(:song, active: true)
+      expect(Song.filter_by_active).to include(song)
+    end
+  end
+
+  describe ".filter_by_not_active" do
+    it "order songs in database in descending order" do
+      song = create(:song, active: false)
+      expect(Song.filter_by_not_active).to include(song)
+    end
+  end
+
+  describe ".title_match" do
+    it "find song by title" do
+      song = create(:song, title: "No Vendrá")
+      @result = Song.title_match("No Vendrá")
+      expect(@result).to include(song)
+    end
+
+    it "find song by title with partial prefix" do
+      song = create(:song, title: "No Vendrá")
+      @result = Song.title_match("No Ven")
+      expect(@result).to include(song)
+    end
+
+    it "find song by title with partial suffix" do
+      song = create(:song, title: "No Vendrá")
+      @result = Song.title_match("endrá")
+      expect(@result).to include(song)
+    end
+
+    it "find song by title with partial middle match" do
+      song = create(:song, title: "No Vendrá")
+      @result = Song.title_match("vend")
+      expect(@result).to include(song)
+    end
+
+    it "find song by title without accent" do
+      song = create(:song, title: "No Vendrá")
+      @result = Song.title_match("No Vendra")
+      expect(@result).to include(song)
+    end
+
+    it "find song by title without titleize" do
+      song = create(:song, title: "No Vendrá")
+      @result = Song.title_match("no vendrá")
+      expect(@result).to include(song)
+    end
+  end
+
+  describe ".full_title_search" do
+    it "find song with artist" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      @result = Song.full_title_search("angel d'agostino")
+      expect(@result).to include(song)
+    end
+
+    it "find song with partial artist" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      @result = Song.full_title_search("agostino")
+      expect(@result).to include(song)
+    end
+
+    it "find song with genre" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      @result = Song.full_title_search("tango")
+      expect(@result).to include(song)
+    end
+
+    it "find song with partial genre" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      @result = Song.full_title_search("ango")
+      expect(@result).to include(song)
+    end
+
+    it "find song with title" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      @result = Song.full_title_search("no vendra")
+      expect(@result).to include(song)
+    end
+
+    it "find song with partial title" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      @result = Song.full_title_search("endra")
+      expect(@result).to include(song)
+    end
+  end
+
+  describe "full_title" do
+    it "find song return string with 'title - artist - genre'" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      expect(song.full_title).to eq("No Vendrá - Angel D'agostino - Tango")
+    end
+  end
+
 end
