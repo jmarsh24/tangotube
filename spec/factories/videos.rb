@@ -44,11 +44,8 @@
 #
 FactoryBot.define do
   factory :video do
-    title { "Example Title" }
-    description { "Example Description" }
+    channel
     youtube_id { "Example Youtube ID" }
-    channel_id { 1 }
-    click_count { 0 }
   end
 
   factory :random_video do
