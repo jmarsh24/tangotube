@@ -44,7 +44,7 @@ class Song < ApplicationRecord
                             }
 
   def full_title
-    "#{title.titleize} - #{artist.titleize} - #{genre.titleize}"
+    "#{title.titleize} - #{artist.split("'").map(&:titleize).join("'")} - #{genre.titleize}"
   end
 
   class << self

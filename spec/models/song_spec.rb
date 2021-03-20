@@ -112,7 +112,7 @@ RSpec.describe Song, type: :model do
   describe "full_title" do
     it "find song return string with 'title - artist - genre'" do
       song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
-      expect(song.full_title).to eq("No Vendrá - Angel D'agostino - Tango")
+      expect(song.full_title).to eq("No Vendrá - Angel D'Agostino - Tango")
     end
   end
 end
