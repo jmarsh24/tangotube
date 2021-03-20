@@ -136,4 +136,8 @@ class Video < ApplicationRecord
     increment(:popularity)
     save!
   end
+
+  def titleize_artist_name
+    split("'").map(&:titleize).join("'")
+  end
 end
