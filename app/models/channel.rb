@@ -24,7 +24,8 @@ class Channel < ApplicationRecord
 
   has_many :videos, dependent: :destroy
 
-  scope :imported, -> { where("`channels`.`videos_count` >= `channels`.`total_videos_count`") }
+  scope :imported, -> { where(imported: true) }
+  scope :not_imported, -> { where(imported: false) }
 
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
@@ -35,11 +36,5 @@ class Channel < ApplicationRecord
 
   def update_imported
     self.imported = videos_count >= total_videos_count
-  end
-
-  class << self
-    def imported?
-      where("videos_count < total_videos_count").update_all(imported: false)
-    end
   end
 end
