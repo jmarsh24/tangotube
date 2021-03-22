@@ -96,6 +96,7 @@ class Video < ApplicationRecord
                                     OR unaccent(acr_cloud_track_name) ILIKE unaccent(:song_title)",
                                   song_title: "%#{song_title}%")
                           }
+
   scope :with_song_artist_keyword, lambda { |song_artist_keyword|
                                      where("spotify_artist_name ILIKE :song_artist_keyword
                                             OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
