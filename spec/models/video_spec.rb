@@ -234,7 +234,7 @@ RSpec.describe Video, type: :model do
   end
 
   describe ".filter_by_follower" do
-    it "filter_by_follower" do
+    it "returns videos with matching follower name in video" do
       follower = create(:follower, name: "Noelia Hurtado")
       video = create(:video, follower: follower)
       @result = described_class.filter_by_follower("Noelia Hurtado")
@@ -243,7 +243,7 @@ RSpec.describe Video, type: :model do
   end
 
   describe ".filter_by_channel" do
-    it "filter_by_channel" do
+    it "returns videos with matching channel name in video" do
       channel = create(:channel, title: "030 Tango")
       video = create(:video, channel: channel)
       @result = described_class.filter_by_channel("030 Tango")
@@ -252,7 +252,7 @@ RSpec.describe Video, type: :model do
   end
 
   describe ".filter_by_event_id" do
-    it "filter_by_event_id" do
+    it "returns videos with matching event_id in video" do
       event = create(:event, title: "Embrace Berlin", id: 1)
       video = create(:video, event: event)
       @result = described_class.filter_by_event_id("1")
@@ -261,7 +261,7 @@ RSpec.describe Video, type: :model do
   end
 
   describe ".filter_by_song_id" do
-    it "returns song with corresponding song_id" do
+    it "returns videos with song_id in video" do
       song = create(:song, id: 1)
       video = create(:video, song: song)
       @result = described_class.filter_by_song_id("1")
@@ -270,13 +270,13 @@ RSpec.describe Video, type: :model do
   end
 
   describe ".filter_by_hd" do
-    it "returns video hd videos" do
+    it "returns videos with hd: true" do
       video = create(:video, hd: true)
       @result = described_class.filter_by_hd(true)
       expect(@result).to include(video)
     end
 
-    it "returns video non hd videos" do
+    it "returns videos with hd: false" do
       video = create(:video, hd: false)
       @result = described_class.filter_by_hd(false)
       expect(@result).to include(video)
@@ -304,101 +304,466 @@ RSpec.describe Video, type: :model do
 
   describe ".has_song" do
     it "returns by videos with a song" do
+      song = create(:song)
+      video = create(:video, song: song)
+      @result = described_class.has_song
+      expect(@result).to include(video)
     end
   end
 
-  describe ".filter_by_not_hidden" do
+  describe ".not_hidden" do
     it "returns by videos with a song" do
+      video = create(:video, hidden: false)
+      @result = described_class.not_hidden
+      expect(@result).to include(video)
     end
   end
 
   describe ".has_leader" do
     it "returns by videos with a song" do
+      leader = create(:leader)
+      video = create(:video, leader: leader)
+      @result = described_class.has_leader
+      expect(@result).to include(video)
     end
   end
 
   describe ".has_follower" do
     it "returns by videos with a song" do
+      follower = create(:follower)
+      video = create(:video, follower: follower)
+      @result = described_class.has_follower
+      expect(@result).to include(video)
     end
   end
 
   describe ".has_youtube_song" do
     it "returns by videos with a song" do
+      video = create(:video, youtube_song: "La Mentirosa", youtube_artist: "Osvaldo PUGLIESE")
+      @result = described_class.has_youtube_song
+      expect(@result).to include(video)
     end
   end
 
   describe ".missing_follower" do
     it "returns by videos with a song" do
+      video = create(:video)
+      @result = described_class.missing_follower
+      expect(@result).to include(video)
     end
   end
 
   describe ".missing_leader" do
-    it "returns by videos with a song" do
+    it "returns by videos missing a leader" do
+      video = create(:video)
+      @result = described_class.missing_leader
+      expect(@result).to include(video)
     end
   end
 
   describe ".missing_song" do
     it "returns by videos with a song" do
+      video = create(:video)
+      @result = described_class.missing_song
+      expect(@result).to include(video)
     end
   end
 
   describe ".scanned_youtube_music" do
     it "returns by videos with a song" do
+      video = create(:video, scanned_youtube_music: true)
+      @result = described_class.scanned_youtube_music
+      expect(@result).to include(video)
     end
   end
 
   describe ".not_scanned_youtube_music" do
     it "returns by videos with a song" do
+      video = create(:video, scanned_youtube_music: false)
+      @result = described_class.not_scanned_youtube_music
+      expect(@result).to include(video)
     end
   end
 
   describe ".has_youtube_song" do
-    it "returns by videos with a song" do
+    it "returns by videos with youtube_song" do
+      video = create(:video, youtube_song: "La Mentirosa")
+      @result = described_class.has_youtube_song
+      expect(@result).to include(video)
     end
   end
 
   describe ".successful_acrcloud" do
     it "returns by videos with a song" do
+      video = create(:video, acr_response_code: 0)
+      @result = described_class.successful_acrcloud
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song" do
+      video = create(:video, acr_response_code: 1001)
+      @result = described_class.successful_acrcloud
+      expect(@result).not_to include(video)
+    end
+
+    it "returns by videos with a song" do
+      video = create(:video, acr_response_code: nil)
+      @result = described_class.successful_acrcloud
+      expect(@result).not_to include(video)
     end
   end
 
   describe ".not_successful_acrcloud" do
-    it "returns by videos with a song" do
+    it "returns by videos with a 1001 acr_response_code" do
+      video = create(:video, acr_response_code: 1001)
+      @result = described_class.not_successful_acrcloud
+      expect(@result).to include(video)
+    end
+
+    it "does not return videos with nil acr_response_code" do
+      video = create(:video, acr_response_code: nil)
+      @result = described_class.not_successful_acrcloud
+      expect(@result).not_to include(video)
+    end
+
+    it "does not return videos with 0 acr_response_code" do
+      video = create(:video, acr_response_code: 0)
+      @result = described_class.not_successful_acrcloud
+      expect(@result).not_to include(video)
     end
   end
 
   describe ".scanned_acrcloud" do
     it "returns by videos with a song" do
+      video = create(:video, acr_response_code: nil)
+      @result = described_class.scanned_acrcloud
+      expect(@result).not_to include(video)
+    end
+
+    it "returns by videos with a song" do
+      video = create(:video, acr_response_code: 0)
+      @result = described_class.scanned_acrcloud
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song" do
+      video = create(:video, acr_response_code: 1001)
+      @result = described_class.scanned_acrcloud
+      expect(@result).to include(video)
     end
   end
 
   describe ".not_scanned_acrcloud" do
     it "returns by videos with a song" do
+      video = create(:video, acr_response_code: nil)
+      @result = described_class.not_scanned_acrcloud
+      expect(@result).not_to include(video)
+    end
+
+    it "returns by videos with a song" do
+      video = create(:video, acr_response_code: 0)
+      @result = described_class.not_scanned_acrcloud
+      expect(@result).not_to include(video)
+    end
+
+    it "returns by videos with a song" do
+      video = create(:video, acr_response_code: 1001)
+      @result = described_class.not_scanned_acrcloud
+      expect(@result).not_to include(video)
     end
   end
 
   describe ".with_song_title" do
-    it "returns by videos with a song" do
+    it "returns by videos with a spotify_track_song" do
+      song = create(:song, title: "No Vendrá")
+      video = create(:video, spotify_track_name: "No Vendra")
+      @result = described_class.with_song_title(song.title)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a youtube_song" do
+      song = create(:song, title: "No Vendrá")
+      video = create(:video, youtube_song: "No Vendra")
+      @result = described_class.with_song_title(song.title)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a title" do
+      song = create(:song, title: "No Vendrá")
+      video = create(:video, title: "This is a video with No Vendra by Angel D'Agostino")
+      @result = described_class.with_song_title(song.title)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a description" do
+      song = create(:song, title: "No Vendrá")
+      video = create(:video, description: "This is a video with No Vendra by Angel D'Agostino")
+      @result = described_class.with_song_title(song.title)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song title in tags" do
+      song = create(:song, title: "No Vendrá")
+      video = create(:video, tags: "This is a video with No Vendra by Angel D'Agostino")
+      @result = described_class.with_song_title(song.title)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song title in tags" do
+      song = create(:song, title: "No Vendrá")
+      video = create(:video, acr_cloud_track_name: "This is a video with No Vendra by Angel D'Agostino")
+      @result = described_class.with_song_title(song.title)
+      expect(@result).to include(video)
     end
   end
 
   describe ".with_song_artist_keyword" do
-    it "returns by videos with a song" do
+    it "returns by videos with a song in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, spotify_artist_name: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a spotify_artist_name_2 in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, spotify_artist_name_2: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a youtube_artist in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, youtube_artist: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a description in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, description: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a title in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, title: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a tags in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, tags: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a spotify_album_name in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, spotify_album_name: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with an acr_cloud_artist_name in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, acr_cloud_artist_name: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with an acr_cloud_artist_name_1 in video" do
+      song = create(:song, last_name_search: "Agostino")
+      video = create(:video, acr_cloud_artist_name_1: "Angel D'Agostino")
+      @result = described_class.with_song_artist_keyword(song.last_name_search)
+      expect(@result).to include(video)
     end
   end
 
   describe ".with_dancer_name_in_title" do
     it "returns by videos with a song" do
+      leader = create(:leader, name: "Carlitos Espinoza")
+      video = create(:video, title: "Title with Carlitos Espinoza")
+      @result = described_class.with_dancer_name_in_title(leader.full_name)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song" do
+      leader = create(:leader, first_name: "Carlitos", last_name: "Espinoza")
+      video = create(:video, title: "Title with Carlitos Espinoza")
+      @result = described_class.with_dancer_name_in_title(leader.full_name)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song" do
+      follower = create(:follower, name: "Noelia Hurtado")
+      video = create(:video, title: "Title with Noelia Hurtado")
+      @result = described_class.with_dancer_name_in_title(follower.full_name)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song" do
+      follower = create(:follower, first_name: "Noelia", last_name: "Hurtado")
+      video = create(:video, title: "Title with Noelia Hurtado")
+      @result = described_class.with_dancer_name_in_title(follower.full_name)
+      expect(@result).to include(video)
     end
   end
 
   describe ".title_match_missing_leader" do
     it "returns by videos with a song" do
+      leader = create(:leader, name: "Carlitos Espinoza")
+      video = create(:video, leader: nil, title: "Title with Carlitos Espinoza")
+      @result = described_class.title_match_missing_leader(leader.full_name)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song" do
+      leader = create(:leader, name: "Carlitos Espinoza")
+      video = create(:video, leader: leader, title: "Title with Carlitos Espinoza")
+      @result = described_class.title_match_missing_leader(leader.full_name)
+      expect(@result).not_to include(video)
     end
   end
 
   describe ".title_match_missing_follower" do
     it "returns by videos with a song" do
+      follower = create(:follower, name: "Noelia Hurtado")
+      video = create(:video, follower: nil, title: "Title with Noelia Hurtado")
+      @result = described_class.title_match_missing_follower(follower.full_name)
+      expect(@result).to include(video)
+    end
+
+    it "returns by videos with a song" do
+      follower = create(:follower, name: "Carlitos Espinoza")
+      video = create(:video, follower: follower, title: "Title with Carlitos Espinoza")
+      @result = described_class.title_match_missing_follower(follower.full_name)
+      expect(@result).not_to include(video)
+    end
+  end
+
+  describe ".filter_by_query" do
+    it "finds video with title" do
+      video = create(:video, title: "Title with carlitos espinoza")
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("Carlitos Espinoza")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with title" do
+      video = create(:video, description: "description with carlitos espinoza")
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("Carlitos Espinoza")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with leader" do
+      leader = create(:leader, name: "Carlitos Espinoza")
+      video = create(:video, leader: leader)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("Carlitos Espinoza")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with leader" do
+      leader = create(:leader, nickname: "Carlitos")
+      video = create(:video, leader: leader)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("Carlitos")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with follower" do
+      follower = create(:follower, name: "Noelia Hurtado")
+      video = create(:video, follower: follower)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("Noelia Hurtado")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with follower" do
+      follower = create(:follower, nickname: "Noelia")
+      video = create(:video, follower: follower)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("Noelia")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with youtube_id" do
+      video = create(:video, youtube_id: "s6iptZdCcG0")
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("s6iptZdCcG0")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with youtube_artist" do
+      video = create(:video, youtube_artist: "Angel D'Agostino")
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("Agostino")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with youtube_song" do
+      video = create(:video, youtube_song: "No Vendrá")
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("no vendrá")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with spotify_track_name" do
+      video = create(:video, spotify_track_name: "No Vendrá")
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("no vendrá")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with spotify_artist_name" do
+      video = create(:video, spotify_artist_name: "Angel D'Agostino")
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("agostino")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with channel title" do
+      channel = create(:channel, title: "030 Tango")
+      video = create(:video, channel: channel)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("030 tango")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with channel_id" do
+      channel = create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
+      video = create(:video, channel: channel)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("UCtdgMR0bmogczrZNpPaO66Q")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with song genre" do
+      song = create(:song, genre: "Tango")
+      video = create(:video, song: song)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("tango")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with song title" do
+      song = create(:song, title: "La Mentirosa")
+      video = create(:video, song: song)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("mentirosa")
+      expect(@result).to include(video)
+    end
+
+    it "finds video with song artist" do
+      song = create(:song, artist: "Angel D'Agostino")
+      video = create(:video, song: song)
+      VideosSearch.refresh
+      @result = described_class.filter_by_query("d'agostino")
+      expect(@result).to include(video)
     end
   end
 end
