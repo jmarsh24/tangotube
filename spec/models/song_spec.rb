@@ -12,8 +12,6 @@ RSpec.describe Song, type: :model do
   it { is_expected.to have_many(:leader).through(:videos) }
   it { is_expected.to have_many(:follower).through(:videos) }
 
-  it { is_expected.to belong_to(:video).counter_cache(true) }
-
   describe ".sort_by_popularity" do
     it "order songs in database in descending order" do
       song = create(:song, popularity: 100)
@@ -121,19 +119,6 @@ RSpec.describe Song, type: :model do
     it "titleizes artist names without ' properly" do
       song = create(:song, title: "Tal vez será su voz", artist: "Anibal Troilo", genre: "TANGO")
       expect(song.full_title).to eq("Tal Vez Será Su Voz - Anibal Troilo - Tango")
-    end
-  end
-
-  describe ".set_all_popularity_values" do
-    it "calculates popularity values" do
-      song = create(:song)
-      channel = create(:channel)
-      create(:video, channel: channel, song: song)
-      create(:video, channel: channel, song: song)
-      create(:video, channel: channel, song: song)
-      song.reload
-      described_class.set_all_popularity_values
-      expect(song.popularity).to eq(100)
     end
   end
 end
