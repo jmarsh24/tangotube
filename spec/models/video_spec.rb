@@ -51,11 +51,11 @@ RSpec.describe Video, type: :model do
   it { is_expected.to validate_presence_of(:youtube_id) }
   it { is_expected.to validate_uniqueness_of(:youtube_id) }
 
-  it { is_expected.to belong_to(:leader).optional }
-  it { is_expected.to belong_to(:follower).optional }
-  it { is_expected.to belong_to(:song).optional }
-  it { is_expected.to belong_to(:channel) }
-  it { is_expected.to belong_to(:event).optional }
+  it { is_expected.to belong_to(:leader).optional.counter_cache(true) }
+  it { is_expected.to belong_to(:follower).optional.counter_cache(true) }
+  it { is_expected.to belong_to(:song).optional.counter_cache(true) }
+  it { is_expected.to belong_to(:channel).counter_cache(true) }
+  it { is_expected.to belong_to(:event).optional.counter_cache(true) }
 
   it "click_count should == 1 " do
     video = create(:video, click_count: 0)

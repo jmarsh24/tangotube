@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Song, type: :model do
   let(:song) { build(:song) }
-  let(:video) { build(:random_video) }
+  let(:video) { build(:video) }
 
   it { is_expected.to validate_presence_of(:genre) }
   it { is_expected.to validate_presence_of(:title) }
@@ -11,6 +11,8 @@ RSpec.describe Song, type: :model do
   it { is_expected.to have_many(:videos) }
   it { is_expected.to have_many(:leader).through(:videos) }
   it { is_expected.to have_many(:follower).through(:videos) }
+
+  it { is_expected.to belong_to(:video).counter_cache(true) }
 
   describe ".sort_by_popularity" do
     it "order songs in database in descending order" do
@@ -126,9 +128,10 @@ RSpec.describe Song, type: :model do
     it "calculates popularity values" do
       song = create(:song)
       channel = create(:channel)
-      create(:random_video, channel: channel, song: song)
-      create(:random_video, channel: channel, song: song)
-      create(:random_video, channel: channel, song: song)
+      create(:video, channel: channel, song: song)
+      create(:video, channel: channel, song: song)
+      create(:video, channel: channel, song: song)
+      song.reload
       described_class.set_all_popularity_values
       expect(song.popularity).to eq(100)
     end

@@ -45,11 +45,6 @@
 FactoryBot.define do
   factory :video do
     channel
-    youtube_id { "s6iptZdCcG0" }
-  end
-
-  factory :random_video do
-    channel
     youtube_id { Faker::Internet.password(min_length: 8) }
   end
 end
