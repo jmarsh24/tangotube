@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Song, type: :model do
   let(:song) { build(:song) }
+  let(:video) { build(:random_video) }
 
   it { is_expected.to validate_presence_of(:genre) }
   it { is_expected.to validate_presence_of(:title) }
@@ -125,9 +126,9 @@ RSpec.describe Song, type: :model do
     it "calculates popularity values" do
       song = create(:song)
       channel = create(:channel)
-      create(:video, channel: channel, song: song)
-      create(:video, channel: channel, song: song)
-      create(:video, channel: channel, song: song)
+      create(:random_video, channel: channel, song: song)
+      create(:random_video, channel: channel, song: song)
+      create(:random_video, channel: channel, song: song)
       described_class.set_all_popularity_values
       expect(song.popularity).to eq(100)
     end
