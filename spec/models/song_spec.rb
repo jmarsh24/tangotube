@@ -109,7 +109,7 @@ RSpec.describe Song, type: :model do
     end
   end
 
-  describe "full_title" do
+  describe ".full_title" do
     it "find song return string with 'title - artist - genre'" do
       song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
       expect(song.full_title).to eq("No Vendrá - Angel D'Agostino - Tango")
@@ -118,6 +118,18 @@ RSpec.describe Song, type: :model do
     it "titleizes artist names without ' properly" do
       song = create(:song, title: "Tal vez será su voz", artist: "Anibal Troilo", genre: "TANGO")
       expect(song.full_title).to eq("Tal Vez Será Su Voz - Anibal Troilo - Tango")
+    end
+  end
+
+  describe ".set_all_popularity_values" do
+    it "calculates popularity values" do
+      song = create(:song)
+      channel = create(:channel)
+      create(:video, channel: channel, song: song)
+      create(:video, channel: channel, song: song)
+      create(:video, channel: channel, song: song)
+      described_class.set_all_popularity_values
+      expect(song.popularity).to eq(100)
     end
   end
 end

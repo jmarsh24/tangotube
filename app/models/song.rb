@@ -49,8 +49,11 @@ class Song < ApplicationRecord
 
   class << self
     def set_all_popularity_values
-      max_count = Song.maximum(:videos_count).to_f
-      update_all("popularity = CAST(videos_count AS FLOAT) / #{max_count} * 100.0")
+      update_all("popularity = CAST(videos_count AS FLOAT) / #{max_times_song_appears} * 100.0")
+    end
+
+    def max_times_song_appears
+      @max_times_song_appears = Song.maximum(:videos_count).to_f
     end
   end
 end
