@@ -17,6 +17,28 @@
 require "rails_helper"
 
 RSpec.describe Channel, type: :model do
+  let(:channel) { build(:channel) }
+
   it { is_expected.to have_many(:videos) }
   it { is_expected.to validate_uniqueness_of(:channel_id) }
+
+  describe ".update_videos_count" do
+    it "changes imported to false if total_videos_count is greater than internal videos_count" do
+      channel = create(:channel, imported: true, total_videos_count: 500, videos_count: 499)
+      channel.save
+      expect(channel.reload.imported).to eq(false)
+    end
+
+    it "changes imported to true if total_videos_count is smaller than internal videos_count" do
+      channel = create(:channel, imported: false, total_videos_count: 500, videos_count: 501)
+      channel.save
+      expect(channel.reload.imported).to eq(true)
+    end
+
+    it "changes imported to false if total_videos_count is greater than internal videos_count" do
+      channel = create(:channel, imported: false, total_videos_count: 500, videos_count: 500)
+      channel.save
+      expect(channel.reload.imported).to eq(true)
+    end
+  end
 end

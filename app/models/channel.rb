@@ -15,6 +15,8 @@
 #  reviewed              :boolean          default(FALSE)
 #
 class Channel < ApplicationRecord
+  before_save :update_imported, if: -> { total_videos_count_changed? || videos_count_changed? }
+
   include Reviewable
   include Importable
 
@@ -22,22 +24,22 @@ class Channel < ApplicationRecord
 
   has_many :videos, dependent: :destroy
 
+  scope :imported, -> { where("`channels`.`videos_count` >= `channels`.`total_videos_count`") }
+
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
                                "%#{query}%")
                        }
 
-  class << self
-    def update_imported_video_counts
-      all.find_each do |channel|
-        channel.update(imported_videos_count: channel.videos.count)
-      end
-    end
+  private
 
-    def update_import_status
-      where("imported_videos_count < total_videos_count").find_each do |channel|
-        channel.update(imported: false)
-      end
+  def update_imported
+    self.imported = videos_count >= total_videos_count
+  end
+
+  class << self
+    def imported?
+      where("videos_count < total_videos_count").update_all(imported: false)
     end
   end
 end
