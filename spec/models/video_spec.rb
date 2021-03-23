@@ -45,7 +45,6 @@
 require "rails_helper"
 
 RSpec.describe Video, type: :model do
-
   describe "validations" do
     it { is_expected.to validate_presence_of(:youtube_id) }
     it { is_expected.to validate_uniqueness_of(:youtube_id) }
@@ -159,9 +158,6 @@ RSpec.describe Video, type: :model do
       result = described_class.not_hidden
       expect(result).to include(video)
     end
-  end
-
-  describe ".paginate" do
   end
 
   describe ".has_song" do

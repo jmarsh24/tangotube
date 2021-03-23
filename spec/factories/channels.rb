@@ -17,6 +17,6 @@
 
 FactoryBot.define do
   factory :channel do
-    channel_id { Faker::String.random(length: 12) }
+    sequence(:channel_id) { |n| "fancy_youtube_slug#{n}" }
   end
 end
