@@ -15,12 +15,4 @@ RSpec.describe VideosSearch, type: :model do
       expect(VideosSearch.count).to eq(1)
     end
   end
-
-  describe ".search" do
-    it "materialized view is searchable" do
-      video = create(:video)
-      VideosSearch.refresh
-      expect(VideosSearch.count).to include(1)
-    end
-  end
 end
