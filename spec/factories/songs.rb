@@ -25,18 +25,4 @@ FactoryBot.define do
     title { "La mentirosa" }
     artist { "Anibal Troilo" }
   end
-
-  factory :random_song do
-    genre { Faker::Music.genre }
-    title { Faker::Music::RockBand.song }
-    artist { Faker::Name.name }
-    artist_2 { Faker::Name.name }
-    composer { Faker::Name.name }
-    author { Faker::Name.name }
-    date { Faker::Date.between(from: "1900-01-01", to: Date.today) }
-    popularity { Faker::Number.between(from: 1, to: 100) }
-    active { true }
-    lyrics { Faker::Quote.famous_last_words }
-    last_name_search { artist.last }
-  end
 end

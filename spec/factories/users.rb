@@ -13,11 +13,6 @@
 #
 FactoryBot.define do
   factory :user do
-    email { "john.doe@example.com" }
-    password { "123456789" }
-  end
-
-  factory :random_user do
     email { Faker::Internet.email }
     password { Faker::Internet.password(min_length: 10, max_length: 20) }
   end
