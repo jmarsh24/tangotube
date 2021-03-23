@@ -67,7 +67,7 @@ RSpec.describe Video, type: :model do
     end
   end
 
-  describe ".filter_by_event_id" do
+  describe ".filter_by_orchestra" do
     it "returns video with corresponding orchestra name" do
       song = create(:song, artist: "Juan d'Arienzo")
       video = create(:video, song: song)
@@ -76,7 +76,7 @@ RSpec.describe Video, type: :model do
     end
   end
 
-  describe ".filter_by_event_id" do
+  describe ".filter_by_genre" do
     it "returns video with corresponding event id" do
       song = create(:song, genre: "TANGO")
       video = create(:video, song: song)
@@ -167,6 +167,12 @@ RSpec.describe Video, type: :model do
       result = described_class.has_song
       expect(result).to include(video)
     end
+
+    it "does not return videos without song" do
+      video = create(:video)
+      result = described_class.has_song
+      expect(result).not_to include(video)
+    end
   end
 
   describe ".not_hidden" do
@@ -174,6 +180,12 @@ RSpec.describe Video, type: :model do
       video = create(:video, hidden: false)
       result = described_class.not_hidden
       expect(result).to include(video)
+    end
+
+    it "does not return videos where hidden: true" do
+      video = create(:video, hidden: true)
+      result = described_class.not_hidden
+      expect(result).not_to include(video)
     end
   end
 
@@ -184,6 +196,12 @@ RSpec.describe Video, type: :model do
       result = described_class.has_leader
       expect(result).to include(video)
     end
+
+    it "does not return videos with leader" do
+      video = create(:video)
+      result = described_class.has_leader
+      expect(result).not_to include(video)
+    end
   end
 
   describe ".has_follower" do
@@ -193,13 +211,11 @@ RSpec.describe Video, type: :model do
       result = described_class.has_follower
       expect(result).to include(video)
     end
-  end
 
-  describe ".has_youtube_song" do
-    it "returns videos with a youtube_song" do
-      video = create(:video, youtube_song: "La Mentirosa")
-      result = described_class.has_youtube_song
-      expect(result).to include(video)
+    it "does not return videos without a follower" do
+      video = create(:video)
+      result = described_class.has_follower
+      expect(result).not_to include(video)
     end
   end
 
@@ -209,6 +225,13 @@ RSpec.describe Video, type: :model do
       result = described_class.missing_follower
       expect(result).to include(video)
     end
+
+    it "does not return videos with a follower" do
+      follower = create(:follower)
+      video = create(:video, follower: follower)
+      result = described_class.missing_follower
+      expect(result).not_to include(video)
+    end
   end
 
   describe ".missing_leader" do
@@ -216,6 +239,13 @@ RSpec.describe Video, type: :model do
       video = create(:video)
       result = described_class.missing_leader
       expect(result).to include(video)
+    end
+
+    it "does not return videos with a leader" do
+      leader = create(:leader)
+      video = create(:video, leader: leader)
+      result = described_class.missing_leader
+      expect(result).not_to include(video)
     end
   end
 
@@ -225,13 +255,26 @@ RSpec.describe Video, type: :model do
       result = described_class.missing_song
       expect(result).to include(video)
     end
+
+    it "does not return videos with a song" do
+      song = create(:song)
+      video = create(:video, song: song)
+      result = described_class.missing_song
+      expect(result).not_to include(video)
+    end
   end
 
   describe ".scanned_youtube_music" do
-    it "returns videos that where we have tried to retrieve youtube's music identifacation" do
+    it "returns videos that where we have tried to retrieve youtube's music identification" do
       video = create(:video, scanned_youtube_music: true)
       result = described_class.scanned_youtube_music
       expect(result).to include(video)
+    end
+
+    it "does not return videos that where we have not tried to retrieve youtube's music identification" do
+      video = create(:video, scanned_youtube_music: false)
+      result = described_class.scanned_youtube_music
+      expect(result).not_to include(video)
     end
   end
 
@@ -241,6 +284,12 @@ RSpec.describe Video, type: :model do
       result = described_class.not_scanned_youtube_music
       expect(result).to include(video)
     end
+
+    it "does not returns videos where we have tried to retrieve youtube's music identifacation" do
+      video = create(:video, scanned_youtube_music: true)
+      result = described_class.not_scanned_youtube_music
+      expect(result).not_to include(video)
+    end
   end
 
   describe ".has_youtube_song" do
@@ -248,6 +297,12 @@ RSpec.describe Video, type: :model do
       video = create(:video, youtube_song: "La Mentirosa")
       result = described_class.has_youtube_song
       expect(result).to include(video)
+    end
+
+    it "does not returns videos without youtube_song" do
+      video = create(:video)
+      result = described_class.has_youtube_song
+      expect(result).not_to include(video)
     end
   end
 
