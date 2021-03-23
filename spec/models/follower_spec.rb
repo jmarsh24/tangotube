@@ -17,7 +17,7 @@ RSpec.describe Follower, type: :model do
   let(:follower) { build(:follower) }
 
   it_behaves_like "a full nameable"
-  it_behaves_like "a reviewable"
+  it_behaves_like "a reviewable", :follower
 
   context "validation tests" do
     subject { FactoryBot.build(:follower) }

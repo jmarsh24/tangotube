@@ -70,7 +70,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::Test::IntegrationHelpers, type: :request
 end
-require 'support/factory_bot'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

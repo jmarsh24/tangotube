@@ -16,7 +16,6 @@
 #  updated_at    :datetime         not null
 #
 class Playlist < ApplicationRecord
-  include Reviewable
   include Importable
 
   validates :slug, presence: true, uniqueness: true

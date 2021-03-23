@@ -18,6 +18,5 @@
 require "rails_helper"
 
 RSpec.describe Playlist, type: :model do
-  it_behaves_like "an importable"
-  it_behaves_like "a reviewable"
+  it_behaves_like "an importable", :playlist
 end

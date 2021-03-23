@@ -17,7 +17,7 @@ RSpec.describe Leader, type: :model do
   let(:leader) { build(:leader) }
 
   it_behaves_like "a full nameable"
-  it_behaves_like "a reviewable"
+  it_behaves_like "a reviewable", :leader
 
   context "validation tests" do
     subject { FactoryBot.build(:leader) }
