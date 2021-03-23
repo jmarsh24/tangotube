@@ -20,16 +20,16 @@ RSpec.describe Song, type: :model do
   end
 
   describe ".filter_by_active" do
-    it "order songs in database in descending order" do
-      song = create(:song, active: true)
-      expect(described_class.filter_by_active).to include(song)
+    it "returns active songs" do
+      active_song = create(:song, active: true)
+      expect(described_class.filter_by_active).to include(active_song)
     end
   end
 
   describe ".filter_by_not_active" do
-    it "order songs in database in descending order" do
-      song = create(:song, active: false)
-      expect(described_class.filter_by_not_active).to include(song)
+    it "returns not active songs" do
+      not_active_song = create(:song, active: false)
+      expect(described_class.filter_by_not_active).to include(not_active_song)
     end
   end
 
