@@ -46,21 +46,23 @@ require "rails_helper"
 require_relative "../support/devise"
 
 RSpec.describe Video, type: :model do
-  let(:video) { build(:video) }
+  describe "validations" do
+    it { is_expected.to validate_presence_of(:youtube_id) }
+    it { is_expected.to validate_uniqueness_of(:youtube_id) }
 
-  it { is_expected.to validate_presence_of(:youtube_id) }
-  it { is_expected.to validate_uniqueness_of(:youtube_id) }
+    it { is_expected.to belong_to(:leader).optional.counter_cache(true) }
+    it { is_expected.to belong_to(:follower).optional.counter_cache(true) }
+    it { is_expected.to belong_to(:song).optional.counter_cache(true) }
+    it { is_expected.to belong_to(:channel).counter_cache(true) }
+    it { is_expected.to belong_to(:event).optional.counter_cache(true) }
+  end
 
-  it { is_expected.to belong_to(:leader).optional.counter_cache(true) }
-  it { is_expected.to belong_to(:follower).optional.counter_cache(true) }
-  it { is_expected.to belong_to(:song).optional.counter_cache(true) }
-  it { is_expected.to belong_to(:channel).counter_cache(true) }
-  it { is_expected.to belong_to(:event).optional.counter_cache(true) }
-
-  it "click_count should == 1 " do
-    video = create(:video, click_count: 0)
-    video.clicked!
-    expect(video.click_count).to eq(1)
+  describe ".clicked!" do
+    it "click_count should == 1 " do
+      video = create(:video, click_count: 0)
+      video.clicked!
+      expect(video.click_count).to eq(1)
+    end
   end
 
   describe ".display.any_song_attribute" do
