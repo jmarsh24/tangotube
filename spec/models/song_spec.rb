@@ -13,9 +13,9 @@ RSpec.describe Song, type: :model do
 
   describe ".sort_by_popularity" do
     it "order songs in database in descending order" do
-      song = create(:song, popularity: 100)
-      song2 = create(:song, popularity: 99)
-      expect(described_class.sort_by_popularity.first).to eq(song)
+      popular_song = create(:song, popularity: 100)
+      less_popular_song = create(:song, popularity: 99)
+      expect(described_class.sort_by_popularity).to eq([popular_song, less_popular_song])
     end
   end
 
