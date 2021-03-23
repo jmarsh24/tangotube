@@ -17,13 +17,13 @@
 require "rails_helper"
 
 RSpec.describe Channel, type: :model do
-  let(:channel) { build(:channel) }
-
   it_behaves_like "an importable", :channel
   it_behaves_like "a reviewable", :channel
 
-  it { is_expected.to have_many(:videos) }
-  it { is_expected.to validate_uniqueness_of(:channel_id) }
+  describe "validations" do
+    it { is_expected.to have_many(:videos) }
+    it { is_expected.to validate_uniqueness_of(:channel_id) }
+  end
 
   describe ".update_videos_count" do
     it "changes imported to false if total_videos_count is greater than internal videos_count" do
