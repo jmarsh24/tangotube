@@ -53,7 +53,7 @@ class Song < ApplicationRecord
     end
 
     def max_times_song_appears
-      Song.maximum(:videos_count).to_f
+      maximum(:videos_count)
     end
   end
 end
