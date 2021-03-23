@@ -7,4 +7,4 @@ RSpec.shared_examples "an importable" do |factory_name|
       expect(described_class.imported).not_to include(not_imported)
     end
   end
- end
+end

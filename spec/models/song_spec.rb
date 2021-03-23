@@ -22,13 +22,17 @@ RSpec.describe Song, type: :model do
   describe ".filter_by_active" do
     it "returns active songs" do
       active_song = create(:song, active: true)
+      not_active_song = create(:song, active: false)
       expect(described_class.filter_by_active).to include(active_song)
+      expect(described_class.filter_by_active).not_to include(not_active_song)
     end
   end
 
   describe ".filter_by_not_active" do
     it "returns not active songs" do
+      active_song = create(:song, active: true)
       not_active_song = create(:song, active: false)
+      expect(described_class.filter_by_not_active).not_to include(active_song)
       expect(described_class.filter_by_not_active).to include(not_active_song)
     end
   end
