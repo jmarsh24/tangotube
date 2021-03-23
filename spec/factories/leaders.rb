@@ -13,8 +13,6 @@
 #
 FactoryBot.define do
   factory :leader do
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
-    name { "#{first_name} #{last_name}" }
+    name { Faker::Name.name }
   end
 end

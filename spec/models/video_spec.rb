@@ -584,7 +584,7 @@ RSpec.describe Video, type: :model do
 
   describe ".with_dancer_name_in_title" do
     it "returns videos title matches leader name" do
-      leader = create(:leader, name: "Carlitos Espinoza")
+      leader = create(:leader, name: "Carlitos Espinoza", first_name: "Carlitos", last_name: "Espinoza")
       video = create(:video, title: "Title with Carlitos Espinoza")
       @result = described_class.with_dancer_name_in_title(leader.full_name)
       expect(@result).to include(video)
