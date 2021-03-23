@@ -132,8 +132,8 @@ RSpec.describe Song, type: :model do
   describe ".set_all_popularity_values" do
     it "calculates popularity values" do
       song = create(:song, popularity: 0, videos_count: 10)
-      described_class.set_all_popularity_values
-      expect(song.reload.popularity).to eq(100)
+      song.reload
+      expect(song.popularity).to eq(100)
     end
   end
 end

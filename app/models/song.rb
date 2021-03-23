@@ -20,6 +20,8 @@
 #
 
 class Song < ApplicationRecord
+  before_save :update_popularity_value, if: :videos_count_changed?
+
   validates :genre, presence: true
   validates :title, presence: true
   validates :artist, presence: true
@@ -47,13 +49,18 @@ class Song < ApplicationRecord
     "#{title.titleize} - #{artist.split("'").map(&:titleize).join("'")} - #{genre.titleize}"
   end
 
-  class << self
-    def set_all_popularity_values
-      update_all("popularity = CAST(videos_count AS FLOAT) / #{max_times_song_appears} * 100.0")
-    end
+  def update_popularity_value
+    update(popularity: popularity_value) unless videos_count.zero? || max_times_song_appears.nil?
+  end
 
-    def max_times_song_appears
-      maximum(:videos_count)
-    end
+  def popularity_value
+    (videos_count.to_f / max_times_song_appears.to_f * 100).round
+  end
+
+  def max_times_song_appears
+    Song.maximum(:videos_count)
+  end
+
+  class << self
   end
 end
