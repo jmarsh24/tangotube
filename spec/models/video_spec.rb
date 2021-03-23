@@ -68,11 +68,17 @@ RSpec.describe Video, type: :model do
   end
 
   describe ".filter_by_orchestra" do
-    it "returns video with corresponding orchestra name" do
+    it "returns videos with corresponding orchestra name" do
       song = create(:song, artist: "Juan d'Arienzo")
       video = create(:video, song: song)
       result = described_class.filter_by_orchestra("Juan d'Arienzo")
       expect(result).to include(video)
+    end
+
+    it "does not return videos without corresponding orchestra name" do
+      video = create(:video)
+      result = described_class.filter_by_orchestra("Juan d'Arienzo")
+      expect(result).not_to include(video)
     end
   end
 
@@ -83,6 +89,12 @@ RSpec.describe Video, type: :model do
       result = described_class.filter_by_genre("Tango")
       expect(result).to include(video)
     end
+
+    it "does not return videos without corresponding event id" do
+      video = create(:video)
+      result = described_class.filter_by_genre("Tango")
+      expect(result).not_to include(video)
+    end
   end
 
   describe ".filter_by_leader" do
@@ -91,6 +103,12 @@ RSpec.describe Video, type: :model do
       video = create(:video, leader: leader)
       result = described_class.filter_by_leader("Carlitos Espinoza")
       expect(result).to include(video)
+    end
+
+    it "does not return video without corresponding orchestra event_id" do
+      video = create(:video)
+      result = described_class.filter_by_leader("Carlitos Espinoza")
+      expect(result).not_to include(video)
     end
   end
 
@@ -101,6 +119,12 @@ RSpec.describe Video, type: :model do
       result = described_class.filter_by_follower("Noelia Hurtado")
       expect(result).to include(video)
     end
+
+    it "does not return videos without matching follower name in video" do
+      video = create(:video)
+      result = described_class.filter_by_follower("Noelia Hurtado")
+      expect(result).not_to include(video)
+    end
   end
 
   describe ".filter_by_channel" do
@@ -109,6 +133,12 @@ RSpec.describe Video, type: :model do
       video = create(:video, channel: channel)
       result = described_class.filter_by_channel("030 Tango")
       expect(result).to include(video)
+    end
+
+    it "does not return videos without matching channel name in video" do
+      video = create(:video)
+      result = described_class.filter_by_channel("030 Tango")
+      expect(result).not_to include(video)
     end
   end
 
@@ -119,6 +149,12 @@ RSpec.describe Video, type: :model do
       result = described_class.filter_by_event_id("1")
       expect(result).to include(video)
     end
+
+    it "does not return videos without matching event_id in video" do
+      video = create(:video)
+      result = described_class.filter_by_event_id("1")
+      expect(result).not_to include(video)
+    end
   end
 
   describe ".filter_by_song_id" do
@@ -127,6 +163,12 @@ RSpec.describe Video, type: :model do
       video = create(:video, song: song)
       result = described_class.filter_by_song_id("1")
       expect(result).to include(video)
+    end
+
+    it "does not return videos without matching song_id" do
+      video = create(:video)
+      result = described_class.filter_by_song_id("1")
+      expect(result).not_to include(video)
     end
   end
 
