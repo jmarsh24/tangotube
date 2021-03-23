@@ -14,24 +14,20 @@
 require "rails_helper"
 
 RSpec.describe Leader, type: :model do
-  let(:leader) { build(:leader) }
+  subject { FactoryBot.build(:leader) }
 
   it_behaves_like "a full nameable"
   it_behaves_like "a reviewable", :leader
 
-  context "validation tests" do
-    subject { FactoryBot.build(:leader) }
+  describe "validations" do
+    it { is_expected.to validate_uniqueness_of(:name) }
+  end
 
+  describe "assocations" do
     it { is_expected.to have_many(:videos) }
     it { is_expected.to have_many(:follower) }
     it { is_expected.to have_many(:song) }
-    it { is_expected.to validate_uniqueness_of(:name) }
     it { is_expected.to have_many(:song).through(:videos) }
     it { is_expected.to have_many(:follower).through(:videos) }
-
-    it "ensures name presence" do
-      leader.name = nil
-      expect(leader.save).to eq(false)
-    end
   end
 end
