@@ -20,8 +20,6 @@
 #
 
 class Song < ApplicationRecord
-  before_save :update_popularity_value, if: :videos_count_changed?
-
   validates :genre, presence: true
   validates :title, presence: true
   validates :artist, presence: true
@@ -31,8 +29,8 @@ class Song < ApplicationRecord
   has_many :follower, through: :videos
 
   # active admin scopes
-  scope :sort_by_popularity,   -> { order(popularity: :desc) }
-  scope :filter_by_active,     -> { where(active: true) }
+  scope :sort_by_popularity, -> { order(popularity: :desc) }
+  scope :filter_by_active, -> { where(active: true) }
   scope :filter_by_not_active, -> { where(active: false) }
 
   # song match scopes
@@ -47,20 +45,5 @@ class Song < ApplicationRecord
 
   def full_title
     "#{title.titleize} - #{artist.split("'").map(&:titleize).join("'")} - #{genre.titleize}"
-  end
-
-  def update_popularity_value
-    update(popularity: popularity_value) unless videos_count.zero? || max_times_song_appears.nil?
-  end
-
-  def popularity_value
-    (videos_count.to_f / max_times_song_appears.to_f * 100).round
-  end
-
-  def max_times_song_appears
-    Song.maximum(:videos_count)
-  end
-
-  class << self
   end
 end

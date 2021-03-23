@@ -128,12 +128,4 @@ RSpec.describe Song, type: :model do
       expect(song.full_title).to eq("Tal Vez Será Su Voz - Anibal Troilo - Tango")
     end
   end
-
-  describe ".set_all_popularity_values" do
-    it "calculates popularity values" do
-      song = create(:song, popularity: 0, videos_count: 10)
-      song.reload
-      expect(song.popularity).to eq(100)
-    end
-  end
 end
