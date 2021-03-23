@@ -40,8 +40,10 @@ RSpec.describe Song, type: :model do
   describe ".title_match" do
     it "find song by title" do
       song = create(:song, title: "No Vendrá")
-      result = described_class.title_match("No Vendrá")
+      song2 = create(:song, title: "Not matching song")
+      result = described_class.title_match("no vendra")
       expect(result).to include(song)
+      expect(result).not_to include(song2)
     end
 
     it "find song by title with partial prefix" do
@@ -52,7 +54,7 @@ RSpec.describe Song, type: :model do
 
     it "find song by title with partial suffix" do
       song = create(:song, title: "No Vendrá")
-      result = described_class.title_match("endrá")
+      result = described_class.title_match("endra")
       expect(result).to include(song)
     end
 
@@ -70,7 +72,7 @@ RSpec.describe Song, type: :model do
 
     it "find song by title without titleize" do
       song = create(:song, title: "No Vendrá")
-      result = described_class.title_match("no vendrá")
+      result = described_class.title_match("no vendra")
       expect(result).to include(song)
     end
   end

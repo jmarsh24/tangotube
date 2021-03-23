@@ -57,11 +57,12 @@ RSpec.describe Video, type: :model do
     it { is_expected.to belong_to(:event).optional.counter_cache(true) }
   end
 
-  describe ".clicked!" do
-    it "click_count should == 1 " do
-      video = create(:video, click_count: 0)
+  describe "#clicked!" do
+    it "increments the click count" do
+      video = create(:video, click_count: 0, popularity: 0)
       video.clicked!
       expect(video.click_count).to eq(1)
+      expect(video.popularity).to eq(1)
     end
   end
 
