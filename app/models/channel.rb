@@ -15,7 +15,7 @@
 #  reviewed              :boolean          default(FALSE)
 #
 class Channel < ApplicationRecord
-  before_save :update_imported, if: -> { total_videos_count_changed? || videos_count_changed? }
+  before_save :update_imported, if: :count_changed?
 
   include Reviewable
   include Importable
@@ -36,5 +36,9 @@ class Channel < ApplicationRecord
 
   def update_imported
     self.imported = videos_count >= total_videos_count
+  end
+
+  def count_changed?
+    total_videos_count_changed? || videos_count_changed?
   end
 end
