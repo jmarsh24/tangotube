@@ -45,7 +45,6 @@
 require "rails_helper"
 
 RSpec.describe Video, type: :model do
-
   describe "validations" do
     it { is_expected.to validate_presence_of(:youtube_id) }
     it { is_expected.to validate_uniqueness_of(:youtube_id) }
@@ -508,14 +507,22 @@ RSpec.describe Video, type: :model do
       video = create(:video, title: "Title with carlitos espinoza")
       VideosSearch.refresh
       result = described_class.filter_by_query("Carlitos Espinoza")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("Carlitos Espin")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with description that matches query" do
       video = create(:video, description: "description with carlitos espinoza")
       VideosSearch.refresh
       result = described_class.filter_by_query("Carlitos Espinoza")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("Carlitos Espin")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with leader name that matches query" do
@@ -523,7 +530,11 @@ RSpec.describe Video, type: :model do
       video = create(:video, leader: leader)
       VideosSearch.refresh
       result = described_class.filter_by_query("Carlitos Espinoza")
+      partial_match_result = described_class.filter_by_query("Carlitos Espin")
+      no_result = described_class.filter_by_query("John Doe")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with leader nickname that matches query" do
@@ -531,7 +542,11 @@ RSpec.describe Video, type: :model do
       video = create(:video, leader: leader)
       VideosSearch.refresh
       result = described_class.filter_by_query("Carlitos")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("Carli")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with follower name that matches query" do
@@ -539,7 +554,11 @@ RSpec.describe Video, type: :model do
       video = create(:video, follower: follower)
       VideosSearch.refresh
       result = described_class.filter_by_query("Noelia Hurtado")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("noeli")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with follower nickname that matches query" do
@@ -547,42 +566,66 @@ RSpec.describe Video, type: :model do
       video = create(:video, follower: follower)
       VideosSearch.refresh
       result = described_class.filter_by_query("Noelia")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("Noel")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with youtube_id that matches query" do
       video = create(:video, youtube_id: "s6iptZdCcG0")
       VideosSearch.refresh
       result = described_class.filter_by_query("s6iptZdCcG0")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("s6iptZdCcG")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with youtube_artist that matches query" do
       video = create(:video, youtube_artist: "Angel D'Agostino")
       VideosSearch.refresh
       result = described_class.filter_by_query("Agostino")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("Agostin")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with youtube_song that matches query" do
       video = create(:video, youtube_song: "No Vendrá")
       VideosSearch.refresh
       result = described_class.filter_by_query("no vendrá")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("no vend")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with spotify_track_name that matches query" do
       video = create(:video, spotify_track_name: "No Vendrá")
       VideosSearch.refresh
       result = described_class.filter_by_query("no vendrá")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("no vend")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with spotify_artist_name that matches query" do
       video = create(:video, spotify_artist_name: "Angel D'Agostino")
       VideosSearch.refresh
       result = described_class.filter_by_query("agostino")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("Angel D'Agosti")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with channel title that matches query" do
@@ -590,7 +633,11 @@ RSpec.describe Video, type: :model do
       video = create(:video, channel: channel)
       VideosSearch.refresh
       result = described_class.filter_by_query("030 tango")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("030 T")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with channel_id that matches query" do
@@ -598,7 +645,11 @@ RSpec.describe Video, type: :model do
       video = create(:video, channel: channel)
       VideosSearch.refresh
       result = described_class.filter_by_query("UCtdgMR0bmogczrZNpPaO66Q")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("UCtdgMR0bmogczrZNpPaO")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with song genre that matches query" do
@@ -606,7 +657,11 @@ RSpec.describe Video, type: :model do
       video = create(:video, song: song)
       VideosSearch.refresh
       result = described_class.filter_by_query("tango")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("tang")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with song title that matches query" do
@@ -614,7 +669,11 @@ RSpec.describe Video, type: :model do
       video = create(:video, song: song)
       VideosSearch.refresh
       result = described_class.filter_by_query("mentirosa")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("menti")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
 
     it "returns video with song artist that matches query" do
@@ -622,7 +681,11 @@ RSpec.describe Video, type: :model do
       video = create(:video, song: song)
       VideosSearch.refresh
       result = described_class.filter_by_query("d'agostino")
+      no_result = described_class.filter_by_query("John Doe")
+      partial_match_result = described_class.filter_by_query("Agosti")
       expect(result).to include(video)
+      expect(no_result).not_to include(video)
+      expect(partial_match_result).to include(video)
     end
   end
 end
