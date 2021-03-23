@@ -40,76 +40,76 @@ RSpec.describe Song, type: :model do
   describe ".title_match" do
     it "find song by title" do
       song = create(:song, title: "No Vendrá")
-      @result = described_class.title_match("No Vendrá")
-      expect(@result).to include(song)
+      result = described_class.title_match("No Vendrá")
+      expect(result).to include(song)
     end
 
     it "find song by title with partial prefix" do
       song = create(:song, title: "No Vendrá")
-      @result = described_class.title_match("No Ven")
-      expect(@result).to include(song)
+      result = described_class.title_match("No Ven")
+      expect(result).to include(song)
     end
 
     it "find song by title with partial suffix" do
       song = create(:song, title: "No Vendrá")
-      @result = described_class.title_match("endrá")
-      expect(@result).to include(song)
+      result = described_class.title_match("endrá")
+      expect(result).to include(song)
     end
 
     it "find song by title with partial middle match" do
       song = create(:song, title: "No Vendrá")
-      @result = described_class.title_match("vend")
-      expect(@result).to include(song)
+      result = described_class.title_match("vend")
+      expect(result).to include(song)
     end
 
     it "find song by title without accent" do
       song = create(:song, title: "No Vendrá")
-      @result = described_class.title_match("No Vendra")
-      expect(@result).to include(song)
+      result = described_class.title_match("No Vendra")
+      expect(result).to include(song)
     end
 
     it "find song by title without titleize" do
       song = create(:song, title: "No Vendrá")
-      @result = described_class.title_match("no vendrá")
-      expect(@result).to include(song)
+      result = described_class.title_match("no vendrá")
+      expect(result).to include(song)
     end
   end
 
   describe ".full_title_search" do
     it "find song with artist" do
       song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
-      @result = described_class.full_title_search("angel d'agostino")
-      expect(@result).to include(song)
+      result = described_class.full_title_search("angel d'agostino")
+      expect(result).to include(song)
     end
 
     it "find song with partial artist" do
       song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
-      @result = described_class.full_title_search("agostino")
-      expect(@result).to include(song)
+      result = described_class.full_title_search("agostino")
+      expect(result).to include(song)
     end
 
     it "find song with genre" do
       song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
-      @result = described_class.full_title_search("tango")
-      expect(@result).to include(song)
+      result = described_class.full_title_search("tango")
+      expect(result).to include(song)
     end
 
     it "find song with partial genre" do
       song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
-      @result = described_class.full_title_search("ango")
-      expect(@result).to include(song)
+      result = described_class.full_title_search("ango")
+      expect(result).to include(song)
     end
 
     it "find song with title" do
       song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
-      @result = described_class.full_title_search("no vendra")
-      expect(@result).to include(song)
+      result = described_class.full_title_search("no vendra")
+      expect(result).to include(song)
     end
 
     it "find song with partial title" do
       song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
-      @result = described_class.full_title_search("endra")
-      expect(@result).to include(song)
+      result = described_class.full_title_search("endra")
+      expect(result).to include(song)
     end
   end
 
