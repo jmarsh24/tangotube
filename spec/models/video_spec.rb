@@ -43,7 +43,6 @@
 #  click_count           :integer          default(0)
 #
 require "rails_helper"
-require_relative "../support/devise"
 
 RSpec.describe Video, type: :model do
   describe "validations" do
