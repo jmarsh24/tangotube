@@ -22,10 +22,10 @@ class Event < ApplicationRecord
   has_many :videos, dependent: :nullify
 
   def search_title
-    title.split("-")[0].strip
+    @search_title ||= title.split("-")[0].strip
   end
 
-  def videos_with_event_title_match(search_title)
+  def videos_with_event_title_match
     Video.joins(:channel)
          .where(event_id: nil)
          .where("unaccent(videos.title) ILIKE unaccent(:query) OR
@@ -36,10 +36,10 @@ class Event < ApplicationRecord
   end
 
   def match_videos
-    return if clean_title.split.size < 2 || videos_with_event_title_match.empty?
+    return if search_title.split.size < 2 || videos_with_event_title_match.empty?
 
     videos_with_event_title_match.find_each do |video|
-      video.update(event: event)
+      video.update(event_id: id)
     end
   end
 

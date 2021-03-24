@@ -98,24 +98,24 @@ RSpec.describe Event, type: :model do
       matching_video = create(:video, title: "Tango Event Title and other information")
       not_matched_video = create(:video, title: "title which should have match")
       event = create(:event, title: "Tango Event Title - unless search information")
-      expect(event.videos_with_event_title_match(event.search_title)).to include(matching_video)
-      expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
+      expect(event.videos_with_event_title_match).to include(matching_video)
+      expect(event.videos_with_event_title_match).not_to include(not_matched_video)
     end
 
     it "return video with title match in video description" do
       matching_video = create(:video, description: "Tango Event Title and other information")
       not_matched_video = create(:video, description: "title which should have match")
       event = create(:event, title: "Tango Event Title - unless search information")
-      expect(event.videos_with_event_title_match(event.search_title)).to include(matching_video)
-      expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
+      expect(event.videos_with_event_title_match).to include(matching_video)
+      expect(event.videos_with_event_title_match).not_to include(not_matched_video)
     end
 
     it "return video with title match in video tags" do
       matching_video = create(:video, tags: "Tango Event Title and other information")
       not_matched_video = create(:video, tags: "title which should have match")
       event = create(:event, title: "Tango Event Title - unless search information")
-      expect(event.videos_with_event_title_match(event.search_title)).to include(matching_video)
-      expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
+      expect(event.videos_with_event_title_match).to include(matching_video)
+      expect(event.videos_with_event_title_match).not_to include(not_matched_video)
     end
 
     it "return video with title match in video channel title" do
@@ -124,14 +124,50 @@ RSpec.describe Event, type: :model do
       matching_video = create(:video, channel: matching_channel)
       not_matched_video = create(:video, channel: not_matching_channel)
       event = create(:event, title: "Tango Event Title - unless search information")
-      expect(event.videos_with_event_title_match(event.search_title)).to include(matching_video)
-      expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
+      expect(event.videos_with_event_title_match).to include(matching_video)
+      expect(event.videos_with_event_title_match).not_to include(not_matched_video)
     end
   end
 
   describe "match_videos" do
     it "doesnt perform if title is less than 2 words" do
-      expect(described_class.match_videos).to
+      event = create(:event, title: "shorttitle")
+      expect(event.match_videos).to be_nil
+    end
+
+    it "doesnt perform if title videos with title match is empty" do
+      event = create(:event, title: "shorttitle")
+      create(:video, title: nil)
+      expect(event.match_videos).to be_nil
+    end
+
+    it "updates video with event if event title matches video title" do
+      event = create(:event, title: "event title match")
+      video = create(:video, title: "event title match", event_id: nil)
+      event.match_videos
+      expect(video.reload.event).to eq(event)
+    end
+
+    it "updates video with event if event title matches video description" do
+      event = create(:event, title: "event title match")
+      video = create(:video, description: "event title match", event_id: nil)
+      event.match_videos
+      expect(video.reload.event).to eq(event)
+    end
+
+    it "updates video with event if event title matches video tags" do
+      event = create(:event, title: "event title match")
+      video = create(:video, tags: "event title match", event_id: nil)
+      event.match_videos
+      expect(video.reload.event).to eq(event)
+    end
+
+    it "updates video with event if event title matches video's channel title" do
+      channel = create(:channel, title: "event title match")
+      event = create(:event, title: "event title match")
+      video = create(:video, channel: channel, event_id: nil)
+      event.match_videos
+      expect(video.reload.event).to eq(event)
     end
   end
 end
