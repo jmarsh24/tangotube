@@ -45,12 +45,12 @@
 require "rails_helper"
 
 RSpec.describe Video, type: :model do
-  describe "validations" do
+  describe "#validations" do
     it { is_expected.to validate_presence_of(:youtube_id) }
     it { is_expected.to validate_uniqueness_of(:youtube_id) }
   end
 
-  describe "associations" do
+  describe "#associations" do
     it { is_expected.to belong_to(:leader).optional.counter_cache(true) }
     it { is_expected.to belong_to(:follower).optional.counter_cache(true) }
     it { is_expected.to belong_to(:song).optional.counter_cache(true) }
@@ -67,7 +67,7 @@ RSpec.describe Video, type: :model do
     end
   end
 
-  describe "scopes" do
+  describe "#scopes" do
     describe ".filter_by_orchestra" do
       it "returns videos with corresponding orchestra name" do
         song = create(:song, artist: "Juan d'Arienzo")
@@ -187,7 +187,7 @@ RSpec.describe Video, type: :model do
       end
     end
 
-    describe "filter_by_hidden" do
+    describe ".filter_by_hidden" do
       it "filter_by_hidden" do
         video = create(:video, hidden: true)
         result = described_class.hidden
