@@ -50,7 +50,8 @@ class Event < ApplicationRecord
                              query: "%#{event_title}%")
         if videos.present?
           videos.find_each do |video|
-          video.update(event_id: event.id)
+            video.update(event_id: event.id)
+          end
         end
       end
     end
