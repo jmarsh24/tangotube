@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Video::Display do
+RSpec.describe Video::Display, type: :model do
   describe ".display.any_song_attribute" do
     it "only song exists" do
       song = build(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
