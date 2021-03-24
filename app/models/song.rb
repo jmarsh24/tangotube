@@ -24,7 +24,7 @@ class Song < ApplicationRecord
   validates :title, presence: true
   validates :artist, presence: true
 
-  has_many :videos
+  has_many :videos, dependent: :nullify
   has_many :leader, through: :videos
   has_many :follower, through: :videos
 
