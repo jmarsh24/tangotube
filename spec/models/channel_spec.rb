@@ -44,4 +44,36 @@ RSpec.describe Channel, type: :model do
       expect(channel.reload.imported).to eq(true)
     end
   end
+
+  describe "scope" do
+    describe "title_search" do
+      it "returns channels that match title with exact match" do
+        matching_channel = create(:channel, title: "ChánneL Títle")
+        no_match_channel = create(:channel)
+        expect(described_class.title_search("ChánneL Títle")).to include(matching_channel)
+        expect(described_class.title_search("ChánneL Títle")).not_to include(no_match_channel)
+      end
+
+      it "returns channels that match title without caps" do
+        matching_channel = create(:channel, title: "ChánneL Títle")
+        no_match_channel = create(:channel)
+        expect(described_class.title_search("chánnel títle")).to include(matching_channel)
+        expect(described_class.title_search("chánnel títle")).not_to include(no_match_channel)
+      end
+
+      it "returns channels that match title without accents" do
+        matching_channel = create(:channel, title: "ChánneL Títle")
+        no_match_channel = create(:channel)
+        expect(described_class.title_search("channel title")).to include(matching_channel)
+        expect(described_class.title_search("channel title")).not_to include(no_match_channel)
+      end
+
+      it "returns channels that match title partial match without accents" do
+        matching_channel = create(:channel, title: "ChánneL Títle")
+        no_match_channel = create(:channel)
+        expect(described_class.title_search("chann")).to include(matching_channel)
+        expect(described_class.title_search("chann")).not_to include(no_match_channel)
+      end
+    end
+  end
 end
