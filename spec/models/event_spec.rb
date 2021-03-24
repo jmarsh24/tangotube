@@ -128,4 +128,10 @@ RSpec.describe Event, type: :model do
       expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
     end
   end
+
+  describe "match_videos" do
+    it "doesnt perform if title is less than 2 words" do
+      expect(described_class.match_videos).to
+    end
+  end
 end

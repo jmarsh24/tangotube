@@ -34,7 +34,7 @@ class Song < ApplicationRecord
   scope :filter_by_not_active, -> { where(active: false) }
 
   # song match scopes
-  scope :title_match, ->(model_attribute) { where("unaccent(title) ILIKE unaccent(?)", "%#{model_attribute}%") }
+  scope :title_match, ->(query) { where("unaccent(title) ILIKE unaccent(?)", "%#{query}%") }
 
   def full_title
     "#{title.titleize} - #{artist.split("'").map(&:titleize).join("'")} - #{genre.titleize}"
