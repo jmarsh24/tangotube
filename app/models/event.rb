@@ -32,11 +32,11 @@ class Event < ApplicationRecord
                   unaccent(videos.description) ILIKE unaccent(:query) OR
                   unaccent(videos.tags) ILIKE unaccent(:query) OR
                   unaccent(channels.title) ILIKE unaccent(:query)",
-                  query: "%#{event_title}%")
+                query: "%#{event_title}%")
   end
 
   def match_videos
-    return if clean_title.split.size < 2 && videos_with_event_title_match.empty?
+    return if clean_title.split.size < 2 || videos_with_event_title_match.empty?
 
     videos_with_event_title_match.find_each do |video|
       video.update(event: event)
