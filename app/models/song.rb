@@ -36,14 +36,19 @@ class Song < ApplicationRecord
   # song match scopes
   scope :title_match, ->(model_attribute) { where("unaccent(title) ILIKE unaccent(?)", "%#{model_attribute}%") }
 
-  scope :full_title_search, lambda { |query|
-                              where("unaccent(songs.title) ILIKE unaccent(:query) OR
-                                    unaccent(artist) ILIKE unaccent(:query) OR
-                                    unaccent(genre) ILIKE unaccent(:query)",
-                                    query: "%#{query}%").references(:song)
-                            }
-
   def full_title
     "#{title.titleize} - #{artist.split("'").map(&:titleize).join("'")} - #{genre.titleize}"
+  end
+
+  class << self
+    def full_title_search(query)
+      words = query.to_s.strip.split
+      words.inject(all) do |combined_scope, word|
+        combined_scope.where("unaccent(songs.title) ILIKE unaccent(:query) OR
+                              unaccent(regexp_replace(artist, '''', '', 'g')) ILIKE unaccent(:query) OR
+                              unaccent(genre) ILIKE unaccent(:query) OR
+                              unaccent(artist) ILIKE unaccent(:query)", query: "%#{word}%").references(:song)
+      end
+    end
   end
 end

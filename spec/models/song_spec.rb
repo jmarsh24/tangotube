@@ -137,6 +137,22 @@ RSpec.describe Song, type: :model do
       expect(result).to include(song)
       expect(result).not_to include(no_match_song)
     end
+
+    it "finds song with mixed multi word query" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      no_match_song = create(:song, title: "Not matching song")
+      result = described_class.full_title_search("agostino vendra")
+      expect(result).to include(song)
+      expect(result).not_to include(no_match_song)
+    end
+
+    it "finds song with without matching apostophe" do
+      song = create(:song, title: "No Vendrá", artist: "Angel D'AGOSTINO", genre: "TANGO")
+      no_match_song = create(:song, title: "Not matching song")
+      result = described_class.full_title_search("dagostino")
+      expect(result).to include(song)
+      expect(result).not_to include(no_match_song)
+    end
   end
 
   describe ".full_title" do
@@ -145,7 +161,7 @@ RSpec.describe Song, type: :model do
       expect(song.full_title).to eq("No Vendrá - Angel D'Agostino - Tango")
     end
 
-    it "titleizes artist names without ' properly" do
+    it "titleizes artist names with apostrophe properly" do
       song = create(:song, title: "Tal vez será su voz", artist: "Anibal Troilo", genre: "TANGO")
       expect(song.full_title).to eq("Tal Vez Será Su Voz - Anibal Troilo - Tango")
     end
