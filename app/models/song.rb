@@ -43,7 +43,7 @@ class Song < ApplicationRecord
   class << self
     def full_title_search(query)
       words = query.to_s.strip.split
-      words.inject(all) do |combined_scope, word|
+      words.reduce(all) do |combined_scope, word|
         combined_scope.where("unaccent(songs.title) ILIKE unaccent(:query) OR
                               unaccent(regexp_replace(artist, '''', '', 'g')) ILIKE unaccent(:query) OR
                               unaccent(genre) ILIKE unaccent(:query) OR

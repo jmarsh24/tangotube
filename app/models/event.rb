@@ -24,7 +24,7 @@ class Event < ApplicationRecord
   class << self
     def title_search(query)
       words = query.to_s.strip.split
-      words.inject(all) do |combined_scope, word|
+      words.reduce(all) do |combined_scope, word|
         combined_scope.where("unaccent(title) ILIKE unaccent(:query)", query: "%#{word}%")
       end
     end
