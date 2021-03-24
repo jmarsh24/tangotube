@@ -21,6 +21,28 @@ class Event < ApplicationRecord
 
   has_many :videos, dependent: :nullify
 
+  def event_title
+    title.split("-")[0].strip
+  end
+
+  def videos_with_event_title_match(event_title)
+    Video.joins(:channel)
+         .where(event_id: nil)
+         .where("unaccent(videos.title) ILIKE unaccent(:query) OR
+                  unaccent(videos.description) ILIKE unaccent(:query) OR
+                  unaccent(videos.tags) ILIKE unaccent(:query) OR
+                  unaccent(channels.title) ILIKE unaccent(:query)",
+                  query: "%#{event_title}%")
+  end
+
+  def match_videos
+    return if clean_title.split.size < 2 && videos_with_event_title_match.empty?
+
+    videos_with_event_title_match.find_each do |video|
+      video.update(event: event)
+    end
+  end
+
   class << self
     def title_search(query)
       words = query.to_s.strip.split
@@ -32,27 +54,6 @@ class Event < ApplicationRecord
     def match_all_events
       Event.all.order(:id).each do |event|
         MatchEventWorker.perform_async(event.id)
-      end
-    end
-
-    def match_event(event_id)
-      event = Event.find(event_id)
-      event_title = event.title.split("-")[0].strip
-
-      if event_title.split.size > 2
-
-        videos = Video.joins(:channel)
-                      .where(event_id: nil)
-                      .where("unaccent(videos.title) ILIKE unaccent(:query) OR
-                              unaccent(videos.description) ILIKE unaccent(:query) OR
-                              unaccent(videos.tags) ILIKE unaccent(:query) OR
-                              unaccent(channels.title) ILIKE unaccent(:query)",
-                             query: "%#{event_title}%")
-        if videos.present?
-          videos.find_each do |video|
-            video.update(event_id: event.id)
-          end
-        end
       end
     end
   end
