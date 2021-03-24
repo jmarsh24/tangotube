@@ -85,4 +85,47 @@ RSpec.describe Event, type: :model do
       expect(result).not_to include(no_match_event)
     end
   end
+
+  describe ".search_title" do
+    it "creates searchable title" do
+      event = create(:event, title: "Tango Event Title - unless search information")
+      expect(event.search_title).to eq("Tango Event Title")
+    end
+  end
+
+  describe ".videos_with_event_title_match(search_title)" do
+    it "return video with title match in video title" do
+      matching_video = create(:video, title: "Tango Event Title and other information")
+      not_matched_video = create(:video, title: "title which should have match")
+      event = create(:event, title: "Tango Event Title - unless search information")
+      expect(event.videos_with_event_title_match(event.search_title)).to include(matching_video)
+      expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
+    end
+
+    it "return video with title match in video description" do
+      matching_video = create(:video, description: "Tango Event Title and other information")
+      not_matched_video = create(:video, description: "title which should have match")
+      event = create(:event, title: "Tango Event Title - unless search information")
+      expect(event.videos_with_event_title_match(event.search_title)).to include(matching_video)
+      expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
+    end
+
+    it "return video with title match in video tags" do
+      matching_video = create(:video, tags: "Tango Event Title and other information")
+      not_matched_video = create(:video, tags: "title which should have match")
+      event = create(:event, title: "Tango Event Title - unless search information")
+      expect(event.videos_with_event_title_match(event.search_title)).to include(matching_video)
+      expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
+    end
+
+    it "return video with title match in video channel title" do
+      matching_channel = create(:channel, title: "Tango Event Title and other information")
+      not_matching_channel = create(:channel, title: "title which should have match")
+      matching_video = create(:video, channel: matching_channel)
+      not_matched_video = create(:video, channel: not_matching_channel)
+      event = create(:event, title: "Tango Event Title - unless search information")
+      expect(event.videos_with_event_title_match(event.search_title)).to include(matching_video)
+      expect(event.videos_with_event_title_match(event.search_title)).not_to include(not_matched_video)
+    end
+  end
 end

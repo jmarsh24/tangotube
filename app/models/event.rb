@@ -21,18 +21,18 @@ class Event < ApplicationRecord
 
   has_many :videos, dependent: :nullify
 
-  def event_title
+  def search_title
     title.split("-")[0].strip
   end
 
-  def videos_with_event_title_match(event_title)
+  def videos_with_event_title_match(search_title)
     Video.joins(:channel)
          .where(event_id: nil)
          .where("unaccent(videos.title) ILIKE unaccent(:query) OR
                   unaccent(videos.description) ILIKE unaccent(:query) OR
                   unaccent(videos.tags) ILIKE unaccent(:query) OR
                   unaccent(channels.title) ILIKE unaccent(:query)",
-                query: "%#{event_title}%")
+                query: "%#{search_title}%")
   end
 
   def match_videos
