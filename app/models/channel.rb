@@ -24,9 +24,6 @@ class Channel < ApplicationRecord
 
   before_save :update_imported, if: :count_changed?
 
-  scope :imported, -> { where(imported: true) }
-  scope :not_imported, -> { where(imported: false) }
-
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
                                "%#{query}%")
