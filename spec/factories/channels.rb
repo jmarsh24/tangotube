@@ -13,6 +13,7 @@
 #  total_videos_count    :integer          default(0)
 #  yt_api_pull_count     :integer          default(0)
 #  reviewed              :boolean          default(FALSE)
+#  videos_count          :integer          default(0), not null
 #
 
 FactoryBot.define do
