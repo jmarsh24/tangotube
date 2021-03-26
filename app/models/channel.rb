@@ -15,14 +15,14 @@
 #  reviewed              :boolean          default(FALSE)
 #
 class Channel < ApplicationRecord
-  before_save :update_imported, if: :count_changed?
-
   include Reviewable
   include Importable
 
+  has_many :videos, dependent: :destroy
+
   validates :channel_id, presence: true, uniqueness: true
 
-  has_many :videos, dependent: :destroy
+  before_save :update_imported, if: :count_changed?
 
   scope :imported, -> { where(imported: true) }
   scope :not_imported, -> { where(imported: false) }
