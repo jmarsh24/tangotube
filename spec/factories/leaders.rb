@@ -14,6 +14,6 @@
 #
 FactoryBot.define do
   factory :leader do
-    name { Faker::Name.name }
+    sequence(:name) { |n| "John Doe #{n}" }
   end
 end
