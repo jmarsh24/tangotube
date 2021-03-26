@@ -37,11 +37,15 @@ class Event < ApplicationRecord
   end
 
   def match_videos
-    return if search_title.split.size < 2 || videos_with_event_title_match.empty?
+    return if event_title_length_match_validation
 
     videos_with_event_title_match.find_each do |video|
       video.update(event_id: id)
     end
+  end
+
+  def event_title_length_match_validation
+    search_title.split.size < 2 || videos_with_event_title_match.empty?
   end
 
   class << self
