@@ -1,5 +1,4 @@
 source "https://rubygems.org"
-git_source(:github) { |_repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.0"
 
@@ -39,6 +38,7 @@ gem "yt", "~> 0.32.0"
 
 group :development, :test do
   gem "amazing_print", "~> 1.2", ">= 1.2.2"
+  gem "byebug", "~> 11.1", ">= 11.1.3"
   gem "factory_bot_rails", "~> 6.1"
   gem "faker", "~> 2.16"
   gem "rspec-rails", "~> 4.0"
@@ -46,7 +46,6 @@ group :development, :test do
 end
 
 group :development do
-  gem "byebug", "~> 11.1", ">= 11.1.3"
   gem "listen", "~> 3.2"
   gem "rack-mini-profiler", "~> 2.3"
   gem "rubocop", "~> 1.8"

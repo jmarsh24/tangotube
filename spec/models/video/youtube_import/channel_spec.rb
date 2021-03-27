@@ -2,24 +2,58 @@ require "rails_helper"
 
 RSpec.describe Video::YoutubeImport::Channel, type: :model do
   describe "#import" do
-    it "receives channel info from youtube" do
-      channel = instance_double(:channel, channel_id:         "valid_youtube_channel_id",
-                                          title:              "channel_title",
-                                          thumbnail_url:      "channel_url",
-                                          total_videos_count: 500,
-                                          videos:             %w[youtube_video_id youtube_video_id1 youtube_video_id2])
+    it "creates new channel if missing" do
+      yt_response = instance_double(Yt::Channel, id:            "valid_youtube_channel_id",
+                                                 title:         "channel_title",
+                                                 thumbnail_url: "channel_url",
+                                                 video_count:   500)
 
-      allow(Yt::Channel).to received(:new).and_return(channel)
-      imported_channel = described_class.import("ABC")
+      allow(Yt::Channel).to receive(:new).and_return(yt_response)
 
-      expect(imported_channel.channel_id).to eq("valid_youtube_channel_id")
-      expect(imported_channel.title).to eq("channel_title")
-      expect(imported_channel.thumbnail_url).to eq("channel_url")
-      expect(imported_channel.total_videos_count).to eq("channel_url")
-      expect(imported_channel.videos).to eq(%w[youtube_video_id youtube_video_id1 youtube_video_id2])
+      expect { described_class.import("valid_youtube_channel_id") }.to change(Channel, :count).from(0).to(1)
+    end
+
+    it "imported channel has attributes" do
+      yt_response = instance_double(Yt::Channel, id:            "valid_youtube_channel_id",
+                                                 title:         "channel_title",
+                                                 thumbnail_url: "channel_url",
+                                                 video_count:   500)
+
+      allow(Yt::Channel).to receive(:new).and_return(yt_response)
+
+      described_class.import("valid_youtube_channel_id")
+      channel = Channel.first
+      expect(channel.channel_id).to eq("valid_youtube_channel_id")
+      expect(channel.title).to eq("channel_title")
+      expect(channel.thumbnail_url).to eq("channel_url")
+      expect(channel.total_videos_count).to eq(500)
+    end
+
+    it "updates attributes if channel exists" do
+      yt_response = instance_double(Yt::Channel, id:            "valid_youtube_channel_id",
+                                                 title:         "channel_title",
+                                                 thumbnail_url: "channel_url",
+                                                 video_count:   500)
+
+      allow(Yt::Channel).to receive(:new).and_return(yt_response)
+      channel = create(:channel, channel_id: "valid_youtube_channel_id")
+
+      described_class.import("valid_youtube_channel_id")
+      channel.reload
+
+      expect(channel.channel_id).to eq("valid_youtube_channel_id")
+      expect(channel.title).to eq("channel_title")
+      expect(channel.thumbnail_url).to eq("channel_url")
+      expect(channel.total_videos_count).to eq(500)
     end
   end
 end
+
+# expect(Channel.first.channel_id).to eq("valid_youtube_channel_id")
+# expect(imported_channel.title).to eq("channel_title")
+# expect(imported_channel.thumbnail_url).to eq("channel_url")
+# expect(imported_channel.total_videos_count).to eq("channel_url")
+# expect(imported_channel.videos).to eq(%w[youtube_video_id youtube_video_id1 youtube_video_id2])
 
 #   describe "#fetch_by_id" do
 #     it "returns true response" do
