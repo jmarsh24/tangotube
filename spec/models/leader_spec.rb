@@ -15,12 +15,12 @@
 require "rails_helper"
 
 RSpec.describe Leader, type: :model do
-  subject { FactoryBot.build(:leader) }
-
   it_behaves_like "a full nameable"
   it_behaves_like "a reviewable", :leader
 
   describe "validations" do
+    subject { FactoryBot.build(:leader) }
+
     it { is_expected.to validate_uniqueness_of(:name) }
   end
 
