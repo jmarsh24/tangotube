@@ -29,20 +29,20 @@ RSpec.describe Channel, type: :model do
     it { is_expected.to have_many(:videos) }
   end
 
-  describe ".update_videos_count" do
-    it "changes imported to false if total_videos_count is greater than internal videos_count" do
-      channel = create(:channel, imported: true, total_videos_count: 500, videos_count: 499)
-      expect(channel.reload.imported).to eq(false)
+  describe "#update_imported" do
+    it "doesn't update if the count is not changing" do
+      channel = create(:channel, total_videos_count: 500, videos_count: 499)
+      expect { channel.update(title: "blah blah") }.not_to change(channel.reload, :imported)
     end
 
-    it "changes imported to true if total_videos_count is smaller than internal videos_count" do
-      channel = create(:channel, imported: false, total_videos_count: 500, videos_count: 501)
-      expect(channel.reload.imported).to eq(true)
+    it "updates the imported status if count is equal" do
+      channel = create(:channel, total_videos_count: 500, videos_count: 499)
+      expect { channel.update(videos_count: 500) }.to change(channel.reload, :imported)
     end
 
-    it "changes imported to false if total_videos_count is greater than internal videos_count" do
-      channel = create(:channel, imported: false, total_videos_count: 500, videos_count: 500)
-      expect(channel.reload.imported).to eq(true)
+    it "doesn't update if the videos count is less than total_vides_count" do
+      channel = create(:channel, total_videos_count: 500, videos_count: 499)
+      expect { channel.update(videos_count: 501) }.to change { channel.reload.imported }.from(false).to(true)
     end
   end
 
