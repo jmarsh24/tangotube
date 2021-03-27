@@ -69,6 +69,10 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  config.mock_with :rspec do |mocks|
+    mocks.verify_doubled_constant_names = true
+  end
 end
 
 Shoulda::Matchers.configure do |config|
