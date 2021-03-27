@@ -19,11 +19,7 @@ class Video::YoutubeImport::Channel
   end
 
   def import
-    if channel.present?
-      channel.update(to_channel_params)
-    else
-      @channel = Channel.create(to_channel_params)
-    end
+    channel.update(to_channel_params)
   end
 
   def import_videos
@@ -39,7 +35,7 @@ class Video::YoutubeImport::Channel
   end
 
   def channel
-    @channel ||= Channel.find_by(channel_id: @channel_id)
+    @channel ||= Channel.find_or_create_by(channel_id: @channel_id)
   end
 
   def to_channel_params

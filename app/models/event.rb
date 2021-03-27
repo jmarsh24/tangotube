@@ -2,17 +2,18 @@
 #
 # Table name: events
 #
-#  id         :bigint           not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  title      :string
-#  city       :string
-#  country    :string
-#  category   :string
-#  start_date :date
-#  end_date   :date
-#  active     :boolean          default(TRUE)
-#  reviewed   :boolean          default(FALSE)
+#  id           :bigint           not null, primary key
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  title        :string
+#  city         :string
+#  country      :string
+#  category     :string
+#  start_date   :date
+#  end_date     :date
+#  active       :boolean          default(TRUE)
+#  reviewed     :boolean          default(FALSE)
+#  videos_count :integer          default(0), not null
 #
 class Event < ApplicationRecord
   validates :title, presence: true, uniqueness: true
@@ -22,6 +23,7 @@ class Event < ApplicationRecord
   has_many :videos, dependent: :nullify
 
   def search_title
+    return if title.empty?
     @search_title ||= title.split("-")[0].strip
   end
 
@@ -36,11 +38,15 @@ class Event < ApplicationRecord
   end
 
   def match_videos
-    return if search_title.split.size < 2 || videos_with_event_title_match.empty?
+    return if event_title_length_match_validation
 
     videos_with_event_title_match.find_each do |video|
       video.update(event_id: id)
     end
+  end
+
+  def event_title_length_match_validation
+    search_title.split.size < 2 || videos_with_event_title_match.empty?
   end
 
   class << self

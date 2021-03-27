@@ -13,17 +13,21 @@
 #  total_videos_count    :integer          default(0)
 #  yt_api_pull_count     :integer          default(0)
 #  reviewed              :boolean          default(FALSE)
+#  videos_count          :integer          default(0), not null
 #
 class Channel < ApplicationRecord
-  before_save :update_imported, if: :count_changed?
-
   include Reviewable
   include Importable
 
-  validates :channel_id, presence: true, uniqueness: true
-
   has_many :videos, dependent: :destroy
 
+<<<<<<< HEAD
+=======
+  validates :channel_id, presence: true, uniqueness: true
+
+  before_save :update_imported, if: :count_changed?
+
+>>>>>>> 6b9d577a6a23caaabbe697dd820cbf4b63ff42ba
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
                                "%#{query}%")

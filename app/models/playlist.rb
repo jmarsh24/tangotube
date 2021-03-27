@@ -19,7 +19,4 @@ class Playlist < ApplicationRecord
   include Importable
 
   validates :slug, presence: true, uniqueness: true
-
-  has_many :videos
-
 end
