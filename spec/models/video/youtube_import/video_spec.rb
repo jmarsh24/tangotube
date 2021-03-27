@@ -20,7 +20,5 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
   end
 
   describe "channel" do
-    youtube_video =
-      expect
   end
 end
