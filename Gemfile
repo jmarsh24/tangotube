@@ -46,7 +46,6 @@ group :development, :test do
 end
 
 group :development do
-  gem "annotate", "~> 3.1", ">= 3.1.1"
   gem "byebug", "~> 11.1", ">= 11.1.3"
   gem "listen", "~> 3.2"
   gem "rack-mini-profiler", "~> 2.3"
