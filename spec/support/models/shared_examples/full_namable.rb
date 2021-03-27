@@ -19,6 +19,7 @@ RSpec.shared_examples "a full nameable" do
       expect(object.abrev_name_nospace).to eq("J.Doe")
     end
   end
+
   describe ".full_name_search" do
     it "finds a searched follower by name" do
       object = described_class.create(name: "John Doe", first_name: "John", last_name: "Doe")
@@ -26,6 +27,7 @@ RSpec.shared_examples "a full nameable" do
       expect(@result).to include(object)
     end
   end
+
   describe ".full_name_search" do
     it "finds a searched follower by ending of name" do
       object = described_class.create(name: "John Doe", first_name: "John", last_name: "Doe")
@@ -33,6 +35,7 @@ RSpec.shared_examples "a full nameable" do
       expect(@result).to include(object)
     end
   end
+
   describe ".full_name_search" do
     it "finds a searched follower by beginning of name" do
       object = described_class.create(name: "John Doe", first_name: "John", last_name: "Doe")
@@ -40,6 +43,7 @@ RSpec.shared_examples "a full nameable" do
       expect(@result).to include(object)
     end
   end
+
   describe ".full_name_search" do
     it "finds a searched follower by with case insensitivity" do
       object = described_class.create(name: "John Doe", first_name: "John", last_name: "Doe")

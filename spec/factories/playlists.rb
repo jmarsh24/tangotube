@@ -15,12 +15,8 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-require "rails_helper"
-
-RSpec.describe Playlist, type: :model do
-  it_behaves_like "an importable", :playlist
-
-  describe "validations" do
-    it { is_expected.to validate_uniqueness_of(:slug) }
+FactoryBot.define do
+  factory :playlist do
+    sequence(:slug) { |n| "Slug#{n}" }
   end
 end

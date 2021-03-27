@@ -2,17 +2,18 @@
 #
 # Table name: events
 #
-#  id         :bigint           not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  title      :string
-#  city       :string
-#  country    :string
-#  category   :string
-#  start_date :date
-#  end_date   :date
-#  active     :boolean          default(TRUE)
-#  reviewed   :boolean          default(FALSE)
+#  id           :bigint           not null, primary key
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  title        :string
+#  city         :string
+#  country      :string
+#  category     :string
+#  start_date   :date
+#  end_date     :date
+#  active       :boolean          default(TRUE)
+#  reviewed     :boolean          default(FALSE)
+#  videos_count :integer          default(0), not null
 #
 class Event < ApplicationRecord
   validates :title, presence: true, uniqueness: true
@@ -21,28 +22,44 @@ class Event < ApplicationRecord
 
   has_many :videos, dependent: :nullify
 
-  scope :title_search, lambda { |query|
-                         where("unaccent(title) ILIKE unaccent(:query)",
-                               query: "%#{query}%")
-                       }
+  def search_title
+    return if title.empty?
+    @search_title ||= title.split("-")[0].strip
+  end
+
+  def videos_with_event_title_match
+    Video.joins(:channel)
+         .where(event_id: nil)
+         .where("unaccent(videos.title) ILIKE unaccent(:query) OR
+                  unaccent(videos.description) ILIKE unaccent(:query) OR
+                  unaccent(videos.tags) ILIKE unaccent(:query) OR
+                  unaccent(channels.title) ILIKE unaccent(:query)",
+                query: "%#{search_title}%")
+  end
+
+  def match_videos
+    return if event_title_length_match_validation
+
+    videos_with_event_title_match.find_each do |video|
+      video.update(event_id: id)
+    end
+  end
+
+  def event_title_length_match_validation
+    search_title.split.size < 2 || videos_with_event_title_match.empty?
+  end
 
   class << self
-    def match_all_events
-      Event.all.order(:id).each do |event|
-        MatchEventWorker.perform_async(event.id)
+    def title_search(query)
+      words = query.to_s.strip.split
+      words.reduce(all) do |combined_scope, word|
+        combined_scope.where("unaccent(title) ILIKE unaccent(:query)", query: "%#{word}%")
       end
     end
 
-    def match_event(event_id)
-      event = Event.find(event_id)
-      event_title = event.title.split("-")[0].strip
-
-      if event_title.split.size > 2
-
-        videos = Video.joins(:channel).where(event_id: nil).where("unaccent(videos.title) ILIKE unaccent(?) OR unaccent(videos.description) ILIKE unaccent(?) OR unaccent(videos.tags) ILIKE unaccent(?) OR unaccent(channels.title) ILIKE unaccent(?)", "%#{event_title}%",
-                                                                  "%#{event_title}%", "%#{event_title}%", "%#{event_title}%")
-
-        videos.update_all(event_id: event.id) if videos.present?
+    def match_all_events
+      Event.all.order(:id).each do |event|
+        MatchEventWorker.perform_async(event.id)
       end
     end
   end

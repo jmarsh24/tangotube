@@ -7,4 +7,4 @@ RSpec.shared_examples "a reviewable" do |factory_name|
       expect(described_class.reviewed).not_to include(unreviewed)
     end
   end
- end
+end

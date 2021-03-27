@@ -15,15 +15,10 @@
 #  reviewed     :boolean          default(FALSE)
 #  videos_count :integer          default(0), not null
 #
-
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+FactoryBot.define do
+  factory :event do
+    sequence(:title) { |n| "Fancy event #{n}" }
+    city { Faker::Address.city }
+    country { Faker::Address.country }
+  end
+end

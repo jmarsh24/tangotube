@@ -13,31 +13,30 @@
 #  total_videos_count    :integer          default(0)
 #  yt_api_pull_count     :integer          default(0)
 #  reviewed              :boolean          default(FALSE)
+#  videos_count          :integer          default(0), not null
 #
 class Channel < ApplicationRecord
   include Reviewable
   include Importable
 
+  has_many :videos, dependent: :destroy
+
   validates :channel_id, presence: true, uniqueness: true
 
-  has_many :videos, dependent: :destroy
+  before_save :update_imported, if: :count_changed?
 
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
                                "%#{query}%")
                        }
 
-  class << self
-    def update_imported_video_counts
-      all.find_each do |channel|
-        channel.update(imported_videos_count: channel.videos.count)
-      end
-    end
+  private
 
-    def update_import_status
-      where("imported_videos_count < total_videos_count").find_each do |channel|
-        channel.update(imported: false)
-      end
-    end
+  def update_imported
+    self.imported = videos_count >= total_videos_count
+  end
+
+  def count_changed?
+    total_videos_count_changed? || videos_count_changed?
   end
 end
