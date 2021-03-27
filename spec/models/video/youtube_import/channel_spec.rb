@@ -1,4 +1,6 @@
 require "rails_helper"
+require "sidekiq/testing"
+Sidekiq::Testing.fake!
 
 RSpec.describe Video::YoutubeImport::Channel, type: :model do
   describe "#import" do
@@ -45,6 +47,21 @@ RSpec.describe Video::YoutubeImport::Channel, type: :model do
       expect(channel.title).to eq("channel_title")
       expect(channel.thumbnail_url).to eq("channel_url")
       expect(channel.total_videos_count).to eq(500)
+    end
+  end
+
+  describe "#import_videos" do
+    it "#import_videos" do
+      yt_response = instance_double(Yt::Channel, id:            "valid_youtube_channel_id",
+                                                 title:         "channel_title",
+                                                 thumbnail_url: "channel_url",
+                                                 video_count:   3,
+                                                 videos:        [build(:video, id: 1),
+                                                                 build(:video, id: 2),
+                                                                 build(:video, id: 3)])
+      allow(Yt::Channel).to receive(:new).and_return(yt_response)
+
+      expect { described_class.import_videos("valid_youtube_channel_id") }.to change(ImportVideoWorker.jobs, :size).by(3)
     end
   end
 end
