@@ -6,30 +6,20 @@ module ApplicationHelper
     title ||= column.titleize
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "desc" ? "asc" : "desc"
-    link_to "#{title} #{if css_class.present?
-                          tag.i('', class: "fa fa-chevron-#{direction == 'asc' ? 'up' : 'down'}")
-                        end}".html_safe,
-            current_page_params.merge({ sort: column, direction: direction }), { class: css_class }
+    link_to "#{title} #{arrow_css_tag}", current_page_params.merge({ sort: column, direction: direction }), { class: css_class }
+  end
+
+  def arrow_css_tag
+    return if css_class.empty?
+
+    tag.i("", class: "fa fa-chevron-#{direction == 'asc' ? 'up' : 'down'}")
   end
 
   def current_page_params
-    request.params.slice("orchestra",
-                         "channel",
-                         "leader",
-                         "follower",
-                         "genre",
-                         "query",
-                         "view_count",
-                         "upload_date",
-                         "popularity",
-                         "song_id",
-                         "event_id",
-                         "hd",
-                         "sort",
-                         "direction")
+    request.params.slice(sortable_params)
   end
 
-  def format_value(value)
-    value ||= "N/A"
+  def sortable_params
+    %w[orchestra channel leader follower genre view_count upload_date popularity song_id event_id hd sort direction]
   end
 end
