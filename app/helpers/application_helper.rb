@@ -6,13 +6,9 @@ module ApplicationHelper
     title ||= column.titleize
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "desc" ? "asc" : "desc"
-    link_to "#{title} #{arrow_css_tag}", current_page_params.merge({ sort: column, direction: direction }), { class: css_class }
-  end
-
-  def arrow_css_tag
-    return if css_class.empty?
-
-    tag.i("", class: "fa fa-chevron-#{direction == 'asc' ? 'up' : 'down'}")
+    link_to "#{title} #{tag.i('', class: "fa fa-chevron-#{direction == 'asc' ? 'up' : 'down'}") if css_class.present?}",
+            current_page_params.merge({ sort: column, direction: direction }),
+            { class: css_class }
   end
 
   def current_page_params
