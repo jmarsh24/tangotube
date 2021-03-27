@@ -59,6 +59,7 @@ end
 
 group :test do
   gem "capybara", ">= 2.15"
+  gem "rspec-mocks", "~> 3.10"
   gem "selenium-webdriver", "3.142.7"
   gem "shoulda-matchers", "~> 4.0"
   gem "simplecov", "~> 0.21.2", require: false
