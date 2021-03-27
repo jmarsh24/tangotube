@@ -24,9 +24,6 @@ class Channel < ApplicationRecord
 
   has_many :videos, dependent: :destroy
 
-  scope :imported, -> { where(imported: true) }
-  scope :not_imported, -> { where(imported: false) }
-
   scope :title_search, lambda { |query|
                          where("unaccent(title) ILIKE unaccent(?)",
                                "%#{query}%")
