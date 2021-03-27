@@ -21,7 +21,7 @@ class Video::MusicRecognition::AcrCloud::Client
   def get_audio_from_acr_cloud
     faraday = Faraday.new do |f|
       f.request :multipart
-      f.request :url_encoded
+      f.request :url_encodeduser
       f.adapter :net_http
     end
 
