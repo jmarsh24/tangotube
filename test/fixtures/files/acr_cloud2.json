@@ -1,0 +1,109 @@
+{
+         "status" => {
+            "msg" => "Success",
+           "code" => 0,
+        "version" => "1.0"
+    },
+       "metadata" => {
+                "music" => [
+            [0] {
+                     "external_ids" => {
+                    "isrc" => "ARF034300056"
+                },
+                     "contributors" => {
+                    "composers" => [
+                        [0] "Jose Barreiros Bazan",
+                        [1] "José Basso",
+                        [2] "Julian Ortiz"
+                    ],
+                    "lyricists" => [
+                        [0] "Jose Barreiros Bazan",
+                        [1] "José Basso",
+                        [2] "Julian Ortiz"
+                    ]
+                },
+                            "label" => "SME - Columbia",
+                      "duration_ms" => 154000,
+                            "acrid" => "2f809ea684e831616fe983d0a08e5a37",
+                            "score" => 82,
+                   "play_offset_ms" => 100300,
+                "external_metadata" => {},
+                           "genres" => [
+                    [0] {
+                        "name" => "Tango"
+                    }
+                ],
+                            "title" => "Que Vas Buscando Muñeca",
+                     "release_date" => "2005-07-15",
+                            "album" => {
+                    "name" => "Serie 78 RPM : Ricardo Tanturi Vol.1"
+                },
+                      "result_from" => 1,
+                          "artists" => [
+                    [0] {
+                        "name" => "Ricardo Tanturi y su Orquesta Típica Los Indios"
+                    }
+                ]
+            },
+            [1] {
+                     "external_ids" => {
+                    "isrc" => "ARF034300056"
+                },
+                     "contributors" => {
+                    "composers" => [
+                        [0] "Jose Barreiros Bazan",
+                        [1] "Jose Basso",
+                        [2] "Julián Ortiz"
+                    ],
+                    "lyricists" => [
+                        [0] "Jose Barreiros Bazan",
+                        [1] "Jose Basso",
+                        [2] "Julián Ortiz"
+                    ]
+                },
+                            "label" => "Columbia",
+                      "duration_ms" => 153307,
+                            "score" => 79,
+                            "acrid" => "22c08191b6e9b1207548454d0a12ec1f",
+                "external_metadata" => {
+                    "spotify" => {
+                          "album" => {
+                            "id" => "0DbVwdn8wcI9jNvm7BwMIe"
+                        },
+                        "artists" => [
+                            [0] {
+                                "id" => "44yvH6jBSzsZBi6LEleHg6"
+                            }
+                        ],
+                          "track" => {
+                            "id" => "0GMLu9xQF8YR8XpyzRq2HU"
+                        }
+                    }
+                },
+                   "play_offset_ms" => 100320,
+                           "genres" => [
+                    [0] {
+                        "name" => "World"
+                    },
+                    [1] {
+                        "name" => "South America"
+                    }
+                ],
+                     "release_date" => "2011-07-15",
+                            "title" => "Que Vas Buscando Muñeca",
+                            "album" => {
+                    "name" => "Serie 78 RPM : Ricardo Tanturi Vol.1"
+                },
+                      "result_from" => 1,
+                          "artists" => [
+                    [0] {
+                        "name" => "Ricardo Tanturi y su Orquesta Típica Los Indios"
+                    }
+                ]
+            }
+        ],
+        "timestamp_utc" => "2020-11-29 21:39:33"
+    },
+      "cost_time" => 1.4750001430511,
+    "result_type" => 0
+}

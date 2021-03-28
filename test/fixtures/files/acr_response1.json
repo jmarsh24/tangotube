@@ -1,0 +1,71 @@
+{
+         "status" => {
+            "msg" => "Success",
+           "code" => 0,
+        "version" => "1.0"
+    },
+       "metadata" => {
+                "music" => [
+            [0] {
+                     "external_ids" => {
+                    "isrc" => "DEBL60206921"
+                },
+                     "contributors" => {
+                    "composers" => [
+                        [0] "M. Mores",
+                        [1] "A. Surdé"
+                    ],
+                    "lyricists" => [
+                        [0] "M. Mores",
+                        [1] "A. Surdé"
+                    ]
+                },
+                            "label" => "Immortal Legends Records",
+                      "duration_ms" => 121679,
+                     "release_date" => "2014-08-01",
+                            "score" => 91,
+                            "album" => {
+                    "name" => "Candombe Oriental"
+                },
+                   "play_offset_ms" => 89420,
+                "external_metadata" => {
+                    "spotify" => {
+                          "album" => {
+                            "id" => "7HoZeE8gLlHAEo66AS5N3u"
+                        },
+                        "artists" => [
+                            [0] {
+                                "id" => "46beGPwcX2QEZcmuvrMqp4"
+                            }
+                        ],
+                          "track" => {
+                            "id" => "3qxaj6XeXVkWUeKXgSz0mz"
+                        }
+                    },
+                    "youtube" => {
+                        "vid" => "pVk3FsgWXlo"
+                    }
+                },
+                           "genres" => [
+                    [0] {
+                        "name" => "World"
+                    },
+                    [1] {
+                        "name" => "South America"
+                    }
+                ],
+                            "title" => "Estampa de Varón",
+                            "acrid" => "7ed4a2a00898b958e9dd60d739be1ec9",
+                      "result_from" => 1,
+                          "artists" => [
+                    [0] {
+                        "name" => "Juan D'Arienzo"
+                    }
+                ]
+            }
+        ],
+        "timestamp_utc" => "2020-11-29 21:40:07"
+    },
+      "cost_time" => 1.2829999923706,
+    "result_type" => 0
+}

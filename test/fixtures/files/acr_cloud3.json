@@ -1,0 +1,43 @@
+{
+         "status" => {
+            "msg" => "Success",
+           "code" => 0,
+        "version" => "1.0"
+    },
+       "metadata" => {
+                "music" => [
+            [0] {
+                     "external_ids" => {
+                    "isrc" => "DETL61625170"
+                },
+                            "label" => "TF Sound",
+                      "duration_ms" => 170980,
+                            "score" => 100,
+                   "play_offset_ms" => 102960,
+                "external_metadata" => {},
+                            "acrid" => "4dd08541e51f26f81fe6dbc0e0678d19",
+                            "title" => "Paisaje",
+                            "album" => {
+                    "name" => "Greatest Songs",
+                      "id" => "3476078"
+                },
+                           "genres" => [
+                    [0] {
+                        "name" => "Pop"
+                    }
+                ],
+                     "release_date" => "2020-03-18",
+                      "result_from" => 1,
+                          "artists" => [
+                    [0] {
+                        "name" => "Pedro Laurenz",
+                          "id" => "175305"
+                    }
+                ]
+            }
+        ],
+        "timestamp_utc" => "2020-11-29 21:38:36"
+    },
+      "cost_time" => 1.3030002117157,
+    "result_type" => 0
+}
