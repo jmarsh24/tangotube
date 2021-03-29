@@ -29,7 +29,7 @@ class Video::YoutubeImport::Playlist
 
   def import_channels
     new_channels.each do |channel_id|
-      Video::YoutubeImport::Channel.import(channel_id)
+      ImportChannelWorker.perform_async(channel_id)
     end
   end
 
@@ -48,7 +48,8 @@ class Video::YoutubeImport::Playlist
       slug:          @youtube_playlist.id,
       title:         @youtube_playlist.title,
       description:   @youtube_playlist.description,
-      channel_title: @youtube_playlist.published_at
+      channel_title: @youtube_playlist.channel_title,
+      channel_id:    @youtube_playlist.channel_id
     }
   end
 
