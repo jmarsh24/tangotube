@@ -60,7 +60,7 @@ RSpec.describe Video::YoutubeImport::Playlist, type: :model do
   describe "#import_channels" do
     it "creates import channels worker" do
       youtube_playlist = described_class.new("ABC")
-      youtube_playlist.stub(:new_channels) { %w[video_id_1 video_id_2 video_id_3] }
+      youtube_playlist.stub(:new_channels) { %w[channel_id_1 channel_id_2 channel_id_3] }
 
       yt_response = instance_double(Yt::Playlist, id:            "valid_youtube_playlist_id",
                                                   title:         "playlist_title",
