@@ -29,6 +29,7 @@ RSpec.describe Video::YoutubeImport::Channel, type: :model do
       expect(channel.title).to eq("channel_title")
       expect(channel.thumbnail_url).to eq("channel_url")
       expect(channel.total_videos_count).to eq(500)
+      expect(channel.imported?).to eq(false)
     end
 
     it "updates attributes if channel exists" do
@@ -47,6 +48,7 @@ RSpec.describe Video::YoutubeImport::Channel, type: :model do
       expect(channel.title).to eq("channel_title")
       expect(channel.thumbnail_url).to eq("channel_url")
       expect(channel.total_videos_count).to eq(500)
+      expect(channel.imported?).to eq(false)
     end
   end
 
