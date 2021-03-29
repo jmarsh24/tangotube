@@ -53,17 +53,18 @@ RSpec.describe Video::YoutubeImport::Channel, type: :model do
   end
 
   describe "#import_videos" do
-    it "#import_videos" do
+    it "create import videos workers" do
+      youtube_channel = described_class.new("ABC")
+      youtube_channel.stub(:new_videos) { %w[video_id_1 video_id_2 video_id_3] }
+
       yt_response = instance_double(Yt::Channel, id:            "valid_youtube_channel_id",
                                                  title:         "channel_title",
                                                  thumbnail_url: "channel_url",
-                                                 video_count:   3,
-                                                 videos:        [build(:video, id: 1),
-                                                                 build(:video, id: 2),
-                                                                 build(:video, id: 3)])
+                                                 video_count:   3)
+
       allow(Yt::Channel).to receive(:new).and_return(yt_response)
 
-      expect { described_class.import_videos("valid_youtube_channel_id") }.to change(ImportVideoWorker.jobs, :size).by(3)
+      expect { youtube_channel.import_videos }.to change(ImportVideoWorker.jobs, :size).by(3)
     end
   end
 end
