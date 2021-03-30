@@ -70,6 +70,13 @@ class VideosController < ApplicationController
     redirect_to watch_path(v: @video.youtube_id)
   end
 
+  def create
+    @video = Video.create(youtube_id: params[:video][:youtube_id])
+    fetch_new_video
+
+    redirect_to root_path, notice: "Video Sucessfully Added: The video must be approved before the videos are added"
+  end
+
   private
 
   def current_search
@@ -105,5 +112,9 @@ class VideosController < ApplicationController
 
   def filtering_params
     params.permit(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd, :event_id)
+  end
+
+  def fetch_new_video
+    ImportVideoWorker.perform_async(@video.youtube_id)
   end
 end
