@@ -1,6 +1,6 @@
  <div class="videos-new-container">
   <div class="videos-new-form-container">
-    <h2>Add Video</h2>
+    <h4>Add Video</h4>
     <%= form_with model: Video.new, local: true, class: 'video-form' do |f| %>
       youtube.com/watch?v=
       <%= f.text_field :youtube_id, placeholder: 'insert video id here...'%>
