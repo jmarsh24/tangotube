@@ -6,8 +6,8 @@ RSpec.describe Video::MusicRecognition::Youtube::Video, type: :model do
       video = create(:video, youtube_id: "ABC", youtube_song: nil, youtube_artist: nil)
 
       yt_response = instance_double(YoutubeDL,
-                                    [{ "track"  => "Youtube Song Name" },
-                                     { "artist" => "Youtube Artist Name" }].to_json)
+                                    { "track"  => "Youtube Song Name",
+                                      "artist" => "Youtube Artist Name" }.to_json)
 
       allow(YoutubeDL).to receive(:download).and_return(yt_response)
       described_class.import("ABC")
