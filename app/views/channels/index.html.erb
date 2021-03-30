@@ -1,6 +1,6 @@
 <div class="channels-index-container">
   <h2>All Channels</h2>
-  <%= form_with model: Channel.new, class: 'channel-form' do |f| %>
+  <%= form_with model: Channel.new, local: true, class: 'channel-form' do |f| %>
     youtube.com/channel/
     <%= f.text_field :channel_id, placeholder: 'insert channel id here...' %>
     <%= f.submit "Add New Channel" %>

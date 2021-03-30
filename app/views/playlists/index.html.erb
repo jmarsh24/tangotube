@@ -1,6 +1,6 @@
 <div class="playlists-index-container">
   <h2>All playlists</h2>
-  <%= form_with model: Playlist.new, class: 'playlist-form' do |f| %>
+  <%= form_with model: Playlist.new, local: true, class: 'playlist-form' do |f| %>
     youtube.com/playlist/
     <%= f.text_field :slug, placeholder: 'insert playlist id here...'%>
     <%= f.submit "Add New Playlist" %>

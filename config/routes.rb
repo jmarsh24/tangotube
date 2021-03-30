@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get '/about',    to: 'static_pages#about'
 
   resources :channels, only: [:index, :create]
-  resources :playlists, only: :index
+  resources :playlists, only: [:index, :create]
   resources :videos, except: :show
   resources :search_suggestions, only: :index
   resources :leaders, only: :index

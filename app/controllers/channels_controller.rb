@@ -1,6 +1,4 @@
 class ChannelsController < ApplicationController
-  after_action :fetch_new_channel, only: :create
-
   def index
     @channels = Channel.order(:id).all
   end
@@ -11,13 +9,14 @@ class ChannelsController < ApplicationController
 
   def create
     @channel = Channel.create(channel_id: params[:channel][:channel_id])
+    fetch_new_channel
 
-    redirect_to videos_path, notice: "Channel Sucessfully Added: The channel must be approved before the videos are added"
+    redirect_to root_path, notice: "Channel Sucessfully Added: The channel must be approved before the videos are added"
   end
 
   private
 
   def fetch_new_channel
-    Video::YoutubeImport::Channel.import(@channel.channel_id)
+    ImportChannelWorker.perform_async(@channel.channel_id)
   end
 end
