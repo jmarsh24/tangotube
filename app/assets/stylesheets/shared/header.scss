@@ -178,12 +178,17 @@
 
   #mastHeadContainer {
     margin: 0;
+    height: 50px;
 
     .logoContainer {
       flex: 1;
       a {
         font-size: 20px;
       }
+    }
+
+    .upperHeadContainer {
+      display: none;
     }
 
     .autocompleteContainer {
@@ -196,4 +201,6 @@
       }
     }
   }
+
+
 }
