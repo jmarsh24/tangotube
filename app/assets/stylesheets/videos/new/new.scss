@@ -1,0 +1,27 @@
+.videos-new-container {
+  display: flex;
+  flex: 1;
+  margin-top: 100px;
+  justify-content: center;
+}
+
+.videos-new-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  height: 50px;
+
+  input {
+    margin: auto 0.5rem;
+    height: 2rem;
+    padding: 0.5rem;
+    border: 1px solid grey;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+  }
+  form {
+    display: flex;
+  }
+}
