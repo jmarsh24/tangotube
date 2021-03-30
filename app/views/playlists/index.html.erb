@@ -1,20 +1,18 @@
 <div class="playlists-index-container">
   <h2>All playlists</h2>
-  <%= form_with model: @video, class: 'playlist-form' do |f| %>
-    <%= f.label 'youtube.com/playlist/' %>
-    <%= f.text_field :playlist_id, placeholder: 'insert playlist id here...'%>
+  <%= form_with model: Playlist.new, class: 'playlist-form' do |f| %>
+    youtube.com/playlist/
+    <%= f.text_field :slug, placeholder: 'insert playlist id here...'%>
+    <%= f.submit "Add New Playlist" %>
   <% end %>
   <% @playlists.each do |playlist| %>
-  <div class="playlists-index-row">
-    <div class="playlists-index-item" id="id">
-      <%= playlist.slug %>
+    <div class="playlists-index-row">
+      <div class="playlists-index-item" id="id">
+        <%= playlist.slug %>
+      </div>
+      <div class="playlists-index-item" id="title">
+        <%= playlist.title %>
+      </div>
     </div>
-    <div class="playlists-index-item" id="title">
-      <%= playlist.title %>
-    </div>
-    <div class="playlists-index-item" id="playlist_id">
-      <%= playlist.channel_id %>
-    </div>
-  </div>
   <% end %>
 </div>

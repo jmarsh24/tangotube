@@ -12,6 +12,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet"></link>
   </head>
   <body>
+    <div id="header">
+      <%= render 'shared/header' %>
+    </div>
+    <div>
+      <%= render "shared/flash" %>
+    </div>
     <div id="pageContainer" data-controller="toggle">
       <div id="sideNavContainer" class="isHidden" data-toggle-target="sideNavContainer">
       </div>

@@ -1,8 +1,9 @@
 <div class="channels-index-container">
   <h2>All Channels</h2>
-  <%= form_with model: @video, class: 'channel-form' do |f| %>
-    <%= f.label 'youtube.com/channel/' %>
-    <%= f.text_field :channel_id, placeholder: 'insert channel id here...'%>
+  <%= form_with model: Channel.new, class: 'channel-form' do |f| %>
+    youtube.com/channel/
+    <%= f.text_field :channel_id, placeholder: 'insert channel id here...' %>
+    <%= f.submit "Add New Channel" %>
   <% end %>
   <% @channels.each do |channel| %>
   <div class="channels-index-row">
