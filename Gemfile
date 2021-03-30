@@ -35,7 +35,6 @@ gem "turbo-rails", "~> 0.5.8"
 group :development, :test do
   gem "amazing_print", "~> 1.2", ">= 1.2.2"
   gem "byebug", "~> 11.1", ">= 11.1.3"
-  gem "standard"
 end
 
 group :development do
