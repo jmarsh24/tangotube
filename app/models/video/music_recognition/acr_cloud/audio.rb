@@ -16,7 +16,7 @@ class Video::MusicRecognition::AcrCloud::Audio
 
   private
 
-  def fetch_by_id(_youtube_id)
+  def fetch_by_id(youtube_id)
     YoutubeDL.download(
       "https://www.youtube.com/watch?v=#{@youtube_id}",
       { format: "140", output: "~/environment/data/audio/%(id)s.mp3" }
