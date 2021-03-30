@@ -19,7 +19,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
                                                dislike_count:  "test")
 
       allow(Yt::Video).to receive(:new).and_return(yt_response)
-
+      
       youtube_video.stub(:base_params) do
         { youtube_id:  "valid_youtube_video_id",
           title:       "video_title",

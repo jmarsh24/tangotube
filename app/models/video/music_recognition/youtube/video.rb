@@ -11,6 +11,7 @@ class Video::MusicRecognition::Youtube::Video
   end
 
   def import
+    byebug
     @video.update(video_params)
   end
 
