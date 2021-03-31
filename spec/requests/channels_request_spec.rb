@@ -7,4 +7,11 @@ RSpec.describe "Channels", type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe "POST #create" do
+    it "succesfully accepts post request" do
+      post channels_path, params: { channel: { channel_id: "test" } }
+      expect(response).to have_http_status(:found)
+    end
+  end
 end
