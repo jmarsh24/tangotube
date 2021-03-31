@@ -15,8 +15,8 @@
   </div>
   <div class="filter-container isHidden" data-toggle-target="toggleable" id="filters">
     <%= render partial: "videos/index/filter_item", locals: { model: @genres, model_count: @genre_count, title: :genre, id: 'genre-filter' } %>
-    <%= render partial: "videos/index/filter_item", locals: { model: @leaders, model_count: @leader_count, title: :leader, id: 'leader-filter' } %>
-    <%= render partial: "videos/index/filter_item", locals: { model: @followers, model_count: @follower_count, title: :follower, id: 'follower-filter' } %>
+    <%= render partial: "videos/index/filter_item", locals: { model: @leaders, model_count: @leader_count, title: :leader_id, id: 'leader-filter' } %>
+    <%= render partial: "videos/index/filter_item", locals: { model: @followers, model_count: @follower_count, title: :follower_id, id: 'follower-filter' } %>
     <%= render partial: "videos/index/filter_item", locals: { model: @artists, model_count: @artist_count, title: :orchestra, id: 'orchestra-filter' } %>
     <div class="videos-sortable-container">
       <label>

@@ -20,9 +20,9 @@ class VideosController < ApplicationController
     @next_page_items = @videos.paginate(page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
     @items_display_count = (@videos.size - (@videos.size - (page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
 
-    @leaders = facet("leaders.name", :leader)
-    @followers = facet("followers.name", :follower)
-    @channels = facet("channels.title", :channel)
+    @leaders = facet_id("leaders.name", "leaders.id", :leader)
+    @followers = facet_id("followers.name", "followers.id", :follower)
+    @channels = facet_id("channels.title", "channels.id", :channel)
     @artists = facet("songs.artist", :song)
     @genres = facet("songs.genre", :song)
 
@@ -60,6 +60,14 @@ class VideosController < ApplicationController
     counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column).order("occurrences DESC")
     counts.map do |c|
       ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.titleize]
+    end
+  end
+
+  def facet_id(table_column, table_column_id, model)
+    query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences, #{table_column_id} AS facet_id_value"
+    counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column, table_column_id).order("occurrences DESC")
+    counts.map do |c|
+      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_id_value]
     end
   end
 
@@ -112,7 +120,7 @@ class VideosController < ApplicationController
   end
 
   def filtering_params
-    params.permit(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd, :event_id)
+    params.permit(:leader_id, :follower_id, :channel_id, :genre, :orchestra, :song_id, :query, :hd, :event_id)
   end
 
   def fetch_new_video
