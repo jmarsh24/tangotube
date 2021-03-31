@@ -25,7 +25,6 @@ class Video < ApplicationRecord
   scope :has_song, -> { where.not(song_id: nil) }
   scope :has_leader, -> { where.not(leader_id: nil) }
   scope :has_follower, -> { where.not(follower_id: nil) }
-  scope :has_youtube_song, -> { where.not(youtube_song: nil) }
   scope :missing_follower, -> { where(follower_id: nil) }
   scope :missing_leader, -> { where(leader_id: nil) }
   scope :missing_song, -> { where(song_id: nil) }
