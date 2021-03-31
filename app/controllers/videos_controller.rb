@@ -41,8 +41,6 @@ class VideosController < ApplicationController
     @video.clicked!
   end
 
-  def edit; end
-
   def update
     @video.update(video_params)
     redirect_to watch_path(v: @video.youtube_id)
