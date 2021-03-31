@@ -57,8 +57,8 @@ class VideosController < ApplicationController
 
   def facet(table_column, model)
     query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
-    counts = Video.joins(model).select(query).group(table_column)
-    facet = counts.map do |c|
+    counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column).order("occurrences DESC")
+    counts.map do |c|
       ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.titleize]
     end
   end
