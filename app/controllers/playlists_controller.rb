@@ -3,10 +3,6 @@ class PlaylistsController < ApplicationController
     @playlists = Playlist.all.order(:id)
   end
 
-  def show
-    @playlist = Playlist.find(params[:id])
-  end
-
   def create
     @playlist = Playlist.create(slug: params[:playlist][:slug])
     fetch_new_playlist

@@ -3,10 +3,6 @@ class ChannelsController < ApplicationController
     @channels = Channel.order(:id).all
   end
 
-  def show
-    @channel = Channel.find(params[:id])
-  end
-
   def create
     @channel = Channel.create(channel_id: params[:channel][:channel_id])
     fetch_new_channel
