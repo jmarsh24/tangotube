@@ -34,8 +34,8 @@ export default class extends Controller {
        containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
        containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML
        containerVideos.innerHTML = newContainerVideos.innerHTML
-       containerYearFilters.innerHTML = newContainerYearFilters.innerHTML
        containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
+       containerYearFilters.innerHTML = newContainerYearFilters.innerHTML
 
        history.pushState({}, '', `${window.location.pathname}?${this.params}`)
      },
@@ -76,7 +76,7 @@ export default class extends Controller {
     if (hd.length > 0) {
       params.push(`hd=${hd}`)
     }
-    debugger
+
     return [...new Set(params)].join("&")
 
   }
