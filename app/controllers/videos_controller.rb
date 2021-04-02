@@ -17,7 +17,7 @@ class VideosController < ApplicationController
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
     @videos_paginated = @videos_paginated.shuffle if filtering_params.blank?
 
-    @next_page_items = @videos.paginate(page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
+    @next_page_items = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
     @items_display_count = (@videos.size - (@videos.size - (page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
 
     @leaders = facet_id("leaders.name", "leaders.id", :leader)
@@ -25,18 +25,10 @@ class VideosController < ApplicationController
     @channels = facet_id("channels.title", "channels.id", :channel)
     @artists = facet("songs.artist", :song)
     @genres = facet("songs.genre", :song)
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render json: { videos:   render_to_string(partial: "videos/index/videos", formats: [:html]),
-                       loadmore: render_to_string(partial: "videos/index/load_more", formats: [:html]) }
-      end
-    end
   end
 
   def show
-    @video = Video.find_by(youtube_id: params[:v])
+    @video = Video.find_by(youtube_id: show_params[:v])
     set_recommended_videos
     @video.clicked!
   end
@@ -121,6 +113,10 @@ class VideosController < ApplicationController
 
   def filtering_params
     params.permit(:leader_id, :follower_id, :channel_id, :genre, :orchestra, :song_id, :query, :hd, :event_id)
+  end
+
+  def show_params
+    params.permit(:v)
   end
 
   def fetch_new_video

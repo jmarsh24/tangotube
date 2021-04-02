@@ -3,8 +3,6 @@
     <%= "Displaying #{@items_display_count} / #{number_with_delimiter(@videos.size)} Results" %>
   </div>
   <% unless @next_page_items.empty?  %>
-    <button class="load-more-link" data-action='click->loadmore#loadMore'>
-      Load More
-    </button>
+    <%= button_to "Load More", videos_path(page: @page + 1), { class: "load-more-link", method: "get" } %>
   <% end %>
 </div>
