@@ -18,15 +18,15 @@ module VideosHelper
             { 'data-turbo-frame': "_top" }
   end
 
-  def link_to_song_id(song_attributes)
+  def link_to_song_id(song_attributes, video)
     link_to song_attributes,
-            root_path(song_id: "video.song_id"),
+            root_path(song_id: video.song_id),
             { 'data-turbo-frame': "_top" }
   end
 
-  def link_to_song(el_recodo_attributes, external_song_attributes)
+  def link_to_song(el_recodo_attributes, external_song_attributes, video)
     if el_recodo_attributes.present?
-      link_to_song_id(el_recodo_attributes)
+      link_to_song_id(el_recodo_attributes, video)
     elsif external_song_attributes.present?
       link_to_query(external_song_attributes)
     end

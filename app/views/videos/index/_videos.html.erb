@@ -16,7 +16,8 @@
           <div class="video-song">
           <% if video.display.any_song_attributes.present? %>
             <%= link_to_song(video.display.el_recodo_attributes,
-                              video.display.external_song_attributes) %>
+                              video.display.external_song_attributes,
+                              video) %>
           <% end %>
           </div>
           <div class="video-event">
