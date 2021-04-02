@@ -4,7 +4,7 @@ class VideosController < ApplicationController
   before_action :set_video, only: %i[update edit]
   before_action :set_recommended_videos, only: %i[edit]
 
-  NUMBER_OF_VIDEOS_PER_PAGE = 120
+  NUMBER_OF_VIDEOS_PER_PAGE = 60
 
   helper_method :sort_column, :sort_direction
 
