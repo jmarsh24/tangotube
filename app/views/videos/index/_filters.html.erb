@@ -18,34 +18,6 @@
     <%= render partial: "videos/index/filter_item", locals: { model: @leaders, model_count: @leader_count, title: :leader_id, id: 'leader-filter' } %>
     <%= render partial: "videos/index/filter_item", locals: { model: @followers, model_count: @follower_count, title: :follower_id, id: 'follower-filter' } %>
     <%= render partial: "videos/index/filter_item", locals: { model: @artists, model_count: @artist_count, title: :orchestra, id: 'orchestra-filter' } %>
-    <div class="videos-sortable-container">
-      <label>
-        Sort By
-      </label>
-      <div class="videos-sortable-btn">
-        <%= sortable 'songs.title', "Song Title" %>
-      </div>
-      <div class="videos-sortable-btn">
-        <%= sortable 'songs.last_name_search', "Orchestra (last name)" %>
-      </div>
-      <div class="videos-sortable-btn">
-        <%= sortable 'leaders.name', "Leader" %>
-      </div>
-      <div class="videos-sortable-btn">
-        <%= sortable 'followers.name', "Follower" %>
-      </div>
-      <div class="videos-sortable-btn">
-        <%= sortable 'channels.title', "Channel" %>
-      </div>
-      <div class="videos-sortable-btn">
-        <%= sortable "videos.view_count", "View Count" %>
-      </div>
-      <div class="videos-sortable-btn">
-        <%= sortable "videos.upload_date", "Upload Date" %>
-      </div>
-      <div class="videos-sortable-btn">
-        <%= sortable 'videos.popularity', "Popularity" %>
-      </div>
-    </div>
+    <%= render partial: "videos/index/filter_item", locals: { model: @years, model_count: @years_count, title: :year, id: 'year-filter' } %>
   </div>
 </div>

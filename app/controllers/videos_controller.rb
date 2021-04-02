@@ -25,6 +25,7 @@ class VideosController < ApplicationController
     @channels = facet_id("channels.title", "channels.id", :channel)
     @artists = facet("songs.artist", :song)
     @genres = facet("songs.genre", :song)
+    @years = facet_on_year("upload_date")
   end
 
   def show
@@ -46,6 +47,14 @@ class VideosController < ApplicationController
   end
 
   private
+
+  def facet_on_year(table_column)
+    query = "extract(year from #{table_column})::int AS facet_value, count(#{table_column}) AS occurrences"
+    counts = Video.filter_videos(filtering_params).select(query).group("facet_value").order("facet_value DESC")
+    counts.map do |c|
+      ["#{c.facet_value} (#{c.occurrences})", c.facet_value]
+    end
+  end
 
   def facet(table_column, model)
     query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
@@ -112,7 +121,7 @@ class VideosController < ApplicationController
   end
 
   def filtering_params
-    params.permit(:leader_id, :follower_id, :channel_id, :genre, :orchestra, :song_id, :query, :hd, :event_id)
+    params.permit(:leader_id, :follower_id, :channel_id, :genre, :orchestra, :song_id, :query, :hd, :event_id, :year)
   end
 
   def show_params
