@@ -20,7 +20,7 @@ module VideosHelper
 
   def link_to_song_id(song_attributes)
     link_to song_attributes,
-            root_path(song_id: @video.song_id),
+            root_path(song_id: "video.song_id"),
             { 'data-turbo-frame': "_top" }
   end
 
@@ -46,5 +46,17 @@ module VideosHelper
 
   def formatted_metadata(video)
     "#{formatted_upload_date(video.upload_date)} • #{video.view_count} views • #{video.like_count} likes"
+  end
+
+  def hd_duration_data(video)
+    if video.hd?
+      "HD #{Time.at(video.duration).utc.strftime('%M:%S')}"
+    else
+      Time.at(video.duration).utc.strftime("%M:%S")
+    end
+  end
+
+  def channel_title(video)
+    truncate(video.channel.title, length: 45, omission: "")
   end
 end
