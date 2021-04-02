@@ -10,7 +10,7 @@
     <%= render "videos/index/videos" %>
   </div>
   <%= turbo_frame_tag "videos-#{@page + 1}" do %>
-    <div id="load-more-container">
+    <div class="load-more-container">
       <%= render "videos/index/load_more" %>
     </div>
   <% end %>
