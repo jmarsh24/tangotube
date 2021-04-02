@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
-  before_action :current_search, only: %i[index show]
+  before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[update edit]
   before_action :set_recommended_videos, only: %i[edit]
 
@@ -60,7 +60,7 @@ class VideosController < ApplicationController
     query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
     counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column).order("occurrences DESC")
     counts.map do |c|
-      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.titleize]
+      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value]
     end
   end
 

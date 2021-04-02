@@ -76,8 +76,8 @@ export default class extends Controller {
     if (hd.length > 0) {
       params.push(`hd=${hd}`)
     }
-
-    return params.join("&")
+    debugger
+    return [...new Set(params)].join("&")
 
   }
 }

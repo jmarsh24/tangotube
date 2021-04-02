@@ -3,7 +3,7 @@
 <%= title.to_s.titleize %>
 </label>
   <%= select_tag title.to_s,
-        options_for_select(model, params[title.to_s].presence), include_blank: true, multiple: false,
+        options_for_select(model, params[title].presence), include_blank: true, multiple: false,
             data: { action: "filter#filter",
                     "filter-target": "filter",
                     controller:'slimselect'
