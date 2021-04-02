@@ -27,9 +27,9 @@
           <div class="video-channel">
             <%= link_to image_tag(video.channel.thumbnail_url,
                           class: 'channel-icon'),
-                          root_path(channel: video.channel.title) if video.channel.thumbnail_url.present? %>
+                          root_path(channel_id: video.channel_id) if video.channel.thumbnail_url.present? %>
             <%= link_to channel_title(video),
-                          root_path(channel: video.channel.title),
+                          root_path(channel_id: video.channel_id),
                           class: "channel-title" if video.channel.title.present? %>
           </div>
           <div class="video-metadata">
