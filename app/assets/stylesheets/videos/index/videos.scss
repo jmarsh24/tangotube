@@ -2,7 +2,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem 1rem;
-  margin: 0 10px 10px 10px;
+  // margin: 10px 0 10px 0;
+  padding: 1rem 1rem;
+  background-color: #f9f9f9;
 }
 
 .video-container {
