@@ -31,7 +31,7 @@ class VideosController < ApplicationController
       format.json do
         render json: { videos:   render_to_string(partial: "videos/index/videos", formats: [:html]),
                        loadmore: render_to_string(partial: "videos/index/load_more", formats: [:html]) }
-      end
+      endp
     end
   end
 
