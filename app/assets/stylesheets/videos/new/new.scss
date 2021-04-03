@@ -1,16 +1,17 @@
-.playlists-index-container {
+.videos-new-container {
   display: flex;
-  flex-direction: column;
-  margin: 64px auto;
-  width: 900px;
-  align-items: center;
+  flex: 1;
+  margin-top: 128px;
   justify-content: center;
 }
 
-.playlist-form {
+.videos-new-form-container {
   display: flex;
-  margin-bottom: 50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 2rem;
+  height: 50px;
 
   input {
     margin: auto 0.5rem;
@@ -25,14 +26,8 @@
       background: #f0f0f0;
     }
   }
-}
 
-.playlists-index-row {
-  display: flex;
-  padding-bottom: 1rem;
-}
-
-.playlists-index-item {
-  width: 400px;
-  border-bottom: 1px solid #f2f2f2;
+  form {
+    display: flex;
+  }
 }

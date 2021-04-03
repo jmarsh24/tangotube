@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
+
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[update edit]
   before_action :set_recommended_videos, only: %i[edit]
@@ -126,6 +127,10 @@ class VideosController < ApplicationController
 
   def show_params
     params.permit(:v)
+  end
+
+  def fetch_new_video
+    ImportVideoWorker.perform_async(@video.youtube_id)
   end
 
   def fetch_new_video

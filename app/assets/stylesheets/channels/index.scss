@@ -13,11 +13,17 @@
   font-size: 2rem;
 
   input {
-    height: 1rem;
+    margin: auto .5rem;
+    height: 2rem;
     padding: .5rem;
-    border: 1px solid grey;
+    border: 1px solid #d3d3d3;
     border-radius: .2rem;
     font-size: 1rem;
+    background: #f8f8f8;
+
+    &:hover {
+      background: #f0f0f0;
+    }
   }
 }
 
@@ -29,4 +35,8 @@
 .channels-index-item {
   width: 300px;
   border-bottom: 1px solid #f2f2f2;
+}
+
+#id.channels-index-item {
+  width: 80px;
 }
