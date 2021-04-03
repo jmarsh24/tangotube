@@ -26,6 +26,14 @@ class VideosController < ApplicationController
     @artists = facet("songs.artist", :song)
     @genres = facet("songs.genre", :song)
     @years = facet_on_year("upload_date")
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: { videos:   render_to_string(partial: "videos/index/videos", formats: [:html]),
+                       loadmore: render_to_string(partial: "videos/index/load_more", formats: [:html]) }
+      end
+    end
   end
 
   def edit; end
