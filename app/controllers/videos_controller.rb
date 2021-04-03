@@ -1,6 +1,5 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
-
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[update edit]
   before_action :set_recommended_videos, only: %i[edit]
@@ -27,6 +26,9 @@ class VideosController < ApplicationController
     @artists = facet("songs.artist", :song)
     @genres = facet("songs.genre", :song)
     @years = facet_on_year("upload_date")
+  end
+
+  def edit
   end
 
   def show
