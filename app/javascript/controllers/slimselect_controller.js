@@ -3,27 +3,26 @@ import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.min.css'
 
 export default class extends Controller {
+static values = { placeholder: String }
+
   connect () {
-    const limit = this.data.get('limit')
-    const placeholder = this.data.get('placeholder')
-    const searchText = this.data.get('no-results')
     const closeOnSelect = false
     const allowDeselect = true
     const showContent = 'down'
     const searchFocus = false
+    const searchPlaceholder = this.placeholderValue
+
 
     this.slimselect = new SlimSelect({
       select: this.element,
+      searchPlaceholder,
+      closeOnSelect,
+      allowDeselect,
+      showContent,
+      searchFocus,
       beforeClose: function (e) {
         e.preventDefault()
       },
-      closeOnSelect,
-      allowDeselect,
-      limit,
-      placeholder,
-      searchText,
-      showContent,
-      searchFocus
     })
     this.slimselect.open()
   }
