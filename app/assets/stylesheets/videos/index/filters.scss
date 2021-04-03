@@ -31,7 +31,7 @@ $primary-color: rgb(17, 128, 255);
   letter-spacing: 0.05em;
   align-items: center;
   font-size: .6rem;
-  z-index: 100000000;
+  z-index: 1011;
 }
 
 #filter-button-text {
@@ -59,6 +59,7 @@ $primary-color: rgb(17, 128, 255);
   margin: 0 0 0 0.5rem;
   letter-spacing: 0.05em;
   font-size: 0.7rem;
+  z-index: 1011;
 }
 
 .filter-container {
