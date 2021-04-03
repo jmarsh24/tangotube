@@ -89,7 +89,7 @@
       flex: 1;
       width: 100%;
       color: rgb(17, 17, 17);
-      height: 34px;
+      height: 30px;
       padding: 4px 10px;
       border: 1px solid #ebebeb;
       border-top-left-radius: 3px;
@@ -114,14 +114,14 @@
     }
 
     .searchButton {
-      height: 34px;
-      font-size: .9rem;
+      height: 30px;
+      font-size: .8rem;
       background-color: rgb(248, 248, 248);
       border: 1px solid #ebebeb;
       border-bottom-right-radius: 3px;
       border-top-right-radius: 3px;
       cursor: pointer;
-      width: 65px;
+      width: 55px;
       &:hover {
         background-color: rgb(240, 240, 240);
       }
