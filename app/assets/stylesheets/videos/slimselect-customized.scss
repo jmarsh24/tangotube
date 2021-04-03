@@ -8,6 +8,22 @@
   // border-radius: 0 !important;
 }
 
+.ss-main.ss-select-filter {
+  display: none;
+}
+
+.ss-main .ss-single-selected .placeholder {
+  position: relative;
+  top: 73px;
+  z-index: 1000000;
+}
+
+.ss-deselect {
+  position: relative;
+  top: 71px;
+  z-index: 1000000;
+}
+
 .ss-content.ss-open {
   border-radius: 4px;
 }
