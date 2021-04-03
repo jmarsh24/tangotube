@@ -21,9 +21,10 @@
 .ss-deselect {
   position: relative;
   top: 71px;
+  left: 5px;
   z-index: 1000000;
   margin: 0 !important;
-  padding: 6px;
+  padding: 10px;
 }
 
 .ss-content.ss-open {
