@@ -16,17 +16,11 @@
   background: none !important;
 }
 
-.ss-main .ss-single-selected.ss-open-below {
+.ss-main .ss-single-selected .placeholder {
   position: relative;
-  top: 73px;
+  top: 0px;
   z-index: 1000000;
 }
-
-// .ss-main .ss-single-selected .placeholder {
-//   position: relative;
-//   top: 73px;
-//   z-index: 1000000;
-// }
 
 .ss-deselect {
   margin: 0 !important;
