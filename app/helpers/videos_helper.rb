@@ -44,6 +44,14 @@ module VideosHelper
     end
   end
 
+  def primary_title(dancer_names, title, song_attributes, youtube_id)
+    if dancer_names.present? && song_attributes.present?
+      dancer_names
+    else
+      truncate(title, length: 85)
+    end
+  end
+  
   def formatted_metadata(video)
     "#{formatted_upload_date(video.upload_date)} • #{video.view_count} views • #{video.like_count} likes"
   end

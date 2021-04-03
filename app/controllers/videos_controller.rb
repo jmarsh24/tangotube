@@ -28,8 +28,7 @@ class VideosController < ApplicationController
     @years = facet_on_year("upload_date")
   end
 
-  def edit
-  end
+  def edit; end
 
   def show
     @video = Video.find_by(youtube_id: show_params[:v])

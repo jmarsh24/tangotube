@@ -26,6 +26,8 @@ export default class extends Controller {
 
        const newContainerVideos = data.getElementById('videos')
        const containerVideos = document.getElementById('videos')
+       const newContainerLoadmore = data.getElementById('load-more-container')
+       const containerLoadmore = document.getElementById('load-more-container')
        const newContainerFilterresults = data.getElementById('filter_results')
        const containerFilterresults = document.getElementById('filter_results')
 
@@ -34,6 +36,7 @@ export default class extends Controller {
        containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
        containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML
        containerVideos.innerHTML = newContainerVideos.innerHTML
+       containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
        containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
        containerYearFilters.innerHTML = newContainerYearFilters.innerHTML
 
