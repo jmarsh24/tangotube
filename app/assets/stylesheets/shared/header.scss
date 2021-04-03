@@ -7,7 +7,6 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
-  border-bottom: 1px solid #f2f2f2;
   background-color: #fff;
   z-index: 1011;
   display: flex;
@@ -19,8 +18,10 @@
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  background-color: #f2f2f2;
-  padding: 5px 5px;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 5px .8rem;
   font-size: .8rem;
     a {
       margin: 0 5px;
@@ -136,7 +137,7 @@
 
   nav#Login{
     font-size: 0.8rem;
-    margin: 0 1rem;
+    margin: 0 .5rem;
   }
 
   .navbar-link {
