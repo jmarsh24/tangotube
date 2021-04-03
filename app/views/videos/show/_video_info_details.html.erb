@@ -38,7 +38,7 @@
     <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Orchestra",
                         value: link_to(@video.song.try(:artist).to_s.titleize,
-                                        root_path(orchestra: @video.song.artist), {'data-turbo-frame': "_top"}) } %>
+                                        root_path(orchestra: @video.song.artist.downcase), {'data-turbo-frame': "_top"}) } %>
     <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Singer",
                                   value: @video.song.try(:artist_2).to_s.titleize } if @video.song.artist_2.present? %>
