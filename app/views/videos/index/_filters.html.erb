@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="filter-hd">
-      <%= link_to "All", current_page_params.except(:hd), { class: "filter-hd-button", data: { action: "filter#filter", "filter-target": "filter" }} %>
-      <%= link_to "HD", current_page_params.merge(hd: 1), { class: "filter-hd-button",  data: { action: "filter#filter", "filter-target": "filter" }} %>
+      <%= button_to "All", root_path, params: { hd: 0 }, { class: "filter-hd-button", data: { action: "filter#filter", "filter-target": "filter" }} %>
+      <%= button_to "HD", root_path, params: { hd: 1 }, { class: "filter-hd-button",  data: { action: "filter#filter", "filter-target": "filter" }} %>
     </div>
   </div>
   <div class="filter-container isHidden" data-toggle-target="toggleable" id="filters">
