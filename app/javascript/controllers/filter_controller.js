@@ -21,10 +21,11 @@ export default class extends Controller {
        const containerFollowerFilters = document.getElementById('follower-filter')
        const newContainerOrchestraFilters = data.getElementById("orchestra-filter")
        const containerOrchestraFilters = document.getElementById("orchestra-filter")
+       const newContainerYearFilters = data.getElementById('year-filter')
+       const containerYearFilters = document.getElementById('year-filter')
+
        const newContainerVideos = data.getElementById('videos')
        const containerVideos = document.getElementById('videos')
-       const newContainerLoadmore = data.getElementById('load-more-container')
-       const containerLoadmore = document.getElementById('load-more-container')
        const newContainerFilterresults = data.getElementById('filter_results')
        const containerFilterresults = document.getElementById('filter_results')
 
@@ -33,8 +34,8 @@ export default class extends Controller {
        containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
        containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML
        containerVideos.innerHTML = newContainerVideos.innerHTML
-       containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
        containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
+       containerYearFilters.innerHTML = newContainerYearFilters.innerHTML
 
        history.pushState({}, '', `${window.location.pathname}?${this.params}`)
      },
@@ -53,6 +54,7 @@ export default class extends Controller {
     let hd = urlParams.getAll('hd')
     let params = this.filterTargets
       .filter((t) => t.value !== '')
+      .filter((t) => t.name!== '')
       .map((t) => `${t.name}=${t.value}`)
 
     if (search.value) {
@@ -71,7 +73,7 @@ export default class extends Controller {
       params.push(`hd=${hd}`)
     }
 
-    return params.join("&")
+    return [...new Set(params)].join("&")
 
   }
 }

@@ -1,10 +1,11 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
-  before_action :current_search, only: %i[index show]
+
+  before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[update edit]
   before_action :set_recommended_videos, only: %i[edit]
 
-  NUMBER_OF_VIDEOS_PER_PAGE = 120
+  NUMBER_OF_VIDEOS_PER_PAGE = 60
 
   helper_method :sort_column, :sort_direction
 
@@ -20,23 +21,16 @@ class VideosController < ApplicationController
     @next_page_items = @videos.paginate(page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
     @items_display_count = (@videos.size - (@videos.size - (page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
 
-    @leaders    = @videos.joins(:leader).pluck("leaders.name").uniq.sort.map(&:titleize)
-    @followers  = @videos.joins(:follower).pluck("followers.name").uniq.sort.map(&:titleize)
-    @channels   = @videos.joins(:channel).pluck("channels.title").uniq.compact.sort
-    @artists    = @videos.joins(:song).pluck("songs.artist").uniq.compact.sort.map(&:titleize)
-    @genres     = @videos.joins(:song).pluck("songs.genre").uniq.compact.sort.map(&:titleize).uniq
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render json: { videos:   render_to_string(partial: "videos/index/videos", formats: [:html]),
-                       loadmore: render_to_string(partial: "videos/index/load_more", formats: [:html]) }
-      end
-    end
+    @leaders = facet_id("leaders.name", "leaders.id", :leader)
+    @followers = facet_id("followers.name", "followers.id", :follower)
+    @channels = facet_id("channels.title", "channels.id", :channel)
+    @artists = facet("songs.artist", :song)
+    @genres = facet("songs.genre", :song)
+    @years = facet_on_year("upload_date")
   end
 
   def show
-    @video = Video.find_by(youtube_id: params[:v])
+    @video = Video.find_by(youtube_id: show_params[:v])
     set_recommended_videos
     @video.clicked!
   end
@@ -54,6 +48,30 @@ class VideosController < ApplicationController
   end
 
   private
+
+  def facet_on_year(table_column)
+    query = "extract(year from #{table_column})::int AS facet_value, count(#{table_column}) AS occurrences"
+    counts = Video.filter_videos(filtering_params).select(query).group("facet_value").order("facet_value DESC")
+    counts.map do |c|
+      ["#{c.facet_value} (#{c.occurrences})", c.facet_value]
+    end
+  end
+
+  def facet(table_column, model)
+    query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
+    counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column).order("occurrences DESC")
+    counts.map do |c|
+      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.downcase]
+    end
+  end
+
+  def facet_id(table_column, table_column_id, model)
+    query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences, #{table_column_id} AS facet_id_value"
+    counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column, table_column_id).order("occurrences DESC")
+    counts.map do |c|
+      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_id_value]
+    end
+  end
 
   def set_video
     @video = Video.find(params[:id])
@@ -104,7 +122,15 @@ class VideosController < ApplicationController
   end
 
   def filtering_params
-    params.permit(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd, :event_id)
+    params.permit(:leader_id, :follower_id, :channel_id, :genre, :orchestra, :song_id, :query, :hd, :event_id, :year)
+  end
+
+  def show_params
+    params.permit(:v)
+  end
+
+  def fetch_new_video
+    ImportVideoWorker.perform_async(@video.youtube_id)
   end
 
   def fetch_new_video

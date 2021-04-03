@@ -7,11 +7,13 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
+  border-bottom: 1px solid #f2f2f2;
   background-color: #fff;
   z-index: 1011;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  // margin: 0 .5rem;
 
   .upperHeadContainer {
   display: flex;
@@ -56,7 +58,7 @@
       font-size: 24px;
       color: black;
       letter-spacing: -1px;
-      margin-left: 8px;
+      margin-left: .8rem;
       font-weight: bold;
 
       &:hover {
@@ -88,7 +90,7 @@
       color: rgb(17, 17, 17);
       height: 34px;
       padding: 4px 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #ebebeb;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
       border-top-right-radius: 0;
@@ -114,7 +116,7 @@
       height: 34px;
       font-size: .9rem;
       background-color: rgb(248, 248, 248);
-      border: 1px solid #d3d3d3;
+      border: 1px solid #ebebeb;
       border-bottom-right-radius: 3px;
       border-top-right-radius: 3px;
       cursor: pointer;
@@ -130,6 +132,11 @@
     flex: 1;
     justify-content: flex-end;
     align-items: center;
+  }
+
+  nav#Login{
+    font-size: 0.8rem;
+    margin: 0 1rem;
   }
 
   .navbar-link {

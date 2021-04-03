@@ -3,8 +3,7 @@
   display: flex;
   justify-content: center;
   min-width: 320px;
-  padding: 0 .5rem;
-  margin: 1rem auto;
+  margin: 1rem 1rem;
 }
 
 .detail-row-lyrics {
@@ -14,9 +13,10 @@
   align-items: center;
   min-width: 150px;
   max-width: 300px;
-  border: 1px solid #c5c5c5;
-  border-radius: 4px;
-  padding: 0 1rem;
+  border: 1px solid #f2f2f2;
+  // border-radius: 4px;
+  background-color: #f9f9f9;
+  padding: 0 1.5rem;
 }
 
 .detail-column-lyrics {

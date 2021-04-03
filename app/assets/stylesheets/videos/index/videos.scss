@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem 1rem;
-  margin: 0 10px 50px 10px;
+  padding: 1rem 1rem 0 1rem;
+  background-color: #f9f9f9;
 }
 
 .video-container {
@@ -17,7 +18,7 @@
   height: 0;
   padding-bottom: 56.25%;
   overflow: hidden;
-  border-radius: .3rem;
+  border-radius: 2px;
 }
 
 .thumbnail::after {
@@ -133,7 +134,7 @@
   .video-section {
     display: flex;
     flex-direction: column;
-    margin: 0;
+    padding: 0;
   }
   .video-bottom-section {
     margin: 10px;

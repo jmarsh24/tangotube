@@ -11,12 +11,13 @@ class Video < ApplicationRecord
 
   scope :filter_by_orchestra, ->(song_artist) { joins(:song).where("songs.artist ILIKE ?", song_artist) }
   scope :filter_by_genre, ->(song_genre) { joins(:song).where("songs.genre ILIKE ?", song_genre) }
-  scope :filter_by_leader, ->(leader_name) { joins(:leader).where("leaders.name ILIKE ?", leader_name) }
-  scope :filter_by_follower, ->(follower_name) { joins(:follower).where("followers.name ILIKE ?", follower_name) }
-  scope :filter_by_channel, ->(channel_title) { joins(:channel).where("channels.title ILIKE ?", channel_title) }
+  scope :filter_by_leader_id, ->(leader_id) { where(leader_id: leader_id) }
+  scope :filter_by_follower_id, ->(follower_id) { where(follower_id: follower_id) }
+  scope :filter_by_channel_id, ->(channel_id) { where(channel_id: channel_id) }
   scope :filter_by_event_id, ->(event_id) { where(event_id: event_id) }
   scope :filter_by_song_id, ->(song_id) { where(song_id: song_id) }
   scope :filter_by_hd, ->(boolean) { where(hd: boolean) }
+  scope :filter_by_year, ->(year) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :paginate, ->(page, per_page) { offset(per_page * (page - 1)).limit(per_page) }
@@ -25,7 +26,6 @@ class Video < ApplicationRecord
   scope :has_song, -> { where.not(song_id: nil) }
   scope :has_leader, -> { where.not(leader_id: nil) }
   scope :has_follower, -> { where.not(follower_id: nil) }
-  scope :has_youtube_song, -> { where.not(youtube_song: nil) }
   scope :missing_follower, -> { where(follower_id: nil) }
   scope :missing_leader, -> { where(leader_id: nil) }
   scope :missing_song, -> { where(song_id: nil) }

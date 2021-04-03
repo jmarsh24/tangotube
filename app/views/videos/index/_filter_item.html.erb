@@ -1,13 +1,11 @@
 <div class="filter-item">
-<label>
-<%= title.to_s.titleize %>
-</label>
   <%= select_tag title.to_s,
-        options_for_select(model, params[title.to_s].presence), include_blank: true, multiple: false,
-            data: { action: "filter#filter",
-                    "filter-target": "filter",
-                    controller:'slimselect'
-                  },
-                    class: 'select-filter',
-                    id: id %>
+        options_for_select(model, params[title.to_s].presence), { include_blank: true,
+                                                                  multiple: false,
+                                                                  data: { action: "filter#filter",
+                                                                          "filter-target": "filter",
+                                                                          controller: 'slimselect',
+                                                                          "slimselect-placeholder-value": "Search #{title.to_s.titleize.pluralize}" },
+                                                                  class: 'select-filter',
+                                                                  id: id } %>
 </div>

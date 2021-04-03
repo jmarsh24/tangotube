@@ -40,6 +40,11 @@ a {
   color: rgb(80, 80, 80);
 }
 
+button {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
 #pageContainer {
   width: 100%;
   max-width: 1900px;
@@ -52,6 +57,7 @@ a {
 #mainSectionContainer {
   padding-top: 72px;
   flex: 1 0 auto;
+  background-color: #f9f9f9;
 }
 
 #mainSectionContainer.leftPadding {
