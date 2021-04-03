@@ -5,8 +5,10 @@ $primary-color: rgb(17, 128, 255);
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 1rem;
-  border-bottom: 1px solid #f2f2f2;
+  padding: 10px ,5rem;
+  margin: .5rem 1rem;
+  // border-bottom: 1px solid #f2f2f2;
+  // background-color: #f9f9f9;
 }
 
 .filter-container-button-results {
@@ -70,9 +72,10 @@ $primary-color: rgb(17, 128, 255);
   justify-content: space-between;
   max-width: 1900px;
   height: 320px;
-  padding-top: 10px;
-  margin: 0 .5rem;
+  padding: 0 10px;
+  // margin: 0 .25rem;
   border-bottom: 1px solid #f2f2f2;
+  // background-color: #f9f9f9;
 
   #form-frame {
     flex: 1;

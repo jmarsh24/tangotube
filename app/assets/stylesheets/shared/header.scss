@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
-  border-bottom: 1px solid #e8e8e8;
+  // border-bottom: 1px solid #e8e8e8;
   background-color: #fff;
   z-index: 1011;
   display: flex;
@@ -36,7 +36,7 @@
       font-size: 24px;
       color: black;
       letter-spacing: -1px;
-      margin-left: 8px;
+      margin-left: .8rem;
       font-weight: bold;
 
       &:hover {
