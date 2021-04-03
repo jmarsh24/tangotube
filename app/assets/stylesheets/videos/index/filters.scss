@@ -59,9 +59,12 @@ $primary-color: rgb(17, 128, 255);
   font-size: 0.7rem;
 }
 
+.submit-btn {
+  display: none;
+}
 
 .filter-container {
-  border-bottom: 1px solid #f2f2f2;
+  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -69,6 +72,16 @@ $primary-color: rgb(17, 128, 255);
   height: 320px;
   padding-top: 10px;
   margin: 0 .5rem;
+  border-bottom: 1px solid #f2f2f2;
+
+  #form-frame {
+    flex: 1;
+    display: flex;
+    form {
+      flex: 1;
+      display: flex;
+    }
+  }
 
   .filter-item {
     flex: 1;

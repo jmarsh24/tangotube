@@ -51,10 +51,10 @@ export default class extends Controller {
     let search = document.querySelector('#query')
     let songID = urlParams.getAll('song_id')
     let eventID = urlParams.getAll('event_id')
-    let year = urlParams.getAll('year')
     let hd = urlParams.getAll('hd')
     let params = this.filterTargets
       .filter((t) => t.value !== '')
+      .filter((t) => t.name!== '')
       .map((t) => `${t.name}=${t.value}`)
 
     if (search.value) {
@@ -67,10 +67,6 @@ export default class extends Controller {
 
     if (eventID.length > 0) {
       params.push(`event_id=${eventID}`)
-    }
-
-    if (year.length > 0) {
-      params.push(`year=${year}`)
     }
 
     if (hd.length > 0) {

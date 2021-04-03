@@ -2,15 +2,15 @@
   <div class="filter-header">
     <div class="filter-container-button-results">
       <button data-action="click->toggle#toggle" class="filter-button"><%= fa_icon "sliders-h 2x", left: true %>
-        <div id="filter-button-text">Filters</div>
+        <p id="filter-button-text">Filters</p>
       </button>
       <div id="filter_results">
         <%= "Displaying #{number_with_delimiter(@videos.size)} Results" %>
       </div>
     </div>
     <div class="filter-hd">
-      <%= link_to "All", current_page_params.except(:hd) , class: "filter-hd-button", data: { action: "filter#filter", "filter-target": "filter" } %>
-      <%= link_to "HD", current_page_params.merge(hd: 1) , class: "filter-hd-button", data: { action: "filter#filter", "filter-target": "filter" }  %>
+      <%= link_to "All", current_page_params.except(:hd), { class: "filter-hd-button", data: { action: "filter#filter", "filter-target": "filter" }} %>
+      <%= link_to "HD", current_page_params.merge(hd: 1), { class: "filter-hd-button",  data: { action: "filter#filter", "filter-target": "filter" }} %>
     </div>
   </div>
   <div class="filter-container isHidden" data-toggle-target="toggleable" id="filters">
@@ -18,5 +18,6 @@
     <%= render partial: "videos/index/filter_item", locals: { model: @leaders, title: :leader_id, id: 'leader-filter' } %>
     <%= render partial: "videos/index/filter_item", locals: { model: @followers, title: :follower_id, id: 'follower-filter' } %>
     <%= render partial: "videos/index/filter_item", locals: { model: @artists, title: :orchestra, id: 'orchestra-filter' } %>
+    <%= render partial: "videos/index/filter_item", locals: { model: @years, title: :year, id: 'year-filter' } %>
   </div>
 </div>

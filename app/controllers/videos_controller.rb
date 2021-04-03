@@ -60,7 +60,7 @@ class VideosController < ApplicationController
     query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
     counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column).order("occurrences DESC")
     counts.map do |c|
-      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value]
+      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.downcase]
     end
   end
 
