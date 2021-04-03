@@ -30,7 +30,7 @@
   max-width: 1050px;
   flex-direction: column;
   margin: 0 auto;
-  padding: 1rem;
+  // padding: 1rem;
   justify-content: center;
   background-color: white;
   border-left: 1px solid #f2f2f2;
@@ -40,6 +40,7 @@
 .video-info-primary-container {
   max-width: 1225px;
   text-align: left;
+  margin: 1rem;
 }
 
 .video-info-container-secondary {
@@ -55,7 +56,8 @@
 .video-info-details-main {
   flex: 1;
   // padding-right: 1rem;
-  min-width: 350px;
+  margin: 0 1rem;
+  min-width: 300px;
   flex-direction: column;
   a {
     color: rgb(6, 95, 212);
@@ -72,7 +74,7 @@
   max-width: 400px;
   min-width: 320px;
   // padding: 0rem 1rem 5rem 1rem;
-  margin: 0 auto;
+  margin: 0 1rem;
 }
 
 @media (max-width: 926px) {
