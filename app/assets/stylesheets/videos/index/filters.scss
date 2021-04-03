@@ -5,7 +5,7 @@ $primary-color: rgb(17, 128, 255);
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: .5rem 1rem;
+  padding: .9rem 1rem;
   // border-bottom: 1px solid #f2f2f2;
   background-color: white;
 }
@@ -31,6 +31,7 @@ $primary-color: rgb(17, 128, 255);
   letter-spacing: 0.05em;
   align-items: center;
   font-size: .6rem;
+  z-index: 100000000;
 }
 
 #filter-button-text {
@@ -60,17 +61,13 @@ $primary-color: rgb(17, 128, 255);
   font-size: 0.7rem;
 }
 
-.submit-btn {
-  display: none;
-}
-
 .filter-container {
   flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   max-width: 1900px;
-  height: 285px;
+  height: 260px;
   padding: 0 .5rem;
   // margin: 0 .25rem;
   border-bottom: 1px solid #f2f2f2;
@@ -89,7 +86,7 @@ $primary-color: rgb(17, 128, 255);
     flex: 1;
     width: 100%;
     position: relative;
-    top: -.5rem;
+    top: -30px;
     min-width:120px;
     margin: 0 .5rem;
     border: 0px solid #963;
