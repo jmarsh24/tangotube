@@ -17,7 +17,7 @@ class VideosController < ApplicationController
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
     @videos_paginated = @videos_paginated.shuffle if filtering_params.blank?
 
-    @next_page_items = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
+    @next_page_items = @videos.paginate(page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
     @items_display_count = (@videos.size - (@videos.size - (page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
 
     @leaders = facet_id("leaders.name", "leaders.id", :leader)
