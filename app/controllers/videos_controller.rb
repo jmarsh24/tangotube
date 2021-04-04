@@ -113,9 +113,10 @@ class VideosController < ApplicationController
                        "videos.upload_date",
                        "videos.view_count",
                        "songs.last_name_search",
-                       "videos.popularity"]
+                       "videos.popularity",
+                       "videos.updated_at"]
 
-    acceptable_cols.include?(params[:sort]) ? params[:sort] : "videos.popularity"
+    acceptable_cols.include?(params[:sort]) ? params[:sort] : "videos.updated_at"
   end
 
   def sort_direction
