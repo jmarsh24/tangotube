@@ -78,3 +78,9 @@ button {
 .isHidden {
   display: none !important;
 }
+
+@media (max-width: 500px) {
+  #mainSectionContainer {
+    padding-top: 42px;
+  }
+}
