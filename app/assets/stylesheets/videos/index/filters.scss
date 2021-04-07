@@ -6,7 +6,6 @@ $primary-color: rgb(17, 128, 255);
   justify-content: space-between;
   align-items: center;
   padding: .6rem 2.5rem;
-  // border-bottom: 1px solid #f2f2f2;
   background-color: #f9f9f9;
 }
 
@@ -68,7 +67,7 @@ $primary-color: rgb(17, 128, 255);
   flex-direction: column;
   justify-content: space-between;
   max-width: 1900px;
-  height: 350px;
+  height: 310px;
   padding: 0 2rem;
   background-color: #f9f9f9;
 
@@ -100,7 +99,7 @@ $primary-color: rgb(17, 128, 255);
   }
 }
 
-.filterContainer {
+.filter-container-upper {
   flex: 1;
   display: flex;
   flex: row;
@@ -109,15 +108,16 @@ $primary-color: rgb(17, 128, 255);
 .videos-sortable-container {
   display: flex;
   flex-direction: row;
-  margin: 0 0 1rem 0;
+  height: 2rem;
   font-size: .7rem;
+  margin: 0 1rem;
   border-top: 1px solid #f2f2f2;
   border-bottom: 1px solid #f2f2f2;
 
   label {
     color: rgb(50, 50, 50);
     font-size: .9rem;
-    padding: 1rem;
+    margin: auto 0;
     color: #505050;
   }
   button {
@@ -137,7 +137,7 @@ $primary-color: rgb(17, 128, 255);
   font-size: .8rem;
   margin: 0 1rem;
   border-radius: 0.3rem;
-  // padding: .1rem .3rem;
+  min-width: 60px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
