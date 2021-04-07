@@ -15,7 +15,7 @@ class VideosController < ApplicationController
                    .filter_videos(filtering_params)
 
     @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
-    @videos_paginated = @videos_paginated.shuffle if filtering_params.blank?
+    @videos_paginated = @videos_paginated.shuffle if filtering_params.blank? && sorting_params.blank?
 
     @next_page_items = @videos.paginate(page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
     @items_display_count = (@videos.size - (@videos.size - (page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
@@ -129,6 +129,10 @@ class VideosController < ApplicationController
 
   def filtering_params
     params.permit(:leader_id, :follower_id, :channel_id, :genre, :orchestra, :song_id, :query, :hd, :event_id, :year)
+  end
+
+  def sorting_params
+    params.permit(:direction, :sort)
   end
 
   def show_params
