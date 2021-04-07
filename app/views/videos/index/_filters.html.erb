@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="filter-hd" id="hd_filters">
-      <%= link_to "All", current_page_params.merge(hd: 0), { class: "filter-hd-button", data: { action: "filter#filter", "filter-target": "filter" } } %>
+      <%= link_to "All", current_page_params.except(:hd), { class: "filter-hd-button", data: { action: "filter#filter", "filter-target": "filter" } } %>
       <%= link_to "HD", current_page_params.merge(hd: 1), { class: "filter-hd-button", data: { action: "filter#filter", "filter-target": "filter" } } %>
     </div>
   </div>
