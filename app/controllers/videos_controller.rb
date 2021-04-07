@@ -105,14 +105,10 @@ class VideosController < ApplicationController
 
   def sort_column
     acceptable_cols = ["songs.title",
-                       "songs.artist",
-                       "songs.genre",
-                       "leaders.name",
-                       "followers.name",
-                       "channels.title",
+                       "songs.last_name_search",
+                       "videos.channel_id",
                        "videos.upload_date",
                        "videos.view_count",
-                       "songs.last_name_search",
                        "videos.popularity",
                        "videos.updated_at"]
 

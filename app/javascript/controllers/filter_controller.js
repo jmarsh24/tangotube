@@ -30,6 +30,11 @@ export default class extends Controller {
        const containerLoadmore = document.getElementById('load-more-container')
        const newContainerFilterresults = data.getElementById('filter_results')
        const containerFilterresults = document.getElementById('filter_results')
+       const containerSorting = document.getElementById('sortable_container')
+       const newContainerSorting = data.getElementById('sortable_container')
+       const containerHd = document.getElementById('hd_filters')
+       const newContainerHd = data.getElementById('hd_filters')
+
 
        containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML
        containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML
@@ -39,6 +44,8 @@ export default class extends Controller {
        containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
        containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
        containerYearFilters.innerHTML = newContainerYearFilters.innerHTML
+       containerSorting.innerHTML = newContainerSorting.innerHTML
+       containerHd.innerHTML = newContainerHd.innerHTML
 
        history.pushState({}, '', `${window.location.pathname}?${this.params}`)
      },
@@ -50,33 +57,26 @@ export default class extends Controller {
 
   get params() {
     const queryString = window.location.search
-    const urlParams = new URLSearchParams(queryString)
-    let search = document.querySelector('#query')
-    let songID = urlParams.getAll('song_id')
-    let eventID = urlParams.getAll('event_id')
-    let hd = urlParams.getAll('hd')
-    let params = this.filterTargets
-      .filter((t) => t.value !== '')
-      .filter((t) => t.name!== '')
-      .map((t) => `${t.name}=${t.value}`)
+    const usp = new URLSearchParams(queryString)
 
-    if (search.value) {
-      params.push(`${search.name}=${search.value}`)
-    }
+    console.log(this.filterTargets)
 
-    if (songID.length > 0 ) {
-      params.push(`song_id=${songID}`)
-    }
+    let params = this.filterTargets.map((t) => [t.name, t.value])
 
-    if (eventID.length > 0) {
-      params.push(`event_id=${eventID}`)
-    }
+    console.log(params)
 
-    if (hd.length > 0) {
-      params.push(`hd=${hd}`)
-    }
+      params.forEach((param) => usp.set(param[0], param[1]))
 
-    return [...new Set(params)].join("&")
+    console.log(usp.toString())
 
+    let keysForDel = []
+      usp.forEach((v, k) => {
+        if (v == '' || v == '0' || k == '') keysForDel.push(k)
+      })
+      keysForDel.forEach(k => {
+        usp.delete(k)
+      })
+
+    return usp.toString()
   }
 }

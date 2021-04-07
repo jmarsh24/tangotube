@@ -65,12 +65,11 @@ $primary-color: rgb(17, 128, 255);
 .filter-container {
   flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   max-width: 1900px;
-  height: 280px;
+  height: 350px;
   padding: 0 2rem;
-  border-bottom: 1px solid #f2f2f2;
   background-color: #f9f9f9;
 
   #form-frame {
@@ -101,17 +100,25 @@ $primary-color: rgb(17, 128, 255);
   }
 }
 
+.filterContainer {
+  flex: 1;
+  display: flex;
+  flex: row;
+}
+
 .videos-sortable-container {
-  display: grid;
-  grid-template-columns: repeat(auto, 8);
-  margin: 0 1rem 2rem 1rem;
-  font-size: .8rem;
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 1rem 0;
+  font-size: .7rem;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
 
   label {
     color: rgb(50, 50, 50);
-    font-weight: 500;
-    border-bottom: 1px solid #f2f2f2;
-    height: 24px;
+    font-size: .9rem;
+    padding: 1rem;
+    color: #505050;
   }
   button {
     text-decoration: none;
@@ -125,15 +132,18 @@ $primary-color: rgb(17, 128, 255);
 
 .videos-sortable-btn {
   display: flex;
-  color: rgb(96, 96, 96);
+  color: white;
   align-items: center;
-  font-size: 1rem;
+  font-size: .8rem;
+  margin: 0 1rem;
   border-radius: 0.3rem;
+  // padding: .1rem .3rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   svg {
-    color: rgb(96, 96, 96);
+    font-size: .7rem;
+    color: #505050;
   }
 }
 
