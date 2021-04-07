@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.0.0"
+ruby "3.0.1"
 
 gem "activeadmin", "~> 2.8", ">= 2.8.1"
 gem "ahoy_matey", "~> 3.1"
