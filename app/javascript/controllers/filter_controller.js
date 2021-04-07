@@ -35,7 +35,6 @@ export default class extends Controller {
        const containerHd = document.getElementById('hd_filters')
        const newContainerHd = data.getElementById('hd_filters')
 
-
        containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML
        containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML
        containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
@@ -59,15 +58,9 @@ export default class extends Controller {
     const queryString = window.location.search
     const usp = new URLSearchParams(queryString)
 
-    console.log(this.filterTargets)
-
     let params = this.filterTargets.map((t) => [t.name, t.value])
 
-    console.log(params)
-
       params.forEach((param) => usp.set(param[0], param[1]))
-
-    console.log(usp.toString())
 
     let keysForDel = []
       usp.forEach((v, k) => {
