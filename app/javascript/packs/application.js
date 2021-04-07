@@ -6,7 +6,6 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
-require("@hotwired/turbo-rails")
 
 import "@fortawesome/fontawesome-free/js/all"
 import "controllers"
