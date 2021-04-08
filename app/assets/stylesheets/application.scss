@@ -14,6 +14,7 @@
  */
 
 @import "font-awesome";
+@import 'shared/**/*';
 
 @import "videos/**/*";
 @import "devise/**/*";
@@ -21,7 +22,7 @@
 @import 'static_pages/**/*';
 @import 'channels/**/*';
 @import 'playlists/**/*';
-@import 'shared/**/*';
+
 
 html,
 body {
@@ -37,7 +38,7 @@ a {
 * {
   box-sizing: border-box;
   font-family: Roboto, Arial, Helvetica, sans-serif;
-  color: rgb(80, 80, 80);
+  color: $primary-font-color;
 }
 
 button {
@@ -81,6 +82,6 @@ button {
 
 @media (max-width: 500px) {
   #mainSectionContainer {
-    padding-top: 42px;
+    padding-top: 2px;
   }
 }
