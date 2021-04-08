@@ -13,16 +13,9 @@ export default class extends Controller {
      type: "get",
      url: url,
      success: (data) => {
-       const newContainerGenreFilters = data.getElementById('genre-filter')
-       const containerGenreFilters = document.getElementById('genre-filter')
-       const newContainerLeaderFilters = data.getElementById('leader-filter')
-       const containerLeaderFilters = document.getElementById('leader-filter')
-       const newContainerFollowerFilters = data.getElementById('follower-filter')
-       const containerFollowerFilters = document.getElementById('follower-filter')
-       const newContainerOrchestraFilters = data.getElementById("orchestra-filter")
-       const containerOrchestraFilters = document.getElementById("orchestra-filter")
-       const newContainerYearFilters = data.getElementById('year-filter')
-       const containerYearFilters = document.getElementById('year-filter')
+
+       const newContainerFilter = data.getElementById('filter-container-upper')
+       const containerGenreFilters = document.getElementById('filter-container-upper')
 
        const newContainerVideos = data.getElementById('videos')
        const containerVideos = document.getElementById('videos')
@@ -35,14 +28,10 @@ export default class extends Controller {
        const containerHd = document.getElementById('hd_filters')
        const newContainerHd = data.getElementById('hd_filters')
 
-       containerGenreFilters.innerHTML = newContainerGenreFilters.innerHTML
-       containerLeaderFilters.innerHTML = newContainerLeaderFilters.innerHTML
-       containerFollowerFilters.innerHTML = newContainerFollowerFilters.innerHTML
-       containerOrchestraFilters.innerHTML = newContainerOrchestraFilters.innerHTML
+       containerGenreFilters.innerHTML = newContainerFilter.innerHTML
        containerVideos.innerHTML = newContainerVideos.innerHTML
        containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
        containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
-       containerYearFilters.innerHTML = newContainerYearFilters.innerHTML
        containerSorting.innerHTML = newContainerSorting.innerHTML
        containerHd.innerHTML = newContainerHd.innerHTML
 
