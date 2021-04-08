@@ -44,14 +44,14 @@ module VideosHelper
     end
   end
 
-  def primary_title(dancer_names, title, song_attributes, youtube_id)
+  def primary_title(dancer_names, title, song_attributes, _youtube_id)
     if dancer_names.present? && song_attributes.present?
       dancer_names
     else
       truncate(title, length: 85)
     end
   end
-  
+
   def formatted_metadata(video)
     "#{formatted_upload_date(video.upload_date)} • #{video.view_count} views • #{video.like_count} likes"
   end
@@ -66,5 +66,30 @@ module VideosHelper
 
   def channel_title(video)
     truncate(video.channel.title, length: 45, omission: "")
+  end
+
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "desc" ? "asc" : "desc"
+
+    link_to "#{title} #{tag.i('', class: "fa fa-chevron-#{direction == 'asc' ? 'up' : 'down'}") if css_class.present?}".html_safe,
+            current_page_params.merge({ sort: column, direction: direction }), { class: css_class }
+  end
+
+  def current_page_params
+    request.params.slice("channel_id",
+                         "leader_id",
+                         "follower_id",
+                         "song_id",
+                         "event_id",
+                         "year",
+                         "genre",
+                         "orchestra",
+                         "query",
+                         "view_count",
+                         "upload_date",
+                         "popularity",
+                         "hd")
   end
 end
