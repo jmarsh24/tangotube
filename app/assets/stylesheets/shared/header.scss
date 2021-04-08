@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: $primary-color;
   z-index: 1012;
   display: flex;
   justify-content: space-between;
@@ -18,14 +18,14 @@
   width: 100%;
   justify-content: flex-end;
   align-items: center;
-  background-color: #4a4a4a;
+  background-color: $secondary-header-background;
   padding: 5px 2rem;
   font-size: .8rem;
   a {
     margin: 0 .5rem;
-    color: white;
+    color: $primary-header-link-color;
     &:hover {
-      color: #c2c2c2;
+      color: $secondary-header-link-color-hover;
     }
   }
 }
@@ -34,8 +34,8 @@
     flex: 1;
     width: 100%;
     display: flex;
-    border-bottom: 1px solid #e8e8e8;
-    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
   }
 
   .buttonSideBar {
@@ -66,7 +66,7 @@
       font-weight: bold;
 
       &:hover {
-        color: #3d3d3d;
+        color: $logo-hover-color;
       }
     }
   }
@@ -94,7 +94,7 @@
       color: rgb(17, 17, 17);
       height: 30px;
       padding: 4px 10px;
-      border: 1px solid #ebebeb;
+      border: 1px solid $border-color;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
       border-top-right-radius: 0;
@@ -120,7 +120,7 @@
       height: 30px;
       font-size: .8rem;
       background-color: rgb(248, 248, 248);
-      border: 1px solid #ebebeb;
+      border: 1px solid $border-color;
       border-bottom-right-radius: 3px;
       border-top-right-radius: 3px;
       cursor: pointer;
@@ -157,8 +157,8 @@
     padding: 0.4rem;
     margin: 0.5rem;
     &:hover {
-      color: #222222;
-      border-color: #222222;
+      color: $nav-link-color-hover;
+      border-color: $nav-link-color-hover;
     }
   }
 }
@@ -173,7 +173,7 @@
     font-size: 14px;
     margin-right: 2rem;
     &:hover {
-      color: #222222;
+      color: $nav-link-color-hover;
     }
   }
 }

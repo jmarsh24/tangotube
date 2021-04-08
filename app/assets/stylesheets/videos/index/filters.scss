@@ -22,7 +22,7 @@
   display: flex;
   text-decoration: none;
   padding: .5rem;
-  border: 1px solid $secondary-color;
+  border: 1px solid $border-color;
   background: $primary-color;
   border-radius: 3px;
   letter-spacing: 0.05em;
@@ -65,7 +65,7 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: 1900px;
-  height: 315px;
+  height: 310px;
   padding: 0 2rem;
   background-color: $secondary-color;
 
@@ -85,7 +85,6 @@
     top: -10px;
     min-width:120px;
     margin: 0 .5rem;
-    border: 0px solid #963;
     font-size: .8rem;
     label {
       display: block;
@@ -110,7 +109,6 @@
   font-size: .7rem;
   padding: .5rem 1rem;
   margin: 0 .5rem .5rem .5rem;
-  border-top: 1px solid $border-color;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   label {
