@@ -73,8 +73,14 @@ module VideosHelper
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "desc" ? "asc" : "desc"
 
-    link_to "#{title} #{tag.i('', class: "fa fa-chevron-#{direction == 'asc' ? 'up' : 'down'}") if css_class.present?}".html_safe,
-            current_page_params.merge({ sort: column, direction: direction }), { class: css_class }
+    link_to current_page_params.merge({ sort: column, direction: direction }) do
+      if css_class.present?
+        concat title.to_s + " "
+        concat fa_icon("chevron-#{direction == 'asc' ? 'up' : 'down'}")
+      else
+        title
+      end
+    end
   end
 
   def current_page_params
