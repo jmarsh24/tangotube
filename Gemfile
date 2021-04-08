@@ -41,7 +41,6 @@ group :development, :test do
   gem "factory_bot_rails", "~> 6.1"
   gem "faker", "~> 2.16"
   gem "rspec-rails", "~> 4.0"
-  gem "standard"
 end
 
 group :development do
