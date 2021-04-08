@@ -56,7 +56,7 @@ export default class extends Controller {
 
   get params() {
     const queryString = window.location.search
-    const usp = new URLSearchParams(queryString)
+    let usp = new URLSearchParams(queryString)
 
       this.setCurrentParams(usp)
       this.deleteEmptyParams(usp)
@@ -82,6 +82,4 @@ export default class extends Controller {
       })
       return usp
   }
-
-
 }
