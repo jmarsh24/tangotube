@@ -109,21 +109,21 @@
   font-size: .7rem;
   padding: .5rem 1rem;
   margin: 0 .5rem .5rem .5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid $sortable-border-bottom-color;
 
   label {
-    color: rgb(50, 50, 50);
     font-size: .9rem;
     font-weight: 500;
     margin: auto 0;
     color: $sortable-label-color;
   }
-  button {
+
+  a {
     text-decoration: none;
     color: $primary-font-color;
     font-size: .8rem;
     &:hover {
-      color: rgb(3, 3, 3);
+      color: $sortable-label-color-hover;
     }
   }
 }
