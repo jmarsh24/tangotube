@@ -14,28 +14,27 @@ export default class extends Controller {
      url: url,
      success: (data) => {
 
-       const newContainerFilter = data.getElementById('filter-container-upper')
-       const containerGenreFilters = document.getElementById('filter-container-upper')
+      const newContainerFilter = data.getElementById('filter-container-upper')
+      const containerGenreFilters = document.getElementById('filter-container-upper')
+      const newContainerVideos = data.getElementById('videos')
+      const containerVideos = document.getElementById('videos')
+      const newContainerLoadmore = data.getElementById('load-more-container')
+      const containerLoadmore = document.getElementById('load-more-container')
+      const newContainerFilterresults = data.getElementById('filter_results')
+      const containerFilterresults = document.getElementById('filter_results')
+      const containerSorting = document.getElementById('sortable_container')
+      const newContainerSorting = data.getElementById('sortable_container')
+      const containerHd = document.getElementById('hd_filters')
+      const newContainerHd = data.getElementById('hd_filters')
 
-       const newContainerVideos = data.getElementById('videos')
-       const containerVideos = document.getElementById('videos')
-       const newContainerLoadmore = data.getElementById('load-more-container')
-       const containerLoadmore = document.getElementById('load-more-container')
-       const newContainerFilterresults = data.getElementById('filter_results')
-       const containerFilterresults = document.getElementById('filter_results')
-       const containerSorting = document.getElementById('sortable_container')
-       const newContainerSorting = data.getElementById('sortable_container')
-       const containerHd = document.getElementById('hd_filters')
-       const newContainerHd = data.getElementById('hd_filters')
+      containerGenreFilters.innerHTML = newContainerFilter.innerHTML
+      containerVideos.innerHTML = newContainerVideos.innerHTML
+      containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
+      containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
+      containerSorting.innerHTML = newContainerSorting.innerHTML
+      containerHd.innerHTML = newContainerHd.innerHTML
 
-       containerGenreFilters.innerHTML = newContainerFilter.innerHTML
-       containerVideos.innerHTML = newContainerVideos.innerHTML
-       containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
-       containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
-       containerSorting.innerHTML = newContainerSorting.innerHTML
-       containerHd.innerHTML = newContainerHd.innerHTML
-
-       history.pushState({}, '', `${window.location.pathname}?${this.params}`)
+      history.pushState({}, '', `${window.location.pathname}?${this.params}`)
      },
      error: (data) => {
        console.log(data)
