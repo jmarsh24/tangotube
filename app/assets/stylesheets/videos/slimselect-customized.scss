@@ -5,7 +5,6 @@
 .ss-open {
   height: 245px !important;
   background-color: white !important;
-  // border-radius: 0 !important;
 }
 
 .ss-main.ss-select-filter {
@@ -29,7 +28,6 @@
   background-color: none !important;
 }
 .ss-main .ss-single-selected.ss-open-below {
-  // border-radius: 0 !important;
   border: 0 !important;
   background-color: none !important;
 }
@@ -58,10 +56,6 @@
 .ss-main .ss-single-selected .placeholder, .ss-main .ss-single-selected .placeholder * {
   align-items: none !important;
   padding-top: 0px !important;
-}
-
-.ss-content {
-  // border-top: 0 !important;
 }
 
 .ss-search {
