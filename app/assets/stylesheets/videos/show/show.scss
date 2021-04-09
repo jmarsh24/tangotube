@@ -33,10 +33,9 @@
   // padding: 1rem;
   justify-content: center;
   background-color: white;
-  border-left: 1px solid #f2f2f2;
-  border-right: 1px solid #f2f2f2;
-  border-bottom: 1px solid #f2f2f2;
-
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
 }
 
 .video-info-primary-container {
@@ -57,12 +56,11 @@
 
 .video-info-details-main {
   flex: 1;
-  // padding-right: 1rem;
   margin: 0 1rem;
   min-width: 275px;
   flex-direction: column;
   a {
-    color: rgb(6, 95, 212);
+    color: $link-color;
     font-size: 0.8rem;
   }
   p {
@@ -75,7 +73,6 @@
   flex-direction: column;
   max-width: 400px;
   min-width: 320px;
-  // padding: 0rem 1rem 5rem 1rem;
   margin: 0 1rem;
 }
 
