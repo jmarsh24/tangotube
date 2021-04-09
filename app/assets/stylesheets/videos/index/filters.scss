@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: .6rem 2.5rem;
-  background-color: $filter-background-color;
+  background-color: $secondary-color;
 }
 
 .filter-container-button-results {
@@ -67,7 +67,7 @@
   max-width: 1900px;
   height: 310px;
   padding: 0 2rem;
-  background-color: $filter-background-color;
+  background-color: $secondary-color;
 
   #form-frame {
     flex: 1;
