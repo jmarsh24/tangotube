@@ -35,7 +35,7 @@ class Video::Search
   end
 
   def displayed_videos_count
-    all_videos.size - ( all_videos.size - (@page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, all_videos.size) )
+    all_videos.size - (all_videos.size - (@page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, all_videos.size))
   end
 
   def next_page
@@ -54,8 +54,8 @@ class Video::Search
     @channels ||= facet_id("channels.title", "channels.id", :channel)
   end
 
-  def artists
-    @artists ||= facet("songs.artist", :song)
+  def orchestras
+    @orchestras ||= facet("songs.artist", :song)
   end
 
   def genres
