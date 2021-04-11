@@ -50,48 +50,48 @@ RSpec.describe Video, type: :model do
       end
     end
 
-    describe ".filter_by_leader" do
+    describe ".filter_by_leader_id" do
       it "returns video with corresponding orchestra event_id" do
-        leader = create(:leader, name: "Carlitos Espinoza")
+        leader = create(:leader, id: 1)
         video = create(:video, leader: leader)
-        expect(described_class.filter_by_leader("Carlitos Espinoza")).to eq [video]
+        expect(described_class.filter_by_leader_id(1)).to eq [video]
       end
 
       it "does not return video without corresponding orchestra event_id" do
         video = create(:video)
-        expect(described_class.filter_by_leader("Carlitos Espinoza")).not_to eq [video]
+        expect(described_class.filter_by_leader_id(2)).not_to eq [video]
       end
     end
 
-    describe ".filter_by_follower" do
-      it "returns videos with matching follower name in video" do
-        follower = create(:follower, name: "Noelia Hurtado")
+    describe ".filter_by_follower_id" do
+      it "returns videos with matching follower" do
+        follower = create(:follower, id: 1)
         video = create(:video, follower: follower)
-        expect(described_class.filter_by_follower("Noelia Hurtado")).to eq [video]
+        expect(described_class.filter_by_follower_id(1)).to eq [video]
       end
 
-      it "does not return videos without matching follower name in video" do
+      it "does not return videos with incorrect follower id" do
         video = create(:video)
-        expect(described_class.filter_by_follower("Noelia Hurtado")).not_to eq [video]
+        expect(described_class.filter_by_follower_id(2)).not_to eq [video]
       end
     end
 
-    describe ".filter_by_channel" do
-      it "returns videos with matching channel name in video" do
-        channel = create(:channel, title: "030 Tango")
+    describe ".filter_by_channel_id" do
+      it "returns videos with matching channel" do
+        channel = create(:channel, id: 1)
         video = create(:video, channel: channel)
-        expect(described_class.filter_by_channel("030 Tango")).to eq [video]
+        expect(described_class.filter_by_channel_id(1)).to eq [video]
       end
 
-      it "does not return videos without matching channel name in video" do
+      it "does not return videos with incorrect channel id" do
         video = create(:video)
-        expect(described_class.filter_by_channel("030 Tango")).not_to eq [video]
+        expect(described_class.filter_by_channel_id(2)).not_to eq [video]
       end
     end
 
     describe ".filter_by_event_id" do
       it "returns videos with matching event_id in video" do
-        event = create(:event, title: "Embrace Berlin", id: 1)
+        event = create(:event, id: 1)
         video = create(:video, event: event)
         expect(described_class.filter_by_event_id("1")).to eq [video]
       end
