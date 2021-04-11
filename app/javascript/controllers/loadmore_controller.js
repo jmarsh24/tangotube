@@ -3,16 +3,12 @@ import Rails from '@rails/ujs'
 
 export default class extends Controller {
   static targets = ['videos', 'loadmore']
-  static values = { nextpage: Number }
+  static values = { page: Number }
 
   loadMore () {
     const url = new URL(window.document.location)
 
-    if (url.searchParams == '') {
-      url.searchParams.append('page', this.nextpageValue++)
-    } else {
-      url.searchParams.set('page', this.nextpageValue++)
-    }
+    url.searchParams.set('page', this.pageValue)
 
     Rails.ajax({
       type: 'GET',

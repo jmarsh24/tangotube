@@ -1,7 +1,6 @@
 // filters_controller.js
 import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
-import * as Turbo from '@hotwired/turbo'
 
 export default class extends Controller {
   static targets = ["filter"]
@@ -14,8 +13,8 @@ export default class extends Controller {
      url: url,
      success: (data) => {
 
-      const newContainerFilter = data.getElementById('filter-container-upper')
-      const containerGenreFilters = document.getElementById('filter-container-upper')
+      const newContainerFilters = data.getElementById('filter-container-upper')
+      const containerFilters = document.getElementById('filter-container-upper')
       const newContainerVideos = data.getElementById('videos')
       const containerVideos = document.getElementById('videos')
       const newContainerLoadmore = data.getElementById('load-more-container')
@@ -27,7 +26,7 @@ export default class extends Controller {
       const containerHd = document.getElementById('hd_filters')
       const newContainerHd = data.getElementById('hd_filters')
 
-      containerGenreFilters.innerHTML = newContainerFilter.innerHTML
+      containerFilters.innerHTML = newContainerFilters.innerHTML
       containerVideos.innerHTML = newContainerVideos.innerHTML
       containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
       containerFilterresults.innerHTML = newContainerFilterresults.innerHTML

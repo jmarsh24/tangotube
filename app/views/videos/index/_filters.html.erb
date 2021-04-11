@@ -5,7 +5,7 @@
         <p id="filter-button-text">Filters</p>
       </button>
       <div id="filter_results">
-        <%= "Displaying #{number_with_delimiter(@videos.size)} Results" %>
+        <%= "Displaying #{number_with_delimiter(@search.all_videos.size)} Results" %>
       </div>
     </div>
     <div class="filter-hd" id="hd_filters">
@@ -14,12 +14,12 @@
     </div>
   </div>
   <div class="filter-container" data-toggle-target="toggleable" id="filters">
-    <div class="filter-container-upper">
-      <%= render partial: "videos/index/filter_item", locals: { model: @genres, title: :genre, id: 'genre-filter' } %>
-      <%= render partial: "videos/index/filter_item", locals: { model: @leaders, title: :leader_id, id: 'leader-filter' } %>
-      <%= render partial: "videos/index/filter_item", locals: { model: @followers, title: :follower_id, id: 'follower-filter' } %>
-      <%= render partial: "videos/index/filter_item", locals: { model: @artists, title: :orchestra, id: 'orchestra-filter' } %>
-      <%= render partial: "videos/index/filter_item", locals: { model: @years, title: :year, id: 'year-filter' } %>
+    <div class="filter-container-upper" id="filter-container-upper">
+      <%= render partial: "videos/index/filter_item", locals: { model: @search.genres, title: :genre, id: 'genre-filter' } %>
+      <%= render partial: "videos/index/filter_item", locals: { model: @search.leaders, title: :leader_id, id: 'leader-filter' } %>
+      <%= render partial: "videos/index/filter_item", locals: { model: @search.followers, title: :follower_id, id: 'follower-filter' } %>
+      <%= render partial: "videos/index/filter_item", locals: { model: @search.artists, title: :orchestra, id: 'orchestra-filter' } %>
+      <%= render partial: "videos/index/filter_item", locals: { model: @search.years, title: :year, id: 'year-filter' } %>
     </div>
     <div class="videos-sortable-container" id= "sortable_container">
       <label>

@@ -1,31 +1,28 @@
 class VideosController < ApplicationController
+  SEARCHABLE_COLUMNS = %w[
+    songs.title
+    songs.last_name_search
+    videos.channel_id
+    videos.upload_date
+    videos.view_count
+    videos.popularity
+    videos.updated_at
+  ].freeze
+
   before_action :authenticate_user!, only: %i[edit update]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[update edit]
   before_action :set_recommended_videos, only: %i[edit]
 
-  NUMBER_OF_VIDEOS_PER_PAGE = 60
-
   helper_method :sort_column, :sort_direction
 
+  NUMBER_OF_VIDEOS_PER_PAGE = 60
+
   def index
-    @videos = Video.not_hidden
-                   .includes(:leader, :follower, :channel, :song, :event)
-                   .order("#{sort_column} #{sort_direction}")
-                   .filter_videos(filtering_params)
-
-    @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
-    @videos_paginated = @videos_paginated.shuffle if filtering_params.blank? && sorting_params.blank?
-
-    @next_page_items = @videos.paginate(page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
-    @items_display_count = (@videos.size - (@videos.size - (page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
-
-    @leaders = facet_id("leaders.name", "leaders.id", :leader)
-    @followers = facet_id("followers.name", "followers.id", :follower)
-    @channels = facet_id("channels.title", "channels.id", :channel)
-    @artists = facet("songs.artist", :song)
-    @genres = facet("songs.genre", :song)
-    @years = facet_on_year("upload_date")
+    @search = Video::Search.for(filtering_params: filtering_params,
+                                sort_column:      sort_column,
+                                sort_direction:   sort_direction,
+                                page:             page)
 
     respond_to do |format|
       format.html
@@ -58,30 +55,6 @@ class VideosController < ApplicationController
 
   private
 
-  def facet_on_year(table_column)
-    query = "extract(year from #{table_column})::int AS facet_value, count(#{table_column}) AS occurrences"
-    counts = Video.filter_videos(filtering_params).select(query).group("facet_value").order("facet_value DESC")
-    counts.map do |c|
-      ["#{c.facet_value} (#{c.occurrences})", c.facet_value]
-    end
-  end
-
-  def facet(table_column, model)
-    query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
-    counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column).order("occurrences DESC")
-    counts.map do |c|
-      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.downcase]
-    end
-  end
-
-  def facet_id(table_column, table_column_id, model)
-    query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences, #{table_column_id} AS facet_id_value"
-    counts = Video.filter_videos(filtering_params).joins(model).select(query).group(table_column, table_column_id).order("occurrences DESC")
-    counts.map do |c|
-      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_id_value]
-    end
-  end
-
   def set_video
     @video = Video.find(params[:id])
   end
@@ -101,22 +74,6 @@ class VideosController < ApplicationController
 
   def current_search
     @current_search = params[:query]
-  end
-
-  def sort_column
-    acceptable_cols = ["songs.title",
-                       "songs.last_name_search",
-                       "videos.channel_id",
-                       "videos.upload_date",
-                       "videos.view_count",
-                       "videos.popularity",
-                       "videos.updated_at"]
-
-    acceptable_cols.include?(params[:sort]) ? params[:sort] : "videos.updated_at"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def page
@@ -139,8 +96,12 @@ class VideosController < ApplicationController
     params.permit(:v)
   end
 
-  def fetch_new_video
-    ImportVideoWorker.perform_async(@video.youtube_id)
+  def sort_column
+    SEARCHABLE_COLUMNS.include?(params[:sort]) ? params[:sort] : SEARCHABLE_COLUMNS.last
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def fetch_new_video

@@ -1,4 +1,4 @@
-<% @videos_paginated.each do |video| %>
+<% @search.videos.each do |video| %>
     <article class="video-container">
       <%= link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top" } do %>
         <div class="thumbnail" data-duration= "<%= hd_duration_data(video) %>" >
