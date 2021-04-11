@@ -73,7 +73,7 @@ module VideosHelper
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "desc" ? "asc" : "desc"
 
-    link_to current_page_params.merge({ sort: column, direction: direction }) do
+    link_to video_query_params.merge({ sort: column, direction: direction }) do
       if css_class.present?
         concat "#{title} "
         concat fa_icon("chevron-#{direction == 'asc' ? 'up' : 'down'}")
@@ -83,7 +83,7 @@ module VideosHelper
     end
   end
 
-  def current_page_params
+  def video_query_params
     request.params.slice("channel_id",
                          "event_id",
                          "follower_id",
@@ -96,6 +96,8 @@ module VideosHelper
                          "song_id",
                          "upload_date",
                          "view_count",
-                         "year")
+                         "year",
+                         "direction",
+                         "sort")
   end
 end
