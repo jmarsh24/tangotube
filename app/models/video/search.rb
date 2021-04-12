@@ -50,10 +50,6 @@ class Video::Search
     @followers ||= facet_id("followers.name", "followers.id", :follower)
   end
 
-  def channels
-    @channels ||= facet_id("channels.title", "channels.id", :channel)
-  end
-
   def orchestras
     @orchestras ||= facet("songs.artist", :song)
   end

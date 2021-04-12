@@ -41,8 +41,8 @@ RSpec.describe Video::Search, type: :model do
       end
 
       it "returns a videos sorted by upload_date" do
-        video_a = create(:video, upload_date: Time.now)
-        video_b = create(:video, upload_date: 1.day.ago)
+        video_a = create(:video, upload_date: Time.new(2020, 1, 1))
+        video_b = create(:video, upload_date: Time.new(2019, 1, 1))
         search_asc = described_class.new(filtering_params: {}, sort_column: "videos.upload_date", sort_direction: "ASC", page: 1)
         search_desc = described_class.new(filtering_params: {}, sort_column: "videos.upload_date", sort_direction: "DESC", page: 1)
         expect(search_asc.all_videos).to eq [video_b, video_a]
@@ -298,7 +298,7 @@ RSpec.describe Video::Search, type: :model do
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
                                        page:             1)
-        search_b = described_class.new(filtering_params: { query: "John Doe" },
+        search_b = described_class.new(filtering_params: { query: "no match" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
                                        page:             1)
@@ -556,6 +556,139 @@ RSpec.describe Video::Search, type: :model do
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
+      end
+    end
+
+    describe "#videos" do
+      it "paginates videos by 60" do
+        create_list(:video, 150)
+        page1 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             1)
+        page2 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             2)
+        page3 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             3)
+        page4 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             4)
+        expect(page1.videos.count).to eq(60)
+        expect(page2.videos.count).to eq(60)
+        expect(page3.videos.count).to eq(30)
+        expect(page4.videos.count).to eq(0)
+      end
+    end
+
+    describe "#displayed_videos_count" do
+      it "counts the total amount of displayed videos" do
+        create_list(:video, 150)
+        page1 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             1)
+        page2 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             2)
+        page3 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             3)
+        page4 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             4)
+        expect(page1.displayed_videos_count).to eq(60)
+        expect(page2.displayed_videos_count).to eq(120)
+        expect(page3.displayed_videos_count).to eq(150)
+        expect(page4.displayed_videos_count).to eq(150)
+      end
+    end
+
+    describe "#next_page" do
+      it "returns the next page" do
+        create_list(:video, 80)
+        page1 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             1)
+        page2 = described_class.new(filtering_params: {},
+                                    sort_column:      "videos.upload_date",
+                                    sort_direction:   "ASC",
+                                    page:             2)
+
+        expect(page1.next_page.any?).to eq(true)
+        expect(page2.next_page.any?).to eq(false)
+      end
+    end
+
+    describe "#leaders" do
+      it "returns leaders options" do
+        leader = create(:leader, name: "Carlitos Espinoza")
+        create(:video, leader: leader)
+
+        search = described_class.new(filtering_params: {},
+                                     sort_column:      "videos.upload_date",
+                                     sort_direction:   "ASC",
+                                     page:             1)
+        expect(search.leaders).to eq([["Carlitos Espinoza (1)", leader.id]])
+      end
+    end
+
+    describe "#followers" do
+      it "returns followers options" do
+        follower = create(:follower, name: "Noelia Hurtado")
+        create(:video, follower: follower)
+
+        search = described_class.new(filtering_params: {},
+                                     sort_column:      "videos.upload_date",
+                                     sort_direction:   "ASC",
+                                     page:             1)
+        expect(search.followers).to eq([["Noelia Hurtado (1)", follower.id]])
+      end
+
+      describe "#orchestras" do
+        it "returns orchestras options" do
+          song = create(:song, artist: "Carlos Di Sarli")
+          create(:video, song: song)
+
+          search = described_class.new(filtering_params: {},
+                                       sort_column:      "videos.upload_date",
+                                       sort_direction:   "ASC",
+                                       page:             1)
+          expect(search.orchestras).to eq([["Carlos Di Sarli (1)", "carlos di sarli"]])
+        end
+      end
+
+      describe "#orchestras" do
+        it "returns orchestras options" do
+          song = create(:song, genre: "Tango")
+          create(:video, song: song)
+
+          search = described_class.new(filtering_params: {},
+                                       sort_column:      "videos.upload_date",
+                                       sort_direction:   "ASC",
+                                       page:             1)
+          expect(search.genres).to eq([["Tango (1)", "tango"]])
+        end
+      end
+
+      describe "#years" do
+        it "returns years options" do
+          create(:video, upload_date: Time.new(2018, 1, 1))
+
+          search = described_class.new(filtering_params: {},
+                                       sort_column:      "videos.upload_date",
+                                       sort_direction:   "ASC",
+                                       page:             1)
+          expect(search.years).to eq([["2018 (1)", 2018]])
+        end
       end
     end
   end
