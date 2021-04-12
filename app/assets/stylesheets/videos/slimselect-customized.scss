@@ -5,7 +5,6 @@
 .ss-open {
   height: 245px !important;
   background-color: white !important;
-  // border-radius: 0 !important;
 }
 
 .ss-main.ss-select-filter {
@@ -66,20 +65,16 @@
   padding-top: 0px !important;
 }
 
-.ss-content {
-  // border-top: 0 !important;
-}
-
 .ss-search {
   input {
     -webkit-appearance: none !important;
     -webkit-border-radius: 4px !important;
     -webkit-border-radius: 4px !important;
-    background: #f9f9f9 !important;
+    background: $ss-search-background !important;
   }
   input:focus {
     box-shadow: none !important;
-    border: 2px solid #5897fb !important;
+    border: 2px solid rgb(4, 10, 20)rch-background-focus !important;
   }
 }
 
