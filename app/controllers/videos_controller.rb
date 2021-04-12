@@ -5,8 +5,8 @@ class VideosController < ApplicationController
     videos.channel_id
     videos.upload_date
     videos.view_count
-    videos.popularity
     videos.updated_at
+    videos.popularity
   ].freeze
 
   before_action :authenticate_user!, only: %i[edit update]
@@ -23,7 +23,7 @@ class VideosController < ApplicationController
                                 sort_column:      sort_column,
                                 sort_direction:   sort_direction,
                                 page:             page,
-                                shuffle: shuffled?)
+                                shuffle:          shuffled?)
 
     respond_to do |format|
       format.html
