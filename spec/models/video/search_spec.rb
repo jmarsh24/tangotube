@@ -8,8 +8,16 @@ RSpec.describe Video::Search, type: :model do
         song_b = create(:song, last_name_search: "B")
         video_a = create(:video, song: song_a)
         video_b = create(:video, song: song_b)
-        search_asc = described_class.new(filtering_params: {}, sort_column: "songs.last_name_search", sort_direction: "ASC", page: 1)
-        search_desc = described_class.new(filtering_params: {}, sort_column: "songs.last_name_search", sort_direction: "DESC", page: 1)
+        search_asc = described_class.new(filtering_params: {},
+                                         sort_column:      "songs.last_name_search",
+                                         sort_direction:   "ASC",
+                                         page:             1,
+                                         shuffle:          false)
+        search_desc = described_class.new(filtering_params: {},
+                                          sort_column:      "songs.last_name_search",
+                                          sort_direction:   "DESC",
+                                          page:             1,
+                                          shuffle:          false)
         expect(search_asc.all_videos).to eq [video_a, video_b]
         expect(search_desc.all_videos).to eq [video_b, video_a]
         expect(search_asc.all_videos).not_to eq [video_b, video_a]
@@ -21,8 +29,16 @@ RSpec.describe Video::Search, type: :model do
         song_b = create(:song, title: "B")
         video_a = create(:video, song: song_a)
         video_b = create(:video, song: song_b)
-        search_asc = described_class.new(filtering_params: {}, sort_column: "songs.title", sort_direction: "ASC", page: 1)
-        search_desc = described_class.new(filtering_params: {}, sort_column: "songs.title", sort_direction: "DESC", page: 1)
+        search_asc = described_class.new(filtering_params: {},
+                                         sort_column:      "songs.title",
+                                         sort_direction:   "ASC",
+                                         page:             1,
+                                         shuffle:          false)
+        search_desc = described_class.new(filtering_params: {},
+                                          sort_column:      "songs.title",
+                                          sort_direction:   "DESC",
+                                          page:             1,
+                                          shuffle:          false)
         expect(search_asc.all_videos).to eq [video_a, video_b]
         expect(search_desc.all_videos).to eq [video_b, video_a]
         expect(search_asc.all_videos).not_to eq [video_b, video_a]
@@ -32,8 +48,16 @@ RSpec.describe Video::Search, type: :model do
       it "returns a videos sorted by title ASC" do
         video_a = create(:video, title: "A")
         video_b = create(:video, title: "B")
-        search_asc = described_class.new(filtering_params: {}, sort_column: "videos.title", sort_direction: "ASC", page: 1)
-        search_desc = described_class.new(filtering_params: {}, sort_column: "videos.title", sort_direction: "DESC", page: 1)
+        search_asc = described_class.new(filtering_params: {},
+                                         sort_column:      "videos.title",
+                                         sort_direction:   "ASC",
+                                         page:             1,
+                                         shuffle:          false)
+        search_desc = described_class.new(filtering_params: {},
+                                          sort_column:      "videos.title",
+                                          sort_direction:   "DESC",
+                                          page:             1,
+                                          shuffle:          false)
         expect(search_asc.all_videos).to eq [video_a, video_b]
         expect(search_desc.all_videos).to eq [video_b, video_a]
         expect(search_asc.all_videos).not_to eq [video_b, video_a]
@@ -43,8 +67,16 @@ RSpec.describe Video::Search, type: :model do
       it "returns a videos sorted by upload_date" do
         video_a = create(:video, upload_date: Time.new(2020, 1, 1))
         video_b = create(:video, upload_date: Time.new(2019, 1, 1))
-        search_asc = described_class.new(filtering_params: {}, sort_column: "videos.upload_date", sort_direction: "ASC", page: 1)
-        search_desc = described_class.new(filtering_params: {}, sort_column: "videos.upload_date", sort_direction: "DESC", page: 1)
+        search_asc = described_class.new(filtering_params: {},
+                                         sort_column:      "videos.upload_date",
+                                         sort_direction:   "ASC",
+                                         page:             1,
+                                         shuffle:          false)
+        search_desc = described_class.new(filtering_params: {},
+                                          sort_column:      "videos.upload_date",
+                                          sort_direction:   "DESC",
+                                          page:             1,
+                                          shuffle:          false)
         expect(search_asc.all_videos).to eq [video_b, video_a]
         expect(search_desc.all_videos).to eq [video_a, video_b]
         expect(search_asc.all_videos).not_to eq [video_a, video_b]
@@ -54,8 +86,16 @@ RSpec.describe Video::Search, type: :model do
       it "returns a videos sorted by view_count" do
         video_a = create(:video, view_count: 1)
         video_b = create(:video, view_count: 2)
-        search_asc = described_class.new(filtering_params: {}, sort_column: "videos.view_count", sort_direction: "ASC", page: 1)
-        search_desc = described_class.new(filtering_params: {}, sort_column: "videos.view_count", sort_direction: "DESC", page: 1)
+        search_asc = described_class.new(filtering_params: {},
+                                         sort_column:      "videos.view_count",
+                                         sort_direction:   "ASC",
+                                         page:             1,
+                                         shuffle:          false)
+        search_desc = described_class.new(filtering_params: {},
+                                          sort_column:      "videos.view_count",
+                                          sort_direction:   "DESC",
+                                          page:             1,
+                                          shuffle:          false)
         expect(search_asc.all_videos).to eq [video_a, video_b]
         expect(search_desc.all_videos).to eq [video_b, video_a]
         expect(search_asc.all_videos).not_to eq [video_b, video_a]
@@ -65,8 +105,16 @@ RSpec.describe Video::Search, type: :model do
       it "returns a videos sorted by popularity" do
         video_a = create(:video, popularity: 1)
         video_b = create(:video, popularity: 2)
-        search_asc = described_class.new(filtering_params: {}, sort_column: "videos.popularity", sort_direction: "ASC", page: 1)
-        search_desc = described_class.new(filtering_params: {}, sort_column: "videos.popularity", sort_direction: "DESC", page: 1)
+        search_asc = described_class.new(filtering_params: {},
+                                         sort_column:      "videos.popularity",
+                                         sort_direction:   "ASC",
+                                         page:             1,
+                                         shuffle:          false)
+        search_desc = described_class.new(filtering_params: {},
+                                          sort_column:      "videos.popularity",
+                                          sort_direction:   "DESC",
+                                          page:             1,
+                                          shuffle:          false)
         expect(search_asc.all_videos).to eq [video_a, video_b]
         expect(search_desc.all_videos).to eq [video_b, video_a]
         expect(search_asc.all_videos).not_to eq [video_b, video_a]
@@ -76,8 +124,16 @@ RSpec.describe Video::Search, type: :model do
       it "returns a videos sorted by updated_at" do
         video_a = create(:video)
         video_b = create(:video)
-        search_asc = described_class.new(filtering_params: {}, sort_column: "videos.updated_at", sort_direction: "ASC", page: 1)
-        search_desc = described_class.new(filtering_params: {}, sort_column: "videos.updated_at", sort_direction: "DESC", page: 1)
+        search_asc = described_class.new(filtering_params: {},
+                                         sort_column:      "videos.updated_at",
+                                         sort_direction:   "ASC",
+                                         page:             1,
+                                         shuffle:          false)
+        search_desc = described_class.new(filtering_params: {},
+                                          sort_column:      "videos.updated_at",
+                                          sort_direction:   "DESC",
+                                          page:             1,
+                                          shuffle:          false)
         expect(search_asc.all_videos).to eq [video_a, video_b]
         expect(search_desc.all_videos).to eq [video_b, video_a]
         expect(search_asc.all_videos).not_to eq [video_b, video_a]
@@ -89,8 +145,16 @@ RSpec.describe Video::Search, type: :model do
       it "returns a videos sorted by updated_at" do
         video_a = create(:video)
         video_b = create(:video)
-        search_asc = described_class.new(filtering_params: {}, sort_column: "videos.updated_at", sort_direction: "ASC", page: 1)
-        search_desc = described_class.new(filtering_params: {}, sort_column: "videos.updated_at", sort_direction: "DESC", page: 1)
+        search_asc = described_class.new(filtering_params: {},
+                                         sort_column:      "videos.updated_at",
+                                         sort_direction:   "ASC",
+                                         page:             1,
+                                         shuffle:          false)
+        search_desc = described_class.new(filtering_params: {},
+                                          sort_column:      "videos.updated_at",
+                                          sort_direction:   "DESC",
+                                          page:             1,
+                                          shuffle:          false)
         expect(search_asc.all_videos).to eq [video_a, video_b]
         expect(search_desc.all_videos).to eq [video_b, video_a]
         expect(search_asc.all_videos).not_to eq [video_b, video_a]
@@ -105,8 +169,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new(filtering_params: { leader_id: leader.id },
                                    sort_column:      "videos.updated_at",
                                    sort_direction:   "ASC",
-                                   page:             1)
-
+                                   page:             1,
+                                   shuffle:          false)
       expect(search.all_videos).to eq [video_a]
       expect(search.all_videos).not_to eq [video_b]
     end
@@ -119,7 +183,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new(filtering_params: { follower_id: follower.id },
                                    sort_column:      "videos.updated_at",
                                    sort_direction:   "ASC",
-                                   page:             1)
+                                   page:             1,
+                                   shuffle:          false)
 
       expect(search.all_videos).to eq [video_a]
       expect(search.all_videos).not_to eq [video_b]
@@ -133,7 +198,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new(filtering_params: { channel_id: channel.id },
                                    sort_column:      "videos.updated_at",
                                    sort_direction:   "ASC",
-                                   page:             1)
+                                   page:             1,
+                                   shuffle:          false)
 
       expect(search.all_videos).to eq [video_a]
       expect(search.all_videos).not_to eq [video_b]
@@ -147,7 +213,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new(filtering_params: { genre: "Tango" },
                                    sort_column:      "videos.updated_at",
                                    sort_direction:   "ASC",
-                                   page:             1)
+                                   page:             1,
+                                   shuffle:          false)
 
       expect(search.all_videos).to eq [video_a]
       expect(search.all_videos).not_to eq [video_b]
@@ -161,7 +228,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new(filtering_params: { orchestra: "Di Sarli" },
                                    sort_column:      "videos.updated_at",
                                    sort_direction:   "ASC",
-                                   page:             1)
+                                   page:             1,
+                                   shuffle:          false)
 
       expect(search.all_videos).to eq [video_a]
       expect(search.all_videos).not_to eq [video_b]
@@ -175,7 +243,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new(filtering_params: { song_id: song.id },
                                    sort_column:      "videos.updated_at",
                                    sort_direction:   "ASC",
-                                   page:             1)
+                                   page:             1,
+                                   shuffle:          false)
 
       expect(search.all_videos).to eq [video_a]
       expect(search.all_videos).not_to eq [video_b]
@@ -188,12 +257,14 @@ RSpec.describe Video::Search, type: :model do
       search_a = described_class.new(filtering_params: { hd: 1 },
                                      sort_column:      "videos.updated_at",
                                      sort_direction:   "ASC",
-                                     page:             1)
+                                     page:             1,
+                                     shuffle:          false)
 
       search_b = described_class.new(filtering_params: { hd: 0 },
                                      sort_column:      "videos.updated_at",
                                      sort_direction:   "ASC",
-                                     page:             1)
+                                     page:             1,
+                                     shuffle:          false)
 
       expect(search_a.all_videos).to eq [video_a]
       expect(search_a.all_videos).not_to eq [video_b]
@@ -209,7 +280,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new(filtering_params: { event_id: event.id },
                                    sort_column:      "videos.updated_at",
                                    sort_direction:   "ASC",
-                                   page:             1)
+                                   page:             1,
+                                   shuffle:          false)
 
       expect(search.all_videos).to eq [video_a]
       expect(search.all_videos).not_to eq [video_b]
@@ -222,7 +294,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new(filtering_params: { year: "2018" },
                                    sort_column:      "videos.updated_at",
                                    sort_direction:   "ASC",
-                                   page:             1)
+                                   page:             1,
+                                   shuffle:          false)
 
       expect(search.all_videos).to eq [video_a]
       expect(search.all_videos).not_to eq [video_b]
@@ -235,15 +308,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "Carlitos Espinoza" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "Carlitos Espin" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -255,15 +331,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "Carlitos Espinoza" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "Carlitos Espin" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -276,15 +355,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "Carlitos Espinoza" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "Carlitos Espin" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -297,15 +379,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "Carlitos" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "no match" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "Carlit" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -318,15 +403,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "Noelia Hurtado" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "noeli" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -339,15 +427,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "Noelia" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "Noel" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -359,15 +450,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "s6iptZdCcG0" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "s6iptZdCcG" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -379,15 +473,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "Agostino" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "Agostin" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -399,15 +496,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "no vendrá" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "no vend" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -419,15 +519,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "no vendrá" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "no vend" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -439,15 +542,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "agostino" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "Angel D'Agosti" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -460,15 +566,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "030 tango" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "030 T" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -481,15 +590,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "UCtdgMR0bmogczrZNpPaO66Q" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "UCtdgMR0bmogczrZNpPaO" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -502,15 +614,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "tango" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "tang" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -523,15 +638,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "mentirosa" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "menti" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -544,15 +662,18 @@ RSpec.describe Video::Search, type: :model do
         search_a = described_class.new(filtering_params: { query: "d'agostino" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_b = described_class.new(filtering_params: { query: "John Doe" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         search_c = described_class.new(filtering_params: { query: "Agosti" },
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "DESC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
         expect(search_a.all_videos).to eq [video]
         expect(search_b.all_videos).not_to eq [video]
         expect(search_c.all_videos).to eq [video]
@@ -565,19 +686,23 @@ RSpec.describe Video::Search, type: :model do
         page1 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             1)
+                                    page:             1,
+                                    shuffle:          false)
         page2 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             2)
+                                    page:             2,
+                                    shuffle:          false)
         page3 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             3)
+                                    page:             3,
+                                    shuffle:          false)
         page4 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             4)
+                                    page:             4,
+                                    shuffle:          false)
         expect(page1.videos.count).to eq(60)
         expect(page2.videos.count).to eq(60)
         expect(page3.videos.count).to eq(30)
@@ -591,19 +716,23 @@ RSpec.describe Video::Search, type: :model do
         page1 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             1)
+                                    page:             1,
+                                    shuffle:          false)
         page2 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             2)
+                                    page:             2,
+                                    shuffle:          false)
         page3 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             3)
+                                    page:             3,
+                                    shuffle:          false)
         page4 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             4)
+                                    page:             4,
+                                    shuffle:          false)
         expect(page1.displayed_videos_count).to eq(60)
         expect(page2.displayed_videos_count).to eq(120)
         expect(page3.displayed_videos_count).to eq(150)
@@ -617,11 +746,13 @@ RSpec.describe Video::Search, type: :model do
         page1 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             1)
+                                    page:             1,
+                                    shuffle:          false)
         page2 = described_class.new(filtering_params: {},
                                     sort_column:      "videos.upload_date",
                                     sort_direction:   "ASC",
-                                    page:             2)
+                                    page:             2,
+                                    shuffle:          false)
 
         expect(page1.next_page.any?).to eq(true)
         expect(page2.next_page.any?).to eq(false)
@@ -636,7 +767,8 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: {},
                                      sort_column:      "videos.upload_date",
                                      sort_direction:   "ASC",
-                                     page:             1)
+                                     page:             1,
+                                     shuffle:          false)
         expect(search.leaders).to eq([["Carlitos Espinoza (1)", leader.id]])
       end
     end
@@ -649,7 +781,8 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: {},
                                      sort_column:      "videos.upload_date",
                                      sort_direction:   "ASC",
-                                     page:             1)
+                                     page:             1,
+                                     shuffle:          false)
         expect(search.followers).to eq([["Noelia Hurtado (1)", follower.id]])
       end
 
@@ -661,7 +794,8 @@ RSpec.describe Video::Search, type: :model do
           search = described_class.new(filtering_params: {},
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
           expect(search.orchestras).to eq([["Carlos Di Sarli (1)", "carlos di sarli"]])
         end
       end
@@ -674,7 +808,8 @@ RSpec.describe Video::Search, type: :model do
           search = described_class.new(filtering_params: {},
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
           expect(search.genres).to eq([["Tango (1)", "tango"]])
         end
       end
@@ -686,7 +821,8 @@ RSpec.describe Video::Search, type: :model do
           search = described_class.new(filtering_params: {},
                                        sort_column:      "videos.upload_date",
                                        sort_direction:   "ASC",
-                                       page:             1)
+                                       page:             1,
+                                       shuffle:          false)
           expect(search.years).to eq([["2018 (1)", 2018]])
         end
       end
