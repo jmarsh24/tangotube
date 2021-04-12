@@ -4,7 +4,7 @@
 
 .ss-open {
   height: 245px !important;
-  background-color: white !important;
+  background-color: $primary-color !important;
 }
 
 .ss-main.ss-select-filter {
@@ -34,7 +34,6 @@
   background-color: none !important;
 }
 .ss-main .ss-single-selected.ss-open-below {
-  // border-radius: 0 !important;
   border: 0 !important;
   background-color: none !important;
 }
