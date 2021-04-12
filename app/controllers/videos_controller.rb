@@ -22,7 +22,8 @@ class VideosController < ApplicationController
     @search = Video::Search.for(filtering_params: filtering_params,
                                 sort_column:      sort_column,
                                 sort_direction:   sort_direction,
-                                page:             page)
+                                page:             page,
+                                shuffle: shuffled?)
 
     respond_to do |format|
       format.html
@@ -70,6 +71,10 @@ class VideosController < ApplicationController
                                 .where.not(youtube_id: @video.youtube_id)
                                 .order("popularity DESC")
                                 .limit(3)
+  end
+
+  def shuffled?
+    filtering_params.blank? || sorting_params.blank?
   end
 
   def current_search

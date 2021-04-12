@@ -5,22 +5,26 @@ class Video::Search
     def for(filtering_params:,
             sort_column:,
             sort_direction:,
-            page:)
+            page:,
+            shuffle:)
       new(filtering_params: filtering_params,
           sort_column:      sort_column,
           sort_direction:   sort_direction,
-          page:             page)
+          page:             page,
+          shuffle:          shuffle)
     end
   end
 
   def initialize(filtering_params:,
                  sort_column:,
                  sort_direction:,
-                 page:)
+                 page:,
+                 shuffle:)
     @filtering_params = filtering_params
     @sort_column = sort_column
     @sort_direction = sort_direction
     @page = page
+    @shuffle = shuffle
   end
 
   def all_videos
@@ -31,7 +35,12 @@ class Video::Search
   end
 
   def videos
-    all_videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+    if @shuffle
+      all_videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+                .shuffle
+    else
+      all_videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+    end
   end
 
   def displayed_videos_count
