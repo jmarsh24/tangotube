@@ -2,7 +2,7 @@
   <%= render "videos/index/filters" %>
 </div>
 <div>
-<div data-controller="loadmore" data-loadmore-page-value="<%= @page + 1 %>">
+<div data-controller="loadmore" data-loadmore-nextpage-value="<%= @page + 1 %>">
   <div id="videos" class="video-section" data-loadmore-target="videos">
     <%= render "videos/index/videos" %>
   </div>
