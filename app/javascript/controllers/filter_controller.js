@@ -43,30 +43,30 @@ export default class extends Controller {
 
   get params() {
     const queryString = window.location.search
-    let usp = new URLSearchParams(queryString)
+    let searchParams = new URLSearchParams(queryString)
 
-      this.setCurrentParams(usp)
-      this.deleteEmptyParams(usp)
+      this.setCurrentParams(searchParams)
+      this.deleteEmptyParams(searchParams)
 
-    return usp.toString()
+    return searchParams.toString()
   }
 
-  setCurrentParams(usp) {
+  setCurrentParams(searchParams) {
     let params = this.filterTargets.map(t => [t.name, t.value])
 
-    params.forEach(param => usp.set(param[0], param[1]))
+    params.forEach(param => searchParams.set(param[0], param[1]))
 
-    return usp
+    return searchParams
   }
 
-  deleteEmptyParams(usp) {
+  deleteEmptyParams(searchParams) {
     let keysForDel = []
-      usp.forEach((v, k) => {
+      searchParams.forEach((v, k) => {
         if (v == '' || k == '') keysForDel.push(k)
       })
       keysForDel.forEach(k => {
-        usp.delete(k)
+        searchParams.delete(k)
       })
-      return usp
+      return searchParams
   }
 }
