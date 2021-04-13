@@ -15,9 +15,7 @@ class Video::Search
     def for(filtering_params:,
             sorting_params:,
             page:)
-      new(filtering_params: filtering_params,
-          sorting_params:   sorting_params,
-          page:             page)
+      new(filtering_params: filtering_params, sorting_params: sorting_params, page: page)
     end
   end
 
