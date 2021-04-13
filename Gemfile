@@ -41,10 +41,10 @@ group :development, :test do
   gem "factory_bot_rails", "~> 6.1"
   gem "faker", "~> 2.16"
   gem "rspec-rails", "~> 4.0"
+  gem "byebug", "~> 11.1", ">= 11.1.3"
 end
 
 group :development do
-  gem "byebug", "~> 11.1", ">= 11.1.3"
   gem "listen", "~> 3.2"
   gem "rack-mini-profiler", "~> 2.3"
   gem "rubocop", "~> 1.8"
