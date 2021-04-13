@@ -12,16 +12,12 @@ class Video::Search
   NUMBER_OF_VIDEOS_PER_PAGE = 60
 
   class << self
-    def for(filtering_params:,
-            sorting_params:,
-            page:)
+    def for(filtering_params:, sorting_params:, page:)
       new(filtering_params: filtering_params, sorting_params: sorting_params, page: page)
     end
   end
 
-  def initialize(filtering_params:,
-                 sorting_params:,
-                 page:)
+  def initialize(filtering_params:, sorting_params:, page:)
     @filtering_params = filtering_params
     @sorting_params = sorting_params
     @page = page
@@ -44,11 +40,11 @@ class Video::Search
   end
 
   def displayed_videos_count
-    (@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size
+    @displayed_videos_count ||= (@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size
   end
 
   def next_page
-    videos.paginate(@page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
+    @next_page ||= videos.paginate(@page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
   end
 
   def leaders
