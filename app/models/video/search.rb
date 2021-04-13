@@ -27,28 +27,28 @@ class Video::Search
     @page = page
   end
 
-  def all_videos
+  def videos
     Video.not_hidden
          .includes(:leader, :follower, :channel, :song, :event)
          .order("#{sort_column} #{sort_direction}")
          .filter_videos(@filtering_params)
   end
 
-  def videos
+  def paginated_videos
     if @sorting_params.blank? && @filtering_params.blank?
-      all_videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
-                .shuffle
+      videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+            .shuffle
     else
-      all_videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+      videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
     end
   end
 
   def displayed_videos_count
-    all_videos.size - (all_videos.size - (@page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, all_videos.size))
+    videos.size - (videos.size - (@page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, videos.size))
   end
 
   def next_page
-    all_videos.paginate(@page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
+    videos.paginate(@page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
   end
 
   def leaders

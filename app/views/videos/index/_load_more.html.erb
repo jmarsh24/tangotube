@@ -1,6 +1,6 @@
 <div class="loadMoreContainer" id="load-more-container">
   <div class="loadMoreResults">
-    <%= "Displaying #{@search.displayed_videos_count} / #{number_with_delimiter(@search.all_videos.size)} Results" %>
+    <%= "Displaying #{@search.displayed_videos_count} / #{number_with_delimiter(@search.videos.size)} Results" %>
   </div>
   <% if @search.next_page.any? %>
     <button class="load-more-link" data-action='click->loadmore#loadMore'>
