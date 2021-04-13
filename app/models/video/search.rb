@@ -1,41 +1,43 @@
 class Video::Search
+  SEARCHABLE_COLUMNS = %w[
+    songs.title
+    songs.last_name_search
+    videos.channel_id
+    videos.upload_date
+    videos.view_count
+    videos.updated_at
+    videos.popularity
+  ].freeze
+
   NUMBER_OF_VIDEOS_PER_PAGE = 60
 
   class << self
     def for(filtering_params:,
-            sort_column:,
-            sort_direction:,
-            page:,
-            shuffle:)
+            sorting_params:,
+            page:)
       new(filtering_params: filtering_params,
-          sort_column:      sort_column,
-          sort_direction:   sort_direction,
-          page:             page,
-          shuffle:          shuffle)
+          sorting_params:   sorting_params,
+          page:             page)
     end
   end
 
   def initialize(filtering_params:,
-                 sort_column:,
-                 sort_direction:,
-                 page:,
-                 shuffle:)
+                 sorting_params:,
+                 page:)
     @filtering_params = filtering_params
-    @sort_column = sort_column
-    @sort_direction = sort_direction
+    @sorting_params = sorting_params
     @page = page
-    @shuffle = shuffle
   end
 
   def all_videos
     Video.not_hidden
          .includes(:leader, :follower, :channel, :song, :event)
-         .order("#{@sort_column} #{@sort_direction}")
+         .order("#{sort_column} #{sort_direction}")
          .filter_videos(@filtering_params)
   end
 
   def videos
-    if @shuffle
+    if @sorting_params.blank? && @filtering_params.blank?
       all_videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
                 .shuffle
     else
@@ -69,6 +71,14 @@ class Video::Search
 
   def years
     @years ||= facet_on_year("upload_date")
+  end
+
+  def sort_column
+    SEARCHABLE_COLUMNS.include?(@sorting_params[:sort]) ? @sorting_params[:sort] : SEARCHABLE_COLUMNS.last
+  end
+
+  def sort_direction
+    %w[asc desc].include?(@sorting_params[:direction]) ? @sorting_params[:direction] : "desc"
   end
 
   private

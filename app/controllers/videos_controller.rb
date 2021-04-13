@@ -1,29 +1,13 @@
 class VideosController < ApplicationController
-  SEARCHABLE_COLUMNS = %w[
-    songs.title
-    songs.last_name_search
-    videos.channel_id
-    videos.upload_date
-    videos.view_count
-    videos.updated_at
-    videos.popularity
-  ].freeze
-
   before_action :authenticate_user!, only: %i[edit update]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[update edit]
   before_action :set_recommended_videos, only: %i[edit]
 
-  helper_method :sort_column, :sort_direction
-
-  NUMBER_OF_VIDEOS_PER_PAGE = 60
-
   def index
     @search = Video::Search.for(filtering_params: filtering_params,
-                                sort_column:      sort_column,
-                                sort_direction:   sort_direction,
-                                page:             page,
-                                shuffle:          shuffled?)
+                                sorting_params:   sorting_params,
+                                page:             page)
 
     respond_to do |format|
       format.html
@@ -73,10 +57,6 @@ class VideosController < ApplicationController
                                 .limit(3)
   end
 
-  def shuffled?
-    filtering_params.blank? || sorting_params.blank?
-  end
-
   def current_search
     @current_search = params[:query]
   end
@@ -99,14 +79,6 @@ class VideosController < ApplicationController
 
   def show_params
     params.permit(:v)
-  end
-
-  def sort_column
-    SEARCHABLE_COLUMNS.include?(params[:sort]) ? params[:sort] : SEARCHABLE_COLUMNS.last
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def fetch_new_video
