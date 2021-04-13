@@ -40,7 +40,7 @@ class Video::Search
   end
 
   def displayed_videos_count
-    @displayed_videos_count ||= (@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size
+    @displayed_videos_count ||= ((@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size).clamp(0, videos.size)
   end
 
   def next_page
