@@ -14,8 +14,6 @@ RSpec.describe Video::Search, type: :model do
                                                             direction: "DESC" })
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
-        expect(search_asc.videos).not_to eq [video_a, video_b]
-        expect(search_desc.videos).not_to eq [video_a, video_b]
       end
 
       it "returns videos sorted by songs.title" do
@@ -29,8 +27,6 @@ RSpec.describe Video::Search, type: :model do
                                                             direction: "DESC" })
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
-        expect(search_asc.videos).not_to eq [video_a, video_b]
-        expect(search_desc.videos).not_to eq [video_a, video_b]
       end
 
       it "returns videos sorted by upload_date" do
@@ -42,8 +38,6 @@ RSpec.describe Video::Search, type: :model do
                                                             direction: "DESC" })
         expect(search_asc.videos).to eq [video_a, video_b]
         expect(search_desc.videos).to eq [video_a, video_b]
-        expect(search_asc.videos).not_to eq [video_b, video_a]
-        expect(search_desc.videos).not_to eq [video_b, video_a]
       end
 
       it "returns videos sorted by view_count" do
@@ -55,8 +49,6 @@ RSpec.describe Video::Search, type: :model do
                                                             direction: "DESC" })
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
-        expect(search_asc.videos).not_to eq [video_a, video_b]
-        expect(search_desc.videos).not_to eq [video_a, video_b]
       end
 
       it "returns videos sorted by popularity" do
@@ -68,8 +60,6 @@ RSpec.describe Video::Search, type: :model do
                                                             direction: "DESC" })
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
-        expect(search_asc.videos).not_to eq [video_a, video_b]
-        expect(search_desc.videos).not_to eq [video_a, video_b]
       end
 
       it "returns videos sorted by updated_at" do
@@ -81,8 +71,6 @@ RSpec.describe Video::Search, type: :model do
                                                             direction: "DESC" })
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
-        expect(search_asc.videos).not_to eq [video_a, video_b]
-        expect(search_desc.videos).not_to eq [video_a, video_b]
       end
 
       it "does not sort by parameter that's not a searchable column" do
@@ -94,8 +82,6 @@ RSpec.describe Video::Search, type: :model do
                                                             direction: "DESC" })
         expect(search_asc.videos).to eq [video_a, video_b]
         expect(search_desc.videos).to eq [video_a, video_b]
-        expect(search_asc.videos).not_to eq [video_b, video_a]
-        expect(search_desc.videos).not_to eq [video_b, video_a]
         expect(search_asc.videos).not_to be_nil
         expect(search_desc.videos).not_to be_nil
       end
@@ -175,9 +161,7 @@ RSpec.describe Video::Search, type: :model do
         search_b = described_class.new(filtering_params: { hd: 0 })
 
         expect(search_a.videos).to eq [video_a]
-        expect(search_a.videos).not_to eq [video_b]
         expect(search_b.videos).to eq [video_b]
-        expect(search_b.videos).not_to eq [video_a]
       end
 
       it "filters by event_id" do
