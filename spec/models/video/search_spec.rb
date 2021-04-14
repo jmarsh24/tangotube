@@ -135,8 +135,7 @@ RSpec.describe Video::Search, type: :model do
         video_a = create(:video, leader: leader)
         video_b = create(:video)
         search = described_class.new(filtering_params: { leader_id: leader.id },
-                                     sorting_params:   { sort:      "videos.updated_at",
-                                                         direction: "ASC" },
+                                     sorting_params:   {},
                                      page:             1)
         expect(search.videos).to eq [video_a]
         expect(search.videos).not_to eq [video_b]
@@ -148,8 +147,7 @@ RSpec.describe Video::Search, type: :model do
         video_b = create(:video)
 
         search = described_class.new(filtering_params: { follower_id: follower.id },
-                                     sorting_params:   { sort:      "videos.updated_at",
-                                                         direction: "ASC" },
+                                     sorting_params:   {},
                                      page:             1)
 
         expect(search.videos).to eq [video_a]
@@ -162,8 +160,7 @@ RSpec.describe Video::Search, type: :model do
         video_b = create(:video)
 
         search = described_class.new(filtering_params: { channel_id: channel.id },
-                                     sorting_params:   { sort:      "videos.updated_at",
-                                                         direction: "ASC" },
+                                     sorting_params:   {},
                                      page:             1)
 
         expect(search.videos).to eq [video_a]
@@ -176,8 +173,7 @@ RSpec.describe Video::Search, type: :model do
         video_b = create(:video)
 
         search = described_class.new(filtering_params: { genre: "Tango" },
-                                     sorting_params:   { sort:      "videos.updated_at",
-                                                         direction: "ASC" },
+                                     sorting_params:   {},
                                      page:             1)
 
         expect(search.videos).to eq [video_a]
@@ -190,8 +186,7 @@ RSpec.describe Video::Search, type: :model do
         video_b = create(:video)
 
         search = described_class.new(filtering_params: { orchestra: "Di Sarli" },
-                                     sorting_params:   { sort:      "videos.updated_at",
-                                                         direction: "ASC" },
+                                     sorting_params:   {},
                                      page:             1)
 
         expect(search.videos).to eq [video_a]
@@ -204,8 +199,7 @@ RSpec.describe Video::Search, type: :model do
         video_b = create(:video)
 
         search = described_class.new(filtering_params: { song_id: song.id },
-                                     sorting_params:   { sort:      "videos.updated_at",
-                                                         direction: "ASC" },
+                                     sorting_params:   {},
                                      page:             1)
 
         expect(search.videos).to eq [video_a]
@@ -238,8 +232,7 @@ RSpec.describe Video::Search, type: :model do
         video_b = create(:video)
 
         search = described_class.new(filtering_params: { event_id: event.id },
-                                     sorting_params:   { sort:      "videos.updated_at",
-                                                         direction: "ASC" },
+                                     sorting_params:   {},
                                      page:             1)
 
         expect(search.videos).to eq [video_a]
@@ -251,8 +244,7 @@ RSpec.describe Video::Search, type: :model do
         video_b = create(:video)
 
         search = described_class.new(filtering_params: { year: "2018" },
-                                     sorting_params:   { sort:      "videos.updated_at",
-                                                         direction: "ASC" },
+                                     sorting_params:   {},
                                      page:             1)
 
         expect(search.videos).to eq [video_a]
