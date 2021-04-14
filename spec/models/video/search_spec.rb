@@ -532,241 +532,241 @@ RSpec.describe Video::Search, type: :model do
         end
       end
     end
+  end
 
-    describe "#paginated_videos" do
-      it "paginates videos by 60" do
-        stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-        create_list(:video, 3)
-        page1 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             1)
-        page2 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             2)
-        page3 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             3)
-        page4 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             4)
-        expect(page1.paginated_videos.count).to eq(2)
-        expect(page2.paginated_videos.count).to eq(1)
-        expect(page3.paginated_videos.count).to eq(0)
-      end
+  describe "#paginated_videos" do
+    it "paginates videos by 60" do
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+      create_list(:video, 3)
+      page1 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             1)
+      page2 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             2)
+      page3 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             3)
+      page4 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             4)
+      expect(page1.paginated_videos.count).to eq(2)
+      expect(page2.paginated_videos.count).to eq(1)
+      expect(page3.paginated_videos.count).to eq(0)
+    end
+  end
+
+  describe "#displayed_videos_count" do
+    it "counts the total amount of displayed videos" do
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+      create_list(:video, 3)
+      page1 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             1)
+      page2 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             2)
+      page3 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             3)
+      page4 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             4)
+      expect(page1.displayed_videos_count).to eq(2)
+      expect(page2.displayed_videos_count).to eq(3)
+      expect(page3.displayed_videos_count).to eq(3)
+    end
+  end
+
+  describe "#next_page" do
+    it "returns the next page" do
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+      create_list(:video, 3)
+      page1 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             1)
+      page2 = described_class.new(filtering_params: {},
+                                  sorting_params:   {},
+                                  page:             2)
+      expect(page1.next_page.any?).to eq(true)
+      expect(page2.next_page.any?).to eq(false)
+    end
+  end
+
+  describe "#leaders" do
+    it "returns leader options" do
+      leader = create(:leader, name: "Carlitos Espinoza")
+      create(:video, leader: leader)
+
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   { sort:      "videos.upload_date",
+                                                       direction: "ASC" },
+                                   page:             1)
+      expect(search.leaders).to eq([["Carlitos Espinoza (1)", leader.id]])
     end
 
-    describe "#displayed_videos_count" do
-      it "counts the total amount of displayed videos" do
-        stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-        create_list(:video, 3)
-        page1 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             1)
-        page2 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             2)
-        page3 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             3)
-        page4 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             4)
-        expect(page1.displayed_videos_count).to eq(2)
-        expect(page2.displayed_videos_count).to eq(3)
-        expect(page3.displayed_videos_count).to eq(3)
-      end
+    it "does not duplicate with same leader and increments count" do
+      leader = create(:leader, name: "Carlitos Espinoza")
+      create(:video, leader: leader)
+      create(:video, leader: leader)
+
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.leaders).to eq([["Carlitos Espinoza (2)", leader.id]])
     end
 
-    describe "#next_page" do
-      it "returns the next page" do
-        stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-        create_list(:video, 3)
-        page1 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             1)
-        page2 = described_class.new(filtering_params: {},
-                                    sorting_params:   {},
-                                    page:             2)
-        expect(page1.next_page.any?).to eq(true)
-        expect(page2.next_page.any?).to eq(false)
-      end
+    it "creates array of leaders and increments multiple videos without duplication" do
+      leader = create(:leader, name: "Carlitos Espinoza")
+      leader2 = create(:leader, name: "Sebastian Jimenez")
+      create(:video, leader: leader)
+      create(:video, leader: leader2)
+      create(:video, leader: leader2)
+
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.leaders).to eq([["Sebastian Jimenez (2)", leader2.id], ["Carlitos Espinoza (1)", leader.id]])
+    end
+  end
+
+  describe "#followers" do
+    it "returns follower options" do
+      follower = create(:follower, name: "Noelia Hurtado")
+      create(:video, follower: follower)
+
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.followers).to eq([["Noelia Hurtado (1)", follower.id]])
     end
 
-    describe "#leaders" do
-      it "returns leader options" do
-        leader = create(:leader, name: "Carlitos Espinoza")
-        create(:video, leader: leader)
+    it "does not duplicate with same follower and increments count" do
+      follower = create(:follower, name: "Noelia Hurtado")
+      create(:video, follower: follower)
+      create(:video, follower: follower)
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   { sort:      "videos.upload_date",
-                                                         direction: "ASC" },
-                                     page:             1)
-        expect(search.leaders).to eq([["Carlitos Espinoza (1)", leader.id]])
-      end
-
-      it "does not duplicate with same leader and increments count" do
-        leader = create(:leader, name: "Carlitos Espinoza")
-        create(:video, leader: leader)
-        create(:video, leader: leader)
-
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.leaders).to eq([["Carlitos Espinoza (2)", leader.id]])
-      end
-
-      it "creates array of leaders and increments multiple videos without duplication" do
-        leader = create(:leader, name: "Carlitos Espinoza")
-        leader2 = create(:leader, name: "Sebastian Jimenez")
-        create(:video, leader: leader)
-        create(:video, leader: leader2)
-        create(:video, leader: leader2)
-
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.leaders).to eq([["Sebastian Jimenez (2)", leader2.id], ["Carlitos Espinoza (1)", leader.id]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.followers).to eq([["Noelia Hurtado (2)", follower.id]])
     end
 
-    describe "#followers" do
-      it "returns follower options" do
-        follower = create(:follower, name: "Noelia Hurtado")
-        create(:video, follower: follower)
+    it "creates array of followers and increments multiple videos without duplication" do
+      follower = create(:follower, name: "Noelia Hurtado")
+      follower2 = create(:follower, name: "Moira Castellano")
+      create(:video, follower: follower)
+      create(:video, follower: follower2)
+      create(:video, follower: follower2)
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.followers).to eq([["Noelia Hurtado (1)", follower.id]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.followers).to eq([["Moira Castellano (2)", follower2.id], ["Noelia Hurtado (1)", follower.id]])
+    end
+  end
 
-      it "does not duplicate with same follower and increments count" do
-        follower = create(:follower, name: "Noelia Hurtado")
-        create(:video, follower: follower)
-        create(:video, follower: follower)
+  describe "#orchestras" do
+    it "returns orchestra options" do
+      song = create(:song, artist: "Carlos Di Sarli")
+      create(:video, song: song)
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.followers).to eq([["Noelia Hurtado (2)", follower.id]])
-      end
-
-      it "creates array of followers and increments multiple videos without duplication" do
-        follower = create(:follower, name: "Noelia Hurtado")
-        follower2 = create(:follower, name: "Moira Castellano")
-        create(:video, follower: follower)
-        create(:video, follower: follower2)
-        create(:video, follower: follower2)
-
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.followers).to eq([["Moira Castellano (2)", follower2.id], ["Noelia Hurtado (1)", follower.id]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.orchestras).to eq([["Carlos Di Sarli (1)", "carlos di sarli"]])
     end
 
-    describe "#orchestras" do
-      it "returns orchestra options" do
-        song = create(:song, artist: "Carlos Di Sarli")
-        create(:video, song: song)
+    it "does not duplicate with same orchestra and increments count" do
+      song = create(:song, artist: "Carlos Di Sarli")
+      create(:video, song: song)
+      create(:video, song: song)
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.orchestras).to eq([["Carlos Di Sarli (1)", "carlos di sarli"]])
-      end
-
-      it "does not duplicate with same orchestra and increments count" do
-        song = create(:song, artist: "Carlos Di Sarli")
-        create(:video, song: song)
-        create(:video, song: song)
-
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.orchestras).to eq([["Carlos Di Sarli (2)", "carlos di sarli"]])
-      end
-
-      it "creates array of ors and increments multiple videos without duplication" do
-        song = create(:song, artist: "Carlos Di Sarli")
-        song2 = create(:song, artist: "Osvaldo Pugliese")
-        create(:video, song: song)
-        create(:video, song: song2)
-        create(:video, song: song2)
-
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.orchestras).to eq([["Osvaldo Pugliese (2)", "osvaldo pugliese"], ["Carlos Di Sarli (1)", "carlos di sarli"]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.orchestras).to eq([["Carlos Di Sarli (2)", "carlos di sarli"]])
     end
 
-    describe "#genre" do
-      it "returns song options" do
-        song = create(:song, genre: "Milonga")
-        create(:video, song: song)
+    it "creates array of ors and increments multiple videos without duplication" do
+      song = create(:song, artist: "Carlos Di Sarli")
+      song2 = create(:song, artist: "Osvaldo Pugliese")
+      create(:video, song: song)
+      create(:video, song: song2)
+      create(:video, song: song2)
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.genres).to eq([["Milonga (1)", "milonga"]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.orchestras).to eq([["Osvaldo Pugliese (2)", "osvaldo pugliese"], ["Carlos Di Sarli (1)", "carlos di sarli"]])
+    end
+  end
 
-      it "does not duplicate with same song and increments count" do
-        song = create(:song, genre: "Milonga")
-        create(:video, song: song)
-        create(:video, song: song)
+  describe "#genre" do
+    it "returns song options" do
+      song = create(:song, genre: "Milonga")
+      create(:video, song: song)
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.genres).to eq([["Milonga (2)", "milonga"]])
-      end
-
-      it "creates array of songs and increments multiple videos without duplication" do
-        song = create(:song, genre: "Milonga")
-        song2 = create(:song, genre: "Tango")
-        create(:video, song: song)
-        create(:video, song: song2)
-        create(:video, song: song2)
-
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.genres).to eq([["Tango (2)", "tango"], ["Milonga (1)", "milonga"]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.genres).to eq([["Milonga (1)", "milonga"]])
     end
 
-    describe "#years" do
-      it "returns year options" do
-        create(:video, upload_date: Time.new(2018, 1, 1))
+    it "does not duplicate with same song and increments count" do
+      song = create(:song, genre: "Milonga")
+      create(:video, song: song)
+      create(:video, song: song)
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.years).to eq([["2018 (1)", 2018]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.genres).to eq([["Milonga (2)", "milonga"]])
+    end
 
-      it "does not duplicate with same song and increments count" do
-        create(:video, upload_date: Time.new(2018, 1, 1))
-        create(:video, upload_date: Time.new(2018, 1, 1))
+    it "creates array of songs and increments multiple videos without duplication" do
+      song = create(:song, genre: "Milonga")
+      song2 = create(:song, genre: "Tango")
+      create(:video, song: song)
+      create(:video, song: song2)
+      create(:video, song: song2)
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.years).to eq([["2018 (2)", 2018]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.genres).to eq([["Tango (2)", "tango"], ["Milonga (1)", "milonga"]])
+    end
+  end
 
-      it "creates array of songs and increments multiple videos without duplication" do
-        create(:video, upload_date: Time.new(2018, 1, 1))
-        create(:video, upload_date: Time.new(2018, 1, 1))
-        create(:video, upload_date: Time.new(2017, 1, 1))
+  describe "#years" do
+    it "returns year options" do
+      create(:video, upload_date: Time.new(2018, 1, 1))
 
-        search = described_class.new(filtering_params: {},
-                                     sorting_params:   {},
-                                     page:             1)
-        expect(search.years).to eq([["2018 (2)", 2018], ["2017 (1)", 2017]])
-      end
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.years).to eq([["2018 (1)", 2018]])
+    end
+
+    it "does not duplicate with same song and increments count" do
+      create(:video, upload_date: Time.new(2018, 1, 1))
+      create(:video, upload_date: Time.new(2018, 1, 1))
+
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.years).to eq([["2018 (2)", 2018]])
+    end
+
+    it "creates array of songs and increments multiple videos without duplication" do
+      create(:video, upload_date: Time.new(2018, 1, 1))
+      create(:video, upload_date: Time.new(2018, 1, 1))
+      create(:video, upload_date: Time.new(2017, 1, 1))
+
+      search = described_class.new(filtering_params: {},
+                                   sorting_params:   {},
+                                   page:             1)
+      expect(search.years).to eq([["2018 (2)", 2018], ["2017 (1)", 2017]])
     end
   end
 end
