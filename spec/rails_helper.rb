@@ -69,6 +69,18 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::Test::IntegrationHelpers, type: :system
+
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    options = Selenium::WebDriver::Chrome::Options.new
+
+    [
+      "headless",
+      "window-size=1600x1280",
+      "disable-gpu"
+    ].each { |arg| options.add_argument(arg) }
+
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
 end
 
 Shoulda::Matchers.configure do |config|
