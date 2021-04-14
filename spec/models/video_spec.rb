@@ -625,11 +625,11 @@ RSpec.describe Video, type: :model do
 
     describe ".paginate" do
       it "limits pagination to 1" do
-        create_list(:video, 2)
-        page1 = described_class.paginate(1, 1)
-        page2 = described_class.paginate(2, 1)
-        page3 = described_class.paginate(3, 1)
-        expect(page1.count).to eq(1)
+        create_list(:video, 3)
+        page1 = described_class.paginate(1, 2)
+        page2 = described_class.paginate(2, 2)
+        page3 = described_class.paginate(3, 2)
+        expect(page1.count).to eq(2)
         expect(page2.count).to eq(1)
         expect(page3.count).to eq(0)
       end
