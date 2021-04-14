@@ -59,7 +59,7 @@ RSpec.describe Video, type: :model do
 
       it "does not return video without corresponding orchestra event_id" do
         video = create(:video)
-        expect(described_class.filter_by_leader_id("2")).not_to eq [video]
+        expect(described_class.filter_by_leader_id("0")).not_to eq [video]
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe Video, type: :model do
 
       it "does not return videos with incorrect follower id" do
         video = create(:video)
-        expect(described_class.filter_by_follower_id("2")).not_to eq [video]
+        expect(described_class.filter_by_follower_id("0")).not_to eq [video]
       end
     end
 
@@ -85,7 +85,7 @@ RSpec.describe Video, type: :model do
 
       it "does not return videos with incorrect channel id" do
         video = create(:video)
-        expect(described_class.filter_by_channel_id("2")).not_to eq [video]
+        expect(described_class.filter_by_channel_id("0")).not_to eq [video]
       end
     end
 
@@ -104,7 +104,7 @@ RSpec.describe Video, type: :model do
 
     describe ".filter_by_song_id" do
       it "returns videos with song_id in video" do
-        song = create(:song, id: 1)
+        song = create(:song)
         video = create(:video, song: song)
         expect(described_class.filter_by_song_id(song.id)).to eq [video]
       end
