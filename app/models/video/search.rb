@@ -17,7 +17,7 @@ class Video::Search
     end
   end
 
-  def initialize(filtering_params:, sorting_params:, page:)
+  def initialize(filtering_params: {}, sorting_params: {}, page: 1)
     @filtering_params = filtering_params
     @sorting_params = sorting_params
     @page = page
