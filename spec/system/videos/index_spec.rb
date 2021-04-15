@@ -7,13 +7,13 @@ RSpec.describe "Videos::Index", type: :system do
 
   describe "header" do
     it "has logo" do
-      visit videos_url
+      visit videos_path
 
       expect(page).to have_content("TangoTube")
     end
 
     it "has login links" do
-      visit videos_url
+      visit videos_path
 
       expect(page).to have_content("Sign up")
       expect(page).to have_content("Login")
@@ -23,7 +23,7 @@ RSpec.describe "Videos::Index", type: :system do
 
     it "has logged in links" do
       sign_in create(:user)
-      visit videos_url
+      visit videos_path
 
       expect(page).to have_link "Edit profile", href: edit_user_registration_path
       expect(page).to have_link "Logout", href: destroy_user_session_path
@@ -82,36 +82,38 @@ RSpec.describe "Videos::Index", type: :system do
     end
 
     it "has has add resource links" do
-      visit videos_url
+      visit videos_path
 
       expect(page).to have_link "Add Channel", href: channels_path
       expect(page).to have_link "Add Playlist", href: playlists_path
       expect(page).to have_link "Add Video", href: new_video_path
     end
 
-    describe "has search bar" do
+    describe "search bar" do
       it "has input field" do
-        visit videos_url
+        visit videos_path
 
         expect(page).to have_css("input#query")
       end
 
       it "has submit button" do
-        visit videos_url
+        visit videos_path
 
         expect(page).to have_css("button.searchButton")
       end
+
+      # it "has autocomplete" do
+      #   create(:leader, name: "autocomplete match")
+      #   visit videos_path
+      #   find("input#query").fill_in with: "autocomplete"
+      #   expect(page).to have_content("autocomplete match")
+      # end
     end
   end
 
   describe "filters" do
-    it "can select" do
-      visit videos_url
-      expect(page).to have_content("TangoTube")
-    end
-
     it "can toggle filters" do
-      visit videos_url
+      visit videos_path
       expect(page).to have_css("div.filter-container")
       click_on("Filters")
       expect(page).not_to have_css("div.filter-container isHidden")
@@ -121,36 +123,75 @@ RSpec.describe "Videos::Index", type: :system do
       create(:video, :display)
       create(:video, :display)
       create(:video, :display)
-      visit videos_url
+      visit videos_path
 
       expect(page).to have_content("Displaying 3 Results")
     end
 
-    describe "pagination" do
-      it "hides load more button and displays max result" do
-        stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 5)
-        create(:video, :display)
-        create(:video, :display)
-        create(:video, :display)
-        visit videos_url
+    it "displays all/hd buttons" do
+      visit videos_path
+      expect(page).to have_content("HD")
+      expect(page).to have_content("All")
+    end
 
-        expect(page).to have_content("Displaying 3 Results")
-        expect(page).not_to have_content("Load More")
-        expect(page).to have_content("Displaying 3 / 3 Results")
-      end
+    it "displays sorting params" do
+      visit videos_path
 
-      it "hides load more button and displays max result" do
-        stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-        create(:video, :display)
-        create(:video, :display)
-        create(:video, :display)
-        visit videos_url
+      expect(page).to have_content("Song Title")
+      expect(page).to have_content("Orchestra")
+      expect(page).to have_content("Channel")
+      expect(page).to have_content("View Count")
+      expect(page).to have_content("Upload Date")
+    end
 
-        expect(page).to have_content("Displaying 3 Results")
-        click_on("Load More")
-        expect(page).not_to have_content("Load More")
-        expect(page).to have_content("Displaying 3 / 3 Results")
-      end
+    it "displays filters genre, leader, follower, orchestra, year" do
+      visit videos_path
+
+      expect(page).to have_select("genre-filter")
+      expect(page).to have_select("leader-filter")
+      expect(page).to have_select("follower-filter")
+      expect(page).to have_select("orchestra-filter")
+      expect(page).to have_select("year-filter")
+    end
+  end
+
+  describe "footer" do
+  end
+
+  describe "navigates to watch page" do
+  end
+
+  describe "videos" do
+  end
+
+  describe "sorts" do
+  end
+
+  describe "pagination" do
+    it "shows last page if next_page empty" do
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 5)
+      create(:video, :display)
+      create(:video, :display)
+      create(:video, :display)
+      visit videos_path
+
+      expect(page).to have_content("Displaying 3 Results")
+      expect(page).not_to have_content("Load More")
+      expect(page).to have_content("Displaying 3 / 3 Results")
+    end
+
+    it "navigates to last page" do
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+      create(:video, :display)
+      create(:video, :display)
+      create(:video, :display)
+      visit videos_path
+
+      expect(page).to have_content("Displaying 3 Results")
+      click_on("Load More")
+      expect(page).not_to have_content("Load More")
+      expect(page).to have_content("Displaying 3 Results")
+      expect(page).to have_content("Displaying 3 / 3 Results")
     end
   end
 end
