@@ -32,7 +32,6 @@ $max-container-width: 1060px;
   max-width: $max-container-width;
   flex-direction: column;
   margin: 0 auto;
-  padding: 1em 1em 0 1em;
   justify-content: center;
   background-color: white;
   border-left: 1px solid $border-color;
@@ -41,13 +40,14 @@ $max-container-width: 1060px;
 }
 
 .video-info-primary-container {
-  max-width: 1225px;
+  max-width: 500px;
   text-align: left;
+  margin: 1em;
 }
 
 .video-info-container-secondary {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   max-width: 1225px;
   flex-direction: row;
   flex-wrap: wrap;
@@ -56,8 +56,8 @@ $max-container-width: 1060px;
 
 .video-info-details-main {
   flex: 1;
-  min-width: 275px;
-  max-width: 350px;
+  margin: 0 1em;
+
   flex-direction: column;
   a {
     color: $link-color;
@@ -70,9 +70,10 @@ $max-container-width: 1060px;
 
 .recommended-videos-section {
   flex: 1;
+  margin: 0 1em;
   flex-direction: column;
-  // max-width: 320px;
-  min-width: 250px;
+  max-width: 400px;
+  min-width: 320px;
 }
 
 @media (max-width: 926px) {
