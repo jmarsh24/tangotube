@@ -4,7 +4,7 @@
   color: $show-primary-title;
   font-size: 1.2rem;
   font-weight: 700;
-  margin: 0.2rem 0;
+  margin: 0.2em 0;
 }
 
 .show-video-song {
@@ -23,7 +23,7 @@
 }
 
 .show-channel-icon {
-  margin: 0.2rem 0.5rem 0 0.2rem;
+  margin: 0.2em 0.5em 0 0.2em;
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -39,7 +39,7 @@
   align-items: center;
   font-size: 1rem;
   a {
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.1em;
     text-decoration: none;
     transition: color 150ms;
     color: $show-primary-channel-title;
