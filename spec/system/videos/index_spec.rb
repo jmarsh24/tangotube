@@ -125,5 +125,17 @@ RSpec.describe "Videos::Index", type: :system do
 
       expect(page).to have_content("Displaying 3 Results")
     end
+
+    describe "pagination" do
+      it "paginates" do
+        stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+        create(:video, :display)
+        create(:video, :display)
+        create(:video, :display)
+        visit videos_url
+
+        expect(page).to have_content("Displaying 2 Results")
+      end
+    end
   end
 end
