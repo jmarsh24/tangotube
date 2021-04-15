@@ -1,10 +1,8 @@
-<div class="loadMoreContainer" id="load-more-container">
+<div class="loadMoreContainer">
   <div class="loadMoreResults">
     <%= "Displaying #{@search.displayed_videos_count} / #{number_with_delimiter(@search.videos.size)} Results" %>
   </div>
   <% if @search.next_page.any? %>
-    <button class="load-more-link" data-action='click->loadmore#loadMore'>
-      Load More
-    </button>
+    <%= link_to "Load More", video_query_params.merge(page: @page + 1), class: "load-more-link" %>
   <% end %>
 </div>
