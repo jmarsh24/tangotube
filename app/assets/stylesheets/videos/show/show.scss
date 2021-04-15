@@ -55,6 +55,7 @@ $max-container-width: 1060px;
 }
 
 .video-info-details-main {
+  flex: 1;
   min-width: 275px;
   max-width: 350px;
   flex-direction: column;
@@ -70,7 +71,7 @@ $max-container-width: 1060px;
 .recommended-videos-section {
   flex: 1;
   flex-direction: column;
-  max-width: 320px;
+  // max-width: 320px;
   min-width: 250px;
 }
 
