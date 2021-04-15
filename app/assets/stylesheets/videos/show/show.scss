@@ -1,6 +1,8 @@
+$max-container-width: 1060px;
+
 .video-responsive-container {
   width: 100%;
-  max-width: 1060px; //set your `max-width` here
+  max-width: $max-container-width; //set your `max-width` here
   max-height: auto; //necessary to keep proportion
   margin: 0 auto; //centering
 }
@@ -27,9 +29,10 @@
 
 .video-info-container {
   display: flex;
-  max-width: 1050px;
+  max-width: $max-container-width;
   flex-direction: column;
   margin: 0 auto;
+  padding: 1em 1em 0 1em;
   justify-content: center;
   background-color: white;
   border-left: 1px solid $border-color;
@@ -40,23 +43,20 @@
 .video-info-primary-container {
   max-width: 1225px;
   text-align: left;
-  margin: 1rem;
 }
 
 .video-info-container-secondary {
-  width: 100%;
   display: flex;
+  justify-content: center;
   max-width: 1225px;
   flex-direction: row;
-  margin: 0 auto;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .video-info-details-main {
-  flex: 1;
-  margin: 0 1rem;
   min-width: 275px;
+  max-width: 350px;
   flex-direction: column;
   a {
     color: $link-color;
@@ -70,9 +70,8 @@
 .recommended-videos-section {
   flex: 1;
   flex-direction: column;
-  max-width: 400px;
-  min-width: 320px;
-  margin: 0 1rem;
+  max-width: 320px;
+  min-width: 250px;
 }
 
 @media (max-width: 926px) {
