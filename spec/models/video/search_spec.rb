@@ -373,7 +373,7 @@ RSpec.describe Video::Search, type: :model do
   end
 
   describe "#paginated_videos" do
-    it "paginates videos by 60" do
+    it "paginates videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
       page1 = described_class.new
