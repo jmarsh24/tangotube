@@ -19,7 +19,7 @@
   justify-content: flex-end;
   align-items: center;
   background-color: $secondary-header-background;
-  padding: 5px 2rem;
+  padding: 5px 2.5em;
   font-size: .8rem;
   a {
     margin: 0 .5rem;
@@ -36,6 +36,7 @@
     display: flex;
     border-bottom: 1px solid $border-color;
     border-top: 1px solid $border-color;
+    padding: 0 2.5em;
   }
 
   .buttonSideBar {
@@ -62,7 +63,6 @@
       font-size: 24px;
       color: black;
       letter-spacing: -1px;
-      padding-left: 2.5rem;
       font-weight: bold;
 
       &:hover {
@@ -141,7 +141,6 @@
 
   nav#Login{
     font-size: 0.8rem;
-    margin: 0 2rem;
   }
 
   .navbar-link {
@@ -154,9 +153,9 @@
   .navbar-link#sign-up {
     display: flex;
     border: 1px solid;
-    border-radius: 0.2rem;
-    padding: 0.4rem;
-    margin: 0.5rem;
+    border-radius: 0.2em;
+    padding: 0.4em;
+    margin: 0 0 0 .5em;
     &:hover {
       color: $nav-link-color-hover;
       border-color: $nav-link-color-hover;
