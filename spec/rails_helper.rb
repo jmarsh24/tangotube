@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'devise'
 
 SimpleCov.start 'rails' do
   # No vendor assets yet to test
@@ -69,6 +70,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Warden::Test::Helpers
 
   Capybara.register_driver :selenium_chrome_headless do |app|
     options = Selenium::WebDriver::Chrome::Options.new

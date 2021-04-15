@@ -42,6 +42,7 @@ group :development, :test do
   gem "faker", "~> 2.16"
   gem "rspec-rails", "~> 4.0"
   gem "byebug", "~> 11.1", ">= 11.1.3"
+  gem 'webdrivers'
 end
 
 group :development do
