@@ -107,7 +107,23 @@ RSpec.describe "Videos::Index", type: :system do
   describe "filters" do
     it "can select" do
       visit videos_url
-      assert_selector "a", text: "TangoTube"
+      expect(page).to have_content("TangoTube")
+    end
+
+    it "can toggle filters" do
+      visit videos_url
+      expect(page).to have_css("div.filter-container")
+      click_on("Filters")
+      expect(page).not_to have_css("div.filter-container isHidden")
+    end
+
+    it "displays total results" do
+      create(:video, :display)
+      create(:video, :display)
+      create(:video, :display)
+      visit videos_url
+
+      expect(page).to have_content("Displaying 3 Results")
     end
   end
 end
