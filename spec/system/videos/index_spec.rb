@@ -153,9 +153,69 @@ RSpec.describe "Videos::Index", type: :system do
       expect(page).to have_select("orchestra-filter")
       expect(page).to have_select("year-filter")
     end
+
+    it "populates genre filter" do
+      song_tango = create(:song, genre: "Tango")
+      song_milonga = create(:song, genre: "Milonga")
+      create(:video, :display, song: song_tango)
+      create(:video, :display, song: song_tango)
+      create(:video, :display, song: song_milonga)
+      visit videos_path
+
+      expect(page).to have_select("genre-filter", options: ["", "Tango (2)", "Milonga (1)"])
+    end
+
+    it "populates Leader filter" do
+      leader1 = create(:leader, name: "Carlitos Espinoza")
+      leader2 = create(:leader, name: "Chicho Frumboli")
+      create(:video, :display, leader: leader1)
+      create(:video, :display, leader: leader1)
+      create(:video, :display, leader: leader2)
+      visit videos_path
+
+      expect(page).to have_select("leader-filter", options: ["", "Carlitos Espinoza (2)", "Chicho Frumboli (1)"])
+    end
+
+    it "populates Follower filter" do
+      follower1 = create(:follower, name: "Noelia Hurado")
+      follower2 = create(:follower, name: "Roxana Suarez")
+      create(:video, :display, follower: follower1)
+      create(:video, :display, follower: follower1)
+      create(:video, :display, follower: follower2)
+      visit videos_path
+
+      expect(page).to have_select("follower-filter", options: ["", "Noelia Hurado (2)", "Roxana Suarez (1)"])
+    end
+
+    it "populates Orchestra filter" do
+      song1 = create(:song, artist: "Osvaldo Pugliese")
+      song2 = create(:song, artist: "Carlos Di Sarli")
+      create(:video, :display, song: song1)
+      create(:video, :display, song: song1)
+      create(:video, :display, song: song2)
+      visit videos_path
+
+      expect(page).to have_select("orchestra-filter", options: ["", "Osvaldo Pugliese (2)", "Carlos Di Sarli (1)"])
+    end
+
+    it "populates Year filter" do
+      create(:video, :display, upload_date: "2017-5-1")
+      create(:video, :display, upload_date: "2017-10-26")
+      create(:video, :display, upload_date: "2018-1-2")
+      visit videos_path
+
+      expect(page).to have_select("year-filter", options: ["", "2017 (2)", "2018 (1)"])
+    end
   end
 
   describe "footer" do
+    it "has footer content" do
+      visit videos_path
+      expect(page).to have_content("TangoTubeTV App | Powered by Youtube API")
+      expect(page).to have_link("Privacy Policy", href: privacy_path)
+      expect(page).to have_link("Terms of Service", href: terms_path)
+      expect(page).to have_link("G​oogle Privacy Policy", href: "http://www.google.com/policies/privacy")
+    end
   end
 
   describe "navigates to watch page" do
