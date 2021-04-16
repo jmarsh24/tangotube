@@ -1,11 +1,11 @@
-.loadMoreContainer {
+.load-more-container {
   display: flex;
   flex-direction: column;
   padding: 3rem 0;
   background-color: $secondary-color;
 }
 
-.loadMoreResults {
+.load-more-results {
   flex: 1;
   margin: 0 auto;
   color: rgb(96, 96, 96);
