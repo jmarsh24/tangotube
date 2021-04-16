@@ -13,24 +13,26 @@
 }
 
 .load-more-link {
-  flex: 1;
-  display: block;
-  color: #363636;
-  font-size: .8rem;
-  background-color: rgb(248, 248, 248);
-  border: 2px solid #929292;
+  color: $primary-font-color;
+  font-size: .9rem;
+  background-color: white;
+  border: 1px solid $border-color-secondary;
   border-radius: 5px;
   text-align: center;
   text-decoration: none;
+  width: 180px;
+  padding: 1em;
+  margin: 1rem auto;
   &:hover {
     background-color: rgb(240, 240, 240);
+  }
+    .loading-animation {
+    font-size: 0.35rem;
   }
 }
 
 .load-more-link {
-  width: 200px;
-  padding: 20px;
-  margin: 1rem auto;
+
 }
 
 @media (max-width: 500px) {

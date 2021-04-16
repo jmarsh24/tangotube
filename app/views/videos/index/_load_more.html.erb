@@ -1,9 +1,13 @@
-
 <div class="load-more-container">
   <div class="load-more-results">
     <%= "Displaying #{@search.displayed_videos_count} / #{number_with_delimiter(@search.videos.size)} Results" %>
   </div>
   <% if @search.next_page.any? %>
-    <%= link_to "Load More", video_query_params.merge(page: @page + 1), class: "load-more-link" %>
+    <%= link_to "Load More",
+          video_query_params.merge(page: @page + 1),
+            class: "load-more-link",
+            data: { disable_with: "<div class='loading-animation'>
+                                    <i class='fas fa-spinner fa-spin fa-3x'></i>
+                                  </div>" } %>
   <% end %>
 </div>
