@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem 2rem;
-  padding: .2rem 2.5rem 0 2.5rem;
+  padding: .2em 2.5em 0 2.5em;
+  margin: 1em 0;
   background-color: #f9f9f9;
 }
 
