@@ -24,7 +24,7 @@
   padding: 1em;
   margin: 1rem auto;
   &:hover {
-    background-color: rgb(240, 240, 240);
+    background-color: $border-color-secondary;
   }
     .loading-animation {
     font-size: 0.35rem;
