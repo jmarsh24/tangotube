@@ -383,6 +383,17 @@ RSpec.describe Video::Search, type: :model do
       expect(page2.paginated_videos.count).to eq(1)
       expect(page3.paginated_videos.count).to eq(0)
     end
+
+    it "shuffles videos if sorting/filtering params empty" do
+      srand(3)
+      video1 = create(:video, hd: 1)
+      video2 = create(:video, hd: 1)
+      video3 = create(:video, hd: 1)
+      page_shuffled = described_class.new(page: 1)
+      page_not_shuffled = described_class.new(page: 1, filtering_params: { hd: 1 })
+      expect(page_shuffled.paginated_videos).to eq([video2, video1, video3])
+      expect(page_not_shuffled.paginated_videos).to eq([video1, video2, video3])
+    end
   end
 
   describe "#displayed_videos_count" do
