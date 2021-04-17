@@ -1,10 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Videos::Index", type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   describe "header" do
     it "has logo" do
       visit videos_path
@@ -167,8 +163,7 @@ RSpec.describe "Videos::Index", type: :system do
       expect(page).to have_select("genre-filter", options: ["", "Tango (2)", "Milonga (1)"])
     end
 
-    it "filters videos by genre" do
-      driven_by(:selenium)
+    it "filters videos by genre", js: true do
       song_tango = create(:song, genre: "Tango")
       song_milonga = create(:song, genre: "Milonga")
       create(:video, :display, song: song_tango, title: "Tango Video")

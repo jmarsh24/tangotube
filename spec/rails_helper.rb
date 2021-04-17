@@ -83,6 +83,14 @@ RSpec.configure do |config|
 
     Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
   end
+
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium
+  end
 end
 
 Shoulda::Matchers.configure do |config|
