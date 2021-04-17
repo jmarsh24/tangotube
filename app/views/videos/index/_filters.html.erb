@@ -5,7 +5,7 @@
         <p id="filter-button-text">Filters</p>
       </button>
       <div id="filter_results">
-        <% if sorting_params.present? || filtering_params.present? %>
+        <% if filtering_params.present? %>
           <%= "#{number_with_delimiter(@search.videos.size)} #{pluralize(@search.videos.size, "Result")} Found" %>
         <% end %>
       </div>
