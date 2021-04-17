@@ -376,7 +376,7 @@ RSpec.describe Video::Search, type: :model do
     it "paginates videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
-      page1 = described_class.new
+      page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       page3 = described_class.new(page: 3)
       expect(page1.paginated_videos.count).to eq(2)
@@ -389,12 +389,12 @@ RSpec.describe Video::Search, type: :model do
     it "counts the total amount of displayed videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
-      page1 = described_class.new
+      page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       page3 = described_class.new(page: 3)
       expect(page1.displayed_videos_count).to eq(2)
       expect(page2.displayed_videos_count).to eq(3)
-      expect(page3.displayed_videos_count).to eq(3)
+      expect(page3.displayed_videos_count).to eq(4)
     end
   end
 
@@ -402,7 +402,7 @@ RSpec.describe Video::Search, type: :model do
     it "returns the next page" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
-      page1 = described_class.new
+      page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       expect(page1.next_page.any?).to eq(true)
       expect(page2.next_page.any?).to eq(false)

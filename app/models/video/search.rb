@@ -31,16 +31,16 @@ class Video::Search
   end
 
   def paginated_videos
-    if @sorting_params.blank? && @filtering_params.blank?
-      @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+    @paginated_videos = if @sorting_params.blank? && @filtering_params.blank?
+                          videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
                                 .shuffle
-    else
-      @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
-    end
+                        else
+                          videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+                        end
   end
 
   def displayed_videos_count
-    @displayed_videos_count ||= ((@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size).clamp(0, videos.size)
+    @displayed_videos_count ||= (@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size
   end
 
   def next_page
