@@ -116,15 +116,6 @@ RSpec.describe "Videos::Index", type: :system do
       expect(page).not_to have_css("div.filter-container isHidden")
     end
 
-    it "displays total results" do
-      create(:video, :display)
-      create(:video, :display)
-      create(:video, :display)
-      visit videos_path
-
-      expect(page).to have_content("Displaying 3 Results")
-    end
-
     it "displays all/hd buttons" do
       visit videos_path
       expect(page).to have_content("HD")
@@ -175,6 +166,8 @@ RSpec.describe "Videos::Index", type: :system do
 
       # expect(page).to have_select("genre-filter", selected: "Milonga (1)")
       # expect(page).not_to have_select("genre-filter", options: ["Tango (2)"])
+      expect(page).to have_content("1 Result Found")
+      expect(page).to have_content("Displaying 1 / 1 Results")
       expect(page).to have_content("Milonga Video")
       expect(page).not_to have_content("Tango Video")
     end
@@ -248,7 +241,6 @@ RSpec.describe "Videos::Index", type: :system do
       create(:video, :display)
       visit videos_path
 
-      expect(page).to have_content("Displaying 2 Results")
       expect(page).not_to have_content("Load More")
       expect(page).to have_content("Displaying 2 / 2 Results")
     end
@@ -259,11 +251,9 @@ RSpec.describe "Videos::Index", type: :system do
       create(:video, :display)
       visit videos_path
 
-      expect(page).to have_content("Displaying 2 Results")
       expect(page).to have_content("Displaying 1 / 2 Results")
       click_on("Load More")
       expect(page).not_to have_content("Load More")
-      expect(page).to have_content("Displaying 2 Results")
       expect(page).to have_content("Displaying 2 / 2 Results")
     end
   end
