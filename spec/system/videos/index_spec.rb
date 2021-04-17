@@ -246,26 +246,25 @@ RSpec.describe "Videos::Index", type: :system do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 5)
       create(:video, :display)
       create(:video, :display)
-      create(:video, :display)
       visit videos_path
 
-      expect(page).to have_content("Displaying 3 Results")
+      expect(page).to have_content("Displaying 2 Results")
       expect(page).not_to have_content("Load More")
-      expect(page).to have_content("Displaying 3 / 3 Results")
+      expect(page).to have_content("Displaying 2 / 2 Results")
     end
 
     it "navigates to last page" do
-      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-      create(:video, :display)
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 1)
       create(:video, :display)
       create(:video, :display)
       visit videos_path
 
-      expect(page).to have_content("Displaying 3 Results")
+      expect(page).to have_content("Displaying 2 Results")
+      expect(page).to have_content("Displaying 1 / 2 Results")
       click_on("Load More")
       expect(page).not_to have_content("Load More")
-      expect(page).to have_content("Displaying 3 Results")
-      expect(page).to have_content("Displaying 3 / 3 Results")
+      expect(page).to have_content("Displaying 2 Results")
+      expect(page).to have_content("Displaying 2 / 2 Results")
     end
   end
 end
