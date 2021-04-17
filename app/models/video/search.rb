@@ -43,8 +43,8 @@ class Video::Search
     @displayed_videos_count ||= (@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size
   end
 
-  def next_page
-    @next_page ||= videos.paginate(@page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
+  def next_page?
+    @next_page ||= displayed_videos_count < videos.size
   end
 
   def leaders

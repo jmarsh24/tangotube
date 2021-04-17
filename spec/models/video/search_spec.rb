@@ -398,14 +398,14 @@ RSpec.describe Video::Search, type: :model do
     end
   end
 
-  describe "#next_page" do
+  describe "#next_page?" do
     it "returns the next page" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
-      expect(page1.next_page.any?).to eq(true)
-      expect(page2.next_page.any?).to eq(false)
+      expect(page1.next_page?).to eq(true)
+      expect(page2.next_page?).to eq(false)
     end
   end
 
