@@ -31,7 +31,7 @@ RSpec.describe "Videos::Index", type: :system do
 
     it "presents 'Signed In' alert after succesful sign in and signs out" do
       create(:user, email: "j.doe@example.com", password: "foobar1")
-      visit new_user_session_url
+      visit new_user_session_path
 
       expect(page).to have_content("Log in to TangoTube")
       expect(page).to have_content("Remember me")
@@ -50,7 +50,7 @@ RSpec.describe "Videos::Index", type: :system do
 
     it "edit user page" do
       create(:user, email: "j.doe@example.com", password: "foobar1")
-      visit new_user_session_url
+      visit new_user_session_path
 
       fill_in :user_email, with: "j.doe@example.com"
       fill_in :user_password, with: "foobar1"
@@ -68,7 +68,7 @@ RSpec.describe "Videos::Index", type: :system do
     end
 
     it "successfully loads forgot your password" do
-      visit new_user_session_url
+      visit new_user_session_path
 
       expect(page).to have_content("Forgot your password?")
 
@@ -103,6 +103,7 @@ RSpec.describe "Videos::Index", type: :system do
       end
 
       # it "has autocomplete" do
+      #   driven_by(:selenium)
       #   create(:leader, name: "autocomplete match")
       #   visit videos_path
       #   find("input#query").fill_in with: "autocomplete"
@@ -160,9 +161,27 @@ RSpec.describe "Videos::Index", type: :system do
       create(:video, :display, song: song_tango)
       create(:video, :display, song: song_tango)
       create(:video, :display, song: song_milonga)
+
       visit videos_path
 
       expect(page).to have_select("genre-filter", options: ["", "Tango (2)", "Milonga (1)"])
+    end
+
+    it "filters videos by genre" do
+      driven_by(:selenium)
+      song_tango = create(:song, genre: "Tango")
+      song_milonga = create(:song, genre: "Milonga")
+      create(:video, :display, song: song_tango, title: "Tango Video")
+      create(:video, :display, song: song_tango, title: "Tango Video")
+      create(:video, :display, song: song_milonga, title: "Milonga Video")
+      visit videos_path
+
+      find("div.ss-option", text: "Milonga (1)").click
+
+      # expect(page).to have_select("genre-filter", selected: "Milonga (1)")
+      # expect(page).not_to have_select("genre-filter", options: ["Tango (2)"])
+      expect(page).to have_content("Milonga Video")
+      expect(page).not_to have_content("Tango Video")
     end
 
     it "populates Leader filter" do
