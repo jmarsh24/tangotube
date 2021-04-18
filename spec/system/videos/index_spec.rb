@@ -1,140 +1,265 @@
 require "rails_helper"
 
 RSpec.describe "Videos::Index", type: :system do
-  describe "filters" do
-    it "shows videos, display and populates filters" do
-      setup_videos
-      shows_videos
-      display_filters
-      populate_filters
-      toggle_hidden
-      create_empty_selects
-      sort_by_song_title
-      sort_by_channel
-      sort_by_orchestra
-      sort_by_view_count
-      sort_by_upload_date
-    end
+  it "shows videos, display and populates filters" do
+    setup_videos
+    shows_videos
+    toggle_filters_hidden
+    sorts_videos
 
-    def setup_videos
-      song1 = create(:song, last_name_search: "A", title: "A")
-      song2 = create(:song, last_name_search: "B", title: "B")
-      song3 = create(:song, last_name_search: "C", title: "C")
-      channel1 = create(:channel, title: "A")
-      channel2 = create(:channel, title: "B")
-      channel3 = create(:channel, title: "C")
-      video1 = create(:video, :display, title: "video_a", view_count: "1", upload_date: "2000-01-01", song: song1, channel: channel1)
-      video2 = create(:video, :display, title: "video_b", view_count: "2", upload_date: "1999-01-01", song: song2, channel: channel2)
-      video3 = create(:video, :display, title: "video_c", view_count: "3", upload_date: "1998-01-01", song: song3, channel: channel3)
-    end
+    display_filters
+    links_to_videos
+    create_empty_selects
 
-    def shows_videos
-      visit videos_path
-      # expect(page).to have_content("probably should test for the video name, and whatever else you should...")
-      expect(page).to have_content("Displaying 3 / 3 Results")
-    end
+    populate_filters
+    filters_videos
+  end
 
-    def display_filters
-      display_hd_all_buttons
-      display_sort_options
-    end
+  def setup_videos
+    song_a = create(:song, artist: "artist_name_a", last_name_search: "A", title: "song_title_a", genre: "genre_a")
+    song_b = create(:song, artist: "artist_name_b", last_name_search: "B", title: "song_title_b", genre: "genre_b")
+    song_c = create(:song, artist: "artist_name_a", last_name_search: "C", title: "song_title_c", genre: "genre_c")
+    event_a = create(:event, title: "event_a")
+    event_b = create(:event, title: "event_b")
+    event_c = create(:event, title: "event_c")
+    channel_a = create(:channel, title: "channel_a")
+    channel_b = create(:channel, title: "channel_b")
+    channel_c = create(:channel, title: "channel_c")
+    create(:video, :display, title: "video_a", view_count: "1", like_count: "1", popularity: "3", upload_date: "2000-01-01",
+                      youtube_id: "youtube_id_a", duration: "30", hd: "0", song: song_a, channel: channel_a, event: event_a)
+    create(:video, :display, title: "video_b", view_count: "2", like_count: "2", popularity: "2", upload_date: "1999-01-01",
+                      youtube_id: "youtube_id_b", duration: "60", hd: "1", song: song_b, channel: channel_b, event: event_b)
+    create(:video, :display, title: "video_c", view_count: "3", like_count: "3", popularity: "1", upload_date: "1998-01-01",
+                      youtube_id: "youtube_id_c", duration: "90", hd: "1", song: song_c, channel: channel_c, event: event_c)
+  end
 
-    def display_hd_all_buttons
-      expect(page).to have_content("HD")
-      expect(page).to have_content("All")
-    end
+  def display_filters
+    display_hd_all_buttons
+    display_sort_options
+  end
 
-    def display_sort_options
-      expect(page).to have_content("Song Title")
-      expect(page).to have_content("Orchestra")
-      expect(page).to have_content("Channel")
-      expect(page).to have_content("View Count")
-      expect(page).to have_content("Upload Date")
-    end
+  def filters_videos
+    filter_by_hd
+  end
 
-    def populate_filters; end
+  def sorts_videos
+    sort_by_song_title
+    sort_by_channel
+    sort_by_orchestra
+    sort_by_view_count
+    sort_by_upload_date
+  end
 
-    def filters_videos; end
+  def links_to_videos
+    filter_by_video_song_id
+    filter_by_video_channel_id
+    filter_by_video_event_id
+    visit_video_thumbnail_link
+    visit_video_title_link
+  end
 
-    def create_empty_selects
-      expect(page).to have_select("genre-filter")
-      expect(page).to have_select("leader-filter")
-      expect(page).to have_select("follower-filter")
-      expect(page).to have_select("orchestra-filter")
-      expect(page).to have_select("year-filter")
-    end
+  def paginated_videos
+    load_more_button_present
+    load_more_button_hidden
+  end
 
-    def toggle_hidden
-      expect(page).to have_css("div.filter-container")
-      click_on("Filters")
-      expect(page).not_to have_css("div.filter-container isHidden")
-    end
+  def shows_videos
+    visit videos_path
+    click_on("Popularity")
+    click_on("Popularity")
+    display_video_thumbnails
+    display_video_thumbnail_details
+    display_channel_titles
+    display_video_song
+    display_video_event_title
+    display_video_metadata
 
-    def sort_by_song_title
-      click_on("Song Title")
-      expect(video_title_collection).to eq(%w[video_c video_b video_a])
-      click_on("Song Title")
-      expect(video_title_collection).to eq(%w[video_a video_b video_c])
-    end
+    expect(page).to have_content("Displaying 3 / 3 Results")
+  end
 
-    def sort_by_channel
-      click_on("Channel")
-      expect(video_title_collection).to eq(%w[video_c video_b video_a])
-      click_on("Channel")
-      expect(video_title_collection).to eq(%w[video_a video_b video_c])
-    end
+  def video_thumbnail_collection
+    page.all("img.thumbnail-image").map { |img| img["src"] }
+  end
 
-    def sort_by_view_count
-      click_on("View Count")
-      expect(video_title_collection).to eq(%w[video_c video_b video_a])
-      click_on("View Count")
-      expect(video_title_collection).to eq(%w[video_a video_b video_c])
-    end
+  def video_thumnbail_details_collection
+    page.all("div.thumbnail").map { |data| data["data-duration"] }
+  end
 
-    def sort_by_upload_date
-      click_on("Upload Date")
-      expect(video_title_collection).to eq(%w[video_a video_b video_c])
-      click_on("Upload Date")
-      expect(video_title_collection).to eq(%w[video_c video_b video_a])
-    end
+  def video_title_collection
+    page.all("div.video-title").map(&:text)
+  end
 
-    def sort_by_orchestra
-      click_on("Orchestra")
-      expect(video_title_collection).to eq(%w[video_c video_b video_a])
-      click_on("Orchestra")
-      expect(video_title_collection).to eq(%w[video_a video_b video_c])
-    end
+  def video_metadata_collection
+    page.all("div.video-metadata").map(&:text)
+  end
 
-    def video_title_collection
-      page.all("div.video-title").map(&:text)
-    end
+  def video_event_title_collection
+    page.all("div.video-event").map(&:text)
+  end
+
+  def video_channel_titles_collection
+    page.all("div.video-channel").map(&:text)
+  end
+
+  def video_metadata_collection
+    page.all("div.video-metadata").map(&:text)
+  end
+
+  def video_song_collection
+    page.all("div.video-song").map(&:text)
+  end
+
+  def display_video_thumbnails
+    expect(video_thumbnail_collection).to eq(["https://img.youtube.com/vi/youtube_id_a/hqdefault.jpg",
+                                              "https://img.youtube.com/vi/youtube_id_b/hqdefault.jpg",
+                                              "https://img.youtube.com/vi/youtube_id_c/hqdefault.jpg"])
+  end
+
+  def display_video_thumbnail_details
+    expect(video_thumnbail_details_collection).to eq(["00:30", "HD 01:00", "HD 01:30"])
+  end
+
+  def display_channel_titles
+    expect(video_channel_titles_collection).to eq(%w[channel_a channel_b channel_c])
+  end
+
+  def display_video_song
+    expect(video_song_collection).to eq(["Song Title A - Artist Name A - Genre A",
+                                         "Song Title B - Artist Name B - Genre B",
+                                         "Song Title C - Artist Name A - Genre C"])
+  end
+
+  def display_video_event_title
+    expect(video_event_title_collection).to eq(["Event A", "Event B", "Event C"])
+  end
+
+  def display_video_metadata
+    expect(video_metadata_collection).to eq(["January 2000 • 1 views • 1 likes",
+                                             "January 1999 • 2 views • 2 likes",
+                                             "January 1998 • 3 views • 3 likes"])
+  end
+
+  def shows_videos_details; end
+
+  def display_hd_all_buttons
+    expect(page).to have_content("HD")
+    expect(page).to have_content("All")
+  end
+
+  def display_sort_options
+    expect(page).to have_content("Song Title")
+    expect(page).to have_content("Orchestra")
+    expect(page).to have_content("Channel")
+    expect(page).to have_content("View Count")
+    expect(page).to have_content("Upload Date")
+  end
+
+  def populate_filters; end
+
+  def filters_videos; end
+
+  def create_empty_selects
+    expect(page).to have_select("genre-filter")
+    expect(page).to have_select("leader-filter")
+    expect(page).to have_select("follower-filter")
+    expect(page).to have_select("orchestra-filter")
+    expect(page).to have_select("year-filter")
+  end
+
+  def toggle_filters_hidden
+    expect(page).to have_css("div.filter-container")
+    click_on("Filters")
+    expect(page).not_to have_css("div.filter-container isHidden")
+  end
+
+  def sort_by_song_title
+    click_on("Song Title")
+    expect(video_title_collection).to eq(%w[video_c video_b video_a])
+    click_on("Song Title")
+    expect(video_title_collection).to eq(%w[video_a video_b video_c])
+  end
+
+  def sort_by_channel
+    click_on("Channel")
+    expect(video_title_collection).to eq(%w[video_c video_b video_a])
+    click_on("Channel")
+    expect(video_title_collection).to eq(%w[video_a video_b video_c])
+  end
+
+  def sort_by_view_count
+    click_on("View Count")
+    expect(video_title_collection).to eq(%w[video_c video_b video_a])
+    click_on("View Count")
+    expect(video_title_collection).to eq(%w[video_a video_b video_c])
+  end
+
+  def sort_by_upload_date
+    click_on("Upload Date")
+    expect(video_title_collection).to eq(%w[video_a video_b video_c])
+    click_on("Upload Date")
+    expect(video_title_collection).to eq(%w[video_c video_b video_a])
+  end
+
+  def sort_by_orchestra
+    click_on("Orchestra")
+    expect(video_title_collection).to eq(%w[video_c video_b video_a])
+    click_on("Orchestra")
+    expect(video_title_collection).to eq(%w[video_a video_b video_c])
+  end
+
+  def load_more_button_present
+    stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+    visit videos_path
+    expect(page).to have_content("Displaying 2 / 3 Results")
+    click_on("Load More")
+    expect(page).not_to have_content("Load More")
+    expect(page).to have_content("Displaying 3 / 3 Results")
+  end
+
+  def load_more_button_hidden
+    stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 5)
+    visit videos_path
+    expect(page).not_to have_content("Load More")
+    expect(page).to have_content("Displaying 3 / 3 Results")
+  end
+
+  def filter_by_hd
+    click_on("HD")
+    expect(video_title_collection).to eq(%w[video_b video_c])
+    click_on("All")
+    click_on("Popularity")
+    expect(video_title_collection).to eq(%w[video_c video_b video_a])
+  end
+
+  def filter_by_video_song_id
+    click_on("Song Title A - Artist Name A - Genre A")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_video_channel_id
+    click_on("channel_a")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_video_event_id
+    click_on("Event A")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def visit_video_thumbnail_link
+    click_on("Popularity")
+    all("a#video-link").first.click
+    expect(current_url).to eq("http://www.example.com/watch?v=youtube_id_a")
+    visit videos_path
+  end
+
+  def visit_video_title_link
+    click_on("Popularity")
+    click_on("video_a")
+    expect(current_url).to eq("http://www.example.com/watch?v=youtube_id_a")
+    visit videos_path
   end
 end
-
-#   it "sorts videos" do
-#     def setup_videos; end
-
-#     def sorts_song_title
-#       # click_on "Orchestra"
-#     end
-
-#     def sorts_song_title
-#       # click_on "View Count"
-#     end
-
-#     def sorts_song_title
-#       # click_on "Upload Date"
-#     end
-#   end
-# end
-
-#   it "sorts videos DESC" do
-#     click_on "Song Title"
-#     click_on "Orchestra"
-#     click_on "Channel"
-#     click_on "View Count"
-#     click_on "Upload Date"
-#   end
 
 #   it "populates genre filter" do
 #     song_tango = create(:song, genre: "Tango")
@@ -206,38 +331,5 @@ end
 #     visit videos_path
 
 #     expect(page).to have_select("year-filter", options: ["", "2017 (2)", "2018 (1)"])
-#   end
-# end
-
-# describe "navigates to watch page" do
-# end
-
-# describe "videos" do
-# end
-
-# describe "sorts" do
-# end
-
-# describe "pagination" do
-#   it "shows last page if next_page empty" do
-#     stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 5)
-#     create(:video, :display)
-#     create(:video, :display)
-#     visit videos_path
-
-#     expect(page).not_to have_content("Load More")
-#     expect(page).to have_content("Displaying 2 / 2 Results")
-#   end
-
-#   it "navigates to last page" do
-#     stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 1)
-#     create(:video, :display)
-#     create(:video, :display)
-#     visit videos_path
-
-#     expect(page).to have_content("Displaying 1 / 2 Results")
-#     click_on("Load More")
-#     expect(page).not_to have_content("Load More")
-#     expect(page).to have_content("Displaying 2 / 2 Results")
 #   end
 # end
