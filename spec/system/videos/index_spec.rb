@@ -10,7 +10,10 @@ RSpec.describe "Videos::Index", type: :system do
       toggle_hidden
       create_empty_selects
       sort_by_song_title
+      sort_by_channel
       sort_by_orchestra
+      sort_by_view_count
+      sort_by_upload_date
     end
 
     def setup_videos
@@ -74,21 +77,21 @@ RSpec.describe "Videos::Index", type: :system do
       expect(video_title_collection).to eq(%w[video_a video_b video_c])
     end
 
-    def sort_by_channel_title
+    def sort_by_channel
       click_on("Channel")
       expect(video_title_collection).to eq(%w[video_c video_b video_a])
       click_on("Channel")
       expect(video_title_collection).to eq(%w[video_a video_b video_c])
     end
 
-    def sort_by_view_count_title
+    def sort_by_view_count
       click_on("View Count")
       expect(video_title_collection).to eq(%w[video_c video_b video_a])
       click_on("View Count")
       expect(video_title_collection).to eq(%w[video_a video_b video_c])
     end
 
-    def sort_by_upload_date_title
+    def sort_by_upload_date
       click_on("Upload Date")
       expect(video_title_collection).to eq(%w[video_c video_b video_a])
       click_on("Upload Date")
