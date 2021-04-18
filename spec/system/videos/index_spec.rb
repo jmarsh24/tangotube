@@ -93,9 +93,9 @@ RSpec.describe "Videos::Index", type: :system do
 
     def sort_by_upload_date
       click_on("Upload Date")
-      expect(video_title_collection).to eq(%w[video_c video_b video_a])
-      click_on("Upload Date")
       expect(video_title_collection).to eq(%w[video_a video_b video_c])
+      click_on("Upload Date")
+      expect(video_title_collection).to eq(%w[video_c video_b video_a])
     end
 
     def sort_by_orchestra
