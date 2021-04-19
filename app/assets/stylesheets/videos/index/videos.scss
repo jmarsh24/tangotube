@@ -1,9 +1,8 @@
 .video-section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem 2rem;
-  padding: .2em 2.5em 0 2.5em;
-  margin: 1em 0;
+  gap: 30px 30px;
+  padding: 30px 40px;
   background-color: #f9f9f9;
 }
 
