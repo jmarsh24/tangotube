@@ -6,7 +6,7 @@
       </button>
       <div id="filter_results">
         <% if filtering_params.present? %>
-          <%= "#{number_with_delimiter(@search.videos.size)} #{pluralize(@search.videos.size, "Result")} Found" %>
+          <%= "#{pluralize(number_with_delimiter(@search.videos.size), "Result")} Found" %>
         <% end %>
       </div>
     </div>
