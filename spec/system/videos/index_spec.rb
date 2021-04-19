@@ -16,9 +16,11 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def setup_videos
+    leader = create(:leader, name: "leader_name")
+    follower = create(:follower, name: "follower_name")
     song_a = create(:song, artist: "artist_name_a", last_name_search: "A", title: "song_title_a", genre: "genre_a")
     song_b = create(:song, artist: "artist_name_b", last_name_search: "B", title: "song_title_b", genre: "genre_b")
-    song_c = create(:song, artist: "artist_name_a", last_name_search: "C", title: "song_title_c", genre: "genre_c")
+    song_c = create(:song, artist: "artist_name_c", last_name_search: "C", title: "song_title_c", genre: "genre_c")
     event_a = create(:event, title: "event_a")
     event_b = create(:event, title: "event_b")
     event_c = create(:event, title: "event_c")
@@ -26,9 +28,9 @@ RSpec.describe "Videos::Index", type: :system do
     channel_b = create(:channel, title: "channel_b")
     channel_c = create(:channel, title: "channel_c")
     create(:video, :display, title: "video_a", view_count: "1", like_count: "1", popularity: "3", upload_date: "2000-01-01",
-                      youtube_id: "youtube_id_a", duration: "30", hd: "0", song: song_a, channel: channel_a, event: event_a)
+                      youtube_id: "youtube_id_a", duration: "30", hd: "0", song: song_a, channel: channel_a, event: event_a, leader: leader)
     create(:video, :display, title: "video_b", view_count: "2", like_count: "2", popularity: "2", upload_date: "1999-01-01",
-                      youtube_id: "youtube_id_b", duration: "60", hd: "1", song: song_b, channel: channel_b, event: event_b)
+                      youtube_id: "youtube_id_b", duration: "60", hd: "1", song: song_b, channel: channel_b, event: event_b, follower: follower)
     create(:video, :display, title: "video_c", view_count: "3", like_count: "3", popularity: "1", upload_date: "1998-01-01",
                       youtube_id: "youtube_id_c", duration: "90", hd: "1", song: song_c, channel: channel_c, event: event_c)
   end
@@ -126,7 +128,7 @@ RSpec.describe "Videos::Index", type: :system do
   def display_video_song
     expect(video_song_collection).to eq(["Song Title A - Artist Name A - Genre A",
                                          "Song Title B - Artist Name B - Genre B",
-                                         "Song Title C - Artist Name A - Genre C"])
+                                         "Song Title C - Artist Name C - Genre C"])
   end
 
   def display_video_event_title
@@ -138,8 +140,6 @@ RSpec.describe "Videos::Index", type: :system do
                                              "January 1999 • 2 views • 2 likes",
                                              "January 1998 • 3 views • 3 likes"])
   end
-
-  def shows_videos_details; end
 
   def display_hd_all_buttons
     expect(page).to have_content("HD")
@@ -154,7 +154,15 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_content("Upload Date")
   end
 
-  def populate_filters; end
+  def populate_filters
+    click_on("Popularity")
+
+    expect(page).to have_select("genre-filter", with_options: ["", "Genre A (1)", "Genre B (1)", "Genre C (1)"])
+    expect(page).to have_select("leader-filter", with_options: ["", "Leader Name (1)"])
+    expect(page).to have_select("follower-filter", with_options: ["", "Follower Name (1)"])
+    expect(page).to have_select("orchestra-filter", with_options: ["", "Artist Name A (1)", "Artist Name B (1)", "Artist Name C (1)"])
+    expect(page).to have_select("year-filter", with_options: ["", "2000 (1)", "1999 (1)", "1998 (1)"])
+  end
 
   def filters_videos; end
 
