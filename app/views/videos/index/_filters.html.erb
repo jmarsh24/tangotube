@@ -5,7 +5,9 @@
         <p id="filter-button-text">Filters</p>
       </button>
       <div id="filter_results">
-        <%= "Displaying #{number_with_delimiter(@search.videos.size)} Results" %>
+        <% if filtering_params.present? %>
+          <%= "#{pluralize(number_with_delimiter(@search.videos.size), "Result")} Found" %>
+        <% end %>
       </div>
     </div>
     <div class="filter-hd" id="hd_filters">

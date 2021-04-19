@@ -4,18 +4,12 @@ class VideosController < ApplicationController
   before_action :set_video, only: %i[update edit]
   before_action :set_recommended_videos, only: %i[edit]
 
+  helper_method :sorting_params, :filtering_params
+
   def index
     @search = Video::Search.for(filtering_params: filtering_params,
                                 sorting_params:   sorting_params,
                                 page:             page)
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render json: { videos:   render_to_string(partial: "videos/index/videos", formats: [:html]),
-                       loadmore: render_to_string(partial: "videos/index/load_more", formats: [:html]) }
-      end
-    end
   end
 
   def edit; end

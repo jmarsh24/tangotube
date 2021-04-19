@@ -30,8 +30,8 @@ RSpec.describe Video::Search, type: :model do
       end
 
       it "returns videos sorted by upload_date" do
-        video_a = create(:video, upload_date: Time.new(2020, 1, 1))
-        video_b = create(:video, upload_date: Time.new(2019, 1, 1))
+        video_a = create(:video, upload_date: Time.zone.local(2020, 1, 1))
+        video_b = create(:video, upload_date: Time.zone.local(2019, 1, 1))
         search_asc = described_class.new(sorting_params: { sort:      "videos.upload_date",
                                                            direction: "ASC" })
         search_desc = described_class.new(sorting_params: { sort:      "videos.upload_date",
@@ -174,7 +174,7 @@ RSpec.describe Video::Search, type: :model do
       end
 
       it "filters by year" do
-        video_a = create(:video, upload_date: Time.new(2018, 1, 1))
+        video_a = create(:video, upload_date: Time.zone.local(2018, 1, 1))
         video_b = create(:video)
 
         search = described_class.new(filtering_params: { year: "2018" })
@@ -376,12 +376,23 @@ RSpec.describe Video::Search, type: :model do
     it "paginates videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
-      page1 = described_class.new
+      page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       page3 = described_class.new(page: 3)
       expect(page1.paginated_videos.count).to eq(2)
       expect(page2.paginated_videos.count).to eq(1)
       expect(page3.paginated_videos.count).to eq(0)
+    end
+
+    it "shuffles videos if sorting/filtering params empty" do
+      srand(3)
+      video1 = create(:video, hd: 1)
+      video2 = create(:video, hd: 1)
+      video3 = create(:video, hd: 1)
+      page_shuffled = described_class.new(page: 1)
+      page_not_shuffled = described_class.new(page: 1, filtering_params: { hd: 1 })
+      expect(page_shuffled.paginated_videos).to eq([video2, video1, video3])
+      expect(page_not_shuffled.paginated_videos).to eq([video1, video2, video3])
     end
   end
 
@@ -389,23 +400,23 @@ RSpec.describe Video::Search, type: :model do
     it "counts the total amount of displayed videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
-      page1 = described_class.new
+      page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       page3 = described_class.new(page: 3)
       expect(page1.displayed_videos_count).to eq(2)
       expect(page2.displayed_videos_count).to eq(3)
-      expect(page3.displayed_videos_count).to eq(3)
+      expect(page3.displayed_videos_count).to eq(4)
     end
   end
 
-  describe "#next_page" do
+  describe "#next_page?" do
     it "returns the next page" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
-      page1 = described_class.new
+      page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
-      expect(page1.next_page.any?).to eq(true)
-      expect(page2.next_page.any?).to eq(false)
+      expect(page1.next_page?).to eq(true)
+      expect(page2.next_page?).to eq(false)
     end
   end
 
@@ -463,9 +474,9 @@ RSpec.describe Video::Search, type: :model do
 
   describe "#years" do
     it "creates array of songs and increments multiple videos without duplication" do
-      create(:video, upload_date: Time.new(2018, 1, 1))
-      create(:video, upload_date: Time.new(2018, 1, 1))
-      create(:video, upload_date: Time.new(2017, 1, 1))
+      create(:video, upload_date: Time.zone.local(2018, 1, 1))
+      create(:video, upload_date: Time.zone.local(2018, 1, 1))
+      create(:video, upload_date: Time.zone.local(2017, 1, 1))
 
       search = described_class.new
       expect(search.years).to eq([["2018 (2)", 2018], ["2017 (1)", 2017]])

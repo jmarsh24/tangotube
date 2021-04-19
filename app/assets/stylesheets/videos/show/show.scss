@@ -1,8 +1,11 @@
-$max-container-width: 1060px;
+ $show-video-width: 1300px;
 
 .video-responsive-container {
   width: 100%;
-  max-width: $max-container-width; //set your `max-width` here
+
+.video-responsive-container {
+  width: 100%;
+  max-width: $show-video-width;
   max-height: auto; //necessary to keep proportion
   margin: 0 auto; //centering
 }
@@ -29,7 +32,7 @@ $max-container-width: 1060px;
 
 .video-info-container {
   display: flex;
-  max-width: $max-container-width;
+  max-width: $show-video-width;
   flex-direction: column;
   margin: 0 auto;
   justify-content: center;
@@ -40,7 +43,7 @@ $max-container-width: 1060px;
 }
 
 .video-info-primary-container {
-  max-width: 500px;
+  max-width: $show-video-width;
   text-align: left;
   margin: 1em;
 }
@@ -49,6 +52,7 @@ $max-container-width: 1060px;
   display: flex;
   justify-content: space-between;
   max-width: 1225px;
+  max-width: $show-video-width;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;

@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.0.0"
+ruby "3.0.1"
 
 gem "activeadmin", "~> 2.8", ">= 2.8.1"
 gem "ahoy_matey", "~> 3.1"
@@ -57,6 +57,7 @@ end
 
 group :test do
   gem "capybara", ">= 2.15"
+  gem 'capybara-screenshot'
   gem "selenium-webdriver", "3.142.7"
   gem "shoulda-matchers", "~> 4.0"
   gem "simplecov", "~> 0.21.2", require: false

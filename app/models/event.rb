@@ -7,6 +7,7 @@ class Event < ApplicationRecord
 
   def search_title
     return if title.empty?
+
     @search_title ||= title.split("-")[0].strip
   end
 

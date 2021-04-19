@@ -1,9 +1,9 @@
 .video-section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem 2rem;
-  padding: .2rem 2.5rem 0 2.5rem;
-  background-color: #f9f9f9;
+  gap: 30px 30px;
+  padding: 0 40px 40px 40px;
+  background-color: $secondary-color;
 }
 
 .video-container {
@@ -58,13 +58,13 @@
 .video-title {
   text-decoration: none;
   font-size: inherit;
-  color: #333;
+  color: $videos-primary-link;
   font-size: .9rem;
   font-weight: 600;
   margin: .2rem 0;
 
   &:hover {
-    color: black;
+    color: $videos-primary-link-hover;
   }
 }
 
@@ -75,10 +75,10 @@
   a {
     font-size: 0.7rem;
     text-decoration: none;
-    color:rgb(97, 97, 97);
+    color:$videos-secondary-link;
 
     &:hover {
-      color: rgb(3, 3, 3);
+      color: $videos-secondary-link-hover;
     }
   }
 }
