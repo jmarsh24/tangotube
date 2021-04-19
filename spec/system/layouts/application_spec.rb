@@ -1,8 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Videos::Index", type: :system do
-
-describe "header" do
+  describe "header" do
     it "has logo" do
       visit videos_path
 
@@ -118,5 +117,4 @@ describe "header" do
       expect(page).to have_link("G​oogle Privacy Policy", href: "http://www.google.com/policies/privacy")
     end
   end
-
 end
