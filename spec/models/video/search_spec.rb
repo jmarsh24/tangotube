@@ -92,7 +92,6 @@ RSpec.describe Video::Search, type: :model do
         video_b = create(:video)
         search = described_class.new(filtering_params: { leader_id: leader.id })
         expect(search.videos).to eq [video_a]
-        expect(search.videos).not_to eq [video_b]
       end
 
       it "filters by follower_id" do
@@ -103,7 +102,6 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: { follower_id: follower.id })
 
         expect(search.videos).to eq [video_a]
-        expect(search.videos).not_to eq [video_b]
       end
 
       it "filters by channel_id" do
@@ -114,7 +112,6 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: { channel_id: channel.id })
 
         expect(search.videos).to eq [video_a]
-        expect(search.videos).not_to eq [video_b]
       end
 
       it "filters by genre" do
@@ -125,7 +122,6 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: { genre: "Tango" })
 
         expect(search.videos).to eq [video_a]
-        expect(search.videos).not_to eq [video_b]
       end
 
       it "filters by orchestra" do
@@ -136,7 +132,6 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: { orchestra: "Di Sarli" })
 
         expect(search.videos).to eq [video_a]
-        expect(search.videos).not_to eq [video_b]
       end
 
       it "filters by song_id" do
@@ -147,7 +142,6 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: { song_id: song.id })
 
         expect(search.videos).to eq [video_a]
-        expect(search.videos).not_to eq [video_b]
       end
 
       it "filters by hd" do
@@ -170,7 +164,6 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: { event_id: event.id })
 
         expect(search.videos).to eq [video_a]
-        expect(search.videos).not_to eq [video_b]
       end
 
       it "filters by year" do
@@ -180,7 +173,6 @@ RSpec.describe Video::Search, type: :model do
         search = described_class.new(filtering_params: { year: "2018" })
 
         expect(search.videos).to eq [video_a]
-        expect(search.videos).not_to eq [video_b]
       end
 
       describe "filter_by_query" do
