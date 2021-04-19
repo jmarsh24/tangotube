@@ -25,8 +25,8 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def setup_videos
-    leader = create(:leader, name: "leader_name")
-    follower = create(:follower, name: "follower_name")
+    @leader = create(:leader, name: "leader_name")
+    @follower = create(:follower, name: "follower_name")
     song_a = create(:song, artist: "artist_name_a", last_name_search: "A", title: "song_title_a", genre: "genre_a")
     song_b = create(:song, artist: "artist_name_b", last_name_search: "B", title: "song_title_b", genre: "genre_b")
     song_c = create(:song, artist: "artist_name_c", last_name_search: "C", title: "song_title_c", genre: "genre_c")
@@ -37,9 +37,9 @@ RSpec.describe "Videos::Index", type: :system do
     channel_b = create(:channel, title: "channel_b")
     channel_c = create(:channel, title: "channel_c")
     create(:video, :display, title: "video_a", view_count: "1", like_count: "1", popularity: "3", upload_date: "2000-01-01",
-                      youtube_id: "youtube_id_a", duration: "30", hd: "0", song: song_a, channel: channel_a, event: event_a, leader: leader)
+                      youtube_id: "youtube_id_a", duration: "30", hd: "0", song: song_a, channel: channel_a, event: event_a, leader: @leader)
     create(:video, :display, title: "video_b", view_count: "2", like_count: "2", popularity: "2", upload_date: "1999-01-01",
-                      youtube_id: "youtube_id_b", duration: "60", hd: "1", song: song_b, channel: channel_b, event: event_b, follower: follower)
+                      youtube_id: "youtube_id_b", duration: "60", hd: "1", song: song_b, channel: channel_b, event: event_b, follower: @follower)
     create(:video, :display, title: "video_c", view_count: "3", like_count: "3", popularity: "1", upload_date: "1998-01-01",
                       youtube_id: "youtube_id_c", duration: "90", hd: "1", song: song_c, channel: channel_c, event: event_c)
   end
@@ -71,7 +71,7 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def shows_videos
-    visit videos_path
+    visit root_path
     click_on("Popularity")
     click_on("Popularity")
     display_video_thumbnails
@@ -222,7 +222,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def load_more_button_present
     stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-    visit videos_path
+    visit root_path
     expect(page).to have_content("Displaying 2 / 3 Results")
     click_on("Load More")
     expect(page).not_to have_content("Load More")
@@ -231,7 +231,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def load_more_button_hidden
     stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 5)
-    visit videos_path
+    visit root_path
     expect(page).not_to have_content("Load More")
     expect(page).to have_content("Displaying 3 / 3 Results")
   end
@@ -265,49 +265,54 @@ RSpec.describe "Videos::Index", type: :system do
   def visit_video_thumbnail_link
     click_on("Popularity")
     all("a#video-link").first.click
-    expect(current_url).to eq("http://www.example.com/watch?v=youtube_id_a")
-    visit videos_path
+    expect(page).to have_current_path("/watch?v=youtube_id_a")
+    visit root_path
   end
 
   def visit_video_title_link
     click_on("Popularity")
     click_on("video_a")
-    expect(current_url).to eq("http://www.example.com/watch?v=youtube_id_a")
-    visit videos_path
+    expect(page).to have_current_path("/watch?v=youtube_id_a")
+    visit root_path
   end
 
   def filter_by_genre
-    visit videos_path
+    visit root_path
     find("div.ss-option", text: "Genre A (1)").click
     sleep 1
     expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?genre=genre_a")
   end
 
   def filter_by_leader
-    visit videos_path
+    visit root_path
     find("div.ss-option", text: "Leader Name (1)").click
     sleep 1
     expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
   end
 
   def filter_by_follower
-    visit videos_path
+    visit root_path
     find("div.ss-option", text: "Follower Name (1)").click
     sleep 1
     expect(video_title_collection).to eq(["video_b"])
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
   end
 
   def filter_by_orchestra
-    visit videos_path
+    visit root_path
     find("div.ss-option", text: "Artist Name A (1)").click
     sleep 1
     expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?orchestra=artist_name_a")
   end
 
   def filter_by_year
-    visit videos_path
+    visit root_path
     find("div.ss-option", text: "2000 (1)").click
     sleep 1
     expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?year=2000")
   end
 end
