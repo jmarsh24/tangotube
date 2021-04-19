@@ -12,8 +12,16 @@ RSpec.describe "Videos::Index", type: :system do
     create_empty_selects
 
     populate_filters
-    filters_by_hd
+    filter_by_hd
   end
+
+  # it "filters videos", js: true do
+  #   filter_by_genre
+  #   # filter_by_leader
+  #   # filter_by_follower
+  #   # filter_by_orchestra
+  #   # filter_by_year
+  # end
 
   def setup_videos
     leader = create(:leader, name: "leader_name")
@@ -229,10 +237,13 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_hd
     click_on("HD")
-    expect(video_title_collection).to eq(%w[video_b video_c])
+    expect(video_title_collection).to include("video_b")
+    expect(video_title_collection).to include("video_c")
+    expect(video_title_collection).not_to include("video_a")
     click_on("All")
-    click_on("Popularity")
-    expect(video_title_collection).to eq(%w[video_c video_b video_a])
+    expect(video_title_collection).to include("video_b")
+    expect(video_title_collection).to include("video_c")
+    expect(video_title_collection).to include("video_a")
   end
 
   def filter_by_video_song_id
@@ -262,6 +273,11 @@ RSpec.describe "Videos::Index", type: :system do
     click_on("video_a")
     expect(current_url).to eq("http://www.example.com/watch?v=youtube_id_a")
     visit videos_path
+  end
+
+  def filter_by_genre
+    find("div.ss-option", text: "Genre A (1)").click
+    expect(video_title_collection).to eq("Video A")
   end
 end
 
