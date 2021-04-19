@@ -2,9 +2,6 @@
 
 .video-responsive-container {
   width: 100%;
-
-.video-responsive-container {
-  width: 100%;
   max-width: $show-video-width;
   max-height: auto; //necessary to keep proportion
   margin: 0 auto; //centering
@@ -51,7 +48,6 @@
 .video-info-container-secondary {
   display: flex;
   justify-content: space-between;
-  max-width: 1225px;
   max-width: $show-video-width;
   flex-direction: row;
   flex-wrap: wrap;
@@ -61,7 +57,6 @@
 .video-info-details-main {
   flex: 1;
   margin: 0 1em;
-
   flex-direction: column;
   a {
     color: $link-color;

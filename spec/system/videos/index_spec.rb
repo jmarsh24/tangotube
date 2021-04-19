@@ -672,18 +672,6 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_current_path("/?year=2000&orchestra=artist_name_a")
   end
 
-  describe "pagination" do
-    it "paginates" do
-      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-      create(:video, :display)
-      create(:video, :display)
-      create(:video, :display)
-      visit videos_url
-
-      expect(page).to have_content("Displaying 2 Results")
-    end
-  end
-
   def filter_by_year_orchestra_hd
     visit root_path
     find("div.ss-option", text: "1999 (1)").click
