@@ -12,7 +12,7 @@ RSpec.describe "Videos::Index", type: :system do
     create_empty_selects
 
     populate_filters
-    filters_videos
+    filters_by_hd
   end
 
   def setup_videos
@@ -38,10 +38,6 @@ RSpec.describe "Videos::Index", type: :system do
   def display_filters
     display_hd_all_buttons
     display_sort_options
-  end
-
-  def filters_videos
-    filter_by_hd
   end
 
   def sorts_videos
