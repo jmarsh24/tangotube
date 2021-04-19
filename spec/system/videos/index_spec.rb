@@ -18,10 +18,28 @@ RSpec.describe "Videos::Index", type: :system do
   it "filters videos", js: true do
     setup_videos
     filter_by_genre
-    filter_by_leader
-    filter_by_follower
+    filter_by_genre_leader_id
+    filter_by_genre_follower_id
+    filter_by_genre_orchestra
+    filter_by_genre_year
+    filter_by_leader_id
+    filter_by_leader_id_genre
+    filter_by_leader_id_orchestra
+    filter_by_leader_id_year
+    filter_by_follower_id
+    filter_by_follower_id_genre
+    filter_by_follower_id_orchestra
+    filter_by_follower_id_year
     filter_by_orchestra
+    filter_by_orchestra_genre
+    filter_by_orchestra_leader_id
+    filter_by_orchestra_follower_id
+    filter_by_orchestra_year
     filter_by_year
+    filter_by_year_genre
+    filter_by_year_leader_id
+    filter_by_year_follower_id
+    filter_by_year_orchestra
   end
 
   def setup_videos
@@ -284,7 +302,43 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_current_path("/?genre=genre_a")
   end
 
-  def filter_by_leader
+  def filter_by_genre_leader_id
+    visit root_path
+    find("div.ss-option", text: "Genre A (1)").click
+    find("div.ss-option", text: "Leader Name (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?genre=genre_a&leader_id=#{@leader.id}")
+  end
+
+  def filter_by_genre_follower_id
+    visit root_path
+    find("div.ss-option", text: "Genre B (1)").click
+    find("div.ss-option", text: "Follower Name (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_b"])
+    expect(page).to have_current_path("/?genre=genre_b&follower_id=#{@follower.id}")
+  end
+
+  def filter_by_genre_orchestra
+    visit root_path
+    find("div.ss-option", text: "Genre A (1)").click
+    find("div.ss-option", text: "Artist Name A (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?genre=genre_a&orchestra=artist_name_a")
+  end
+
+  def filter_by_genre_year
+    visit root_path
+    find("div.ss-option", text: "Genre A (1)").click
+    find("div.ss-option", text: "2000 (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?genre=genre_a&year=2000")
+  end
+
+  def filter_by_leader_id
     visit root_path
     find("div.ss-option", text: "Leader Name (1)").click
     sleep 1
@@ -292,12 +346,66 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_current_path("/?leader_id=#{@leader.id}")
   end
 
-  def filter_by_follower
+  def filter_by_leader_id_genre
+    visit root_path
+    find("div.ss-option", text: "Leader Name (1)").click
+    find("div.ss-option", text: "Genre A (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}&genre=genre_a")
+  end
+
+  def filter_by_leader_id_orchestra
+    visit root_path
+    find("div.ss-option", text: "Leader Name (1)").click
+    find("div.ss-option", text: "Artist Name A (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}&orchestra=artist_name_a")
+  end
+
+  def filter_by_leader_id_year
+    visit root_path
+    find("div.ss-option", text: "Leader Name (1)").click
+    find("div.ss-option", text: "2000 (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}&year=2000")
+  end
+
+  def filter_by_follower_id
     visit root_path
     find("div.ss-option", text: "Follower Name (1)").click
     sleep 1
     expect(video_title_collection).to eq(["video_b"])
     expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+  end
+
+  def filter_by_follower_id_genre
+    visit root_path
+    find("div.ss-option", text: "Follower Name (1)").click
+    find("div.ss-option", text: "Genre B (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_b"])
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&genre=genre_b")
+  end
+
+  def filter_by_follower_id_orchestra
+    visit root_path
+    find("div.ss-option", text: "Follower Name (1)").click
+    find("div.ss-option", text: "Artist Name B (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_b"])
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&orchestra=artist_name_b")
+  end
+
+  def filter_by_follower_id_year
+    visit root_path
+    find("div.ss-option", text: "Follower Name (1)").click
+    find("div.ss-option", text: "1999 (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_b"])
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&year=1999")
   end
 
   def filter_by_orchestra
@@ -308,11 +416,83 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_current_path("/?orchestra=artist_name_a")
   end
 
+  def filter_by_orchestra_genre
+    visit root_path
+    find("div.ss-option", text: "Artist Name A (1)").click
+    find("div.ss-option", text: "Genre A (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?orchestra=artist_name_a&genre=genre_a")
+  end
+
+  def filter_by_orchestra_leader_id
+    visit root_path
+    find("div.ss-option", text: "Artist Name A (1)").click
+    find("div.ss-option", text: "Leader Name (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?orchestra=artist_name_a&leader_id=#{@leader.id}")
+  end
+
+  def filter_by_orchestra_follower_id
+    visit root_path
+    find("div.ss-option", text: "Artist Name B (1)").click
+    find("div.ss-option", text: "Follower Name (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_b"])
+    expect(page).to have_current_path("/?orchestra=artist_name_b&follower_id=#{@follower.id}")
+  end
+
+  def filter_by_orchestra_year
+    visit root_path
+    find("div.ss-option", text: "Artist Name A (1)").click
+    find("div.ss-option", text: "2000 (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?orchestra=artist_name_a&year=2000")
+  end
+
   def filter_by_year
     visit root_path
     find("div.ss-option", text: "2000 (1)").click
     sleep 1
     expect(video_title_collection).to eq(["video_a"])
     expect(page).to have_current_path("/?year=2000")
+  end
+
+  def filter_by_year_genre
+    visit root_path
+    find("div.ss-option", text: "2000 (1)").click
+    find("div.ss-option", text: "Genre A (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?year=2000&genre=genre_a")
+  end
+
+  def filter_by_year_leader_id
+    visit root_path
+    find("div.ss-option", text: "2000 (1)").click
+    find("div.ss-option", text: "Leader Name (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?year=2000&leader_id=#{@leader.id}")
+  end
+
+  def filter_by_year_follower_id
+    visit root_path
+    find("div.ss-option", text: "1999 (1)").click
+    find("div.ss-option", text: "Follower Name (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_b"])
+    expect(page).to have_current_path("/?year=1999&follower_id=#{@follower.id}")
+  end
+
+  def filter_by_year_orchestra
+    visit root_path
+    find("div.ss-option", text: "2000 (1)").click
+    find("div.ss-option", text: "Artist Name A (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+    expect(page).to have_current_path("/?year=2000&orchestra=artist_name_a")
   end
 end
