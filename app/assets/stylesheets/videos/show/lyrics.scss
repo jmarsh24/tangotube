@@ -1,25 +1,9 @@
 .video-info-lyrics {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  min-width: 320px;
-  margin: 1rem 0;
-}
-
-.detail-row-lyrics {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 150px;
-  max-width: 300px;
+  flex: .85;
   border: 1px solid $border-color;
   background-color: $secondary-color;
-  padding: 0 1.5rem;
-}
-
-.detail-column-lyrics {
-  flex: 1;
-  margin: 0 2rem;
-  line-height: 1.5rem;
+  margin: 1em 1em;
+  // padding: 0 1.5em;
+  text-align: center;
+  line-height: 1.5em;
 }

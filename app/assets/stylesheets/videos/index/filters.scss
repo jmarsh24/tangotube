@@ -48,12 +48,12 @@
 .filter-hd-button {
   display: flex;
   text-decoration: none;
-  padding: 0.5rem;
+  margin: 0 0 0 0.5em;
+  padding: .5rem;
   border: 1px solid $border-color;
   background: $primary-color;
-  border-radius: 0.2rem;
+  border-radius: 0.2em;
   align-items: center;
-  margin: 0 0 0 8px;
   letter-spacing: 0.05em;
   font-size: 0.7rem;
   z-index: 1011;
@@ -69,6 +69,7 @@
   padding: 0 32px;
   margin-bottom: 20px;
   background-color: $secondary-color;
+  border-bottom: 1px solid $border-color;
 
   #form-frame {
     flex: 1;
@@ -109,8 +110,7 @@
   height: 2rem;
   font-size: .7rem;
   align-items: center;
-  padding: 0 8px;
-  border-bottom: 1px solid $sortable-border-bottom-color;
+  padding: 0 1em;
 
   label {
     font-size: .9rem;
