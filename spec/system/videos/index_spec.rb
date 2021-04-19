@@ -15,13 +15,14 @@ RSpec.describe "Videos::Index", type: :system do
     filter_by_hd
   end
 
-  # it "filters videos", js: true do
-  #   filter_by_genre
-  #   # filter_by_leader
-  #   # filter_by_follower
-  #   # filter_by_orchestra
-  #   # filter_by_year
-  # end
+  it "filters videos", js: true do
+    setup_videos
+    filter_by_genre
+    filter_by_leader
+    filter_by_follower
+    filter_by_orchestra
+    filter_by_year
+  end
 
   def setup_videos
     leader = create(:leader, name: "leader_name")
@@ -276,25 +277,37 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def filter_by_genre
+    visit videos_path
     find("div.ss-option", text: "Genre A (1)").click
-    expect(video_title_collection).to eq("Video A")
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_leader
+    visit videos_path
+    find("div.ss-option", text: "Leader Name (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_follower
+    visit videos_path
+    find("div.ss-option", text: "Follower Name (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_orchestra
+    visit videos_path
+    find("div.ss-option", text: "Artist Name A (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_year
+    visit videos_path
+    find("div.ss-option", text: "2000 (1)").click
+    sleep 1
+    expect(video_title_collection).to eq(["video_a"])
   end
 end
-
-#   it "filters videos by genre", js: true do
-#     song_tango = create(:song, genre: "Tango")
-#     song_milonga = create(:song, genre: "Milonga")
-#     create(:video, :display, song: song_tango, title: "Tango Video")
-#     create(:video, :display, song: song_tango, title: "Tango Video")
-#     create(:video, :display, song: song_milonga, title: "Milonga Video")
-#     visit videos_path
-
-#     find("div.ss-option", text: "Milonga (1)").click
-
-#     # expect(page).to have_select("genre-filter", selected: "Milonga (1)")
-#     # expect(page).not_to have_select("genre-filter", options: ["Tango (2)"])
-#     expect(page).to have_content("1 Result Found")
-#     expect(page).to have_content("Displaying 1 / 1 Results")
-#     expect(page).to have_content("Milonga Video")
-#     expect(page).not_to have_content("Tango Video")
-#   end
