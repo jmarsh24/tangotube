@@ -17,46 +17,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   it "filters videos", js: true do
     setup_videos
-    filter_by_genre
-    filter_by_genre_hd
-    filter_by_genre_leader_id
-    filter_by_genre_follower_id
-    filter_by_genre_follower_id_hd
-    filter_by_genre_orchestra
-    filter_by_genre_orchestra_hd
-    filter_by_genre_year
-    filter_by_genre_year_hd
-    filter_by_leader_id
-    filter_by_leader_id
-    filter_by_leader_id_genre
-    filter_by_leader_id_orchestra
-    filter_by_leader_id_year
-    filter_by_follower_id
-    filter_by_follower_id_hd
-    filter_by_follower_id_genre
-    filter_by_follower_id_genre_hd
-    filter_by_follower_id_orchestra
-    filter_by_follower_id_orchestra_hd
-    filter_by_follower_id_year
-    filter_by_follower_id_year_hd
-    filter_by_orchestra
-    filter_by_orchestra_hd
-    filter_by_orchestra_genre
-    filter_by_orchestra_genre_hd
-    filter_by_orchestra_leader_id
-    filter_by_orchestra_follower_id
-    filter_by_orchestra_follower_id_hd
-    filter_by_orchestra_year
-    filter_by_orchestra_year_hd
-    filter_by_year
-    filter_by_year_hd
-    filter_by_year_genre
-    filter_by_year_genre_hd
-    filter_by_year_leader_id
-    filter_by_year_follower_id
-    filter_by_year_follower_id_hd
-    filter_by_year_orchestra
-    filter_by_year_orchestra_hd
+    filters_correctly
   end
 
   def setup_videos
@@ -90,6 +51,69 @@ RSpec.describe "Videos::Index", type: :system do
     sort_by_orchestra
     sort_by_view_count
     sort_by_upload_date
+  end
+
+  def filters_correctly
+    visit root_path
+    filters_by_genre
+    filters_by_leader
+    filters_by_follower
+    filters_by_orchestra
+    filters_by_year
+  end
+
+  def filters_by_genre
+    filter_by_genre_alone
+    filter_by_genre_and_hd
+    filter_by_genre_and_leader
+    filter_by_genre_and_follower
+    filter_by_genre_and_follower_and_hd
+    filter_by_genre_and_orchestra
+    filter_by_genre_and_orchestra_and_hd
+    filter_by_genre_and_year
+    filter_by_genre_and_year_and_hd
+  end
+
+  def filters_by_leader
+    filter_by_leader_alone
+    filter_by_leader_and_genre
+    filter_by_leader_and_orchestra
+    filter_by_leader_and_year
+  end
+
+  def filters_by_follower
+    filter_by_follower_alone
+    filter_by_follower_and_hd
+    filter_by_follower_and_genre
+    filter_by_follower_and_genre_and_hd
+    filter_by_follower_and_orchestra
+    filter_by_follower_and_orchestra_and_hd
+    filter_by_follower_and_year
+    filter_by_follower_and_year_and_hd
+  end
+
+  def filters_by_orchestra
+    filter_by_orchestra_alone
+    filter_by_orchestra_and_hd
+    filter_by_orchestra_and_genre
+    filter_by_orchestra_and_genre_and_hd
+    filter_by_orchestra_and_leader
+    filter_by_orchestra_and_follower
+    filter_by_orchestra_and_follower_and_hd
+    filter_by_orchestra_and_year
+    filter_by_orchestra_and_year_and_hd
+  end
+
+  def filters_by_year
+    filter_by_year_alone
+    filter_by_year_and_hd
+    filter_by_year_and_genre
+    filter_by_year_and_genre_and_hd
+    filter_by_year_and_leader
+    filter_by_year_and_follower
+    filter_by_year_and_follower_and_hd
+    filter_by_year_and_orchestra
+    filter_by_year_and_orchestra_and_hd
   end
 
   def links_to_videos
@@ -149,6 +173,46 @@ RSpec.describe "Videos::Index", type: :system do
 
   def video_song_collection
     page.all("div.video-song").map(&:text)
+  end
+
+  def reset_all_filters
+    if page.has_css?("span.ss-deselect")
+      find("span.ss-deselect", match: :first)
+      all("span.ss-deselect").each(&:click)
+    end
+    click_on("All")
+  end
+
+  def filter_by_genre_a
+    find("div.ss-option", text: "Genre A (1)").click
+  end
+
+  def filter_by_genre_b
+    find("div.ss-option", text: "Genre B (1)").click
+  end
+
+  def filter_by_leader
+    find("div.ss-option", text: "Leader Name (1)").click
+  end
+
+  def filter_by_follower
+    find("div.ss-option", text: "Follower Name (1)").click
+  end
+
+  def filter_by_orchestra_a
+    find("div.ss-option", text: "Artist Name A (1)").click
+  end
+
+  def filter_by_orchestra_b
+    find("div.ss-option", text: "Artist Name B (1)").click
+  end
+
+  def filter_by_year_2000
+    find("div.ss-option", text: "2000 (1)").click
+  end
+
+  def filter_by_year_1999
+    find("div.ss-option", text: "1999 (1)").click
   end
 
   def display_video_thumbnails
@@ -311,375 +375,355 @@ RSpec.describe "Videos::Index", type: :system do
     visit root_path
   end
 
-  def filter_by_genre
+  def filter_by_genre_alone
     visit root_path
-    find("div.ss-option", text: "Genre A (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
+    filter_by_genre_a
     expect(page).to have_current_path("/?genre=genre_a")
+    expect(video_title_collection).to eq(["video_a"])
   end
 
-  def filter_by_genre_hd
+  def filter_by_genre_and_hd
     visit root_path
-    find("div.ss-option", text: "Genre B (1)").click
-    sleep 1
+    filter_by_genre_b
+    expect(page).to have_current_path("/?genre=genre_b")
     click_on("HD")
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
     expect(page).to have_current_path("/?genre=genre_b&hd=1")
+    expect(video_title_collection).to eq(["video_b"])
   end
 
-  def filter_by_genre_leader_id
+  def filter_by_genre_and_leader
     visit root_path
-    find("div.ss-option", text: "Genre A (1)").click
-    find("div.ss-option", text: "Leader Name (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
+    filter_by_genre_a
+    expect(page).to have_current_path("/?genre=genre_a")
+    filter_by_leader
     expect(page).to have_current_path("/?genre=genre_a&leader_id=#{@leader.id}")
+    expect(video_title_collection).to eq(["video_a"])
   end
 
-  def filter_by_genre_follower_id
+  def filter_by_genre_and_follower
     visit root_path
-    find("div.ss-option", text: "Genre B (1)").click
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
+    filter_by_genre_b
+    expect(page).to have_current_path("/?genre=genre_b")
+    filter_by_follower
     expect(page).to have_current_path("/?genre=genre_b&follower_id=#{@follower.id}")
+    expect(video_title_collection).to eq(["video_b"])
   end
 
-  def filter_by_genre_follower_id_hd
+  def filter_by_genre_and_follower_and_hd
     visit root_path
-    find("div.ss-option", text: "Genre B (1)").click
-    sleep 1
-    find("div.ss-option", text: "Follower Name (1)").click
+    filter_by_genre_b
+    expect(page).to have_current_path("/?genre=genre_b")
+    filter_by_follower
+    expect(page).to have_current_path("/?genre=genre_b&follower_id=#{@follower.id}")
     click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?genre=genre_b&hd=1&follower_id=#{@follower.id}")
-  end
-
-  def filter_by_genre_orchestra
-    visit root_path
-    find("div.ss-option", text: "Genre A (1)").click
-    find("div.ss-option", text: "Artist Name A (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?genre=genre_a&orchestra=artist_name_a")
-  end
-
-  def filter_by_genre_orchestra_hd
-    visit root_path
-    find("div.ss-option", text: "Genre B (1)").click
-    sleep 1
-    find("div.ss-option", text: "Artist Name B (1)").click
-    sleep 1
-    click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?genre=genre_b&hd=1&orchestra=artist_name_b")
-  end
-
-  def filter_by_genre_year
-    visit root_path
-    find("div.ss-option", text: "Genre A (1)").click
-    find("div.ss-option", text: "2000 (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?genre=genre_a&year=2000")
-  end
-
-  def filter_by_genre_year_hd
-    visit root_path
-    find("div.ss-option", text: "Genre B (1)").click
-    sleep 1
-    find("div.ss-option", text: "1999 (1)").click
-    sleep 1
-    click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?genre=genre_b&hd=1&year=1999")
-  end
-
-  def filter_by_leader_id
-    visit root_path
-    find("div.ss-option", text: "Leader Name (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
-  end
-
-  def filter_by_leader_id_genre
-    visit root_path
-    find("div.ss-option", text: "Leader Name (1)").click
-    find("div.ss-option", text: "Genre A (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}&genre=genre_a")
-  end
-
-  def filter_by_leader_id_orchestra
-    visit root_path
-    find("div.ss-option", text: "Leader Name (1)").click
-    find("div.ss-option", text: "Artist Name A (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}&orchestra=artist_name_a")
-  end
-
-  def filter_by_leader_id_year
-    visit root_path
-    find("div.ss-option", text: "Leader Name (1)").click
-    find("div.ss-option", text: "2000 (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}&year=2000")
-  end
-
-  def filter_by_follower_id
-    visit root_path
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
-  end
-
-  def filter_by_follower_id_hd
-    visit root_path
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1")
-  end
-
-  def filter_by_follower_id_genre
-    visit root_path
-    find("div.ss-option", text: "Follower Name (1)").click
-    find("div.ss-option", text: "Genre B (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&genre=genre_b")
-  end
-
-  def filter_by_follower_id_genre_hd
-    visit root_path
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    find("div.ss-option", text: "Genre B (1)").click
-    sleep 1
-    click_on("HD")
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
     expect(page).to have_current_path("/?follower_id=#{@follower.id}&genre=genre_b&hd=1")
-  end
-
-  def filter_by_follower_id_orchestra
-    visit root_path
-    find("div.ss-option", text: "Follower Name (1)").click
-    find("div.ss-option", text: "Artist Name B (1)").click
-    sleep 1
     expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&orchestra=artist_name_b")
   end
 
-  def filter_by_follower_id_orchestra_hd
+  def filter_by_genre_and_orchestra
     visit root_path
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    find("div.ss-option", text: "Artist Name B (1)").click
-    sleep 1
-    click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1&orchestra=artist_name_b")
-  end
-
-  def filter_by_follower_id_year
-    visit root_path
-    find("div.ss-option", text: "Follower Name (1)").click
-    find("div.ss-option", text: "1999 (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&year=1999")
-  end
-
-  def filter_by_follower_id_year_hd
-    visit root_path
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    find("div.ss-option", text: "1999 (1)").click
-    sleep 1
-    click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1&year=1999")
-  end
-
-  def filter_by_orchestra
-    visit root_path
-    find("div.ss-option", text: "Artist Name A (1)").click
-    sleep 1
+    filter_by_genre_a
+    expect(page).to have_current_path("/?genre=genre_a")
+    filter_by_orchestra_a
+    expect(page).to have_current_path("/?genre=genre_a&orchestra=artist_name_a")
     expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?orchestra=artist_name_a")
   end
 
-  def filter_by_orchestra_hd
+  def filter_by_genre_and_orchestra_and_hd
     visit root_path
-    find("div.ss-option", text: "Artist Name B (1)").click
-    sleep 1
+    filter_by_genre_b
+    expect(page).to have_current_path("/?genre=genre_b")
+    filter_by_orchestra_b
     click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?hd=1&orchestra=artist_name_b")
-  end
-
-  def filter_by_orchestra_genre
-    visit root_path
-    find("div.ss-option", text: "Artist Name A (1)").click
-    find("div.ss-option", text: "Genre A (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?orchestra=artist_name_a&genre=genre_a")
-  end
-
-  def filter_by_orchestra_genre_hd
-    visit root_path
-    find("div.ss-option", text: "Artist Name B (1)").click
-    sleep 1
-    find("div.ss-option", text: "Genre B (1)").click
-    sleep 1
-    click_on("HD")
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
     expect(page).to have_current_path("/?genre=genre_b&hd=1&orchestra=artist_name_b")
+    expect(video_title_collection).to eq(["video_b"])
   end
 
-  def filter_by_orchestra_leader_id
+  def filter_by_genre_and_year
     visit root_path
-    find("div.ss-option", text: "Artist Name A (1)").click
-    find("div.ss-option", text: "Leader Name (1)").click
-    sleep 1
+    filter_by_genre_a
+    expect(page).to have_current_path("/?genre=genre_a")
+    filter_by_year_2000
+    expect(page).to have_current_path("/?genre=genre_a&year=2000")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_genre_and_year_and_hd
+    visit root_path
+    filter_by_genre_b
+    expect(page).to have_current_path("/?genre=genre_b")
+    filter_by_year_1999
+    click_on("HD")
+    expect(page).to have_current_path("/?genre=genre_b&hd=1&year=1999")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_leader_alone
+    visit root_path
+    filter_by_leader
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_leader_and_genre
+    visit root_path
+    filter_by_leader
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    filter_by_genre_a
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}&genre=genre_a")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_leader_and_orchestra
+    visit root_path
+    filter_by_leader
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    filter_by_orchestra_a
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}&orchestra=artist_name_a")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_leader_and_year
+    visit root_path
+    filter_by_leader
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    filter_by_year_2000
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}&year=2000")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_follower_alone
+    visit root_path
+    filter_by_follower
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_follower_and_hd
+    visit root_path
+    filter_by_follower
+    click_on("HD")
+    expect(page).to have_current_path("/?hd=1&follower_id=#{@follower.id}")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_follower_and_genre
+    visit root_path
+    filter_by_follower
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    filter_by_genre_b
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&genre=genre_b")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_follower_and_genre_and_hd
+    visit root_path
+    filter_by_follower
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    filter_by_genre_b
+    click_on("HD")
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1&genre=genre_b")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_follower_and_orchestra
+    visit root_path
+    filter_by_follower
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    filter_by_orchestra_b
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&orchestra=artist_name_b")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_follower_and_orchestra_and_hd
+    visit root_path
+    filter_by_follower
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    filter_by_orchestra_b
+    click_on("HD")
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1&orchestra=artist_name_b")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_follower_and_year
+    visit root_path
+    filter_by_follower
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    filter_by_year_1999
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&year=1999")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_follower_and_year_and_hd
+    visit root_path
+    filter_by_follower
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    filter_by_year_1999
+    click_on("HD")
+    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1&year=1999")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_orchestra_alone
+    visit root_path
+    filter_by_orchestra_a
+    expect(page).to have_current_path("/?orchestra=artist_name_a")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_orchestra_and_hd
+    visit root_path
+    filter_by_orchestra_b
+    expect(page).to have_current_path("/?orchestra=artist_name_b")
+    click_on("HD")
+    expect(page).to have_current_path("/?hd=1&orchestra=artist_name_b")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_orchestra_and_genre
+    visit root_path
+    filter_by_orchestra_a
+    expect(page).to have_current_path("/?orchestra=artist_name_a")
+    filter_by_genre_a
+    expect(page).to have_current_path("/?orchestra=artist_name_a&genre=genre_a")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_orchestra_and_genre_and_hd
+    visit root_path
+    filter_by_orchestra_b
+    expect(page).to have_current_path("/?orchestra=artist_name_b")
+    filter_by_genre_b
+    click_on("HD")
+    expect(page).to have_current_path("/?hd=1&orchestra=artist_name_b&genre=genre_b")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_orchestra_and_leader
+    visit root_path
+    filter_by_orchestra_a
+    expect(page).to have_current_path("/?orchestra=artist_name_a")
+    filter_by_leader
     expect(video_title_collection).to eq(["video_a"])
     expect(page).to have_current_path("/?orchestra=artist_name_a&leader_id=#{@leader.id}")
   end
 
-  def filter_by_orchestra_follower_id
+  def filter_by_orchestra_and_follower
     visit root_path
-    find("div.ss-option", text: "Artist Name B (1)").click
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
+    filter_by_orchestra_b
+    expect(page).to have_current_path("/?orchestra=artist_name_b")
+    filter_by_follower
     expect(page).to have_current_path("/?orchestra=artist_name_b&follower_id=#{@follower.id}")
-  end
-
-  def filter_by_orchestra_follower_id_hd
-    visit root_path
-    find("div.ss-option", text: "Artist Name B (1)").click
-    sleep 1
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    click_on("HD")
     expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1&orchestra=artist_name_b")
   end
 
-  def filter_by_orchestra_year
+  def filter_by_orchestra_and_follower_and_hd
     visit root_path
-    find("div.ss-option", text: "Artist Name A (1)").click
-    find("div.ss-option", text: "2000 (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
+    filter_by_orchestra_b
+    expect(page).to have_current_path("/?orchestra=artist_name_b")
+    filter_by_follower
+    click_on("HD")
+    expect(page).to have_current_path("/?hd=1&orchestra=artist_name_b&follower_id=#{@follower.id}")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_orchestra_and_year
+    visit root_path
+    filter_by_orchestra_a
+    expect(page).to have_current_path("/?orchestra=artist_name_a")
+    filter_by_year_2000
     expect(page).to have_current_path("/?orchestra=artist_name_a&year=2000")
-  end
-
-  def filter_by_orchestra_year_hd
-    visit root_path
-    find("div.ss-option", text: "Artist Name B (1)").click
-    sleep 1
-    find("div.ss-option", text: "1999 (1)").click
-    sleep 1
-    click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?hd=1&orchestra=artist_name_b&year=1999")
-  end
-
-  def filter_by_year
-    visit root_path
-    find("div.ss-option", text: "2000 (1)").click
-    sleep 1
     expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_orchestra_and_year_and_hd
+    visit root_path
+    filter_by_orchestra_b
+    expect(page).to have_current_path("/?orchestra=artist_name_b")
+    filter_by_year_1999
+    click_on("HD")
+    expect(page).to have_current_path("/?hd=1&orchestra=artist_name_b&year=1999")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_year_alone
+    visit root_path
+    filter_by_year_2000
     expect(page).to have_current_path("/?year=2000")
+    expect(video_title_collection).to eq(["video_a"])
   end
 
-  def filter_by_year_hd
+  def filter_by_year_and_hd
     visit root_path
-    find("div.ss-option", text: "1999 (1)").click
-    sleep 1
+    filter_by_year_1999
     click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
     expect(page).to have_current_path("/?hd=1&year=1999")
+    expect(video_title_collection).to eq(["video_b"])
   end
 
-  def filter_by_year_genre
+  def filter_by_year_and_genre
     visit root_path
-    find("div.ss-option", text: "2000 (1)").click
-    find("div.ss-option", text: "Genre A (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_a"])
+    filter_by_year_2000
+    expect(page).to have_current_path("/?year=2000")
+    filter_by_genre_a
     expect(page).to have_current_path("/?year=2000&genre=genre_a")
-  end
-
-  def filter_by_year_genre_hd
-    visit root_path
-    find("div.ss-option", text: "1999 (1)").click
-    sleep 1
-    find("div.ss-option", text: "Genre B (1)").click
-    sleep 1
-    click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?genre=genre_b&hd=1&year=1999")
-  end
-
-  def filter_by_year_leader_id
-    visit root_path
-    find("div.ss-option", text: "2000 (1)").click
-    find("div.ss-option", text: "Leader Name (1)").click
-    sleep 1
     expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_year_and_genre_and_hd
+    visit root_path
+    filter_by_year_1999
+    expect(page).to have_current_path("/?year=1999")
+    filter_by_genre_b
+    click_on("HD")
+    expect(page).to have_current_path("/?hd=1&year=1999&genre=genre_b")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_year_and_leader
+    visit root_path
+    filter_by_year_2000
+    expect(page).to have_current_path("/?year=2000")
+    filter_by_leader
     expect(page).to have_current_path("/?year=2000&leader_id=#{@leader.id}")
-  end
-
-  def filter_by_year_follower_id
-    visit root_path
-    find("div.ss-option", text: "1999 (1)").click
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?year=1999&follower_id=#{@follower.id}")
-  end
-
-  def filter_by_year_follower_id_hd
-    visit root_path
-    find("div.ss-option", text: "1999 (1)").click
-    sleep 1
-    find("div.ss-option", text: "Follower Name (1)").click
-    sleep 1
-    click_on("HD")
-    expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1&year=1999")
-  end
-
-  def filter_by_year_orchestra
-    visit root_path
-    find("div.ss-option", text: "2000 (1)").click
-    find("div.ss-option", text: "Artist Name A (1)").click
-    sleep 1
     expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path("/?year=2000&orchestra=artist_name_a")
   end
 
-  def filter_by_year_orchestra_hd
+  def filter_by_year_and_follower
     visit root_path
-    find("div.ss-option", text: "1999 (1)").click
-    sleep 1
-    find("div.ss-option", text: "Artist Name B (1)").click
-    sleep 1
-    click_on("HD")
+    filter_by_year_1999
+    expect(page).to have_current_path("/?year=1999")
+    filter_by_follower
+    expect(page).to have_current_path("/?year=1999&follower_id=#{@follower.id}")
     expect(video_title_collection).to eq(["video_b"])
-    expect(page).to have_current_path("/?hd=1&orchestra=artist_name_b&year=1999")
+  end
+
+  def filter_by_year_and_follower_and_hd
+    visit root_path
+    filter_by_year_1999
+    expect(page).to have_current_path("/?year=1999")
+    filter_by_follower
+    click_on("HD")
+    expect(page).to have_current_path("/?hd=1&year=1999&follower_id=#{@follower.id}")
+    expect(video_title_collection).to eq(["video_b"])
+  end
+
+  def filter_by_year_and_orchestra
+    visit root_path
+    filter_by_year_2000
+    expect(page).to have_current_path("/?year=2000")
+    filter_by_orchestra_a
+    expect(page).to have_current_path("/?year=2000&orchestra=artist_name_a")
+    expect(video_title_collection).to eq(["video_a"])
+  end
+
+  def filter_by_year_and_orchestra_and_hd
+    visit root_path
+    filter_by_year_1999
+    expect(page).to have_current_path("/?year=1999")
+    filter_by_orchestra_b
+    click_on("HD")
+    expect(page).to have_current_path("/?hd=1&year=1999&orchestra=artist_name_b")
+    expect(video_title_collection).to eq(["video_b"])
   end
 end
