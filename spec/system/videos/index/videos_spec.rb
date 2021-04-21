@@ -14,8 +14,6 @@ RSpec.describe "Videos::Index::Videos", type: :system do
     @follower = create(:follower, name: "Noelia Hurtado")
     @song = create(:song, title: "song_title")
     @event = create(:event, title: "event_title")
-    @channel = create(:channel, title: "channel_a")
-    @song = create(:song, artist: "artist_name_a", last_name_search: "A", title: "song_title_a", genre: "genre_a")
     @video = create(:video, :display, title: "video_a", leader: @leader, follower: @follower, song: @song, event: @event)
   end
 

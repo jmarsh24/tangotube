@@ -139,8 +139,6 @@ RSpec.describe "Videos::Index", type: :system do
     display_video_song
     display_video_event_title
     display_video_metadata
-
-    expect(page).to have_content("Displaying 3 / 3 Results")
   end
 
   def video_thumbnail_collection
