@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "Videos::Index", type: :system do
   it "shows videos, display and populates filters" do
     setup_videos
+    visit root_path
     shows_videos
     toggle_filters_hidden
     sorts_videos
@@ -17,6 +18,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   it "filters videos", js: true do
     setup_videos
+    visit root_path
     filters_correctly
   end
 
@@ -54,7 +56,6 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def filters_correctly
-    visit root_path
     filters_by_genre
     filters_by_leader
     filters_by_follower
@@ -130,9 +131,6 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def shows_videos
-    visit root_path
-    click_on("Popularity")
-    click_on("Popularity")
     display_video_thumbnails
     display_video_thumbnail_details
     display_channel_titles
