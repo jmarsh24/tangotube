@@ -3,6 +3,6 @@ class ImportPlaylistWorker
   sidekiq_options queue: :default, retry: 3
 
   def perform(slug)
-    Video::YotutubeImport::Playlist.import(slug)
+    Video::YoutubeImport::Playlist.import(slug)
   end
 end
