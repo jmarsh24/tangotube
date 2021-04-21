@@ -4,6 +4,8 @@ RSpec.describe "Videos::Index", type: :system do
   it "shows videos, display and populates filters" do
     setup_videos
     visit root_path
+    click_on("Popularity")
+    click_on("Popularity")
     shows_videos
     toggle_filters_hidden
     sorts_videos
