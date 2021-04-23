@@ -7,7 +7,6 @@ RSpec.describe "Videos::Index", type: :system do
     click_on("Popularity")
     click_on("Popularity")
     shows_videos
-    toggle_filters_hidden
     sorts_videos
 
     display_filters
@@ -20,7 +19,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   it "filters videos", js: true do
     setup_videos
-    visit root_path
+    toggle_filters_hidden
     filters_correctly
   end
 
@@ -269,9 +268,10 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def toggle_filters_hidden
-    expect(page).to have_css("div.filter-container")
+    visit root_path
+    expect(page).to have_css("div.filter-container:not(.isHidden)", visible: :all)
     click_on("Filters")
-    expect(page).not_to have_css("div.filter-container isHidden")
+    expect(page).to have_css("div.filter-container.isHidden", visible: :all)
   end
 
   def sort_by_song_title
