@@ -173,19 +173,6 @@ RSpec.describe "Videos::Index", type: :system do
     page.all("div.video-song").map(&:text)
   end
 
-  def reset_all_filters
-    if page.has_css?("span.ss-deselect")
-      deselect_count = all("span.ss-deselect").count
-      find("span.ss-deselect", match: :first)
-      all("span.ss-deselect").each do |element|
-        element.click
-        expect(all("span.ss-deselect").count).to eq(deselect_count - 1)
-      end
-      click_on("All")
-      expect(page).to have_current_path("/?follower_id=#{@follower.id}&genre=genre_b&hd=1")
-    end
-  end
-
   def filter_by_genre_a
     find("div.ss-option", text: "Genre A (1)").click
   end
