@@ -1,120 +1,181 @@
 require "rails_helper"
 
 RSpec.describe "Videos::Index", type: :system do
-  describe "header" do
-    it "has logo" do
-      visit videos_path
-
-      expect(page).to have_content("TangoTube")
-    end
-
-    it "has login links" do
-      visit videos_path
-
-      expect(page).to have_content("Sign up")
-      expect(page).to have_content("Login")
-      expect(page).to have_link "Sign up", href: new_user_registration_path
-      expect(page).to have_link "Login", href: new_user_session_path
-    end
-
-    it "has logged in links" do
-      sign_in create(:user)
-      visit videos_path
-
-      expect(page).to have_link "Edit profile", href: edit_user_registration_path
-      expect(page).to have_link "Logout", href: destroy_user_session_path
-    end
-
-    it "presents 'Signed In' alert after succesful sign in and signs out" do
-      create(:user, email: "j.doe@example.com", password: "foobar1")
-      visit new_user_session_path
-
-      expect(page).to have_content("Log in to TangoTube")
-      expect(page).to have_content("Remember me")
-
-      expect(page).to have_link "Create an account", href: new_user_registration_path
-      expect(page).to have_link "Forgot your password?", href: new_user_password_path
-
-      fill_in :user_email, with: "j.doe@example.com"
-      fill_in :user_password, with: "foobar1"
-      click_on "Log in"
-
-      expect(page).to have_content("Signed in successfully.")
-      click_on "Logout"
-      expect(page).to have_content("Signed out successfully.")
-    end
-
-    it "edit user page" do
-      create(:user, email: "j.doe@example.com", password: "foobar1")
-      visit new_user_session_path
-
-      fill_in :user_email, with: "j.doe@example.com"
-      fill_in :user_password, with: "foobar1"
-
-      click_on "Log in"
-
-      click_on "Edit profile"
-
-      expect(page).to have_content("Edit User")
-      expect(page).to have_content("Email")
-      expect(page).to have_content("Password confirmation")
-      expect(page).to have_content("Current password")
-
-      expect(page).to have_content("Cancel my account")
-    end
-
-    it "successfully loads forgot your password" do
-      visit new_user_session_path
-
-      expect(page).to have_content("Forgot your password?")
-
-      click_on "Forgot your password?"
-
-      expect(page).to have_content("Email")
-      expect(page).to have_content("Forgot your password?")
-
-      expect(page).to have_link "Log in", href: new_user_session_path
-      expect(page).to have_link "Create an account", href: new_user_registration_path
-    end
-
-    it "has has add resource links" do
-      visit videos_path
-
-      expect(page).to have_link "Add Channel", href: channels_path
-      expect(page).to have_link "Add Playlist", href: playlists_path
-      expect(page).to have_link "Add Video", href: new_video_path
-    end
-
-    describe "search bar" do
-      it "has input field" do
-        visit videos_path
-
-        expect(page).to have_css("input#query")
-      end
-
-      it "has submit button" do
-        visit videos_path
-
-        expect(page).to have_css("button.searchButton")
-      end
-
-      # it "has autocomplete" do
-      #   driven_by(:selenium)
-      #   create(:leader, name: "autocomplete match")
-      #   visit videos_path
-      #   find("input#query").fill_in with: "autocomplete"
-      #   expect(page).to have_content("autocomplete match")
-      # end
-    end
+  it "creates account, shows header, edit user page, add resource...", js: true do
+    set_up_videos
+    visit root_path
+    shows_page_navigation
+    shows_search_bar
+    shows_page_footer
+    create_account
+    logout
+    login
+    shows_header_logged_in
+    add_new_video
+    add_new_channel
+    add_new_playlist
+    edit_user_page
+    performs_a_search
+    performs_autocomplete_search
+    logout
   end
 
-  describe "footer" do
-    it "has footer content" do
-      visit videos_path
-      expect(page).to have_content("TangoTubeTV App | Powered by Youtube API")
-      expect(page).to have_link("Privacy Policy", href: privacy_path)
-      expect(page).to have_link("Terms of Service", href: terms_path)
-      expect(page).to have_link("G​oogle Privacy Policy", href: "http://www.google.com/policies/privacy")
-    end
+  def video_title_collection
+    page.all("div.video-title").map(&:text)
+  end
+
+  def set_up_videos
+    leader = create(:leader, name: "Leader Name")
+    create(:video, :display, title: "expected_result", popularity: "1", leader: leader)
+    create(:video, :display, title: "video_b", popularity: "2")
+    VideosSearch.refresh
+  end
+
+  def shows_page_navigation
+    expect(page).to have_link("Add Channel", href: channels_path)
+    expect(page).to have_link("Add Playlist", href: playlists_path)
+    expect(page).to have_link("Add Video", href: new_video_path)
+    expect(page).to have_content("Sign up")
+    expect(page).to have_content("Login")
+    expect(page).to have_link("Sign up", href: new_user_registration_path)
+    expect(page).to have_link("Login", href: new_user_session_path)
+  end
+
+  def shows_search_bar
+    expect(page).to have_css("input#query")
+    expect(page).to have_css("button.searchButton")
+  end
+
+  def shows_page_footer
+    expect(page).to have_content("TangoTubeTV App | Powered by Youtube API")
+    expect(page).to have_link("Privacy Policy", href: privacy_path)
+    expect(page).to have_link("Terms of Service", href: terms_path)
+    expect(page).to have_link("G​oogle Privacy Policy", href: "http://www.google.com/policies/privacy")
+  end
+
+  def create_account
+    click_on("Sign up")
+    shows_page_registrations_new
+    fill_in(:user_email, with: "j.doe@example.com")
+    fill_in(:user_password, with: "foobar1")
+    fill_in(:user_password_confirmation, with: "foobar1")
+    click_on("Create account")
+
+    expect(page).to have_content("Welcome! You have signed up successfully.")
+  end
+
+  def login
+    click_on("Login")
+    expect(page).to have_content("Create an account")
+    expect(page).to have_content("Forgot your password?")
+    fill_in(:user_email, with: "j.doe@example.com")
+    fill_in(:user_password, with: "foobar1")
+    expect(page).to have_content("Remember me")
+    expect(page).to have_link("Create an account", href: new_user_registration_path)
+    expect(page).to have_link("Forgot your password?", href: new_user_password_path)
+
+    click_on("Log in")
+
+    expect(page).to have_content("Signed in successfully.")
+  end
+
+  def shows_page_registrations_new
+    expect(page).to have_field("user_email")
+    expect(page).to have_field("user_password")
+    expect(page).to have_field("user_password_confirmation")
+    expect(page).to have_button("Create account")
+  end
+
+  def shows_header_logged_in
+    expect(page).to have_link("Edit profile", href: edit_user_registration_path)
+    expect(page).to have_link("Logout", href: destroy_user_session_path)
+  end
+
+  def add_new_video
+    click_on("Add Video")
+    expect(page).to have_content("Add Video")
+    expect(page).to have_content("youtube.com/watch?v=")
+    expect(page).to have_field(id: "video_youtube_id")
+    expect(page).to have_button("Add New Video")
+
+    fill_in("video_youtube_id", with: "new_youtube_id")
+    click_on("Add New Video")
+
+    expect(page).to have_content("Video Sucessfully Added: The video must be approved before the videos are added")
+  end
+
+  def add_new_channel
+    click_on("Add Channel")
+    expect(page).to have_content("All Channels")
+    expect(page).to have_content("youtube.com/channel/")
+    expect(page).to have_field(id: "channel_channel_id")
+    expect(page).to have_button("Add New Channel")
+
+    fill_in("channel_channel_id", with: "new_channel_id")
+    click_on("Add New Channel")
+
+    expect(page).to have_content("Channel Sucessfully Added: The channel must be approved before the videos are added")
+  end
+
+  def add_new_playlist
+    click_on("Add Playlist")
+    expect(page).to have_content("All playlists")
+    expect(page).to have_content("youtube.com/playlist/")
+    expect(page).to have_field(id: "playlist_slug")
+    expect(page).to have_button("Add New Playlist")
+
+    fill_in("playlist_slug", with: "new_playlist_id")
+    click_on("Add New Playlist")
+
+    expect(page).to have_content("Playlist Sucessfully Added: The playlist must be approved before the videos are added")
+  end
+
+  def edit_user_page
+    click_on("Edit profile")
+
+    expect(page).to have_content("Edit User")
+    expect(page).to have_content("Email")
+    expect(page).to have_content("Password confirmation")
+    expect(page).to have_content("Current password")
+
+    expect(page).to have_content("Cancel my account")
+    click_on("Back")
+  end
+
+  def forgot_your_password_page
+    visit new_user_session_path
+    expect(page).to have_content("Forgot your password?")
+
+    click_on("Forgot your password?")
+
+    expect(page).to have_content("Email")
+    expect(page).to have_content("Forgot your password?")
+
+    expect(page).to have_link("Log in", href: new_user_session_path)
+    expect(page).to have_link("Create an account", href: new_user_registration_path)
+  end
+
+  def performs_a_search
+    click_on("Popularity")
+    expect(video_title_collection).to eq(%w[expected_result video_b])
+    fill_in("query", with: "expected_result")
+    click_on(class: "searchButton")
+    expect(page).to have_current_path("/?query=expected_result")
+    expect(page).to have_content("1 Result Found")
+    expect(video_title_collection).to eq(%w[expected_result])
+  end
+
+  def performs_autocomplete_search
+    fill_in("query", with: "Leader")
+    expect(page).to have_content("Leader Name")
+    find(class: "aa-suggestion", text: "Leader Name").click
+    expect(page).to have_current_path("/?query=expected_result")
+    expect(page).to have_content("1 Result Found")
+    expect(video_title_collection).to eq(%w[expected_result])
+  end
+
+  def logout
+    click_on "Logout"
+    expect(page).to have_content("Signed out successfully.")
   end
 end
