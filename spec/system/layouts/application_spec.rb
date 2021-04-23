@@ -1,23 +1,45 @@
 require "rails_helper"
 
 RSpec.describe "Videos::Index", type: :system do
-  it "creates account, shows header, edit user page, add resource...", js: true do
-    set_up_videos
-    visit root_path
-    shows_page_navigation
-    shows_search_bar
-    shows_page_footer
-    create_account
-    logout
-    login
-    shows_header_logged_in
-    add_new_video
-    add_new_channel
-    add_new_playlist
-    edit_user_page
-    performs_a_search
-    performs_autocomplete_search
-    logout
+  describe "registered user flow" do
+    it "login existing account, shows header, edit user page, add resource...", js: true do
+      set_up_videos
+      generate_existing_user
+      visit root_path
+      shows_page_navigation
+      shows_search_bar
+      shows_page_footer
+      login
+      shows_header_logged_in
+      add_new_video
+      add_new_channel
+      add_new_playlist
+      edit_user_page
+      performs_a_search
+      performs_autocomplete_search
+      logout
+    end
+  end
+
+  describe "unregistered user flow" do
+    it "creates account, shows header, edit user page, add resource...", js: true do
+      set_up_videos
+      visit root_path
+      shows_page_navigation
+      shows_search_bar
+      shows_page_footer
+      create_account
+      logout
+      login
+      shows_header_logged_in
+      add_new_video
+      add_new_channel
+      add_new_playlist
+      edit_user_page
+      performs_a_search
+      performs_autocomplete_search
+      logout
+    end
   end
 
   def video_title_collection
@@ -51,6 +73,10 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_link("Privacy Policy", href: privacy_path)
     expect(page).to have_link("Terms of Service", href: terms_path)
     expect(page).to have_link("G​oogle Privacy Policy", href: "http://www.google.com/policies/privacy")
+  end
+
+  def generate_existing_user
+    create(:user, email: "j.doe@example.com", password: "foobar1")
   end
 
   def create_account
