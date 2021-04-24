@@ -11,7 +11,12 @@
     </div>
     <div class="autocompleteContainer" data-controller="autocomplete">
       <%= form_with(url: root_path, method: :get, local: true, class: "searchBarContainer") do |form| %>
-        <%= form.text_field :query, value: @current_search, placeholder: "Search #{number_with_delimiter(@videos_total)} videos...", class: 'searchBar', 'data-autocomplete-target': "field", 'data-autocomplete-url': "/search_suggestions" %>
+        <%= form.text_field :query,
+              value: @current_search,
+              placeholder: "Search #{number_with_delimiter(@videos_total)} videos...",
+              class: 'searchBar',
+                      'data-autocomplete-target': "field",
+                      'data-autocomplete-url': "/search_suggestions" %>
         <%= form.button fa_icon("search"), class: "searchButton", name: nil %>
       <% end %>
       </div>

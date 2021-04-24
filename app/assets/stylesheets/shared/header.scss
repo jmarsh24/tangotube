@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: $primary-color;
   z-index: 1012;
   display: flex;
   justify-content: space-between;
@@ -18,14 +18,14 @@
   width: 100%;
   justify-content: flex-end;
   align-items: center;
-  background-color: #f9f9f9;
-  padding: 5px 2rem;
+  background-color: $secondary-header-background;
+  padding: 5px 2.5em;
   font-size: .8rem;
   a {
     margin: 0 .5rem;
-    color: #aaaaaa;
+    color: $secondary-header-link-color;
     &:hover {
-      color: #4b4b4b;
+      color: $secondary-header-link-color-hover;
     }
   }
 }
@@ -34,8 +34,9 @@
     flex: 1;
     width: 100%;
     display: flex;
-    border-bottom: 1px solid #e8e8e8;
-    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    padding: 0 2.5em;
   }
 
   .buttonSideBar {
@@ -62,11 +63,10 @@
       font-size: 24px;
       color: black;
       letter-spacing: -1px;
-      padding-left: 2.5rem;
       font-weight: bold;
 
       &:hover {
-        color: #3d3d3d;
+        color: $logo-hover-color;
       }
     }
   }
@@ -91,10 +91,10 @@
     .searchBar {
       flex: 1;
       width: 100%;
-      color: rgb(17, 17, 17);
+      color: $placeholder-font-color;
       height: 30px;
       padding: 4px 10px;
-      border: 1px solid #ebebeb;
+      border: 1px solid $border-color;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
       border-top-right-radius: 0;
@@ -107,10 +107,11 @@
 
       &:focus {
         outline: none;
-        border: 1px solid #719ECE;
+        border: 1px solid $search-bar-focus-color;
       }
+
       input {
-        color: rgb(17, 17, 17);
+        color: $placeholder-font-color;
         margin: 2px 4px;
         padding: 1px;
       }
@@ -119,14 +120,14 @@
     .searchButton {
       height: 30px;
       font-size: .8rem;
-      background-color: rgb(248, 248, 248);
-      border: 1px solid #ebebeb;
+      background-color: $search-bar-button-color;
+      border: 1px solid $border-color;
       border-bottom-right-radius: 3px;
       border-top-right-radius: 3px;
       cursor: pointer;
       width: 55px;
       &:hover {
-        background-color: rgb(240, 240, 240);
+        background-color: $search-bar-button-color-hover;
       }
     }
   }
@@ -140,7 +141,6 @@
 
   nav#Login{
     font-size: 0.8rem;
-    margin: 0 2rem;
   }
 
   .navbar-link {
@@ -153,12 +153,12 @@
   .navbar-link#sign-up {
     display: flex;
     border: 1px solid;
-    border-radius: 0.2rem;
-    padding: 0.4rem;
-    margin: 0.5rem;
+    border-radius: 0.2em;
+    padding: 0.4em;
+    margin: 0 0 0 .5em;
     &:hover {
-      color: #222222;
-      border-color: #222222;
+      color: $nav-link-color-hover;
+      border-color: $nav-link-color-hover;
     }
   }
 }
@@ -173,7 +173,7 @@
     font-size: 14px;
     margin-right: 2rem;
     &:hover {
-      color: #222222;
+      color: $nav-link-color-hover;
     }
   }
 }

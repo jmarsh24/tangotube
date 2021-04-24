@@ -1,11 +1,11 @@
-.loadMoreContainer {
+.load-more-container {
   display: flex;
   flex-direction: column;
   padding: 3rem 0;
-  background-color: #f9f9f9;
+  background-color: $secondary-color;
 }
 
-.loadMoreResults {
+.load-more-results {
   flex: 1;
   margin: 0 auto;
   color: rgb(96, 96, 96);
@@ -13,25 +13,27 @@
 }
 
 .load-more-link {
-  flex: 1;
-  display: block;
-  color: #363636;
-  font-size: .8rem;
-  background-color: rgb(248, 248, 248);
-  border: 2px solid #929292;
+  color: $primary-font-color;
+  font-size: .9rem;
+  background-color: white;
+  border: 1px solid $border-color-secondary;
   border-radius: 5px;
   text-align: center;
   text-decoration: none;
+  width: 180px;
+  padding: 1em;
+  margin: 1rem auto;
   &:hover {
-    background-color: rgb(240, 240, 240);
+    background-color: $border-color-secondary;
+  }
+    .loading-animation {
+    font-size: 0.35rem;
   }
 }
 
-  .load-more-link {
-    width: 200px;
-    padding: 20px;
-    margin: 1rem auto;
-  }
+.load-more-link {
+
+}
 
 @media (max-width: 500px) {
   .load-more-link {

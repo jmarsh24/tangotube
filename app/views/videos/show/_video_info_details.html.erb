@@ -1,16 +1,16 @@
 <% if @video.leader.present? || @video.follower.present? %>
-  <div class="video-info-details-main">
+  <div class="detail-section-label">
       <h4>Performers</h4>
+    <%= render partial: "videos/show/video_info_item",
+                        locals: { header: "Leader",
+                        value: link_to(@video.leader.try(:name),
+                                        root_path(leader_id: @video.leader.id), {'data-turbo-frame': "_top"}) } if @video.leader.present? %>
+    <%= render partial: "videos/show/video_info_item",
+                        locals: { header: "Follower",
+                        value: link_to(@video.follower.try(:name),
+                                        root_path(follower_id: @video.follower.id), {'data-turbo-frame': "_top"}) } if @video.follower.present? %>
   </div>
 <% end %>
-  <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Leader",
-                      value: link_to(@video.leader.try(:name),
-                                      root_path(leader_id: @video.leader.id), {'data-turbo-frame': "_top"}) } if @video.leader.present? %>
-  <%= render partial: "videos/show/video_info_item",
-                      locals: { header: "Follower",
-                      value: link_to(@video.follower.try(:name),
-                                      root_path(follower_id: @video.follower.id), {'data-turbo-frame': "_top"}) } if @video.follower.present? %>
   <% if @video.event.present? %>
 <div class="detail-section-label">
   <h4>Event Info</h4>

@@ -4,7 +4,7 @@
 
 .ss-open {
   height: 245px !important;
-  background-color: white !important;
+  background-color: $primary-color !important;
 }
 
 .ss-main.ss-select-filter {
@@ -13,6 +13,11 @@
 
 .ss-main .ss-single-selected {
   background: none !important;
+}
+
+.ss-main .ss-single-selected .placeholder {
+  position: relative;
+  top: 0px;
 }
 
 .ss-deselect {
@@ -63,11 +68,11 @@
     -webkit-appearance: none !important;
     -webkit-border-radius: 4px !important;
     -webkit-border-radius: 4px !important;
-    background: #f9f9f9 !important;
+    background: $ss-search-background !important;
   }
   input:focus {
     box-shadow: none !important;
-    border: 2px solid #5897fb !important;
+    border: 2px solid $ss-search-background-focus !important;
   }
 }
 

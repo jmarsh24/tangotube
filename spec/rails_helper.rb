@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'devise'
 
 SimpleCov.start 'rails' do
   # No vendor assets yet to test
@@ -68,7 +69,28 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Warden::Test::Helpers
+
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    options = Selenium::WebDriver::Chrome::Options.new
+
+    [
+      "headless",
+      "window-size=1600x1280",
+      "disable-gpu"
+    ].each { |arg| options.add_argument(arg) }
+
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
+
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome_headless
+  end
 end
 
 Shoulda::Matchers.configure do |config|

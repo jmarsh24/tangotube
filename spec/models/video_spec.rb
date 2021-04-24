@@ -50,50 +50,50 @@ RSpec.describe Video, type: :model do
       end
     end
 
-    describe ".filter_by_leader" do
+    describe ".filter_by_leader_id" do
       it "returns video with corresponding orchestra event_id" do
-        leader = create(:leader, name: "Carlitos Espinoza")
+        leader = create(:leader)
         video = create(:video, leader: leader)
-        expect(described_class.filter_by_leader("Carlitos Espinoza")).to eq [video]
+        expect(described_class.filter_by_leader_id(leader.id)).to eq [video]
       end
 
       it "does not return video without corresponding orchestra event_id" do
         video = create(:video)
-        expect(described_class.filter_by_leader("Carlitos Espinoza")).not_to eq [video]
+        expect(described_class.filter_by_leader_id("0")).not_to eq [video]
       end
     end
 
-    describe ".filter_by_follower" do
-      it "returns videos with matching follower name in video" do
-        follower = create(:follower, name: "Noelia Hurtado")
+    describe ".filter_by_follower_id" do
+      it "returns videos with matching follower" do
+        follower = create(:follower)
         video = create(:video, follower: follower)
-        expect(described_class.filter_by_follower("Noelia Hurtado")).to eq [video]
+        expect(described_class.filter_by_follower_id(follower.id)).to eq [video]
       end
 
-      it "does not return videos without matching follower name in video" do
+      it "does not return videos with incorrect follower id" do
         video = create(:video)
-        expect(described_class.filter_by_follower("Noelia Hurtado")).not_to eq [video]
+        expect(described_class.filter_by_follower_id("0")).not_to eq [video]
       end
     end
 
-    describe ".filter_by_channel" do
-      it "returns videos with matching channel name in video" do
-        channel = create(:channel, title: "030 Tango")
+    describe ".filter_by_channel_id" do
+      it "returns videos with matching channel" do
+        channel = create(:channel)
         video = create(:video, channel: channel)
-        expect(described_class.filter_by_channel("030 Tango")).to eq [video]
+        expect(described_class.filter_by_channel_id(channel.id)).to eq [video]
       end
 
-      it "does not return videos without matching channel name in video" do
+      it "does not return videos with incorrect channel id" do
         video = create(:video)
-        expect(described_class.filter_by_channel("030 Tango")).not_to eq [video]
+        expect(described_class.filter_by_channel_id("0")).not_to eq [video]
       end
     end
 
     describe ".filter_by_event_id" do
       it "returns videos with matching event_id in video" do
-        event = create(:event, title: "Embrace Berlin", id: 1)
+        event = create(:event)
         video = create(:video, event: event)
-        expect(described_class.filter_by_event_id("1")).to eq [video]
+        expect(described_class.filter_by_event_id(event.id)).to eq [video]
       end
 
       it "does not return videos without matching event_id in video" do
@@ -104,9 +104,9 @@ RSpec.describe Video, type: :model do
 
     describe ".filter_by_song_id" do
       it "returns videos with song_id in video" do
-        song = create(:song, id: 1)
+        song = create(:song)
         video = create(:video, song: song)
-        expect(described_class.filter_by_song_id("1")).to eq [video]
+        expect(described_class.filter_by_song_id(song.id)).to eq [video]
       end
 
       it "does not return videos without matching song_id" do
@@ -624,13 +624,13 @@ RSpec.describe Video, type: :model do
     end
 
     describe ".paginate" do
-      it "limits pagination to 120 queries" do
-        create_list(:video, 200)
-        page1 = described_class.paginate(1, 120)
-        page2 = described_class.paginate(2, 120)
-        page3 = described_class.paginate(3, 120)
-        expect(page1.count).to eq(120)
-        expect(page2.count).to eq(80)
+      it "limits pagination to 1" do
+        create_list(:video, 3)
+        page1 = described_class.paginate(1, 2)
+        page2 = described_class.paginate(2, 2)
+        page3 = described_class.paginate(3, 2)
+        expect(page1.count).to eq(2)
+        expect(page2.count).to eq(1)
         expect(page3.count).to eq(0)
       end
     end
