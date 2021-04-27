@@ -52,11 +52,12 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0 .5em;
 }
 
 .video-info-details-main {
   flex: 1;
-  margin: 0 1em;
+  margin: 0 .5em;
   flex-direction: column;
   a {
     color: $link-color;
@@ -69,7 +70,7 @@
 
 .recommended-videos-section {
   flex: 1;
-  margin: 0 1em;
+  margin: 0 .5em;
   flex-direction: column;
   max-width: 400px;
   min-width: 320px;
