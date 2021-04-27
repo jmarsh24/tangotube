@@ -106,7 +106,6 @@
   height: 2rem;
   font-size: .7rem;
   align-items: center;
-  // justify-content: space-between;
   padding: 1rem 1em;
   min-width: 1000px;
   label {
@@ -150,10 +149,11 @@
   .filter-container {
     height: 315px;
     overflow-x: auto;
-    padding: 0;
     margin-bottom: 0;
+    padding: 0 5px;
     .filter {
       min-width: 190px;
+      margin: 0 6px;
     }
   }
 
