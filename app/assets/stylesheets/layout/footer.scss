@@ -38,14 +38,19 @@
     padding-right: 0.5rem;
   }
 
-    a {
+  a {
     display: flex;
     text-decoration: none;
   }
 
-    a:hover {
+  a:hover {
     text-decoration: underline;
     color: rgb(3, 102, 214);
   }
+}
 
+@media (max-width: 500px) {
+  .footer {
+      padding-top: 5px;
+    }
 }

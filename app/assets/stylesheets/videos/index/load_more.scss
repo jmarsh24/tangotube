@@ -31,15 +31,15 @@
   }
 }
 
-.load-more-link {
-
-}
-
 @media (max-width: 500px) {
+  .load-more-container {
+    padding: 20px 0 0 0;
+  }
+
   .load-more-link {
     width: 150px;
     margin: 20px auto 20px auto;
-    padding: 15px;
+    padding: 10px;
     font-size: 17px;
   }
 }
