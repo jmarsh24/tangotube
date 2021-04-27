@@ -149,12 +149,11 @@
 
   .filter-container {
     height: 315px;
-    max-width: 100%;
     overflow-x: auto;
     padding: 0;
+    margin-bottom: 0;
     .filter {
       min-width: 190px;
-      height: 200px;
     }
   }
 
