@@ -1,9 +1,9 @@
 <div data-controller="filter">
   <div class="filter-header">
     <div class="filter-container-button-results">
-      <button data-action="click->toggle#toggle" class="filter-button"><%= fa_icon "sliders-h 2x", left: true %>
-        <p id="filter-button-text">Filters</p>
-      </button>
+      <%= button_tag type: 'button', data: { action: "click->toggle#toggle"}, class: "filter-button" do %>
+        <%= fa_icon "sliders-h 2x", left: true %>Filters
+      <% end %>
       <div id="filter_results">
         <% if filtering_params.present? %>
           <%= "#{pluralize(number_with_delimiter(@search.videos.size), "Result")} Found" %>
