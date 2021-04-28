@@ -15,6 +15,7 @@ RSpec.describe "Videos::Index", type: :system do
       add_new_channel
       add_new_playlist
       edit_user_page
+      open_filters
       performs_a_search
       performs_autocomplete_search
       logout
@@ -36,6 +37,7 @@ RSpec.describe "Videos::Index", type: :system do
       add_new_channel
       add_new_playlist
       edit_user_page
+      open_filters
       performs_a_search
       performs_autocomplete_search
       logout
@@ -165,7 +167,7 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_content("Current password")
 
     expect(page).to have_content("Cancel my account")
-    click_on("Back")
+    click_on("TangoTube")
   end
 
   def forgot_your_password_page
@@ -181,8 +183,23 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_link("Create an account", href: new_user_registration_path)
   end
 
+  def open_filters
+    byebug
+    find(class: "filter-button").click
+    expect(page).to have_css("div.filter-container:not(.isHidden)", visible: :all)
+    byebug
+  end
+
+  def close_filters
+    find(class: "filter-button").click
+    expect(page).to have_css("div.filter-container.isHidden", visible: :all)
+  end
+
   def performs_a_search
+    byebug
     click_on("Popularity")
+    byebug
+    expect(page).to have_current_path("/?sort=videos.popularity&direction=asc")
     expect(video_title_collection).to eq(%w[expected_result video_b])
     fill_in("query", with: "expected_result")
     click_on(class: "searchButton")
