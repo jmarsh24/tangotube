@@ -3,10 +3,14 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["filter"]
+  static targets = [ "filter" ]
+  static values = { sort: String,
+                    direction: String,
+                    hd: String
+                  }
 
   filter() {
-    const url = `${window.location.pathname}?${this.params}`;
+    const url = `${window.location.pathname}?${this.params}`
 
     Rails.ajax({
      type: "get",
@@ -23,15 +27,12 @@ export default class extends Controller {
       const containerFilterresults = document.getElementById('filter_results')
       const containerSorting = document.getElementById('sortable_container')
       const newContainerSorting = data.getElementById('sortable_container')
-      const containerHd = document.getElementById('hd_filters')
-      const newContainerHd = data.getElementById('hd_filters')
 
       containerFilters.innerHTML = newContainerFilters.innerHTML
       containerVideos.innerHTML = newContainerVideos.innerHTML
       containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
       containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
       containerSorting.innerHTML = newContainerSorting.innerHTML
-      containerHd.innerHTML = newContainerHd.innerHTML
 
       history.pushState({}, '', `${window.location.pathname}?${this.params}`)
      },
@@ -54,6 +55,22 @@ export default class extends Controller {
   setCurrentParams(searchParams) {
     let params = this.filterTargets.map(t => [t.name, t.value])
 
+    let sortParam = ["sort", this.sortValue]
+    let directionParam = ["direction", this.directionValue]
+    let hdParam = ["hd", this.hdValue]
+
+    if (sortParam[1]) {
+      searchParams.set(sortParam[0], sortParam[1])
+    }
+
+    if (directionParam[1]) {
+      searchParams.set(directionParam[0], directionParam[1])
+    }
+
+    if (hdParam[1]) {
+      searchParams.set(hdParam[0], hdParam[1])
+    }
+
     params.forEach(param => searchParams.set(param[0], param[1]))
 
     return searchParams
@@ -62,7 +79,7 @@ export default class extends Controller {
   deleteEmptyParams(searchParams) {
     let keysForDel = []
       searchParams.forEach((v, k) => {
-        if (v == '' || k == '') keysForDel.push(k)
+        if (v == '' || k == '' || v == '0') keysForDel.push(k)
       })
       keysForDel.forEach(k => {
         searchParams.delete(k)
