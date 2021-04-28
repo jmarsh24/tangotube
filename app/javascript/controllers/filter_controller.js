@@ -1,6 +1,8 @@
 // filters_controller.js
 import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
+import { Turbo } from '@hotwired/turbo-rails'
+
 
 export default class extends Controller {
   static targets = ["filter"]
@@ -13,28 +15,31 @@ export default class extends Controller {
      url: url,
      success: (data) => {
 
-      const newContainerFilters = data.getElementById('filter-container-upper')
-      const containerFilters = document.getElementById('filter-container-upper')
-      const newContainerVideos = data.getElementById('videos')
-      const containerVideos = document.getElementById('videos')
-      const newContainerLoadmore = data.getElementById('load-more-container')
-      const containerLoadmore = document.getElementById('load-more-container')
-      const newContainerFilterresults = data.getElementById('filter_results')
-      const containerFilterresults = document.getElementById('filter_results')
-      const containerSorting = document.getElementById('sortable_container')
-      const newContainerSorting = data.getElementById('sortable_container')
-      const containerHd = document.getElementById('hd_filters')
-      const newContainerHd = data.getElementById('hd_filters')
+        const newContainerFilters = data.getElementById('filter-container-upper')
+        const containerFilters = document.getElementById('filter-container-upper')
+        const newContainerVideos = data.getElementById('videos')
+        const containerVideos = document.getElementById('videos')
+        const newContainerLoadmore = data.getElementById('load-more-container')
+        const containerLoadmore = document.getElementById('load-more-container')
+        const newContainerFilterresults = data.getElementById('filter_results')
+        const containerFilterresults = document.getElementById('filter_results')
+        const containerSorting = document.getElementById('sortable_container')
+        const newContainerSorting = data.getElementById('sortable_container')
+        const containerHd = document.getElementById('hd_filters')
+        const newContainerHd = data.getElementById('hd_filters')
 
-      containerFilters.innerHTML = newContainerFilters.innerHTML
-      containerVideos.innerHTML = newContainerVideos.innerHTML
-      containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
-      containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
-      containerSorting.innerHTML = newContainerSorting.innerHTML
-      containerHd.innerHTML = newContainerHd.innerHTML
+        containerFilters.innerHTML = newContainerFilters.innerHTML
+        containerVideos.innerHTML = newContainerVideos.innerHTML
+        containerLoadmore.innerHTML = newContainerLoadmore.innerHTML
+        containerFilterresults.innerHTML = newContainerFilterresults.innerHTML
+        containerSorting.innerHTML = newContainerSorting.innerHTML
+        containerHd.innerHTML = newContainerHd.innerHTML
 
-      history.pushState({}, '', `${window.location.pathname}?${this.params}`)
-     },
+        history.pushState({}, '', `${window.location.pathname}?${this.params}`)
+        window.onpopstate = function () {
+          Turbo.visit(document.location)
+        }
+      },
      error: (data) => {
        console.log(data)
      }
