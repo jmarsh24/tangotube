@@ -21,24 +21,28 @@
 .filter-button {
   display: flex;
   text-decoration: none;
-  padding: .5rem;
+  padding: 6px;
   border: 1px solid $border-color;
   background: $primary-color;
   border-radius: 3px;
   letter-spacing: 0.05em;
   align-items: center;
-  font-size: .6rem;
+  font-size: 0.8rem;
   z-index: 1011;
+  cursor: pointer;
+  svg {
+    height: 15px;
+  }
 }
 
 #filter-button-text {
-  font-size: .85rem;
+  font-size: 0.85rem;
   margin: 0 0 0 8px;
 }
 
 #filter_results {
   display: flex;
-  font-size: .8rem;
+  font-size: 0.8rem;
   margin: 0 10px;
   color: $primary-font-color;
   align-items: center;
@@ -49,7 +53,7 @@
   display: flex;
   text-decoration: none;
   margin: 0 0 0 0.5em;
-  padding: .5rem;
+  padding: 7px;
   border: 1px solid $border-color;
   background: $primary-color;
   border-radius: 0.2em;
@@ -57,6 +61,10 @@
   letter-spacing: 0.05em;
   font-size: 0.7rem;
   z-index: 1011;
+  cursor: pointer;
+  &:hover {
+    color: $sortable-label-color-hover;
+  }
 }
 
 .filter-container {
