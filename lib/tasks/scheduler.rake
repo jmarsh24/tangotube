@@ -8,10 +8,10 @@ task import_all_reviewed_channels: :environment do
 end
 
 desc 'This task populates playlists'
-task import_all_playlists: :environment do
+task import_all_reviewed_playlists: :environment do
   puts 'Adding all new playlists'
-  Playlist.not_imported.reviewed.find_each do |playlist|
-    Video.import_playlist(playlist.slug)
+  Playlist.not_imported.reviewed.find_each do |channel|
+    Video::YoutubeImport.from_playlist(playlist.slug)
   end
   puts 'done.'
 end
