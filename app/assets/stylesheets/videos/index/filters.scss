@@ -116,17 +116,15 @@
   height: 272.5px;
 }
 
-
 .videos-sortable-container {
   display: flex;
   height: 2rem;
-  font-size: .7rem;
+  font-size: 0.7rem;
   align-items: center;
   padding: 0 1em;
-  margin: 5px 0;
   min-width: 1000px;
   label {
-    font-size: .9rem;
+    font-size: 0.9rem;
     font-weight: 500;
     min-width: 50px;
     color: $sortable-label-color;
@@ -135,7 +133,7 @@
   a {
     text-decoration: none;
     color: $primary-font-color;
-    font-size: .8rem;
+    font-size: 0.8rem;
     text-align: center;
     min-width: 100px;
     &:hover {
@@ -148,19 +146,22 @@
   display: flex;
   color: $primary-color;
   justify-content: center;
-  font-size: .8rem;
+  font-size: 0.8rem;
   margin: 0 5px;
   min-width: 100px;
   svg {
-    font-size: .7rem;
+    font-size: 0.7rem;
     color: $sortable-label-color;
   }
 }
 
 @media (max-width: 500px) {
-
   .filter-header {
     padding: 10px;
+  }
+
+  #filter_results {
+    font-size: 12px;
   }
 
   .filter-container {
@@ -171,7 +172,7 @@
     .filter {
       min-width: 220px;
       margin: 0 6px;
-      font-size: .85rem;
+      font-size: 0.85rem;
     }
   }
 
@@ -179,6 +180,7 @@
     min-width: 700px;
     a {
       min-width: 80px;
+      font-size: 0.7rem;
     }
   }
   .videos-sortable-button {

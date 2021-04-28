@@ -58,7 +58,8 @@
   padding-bottom: 0px !important;
 }
 
-.ss-main .ss-single-selected .placeholder, .ss-main .ss-single-selected .placeholder * {
+.ss-main .ss-single-selected .placeholder,
+.ss-main .ss-single-selected .placeholder * {
   align-items: none !important;
   padding-top: 0px !important;
 }
@@ -78,4 +79,10 @@
 
 .ss-arrow {
   display: none !important;
+}
+
+@media (max-width: 500px) {
+  .select-filter {
+    font-size: 12px;
+  }
 }
