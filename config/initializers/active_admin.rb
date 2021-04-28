@@ -125,6 +125,7 @@ ActiveAdmin.setup do |config|
   #
   # You can completely disable comments:
   config.comments = false
+
   #
   # You can change the name under which comments are registered:
   # config.comments_registration_name = 'AdminComment'
@@ -157,7 +158,11 @@ ActiveAdmin.setup do |config|
   # You can exclude possibly sensitive model attributes from being displayed,
   # added to forms, or exported by default by ActiveAdmin
   #
-  config.filter_attributes = %i[encrypted_password password password_confirmation]
+  config.filter_attributes = %i[
+    encrypted_password
+    password
+    password_confirmation
+  ]
 
   # == Localize Date/Time Format
   #
@@ -272,6 +277,7 @@ ActiveAdmin.setup do |config|
   # You can control the default per page count for all resources here.
   #
   config.default_per_page = 100
+
   #
   # You can control the max per page count too.
   #

@@ -7,9 +7,12 @@ class VideosController < ApplicationController
   helper_method :sorting_params, :filtering_params
 
   def index
-    @search = Video::Search.for(filtering_params: filtering_params,
-                                sorting_params:   sorting_params,
-                                page:             page)
+    @search =
+      Video::Search.for(
+        filtering_params: filtering_params,
+        sorting_params: sorting_params,
+        page: page
+      )
   end
 
   def edit; end
@@ -29,7 +32,9 @@ class VideosController < ApplicationController
     @video = Video.create(youtube_id: params[:video][:youtube_id])
     fetch_new_video
 
-    redirect_to root_path, notice: "Video Sucessfully Added: The video must be approved before the videos are added"
+    redirect_to root_path,
+                notice:
+                  'Video Sucessfully Added: The video must be approved before the videos are added'
   end
 
   private
@@ -39,16 +44,20 @@ class VideosController < ApplicationController
   end
 
   def set_recommended_videos
-    videos = if Video.where(song_id: @video.song_id).size > 3
-               Video.where(song_id: @video.song_id)
-             else
-               Video.where(channel_id: @video.channel_id)
-             end
+    videos =
+      if Video.where(song_id: @video.song_id).size > 3
+        Video.where(song_id: @video.song_id)
+      else
+        Video.where(channel_id: @video.channel_id)
+      end
 
-    @recommended_videos = videos.where(hidden: false)
-                                .where.not(youtube_id: @video.youtube_id)
-                                .order("popularity DESC")
-                                .limit(3)
+    @recommended_videos =
+      videos
+        .where(hidden: false)
+        .where
+        .not(youtube_id: @video.youtube_id)
+        .order('popularity DESC')
+        .limit(3)
   end
 
   def current_search
@@ -60,11 +69,24 @@ class VideosController < ApplicationController
   end
 
   def video_params
-    params.require(:video).permit(:leader_id, :follower_id, :song_id, :event_id, :hidden, :id)
+    params
+      .require(:video)
+      .permit(:leader_id, :follower_id, :song_id, :event_id, :hidden, :id)
   end
 
   def filtering_params
-    params.permit(:leader_id, :follower_id, :channel_id, :genre, :orchestra, :song_id, :query, :hd, :event_id, :year)
+    params.permit(
+      :leader_id,
+      :follower_id,
+      :channel_id,
+      :genre,
+      :orchestra,
+      :song_id,
+      :query,
+      :hd,
+      :event_id,
+      :year
+    )
   end
 
   def sorting_params

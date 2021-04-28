@@ -10,7 +10,7 @@
 #  updated_at    :datetime         not null
 #
 
-corequire "test_helper"
+corequire 'test_helper'
 
 class DancerTest < ActiveSupport::TestCase
   # test "the truth" do

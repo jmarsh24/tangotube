@@ -8,10 +8,10 @@ class Channel < ApplicationRecord
 
   before_save :update_imported, if: :count_changed?
 
-  scope :title_search, lambda { |query|
-                         where("unaccent(title) ILIKE unaccent(?)",
-                               "%#{query}%")
-                       }
+  scope :title_search,
+        lambda { |query|
+          where('unaccent(title) ILIKE unaccent(?)', "%#{query}%")
+        }
 
   private
 

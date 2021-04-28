@@ -6,9 +6,7 @@ class Event::Tangopolix
   end
 
   def fetch
-    (1..PAGINATION_MAX_NUMBER).each do |id|
-      fetch_page(id)
-    end
+    (1..PAGINATION_MAX_NUMBER).each { |id| fetch_page(id) }
   end
 
   private

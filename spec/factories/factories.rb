@@ -1,2 +1,1 @@
-FactoryBot.define do
-end
+FactoryBot.define {}

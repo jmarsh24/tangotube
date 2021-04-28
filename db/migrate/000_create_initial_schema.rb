@@ -365,8 +365,12 @@ ALTER TABLE ONLY public.playlists
     ADD CONSTRAINT fk_rails_d67ef1eb45 FOREIGN KEY (user_id) REFERENCES public.users(id);
 SET search_path TO "$user", public;
 eos
-    statements.split(";
-").each {|s| execute s}
+    statements
+      .split(
+        ';
+'
+      )
+      .each { |s| execute s }
   end
 
   def down
@@ -396,7 +400,11 @@ DROP TABLE public.ahoy_events CASCADE;
 DROP SEQUENCE public.admin_users_id_seq CASCADE;
 DROP TABLE public.admin_users CASCADE;
 eos
-    statements.split(";
-").each {|s| execute s}
+    statements
+      .split(
+        ';
+'
+      )
+      .each { |s| execute s }
   end
 end

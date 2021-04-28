@@ -4,11 +4,16 @@ class WatchController < ApplicationController
   def show
     @videos_total = Video.all.where(hidden: false).size
 
-    @recommended_videos = Video.where(song_id: @video.song_id).or.where(channel_id: @video.song_id)
-                               .where(hidden: false)
-                               .where.not(youtube_id: @video.youtube_id)
-                               .order("popularity DESC")
-                               .limit(3)
+    @recommended_videos =
+      Video
+        .where(song_id: @video.song_id)
+        .or
+        .where(channel_id: @video.song_id)
+        .where(hidden: false)
+        .where
+        .not(youtube_id: @video.youtube_id)
+        .order('popularity DESC')
+        .limit(3)
     @video.clicked!
   end
 
@@ -18,7 +23,8 @@ class WatchController < ApplicationController
 
     @follower_options = Follower.all.order(:name).pluck(:name, :id)
 
-    @song_options = Song.all.order(:title).map { |song| [song.full_title, song.id] }
+    @song_options =
+      Song.all.order(:title).map { |song| [song.full_title, song.id] }
 
     @event_options = Event.all.order(:title).pluck(:title, :id)
   end

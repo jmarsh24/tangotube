@@ -17,7 +17,10 @@ class Video::MusicRecognition::Youtube::Video
   private
 
   def fetch_by_id(youtube_id)
-    YoutubeDL.download("https://www.youtube.com/watch?v=#{youtube_id}", skip_download: true)
+    YoutubeDL.download(
+      "https://www.youtube.com/watch?v=#{youtube_id}",
+      skip_download: true
+    )
   end
 
   def parsed_response
@@ -26,8 +29,8 @@ class Video::MusicRecognition::Youtube::Video
 
   def video_params
     {
-      youtube_song:   parsed_response.deep_find("track"),
-      youtube_artist: parsed_response.deep_find("artist")
+      youtube_song: parsed_response.deep_find('track'),
+      youtube_artist: parsed_response.deep_find('artist')
     }
   end
 end
