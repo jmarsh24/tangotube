@@ -2,9 +2,7 @@ class AddVideosCountToChannel < ActiveRecord::Migration[6.1]
   def change
     add_column :channels, :videos_count, :integer, default: 0, null: false
 
-    reversible do |dir|
-      dir.up { data }
-    end
+    reversible { |dir| dir.up { data } }
   end
 
   def data

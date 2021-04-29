@@ -1,0 +1,33 @@
+.videos-new-container {
+  display: flex;
+  flex: 1;
+  margin-top: 128px;
+  justify-content: center;
+}
+
+.videos-new-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  height: 50px;
+
+  input {
+    margin: auto 0.5rem;
+    height: 2rem;
+    padding: 0.5rem;
+    border: 1px solid #d3d3d3;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    background: #f8f8f8;
+
+    &:hover {
+      background: #f0f0f0;
+    }
+  }
+
+  form {
+    display: flex;
+  }
+}

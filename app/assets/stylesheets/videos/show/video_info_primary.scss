@@ -1,13 +1,10 @@
 .show-video-title {
   text-decoration: none;
   font-size: inherit;
-  color: #333;
+  color: $show-primary-title;
   font-size: 1.2rem;
   font-weight: 700;
-  margin: 0.2rem 0;
-  &:hover {
-    color: black;
-  }
+  margin: 0.2em 0;
 }
 
 .show-video-song {
@@ -17,25 +14,24 @@
   a {
     font-size: 1rem;
     text-decoration: none;
-    color: rgb(97, 97, 97);
+    color: $show-primary-song;
 
     &:hover {
-      color: rgb(3, 3, 3);
+      color: $show-primary-song-hover;
     }
   }
 }
 
 .show-channel-icon {
-  margin: 0.2rem 0.5rem 0 0.2rem;
+  margin: 0.2em 0.5em 0 0.2em;
   border-radius: 50%;
   width: 18px;
   height: 18px;
-  background-color: #aaa;
 }
 
 .show-channel-title {
   font-size: 0.8rem;
-  color: #555;
+  color: $show-primary-channel-title;
 }
 
 .show-video-channel {
@@ -43,19 +39,19 @@
   align-items: center;
   font-size: 1rem;
   a {
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.1em;
     text-decoration: none;
     transition: color 150ms;
-    color: #555;
+    color: $show-primary-channel-title;
   }
 
   a:hover {
-    color: #111;
+    color: $show-primary-channel-title-hover;
   }
 }
 
 .show-video-metadata {
-  color: #555;
+  color: $show-primary-channel-title;
   font-size: 0.7rem;
 }
 
@@ -66,10 +62,10 @@
   a {
     font-size: 1rem;
     text-decoration: none;
-    color: rgb(97, 97, 97);
+    color: $show-primary-video-event;
 
     &:hover {
-      color: rgb(3, 3, 3);
+      color: $show-primary-video-event-hover;
     }
   }
 }

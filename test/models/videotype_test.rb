@@ -7,7 +7,7 @@
 #  related_keywords :string
 #
 
-require "test_helper"
+require 'test_helper'
 
 class VideotypeTest < ActiveSupport::TestCase
   # test "the truth" do

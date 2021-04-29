@@ -3,20 +3,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #f9f9f9;
   padding-top: 2rem;
   padding-bottom: 1rem;
   font-size: 12px;
   width: 100%;
+  background-color: rgb(247, 250, 252);
+  border-top: 1px solid rgb(226, 232, 240);
   a {
-    color: rgb(96, 96, 96);
+    color: rgb(50, 50, 50);
   }
 }
 
 .footerTitle {
   flex: 1;
   text-align: center;
-  color: rgb(96, 96, 96);
+  color: rgb(99, 99, 99);
 }
 
 .footer nav {
@@ -37,14 +38,19 @@
     padding-right: 0.5rem;
   }
 
-    a {
+  a {
     display: flex;
     text-decoration: none;
   }
 
-    a:hover {
+  a:hover {
     text-decoration: underline;
     color: rgb(3, 102, 214);
   }
+}
 
+@media (max-width: 500px) {
+  .footer {
+    padding-top: 5px;
+  }
 }

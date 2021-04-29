@@ -8,7 +8,8 @@ class Video::Display
   end
 
   def any_song_attributes
-    el_recodo_attributes || spotify_attributes || youtube_attributes || acr_cloud_attributes
+    el_recodo_attributes || spotify_attributes || youtube_attributes ||
+      acr_cloud_attributes
   end
 
   def external_song_attributes
@@ -22,7 +23,9 @@ class Video::Display
   end
 
   def spotify_attributes
-    return if @video.spotify_track_name.blank? || @video.spotify_artist_name.blank?
+    if @video.spotify_track_name.blank? || @video.spotify_artist_name.blank?
+      return
+    end
 
     "#{@video.spotify_track_name.titleize} - #{titleize_artist_name(@video.spotify_artist_name)}"
   end
@@ -34,7 +37,9 @@ class Video::Display
   end
 
   def acr_cloud_attributes
-    return if @video.acr_cloud_track_name.blank? || @video.acr_cloud_artist_name.blank?
+    if @video.acr_cloud_track_name.blank? || @video.acr_cloud_artist_name.blank?
+      return
+    end
 
     "#{@video.acr_cloud_track_name.titleize} - #{titleize_artist_name(@video.acr_cloud_artist_name)}"
   end

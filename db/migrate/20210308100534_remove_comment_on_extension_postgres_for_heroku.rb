@@ -1,9 +1,17 @@
 class RemoveCommentOnExtensionPostgresForHeroku < ActiveRecord::Migration[6.1]
   def up
-    ActiveRecord::Base.connection.execute("COMMENT ON EXTENSION plpgsql IS NULL;") if Rails.env.development?
+    if Rails.env.development?
+      ActiveRecord::Base.connection.execute(
+        'COMMENT ON EXTENSION plpgsql IS NULL;'
+      )
+    end
   end
 
   def down
-    ActiveRecord::Base.connection.execute("COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';") if Rails.env.development?
+    if Rails.env.development?
+      ActiveRecord::Base.connection.execute(
+        "COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';"
+      )
+    end
   end
 end

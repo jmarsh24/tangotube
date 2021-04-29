@@ -6,8 +6,6 @@
 
 .video-info-details-secondary {
   flex: 1;
-
-  // margin: 1rem 0;
 }
 
 .detail-column-lyrics {
@@ -23,8 +21,8 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  border-bottom: 1px solid grey;
-  padding: 5px 0;
+  border-bottom: 1px solid $border-color;
+  padding: .5em 0;
 
   &:last-child {
     border-bottom: none;
@@ -42,13 +40,13 @@
   text-align: left;
   font-weight: 600;
   font-size: 0.8rem;
-  color: rgb(96, 96, 96);
+  color: $video-info-details-heading;
 }
 
 .detail-item-value {
   text-align: right;
   font-size: 0.8rem;
-  color: rgb(96, 96, 96);
+  color: $video-info-details-value;
 }
 
 .detail-item-value {

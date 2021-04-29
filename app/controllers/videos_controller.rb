@@ -1,98 +1,67 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
-  before_action :current_search, only: %i[index show]
-  NUMBER_OF_VIDEOS_PER_PAGE = 120
+  before_action :current_search, only: %i[index]
+  before_action :set_video, only: %i[update edit]
+  before_action :set_recommended_videos, only: %i[edit]
 
-  helper_method :sort_column, :sort_direction
+  helper_method :sorting_params, :filtering_params
 
   def index
-    @videos_total = Video.not_hidden.size
-    @videos = Video.not_hidden
-                   .includes(:leader, :follower, :channel, :song, :event)
-                   .order("#{sort_column} #{sort_direction}")
-                   .filter_videos(filtering_params)
-
-    @videos_paginated = @videos.paginate(page, NUMBER_OF_VIDEOS_PER_PAGE)
-    @videos_paginated = @videos_paginated.shuffle if filtering_params.blank?
-
-    @next_page_items = @videos.paginate(page + 1, NUMBER_OF_VIDEOS_PER_PAGE)
-    @items_display_count = (@videos.size - (@videos.size - (page * NUMBER_OF_VIDEOS_PER_PAGE).clamp(0, @videos.size)))
-
-    @leaders    = @videos.joins(:leader).pluck("leaders.name").uniq.sort.map(&:titleize)
-    @followers  = @videos.joins(:follower).pluck("followers.name").uniq.sort.map(&:titleize)
-    @channels   = @videos.joins(:channel).pluck("channels.title").uniq.compact.sort
-    @artists    = @videos.joins(:song).pluck("songs.artist").uniq.compact.sort.map(&:titleize)
-    @genres     = @videos.joins(:song).pluck("songs.genre").uniq.compact.sort.map(&:titleize).uniq
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render json: { videos:   render_to_string(partial: "videos/index/videos", formats: [:html]),
-                       loadmore: render_to_string(partial: "videos/index/load_more", formats: [:html]) }
-      end
-    end
+    @search =
+      Video::Search.for(
+        filtering_params: filtering_params,
+        sorting_params: sorting_params,
+        page: page
+      )
   end
 
-  def show
-    @video = Video.find_by(youtube_id: params[:v])
-    @videos_total = Video.not_hidden.size
-    videos = if Video.where(song_id: @video.song_id).size > 3
-               Video.where(song_id: @video.song_id)
-             else
-               Video.where(channel_id: @video.channel_id)
-             end
+  def edit; end
 
-    @recommended_videos = videos.where(hidden: false)
-                                .where.not(youtube_id: @video.youtube_id)
-                                .order("popularity DESC")
-                                .limit(3)
+  def show
+    @video = Video.find_by(youtube_id: show_params[:v])
+    set_recommended_videos
     @video.clicked!
   end
 
-  def edit
-    @video = Video.find(params[:id])
-    @videos_total = Video.not_hidden.size
-    videos = if Video.where(song_id: @video.song_id).size > 3
-               Video.where(song_id: @video.song_id)
-             else
-               Video.where(channel_id: @video.channel_id)
-             end
-
-    @recommended_videos = videos.where(hidden: false)
-                                .where.not(youtube_id: @video.youtube_id)
-                                .order("popularity DESC")
-                                .limit(3)
-  end
-
   def update
-    @video = Video.find(params[:id])
     @video.update(video_params)
     redirect_to watch_path(v: @video.youtube_id)
   end
 
+  def create
+    @video = Video.create(youtube_id: params[:video][:youtube_id])
+    fetch_new_video
+
+    redirect_to root_path,
+                notice:
+                  'Video Sucessfully Added: The video must be approved before the videos are added'
+  end
+
   private
+
+  def set_video
+    @video = Video.find(params[:id])
+  end
+
+  def set_recommended_videos
+    videos =
+      if Video.where(song_id: @video.song_id).size > 3
+        Video.where(song_id: @video.song_id)
+      else
+        Video.where(channel_id: @video.channel_id)
+      end
+
+    @recommended_videos =
+      videos
+        .where(hidden: false)
+        .where
+        .not(youtube_id: @video.youtube_id)
+        .order('popularity DESC')
+        .limit(3)
+  end
 
   def current_search
     @current_search = params[:query]
-  end
-
-  def sort_column
-    acceptable_cols = ["songs.title",
-                       "songs.artist",
-                       "songs.genre",
-                       "leaders.name",
-                       "followers.name",
-                       "channels.title",
-                       "videos.upload_date",
-                       "videos.view_count",
-                       "songs.last_name_search",
-                       "videos.popularity"]
-
-    acceptable_cols.include?(params[:sort]) ? params[:sort] : "videos.popularity"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def page
@@ -100,10 +69,35 @@ class VideosController < ApplicationController
   end
 
   def video_params
-    params.require(:video).permit(:leader_id, :follower_id, :song_id, :event_id, :hidden, :id)
+    params
+      .require(:video)
+      .permit(:leader_id, :follower_id, :song_id, :event_id, :hidden, :id)
   end
 
   def filtering_params
-    params.permit(:leader, :follower, :channel, :genre, :orchestra, :song_id, :query, :hd, :event_id)
+    params.permit(
+      :leader_id,
+      :follower_id,
+      :channel_id,
+      :genre,
+      :orchestra,
+      :song_id,
+      :query,
+      :hd,
+      :event_id,
+      :year
+    )
+  end
+
+  def sorting_params
+    params.permit(:direction, :sort)
+  end
+
+  def show_params
+    params.permit(:v)
+  end
+
+  def fetch_new_video
+    ImportVideoWorker.perform_async(@video.youtube_id)
   end
 end

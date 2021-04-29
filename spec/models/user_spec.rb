@@ -1,21 +1,22 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # context "validation tests" do
+  context 'validation tests' do
+    let(:user) { build(:user) }
 
-    # it "is valid with valid attributes" do
-    #   expect(user.save).to eq(true)
-    # end
+    it 'is valid with valid attributes' do
+      expect(user.save).to eq(true)
+    end
 
-    # it "is not valid without a password" do
-    #   user.password = nil
-    #   expect(user.save).to eq(false)
-    # end
+    it 'is not valid without a password' do
+      user.password = nil
+      expect(user.save).to eq(false)
+    end
 
-    # it "is not valid without an email" do
-    #   user.email = nil
-    #   expect(user.save).to eq(false)
-    # end
+    it 'is not valid without an email' do
+      user.email = nil
+      expect(user.save).to eq(false)
+    end
 
     # it 'ensures last name presence' do
     #   user = User.new(first_name: 'First', email: 'sample@example.com').save

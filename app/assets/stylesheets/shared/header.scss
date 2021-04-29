@@ -1,16 +1,43 @@
 #mastHeadContainer {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 56px;
+  height: 72px;
   position: fixed;
   top: 0;
   left: 0;
   box-sizing: border-box;
-  border-bottom: 1px solid #e8e8e8;
-  background-color: #fff;
-  z-index: 1011;
+  background-color: $primary-color;
+  z-index: 1012;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .upperHeadContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: $secondary-header-background;
+  padding: 5px 2.5em;
+  font-size: .8rem;
+  a {
+    margin: 0 .5rem;
+    color: $secondary-header-link-color;
+    &:hover {
+      color: $secondary-header-link-color-hover;
+    }
+  }
+}
+
+  .lowerHeadContainer {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    padding: 0 2.5em;
+  }
 
   .buttonSideBar {
     display: none;
@@ -30,16 +57,16 @@
     display: flex;
     flex: 1;
     justify-content: flex-start;
+    align-items: center;
 
     a {
-      font-size: 24px;
+      font-size: 20px;
       color: black;
       letter-spacing: -1px;
-      margin-left: 8px;
       font-weight: bold;
 
       &:hover {
-        color: #3d3d3d;
+        color: $logo-hover-color;
       }
     }
   }
@@ -64,10 +91,10 @@
     .searchBar {
       flex: 1;
       width: 100%;
-      color: rgb(17, 17, 17);
-      height: 34px;
+      color: $placeholder-font-color;
+      height: 30px;
       padding: 4px 10px;
-      border: 1px solid #ccc;
+      border: 1px solid $border-color;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
       border-top-right-radius: 0;
@@ -80,26 +107,27 @@
 
       &:focus {
         outline: none;
-        border: 1px solid #719ECE;
+        border: 1px solid $search-bar-focus-color;
       }
+
       input {
-        color: rgb(17, 17, 17);
+        color: $placeholder-font-color;
         margin: 2px 4px;
         padding: 1px;
       }
     }
 
     .searchButton {
-      height: 34px;
-      font-size: .9rem;
-      background-color: rgb(248, 248, 248);
-      border: 1px solid #d3d3d3;
+      height: 30px;
+      font-size: .8rem;
+      background-color: $search-bar-button-color;
+      border: 1px solid $border-color;
       border-bottom-right-radius: 3px;
       border-top-right-radius: 3px;
       cursor: pointer;
-      width: 65px;
+      width: 55px;
       &:hover {
-        background-color: rgb(240, 240, 240);
+        background-color: $search-bar-button-color-hover;
       }
     }
   }
@@ -109,6 +137,10 @@
     flex: 1;
     justify-content: flex-end;
     align-items: center;
+  }
+
+  nav#Login{
+    font-size: 0.8rem;
   }
 
   .navbar-link {
@@ -121,12 +153,12 @@
   .navbar-link#sign-up {
     display: flex;
     border: 1px solid;
-    border-radius: 0.2rem;
-    padding: 0.4rem;
-    margin: 0.5rem;
+    border-radius: 0.2em;
+    padding: 0.4em;
+    margin: 0 0 0 .5em;
     &:hover {
-      color: #222222;
-      border-color: #222222;
+      color: $nav-link-color-hover;
+      border-color: $nav-link-color-hover;
     }
   }
 }
@@ -141,7 +173,7 @@
     font-size: 14px;
     margin-right: 2rem;
     &:hover {
-      color: #222222;
+      color: $nav-link-color-hover;
     }
   }
 }
@@ -157,12 +189,22 @@
 
   #mastHeadContainer {
     margin: 0;
+    height: 50px;
 
     .logoContainer {
       flex: 1;
       a {
         font-size: 20px;
+        padding: 10px;
       }
+    }
+
+    .upperHeadContainer {
+      display: none;
+    }
+
+    .lowerHeadContainer {
+      padding: 0;
     }
 
     .autocompleteContainer {
@@ -170,7 +212,7 @@
       margin: 0;
 
       .searchBarContainer {
-        margin: 0 0 0 20px;
+        margin: 0 10px 0 5px;
         min-width: 100px;
       }
     }

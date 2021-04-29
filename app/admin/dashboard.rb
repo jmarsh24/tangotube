@@ -1,6 +1,6 @@
-ActiveAdmin.register_page "Dashboard" do
+ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1
-  content title: proc { I18n.t("active_admin.dashboard") } do
+  content title: proc { I18n.t('active_admin.dashboard') } do
     # columns do
     #   column do
     #     panel "Recent Orders" do
@@ -41,12 +41,13 @@ ActiveAdmin.register_page "Dashboard" do
     # end # columns
 
     columns do
-      panel "Recent Videos" do
+      panel 'Recent Videos' do
         ul do
-          Video.all.limit(10).map do |video|
-            li link_to(video.title, admin_video_path(video))
-          end
-          strong { link_to "View All Videos", admin_videos_path }
+          Video
+            .all
+            .limit(10)
+            .map { |video| li link_to(video.title, admin_video_path(video)) }
+          strong { link_to 'View All Videos', admin_videos_path }
         end
       end
     end

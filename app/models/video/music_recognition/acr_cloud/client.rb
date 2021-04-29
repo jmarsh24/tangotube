@@ -6,7 +6,8 @@ class Video::MusicRecognition::AcrCloud::Client
   ACR_CLOUD_TIMESTAMP = Time.now.utc.to_i.to_s.freeze
   ACR_CLOUD_ACCESS_KEY = ENV["ACRCLOUD_ACCESS_KEY"]
   ACR_CLOUD_ACCESS_SECRET = ENV["ACRCLOUD_SECRET_KEY"]
-  ACR_CLOUD_REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify".freeze
+  ACR_CLOUD_REQ_URL =
+    "http://identify-eu-west-1.acrcloud.com/v1/identify".freeze
 
   class << self
     def send_audio(file_path)
@@ -19,11 +20,12 @@ class Video::MusicRecognition::AcrCloud::Client
   end
 
   def get_audio_from_acr_cloud
-    faraday = Faraday.new do |f|
-      f.request :multipart
-      f.request :url_encodeduser
-      f.adapter :net_http
-    end
+    faraday =
+      Faraday.new do |f|
+        f.request :multipart
+        f.request :url_encoded
+        f.adapter :net_http
+      end
 
     response = faraday.post(url, body)
     response.body
@@ -33,13 +35,13 @@ class Video::MusicRecognition::AcrCloud::Client
 
   def body
     {
-      sample:            sample_file,
-      access_key:        ACR_CLOUD_ACCESS_KEY,
-      data_type:         ACR_CLOUD_DATA_TYPE,
+      sample: sample_file,
+      access_key: ACR_CLOUD_ACCESS_KEY,
+      data_type: ACR_CLOUD_DATA_TYPE,
       signature_version: ACR_CLOUD_SIGNATURE_VERSION,
-      signature:         signature,
-      sample_bytes:      sample_bytes,
-      timestamp:         ACR_CLOUD_TIMESTAMP
+      signature: signature,
+      sample_bytes: sample_bytes,
+      timestamp: ACR_CLOUD_TIMESTAMP
     }
   end
 
@@ -69,6 +71,8 @@ class Video::MusicRecognition::AcrCloud::Client
   end
 
   def signature
-    Base64.encode64(OpenSSL::HMAC.digest(digest, ACR_CLOUD_ACCESS_SECRET, unsigned_string)).strip
+    Base64.encode64(
+      OpenSSL::HMAC.digest(digest, ACR_CLOUD_ACCESS_SECRET, unsigned_string)
+    ).strip
   end
 end

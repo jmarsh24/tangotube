@@ -128,3 +128,6 @@ RSpec/ReturnFromStub:
 
 Rails:
   Enabled: true
+
+inherit_gem:
+  prettier: rubocop.yml

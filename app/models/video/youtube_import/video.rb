@@ -25,23 +25,23 @@ class Video::YoutubeImport::Video
 
   def base_params
     {
-      youtube_id:  @youtube_video.id,
-      title:       @youtube_video.title,
+      youtube_id: @youtube_video.id,
+      title: @youtube_video.title,
       description: @youtube_video.description,
       upload_date: @youtube_video.published_at,
-      duration:    @youtube_video.duration,
-      tags:        @youtube_video.tags,
-      hd:          @youtube_video.hd?
+      duration: @youtube_video.duration,
+      tags: @youtube_video.tags,
+      hd: @youtube_video.hd?
     }
   end
 
   def count_params
     {
-      view_count:     @youtube_video.view_count,
+      view_count: @youtube_video.view_count,
       favorite_count: @youtube_video.favorite_count,
-      comment_count:  @youtube_video.comment_count,
-      like_count:     @youtube_video.like_count,
-      dislike_count:  @youtube_video.dislike_count
+      comment_count: @youtube_video.comment_count,
+      like_count: @youtube_video.like_count,
+      dislike_count: @youtube_video.dislike_count
     }
   end
 

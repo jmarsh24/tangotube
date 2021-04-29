@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.0.0"
+ruby "3.0.1"
 
 # gems that ship with rails...........................................................
 gem "bootsnap", "1.4.6", require: false
@@ -34,7 +34,11 @@ gem "turbo-rails", "~> 0.5.8"
 
 group :development, :test do
   gem "amazing_print", "~> 1.2", ">= 1.2.2"
+  gem "factory_bot_rails", "~> 6.1"
+  gem "faker", "~> 2.16"
+  gem "rspec-rails", "~> 4.0"
   gem "byebug", "~> 11.1", ">= 11.1.3"
+  gem 'webdrivers'
 end
 
 group :development do
@@ -49,12 +53,10 @@ end
 
 group :test do
   gem "capybara", ">= 2.15"
-  gem "faker", "~> 2.16"
-  gem "rspec-mocks", "~> 3.10"
-  gem "rspec-rails", "~> 4.0"
-  gem "rspec-sidekiq", "~> 3.1"
-  gem "factory_bot_rails", "~> 6.1"
+  gem 'capybara-screenshot'
   gem "selenium-webdriver", "3.142.7"
   gem "shoulda-matchers", "~> 4.0"
   gem "simplecov", "~> 0.21.2", require: false
 end
+
+gem "prettier", "~> 1.5"

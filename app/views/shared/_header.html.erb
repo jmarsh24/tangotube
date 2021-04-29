@@ -1,25 +1,34 @@
 
 <div id="mastHeadContainer">
-  <button data-action="click->toggle#navShowHide click->select2#close click->select2#open" class="buttonSideBar">
-    <%= fa_icon "bars 2x" %>
-  </button>
-  <div class="logoContainer">
-    <%= link_to "TangoTube", root_path %>
+  <div class="upperHeadContainer">
+    <%= link_to "Add Channel", channels_path %>
+    <%= link_to "Add Playlist", playlists_path %>
+    <%= link_to "Add Video", new_video_path %>
   </div>
-  <div class="autocompleteContainer" data-controller="autocomplete">
-    <%= form_with(url: root_path, method: :get, local: true, class: "searchBarContainer") do |form| %>
-      <%= form.text_field :query, value: @current_search, placeholder: "Search #{number_with_delimiter(@videos_total)} videos...", class: 'searchBar', 'data-autocomplete-target': "field", 'data-autocomplete-url': "/search_suggestions" %>
-      <%= form.button fa_icon("search"), class: "searchButton", name: nil %>
-    <% end %>
+  <div class="lowerHeadContainer">
+    <div class="logoContainer">
+      <%= link_to "TangoTube", root_path %>
     </div>
-  <nav id="Login">
-    <% if user_signed_in? %>
-      Logged in as <strong><%= current_user.email %></strong>.
-      <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
-    <% else %>
-      <%= link_to "Login", new_user_session_path, class:'navbar-link'  %>
-      <%= link_to "Sign up", new_user_registration_path, class:'navbar-link', id: 'sign-up' %>
-    <% end %>
-  </nav>
+    <div class="autocompleteContainer" data-controller="autocomplete">
+      <%= form_with(url: root_path, method: :get, local: true, class: "searchBarContainer") do |form| %>
+        <%= form.text_field :query,
+              value: @current_search,
+              placeholder: "Search #{number_with_delimiter(@videos_total)} videos...",
+              class: 'searchBar',
+                      'data-autocomplete-target': "field",
+                      'data-autocomplete-url': "/search_suggestions" %>
+        <%= form.button fa_icon("search"), class: "searchButton", name: nil %>
+      <% end %>
+      </div>
+    <nav id="Login">
+      <% if user_signed_in? %>
+        Logged in as <strong><%= current_user.email %></strong>.
+        <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, class:'navbar-link'  %>
+        <%= link_to "Sign up", new_user_registration_path, class:'navbar-link', id: 'sign-up' %>
+      <% end %>
+    </nav>
+  </div>
 </div>

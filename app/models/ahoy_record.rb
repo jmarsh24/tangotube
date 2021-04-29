@@ -3,5 +3,5 @@
 
 class AhoyRecord < ApplicationRecord
   self.abstract_class = true
-  self.table_name_prefix = "ahoy_"
+  self.table_name_prefix = 'ahoy_'
 end

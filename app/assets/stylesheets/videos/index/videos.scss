@@ -1,23 +1,22 @@
 .video-section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem 1rem;
-  margin: 0 10px 50px 10px;
+  gap: 20px 20px;
+  padding: 0 40px 0 40px;
+  background-color: $secondary-color;
 }
 
 .video-container {
   display: flex;
   flex-direction: column;
-  min-height: 300px;
 }
 
-.thumbnail{
+.thumbnail {
   position: relative;
   display: flex;
   height: 0;
   padding-bottom: 56.25%;
   overflow: hidden;
-  border-radius: .3rem;
 }
 
 .thumbnail::after {
@@ -29,7 +28,7 @@
   bottom: 5px;
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
-  font-size: .7rem;
+  font-size: 0.7rem;
 }
 
 .thumbnail-image {
@@ -38,7 +37,7 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #AAA;
+  background-color: #aaa;
   border-radius: 0.3em;
 }
 
@@ -57,13 +56,13 @@
 .video-title {
   text-decoration: none;
   font-size: inherit;
-  color: #333;
-  font-size: .9rem;
+  color: $videos-primary-link;
+  font-size: 0.9rem;
   font-weight: 600;
-  margin: .2rem 0;
+  margin: 0.2rem 0;
 
   &:hover {
-    color: black;
+    color: $videos-primary-link-hover;
   }
 }
 
@@ -74,20 +73,20 @@
   a {
     font-size: 0.7rem;
     text-decoration: none;
-    color:rgb(97, 97, 97);
+    color: $videos-secondary-link;
 
     &:hover {
-      color: rgb(3, 3, 3);
+      color: $videos-secondary-link-hover;
     }
   }
 }
 
 .channel-icon {
-  margin: .1rem .3rem 0 0;
+  margin: 0.1rem 0.3rem 0 0;
   border-radius: 50%;
   width: 18px;
   height: 18px;
-  background-color: #AAA;
+  background-color: #aaa;
 }
 
 .channel-title {
@@ -105,13 +104,13 @@
   }
 
   a:hover {
-  color: #111;
+    color: #111;
   }
 }
 
 .video-metadata {
   color: #555;
-  font-size: .7rem;
+  font-size: 0.7rem;
 }
 
 .video-event {
@@ -133,12 +132,13 @@
   .video-section {
     display: flex;
     flex-direction: column;
-    margin: 0;
+    padding: 0;
+    gap: 0px;
   }
   .video-bottom-section {
     margin: 10px;
   }
   .thumbnail {
-  border-radius: 0;
+    border-radius: 0;
   }
 }
