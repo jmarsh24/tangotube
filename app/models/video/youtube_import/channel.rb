@@ -1,7 +1,7 @@
 class Video::YoutubeImport::Channel
   YOUTUBE_DL_COMMAND_PREFIX =
-    'youtube-dl https://www.youtube.com/channel/'.freeze
-  YOUTUBE_DL_COMMAND_SUFFIX = '/videos  --get-id --skip-download'.freeze
+    "youtube-dl https://www.youtube.com/channel/".freeze
+  YOUTUBE_DL_COMMAND_SUFFIX = "/videos  --get-id --skip-download".freeze
 
   class << self
     def import(channel_id)
@@ -33,8 +33,8 @@ class Video::YoutubeImport::Channel
 
   private
 
-  def fetch_by_id(channel_id)
-    Yt::Channel.new id: channel_id
+  def fetch_by_id(_channel_id)
+    Yt::Channel.new id: @channel_id
   end
 
   def channel
@@ -58,16 +58,16 @@ class Video::YoutubeImport::Channel
   end
 
   def get_channel_video_ids
-    `#{YOUTUBE_DL_COMMAND_PREFIX + channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
+    `#{YOUTUBE_DL_COMMAND_PREFIX + @channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
   rescue StandardError => e
     Rails
       .logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
-    '' # NOTE: the empty string return so your split method works always.
+    "" # NOTE: the empty string return so your split method works always.
   end
 
   def youtube_channel_video_ids
     if @youtube_channel.video_count >= 500
-      get_channel_video_ids(channel_id)
+      get_channel_video_ids
     else
       @youtube_channel.videos.map(&:id)
     end

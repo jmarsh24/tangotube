@@ -20,7 +20,7 @@ desc 'This task updates channels'
 task update_all_channels: :environment do
   puts 'Updating All Channels'
   Channel.imported.reviewed.find_each do |channel|
-    Video::YoutubeImport::Channel.import_channel(channel.channel_id)
+    Video::YoutubeImport::Channel.import(channel.channel_id)
   end
 
   Channel.not_imported.reviewed.find_each do |channel|
