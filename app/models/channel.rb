@@ -16,8 +16,7 @@ class Channel < ApplicationRecord
   private
 
   def update_imported
-    self.imported = videos_count >= total_videos_count
-    self.imported = videos_count <= total_videos_count
+   self.imported = videos_count >= total_videos_count
   end
 
   def count_changed?
