@@ -10,13 +10,14 @@ class Channel < ApplicationRecord
 
   scope :title_search,
         lambda { |query|
-          where('unaccent(title) ILIKE unaccent(?)', "%#{query}%")
+          where("unaccent(title) ILIKE unaccent(?)", "%#{query}%")
         }
 
   private
 
   def update_imported
     self.imported = videos_count >= total_videos_count
+    self.imported = videos_count <= total_videos_count
   end
 
   def count_changed?

@@ -16,6 +16,19 @@ task import_all_reviewed_playlists: :environment do
   puts 'done.'
 end
 
+desc 'This task updates channels'
+task update_all_channels: :environment do
+  puts 'Updating All Channels'
+  Channel.imported.reviewed.find_each do |channel|
+    Video::YoutubeImport::Channel.import_channel(channel.channel_id)
+  end
+
+  Channel.not_imported.reviewed.find_each do |channel|
+    Video::YoutubeImport::Channel.import_videos(channel.channel_id)
+  end
+  puts 'done.'
+end
+
 # For every active song and in order of popularity search
 # for videos that have both the song title and last name
 # of the orchestra somewhere in the attributes
