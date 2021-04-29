@@ -20,7 +20,7 @@ class Video::MusicRecognition::Youtube::Video
 
   private
 
-  def fetch_by_id(_youtube_id)
+  def fetch_by_id
     `#{YOUTUBE_DL_COMMAND_PREFIX + @youtube_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
     rescue StandardError => e
       Rails.logger.warn "Video::MusicRecognition::Youtube::Video youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
