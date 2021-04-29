@@ -1,4 +1,7 @@
 class Video::MusicRecognition::AcrCloud::Audio
+    YOUTUBE_DL_COMMAND_PREFIX = "https://www.youtube.com/watch?v=".freeze
+    YOUTUBE_DL_COMMAND_SUFFIX = "format: '140', output: '~/environment/data/audio/%(id)s.mp3' ".freeze
+
   class << self
     def import(youtube_id)
       new(youtube_id).import
@@ -7,7 +10,7 @@ class Video::MusicRecognition::AcrCloud::Audio
 
   def initialize(youtube_id)
     @youtube_id = youtube_id
-    @youtube_video_audio_file = fetch_by_id(youtube_id)
+    @youtube_video_audio_file = fetch_audio_by_id(youtube_id)
   end
 
   def import
@@ -16,11 +19,11 @@ class Video::MusicRecognition::AcrCloud::Audio
 
   private
 
-  def fetch_by_id(youtube_id)
-    YoutubeDL.download(
-      "https://www.youtube.com/watch?v=#{@youtube_id}",
-      { format: '140', output: '~/environment/data/audio/%(id)s.mp3' }
-    )
+  def fetch_audio_by_id
+    `#{YOUTUBE_DL_COMMAND_PREFIX + @youtube_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
+    rescue StandardError => e
+      Rails.logger.warn "Video::MusicRecognition::AcrCloud::Audio youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
+      ""
   end
 
   def youtube_audio_file_path

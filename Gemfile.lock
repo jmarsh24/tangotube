@@ -101,9 +101,6 @@ GEM
       capybara (>= 1.0, < 4)
       launchy
     childprocess (3.0.0)
-    climate_control (0.2.0)
-    cocaine (0.6.0)
-      terrapin (= 0.6.0)
     concurrent-ruby (1.1.8)
     connection_pool (2.2.5)
     crass (1.0.6)
@@ -394,8 +391,6 @@ GEM
       rails (>= 6.0.0)
     streamio-ffmpeg (3.0.2)
       multi_json (~> 1.8)
-    terrapin (0.6.0)
-      climate_control (>= 0.0.3, < 1.0)
     thor (1.1.0)
     tilt (2.0.10)
     turbo-rails (0.5.9)
@@ -427,8 +422,6 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.26)
-    youtube-dl.rb (0.3.1.2016.09.11.1)
-      cocaine (>= 0.5.4)
     yt (0.32.6)
       activesupport
     zeitwerk (2.4.2)
@@ -481,7 +474,6 @@ DEPENDENCIES
   web-console (= 4.0.2)
   webdrivers
   webpacker (= 4.2.2)
-  youtube-dl.rb (~> 0.3.1.2016.09.11.1)
   yt (~> 0.32.0)
 
 RUBY VERSION
