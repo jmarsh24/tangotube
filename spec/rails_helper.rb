@@ -74,12 +74,6 @@ RSpec.configure do |config|
 
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-<<<<<<< HEAD
-  config.include Devise::Test::IntegrationHelpers, type: :request
-
-  config.mock_with :rspec do |mocks|
-    mocks.verify_doubled_constant_names = true
-=======
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Warden::Test::Helpers
 
@@ -97,7 +91,6 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless
->>>>>>> master
   end
 end
 

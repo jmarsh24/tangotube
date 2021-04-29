@@ -20,6 +20,7 @@ gem "font-awesome-rails", "~> 4.7", ">= 4.7.0.5"
 gem "hashie", "~> 4.1"
 gem "hotwire-rails", "~> 0.1.3"
 gem "nokogiri", "~> 1.10", ">= 1.10.10"
+gem "prettier", "~> 1.5"
 gem "pg_search", "~> 2.3", ">= 2.3.5"
 gem "rails_autolink", "~> 1.1"
 gem "rspotify", "~> 2.9", ">= 2.9.2"
@@ -57,6 +58,5 @@ group :test do
   gem "selenium-webdriver", "3.142.7"
   gem "shoulda-matchers", "~> 4.0"
   gem "simplecov", "~> 0.21.2", require: false
+  gem 'rspec-sidekiq'
 end
-
-gem "prettier", "~> 1.5"

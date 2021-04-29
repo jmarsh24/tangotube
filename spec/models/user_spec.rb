@@ -1,19 +1,19 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
-  context 'validation tests' do
+  context "validation tests" do
     let(:user) { build(:user) }
 
-    it 'is valid with valid attributes' do
+    it "is valid with valid attributes" do
       expect(user.save).to eq(true)
     end
 
-    it 'is not valid without a password' do
+    it "is not valid without a password" do
       user.password = nil
       expect(user.save).to eq(false)
     end
 
-    it 'is not valid without an email' do
+    it "is not valid without an email" do
       user.email = nil
       expect(user.save).to eq(false)
     end
@@ -49,5 +49,5 @@ RSpec.describe User, type: :model do
     #   it 'should return inactive users' do
     #     expect(User.inactive_users.size).to eq(2)
     #   end
-  # end
+  end
 end
