@@ -167,7 +167,7 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_content("Current password")
 
     expect(page).to have_content("Cancel my account")
-    click_on("TangoTube")
+    visit root_path
   end
 
   def forgot_your_password_page
@@ -184,10 +184,8 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def open_filters
-    byebug
     find(class: "filter-button").click
     expect(page).to have_css("div.filter-container:not(.isHidden)", visible: :all)
-    byebug
   end
 
   def close_filters
@@ -196,9 +194,7 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def performs_a_search
-    byebug
-    click_on("Popularity")
-    byebug
+    find("button", text: "Popularity").click
     expect(page).to have_current_path("/?sort=videos.popularity&direction=asc")
     expect(video_title_collection).to eq(%w[expected_result video_b])
     fill_in("query", with: "expected_result")
