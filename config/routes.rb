@@ -1,12 +1,6 @@
-# == Route Map
-#
-
 require 'sidekiq/web'
 
-Rails
-  .application
-  .routes
-  .draw do
+Rails.application.routes.draw do
     devise_for :admin_users, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
 
@@ -27,6 +21,7 @@ Rails
     get '/privacy', to: 'static_pages#privacy'
     get '/terms', to: 'static_pages#terms'
     get '/about', to: 'static_pages#about'
+    get '/contact', to: 'static_pages#contact'
 
     resources :channels, only: %i[index create]
     resources :playlists, only: %i[index create]
