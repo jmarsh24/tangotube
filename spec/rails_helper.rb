@@ -111,3 +111,13 @@ RSpec::Sidekiq.configure do |config|
   # Warn when jobs are not enqueued to Redis but to a job array
   config.warn_when_jobs_not_processed_by_sidekiq = true # default => true
 end
+
+require 'vcr'
+require 'webmock'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "#{::Rails.root}/spec/cassettes"
+  config.hook_into :webmock
+  config.ignore_localhost = true
+  config.configure_rspec_metadata!
+end
