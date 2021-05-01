@@ -14,9 +14,8 @@ class Video::YoutubeImport::Channel
   end
 
   def initialize(channel_id)
-    @channel_id = channel_id
+    @channel = Channel.find_or_create_by(channel_id)
     @youtube_channel = fetch_by_id(channel_id)
-    @channel = channel
   end
 
   def import
@@ -29,8 +28,8 @@ class Video::YoutubeImport::Channel
 
   private
 
-  def fetch_by_id(_channel_id)
-    Yt::Channel.new id: @channel_id
+  def fetch_by_id(channel_id)
+    Yt::Channel.new id: channel_id
   end
 
   def channel
@@ -53,15 +52,14 @@ class Video::YoutubeImport::Channel
     { total_videos_count: @youtube_channel.video_count }
   end
 
-  def get_channel_video_ids
+  def channel_youtube_ids
     `#{YOUTUBE_DL_COMMAND_PREFIX + @channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
-  rescue StandardError => e
-    Rails
-      .logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
+    rescue StandardError => e
+    Rails.logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
     ""
   end
 
-  def youtube_channel_video_ids
+  def external_youtube_ids
     if @youtube_channel.video_count >= 500
       get_channel_video_ids
     else
@@ -69,11 +67,11 @@ class Video::YoutubeImport::Channel
     end
   end
 
-  def channel_existing_youtube_video_ids
+  def internal_channel_youtube_ids
     channel.videos.pluck(:youtube_id)
   end
 
   def new_videos
-    youtube_channel_video_ids - channel_existing_youtube_video_ids
+    external_youtube_ids - internal_channel_youtube_ids
   end
 end
