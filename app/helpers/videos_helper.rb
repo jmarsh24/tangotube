@@ -78,7 +78,7 @@ module VideosHelper
                  class: "videos-sortable-button" }) do
       if css_class.present?
         concat title.to_s
-        concat fa_icon("chevron-#{direction == 'asc' ? 'up' : 'down'}")
+        concat fa_icon("chevron-#{direction == 'asc' ? 'up' : 'down'}", class: "videos-sortable-icon")
       else
         title
       end
