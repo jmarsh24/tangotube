@@ -73,8 +73,9 @@ module VideosHelper
     css_class = column == search.sort_column ? "current #{search.sort_direction}" : nil
     direction = column == search.sort_column && search.sort_direction == "desc" ? "asc" : "desc"
 
-    button_tag({ type: "button",
-                 data: { controller: "filter", action: "filter#filter", "filter-sort-value": column, "filter-direction-value": direction } }) do
+    button_tag({ type:  "button",
+                 data:  { controller: "filter", action: "filter#filter", "filter-sort-value": column, "filter-direction-value": direction },
+                 class: "videos-sortable-button" }) do
       if css_class.present?
         concat title.to_s
         concat fa_icon("chevron-#{direction == 'asc' ? 'up' : 'down'}")

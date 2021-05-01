@@ -133,27 +133,25 @@
 }
 
 .videos-sortable-button {
-  button {
-    display: flex;
-    color: rgb(96, 96, 96);
-    justify-content: center;
-    align-items: center;
-    border: 1px solid $border-color-secondary;
-    background: $button-primary-background-color;
-    font-size: 0.8rem;
-    margin: 0 5px;
-    border-radius: 2px;
-    padding: 5px 12px;
-    height: 32px;
-    cursor: pointer;
-    &:hover {
-      color: $sortable-label-color-hover;
-    }
-    svg {
-      padding-left: 5px;
-      font-size: 1rem;
-      color: $sortable-label-color;
-    }
+  display: flex;
+  color: rgb(96, 96, 96);
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $border-color-secondary;
+  background: $button-primary-background-color;
+  font-size: 0.8rem;
+  margin: 0 5px;
+  border-radius: 2px;
+  padding: 5px 12px;
+  height: 32px;
+  cursor: pointer;
+  &:hover {
+    color: $sortable-label-color-hover;
+  }
+  svg {
+    padding-left: 5px;
+    font-size: 1rem;
+    color: $sortable-label-color;
   }
 }
 
