@@ -17,7 +17,7 @@ class Video::MusicRecognition::Youtube::Video
     if @video.present?
       @video.update(video_params)
     else
-      video_params
+      "Artist: #{video_params[:youtube_artist]}, Track: #{video_params[:youtube_song]}, but could not save because no internal video record found."
     end
   end
 
@@ -27,6 +27,7 @@ class Video::MusicRecognition::Youtube::Video
     `#{YOUTUBE_DL_COMMAND_PREFIX + @youtube_id + YOUTUBE_DL_COMMAND_SUFFIX}`
     rescue StandardError => e
     Rails.logger.warn("Video::MusicRecognition::Youtube::Video youtube-dl video fetching error: #{e.backtrace.join("\n\t")}")
+    ""
   end
 
   def parsed_response
