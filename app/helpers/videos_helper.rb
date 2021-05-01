@@ -68,7 +68,7 @@ module VideosHelper
     truncate(video.channel.title, length: 45, omission: "")
   end
 
-  def sortable(column, title = nil, search)
+  def sortable(column, title = "", search)
     title ||= column.titleize
     css_class = column == search.sort_column ? "current #{search.sort_direction}" : nil
     direction = column == search.sort_column && search.sort_direction == "desc" ? "asc" : "desc"
