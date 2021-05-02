@@ -5,7 +5,7 @@ ActiveAdmin.register User do
                 :reset_password_sent_at,
                 :remember_created_at
 
-  config.sort_order = 'id_asc'
+  config.sort_order = "id_asc"
 
   index do
     selectable_column

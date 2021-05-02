@@ -8,8 +8,8 @@ class VideosSearch < ApplicationRecord
     against: :description,
     using: {
       tsearch: {
-        dictionary: 'english',
-        tsvector_column: 'tsv_document',
+        dictionary: "english",
+        tsvector_column: "tsv_document",
         prefix: true
       }
     }

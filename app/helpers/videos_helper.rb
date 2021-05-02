@@ -2,30 +2,30 @@ module VideosHelper
   def formatted_view_count(view_count)
     number_to_human(
       view_count,
-      format: '%n%u',
+      format: "%n%u",
       precision: 2,
       units: {
-        thousand: 'K',
-        million: 'M',
-        billion: 'B'
+        thousand: "K",
+        million: "M",
+        billion: "B"
       }
     )
   end
 
   def formatted_upload_date(upload_date)
-    upload_date.strftime('%B %Y')
+    upload_date.strftime("%B %Y")
   end
 
   def link_to_query(external_song_attributes)
     link_to external_song_attributes,
-            root_path(query: external_song_attributes.gsub(/\s-\s/, ' ')),
-            { 'data-turbo-frame': '_top' }
+            root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
+            { 'data-turbo-frame': "_top" }
   end
 
   def link_to_song_id(song_attributes, video)
     link_to song_attributes,
             root_path(song_id: video.song_id),
-            { 'data-turbo-frame': '_top' }
+            { 'data-turbo-frame': "_top" }
   end
 
   def link_to_song(el_recodo_attributes, external_song_attributes, video)
@@ -40,11 +40,11 @@ module VideosHelper
     if dancer_names.present? && song_attributes.present?
       link_to dancer_names,
               watch_path(v: youtube_id),
-              { 'data-turbo-frame': '_top' }
+              { 'data-turbo-frame': "_top" }
     else
       link_to truncate(title, length: 85),
               watch_path(v: youtube_id),
-              { 'data-turbo-frame': '_top' }
+              { 'data-turbo-frame': "_top" }
     end
   end
 
@@ -64,12 +64,12 @@ module VideosHelper
     if video.hd?
       "HD #{Time.at(video.duration).utc.strftime('%M:%S')}"
     else
-      Time.at(video.duration).utc.strftime('%M:%S')
+      Time.at(video.duration).utc.strftime("%M:%S")
     end
   end
 
   def channel_title(video)
-    truncate(video.channel.title, length: 45, omission: '')
+    truncate(video.channel.title, length: 45, omission: "")
   end
 
   def sortable(column, title = nil, search)
@@ -77,10 +77,10 @@ module VideosHelper
     css_class =
       column == search.sort_column ? "current #{search.sort_direction}" : nil
     direction =
-      if column == search.sort_column && search.sort_direction == 'desc'
-        'asc'
+      if column == search.sort_column && search.sort_direction == "desc"
+        "asc"
       else
-        'desc'
+        "desc"
       end
 
     link_to video_query_params.merge({ sort: column, direction: direction }) do
@@ -95,21 +95,21 @@ module VideosHelper
 
   def video_query_params
     request.params.slice(
-      'channel_id',
-      'event_id',
-      'follower_id',
-      'genre',
-      'hd',
-      'leader_id',
-      'orchestra',
-      'popularity',
-      'query',
-      'song_id',
-      'upload_date',
-      'view_count',
-      'year',
-      'direction',
-      'sort'
+      "channel_id",
+      "event_id",
+      "follower_id",
+      "genre",
+      "hd",
+      "leader_id",
+      "orchestra",
+      "popularity",
+      "query",
+      "song_id",
+      "upload_date",
+      "view_count",
+      "year",
+      "direction",
+      "sort"
     )
   end
 end

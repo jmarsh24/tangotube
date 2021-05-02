@@ -55,23 +55,23 @@ class Video::Search
   end
 
   def leaders
-    @leaders ||= facet_id('leaders.name', 'leaders.id', :leader)
+    @leaders ||= facet_id("leaders.name", "leaders.id", :leader)
   end
 
   def followers
-    @followers ||= facet_id('followers.name', 'followers.id', :follower)
+    @followers ||= facet_id("followers.name", "followers.id", :follower)
   end
 
   def orchestras
-    @orchestras ||= facet('songs.artist', :song)
+    @orchestras ||= facet("songs.artist", :song)
   end
 
   def genres
-    @genres ||= facet('songs.genre', :song)
+    @genres ||= facet("songs.genre", :song)
   end
 
   def years
-    @years ||= facet_on_year('upload_date')
+    @years ||= facet_on_year("upload_date")
   end
 
   def sort_column
@@ -86,7 +86,7 @@ class Video::Search
     if %w[asc desc].include?(@sorting_params[:direction])
       @sorting_params[:direction]
     else
-      'desc'
+      "desc"
     end
   end
 
@@ -99,8 +99,8 @@ class Video::Search
       Video
         .filter_videos(@filtering_params)
         .select(query)
-        .group('facet_value')
-        .order('facet_value DESC')
+        .group("facet_value")
+        .order("facet_value DESC")
     counts.map { |c| ["#{c.facet_value} (#{c.occurrences})", c.facet_value] }
   end
 
@@ -113,7 +113,7 @@ class Video::Search
         .joins(model)
         .select(query)
         .group(table_column)
-        .order('occurrences DESC')
+        .order("occurrences DESC")
     counts.map do |c|
       ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.downcase]
     end
@@ -128,7 +128,7 @@ class Video::Search
         .joins(model)
         .select(query)
         .group(table_column, table_column_id)
-        .order('occurrences DESC')
+        .order("occurrences DESC")
     counts.map do |c|
       ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_id_value]
     end

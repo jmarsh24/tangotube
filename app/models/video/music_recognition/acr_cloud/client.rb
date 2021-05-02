@@ -1,13 +1,13 @@
 class Video::MusicRecognition::AcrCloud::Client
-  ACR_CLOUD_HTTP_METHOD = 'POST'.freeze
-  ACR_CLOUD_HTTP_URI = '/v1/identify'.freeze
-  ACR_CLOUD_DATA_TYPE = 'audio'.freeze
-  ACR_CLOUD_SIGNATURE_VERSION = '1'.freeze
+  ACR_CLOUD_HTTP_METHOD = "POST".freeze
+  ACR_CLOUD_HTTP_URI = "/v1/identify".freeze
+  ACR_CLOUD_DATA_TYPE = "audio".freeze
+  ACR_CLOUD_SIGNATURE_VERSION = "1".freeze
   ACR_CLOUD_TIMESTAMP = Time.now.utc.to_i.to_s.freeze
-  ACR_CLOUD_ACCESS_KEY = ENV['ACRCLOUD_ACCESS_KEY']
-  ACR_CLOUD_ACCESS_SECRET = ENV['ACRCLOUD_SECRET_KEY']
+  ACR_CLOUD_ACCESS_KEY = ENV["ACRCLOUD_ACCESS_KEY"]
+  ACR_CLOUD_ACCESS_SECRET = ENV["ACRCLOUD_SECRET_KEY"]
   ACR_CLOUD_REQ_URL =
-    'http://identify-eu-west-1.acrcloud.com/v1/identify'.freeze
+    "http://identify-eu-west-1.acrcloud.com/v1/identify".freeze
 
   class << self
     def send_audio(file_path)
@@ -46,7 +46,7 @@ class Video::MusicRecognition::AcrCloud::Client
   end
 
   def sample_file
-    Faraday::UploadIO.new(@file_path, 'audio/mp3')
+    Faraday::UploadIO.new(@file_path, "audio/mp3")
   end
 
   def url
@@ -67,7 +67,7 @@ class Video::MusicRecognition::AcrCloud::Client
   end
 
   def digest
-    OpenSSL::Digest.new('sha1')
+    OpenSSL::Digest.new("sha1")
   end
 
   def signature

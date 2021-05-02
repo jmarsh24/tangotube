@@ -1,11 +1,11 @@
 class Event::Tangopolix::Page
   TANGOPOLIX_URL_PREFIX =
-    'https://www.tangopolix.com/archived-events/page-'.freeze
-  TANGOPOLIX_ARTICLE_METADATA_HTML_MARKER = 'article'.freeze
-  TANGOPOLIX_TITLE_HTML_MARKER = 'h1 a'.freeze
-  TANGOPOLIX_DATE_HTML_MARKER = 'span.uk-icon-calendar'.freeze
-  TANGOPOLIX_LOCATION_HTML_MARKER = 'span.uk-icon-medium'.freeze
-  TANGOPOLIX_CATEGORY_HTML_MARKER = 'div.uk-vertical-align-bottom a'.freeze
+    "https://www.tangopolix.com/archived-events/page-".freeze
+  TANGOPOLIX_ARTICLE_METADATA_HTML_MARKER = "article".freeze
+  TANGOPOLIX_TITLE_HTML_MARKER = "h1 a".freeze
+  TANGOPOLIX_DATE_HTML_MARKER = "span.uk-icon-calendar".freeze
+  TANGOPOLIX_LOCATION_HTML_MARKER = "span.uk-icon-medium".freeze
+  TANGOPOLIX_CATEGORY_HTML_MARKER = "div.uk-vertical-align-bottom a".freeze
 
   def initialize(id)
     @id = id
@@ -32,7 +32,7 @@ class Event::Tangopolix::Page
 
   def location(article)
     @location ||=
-      article.css(TANGOPOLIX_LOCATION_HTML_MARKER).text.split(',').map(&:strip)
+      article.css(TANGOPOLIX_LOCATION_HTML_MARKER).text.split(",").map(&:strip)
   end
 
   def city(article)
@@ -53,7 +53,7 @@ class Event::Tangopolix::Page
         .css(TANGOPOLIX_DATE_HTML_MARKER)
         .text
         .strip
-        .split('-')
+        .split("-")
         .map(&:strip)
   end
 

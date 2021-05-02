@@ -29,8 +29,8 @@ class Video::MusicRecognition::Youtube::Video
 
   def video_params
     {
-      youtube_song: parsed_response.deep_find('track'),
-      youtube_artist: parsed_response.deep_find('artist')
+      youtube_song: parsed_response.deep_find("track"),
+      youtube_artist: parsed_response.deep_find("artist")
     }
   end
 end

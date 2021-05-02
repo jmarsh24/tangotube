@@ -11,10 +11,10 @@ class Video < ApplicationRecord
 
   scope :filter_by_orchestra,
         ->(song_artist) {
-          joins(:song).where('songs.artist ILIKE ?', song_artist)
+          joins(:song).where("songs.artist ILIKE ?", song_artist)
         }
   scope :filter_by_genre,
-        ->(song_genre) { joins(:song).where('songs.genre ILIKE ?', song_genre) }
+        ->(song_genre) { joins(:song).where("songs.genre ILIKE ?", song_genre) }
   scope :filter_by_leader_id, ->(leader_id) { where(leader_id: leader_id) }
   scope :filter_by_follower_id,
         ->(follower_id) { where(follower_id: follower_id) }
@@ -23,7 +23,7 @@ class Video < ApplicationRecord
   scope :filter_by_song_id, ->(song_id) { where(song_id: song_id) }
   scope :filter_by_hd, ->(boolean) { where(hd: boolean) }
   scope :filter_by_year,
-        ->(year) { where('extract(year from upload_date) = ?', year) }
+        ->(year) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :paginate,
@@ -87,7 +87,7 @@ class Video < ApplicationRecord
   scope :with_dancer_name_in_title,
         lambda { |dancer_name|
           where(
-            'unaccent(title) ILIKE unaccent(:dancer_name)',
+            "unaccent(title) ILIKE unaccent(:dancer_name)",
             dancer_name: "%#{dancer_name}%"
           )
         }

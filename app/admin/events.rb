@@ -9,7 +9,7 @@ ActiveAdmin.register Event do
                 :reviewed
   actions :all
 
-  config.sort_order = 'id_asc'
+  config.sort_order = "id_asc"
 
   config.per_page = [100, 500, 1000]
 

@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   def search_title
     return if title.empty?
 
-    @search_title ||= title.split('-')[0].strip
+    @search_title ||= title.split("-")[0].strip
   end
 
   def videos_with_event_title_match
@@ -41,7 +41,7 @@ class Event < ApplicationRecord
       words = query.to_s.strip.split
       words.reduce(all) do |combined_scope, word|
         combined_scope.where(
-          'unaccent(title) ILIKE unaccent(:query)',
+          "unaccent(title) ILIKE unaccent(:query)",
           query: "%#{word}%"
         )
       end

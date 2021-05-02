@@ -51,57 +51,57 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def acr_response_code
-    return if parsed_acr_cloud_data.dig('status', 'code').blank?
+    return if parsed_acr_cloud_data.dig("status", "code").blank?
 
-    @acr_response_code ||= parsed_acr_cloud_data.dig('status', 'code')
+    @acr_response_code ||= parsed_acr_cloud_data.dig("status", "code")
   end
 
   def youtube_song_id
-    return if parsed_acr_cloud_data.deep_find('youtube').blank?
+    return if parsed_acr_cloud_data.deep_find("youtube").blank?
 
-    @youtube_song_id ||= parsed_acr_cloud_data.deep_find('youtube')['vid']
+    @youtube_song_id ||= parsed_acr_cloud_data.deep_find("youtube")["vid"]
   end
 
   def isrc
-    return if parsed_acr_cloud_data.deep_find('external_ids').blank?
+    return if parsed_acr_cloud_data.deep_find("external_ids").blank?
 
-    @isrc ||= parsed_acr_cloud_data.deep_find('external_ids')['isrc']
+    @isrc ||= parsed_acr_cloud_data.deep_find("external_ids")["isrc"]
   end
 
   def spotify_params
-    return if parsed_acr_cloud_data.deep_find('spotify').blank?
+    return if parsed_acr_cloud_data.deep_find("spotify").blank?
 
-    @spotify_params ||= parsed_acr_cloud_data.deep_find('spotify')
+    @spotify_params ||= parsed_acr_cloud_data.deep_find("spotify")
   end
 
   def spotify_album_id
     return if spotify_params.blank?
 
-    @spotify_album_id ||= spotify_params.dig('album', 'id')
+    @spotify_album_id ||= spotify_params.dig("album", "id")
   end
 
   def spotify_artist_id
     return if spotify_params.blank?
 
-    @spotify_artist_id ||= spotify_params.dig('artists', 0, 'id')
+    @spotify_artist_id ||= spotify_params.dig("artists", 0, "id")
   end
 
   def spotify_artist_id_1
     return if spotify_params.blank?
 
-    @spotify_artist_id_1 ||= spotify_params.dig('artists', 1, 'id')
+    @spotify_artist_id_1 ||= spotify_params.dig("artists", 1, "id")
   end
 
   def spotify_artist_id_2
     return if spotify_params.blank?
 
-    @spotify_artist_id_2 ||= spotify_params.dig('artists', 2, 'id')
+    @spotify_artist_id_2 ||= spotify_params.dig("artists", 2, "id")
   end
 
   def spotify_track_id
     return if spotify_params.blank?
 
-    @spotify_track_id ||= spotify_params.dig('track', 'id')
+    @spotify_track_id ||= spotify_params.dig("track", "id")
   end
 
   def spotify_album_name
@@ -135,39 +135,39 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def acr_cloud_artists
-    return if parsed_acr_cloud_data.deep_find('artists').blank?
+    return if parsed_acr_cloud_data.deep_find("artists").blank?
 
-    parsed_acr_cloud_data.deep_find('artists')
+    parsed_acr_cloud_data.deep_find("artists")
   end
 
   def acr_cloud_artist_name
     return if acr_cloud_artists.blank?
 
-    acr_cloud_artists.dig(0, 'name')
+    acr_cloud_artists.dig(0, "name")
   end
 
   def acr_cloud_artist_name_1
     return if acr_cloud_artists.blank?
 
-    acr_cloud_artists.dig(1, 'name')
+    acr_cloud_artists.dig(1, "name")
   end
 
   def acr_cloud_album_name
-    return if parsed_acr_cloud_data.deep_find('album').blank?
+    return if parsed_acr_cloud_data.deep_find("album").blank?
 
-    parsed_acr_cloud_data.deep_find('album')['name']
+    parsed_acr_cloud_data.deep_find("album")["name"]
   end
 
   def acr_cloud_track_name
-    return if parsed_acr_cloud_data.deep_find('title').blank?
+    return if parsed_acr_cloud_data.deep_find("title").blank?
 
-    parsed_acr_cloud_data.deep_find('title')
+    parsed_acr_cloud_data.deep_find("title")
   end
 
   def acrid
-    return if parsed_acr_cloud_data.deep_find('acrid').blank?
+    return if parsed_acr_cloud_data.deep_find("acrid").blank?
 
-    parsed_acr_cloud_data.deep_find('acrid')
+    parsed_acr_cloud_data.deep_find("acrid")
   end
 
   def parsed_acr_cloud_data

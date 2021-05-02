@@ -21,7 +21,7 @@ class UsersController < ApplicationController
           #{ActiveRecord::Base.connection.quote(user_params[:name])},
           #{ActiveRecord::Base.connection.quote(user_params[:email])},now(), now())"
     ActiveRecord::Base.connection.execute(sql)
-    redirect_to action: 'index'
+    redirect_to action: "index"
   end
 
   private

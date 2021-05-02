@@ -12,7 +12,7 @@ class WatchController < ApplicationController
         .where(hidden: false)
         .where
         .not(youtube_id: @video.youtube_id)
-        .order('popularity DESC')
+        .order("popularity DESC")
         .limit(3)
     @video.clicked!
   end

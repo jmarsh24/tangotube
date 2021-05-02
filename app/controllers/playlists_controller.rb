@@ -9,7 +9,7 @@ class PlaylistsController < ApplicationController
 
     redirect_to root_path,
                 notice:
-                  'Playlist Sucessfully Added: The playlist must be approved before the videos are added'
+                  "Playlist Sucessfully Added: The playlist must be approved before the videos are added"
   end
 
   private

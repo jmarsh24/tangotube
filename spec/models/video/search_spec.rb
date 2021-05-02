@@ -1,132 +1,132 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Video::Search, type: :model do
-  describe '#videos' do
-    describe 'sorting' do
-      it 'returns videos sorted by songs.last_name_search' do
-        song_a = create(:song, last_name_search: 'A')
-        song_b = create(:song, last_name_search: 'B')
+  describe "#videos" do
+    describe "sorting" do
+      it "returns videos sorted by songs.last_name_search" do
+        song_a = create(:song, last_name_search: "A")
+        song_b = create(:song, last_name_search: "B")
         video_a = create(:video, song: song_a)
         video_b = create(:video, song: song_b)
         search_asc =
           described_class.new(
             sorting_params: {
-              sort: 'songs.last_name_search',
-              direction: 'ASC'
+              sort: "songs.last_name_search",
+              direction: "ASC"
             }
           )
         search_desc =
           described_class.new(
             sorting_params: {
-              sort: 'songs.last_name_search',
-              direction: 'DESC'
+              sort: "songs.last_name_search",
+              direction: "DESC"
             }
           )
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
       end
 
-      it 'returns videos sorted by songs.title' do
-        song_a = create(:song, title: 'A')
-        song_b = create(:song, title: 'B')
+      it "returns videos sorted by songs.title" do
+        song_a = create(:song, title: "A")
+        song_b = create(:song, title: "B")
         video_a = create(:video, song: song_a)
         video_b = create(:video, song: song_b)
         search_asc =
           described_class.new(
             sorting_params: {
-              sort: 'songs.title',
-              direction: 'ASC'
+              sort: "songs.title",
+              direction: "ASC"
             }
           )
         search_desc =
           described_class.new(
             sorting_params: {
-              sort: 'songs.title',
-              direction: 'DESC'
+              sort: "songs.title",
+              direction: "DESC"
             }
           )
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
       end
 
-      it 'returns videos sorted by upload_date' do
+      it "returns videos sorted by upload_date" do
         video_a = create(:video, upload_date: Time.zone.local(2020, 1, 1))
         video_b = create(:video, upload_date: Time.zone.local(2019, 1, 1))
         search_asc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.upload_date',
-              direction: 'ASC'
+              sort: "videos.upload_date",
+              direction: "ASC"
             }
           )
         search_desc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.upload_date',
-              direction: 'DESC'
+              sort: "videos.upload_date",
+              direction: "DESC"
             }
           )
         expect(search_asc.videos).to eq [video_a, video_b]
         expect(search_desc.videos).to eq [video_a, video_b]
       end
 
-      it 'returns videos sorted by view_count' do
+      it "returns videos sorted by view_count" do
         video_a = create(:video, view_count: 1)
         video_b = create(:video, view_count: 2)
         search_asc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.view_count',
-              direction: 'ASC'
+              sort: "videos.view_count",
+              direction: "ASC"
             }
           )
         search_desc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.view_count',
-              direction: 'DESC'
+              sort: "videos.view_count",
+              direction: "DESC"
             }
           )
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
       end
 
-      it 'returns videos sorted by popularity' do
+      it "returns videos sorted by popularity" do
         video_a = create(:video, popularity: 1)
         video_b = create(:video, popularity: 2)
         search_asc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.popularity',
-              direction: 'ASC'
+              sort: "videos.popularity",
+              direction: "ASC"
             }
           )
         search_desc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.popularity',
-              direction: 'DESC'
+              sort: "videos.popularity",
+              direction: "DESC"
             }
           )
         expect(search_asc.videos).to eq [video_b, video_a]
         expect(search_desc.videos).to eq [video_b, video_a]
       end
 
-      it 'returns videos sorted by updated_at' do
+      it "returns videos sorted by updated_at" do
         video_a = create(:video)
         video_b = create(:video)
         search_asc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.updated_at',
-              direction: 'ASC'
+              sort: "videos.updated_at",
+              direction: "ASC"
             }
           )
         search_desc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.updated_at',
-              direction: 'DESC'
+              sort: "videos.updated_at",
+              direction: "DESC"
             }
           )
         expect(search_asc.videos).to eq [video_b, video_a]
@@ -134,20 +134,20 @@ RSpec.describe Video::Search, type: :model do
       end
 
       it "does not sort by parameter that's not a searchable column" do
-        video_a = create(:video, title: 'A')
-        video_b = create(:video, title: 'B')
+        video_a = create(:video, title: "A")
+        video_b = create(:video, title: "B")
         search_asc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.title',
-              direction: 'ASC'
+              sort: "videos.title",
+              direction: "ASC"
             }
           )
         search_desc =
           described_class.new(
             sorting_params: {
-              sort: 'videos.title',
-              direction: 'DESC'
+              sort: "videos.title",
+              direction: "DESC"
             }
           )
         expect(search_asc.videos).to eq [video_a, video_b]
@@ -155,8 +155,8 @@ RSpec.describe Video::Search, type: :model do
       end
     end
 
-    describe 'filter_videos' do
-      it 'filters by leader_id' do
+    describe "filter_videos" do
+      it "filters by leader_id" do
         leader = create(:leader)
         video_a = create(:video, leader: leader)
         video_b = create(:video)
@@ -164,7 +164,7 @@ RSpec.describe Video::Search, type: :model do
         expect(search.videos).to eq [video_a]
       end
 
-      it 'filters by follower_id' do
+      it "filters by follower_id" do
         follower = create(:follower)
         video_a = create(:video, follower: follower)
         video_b = create(:video)
@@ -175,7 +175,7 @@ RSpec.describe Video::Search, type: :model do
         expect(search.videos).to eq [video_a]
       end
 
-      it 'filters by channel_id' do
+      it "filters by channel_id" do
         channel = create(:channel)
         video_a = create(:video, channel: channel)
         video_b = create(:video)
@@ -186,28 +186,28 @@ RSpec.describe Video::Search, type: :model do
         expect(search.videos).to eq [video_a]
       end
 
-      it 'filters by genre' do
-        song = create(:song, genre: 'Tango')
+      it "filters by genre" do
+        song = create(:song, genre: "Tango")
         video_a = create(:video, song: song)
         video_b = create(:video)
 
-        search = described_class.new(filtering_params: { genre: 'Tango' })
+        search = described_class.new(filtering_params: { genre: "Tango" })
 
         expect(search.videos).to eq [video_a]
       end
 
-      it 'filters by orchestra' do
-        song = create(:song, artist: 'Di Sarli')
+      it "filters by orchestra" do
+        song = create(:song, artist: "Di Sarli")
         video_a = create(:video, song: song)
         video_b = create(:video)
 
         search =
-          described_class.new(filtering_params: { orchestra: 'Di Sarli' })
+          described_class.new(filtering_params: { orchestra: "Di Sarli" })
 
         expect(search.videos).to eq [video_a]
       end
 
-      it 'filters by song_id' do
+      it "filters by song_id" do
         song = create(:song)
         video_a = create(:video, song: song)
         video_b = create(:video)
@@ -217,7 +217,7 @@ RSpec.describe Video::Search, type: :model do
         expect(search.videos).to eq [video_a]
       end
 
-      it 'filters by hd' do
+      it "filters by hd" do
         video_a = create(:video, hd: true)
         video_b = create(:video, hd: false)
 
@@ -229,7 +229,7 @@ RSpec.describe Video::Search, type: :model do
         expect(search_b.videos).to eq [video_b]
       end
 
-      it 'filters by event_id' do
+      it "filters by event_id" do
         event = create(:event)
         video_a = create(:video, event: event)
         video_b = create(:video)
@@ -239,173 +239,173 @@ RSpec.describe Video::Search, type: :model do
         expect(search.videos).to eq [video_a]
       end
 
-      it 'filters by year' do
+      it "filters by year" do
         video_a = create(:video, upload_date: Time.zone.local(2018, 1, 1))
         video_b = create(:video)
 
-        search = described_class.new(filtering_params: { year: '2018' })
+        search = described_class.new(filtering_params: { year: "2018" })
 
         expect(search.videos).to eq [video_a]
       end
 
-      describe 'filter_by_query' do
-        it 'returns video with title that matches query' do
-          video = create(:video, title: 'Title with carlitos espinoza')
+      describe "filter_by_query" do
+        it "returns video with title that matches query" do
+          video = create(:video, title: "Title with carlitos espinoza")
           VideosSearch.refresh
           search_a =
             described_class.new(
               filtering_params: {
-                query: 'Carlitos Espinoza'
+                query: "Carlitos Espinoza"
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
+            described_class.new(filtering_params: { query: "John Doe" })
           search_c =
-            described_class.new(filtering_params: { query: 'Carlitos Espin' })
+            described_class.new(filtering_params: { query: "Carlitos Espin" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with description that matches query' do
+        it "returns video with description that matches query" do
           video =
-            create(:video, description: 'description with carlitos espinoza')
+            create(:video, description: "description with carlitos espinoza")
           VideosSearch.refresh
           search_a =
             described_class.new(
               filtering_params: {
-                query: 'Carlitos Espinoza'
+                query: "Carlitos Espinoza"
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
+            described_class.new(filtering_params: { query: "John Doe" })
           search_c =
-            described_class.new(filtering_params: { query: 'Carlitos Espin' })
+            described_class.new(filtering_params: { query: "Carlitos Espin" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with leader name that matches query' do
-          leader = create(:leader, name: 'Carlitos Espinoza')
+        it "returns video with leader name that matches query" do
+          leader = create(:leader, name: "Carlitos Espinoza")
           video = create(:video, leader: leader)
           VideosSearch.refresh
           search_a =
             described_class.new(
               filtering_params: {
-                query: 'Carlitos Espinoza'
+                query: "Carlitos Espinoza"
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
+            described_class.new(filtering_params: { query: "John Doe" })
           search_c =
-            described_class.new(filtering_params: { query: 'Carlitos Espin' })
+            described_class.new(filtering_params: { query: "Carlitos Espin" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with leader nickname that matches query' do
-          leader = create(:leader, nickname: 'Carlitos')
+        it "returns video with leader nickname that matches query" do
+          leader = create(:leader, nickname: "Carlitos")
           video = create(:video, leader: leader)
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: 'Carlitos' })
+            described_class.new(filtering_params: { query: "Carlitos" })
           search_b =
-            described_class.new(filtering_params: { query: 'no match' })
-          search_c = described_class.new(filtering_params: { query: 'Carlit' })
+            described_class.new(filtering_params: { query: "no match" })
+          search_c = described_class.new(filtering_params: { query: "Carlit" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with follower name that matches query' do
-          follower = create(:follower, name: 'Noelia Hurtado')
+        it "returns video with follower name that matches query" do
+          follower = create(:follower, name: "Noelia Hurtado")
           video = create(:video, follower: follower)
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: 'Noelia Hurtado' })
+            described_class.new(filtering_params: { query: "Noelia Hurtado" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: 'noeli' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "noeli" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with follower nickname that matches query' do
-          follower = create(:follower, nickname: 'Noelia')
+        it "returns video with follower nickname that matches query" do
+          follower = create(:follower, nickname: "Noelia")
           video = create(:video, follower: follower)
           VideosSearch.refresh
-          search_a = described_class.new(filtering_params: { query: 'Noelia' })
+          search_a = described_class.new(filtering_params: { query: "Noelia" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: 'Noel' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "Noel" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with youtube_id that matches query' do
-          video = create(:video, youtube_id: 's6iptZdCcG0')
+        it "returns video with youtube_id that matches query" do
+          video = create(:video, youtube_id: "s6iptZdCcG0")
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: 's6iptZdCcG0' })
+            described_class.new(filtering_params: { query: "s6iptZdCcG0" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
+            described_class.new(filtering_params: { query: "John Doe" })
           search_c =
-            described_class.new(filtering_params: { query: 's6iptZdCcG' })
+            described_class.new(filtering_params: { query: "s6iptZdCcG" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with youtube_artist that matches query' do
+        it "returns video with youtube_artist that matches query" do
           video = create(:video, youtube_artist: "Angel D'Agostino")
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: 'Agostino' })
+            described_class.new(filtering_params: { query: "Agostino" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: 'Agostin' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "Agostin" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with youtube_song that matches query' do
-          video = create(:video, youtube_song: 'No Vendrá')
+        it "returns video with youtube_song that matches query" do
+          video = create(:video, youtube_song: "No Vendrá")
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: 'no vendrá' })
+            described_class.new(filtering_params: { query: "no vendrá" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: 'no vend' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "no vend" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with spotify_track_name that matches query' do
-          video = create(:video, spotify_track_name: 'No Vendrá')
+        it "returns video with spotify_track_name that matches query" do
+          video = create(:video, spotify_track_name: "No Vendrá")
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: 'no vendrá' })
+            described_class.new(filtering_params: { query: "no vendrá" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: 'no vend' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "no vend" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with spotify_artist_name that matches query' do
+        it "returns video with spotify_artist_name that matches query" do
           video = create(:video, spotify_artist_name: "Angel D'Agostino")
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: 'agostino' })
+            described_class.new(filtering_params: { query: "agostino" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
+            described_class.new(filtering_params: { query: "John Doe" })
           search_c =
             described_class.new(filtering_params: { query: "Angel D'Agosti" })
           expect(search_a.videos).to eq [video]
@@ -413,36 +413,36 @@ RSpec.describe Video::Search, type: :model do
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with channel title that matches query' do
-          channel = create(:channel, title: '030 Tango')
+        it "returns video with channel title that matches query" do
+          channel = create(:channel, title: "030 Tango")
           video = create(:video, channel: channel)
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: '030 tango' })
+            described_class.new(filtering_params: { query: "030 tango" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: '030 T' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "030 T" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with channel_id that matches query' do
-          channel = create(:channel, channel_id: 'UCtdgMR0bmogczrZNpPaO66Q')
+        it "returns video with channel_id that matches query" do
+          channel = create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
           video = create(:video, channel: channel)
           VideosSearch.refresh
           search_a =
             described_class.new(
               filtering_params: {
-                query: 'UCtdgMR0bmogczrZNpPaO66Q'
+                query: "UCtdgMR0bmogczrZNpPaO66Q"
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
+            described_class.new(filtering_params: { query: "John Doe" })
           search_c =
             described_class.new(
               filtering_params: {
-                query: 'UCtdgMR0bmogczrZNpPaO'
+                query: "UCtdgMR0bmogczrZNpPaO"
               }
             )
           expect(search_a.videos).to eq [video]
@@ -450,42 +450,42 @@ RSpec.describe Video::Search, type: :model do
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with song genre that matches query' do
-          song = create(:song, genre: 'Tango')
+        it "returns video with song genre that matches query" do
+          song = create(:song, genre: "Tango")
           video = create(:video, song: song)
           VideosSearch.refresh
-          search_a = described_class.new(filtering_params: { query: 'tango' })
+          search_a = described_class.new(filtering_params: { query: "tango" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: 'tang' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "tang" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with song title that matches query' do
-          song = create(:song, title: 'La Mentirosa')
+        it "returns video with song title that matches query" do
+          song = create(:song, title: "La Mentirosa")
           video = create(:video, song: song)
           VideosSearch.refresh
           search_a =
-            described_class.new(filtering_params: { query: 'mentirosa' })
+            described_class.new(filtering_params: { query: "mentirosa" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: 'menti' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "menti" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
         end
 
-        it 'returns video with song artist that matches query' do
+        it "returns video with song artist that matches query" do
           song = create(:song, artist: "Angel D'Agostino")
           video = create(:video, song: song)
           VideosSearch.refresh
           search_a =
             described_class.new(filtering_params: { query: "d'agostino" })
           search_b =
-            described_class.new(filtering_params: { query: 'John Doe' })
-          search_c = described_class.new(filtering_params: { query: 'Agosti' })
+            described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "Agosti" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -494,9 +494,9 @@ RSpec.describe Video::Search, type: :model do
     end
   end
 
-  describe '#paginated_videos' do
-    it 'paginates videos' do
-      stub_const('Video::Search::NUMBER_OF_VIDEOS_PER_PAGE', 2)
+  describe "#paginated_videos" do
+    it "paginates videos" do
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
@@ -506,7 +506,7 @@ RSpec.describe Video::Search, type: :model do
       expect(page3.paginated_videos.count).to eq(0)
     end
 
-    it 'shuffles videos if sorting/filtering params empty' do
+    it "shuffles videos if sorting/filtering params empty" do
       srand(3)
       video1 = create(:video, hd: 1)
       video2 = create(:video, hd: 1)
@@ -519,9 +519,9 @@ RSpec.describe Video::Search, type: :model do
     end
   end
 
-  describe '#displayed_videos_count' do
-    it 'counts the total amount of displayed videos' do
-      stub_const('Video::Search::NUMBER_OF_VIDEOS_PER_PAGE', 2)
+  describe "#displayed_videos_count" do
+    it "counts the total amount of displayed videos" do
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
@@ -532,9 +532,9 @@ RSpec.describe Video::Search, type: :model do
     end
   end
 
-  describe '#next_page?' do
-    it 'returns the next page' do
-      stub_const('Video::Search::NUMBER_OF_VIDEOS_PER_PAGE', 2)
+  describe "#next_page?" do
+    it "returns the next page" do
+      stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
       create_list(:video, 3)
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
@@ -543,10 +543,10 @@ RSpec.describe Video::Search, type: :model do
     end
   end
 
-  describe '#leaders' do
-    it 'creates array of leaders and increments multiple videos without duplication' do
-      leader = create(:leader, name: 'Carlitos Espinoza')
-      leader2 = create(:leader, name: 'Sebastian Jimenez')
+  describe "#leaders" do
+    it "creates array of leaders and increments multiple videos without duplication" do
+      leader = create(:leader, name: "Carlitos Espinoza")
+      leader2 = create(:leader, name: "Sebastian Jimenez")
       create(:video, leader: leader)
       create(:video, leader: leader2)
       create(:video, leader: leader2)
@@ -554,17 +554,17 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new
       expect(search.leaders).to eq(
         [
-          ['Sebastian Jimenez (2)', leader2.id],
-          ['Carlitos Espinoza (1)', leader.id]
+          ["Sebastian Jimenez (2)", leader2.id],
+          ["Carlitos Espinoza (1)", leader.id]
         ]
       )
     end
   end
 
-  describe '#followers' do
-    it 'creates array of followers and increments multiple videos without duplication' do
-      follower = create(:follower, name: 'Noelia Hurtado')
-      follower2 = create(:follower, name: 'Moira Castellano')
+  describe "#followers" do
+    it "creates array of followers and increments multiple videos without duplication" do
+      follower = create(:follower, name: "Noelia Hurtado")
+      follower2 = create(:follower, name: "Moira Castellano")
       create(:video, follower: follower)
       create(:video, follower: follower2)
       create(:video, follower: follower2)
@@ -572,17 +572,17 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new
       expect(search.followers).to eq(
         [
-          ['Moira Castellano (2)', follower2.id],
-          ['Noelia Hurtado (1)', follower.id]
+          ["Moira Castellano (2)", follower2.id],
+          ["Noelia Hurtado (1)", follower.id]
         ]
       )
     end
   end
 
-  describe '#orchestras' do
-    it 'creates array of ors and increments multiple videos without duplication' do
-      song = create(:song, artist: 'Carlos Di Sarli')
-      song2 = create(:song, artist: 'Osvaldo Pugliese')
+  describe "#orchestras" do
+    it "creates array of ors and increments multiple videos without duplication" do
+      song = create(:song, artist: "Carlos Di Sarli")
+      song2 = create(:song, artist: "Osvaldo Pugliese")
       create(:video, song: song)
       create(:video, song: song2)
       create(:video, song: song2)
@@ -590,36 +590,36 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new
       expect(search.orchestras).to eq(
         [
-          ['Osvaldo Pugliese (2)', 'osvaldo pugliese'],
-          ['Carlos Di Sarli (1)', 'carlos di sarli']
+          ["Osvaldo Pugliese (2)", "osvaldo pugliese"],
+          ["Carlos Di Sarli (1)", "carlos di sarli"]
         ]
       )
     end
   end
 
-  describe '#genre' do
-    it 'creates array of songs and increments multiple videos without duplication' do
-      song = create(:song, genre: 'Milonga')
-      song2 = create(:song, genre: 'Tango')
+  describe "#genre" do
+    it "creates array of songs and increments multiple videos without duplication" do
+      song = create(:song, genre: "Milonga")
+      song2 = create(:song, genre: "Tango")
       create(:video, song: song)
       create(:video, song: song2)
       create(:video, song: song2)
 
       search = described_class.new
       expect(search.genres).to eq(
-        [['Tango (2)', 'tango'], ['Milonga (1)', 'milonga']]
+        [["Tango (2)", "tango"], ["Milonga (1)", "milonga"]]
       )
     end
   end
 
-  describe '#years' do
-    it 'creates array of songs and increments multiple videos without duplication' do
+  describe "#years" do
+    it "creates array of songs and increments multiple videos without duplication" do
       create(:video, upload_date: Time.zone.local(2018, 1, 1))
       create(:video, upload_date: Time.zone.local(2018, 1, 1))
       create(:video, upload_date: Time.zone.local(2017, 1, 1))
 
       search = described_class.new
-      expect(search.years).to eq([['2018 (2)', 2018], ['2017 (1)', 2017]])
+      expect(search.years).to eq([["2018 (2)", 2018], ["2017 (1)", 2017]])
     end
   end
 end

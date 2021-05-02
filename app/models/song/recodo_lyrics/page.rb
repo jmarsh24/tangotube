@@ -1,8 +1,8 @@
 class Song::RecodoLyrics::Page
-  RECODO_URL_PREFIX = 'https://www.el-recodo.com/music?id='.freeze
-  RECODO_URL_SUFFIX = '&lang=en'.freeze
-  RECODO_LYRICS_HTML_MARKER = 'p#geniusText'.freeze
-  RECODO_METADATA_HTML_MARKER = 'div.list-group.lead a'.freeze
+  RECODO_URL_PREFIX = "https://www.el-recodo.com/music?id=".freeze
+  RECODO_URL_SUFFIX = "&lang=en".freeze
+  RECODO_LYRICS_HTML_MARKER = "p#geniusText".freeze
+  RECODO_METADATA_HTML_MARKER = "div.list-group.lead a".freeze
 
   def initialize(id)
     @id = id
@@ -33,13 +33,13 @@ class Song::RecodoLyrics::Page
   def artist
     return if metadata[3].blank?
 
-    @artist ||= metadata[3].text.strip.split[1..].join(' ')
+    @artist ||= metadata[3].text.strip.split[1..].join(" ")
   end
 
   def title
     return if metadata[1].blank?
 
-    @title ||= metadata[1].text.strip.split[1..].join(' ')
+    @title ||= metadata[1].text.strip.split[1..].join(" ")
   end
 
   def metadata

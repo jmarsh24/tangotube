@@ -34,7 +34,7 @@ class VideosController < ApplicationController
 
     redirect_to root_path,
                 notice:
-                  'Video Sucessfully Added: The video must be approved before the videos are added'
+                  "Video Sucessfully Added: The video must be approved before the videos are added"
   end
 
   private
@@ -56,7 +56,7 @@ class VideosController < ApplicationController
         .where(hidden: false)
         .where
         .not(youtube_id: @video.youtube_id)
-        .order('popularity DESC')
+        .order("popularity DESC")
         .limit(3)
   end
 

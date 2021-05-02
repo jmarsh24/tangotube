@@ -9,7 +9,7 @@ class ChannelsController < ApplicationController
 
     redirect_to root_path,
                 notice:
-                  'Channel Sucessfully Added: The channel must be approved before the videos are added'
+                  "Channel Sucessfully Added: The channel must be approved before the videos are added"
   end
 
   private

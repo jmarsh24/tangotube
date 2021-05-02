@@ -22,12 +22,12 @@ module FullNameable
   end
 
   def abrev_name
-    return '' if first_name.blank? || last_name.blank?
+    return "" if first_name.blank? || last_name.blank?
 
     "#{first_name.try(:first).capitalize}. #{last_name.capitalize}"
   end
 
   def abrev_name_nospace
-    abrev_name.try(:delete, ' ') if abrev_name.present?
+    abrev_name.try(:delete, " ") if abrev_name.present?
   end
 end
