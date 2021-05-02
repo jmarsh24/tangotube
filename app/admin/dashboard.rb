@@ -43,9 +43,10 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       panel "Recent Videos" do
         ul do
-          Video.all.limit(10).map do |video|
-            li link_to(video.title, admin_video_path(video))
-          end
+          Video
+            .all
+            .limit(10)
+            .map { |video| li link_to(video.title, admin_video_path(video)) }
           strong { link_to "View All Videos", admin_videos_path }
         end
       end

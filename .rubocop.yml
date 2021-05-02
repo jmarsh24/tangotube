@@ -1,3 +1,6 @@
+inherit_gem:
+  prettier: rubocop.yml
+
 require:
   - rubocop-rails
   - rubocop-rspec

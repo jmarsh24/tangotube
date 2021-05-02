@@ -14,7 +14,16 @@ RSpec.describe "Videos::Index::Videos", type: :system do
     @follower = create(:follower, name: "Noelia Hurtado")
     @song = create(:song, title: "song_title")
     @event = create(:event, title: "event_title")
-    @video = create(:video, :display, title: "video_a", leader: @leader, follower: @follower, song: @song, event: @event)
+    @video =
+      create(
+        :video,
+        :display,
+        title: "video_a",
+        leader: @leader,
+        follower: @follower,
+        song: @song,
+        event: @event
+      )
   end
 
   def updates_video_title_when_song_leader_follower_present

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     # don't send email notifications from admin interface
     @user.skip_notifications!
     # ...
@@ -15,7 +16,8 @@ class UsersController < ApplicationController
   end
 
   def savenew
-    sql = "insert into users (name,email, created_at,updated_at) values(
+    sql =
+      "insert into users (name,email, created_at,updated_at) values(
           #{ActiveRecord::Base.connection.quote(user_params[:name])},
           #{ActiveRecord::Base.connection.quote(user_params[:email])},now(), now())"
     ActiveRecord::Base.connection.execute(sql)
@@ -25,7 +27,8 @@ class UsersController < ApplicationController
   private
 
   def allow_without_password
-    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+    if params[:user][:password].blank? &&
+         params[:user][:password_confirmation].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
     end

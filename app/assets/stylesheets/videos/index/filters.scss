@@ -71,7 +71,7 @@
   display: flex;
   flex-direction: column;
   max-width: 1900px;
-  height: 325px;
+  height: 310px;
   overflow-x: auto;
   padding: 0 32px;
   margin-bottom: 0.5rem;
@@ -123,12 +123,23 @@
   align-items: center;
   padding: 0 5px;
   margin: 5px 0;
+
   min-width: 1000px;
   label {
     font-size: 0.9rem;
     font-weight: 500;
     min-width: 50px;
     color: $sortable-label-color;
+  }
+  a {
+    text-decoration: none;
+    color: $primary-font-color;
+    font-size: 0.8rem;
+    text-align: center;
+    min-width: 100px;
+    &:hover {
+      color: $sortable-label-color-hover;
+    }
   }
 }
 
@@ -158,6 +169,10 @@
 @media (max-width: 500px) {
   .filter-header {
     padding: 10px;
+  }
+
+  #filter_results {
+    font-size: 12px;
   }
 
   .filter-container {

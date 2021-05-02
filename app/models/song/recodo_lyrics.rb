@@ -6,9 +6,7 @@ class Song::RecodoLyrics
   end
 
   def fetch
-    (1..SONG_ID_MAX_NUMBER).each do |id|
-      fetch_page(id)
-    end
+    (1..SONG_ID_MAX_NUMBER).each { |id| fetch_page(id) }
   end
 
   private

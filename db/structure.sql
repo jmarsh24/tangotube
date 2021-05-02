@@ -354,7 +354,8 @@ CREATE TABLE public.playlists (
     videos_id bigint,
     user_id bigint,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    reviewed boolean DEFAULT false
 );
 
 
@@ -1012,6 +1013,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210309223723'),
 ('20210309233622'),
 ('20210312174239'),
-('20210315153437');
+('20210315153437'),
+('20210428220252');
 
 

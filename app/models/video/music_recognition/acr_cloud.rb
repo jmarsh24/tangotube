@@ -3,7 +3,8 @@ class Video::MusicRecognition::AcrCloud
     def fetch(youtube_id)
       new(youtube_id).update_video
     rescue StandardError => e
-      Rails.logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e.backtrace.join("\n\t")}"
+      Rails
+        .logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e.backtrace.join("\n\t")}"
     end
   end
 
@@ -28,24 +29,24 @@ class Video::MusicRecognition::AcrCloud
 
   def video_params
     {
-      acr_response_code:       acr_response_code,
-      spotify_album_id:        spotify_album_id,
-      spotify_album_name:      spotify_album_name,
-      spotify_artist_id:       spotify_artist_id,
-      spotify_artist_id_1:     spotify_artist_id_1,
-      spotify_artist_id_2:     spotify_artist_id_2,
-      spotify_artist_name:     spotify_artist_name,
-      spotify_artist_name_1:   spotify_artist_name_1,
-      spotify_artist_name_2:   spotify_artist_name_2,
-      spotify_track_id:        spotify_track_id,
-      spotify_track_name:      spotify_track_name,
-      acr_cloud_artist_name:   acr_cloud_artist_name,
+      acr_response_code: acr_response_code,
+      spotify_album_id: spotify_album_id,
+      spotify_album_name: spotify_album_name,
+      spotify_artist_id: spotify_artist_id,
+      spotify_artist_id_1: spotify_artist_id_1,
+      spotify_artist_id_2: spotify_artist_id_2,
+      spotify_artist_name: spotify_artist_name,
+      spotify_artist_name_1: spotify_artist_name_1,
+      spotify_artist_name_2: spotify_artist_name_2,
+      spotify_track_id: spotify_track_id,
+      spotify_track_name: spotify_track_name,
+      acr_cloud_artist_name: acr_cloud_artist_name,
       acr_cloud_artist_name_1: acr_cloud_artist_name_1,
-      acr_cloud_album_name:    acr_cloud_album_name,
-      acr_cloud_track_name:    acr_cloud_track_name,
-      youtube_song_id:         youtube_song_id,
-      acrid:                   acrid,
-      isrc:                    isrc
+      acr_cloud_album_name: acr_cloud_album_name,
+      acr_cloud_track_name: acr_cloud_track_name,
+      youtube_song_id: youtube_song_id,
+      acrid: acrid,
+      isrc: isrc
     }
   end
 
@@ -170,6 +171,7 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def parsed_acr_cloud_data
-    @parsed_acr_cloud_data ||= JSON.parse(acr_cloud_response).extend Hashie::Extensions::DeepFind
+    @parsed_acr_cloud_data ||=
+      JSON.parse(acr_cloud_response).extend Hashie::Extensions::DeepFind
   end
 end

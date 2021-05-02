@@ -28,12 +28,16 @@ RSpec.describe Video, type: :model do
       it "returns videos with corresponding orchestra name" do
         song = create(:song, artist: "Juan d'Arienzo")
         video = create(:video, song: song)
-        expect(described_class.filter_by_orchestra("Juan d'Arienzo")).to eq [video]
+        expect(described_class.filter_by_orchestra("Juan d'Arienzo")).to eq [
+             video
+           ]
       end
 
       it "does not return videos without corresponding orchestra name" do
         video = create(:video)
-        expect(described_class.filter_by_orchestra("Juan d'Arienzo")).not_to eq [video]
+        expect(
+          described_class.filter_by_orchestra("Juan d'Arienzo")
+        ).not_to eq [video]
       end
     end
 
@@ -350,25 +354,42 @@ RSpec.describe Video, type: :model do
 
       it "returns videos where Video's song_title matches given song title" do
         song = create(:song, title: "No Vendrá")
-        video = create(:video, title: "This is a video with No Vendra by Angel D'Agostino")
+        video =
+          create(
+            :video,
+            title: "This is a video with No Vendra by Angel D'Agostino"
+          )
         expect(described_class.with_song_title(song.title)).to eq [video]
       end
 
       it "returns videos where Video Description matches given song title" do
         song = create(:song, title: "No Vendrá")
-        video = create(:video, description: "This is a video with No Vendra by Angel D'Agostino")
+        video =
+          create(
+            :video,
+            description: "This is a video with No Vendra by Angel D'Agostino"
+          )
         expect(described_class.with_song_title(song.title)).to eq [video]
       end
 
       it "returns videos where Video Tags matches given song title" do
         song = create(:song, title: "No Vendrá")
-        video = create(:video, tags: "This is a video with No Vendra by Angel D'Agostino")
+        video =
+          create(
+            :video,
+            tags: "This is a video with No Vendra by Angel D'Agostino"
+          )
         expect(described_class.with_song_title(song.title)).to eq [video]
       end
 
       it "returns videos where Video acr_cloud_track_name matches given song title" do
         song = create(:song, title: "No Vendrá")
-        video = create(:video, acr_cloud_track_name: "This is a video with No Vendra by Angel D'Agostino")
+        video =
+          create(
+            :video,
+            acr_cloud_track_name:
+              "This is a video with No Vendra by Angel D'Agostino"
+          )
         expect(described_class.with_song_title(song.title)).to eq [video]
       end
     end
@@ -377,109 +398,157 @@ RSpec.describe Video, type: :model do
       it "returns videos where last_name_search of song is found in video's spotify_artist_name" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, spotify_artist_name: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
 
       it "returns videos where last_name_search of song is found in video's spotify_artist_name_2" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, spotify_artist_name_2: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
 
       it "returns videos where last_name_search of song is found in video's youtube_artist" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, youtube_artist: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
 
       it "returns videos where last_name_search of song is found in video's description" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, description: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
 
       it "returns videos where last_name_search of song is found in video's title" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, title: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
 
       it "returns videos where last_name_search of song is found in video's tags" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, tags: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
 
       it "returns videos where last_name_search of song is found in video's spotify_album_name" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, spotify_album_name: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
 
       it "returns videos where last_name_search of song is found in video's acr_cloud_artist_name" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, acr_cloud_artist_name: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
 
       it "returns videos where last_name_search of song is found in video's acr_cloud_artist_name_1" do
         song = create(:song, last_name_search: "Agostino")
         video = create(:video, acr_cloud_artist_name_1: "Angel D'Agostino")
-        expect(described_class.with_song_artist_keyword(song.last_name_search)).to eq [video]
+        expect(
+          described_class.with_song_artist_keyword(song.last_name_search)
+        ).to eq [video]
       end
     end
 
     describe ".with_dancer_name_in_title" do
       it "returns videos title matches leader name" do
-        leader = create(:leader, name: "Carlitos Espinoza", first_name: "Carlitos", last_name: "Espinoza")
+        leader =
+          create(
+            :leader,
+            name: "Carlitos Espinoza",
+            first_name: "Carlitos",
+            last_name: "Espinoza"
+          )
         video = create(:video, title: "Title with Carlitos Espinoza")
-        expect(described_class.with_dancer_name_in_title(leader.full_name)).to eq [video]
+        expect(
+          described_class.with_dancer_name_in_title(leader.full_name)
+        ).to eq [video]
       end
 
       it "returns videos title matches leader nickname" do
         leader = create(:leader, first_name: "Carlitos", last_name: "Espinoza")
         video = create(:video, title: "Title with Carlitos Espinoza")
-        expect(described_class.with_dancer_name_in_title(leader.full_name)).to eq [video]
+        expect(
+          described_class.with_dancer_name_in_title(leader.full_name)
+        ).to eq [video]
       end
 
       it "returns videos title matches follower name" do
         follower = create(:follower, name: "Noelia Hurtado")
         video = create(:video, title: "Title with Noelia Hurtado")
-        expect(described_class.with_dancer_name_in_title(follower.full_name)).to eq [video]
+        expect(
+          described_class.with_dancer_name_in_title(follower.full_name)
+        ).to eq [video]
       end
 
       it "returns videos title matches follower nickname" do
         follower = create(:follower, first_name: "Noelia", last_name: "Hurtado")
         video = create(:video, title: "Title with Noelia Hurtado")
-        expect(described_class.with_dancer_name_in_title(follower.full_name)).to eq [video]
+        expect(
+          described_class.with_dancer_name_in_title(follower.full_name)
+        ).to eq [video]
       end
     end
 
     describe ".title_match_missing_leader" do
       it "returns videos title matches leader name and the relation hasn't been made" do
         leader = create(:leader, name: "Carlitos Espinoza")
-        video = create(:video, leader: nil, title: "Title with Carlitos Espinoza")
-        expect(described_class.title_match_missing_leader(leader.full_name)).to eq [video]
+        video =
+          create(:video, leader: nil, title: "Title with Carlitos Espinoza")
+        expect(
+          described_class.title_match_missing_leader(leader.full_name)
+        ).to eq [video]
       end
 
       it "does not return ideos title matches leader name and the relation hasn't been made" do
         leader = create(:leader, name: "Carlitos Espinoza")
-        video = create(:video, leader: leader, title: "Title with Carlitos Espinoza")
-        expect(described_class.title_match_missing_leader(leader.full_name)).not_to eq [video]
+        video =
+          create(:video, leader: leader, title: "Title with Carlitos Espinoza")
+        expect(
+          described_class.title_match_missing_leader(leader.full_name)
+        ).not_to eq [video]
       end
     end
 
     describe ".title_match_missing_follower" do
       it "returns videos title matches follower name and the relation hasn't been made" do
         follower = create(:follower, name: "Noelia Hurtado")
-        video = create(:video, follower: nil, title: "Title with Noelia Hurtado")
-        expect(described_class.title_match_missing_follower(follower.full_name)).to eq [video]
+        video =
+          create(:video, follower: nil, title: "Title with Noelia Hurtado")
+        expect(
+          described_class.title_match_missing_follower(follower.full_name)
+        ).to eq [video]
       end
 
       it "does not return ideos title matches follower name and the relation hasn't been made" do
         follower = create(:follower, name: "Carlitos Espinoza")
-        video = create(:video, follower: follower, title: "Title with Carlitos Espinoza")
-        expect(described_class.title_match_missing_follower(follower.full_name)).not_to eq [video]
+        video =
+          create(
+            :video,
+            follower: follower,
+            title: "Title with Carlitos Espinoza"
+          )
+        expect(
+          described_class.title_match_missing_follower(follower.full_name)
+        ).not_to eq [video]
       end
     end
 
@@ -487,15 +556,20 @@ RSpec.describe Video, type: :model do
       it "returns video with title that matches query" do
         video = create(:video, title: "Title with carlitos espinoza")
         VideosSearch.refresh
-        expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [video]
+        expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [
+             video
+           ]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
         expect(described_class.filter_by_query("Carlitos Espin")).to eq [video]
       end
 
       it "returns video with description that matches query" do
-        video = create(:video, description: "description with carlitos espinoza")
+        video =
+          create(:video, description: "description with carlitos espinoza")
         VideosSearch.refresh
-        expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [video]
+        expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [
+             video
+           ]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
         expect(described_class.filter_by_query("Carlitos Espin")).to eq [video]
       end
@@ -504,7 +578,9 @@ RSpec.describe Video, type: :model do
         leader = create(:leader, name: "Carlitos Espinoza")
         video = create(:video, leader: leader)
         VideosSearch.refresh
-        expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [video]
+        expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [
+             video
+           ]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
         expect(described_class.filter_by_query("Carlitos Espin")).to eq [video]
       end
@@ -590,9 +666,13 @@ RSpec.describe Video, type: :model do
         channel = create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
         video = create(:video, channel: channel)
         VideosSearch.refresh
-        expect(described_class.filter_by_query("UCtdgMR0bmogczrZNpPaO66Q")).to eq [video]
+        expect(
+          described_class.filter_by_query("UCtdgMR0bmogczrZNpPaO66Q")
+        ).to eq [video]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
-        expect(described_class.filter_by_query("UCtdgMR0bmogczrZNpPaO")).to eq [video]
+        expect(described_class.filter_by_query("UCtdgMR0bmogczrZNpPaO")).to eq [
+             video
+           ]
       end
 
       it "returns video with song genre that matches query" do

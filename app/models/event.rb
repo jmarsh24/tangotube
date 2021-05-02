@@ -12,13 +12,16 @@ class Event < ApplicationRecord
   end
 
   def videos_with_event_title_match
-    Video.joins(:channel)
-         .where(event_id: nil)
-         .where("unaccent(videos.title) ILIKE unaccent(:query) OR
+    Video
+      .joins(:channel)
+      .where(event_id: nil)
+      .where(
+        'unaccent(videos.title) ILIKE unaccent(:query) OR
                   unaccent(videos.description) ILIKE unaccent(:query) OR
                   unaccent(videos.tags) ILIKE unaccent(:query) OR
-                  unaccent(channels.title) ILIKE unaccent(:query)",
-                query: "%#{search_title}%")
+                  unaccent(channels.title) ILIKE unaccent(:query)',
+        query: "%#{search_title}%"
+      )
   end
 
   def match_videos
@@ -37,14 +40,18 @@ class Event < ApplicationRecord
     def title_search(query)
       words = query.to_s.strip.split
       words.reduce(all) do |combined_scope, word|
-        combined_scope.where("unaccent(title) ILIKE unaccent(:query)", query: "%#{word}%")
+        combined_scope.where(
+          "unaccent(title) ILIKE unaccent(:query)",
+          query: "%#{word}%"
+        )
       end
     end
 
     def match_all_events
-      Event.all.order(:id).each do |event|
-        MatchEventWorker.perform_async(event.id)
-      end
+      Event
+        .all
+        .order(:id)
+        .each { |event| MatchEventWorker.perform_async(event.id) }
     end
   end
 end

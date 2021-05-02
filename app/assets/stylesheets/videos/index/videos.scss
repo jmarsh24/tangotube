@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px 20px;
-  padding: 0 40px 0 40px;
+  padding: 0 40px 20px 40px;
   background-color: $secondary-color;
 }
 
@@ -11,7 +11,7 @@
   flex-direction: column;
 }
 
-.thumbnail{
+.thumbnail {
   position: relative;
   display: flex;
   height: 0;
@@ -28,7 +28,7 @@
   bottom: 5px;
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
-  font-size: .7rem;
+  font-size: 0.7rem;
 }
 
 .thumbnail-image {
@@ -37,7 +37,7 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #AAA;
+  background-color: #aaa;
   border-radius: 0.3em;
 }
 
@@ -57,9 +57,9 @@
   text-decoration: none;
   font-size: inherit;
   color: $videos-primary-link;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  margin: .2rem 0;
+  margin: 0.2rem 0;
 
   &:hover {
     color: $videos-primary-link-hover;
@@ -73,7 +73,7 @@
   a {
     font-size: 0.7rem;
     text-decoration: none;
-    color:$videos-secondary-link;
+    color: $videos-secondary-link;
 
     &:hover {
       color: $videos-secondary-link-hover;
@@ -82,11 +82,11 @@
 }
 
 .channel-icon {
-  margin: .1rem .3rem 0 0;
+  margin: 0.1rem 0.3rem 0 0;
   border-radius: 50%;
   width: 18px;
   height: 18px;
-  background-color: #AAA;
+  background-color: #aaa;
 }
 
 .channel-title {
@@ -104,13 +104,13 @@
   }
 
   a:hover {
-  color: #111;
+    color: #111;
   }
 }
 
 .video-metadata {
   color: #555;
-  font-size: .7rem;
+  font-size: 0.7rem;
 }
 
 .video-event {
@@ -139,6 +139,6 @@
     margin: 10px;
   }
   .thumbnail {
-  border-radius: 0;
+    border-radius: 0;
   }
 }

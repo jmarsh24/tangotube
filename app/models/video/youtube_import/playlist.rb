@@ -22,9 +22,7 @@ class Video::YoutubeImport::Playlist
   end
 
   def import_videos
-    new_videos.each do |youtube_id|
-      ImportVideoWorker.perform_async(youtube_id)
-    end
+    new_videos.each { |youtube_id| ImportVideoWorker.perform_async(youtube_id) }
   end
 
   def import_channels
@@ -45,17 +43,15 @@ class Video::YoutubeImport::Playlist
 
   def base_params
     {
-      slug:          @youtube_playlist.id,
-      title:         @youtube_playlist.title,
-      description:   @youtube_playlist.description,
+      slug: @youtube_playlist.id,
+      title: @youtube_playlist.title,
+      description: @youtube_playlist.description,
       channel_title: @youtube_playlist.published_at
     }
   end
 
   def count_params
-    {
-      video_count: @youtube_playlist.playlist_items.count
-    }
+    { video_count: @youtube_playlist.playlist_items.count }
   end
 
   def youtube_playlist_videos
@@ -63,7 +59,9 @@ class Video::YoutubeImport::Playlist
   end
 
   def youtube_playlist_channels
-    @youtube_playlist.playlist_items.map { |video| video.snippet.data["videoOwnerChannelId"] }.uniq
+    @youtube_playlist.playlist_items.map do |video|
+      video.snippet.data["videoOwnerChannelId"]
+    end.uniq
   end
 
   def channels

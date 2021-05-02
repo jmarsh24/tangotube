@@ -7,7 +7,9 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.create(slug: params[:playlist][:slug])
     fetch_new_playlist
 
-    redirect_to root_path, notice: "Playlist Sucessfully Added: The playlist must be approved before the videos are added"
+    redirect_to root_path,
+                notice:
+                  "Playlist Sucessfully Added: The playlist must be approved before the videos are added"
   end
 
   private

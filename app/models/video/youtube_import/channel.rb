@@ -1,5 +1,6 @@
 class Video::YoutubeImport::Channel
-  YOUTUBE_DL_COMMAND_PREFIX = "youtube-dl https://www.youtube.com/channel/".freeze
+  YOUTUBE_DL_COMMAND_PREFIX =
+    "youtube-dl https://www.youtube.com/channel/".freeze
   YOUTUBE_DL_COMMAND_SUFFIX = "/videos  --get-id --skip-download".freeze
 
   class << self
@@ -27,15 +28,13 @@ class Video::YoutubeImport::Channel
   end
 
   def import_videos
-    new_videos.each do |youtube_id|
-      ImportVideoWorker.perform_async(youtube_id)
-    end
+    new_videos.each { |youtube_id| ImportVideoWorker.perform_async(youtube_id) }
   end
 
   private
 
-  def fetch_by_id(channel_id)
-    Yt::Channel.new id: channel_id
+  def fetch_by_id(_channel_id)
+    Yt::Channel.new id: @channel_id
   end
 
   def channel
@@ -48,27 +47,30 @@ class Video::YoutubeImport::Channel
 
   def base_params
     {
-      channel_id:    @youtube_channel.id,
-      title:         @youtube_channel.title,
+      channel_id: @youtube_channel.id,
+      title: @youtube_channel.title,
       thumbnail_url: @youtube_channel.thumbnail_url
     }
   end
 
   def count_params
-    {
-      total_videos_count: @youtube_channel.video_count
-    }
+    { total_videos_count: @youtube_channel.video_count }
   end
 
   def get_channel_video_ids
-    `#{YOUTUBE_DL_COMMAND_PREFIX + channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
+    `#{YOUTUBE_DL_COMMAND_PREFIX + @channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
   rescue StandardError => e
-    Rails.logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
+    Rails
+      .logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
     "" # NOTE: the empty string return so your split method works always.
   end
 
   def youtube_channel_video_ids
-    @youtube_channel.video_count >= 500 ? get_channel_video_ids(channel_id) : @youtube_channel.videos.map(&:id)
+    if @youtube_channel.video_count >= 500
+      get_channel_video_ids
+    else
+      @youtube_channel.videos.map(&:id)
+    end
   end
 
   def channel_existing_youtube_video_ids

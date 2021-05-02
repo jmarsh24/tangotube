@@ -2,6 +2,7 @@ import { Controller } from 'stimulus'
 import Rails from '@rails/ujs'
 import { Turbo } from '@hotwired/turbo-rails'
 
+
 export default class extends Controller {
   static targets = ['filter']
   static values = { sort: String, direction: String, hd: String }

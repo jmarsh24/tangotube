@@ -1,5 +1,11 @@
 ActiveAdmin.register Song do
-  permit_params :genre, :title, :artist, :artist_2, :active, :last_name_search, :date
+  permit_params :genre,
+                :title,
+                :artist,
+                :artist_2,
+                :active,
+                :last_name_search,
+                :date
   actions :all
 
   config.sort_order = "id_asc"

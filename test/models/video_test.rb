@@ -1,4 +1,4 @@
-or# == Schema Information
+# == Schema Information
 #
 # Table name: videos
 #
@@ -27,7 +27,7 @@ or# == Schema Information
 #  event_id           :bigint
 #
 
-require 'test_helper'
+require "test_helper"
 
 class VideoTest < ActiveSupport::TestCase
   # test "the truth" do

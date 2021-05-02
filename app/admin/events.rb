@@ -1,5 +1,12 @@
 ActiveAdmin.register Event do
-  permit_params :title, :city, :country, :category, :start_date, :end_date, :active, :reviewed
+  permit_params :title,
+                :city,
+                :country,
+                :category,
+                :start_date,
+                :end_date,
+                :active,
+                :reviewed
   actions :all
 
   config.sort_order = "id_asc"

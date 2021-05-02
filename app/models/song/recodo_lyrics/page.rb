@@ -11,13 +11,21 @@ class Song::RecodoLyrics::Page
   def update_song_from_lyrics
     return if lyrics.blank?
 
-    song = ::Song.where("unaccent(title) ILIKE unaccent(?)
-                        AND unaccent(artist) ILIKE unaccent(?)",
-                        title,
-                        artist).first
+    song =
+      ::Song.where(
+        'unaccent(title) ILIKE unaccent(?)
+                        AND unaccent(artist) ILIKE unaccent(?)',
+        title,
+        artist
+      ).first
     return unless song
 
-    song.update(el_recodo_song_id: @id, lyrics: lyrics, artist: artist, title: title)
+    song.update(
+      el_recodo_song_id: @id,
+      lyrics: lyrics,
+      artist: artist,
+      title: title
+    )
   end
 
   private
@@ -43,7 +51,7 @@ class Song::RecodoLyrics::Page
   end
 
   def parsed_body
-    @parsed_body ||= ::Nokogiri::HTML(raw.body)
+    @parsed_body ||= ::Nokogiri.HTML(raw.body)
   end
 
   def raw
