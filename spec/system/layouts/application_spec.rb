@@ -18,6 +18,10 @@ RSpec.describe "Videos::Index", type: :system do
       open_filters
       performs_a_search
       performs_autocomplete_search
+      reset_page
+      open_filters
+      select_leader_filter
+      close_filters
       logout
     end
   end
@@ -40,6 +44,10 @@ RSpec.describe "Videos::Index", type: :system do
       open_filters
       performs_a_search
       performs_autocomplete_search
+      reset_page
+      open_filters
+      select_leader_filter
+      close_filters
       logout
     end
   end
@@ -49,8 +57,8 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def set_up_videos
-    leader = create(:leader, name: "Leader Name")
-    create(:video, :display, title: "expected_result", popularity: "1", leader: leader)
+    @leader = create(:leader, name: "Leader Name")
+    create(:video, :display, title: "expected_result", popularity: "1", leader: @leader)
     create(:video, :display, title: "video_b", popularity: "2")
     VideosSearch.refresh
   end
@@ -185,7 +193,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def open_filters
     find(class: "filter-button").click
-    expect(page).to have_css("div.filter-container:not(.isHidden)", visible: :all)
+    expect(page).to have_css("div.filter-container", visible: :all)
   end
 
   def close_filters
@@ -211,6 +219,18 @@ RSpec.describe "Videos::Index", type: :system do
     expect(page).to have_current_path("/?query=expected_result")
     expect(page).to have_content("1 Result Found")
     expect(video_title_collection).to eq(%w[expected_result])
+  end
+
+  def reset_page
+    click_on("TangoTube")
+    expect(video_title_collection).to eq(%w[expected_result video_b])
+    expect(page).to have_current_path("/")
+  end
+
+  def select_leader_filter
+    find("div.ss-option", text: "Leader Name (1)").click
+    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    expect(video_title_collection).to eq(["expected_result"])
   end
 
   def logout
