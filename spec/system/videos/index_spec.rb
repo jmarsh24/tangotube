@@ -369,12 +369,10 @@ RSpec.describe "Videos::Index", type: :system do
 
   def toggle_filters_hidden
     visit root_path
-    expect(page).to have_css(
-      "div.filter-container:not(.isHidden)",
-      visible: :all
-    )
-    click_on("Filters")
     expect(page).to have_css("div.filter-container.isHidden", visible: :all)
+    click_on("Filters")
+    expect(page).not_to have_css("div.filter-container.isHidden", visible: :all)
+    expect(page).to have_css("div.filter-container", visible: :all)
   end
 
   def sort_by_song_title
@@ -470,6 +468,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_genre_alone
     visit root_path
+    byebug
     filter_by_genre_a
     expect(page).to have_current_path("/?genre=genre_a")
     expect(video_title_collection).to eq(["video_a"])
