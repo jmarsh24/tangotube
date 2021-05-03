@@ -55,11 +55,11 @@ class Video::Search
   end
 
   def leaders
-    @leaders ||= facet_id("leaders.name", "leaders.id", :leader)
+    @leaders ||= facet("leaders.name", :leader)
   end
 
   def followers
-    @followers ||= facet_id("followers.name", "followers.id", :follower)
+    @followers ||= facet("followers.name", :follower)
   end
 
   def orchestras

@@ -76,8 +76,8 @@ class VideosController < ApplicationController
 
   def filtering_params
     params.permit(
-      :leader_id,
-      :follower_id,
+      :leader,
+      :follower,
       :channel_id,
       :genre,
       :orchestra,
