@@ -23,6 +23,8 @@ RSpec.describe "Videos::Index", type: :system do
       open_filters
       select_leader_filter
       close_filters
+      select_video
+      shows_edit_button
       logout
     end
   end
@@ -59,8 +61,8 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def set_up_videos
-    @leader = create(:leader, name: "Leader Name")
-    create(:video, :display, title: "expected_result", popularity: "1", leader: @leader)
+    leader = create(:leader, name: "Leader Name")
+    @video = create(:video, :display, title: "expected_result", popularity: "1", leader: leader)
     create(:video, :display, title: "video_b", popularity: "2")
     VideosSearch.refresh
   end
@@ -124,6 +126,14 @@ RSpec.describe "Videos::Index", type: :system do
     click_on("Log in")
 
     expect(page).to have_content("Signed in successfully.")
+  end
+
+  def select_video
+    find("a#video-link").click
+  end
+
+  def shows_edit_button
+    expect(page).to have_link("Edit", href: edit_video_path(@video))
   end
 
   def shows_page_registrations_new
@@ -254,7 +264,7 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def logout
-    click_on "Logout"
+    all(class: "navbar-link", text: "Logout").last.click
     expect(page).to have_content("Signed out successfully.")
   end
 end

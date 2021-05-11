@@ -82,6 +82,7 @@
   &::-webkit-scrollbar {
     display: none;
   }
+  z-index: 10;
 
   #form-frame {
     flex: 1;

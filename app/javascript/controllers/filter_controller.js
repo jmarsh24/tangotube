@@ -60,17 +60,14 @@ export default class extends Controller {
       url: url,
       success: data => {
         const replaceContainers = [
-          'filter-container-upper',
+          'filter-container',
           'videos',
           'load-more-container',
-          'filter_results',
-          'sortable_container'
+          'filter_results'
         ]
 
         replaceContainers.forEach(element => {
-          document.getElementById(element).innerHTML = data.getElementById(
-            element
-          ).innerHTML
+          document.getElementById(element).innerHTML = data.getElementById(element).innerHTML
         })
 
         history.pushState({}, '', `${window.location.pathname}?${this.params}`)
