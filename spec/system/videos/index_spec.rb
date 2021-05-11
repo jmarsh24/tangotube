@@ -468,7 +468,6 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_genre_alone
     visit root_path
-    byebug
     filter_by_genre_a
     expect(page).to have_current_path("/?genre=genre_a")
     expect(video_title_collection).to eq(["video_a"])
