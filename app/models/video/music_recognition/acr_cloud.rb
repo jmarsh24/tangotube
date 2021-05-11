@@ -18,12 +18,12 @@ class Video::MusicRecognition::AcrCloud
 
   private
 
-  def audio_file
-    @audio_file ||= Audio.import(@youtube_id)
+  def audio_file_path
+    Audio.import(@youtube_id).path
   end
 
   def acr_cloud_response
-    @acr_cloud_response ||= Client.send_audio(audio_file.path)
+    @acr_cloud_response ||= Client.send_audio(audio_file_path)
   end
 
   def video_params
