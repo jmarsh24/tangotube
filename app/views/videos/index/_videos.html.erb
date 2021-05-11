@@ -23,15 +23,16 @@
           </div>
           <div class="video-event">
               <%= link_to video.event.title.titleize,
-                          root_path(event_id: video.event.id) if video.event.present? %>
+                            root_path(event_id: video.event.id),
+                            'data-turbo-frame': "_top"  if video.event.present? %>
           </div>
           <div class="video-channel">
             <%= link_to image_tag(video.channel.thumbnail_url,
-                          class: 'channel-icon'),
+                          {'data-turbo-frame': "_top", class: 'channel-icon'}),
                           root_path(channel_id: video.channel_id) if video.channel.thumbnail_url.present? %>
             <%= link_to channel_title(video),
                           root_path(channel_id: video.channel_id),
-                          class: "channel-title" if video.channel.title.present? %>
+                          {'data-turbo-frame': "_top", class: "channel-title"} if video.channel.title.present? %>
           </div>
           <div class="video-metadata">
               <%= formatted_metadata(video) %>

@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe "Videos::Index", type: :system do
-  it "shows videos, display and populates filters" do
+  it "shows videos, display and populates filters", js: true do
     setup_videos
     visit root_path
-    click_on("Popularity")
-    click_on("Popularity")
+    open_filters
+    sort_by_popularity
     shows_videos
     sorts_videos
 
@@ -26,34 +26,13 @@ RSpec.describe "Videos::Index", type: :system do
   def setup_videos
     @leader = create(:leader, name: "leader_name")
     @follower = create(:follower, name: "follower_name")
-    song_a =
-      create(
-        :song,
-        artist: "artist_name_a",
-        last_name_search: "A",
-        title: "song_title_a",
-        genre: "genre_a"
-      )
-    song_b =
-      create(
-        :song,
-        artist: "artist_name_b",
-        last_name_search: "B",
-        title: "song_title_b",
-        genre: "genre_b"
-      )
-    song_c =
-      create(
-        :song,
-        artist: "artist_name_c",
-        last_name_search: "C",
-        title: "song_title_c",
-        genre: "genre_c"
-      )
-    event_a = create(:event, title: "event_a")
+    @song_a = create(:song, artist: "artist_name_a", last_name_search: "A", title: "song_title_a", genre: "genre_a")
+    song_b = create(:song, artist: "artist_name_b", last_name_search: "B", title: "song_title_b", genre: "genre_b")
+    song_c = create(:song, artist: "artist_name_c", last_name_search: "C", title: "song_title_c", genre: "genre_c")
+    @event_a = create(:event, title: "event_a")
     event_b = create(:event, title: "event_b")
     event_c = create(:event, title: "event_c")
-    channel_a = create(:channel, title: "channel_a")
+    @channel_a = create(:channel, title: "channel_a")
     channel_b = create(:channel, title: "channel_b")
     channel_c = create(:channel, title: "channel_c")
     create(
@@ -67,9 +46,9 @@ RSpec.describe "Videos::Index", type: :system do
       youtube_id: "youtube_id_a",
       duration: "30",
       hd: "0",
-      song: song_a,
-      channel: channel_a,
-      event: event_a,
+      song: @song_a,
+      channel: @channel_a,
+      event: @event_a,
       leader: @leader
     )
     create(
@@ -266,6 +245,19 @@ RSpec.describe "Videos::Index", type: :system do
     find("div.ss-option", text: "1999 (1)").click
   end
 
+  def open_filters
+    click_on("Filters")
+    expect(page).not_to have_css("div.filter-container.isHidden")
+    expect(page).to have_css("div.filter-container")
+  end
+
+  def sort_by_popularity
+    click_on("Popularity")
+    expect(page).to have_current_path("/?sort=videos.popularity&direction=asc")
+    click_on("Popularity")
+    expect(page).to have_current_path("/?sort=videos.popularity&direction=desc")
+  end
+
   def display_video_thumbnails
     expect(video_thumbnail_collection).to eq(
       %w[
@@ -377,36 +369,46 @@ RSpec.describe "Videos::Index", type: :system do
 
   def sort_by_song_title
     click_on("Song Title")
+    expect(page).to have_current_path("/?sort=songs.title&direction=desc")
     expect(video_title_collection).to eq(%w[video_c video_b video_a])
     click_on("Song Title")
+    expect(page).to have_current_path("/?sort=songs.title&direction=asc")
     expect(video_title_collection).to eq(%w[video_a video_b video_c])
   end
 
   def sort_by_channel
     click_on("Channel")
+    expect(page).to have_current_path("/?sort=videos.channel_id&direction=desc")
     expect(video_title_collection).to eq(%w[video_c video_b video_a])
     click_on("Channel")
+    expect(page).to have_current_path("/?sort=videos.channel_id&direction=asc")
     expect(video_title_collection).to eq(%w[video_a video_b video_c])
   end
 
   def sort_by_view_count
     click_on("View Count")
+    expect(page).to have_current_path("/?sort=videos.view_count&direction=desc")
     expect(video_title_collection).to eq(%w[video_c video_b video_a])
     click_on("View Count")
+    expect(page).to have_current_path("/?sort=videos.view_count&direction=asc")
     expect(video_title_collection).to eq(%w[video_a video_b video_c])
   end
 
   def sort_by_upload_date
     click_on("Upload Date")
+    expect(page).to have_current_path("/?sort=videos.upload_date&direction=desc")
     expect(video_title_collection).to eq(%w[video_a video_b video_c])
     click_on("Upload Date")
+    expect(page).to have_current_path("/?sort=videos.upload_date&direction=asc")
     expect(video_title_collection).to eq(%w[video_c video_b video_a])
   end
 
   def sort_by_orchestra
     click_on("Orchestra")
+    expect(page).to have_current_path("/?sort=songs.last_name_search&direction=desc")
     expect(video_title_collection).to eq(%w[video_c video_b video_a])
     click_on("Orchestra")
+    expect(page).to have_current_path("/?sort=songs.last_name_search&direction=asc")
     expect(video_title_collection).to eq(%w[video_a video_b video_c])
   end
 
@@ -438,29 +440,30 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def filter_by_video_song_id
-    click_on("Song Title A - Artist Name A - Genre A")
+    click_link("Song Title A - Artist Name A - Genre A")
+    expect(page).to have_current_path("/?song_id=#{@song_a.id}")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def filter_by_video_channel_id
-    click_on("channel_a")
+    click_link("channel_a")
+    expect(page).to have_current_path("/?channel_id=#{@channel_a.id}")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def filter_by_video_event_id
-    click_on("Event A")
+    click_link("Event A")
+    expect(page).to have_current_path("/?event_id=#{@event_a.id}")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def visit_video_thumbnail_link
-    click_on("Popularity")
     all("a#video-link").first.click
     expect(page).to have_current_path("/watch?v=youtube_id_a")
     visit root_path
   end
 
   def visit_video_title_link
-    click_on("Popularity")
     click_on("video_a")
     expect(page).to have_current_path("/watch?v=youtube_id_a")
     visit root_path
