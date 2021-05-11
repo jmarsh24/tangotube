@@ -5,7 +5,7 @@ Sidekiq::Testing.fake!
 RSpec.describe Video::YoutubeImport::Channel, type: :model do
   describe "#import" do
     it "creates new channel if missing" do
-      VCR.use_cassette("video/youtubeimport/channel") do
+      VCR.use_cassette("video/youtubeimport/channel/api_response") do
         expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.to change(Channel, :count).from(0).to(1)
         channel = Channel.find_by(channel_id: "UC9lGGipk4wth0rDyy4419aw")
         expect(channel.channel_id).to eq("UC9lGGipk4wth0rDyy4419aw")
@@ -19,7 +19,7 @@ RSpec.describe Video::YoutubeImport::Channel, type: :model do
     end
 
     it "updates channel information if channel already exists" do
-      VCR.use_cassette("video/youtubeimport/channel") do
+      VCR.use_cassette("video/youtubeimport/channel/api_response") do
         channel = create(:channel, channel_id: "UC9lGGipk4wth0rDyy4419aw")
         expect(Channel.count).to eq(1)
         expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.not_to change(Channel, :count)
@@ -38,7 +38,7 @@ RSpec.describe Video::YoutubeImport::Channel, type: :model do
 
   describe "#import_videos" do
     it "import all videos" do
-      VCR.use_cassette("video/youtubeimport/channel_videos") do
+      VCR.use_cassette("video/youtubeimport/channel/api_response_videos") do
         expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.to change(Channel, :count).from(0).to(1)
 
         expect{described_class.import_videos("UC9lGGipk4wth0rDyy4419aw")}.to change(ImportVideoWorker.jobs, :size).by(5)
@@ -46,7 +46,7 @@ RSpec.describe Video::YoutubeImport::Channel, type: :model do
     end
 
     it "imports only new videos" do
-      VCR.use_cassette("video/youtubeimport/channel_videos") do
+      VCR.use_cassette("video/youtubeimport/channel/api_response_videos") do
         channel = create(:channel, channel_id: "UC9lGGipk4wth0rDyy4419aw")
         expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.not_to change(Channel, :count)
         create(:video, youtube_id: "s8olH-kdwzw", channel: channel)
@@ -56,7 +56,7 @@ RSpec.describe Video::YoutubeImport::Channel, type: :model do
     end
 
     it "doesn't import new videos" do
-      VCR.use_cassette("video/youtubeimport/channel_videos") do
+      VCR.use_cassette("video/youtubeimport/channel/api_response_videos") do
         channel = create(:channel, channel_id: "UC9lGGipk4wth0rDyy4419aw")
         create(:video, youtube_id: "s8olH-kdwzw", channel: channel)
         create(:video, youtube_id: "M50x-wkXZHI", channel: channel)

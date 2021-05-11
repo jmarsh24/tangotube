@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Video::YoutubeImport::Video, type: :model do
   describe ".import" do
     it "creates new video and channel if missing" do
-      VCR.use_cassette("video/youtubeimport/video") do
+      VCR.use_cassette("video/youtubeimport/video/api_response") do
         expect{described_class.import("s6iptZdCcG0")}.to change(Video, :count).from(0).to(1)
 
         video = Video.find_by(youtube_id: "s6iptZdCcG0")
@@ -16,7 +16,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
 
-        expect(video.view_count).to eq(45775)
+        expect(video.view_count).to eq(45808)
         expect(video.favorite_count).to eq(0)
         expect(video.comment_count).to eq(8)
         expect(video.like_count).to eq(293)
@@ -27,7 +27,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
     end
 
     it "updates video if already exists" do
-      VCR.use_cassette("video/youtubeimport/video") do
+      VCR.use_cassette("video/youtubeimport/video/api_response") do
         video = create(:video, youtube_id: "s6iptZdCcG0",
                                 title: "old title",
                                 description: "old description",
@@ -49,7 +49,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
 
-        expect(video.view_count).to eq(45775)
+        expect(video.view_count).to eq(45808)
         expect(video.favorite_count).to eq(0)
         expect(video.comment_count).to eq(8)
         expect(video.like_count).to eq(293)
@@ -58,7 +58,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
     end
 
     it "assigns video to channel if it already exists" do
-      VCR.use_cassette("video/youtubeimport/video") do
+      VCR.use_cassette("video/youtubeimport/video/api_response") do
         channel = create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
         expect{described_class.import("s6iptZdCcG0")}.to change(Video, :count).from(0).to(1)
         video = Video.find_by(youtube_id: "s6iptZdCcG0")
@@ -70,7 +70,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
 
-        expect(video.view_count).to eq(45775)
+        expect(video.view_count).to eq(45808)
         expect(video.favorite_count).to eq(0)
         expect(video.comment_count).to eq(8)
         expect(video.like_count).to eq(293)
