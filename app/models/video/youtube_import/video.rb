@@ -6,17 +6,19 @@ class Video::YoutubeImport::Video
   end
 
   def initialize(youtube_id)
-    @youtube_video = fetch_by_id(youtube_id)
+    @youtube_id = youtube_id
+    @youtube_video = fetch_by_id
   end
 
   def import
-    Video.create(to_video_params)
+    video = Video.find_or_create_by(youtube_id: @youtube_id)
+    video.update(to_video_params)
   end
 
   private
 
-  def fetch_by_id(youtube_id)
-    Yt::Video.new id: youtube_id
+  def fetch_by_id
+    Yt::Video.new id: @youtube_id
   end
 
   def to_video_params
@@ -46,6 +48,6 @@ class Video::YoutubeImport::Video
   end
 
   def channel
-    Channel.find_by(channel_id: @youtube_video.channel_id)
+    @channel ||= Channel.find_or_create_by(channel_id: @youtube_video.channel_id)
   end
 end

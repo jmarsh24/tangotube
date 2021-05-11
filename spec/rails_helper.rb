@@ -120,4 +120,9 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.ignore_localhost = true
   config.configure_rspec_metadata!
+  config.define_cassette_placeholder("<SPOTIFY_CLIENT_ID>") { ENV["SPOTIFY_CLIENT_ID"] }
+  config.define_cassette_placeholder("<SPOTIFY_SECRET_KEY>") { ENV["SPOTIFY_SECRET_KEY"] }
+  config.define_cassette_placeholder("<ACRCLOUD_ACCESS_KEY>") { ENV["ACRCLOUD_ACCESS_KEY"] }
+  config.define_cassette_placeholder("<ACRCLOUD_SECRET_KEY>") { ENV["ACRCLOUD_SECRET_KEY"] }
+  config.define_cassette_placeholder("<YOUTUBE_API_KEY>")  {ENV["YOUTUBE_API_KEY"] }
 end
