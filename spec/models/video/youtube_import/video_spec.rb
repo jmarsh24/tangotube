@@ -16,10 +16,10 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
 
-        expect(video.view_count).to eq(45808)
+        expect(video.view_count).to eq(46181)
         expect(video.favorite_count).to eq(0)
         expect(video.comment_count).to eq(8)
-        expect(video.like_count).to eq(293)
+        expect(video.like_count).to eq(295)
         expect(video.dislike_count).to eq(9)
 
         expect(video.channel).to eq(channel)
@@ -49,10 +49,10 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
 
-        expect(video.view_count).to eq(45808)
+        expect(video.view_count).to eq(46181)
         expect(video.favorite_count).to eq(0)
         expect(video.comment_count).to eq(8)
-        expect(video.like_count).to eq(293)
+        expect(video.like_count).to eq(295)
         expect(video.dislike_count).to eq(9)
       end
     end
@@ -70,10 +70,10 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
 
-        expect(video.view_count).to eq(45808)
+        expect(video.view_count).to eq(46181)
         expect(video.favorite_count).to eq(0)
         expect(video.comment_count).to eq(8)
-        expect(video.like_count).to eq(293)
+        expect(video.like_count).to eq(295)
         expect(video.dislike_count).to eq(9)
 
         expect(video.channel).to eq(channel)
