@@ -5,72 +5,91 @@ Sidekiq::Testing.fake!
 RSpec.describe Video::YoutubeImport::Playlist, type: :model do
   describe "#import" do
     it "creates new playlist if missing" do
-      yt_response = instance_double(Yt::Playlist, id:             "valid_youtube_playlist_id",
-                                                  title:          "playlist_title",
-                                                  description:    "playlist_description",
-                                                  channel_id:     "channel_id",
-                                                  channel_title:  "channel_title",
-                                                  playlist_items: %w[1 2 3])
-
-      allow(Yt::Playlist).to receive(:new).and_return(yt_response)
-
-      expect { described_class.import("valid_youtube_playlist_id") }.to change(Playlist, :count).from(0).to(1)
+      VCR.use_cassette("video/youtubeimport/playlist") do
+        expect{described_class.import("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.to change(Playlist, :count).from(0).to(1)
+        playlist = Playlist.find_by(slug: "PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")
+        expect(playlist.slug).to eq("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")
+        expect(playlist.title).to eq("tangotube test")
+        expect(playlist.description).to eq("")
+        expect(playlist.channel_title).to eq("Justin Marsh")
+        expect(playlist.channel_id).to eq(nil)
+        expect(playlist.video_count).to eq("2")
+        expect(playlist.imported).to eq(false)
+        expect(playlist.reviewed).to eq(false)
+      end
     end
 
-    it "imported playlist has attributes" do
-      yt_response = instance_double(Yt::Playlist, id:             "valid_youtube_playlist_id",
-                                                  title:          "playlist_title",
-                                                  description:    "playlist_description",
-                                                  channel_id:     "channel_id",
-                                                  channel_title:  "channel_title",
-                                                  playlist_items: %w[1 2 3])
+    it "updates playlist information if playlist already exists" do
+      VCR.use_cassette("video/youtubeimport/playlist") do
+        playlist = create(:playlist, slug: "PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")
+        expect(Playlist.count).to eq(1)
+        expect{described_class.import("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.not_to change(Playlist, :count)
+        playlist.reload
 
-      allow(Yt::Playlist).to receive(:new).and_return(yt_response)
-
-      described_class.import("valid_youtube_playlist_id")
-      playlist = Playlist.first
-
-      expect(playlist.slug).to eq("valid_youtube_playlist_id")
-      expect(playlist.title).to eq("playlist_title")
-      expect(playlist.description).to eq("playlist_description")
-      expect(playlist.channel_id).to eq("channel_id")
-      expect(playlist.channel_title).to eq("channel_title")
-      expect(playlist.video_count).to eq("3")
-      expect(playlist.imported?).to eq(false)
+        expect(playlist.slug).to eq("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")
+        expect(playlist.title).to eq("tangotube test")
+        expect(playlist.description).to eq("")
+        expect(playlist.channel_title).to eq("Justin Marsh")
+        expect(playlist.channel_id).to eq(nil)
+        expect(playlist.video_count).to eq("2")
+        expect(playlist.imported).to eq(false)
+        expect(playlist.reviewed).to eq(false)
+      end
     end
   end
 
   describe "#import_videos" do
-    it "creates import videos worker" do
-      youtube_playlist = described_class.new("ABC")
-      youtube_playlist.stub(:new_videos) { %w[video_id_1 video_id_2 video_id_3] }
+    it "import all videos" do
+      VCR.use_cassette("video/youtubeimport/playlist_videos") do
+        expect{described_class.import("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.to change(Playlist, :count).from(0).to(1)
 
-      yt_response = instance_double(Yt::Playlist, id:            "valid_youtube_playlist_id",
-                                                  title:         "playlist_title",
-                                                  description:   "playlist_description",
-                                                  channel_id:    "channel_id",
-                                                  channel_title: "channel_title")
+        expect{described_class.import_videos("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.to change(ImportVideoWorker.jobs, :size).by(2)
+      end
+    end
 
-      allow(Yt::Playlist).to receive(:new).and_return(yt_response)
+    it "imports only new videos" do
+      VCR.use_cassette("video/youtubeimport/playlist_videos") do
+        create(:playlist, slug: "PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")
+        expect{described_class.import("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.not_to change(Playlist, :count)
+        create(:video, youtube_id: "s6iptZdCcG0")
 
-      expect { youtube_playlist.import_videos }.to change(ImportVideoWorker.jobs, :size).by(3)
+        expect{described_class.import_videos("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.to change(ImportVideoWorker.jobs, :size).by(1)
+      end
+    end
+
+    it "doesn't import new videos" do
+      VCR.use_cassette("video/youtubeimport/playlist_videos") do
+        create(:playlist, slug: "PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")
+        create(:video, youtube_id: "s6iptZdCcG0")
+        create(:video, youtube_id: "QmJacJnz0o0")
+
+        expect{described_class.import("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.not_to change(Playlist, :count)
+
+        expect{described_class.import_videos("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.not_to change(ImportVideoWorker.jobs, :size)
+      end
     end
   end
 
   describe "#import_channels" do
-    it "creates import channels worker" do
-      youtube_playlist = described_class.new("ABC")
-      youtube_playlist.stub(:new_channels) { %w[channel_id_1 channel_id_2 channel_id_3] }
+    it "imports all channels" do
+      VCR.use_cassette("video/youtubeimport/playlist_channels") do
+        expect{described_class.import_channels("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.to change(ImportChannelWorker.jobs, :size).by(2)
+      end
+    end
 
-      yt_response = instance_double(Yt::Playlist, id:            "valid_youtube_playlist_id",
-                                                  title:         "playlist_title",
-                                                  description:   "playlist_description",
-                                                  channel_id:    "channel_id",
-                                                  channel_title: "channel_title")
+    it "imports only new channels" do
+      VCR.use_cassette("video/youtubeimport/playlist_channels") do
+      create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
+      expect{described_class.import_channels("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.to change(ImportChannelWorker.jobs, :size).by(1)
+      end
+    end
 
-      allow(Yt::Playlist).to receive(:new).and_return(yt_response)
-
-      expect { youtube_playlist.import_channels }.to change(ImportChannelWorker.jobs, :size).by(3)
+    it "imports all channels" do
+      VCR.use_cassette("video/youtubeimport/playlist_channels") do
+      create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
+      create(:channel, channel_id: "UCceZHjU9BkQM_Nz14N3wQKw")
+      expect{described_class.import_channels("PL_HOpEXNpyAZrjlgI_I_R47yQdhLRtBrb")}.not_to change(ImportChannelWorker.jobs, :size)
+      end
     end
   end
 end
