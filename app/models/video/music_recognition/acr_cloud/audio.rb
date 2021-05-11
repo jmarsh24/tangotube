@@ -50,6 +50,6 @@ class Video::MusicRecognition::AcrCloud::Audio
   end
 
   def transcoded_audio_file
-    audio_file.transcode("tmp/music/s6iptZdCcG0_109_129.mp3", { custom: %W[-ss #{sample_start_time} -to #{sample_end_time}] })
+    audio_file.transcode(output_file_path, { custom: %W[-ss #{sample_start_time} -to #{sample_end_time}] })
   end
 end
