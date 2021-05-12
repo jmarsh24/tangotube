@@ -374,14 +374,9 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def wait_for_filters
+    expect(page).to have_css("div.ss-content.ss-open.disabled")
     expect(page).to have_css("div.ss-content.ss-open:not(.disabled)")
-  end
-
-  def clear_filters
-    page.all(:css, "span.ss-deselect:not(.ss-hide)").each do |el|
-      el.click
-      wait_for_filters
-    end
+    expect(page).to have_css("div.ss-content.ss-open")
   end
 
   def sort_by_song_title
