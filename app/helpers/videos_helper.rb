@@ -99,10 +99,10 @@ module VideosHelper
     request.params.slice(
       "channel_id",
       "event_id",
-      "follower_id",
+      "follower",
       "genre",
       "hd",
-      "leader_id",
+      "leader",
       "orchestra",
       "popularity",
       "query",
