@@ -9,7 +9,7 @@
   width: 308px;
   height: 375px;
   background-color: rgb(246, 248, 250);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   border: 1px solid rgb(234, 236, 239);
 }
 
@@ -58,8 +58,8 @@
   input {
     width: 266px;
     height: 32px;
-    margin: .5rem;
-    padding-left: .5rem;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
     border-radius: 0.3rem;
     border: 1px solid rgb(225, 228, 232);
   }
@@ -82,12 +82,12 @@
     font-size: 12px;
     font-weight: 500;
     color: white;
-    background-color:#1d77f5;
+    background-color: #1d77f5;
     margin-bottom: 15px;
+    cursor: pointer;
   }
 
   a {
     color: rgb(3, 102, 214);
   }
-
 }
