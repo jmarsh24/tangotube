@@ -79,5 +79,8 @@
     color: white;
     background-color: #1d77f5;
     cursor: pointer;
+    &:hover {
+      background-color: #257efa;
+    }
   }
 }

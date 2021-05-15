@@ -85,6 +85,9 @@
     background-color: #1d77f5;
     margin-bottom: 15px;
     cursor: pointer;
+    &:hover {
+      background-color: #257efa;
+    }
   }
 
   a {
