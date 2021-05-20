@@ -72,7 +72,7 @@ module VideosHelper
     truncate(video.channel.title, length: 45, omission: "")
   end
 
-  def sortable(column, title = nil, search)
+  def sortable(column, title = "", search)
     title ||= column.titleize
     css_class =
       column == search.sort_column ? "current #{search.sort_direction}" : nil
@@ -83,10 +83,12 @@ module VideosHelper
         "desc"
       end
 
-    link_to video_query_params.merge({ sort: column, direction: direction }) do
+    button_tag({ type:  "button",
+                 data:  { controller: "filter", action: "filter#filter", "filter-sort-value": column, "filter-direction-value": direction },
+                 class: "videos-sortable-button" }) do
       if css_class.present?
-        concat "#{title} "
-        concat fa_icon("chevron-#{direction == 'asc' ? 'up' : 'down'}")
+        concat title.to_s
+        concat fa_icon("chevron-#{direction == 'asc' ? 'up' : 'down'}", class: "videos-sortable-icon")
       else
         title
       end

@@ -1,11 +1,9 @@
 <%= render "videos/index/filters" %>
+<div id="videos">
 <%= turbo_frame_tag "videos-#{@page}" do %>
-  <div id="videos">
-    <%= render "videos/index/videos" %>
-  </div>
+  <%= render "videos/index/videos" %>
   <%= turbo_frame_tag "videos-#{@page + 1}" do %>
-    <div id="load-more-container">
-      <%= render "videos/index/load_more" %>
-    </div>
+    <%= render "videos/index/load_more" %>
   <% end %>
 <% end %>
+</div>
