@@ -28,12 +28,22 @@ class Video::Search
   end
 
   def videos
+    if @filtering_params.empty? && @sorting_params.empty?
     @videos =
       Video
         .not_hidden
         .includes(:leader, :follower, :channel, :song, :event)
         .order("#{sort_column} #{sort_direction}")
         .filter_videos(@filtering_params)
+        .most_viewed_videos_by_month
+    else
+      @videos =
+      Video
+        .not_hidden
+        .includes(:leader, :follower, :channel, :song, :event)
+        .order("#{sort_column} #{sort_direction}")
+        .filter_videos(@filtering_params)
+    end
   end
 
   def paginated_videos

@@ -21,6 +21,7 @@ class VideosController < ApplicationController
     @video = Video.find_by(youtube_id: show_params[:v])
     set_recommended_videos
     @video.clicked!
+    ahoy.track("Video View", youtube_id: show_params[:v])
   end
 
   def update
