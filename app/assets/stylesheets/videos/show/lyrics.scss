@@ -7,3 +7,9 @@
   line-height: 1.5em;
   min-width: 300px;
 }
+
+@media (max-width: 926px) {
+  .video-info-lyrics {
+    margin: 0;
+  }
+}

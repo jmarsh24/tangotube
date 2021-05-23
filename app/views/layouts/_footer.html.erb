@@ -1,15 +1,17 @@
 <footer class="footer">
-  <div class="footerTitle">
-    TangoTubeTV App | Powered by Youtube API
-  </div>
   <nav class="footer-nav">
-    <ul>
+    <ul class="primary-links">
       <li><%= link_to "Support Us", "https://www.patreon.com/tangotube" %></li>
       <li><%= link_to "About", about_path %></li>
       <li><%= link_to "Contact", contact_path %></li>
-      <li><%= link_to "Privacy Policy", privacy_path %></li>
-      <li><%= link_to "Terms of Service", terms_path %></li>
-      <li><%= link_to "G​oogle Privacy Policy", "http://www.google.com/policies/privacy" %></li>
+    </ul>
+    <div class="footerTitle">
+      TangoTubeTV App | Powered by Youtube API
+    </div>
+    <ul class="secondary-links">
+      <li><%= link_to "Privacy Policy", privacy_path, class: "link-secondary" %></li>
+      <li><%= link_to "Terms of Service", terms_path, class: "link-secondary" %></li>
+      <li><%= link_to "G​oogle Privacy Policy", "http://www.google.com/policies/privacy", class: "link-secondary" %></li>
     </ul>
   </nav>
 </footer>

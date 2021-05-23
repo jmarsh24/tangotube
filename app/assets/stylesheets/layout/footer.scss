@@ -29,28 +29,48 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    padding-inline-start: 0;
+    margin: .5rem 0;
   }
 
   li {
     display: flex;
     text-decoration: none;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: .1rem 0.25rem;
   }
+}
 
+.primary-links {
   a {
     display: flex;
     text-decoration: none;
   }
 
   a:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: rgb(3, 102, 214);
+  }
+}
+
+.secondary-links {
+  a {
+    display: flex;
+    text-decoration: none;
+    color: rgb(197, 197, 197);
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: rgb(151, 151, 151);
   }
 }
 
 @media (max-width: 500px) {
   .footer {
+    padding-top: 5px;
+  }
+  
+  .footerTitle {
     padding-top: 5px;
   }
 }
