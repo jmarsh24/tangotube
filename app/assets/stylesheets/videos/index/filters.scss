@@ -167,6 +167,12 @@
   }
 }
 
+@media (max-width: 800px) {
+  .filter-header {
+    padding: .2rem .5rem;
+  }
+}
+
 @media (max-width: 500px) {
   .filter-header {
     padding: 10px;

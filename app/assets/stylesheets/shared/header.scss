@@ -178,6 +178,18 @@
   }
 }
 
+@media (max-width: 800px) {
+  #mastHeadContainer {
+    .upperHeadContainer {
+      padding: .2rem 0;
+    }
+
+    .lowerHeadContainer {
+      padding: .2rem .5rem;
+    }
+  }
+}
+
 @media (max-width: 500px) {
   .buttonSideBar {
     display: none;
