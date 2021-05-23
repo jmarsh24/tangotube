@@ -58,6 +58,7 @@ $show-video-width: 1300px;
   flex: 1;
   margin: 0 0.5em;
   flex-direction: column;
+  min-width: 300px;
   a {
     color: $link-color;
     font-size: 0.8rem;
