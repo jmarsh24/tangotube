@@ -123,7 +123,7 @@
   font-size: 0.7rem;
   align-items: center;
   padding: 0 5px;
-  margin: 5px 0;
+  margin: 5px 5px;
 
   min-width: 1000px;
   label {
@@ -170,6 +170,12 @@
 @media (max-width: 800px) {
   .filter-header {
     padding: .2rem .5rem;
+  }
+
+  #filter-container {
+    &.filter-container {
+      padding: 0px;
+    }
   }
 }
 
