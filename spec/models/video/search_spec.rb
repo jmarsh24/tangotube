@@ -156,32 +156,29 @@ RSpec.describe Video::Search, type: :model do
     end
 
     describe "filter_videos" do
-      it "filters by leader_id" do
+      it "filters by leader" do
         leader = create(:leader)
         video_a = create(:video, leader: leader)
-        video_b = create(:video)
-        search = described_class.new(filtering_params: { leader_id: leader.id })
+
+        search = described_class.new(filtering_params: { leader: leader.name })
         expect(search.videos).to eq [video_a]
       end
 
-      it "filters by follower_id" do
+      it "filters by follower" do
         follower = create(:follower)
         video_a = create(:video, follower: follower)
-        video_b = create(:video)
 
         search =
-          described_class.new(filtering_params: { follower_id: follower.id })
+          described_class.new(filtering_params: { follower: follower.name })
 
         expect(search.videos).to eq [video_a]
       end
 
-      it "filters by channel_id" do
+      it "filters by channel" do
         channel = create(:channel)
         video_a = create(:video, channel: channel)
-        video_b = create(:video)
 
-        search =
-          described_class.new(filtering_params: { channel_id: channel.id })
+        search = described_class.new(filtering_params: { channel: channel.title })
 
         expect(search.videos).to eq [video_a]
       end
@@ -189,7 +186,6 @@ RSpec.describe Video::Search, type: :model do
       it "filters by genre" do
         song = create(:song, genre: "Tango")
         video_a = create(:video, song: song)
-        video_b = create(:video)
 
         search = described_class.new(filtering_params: { genre: "Tango" })
 
@@ -199,7 +195,6 @@ RSpec.describe Video::Search, type: :model do
       it "filters by orchestra" do
         song = create(:song, artist: "Di Sarli")
         video_a = create(:video, song: song)
-        video_b = create(:video)
 
         search =
           described_class.new(filtering_params: { orchestra: "Di Sarli" })
@@ -232,7 +227,6 @@ RSpec.describe Video::Search, type: :model do
       it "filters by event_id" do
         event = create(:event)
         video_a = create(:video, event: event)
-        video_b = create(:video)
 
         search = described_class.new(filtering_params: { event_id: event.id })
 
@@ -241,7 +235,6 @@ RSpec.describe Video::Search, type: :model do
 
       it "filters by year" do
         video_a = create(:video, upload_date: Time.zone.local(2018, 1, 1))
-        video_b = create(:video)
 
         search = described_class.new(filtering_params: { year: "2018" })
 
