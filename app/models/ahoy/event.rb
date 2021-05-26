@@ -12,7 +12,6 @@ class Ahoy::Event < AhoyRecord
       .group("properties")
       .map(&:event)
       .pluck("youtube_id")
-      .shuffle
     end
   end
 end

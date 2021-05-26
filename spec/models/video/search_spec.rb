@@ -490,7 +490,7 @@ RSpec.describe Video::Search, type: :model do
       video3 = create(:watched_video, hd: 1)
       page_shuffled = described_class.new(page: 1)
       page_not_shuffled = described_class.new(page: 1, filtering_params: { hd: 1 })
-      expect(page_shuffled.paginated_videos).to eq([video2, video1, video3])
+      expect(page_shuffled.paginated_videos).to eq([video1, video3, video2])
       expect(page_not_shuffled.paginated_videos).to eq([video1, video2, video3])
     end
   end

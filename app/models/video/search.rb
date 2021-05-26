@@ -32,19 +32,18 @@ class Video::Search
       Video
         .not_hidden
         .includes(:leader, :follower, :channel, :song, :event)
-        .order("#{sort_column} #{sort_direction}")
+        .order(ordering_params)
         .filter_videos(@filtering_params)
         return @videos unless @filtering_params.empty? && @sorting_params.empty?
         @videos.most_viewed_videos_by_month
   end
 
   def paginated_videos
-    @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE).shuffle
+    @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
   end
 
   def displayed_videos_count
-    @displayed_videos_count ||=
-      (@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size
+    @displayed_videos_count ||= (@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size
   end
 
   def next_page?
@@ -72,22 +71,18 @@ class Video::Search
   end
 
   def sort_column
-    if SEARCHABLE_COLUMNS.include?(@sorting_params[:sort])
-      @sorting_params[:sort]
-    else
-      SEARCHABLE_COLUMNS.last
-    end
+    SEARCHABLE_COLUMNS.include?(@sorting_params[:sort]) ? @sorting_params[:sort] : SEARCHABLE_COLUMNS.last
   end
 
   def sort_direction
-    if %w[asc desc].include?(@sorting_params[:direction])
-      @sorting_params[:direction]
-    else
-      "desc"
-    end
+    %w[asc desc].include?(@sorting_params[:direction]) ? @sorting_params[:direction] : "desc"
   end
 
   private
+
+  def ordering_params
+    @filtering_params.empty? && @sorting_params.empty? ? "RANDOM()": "#{sort_column} #{sort_direction}"
+  end
 
   def facet_on_year(table_column)
     query =

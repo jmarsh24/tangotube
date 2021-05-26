@@ -36,7 +36,7 @@ RSpec.describe "Videos::Index", type: :system do
     channel_b = create(:channel, title: "channel_b")
     channel_c = create(:channel, title: "channel_c")
     create(
-      :video,
+      :watched_video,
       :display,
       title: "video_a",
       view_count: "1",
@@ -52,7 +52,7 @@ RSpec.describe "Videos::Index", type: :system do
       leader: @leader
     )
     create(
-      :video,
+      :watched_video,
       :display,
       title: "video_b",
       view_count: "2",
@@ -68,7 +68,7 @@ RSpec.describe "Videos::Index", type: :system do
       follower: @follower
     )
     create(
-      :video,
+      :watched_video,
       :display,
       title: "video_c",
       view_count: "3",
@@ -173,6 +173,7 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def shows_videos
+    byebug
     display_video_thumbnails
     display_video_thumbnail_details
     display_channel_titles
