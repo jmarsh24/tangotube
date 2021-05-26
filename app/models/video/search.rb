@@ -47,12 +47,7 @@ class Video::Search
   end
 
   def paginated_videos
-    @paginated_videos =
-      if @sorting_params.blank? && @filtering_params.blank?
-        videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE).shuffle
-      else
-        videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
-      end
+    @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE).shuffle
   end
 
   def displayed_videos_count
