@@ -395,12 +395,9 @@ RSpec.describe Video::Search, type: :model do
         it "returns video with spotify_artist_name that matches query" do
           video = create(:video, spotify_artist_name: "Angel D'Agostino")
           VideosSearch.refresh
-          search_a =
-            described_class.new(filtering_params: { query: "agostino" })
-          search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
-          search_c =
-            described_class.new(filtering_params: { query: "Angel D'Agosti" })
+          search_a = described_class.new(filtering_params: { query: "agostino" })
+          search_b = described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new(filtering_params: { query: "Angel D'Agosti" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -410,10 +407,8 @@ RSpec.describe Video::Search, type: :model do
           channel = create(:channel, title: "030 Tango")
           video = create(:video, channel: channel)
           VideosSearch.refresh
-          search_a =
-            described_class.new(filtering_params: { query: "030 tango" })
-          search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+          search_a = described_class.new(filtering_params: { query: "030 tango" })
+          search_b = described_class.new(filtering_params: { query: "John Doe" })
           search_c = described_class.new(filtering_params: { query: "030 T" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -424,20 +419,9 @@ RSpec.describe Video::Search, type: :model do
           channel = create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
           video = create(:video, channel: channel)
           VideosSearch.refresh
-          search_a =
-            described_class.new(
-              filtering_params: {
-                query: "UCtdgMR0bmogczrZNpPaO66Q"
-              }
-            )
-          search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
-          search_c =
-            described_class.new(
-              filtering_params: {
-                query: "UCtdgMR0bmogczrZNpPaO"
-              }
-            )
+          search_a = described_class.new( filtering_params: { query: "UCtdgMR0bmogczrZNpPaO66Q" } )
+          search_b = described_class.new(filtering_params: { query: "John Doe" })
+          search_c = described_class.new( filtering_params: { query: "UCtdgMR0bmogczrZNpPaO" } )
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -474,10 +458,8 @@ RSpec.describe Video::Search, type: :model do
           song = create(:song, artist: "Angel D'Agostino")
           video = create(:video, song: song)
           VideosSearch.refresh
-          search_a =
-            described_class.new(filtering_params: { query: "d'agostino" })
-          search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+          search_a = described_class.new(filtering_params: { query: "d'agostino" })
+          search_b = described_class.new(filtering_params: { query: "John Doe" })
           search_c = described_class.new(filtering_params: { query: "Agosti" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -490,10 +472,12 @@ RSpec.describe Video::Search, type: :model do
   describe "#paginated_videos" do
     it "paginates videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-      create_list(:video, 3)
+      create_list(:watched_video, 3)
+
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       page3 = described_class.new(page: 3)
+      
       expect(page1.paginated_videos.count).to eq(2)
       expect(page2.paginated_videos.count).to eq(1)
       expect(page3.paginated_videos.count).to eq(0)
@@ -501,12 +485,11 @@ RSpec.describe Video::Search, type: :model do
 
     it "shuffles videos if sorting/filtering params empty" do
       srand(3)
-      video1 = create(:video, hd: 1)
-      video2 = create(:video, hd: 1)
-      video3 = create(:video, hd: 1)
+      video1 = create(:watched_video, hd: 1)
+      video2 = create(:watched_video, hd: 1)
+      video3 = create(:watched_video, hd: 1)
       page_shuffled = described_class.new(page: 1)
-      page_not_shuffled =
-        described_class.new(page: 1, filtering_params: { hd: 1 })
+      page_not_shuffled = described_class.new(page: 1, filtering_params: { hd: 1 })
       expect(page_shuffled.paginated_videos).to eq([video2, video1, video3])
       expect(page_not_shuffled.paginated_videos).to eq([video1, video2, video3])
     end
@@ -515,7 +498,8 @@ RSpec.describe Video::Search, type: :model do
   describe "#displayed_videos_count" do
     it "counts the total amount of displayed videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-      create_list(:video, 3)
+      create_list(:watched_video, 3)
+
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       page3 = described_class.new(page: 3)
@@ -528,7 +512,7 @@ RSpec.describe Video::Search, type: :model do
   describe "#next_page?" do
     it "returns the next page" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
-      create_list(:video, 3)
+      create_list(:watched_video, 3)
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       expect(page1.next_page?).to eq(true)
@@ -547,8 +531,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new
       expect(search.leaders).to eq(
         [
-          ["Sebastian Jimenez (2)", leader2.id],
-          ["Carlitos Espinoza (1)", leader.id]
+          ["Sebastian Jimenez (2)", "sebastian jimenez"],
+          ["Carlitos Espinoza (1)", "carlitos espinoza"]
         ]
       )
     end
@@ -556,8 +540,8 @@ RSpec.describe Video::Search, type: :model do
 
   describe "#followers" do
     it "creates array of followers and increments multiple videos without duplication" do
-      follower = create(:follower, name: "Noelia Hurtado")
-      follower2 = create(:follower, name: "Moira Castellano")
+      follower = create(:follower, name: "noelia hurtado")
+      follower2 = create(:follower, name: "moira castellano")
       create(:video, follower: follower)
       create(:video, follower: follower2)
       create(:video, follower: follower2)
@@ -565,8 +549,8 @@ RSpec.describe Video::Search, type: :model do
       search = described_class.new
       expect(search.followers).to eq(
         [
-          ["Moira Castellano (2)", follower2.id],
-          ["Noelia Hurtado (1)", follower.id]
+          ["Moira Castellano (2)", "moira castellano"],
+          ["Noelia Hurtado (1)", "noelia hurtado"]
         ]
       )
     end
