@@ -47,7 +47,7 @@ class Video::Search
   end
 
   def paginated_videos
-    @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
+    @paginated_videos = @videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
   end
 
   def displayed_videos_count
