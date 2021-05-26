@@ -36,6 +36,7 @@ class Video::Search
         .order("#{sort_column} #{sort_direction}")
         .filter_videos(@filtering_params)
         .most_viewed_videos_by_month
+        .shuffle
     else
       @videos =
       Video
