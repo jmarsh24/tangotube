@@ -10,7 +10,6 @@ class Ahoy::Event < AhoyRecord
       .where(name: "Video View")
       .select("properties AS event, count(properties) AS occurrences")
       .group("properties")
-      .order("occurrences DESC")
       .map(&:event)
       .pluck("youtube_id")
     end
