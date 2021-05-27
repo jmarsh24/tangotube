@@ -8,8 +8,9 @@ class Ahoy::Event < AhoyRecord
     def most_viewed_videos_by_month
        where("time > ?", 30.days.ago)
       .where(name: "Video View")
-      .select("properties AS event, count(properties) AS occurrences")
+      .select("properties")
       .group("properties")
+      .having('count(properties) > 5')
       .map(&:event)
       .pluck("youtube_id")
     end
