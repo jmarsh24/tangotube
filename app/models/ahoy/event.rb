@@ -10,7 +10,6 @@ class Ahoy::Event < AhoyRecord
       .where(name: "Video View")
       .select("properties")
       .group("properties")
-      .having('count(properties) > 5')
       .map(&:event)
       .pluck("youtube_id")
     end
