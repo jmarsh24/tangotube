@@ -472,6 +472,8 @@ RSpec.describe Video::Search, type: :model do
   describe "#paginated_videos" do
     it "paginates videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+      stub_const("Ahoy::Event::MIN_NUMBER_OF_VIEWS", 1)
+
       create_list(:watched_video, 3)
 
       page1 = described_class.new(page: 1)
@@ -484,13 +486,16 @@ RSpec.describe Video::Search, type: :model do
     end
 
     it "shuffles videos if sorting/filtering params empty" do
-      srand(3)
-      video1 = create(:watched_video, hd: 1)
-      video2 = create(:watched_video, hd: 1)
-      video3 = create(:watched_video, hd: 1)
+      stub_const("Ahoy::Event::MIN_NUMBER_OF_VIEWS", 1)
+      srand(1)
+      
+      video1 = create(:watched_video, hd: 1, popularity: 3)
+      video2 = create(:watched_video, hd: 1, popularity: 2)
+      video3 = create(:watched_video, hd: 1, popularity: 1)
+      
       page_shuffled = described_class.new(page: 1)
       page_not_shuffled = described_class.new(page: 1, filtering_params: { hd: 1 })
-      expect(page_shuffled.paginated_videos).to eq([video1, video3, video2])
+      expect(page_shuffled.paginated_videos).to eq([video2, video3, video1])
       expect(page_not_shuffled.paginated_videos).to eq([video1, video2, video3])
     end
   end
@@ -498,11 +503,14 @@ RSpec.describe Video::Search, type: :model do
   describe "#displayed_videos_count" do
     it "counts the total amount of displayed videos" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+      stub_const("Ahoy::Event::MIN_NUMBER_OF_VIEWS", 1)
+
       create_list(:watched_video, 3)
 
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       page3 = described_class.new(page: 3)
+
       expect(page1.displayed_videos_count).to eq(2)
       expect(page2.displayed_videos_count).to eq(3)
       expect(page3.displayed_videos_count).to eq(4)
@@ -512,9 +520,13 @@ RSpec.describe Video::Search, type: :model do
   describe "#next_page?" do
     it "returns the next page" do
       stub_const("Video::Search::NUMBER_OF_VIDEOS_PER_PAGE", 2)
+      stub_const("Ahoy::Event::MIN_NUMBER_OF_VIEWS", 1)
+
       create_list(:watched_video, 3)
+
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
+
       expect(page1.next_page?).to eq(true)
       expect(page2.next_page?).to eq(false)
     end
@@ -524,11 +536,13 @@ RSpec.describe Video::Search, type: :model do
     it "creates array of leaders and increments multiple videos without duplication" do
       leader = create(:leader, name: "Carlitos Espinoza")
       leader2 = create(:leader, name: "Sebastian Jimenez")
+
       create(:video, leader: leader)
       create(:video, leader: leader2)
       create(:video, leader: leader2)
 
       search = described_class.new
+
       expect(search.leaders).to eq(
         [
           ["Sebastian Jimenez (2)", "sebastian jimenez"],

@@ -173,7 +173,6 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def shows_videos
-    byebug
     display_video_thumbnails
     display_video_thumbnail_details
     display_channel_titles
