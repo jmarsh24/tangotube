@@ -100,7 +100,7 @@ class Video < ApplicationRecord
     # Filters videos by the results from the materialized
     # full text search out of from VideosSearch
     def filter_by_query(query)
-      where(id: VideosSearch.search(query).select(:video_id))
+      where(id: VideosSearch.search(query.gsub("'","")).select(:video_id))
     end
 
     def most_viewed_videos_by_month
