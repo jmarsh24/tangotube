@@ -51,6 +51,71 @@ CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
 COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 
+--
+-- Name: unaccentdict; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH CONFIGURATION public.unaccentdict (
+    PARSER = pg_catalog."default" );
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR asciiword WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR word WITH public.unaccent, simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR numword WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR email WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR url WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR host WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR sfloat WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR version WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR hword_numpart WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR hword_part WITH public.unaccent, simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR hword_asciipart WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR numhword WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR asciihword WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR hword WITH public.unaccent, simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR url_path WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR file WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR "float" WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR "int" WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.unaccentdict
+    ADD MAPPING FOR uint WITH simple;
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -576,7 +641,7 @@ ALTER SEQUENCE public.videos_id_seq OWNED BY public.videos.id;
 
 CREATE MATERIALIZED VIEW public.videos_searches AS
  SELECT videos.id AS video_id,
-    (((((((((((((((to_tsvector('english'::regconfig, COALESCE(videos.title, ''::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.description, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.genre, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.artist, ''::character varying))::text)) AS tsv_document
+    ((((((((((((((((((to_tsvector('public.unaccentdict'::regconfig, (COALESCE(channels.title, ''::character varying))::text) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(followers.name, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(followers.nickname, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(leaders.name, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(leaders.nickname, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(songs.genre, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(songs.title, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(songs.artist, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.acr_cloud_track_name, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.acr_cloud_artist_name, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.description, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, COALESCE(videos.title, ''::text))) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text)) || to_tsvector('public.unaccentdict'::regconfig, (COALESCE(videos.tags, ''::character varying))::text)) AS tsv_document
    FROM ((((public.videos
      LEFT JOIN public.channels ON ((channels.id = videos.channel_id)))
      LEFT JOIN public.followers ON ((followers.id = videos.follower_id)))
@@ -670,62 +735,6 @@ ALTER TABLE ONLY public.videos ALTER COLUMN id SET DEFAULT nextval('public.video
 
 
 --
--- Name: channels channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.channels
-    ADD CONSTRAINT channels_pkey PRIMARY KEY (id);
-
-
---
--- Name: followers followers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.followers
-    ADD CONSTRAINT followers_pkey PRIMARY KEY (id);
-
-
---
--- Name: leaders leaders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.leaders
-    ADD CONSTRAINT leaders_pkey PRIMARY KEY (id);
-
-
---
--- Name: songs songs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.songs
-    ADD CONSTRAINT songs_pkey PRIMARY KEY (id);
-
-
---
--- Name: videos videos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.videos
-    ADD CONSTRAINT videos_pkey PRIMARY KEY (id);
-
-
---
--- Name: mat_videos; Type: MATERIALIZED VIEW; Schema: public; Owner: -
---
-
-CREATE MATERIALIZED VIEW public.mat_videos AS
- SELECT videos.id AS video_id,
-    (((((((((((((((to_tsvector('english'::regconfig, COALESCE(videos.title, ''::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.description, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(leaders.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.name, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(followers.nickname, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.genre, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.title, ''::character varying))::text)) || to_tsvector('english'::regconfig, (COALESCE(songs.artist, ''::character varying))::text)) AS tsv_document
-   FROM ((((public.videos
-     JOIN public.channels ON ((channels.id = videos.channel_id)))
-     JOIN public.followers ON ((followers.id = videos.follower_id)))
-     JOIN public.leaders ON ((leaders.id = videos.leader_id)))
-     JOIN public.songs ON ((songs.id = videos.song_id)))
-  GROUP BY videos.id, channels.id, followers.id, leaders.id, songs.id
-  WITH NO DATA;
-
-
---
 -- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -742,11 +751,35 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: channels channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.channels
+    ADD CONSTRAINT channels_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: followers followers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.followers
+    ADD CONSTRAINT followers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: leaders leaders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.leaders
+    ADD CONSTRAINT leaders_pkey PRIMARY KEY (id);
 
 
 --
@@ -774,11 +807,27 @@ ALTER TABLE ONLY public.search_suggestions
 
 
 --
+-- Name: songs songs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.songs
+    ADD CONSTRAINT songs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: videos videos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.videos
+    ADD CONSTRAINT videos_pkey PRIMARY KEY (id);
 
 
 --
@@ -856,20 +905,6 @@ CREATE INDEX index_followers_on_name ON public.followers USING btree (name);
 --
 
 CREATE INDEX index_leaders_on_name ON public.leaders USING btree (name);
-
-
---
--- Name: index_mat_videos_on_tsv_document; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_mat_videos_on_tsv_document ON public.mat_videos USING gin (tsv_document);
-
-
---
--- Name: index_mat_videos_on_video_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_mat_videos_on_video_id ON public.mat_videos USING btree (video_id);
 
 
 --
@@ -1014,6 +1049,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210309233622'),
 ('20210312174239'),
 ('20210315153437'),
-('20210428220252');
+('20210428220252'),
+('20210530040913'),
+('20210530041239'),
+('20210530041330'),
+('20210530043025');
 
 
