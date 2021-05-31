@@ -100,3 +100,29 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+require 'sidekiq/testing/inline'
+
+RSpec::Sidekiq.configure do |config|
+  # Clears all job queues before each example
+  config.clear_all_enqueued_jobs = true # default => true
+  # Whether to use terminal colours when outputting messages
+  config.enable_terminal_colours = true # default => true
+  # Warn when jobs are not enqueued to Redis but to a job array
+  config.warn_when_jobs_not_processed_by_sidekiq = true # default => true
+end
+
+require 'vcr'
+require 'webmock'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "#{::Rails.root}/spec/cassettes"
+  config.hook_into :webmock
+  config.ignore_localhost = true
+  config.configure_rspec_metadata!
+  config.define_cassette_placeholder("<SPOTIFY_CLIENT_ID>") { ENV["SPOTIFY_CLIENT_ID"] }
+  config.define_cassette_placeholder("<SPOTIFY_SECRET_KEY>") { ENV["SPOTIFY_SECRET_KEY"] }
+  config.define_cassette_placeholder("<ACRCLOUD_ACCESS_KEY>") { ENV["ACRCLOUD_ACCESS_KEY"] }
+  config.define_cassette_placeholder("<ACRCLOUD_SECRET_KEY>") { ENV["ACRCLOUD_SECRET_KEY"] }
+  config.define_cassette_placeholder("<YOUTUBE_API_KEY>")  {ENV["YOUTUBE_API_KEY"] }
+end

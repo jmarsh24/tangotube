@@ -10,8 +10,8 @@ class Video::YoutubeImport
       Playlist.import_videos(playlist_id)
     end
 
-    def from_video(video_id)
-      Video.import(video_id)
+    def from_video(youtube_id)
+      ImportVideoWorker.perform_async(youtube_id)
     end
   end
 end

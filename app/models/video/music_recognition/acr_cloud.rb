@@ -2,9 +2,8 @@ class Video::MusicRecognition::AcrCloud
   class << self
     def fetch(youtube_id)
       new(youtube_id).update_video
-    rescue StandardError => e
-      Rails
-        .logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e.backtrace.join("\n\t")}"
+      rescue StandardError => e
+        Rails.logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e.backtrace.join("\n\t")}"
     end
   end
 
@@ -19,12 +18,12 @@ class Video::MusicRecognition::AcrCloud
 
   private
 
-  def file_path
-    @file_path ||= Audio.import(@youtube_id)
+  def audio_file_path
+    Audio.import(@youtube_id).path
   end
 
   def acr_cloud_response
-    @acr_cloud_reponse ||= Client.send_audio(file_path)
+    @acr_cloud_response ||= Client.send_audio(audio_file_path)
   end
 
   def video_params
@@ -171,7 +170,6 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def parsed_acr_cloud_data
-    @parsed_acr_cloud_data ||=
-      JSON.parse(acr_cloud_response).extend Hashie::Extensions::DeepFind
+    @parsed_acr_cloud_data ||= JSON.parse(acr_cloud_response).extend Hashie::Extensions::DeepFind
   end
 end
