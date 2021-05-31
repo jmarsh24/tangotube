@@ -50,7 +50,9 @@ ActiveAdmin.register Video do
     selectable_column
     id_column
     column "Logo" do |video|
-      image_tag video.channel.thumbnail_url, height: 30
+      if video.channel.thumbnail_url.present?
+        image_tag video.channel.thumbnail_url, height: 30
+      end
     end
     column "channel" do |video|
       link_to(
