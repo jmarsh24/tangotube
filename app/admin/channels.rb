@@ -3,8 +3,8 @@ ActiveAdmin.register Channel do
                 :channel_id,
                 :thumbnail_url,
                 :imported,
-                :imported_videos_count,
                 :videos_count,
+                :total_videos_count,
                 :yt_api_pull_count
 
   config.sort_order = "id_asc"
@@ -18,8 +18,8 @@ ActiveAdmin.register Channel do
   filter :id
   filter :title
   filter :channel_id
-  filter :imported_videos_count
   filter :videos_count
+  filter :total_videos_count
 
   index do
     selectable_column
@@ -53,8 +53,8 @@ ActiveAdmin.register Channel do
     column :channel_id
     column :imported
     column :reviewed
-    column :imported_videos_count
     column :videos_count
+    column :total_videos_count
     actions
   end
 
