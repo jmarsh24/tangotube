@@ -22,11 +22,6 @@ gem "hotwire-rails", "~> 0.1.3"
 gem "nokogiri", "~> 1.10", ">= 1.10.10"
 gem "prettier", "~> 1.5"
 gem "pg_search", "~> 2.3", ">= 2.3.5"
-<<<<<<< HEAD
-gem "puma", "4.3.8"
-gem "rails", "~> 6.1"
-=======
->>>>>>> origin/video-tests-new
 gem "rails_autolink", "~> 1.1"
 gem "rspotify", "~> 2.9", ">= 2.9.2"
 gem "sass-rails", "6.0.0"
