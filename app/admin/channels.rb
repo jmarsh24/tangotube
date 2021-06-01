@@ -5,7 +5,8 @@ ActiveAdmin.register Channel do
                 :imported,
                 :videos_count,
                 :total_videos_count,
-                :yt_api_pull_count
+                :yt_api_pull_count,
+                :reviewed
 
   config.sort_order = "id_asc"
   config.per_page = [100, 500, 1000]
