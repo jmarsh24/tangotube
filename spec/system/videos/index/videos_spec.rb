@@ -10,13 +10,14 @@ RSpec.describe "Videos::Index::Videos", type: :system do
   end
 
   def setup_video
+    stub_const("Ahoy::Event::MIN_NUMBER_OF_VIEWS", 1)
     @leader = create(:leader, name: "Carlitos Espinoza")
     @follower = create(:follower, name: "Noelia Hurtado")
     @song = create(:song, title: "song_title")
     @event = create(:event, title: "event_title")
     @video =
       create(
-        :video,
+        :watched_video,
         :display,
         title: "video_a",
         leader: @leader,

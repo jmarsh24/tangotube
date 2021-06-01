@@ -5,7 +5,7 @@ require "rails_helper"
      it "updates existing record" do
        video = create(:video, youtube_id: "ABC", youtube_song: nil, youtube_artist: nil)
        youtube_dl_response = File.read("test/fixtures/youtube-dl_response_success.json")
-
+      
        allow_any_instance_of(described_class).to(receive(:fetch_youtube_video_info_by_id).and_return( youtube_dl_response ))
        described_class.fetch("ABC")
        video.reload

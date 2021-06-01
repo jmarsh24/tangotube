@@ -10,6 +10,7 @@ gem "redis", "~> 4.2", ">= 4.2.5"
 gem "puma", "4.3.5"
 gem "pg", "1.2.3"
 gem "webpacker", "4.2.2"
+gem "barnes", "~> 0.0.9"
 
 # app specific gems...................................................................
 gem "activeadmin", "~> 2.8", ">= 2.8.1"
@@ -61,3 +62,5 @@ group :test do
   gem "vcr", "~> 6.0"
   gem "webmock", "~> 3.12"
 end
+
+

@@ -625,9 +625,9 @@ RSpec.describe Video, type: :model do
       it "returns video with youtube_artist that matches query" do
         video = create(:video, youtube_artist: "Angel D'Agostino")
         VideosSearch.refresh
-        expect(described_class.filter_by_query("Agostino")).to eq [video]
+        expect(described_class.filter_by_query("dAgostino")).to eq [video]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
-        expect(described_class.filter_by_query("Agostin")).to eq [video]
+        expect(described_class.filter_by_query("dAgostin")).to eq [video]
       end
 
       it "returns video with youtube_song that matches query" do
@@ -649,7 +649,7 @@ RSpec.describe Video, type: :model do
       it "returns video with spotify_artist_name that matches query" do
         video = create(:video, spotify_artist_name: "Angel D'Agostino")
         VideosSearch.refresh
-        expect(described_class.filter_by_query("agostino")).to eq [video]
+        expect(described_class.filter_by_query("Dagostino")).to eq [video]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
         expect(described_class.filter_by_query("Angel D'Agosti")).to eq [video]
       end
@@ -700,7 +700,7 @@ RSpec.describe Video, type: :model do
         VideosSearch.refresh
         expect(described_class.filter_by_query("d'agostino")).to eq [video]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
-        expect(described_class.filter_by_query("Agosti")).to eq [video]
+        expect(described_class.filter_by_query("DAgosti")).to eq [video]
       end
     end
 
