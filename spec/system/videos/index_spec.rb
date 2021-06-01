@@ -11,7 +11,7 @@ RSpec.describe "Videos::Index", type: :system do
 
     display_filters
     links_to_videos
-
+    show_filters
     populate_filters
     filter_by_hd
   end
@@ -24,6 +24,7 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def setup_videos
+    stub_const("Ahoy::Event::MIN_NUMBER_OF_VIEWS", 1)
     @leader = create(:leader, name: "leader_name")
     @follower = create(:follower, name: "follower_name")
     @song_a = create(:song, artist: "artist_name_a", last_name_search: "A", title: "song_title_a", genre: "genre_a")
@@ -327,7 +328,6 @@ RSpec.describe "Videos::Index", type: :system do
 
   def populate_filters
     click_on("Popularity")
-
     expect(page).to have_select("genre-filter",
       with_options: ["", "Genre A (1)", "Genre B (1)", "Genre C (1)"],
       visible: :all
@@ -467,7 +467,7 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def visit_video_thumbnail_link
-    all("a#video-link").first.click
+    click_on("video_a")
     expect(page).to have_current_path("/watch?v=youtube_id_a")
     visit root_path
   end
@@ -480,6 +480,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_genre_alone
     visit root_path
+    show_filters
     filter_by_genre_a
     expect(page).to have_current_path("/?genre=genre_a")
     expect(video_title_collection).to eq(["video_a"])
@@ -487,6 +488,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_genre_and_hd
     visit root_path
+    show_filters
     filter_by_genre_b
     expect(page).to have_current_path("/?genre=genre_b")
     click_on("HD")
@@ -496,35 +498,39 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_genre_and_leader
     visit root_path
+    show_filters
     filter_by_genre_a
     expect(page).to have_current_path("/?genre=genre_a")
     filter_by_leader
-    expect(page).to have_current_path("/?genre=genre_a&leader_id=#{@leader.id}")
+    expect(page).to have_current_path("/?genre=genre_a&leader=leader_name")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def filter_by_genre_and_follower
     visit root_path
+    show_filters
     filter_by_genre_b
     expect(page).to have_current_path("/?genre=genre_b")
     filter_by_follower
-    expect(page).to have_current_path("/?genre=genre_b&follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?genre=genre_b&follower=follower_name")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_genre_and_follower_and_hd
     visit root_path
+    show_filters
     filter_by_genre_b
     expect(page).to have_current_path("/?genre=genre_b")
     filter_by_follower
-    expect(page).to have_current_path("/?genre=genre_b&follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?genre=genre_b&follower=follower_name")
     click_on("HD")
-    expect(page).to have_current_path("/?genre=genre_b&follower_id=#{@follower.id}&hd=1")
+    expect(page).to have_current_path("/?genre=genre_b&follower=follower_name&hd=1")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_genre_and_orchestra
     visit root_path
+    show_filters
     filter_by_genre_a
     expect(page).to have_current_path("/?genre=genre_a")
     filter_by_orchestra_a
@@ -534,6 +540,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_genre_and_orchestra_and_hd
     visit root_path
+    show_filters
     filter_by_genre_b
     expect(page).to have_current_path("/?genre=genre_b")
     filter_by_orchestra_b
@@ -545,6 +552,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_genre_and_year
     visit root_path
+    show_filters
     filter_by_genre_a
     expect(page).to have_current_path("/?genre=genre_a")
     filter_by_year_2000
@@ -554,6 +562,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_genre_and_year_and_hd
     visit root_path
+    show_filters
     filter_by_genre_b
     expect(page).to have_current_path("/?genre=genre_b")
     filter_by_year_1999
@@ -565,115 +574,128 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_leader_alone
     visit root_path
+    show_filters
     filter_by_leader
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    expect(page).to have_current_path("/?leader=leader_name")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def filter_by_leader_and_genre
     visit root_path
+    show_filters
     filter_by_leader
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    expect(page).to have_current_path("/?leader=leader_name")
     filter_by_genre_a
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}&genre=genre_a")
+    expect(page).to have_current_path("/?leader=leader_name&genre=genre_a")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def filter_by_leader_and_orchestra
     visit root_path
+    show_filters
     filter_by_leader
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    expect(page).to have_current_path("/?leader=leader_name")
     filter_by_orchestra_a
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}&orchestra=artist_name_a")
+    expect(page).to have_current_path("/?leader=leader_name&orchestra=artist_name_a")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def filter_by_leader_and_year
     visit root_path
+    show_filters
     filter_by_leader
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}")
+    expect(page).to have_current_path("/?leader=leader_name")
     filter_by_year_2000
-    expect(page).to have_current_path("/?leader_id=#{@leader.id}&year=2000")
+    expect(page).to have_current_path("/?leader=leader_name&year=2000")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def filter_by_follower_alone
     visit root_path
+    show_filters
     filter_by_follower
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?follower=follower_name")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_follower_and_hd
     visit root_path
+    show_filters
     filter_by_follower
     click_on("HD")
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&hd=1")
+    expect(page).to have_current_path("/?follower=follower_name&hd=1")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_follower_and_genre
     visit root_path
+    show_filters
     filter_by_follower
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?follower=follower_name")
     filter_by_genre_b
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&genre=genre_b")
+    expect(page).to have_current_path("/?follower=follower_name&genre=genre_b")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_follower_and_genre_and_hd
     visit root_path
+    show_filters
     filter_by_follower
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?follower=follower_name")
     filter_by_genre_b
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&genre=genre_b")
+    expect(page).to have_current_path("/?follower=follower_name&genre=genre_b")
     click_on("HD")
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&genre=genre_b&hd=1")
+    expect(page).to have_current_path("/?follower=follower_name&genre=genre_b&hd=1")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_follower_and_orchestra
     visit root_path
+    show_filters
     filter_by_follower
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?follower=follower_name")
     filter_by_orchestra_b
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&orchestra=artist_name_b")
+    expect(page).to have_current_path("/?follower=follower_name&orchestra=artist_name_b")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_follower_and_orchestra_and_hd
     visit root_path
+    show_filters
     filter_by_follower
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?follower=follower_name")
     filter_by_orchestra_b
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&orchestra=artist_name_b")
+    expect(page).to have_current_path("/?follower=follower_name&orchestra=artist_name_b")
     click_on("HD")
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&orchestra=artist_name_b&hd=1")
+    expect(page).to have_current_path("/?follower=follower_name&orchestra=artist_name_b&hd=1")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_follower_and_year
     visit root_path
+    show_filters
     filter_by_follower
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?follower=follower_name")
     filter_by_year_1999
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&year=1999")
+    expect(page).to have_current_path("/?follower=follower_name&year=1999")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_follower_and_year_and_hd
     visit root_path
+    show_filters
     filter_by_follower
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?follower=follower_name")
     filter_by_year_1999
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&year=1999")
+    expect(page).to have_current_path("/?follower=follower_name&year=1999")
     click_on("HD")
-    expect(page).to have_current_path("/?follower_id=#{@follower.id}&year=1999&hd=1")
+    expect(page).to have_current_path("/?follower=follower_name&year=1999&hd=1")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_orchestra_alone
     visit root_path
+    show_filters
     filter_by_orchestra_a
     expect(page).to have_current_path("/?orchestra=artist_name_a")
     expect(video_title_collection).to eq(["video_a"])
@@ -681,6 +703,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_orchestra_and_hd
     visit root_path
+    show_filters
     filter_by_orchestra_b
     expect(page).to have_current_path("/?orchestra=artist_name_b")
     click_on("HD")
@@ -690,6 +713,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_orchestra_and_genre
     visit root_path
+    show_filters
     filter_by_orchestra_a
     expect(page).to have_current_path("/?orchestra=artist_name_a")
     filter_by_genre_a
@@ -699,6 +723,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_orchestra_and_genre_and_hd
     visit root_path
+    show_filters
     filter_by_orchestra_b
     expect(page).to have_current_path("/?orchestra=artist_name_b")
     filter_by_genre_b
@@ -709,37 +734,39 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_orchestra_and_leader
     visit root_path
+    show_filters
     filter_by_orchestra_a
     expect(page).to have_current_path("/?orchestra=artist_name_a")
     filter_by_leader
     expect(video_title_collection).to eq(["video_a"])
-    expect(page).to have_current_path(
-      "/?orchestra=artist_name_a&leader_id=#{@leader.id}"
-    )
+    expect(page).to have_current_path("/?orchestra=artist_name_a&leader=leader_name")
   end
 
   def filter_by_orchestra_and_follower
     visit root_path
+    show_filters
     filter_by_orchestra_b
     expect(page).to have_current_path("/?orchestra=artist_name_b")
     filter_by_follower
-    expect(page).to have_current_path("/?orchestra=artist_name_b&follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?orchestra=artist_name_b&follower=follower_name")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_orchestra_and_follower_and_hd
     visit root_path
+    show_filters
     filter_by_orchestra_b
     expect(page).to have_current_path("/?orchestra=artist_name_b")
     filter_by_follower
-    expect(page).to have_current_path("/?orchestra=artist_name_b&follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?orchestra=artist_name_b&follower=follower_name")
     click_on("HD")
-    expect(page).to have_current_path("/?orchestra=artist_name_b&follower_id=#{@follower.id}&hd=1")
+    expect(page).to have_current_path("/?orchestra=artist_name_b&follower=follower_name&hd=1")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_orchestra_and_year
     visit root_path
+    show_filters
     filter_by_orchestra_a
     expect(page).to have_current_path("/?orchestra=artist_name_a")
     filter_by_year_2000
@@ -749,6 +776,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_orchestra_and_year_and_hd
     visit root_path
+    show_filters
     filter_by_orchestra_b
     expect(page).to have_current_path("/?orchestra=artist_name_b")
     filter_by_year_1999
@@ -760,6 +788,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_year_alone
     visit root_path
+    show_filters
     filter_by_year_2000
     expect(page).to have_current_path("/?year=2000")
     expect(video_title_collection).to eq(["video_a"])
@@ -767,6 +796,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_year_and_hd
     visit root_path
+    show_filters
     filter_by_year_1999
     expect(page).to have_current_path("/?year=1999")
     click_on("HD")
@@ -776,6 +806,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_year_and_genre
     visit root_path
+    show_filters
     filter_by_year_2000
     expect(page).to have_current_path("/?year=2000")
     filter_by_genre_a
@@ -785,6 +816,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_year_and_genre_and_hd
     visit root_path
+    show_filters
     filter_by_year_1999
     expect(page).to have_current_path("/?year=1999")
     filter_by_genre_b
@@ -796,35 +828,39 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_year_and_leader
     visit root_path
+    show_filters
     filter_by_year_2000
     expect(page).to have_current_path("/?year=2000")
     filter_by_leader
-    expect(page).to have_current_path("/?year=2000&leader_id=#{@leader.id}")
+    expect(page).to have_current_path("/?year=2000&leader=leader_name")
     expect(video_title_collection).to eq(["video_a"])
   end
 
   def filter_by_year_and_follower
     visit root_path
+    show_filters
     filter_by_year_1999
     expect(page).to have_current_path("/?year=1999")
     filter_by_follower
-    expect(page).to have_current_path("/?year=1999&follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?year=1999&follower=follower_name")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_year_and_follower_and_hd
     visit root_path
+    show_filters
     filter_by_year_1999
     expect(page).to have_current_path("/?year=1999")
     filter_by_follower
-    expect(page).to have_current_path("/?year=1999&follower_id=#{@follower.id}")
+    expect(page).to have_current_path("/?year=1999&follower=follower_name")
     click_on("HD")
-    expect(page).to have_current_path("/?year=1999&follower_id=#{@follower.id}&hd=1")
+    expect(page).to have_current_path("/?year=1999&follower=follower_name&hd=1")
     expect(video_title_collection).to eq(["video_b"])
   end
 
   def filter_by_year_and_orchestra
     visit root_path
+    show_filters
     filter_by_year_2000
     expect(page).to have_current_path("/?year=2000")
     filter_by_orchestra_a
@@ -834,6 +870,7 @@ RSpec.describe "Videos::Index", type: :system do
 
   def filter_by_year_and_orchestra_and_hd
     visit root_path
+    show_filters
     filter_by_year_1999
     expect(page).to have_current_path("/?year=1999")
     filter_by_orchestra_b
