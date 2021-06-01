@@ -14,7 +14,8 @@ ActiveAdmin.register Video do
                 :performance_total,
                 :videotype_id,
                 :event_id,
-                :hidden
+                :hidden,
+                :reviewed
 
   includes :song, :leader, :follower, :channel
 
