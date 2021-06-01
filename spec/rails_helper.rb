@@ -119,6 +119,7 @@ VCR.configure do |config|
   config.cassette_library_dir = "#{::Rails.root}/spec/cassettes"
   config.hook_into :webmock
   config.ignore_localhost = true
+  config.allow_http_connections_when_no_cassette = true
   config.configure_rspec_metadata!
   config.define_cassette_placeholder("<SPOTIFY_CLIENT_ID>") { ENV["SPOTIFY_CLIENT_ID"] }
   config.define_cassette_placeholder("<SPOTIFY_SECRET_KEY>") { ENV["SPOTIFY_SECRET_KEY"] }
