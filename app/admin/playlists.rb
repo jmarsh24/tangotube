@@ -4,7 +4,8 @@ ActiveAdmin.register Playlist do
                 :description,
                 :channel_title,
                 :channel_id,
-                :video_count
+                :video_count,
+                :reviewed
 
   config.sort_order = "id_asc"
   config.per_page = [100, 500, 1000]

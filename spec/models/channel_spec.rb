@@ -22,18 +22,21 @@ RSpec.describe Channel, type: :model do
     end
 
     it "updates the imported status if count is equal" do
-      channel = create(:channel, total_videos_count: 500, videos_count: 499)
-      expect { channel.update(videos_count: 500) }.to change(
-        channel.reload,
-        :imported
-      )
+      channel = create(:channel, total_videos_count: 500, videos_count: 499, imported: false)
+      channel.update(videos_count: 500)
+      expect(channel.imported?).to be(true)
+    end
+
+    it "doesn't update if the videos count is greater than total_vides_count" do
+      channel = create(:channel, total_videos_count: 500, videos_count: 499, imported: false)
+      channel.update(videos_count: 501)
+      expect(channel.imported?).to be(true)
     end
 
     it "doesn't update if the videos count is less than total_vides_count" do
-      channel = create(:channel, total_videos_count: 500, videos_count: 499)
-      expect { channel.update(videos_count: 501) }.to change {
-        channel.reload.imported
-      }.from(false).to(true)
+      channel = create(:channel, total_videos_count: 500, videos_count: 400, imported: false)
+      channel.update(videos_count: 401)
+      expect(channel.imported?).to be(false)
     end
   end
 

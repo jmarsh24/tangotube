@@ -18,8 +18,8 @@
   <div class="filter-container isHidden" data-toggle-target="toggleable" id="filter-container">
         <%= turbo_frame_tag 'slow-frame', class: "filter-container-upper" do %>
           <%= render partial: "videos/index/filter", locals: { options: @search.genres, title: :genre, id: 'genre-filter' } %>
-          <%= render partial: "videos/index/filter", locals: { options: @search.leaders, title: :leader, id: 'leader-filter' } %>
           <%= render partial: "videos/index/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter' } %>
+          <%= render partial: "videos/index/filter", locals: { options: @search.leaders, title: :leader, id: 'leader-filter' } %>
           <%= render partial: "videos/index/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter' } %>
           <%= render partial: "videos/index/filter", locals: { options: @search.years, title: :year, id: 'year-filter' } %>
         <% end %>
