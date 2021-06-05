@@ -15,6 +15,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.upload_date.to_s).to eq("2018-03-04")
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
+        expect(video.performance_date).to eq("2016/06/04")
 
         expect(video.view_count).to eq(46181)
         expect(video.favorite_count).to eq(0)
@@ -48,6 +49,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.upload_date.to_s).to eq("2018-03-04")
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
+        expect(video.performance_date).to eq("2016/06/04")
 
         expect(video.view_count).to eq(46181)
         expect(video.favorite_count).to eq(0)
@@ -69,6 +71,7 @@ RSpec.describe Video::YoutubeImport::Video, type: :model do
         expect(video.upload_date.to_s).to eq("2018-03-04")
         expect(video.duration).to eq(219)
         expect(video.hd).to be(true)
+        expect(video.performance_date).to eq("2016/06/04")
 
         expect(video.view_count).to eq(46181)
         expect(video.favorite_count).to eq(0)

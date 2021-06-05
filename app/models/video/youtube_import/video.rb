@@ -33,9 +33,11 @@ class Video::YoutubeImport::Video
       upload_date: @youtube_video.published_at,
       duration: @youtube_video.duration,
       tags: @youtube_video.tags,
-      hd: @youtube_video.hd?
+      hd: @youtube_video.hd?,
+      performance_date: performance_date
     }
   end
+  
 
   def count_params
     {
@@ -45,6 +47,12 @@ class Video::YoutubeImport::Video
       like_count: @youtube_video.like_count,
       dislike_count: @youtube_video.dislike_count
     }
+  end
+
+  def performance_date
+    performance_date = Date.parse(@youtube_video.description) || Date.parse(@youtube_video.title)
+    rescue Date::Error
+    performance_date
   end
 
   def channel

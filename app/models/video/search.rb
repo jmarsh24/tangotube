@@ -67,7 +67,7 @@ class Video::Search
   end
 
   def years
-    @years ||= facet_on_year("upload_date")
+    @years ||= facet_on_year("performance_date")
   end
 
   def sort_column
@@ -93,6 +93,7 @@ class Video::Search
         .select(query)
         .group("facet_value")
         .order("facet_value DESC")
+        .having("count(#{table_column}) > 0")
     counts.map { |c| ["#{c.facet_value} (#{c.occurrences})", c.facet_value] }
   end
 
@@ -106,6 +107,7 @@ class Video::Search
         .select(query)
         .group(table_column)
         .order("occurrences DESC")
+        .having("count(#{table_column}) > 0")
     counts.map do |c|
       ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.downcase]
     end
@@ -121,6 +123,7 @@ class Video::Search
         .select(query)
         .group(table_column, table_column_id)
         .order("occurrences DESC")
+        .having("count(#{table_column}) > 0")
     counts.map do |c|
       ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_id_value]
     end

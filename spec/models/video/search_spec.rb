@@ -234,7 +234,7 @@ RSpec.describe Video::Search, type: :model do
       end
 
       it "filters by year" do
-        video_a = create(:video, upload_date: Time.zone.local(2018, 1, 1))
+        video_a = create(:video, performance_date: Time.zone.local(2018, 1, 1))
 
         search = described_class.new(filtering_params: { year: "2018" })
 
@@ -602,9 +602,9 @@ RSpec.describe Video::Search, type: :model do
 
   describe "#years" do
     it "creates array of songs and increments multiple videos without duplication" do
-      create(:video, upload_date: Time.zone.local(2018, 1, 1))
-      create(:video, upload_date: Time.zone.local(2018, 1, 1))
-      create(:video, upload_date: Time.zone.local(2017, 1, 1))
+      create(:video, performance_date: Time.zone.local(2018, 1, 1))
+      create(:video, performance_date: Time.zone.local(2018, 1, 1))
+      create(:video, performance_date: Time.zone.local(2017, 1, 1))
 
       search = described_class.new
       expect(search.years).to eq([["2018 (2)", 2018], ["2017 (1)", 2017]])
