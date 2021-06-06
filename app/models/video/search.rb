@@ -67,7 +67,7 @@ class Video::Search
   end
 
   def years
-    @years ||= facet_on_year("performance_date")
+    @years ||= facet_on_year("upload_date")
   end
 
   def sort_column
