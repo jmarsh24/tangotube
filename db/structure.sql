@@ -1260,6 +1260,13 @@ CREATE INDEX index_videos_on_leader_id ON public.videos USING btree (leader_id);
 
 
 --
+-- Name: index_videos_on_performance_date; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_performance_date ON public.videos USING btree (performance_date);
+
+
+--
 -- Name: index_videos_on_song_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1349,6 +1356,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210604212922'),
 ('20210604213138'),
 ('20210604213139'),
-('20210605102713');
+('20210605102713'),
+('20210606002534');
 
 

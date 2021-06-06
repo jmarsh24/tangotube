@@ -110,6 +110,7 @@ task parse_all_performance_dates: :environment do
     performance_date = Date.parse(video.description) ||Date.parse(video.title)
     video.update(performance_date: performance_date)
     rescue Date::Error
+    rescue RangeError
   end
   puts "done."
 end
