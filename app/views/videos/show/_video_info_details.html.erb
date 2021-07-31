@@ -89,9 +89,6 @@
                       locals: { header: "Description",
                       value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: ''), {'data-turbo-frame': "_top"}), html: { target: '_blank' }) } if @video.description.present? %>
   <%= render partial: "videos/show/video_info_item",
-                    locals: { header: "Performance Date",
-                    value: Time.at(@video.performance_date).utc.strftime("%b %d, %Y") } %>
-  <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Upload Date",
                       value: @video.upload_date.to_formatted_s(:long) } %>
   <%= render partial: "videos/show/video_info_item",
