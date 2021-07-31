@@ -2,8 +2,7 @@ class Video < ApplicationRecord
   include Filterable
 
   validates :youtube_id, presence: true, uniqueness: true
-  validates :performance_date, inclusion: { in: Date.new(1960).in_time_zone..Date.current }
-  
+
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
   belongs_to :song, optional: true, counter_cache: true
