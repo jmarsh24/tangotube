@@ -109,7 +109,7 @@ class Video::Search
         .order("occurrences DESC")
         .having("count(#{table_column}) > 0")
     counts.map do |c|
-      ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_value.downcase]
+      ["#{c.facet_value.split("'").map(&:titleize).join("'")} (#{c.occurrences})", c.facet_value.downcase]
     end
   end
 
