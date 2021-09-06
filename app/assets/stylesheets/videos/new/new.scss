@@ -15,8 +15,7 @@
 
   input {
     margin: auto 0.5rem;
-    height: 2rem;
-    padding: 0.5rem;
+    padding: 5px;
     border: 1px solid #d3d3d3;
     border-radius: 0.2rem;
     font-size: 1rem;
@@ -24,6 +23,10 @@
 
     &:hover {
       background: #f0f0f0;
+    }
+
+    &:active {
+      background: #d0d0d0;
     }
   }
 
