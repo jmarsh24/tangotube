@@ -109,7 +109,7 @@ class Video < ApplicationRecord
     end
 
     def stop_words_regex
-      /\b(#{stop_words.join('|')})\b/
+      /\b(#{stop_words.map { |word| Regexp.escape(word) }.join('|')})\b/
     end
 
     def query_without_stop_words(query)
