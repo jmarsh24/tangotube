@@ -37,7 +37,7 @@
                         value: @video.song.try(:genre).to_s.titleize } %>
     <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Orchestra",
-                        value: link_to(@video.song.try(:artist).to_s.titleize,
+                        value: link_to(@video.song.try(:artist).to_s.split("'").map(&:titleize).join("'"),
                                         root_path(orchestra: @video.song.artist.downcase), {'data-turbo-frame': "_top"}) } %>
     <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Singer",
