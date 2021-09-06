@@ -9,6 +9,7 @@ class Song < ApplicationRecord
 
   # active admin scopes
   scope :sort_by_popularity, -> { order(popularity: :desc) }
+  scope :filter_by_popularity, -> { where.not(popularity: nil) }
   scope :filter_by_active, -> { where(active: true) }
   scope :filter_by_not_active, -> { where(active: false) }
 
