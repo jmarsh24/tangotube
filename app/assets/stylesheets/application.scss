@@ -44,9 +44,9 @@ a {
   color: $primary-font-color;
 }
 
-button {
-  -moz-appearance: none;
-  -webkit-appearance: none;
+button, input{
+	-webkit-appearance: none;
+	-moz-appearance: none;
 }
 
 #pageContainer {
