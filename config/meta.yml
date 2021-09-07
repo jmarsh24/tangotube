@@ -1,4 +1,3 @@
-meta_product_name: "Product Name"
-meta_title: "Product name - Product tagline"
-meta_description: "Relevant description"
+meta_title: "Tangotube"
+meta_description: ""
 meta_image: "down_arrow.png" # should exist in `app/assets/images/`
