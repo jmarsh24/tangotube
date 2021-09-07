@@ -10,6 +10,7 @@
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap' %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet"></link>
+    <%= render 'shared/meta_tags' %>
   </head>
   <body>
     <div id="header">
@@ -24,7 +25,7 @@
       </div>
         <%= yield %>
       </div>
-      <%= render 'layouts/footer' %>
+      <%= render 'shared/footer' %>
     </div>
   </body>
 </html>

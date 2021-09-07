@@ -1,3 +1,12 @@
+<% content_for :meta_title, "#{primary_title(@video.display.dancer_names,
+                                              @video.title,
+                                              @video.display.any_song_attributes,
+                                              @video.youtube_id)}" %>
+<% content_for :meta_description,  "#{link_to_song( @video.display.el_recodo_attributes,
+                                                    @video.display.external_song_attributes,
+                                                    @video)}" %>
+<% content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/maxresdefault.jpg" %>
+
 <%= render 'shared/header' %>
 <div class="video-responsive-background">
   <div class="video-responsive-container">
