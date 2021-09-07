@@ -2,7 +2,7 @@
                                               @video.title,
                                               @video.display.any_song_attributes,
                                               @video.youtube_id)}" %>
-<% content_for :meta_description,  "#{@video.any_song_attributes}" %>
+<% content_for :meta_description,  "#{@video.display.any_song_attributes}" %>
 <% content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/maxresdefault.jpg" %>
 
 <%= render 'shared/header' %>
