@@ -15,18 +15,19 @@
 
   input {
     margin: auto 0.5rem;
-    padding: 5px;
+    padding: 5px 10px;
     border: 1px solid #d3d3d3;
     border-radius: 0.2rem;
     font-size: 1rem;
-    background: #f8f8f8;
+    background: white;
+    cursor: pointer;
 
     &:hover {
-      background: #f0f0f0;
+      background: #f9f9f9;
     }
 
     &:active {
-      background: #d0d0d0;
+      background: #f2f2f2;
     }
   }
 
