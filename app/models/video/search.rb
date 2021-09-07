@@ -90,6 +90,7 @@ class Video::Search
     counts =
       Video
         .filter_videos(@filtering_params)
+        .not_hidden
         .select(query)
         .group("facet_value")
         .order("facet_value DESC")
@@ -103,6 +104,7 @@ class Video::Search
     counts =
       Video
         .filter_videos(@filtering_params)
+        .not_hidden
         .joins(model)
         .select(query)
         .group(table_column)
@@ -119,6 +121,7 @@ class Video::Search
     counts =
       Video
         .filter_videos(@filtering_params)
+        .not_hidden
         .joins(model)
         .select(query)
         .group(table_column, table_column_id)
