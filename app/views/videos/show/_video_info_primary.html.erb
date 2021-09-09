@@ -18,10 +18,10 @@
   <div class="show-video-channel">
     <%= link_to image_tag(@video.channel.thumbnail_url,
                 class: "channel-icon"),
-                root_path(channel_id: @video.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?  %>
+                root_path(channel_id: @video.channel.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?  %>
     <%= link_to truncate(@video.channel.title,
                 length: 45, omission: ""),
-                root_path(channel_id: @video.channel_id),
+                root_path(channel_id: @video.channel.channel_id),
                 { class: "channel-title", "data-turbo-frame": "_top" } %>
   </div>
   <div class="show-video-metadata">

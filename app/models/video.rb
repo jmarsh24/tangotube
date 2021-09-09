@@ -13,7 +13,7 @@ class Video < ApplicationRecord
   scope :filter_by_genre, ->(song_genre) { joins(:song).where("songs.genre ILIKE ?", song_genre) }
   scope :filter_by_leader, ->(leader) { joins(:leader).where("leaders.name ILIKE ?", leader) }
   scope :filter_by_follower, ->(follower) { joins(:follower).where("followers.name ILIKE ?", follower) }
-  scope :filter_by_channel_id, ->(channel_id) { where(channel_id: channel_id) }
+  scope :filter_by_channel_id, ->(channel_id) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
   scope :filter_by_event_id, ->(event_id) { where(event_id: event_id) }
   scope :filter_by_song_id, ->(song_id) { where(song_id: song_id) }
   scope :filter_by_hd, ->(boolean) { where(hd: boolean) }
