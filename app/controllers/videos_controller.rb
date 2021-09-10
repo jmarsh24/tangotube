@@ -79,7 +79,7 @@ class VideosController < ApplicationController
     params.permit(
       :leader,
       :follower,
-      :channel_id,
+      :channel,
       :genre,
       :orchestra,
       :song_id,
