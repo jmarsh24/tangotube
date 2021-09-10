@@ -1,7 +1,7 @@
 <div class="video-section">
   <% @search.paginated_videos.each do |video| %>
     <article class="video-container">
-      <%= link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top", id: "video-link" } do %>
+      <%= link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top", id: "video-link", target: "_blank" } do %>
         <div class="thumbnail" data-duration= "<%= hd_duration_data(video) %>" >
           <%= image_tag("https://img.youtube.com/vi/#{video.youtube_id}/hqdefault.jpg", class: "thumbnail-image") %>
         </div>
