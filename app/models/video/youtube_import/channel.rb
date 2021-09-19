@@ -60,10 +60,10 @@ class Video::YoutubeImport::Channel
   end
 
   def external_youtube_ids
-    if @youtube_channel.videos_count >= 500
+    if @channel.videos_count >= 500
       get_channel_video_ids
     else
-      @youtube_channel.videos.map(&:id)
+      @channel.videos.map(&:id)
     end
   end
 
