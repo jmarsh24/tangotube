@@ -70,6 +70,10 @@ class Video::Search
     @years ||= facet_on_year("upload_date")
   end
 
+  def songs
+    @songs ||= facet("songs.title", :song)
+  end
+
   def sort_column
     SEARCHABLE_COLUMNS.include?(@sorting_params[:sort]) ? @sorting_params[:sort] : SEARCHABLE_COLUMNS.last
   end
