@@ -9,10 +9,10 @@ class Video < ApplicationRecord
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
 
-  scope :filter_by_orchestra, ->(song_artist) { joins(:song).where("songs.artist ILIKE ?", song_artist)}
-  scope :filter_by_genre, ->(song_genre) { joins(:song).where("songs.genre ILIKE ?", song_genre) }
-  scope :filter_by_leader, ->(leader) { joins(:leader).where("leaders.name ILIKE ?", leader) }
-  scope :filter_by_follower, ->(follower) { joins(:follower).where("followers.name ILIKE ?", follower) }
+  scope :filter_by_orchestra, ->(song_artist) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
+  scope :filter_by_genre, ->(song_genre) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
+  scope :filter_by_leader, ->(leader) { joins(:leader).where("unaccent(leaders.name) ILIKE unaccent(?)", leader) }
+  scope :filter_by_follower, ->(follower) { joins(:follower).where("unaccent(followers.name) ILIKE unaccent(?)", follower) }
   scope :filter_by_channel, ->(channel_id) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
   scope :filter_by_event_id, ->(event_id) { where(event_id: event_id) }
   scope :filter_by_song_id, ->(song_id) { where(song_id: song_id) }
