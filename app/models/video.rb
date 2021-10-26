@@ -105,7 +105,7 @@ class Video < ApplicationRecord
     end
 
     def stop_words
-      %w[and or the a an of to y e]
+      %w[and or the a an of to y e &]
     end
 
     def stop_words_regex
