@@ -13,6 +13,7 @@ class Video::YoutubeImport::Video
   def import
     video = Video.find_or_create_by(youtube_id: @youtube_id)
     video.update(to_video_params)
+    video.grep_title
   end
 
   private
@@ -37,7 +38,7 @@ class Video::YoutubeImport::Video
       performance_date: performance_date
     }
   end
-  
+
 
   def count_params
     {

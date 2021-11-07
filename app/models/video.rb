@@ -121,6 +121,14 @@ class Video < ApplicationRecord
     end
   end
 
+  def grep_title
+
+    self.leader = Leader.all.find { |leader| title.match(leader.name) }
+    self.follower = Follower.all.find { |follower| title.match(follower.name) }
+    self.save
+
+  end
+
   def display
     @display ||= Video::Display.new(self)
   end
