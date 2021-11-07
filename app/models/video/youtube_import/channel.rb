@@ -14,6 +14,7 @@ class Video::YoutubeImport::Channel
   end
 
   def initialize(channel_id)
+    @channel_id = channel_id
     @channel = find_or_create_internal_channel_by_id(channel_id)
     @youtube_channel = fetch_by_id(channel_id)
   end
