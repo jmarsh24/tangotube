@@ -58,6 +58,5 @@ class Video::YoutubeImport::Video
 
   def channel
     @channel ||= Channel.find_or_create_by(channel_id: @youtube_video.channel_id)
-    Video::YoutubeImport.from_channel(@channel.channel_id)
   end
 end
