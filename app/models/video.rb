@@ -123,8 +123,8 @@ class Video < ApplicationRecord
 
   def grep_title
 
-    self.leader = Leader.all.find { |leader| title.match(leader.name) }
-    self.follower = Follower.all.find { |follower| title.match(follower.name) }
+    self.leader = Leader.all.find { |leader| title.parameterize.match(leader.name.parameterize) }
+    self.follower = Follower.all.find { |follower| title.parameterize.match(follower.name.parameterize) }
     self.save
 
   end
