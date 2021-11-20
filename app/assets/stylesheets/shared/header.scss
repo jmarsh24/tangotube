@@ -47,6 +47,17 @@
     display: none;
   }
 
+  #button-patreon {
+    background: #FF424D;
+    padding: 10px;
+    color: #f8f8f8;
+    border-radius: 30px;
+
+    &:hover {
+      color: white;
+    }
+  }
+
   button:not(.searchButton) {
     cursor: pointer;
     width: 40px;
@@ -58,7 +69,7 @@
   }
 
   .add_links {
-    margin: 0 20px;
+    margin: 0 5px;
   }
 
   .logoContainer {
