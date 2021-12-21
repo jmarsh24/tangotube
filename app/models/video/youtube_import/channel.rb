@@ -23,12 +23,16 @@ class Video::YoutubeImport::Channel
     @channel.update(to_channel_params)
     rescue Yt::Errors::NoItems
       Rails.logger.warn "Channel does not exist"
+    rescue Yt::Errors::RequestError
+      Rails.logger.warn "Invalid Request"
   end
 
   def import_videos
     new_videos.each { |youtube_id| ImportVideoWorker.perform_async(youtube_id) }
     rescue Yt::Errors::NoItems
       Rails.logger.warn "Channel does not exist"
+    rescue Yt::Errors::RequestError
+      Rails.logger.warn "Invalid Request"
   end
 
   private
