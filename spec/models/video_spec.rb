@@ -81,16 +81,16 @@ RSpec.describe Video, type: :model do
       end
     end
 
-    describe ".filter_by_channel_id" do
+    describe ".filter_by_channel" do
       it "returns videos with matching channel" do
         channel = create(:channel)
         video = create(:video, channel: channel)
-        expect(described_class.filter_by_channel_id(channel.id)).to eq [video]
+        expect(described_class.filter_by_channel(channel.channel_id)).to eq [video]
       end
 
       it "does not return videos with incorrect channel id" do
         video = create(:video)
-        expect(described_class.filter_by_channel_id("0")).not_to eq [video]
+        expect(described_class.filter_by_channel("0")).not_to eq [video]
       end
     end
 
