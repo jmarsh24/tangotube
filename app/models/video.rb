@@ -121,11 +121,22 @@ class Video < ApplicationRecord
     end
   end
 
-  def grep_title
+  def grep_title_leader_follower
 
     self.leader = Leader.all.find { |leader| title.parameterize.match(leader.name.parameterize) }
     self.follower = Follower.all.find { |follower| title.parameterize.match(follower.name.parameterize) }
-    self.save
+    save
+
+  end
+
+  def grep_title_description_song
+
+    string = "#{description} #{title} #{youtube_song} #{youtube_artist}"
+
+    self.song = Song.filter_by_active
+                    .find_all { |song| string.parameterize.match(song.title.parameterize)}
+                    .find { |song| string.parameterize.match(song.last_name_search.parameterize)}
+    save
 
   end
 

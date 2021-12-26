@@ -19,7 +19,7 @@ class Video::MusicRecognition::AcrCloud
   private
 
   def audio_file_path
-    Audio.import(@youtube_id).path
+    Audio.import(@youtube_id)
   end
 
   def acr_cloud_response

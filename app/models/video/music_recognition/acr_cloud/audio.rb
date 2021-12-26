@@ -18,6 +18,7 @@ class Video::MusicRecognition::AcrCloud::Audio
 
   def import
     transcoded_audio_file
+    youtube_audio_file_path
   end
 
   private
@@ -30,7 +31,7 @@ class Video::MusicRecognition::AcrCloud::Audio
   end
 
   def youtube_audio_file_path
-    Rails.root.join(RELATIVE_SAVE_PATH + @youtube_id + OUTPUT_FORMAT).to_s
+    ("." + RELATIVE_SAVE_PATH + @youtube_id + OUTPUT_FORMAT).to_s
   end
 
   def output_file_path

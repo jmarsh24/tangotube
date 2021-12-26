@@ -13,7 +13,8 @@ class Video::YoutubeImport::Video
   def import
     video = Video.find_or_create_by(youtube_id: @youtube_id)
     video.update(to_video_params)
-    video.grep_title
+    video.grep_title_leader_follower
+    video.grep_title_description_song
   end
 
   private
