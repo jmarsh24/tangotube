@@ -31,7 +31,7 @@ class Video::MusicRecognition::AcrCloud::Audio
   end
 
   def youtube_audio_file_path
-    ("." + RELATIVE_SAVE_PATH + @youtube_id + OUTPUT_FORMAT).to_s
+    ".#{RELATIVE_SAVE_PATH + @youtube_id + OUTPUT_FORMAT}"
   end
 
   def output_file_path
