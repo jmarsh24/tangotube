@@ -18,7 +18,6 @@ class Video::MusicRecognition::AcrCloud::Audio
 
   def import
     transcoded_audio_file
-    output_file_path
   end
 
   private
