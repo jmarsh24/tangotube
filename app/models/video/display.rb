@@ -47,7 +47,7 @@ class Video::Display
   def dancer_names
     return if @video.leader.blank? || @video.follower.blank?
 
-    "#{@video.leader.name.titleize} & #{@video.follower.name.titleize}"
+    "#{@video.leader.name.to_s.titleize.gsub("&amp;","&")} & #{@video.follower.name.to_s.titleize.gsub("&amp;","&")}"
   end
 
   private
