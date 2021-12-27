@@ -30,7 +30,6 @@ class Video::YoutubeImport::Channel
   def import_videos
     new_videos.each do |youtube_id|
       ImportVideoWorker.perform_async(youtube_id)
-      AcrMusicMatchWorker.perform_async(youtube_id)
     end
     rescue Yt::Errors::NoItems
       Rails.logger.warn "Channel does not exist"

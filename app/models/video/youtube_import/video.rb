@@ -15,6 +15,7 @@ class Video::YoutubeImport::Video
     video.update(to_video_params)
     video.grep_title_leader_follower
     video.grep_title_description_song
+    AcrMusicMatchWorker.perform_async(@youtube_id)
   end
 
   private
