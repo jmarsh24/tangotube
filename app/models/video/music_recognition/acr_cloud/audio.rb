@@ -18,7 +18,7 @@ class Video::MusicRecognition::AcrCloud::Audio
 
   def import
     transcoded_audio_file
-    youtube_audio_file_path
+    output_file_path
   end
 
   private
