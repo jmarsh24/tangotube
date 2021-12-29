@@ -21,9 +21,12 @@ class Video::MusicRecognition::AcrCloud
   def acr_cloud_response
     Tempfile.create([@youtube_id, ".mp3"]) do |tempfile1|
       Audio.import(@youtube_id, tempfile1.path)
+      Rails.logger.info("Audio downloaded from youtube: #{@youtube_id}, #{tempfile1.path}")
       Tempfile.create(["#{@youtube_id}_from_60_to_75", ".mp3"]) do |tempfile2|
         audio_file = transcode_audio_file(tempfile1.path, tempfile2.path)
+        Rails.logger.info("Audio transcoded by ffmpeg: #{@youtube_id}, #{tempfile2.path}")
         @acr_cloud_response ||= Client.send_audio(audio_file.path)
+        Rails.logger.info("Transcoded audio sent to api: #{@youtube_id}, #{tempfile2.path}")
       end
     end
   end
