@@ -4,6 +4,7 @@ class Video::MusicRecognition::AcrCloud
       new(youtube_id).update_video
       rescue StandardError => e
         Rails.logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e.backtrace.join("\n\t")}"
+        Rails.logger.warn "Error Class: #{e.class}"
     end
   end
 
@@ -13,7 +14,9 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def update_video
+    Rails.logger.info("Attempting to save: #{@youtube_id}")
     @video.update(video_params)
+    Rails.logger.info("Saved video: #{@youtube_id}")
   end
 
   private
