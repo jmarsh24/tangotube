@@ -29,6 +29,8 @@ class Video::MusicRecognition::AcrCloud
         Rails.logger.info("Transcoded audio sent to api: #{@youtube_id}, #{tempfile2.path}")
       end
     end
+    Rails.logger.info(@acr_cloud_response)
+    @acr_cloud_response
   end
 
   def transcode_audio_file(input_file_path, output_file_path)
