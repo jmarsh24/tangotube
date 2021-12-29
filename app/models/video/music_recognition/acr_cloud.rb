@@ -49,7 +49,7 @@ class Video::MusicRecognition::AcrCloud
       spotify_artist_id: spotify_artist_id,
       spotify_artist_id_2: spotify_artist_id_2,
       spotify_artist_name: spotify_artist_name,
-      spotify_artist_name_1: spotify_artist_name_1,
+      spotify_artist_name: spotify_artist_name_1,
       spotify_artist_name_2: spotify_artist_name_2,
       spotify_track_id: spotify_track_id,
       spotify_track_name: spotify_track_name,
