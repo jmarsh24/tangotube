@@ -14,8 +14,8 @@ class Video::YoutubeImport::Video
     video = Video.find_or_create_by(youtube_id: @youtube_id)
     video.update(to_video_params)
     video.grep_title_leader_follower
-    video.grep_title_description_song
     Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
+    video.grep_title_description_acr_cloud_song
   end
 
   private
