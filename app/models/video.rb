@@ -129,13 +129,24 @@ class Video < ApplicationRecord
 
   end
 
-  def grep_title_description_song
+  def grep_title_description_acr_cloud_song
 
-    string = "#{description} #{title} #{youtube_song} #{youtube_artist}"
+    array = Array.new
+    array << title if title.present?
+    array << description if description.present?
+    array << spotify_artist_name if spotify_artist_name.present?
+    array << spotify_artist_name_2 if spotify_artist_name_2.present?
+    array << spotify_track_name if spotify_track_name.present?
+    array << acr_cloud_artist_name if acr_cloud_artist_name.present?
+    array << acr_cloud_artist_name_1 if acr_cloud_artist_name_1.present?
+    array << acr_cloud_track_name if acr_cloud_track_name.present?
+    array << youtube_song if youtube_song.present?
+    array << youtube_artist if youtube_artist.present?
+    search_string = array.join(" ")
 
     self.song = Song.filter_by_active
-                    .find_all { |song| string.parameterize.match(song.title.parameterize)}
-                    .find { |song| string.parameterize.match(song.last_name_search.parameterize)}
+                    .find_all { |song| search_string.parameterize.match(song.title.parameterize)}
+                    .find { |song| search_string.parameterize.match(song.last_name_search.parameterize)}
     save
 
   end
