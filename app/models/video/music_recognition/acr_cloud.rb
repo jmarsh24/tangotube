@@ -3,8 +3,7 @@ class Video::MusicRecognition::AcrCloud
     def fetch(youtube_id)
       new(youtube_id).update_video
       rescue StandardError => e
-        Rails.logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e.backtrace.join("\n\t")}"
-        Rails.logger.warn "Error Class: #{e.class}"
+        Rails.logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e}\n\t#{e.backtrace.join("\n\t")}"
     end
   end
 
@@ -24,16 +23,11 @@ class Video::MusicRecognition::AcrCloud
   def acr_cloud_response
     Tempfile.create([@youtube_id, ".mp3"]) do |tempfile1|
       Audio.import(@youtube_id, tempfile1.path)
-      Rails.logger.info("Audio downloaded from youtube: #{@youtube_id}, #{tempfile1.path}")
       Tempfile.create(["#{@youtube_id}_from_60_to_75", ".mp3"]) do |tempfile2|
         audio_file = transcode_audio_file(tempfile1.path, tempfile2.path)
-        Rails.logger.info("Audio transcoded by ffmpeg: #{@youtube_id}, #{tempfile2.path}")
         @acr_cloud_response ||= Client.send_audio(audio_file.path)
-        Rails.logger.info("Transcoded audio sent to api: #{@youtube_id}, #{tempfile2.path}")
       end
     end
-    Rails.logger.info(@acr_cloud_response)
-    @acr_cloud_response
   end
 
   def transcode_audio_file(input_file_path, output_file_path)
@@ -184,9 +178,6 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def parsed_acr_cloud_data
-    Rails.logger.info("Attempting to parse api response: #{@youtube_id}")
     @parsed_acr_cloud_data ||= JSON.parse(acr_cloud_response).extend Hashie::Extensions::DeepFind
-    Rails.logger.info("Parsing api response: #{@youtube_id}")
-    @parsed_acr_cloud_data
   end
 end
