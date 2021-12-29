@@ -16,7 +16,7 @@ class Video::YoutubeImport::Video
     if video.leader.nil? || video.follower.nil?
       video.grep_title_leader_follower
     end
-    if video.acr_response_code == 1001 || video.acr_response_code == 0
+    unless video.acr_response_code.in? [0,1001]
       Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
     end
     if video.song.nil?
