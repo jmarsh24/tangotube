@@ -18,12 +18,19 @@ class Video::MusicRecognition::AcrCloud
 
   private
 
-  def audio_file_path
-    Audio.import(@youtube_id).path
+  def acr_cloud_response
+    Tempfile.create([@youtube_id, ".mp3"]) do |tempfile1|
+      Audio.import(@youtube_id, tempfile1.path)
+      Tempfile.create(["#{@youtube_id}_from_60_to_75", ".mp3"]) do |tempfile2|
+        audio_file = transcode_audio_file(tempfile1.path, tempfile2.path)
+        @acr_cloud_response ||= Client.send_audio(audio_file.path)
+      end
+    end
   end
 
-  def acr_cloud_response
-    @acr_cloud_response ||= Client.send_audio(audio_file_path)
+  def transcode_audio_file(input_file_path, output_file_path)
+    audio_file = FFMPEG::Movie.new(input_file_path)
+    audio_file.transcode(output_file_path, { custom: %w[-y -ss 60 -to 75] })
   end
 
   def video_params
