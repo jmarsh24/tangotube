@@ -1,6 +1,6 @@
 class Video::YoutubeImport::Channel
   YOUTUBE_DL_COMMAND_PREFIX =
-    "youtube-dl https://www.youtube.com/channel/".freeze
+    "yt-dlp https://www.youtube.com/channel/".freeze
   YOUTUBE_DL_COMMAND_SUFFIX = "/videos  --get-id --skip-download".freeze
 
   class << self
