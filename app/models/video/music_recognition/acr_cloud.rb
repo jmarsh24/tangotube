@@ -182,6 +182,9 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def parsed_acr_cloud_data
+    Rails.logger.info("Attempting to parse api response: #{@youtube_id}")
     @parsed_acr_cloud_data ||= JSON.parse(acr_cloud_response).extend Hashie::Extensions::DeepFind
+    Rails.logger.info("Parsing api response: #{@youtube_id}")
+    @parsed_acr_cloud_data
   end
 end
