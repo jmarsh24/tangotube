@@ -13,9 +13,7 @@ class Video::MusicRecognition::AcrCloud
   end
 
   def update_video
-    Rails.logger.info("Attempting to save: #{@youtube_id}")
     @video.update(video_params)
-    Rails.logger.info("Saved video: #{@youtube_id}")
   end
 
   private
