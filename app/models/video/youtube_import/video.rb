@@ -19,13 +19,12 @@ class Video::YoutubeImport::Video
     unless video.acr_response_code.in? [0,1001]
       Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
     end
-    if video.youtube_song.nil?
-      Video::MusicRecognition::Youtube.fetch(@youtube_id)
-    end
+    # if video.youtube_song.nil?
+    #   Video::MusicRecognition::Youtube.fetch(@youtube_id)
+    # end
     if video.song.nil?
       video.grep_title_description_acr_cloud_song
     end
-    byebug
     rescue Yt::Errors::NoItems, NoItems => e
     if e.present?
       video.destroy
