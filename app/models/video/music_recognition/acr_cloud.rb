@@ -23,7 +23,7 @@ class Video::MusicRecognition::AcrCloud
       Audio.import(@youtube_id, tempfile1.path)
       Tempfile.create(["#{@youtube_id}_from_60_to_75", ".mp3"]) do |tempfile2|
         audio_file = transcode_audio_file(tempfile1.path, tempfile2.path)
-        Client.send_audio(audio_file)
+        @acr_cloud_response ||= Client.send_audio(audio_file.path)
       end
     end
   end
