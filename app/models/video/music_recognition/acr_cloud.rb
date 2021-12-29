@@ -30,7 +30,9 @@ class Video::MusicRecognition::AcrCloud
 
   def transcode_audio_file(input_file_path, output_file_path)
     audio_file = FFMPEG::Movie.new(input_file_path)
-    audio_file.transcode(output_file_path, { custom: %w[-y -ss 60 -to 75] })
+    start_time = audio_file.duration / 2
+    end_time = start_time + 20
+    audio_file.transcode(output_file_path, { custom: %W[-y -ss #{start_time} -to #{end_time}] })
   end
 
   def video_params
