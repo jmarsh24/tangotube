@@ -23,7 +23,6 @@ class Video::YoutubeImport::Video
       video.grep_title_description_acr_cloud_song
     end
     rescue Yt::Errors::NoItems, NoItems => e
-      byebug
     if e.present?
       video.destroy
     end
