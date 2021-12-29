@@ -13,9 +13,15 @@ class Video::YoutubeImport::Video
   def import
     video = Video.find_or_create_by(youtube_id: @youtube_id)
     video.update(to_video_params)
-    video.grep_title_leader_follower
-    Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
-    video.grep_title_description_acr_cloud_song
+    if video.leader.nil? || video.follower.nil?
+      video.grep_title_leader_follower
+    end
+    if video.acr_response_code == 1001 || video.acr_response_code == 0
+      Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
+    end
+    if video.song.nil?
+      video.grep_title_description_acr_cloud_song
+    end
   end
 
   private
