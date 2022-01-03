@@ -29,10 +29,13 @@ end
 
 desc "This task updates videos"
 task update_all_videos: :environment do
-  Video.all.order('updated_at ASC').find_each do |video|
-    ImportVideoWorker(video.youtube_id)
+  if Time.now.monday?
+    Video.all.order('updated_at ASC').find_each do |video|
+      ImportVideoWorker(video.youtube_id)
+    end
+
+    puts "done."
   end
-  puts "done."
 end
 
 # For every active song and in order of popularity search
