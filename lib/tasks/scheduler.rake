@@ -20,12 +20,10 @@ end
 
 desc "This task updates videos"
 task update_all_videos: :environment do
-  if Time.now.monday?
-    Video.all.order('updated_at ASC').limit(100000).find_each do |video|
-      ImportVideoWorker.perform_async(video.youtube_id)
-    end
-    puts "done."
+  Video.all.order('updated_at ASC').limit(50000).find_each do |video|
+    ImportVideoWorker.perform_async(video.youtube_id)
   end
+  puts "done."
 end
 
 desc "This task parses the performance date from the description and title"
