@@ -39,7 +39,7 @@ module VideosHelper
   def link_to_primary_title(dancer_names, title, song_attributes, youtube_id)
     if dancer_names.present? && song_attributes.present?
       link_to dancer_names,
-              watch_path(v: youtube_id),x
+              watch_path(v: youtube_id),
               { 'data-turbo-frame': "_top" }
     else
       link_to truncate(title, length: 85),
