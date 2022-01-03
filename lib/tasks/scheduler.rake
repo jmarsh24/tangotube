@@ -27,6 +27,14 @@ task update_all_channels: :environment do
   puts "done."
 end
 
+desc "This task updates videos"
+task update_all_videos: :environment do
+  Video.all.order('updated_at ASC').find_each do |video|
+    ImportVideoWorker(video.youtube_id)
+  end
+  puts "done."
+end
+
 # For every active song and in order of popularity search
 # for videos that have both the song title and last name
 # of the orchestra somewhere in the attributes
