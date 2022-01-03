@@ -39,7 +39,7 @@ module VideosHelper
   def link_to_primary_title(dancer_names, title, song_attributes, youtube_id)
     if dancer_names.present? && song_attributes.present?
       link_to dancer_names,
-              watch_path(v: youtube_id),
+              watch_path(v: youtube_id),x
               { 'data-turbo-frame': "_top" }
     else
       link_to truncate(title, length: 85),
@@ -57,7 +57,7 @@ module VideosHelper
   end
 
   def formatted_metadata(video)
-    "#{formatted_upload_date(video.upload_date)} • #{video.view_count} views • #{video.like_count} likes"
+    "#{formatted_upload_date(video.upload_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes"
   end
 
   def hd_duration_data(video)
