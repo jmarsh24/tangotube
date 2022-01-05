@@ -31,6 +31,15 @@ class Video::YoutubeImport::Video
     end
   end
 
+  def update
+    video = Video.find(youtube_id: @youtube_id)
+    video.update(to_video_params)
+    rescue Yt::Errors::NoItems, NoItems => e
+    if e.present?
+      video.destroy
+    end
+  end
+
   private
 
   def fetch_by_id
