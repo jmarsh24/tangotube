@@ -42,6 +42,10 @@ class Video::YoutubeImport::Video
   def update
     video = Video.find_by(youtube_id: @youtube_id)
     video.update(to_video_params)
+    rescue ActiveRecord::StatementInvalid, PG::DatetimeFieldOverflow => e
+    if e.present?
+      video.update(performance_date: nil)
+    end
     rescue Yt::Errors::NoItems => e
     if e.present?
       video.destroy
