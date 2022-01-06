@@ -3,6 +3,10 @@ class Video::YoutubeImport::Video
     def import(youtube_id)
       new(youtube_id).import
     end
+
+    def update(youtube_id)
+      new(youtube_id).update
+    end
   end
 
   def initialize(youtube_id)
