@@ -12,9 +12,10 @@ FactoryBot.define do
     end
 
     factory :watched_video do
+      leader
+      follower
       after(:create) do |video|
-        leader
-        follower
+
         ahoy = Ahoy::Tracker.new
         ahoy.track( "Video View", youtube_id: video.youtube_id )
       end
