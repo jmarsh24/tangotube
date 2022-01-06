@@ -234,7 +234,7 @@ RSpec.describe Video::Search, type: :model do
       end
 
       it "filters by year" do
-        video_a = create(:video, performance_date: Time.zone.local(2018, 1, 1))
+        video_a = create(:video, upload_date: Time.zone.local(2018, 1, 1))
 
         search = described_class.new(filtering_params: { year: "2018" })
 
@@ -252,7 +252,7 @@ RSpec.describe Video::Search, type: :model do
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c =
             described_class.new(filtering_params: { query: "Carlitos Espin" })
           expect(search_a.videos).to eq [video]
@@ -271,7 +271,7 @@ RSpec.describe Video::Search, type: :model do
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c =
             described_class.new(filtering_params: { query: "Carlitos Espin" })
           expect(search_a.videos).to eq [video]
@@ -290,7 +290,7 @@ RSpec.describe Video::Search, type: :model do
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c =
             described_class.new(filtering_params: { query: "Carlitos Espin" })
           expect(search_a.videos).to eq [video]
@@ -319,7 +319,7 @@ RSpec.describe Video::Search, type: :model do
           search_a =
             described_class.new(filtering_params: { query: "Noelia Hurtado" })
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "noeli" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -332,7 +332,7 @@ RSpec.describe Video::Search, type: :model do
           VideosSearch.refresh
           search_a = described_class.new(filtering_params: { query: "Noelia" })
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "Noel" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -345,7 +345,7 @@ RSpec.describe Video::Search, type: :model do
           search_a =
             described_class.new(filtering_params: { query: "s6iptZdCcG0" })
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c =
             described_class.new(filtering_params: { query: "s6iptZdCcG" })
           expect(search_a.videos).to eq [video]
@@ -359,7 +359,7 @@ RSpec.describe Video::Search, type: :model do
           search_a =
             described_class.new(filtering_params: { query: "d'agostino" })
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "Dagost" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -372,7 +372,7 @@ RSpec.describe Video::Search, type: :model do
           search_a =
             described_class.new(filtering_params: { query: "no vendrá" })
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "no vend" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -385,7 +385,7 @@ RSpec.describe Video::Search, type: :model do
           search_a =
             described_class.new(filtering_params: { query: "no vendrá" })
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "no vend" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -396,7 +396,7 @@ RSpec.describe Video::Search, type: :model do
           video = create(:video, spotify_artist_name: "Angel D'Agostino")
           VideosSearch.refresh
           search_a = described_class.new(filtering_params: { query: "dagostino" })
-          search_b = described_class.new(filtering_params: { query: "John Doe" })
+          search_b = described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "Angel D'Agosti" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -408,7 +408,7 @@ RSpec.describe Video::Search, type: :model do
           video = create(:video, channel: channel)
           VideosSearch.refresh
           search_a = described_class.new(filtering_params: { query: "030 tango" })
-          search_b = described_class.new(filtering_params: { query: "John Doe" })
+          search_b = described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "030 T" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -420,7 +420,7 @@ RSpec.describe Video::Search, type: :model do
           video = create(:video, channel: channel)
           VideosSearch.refresh
           search_a = described_class.new( filtering_params: { query: "UCtdgMR0bmogczrZNpPaO66Q" } )
-          search_b = described_class.new(filtering_params: { query: "John Doe" })
+          search_b = described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new( filtering_params: { query: "UCtdgMR0bmogczrZNpPaO" } )
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -433,7 +433,7 @@ RSpec.describe Video::Search, type: :model do
           VideosSearch.refresh
           search_a = described_class.new(filtering_params: { query: "tango" })
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "tang" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -447,7 +447,7 @@ RSpec.describe Video::Search, type: :model do
           search_a =
             described_class.new(filtering_params: { query: "mentirosa" })
           search_b =
-            described_class.new(filtering_params: { query: "John Doe" })
+            described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "menti" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -459,7 +459,7 @@ RSpec.describe Video::Search, type: :model do
           video = create(:video, song: song)
           VideosSearch.refresh
           search_a = described_class.new(filtering_params: { query: "d'agostino" })
-          search_b = described_class.new(filtering_params: { query: "John Doe" })
+          search_b = described_class.new(filtering_params: { query: "No Match" })
           search_c = described_class.new(filtering_params: { query: "dAgosti" })
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
@@ -479,7 +479,7 @@ RSpec.describe Video::Search, type: :model do
       page1 = described_class.new(page: 1)
       page2 = described_class.new(page: 2)
       page3 = described_class.new(page: 3)
-      
+
       expect(page1.paginated_videos.count).to eq(2)
       expect(page2.paginated_videos.count).to eq(1)
       expect(page3.paginated_videos.count).to eq(0)
@@ -487,11 +487,11 @@ RSpec.describe Video::Search, type: :model do
 
     it "doesn't shuffles videos if sorting/filtering params present" do
       stub_const("Ahoy::Event::MIN_NUMBER_OF_VIEWS", 1)
-      
+
       video1 = create(:watched_video, hd: 1, popularity: 3)
       video2 = create(:watched_video, hd: 1, popularity: 2)
       video3 = create(:watched_video, hd: 1, popularity: 1)
-      
+
       page_not_shuffled = described_class.new(page: 1, filtering_params: { hd: 1 })
       expect(page_not_shuffled.paginated_videos).to eq([video1, video2, video3])
     end
@@ -602,9 +602,9 @@ RSpec.describe Video::Search, type: :model do
 
   describe "#years" do
     it "creates array of songs and increments multiple videos without duplication" do
-      create(:video, performance_date: Time.zone.local(2018, 1, 1))
-      create(:video, performance_date: Time.zone.local(2018, 1, 1))
-      create(:video, performance_date: Time.zone.local(2017, 1, 1))
+      create(:video, upload_date: Time.zone.local(2018, 1, 1))
+      create(:video, upload_date: Time.zone.local(2018, 1, 1))
+      create(:video, upload_date: Time.zone.local(2017, 1, 1))
 
       search = described_class.new
       expect(search.years).to eq([["2018 (2)", 2018], ["2017 (1)", 2017]])
