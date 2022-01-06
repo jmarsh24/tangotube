@@ -1,8 +1,6 @@
 FactoryBot.define do
   factory :video do
     channel
-    leader
-    follower
 
     sequence(:youtube_id) { |n| "fancy_youtube_slug#{n}" }
     performance_date { "2017-10-26" }
@@ -15,6 +13,8 @@ FactoryBot.define do
 
     factory :watched_video do
       after(:create) do |video|
+        leader
+        follower
         ahoy = Ahoy::Tracker.new
         ahoy.track( "Video View", youtube_id: video.youtube_id )
       end
