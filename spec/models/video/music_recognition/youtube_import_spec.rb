@@ -57,11 +57,8 @@ RSpec.describe Video::YoutubeImport, type: :model do
 
   describe ".from_video" do
     it "adds new videos" do
-      VCR.use_cassette("spec/cassettes/video/youtube_import/from_video") do
-        create(:video, youtube_id: "s6iptZdCcG0")
-
-        expect { described_class.from_video("s6iptZdCcG0") }.to change(ImportVideoWorker.jobs, :size).by(1)
-      end
+      expect(Video::YoutubeImport::Video).to receive(:import).with("s6iptZdCcG0")
+      described_class.from_video("s6iptZdCcG0")
     end
   end
 end

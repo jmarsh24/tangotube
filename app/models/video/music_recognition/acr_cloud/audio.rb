@@ -3,14 +3,13 @@ class Video::MusicRecognition::AcrCloud::Audio
   YOUTUBE_DL_COMMAND_DOWNLOAD_AUDIO = " -f 140 --force-overwrites -o".freeze
 
   class << self
-    def import(youtube_id, file_path)
-      new(youtube_id, file_path).import
+    def import(youtube_id)
+      new(youtube_id).import
     end
   end
 
-  def initialize(youtube_id, file_path)
+  def initialize(youtube_id)
     @youtube_id = youtube_id
-    @file_path = file_path
   end
 
   def import
