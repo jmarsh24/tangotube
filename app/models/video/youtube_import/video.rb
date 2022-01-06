@@ -88,7 +88,10 @@ class Video::YoutubeImport::Video
 
   def performance_date
     performance_date = Date.parse(@youtube_video.description) || Date.parse(@youtube_video.title)
-    rescue Date::Error
+    rescue Date::Error, RangeError => e
+      if e.present?
+        performance_date = nil
+      end
     performance_date
   end
 
