@@ -36,7 +36,7 @@ class Video::YoutubeImport::Video
   end
 
   def update
-    video = Video.find(youtube_id: @youtube_id)
+    video = Video.find_by(youtube_id: @youtube_id)
     video.update(to_video_params)
     rescue Yt::Errors::NoItems, NoItems => e
     if e.present?
