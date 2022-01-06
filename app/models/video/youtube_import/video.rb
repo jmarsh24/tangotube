@@ -29,7 +29,11 @@ class Video::YoutubeImport::Video
     if video.song.nil?
       video.grep_title_description_acr_cloud_song
     end
-    rescue Yt::Errors::NoItems, NoItems => e
+    rescue ActiveRecord::StatementInvalid, PG::DatetimeFieldOverflow => e
+    if e.present?
+      video.update(performance_date: nil)
+    end
+    rescue Yt::Errors::NoItems => e
     if e.present?
       video.destroy
     end
@@ -38,7 +42,7 @@ class Video::YoutubeImport::Video
   def update
     video = Video.find_by(youtube_id: @youtube_id)
     video.update(to_video_params)
-    rescue Yt::Errors::NoItems, NoItems => e
+    rescue Yt::Errors::NoItems => e
     if e.present?
       video.destroy
     end
