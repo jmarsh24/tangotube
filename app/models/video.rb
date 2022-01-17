@@ -137,9 +137,11 @@ class Video < ApplicationRecord
     array << spotify_artist_name if spotify_artist_name.present?
     array << spotify_artist_name_2 if spotify_artist_name_2.present?
     array << spotify_track_name if spotify_track_name.present?
+    array << spotify_album_name if spotify_album_name.present?
     array << acr_cloud_artist_name if acr_cloud_artist_name.present?
     array << acr_cloud_artist_name_1 if acr_cloud_artist_name_1.present?
     array << acr_cloud_track_name if acr_cloud_track_name.present?
+    array << acr_cloud_album_name if acr_cloud_album_name.present?
     array << youtube_song if youtube_song.present?
     array << youtube_artist if youtube_artist.present?
     search_string = array.join(" ")
