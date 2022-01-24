@@ -22,7 +22,6 @@
                     class: "filter-hd-button",
                     data: { controller: "filter",
                     action: "filter#filter", "filter-hd-value": "0" } do %>
-                    <%# byebug %>
         <% if filtering_params["hd"] == "0" || !filtering_params.include?("hd") %>
           <%= content_tag(:b, "All" ) %>
         <% else %>
@@ -55,7 +54,6 @@
         <label>
           Sort By
         </label>
-        <hr>
         <%= sortable 'videos.upload_date', "desc", "Oldest First", @search %>
         <%= sortable 'videos.upload_date', "asc",  "Recent First", @search %>
         <%= sortable "videos.view_count", "desc",  "Most Viewed", @search %>
@@ -66,7 +64,6 @@
       <label>
         Group By
       </label>
-      <hr>
         <%= sortable 'songs.title', "asc", "Song", @search %>
         <%= sortable 'songs.last_name_search', "asc",  "Orchestra", @search %>
         <%= sortable 'videos.channel_id', "asc",  "Channel", @search %>

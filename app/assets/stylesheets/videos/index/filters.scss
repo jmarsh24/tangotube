@@ -5,6 +5,7 @@
 .filter-header {
   display: flex;
   flex-direction: row;
+  padding: 10px 0;
   justify-content: space-between;
   background-color: $secondary-color;
 }
@@ -131,18 +132,14 @@
   justify-content: flex-start;
   width: 150px;
   margin: 10px;
-  border-bottom: 1px;
 
   label {
+    border-bottom: 1px solid #c2c2c2;
     font-size: 0.9rem;
     font-weight: 500;
     padding: 5px;
     min-width: 50px;
     color: $sortable-label-color;
-  }
-
-  hr {
-    width: 100%;
   }
 
   a {
@@ -164,9 +161,8 @@
   border: none;
   background: none;
   font-size: 14px;
-  margin: 5px 0;
   border-radius: 2px;
-  padding: 0px;
+  padding: 5px 0;
   cursor: pointer;
   &:hover {
     color: $sortable-label-color-hover;
@@ -179,9 +175,6 @@
 }
 
 @media (max-width: 800px) {
-  .filter-header {
-    padding: .2rem .5rem;
-  }
 
   #filter-container {
     &.filter-container {
@@ -195,9 +188,6 @@
 }
 
 @media (max-width: 500px) {
-  .filter-header {
-    padding: 10px;
-  }
 
   #filter_results {
     font-size: 12px;
