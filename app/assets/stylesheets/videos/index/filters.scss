@@ -188,6 +188,10 @@
       padding: 0px;
     }
   }
+
+  .filter-sorting-container {
+    padding: 0 10px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -212,6 +216,7 @@
 
   .videos-sortable-container {
     min-width: 200px;
+
     button {
       min-width: 100px;
     }
