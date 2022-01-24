@@ -477,7 +477,8 @@ CREATE TABLE public.followers (
     nickname character varying,
     first_name character varying,
     last_name character varying,
-    videos_count integer DEFAULT 0 NOT NULL
+    videos_count integer DEFAULT 0 NOT NULL,
+    normalized_name character varying
 );
 
 
@@ -513,7 +514,8 @@ CREATE TABLE public.leaders (
     nickname character varying,
     first_name character varying,
     last_name character varying,
-    videos_count integer DEFAULT 0 NOT NULL
+    videos_count integer DEFAULT 0 NOT NULL,
+    normalized_name character varying
 );
 
 
@@ -1358,6 +1360,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210604213139'),
 ('20210605102713'),
 ('20210606002534'),
-('20211229163231');
+('20211229163231'),
+('20220124174633'),
+('20220124180416');
 
 
