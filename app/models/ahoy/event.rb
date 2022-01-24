@@ -5,7 +5,7 @@ class Ahoy::Event < AhoyRecord
 
   belongs_to :visit
   belongs_to :user, optional: true
-  
+
   class << self
     def most_viewed_videos_by_month
        where("time > ?", 30.days.ago)
@@ -16,5 +16,15 @@ class Ahoy::Event < AhoyRecord
       .map(&:properties)
       .pluck("youtube_id")
     end
+
+    def viewed_by_user(user_id)
+      where("time > ?", 30.days.ago)
+     .where(name: "Video View")
+     .select("properties")
+     .group("properties")
+     .having("count(properties) >= ?", MIN_NUMBER_OF_VIEWS)
+     .map(&:properties)
+     .pluck("youtube_id")
+   end
   end
 end

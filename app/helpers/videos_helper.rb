@@ -72,27 +72,27 @@ module VideosHelper
     truncate(video.channel.title, length: 45, omission: "")
   end
 
-  def sortable(column, title = "", search)
+  def sortable(column, direction, title = "", search)
     title ||= column.titleize
-    css_class =
-      column == search.sort_column ? "current #{search.sort_direction}" : nil
-    direction =
-      if column == search.sort_column && search.sort_direction == "desc"
-        "asc"
-      else
-        "desc"
-      end
+    column == search.sort_column ? "current #{search.sort_direction}" : nil
 
     button_tag({ type:  "button",
-                 data:  { controller: "filter", action: "filter#filter", "filter-sort-value": column, "filter-direction-value": direction },
+                 data:  { controller: "filter",
+                          action: "filter#filter",
+                          "filter-sort-value": button_active?(column, direction, search) ? 0 : column,
+                          "filter-direction-value": button_active?(column, direction, search) ? 0 : direction },
                  class: "videos-sortable-button" }) do
-      if css_class.present?
-        concat title.to_s
-        concat fa_icon("chevron-#{direction == 'asc' ? 'up' : 'down'}", class: "videos-sortable-icon")
+      if button_active?(column, direction, search)
+        concat content_tag(:b, title.to_s)
+        concat fa_icon("times", class: "videos-sortable-icon")
       else
         title
       end
     end
+  end
+
+  def button_active?(column, direction, search)
+    column == search.sort_column && direction == search.sort_direction
   end
 
   def video_query_params
@@ -103,6 +103,7 @@ module VideosHelper
       "genre",
       "hd",
       "leader",
+      "like_count",
       "orchestra",
       "popularity",
       "query",

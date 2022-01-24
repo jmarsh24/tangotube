@@ -1,8 +1,15 @@
-<div data-controller="filter">
+<div class="filter-sorting-container" data-controller="filter">
   <div class="filter-header">
     <div class="filter-container-button-results">
-      <%= button_tag type: 'button', data: { action: "click->toggle#toggle"}, class: "filter-button" do %>
-        <%= fa_icon "sliders-h 2x", left: true %>Filters
+      <%= button_tag type: 'button', data: { action: "click->toggle#toggleFilter",
+                                            "toggle-target": "filterButton"},
+                                              class: "filter-button" do %>
+        <%= fa_icon "filter 2x", left: true %>Filter
+      <% end %>
+      <%= button_tag type: 'button', data: { action: "click->toggle#toggleSort",
+                                              "toggle-target": "sortButton"},
+                                                class: "filter-button" do %>
+        <%= fa_icon "sliders-h 2x", left: true %>Sorting
       <% end %>
       <div id="filter_results">
         <% if filtering_params.present? %>
@@ -10,29 +17,59 @@
         <% end %>
       </div>
     </div>
-    <div class="filter-hd">
-      <%= button_tag "All", class: "filter-hd-button", data: { controller: "filter", action: "filter#filter", "filter-hd-value": "0" } %>
-      <%= button_tag "HD", class: "filter-hd-button", data: { controller: "filter", action: "filter#filter", "filter-hd-value": "1" } %>
+    <div class="filter-hd" id="hd-filter-buttons">
+      <%= button_tag type: "button",
+                    class: "filter-hd-button",
+                    data: { controller: "filter",
+                    action: "filter#filter", "filter-hd-value": "0" } do %>
+                    <%# byebug %>
+        <% if filtering_params["hd"] == "0" || !filtering_params.include?("hd") %>
+          <%= content_tag(:b, "All" ) %>
+        <% else %>
+          All
+        <% end %>
+      <% end %>
+      <%= button_tag type: "button",
+                    class: "filter-hd-button",
+                    data: { controller: "filter",
+                    action: "filter#filter", "filter-hd-value": "1" } do %>
+        <% if filtering_params["hd"] == "1" %>
+          <%= content_tag(:b, "HD") %>
+        <% else %>
+          HD
+        <% end %>
+      <% end %>
     </div>
   </div>
-  <div class="filter-container" data-toggle-target="toggleable" id="filter-container">
-        <%= turbo_frame_tag 'slow-frame', class: "filter-container-upper" do %>
-          <%= render partial: "videos/index/filter", locals: { options: @search.genres, title: :genre, id: 'genre-filter' } %>
-          <%= render partial: "videos/index/filter", locals: { options: @search.leaders, title: :leader, id: 'leader-filter' } %>
-          <%= render partial: "videos/index/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter' } %>
-          <%= render partial: "videos/index/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter' } %>
-          <%= render partial: "videos/index/filter", locals: { options: @search.years, title: :year, id: 'year-filter' } %>
-        <% end %>
+  <div class="filter-container" data-toggle-target="filter" id="filter-container">
+    <%= turbo_frame_tag 'slow-frame', class: "filter-container-upper" do %>
+      <%= render partial: "videos/index/filter", locals: { options: @search.genres, title: :genre, id: 'genre-filter' } %>
+      <%= render partial: "videos/index/filter", locals: { options: @search.leaders, title: :leader, id: 'leader-filter' } %>
+      <%= render partial: "videos/index/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter' } %>
+      <%= render partial: "videos/index/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter' } %>
+      <%= render partial: "videos/index/filter", locals: { options: @search.years, title: :year, id: 'year-filter' } %>
+    <% end %>
+  </div>
+  <div class="sorting-container isHidden" data-toggle-target="sort" id="sort-container">
+    <div class="videos-sortable-container">
+        <label>
+          Sort By
+        </label>
+        <hr>
+        <%= sortable 'videos.upload_date', "desc", "Oldest First", @search %>
+        <%= sortable 'videos.upload_date', "asc",  "Recent First", @search %>
+        <%= sortable "videos.view_count", "desc",  "Most Viewed", @search %>
+        <%= sortable "videos.popularity", "desc",  "Most Popular", @search %>
+        <%= sortable "videos.like_count", "desc",  "Most Liked", @search %>
+    </div>
     <div class="videos-sortable-container">
       <label>
-        Sort By
+        Group By
       </label>
-        <%= sortable 'songs.title', "Song Title", @search %>
-        <%= sortable 'songs.last_name_search', "Orchestra", @search %>
-        <%= sortable 'videos.channel_id', "Channel", @search %>
-        <%= sortable "videos.view_count", "View Count", @search %>
-        <%= sortable "videos.upload_date", "Upload Date", @search %>
-        <%= sortable 'videos.popularity', "Popularity", @search %>
+      <hr>
+        <%= sortable 'songs.title', "asc", "Song", @search %>
+        <%= sortable 'songs.last_name_search', "asc",  "Orchestra", @search %>
+        <%= sortable 'videos.channel_id', "asc",  "Channel", @search %>
     </div>
   </div>
 </div>

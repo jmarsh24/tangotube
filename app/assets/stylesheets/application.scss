@@ -83,6 +83,10 @@ button {
   display: none !important;
 }
 
+.isActive {
+  font-weight: bold !important;
+}
+
 @media (max-width: 500px) {
   #mainSectionContainer {
     padding-top: 50px;

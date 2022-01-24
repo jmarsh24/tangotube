@@ -7,6 +7,7 @@ class Video::Search
     videos.view_count
     videos.updated_at
     videos.popularity
+    videos.like_count
   ].freeze
 
   NUMBER_OF_VIDEOS_PER_PAGE = 60
@@ -75,11 +76,15 @@ class Video::Search
   end
 
   def sort_column
-    SEARCHABLE_COLUMNS.include?(@sorting_params[:sort]) ? @sorting_params[:sort] : SEARCHABLE_COLUMNS.last
+    SEARCHABLE_COLUMNS.include?(@sorting_params[:sort]) ? @sorting_params[:sort] : "videos.popularity"
   end
 
   def sort_direction
     %w[asc desc].include?(@sorting_params[:direction]) ? @sorting_params[:direction] : "desc"
+  end
+
+  def filter_column
+    @filtering_params
   end
 
   private
