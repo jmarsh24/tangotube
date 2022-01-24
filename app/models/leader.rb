@@ -1,6 +1,7 @@
 class Leader < ApplicationRecord
   include FullNameable
   include Reviewable
+  include Normalizeable
 
   validates :name, presence: true, uniqueness: true
 
