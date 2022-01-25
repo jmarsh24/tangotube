@@ -31,7 +31,7 @@ export default class extends Controller {
     let directionParam = ['direction', this.directionValue]
     let hdParam = ['hd', this.hdValue]
     let watchedParam = ['watched', this.watchedValue]
-    let extraParams = [sortParam, directionParam, hdParam, watchedParam, userParam]
+    let extraParams = [sortParam, directionParam, hdParam, watchedParam]
 
     extraParams.forEach(element => {
       if (element[1]) {
