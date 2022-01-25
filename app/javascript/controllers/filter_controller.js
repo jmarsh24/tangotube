@@ -5,7 +5,7 @@ import { Turbo } from '@hotwired/turbo-rails'
 
 export default class extends Controller {
   static targets = ['filter']
-  static values = { sort: String, direction: String, hd: String }
+  static values = { sort: String, direction: String, hd: String, watched: String }
 
   filter () {
     const url = `${window.location.pathname}?${this.params}`
@@ -30,7 +30,8 @@ export default class extends Controller {
     let sortParam = ['sort', this.sortValue]
     let directionParam = ['direction', this.directionValue]
     let hdParam = ['hd', this.hdValue]
-    let extraParams = [sortParam, directionParam, hdParam]
+    let watchedParam = ['watched', this.watchedValue]
+    let extraParams = [sortParam, directionParam, hdParam, watchedParam, userParam]
 
     extraParams.forEach(element => {
       if (element[1]) {
