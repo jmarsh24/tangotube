@@ -17,14 +17,14 @@ class Ahoy::Event < AhoyRecord
       .pluck("youtube_id")
     end
 
-    def viewed_by_user(user_id)
-      where("time > ?", 30.days.ago)
-     .where(name: "Video View")
+    def viewed_by_user(user)
+      where(name: "Video View")
+     .where(user_id: user.id)
      .select("properties")
      .group("properties")
-     .having("count(properties) >= ?", MIN_NUMBER_OF_VIEWS)
      .map(&:properties)
-     .pluck("youtube_id")
+     .pluck("video_id")
+     .compact
    end
   end
 end

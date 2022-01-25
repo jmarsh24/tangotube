@@ -98,6 +98,16 @@ class Video < ApplicationRecord
         }
 
   class << self
+
+    def filter_by_watched(boolean, user)
+      case boolean
+      when "true"
+        where(id: Ahoy::Event.viewed_by_user(user))
+      when "false"
+        where.not(id: Ahoy::Event.viewed_by_user(user))
+      end
+    end
+
     # Filters videos by the results from the materialized
     # full text search out of from VideosSearch
     def filter_by_query(query)

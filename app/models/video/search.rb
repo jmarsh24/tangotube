@@ -13,19 +13,21 @@ class Video::Search
   NUMBER_OF_VIDEOS_PER_PAGE = 60
 
   class << self
-    def for(filtering_params:, sorting_params:, page:)
+    def for(filtering_params:, sorting_params:, page:, user:)
       new(
         filtering_params: filtering_params,
         sorting_params: sorting_params,
-        page: page
+        page: page,
+        user: user
       )
     end
   end
 
-  def initialize(filtering_params: {}, sorting_params: {}, page: 1)
+  def initialize(filtering_params: {}, sorting_params: {}, page: 1, user: nil)
     @filtering_params = filtering_params
     @sorting_params = sorting_params
     @page = page
+    @user = user
   end
 
   def videos
@@ -34,7 +36,7 @@ class Video::Search
         .not_hidden
         .includes(:leader, :follower, :channel, :song, :event)
         .order(ordering_params)
-        .filter_videos(@filtering_params)
+        .filter_videos(@filtering_params, @user)
         return @videos unless @filtering_params.empty? && @sorting_params.empty?
         @videos.most_viewed_videos_by_month.has_leader.has_follower
   end
@@ -98,7 +100,7 @@ class Video::Search
       "extract(year from #{table_column})::int AS facet_value, count(#{table_column}) AS occurrences"
     counts =
       Video
-        .filter_videos(@filtering_params)
+        .filter_videos(@filtering_params, @user)
         .not_hidden
         .select(query)
         .group("facet_value")
@@ -112,7 +114,7 @@ class Video::Search
       "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
     counts =
       Video
-        .filter_videos(@filtering_params)
+        .filter_videos(@filtering_params, @user)
         .not_hidden
         .joins(model)
         .select(query)
@@ -129,7 +131,7 @@ class Video::Search
       "#{table_column} AS facet_value, count(#{table_column}) AS occurrences, #{table_column_id} AS facet_id_value"
     counts =
       Video
-        .filter_videos(@filtering_params)
+        .filter_videos(@filtering_params, @user)
         .not_hidden
         .joins(model)
         .select(query)

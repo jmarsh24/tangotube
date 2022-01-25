@@ -11,7 +11,8 @@ class VideosController < ApplicationController
       Video::Search.for(
         filtering_params: filtering_params,
         sorting_params: sorting_params,
-        page: page
+        page: page,
+        user: current_user
       )
   end
 
@@ -21,7 +22,7 @@ class VideosController < ApplicationController
     @video = Video.find_by(youtube_id: show_params[:v])
     set_recommended_videos
     @video.clicked!
-    ahoy.track("Video View", youtube_id: show_params[:v])
+    ahoy.track("Video View", video_id: Video.find_by(youtube_id: show_params[:v]).id )
   end
 
   def update
@@ -86,7 +87,8 @@ class VideosController < ApplicationController
       :query,
       :hd,
       :event_id,
-      :year
+      :year,
+      :watched
     )
   end
 
