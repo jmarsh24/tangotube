@@ -9,16 +9,16 @@ class Video < ApplicationRecord
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
 
-  scope :filter_by_orchestra, ->(song_artist) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
-  scope :filter_by_genre, ->(song_genre) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
-  scope :filter_by_leader, ->(leader) { joins(:leader).where("unaccent(leaders.name) ILIKE unaccent(?)", leader) }
-  scope :filter_by_follower, ->(follower) { joins(:follower).where("unaccent(followers.name) ILIKE unaccent(?)", follower) }
-  scope :filter_by_channel, ->(channel_id) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
-  scope :filter_by_event_id, ->(event_id) { where(event_id: event_id) }
-  scope :filter_by_song_id, ->(song_id) { where(song_id: song_id) }
-  scope :filter_by_hd, ->(boolean) { where(hd: boolean) }
-  scope :filter_by_year,->(year) { where("extract(year from upload_date) = ?", year) }
-  scope :filter_by_performance_year,->(year) { where("extract(year from performance_date) = ?", year) }
+  scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
+  scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
+  scope :filter_by_leader, ->(leader, _user) { joins(:leader).where("unaccent(leaders.name) ILIKE unaccent(?)", leader) }
+  scope :filter_by_follower, ->(follower, _user) { joins(:follower).where("unaccent(followers.name) ILIKE unaccent(?)", follower) }
+  scope :filter_by_channel, ->(channel_id, _user) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
+  scope :filter_by_event_id, ->(event_id, _user) { where(event_id: event_id) }
+  scope :filter_by_song_id, ->(song_id, _user) { where(song_id: song_id) }
+  scope :filter_by_hd, ->(boolean, _user) { where(hd: boolean) }
+  scope :filter_by_year,->(year, _user) { where("extract(year from upload_date) = ?", year) }
+  scope :filter_by_performance_year,->(year, _user) { where("extract(year from performance_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :paginate, ->(page, per_page) { offset(per_page * (page - 1)).limit(per_page) }
