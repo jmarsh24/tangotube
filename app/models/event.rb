@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   def search_title
     return if title.empty?
 
-    @search_title ||= title.split("-")[0].strip
+    @search_title ||= title
   end
 
   def videos_with_event_title_match
@@ -47,11 +47,11 @@ class Event < ApplicationRecord
       end
     end
 
-    def match_all_events
+    def match_all_events(event_id)
       Event
         .all
         .order(:id)
-        .each { |event| MatchEventWorker.perform_async(event.id) }
+        .each { |event| MatchEventWorker.perform_async(event_id) }
     end
   end
 end

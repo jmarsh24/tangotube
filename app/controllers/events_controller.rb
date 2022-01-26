@@ -17,6 +17,7 @@ class EventsController < ApplicationController
                             country: params[:event][:country]
                             )
     if @event.save
+      match_event(@event.id)
       redirect_to root_path,
                   notice:
                     "Event Sucessfully Added"
@@ -25,5 +26,11 @@ class EventsController < ApplicationController
       notice:
         "Event not saved."
     end
+  end
+
+  private
+
+  def match_event(event_id)
+    MatchEventWorker.perform_async(event_id)
   end
 end
