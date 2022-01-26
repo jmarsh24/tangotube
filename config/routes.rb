@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get '/about', to: 'static_pages#about'
     get '/contact', to: 'static_pages#contact'
 
+    resources :cities, only: :index
     resources :channels, only: %i[index create]
     resources :playlists, only: %i[index create]
     resources :videos, except: :show
