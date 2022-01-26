@@ -7,7 +7,7 @@ module Normalizeable
     validates :normalized_name, presence: true, uniqueness: true
 
     def normalize_name
-      self.normalized_name = name.downcase.parameterize(separator: " ")
+      self.normalized_name = full_name.downcase.parameterize(separator: " ")
     end
   end
 end

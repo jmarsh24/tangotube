@@ -27,8 +27,8 @@ Rails.application.routes.draw do
     resources :playlists, only: %i[index create]
     resources :videos, except: :show
     resources :search_suggestions, only: :index
-    resources :leaders, only: :index
-    resources :followers, only: :index
-    resources :events, only: :index
+    resources :leaders, only: %i[index create]
+    resources :followers, only: %i[index create]
+    resources :events, only: %i[index create]
     resources :songs, only: :index
   end
