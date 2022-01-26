@@ -110,7 +110,7 @@ class Video < ApplicationRecord
 
     # Filters videos by the results from the materialized
     # full text search out of from VideosSearch
-    def filter_by_query(query)
+    def filter_by_query(query, _user)
       where(id: VideosSearch.search(query_without_stop_words(query)).select(:video_id))
     end
 
