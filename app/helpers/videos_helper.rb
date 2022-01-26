@@ -112,7 +112,8 @@ module VideosHelper
       "view_count",
       "year",
       "direction",
-      "sort"
+      "sort",
+      "watched"
     )
   end
 end
