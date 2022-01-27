@@ -149,6 +149,7 @@ class Video < ApplicationRecord
     return unless search_string.match?(PERFORMANCE_REGEX)
     performance_array = search_string.match(PERFORMANCE_REGEX)[0].tr("^0-9", " ").split(" ").map(&:to_i)
     return if performance_array.empty?
+    return if performance_array.first > performance_array.second || performance_array.second == 1
     self.performance_number = performance_array.first
     self.performance_total_number = performance_array.second
     save
