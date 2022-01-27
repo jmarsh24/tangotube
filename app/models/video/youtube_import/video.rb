@@ -29,6 +29,9 @@ class Video::YoutubeImport::Video
     if video.song.nil?
       video.grep_title_description_acr_cloud_song
     end
+    if video.performance_number.nil? || video.performance_total_number.nil?
+      video.grep_performance_number
+    end
     rescue ActiveRecord::StatementInvalid, PG::DatetimeFieldOverflow => e
     if e.present?
       video.update(performance_date: nil)
@@ -45,6 +48,9 @@ class Video::YoutubeImport::Video
     rescue ActiveRecord::StatementInvalid, PG::DatetimeFieldOverflow => e
     if e.present?
       video.update(performance_date: nil)
+    end
+    if video.performance_number.nil? || video.performance_total_number.nil?
+      video.grep_performance_number
     end
     rescue Yt::Errors::NoItems => e
     if e.present?
