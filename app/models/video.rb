@@ -1,6 +1,8 @@
 class Video < ApplicationRecord
   include Filterable
 
+  PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
+
   validates :youtube_id, presence: true, uniqueness: true
 
   belongs_to :leader, optional: true, counter_cache: true
@@ -137,6 +139,19 @@ class Video < ApplicationRecord
     self.follower = Follower.all.find { |follower| title.parameterize.match(follower.name.parameterize) }
     save
 
+  end
+
+  def grep_performance_number
+    array = Array.new
+    array << title if title.present?
+    array << description if description.present?
+    search_string = array.join(" ")
+    return unless search_string.match?(PERFORMANCE_REGEX)
+    performance_array = search_string.match(PERFORMANCE_REGEX)[0].tr("^0-9", " ").split(" ").map(&:to_i)
+    return if performance_array.empty?
+    self.performance_number = performance_array.first
+    self.performance_total_number = performance_array.second
+    save
   end
 
   def grep_title_description_acr_cloud_song

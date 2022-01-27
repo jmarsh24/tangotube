@@ -779,7 +779,9 @@ CREATE TABLE public.videos (
     acr_cloud_artist_name_1 character varying,
     acr_cloud_album_name character varying,
     acr_cloud_track_name character varying,
-    performance_date timestamp without time zone
+    performance_date timestamp without time zone,
+    performance_number integer,
+    performance_total_number integer
 );
 
 
@@ -1362,6 +1364,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210606002534'),
 ('20211229163231'),
 ('20220124174633'),
-('20220124180416');
+('20220124180416'),
+('20220127133110');
 
 
