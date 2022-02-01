@@ -11,7 +11,9 @@ class LeadersController < ApplicationController
   end
 
   def create
-    @leader = Leader.create(name: "#{params[:leader][:first_name]} #{params[:leader][:last_name]}", first_name: params[:leader][:first_name], last_name: params[:leader][:last_name])
+    @leader = Leader.create(  name: "#{params[:leader][:first_name]} #{params[:leader][:last_name]}",
+                              first_name: params[:leader][:first_name],
+                              last_name: params[:leader][:last_name])
     fetch_new_leader
 
     redirect_to root_path,
