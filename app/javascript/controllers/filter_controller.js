@@ -5,7 +5,7 @@ import { Turbo } from '@hotwired/turbo-rails'
 
 export default class extends Controller {
   static targets = ['filter']
-  static values = { sort: String, direction: String, hd: String, watched: String }
+  static values = { sort: String, direction: String, hd: String, watched: String, clear: String }
 
   filter () {
     const url = `${window.location.pathname}?${this.params}`
@@ -21,7 +21,11 @@ export default class extends Controller {
     this.setCurrentParams(searchParams)
     this.deleteEmptyParams(searchParams)
 
-    return searchParams.toString()
+    if (searchParams.get("clear") == 1) {
+      return ""}
+    else {
+      return searchParams.toString()
+    }
   }
 
   setCurrentParams (searchParams) {
@@ -31,7 +35,8 @@ export default class extends Controller {
     let directionParam = ['direction', this.directionValue]
     let hdParam = ['hd', this.hdValue]
     let watchedParam = ['watched', this.watchedValue]
-    let extraParams = [sortParam, directionParam, hdParam, watchedParam]
+    let clearParam = ['clear', this.clearValue]
+    let extraParams = [sortParam, directionParam, hdParam, watchedParam, clearParam]
 
     extraParams.forEach(element => {
       if (element[1]) {
