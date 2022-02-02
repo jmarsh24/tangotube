@@ -69,8 +69,7 @@ export default class extends Controller {
           'filter-container',
           'videos',
           'load-more-container',
-          'filter_results',
-          'sort-container',
+          'filter_results'
         ]
 
         replaceContainers.forEach(element => {
