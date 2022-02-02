@@ -66,7 +66,6 @@ export default class extends Controller {
           'load-more-container',
           'filter_results',
           'sort-container',
-          'hd-filter-buttons'
         ]
 
         replaceContainers.forEach(element => {
