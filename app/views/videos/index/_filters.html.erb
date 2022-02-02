@@ -12,7 +12,13 @@
         <% end %>
       </div>
     </div>
-    <%= link_to "Clear", root_path, class: "filter-clear-button" %>
+    <%= button_tag type: "button",
+                          class: "filter-clear-button",
+                          data: { controller: "filter",
+                          action: "filter#filter",
+                                  "filter-clear-value": "1" } do %>
+      Clear
+    <% end %>
   </div>
   <div class="filter-container" data-toggle-target="filter" id="filter-container">
     <%= turbo_frame_tag 'slow-frame', class: "filter-container-upper" do %>
@@ -44,31 +50,31 @@
             Additional Filters
           </label>
           <% if current_user %>
-          <%= button_tag type: "button",
-                        class: "videos-sortable-button",
-                        data: { controller: "filter",
-                        action: "filter#filter",
-                                "filter-watched-value": filtering_params["watched"] == "true" ? 0 : "true" } do %>
-            <% if filtering_params["watched"] == "true" %>
-              <%= content_tag(:b, "Watched") %>
-              <%= fa_icon("times", class: "videos-sortable-icon") %>
-            <% else %>
-              Watched
+            <%= button_tag type: "button",
+                          class: "videos-sortable-button",
+                          data: { controller: "filter",
+                          action: "filter#filter",
+                                  "filter-watched-value": filtering_params["watched"] == "true" ? 0 : "true" } do %>
+              <% if filtering_params["watched"] == "true" %>
+                <%= content_tag(:b, "Watched") %>
+                <%= fa_icon("times", class: "videos-sortable-icon") %>
+              <% else %>
+                Watched
+              <% end %>
+            <% end %>
+            <%= button_tag type: "button",
+                          class: "videos-sortable-button",
+                          data: { controller: "filter",
+                          action: "filter#filter",
+                                  "filter-watched-value": filtering_params["watched"] == "false" ? 0 : "false" } do %>
+              <% if filtering_params["watched"] == "false" %>
+                <%= content_tag(:b, "New To You") %>
+                <%= fa_icon("times", class: "videos-sortable-icon") %>
+              <% else %>
+                New to You
+              <% end %>
             <% end %>
           <% end %>
-          <%= button_tag type: "button",
-                        class: "videos-sortable-button",
-                        data: { controller: "filter",
-                        action: "filter#filter",
-                                "filter-watched-value": filtering_params["watched"] == "false" ? 0 : "false" } do %>
-            <% if filtering_params["watched"] == "false" %>
-              <%= content_tag(:b, "New To You") %>
-              <%= fa_icon("times", class: "videos-sortable-icon") %>
-            <% else %>
-              New to You
-            <% end %>
-          <% end %>
-        <% end %>
           <%= button_tag type: "button",
                         class: "videos-sortable-button",
                         data: { controller: "filter",
