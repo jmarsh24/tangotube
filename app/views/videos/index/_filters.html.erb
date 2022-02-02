@@ -27,25 +27,26 @@
       <%= render partial: "videos/index/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter', width: "250px" } %>
       <%= render partial: "videos/index/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter', width: "200px" } %>
       <%= render partial: "videos/index/filter", locals: { options: @search.years, title: :year, id: 'year-filter', width: "150px" } %>
-      <div class="videos-sortable-container">
-        <label>
-          Sort By
-        </label>
-        <%= sortable 'videos.upload_date', "desc",  "Recent First", @search %>
-        <%= sortable 'videos.upload_date', "asc", "Oldest First", @search %>
-        <%= sortable "videos.view_count", "desc",  "Most Viewed", @search %>
-        <%= sortable "videos.popularity", "desc",  "Most Popular", @search %>
-        <%= sortable "videos.like_count", "desc",  "Most Liked", @search %>
-      </div>
-      <div class="videos-sortable-container">
-        <label>
-          Group By
-        </label>
-        <%= sortable 'songs.title', "asc", "Song", @search %>
-        <%= sortable 'songs.last_name_search', "asc",  "Orchestra", @search %>
-        <%= sortable 'videos.channel_id', "asc",  "Channel", @search %>
-      </div>
-        <div class="videos-sortable-container" id="sort-container">
+      <div class="sorting-container">
+        <div class="videos-sortable-container">
+          <label>
+            Sort By
+          </label>
+          <%= sortable 'videos.upload_date', "desc",  "Recent First", @search %>
+          <%= sortable 'videos.upload_date', "asc", "Oldest First", @search %>
+          <%= sortable "videos.view_count", "desc",  "Most Viewed", @search %>
+          <%= sortable "videos.popularity", "desc",  "Most Popular", @search %>
+          <%= sortable "videos.like_count", "desc",  "Most Liked", @search %>
+        </div>
+        <div class="videos-sortable-container">
+          <label>
+            Group By
+          </label>
+          <%= sortable 'songs.title', "asc", "Song", @search %>
+          <%= sortable 'songs.last_name_search', "asc",  "Orchestra", @search %>
+          <%= sortable 'videos.channel_id', "asc",  "Channel", @search %>
+        </div>
+        <div class="videos-sortable-container">
           <label>
             Additional Filters
           </label>
@@ -88,7 +89,7 @@
             <% end %>
           <% end %>
         </div>
-
+      </div>
     <% end %>
   </div>
 </div>
