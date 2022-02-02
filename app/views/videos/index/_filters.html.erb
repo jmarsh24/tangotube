@@ -6,39 +6,13 @@
                                               class: "filter-button" do %>
         <%= fa_icon "filter 2x", left: true %>Filter
       <% end %>
-      <%= button_tag type: 'button', data: { action: "click->toggle#toggleSort",
-                                              "toggle-target": "sortButton"},
-                                                class: "filter-button" do %>
-        <%= fa_icon "sliders-h 2x", left: true %>Sorting
-      <% end %>
       <div id="filter_results">
         <% if filtering_params.present? %>
           <%= "#{pluralize(number_with_delimiter(@search.videos.size), "Result")} Found" %>
         <% end %>
       </div>
     </div>
-    <div class="filter-hd" id="hd-filter-buttons">
-      <%= button_tag type: "button",
-                    class: "filter-hd-button",
-                    data: { controller: "filter",
-                    action: "filter#filter", "filter-hd-value": "0" } do %>
-        <% if filtering_params["hd"] == "0" || !filtering_params.include?("hd") %>
-          <%= content_tag(:b, "All" ) %>
-        <% else %>
-          All
-        <% end %>
-      <% end %>
-      <%= button_tag type: "button",
-                    class: "filter-hd-button",
-                    data: { controller: "filter",
-                    action: "filter#filter", "filter-hd-value": "1" } do %>
-        <% if filtering_params["hd"] == "1" %>
-          <%= content_tag(:b, "HD") %>
-        <% else %>
-          HD
-        <% end %>
-      <% end %>
-    </div>
+    <%= link_to "Clear", root_path, class: "filter-clear-button" %>
   </div>
   <div class="filter-container" data-toggle-target="filter" id="filter-container">
     <%= turbo_frame_tag 'slow-frame', class: "filter-container-upper" do %>
@@ -47,10 +21,7 @@
       <%= render partial: "videos/index/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter' } %>
       <%= render partial: "videos/index/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter' } %>
       <%= render partial: "videos/index/filter", locals: { options: @search.years, title: :year, id: 'year-filter' } %>
-    <% end %>
-  </div>
-  <div class="sorting-container isHidden" data-toggle-target="sort" id="sort-container">
-    <div class="videos-sortable-container">
+      <div class="videos-sortable-container">
         <label>
           Sort By
         </label>
@@ -59,20 +30,20 @@
         <%= sortable "videos.view_count", "desc",  "Most Viewed", @search %>
         <%= sortable "videos.popularity", "desc",  "Most Popular", @search %>
         <%= sortable "videos.like_count", "desc",  "Most Liked", @search %>
-    </div>
-    <div class="videos-sortable-container">
-      <label>
-        Group By
-      </label>
+      </div>
+      <div class="videos-sortable-container">
+        <label>
+          Group By
+        </label>
         <%= sortable 'songs.title', "asc", "Song", @search %>
         <%= sortable 'songs.last_name_search', "asc",  "Orchestra", @search %>
         <%= sortable 'videos.channel_id', "asc",  "Channel", @search %>
-    </div>
-    <% if current_user %>
-      <div class="videos-sortable-container">
-        <label>
-          Filters for you
-        </label>
+      </div>
+      <% if current_user %>
+        <div class="videos-sortable-container" id="sort-container">
+          <label>
+            Additional Filters
+          </label>
           <%= button_tag type: "button",
                         class: "videos-sortable-button",
                         data: { controller: "filter",
@@ -97,7 +68,20 @@
               New to You
             <% end %>
           <% end %>
-      </div>
-    </div>
-  <% end %>
+          <%= button_tag type: "button",
+                        class: "videos-sortable-button",
+                        data: { controller: "filter",
+                        action: "filter#filter",
+                                "filter-hd-value": filtering_params["hd"] == "1" ? 0 : "1" } do %>
+            <% if filtering_params["hd"] == "1" %>
+              <%= content_tag(:b, "HD") %>
+              <%= fa_icon("times", class: "videos-sortable-icon") %>
+            <% else %>
+              HD
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
