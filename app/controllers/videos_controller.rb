@@ -73,7 +73,12 @@ class VideosController < ApplicationController
   def video_params
     params
       .require(:video)
-      .permit(:leader_id, :follower_id, :song_id, :event_id, :hidden, :id)
+      .permit(:leader_id,
+              :follower_id,
+              :song_id,
+              :event_id,
+              :hidden,
+              :id)
   end
 
   def filtering_params
