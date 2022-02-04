@@ -46,20 +46,35 @@ class VideosController < ApplicationController
   end
 
   def set_recommended_videos
-    videos =
-      if Video.where(song_id: @video.song_id).size > 3
-        Video.where(song_id: @video.song_id)
-      else
-        Video.where(channel_id: @video.channel_id)
-      end
+    videos_from_this_performance
+    videos_with_same_song
+    videos_with_same_channel
+  end
 
-    @recommended_videos =
-      videos
-        .where(hidden: false)
-        .where
-        .not(youtube_id: @video.youtube_id)
-        .order("popularity DESC")
-        .limit(3)
+  def videos_from_this_performance
+    @videos_from_this_performance = Video.where("upload_date <= ?", @video.upload_date + 7.days)
+                                         .where("upload_date >= ?", @video.upload_date - 7.days)
+                                         .where(leader_id: @video.leader_id)
+                                         .where(follower_id: @video.follower_id)
+                                         .order("performance_number ASC")
+                                         .where(hidden: false)
+                                         .where
+                                         .not(youtube_id: @video.youtube_id)
+                                         .limit(8)
+  end
+
+  def videos_with_same_song
+    @videos_with_same_song = Video.where(song_id: @video.song_id)
+                                  .where(hidden: false)
+                                  .where.not(youtube_id: @video.youtube_id)
+                                  .limit(8)
+  end
+
+  def videos_with_same_channel
+    @videos_with_same_channel = Video.where(channel_id: @video.channel_id)
+                                  .where(hidden: false)
+                                  .where.not(youtube_id: @video.youtube_id)
+                                  .limit(8)
   end
 
   def current_search
