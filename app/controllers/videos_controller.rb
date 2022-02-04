@@ -67,11 +67,13 @@ class VideosController < ApplicationController
 
   def videos_with_same_event
     @videos_with_same_event = Video.where(event_id: @video.event_id)
+                                   .where.not(event: nil)
                                    .where("upload_date <= ?", @video.upload_date + 7.days)
                                    .where("upload_date >= ?", @video.upload_date - 7.days)
                                    .where(hidden: false)
                                    .where.not(youtube_id: @video.youtube_id)
                                    .limit(8)
+    @videos_with_same_event = @videos_with_same_event - @videos_from_this_performance
   end
 
   def videos_with_same_song
