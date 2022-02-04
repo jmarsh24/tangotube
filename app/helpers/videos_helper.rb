@@ -97,7 +97,7 @@ module VideosHelper
 
   def video_query_params
     request.params.slice(
-      "channel_id",
+      "channel",
       "event_id",
       "follower",
       "genre",

@@ -38,7 +38,9 @@ class Video::Search
         .order(ordering_params)
         .filter_videos(@filtering_params, @user)
         return @videos unless @filtering_params.empty? && @sorting_params.empty?
-        @videos.most_viewed_videos_by_month.has_leader.has_follower
+    @videos.most_viewed_videos_by_month
+           .has_leader
+           .has_follower
   end
 
   def paginated_videos
