@@ -47,6 +47,7 @@ class VideosController < ApplicationController
 
   def set_recommended_videos
     videos_from_this_performance
+    videos_with_same_event
     videos_with_same_song
     videos_with_same_channel
   end
@@ -62,6 +63,15 @@ class VideosController < ApplicationController
                                          .where
                                          .not(youtube_id: @video.youtube_id)
                                          .limit(8)
+  end
+
+  def videos_with_same_event
+    @videos_with_same_event = Video.where(event_id: @video.event_id)
+                                   .where("upload_date <= ?", @video.upload_date + 7.days)
+                                   .where("upload_date >= ?", @video.upload_date - 7.days)
+                                   .where(hidden: false)
+                                   .where.not(youtube_id: @video.youtube_id)
+                                   .limit(8)
   end
 
   def videos_with_same_song
