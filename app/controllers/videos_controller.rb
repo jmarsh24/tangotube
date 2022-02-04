@@ -54,6 +54,7 @@ class VideosController < ApplicationController
   def videos_from_this_performance
     @videos_from_this_performance = Video.where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
+                                         .where(channel_id: @video.channel_id)
                                          .where(leader_id: @video.leader_id)
                                          .where(follower_id: @video.follower_id)
                                          .order("performance_number ASC")
