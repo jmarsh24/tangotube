@@ -7,10 +7,14 @@
 
 <%= render 'shared/header' %>
 <div class="video-responsive-background">
-  <div class="video-responsive-container">
-    <div class="video-responsive">
-      <iframe src="https://www.youtube.com/embed/<%= @video.youtube_id %>?rel=0&modestbranding=1&autoplay=1" allowfullscreen>
-      </iframe>
+  <div class="video-responsive-container" data-controller="youtube">
+    <div class="plyr__video-embed" data-youtube-target="frame">
+      <iframe
+        src="https://www.youtube.com/embed/<%= @video.youtube_id %>?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+        allowfullscreen
+        allowtransparency
+        allow="autoplay"
+      ></iframe>
     </div>
   </div>
 </div>
