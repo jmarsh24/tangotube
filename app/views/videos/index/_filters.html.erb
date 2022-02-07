@@ -22,11 +22,13 @@
   </div>
   <div class="filter-container" data-toggle-target="filter" id="filter-container">
     <%= turbo_frame_tag 'slow-frame', class: "filter-container-upper" do %>
-      <%= render partial: "videos/index/filter", locals: { options: @search.genres, title: :genre, id: 'genre-filter', width: "150px" } %>
-      <%= render partial: "videos/index/filter", locals: { options: @search.leaders, title: :leader, id: 'leader-filter', width: "250px" } %>
-      <%= render partial: "videos/index/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter', width: "250px" } %>
-      <%= render partial: "videos/index/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter', width: "250px" } %>
-      <%= render partial: "videos/index/filter", locals: { options: @search.years, title: :year, id: 'year-filter', width: "150px" } %>
+      <div class="filters">
+        <%= render partial: "videos/index/filter", locals: { options: @search.genres, title: :genre, id: 'genre-filter', width: "150px" } %>
+        <%= render partial: "videos/index/filter", locals: { options: @search.leaders, title: :leader, id: 'leader-filter', width: "250px" } %>
+        <%= render partial: "videos/index/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter', width: "250px" } %>
+        <%= render partial: "videos/index/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter', width: "250px" } %>
+        <%= render partial: "videos/index/filter", locals: { options: @search.years, title: :year, id: 'year-filter', width: "150px" } %>
+      </div>
       <div class="sorting-container">
         <div class="videos-sortable-container">
           <label>
