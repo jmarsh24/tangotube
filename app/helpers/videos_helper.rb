@@ -57,7 +57,13 @@ module VideosHelper
   end
 
   def formatted_metadata(video)
-    "#{formatted_upload_date(video.upload_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes"
+    "#{formatted_upload_date(video.upload_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes #{performance_number(video)}"
+  end
+
+  def performance_number(video)
+    if video.performance_number.present? & video.performance_total_number.present?
+      " • #{video.performance_number} / #{video.performance_total_number}"
+    end
   end
 
   def hd_duration_data(video)
