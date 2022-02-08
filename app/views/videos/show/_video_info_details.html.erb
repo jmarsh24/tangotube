@@ -11,7 +11,7 @@
                                         root_path(follower: @video.follower.name), {'data-turbo-frame': "_top"}) } if @video.follower.present? %>
   </div>
 <% end %>
-<% if @video.event.present? %>
+<% if @video.event.present? || @video.performance_date.present? || @video.performance_number.present? || @video.performance_total_number.present? %>
   <div class="detail-section-label">
     <h4>Event Info</h4>
   </div>
@@ -21,6 +21,15 @@
   <%= render partial: "videos/show/video_info_item",
                           locals: { header: "Location",
                           value:  "#{@video.event.city.to_s.titleize}, #{@video.event.country.to_s.titleize}" } %>
+  <%= render partial: "videos/show/video_info_item",
+                      locals: { header: "Performance Date",
+                      value: @video.performance_date.strftime('%B %d, %Y') }if @video.performance_date.present? %>
+  <%= render partial: "videos/show/video_info_item",
+                    locals: { header: "Performance Number",
+                    value: @video.performance_number } if @video.performance_number.present? %>
+  <%= render partial: "videos/show/video_info_item",
+                  locals: { header: "Performance Total Number",
+                  value: @video.performance_total_number } if @video.performance_number.present? %>
 <% end %>
 <% if @video.song.present? || @video.spotify_track_name.present? || @video.youtube_song.present? %>
   <div class="detail-section-label">

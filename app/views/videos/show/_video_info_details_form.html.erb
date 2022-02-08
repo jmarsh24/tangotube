@@ -24,6 +24,36 @@
                             f: f,
                             url: '/events.json',
                             value: @video.event.try(:title) } %>
+    <div class="attribute-row">
+      <div class="attribute-label">
+        <label>
+          Date
+        </label>
+      </div>
+      <div class="attribute-value">
+        <%= f.date_field(:performance_date, as: :date, value: @video.performance_date) %>
+      </div>
+    </div>
+    <div class="attribute-row">
+      <div class="attribute-label">
+        <label>
+          Performance Number
+        </label>
+      </div>
+      <div class="attribute-value">
+        <%= f.select(:performance_number, (1..8), value: @video.performance_number) %>
+      </div>
+    </div>
+    <div class="attribute-row">
+      <div class="attribute-label">
+        <label>
+          Performance Total Number
+        </label>
+      </div>
+      <div class="attribute-value">
+        <%= f.select(:performance_total_number, (1..8), value: @video.performance_total_number) %>
+      </div>
+    </div>
     <h4>Music</h4>
   </div>
   <%= render partial: "videos/edit/video_info_detail_item_edit",
