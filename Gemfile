@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 
-ruby "3.0.3"
+ruby "3.0.1"
 
 # gems that ship with rails...........................................................
-# gem "bootsnap", "1.4.6", require: false
+gem "bootsnap", "1.4.6", require: false
 gem "spring", "2.1.0"
 gem "rails", "~> 6.1"
 gem "redis", "~> 4.2", ">= 4.2.5"
