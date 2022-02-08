@@ -105,7 +105,7 @@ class Video::YoutubeImport::Video
     performance_date = Date.parse(@youtube_video.description) || Date.parse(@youtube_video.title)
     rescue Date::Error, RangeError => e
       if e.present?
-        performance_date = @youtube_video.published_at if @youtube_video.performance_date.nil?
+        performance_date = @youtube_video.published_at if performance_date.nil?
       end
     performance_date
   end
