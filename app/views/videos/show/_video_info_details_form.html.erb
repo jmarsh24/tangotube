@@ -31,7 +31,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.date_select(:performance_date, start_year: 1980, end_year: Time.now.year, selected: @video.performance_date ) %>
+        <%= f.date_select(:performance_date, { start_year: 1980, end_year: Time.now.year, order: [:month, :day, :year], prompt: { day: 'Select Day', month: 'Select Month', year: 'Select Year' } }, selected: @video.performance_date ) %>
       </div>
     </div>
     <div class="attribute-row">
@@ -41,7 +41,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.select(:performance_number, (1..8), { value: @video.performance_number, include_blank: true }) %>
+        <%= f.select(:performance_number, (1..8), { value: @video.performance_number, prompt: "Select Performance Number" }) %>
       </div>
     </div>
     <div class="attribute-row">
@@ -51,7 +51,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.select(:performance_total_number, (1..8), { value: @video.performance_total_number, include_blank: true }) %>
+        <%= f.select(:performance_total_number, (1..8), { value: @video.performance_total_number, prompt: "Select Total Number of Performance" }) %>
       </div>
     </div>
     <h4>Music</h4>

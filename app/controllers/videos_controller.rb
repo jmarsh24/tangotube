@@ -108,9 +108,9 @@ class VideosController < ApplicationController
               :song_id,
               :event_id,
               :hidden,
-              :'performance_date(1i)',
-              :'performance_date(2i)',
-              :'performance_date(3i)',
+              :"performance_date(1i)",
+              :"performance_date(2i)",
+              :"performance_date(3i)",
               :performance_number,
               :performance_total_number,
               :id)
