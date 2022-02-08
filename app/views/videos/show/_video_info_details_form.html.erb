@@ -31,7 +31,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.date_field(:performance_date, :value => @video.performance_date.strftime('%Y-%m-%d') if @video.performance_date.present? ) %>
+        <%= f.date_select(:performance_date, as: :date, selected: @video.performance_date ) %>
       </div>
     </div>
     <div class="attribute-row">
