@@ -121,139 +121,6 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: action_text_rich_texts; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.action_text_rich_texts (
-    id bigint NOT NULL,
-    name character varying NOT NULL,
-    body text,
-    record_type character varying NOT NULL,
-    record_id bigint NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: action_text_rich_texts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.action_text_rich_texts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: action_text_rich_texts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.action_text_rich_texts_id_seq OWNED BY public.action_text_rich_texts.id;
-
-
---
--- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.active_storage_attachments (
-    id bigint NOT NULL,
-    name character varying NOT NULL,
-    record_type character varying NOT NULL,
-    record_id bigint NOT NULL,
-    blob_id bigint NOT NULL,
-    created_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: active_storage_attachments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.active_storage_attachments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_storage_attachments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.active_storage_attachments_id_seq OWNED BY public.active_storage_attachments.id;
-
-
---
--- Name: active_storage_blobs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.active_storage_blobs (
-    id bigint NOT NULL,
-    key character varying NOT NULL,
-    filename character varying NOT NULL,
-    content_type character varying,
-    metadata text,
-    service_name character varying NOT NULL,
-    byte_size bigint NOT NULL,
-    checksum character varying NOT NULL,
-    created_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: active_storage_blobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.active_storage_blobs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_storage_blobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.active_storage_blobs_id_seq OWNED BY public.active_storage_blobs.id;
-
-
---
--- Name: active_storage_variant_records; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.active_storage_variant_records (
-    id bigint NOT NULL,
-    blob_id bigint NOT NULL,
-    variation_digest character varying NOT NULL
-);
-
-
---
--- Name: active_storage_variant_records_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.active_storage_variant_records_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_storage_variant_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.active_storage_variant_records_id_seq OWNED BY public.active_storage_variant_records.id;
-
-
---
 -- Name: admin_users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -579,37 +446,6 @@ ALTER SEQUENCE public.playlists_id_seq OWNED BY public.playlists.id;
 
 
 --
--- Name: posts; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.posts (
-    id bigint NOT NULL,
-    title character varying,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.posts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.posts_id_seq OWNED BY public.posts.id;
-
-
---
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -706,7 +542,13 @@ CREATE TABLE public.users (
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    name character varying,
+    first_name character varying,
+    last_name character varying,
+    image character varying,
+    uid character varying,
+    provider character varying
 );
 
 
@@ -773,13 +615,13 @@ CREATE TABLE public.videos (
     event_id bigint,
     scanned_youtube_music boolean DEFAULT false,
     click_count integer DEFAULT 0,
-    spotify_artist_id_1 character varying,
-    spotify_artist_name_1 character varying,
     acr_cloud_artist_name character varying,
     acr_cloud_artist_name_1 character varying,
     acr_cloud_album_name character varying,
     acr_cloud_track_name character varying,
     performance_date timestamp without time zone,
+    spotify_artist_id_1 character varying,
+    spotify_artist_name_1 character varying,
     performance_number integer,
     performance_total_number integer
 );
@@ -817,34 +659,6 @@ CREATE MATERIALIZED VIEW public.videos_searches AS
      LEFT JOIN public.leaders ON ((leaders.id = videos.leader_id)))
      LEFT JOIN public.songs ON ((songs.id = videos.song_id)))
   WITH NO DATA;
-
-
---
--- Name: action_text_rich_texts id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.action_text_rich_texts ALTER COLUMN id SET DEFAULT nextval('public.action_text_rich_texts_id_seq'::regclass);
-
-
---
--- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_storage_attachments ALTER COLUMN id SET DEFAULT nextval('public.active_storage_attachments_id_seq'::regclass);
-
-
---
--- Name: active_storage_blobs id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_storage_blobs ALTER COLUMN id SET DEFAULT nextval('public.active_storage_blobs_id_seq'::regclass);
-
-
---
--- Name: active_storage_variant_records id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAULT nextval('public.active_storage_variant_records_id_seq'::regclass);
 
 
 --
@@ -904,13 +718,6 @@ ALTER TABLE ONLY public.playlists ALTER COLUMN id SET DEFAULT nextval('public.pl
 
 
 --
--- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
-
-
---
 -- Name: search_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -936,38 +743,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 ALTER TABLE ONLY public.videos ALTER COLUMN id SET DEFAULT nextval('public.videos_id_seq'::regclass);
-
-
---
--- Name: action_text_rich_texts action_text_rich_texts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.action_text_rich_texts
-    ADD CONSTRAINT action_text_rich_texts_pkey PRIMARY KEY (id);
-
-
---
--- Name: active_storage_attachments active_storage_attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_storage_attachments
-    ADD CONSTRAINT active_storage_attachments_pkey PRIMARY KEY (id);
-
-
---
--- Name: active_storage_blobs active_storage_blobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_storage_blobs
-    ADD CONSTRAINT active_storage_blobs_pkey PRIMARY KEY (id);
-
-
---
--- Name: active_storage_variant_records active_storage_variant_records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_storage_variant_records
-    ADD CONSTRAINT active_storage_variant_records_pkey PRIMARY KEY (id);
 
 
 --
@@ -1027,14 +802,6 @@ ALTER TABLE ONLY public.playlists
 
 
 --
--- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.posts
-    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
-
-
---
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1072,41 +839,6 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.videos
     ADD CONSTRAINT videos_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_action_text_rich_texts_uniqueness; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_action_text_rich_texts_uniqueness ON public.action_text_rich_texts USING btree (record_type, record_id, name);
-
-
---
--- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_active_storage_attachments_on_blob_id ON public.active_storage_attachments USING btree (blob_id);
-
-
---
--- Name: index_active_storage_attachments_uniqueness; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON public.active_storage_attachments USING btree (record_type, record_id, name, blob_id);
-
-
---
--- Name: index_active_storage_blobs_on_key; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_blobs USING btree (key);
-
-
---
--- Name: index_active_storage_variant_records_uniqueness; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.active_storage_variant_records USING btree (blob_id, variation_digest);
 
 
 --
@@ -1166,6 +898,13 @@ CREATE UNIQUE INDEX index_ahoy_visits_on_visit_token ON public.ahoy_visits USING
 
 
 --
+-- Name: index_channels_on_title; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_channels_on_title ON public.channels USING btree (title);
+
+
+--
 -- Name: index_events_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1215,6 +954,13 @@ CREATE INDEX index_songs_on_genre ON public.songs USING btree (genre);
 
 
 --
+-- Name: index_songs_on_last_name_search; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_songs_on_last_name_search ON public.songs USING btree (last_name_search);
+
+
+--
 -- Name: index_songs_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1233,6 +979,20 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: index_videos_on_acr_cloud_artist_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_acr_cloud_artist_name ON public.videos USING btree (acr_cloud_artist_name);
+
+
+--
+-- Name: index_videos_on_acr_cloud_track_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_acr_cloud_track_name ON public.videos USING btree (acr_cloud_track_name);
 
 
 --
@@ -1257,6 +1017,20 @@ CREATE INDEX index_videos_on_follower_id ON public.videos USING btree (follower_
 
 
 --
+-- Name: index_videos_on_hd; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_hd ON public.videos USING btree (hd);
+
+
+--
+-- Name: index_videos_on_hidden; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_hidden ON public.videos USING btree (hidden);
+
+
+--
 -- Name: index_videos_on_leader_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1271,6 +1045,13 @@ CREATE INDEX index_videos_on_performance_date ON public.videos USING btree (perf
 
 
 --
+-- Name: index_videos_on_popularity; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_popularity ON public.videos USING btree (popularity);
+
+
+--
 -- Name: index_videos_on_song_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1278,10 +1059,59 @@ CREATE INDEX index_videos_on_song_id ON public.videos USING btree (song_id);
 
 
 --
+-- Name: index_videos_on_spotify_artist_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_spotify_artist_name ON public.videos USING btree (spotify_artist_name);
+
+
+--
+-- Name: index_videos_on_spotify_track_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_spotify_track_name ON public.videos USING btree (spotify_track_name);
+
+
+--
+-- Name: index_videos_on_tags; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_tags ON public.videos USING btree (tags);
+
+
+--
+-- Name: index_videos_on_upload_date; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_upload_date ON public.videos USING btree (upload_date);
+
+
+--
+-- Name: index_videos_on_view_count; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_view_count ON public.videos USING btree (view_count);
+
+
+--
+-- Name: index_videos_on_youtube_artist; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_youtube_artist ON public.videos USING btree (youtube_artist);
+
+
+--
 -- Name: index_videos_on_youtube_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_videos_on_youtube_id ON public.videos USING btree (youtube_id);
+
+
+--
+-- Name: index_videos_on_youtube_song; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_videos_on_youtube_song ON public.videos USING btree (youtube_song);
 
 
 --
@@ -1308,22 +1138,6 @@ ALTER TABLE ONLY public.videos
 
 
 --
--- Name: active_storage_variant_records fk_rails_993965df05; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_storage_variant_records
-    ADD CONSTRAINT fk_rails_993965df05 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
-
-
---
--- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_storage_attachments
-    ADD CONSTRAINT fk_rails_c3b3935057 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
-
-
---
 -- Name: playlists fk_rails_d67ef1eb45; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1338,8 +1152,71 @@ ALTER TABLE ONLY public.playlists
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('0'),
-('1'),
+('20200702183140'),
+('20200703195144'),
+('20200703210522'),
+('20200705212132'),
+('20200705213652'),
+('20200706151719'),
+('20200707071332'),
+('20200714163153'),
+('20200717075238'),
+('20200721213201'),
+('20200724111424'),
+('20200726121535'),
+('20200727180548'),
+('20200728084042'),
+('20200728084051'),
+('20200728085020'),
+('20200728085048'),
+('20200907014655'),
+('20201019230928'),
+('20201102165536'),
+('20201102165548'),
+('20201102165631'),
+('20201104112926'),
+('20201128194419'),
+('20201128214542'),
+('20201128222120'),
+('20201207145709'),
+('20201208083012'),
+('20201212174857'),
+('20201219105757'),
+('20201220175426'),
+('20201220232439'),
+('20201223085023'),
+('20201223085038'),
+('20201229202305'),
+('20201231063836'),
+('20201231101018'),
+('20210103161704'),
+('20210104081821'),
+('20210104100230'),
+('20210107195638'),
+('20210109154316'),
+('20210110182117'),
+('20210112175659'),
+('20210112185333'),
+('20210115171517'),
+('20210116124900'),
+('20210116154216'),
+('20210116203557'),
+('20210117064902'),
+('20210117065523'),
+('20210117065539'),
+('20210118123830'),
+('20210124151237'),
+('20210124180841'),
+('20210127131318'),
+('20210201102317'),
+('20210205075009'),
+('20210206151011'),
+('20210206172109'),
+('20210206223104'),
+('20210207085038'),
+('20210207115746'),
+('20210210140250'),
+('20210211153442'),
 ('20210306201925'),
 ('20210308100534'),
 ('20210309200926'),
@@ -1349,22 +1226,22 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210309223000'),
 ('20210309223723'),
 ('20210309233622'),
-('20210312174239'),
 ('20210315153437'),
+('20210426184554'),
+('20210426185440'),
+('20210426205241'),
 ('20210428220252'),
 ('20210530040913'),
 ('20210530041239'),
 ('20210530041330'),
 ('20210530043025'),
 ('20210530061929'),
-('20210604212922'),
-('20210604213138'),
-('20210604213139'),
 ('20210605102713'),
 ('20210606002534'),
 ('20211229163231'),
 ('20220124174633'),
 ('20220124180416'),
-('20220127133110');
+('20220127133110'),
+('20220208010324');
 
 
