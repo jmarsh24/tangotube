@@ -19,6 +19,6 @@
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
-  <%= button_to "Sign In With Github", user_github_omniauth_authorize_path, "data-turbo": false %>
-  <%= button_to "Sign In With Google", user_google_oauth2_omniauth_authorize_path, "data-turbo": false %>
+  <%= button_to "Sign In With Github", user_github_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." } %>
+  <%= button_to "Sign In With Google", user_google_oauth2_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." } %>
 <% end %>
