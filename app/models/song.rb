@@ -28,9 +28,9 @@ class Song < ApplicationRecord
         combined_scope
           .where(
             "unaccent(songs.title) ILIKE unaccent(:query) OR
-                              unaccent(regexp_replace(artist, '''', '', 'g')) ILIKE unaccent(:query) OR
-                              unaccent(genre) ILIKE unaccent(:query) OR
-                              unaccent(artist) ILIKE unaccent(:query)",
+              unaccent(regexp_replace(artist, '''', '', 'g')) ILIKE unaccent(:query) OR
+              unaccent(genre) ILIKE unaccent(:query) OR
+              unaccent(artist) ILIKE unaccent(:query)",
             query: "%#{word}%"
           )
           .references(:song)
