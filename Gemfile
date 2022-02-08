@@ -22,6 +22,7 @@ gem "font-awesome-rails", "~> 4.7", ">= 4.7.0.5"
 gem "hashie", "~> 4.1"
 gem "hotwire-rails", "~> 0.1.3"
 gem "nokogiri", "~> 1.10", ">= 1.10.10"
+gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem "prettier", "~> 1.5"
