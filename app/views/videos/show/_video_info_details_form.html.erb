@@ -31,7 +31,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.date_select(:performance_date, as: :date, selected: @video.performance_date ) %>
+        <%= f.date_select(:performance_date, start_year: 1980, end_year: Time.now.year, selected: @video.performance_date ) %>
       </div>
     </div>
     <div class="attribute-row">
