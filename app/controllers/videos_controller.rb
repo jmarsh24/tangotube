@@ -22,7 +22,7 @@ class VideosController < ApplicationController
     @video = Video.find_by(youtube_id: show_params[:v])
     set_recommended_videos
     @video.clicked!
-    UpdateVideoWorker.performance_asnyc(@video.youtube_id)
+    UpdateVideoWorker.perform_async(@video.youtube_id)
     ahoy.track("Video View", video_id: Video.find_by(youtube_id: show_params[:v]).id )
   end
 
