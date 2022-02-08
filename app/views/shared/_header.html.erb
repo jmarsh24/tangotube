@@ -27,7 +27,7 @@
       </div>
     <nav id="Login">
       <% if user_signed_in? %>
-        <strong><%= current_user.name %></strong>
+        <strong><%= current_user.name if current_user.name? %></strong>
         <%= image_tag current_user.image, size: "30x30" if current_user.image? %>
         <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
         <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
