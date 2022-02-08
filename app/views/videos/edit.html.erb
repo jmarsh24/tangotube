@@ -5,13 +5,28 @@
       <div class="video-info-details-main">
         <%= render partial: "videos/show/video_info_details_form" %>
       </div>
-        <% if @video.song.present? %>
-          <% if @video.song.lyrics.present? %>
-            <%= render partial: "videos/show/lyrics" %>
-          <% end %>
+      <% if @video.song.present? %>
+        <% if @video.song.lyrics.present? %>
+          <%= render partial: "videos/show/lyrics" %>
         <% end %>
+      <% end %>
       <div class="recommended-videos-section">
-        <%= render partial: "videos/show/recommended_videos" %>
+        <% unless @videos_from_this_performance.empty? %>
+          <h2>This Performance</h2>
+          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance } %>
+        <% end %>
+        <% unless @videos_with_same_event.empty? %>
+          <h2>This Event</h2>
+          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event } %>
+        <% end %>
+        <% unless @videos_with_same_song.empty? %>
+          <h2>This Song</h2>
+          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song } %>
+        <% end %>
+        <% unless @videos_with_same_channel.empty? %>
+          <h2>This Channel</h2>
+          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel } %>
+        <% end %>
       </div>
     </div>
   </div>
