@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :users
     end
 
-    devise_for :users
+    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
     authenticate :admin_user do
       mount Sidekiq::Web => '/admin/sidekiq'
@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     get '/about', to: 'static_pages#about'
     get '/contact', to: 'static_pages#contact'
 
-    resources :cities, only: :index
     resources :channels, only: %i[index create]
     resources :playlists, only: %i[index create]
     resources :videos, except: :show
