@@ -31,7 +31,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.date_field(:performance_date, as: :date, value: @video.performance_date) %>
+        <%= f.date_field(:performance_date, @video.performance_date.strftime('%Y-%m-%d') if @video.performance_date.present? ) %>
       </div>
     </div>
     <div class="attribute-row">
@@ -41,7 +41,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.select(:performance_number, (1..8), value: @video.performance_number) %>
+        <%= f.select(:performance_number, (1..8), { value: @video.performance_number, include_blank: true }) %>
       </div>
     </div>
     <div class="attribute-row">
@@ -51,7 +51,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.select(:performance_total_number, (1..8), value: @video.performance_total_number) %>
+        <%= f.select(:performance_total_number, (1..8), { value: @video.performance_total_number, include_blank: true }) %>
       </div>
     </div>
     <h4>Music</h4>
