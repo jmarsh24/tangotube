@@ -39,6 +39,7 @@ gem "turbo-rails", "~> 0.5.8"
 
 group :development, :test do
   gem "amazing_print", "~> 1.2", ">= 1.2.2"
+  gem "dotenv-rails", "~> 2.7"
   gem "factory_bot_rails", "~> 6.1"
   gem "faker", "~> 2.16"
   gem "rspec-rails", "~> 4.0"
@@ -66,5 +67,3 @@ group :test do
   gem "vcr", "~> 6.0"
   gem "webmock", "~> 3.12"
 end
-
-
