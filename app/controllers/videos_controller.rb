@@ -116,11 +116,6 @@ class VideosController < ApplicationController
               :id)
   end
 
-  def video_performance_date_params
-    params
-      .require(:video)
-  end
-
   def filtering_params
     params.permit(
       :leader,
