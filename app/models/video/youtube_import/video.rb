@@ -90,9 +90,15 @@ class Video::YoutubeImport::Video
       view_count: @youtube_video.view_count,
       favorite_count: @youtube_video.favorite_count,
       comment_count: @youtube_video.comment_count,
-      like_count: @youtube_video.like_count,
+      like_count: like_count,
       dislike_count: @youtube_video.dislike_count
     }
+  end
+
+  def like_count
+    like_count = @youtube_video.like_count
+    like_count = 0 if like_count.nil?
+    like_count
   end
 
   def performance_date
