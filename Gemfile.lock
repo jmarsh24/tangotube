@@ -232,6 +232,10 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
+    nokogiri (1.12.5-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
+      racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -531,7 +535,7 @@ DEPENDENCIES
   yt (~> 0.32.0)
 
 RUBY VERSION
-   ruby 3.0.3p157
+   ruby 3.0.1p64
 
 BUNDLED WITH
    2.2.32
