@@ -17,10 +17,10 @@
   </div>
   <%= render partial: "videos/show/video_info_item",
                           locals: { header: "Title",
-                          value:  link_to(@video.event.title.to_s.titleize, root_path(event_id: @video.event.id), {'data-turbo-frame': "_top"}) } %>
+                          value:  link_to(@video.event.title.to_s.titleize, root_path(event_id: @video.event.id), {'data-turbo-frame': "_top"}) } if @video.event.present? %>
   <%= render partial: "videos/show/video_info_item",
                           locals: { header: "Location",
-                          value:  "#{@video.event.city.to_s.titleize}, #{@video.event.country.to_s.titleize}" } %>
+                          value:  "#{@video.event.city.to_s.titleize}, #{@video.event.country.to_s.titleize}" } if @video.event.present? %>
   <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Performance Date",
                       value: @video.performance_date.strftime('%B %d, %Y') }if @video.performance_date.present? %>
