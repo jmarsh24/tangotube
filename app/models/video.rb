@@ -188,4 +188,8 @@ class Video < ApplicationRecord
     increment(:popularity)
     save!
   end
+
+  def update
+    YoutubeImport::Video.update(youtube_id)
+  end
 end
