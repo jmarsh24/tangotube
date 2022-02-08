@@ -4,7 +4,7 @@ class Video::YoutubeImport::Video
       new(youtube_id).import
     end
 
-    def update(youtube_id)
+    def \
       new(youtube_id).update
     end
   end
@@ -105,7 +105,7 @@ class Video::YoutubeImport::Video
     performance_date = Date.parse(@youtube_video.description) || Date.parse(@youtube_video.title)
     rescue Date::Error, RangeError => e
       if e.present?
-        performance_date = nil
+        performance_date = @youtube_video.published_at
       end
     performance_date
   end
