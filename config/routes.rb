@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :users
     end
 
-    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', confirmations: 'confirmations' }
 
     resources :deletion_requests, only: [:show] do
       collection do
