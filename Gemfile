@@ -25,6 +25,7 @@ gem "nokogiri", "~> 1.10", ">= 1.10.10"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
+gem "patreon", "~> 0.5.0"
 gem "prettier", "~> 1.5"
 gem "pg_search", "~> 2.3", ">= 2.3.5"
 gem "rails_autolink", "~> 1.1"
