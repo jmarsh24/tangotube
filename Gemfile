@@ -22,6 +22,9 @@ gem "font-awesome-rails", "~> 4.7", ">= 4.7.0.5"
 gem "hashie", "~> 4.1"
 gem "hotwire-rails", "~> 0.1.3"
 gem "nokogiri", "~> 1.10", ">= 1.10.10"
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
 gem "prettier", "~> 1.5"
 gem "pg_search", "~> 2.3", ">= 2.3.5"
 gem "rails_autolink", "~> 1.1"
