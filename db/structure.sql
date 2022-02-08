@@ -293,6 +293,39 @@ ALTER SEQUENCE public.channels_id_seq OWNED BY public.channels.id;
 
 
 --
+-- Name: deletion_requests; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.deletion_requests (
+    id bigint NOT NULL,
+    provider character varying,
+    uid character varying,
+    pid character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: deletion_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.deletion_requests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: deletion_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.deletion_requests_id_seq OWNED BY public.deletion_requests.id;
+
+
+--
 -- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -690,6 +723,13 @@ ALTER TABLE ONLY public.channels ALTER COLUMN id SET DEFAULT nextval('public.cha
 
 
 --
+-- Name: deletion_requests id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.deletion_requests ALTER COLUMN id SET DEFAULT nextval('public.deletion_requests_id_seq'::regclass);
+
+
+--
 -- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -767,6 +807,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.channels
     ADD CONSTRAINT channels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: deletion_requests deletion_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.deletion_requests
+    ADD CONSTRAINT deletion_requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -902,6 +950,13 @@ CREATE UNIQUE INDEX index_ahoy_visits_on_visit_token ON public.ahoy_visits USING
 --
 
 CREATE INDEX index_channels_on_title ON public.channels USING btree (title);
+
+
+--
+-- Name: index_deletion_requests_on_pid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_deletion_requests_on_pid ON public.deletion_requests USING btree (pid);
 
 
 --
@@ -1242,6 +1297,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220124174633'),
 ('20220124180416'),
 ('20220127133110'),
-('20220208010324');
+('20220208010324'),
+('20220208130431');
 
 
