@@ -3,17 +3,6 @@ class WatchController < ApplicationController
 
   def show
     @videos_total = Video.all.where(hidden: false).size
-
-    @recommended_videos =
-      Video
-        .where(song_id: @video.song_id)
-        .or
-        .where(channel_id: @video.song_id)
-        .where(hidden: false)
-        .where
-        .not(youtube_id: @video.youtube_id)
-        .order("popularity DESC")
-        .limit(3)
     @video.clicked!
   end
 

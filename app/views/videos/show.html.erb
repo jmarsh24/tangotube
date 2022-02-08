@@ -4,7 +4,6 @@
                                               @video.youtube_id)}" %>
 <% content_for :meta_description,  "#{@video.display.any_song_attributes}" %>
 <% content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg" %>
-
 <%= render 'shared/header' %>
 <div class="video-responsive-background">
   <div class="video-responsive-container" data-controller="youtube">
@@ -19,33 +18,33 @@
   </div>
 </div>
 <%= turbo_frame_tag dom_id(@video) do %>
-<div class="video-info-container">
-  <%= render partial: "videos/show/video_info_primary" %>
-  <div class="video-info-container-secondary">
-    <div class="video-info-details-main">
-      <%= render partial: "videos/show/video_info_details" %>
-    </div>
+  <div class="video-info-container">
+    <%= render partial: "videos/show/video_info_primary" %>
+    <div class="video-info-container-secondary">
+      <div class="video-info-details-main">
+        <%= render partial: "videos/show/video_info_details" %>
+      </div>
       <% if @video.song.present? %>
-          <%= render partial: "videos/show/lyrics" if @video.song.lyrics.present? %>
+        <%= render partial: "videos/show/lyrics" if @video.song.lyrics.present? %>
       <% end %>
-    <div class="recommended-videos-section">
-      <% unless @videos_from_this_performance.empty? %>
-        <h2>This Performance</h2>
-        <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance } %>
-      <% end %>
-      <% unless @videos_with_same_event.empty? %>
-        <h2>This Event</h2>
-        <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event } %>
-      <% end %>
-      <% unless @videos_with_same_song.empty? %>
-        <h2>This Song</h2>
-        <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song } %>
-      <% end %>
-      <% unless @videos_with_same_channel.empty? %>
-        <h2>This Channel</h2>
-        <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel } %>
-      <% end %>
+      <div class="recommended-videos-section">
+        <% unless @videos_from_this_performance.empty? %>
+          <h2>This Performance</h2>
+          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance } %>
+        <% end %>
+        <% unless @videos_with_same_event.empty? %>
+          <h2>This Event</h2>
+          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event } %>
+        <% end %>
+        <% unless @videos_with_same_song.empty? %>
+          <h2>This Song</h2>
+          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song } %>
+        <% end %>
+        <% unless @videos_with_same_channel.empty? %>
+          <h2>This Channel</h2>
+          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel } %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 <% end %>
