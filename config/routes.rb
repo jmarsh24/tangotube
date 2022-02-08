@@ -10,6 +10,12 @@ Rails.application.routes.draw do
 
     devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+    resources :deletion_requests, only: [:show] do
+      collection do
+        post :facebook
+      end
+    end
+
     authenticate :admin_user do
       mount Sidekiq::Web => '/admin/sidekiq'
     end

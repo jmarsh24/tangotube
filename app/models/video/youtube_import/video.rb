@@ -4,7 +4,7 @@ class Video::YoutubeImport::Video
       new(youtube_id).import
     end
 
-    def \
+    def
       new(youtube_id).update
     end
   end
