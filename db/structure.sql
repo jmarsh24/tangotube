@@ -581,7 +581,11 @@ CREATE TABLE public.users (
     last_name character varying,
     image character varying,
     uid character varying,
-    provider character varying
+    provider character varying,
+    confirmation_token character varying,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying
 );
 
 
@@ -1023,6 +1027,13 @@ CREATE INDEX index_songs_on_title ON public.songs USING btree (title);
 
 
 --
+-- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_confirmation_token ON public.users USING btree (confirmation_token);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1298,6 +1309,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220124180416'),
 ('20220127133110'),
 ('20220208010324'),
-('20220208130431');
+('20220208130431'),
+('20220208222724');
 
 
