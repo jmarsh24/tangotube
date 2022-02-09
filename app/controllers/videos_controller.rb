@@ -79,6 +79,7 @@ class VideosController < ApplicationController
 
   def videos_with_same_song
     @videos_with_same_song = Video.where(song_id: @video.song_id)
+                                  .has_leader.has_follower
                                   .where(hidden: false)
                                   .where.not(song_id: nil)
                                   .where.not(youtube_id: @video.youtube_id)
@@ -87,6 +88,7 @@ class VideosController < ApplicationController
 
   def videos_with_same_channel
     @videos_with_same_channel = Video.where(channel_id: @video.channel_id)
+                                  .has_leader.has_follower
                                   .where(hidden: false)
                                   .where.not(youtube_id: @video.youtube_id)
                                   .limit(8)
