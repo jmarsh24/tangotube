@@ -76,7 +76,7 @@ class Video::YoutubeImport::Video
       duration: @youtube_video.duration,
       tags: @youtube_video.tags,
       hd: @youtube_video.hd?,
-      performance_date: parsed_performance_date
+      performance_date: parsed_performance_date if performance_date.nil?
     }
   end
 
