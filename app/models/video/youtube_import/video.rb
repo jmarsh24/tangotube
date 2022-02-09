@@ -98,9 +98,8 @@ class Video::YoutubeImport::Video
   end
 
   def parsed_performance_date
-    return @video.performance_date unless performance_date.nil?
     parsed_performance_date = Date.parse(@youtube_video.title) || Date.parse(@youtube_video.description)
-    unless parsed_performance_date.between?(Date.new(1927), Time.zone.today)
+    unless parsed_performance_date.between?(Date.new(1927), Time.zone.today) || parsed_performance_date > @youtube_video.upload_date
       parsed_performance_date = @youtube_video.published_at
     end
     parsed_performance_date
