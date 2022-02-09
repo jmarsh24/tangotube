@@ -1,5 +1,20 @@
 $show-video-width: 1300px;
 
+.under-video-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  padding: 16px;
+}
+
+.share-container {
+  display:flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+}
+
 .video-responsive-container {
   width: 100%;
   max-width: $show-video-width;
@@ -40,8 +55,8 @@ $show-video-width: 1300px;
 
 .video-info-primary-container {
   max-width: $show-video-width;
+  width: 100%;
   text-align: left;
-  margin: 1em;
 }
 
 .video-info-container-secondary {
