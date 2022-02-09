@@ -121,41 +121,6 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: admin_users; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.admin_users (
-    id bigint NOT NULL,
-    email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying,
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: admin_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.admin_users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: admin_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.admin_users_id_seq OWNED BY public.admin_users.id;
-
-
---
 -- Name: ahoy_events; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -488,38 +453,6 @@ CREATE TABLE public.schema_migrations (
 
 
 --
--- Name: search_suggestions; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.search_suggestions (
-    id bigint NOT NULL,
-    term character varying,
-    popularity integer,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: search_suggestions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.search_suggestions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: search_suggestions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.search_suggestions_id_seq OWNED BY public.search_suggestions.id;
-
-
---
 -- Name: songs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -700,13 +633,6 @@ CREATE MATERIALIZED VIEW public.videos_searches AS
 
 
 --
--- Name: admin_users id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.admin_users ALTER COLUMN id SET DEFAULT nextval('public.admin_users_id_seq'::regclass);
-
-
---
 -- Name: ahoy_events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -763,13 +689,6 @@ ALTER TABLE ONLY public.playlists ALTER COLUMN id SET DEFAULT nextval('public.pl
 
 
 --
--- Name: search_suggestions id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.search_suggestions ALTER COLUMN id SET DEFAULT nextval('public.search_suggestions_id_seq'::regclass);
-
-
---
 -- Name: songs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -788,14 +707,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 ALTER TABLE ONLY public.videos ALTER COLUMN id SET DEFAULT nextval('public.videos_id_seq'::regclass);
-
-
---
--- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.admin_users
-    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -863,14 +774,6 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
--- Name: search_suggestions search_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.search_suggestions
-    ADD CONSTRAINT search_suggestions_pkey PRIMARY KEY (id);
-
-
---
 -- Name: songs songs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -892,20 +795,6 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.videos
     ADD CONSTRAINT videos_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_admin_users_on_email; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_admin_users_on_email ON public.admin_users USING btree (email);
-
-
---
--- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON public.admin_users USING btree (reset_password_token);
 
 
 --
@@ -1312,6 +1201,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220208010324'),
 ('20220208130431'),
 ('20220208222724'),
-('20220209013643');
+('20220209013643'),
+('20220209032353'),
+('20220209032610');
 
 
