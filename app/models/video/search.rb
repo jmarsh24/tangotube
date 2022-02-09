@@ -3,7 +3,7 @@ class Video::Search
     songs.title
     songs.last_name_search
     videos.channel_id
-    videos.upload_date
+    videos.performance_date
     videos.view_count
     videos.updated_at
     videos.popularity
@@ -72,7 +72,7 @@ class Video::Search
   end
 
   def years
-    @years ||= facet_on_year("upload_date")
+    @years ||= facet_on_year("performance_date")
   end
 
   def songs
