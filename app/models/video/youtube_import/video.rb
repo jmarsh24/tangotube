@@ -34,7 +34,8 @@ class Video::YoutubeImport::Video
     end
     rescue ActiveRecord::StatementInvalid, PG::DatetimeFieldOverflow => e
     if e.present?
-      video.update(performance_date: nil)
+      if video.performance_date.between?(Date.new(1927),Date.today)
+      video.update(performance_date: video.published_at)
     end
     rescue Yt::Errors::NoItems => e
     if e.present?
@@ -102,11 +103,14 @@ class Video::YoutubeImport::Video
   end
 
   def performance_date
-    performance_date = Date.parse(@youtube_video.description) || Date.parse(@youtube_video.title)
+    performance_date = Date.parse(@youtube_video.title) || Date.parse(@youtube_video.description)
     rescue Date::Error, RangeError => e
       if e.present?
-        performance_date = @youtube_video.published_at if performance_date.nil?
+        performance_date = @youtube_video.published_at
       end
+    unless performance_date.between?(Date.new(1927),Date.today)
+      performance_date = @youtube_video.published_at
+    end
     performance_date
   end
 
