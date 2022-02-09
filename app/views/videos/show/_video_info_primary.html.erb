@@ -1,34 +1,47 @@
-<div class="video-info-primary-container">
-  <div class="show-video-title">
-    <h1>
+<div class="under-video-container">
+  <div class="video-info-primary-container">
+    <div class="show-video-title">
+      <h1>
         <%= primary_title(@video.display.dancer_names,
-                                  @video.title,
-                                  @video.display.any_song_attributes,
-                                  @video.youtube_id) %>
-    </h1>
+                                      @video.title,
+                                      @video.display.any_song_attributes,
+                                      @video.youtube_id) %>
+      </h1>
+    </div>
+    <div class="show-video-song">
+      <h2>
+        <%= link_to_song( @video.display.el_recodo_attributes,
+                            @video.display.external_song_attributes,
+                            @video) %>
+      </h2>
+    </div>
+    <div class="show-video-event">
+      <%= link_to @video.event.title.titleize,
+                    root_path(event_id: @video.event.id),
+                    { "data-turbo-frame": "_top" } if @video.event.present? %>
+    </div>
+    <div class="show-video-channel">
+      <%= link_to image_tag(@video.channel.thumbnail_url,
+                    class: "channel-icon"),
+                    root_path(channel: @video.channel.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?  %>
+      <%= link_to truncate(@video.channel.title,
+                    length: 45, omission: ""),
+                    root_path(channel: @video.channel.channel_id),
+                    { class: "channel-title", "data-turbo-frame": "_top" } %>
+    </div>
+    <div class="show-video-metadata">
+      <%= formatted_metadata(@video) %>
+    </div>
   </div>
-  <div class="show-video-song">
-    <h2>
-      <%= link_to_song( @video.display.el_recodo_attributes,
-                        @video.display.external_song_attributes,
-                        @video) %>
-    </h2>
-  </div>
-  <div class="show-video-event">
-    <%= link_to @video.event.title.titleize,
-                root_path(event_id: @video.event.id),
-                { "data-turbo-frame": "_top" } if @video.event.present? %>
-  </div>
-  <div class="show-video-channel">
-    <%= link_to image_tag(@video.channel.thumbnail_url,
-                class: "channel-icon"),
-                root_path(channel: @video.channel.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?  %>
-    <%= link_to truncate(@video.channel.title,
-                length: 45, omission: ""),
-                root_path(channel: @video.channel.channel_id),
-                { class: "channel-title", "data-turbo-frame": "_top" } %>
-  </div>
-  <div class="show-video-metadata">
-    <%= formatted_metadata(@video) %>
+  <div class="share-container">
+    <%= button_tag type: "button",
+                        class: "share-button button",
+                        data: { controller: "clipboard",
+                        "clipboard-target": "button",
+                        "clipboard-success-content": "Copied!",
+                        action: "clipboard#copy",
+                                "clipboard-source-value": "tangotube.tv/watch?v=#{@video.youtube_id}" } do %>
+      <%= fa_icon 'share', text: "Share" %>
+    <% end %>
   </div>
 </div>
