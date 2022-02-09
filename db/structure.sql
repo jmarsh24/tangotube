@@ -585,7 +585,8 @@ CREATE TABLE public.users (
     confirmation_token character varying,
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
-    unconfirmed_email character varying
+    unconfirmed_email character varying,
+    role integer
 );
 
 
@@ -1310,6 +1311,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220127133110'),
 ('20220208010324'),
 ('20220208130431'),
-('20220208222724');
+('20220208222724'),
+('20220209013643');
 
 
