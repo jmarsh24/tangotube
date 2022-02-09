@@ -48,10 +48,6 @@ class Video::YoutubeImport::Video
     if video.leader.nil? || video.follower.nil?
       video.grep_title_leader_follower
     end
-    rescue ActiveRecord::StatementInvalid, PG::DatetimeFieldOverflow => e
-    if e.present?
-      video.update(performance_date: nil)
-    end
     if video.performance_number.nil? || video.performance_total_number.nil?
       video.grep_performance_number
     end
@@ -80,7 +76,7 @@ class Video::YoutubeImport::Video
       duration: @youtube_video.duration,
       tags: @youtube_video.tags,
       hd: @youtube_video.hd?,
-      performance_date: performance_date
+      performance_date: parsed_performance_date
     }
   end
 
@@ -101,16 +97,12 @@ class Video::YoutubeImport::Video
     like_count
   end
 
-  def performance_date
-    performance_date = Date.parse(@youtube_video.title) || Date.parse(@youtube_video.description)
-    unless performance_date.between?(Date.new(1927),Date.today)
-      performance_date = @youtube_video.published_at
+  def parsed_performance_date
+    parsed_performance_date = Date.parse(@youtube_video.title) || Date.parse(@youtube_video.description)
+    unless parsed_performance_date.between?(Date.new(1927), Time.zone.today)
+      parsed_performance_date = @youtube_video.published_at
     end
-    rescue Date::Error, RangeError => e
-      if e.present?
-        performance_date = @youtube_video.published_at
-      end
-    performance_date
+    parsed_performance_date
   end
 
   def channel
