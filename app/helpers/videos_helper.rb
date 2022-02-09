@@ -12,8 +12,8 @@ module VideosHelper
     )
   end
 
-  def formatted_upload_date(upload_date)
-    upload_date.strftime("%B %Y")
+  def formatted_performance_date(performance_date)
+    performance_date.strftime("%B %Y")
   end
 
   def link_to_query(external_song_attributes)
@@ -57,7 +57,7 @@ module VideosHelper
   end
 
   def formatted_metadata(video)
-    "#{formatted_upload_date(video.upload_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes #{performance_number(video)}"
+    "#{formatted_performance_date(video.upload_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes #{performance_number(video)}"
   end
 
   def performance_number(video)
