@@ -40,6 +40,17 @@
   }
 }
 
+#button-patreon {
+  background: #FF424D;
+  padding: 5px;
+  color: #f8f8f8;
+  border-radius: 2px;
+
+  &:hover {
+    color: white;
+  }
+}
+
 .primary-links {
   a {
     display: flex;
@@ -69,7 +80,7 @@
   .footer {
     padding-top: 5px;
   }
-  
+
   .footerTitle {
     padding-top: 5px;
   }
