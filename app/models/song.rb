@@ -7,18 +7,17 @@ class Song < ApplicationRecord
   has_many :leader, through: :videos
   has_many :follower, through: :videos
 
-  # active admin scopes
-  scope :sort_by_popularity, -> { order(popularity: :desc) }
-  scope :filter_by_popularity, -> { where.not(popularity: nil) }
-  scope :filter_by_active, -> { where(active: true) }
-  scope :filter_by_not_active, -> { where(active: false) }
-
   # song match scopes
   scope :title_match,
         ->(query) { where("unaccent(title) ILIKE unaccent(?)", "%#{query}%") }
 
   def full_title
     "#{title.titleize} - #{artist.split("'").map(&:titleize).join("'")} - #{genre.titleize}"
+  end
+
+  def translate_to_english
+    translation = DeepL.translate lyrics, "ES", "EN"
+    update(lyrics_en: translation.text)
   end
 
   class << self
@@ -35,6 +34,10 @@ class Song < ApplicationRecord
           )
           .references(:song)
       end
+    end
+
+    def missing_english_translation
+      where.not(lyrics: nil).where(lyrics_en: nil)
     end
   end
 end

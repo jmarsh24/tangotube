@@ -473,7 +473,8 @@ CREATE TABLE public.songs (
     active boolean DEFAULT true,
     lyrics text,
     el_recodo_song_id integer,
-    videos_count integer DEFAULT 0 NOT NULL
+    videos_count integer DEFAULT 0 NOT NULL,
+    lyrics_en character varying
 );
 
 
@@ -1203,6 +1204,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220208222724'),
 ('20220209013643'),
 ('20220209032353'),
-('20220209032610');
+('20220209032610'),
+('20220210150146');
 
 

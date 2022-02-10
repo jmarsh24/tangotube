@@ -15,6 +15,7 @@ gem "barnes", "~> 0.0.9"
 # app specific gems...................................................................
 gem "ahoy_matey", "~> 3.1"
 gem "aws-sdk-s3", require: false
+gem "deepl-rb", "~> 2.4", require: 'deepl'
 gem "devise", "~> 4.7", ">= 4.7.2"
 gem "faraday", "~> 1.1.0"
 gem "font-awesome-rails", "~> 4.7", ">= 4.7.0.5"

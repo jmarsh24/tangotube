@@ -1,8 +1,25 @@
-<div class="video-info-lyrics">
-    <div class="detail-item-heading-lyrics">
-      <h4>Lyrics</h4>
-    </div>
-    <div class="detail-column-lyrics">
+<div class="video-info-lyrics" data-controller="toggle">
+  <div class="detail-item-heading-lyrics">
+    <h4>Lyrics</h4>
+  </div>
+  <div style="display: flex; justify-content: center;">
+    <%= button_tag type: "button",
+                        class: "share-button button",
+                        data: { action: "toggle#toggleLyricsSpanish" } do %>
+      Spanish
+    <% end %>
+    <%= button_tag type: "button",
+                        class: "share-button button",
+                        data: { action: "toggle#toggleLyricsEnglish" } do %>
+      English
+    <% end %>
+  </div>
+  <div class="detail-column-lyrics">
+    <div class="" data-toggle-target="lyricsEs">
       <%= simple_format(@video.song.lyrics) %>
     </div>
+    <div class="isHidden" data-toggle-target="lyricsEn">
+      <%= simple_format(@video.song.lyrics_en) %>
+    </div>
+  </div>
 </div>
