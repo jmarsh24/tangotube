@@ -125,6 +125,7 @@
 .sorting-container {
   display: flex;
 }
+
 .videos-sortable-container {
   display: flex;
   flex-direction: column;
@@ -174,6 +175,15 @@
   }
 }
 
+
+@media (max-width: 1600px) {
+
+  .sorting-container {
+    padding: 0px;
+  }
+
+}
+
 @media (max-width: 800px) {
 
   #filter-container {
@@ -181,6 +191,8 @@
       padding: 0px;
     }
   }
+
+
 
   .filter-sorting-container {
     padding: 0 10px;
