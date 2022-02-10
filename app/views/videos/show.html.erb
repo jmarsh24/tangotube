@@ -29,28 +29,36 @@
       <% end %>
       <div class="recommended-videos-section">
         <% unless @videos_from_this_performance.empty? %>
-          <div class="recommended-videos__header">
-            <h2>Videos from this Performance</h2>
+          <div class="recommended-videos-card">
+            <div class="recommended-videos__header">
+              <h2>Videos from this Performance</h2>
+            </div>
+            <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance } %>
           </div>
-          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance } %>
         <% end %>
         <% unless @videos_with_same_event.empty? %>
-          <div class="recommended-videos__header">
-            <h2>Videos from <%= @video.event.title %></h2>
+          <div class="recommended-videos-card">
+            <div class="recommended-videos__header">
+              <h2>Videos from <%= @video.event.title %></h2>
+            </div>
+            <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event } %>
           </div>
-          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event } %>
         <% end %>
         <% unless @videos_with_same_song.empty? %>
-          <div class="recommended-videos__header">
-            <h2>Videos with <br><%= "#{@video.song.title.titleize} - #{@video.song.artist.titleize}"  %></h2>
+          <div class="recommended-videos-card">
+            <div class="recommended-videos__header">
+              <h2>Videos with <br><i>"<%= @video.song.title.titleize %>" &nbsp;</i><%= "by #{@video.song.artist.titleize}" %></h2>
+            </div>
+            <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song } %>
           </div>
-          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song } %>
         <% end %>
         <% unless @videos_with_same_channel.empty? %>
-          <div class="recommended-videos__header">
-            <h2>Videos from <%= @video.channel.title %></h2>
+          <div class="recommended-videos-card">
+            <div class="recommended-videos__header">
+              <h2>Videos from <%= @video.channel.title %></h2>
+            </div>
+            <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel } %>
           </div>
-          <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel } %>
         <% end %>
       </div>
     </div>
