@@ -101,12 +101,8 @@ $show-video-width: 1300px;
     border-radius: 0;
   }
 
-  .video-info-primary-container {
-    margin: 0.5em 0.5em;
-  }
-
-  .video-info-container {
-    margin: 0;
+  .under-video-container {
+    flex-wrap: wrap;
   }
 
   .video-info-details-main {
