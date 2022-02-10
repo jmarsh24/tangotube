@@ -6,10 +6,22 @@ static targets = ["filterButton",
                   "toggleable",
                   "sideNavContainer",
                   "mainSectionContainer",
-                  "disableable"];
+                  "disableable",
+                  "lyricsEs",
+                  "lyricsEn"];
 
   toggle() {
     this.toggleableTarget.classList.toggle("isHidden");
+  }
+
+  toggleLyricsSpanish() {
+    this.lyricsEnTarget.classList.add("isHidden");
+    this.lyricsEsTarget.classList.remove("isHidden");
+  }
+
+  toggleLyricsEnglish() {
+    this.lyricsEnTarget.classList.remove("isHidden");
+    this.lyricsEsTarget.classList.add("isHidden");
   }
 
   toggleFilter() {
