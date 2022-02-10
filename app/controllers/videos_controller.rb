@@ -141,8 +141,4 @@ class VideosController < ApplicationController
   def show_params
     params.permit(:v)
   end
-
-  def fetch_new_video
-    ImportVideoWorker.perform_async(@video.youtube_id)
-  end
 end

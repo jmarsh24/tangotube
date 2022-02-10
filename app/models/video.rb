@@ -20,7 +20,7 @@ class Video < ApplicationRecord
   scope :filter_by_song_id, ->(song_id, _user) { where(song_id: song_id) }
   scope :filter_by_hd, ->(boolean, _user) { where(hd: boolean) }
   scope :filter_by_year,->(year, _user) { where("extract(year from performance_date) = ?", year) }
-  scope :filter_by_performance_year,->(year, _user) { where("extract(year from performance_date) = ?", year) }
+  scope :filter_by_upload_year,->(year, _user) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :paginate, ->(page, per_page) { offset(per_page * (page - 1)).limit(per_page) }
