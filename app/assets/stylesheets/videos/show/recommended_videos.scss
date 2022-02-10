@@ -1,10 +1,13 @@
 .recommended-videos-container {
   display: flex;
   gap: 10px;
-  margin: 1rem 0rem;
   min-width: 200px;
 }
 
 .thumbnail-image--recommended {
   width: 180px;
+}
+
+.recommended-videos__header {
+  border-bottom: 1px solid #c2c2c2;
 }

@@ -61,6 +61,7 @@ $show-video-width: 1300px;
 
 .video-info-container-secondary {
   display: flex;
+  gap: 20px;
   justify-content: space-between;
   max-width: $show-video-width;
   flex-direction: row;
@@ -71,7 +72,6 @@ $show-video-width: 1300px;
 
 .video-info-details-main {
   flex: 1;
-  margin: 0 0.5em;
   flex-direction: column;
   min-width: 450px;
   a {
