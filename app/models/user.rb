@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :registerable,
          :recoverable,
          :rememberable,
+         :timeoutable,
          :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
