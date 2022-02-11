@@ -7,7 +7,10 @@ class Song < ApplicationRecord
   has_many :leader, through: :videos
   has_many :follower, through: :videos
 
-  # song match scopes
+  scope :sort_by_popularity, -> { order(popularity: :desc) }
+  scope :filter_by_popularity, -> { where.not(popularity: nil) }
+  scope :filter_by_active, -> { where(active: true) }
+  scope :filter_by_not_active, -> { where(active: false) }
   scope :title_match,
         ->(query) { where("unaccent(title) ILIKE unaccent(?)", "%#{query}%") }
 
