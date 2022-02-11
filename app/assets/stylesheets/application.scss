@@ -62,6 +62,18 @@ button {
   font-size: 20px;
   padding: 10px;
 
+  &.button--flash {
+    font-size: 14px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
   &:hover {
     background-color: rgb(251, 251, 251);
     cursor: pointer;

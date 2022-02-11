@@ -1,6 +1,9 @@
-        <% if flash[:notice] %>
-          <div class="notice alert-info"><%= notice %></div>
-        <% end %>
-        <% if flash[:alert] %>
-          <div class="alert alert-warning" role="alert"><%= alert %></div>
-        <% end %>
+<% flash.each do |key, value| %>
+  <div data-controller="flash" class="flash <%= classes_for_flash(key) %>">
+    <div><%= value %></div>
+
+    <button type="button" class="button--flash" data-action="flash#dismiss">
+      <%= fa_icon "times" %>
+    </button>
+  </div>
+<% end %>
