@@ -1,4 +1,6 @@
 class Video::YoutubeImport::Video
+  PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
+
   class << self
     def import(youtube_id)
       new(youtube_id).import
@@ -10,50 +12,49 @@ class Video::YoutubeImport::Video
   end
 
   def initialize(youtube_id)
+    @video = Video.find_or_create_by(youtube_id: @youtube_id)
     @youtube_id = youtube_id
     @youtube_video = fetch_by_id
   end
 
   def import
-    video = Video.find_or_create_by(youtube_id: @youtube_id)
-    video.update(to_video_params)
-    if video.leader.nil? || video.follower.nil?
-      video.grep_title_leader_follower
+    @video.update(to_video_params)
+    if @video.leader.nil? || @video.follower.nil?
+      @video.grep_title_leader_follower
     end
-    unless video.acr_response_code.in? [0,1001]
+    unless @video.acr_response_code.in? [0,1001]
       Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
     end
-    if video.youtube_song.nil?
+    if @video.youtube_song.nil?
       Video::MusicRecognition::Youtube.fetch(@youtube_id)
     end
-    if video.song.nil?
-      video.grep_title_description_acr_cloud_song
+    if @video.song.nil?
+      @video.grep_title_description_acr_cloud_song
     end
-    if video.performance_number.nil? || video.performance_total_number.nil?
-      video.grep_performance_number
+    if @video.performance_number.nil? || @video.performance_total_number.nil?
+      @video.grep_performance_number
     end
     rescue ActiveRecord::StatementInvalid, PG::DatetimeFieldOverflow => e
     if e.present?
-      video.update(performance_date: video.published_at)
+      @video.update(performance_date: parsed_performance_date)
     end
     rescue Yt::Errors::NoItems => e
     if e.present?
-      video.destroy
+      @video.destroy
     end
   end
 
   def update
-    video = Video.find_by(youtube_id: @youtube_id)
-    video.update(to_video_params)
-    if video.leader.nil? || video.follower.nil?
-      video.grep_title_leader_follower
+    @video.update(to_video_params)
+    if @video.leader.nil? || @video.follower.nil?
+      @video.grep_title_leader_follower
     end
-    if video.performance_number.nil? || video.performance_total_number.nil?
-      video.grep_performance_number
+    if @video.performance_number.nil? || @video.performance_total_number.nil?
+      @video.grep_performance_number
     end
     rescue Yt::Errors::NoItems => e
     if e.present?
-      video.destroy
+      @video.destroy
     end
   end
 
@@ -98,8 +99,10 @@ class Video::YoutubeImport::Video
   end
 
   def parsed_performance_date
+    return  @video.performance_date if @video.performance_date.present?
     performance_date = @youtube_video.published_at
-    parsed_performance_date = Date.parse(@youtube_video.title) || Date.parse(@youtube_video.description) rescue nil
+    cleaned_title_description = "#{@youtube_video.title} #{@youtube_video.description}".gsub(PERFORMANCE_REGEX, "")
+    parsed_performance_date = Date.parse(cleaned_title_description) rescue nil
     if parsed_performance_date.present?
       if parsed_performance_date.between?(Date.new(1927), Date.today) && parsed_performance_date < @youtube_video.published_at
         performance_date = parsed_performance_date
