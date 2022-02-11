@@ -17,19 +17,4 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
   end
-
-  def redirect
-      oauth_client = Patreon::OAuth.new(client_id, client_secret)
-      tokens = oauth_client.get_tokens(params[:code], redirect_uri)
-      access_token = tokens['access_token']
-
-      api_client = Patreon::API.new(access_token)
-      user_response = api_client.fetch_user()
-      # user_response uses [json-api-vanilla](https://github.com/trainline/json-api-vanilla) for easy usage
-      @user = user_response.data
-      # you can list all attributes and relationships with (@user.methods - Object.methods)
-      @pledge = @user.pledges[0]
-      # just like with @user, you can list all pledge attributes and relationships with (@pledge.methods - Object.methods)
-      @pledge_amount = @pledge.amount_cents
-  end
 end

@@ -30,17 +30,16 @@ class User < ApplicationRecord
     user = User.where(email: access_token.info.email).first
     unless user
       user = User.create(
-          email: access_token.info.email,
-          password: Devise.friendly_token[0,20]
+        email: access_token.info.email,
+        password: Devise.friendly_token[0,20],
+        name: access_token.info.name,
+        first_name: access_token.info.first_name,
+        last_name: access_token.info.last_name,
+        image: access_token.info.image,
+        uid: access_token.uid,
+        provider: access_token.info.provider
       )
     end
-    user.name = access_token.info.name
-    user.first_name = access_token.info.first_name
-    user.last_name = access_token.info.last_name
-    user.image = access_token.info.image
-    user.uid = access_token.uid
-    user.provider = access_token.info.provider
-    user.save
     user
   end
 end
