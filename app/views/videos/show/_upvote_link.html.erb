@@ -1,0 +1,11 @@
+<%= content_tag "div", id: "upvote-#{video.id}" do %>
+  <%= link_to upvote_video_path(video), method: :patch,
+                                        remote: true,
+                                        style: "display: flex; justify-content: center; align-items: center;" do %>
+    <% if current_user.voted_up_on? video %>
+      <%= fa_icon "thumbs-up solid", style: "font-size: 30px; margin: 0 10px;" %>
+    <% else %>
+      <%= fa_icon "thumbs-up regular", style: "font-size: 30px; margin: 0 10px;" %>
+    <% end %>
+  <% end %>
+<% end %>

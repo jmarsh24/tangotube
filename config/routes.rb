@@ -28,7 +28,12 @@ Rails.application.routes.draw do
 
   resources :channels, only: %i[index create]
   resources :playlists, only: %i[index create]
-  resources :videos, except: :show
+  resources :videos, except: :show do
+    member do
+      patch "upvote", to: "videos#upvote"
+      patch "downvote", to: "videos#downvote"
+    end
+  end
   resources :search_suggestions, only: :index
   resources :leaders, only: %i[index create]
   resources :followers, only: %i[index create]

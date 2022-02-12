@@ -1,4 +1,6 @@
 class Video < ApplicationRecord
+  acts_as_votable
+
   include Filterable
 
   PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
@@ -107,6 +109,15 @@ class Video < ApplicationRecord
         where(id: Ahoy::Event.viewed_by_user(user))
       when "false"
         where.not(id: Ahoy::Event.viewed_by_user(user))
+      end
+    end
+
+    def filter_by_liked(boolean, user)
+      case boolean
+      when "true"
+        where(id: user.find_up_voted_items.map(&:id))
+      when "false"
+        where(id: user.find_up_downsvoted_items.map(&:id))
       end
     end
 

@@ -64,6 +64,18 @@
               <% else %>
                 Watched
               <% end %>
+            <%= button_tag type: "button",
+                        class: "videos-sortable-button",
+                        data: { controller: "filter",
+                        action: "filter#filter",
+                                "filter-liked-value": filtering_params["liked"] == "true" ? 0 : "true" } do %>
+            <% if filtering_params["liked"] == "true" %>
+              <%= content_tag(:b, "Liked") %>
+              <%= fa_icon("times", class: "videos-sortable-icon") %>
+            <% else %>
+              Liked
+            <% end %>
+          <% end %>
             <% end %>
             <%= button_tag type: "button",
                           class: "videos-sortable-button",

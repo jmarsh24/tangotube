@@ -119,7 +119,7 @@ module VideosHelper
       "year",
       "direction",
       "sort",
-      "watched"
+      "watched",
     )
   end
 end

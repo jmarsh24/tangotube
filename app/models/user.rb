@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  acts_as_voter
+
   validate :password_complexity
 
   # Include default devise modules. Others available are:

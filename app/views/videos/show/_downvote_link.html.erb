@@ -1,0 +1,13 @@
+<%= content_tag "div", id: "downvote-#{video.id}" do %>
+  <%= link_to downvote_video_path(video), method: :patch,
+                                          remote: true,
+                                          style: "display: flex; justify-content: center; align-items: center;" do %>
+    <% if current_user.voted_down_on? video %>
+      <%= fa_icon "thumbs-down solid", text: "Dislike",
+                                      style: "font-size: 30px; margin: 0 10px;" %>
+    <% else %>
+      <%= fa_icon "thumbs-down regular", text: "Dislike",
+                                        style: "font-size: 30px; margin: 0 10px;" %>
+    <% end %>
+  <% end %>
+<% end %>
