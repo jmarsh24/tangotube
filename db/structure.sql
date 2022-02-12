@@ -673,7 +673,14 @@ CREATE TABLE public.videos (
     spotify_artist_id_1 character varying,
     spotify_artist_name_1 character varying,
     performance_number integer,
-    performance_total_number integer
+    performance_total_number integer,
+    cached_votes_total integer DEFAULT 0,
+    cached_votes_score integer DEFAULT 0,
+    cached_votes_up integer DEFAULT 0,
+    cached_votes_down integer DEFAULT 0,
+    cached_weighted_score integer DEFAULT 0,
+    cached_weighted_total integer DEFAULT 0,
+    cached_weighted_average double precision DEFAULT 0.0
 );
 
 
@@ -709,6 +716,43 @@ CREATE MATERIALIZED VIEW public.videos_searches AS
      LEFT JOIN public.leaders ON ((leaders.id = videos.leader_id)))
      LEFT JOIN public.songs ON ((songs.id = videos.song_id)))
   WITH NO DATA;
+
+
+--
+-- Name: votes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.votes (
+    id bigint NOT NULL,
+    votable_type character varying,
+    votable_id bigint,
+    voter_type character varying,
+    voter_id bigint,
+    vote_flag boolean,
+    vote_scope character varying,
+    vote_weight integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.votes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.votes_id_seq OWNED BY public.votes.id;
 
 
 --
@@ -807,6 +851,13 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 ALTER TABLE ONLY public.videos ALTER COLUMN id SET DEFAULT nextval('public.videos_id_seq'::regclass);
+
+
+--
+-- Name: votes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.votes ALTER COLUMN id SET DEFAULT nextval('public.votes_id_seq'::regclass);
 
 
 --
@@ -919,6 +970,14 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.videos
     ADD CONSTRAINT videos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: votes votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.votes
+    ADD CONSTRAINT votes_pkey PRIMARY KEY (id);
 
 
 --
@@ -1230,6 +1289,34 @@ CREATE INDEX index_videos_searches_on_tsv_document ON public.videos_searches USI
 
 
 --
+-- Name: index_votes_on_votable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_votes_on_votable ON public.votes USING btree (votable_type, votable_id);
+
+
+--
+-- Name: index_votes_on_votable_id_and_votable_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_votes_on_votable_id_and_votable_type_and_vote_scope ON public.votes USING btree (votable_id, votable_type, vote_scope);
+
+
+--
+-- Name: index_votes_on_voter; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_votes_on_voter ON public.votes USING btree (voter_type, voter_id);
+
+
+--
+-- Name: index_votes_on_voter_id_and_voter_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_votes_on_voter_id_and_voter_type_and_vote_scope ON public.votes USING btree (voter_id, voter_type, vote_scope);
+
+
+--
 -- Name: playlists fk_rails_180bd29355; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1376,6 +1463,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220212040653'),
 ('20220212040654'),
 ('20220212040655'),
-('20220212040656');
+('20220212040656'),
+('20220212144641'),
+('20220212144740');
 
 

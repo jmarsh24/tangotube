@@ -13,7 +13,8 @@
  *= require_self
  */
 
-@import "font-awesome";
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
 @import 'shared/**/*';
 
 @import "videos/**/*";

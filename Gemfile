@@ -18,7 +18,6 @@ gem "aws-sdk-s3", require: false
 gem "deepl-rb", "~> 2.4", require: 'deepl'
 gem "devise", "~> 4.7", ">= 4.7.2"
 gem "faraday", "~> 1.1.0"
-gem "font-awesome-rails", "~> 4.7", ">= 4.7.0.5"
 gem "hashie", "~> 4.1"
 gem "hotwire-rails", "~> 0.1.3"
 gem "nokogiri", "~> 1.10", ">= 1.10.10"
@@ -68,3 +67,5 @@ group :test do
   gem "webmock", "~> 3.12"
 end
 
+
+gem "font-awesome-rails", "~> 4.7"

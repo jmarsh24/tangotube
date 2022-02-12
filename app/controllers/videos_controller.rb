@@ -40,6 +40,26 @@ class VideosController < ApplicationController
                   "Video Sucessfully Added: The video must be approved before the videos are added"
   end
 
+  def upvote
+    @video = Video.find(params[:id])
+    if current_user.voted_up_on? @video
+      @video.unvote_by current_user
+    else
+      @video.upvote_by current_user
+    end
+    render "videos/show/vote"
+  end
+
+  def downvote
+    @video = Video.find(params[:id])
+    if current_user.voted_down_on? @video
+      @video.unvote_by current_user
+    else
+      @video.downvote_by current_user
+    end
+    render "videos/show/vote"
+  end
+
   private
 
   def set_video
@@ -130,7 +150,8 @@ class VideosController < ApplicationController
       :hd,
       :event_id,
       :year,
-      :watched
+      :watched,
+      :liked
     )
   end
 

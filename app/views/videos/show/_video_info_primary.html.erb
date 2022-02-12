@@ -34,6 +34,13 @@
     </div>
   </div>
   <div class="share-container">
+    <div style="display: flex; padding: 10px;">
+      <% if current_user %>
+        <%= render 'videos/show/upvote_link', video: @video %>
+        <%= render 'videos/show/like_count', video: @video %>
+        <%= render 'videos/show/downvote_link', video: @video %>
+      <% end %>
+    </div>
     <%= button_tag type: "button",
                         class: "share-button button",
                         data: { controller: "clipboard",
