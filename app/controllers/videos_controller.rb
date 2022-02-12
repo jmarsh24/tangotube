@@ -19,7 +19,7 @@ class VideosController < ApplicationController
   def edit; end
 
   def show
-    @video = Video.find_by(youtube_id: show_params[:v])
+    @video = Video.find_by(youtube_id: show_params[:v]).load
     set_recommended_videos
     @video.clicked!
     UpdateVideoWorker.perform_async(@video.youtube_id)
@@ -63,7 +63,7 @@ class VideosController < ApplicationController
                                          .where(hidden: false)
                                          .where
                                          .not(youtube_id: @video.youtube_id)
-                                         .limit(8)
+                                         .limit(8).load_async
   end
 
   def videos_with_same_event
@@ -73,7 +73,7 @@ class VideosController < ApplicationController
                                    .where("upload_date >= ?", @video.upload_date - 7.days)
                                    .where(hidden: false)
                                    .where.not(youtube_id: @video.youtube_id)
-                                   .limit(8)
+                                   .limit(8).load_async
     @videos_with_same_event = @videos_with_same_event - @videos_from_this_performance
   end
 
@@ -83,7 +83,7 @@ class VideosController < ApplicationController
                                   .where(hidden: false)
                                   .where.not(song_id: nil)
                                   .where.not(youtube_id: @video.youtube_id)
-                                  .limit(8)
+                                  .limit(8).load_async
   end
 
   def videos_with_same_channel
@@ -91,7 +91,7 @@ class VideosController < ApplicationController
                                   .has_leader.has_follower
                                   .where(hidden: false)
                                   .where.not(youtube_id: @video.youtube_id)
-                                  .limit(8)
+                                  .limit(8).load_async
   end
 
   def current_search

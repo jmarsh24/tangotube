@@ -108,6 +108,7 @@ class Video::Search
         .group("facet_value")
         .order("facet_value DESC")
         .having("count(#{table_column}) > 0")
+        .load_async
     counts.map { |c| ["#{c.facet_value} (#{c.occurrences})", c.facet_value] }
   end
 
@@ -123,6 +124,7 @@ class Video::Search
         .group(table_column)
         .order("occurrences DESC")
         .having("count(#{table_column}) > 0")
+        .load_async
     counts.map do |c|
       ["#{c.facet_value.split("'").map(&:titleize).join("'")} (#{c.occurrences})", c.facet_value.downcase]
     end
@@ -140,6 +142,7 @@ class Video::Search
         .group(table_column, table_column_id)
         .order("occurrences DESC")
         .having("count(#{table_column}) > 0")
+        .load_async
     counts.map do |c|
       ["#{c.facet_value.titleize} (#{c.occurrences})", c.facet_id_value]
     end
