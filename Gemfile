@@ -12,6 +12,7 @@ gem "webpacker", "4.2.2"
 gem "barnes", "~> 0.0.9"
 
 # app specific gems...................................................................
+gem "acts_as_votable", "~> 0.13.2"
 gem "ahoy_matey", "~> 3.1"
 gem "aws-sdk-s3", require: false
 gem "deepl-rb", "~> 2.4", require: 'deepl'
@@ -66,3 +67,4 @@ group :test do
   gem "vcr", "~> 6.0"
   gem "webmock", "~> 3.12"
 end
+
