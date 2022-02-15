@@ -105,4 +105,13 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.active_record.async_query_executor = :global_thread_pool
+
+  config.cache_store =
+    :redis_cache_store,
+    { url: ENV.fetch('REDIS_URL') { 'redis://localhost:6379/1' } }
+  config.session_store :cache_store,
+                      key: '_session',
+                      compress: true,
+                      pool_size: 5,
+                      expire_after: 1.year
 end
