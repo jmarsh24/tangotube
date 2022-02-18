@@ -15,7 +15,8 @@
     "jquery": "^3.5.1",
     "plyr": "^3.6.12",
     "slim-select": "^1.27.0",
-    "stimulus": "^2.0.0"
+    "stimulus": "^2.0.0",
+    "stylelint": "^14.5.1"
   },
   "version": "0.1.0",
   "devDependencies": {
