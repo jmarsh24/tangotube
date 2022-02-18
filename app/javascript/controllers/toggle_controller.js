@@ -8,10 +8,46 @@ static targets = ["filterButton",
                   "mainSectionContainer",
                   "disableable",
                   "lyricsEs",
-                  "lyricsEn"];
+                  "lyricsEn",
+                  "recommendedSongVideos",
+                  "recommendedSongVideosDownButton",
+                  "recommendedSongVideosUpButton",
+                  "recommendedEventVideos",
+                  "recommendedEventVideosDownButton",
+                  "recommendedEventVideosUpButton",
+                  "recommendedChannelVideos",
+                  "recommendedChannelVideosDownButton",
+                  "recommendedChannelVideosUpButton",
+                  "recommendedPerformanceVideos",
+                  "recommendedPerformanceVideosDownButton",
+                  "recommendedPerformanceVideosUpButton"];
 
   toggle() {
     this.toggleableTarget.classList.toggle("isHidden");
+  }
+
+  toggleRecommendedSongVideos() {
+    this.recommendedSongVideosTarget.classList.toggle("recommended-videos-card--active")
+    this.recommendedSongVideosDownButtonTarget.classList.toggle("isHidden");
+    this.recommendedSongVideosUpButtonTarget.classList.toggle("isHidden");
+  }
+
+  toggleRecommendedEventVideos() {
+    this.recommendedEventVideosTarget.classList.toggle("recommended-videos-card--active")
+    this.recommendedEventVideosDownButtonTarget.classList.toggle("isHidden");
+    this.recommendedEventVideosUpButtonTarget.classList.toggle("isHidden");
+  }
+
+  toggleRecommendedChannelVideos() {
+    this.recommendedChannelVideosTarget.classList.toggle("recommended-videos-card--active")
+    this.recommendedChannelVideosDownButtonTarget.classList.toggle("isHidden");
+    this.recommendedChannelVideosUpButtonTarget.classList.toggle("isHidden");
+  }
+
+  toggleRecommendedPerformanceVideos() {
+    this.recommendedPerformanceVideosTarget.classList.toggle("recommended-videos-card--active")
+    this.recommendedPerformanceVideosDownButtonTarget.classList.toggle("isHidden");
+    this.recommendedPerformanceVideosUpButtonTarget.classList.toggle("isHidden");
   }
 
   toggleLyricsSpanish() {

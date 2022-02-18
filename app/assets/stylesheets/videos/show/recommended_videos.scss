@@ -20,4 +20,10 @@
 
 .recommended-videos-card {
   margin-bottom: 10px;
+  max-height: 400px;
+  overflow-y: hidden;
+
+  &--active {
+    max-height: fit-content;
+  }
 }
