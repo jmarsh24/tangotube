@@ -6,14 +6,14 @@
 <% content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg" %>
 <%= render 'shared/header' %>
 <div class="video-responsive-background">
-  <div class="video-responsive-container" data-controller="youtube">
-    <div class="plyr__video-embed" data-youtube-target="frame">
-      <iframe
-        src="https://www.youtube.com/embed/<%= @video.youtube_id %>?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
-        allowfullscreen
-        allowtransparency
-        allow="autoplay"
-      ></iframe>
+  <div class="video-responsive-container">
+    <div class="video-responsive"
+          data-controller="youtube"
+          data-youtube-video-id-value="<%= @video.youtube_id %>"
+          data-youtube-start-seconds-value="<%= @start_value %>"
+          data-youtube-end-seconds-value="<%= @end_value %>"
+      >
+      <div data-youtube-target="frame"></div>
     </div>
   </div>
 </div>

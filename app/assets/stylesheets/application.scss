@@ -23,32 +23,6 @@
 @import 'playlists/**/*';
 @import 'events/**/*';
 
-.plyr iframe {
-	transition: 1s filter;
-	filter: opacity(1);
-}
-
-iframe {
-  pointer-events: none;
-}
-
-.plyr.plyr--paused iframe {
-	filter: opacity(0);
-	transition: 0.2s filter;
-}
-
-.plyr--paused .plyr__poster {
-	z-index: 2;
-	min-width: 100%;
-	min-height: 100%;
-	position: absolute;
-	opacity: 1;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-
 button {
   display:flex;
   justify-content: center;
@@ -77,6 +51,13 @@ button {
     background-color: rgb(251, 251, 251);
     cursor: pointer;
   }
+}
+
+input {
+  font-size: 16px;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
 
 html,

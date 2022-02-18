@@ -41,14 +41,28 @@
         <%= render 'videos/show/downvote_link', video: @video %>
       <% end %>
     </div>
-    <%= button_tag type: "button",
-                        class: "share-button button",
-                        data: { controller: "clipboard",
-                        "clipboard-target": "button",
-                        "clipboard-success-content": "Copied!",
-                        action: "clipboard#copy",
-                                "clipboard-source-value": "tangotube.tv/watch?v=#{@video.youtube_id}" } do %>
-      <%= fa_icon 'share', text: "Share" %>
-    <% end %>
+    <div style="display: flex"
+         data-controller= "clipboard"
+         data-clipboard-success-content="Copied!"
+         data-clipboard-video-id="<%= @video.youtube_id %>"
+         data-clipboard-root-url="<%= @root_url %>"
+    >
+      <%= button_tag type: "button",
+                          class: "share-button button",
+                          data: { "clipboard-target": "button",
+                          action: "clipboard#copy"} do %>
+        <%= fa_icon 'share', text: "Share" %>
+      <% end %>
+      <div style="margin: 0 6px;">
+        <%= label_tag 'Start Time' %>
+        <%= text_field_tag 'start_time_value', nil, placeholder: 'sec', style: "width: 50px", data: { action: "keyup->clipboard#changeValue",
+                                                              "clipboard-target": "startTime" } %>
+      </div>
+      <div style="margin: 0 6px;">
+        <%= label_tag 'End Time' %>
+        <%= text_field_tag 'end_time_value', nil, placeholder: 'sec', style: "width: 50px", data: { action: "keyup->clipboard#changeValue",
+                                                              "clipboard-target": "endTime" } %>
+      </div>
+    </div>
   </div>
 </div>
