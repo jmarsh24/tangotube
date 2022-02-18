@@ -20,6 +20,9 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find_by(youtube_id: show_params[:v])
+    @start_value = params[:start]
+    @end_value = params[:end]
+    @root_url = root_url
     set_recommended_videos
     @video.clicked!
     UpdateVideoWorker.perform_async(@video.youtube_id)
