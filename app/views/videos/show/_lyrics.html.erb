@@ -4,18 +4,18 @@
   </div>
   <div style="display: flex; justify-content: center;">
     <%= button_tag type: "button",
-                        class: "share-button button",
+                        class: "button-4",
                         data: { action: "toggle#toggleLyricsSpanish" } do %>
       Spanish
     <% end %>
     <%= button_tag type: "button",
-                        class: "share-button button",
+                        class: "button-4",
                         data: { action: "toggle#toggleLyricsEnglish" } do %>
       English
     <% end %>
   </div>
   <div class="detail-column-lyrics">
-    <div class="" data-toggle-target="lyricsEs">
+    <div data-toggle-target="lyricsEs">
       <%= simple_format(@video.song.lyrics) %>
     </div>
     <div class="isHidden" data-toggle-target="lyricsEn">
