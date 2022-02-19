@@ -53,12 +53,12 @@
       <% end %>
       <div style="margin: 0 6px;">
         <%= label_tag 'Start Time' %>
-        <%= text_field_tag 'start_time_value', @start_value, placeholder: 'sec', style: "width: 50px", data: { action: "keyup->clipboard#changeValue",
+        <%= text_field_tag 'start_time_value', @start_value, placeholder: '0:00', style: "width: 60px", data: { action: "keyup->clipboard#changeValue",
                                                               "clipboard-target": "startTime" } %>
       </div>
       <div style="margin: 0 6px;">
         <%= label_tag 'End Time' %>
-        <%= text_field_tag 'end_time_value', @end_value, placeholder: 'sec', style: "width: 50px", data: { action: "keyup->clipboard#changeValue",
+        <%= text_field_tag 'end_time_value', @end_value, placeholder: '0:00', style: "width: 60px", data: { action: "keyup->clipboard#changeValue",
                                                               "clipboard-target": "endTime" } %>
       </div>
       <div style="margin: auto 6px;">
