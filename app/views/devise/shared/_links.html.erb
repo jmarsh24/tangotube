@@ -19,6 +19,6 @@
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
-  <%= button_to "Sign In With Google", user_google_oauth2_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, style: "background: #cc330d; color: #fff; font-size: 14px; height: 40px;" %>
-  <%= button_to "Sign In With Facebook", user_facebook_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, style: "background: #3B5998; color: #fff; font-size: 14px; height: 40px;" %>
+  <%= button_to "Sign In With Google", user_google_oauth2_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button-4", style: "background: #cc330d; color: #fff; width: 100%;" %>
+  <%= button_to "Sign In With Facebook", user_facebook_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button-4", style: "background: #3B5998; color: #fff; width: 100%;" %>
 <% end %>

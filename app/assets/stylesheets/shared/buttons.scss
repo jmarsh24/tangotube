@@ -9,6 +9,7 @@
   cursor: pointer;
   display: flex;
   gap: 5px;
+  justify-content: center;
   align-items: center;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 14px;
@@ -21,7 +22,6 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  vertical-align: middle;
   white-space: nowrap;
   word-wrap: break-word;
 
