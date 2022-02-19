@@ -61,6 +61,14 @@
         <%= text_field_tag 'end_time_value', @end_value, placeholder: 'sec', style: "width: 50px", data: { action: "keyup->clipboard#changeValue",
                                                               "clipboard-target": "endTime" } %>
       </div>
+      <div style="margin: auto 6px;">
+        <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25" ,
+                                                               ".5x" => "0.5",
+                                                              ".75x" => "0.75",
+                                                                 "1" => "1.0"}, selected: @playback_speed.to_f ),
+                                                                 data: { action: "change->clipboard#changeValue",
+                                                                         "clipboard-target": "playbackSpeed" } %>
+      </div>
     </div>
   </div>
 </div>
