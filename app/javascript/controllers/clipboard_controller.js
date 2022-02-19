@@ -43,8 +43,21 @@ export default class extends Controller {
   }
 
   changeValue() {
-    this.startTimeValue = this.startTimeTarget.value
-    this.endTimeValue = this.endTimeTarget.value
+
+    var startTimeArray = this.startTimeTarget.value.split(':')
+    var endTimeArray = this.endTimeTarget.value.split(':')
+    if (startTimeArray.length == 2) {
+      this.startTimeValue = (+startTimeArray[0]) * 60 + (+startTimeArray[1])
+    }
+    if (startTimeArray.length == 1) {
+      this.startTimeValue = startTimeArray[0]
+    }
+    if (endTimeArray.length == 2) {
+      this.endTimeValue = (+endTimeArray[0]) * 60 + (+endTimeArray[1])
+    }
+    if (endTimeArray.length == 1) {
+      this.endTimeValue = endTimeArray[0]
+    }
     this.playbackSpeedValue = this.playbackSpeedTarget.value
   }
 }
