@@ -23,36 +23,6 @@
 @import 'playlists/**/*';
 @import 'events/**/*';
 
-button {
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  background-color: rgb(249, 250, 251);
-  border: 1px solid rgb(209, 213, 219);
-  border-radius: 2px;
-  color: rgb(107, 114, 128);
-  font-size: 20px;
-  padding: 10px;
-
-  &.button--flash {
-    font-size: 14px;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-
-    &:hover {
-      background-color: transparent;
-      cursor: pointer;
-    }
-  }
-
-  &:hover {
-    background-color: rgb(251, 251, 251);
-    cursor: pointer;
-  }
-}
-
 input {
   font-size: 16px;
   padding: 6px 10px;
@@ -95,7 +65,7 @@ button {
 }
 
 #mainSectionContainer {
-  padding-top: 80px;
+  padding-top: 90px;
   flex: 1 0 auto;
   background-color: $secondary-color;
 }
@@ -123,8 +93,8 @@ button {
   font-weight: bold !important;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px) {
   #mainSectionContainer {
-    padding-top: 50px;
+    padding-top: 60px;
   }
 }
