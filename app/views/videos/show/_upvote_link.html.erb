@@ -1,11 +1,28 @@
-<%= content_tag "div", id: "upvote-#{video.id}" do %>
-  <%= link_to upvote_video_path(video), method: :patch,
-                                        remote: true,
-                                        style: "display: flex; justify-content: center; align-items: center;" do %>
-    <% if current_user.voted_up_on? video %>
-      <%= fa_icon "thumbs-up solid", style: "font-size: 30px; margin: 0 10px;" %>
-    <% else %>
-      <%= fa_icon "thumbs-up regular", style: "font-size: 30px; margin: 0 10px;" %>
+<div
+  <% unless current_user %>
+    data-controller="popper"
+  <% end %>
+>
+  <%= content_tag "div", { id: "upvote-#{video.id}", data: { "popper-target": "element", action: "click->popper#show click@window->popper#hide" } } do %>
+    <%= link_to upvote_video_path(video), method: :patch,
+                                                  remote: true,
+                                                  style: "display: flex; justify-content: center; align-items: center;" do %>
+      <% if current_user %>
+        <% if current_user.voted_up_on? video %>
+          <%= fa_icon "thumbs-up solid", style: "font-size: 30px; margin: 0 10px;" %>
+        <% else %>
+          <%= fa_icon "thumbs-up regular", style: "font-size: 30px; margin: 0 10px;" %>
+        <% end %>
+      <% else %>
+        <%= fa_icon "thumbs-up solid", style: "font-size: 30px; margin: 0 10px;" %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+  <div id="tooltip" role="tooltip" data-popper-target="tooltip">
+    Like this video? <br>
+    Sign in to make your opinion count. <br>
+    <br>
+    <%= link_to "Login", new_user_session_path, { "data-turbo-frame": "_top" } %>
+    <div id="arrow" data-popper-arrow></div>
+  </div>
+</div>
