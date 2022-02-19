@@ -61,3 +61,17 @@
   }
 }
 
+.button--flash {
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  font-size: 17px;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
