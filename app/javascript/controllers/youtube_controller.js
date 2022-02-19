@@ -5,13 +5,15 @@ export default class extends Controller {
   static values = {
     videoId: String,
     startSeconds: Number,
-    endSeconds: Number
+    endSeconds: Number,
+    playbackSpeed: Number
   }
   static targets = ['frame']
 
   initialize () {
     this.startSeconds = this.startSecondsValue
     this.endSeconds = this.endSecondsValue
+    this.playbackSpeed = this.playbackSpeedValue
     this.element['youtube'] = this
   }
 
@@ -38,6 +40,8 @@ export default class extends Controller {
       this.element.setAttribute('data-time', this.time)
       this.element.setAttribute('data-state', -1)
     })
+
+    player.setPlaybackRate(this.playbackSpeed)
 
     player.on('stateChange', e => {
       if (e.data === YT.PlayerState.ENDED) {
@@ -72,7 +76,6 @@ export default class extends Controller {
   pause = () => this.player.pauseVideo()
   stop = () => this.player.stopVideo()
   seek = seconds => this.player.seekTo(seconds)
-  playbackSpeed = playbackSpeed => this.player.setPlaybackRate(.25)
 
   get player () {
     return this.youtube

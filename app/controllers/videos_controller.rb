@@ -23,6 +23,7 @@ class VideosController < ApplicationController
     @start_value = params[:start]
     @end_value = params[:end]
     @root_url = root_url
+    @playback_speed = params[:speed]
     set_recommended_videos
     @video.clicked!
     UpdateVideoWorker.perform_async(@video.youtube_id)
