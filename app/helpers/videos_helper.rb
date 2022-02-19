@@ -46,13 +46,13 @@ module VideosHelper
               watch_path(v: youtube_id),
               { 'data-turbo-frame': "_top" }
     end
-  end
+  end``
 
   def primary_title(dancer_names, title, song_attributes, _youtube_id)
     if dancer_names.present? && song_attributes.present?
       dancer_names
     else
-      truncate(title, length: 85)
+      title
     end
   end
 
