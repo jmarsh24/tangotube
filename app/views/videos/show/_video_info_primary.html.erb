@@ -66,8 +66,9 @@
                                                                ".5x" => "0.5",
                                                               ".75x" => "0.75",
                                                                  "1" => "1.0"}, @playback_speed.to_f),
-                                                                 data: { action: "change->clipboard#changeValue",
-                                                                         "clipboard-target": "playbackSpeed" }, style: "font-size: 16px" %>
+                                                                 data: { action: "change->clipboard#changeValue change->youtube#update",
+                                                                         "clipboard-target": "playbackSpeed",
+                                                                         "youtube-target": "playbackSpeed" }, style: "font-size: 16px" %>
       </div>
     </div>
   </div>
