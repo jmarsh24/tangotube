@@ -8,7 +8,7 @@ export default class extends Controller {
     endSeconds: Number,
     playbackSpeed: Number
   }
-  static targets = ['frame']
+  static targets = ["frame", "playbackSpeed"]
 
   initialize () {
     this.startSeconds = this.startSecondsValue
@@ -54,10 +54,13 @@ export default class extends Controller {
     })
   }
 
-  // disconnect () {
-  //   document.removeEventListener('turbolinks:before-cache', this.player.destroy)
-  //   document.removeEventListener('turbo:before-cache', this.player.destroy)
-  // }
+  update () {
+    this.player.setPlaybackRate(parseFloat(this.playbackSpeedTarget.value))
+  }
+
+  disconnect () {
+    document.removeEventListener('turbo:before-cache', this.player.destroy)
+  }
 
   startTimer () {
     this.timer = setInterval(() => {
