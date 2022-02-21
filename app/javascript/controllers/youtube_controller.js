@@ -8,14 +8,7 @@ export default class extends Controller {
     endSeconds: Number,
     playbackSpeed: Number
   }
-  static targets = ["frame", "playbackSpeed"]
-
-  initialize () {
-    this.startSeconds = this.startSecondsValue
-    this.endSeconds = this.endSecondsValue
-    this.playbackSpeed = this.playbackSpeedValue
-    this.element['youtube'] = this
-  }
+  static targets = ["frame", "playbackSpeed", "startTime", "endTime"]
 
   connect () {
     var playerConfig = {
@@ -27,8 +20,8 @@ export default class extends Controller {
         fs: 1, // Hide the full screen button
         cc_load_policy: 0, // Hide closed captions
         iv_load_policy: 3, // Hide the Video Annotations
-        start: this.startSeconds,
-        end: this.endSeconds
+        start: this.startSecondsValue,
+        end: this.endSecondsValue
       }
     }
 
@@ -41,21 +34,52 @@ export default class extends Controller {
       this.element.setAttribute('data-state', -1)
     })
 
-    player.setPlaybackRate(this.playbackSpeed)
+    player.setPlaybackRate(this.playbackSpeedValue)
 
     player.on('stateChange', e => {
       if (e.data === YT.PlayerState.ENDED) {
-        player.loadVideoById({
-          videoId: this.videoIdValue,
-          startSeconds: this.startSeconds,
-          endSeconds: this.endSeconds
-        })
+        this.player.seekTo(this.startSecondsValue)
       }
     })
   }
 
-  update () {
+  updatePlaybackSpeed () {
+    console.log('fired')
     this.player.setPlaybackRate(parseFloat(this.playbackSpeedTarget.value))
+  }
+
+  updateStartTime () {
+    var startTimeArray = this.startTimeTarget.value.split(':')
+    if (startTimeArray.length == 2) {
+      var startTime = (+startTimeArray[0]) * 60 + (+startTimeArray[1])
+    }
+    if (startTimeArray.length == 1) {
+      var startTime = startTimeArray[0]
+    }
+    this.startSecondsValue = startTime
+    this.player.loadVideoById({
+      videoId: this.videoIdValue,
+      startSeconds: this.startSecondsValue,
+      endSeconds: this.endSecondsValue
+    })
+  }
+
+  updateEndTime () {
+    var endTimeArray = this.endTimeTarget.value.split(':')
+    if (endTimeArray.length == 2) {
+      var endTime = (+endTimeArray[0]) * 60 + (+endTimeArray[1])
+    }
+    if (endTimeArray.length == 1) {
+      var endTime = endTimeArray[0]
+    }
+    console.log(this.startSecondsValue)
+    console.log(this.endSecondsValue)
+    this.endSecondsValue = endTime
+    this.player.loadVideoById({
+      videoId: this.videoIdValue,
+      startSeconds: this.startSecondsValue,
+      endSeconds: this.endSecondsValue
+    })
   }
 
   disconnect () {
