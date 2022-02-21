@@ -44,7 +44,6 @@ export default class extends Controller {
   }
 
   updatePlaybackSpeed () {
-    console.log('fired')
     this.player.setPlaybackRate(parseFloat(this.playbackSpeedTarget.value))
   }
 
@@ -72,8 +71,6 @@ export default class extends Controller {
     if (endTimeArray.length == 1) {
       var endTime = endTimeArray[0]
     }
-    console.log(this.startSecondsValue)
-    console.log(this.endSecondsValue)
     this.endSecondsValue = endTime
     this.player.loadVideoById({
       videoId: this.videoIdValue,
