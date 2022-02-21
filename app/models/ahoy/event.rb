@@ -14,7 +14,8 @@ class Ahoy::Event < AhoyRecord
       .group("properties")
       .having("count(properties) >= ?", MIN_NUMBER_OF_VIEWS)
       .map(&:properties)
-      .pluck("youtube_id")
+      .pluck("video_id")
+      .compact
     end
 
     def viewed_by_user(user)
