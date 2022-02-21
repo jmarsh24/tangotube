@@ -1,8 +1,9 @@
 // Entry point for the build script in your package.json
+require("@rails/ujs").start()
 require("@hotwired/turbo")
 
-import "./controllers"
 import "@fortawesome/fontawesome-free/js/all"
+import "./controllers"
 
 // Load the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
