@@ -140,7 +140,7 @@ class Video < ApplicationRecord
     end
 
     def most_viewed_videos_by_month
-      where( youtube_id: Ahoy::Event.most_viewed_videos_by_month)
+      where( id: Ahoy::Event.most_viewed_videos_by_month)
     end
   end
 
