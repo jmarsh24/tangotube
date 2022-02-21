@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import axios from 'axios'
-import autocomplete from 'autocomplete.js'
+import { autocomplete } from '@algolia/autocomplete-js'
 
 export default class extends Controller {
   static targets = ['field']
