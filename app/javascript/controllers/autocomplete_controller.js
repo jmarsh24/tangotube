@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 import axios from 'axios'
 import autocomplete from 'autocomplete.js'
 

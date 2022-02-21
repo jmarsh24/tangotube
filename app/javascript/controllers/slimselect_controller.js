@@ -1,6 +1,6 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 import SlimSelect from 'slim-select'
-import 'slim-select/dist/slimselect.min.css'
+// import 'slim-select/dist/slimselect.min.css'
 
 export default class extends Controller {
 static values = { placeholder: String }
