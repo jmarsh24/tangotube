@@ -6,7 +6,6 @@
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo": "^7.0.0-beta.4",
     "@popperjs/core": "^2.11.2",
-    "@rails/webpacker": "^5.4.0",
     "autocomplete.js": "^0.38.0",
     "axios": "^0.21.1",
     "esbuild": "^0.14.23",
