@@ -53,20 +53,22 @@
       <% end %>
       <div style="margin: 0 6px;">
         <%= label_tag 'Start Time' %>
-        <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', style: "width: 60px", data: { action: "keyup->clipboard#changeValue",
-                                                              "clipboard-target": "startTime" } %>
+        <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', style: "width: 60px", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",
+                                                              "clipboard-target": "startTime",
+                                                              "youtube-target": "startTime" } %>
       </div>
       <div style="margin: 0 6px;">
         <%= label_tag 'End Time' %>
-        <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', style: "width: 60px", data: { action: "keyup->clipboard#changeValue",
-                                                              "clipboard-target": "endTime" } %>
+        <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', style: "width: 60px", data: { action: "keyup->clipboard#changeValue input->youtube#updateEndTime",
+                                                              "clipboard-target": "endTime",
+                                                              "youtube-target": "endTime" } %>
       </div>
       <div style="margin: auto 6px;">
         <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25" ,
                                                                ".5x" => "0.5",
                                                               ".75x" => "0.75",
                                                                  "1" => "1.0"}, @playback_speed.to_f),
-                                                                 data: { action: "change->clipboard#changeValue change->youtube#update",
+                                                                 data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackSpeed",
                                                                          "clipboard-target": "playbackSpeed",
                                                                          "youtube-target": "playbackSpeed" }, style: "font-size: 16px" %>
       </div>
