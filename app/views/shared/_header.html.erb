@@ -24,6 +24,7 @@
                                   value: params[:query],
                                   placeholder: "Search #{number_with_delimiter(@videos_total)} videos...",
                                   autocomplete:"off",
+                                  spellcheck:"false",
                                   data: { action: "focus->combobox#start
                                                    keydown->combobox#start
                                                    input->form#submit",
