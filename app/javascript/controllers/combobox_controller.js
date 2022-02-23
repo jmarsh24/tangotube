@@ -31,7 +31,6 @@ export default class extends Controller {
     }
 
   stop() {
-    console.log('fired')
     this.windowTarget.classList.add('isHidden')
     this.combobox?.stop()
   }
