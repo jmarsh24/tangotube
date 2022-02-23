@@ -34,19 +34,19 @@
     </div>
   </div>
   <div class="share-container">
-    <div style="display: flex; padding: 10px;">
+    <div style="display: flex; align-items: flex-end; padding: 10px;">
       <%= render 'videos/show/upvote_link', video: @video %>
       <%= render 'videos/show/like_count', video: @video %>
       <%= render 'videos/show/downvote_link', video: @video %>
     </div>
-    <div style="display: flex"
+    <div class="youtube-controls"
          data-controller= "clipboard"
          data-clipboard-success-content="Copied!"
          data-clipboard-video-id="<%= @video.youtube_id %>"
          data-clipboard-root-url="<%= @root_url %>"
     >
       <%= button_tag type: "button",
-                          class: "button-4",
+                          class: "button",
                           data: { "clipboard-target": "button",
                           action: "clipboard#copy"} do %>
         <%= fa_icon 'share', text: "Share" %>
@@ -63,7 +63,7 @@
                                                               "clipboard-target": "endTime",
                                                               "youtube-target": "endTime" } %>
       </div>
-      <div style="margin: auto 6px;">
+      <div style="margin: 0 6px;">
         <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25" ,
                                                                ".5x" => "0.5",
                                                               ".75x" => "0.75",

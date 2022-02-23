@@ -1,4 +1,4 @@
-.button-4 {
+.button {
   appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
@@ -24,39 +24,40 @@
   touch-action: manipulation;
   white-space: nowrap;
   word-wrap: break-word;
+  height: 40px;
 
   svg {
     font-size: inherit;
   }
 
-  .button-4:hover {
+  .button:hover {
     background-color: #F3F4F6;
     text-decoration: none;
     transition-duration: 0.1s;
   }
 
-  .button-4:disabled {
+  .button:disabled {
     background-color: #FAFBFC;
     border-color: rgba(27, 31, 35, 0.15);
     color: #959DA5;
     cursor: default;
   }
 
-  .button-4:active {
+  .button:active {
     background-color: #EDEFF2;
     box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
     transition: none 0s;
   }
 
-  .button-4:focus {
+  .button:focus {
     outline: 1px transparent;
   }
 
-  .button-4:before {
+  .button:before {
     display: none;
   }
 
-  .button-4:-webkit-details-marker {
+  .button:-webkit-details-marker {
     display: none;
   }
 }
