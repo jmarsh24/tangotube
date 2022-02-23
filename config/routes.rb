@@ -39,7 +39,11 @@ Rails.application.routes.draw do
       patch "downvote", to: "videos#downvote"
     end
   end
-  resources :search_suggestions, only: :index
+  resources :search_suggestions, only: :index do
+    collection do
+      post :search
+    end
+  end
   resources :leaders, only: %i[index create]
   resources :followers, only: %i[index create]
   resources :events, only: %i[index create]
