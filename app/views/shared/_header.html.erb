@@ -13,26 +13,39 @@
     <div class="logoContainer">
       <%= link_to "TangoTube", root_path %>
     </div>
-    <div class="autocompleteContainer" data-controller="autocomplete">
-      <%= form_with(url: root_path, method: :get, local: true, class: "searchBarContainer") do |form| %>
-        <%= form.text_field :query,
-              value: @current_search,
-              placeholder: "Search #{number_with_delimiter(@videos_total)} videos...",
-              class: 'searchBar',
-                      'data-autocomplete-target': "field",
-                      'data-autocomplete-url': "/search_suggestions" %>
-        <%= form.button fa_icon("search"), class: "searchButton", name: nil %>
+    <div class="autocompleteContainer" data-controller="combobox">
+      <%= form_with url: root_path,
+        method: :get,
+        class: "searchBarContainer",
+        data: { controller: "form",
+                    action: "invalid->form#hideValidationMessage:capture",
+                    "form-url": search_search_suggestions_path } do |f| %>
+       <%= f.search_field :query, class: "searchBar",
+                                  value: params[:query],
+                                  placeholder: "Search #{number_with_delimiter(@videos_total)} videos...",
+                                  autocomplete:"off",
+                                  data: { action: "focus->combobox#start
+                                                   focusout->combobox#stop
+                                                   keydown->combobox#start
+                                                   click@window->combobox#stop
+                                                   input->form#submit",
+                                          "combobox-target": "input",
+                                          "form-target": "input" } %>
+       <%= f.button fa_icon("search"), name: nil, type: 'submit', class: "searchButton" %>
+        <div id="search_results" target="_top" data-combobox-target="window" class="isHidden">
+          <ul role="listbox" data-combobox-target="list"></ul>
+        </div>
       <% end %>
       </div>
-    <nav id="Login">
-      <% if user_signed_in? %>
-        <%= image_tag current_user.image, size: "30x30", style: "border-radius: 50%" if current_user.image? %>
-        <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class:'navbar-link'  %>
-        <%= link_to "Sign up", new_user_registration_path, class:'navbar-link', id: 'sign-up' %>
-      <% end %>
-    </nav>
+      <nav id="Login">
+        <% if user_signed_in? %>
+          <%= image_tag current_user.image, size: "30x30", style: "border-radius: 50%" if current_user.image? %>
+          <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class:'navbar-link'  %>
+          <%= link_to "Sign up", new_user_registration_path, class:'navbar-link', id: 'sign-up' %>
+        <% end %>
+      </nav>
+    </div>
   </div>
-</div>
