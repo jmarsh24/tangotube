@@ -76,18 +76,75 @@
   }
 }
 
-.youtube-controls {
-  display: flex;
-  align-items: flex-end;
+.share-container {
+    display:flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
 
-  input {
-    margin: 0;
-    height: 40px
+  .copy-to-clipboard {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0px;
+    width: 100%;
+
+    &__field {
+
+    }
+
+    .input {
+      font-size: 15px;
+      width: 100%;
+      // min-width: 340px;
+      // max-width: 700px;
+      border-top: 1px solid rgba(27, 31, 35, 0.15);
+      border-left: 1px solid rgba(27, 31, 35, 0.15);
+      border-bottom: 1px solid rgba(27, 31, 35, 0.15);
+      border-right: 0px;
+      margin: 0px;
+    }
+
+    button {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      margin: 0 !important;
+    }
   }
 
-  select {
-    height: 40px;
-    line-height: 40px;
-    background: white;
+  .like-buttons {
+    display: flex;
+    align-items: flex-end;
   }
+
+  .youtube-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+
+    .youtube-controls-time {
+      display: flex;
+      flex-direction: column;
+
+      .input {
+        width: 100%;
+        width: 60px;
+      }
+    }
+
+    .select {
+      height: 40px;
+      line-height: 40px;
+      background: white;
+    }
+
+    .spacer {
+      font-size: 20px;
+      font-style: bold;
+    }
+  }
+
 }

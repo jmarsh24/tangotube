@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ["button", "startTime", "endTime", "playbackSpeed"]
+  static targets = ["button", "startTime", "endTime", "playbackSpeed", "source"]
   static values = { source: String,
                     originalText: String,
                     successDurationValue: Number,
@@ -17,19 +17,13 @@ export default class extends Controller {
 
   connect() {
     this.originalText = this.buttonTarget.innerHTML
+    this.playbackSpeedValue = this.playbackSpeedTarget.value
+    this.startTimeValue = this.parseTime(this.startTimeTarget.value)
+    this.endTimeValue = this.parseTime(this.endTimeTarget.value)
+    this.urlValueUpdate()
   }
 
   copy () {
-    this.urlValue = `${this.data.get('rootUrl')}watch?v=${this.data.get('videoId')}`
-
-    if (this.startTimeValue > 0 & this.endTimeValue > 0 ){
-      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&end=${this.endTimeValue}&speed=${this.playbackSpeedValue}`
-    }
-
-    if (this.startTimeValue > 0 & isNaN(this.endTimeValue) ){
-      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}`
-    }
-
     navigator.clipboard.writeText(this.urlValue)
     this.copied()
   }
@@ -42,22 +36,41 @@ export default class extends Controller {
     }, this.successDurationValue)
   }
 
-  changeValue() {
+  parseTime(time) {
+    var timeArray = time.toString().split(':')
+    var timeInSeconds = 0
+    if (timeArray.length == 2) {
+      timeInSeconds = (+timeArray[0]) * 60 + (+timeArray[1])
+    }
+    if (timeArray.length == 1) {
+      timeInSeconds = timeArray[0]
+    }
+    return parseInt(timeInSeconds)
+  }
 
-    var startTimeArray = this.startTimeTarget.value.split(':')
-    var endTimeArray = this.endTimeTarget.value.split(':')
-    if (startTimeArray.length == 2) {
-      this.startTimeValue = (+startTimeArray[0]) * 60 + (+startTimeArray[1])
+  urlValueUpdate() {
+    this.urlValue = `${this.data.get('rootUrl')}watch?v=${this.data.get('videoId')}`
+
+    if (this.startTimeValue > 0 & this.endTimeValue > 0 & this.playbackSpeedValue != 1 & this.startTimeValue < this.endTimeValue) {
+      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&end=${this.endTimeValue}&speed=${this.playbackSpeedValue}`
     }
-    if (startTimeArray.length == 1) {
-      this.startTimeValue = startTimeArray[0]
+    else if (this.startTimeValue > 0 & this.endTimeValue > 0 & this.playbackSpeedValue == 1 & this.startTimeValue < this.endTimeValue) {
+      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&end=${this.endTimeValue}`
     }
-    if (endTimeArray.length == 2) {
-      this.endTimeValue = (+endTimeArray[0]) * 60 + (+endTimeArray[1])
+    else if (this.startTimeValue > 0 & this.endTimeValue == 0 & this.playbackSpeedValue != 1) {
+      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&speed=${this.playbackSpeedValue}`
     }
-    if (endTimeArray.length == 1) {
-      this.endTimeValue = endTimeArray[0]
+    else if (this.startTimeValue > 0) {
+      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}`
     }
+    this.sourceTarget.value = this.urlValue
+  }
+
+  changeValue() {
     this.playbackSpeedValue = this.playbackSpeedTarget.value
+    this.startTimeValue = this.parseTime(this.startTimeTarget.value)
+    this.endTimeValue = this.parseTime(this.endTimeTarget.value)
+    this.urlValueUpdate()
+    this.sourceTarget.value = this.urlValue
   }
 }
