@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import Rails from '@rails/ujs'
+import { FetchRequest } from "@rails/request.js"
 
 export default class extends Controller {
   static targets = ['filter']
@@ -59,11 +59,14 @@ export default class extends Controller {
     return searchParams
   }
 
-  replaceContents (url) {
-    Rails.ajax({
-      type: 'get',
-      url: url,
-      success: data => {
+  async replaceContents (url) {
+      const request = new FetchRequest('get', url, {responseKind: "html"} )
+      const response = await request.perform()
+      if (response.ok) {
+        const data = await response.html
+        var parser = new DOMParser()
+        var parsedData = parser.parseFromString(data, 'text/html');
+
         const replaceContainers = [
           'filter-container',
           'videos',
@@ -72,16 +75,12 @@ export default class extends Controller {
         ]
 
         replaceContainers.forEach(element => {
-          document.getElementById(element).innerHTML = data.getElementById(element).innerHTML
+          document.getElementById(element).innerHTML = parsedData.getElementById(element).innerHTML
         })
 
         history.pushState({}, '', `${window.location.pathname}?${this.params}`)
-      },
-      error: data => {
-        console.log(data)
       }
-    })
-  }
+    }
 
   getBack () {
     window.onpopstate = function () {
