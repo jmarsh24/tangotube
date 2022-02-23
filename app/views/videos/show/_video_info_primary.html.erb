@@ -33,45 +33,50 @@
       <%= formatted_metadata(@video) %>
     </div>
   </div>
-  <div class="share-container">
-    <div style="display: flex; align-items: flex-end; padding: 10px;">
+  <div class="share-container"
+    data-controller= "clipboard"
+    data-clipboard-success-content="Copied!"
+    data-clipboard-video-id="<%= @video.youtube_id %>"
+    data-clipboard-root-url="<%= @root_url %>"
+    >
+    <div class="like-buttons">
       <%= render 'videos/show/upvote_link', video: @video %>
       <%= render 'videos/show/like_count', video: @video %>
       <%= render 'videos/show/downvote_link', video: @video %>
     </div>
-    <div class="youtube-controls"
-         data-controller= "clipboard"
-         data-clipboard-success-content="Copied!"
-         data-clipboard-video-id="<%= @video.youtube_id %>"
-         data-clipboard-root-url="<%= @root_url %>"
-    >
-      <%= button_tag type: "button",
-                          class: "button",
-                          data: { "clipboard-target": "button",
-                          action: "clipboard#copy"} do %>
-        <%= fa_icon 'share', text: "Share" %>
-      <% end %>
-      <div style="margin: 0 6px;">
-        <%= label_tag 'Start Time' %>
-        <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', style: "width: 60px", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",
+    <div class="youtube-controls">
+      <div class="youtube-controls-time">
+        <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",
                                                               "clipboard-target": "startTime",
                                                               "youtube-target": "startTime" } %>
       </div>
-      <div style="margin: 0 6px;">
-        <%= label_tag 'End Time' %>
-        <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', style: "width: 60px", data: { action: "keyup->clipboard#changeValue input->youtube#updateEndTime",
+      <span class="spacer">-</span>
+      <div class="youtube-controls-time">
+        <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", data: { action: "keyup->clipboard#changeValue input->youtube#updateEndTime",
                                                               "clipboard-target": "endTime",
                                                               "youtube-target": "endTime" } %>
       </div>
-      <div style="margin: 0 6px;">
-        <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25" ,
+      <span class="spacer">:</span>
+      <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25" ,
                                                                ".5x" => "0.5",
                                                               ".75x" => "0.75",
                                                                  "1" => "1.0"}, @playback_speed.to_f),
                                                                  data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackSpeed",
                                                                          "clipboard-target": "playbackSpeed",
-                                                                         "youtube-target": "playbackSpeed" }, style: "font-size: 16px" %>
-      </div>
+                                                                         "youtube-target": "playbackSpeed" }, class: "select" %>
+    </div>
+    <div class="copy-to-clipboard">
+      <%= text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}",
+                              readonly: "readonly",
+                                class: "copy-to-clipboard__field input",
+                                data: { "clipboard-target": "source" } %>
+      <%= button_tag type: "button",
+                        name: "button",
+                        class: "copy-to-clipboard__button button",
+                        data: { "clipboard-target": "button",
+                        action: "click->clipboard#copy"} do %>
+        <%= fa_icon 'share', text: "Share" %>
+      <% end %>
     </div>
   </div>
 </div>

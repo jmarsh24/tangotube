@@ -8,14 +8,6 @@ $show-video-width: 1300px;
   padding: 16px;
 }
 
-.share-container {
-  display:flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
 .video-responsive-container {
   width: 100%;
   max-width: $show-video-width;
