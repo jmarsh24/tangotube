@@ -60,9 +60,13 @@ export default class extends Controller {
     else if (this.startTimeValue > 0 & this.endTimeValue == 0 & this.playbackSpeedValue != 1) {
       this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&speed=${this.playbackSpeedValue}`
     }
+    else if (this.startTimeValue == 0 & this.endTimeValue == 0 & this.playbackSpeedValue != 1) {
+      this.urlValue = `${this.urlValue}&speed=${this.playbackSpeedValue}`
+    }
     else if (this.startTimeValue > 0) {
       this.urlValue = `${this.urlValue}&start=${this.startTimeValue}`
     }
+
     this.sourceTarget.value = this.urlValue
   }
 
