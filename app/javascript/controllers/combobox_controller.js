@@ -8,6 +8,10 @@ export default class extends Controller {
     this.combobox?.destroy()
   }
 
+  listTargetConnected() {
+    this.start()
+  }
+
   hidden() {
     if (this.listTarget.innerHTML.trim().length == 0) {
       this.windowTarget.classList.add('isHidden')
@@ -25,7 +29,7 @@ export default class extends Controller {
 
   start() {
       this.hidden()
-      this.combobox?.stop()
+      this.combobox?.destroy()
       this.combobox = new Combobox(this.inputTarget, this.listTarget)
       this.combobox.start()
     }
