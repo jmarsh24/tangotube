@@ -4,9 +4,6 @@
 
 import { application } from "./application"
 
-import AutocompleteController from "./autocomplete_controller.js"
-application.register("autocomplete", AutocompleteController)
-
 import ClipboardController from "./clipboard_controller.js"
 application.register("clipboard", ClipboardController)
 
