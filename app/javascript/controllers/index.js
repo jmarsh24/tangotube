@@ -4,11 +4,11 @@
 
 import { application } from "./application"
 
-import AutocompleteController from "./autocomplete_controller.js"
-application.register("autocomplete", AutocompleteController)
-
 import ClipboardController from "./clipboard_controller.js"
 application.register("clipboard", ClipboardController)
+
+import ComboboxController from "./combobox_controller.js"
+application.register("combobox", ComboboxController)
 
 import FilterController from "./filter_controller.js"
 application.register("filter", FilterController)
@@ -16,8 +16,8 @@ application.register("filter", FilterController)
 import FlashController from "./flash_controller.js"
 application.register("flash", FlashController)
 
-import HelloController from "./hello_controller.js"
-application.register("hello", HelloController)
+import FormController from "./form_controller.js"
+application.register("form", FormController)
 
 import PopperController from "./popper_controller.js"
 application.register("popper", PopperController)

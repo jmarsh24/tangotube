@@ -2,15 +2,15 @@
   "name": "tangodb",
   "private": true,
   "dependencies": {
-    "@algolia/autocomplete-js": "^1.5.2",
     "@fortawesome/fontawesome-free": "^6.0.0",
+    "@github/combobox-nav": "^2.0.2",
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo": "^7.0.0-beta.4",
     "@popperjs/core": "^2.11.2",
+    "@rails/request.js": "^0.0.6",
     "@rails/ujs": "^7.0.2-2",
-    "axios": "^0.21.1",
     "esbuild": "^0.14.23",
-    "jquery": "^3.5.1",
+    "lodash.debounce": "^4.0.8",
     "slim-select": "^1.27.0",
     "youtube-player": "^5.5.2"
   },
