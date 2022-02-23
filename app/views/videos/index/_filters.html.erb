@@ -3,7 +3,7 @@
     <div class="filter-container-button-results">
       <%= button_tag type: 'button', data: { action: "click->toggle#toggleFilter",
                                             "toggle-target": "filterButton"},
-                                              class: "button-4 isActive" do %>
+                                              class: "button isActive" do %>
         <%= fa_icon "filter 2x", left: true %>Filter
       <% end %>
       <div id="filter_results">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <%= button_tag type: "button",
-                          class: "button-4",
+                          class: "button",
                           data: { controller: "filter",
                           action: "filter#filter",
                                   "filter-clear-value": "1" } do %>
