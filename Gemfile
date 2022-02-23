@@ -8,7 +8,6 @@ gem "rails", "~> 7.0.2.2"
 gem "redis", "~> 4.2", ">= 4.2.5"
 gem "puma", "4.3.11"
 gem "pg", "1.2.3"
-gem "webpacker", "4.2.2"
 gem "barnes", "~> 0.0.9"
 
 # app specific gems...................................................................
@@ -18,8 +17,10 @@ gem "aws-sdk-s3", require: false
 gem "deepl-rb", "~> 2.4", require: 'deepl'
 gem "devise", "~> 4.7", ">= 4.7.2"
 gem "faraday", "~> 1.1.0"
+gem "font-awesome-rails", "~> 4.7"
 gem "hashie", "~> 4.1"
 gem "hotwire-rails", "~> 0.1.3"
+gem "jsbundling-rails", "~> 1.0"
 gem "nokogiri", "~> 1.10", ">= 1.10.10"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
@@ -34,7 +35,6 @@ gem "sidekiq", "~> 6.1", ">= 6.1.2"
 gem "spring-watcher-listen",  "2.0.1"
 gem "streamio-ffmpeg", "~> 3.0", ">= 3.0.2"
 gem "yt", "~> 0.32.0"
-gem "turbo-rails", "~> 0.5.8"
 
 group :development, :test do
   gem "amazing_print", "~> 1.2", ">= 1.2.2"
@@ -66,6 +66,3 @@ group :test do
   gem "vcr", "~> 6.0"
   gem "webmock", "~> 3.12"
 end
-
-
-gem "font-awesome-rails", "~> 4.7"

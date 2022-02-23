@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 import YouTubePlayer from 'youtube-player'
 
 export default class extends Controller {
