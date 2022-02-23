@@ -25,14 +25,12 @@
                                   placeholder: "Search #{number_with_delimiter(@videos_total)} videos...",
                                   autocomplete:"off",
                                   data: { action: "focus->combobox#start
-                                                   focusout->combobox#stop
                                                    keydown->combobox#start
-                                                   click@window->combobox#stop
                                                    input->form#submit",
                                           "combobox-target": "input",
                                           "form-target": "input" } %>
        <%= f.button fa_icon("search"), name: nil, type: 'submit', class: "searchButton" %>
-        <div id="search_results" target="_top" data-combobox-target="window" class="isHidden">
+        <div id="search_results" target="_top" data-combobox-target="window" class="isHidden" data-action="click@window->combobox#stop">
           <ul role="listbox" data-combobox-target="list"></ul>
         </div>
       <% end %>
