@@ -75,6 +75,6 @@ export default class extends Controller {
     this.endTimeValue = this.parseTime(this.endTimeTarget.value)
     this.urlValueUpdate()
     this.sourceTarget.value = this.urlValue
-    history.pushState({}, '', this.urlValue.split('/')[1])
+    history.pushState({}, '', `watch?v=${this.data.get('videoId')}&start=${this.startTimeValue}&end=${this.endTimeValue}&speed=${this.playbackSpeedValue}`)
   }
 }
