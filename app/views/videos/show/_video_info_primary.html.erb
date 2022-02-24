@@ -57,10 +57,10 @@
                                                               "youtube-target": "endTime" } %>
       </div>
       <span class="spacer">:</span>
-      <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25" ,
-                                                               ".5x" => "0.5",
-                                                              ".75x" => "0.75",
-                                                                 "1" => "1.0"}, @playback_speed.to_f),
+      <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25",
+                                                             ".5x" => "0.50",
+                                                            ".75x" => "0.75",
+                                                              "1x" => "1.0"}, @playback_speed.to_f),
                                                                  data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackSpeed",
                                                                          "clipboard-target": "playbackSpeed",
                                                                          "youtube-target": "playbackSpeed" }, class: "select" %>
