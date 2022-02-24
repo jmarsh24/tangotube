@@ -79,7 +79,6 @@ export default class extends Controller {
       startSeconds: this.startSecondsValue,
       endSeconds: this.endSecondsValue
     })
-    history.pushState({}, '', `watch?v=${this.videoIdValue}&start=${this.startSecondsValue}&end=${this.endSecondsValue}&speed=${this.playbackSpeedTarget.value}`)
   }
 
   disconnect () {

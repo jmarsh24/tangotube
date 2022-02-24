@@ -66,7 +66,6 @@ export default class extends Controller {
     else if (this.startTimeValue > 0) {
       this.urlValue = `${this.urlValue}&start=${this.startTimeValue}`
     }
-
     this.sourceTarget.value = this.urlValue
   }
 
@@ -76,5 +75,6 @@ export default class extends Controller {
     this.endTimeValue = this.parseTime(this.endTimeTarget.value)
     this.urlValueUpdate()
     this.sourceTarget.value = this.urlValue
+    history.pushState({}, '', this.urlValue.split('/')[1])
   }
 }
