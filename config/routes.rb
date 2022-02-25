@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :channels, only: %i[index create]
   resources :playlists, only: %i[index create]
   resources :videos, except: :show do
+    resources :comments, module: :videos
     member do
       patch "upvote", to: "videos#upvote"
       patch "downvote", to: "videos#downvote"

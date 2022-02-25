@@ -24,6 +24,18 @@
       <div class="video-info-container-secondary">
         <div class="video-info-details-main">
           <%= render partial: "videos/show/video_info_details" %>
+          <div class="container">
+            <h2> Comments </h2>
+            <% if user_signed_in? %>
+              <%= render partial: "comments/form", locals: { comment: Comment.new, commentable: @video } %>
+            <% else %>
+              <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to comment
+            <% end %>
+            <%= turbo_stream_from @video, :comments %>
+            <%= tag.div id: "#{dom_id(@video)}_comments" do %>
+              <%= render partial: "comments/comment_with_replies", collection: @video.comments.where(parent_id: nil), as: :comment %>
+            <% end %>
+          </div>
         </div>
         <% if @video.song.present? %>
           <%= render partial: "videos/show/lyrics" if @video.song.lyrics.present? %>
@@ -70,7 +82,8 @@
           <% unless @videos_with_same_song.empty? %>
             <div class="recommended-videos-card" data-toggle-target="recommendedSongVideos">
               <div class="recommended-videos__header">
-                <h2>Videos with <br><i>"<%= @video.song.title.titleize %>" &nbsp;</i><%= "by #{@video.song.artist.titleize}" %></h2>
+                <h2>Videos with <br>
+                  <i>"<%= @video.song.title.titleize %>" &nbsp;</i><%= "by #{@video.song.artist.titleize}" %></h2>
               </div>
               <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song } %>
             </div>

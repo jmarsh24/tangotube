@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   acts_as_voter
 
+  has_many :comments, dependent: :destroy
+
   validate :password_complexity
 
   # Include default devise modules. Others available are:
