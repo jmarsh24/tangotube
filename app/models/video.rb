@@ -12,7 +12,7 @@ class Video < ApplicationRecord
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
-  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :comments, as: :commentable
   has_many :yt_comments, dependent: :destroy
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}

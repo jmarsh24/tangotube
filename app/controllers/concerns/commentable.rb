@@ -18,7 +18,7 @@ module Commentable
         format.turbo_stream {
           if @parent
             # A successful reply to another comment, replace and hide this form
-            render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent, comment), partial: "comments/form", locals: { comment: comment, commentable: @parent, data: { comment_reply_target: :form }, class: "d-none" })
+            render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent, comment), partial: "comments/form", locals: { comment: comment, commentable: @parent, data: { comment_reply_target: :form }, class: "isHidden" })
           else
             render turbo_stream: turbo_stream.replace(dom_id_for_records(@commentable, comment), partial: "comments/form", locals: { comment: comment, commentable: @commentable })
           end

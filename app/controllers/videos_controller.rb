@@ -78,8 +78,8 @@ class VideosController < ApplicationController
   end
 
   def videos_from_this_performance
-    @videos_from_this_performance = Video.includes(:song, :leader, :follower, :event)
-                                         .references(:song, :leader, :follower, :event)
+    @videos_from_this_performance = Video.includes(:song, :leader, :follower, :event, :channel)
+                                         .references(:song, :leader, :follower, :event, :channel)
                                          .where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
                                          .where(channel_id: @video.channel_id)
@@ -93,8 +93,8 @@ class VideosController < ApplicationController
   end
 
   def videos_with_same_event
-    @videos_with_same_event = Video.includes(:song, :leader, :follower, :event)
-                                   .references(:song, :leader, :follower, :event)
+    @videos_with_same_event = Video.includes(:song, :leader, :follower, :event, :channel)
+                                   .references(:song, :leader, :follower, :event, :channel)
                                    .where(event_id: @video.event_id)
                                    .where.not(event: nil)
                                    .where("upload_date <= ?", @video.upload_date + 7.days)
@@ -106,8 +106,8 @@ class VideosController < ApplicationController
   end
 
   def videos_with_same_song
-    @videos_with_same_song = Video.includes(:song, :leader, :follower, :event)
-                                  .references(:song, :leader, :follower, :event)
+    @videos_with_same_song = Video.includes(:song, :leader, :follower, :event, :channel)
+                                  .references(:song, :leader, :follower, :event, :channel)
                                   .where(song_id: @video.song_id)
                                   .has_leader.has_follower
                                   .where(hidden: false)
@@ -117,8 +117,8 @@ class VideosController < ApplicationController
   end
 
   def videos_with_same_channel
-    @videos_with_same_channel = Video.includes(:song, :leader, :follower, :event)
-                                  .references(:song, :leader, :follower, :event)
+    @videos_with_same_channel = Video.includes(:song, :leader, :follower, :event, :channel)
+                                  .references(:song, :leader, :follower, :event, :channel)
                                   .where(channel_id: @video.channel_id)
                                   .has_leader.has_follower
                                   .where(hidden: false)
