@@ -1,10 +1,9 @@
-// Entry point for the build script in your package.json
+import "@hotwired/turbo-rails"
+
 import "@fortawesome/fontawesome-free/js/all"
 
 import "./channels"
 import "./controllers"
-
-import { Turbo } from "@hotwired/turbo-rails"
 
 // Load the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
