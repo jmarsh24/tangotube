@@ -14,6 +14,7 @@ gem "barnes", "~> 0.0.9"
 gem "acts_as_votable", "~> 0.13.2"
 gem "ahoy_matey", "~> 3.1"
 gem "aws-sdk-s3", require: false
+gem "bootsnap", require: false
 gem "deepl-rb", "~> 2.4", require: 'deepl'
 gem "devise", "~> 4.7", ">= 4.7.2"
 gem "faraday", "~> 1.1.0"
@@ -29,12 +30,14 @@ gem "prettier", "~> 1.5"
 gem "pg_search", "~> 2.3", ">= 2.3.5"
 gem "rails_autolink", "~> 1.1"
 gem "rspotify", "~> 2.9", ">= 2.9.2"
-gem "sass-rails", "6.0.0"
+gem "sassc-rails"
 gem "scenic", "~> 1.5", ">= 1.5.4"
 gem "sidekiq", "~> 6.1", ">= 6.1.2"
 gem "spring-watcher-listen",  "2.0.1"
+gem "stimulus-rails", "~> 1.0"
 gem "streamio-ffmpeg", "~> 3.0", ">= 3.0.2"
 gem "turbo-rails", "~> 0.5.12"
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "yt", "~> 0.32.0"
 
 group :development, :test do
