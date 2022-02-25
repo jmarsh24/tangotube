@@ -1,0 +1,12 @@
+<%= turbo_stream_from comment %>
+<%= turbo_frame_tag comment do %>
+  <div class="d-flex justify-content-between">
+    <div><%= comment.user.name %></div>
+    <div class="d-flex">
+      <%= link_to "Edit", edit_comment_path(comment), class: "mr-2" %>
+      <%= button_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" } %>
+    </div>
+  </div>
+
+  <%= comment.body %>
+<% end %>
