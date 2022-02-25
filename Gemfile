@@ -34,6 +34,7 @@ gem "scenic", "~> 1.5", ">= 1.5.4"
 gem "sidekiq", "~> 6.1", ">= 6.1.2"
 gem "spring-watcher-listen",  "2.0.1"
 gem "streamio-ffmpeg", "~> 3.0", ">= 3.0.2"
+gem "turbo-rails", "~> 0.5.12"
 gem "yt", "~> 0.32.0"
 
 group :development, :test do
