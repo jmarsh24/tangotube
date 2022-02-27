@@ -24,17 +24,21 @@
       <div class="video-info-container-secondary">
         <div class="video-info-details-main">
           <%= render partial: "videos/show/video_info_details" %>
-          <div class="container">
+          <div class="container" style="padding: 0 16px;">
             <h2> Comments </h2>
             <% if user_signed_in? %>
               <%= render partial: "comments/form", locals: { comment: Comment.new, commentable: @video } %>
             <% else %>
-              <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to comment
+              <div style="margin-bottom: 16px;">
+                <%= link_to "Sign up",  new_user_registration_path, style: "font-size: 16px;", 'data-turbo-frame': "_top" %> or <%= link_to "Login", new_user_session_path, style: "font-size: 16px;", 'data-turbo-frame': "_top" %> to comment
+              </div>
             <% end %>
-            <%= turbo_stream_from @video, :comments %>
-            <%= tag.div id: "#{dom_id(@video)}_comments" do %>
-              <%= render partial: "comments/comment_with_replies", collection: @video.comments.where(parent_id: nil), as: :comment %>
-            <% end %>
+            <div>
+              <%= turbo_stream_from @video, :comments %>
+              <%= tag.div id: "#{dom_id(@video)}_comments" do %>
+                <%= render partial: "comments/comment_with_replies", collection: @video.comments.where(parent_id: nil), as: :comment %>
+              <% end %>
+            </div>
           </div>
         </div>
         <% if @video.song.present? %>

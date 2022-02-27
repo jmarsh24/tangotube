@@ -25,6 +25,7 @@ class VideosController < ApplicationController
     @root_url = root_url
     @playback_speed = params[:speed] || "1"
     set_recommended_videos
+    @yt_comments = @video.yt_comments
     @video.clicked!
     UpdateVideoWorker.perform_async(@video.youtube_id)
     ahoy.track("Video View", video_id: Video.find_by(youtube_id: show_params[:v]).id )

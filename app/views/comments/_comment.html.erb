@@ -1,11 +1,36 @@
 <%= turbo_stream_from comment %>
 <%= turbo_frame_tag comment do %>
-  <div class="d-flex justify-content-between">
-    <div><%= comment.user.name %></div>
-    <div class="d-flex">
-      <%= link_to "Edit", edit_comment_path(comment), class: "mr-2" %>
-      <%= button_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" } %>
+  <div style="display: flex; justify-content: flex-start; padding: 16px;">
+    <div style="margin-right: 12px;">
+      <%= image_tag comment.user.image, class: "avatar-icon" if comment.user.image.present? %>
+    </div>
+    <div style="flex-grow: 1;">
+      <div style="width: 100%;">
+        <div style="display: flex; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-right: 8px;">
+          <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
+            <div style="color: rgb(7, 89, 133);"><%= "#{comment.user.first_name.titleize} #{comment.user.last_name.titleize}" %></div>
+            <time style="font-size: 11px;"><%= "#{comment.updated_at.strftime("%B %d, %Y")}" %></time>
+          </div>
+          <% if current_user == comment.user %>
+            <div style= "display: flex; justify-content: center; align-items: center; gap: 10px;">
+              <%= button_to "Edit", edit_comment_path(comment), method: :get %>
+              <%= button_to "Delete", comment_path(comment), method: :delete, style: "color: red; background: none; border: none; cursor: pointer; padding: 0; margin: 0; font-size: 0.8rem", data: { confirm: "Are you sure?" } %>
+            </div>
+          <% end %>
+        </div>
+        <p style="margin-bottom: 16px; margin-top: 0px;">
+          <%= comment.body %>
+        </p>
+      </div>
+      <% if current_user == comment.user %>
+        <div class="text-sm">
+          <%= link_to fa_icon("reply", text: "Reply"), "#", data: { action: "click->comment-reply#toggle" }, style: "color: rgb(107, 114, 128);" %>
+        </div>
+      <% else %>
+        <div style="margin-bottom: 16px; font-size: 12px;">
+          <%= link_to "Sign up",  new_user_registration_path, style: "font-size: 12px;", 'data-turbo-frame': "_top" %> or <%= link_to "Login", new_user_session_path, style: "font-size: 12px;", 'data-turbo-frame': "_top" %> to reply
+        </div>
+      <% end %>
     </div>
   </div>
-  <%= comment.body %>
 <% end %>
