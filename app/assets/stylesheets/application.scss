@@ -14,8 +14,9 @@
  */
 
 @import "shared/**/*";
-
 @import "videos/**/*";
+
+@import "comments/**/*";
 @import "devise/**/*";
 @import "layout/**/*";
 @import "static_pages/**/*";
@@ -39,6 +40,7 @@ body {
 
 a {
   text-decoration: none;
+  color: rgb(107, 114, 128);
   &:hover {
     color: $link-color;
   }

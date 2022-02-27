@@ -77,17 +77,17 @@ GEM
     amazing_print (1.4.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.555.0)
-    aws-sdk-core (3.126.2)
+    aws-partitions (1.559.0)
+    aws-sdk-core (3.127.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.54.0)
-      aws-sdk-core (~> 3, >= 3.126.0)
+    aws-sdk-kms (1.55.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.112.0)
-      aws-sdk-core (~> 3, >= 3.126.0)
+    aws-sdk-s3 (1.113.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
     aws-sigv4 (1.4.0)
@@ -122,7 +122,7 @@ GEM
       rexml
     crass (1.0.6)
     deepl-rb (2.4.0)
-    device_detector (1.0.6)
+    device_detector (1.0.7)
     devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -170,7 +170,7 @@ GEM
     io-wait (0.2.1)
     jaro_winkler (1.5.4)
     jmespath (1.6.0)
-    jsbundling-rails (1.0.1)
+    jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
     jwt (2.3.0)
     kramdown (2.3.1)
@@ -253,7 +253,7 @@ GEM
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
     parallel (1.21.0)
-    parser (3.1.0.0)
+    parser (3.1.1.0)
       ast (~> 2.4.1)
     pg (1.2.3)
     pg_search (2.3.6)
@@ -265,7 +265,7 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
-    rack-mini-profiler (2.3.3)
+    rack-mini-profiler (2.3.4)
       rack (>= 1.2.0)
     rack-protection (2.2.0)
       rack
@@ -349,8 +349,8 @@ GEM
       rubocop-ast (>= 1.15.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.15.2)
-      parser (>= 3.0.1.1)
+    rubocop-ast (1.16.0)
+      parser (>= 3.1.1.0)
     rubocop-rails (2.13.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -414,7 +414,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     statsd-ruby (1.5.0)
-    stimulus-rails (1.0.3)
+    stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     streamio-ffmpeg (3.0.2)
       multi_json (~> 1.8)
@@ -459,9 +459,7 @@ GEM
     zeitwerk (2.5.4)
 
 PLATFORMS
-  arm64-darwin-20
-  ruby
-  x86_64-linux
+  arm64-darwin-21
 
 DEPENDENCIES
   acts_as_votable (~> 0.13.2)
