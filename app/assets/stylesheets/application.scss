@@ -13,15 +13,16 @@
  *= require_self
  */
 
-@import 'shared/**/*';
-
+@import "shared/**/*";
 @import "videos/**/*";
+
+@import "comments/**/*";
 @import "devise/**/*";
-@import 'layout/**/*';
-@import 'static_pages/**/*';
-@import 'channels/**/*';
-@import 'playlists/**/*';
-@import 'events/**/*';
+@import "layout/**/*";
+@import "static_pages/**/*";
+@import "channels/**/*";
+@import "playlists/**/*";
+@import "events/**/*";
 
 input {
   font-size: 16px;
@@ -32,13 +33,14 @@ input {
 
 html,
 body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 a {
   text-decoration: none;
+  color: rgb(107, 114, 128);
   &:hover {
     color: $link-color;
   }
@@ -51,8 +53,8 @@ a {
 }
 
 button {
-	-webkit-appearance: none;
-	-moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 #pageContainer {
