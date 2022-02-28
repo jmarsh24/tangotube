@@ -1,6 +1,4 @@
-class Videos::CommentsController < ApplicationController
-  include Commentable
-
+class Videos::CommentsController < CommentsController
   before_action :set_commentable
 
   private
