@@ -1,11 +1,6 @@
 require_relative "boot"
 
 require "rails/all"
-require 'openssl'
-require 'base64'
-require 'net/http/post/multipart'
-require 'irb'
-require 'json'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

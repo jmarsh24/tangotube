@@ -1,8 +1,8 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
   before_action :current_search, only: %i[index]
-  before_action :set_video, only: %i[update edit]
-  before_action :set_recommended_videos, only: %i[edit]
+  before_action :set_video, only: %i[show edit update destroy upvote downvote]
+  before_action :set_recommended_videos, only: %i[edit show]
 
   helper_method :sorting_params, :filtering_params
 
@@ -19,16 +19,21 @@ class VideosController < ApplicationController
   def edit; end
 
   def show
-    @video = Video.find_by(youtube_id: show_params[:v])
     @start_value = params[:start]
     @end_value = params[:end]
     @root_url = root_url
     @playback_speed = params[:speed] || "1"
-    set_recommended_videos
-    @yt_comments = @video.yt_comments
+
+    @comments =
+      if params[:comment]
+        @video.comments.includes([:commentable]).where(id: params[:comment])
+      else
+        @video.comments.includes([:commentable]).where(parent_id: nil)
+      end
+
     @video.clicked!
     UpdateVideoWorker.perform_async(@video.youtube_id)
-    ahoy.track("Video View", video_id: Video.find_by(youtube_id: show_params[:v]).id )
+    ahoy.track("Video View", video_id: @video.id)
   end
 
   def update
@@ -46,7 +51,6 @@ class VideosController < ApplicationController
   end
 
   def upvote
-    @video = Video.find(params[:id])
     if current_user.voted_up_on? @video
       @video.unvote_by current_user
     else
@@ -56,7 +60,6 @@ class VideosController < ApplicationController
   end
 
   def downvote
-    @video = Video.find(params[:id])
     if current_user.voted_down_on? @video
       @video.unvote_by current_user
     else
@@ -68,7 +71,14 @@ class VideosController < ApplicationController
   private
 
   def set_video
-    @video = Video.find(params[:id])
+    @video = Video
+              .includes(:song, :leader, :follower, :event, :channel)
+              .references(:song, :leader, :follower, :event, :channel)
+              .find_by(youtube_id: show_params[:v]) if show_params[:v]
+    @video = Video
+              .includes(:song, :leader, :follower, :event, :channel)
+              .references(:song, :leader, :follower, :event, :channel)
+              .find(show_params[:id]) if show_params[:id]
   end
 
   def set_recommended_videos
@@ -103,7 +113,7 @@ class VideosController < ApplicationController
                                    .where(hidden: false)
                                    .where.not(youtube_id: @video.youtube_id)
                                    .limit(8).load_async
-    @videos_with_same_event = @videos_with_same_event - @videos_from_this_performance
+                                   @videos_with_same_event = @videos_with_same_event - @videos_from_this_performance
   end
 
   def videos_with_same_song
@@ -173,6 +183,6 @@ class VideosController < ApplicationController
   end
 
   def show_params
-    params.permit(:v)
+    params.permit(:v, :id)
   end
 end

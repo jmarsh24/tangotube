@@ -10,9 +10,6 @@ application.register("clipboard", ClipboardController)
 import ComboboxController from "./combobox_controller.js"
 application.register("combobox", ComboboxController)
 
-import CommentReplyController from "./comment_reply_controller.js"
-application.register("comment-reply", CommentReplyController)
-
 import FilterController from "./filter_controller.js"
 application.register("filter", FilterController)
 
@@ -24,6 +21,9 @@ application.register("form", FormController)
 
 import PopperController from "./popper_controller.js"
 application.register("popper", PopperController)
+
+import ReplyController from "./reply_controller.js"
+application.register("reply", ReplyController)
 
 import SlimselectController from "./slimselect_controller.js"
 application.register("slimselect", SlimselectController)
