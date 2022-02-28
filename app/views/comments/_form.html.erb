@@ -1,5 +1,5 @@
-<%= form_with model: [commentable, Comment.new], html: { class: local_assigns[:class]
-                                                          style: local_assigns[:style]
+<%= form_with model: [commentable, Comment.new], html: { class: local_assigns[:class],
+                                                          style: local_assigns[:style],
                                                           data: { target: local_assigns[:target] } } do |form| %>
   <div class="form-group">
     <% if form.object.errors.any? %>
