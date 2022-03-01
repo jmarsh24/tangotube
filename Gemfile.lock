@@ -193,7 +193,10 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
+<<<<<<< HEAD
     mini_portile2 (2.8.0)
+=======
+>>>>>>> bbd9037afad8b97e909dc091022630e97cd9486b
     minitest (5.15.0)
     msgpack (1.4.5)
     multi_json (1.15.0)
@@ -215,6 +218,7 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
+<<<<<<< HEAD
     nokogiri (1.13.2)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
@@ -225,6 +229,9 @@ GEM
     nokogiri (1.13.1-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.1-x86_64-linux)
+=======
+    nokogiri (1.13.3-arm64-darwin)
+>>>>>>> bbd9037afad8b97e909dc091022630e97cd9486b
       racc (~> 1.4)
     oauth2 (1.4.9)
       faraday (>= 0.17.3, < 3.0)
@@ -484,10 +491,14 @@ DEPENDENCIES
   jsbundling-rails
   listen (~> 3.2)
 <<<<<<< HEAD
+<<<<<<< HEAD
   nokogiri (~> 1.13)
 =======
   nokogiri
 >>>>>>> e4fa3a68 (Add comments)
+=======
+  nokogiri
+>>>>>>> bbd9037afad8b97e909dc091022630e97cd9486b
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-rails_csrf_protection

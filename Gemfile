@@ -16,14 +16,14 @@ gem "acts_as_votable"
 gem "ahoy_matey"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false
-gem "deepl-rb", "~> 2.4", require: 'deepl'
-gem "devise", "~> 4.7", ">= 4.7.2"
-gem "faraday", "~> 1.1.0"
-gem "font-awesome-rails", "~> 4.7"
-gem "hashie", "~> 4.1"
-gem "hotwire-rails", "~> 0.1.3"
-gem "jsbundling-rails", "~> 1.0"
-gem "nokogiri", "~> 1.13"
+gem "deepl-rb", require: 'deepl'
+gem "devise"
+gem "faraday"
+gem "font-awesome-rails"
+gem "hashie"
+gem "hotwire-rails"
+gem "jsbundling-rails"
+gem "nokogiri"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
