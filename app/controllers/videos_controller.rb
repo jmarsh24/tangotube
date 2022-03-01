@@ -53,7 +53,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user
     end
-    render turbo_stream: turbo_stream.replace("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   def downvote
@@ -63,7 +63,7 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user
     end
-    render turbo_stream: turbo_stream.replace("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   private
