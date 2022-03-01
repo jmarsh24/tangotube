@@ -1,9 +1,7 @@
-<% model = [local_assigns[:commentable], comment].compact %>
-<%= form_with model: model,
-  id: dom_id_for_records(*model),
-  data: local_assigns[:data],
-  class: [" "] + Array.wrap(local_assigns[:class]) do |form| %>
-  <div style="padding: 16px 0; margin: 0 16px;">
+<%= form_with model: [commentable, Comment.new], html: { class: local_assigns[:class]
+                                                          style: local_assigns[:style]
+                                                          data: { target: local_assigns[:target] } } do |form| %>
+  <div class="form-group">
     <% if form.object.errors.any? %>
       <div class="alert alert-danger">
         <% form.object.errors.full_messages.each do |message| %>
@@ -11,10 +9,19 @@
         <% end %>
       </div>
     <% end %>
-    <%= form.text_area :body, placeholder: "Add a comment", id: "#{dom_id_for_records(*model)}_body", style: "width: 100%; border-radius: 4px; border: 1px solid #c2c2c2; padding: 8px 12px; color: rgb(17, 24, 39); font-size: 16px;" %>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <%= form.submit class: "button button-primary" %>
-      <%= link_to "Cancel", comment, class: "button button-link" if form.object.persisted? %>
-    </div>
+    <%= form.text_area :body,
+          placeholder: "Add a comment",
+          class: "form-control",
+          style: "width: 100%;
+                  border-radius: 4px;
+                  border: 1px solid #c2c2c2;
+                  padding: 8px 12px;
+                  color: rgb(17, 24, 39);
+                  font-size: 16px;" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.hidden_field :parent_id, value: local_assigns[:parent_id] %>
+    <%= form.submit class: "button button-primary" %>
   </div>
 <% end %>
