@@ -1,25 +1,24 @@
 <div
-<% unless current_user %>
+<% unless user_signed_in? %>
  data-controller="popper"
 <% end %>
 >
-  <%= content_tag "div", { id: "downvote-#{video.id}",
+  <%= content_tag "div", { id: "downvote-#{@video.id}",
                             data: { "popper-target": "element",
                             action: "click->popper#show click@window->popper#hide" } } do %>
-    <%= link_to downvote_video_path(video), method: :patch,
-                                          remote: true,
-                                          style: "display: flex; justify-content: center; align-items: center;" do %>
-      <% if current_user %>
-        <% if current_user.voted_down_on? video %>
+    <%= button_to downvote_video_path(@video), method: :patch,
+                                              style: "display: flex; justify-content: center; align-items: center; border: none; background: none;" do %>
+      <% if user_signed_in? %>
+        <% if current_user.voted_down_on? @video %>
           <%= fa_icon "thumbs-down solid", text: "Dislike",
-                                        style: "font-size: 30px; margin: 0 10px;" %>
+                                        style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
         <% else %>
           <%= fa_icon "thumbs-down regular", text: "Dislike",
-                                          style: "font-size: 30px; margin: 0 10px;" %>
+                                          style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
         <% end %>
       <% else %>
         <%= fa_icon "thumbs-down solid", text: "Dislike",
-                                        style: "font-size: 30px; margin: 0 10px;" %>
+                                        style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
       <% end %>
     <% end %>
   <% end %>
