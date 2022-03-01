@@ -39,11 +39,7 @@
     data-clipboard-video-id="<%= @video.youtube_id %>"
     data-clipboard-root-url="<%= @root_url %>"
     >
-    <div class="like-buttons">
-      <%= render 'videos/show/upvote_link', video: @video %>
-      <%= render 'videos/show/like_count', video: @video %>
-      <%= render 'videos/show/downvote_link', video: @video %>
-    </div>
+    <%= render "videos/show/vote" %>
     <div class="youtube-controls">
       <div class="youtube-controls-time">
         <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",

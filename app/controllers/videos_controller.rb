@@ -1,4 +1,6 @@
 class VideosController < ApplicationController
+  include ActionView::RecordIdentifier
+
   before_action :authenticate_user!, only: %i[edit update]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[update edit]
@@ -51,7 +53,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user
     end
-    render "videos/show/vote"
+    render turbo_stream: turbo_stream.replace("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   def downvote
@@ -61,7 +63,7 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user
     end
-    render "videos/show/vote"
+    render turbo_stream: turbo_stream.replace("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   private
@@ -98,7 +100,7 @@ class VideosController < ApplicationController
                                    .where(hidden: false)
                                    .where.not(youtube_id: @video.youtube_id)
                                    .limit(8).load_async
-    @videos_with_same_event = @videos_with_same_event - @videos_from_this_performance
+    @videos_with_same_event -= @videos_from_this_performance
   end
 
   def videos_with_same_song
