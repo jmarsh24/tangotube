@@ -341,11 +341,11 @@ ALTER SEQUENCE public.channels_id_seq OWNED BY public.channels.id;
 
 CREATE TABLE public.comments (
     id bigint NOT NULL,
-    user_id bigint NOT NULL,
-    commentable_type character varying NOT NULL,
-    commentable_id bigint NOT NULL,
+    user_id bigint,
+    commentable_type character varying,
+    commentable_id bigint,
     parent_id integer,
-    body text NOT NULL,
+    body text,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -401,6 +401,37 @@ CREATE SEQUENCE public.deletion_requests_id_seq
 --
 
 ALTER SEQUENCE public.deletion_requests_id_seq OWNED BY public.deletion_requests.id;
+
+
+--
+-- Name: discussions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.discussions (
+    id bigint NOT NULL,
+    title character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: discussions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.discussions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: discussions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.discussions_id_seq OWNED BY public.discussions.id;
 
 
 --
@@ -885,6 +916,13 @@ ALTER TABLE ONLY public.deletion_requests ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: discussions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discussions ALTER COLUMN id SET DEFAULT nextval('public.discussions_id_seq'::regclass);
+
+
+--
 -- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1001,6 +1039,14 @@ ALTER TABLE ONLY public.comments
 
 ALTER TABLE ONLY public.deletion_requests
     ADD CONSTRAINT deletion_requests_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: discussions discussions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discussions
+    ADD CONSTRAINT discussions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1607,6 +1653,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220212144641'),
 ('20220212144740'),
 ('20220224114432'),
-('20220224134559');
+('20220224134559'),
+('20220228110513');
 
 

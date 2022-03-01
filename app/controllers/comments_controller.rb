@@ -1,36 +1,42 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_comment
 
-  def show
+  def create
+    @comment = @commentable.comments.new(comment_params)
+    @comment.user = current_user
+    if @comment.save
+      respond_to do |format|
+        format.html { redirect_to @commentable }
+        format.js
+      end
+    else
+      redirect_to @commentable, alert: "Something went wrong"
+    end
   end
 
   def edit
+    @comment = Comment.find params[:id]
   end
 
   def update
-    if @comment.update(comment_params)
-      redirect_to @comment
+    @comment = comment.find params[:id]
+
+    if @comment.update comment_params
+      redirect_to comment_url(@comment)
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+    @comment = @commentable.comments.find(params[:id])
     @comment.destroy
-    respond_to do |format|
-      format.turbo_stream {}
-      format.html { redirect_to @comment.commentable }
-    end
+    redirect_to @commentable
   end
 
   private
 
-  def set_comment
-    @comment = current_user.comments.find(params[:id])
-  end
-
-  def comment_params
-    params.require(:comment).permit(:body)
-  end
+    def comment_params
+      params.require(:comment).permit(:body, :parent_id)
+    end
 end
