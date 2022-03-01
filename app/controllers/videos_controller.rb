@@ -115,11 +115,7 @@ class VideosController < ApplicationController
                                    .where(hidden: false)
                                    .where.not(youtube_id: @video.youtube_id)
                                    .limit(8).load_async
-<<<<<<< HEAD
     @videos_with_same_event -= @videos_from_this_performance
-=======
-                                   @videos_with_same_event = @videos_with_same_event - @videos_from_this_performance
->>>>>>> e4fa3a68 (Add comments)
   end
 
   def videos_with_same_song
