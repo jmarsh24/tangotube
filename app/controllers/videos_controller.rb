@@ -18,8 +18,7 @@ class VideosController < ApplicationController
         user: current_user
       )
 
-    if (sorting_params.empty? && page == 1 && @search.videos.size > 20 && (filtering_params.include?(:leader) || filtering_params.include?(:follower))) || Leader.full_name_search(filtering_params.fetch(
-:query, true)) || Follower.full_name_search(filtering_params.fetch(:query, true))
+    if (sorting_params.empty? && page == 1 && @search.videos.size > 20 && filtering_for_dancer?) || dancer_name_match?
       @search_most_recent =
       Video::Search.for(
         filtering_params: filtering_params,
@@ -211,5 +210,15 @@ class VideosController < ApplicationController
 
   def show_params
     params.permit(:v)
+  end
+
+  def filtering_for_dancer?
+    return true if filtering_params.include?(:leader) || filtering_params.include?(:follower)
+  end
+
+  def dancer_name_match?
+    if filtering_params.fetch(:query, false).present?
+      Leader.full_name_search(filtering_params.fetch(:query, false)) || Follower.full_name_search(filtering_params.fetch(:query, false))
+    end
   end
 end
