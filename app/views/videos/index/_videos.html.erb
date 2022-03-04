@@ -1,4 +1,89 @@
 <div style="padding: 0 40px 20px 40px;">
+  <% if @page == 1 %>
+    <h2>
+      <% if sorting_params.fetch(:direction, false) == "asc" && sorting_params.fetch(:sort, false) == "songs.title" %>
+        Grouped By Song Title
+      <% end %>
+      <% if sorting_params.fetch(:direction, false) == "asc" && sorting_params.fetch(:sort, false) == "songs.last_name_search" %>
+        Grouped By Orchestra
+      <% end %>
+      <% if sorting_params.fetch(:direction, false) == "asc" && sorting_params.fetch(:sort, false) == "videos.channel_id" %>
+        Grouped By Channel
+      <% end %>
+      <% if sorting_params.fetch(:direction, false) == "desc" && sorting_params.fetch(:sort, false) == "videos.like_count" %>
+        Most Liked
+      <% end %>
+      <% if sorting_params.fetch(:direction, false) == "desc" && sorting_params.fetch(:sort, false) == "videos.view_count" %>
+        Most Viewed
+      <% end %>
+      <% if sorting_params.fetch(:direction, false) == "desc" && sorting_params.fetch(:sort, false) == "videos.popularity" %>
+        Most Popular
+      <% end %>
+      <% if sorting_params.fetch(:direction, false) == "desc" && sorting_params.fetch(:sort, false) == "videos.performance_date" %>
+        Most Recent
+      <% end %>
+      <% if sorting_params.fetch(:direction, false) == "asc" && sorting_params.fetch(:sort, false) == "videos.performance_date" %>
+        Oldest
+      <% end %>
+      <% if filtering_params.include?(:genre) %>
+        -
+      <% end %>
+      <% if filtering_params.include?(:orchestra) %>
+        -
+      <% end %>
+      <% if filtering_params.fetch(:orchestra, false) %>
+        <%= filtering_params.fetch(:orchestra).titleize %>
+      <% end %>
+      <% if filtering_params.fetch(:genre, false) == "tango" %>
+        Tango
+      <% end %>
+      <% if filtering_params.fetch(:genre, false) == "milonga" %>
+        Milonga
+      <% end %>
+      <% if filtering_params.fetch(:genre, false) == "vals" %>
+        Vals
+      <% end %>
+      <% if filtering_params.include?(:leader) %>
+        -
+      <% end %>
+      <% if filtering_params.fetch(:leader, false) %>
+        <%= filtering_params.fetch(:leader).titleize %>
+      <% end %>
+      <% if filtering_params.include?(:follower) %>
+        -
+      <% end %>
+      <% if filtering_params.fetch(:follower, false) %>
+        <%= filtering_params.fetch(:follower).titleize %>
+      <% end %>
+      <% if filtering_params.include?(:year) %>
+        -
+      <% end %>
+      <% if filtering_params.fetch(:year, false) %>
+        <%= filtering_params.fetch(:year).titleize %>
+      <% end %>
+      <% if filtering_params.include?(:watched) %>
+        -
+      <% end %>
+      <% if filtering_params.fetch(:watched, false) == "true" %>
+        Watched
+      <% end %>
+      <% if filtering_params.fetch(:watched, false) == "false" %>
+        New To You
+      <% end %>
+      <% if filtering_params.include?(:liked) %>
+        -
+      <% end %>
+      <% if filtering_params.fetch(:liked, false) == "true" %>
+        Liked
+      <% end %>
+      <% if filtering_params.include?(:hd) %>
+        -
+      <% end %>
+      <% if filtering_params.fetch(:hd, false) == "1" %>
+        HD
+      <% end %>
+    </h2>
+  <% end %>
   <% if @search_most_recent.present? %>
     <button name="button"
           type="button"
@@ -64,9 +149,6 @@
         <% end %>
       </div>
     <% end %>
-  <% end %>
-  <% if @page == 1 %>
-    <h2> All Videos</h2>
   <% end %>
   <div class="video-section">
     <% @search.paginated_videos.each do |video| %>
