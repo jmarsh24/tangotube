@@ -9,6 +9,7 @@ class VideosController < ApplicationController
   helper_method :sorting_params, :filtering_params
 
   def index
+    @page = page
     @search =
       Video::Search.for(
         filtering_params: filtering_params,
@@ -16,6 +17,47 @@ class VideosController < ApplicationController
         page: page,
         user: current_user
       )
+    if sorting_params.empty? && page == 1 && @search.videos.size > 20 && (filtering_params.include?(:leader) || filtering_params.include?(:follower))
+      @search_most_recent =
+      Video::Search.for(
+        filtering_params: filtering_params,
+        sorting_params: { direction: "desc", sort: "videos.performance_date" },
+        page: page,
+        user: current_user
+      )
+
+      @search_oldest =
+      Video::Search.for(
+        filtering_params: filtering_params,
+        sorting_params: { direction: "asc", sort: "videos.upload_date" },
+        page: page,
+        user: current_user
+      )
+
+      @search_most_popular =
+      Video::Search.for(
+        filtering_params: filtering_params,
+        sorting_params: { direction: "desc", sort: "videos.popularity" },
+        page: page,
+        user: current_user
+      )
+
+      @search_most_popular_new_to_you =
+      Video::Search.for(
+        filtering_params: filtering_params.merge(watched: "false"),
+        sorting_params: { direction: "desc", sort: "videos.popularity" },
+        page: page,
+        user: current_user
+      )
+
+      @search_most_popular_watched =
+      Video::Search.for(
+        filtering_params: filtering_params.merge(watched: "true"),
+        sorting_params: { direction: "desc", sort: "videos.popularity" },
+        page: page,
+        user: current_user
+      )
+    end
   end
 
   def edit; end
