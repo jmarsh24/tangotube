@@ -68,6 +68,10 @@ button {
   padding-top: 68px;
   flex: 1 0 auto;
   background-color: $secondary-color;
+
+  &.admin {
+    padding-top: 94px;
+  }
 }
 
 #mainSectionContainer.leftPadding {
