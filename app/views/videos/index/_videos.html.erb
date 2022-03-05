@@ -1,88 +1,8 @@
-<div style="padding: 0 40px 20px 40px;">
+<div style="padding: 0 40px 20px 40px;" >
   <% if @page == 1 %>
-    <h2>
-      <% if sorting_params.fetch(:direction, false) == "asc" && sorting_params.fetch(:sort, false) == "songs.title" %>
-        Grouped By Song Title
-      <% end %>
-      <% if sorting_params.fetch(:direction, false) == "asc" && sorting_params.fetch(:sort, false) == "songs.last_name_search" %>
-        Grouped By Orchestra
-      <% end %>
-      <% if sorting_params.fetch(:direction, false) == "asc" && sorting_params.fetch(:sort, false) == "videos.channel_id" %>
-        Grouped By Channel
-      <% end %>
-      <% if sorting_params.fetch(:direction, false) == "desc" && sorting_params.fetch(:sort, false) == "videos.like_count" %>
-        Most Liked
-      <% end %>
-      <% if sorting_params.fetch(:direction, false) == "desc" && sorting_params.fetch(:sort, false) == "videos.view_count" %>
-        Most Viewed
-      <% end %>
-      <% if sorting_params.fetch(:direction, false) == "desc" && sorting_params.fetch(:sort, false) == "videos.popularity" %>
-        Most Popular
-      <% end %>
-      <% if sorting_params.fetch(:direction, false) == "desc" && sorting_params.fetch(:sort, false) == "videos.performance_date" %>
-        Most Recent
-      <% end %>
-      <% if sorting_params.fetch(:direction, false) == "asc" && sorting_params.fetch(:sort, false) == "videos.performance_date" %>
-        Oldest
-      <% end %>
-      <% if filtering_params.include?(:genre) %>
-        -
-      <% end %>
-      <% if filtering_params.include?(:orchestra) %>
-        -
-      <% end %>
-      <% if filtering_params.fetch(:orchestra, false) %>
-        <%= filtering_params.fetch(:orchestra).titleize %>
-      <% end %>
-      <% if filtering_params.fetch(:genre, false) == "tango" %>
-        Tango
-      <% end %>
-      <% if filtering_params.fetch(:genre, false) == "milonga" %>
-        Milonga
-      <% end %>
-      <% if filtering_params.fetch(:genre, false) == "vals" %>
-        Vals
-      <% end %>
-      <% if filtering_params.include?(:leader) %>
-        -
-      <% end %>
-      <% if filtering_params.fetch(:leader, false) %>
-        <%= filtering_params.fetch(:leader).titleize %>
-      <% end %>
-      <% if filtering_params.include?(:follower) %>
-        -
-      <% end %>
-      <% if filtering_params.fetch(:follower, false) %>
-        <%= filtering_params.fetch(:follower).titleize %>
-      <% end %>
-      <% if filtering_params.include?(:year) %>
-        -
-      <% end %>
-      <% if filtering_params.fetch(:year, false) %>
-        <%= filtering_params.fetch(:year).titleize %>
-      <% end %>
-      <% if filtering_params.include?(:watched) %>
-        -
-      <% end %>
-      <% if filtering_params.fetch(:watched, false) == "true" %>
-        Watched
-      <% end %>
-      <% if filtering_params.fetch(:watched, false) == "false" %>
-        New To You
-      <% end %>
-      <% if filtering_params.include?(:liked) %>
-        -
-      <% end %>
-      <% if filtering_params.fetch(:liked, false) == "true" %>
-        Liked
-      <% end %>
-      <% if filtering_params.include?(:hd) %>
-        -
-      <% end %>
-      <% if filtering_params.fetch(:hd, false) == "1" %>
-        HD
-      <% end %>
-    </h2>
+    <h3 style="margin:0px;">
+      <%= videos_header(filtering_params, sorting_params) %>
+    </h3>
   <% end %>
   <% if @search_most_recent.present? %>
     <button name="button"
@@ -92,7 +12,7 @@
           data-filter-sort-value="videos.performance_date"
           data-filter-direction-value="desc"
           class="videos-sortable-button">
-      <h2>Most Recent</h2>
+      <h2 style="margin:0px;">Most Recent</h2>
     </button>
     <div class="video-section">
       <% @search_most_recent.paginated_row.each do |video| %>
@@ -108,7 +28,7 @@
           data-filter-sort-value="videos.performance_date"
           data-filter-direction-value="asc"
           class="videos-sortable-button">
-      <h2>Oldest</h2>
+      <h2 style="margin:0px;">Oldest</h2>
     </button>
     <div class="video-section">
       <% @search_oldest.paginated_row.each do |video| %>
@@ -124,7 +44,7 @@
             data-controller="filter"
             data-action="filter#filter"
             data-filter-watched-value="false">
-        <h2>New To You</h2>
+        <h2 style="margin:0px;">New To You</h2>
       </button>
       <div class="video-section">
         <% @search_most_popular_new_to_you.paginated_row.each do |video| %>
@@ -141,7 +61,7 @@
             data-controller="filter"
             data-action="filter#filter"
             data-filter-watched-value="true">
-        <h2>Watched</h2>
+        <h2 style="margin:0px;">Watched</h2>
       </button>
       <div class="video-section">
         <% @search_most_popular_watched.paginated_row.each do |video| %>
