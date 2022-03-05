@@ -65,13 +65,18 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find_by(youtube_id: show_params[:v])
+    if @video.present?
+      UpdateVideoWorker.perform_async(@video.youtube_id)
+    else
+      Video::YoutubeImport.from_video(show_params[:v])
+      @video = Video.find_by(youtube_id: show_params[:v])
+    end
     @start_value = params[:start]
     @end_value = params[:end]
     @root_url = root_url
     @playback_speed = params[:speed] || "1"
     set_recommended_videos
     @video.clicked!
-    UpdateVideoWorker.perform_async(@video.youtube_id)
     ahoy.track("Video View", video_id: Video.find_by(youtube_id: show_params[:v]).id )
   end
 
