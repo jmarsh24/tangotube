@@ -30,7 +30,7 @@ class VideosController < ApplicationController
       @search_oldest =
       Video::Search.for(
         filtering_params: filtering_params,
-        sorting_params: { direction: "asc", sort: "videos.upload_date" },
+        sorting_params: { direction: "asc", sort: "videos.performance_date" },
         page: page,
         user: current_user
       )
