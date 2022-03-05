@@ -19,13 +19,13 @@ module VideosHelper
   def link_to_query(external_song_attributes)
     link_to external_song_attributes,
             root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
-            { 'data-turbo-frame': "_top" }
+            { "data-turbo-frame": "_top" }
   end
 
   def link_to_song_id(song_attributes, video)
     link_to song_attributes,
             root_path(song_id: video.song_id),
-            { 'data-turbo-frame': "_top" }
+            { "data-turbo-frame": "_top" }
   end
 
   def link_to_song(el_recodo_attributes, external_song_attributes, video)
@@ -40,11 +40,11 @@ module VideosHelper
     if dancer_names.present? && song_attributes.present?
       link_to dancer_names,
               watch_path(v: youtube_id),
-              { 'data-turbo-frame': "_top" }
+              { "data-turbo-frame": "_top" }
     else
       link_to truncate(title, length: 85),
               watch_path(v: youtube_id),
-              { 'data-turbo-frame': "_top" }
+              { "data-turbo-frame": "_top" }
     end
   end
 
@@ -121,5 +121,80 @@ module VideosHelper
       "sort",
       "watched",
     )
+  end
+
+  def videos_header(filtering_params, sorting_params)
+    words_array = []
+
+    dancer_array = []
+    orchestra_array = []
+    year_array = []
+    user_attribute_array = []
+    sorting_array = []
+    genre_array = []
+
+    filtering_params.each do |key, value|
+      if key == "liked" && value == "true"
+        user_attribute_array << "Most Liked"
+      end
+      if key == "watched" && value == "true"
+        user_attribute_array << "Watched"
+      end
+      if key == "watched" && value == "false"
+        user_attribute_array << "New to You"
+      end
+      if key == "hd" && value == "1"
+        user_attribute_array << "HD"
+      end
+      if key == "genre"
+        genre_array << value
+      end
+      if key == "leader"
+        dancer_array << value
+      end
+      if key == "follower"
+        dancer_array << value
+      end
+      if key == "orchestra"
+        orchestra_array << value
+      end
+      if key == "year"
+        year_array << value
+      end
+    end
+
+    if sorting_params["sort"] == "songs.title" && sorting_params["direction"] == "asc"
+      sorting_array << "Grouped By Song Title"
+    end
+    if sorting_params["sort"] == "songs.last_name_search" && sorting_params["direction"] == "asc"
+      sorting_array << "Grouped By Orchestra"
+    end
+    if sorting_params["sort"] == "videos.channel_id" && sorting_params["direction"] == "asc"
+      sorting_array << "Grouped By Channel"
+    end
+    if sorting_params["sort"] == "videos.like_count" && sorting_params["direction"] == "desc"
+      sorting_array << "Most Liked"
+    end
+    if sorting_params["sort"] == "videos.view_count" && sorting_params["direction"] == "desc"
+      sorting_array << "Most Viewed"
+    end
+    if sorting_params["sort"] == "videos.popularity" && sorting_params["direction"] == "desc"
+      sorting_array << "Most Popular"
+    end
+    if sorting_params["sort"] == "videos.performance_date" && sorting_params["direction"] == "desc"
+      sorting_array << "Most Recent"
+    end
+    if sorting_params["sort"] == "videos.performance_date" && sorting_params["direction"] == "asc"
+      sorting_array << "Oldest"
+    end
+
+    words_array << dancer_array.join(" & ")
+    words_array << orchestra_array.join(": ")
+    words_array << year_array.join(": ")
+    words_array << user_attribute_array.join(": ")
+    words_array << sorting_array.join(": ")
+    words_array << genre_array.join(":")
+
+    words_array.flatten.compact_blank.map(&:titleize).join(" - ")
   end
 end
