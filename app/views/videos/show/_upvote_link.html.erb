@@ -1,9 +1,11 @@
 <div
-  <% unless user_signed_in? %>
-    data-controller="popper"
-  <% end %>
+<% unless user_signed_in? %>
+  data-controller="popper"
+<% end %>
 >
-  <%= content_tag "div", { id: "upvote-#{@video.id}", data: { "popper-target": "element", action: "click->popper#show click@window->popper#hide" } } do %>
+  <%= content_tag "div", id: "upvote-#{@video.id}",
+                        data: { "popper-target": "element",
+                        action: "click->popper#show click@window->popper#hide" } do %>
     <%= button_to upvote_video_path(@video), method: :patch,
                                             style: "display: flex; justify-content: center; align-items: center; border: none; background: none;" do %>
       <% if user_signed_in? %>
@@ -13,7 +15,7 @@
           <%= fa_icon "thumbs-up regular", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
         <% end %>
       <% else %>
-        <%= fa_icon "thumbs-up solid", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
+        <%= fa_icon "thumbs-up regular", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
       <% end %>
     <% end %>
   <% end %>

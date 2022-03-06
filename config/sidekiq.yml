@@ -7,4 +7,5 @@ production:
 :queues:
   - high
   - default
+  - ahoy
   - mailers

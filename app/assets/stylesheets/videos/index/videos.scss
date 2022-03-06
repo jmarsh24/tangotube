@@ -1,9 +1,15 @@
+.videos {
+  padding: 0 40px 20px 40px;
+}
+
 .video-section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px 20px;
-  padding: 0 40px 20px 40px;
   background-color: $secondary-color;
+  border-bottom: 1px solid #f2f2f2;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .video-container {
@@ -24,7 +30,6 @@
   width: 100%;
   height: 100%;
 }
-
 
 .thumbnail {
   position: relative;
@@ -144,8 +149,12 @@
 }
 
 @media (max-width: 800px) {
+  .videos {
+    padding: 0px;
+  }
+
   .video-section {
-    padding: .2rem .5rem;
+    padding: 0.2rem 0.5rem;
   }
 }
 

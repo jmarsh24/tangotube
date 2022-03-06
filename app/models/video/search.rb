@@ -11,6 +11,7 @@ class Video::Search
   ].freeze
 
   NUMBER_OF_VIDEOS_PER_PAGE = 60
+  NUMBER_OF_VIDEOS_PER_ROW = 10
 
   class << self
     def for(filtering_params:, sorting_params:, page:, user:)
@@ -47,8 +48,12 @@ class Video::Search
     @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE).load_async
   end
 
+  def paginated_row
+    @paginated_videos_row = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_ROW).load_async
+  end
+
   def displayed_videos_count
-    @displayed_videos_count ||= (@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE + paginated_videos.size
+    @displayed_videos_count ||= ((@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE) + paginated_videos.size
   end
 
   def next_page?

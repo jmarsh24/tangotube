@@ -18,7 +18,13 @@
   <div id="pageContainer" data-controller="toggle">
     <div id="sideNavContainer" class="isHidden" data-toggle-target="sideNavContainer">
     </div>
-    <div id="mainSectionContainer" data-toggle-target="mainSectionContainer">
+    <div id="mainSectionContainer" data-toggle-target="mainSectionContainer"
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        class="admin"
+      <% end %>
+    <% end %>
+    >
       <%= render "shared/flash" %>
       <%= yield %>
     </div>
