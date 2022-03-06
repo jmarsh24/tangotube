@@ -15,7 +15,7 @@ class Video::YoutubeImport::Channel
 
   def initialize(channel_id)
     @channel_id = channel_id
-    @channel = find_or_create_internal_channel_by_id(channel_id)
+    @channel = Channel.find_or_create_by(channel_id: channel_id)
     @youtube_channel = fetch_by_id(channel_id)
   end
 
@@ -41,10 +41,6 @@ class Video::YoutubeImport::Channel
 
   def fetch_by_id(channel_id)
     Yt::Channel.new id: channel_id
-  end
-
-  def find_or_create_internal_channel_by_id(channel_id)
-    Channel.find_or_create_by(channel_id: channel_id)
   end
 
   def to_channel_params

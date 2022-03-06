@@ -12,9 +12,9 @@ class Video::YoutubeImport::Video
   end
 
   def initialize(youtube_id)
-    @video = Video.find_or_create_by(youtube_id: @youtube_id)
     @youtube_id = youtube_id
     @youtube_video = fetch_by_id
+    @video = Video.find_or_create_by!(youtube_id: @youtube_id, channel: channel)
   end
 
   def import
@@ -118,7 +118,9 @@ Date.today) && parsed_performance_date < @youtube_video.published_at)
     @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id)
     if @channel.nil?
       Video::YoutubeImport::Channel.import(@youtube_video.channel_id)
-      Channel.find_by(channel_id: @youtube_video.channel_id)
+      @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id)
+      ImportChannelWorker.perform_async(@youtube_video.channel_id)
     end
+    @channel
   end
 end
