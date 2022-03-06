@@ -4,7 +4,6 @@ class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[show edit update destroy upvote downvote]
-  before_action :set_recommended_videos, only: %i[edit show]
 
   helper_method :sorting_params, :filtering_params
 
@@ -61,7 +60,9 @@ class VideosController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    set_recommended_videos
+  end
 
   def show
     if @video.present?
@@ -70,6 +71,7 @@ class VideosController < ApplicationController
       Video::YoutubeImport.from_video(show_params[:v])
       @video = Video.find_by(youtube_id: show_params[:v])
     end
+    set_recommended_videos
     @start_value = params[:start]
     @end_value = params[:end]
     @root_url = root_url
