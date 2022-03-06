@@ -27,9 +27,15 @@
           <div class="container">
             <h3>Comments</h3>
             <div id="comments">
-              <%= render partial: "comments/form", locals: { commentable: @video } %>
-              <% if params[:comment] %>
-                <p>Single comment thread. <%= link_to "View all comments", url_for() %></p>
+              <% if user_signed_in? %>
+                <%= render partial: "comments/form", locals: { commentable: @video } %>
+                <% if params[:comment] %>
+                  <p>Single comment thread. <%= link_to "View all comments", url_for() %></p>
+                <% end %>
+              <% else %>
+                <div style="margin-bottom: 16px; font-size: 12px;">
+                  <%= link_to "Sign up",  new_user_registration_path, style: "font-size: 0.8rem", 'data-turbo-frame': "_top" %> or <%= link_to "Login", new_user_session_path, style: "font-size: 12px;", 'data-turbo-frame': "_top" %> to reply
+                </div>
               <% end %>
               <%= render @comments, continue_thread: 5 %>
             </div>
