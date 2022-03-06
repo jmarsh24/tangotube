@@ -55,6 +55,9 @@ a {
 button {
   -webkit-appearance: none;
   -moz-appearance: none;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 #pageContainer {
