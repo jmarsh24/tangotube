@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :authenticate_user!
 
   def create
@@ -18,11 +19,15 @@ class CommentsController < ApplicationController
     @comment = Comment.find params[:id]
   end
 
+  def show
+    @comment = Comment.find params[:id]
+  end
+
   def update
-    @comment = comment.find params[:id]
+    @comment = Comment.find params[:id]
 
     if @comment.update comment_params
-      redirect_to comment_url(@comment)
+      render turbo_stream: turbo_stream.replace(dom_id(@comment), partial: "comments/comment", locals: { comment: @comment })
     else
       render :edit, status: :unprocessable_entity
     end
