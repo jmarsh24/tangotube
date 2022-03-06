@@ -1,8 +1,11 @@
 <div class="comment-<%= comment.id %> container"
     style="border: 1px solid black; padding: 1em; margin: 1em;">
-  <%= image_tag(comment.profile_image_url, class: 'channel-icon') %> <%= comment.user_name %><br />
+  <div style="display: flex; align-items: center;">
+    <%= image_tag(comment.profile_image_url, class: 'channel-icon') %> <%= comment.user_name %>
+  </div>
+  <br />
   Like count: <%= comment.like_count %><br />
-  <span>Posted <%= time_ago_in_words(comment.date) %></span>
+  <span>Posted <%= time_ago_in_words(comment.date) %> ago</span>
   <hr />
   <%= comment.body %>
 </div>
