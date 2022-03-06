@@ -11,7 +11,7 @@ class Video::Search
   ].freeze
 
   NUMBER_OF_VIDEOS_PER_PAGE = 60
-  NUMBER_OF_VIDEOS_PER_ROW = 5
+  NUMBER_OF_VIDEOS_PER_ROW = 10
 
   class << self
     def for(filtering_params:, sorting_params:, page:, user:)

@@ -18,7 +18,7 @@ class VideosController < ApplicationController
         user: current_user
       )
 
-    if (sorting_params.empty? && page == 1 && @search.videos.size > 20 && filtering_for_dancer?) || dancer_name_match?
+    if (sorting_params.empty? && page == 1 && @search.videos.size > 60 && filtering_for_dancer?) || dancer_name_match?
       @search_most_recent =
       Video::Search.for(
         filtering_params: filtering_params,
@@ -145,7 +145,7 @@ class VideosController < ApplicationController
                                    .where("upload_date >= ?", @video.upload_date - 7.days)
                                    .where(hidden: false)
                                    .where.not(youtube_id: @video.youtube_id)
-                                   .limit(8).load_async
+                                   .limit(16).load_async
     @videos_with_same_event -= @videos_from_this_performance
   end
 
