@@ -3,6 +3,9 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true, uniqueness: true
   validate :password_complexity
 
   # Include default devise modules. Others available are:
@@ -16,7 +19,7 @@ class User < ApplicationRecord
          :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
-  enum role: [:user, :admin]
+  enum role: {user: 0, admin: 1}
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
@@ -27,13 +30,13 @@ class User < ApplicationRecord
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$/
 
-    errors.add :password, 'Complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
+    errors.add :password,
+"Complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character"
   end
 
   def self.from_omniauth(access_token)
     user = User.where(email: access_token.info.email).first
-    unless user
-      user = User.create(
+    user ||= User.create(
         email: access_token.info.email,
         password: Devise.friendly_token[0,20],
         name: access_token.info.name,
@@ -43,7 +46,6 @@ class User < ApplicationRecord
         uid: access_token.uid,
         provider: access_token.info.provider
       )
-    end
     user
   end
 end
