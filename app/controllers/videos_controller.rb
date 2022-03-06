@@ -135,8 +135,6 @@ class VideosController < ApplicationController
                                          .where(follower_id: @video.follower_id)
                                          .order("performance_number ASC")
                                          .where(hidden: false)
-                                         .where
-                                         .not(youtube_id: @video.youtube_id)
                                          .limit(8).load_async
   end
 
