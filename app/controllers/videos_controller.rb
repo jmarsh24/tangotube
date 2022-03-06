@@ -9,6 +9,7 @@ class VideosController < ApplicationController
   helper_method :sorting_params, :filtering_params
 
   def index
+    @page = page
     @search =
       Video::Search.for(
         filtering_params: filtering_params,
@@ -16,11 +17,60 @@ class VideosController < ApplicationController
         page: page,
         user: current_user
       )
+
+    if (sorting_params.empty? && page == 1 && @search.videos.size > 60 && filtering_for_dancer?) || dancer_name_match?
+      @search_most_recent =
+      Video::Search.for(
+        filtering_params: filtering_params,
+        sorting_params: { direction: "desc", sort: "videos.performance_date" },
+        page: page,
+        user: current_user
+      )
+
+      @search_oldest =
+      Video::Search.for(
+        filtering_params: filtering_params,
+        sorting_params: { direction: "asc", sort: "videos.performance_date" },
+        page: page,
+        user: current_user
+      )
+
+      @search_most_popular =
+      Video::Search.for(
+        filtering_params: filtering_params,
+        sorting_params: { direction: "desc", sort: "videos.popularity" },
+        page: page,
+        user: current_user
+      )
+
+      @search_most_popular_new_to_you =
+      Video::Search.for(
+        filtering_params: filtering_params.merge(watched: "false"),
+        sorting_params: { direction: "desc", sort: "videos.popularity" },
+        page: page,
+        user: current_user
+      )
+
+      @search_most_popular_watched =
+      Video::Search.for(
+        filtering_params: filtering_params.merge(watched: "true"),
+        sorting_params: { direction: "desc", sort: "videos.popularity" },
+        page: page,
+        user: current_user
+      )
+    end
   end
 
   def edit; end
 
   def show
+    @video = Video.find_by(youtube_id: show_params[:v])
+    if @video.present?
+      UpdateVideoWorker.perform_async(@video.youtube_id)
+    else
+      Video::YoutubeImport.from_video(show_params[:v])
+      @video = Video.find_by(youtube_id: show_params[:v])
+    end
     @start_value = params[:start]
     @end_value = params[:end]
     @root_url = root_url
@@ -34,7 +84,6 @@ class VideosController < ApplicationController
       end
 
     @video.clicked!
-    UpdateVideoWorker.perform_async(@video.youtube_id)
     ahoy.track("Video View", video_id: @video.id)
   end
 
@@ -58,7 +107,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user
     end
-    render turbo_stream: turbo_stream.replace("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   def downvote
@@ -67,7 +116,7 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user
     end
-    render turbo_stream: turbo_stream.replace("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   private
@@ -100,8 +149,6 @@ class VideosController < ApplicationController
                                          .where(follower_id: @video.follower_id)
                                          .order("performance_number ASC")
                                          .where(hidden: false)
-                                         .where
-                                         .not(youtube_id: @video.youtube_id)
                                          .limit(8).load_async
   end
 
@@ -114,7 +161,7 @@ class VideosController < ApplicationController
                                    .where("upload_date >= ?", @video.upload_date - 7.days)
                                    .where(hidden: false)
                                    .where.not(youtube_id: @video.youtube_id)
-                                   .limit(8).load_async
+                                   .limit(16).load_async
     @videos_with_same_event -= @videos_from_this_performance
   end
 
@@ -186,5 +233,15 @@ class VideosController < ApplicationController
 
   def show_params
     params.permit(:v, :id)
+  end
+
+  def filtering_for_dancer?
+    return true if filtering_params.include?(:leader) || filtering_params.include?(:follower)
+  end
+
+  def dancer_name_match?
+    if filtering_params.fetch(:query, false).present?
+      Leader.full_name_search(filtering_params.fetch(:query, false)) || Follower.full_name_search(filtering_params.fetch(:query, false))
+    end
   end
 end

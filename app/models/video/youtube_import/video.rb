@@ -12,9 +12,9 @@ class Video::YoutubeImport::Video
   end
 
   def initialize(youtube_id)
-    @video = Video.find_or_create_by(youtube_id: @youtube_id)
     @youtube_id = youtube_id
     @youtube_video = fetch_by_id
+    @video = Video.find_or_create_by!(youtube_id: @youtube_id, channel: channel)
   end
 
   def import
@@ -102,16 +102,25 @@ class Video::YoutubeImport::Video
     return  @video.performance_date if @video.performance_date.present?
     performance_date = @youtube_video.published_at
     cleaned_title_description = "#{@youtube_video.title} #{@youtube_video.description}".gsub(PERFORMANCE_REGEX, "")
-    parsed_performance_date = Date.parse(cleaned_title_description) rescue nil
-    if parsed_performance_date.present?
-      if parsed_performance_date.between?(Date.new(1927), Date.today) && parsed_performance_date < @youtube_video.published_at
+    parsed_performance_date = begin
+                                Date.parse(cleaned_title_description)
+                              rescue StandardError
+                                nil
+                              end
+    if parsed_performance_date.present? && (parsed_performance_date.between?(Date.new(1927),
+Date.today) && parsed_performance_date < @youtube_video.published_at)
         performance_date = parsed_performance_date
       end
-    end
     performance_date
   end
 
   def channel
-    @channel ||= Channel.find_or_create_by(channel_id: @youtube_video.channel_id)
+    @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id)
+    if @channel.nil?
+      Video::YoutubeImport::Channel.import(@youtube_video.channel_id)
+      @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id)
+      ImportChannelWorker.perform_async(@youtube_video.channel_id)
+    end
+    @channel
   end
 end

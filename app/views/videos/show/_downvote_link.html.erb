@@ -3,9 +3,9 @@
  data-controller="popper"
 <% end %>
 >
-  <%= content_tag "div", { id: "downvote-#{@video.id}",
-                            data: { "popper-target": "element",
-                            action: "click->popper#show click@window->popper#hide" } } do %>
+  <%= content_tag "div", id: "downvote-#{@video.id}",
+                          data: { "popper-target": "element",
+                          action: "click->popper#show click@window->popper#hide" } do %>
     <%= button_to downvote_video_path(@video), method: :patch,
                                               style: "display: flex; justify-content: center; align-items: center; border: none; background: none;" do %>
       <% if user_signed_in? %>
@@ -17,7 +17,7 @@
                                           style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
         <% end %>
       <% else %>
-        <%= fa_icon "thumbs-down solid", text: "Dislike",
+        <%= fa_icon "thumbs-down regular", text: "Dislike",
                                         style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
       <% end %>
     <% end %>

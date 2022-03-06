@@ -155,7 +155,7 @@ class Video < ApplicationRecord
   end
 
   def grep_performance_number
-    array = Array.new
+    array = []
     array << title if title.present?
     array << description if description.present?
     search_string = array.join(" ")
@@ -170,7 +170,7 @@ class Video < ApplicationRecord
 
   def grep_title_description_acr_cloud_song
 
-    array = Array.new
+    array = []
     array << title if title.present?
     array << description if description.present?
     array << spotify_artist_name if spotify_artist_name.present?

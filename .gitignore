@@ -38,6 +38,7 @@
 yarn-debug.log*
 .yarn-integrity
 .env
+*.rdb
 
 **/.DS_Store
 
