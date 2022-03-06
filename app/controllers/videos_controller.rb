@@ -84,6 +84,7 @@ class VideosController < ApplicationController
       else
         @video.comments.includes([:commentable]).where(parent_id: nil)
       end
+    @yt_comments = @video.yt_comments
 
     @video.clicked!
     ahoy.track("Video View", video_id: @video.id)
