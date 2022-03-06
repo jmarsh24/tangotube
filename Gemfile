@@ -15,7 +15,6 @@ gem "barnes", "~> 0.0.9"
 gem "acts_as_votable"
 gem "ahoy_matey"
 gem "aws-sdk-s3", require: false
-gem "bootsnap", require: false
 gem "deepl-rb", require: 'deepl'
 gem "devise"
 gem "faraday"
