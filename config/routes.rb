@@ -31,13 +31,20 @@ Rails.application.routes.draw do
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
 
+  resources :comments do
+    resources :comments, module: :comments
+  end
   resources :channels, only: %i[index create]
   resources :playlists, only: %i[index create]
-  resources :videos, except: :show do
+  resources :videos do
+    resources :comments, module: :videos
     member do
       patch "upvote", to: "videos#upvote"
       patch "downvote", to: "videos#downvote"
     end
+  end
+  resources :discssions do
+    resources :comments, module: :discussions
   end
   resources :search_suggestions, only: :index do
     collection do

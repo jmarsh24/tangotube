@@ -22,6 +22,9 @@ application.register("form", FormController)
 import PopperController from "./popper_controller.js"
 application.register("popper", PopperController)
 
+import ReplyController from "./reply_controller.js"
+application.register("reply", ReplyController)
+
 import SlimselectController from "./slimselect_controller.js"
 application.register("slimselect", SlimselectController)
 
