@@ -64,8 +64,6 @@ class VideosController < ApplicationController
   def edit; end
 
   def show
-    @video = Video.find(show_params[:id]) if show_params[:id].present?
-    @video = Video.find_by(youtube_id: show_params[:v]) if show_params[:v].present?
     if @video.present?
       UpdateVideoWorker.perform_async(@video.youtube_id)
     else
