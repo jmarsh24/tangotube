@@ -41,22 +41,23 @@ class VideosController < ApplicationController
         page: page,
         user: current_user
       )
+      if current_user.present?
+        @search_most_popular_new_to_you =
+        Video::Search.for(
+          filtering_params: filtering_params.merge(watched: "false"),
+          sorting_params: { direction: "desc", sort: "videos.popularity" },
+          page: page,
+          user: current_user
+        )
 
-      @search_most_popular_new_to_you =
-      Video::Search.for(
-        filtering_params: filtering_params.merge(watched: "false"),
-        sorting_params: { direction: "desc", sort: "videos.popularity" },
-        page: page,
-        user: current_user
-      )
-
-      @search_most_popular_watched =
-      Video::Search.for(
-        filtering_params: filtering_params.merge(watched: "true"),
-        sorting_params: { direction: "desc", sort: "videos.popularity" },
-        page: page,
-        user: current_user
-      )
+        @search_most_popular_watched =
+        Video::Search.for(
+          filtering_params: filtering_params.merge(watched: "true"),
+          sorting_params: { direction: "desc", sort: "videos.popularity" },
+          page: page,
+          user: current_user
+        )
+      end
     end
   end
 

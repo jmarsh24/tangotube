@@ -36,38 +36,40 @@
       <% end %>
     </div>
   <% end %>
-  <% if @search_most_popular_new_to_you.present? %>
-    <% if @search_most_popular_new_to_you.paginated_row.present? %>
-      <button name="button"
+  <% if user_signed_in? %>
+    <% if @search_most_popular_new_to_you.present? %>
+      <% if @search_most_popular_new_to_you.paginated_row.present? %>
+        <button name="button"
             type="button"
             class="videos-sortable-button"
             data-controller="filter"
             data-action="filter#filter"
             data-filter-watched-value="false">
-        <h2 style="margin:0px;">New To You</h2>
-      </button>
-      <div class="video-section">
-        <% @search_most_popular_new_to_you.paginated_row.each do |video| %>
-          <%= render partial: "videos/index/videos/video", locals: { video: video } %>
-        <% end %>
-      </div>
+          <h2 style="margin:0px;">New To You</h2>
+        </button>
+        <div class="video-section">
+          <% @search_most_popular_new_to_you.paginated_row.each do |video| %>
+            <%= render partial: "videos/index/videos/video", locals: { video: video } %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-  <% if @search_most_popular_watched.present? %>
-    <% if @search_most_popular_watched.paginated_row.present? %>
-      <button name="button"
+    <% if @search_most_popular_watched.present? %>
+      <% if @search_most_popular_watched.paginated_row.present? %>
+        <button name="button"
             type="button"
             class="videos-sortable-button"
             data-controller="filter"
             data-action="filter#filter"
             data-filter-watched-value="true">
-        <h2 style="margin:0px;">Watched</h2>
-      </button>
-      <div class="video-section">
-        <% @search_most_popular_watched.paginated_row.each do |video| %>
-          <%= render partial: "videos/index/videos/video", locals: { video: video } %>
-        <% end %>
-      </div>
+          <h2 style="margin:0px;">Watched</h2>
+        </button>
+        <div class="video-section">
+          <% @search_most_popular_watched.paginated_row.each do |video| %>
+            <%= render partial: "videos/index/videos/video", locals: { video: video } %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
   <div class="video-section">
