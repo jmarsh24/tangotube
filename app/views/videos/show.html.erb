@@ -24,6 +24,16 @@
       <div class="video-info-container-secondary">
         <div class="video-info-details-main">
           <%= render partial: "videos/show/video_info_details" %>
+          <div class="container">
+            <h3>Comments</h3>
+            <div id="comments">
+              <%= render partial: "comments/form", locals: { commentable: @video } %>
+              <% if params[:comment] %>
+                <p>Single comment thread. <%= link_to "View all comments", url_for() %></p>
+              <% end %>
+              <%= render @comments, continue_thread: 5 %>
+            </div>
+          </div>
         </div>
         <% if @video.song.present? %>
           <%= render partial: "videos/show/lyrics" if @video.song.lyrics.present? %>
