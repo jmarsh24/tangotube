@@ -7,4 +7,8 @@ export default class extends Controller {
     event.preventDefault();
     this.formTarget.classList.toggle("isHidden");
   }
+
+  closeForm(event) {
+    this.formTarget.classList.toggle("isHidden");
+  }
 }

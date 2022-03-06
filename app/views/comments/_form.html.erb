@@ -17,11 +17,11 @@
                   border: 1px solid #c2c2c2;
                   padding: 8px 12px;
                   color: rgb(17, 24, 39);
-                  font-size: 16px;" %>
+                  font-size: 16px;
+                  max-width: 100%;" %>
   </div>
-
   <div class="form-group">
     <%= form.hidden_field :parent_id, value: local_assigns[:parent_id] %>
-    <%= form.submit class: "button button-primary" %>
+    <%= form.submit class: "button button-primary", "data-action": "click->reply#closeForm" %>
   </div>
 <% end %>
