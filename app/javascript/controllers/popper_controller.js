@@ -1,19 +1,22 @@
-import { Controller } from '@hotwired/stimulus'
+import { Controller } from "@hotwired/stimulus";
 import { createPopper } from "@popperjs/core";
+import { useClickOutside } from "stimulus-use";
 
 export default class extends Controller {
   static targets = ["element", "tooltip"];
   static values = {
     placement: String,
-    offset: Array
+    offset: Array,
   };
 
   initialize() {
-    this.placementValue = "top"
-    this.offsetValue = [0, 8]
+    this.placementValue = "top";
+    this.offsetValue = [0, 8];
   }
 
   connect() {
+    useClickOutside(this);
+
     // Create a new Popper instance
     this.popperInstance = createPopper(this.elementTarget, this.tooltipTarget, {
       placement: this.placementValue,
@@ -28,7 +31,12 @@ export default class extends Controller {
     });
   }
 
+  clickOutside() {
+    this.hide();
+  }
+
   show(event) {
+    event.preventDefault();
     this.hideAllElements();
     this.tooltipTarget.setAttribute("data-show", "");
 
@@ -37,12 +45,14 @@ export default class extends Controller {
     this.popperInstance.update();
   }
 
-  hide(event) {
+  hide() {
     this.tooltipTarget.removeAttribute("data-show");
   }
 
   hideAllElements() {
-    document.querySelectorAll('#tooltip').forEach(element => element.removeAttribute("data-show"));
+    document
+      .querySelectorAll("#tooltip")
+      .forEach((element) => element.removeAttribute("data-show"));
   }
 
   // Destroy the Popper instance

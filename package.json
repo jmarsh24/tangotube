@@ -15,6 +15,8 @@
     "esbuild-rails": "^1.0.3",
     "lodash.debounce": "^4.0.8",
     "slim-select": "^1.27.0",
+    "stimulus": "^3.0.1",
+    "stimulus-use": "^0.41.0",
     "youtube-player": "^5.5.2"
   },
   "version": "0.1.0",
