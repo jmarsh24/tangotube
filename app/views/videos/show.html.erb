@@ -47,7 +47,7 @@
               <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance } %>
             </div>
             <% if @videos_from_this_performance.size > 3 %>
-              <div class="show-more-container" style="display: flex; justify-content: center">
+              <div class="show-more-container">
                 <%= button_tag type: "button",
                               class: "button",
                               style: "width: 100%;",
@@ -66,7 +66,7 @@
               <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event } %>
             </div>
             <% if @videos_with_same_event.size > 3 %>
-              <div class="show-more-container" style="display: flex; justify-content: center">
+              <div class="show-more-container">
                 <%= button_tag type: "button",
                               class: "button",
                               style: "width: 100%;",
@@ -86,7 +86,7 @@
               <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song } %>
             </div>
             <% if @videos_with_same_song.size > 3 %>
-              <div class="show-more-container" style="display: flex; justify-content: center">
+              <div class="show-more-container">
                 <%= button_tag type: "button",
                               class: "button",
                               style: "width: 100%;",
@@ -105,7 +105,7 @@
               <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel } %>
             </div>
             <% if @videos_with_same_channel.size > 3 %>
-              <div class="show-more-container" style="display: flex; justify-content: center">
+              <div class="show-more-container">
                 <%= button_tag type: "button",
                               class: "button",
                               style: "width: 100%;",
