@@ -150,6 +150,9 @@ GEM
       domain_name (~> 0.5)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
+    image_processing (1.12.2)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     io-wait (0.2.1)
     jaro_winkler (1.5.4)
     jsbundling-rails (1.0.2)
@@ -175,6 +178,7 @@ GEM
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
+    mini_magick (4.11.0)
     mini_mime (1.1.2)
     minitest (5.15.0)
     msgpack (1.4.5)
@@ -333,6 +337,8 @@ GEM
     rubocop-rspec (2.9.0)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     safely_block (0.3.0)
@@ -459,6 +465,7 @@ DEPENDENCIES
   font-awesome-rails
   hashie
   hotwire-rails
+  image_processing
   jsbundling-rails
   listen (~> 3.2)
   nokogiri

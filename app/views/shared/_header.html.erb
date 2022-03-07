@@ -41,7 +41,7 @@
     </div>
     <nav id="Login">
       <% if user_signed_in? %>
-        <%= image_tag current_user.image, size: "30x30", style: "border-radius: 50%" if current_user.image? %>
+        <%= image_tag avatar_url_for(current_user, opts = {}), size: "30x30", style: "border-radius: 50%" %>
         <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
         <%= button_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
       <% else %>

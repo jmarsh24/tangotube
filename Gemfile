@@ -22,6 +22,7 @@ gem "faraday"
 gem "font-awesome-rails"
 gem "hashie"
 gem "hotwire-rails"
+gem "image_processing"
 gem "jsbundling-rails"
 gem "nokogiri"
 gem 'omniauth-facebook'
@@ -71,4 +72,3 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
-
