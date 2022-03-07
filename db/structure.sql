@@ -548,6 +548,227 @@ ALTER SEQUENCE public.leaders_id_seq OWNED BY public.leaders.id;
 
 
 --
+-- Name: pay_charges; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pay_charges (
+    id bigint NOT NULL,
+    customer_id integer NOT NULL,
+    subscription_id integer,
+    processor_id character varying NOT NULL,
+    amount integer NOT NULL,
+    currency character varying,
+    application_fee_amount integer,
+    amount_refunded integer,
+    metadata jsonb,
+    data jsonb,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pay_charges_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pay_charges_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pay_charges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.pay_charges_id_seq OWNED BY public.pay_charges.id;
+
+
+--
+-- Name: pay_customers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pay_customers (
+    id bigint NOT NULL,
+    owner_type character varying,
+    owner_id integer,
+    processor character varying NOT NULL,
+    processor_id character varying,
+    "default" boolean,
+    data jsonb,
+    deleted_at timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pay_customers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pay_customers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pay_customers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.pay_customers_id_seq OWNED BY public.pay_customers.id;
+
+
+--
+-- Name: pay_merchants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pay_merchants (
+    id bigint NOT NULL,
+    owner_type character varying,
+    owner_id integer,
+    processor character varying NOT NULL,
+    processor_id character varying,
+    "default" boolean,
+    data jsonb,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pay_merchants_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pay_merchants_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pay_merchants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.pay_merchants_id_seq OWNED BY public.pay_merchants.id;
+
+
+--
+-- Name: pay_payment_methods; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pay_payment_methods (
+    id bigint NOT NULL,
+    customer_id integer NOT NULL,
+    processor_id character varying NOT NULL,
+    "default" boolean,
+    type character varying,
+    data jsonb,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pay_payment_methods_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pay_payment_methods_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pay_payment_methods_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.pay_payment_methods_id_seq OWNED BY public.pay_payment_methods.id;
+
+
+--
+-- Name: pay_subscriptions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pay_subscriptions (
+    id bigint NOT NULL,
+    customer_id integer NOT NULL,
+    name character varying NOT NULL,
+    processor_id character varying NOT NULL,
+    processor_plan character varying NOT NULL,
+    quantity integer DEFAULT 1 NOT NULL,
+    status character varying NOT NULL,
+    trial_ends_at timestamp without time zone,
+    ends_at timestamp without time zone,
+    application_fee_percent numeric(8,2),
+    metadata jsonb,
+    data jsonb,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pay_subscriptions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pay_subscriptions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pay_subscriptions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.pay_subscriptions_id_seq OWNED BY public.pay_subscriptions.id;
+
+
+--
+-- Name: pay_webhooks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pay_webhooks (
+    id bigint NOT NULL,
+    processor character varying,
+    event_type character varying,
+    event jsonb,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pay_webhooks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pay_webhooks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pay_webhooks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.pay_webhooks_id_seq OWNED BY public.pay_webhooks.id;
+
+
+--
 -- Name: playlists; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -944,6 +1165,48 @@ ALTER TABLE ONLY public.leaders ALTER COLUMN id SET DEFAULT nextval('public.lead
 
 
 --
+-- Name: pay_charges id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_charges ALTER COLUMN id SET DEFAULT nextval('public.pay_charges_id_seq'::regclass);
+
+
+--
+-- Name: pay_customers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_customers ALTER COLUMN id SET DEFAULT nextval('public.pay_customers_id_seq'::regclass);
+
+
+--
+-- Name: pay_merchants id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_merchants ALTER COLUMN id SET DEFAULT nextval('public.pay_merchants_id_seq'::regclass);
+
+
+--
+-- Name: pay_payment_methods id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_payment_methods ALTER COLUMN id SET DEFAULT nextval('public.pay_payment_methods_id_seq'::regclass);
+
+
+--
+-- Name: pay_subscriptions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_subscriptions ALTER COLUMN id SET DEFAULT nextval('public.pay_subscriptions_id_seq'::regclass);
+
+
+--
+-- Name: pay_webhooks id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_webhooks ALTER COLUMN id SET DEFAULT nextval('public.pay_webhooks_id_seq'::regclass);
+
+
+--
 -- Name: playlists id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1071,6 +1334,54 @@ ALTER TABLE ONLY public.followers
 
 ALTER TABLE ONLY public.leaders
     ADD CONSTRAINT leaders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pay_charges pay_charges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_charges
+    ADD CONSTRAINT pay_charges_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pay_customers pay_customers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_customers
+    ADD CONSTRAINT pay_customers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pay_merchants pay_merchants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_merchants
+    ADD CONSTRAINT pay_merchants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pay_payment_methods pay_payment_methods_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_payment_methods
+    ADD CONSTRAINT pay_payment_methods_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pay_subscriptions pay_subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_subscriptions
+    ADD CONSTRAINT pay_subscriptions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pay_webhooks pay_webhooks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_webhooks
+    ADD CONSTRAINT pay_webhooks_pkey PRIMARY KEY (id);
 
 
 --
@@ -1246,6 +1557,48 @@ CREATE INDEX index_followers_on_name ON public.followers USING btree (name);
 --
 
 CREATE INDEX index_leaders_on_name ON public.leaders USING btree (name);
+
+
+--
+-- Name: index_pay_charges_on_customer_id_and_processor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_pay_charges_on_customer_id_and_processor_id ON public.pay_charges USING btree (customer_id, processor_id);
+
+
+--
+-- Name: index_pay_charges_on_subscription_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pay_charges_on_subscription_id ON public.pay_charges USING btree (subscription_id);
+
+
+--
+-- Name: index_pay_customers_on_processor_and_processor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_pay_customers_on_processor_and_processor_id ON public.pay_customers USING btree (processor, processor_id);
+
+
+--
+-- Name: index_pay_merchants_on_owner_type_and_owner_id_and_processor; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pay_merchants_on_owner_type_and_owner_id_and_processor ON public.pay_merchants USING btree (owner_type, owner_id, processor);
+
+
+--
+-- Name: index_pay_payment_methods_on_customer_id_and_processor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_pay_payment_methods_on_customer_id_and_processor_id ON public.pay_payment_methods USING btree (customer_id, processor_id);
+
+
+--
+-- Name: index_pay_subscriptions_on_customer_id_and_processor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_pay_subscriptions_on_customer_id_and_processor_id ON public.pay_subscriptions USING btree (customer_id, processor_id);
 
 
 --
@@ -1487,6 +1840,13 @@ CREATE INDEX index_yt_comments_on_video_id ON public.yt_comments USING btree (vi
 
 
 --
+-- Name: pay_customer_owner_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX pay_customer_owner_index ON public.pay_customers USING btree (owner_type, owner_id, deleted_at, "default");
+
+
+--
 -- Name: comments fk_rails_03de2dc08c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1500,6 +1860,14 @@ ALTER TABLE ONLY public.comments
 
 ALTER TABLE ONLY public.playlists
     ADD CONSTRAINT fk_rails_180bd29355 FOREIGN KEY (videos_id) REFERENCES public.videos(id);
+
+
+--
+-- Name: pay_charges fk_rails_44a2c276fa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_charges
+    ADD CONSTRAINT fk_rails_44a2c276fa FOREIGN KEY (subscription_id) REFERENCES public.pay_subscriptions(id);
 
 
 --
@@ -1519,6 +1887,22 @@ ALTER TABLE ONLY public.active_storage_variant_records
 
 
 --
+-- Name: pay_charges fk_rails_b19d32f835; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_charges
+    ADD CONSTRAINT fk_rails_b19d32f835 FOREIGN KEY (customer_id) REFERENCES public.pay_customers(id);
+
+
+--
+-- Name: pay_subscriptions fk_rails_b7cd64d378; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_subscriptions
+    ADD CONSTRAINT fk_rails_b7cd64d378 FOREIGN KEY (customer_id) REFERENCES public.pay_customers(id);
+
+
+--
 -- Name: yt_comments fk_rails_b8c2c55344; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1532,6 +1916,14 @@ ALTER TABLE ONLY public.yt_comments
 
 ALTER TABLE ONLY public.active_storage_attachments
     ADD CONSTRAINT fk_rails_c3b3935057 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
+
+
+--
+-- Name: pay_payment_methods fk_rails_c78c6cb84d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pay_payment_methods
+    ADD CONSTRAINT fk_rails_c78c6cb84d FOREIGN KEY (customer_id) REFERENCES public.pay_customers(id);
 
 
 --
@@ -1654,6 +2046,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220212144740'),
 ('20220224114432'),
 ('20220224134559'),
-('20220228110513');
+('20220228110513'),
+('20220307091518');
 
 
