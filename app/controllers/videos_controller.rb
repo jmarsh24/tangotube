@@ -16,49 +16,48 @@ class VideosController < ApplicationController
         page: page,
         user: current_user
       )
-
-    if (sorting_params.empty? && page == 1 && @search.videos.size > 60 && filtering_for_dancer?) || dancer_name_match?
-      @search_most_recent =
-      Video::Search.for(
-        filtering_params: filtering_params,
-        sorting_params: { direction: "desc", sort: "videos.performance_date" },
-        page: page,
-        user: current_user
-      )
-
-      @search_oldest =
-      Video::Search.for(
-        filtering_params: filtering_params,
-        sorting_params: { direction: "asc", sort: "videos.performance_date" },
-        page: page,
-        user: current_user
-      )
-
-      @search_most_popular =
-      Video::Search.for(
-        filtering_params: filtering_params,
-        sorting_params: { direction: "desc", sort: "videos.popularity" },
-        page: page,
-        user: current_user
-      )
-      if current_user.present?
-        @search_most_popular_new_to_you =
+    if sorting_params.empty? && page == 1 && @search.videos.size > 60 && (filtering_for_dancer? || dancer_name_match?)
+        @search_most_recent =
         Video::Search.for(
-          filtering_params: filtering_params.merge(watched: "false"),
-          sorting_params: { direction: "desc", sort: "videos.popularity" },
+          filtering_params: filtering_params,
+          sorting_params: { direction: "desc", sort: "videos.performance_date" },
           page: page,
           user: current_user
         )
 
-        @search_most_popular_watched =
+        @search_oldest =
         Video::Search.for(
-          filtering_params: filtering_params.merge(watched: "true"),
+          filtering_params: filtering_params,
+          sorting_params: { direction: "asc", sort: "videos.performance_date" },
+          page: page,
+          user: current_user
+        )
+
+        @search_most_popular =
+        Video::Search.for(
+          filtering_params: filtering_params,
           sorting_params: { direction: "desc", sort: "videos.popularity" },
           page: page,
           user: current_user
         )
+        if current_user.present?
+          @search_most_popular_new_to_you =
+          Video::Search.for(
+            filtering_params: filtering_params.merge(watched: "false"),
+            sorting_params: { direction: "desc", sort: "videos.popularity" },
+            page: page,
+            user: current_user
+          )
+
+          @search_most_popular_watched =
+          Video::Search.for(
+            filtering_params: filtering_params.merge(watched: "true"),
+            sorting_params: { direction: "desc", sort: "videos.popularity" },
+            page: page,
+            user: current_user
+          )
+        end
       end
-    end
   end
 
   def edit
