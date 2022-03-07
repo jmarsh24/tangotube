@@ -1,6 +1,6 @@
 class User < ApplicationRecord
+  pay_customer
   acts_as_voter
-  pay_customer metadata: :stripe_metadata
 
   has_many :comments, dependent: :destroy
 
@@ -33,13 +33,6 @@ class User < ApplicationRecord
 
     errors.add :password,
 "Complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character"
-  end
-
-  def stripe_metadata(pay_customer)
-    {
-      pay_customer_id: pay_customer.id,
-      user_id: id # or pay_customer.owner_id
-    }
   end
 
   def self.from_omniauth(access_token)
