@@ -3,7 +3,8 @@
     <ul class="primary-links">
       <li><%= link_to "About", about_path %></li>
       <li><%= link_to "Contact", contact_path %></li>
-      <%= link_to "Become a Patron!", "https://www.patreon.com/bePatron?u=54750768", id: "button-patreon" %>
+      <li><%= link_to "Billing", billing_path %></li>
+      <li><%= button_to "Become A Supporter", checkout_path, method: :get, class: "button" %></li>
     </ul>
     <ul class="secondary-links">
       <li><%= link_to "Privacy Policy", privacy_path, class: "link-secondary" %></li>
