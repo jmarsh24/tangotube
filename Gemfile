@@ -39,6 +39,7 @@ gem "sidekiq"
 gem "stimulus-rails"
 gem "stripe", "~> 5.45"
 gem "streamio-ffmpeg"
+gem "tailwindcss-rails", "~> 2.0"
 gem "turbo-rails"
 gem "yt"
 

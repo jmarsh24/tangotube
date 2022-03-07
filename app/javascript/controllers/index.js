@@ -10,6 +10,9 @@ application.register("clipboard", ClipboardController)
 import ComboboxController from "./combobox_controller.js"
 application.register("combobox", ComboboxController)
 
+import DropdownController from "./dropdown_controller.js"
+application.register("dropdown", DropdownController)
+
 import FilterController from "./filter_controller.js"
 application.register("filter", FilterController)
 

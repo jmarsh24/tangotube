@@ -40,14 +40,14 @@
     data-clipboard-root-url="<%= @root_url %>"
     >
     <div class="youtube-controls">
-    <%= render "videos/show/vote" %>
-      <div class="youtube-controls-time">
+      <%= render "videos/show/vote" %>
+      <div class="w-full">
         <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",
                                                               "clipboard-target": "startTime",
                                                               "youtube-target": "startTime" } %>
       </div>
       <span class="spacer">-</span>
-      <div class="youtube-controls-time">
+      <div class="w-full">
         <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", data: { action: "keyup->clipboard#changeValue input->youtube#updateEndTime",
                                                               "clipboard-target": "endTime",
                                                               "youtube-target": "endTime" } %>
@@ -59,7 +59,7 @@
                                                               "1x" => "1.0"}, @playback_speed.to_f),
                                                                  data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackSpeed",
                                                                          "clipboard-target": "playbackSpeed",
-                                                                         "youtube-target": "playbackSpeed" }, class: "select" %>
+                                                                         "youtube-target": "playbackSpeed" } %>
     </div>
     <div class="copy-to-clipboard">
       <%= text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}",

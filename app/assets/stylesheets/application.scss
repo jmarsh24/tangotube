@@ -70,12 +70,12 @@ button {
 }
 
 #mainSectionContainer {
-  padding-top: 68px;
+  // padding-top: 68px;
   flex: 1 0 auto;
   background-color: $secondary-color;
 
   &.admin {
-    padding-top: 94px;
+    // padding-top: 94px;
   }
 }
 
@@ -104,6 +104,6 @@ button {
 
 @media (max-width: 800px) {
   #mainSectionContainer {
-    padding-top: 60px;
+    // padding-top: 60px;
   }
 }

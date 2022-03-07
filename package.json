@@ -16,6 +16,7 @@
     "lodash.debounce": "^4.0.8",
     "slim-select": "^1.27.0",
     "stimulus": "^3.0.1",
+    "stimulus-dropdown": "^2.0.0",
     "stimulus-use": "^0.41.0",
     "youtube-player": "^5.5.2"
   },

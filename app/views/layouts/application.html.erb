@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap' %>
@@ -16,10 +17,10 @@
   <div id="header">
     <%= render 'shared/header' %>
   </div>
-  <div id="pageContainer" style="height: 100vh;" data-controller="toggle">
+  <div id="pageContainer" class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:py-6 lg:px-8" data-controller="toggle">
     <div id="sideNavContainer" class="isHidden" data-toggle-target="sideNavContainer">
     </div>
-    <div id="mainSectionContainer" data-toggle-target="mainSectionContainer"
+    <div id="mainSectionContainer" class="flex flex-col justify-center pt-4 lg:pt-20" data-toggle-target="mainSectionContainer"
     <% if user_signed_in? %>
       <% if current_user.admin? %>
         class="admin"
