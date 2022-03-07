@@ -10,11 +10,12 @@ gem "redis"
 gem "puma"
 gem "pg"
 gem "barnes", "~> 0.0.9"
+gem "spring-watcher-listen",  "2.0.1"
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # app specific gems...................................................................
 gem "acts_as_votable"
 gem "ahoy_matey"
-gem "aws-sdk-s3", require: false
 gem "deepl-rb", require: 'deepl'
 gem "devise"
 gem "faraday"
@@ -26,6 +27,7 @@ gem "nokogiri"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
+gem "pay"
 gem "prettier"
 gem "pg_search"
 gem "rails_autolink"
@@ -33,11 +35,10 @@ gem "rspotify"
 gem "sassc-rails"
 gem "scenic"
 gem "sidekiq"
-gem "spring-watcher-listen",  "2.0.1"
 gem "stimulus-rails"
+gem "stripe", "~> 5.45"
 gem "streamio-ffmpeg"
 gem "turbo-rails"
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "yt"
 
 group :development, :test do
@@ -70,3 +71,4 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
