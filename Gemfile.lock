@@ -403,6 +403,10 @@ GEM
       multi_json (~> 1.8)
     stripe (5.45.0)
     strscan (3.0.1)
+    tailwindcss-rails (2.0.7-arm64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.7-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.2.0)
@@ -499,6 +503,7 @@ DEPENDENCIES
   stimulus-rails
   streamio-ffmpeg
   stripe (~> 5.45)
+  tailwindcss-rails (~> 2.0)
   turbo-rails
   tzinfo-data
   vcr

@@ -1,24 +1,14 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Create an account", new_registration_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-<% end %>
-
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+  <%#= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
 <% end %>
-
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
-
 <%- if devise_mapping.omniauthable? %>
-  <%= button_to "Sign In With Google", user_google_oauth2_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button", style: "background: #cc330d; color: #fff; width: 100%;" %>
-  <%= button_to "Sign In With Facebook", user_facebook_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button", style: "background: #3B5998; color: #fff; width: 100%;" %>
+  <%= button_to user_google_oauth2_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "w-full inline-flex justify-center py-2 px-4 my-1 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out" do %>
+    <i class="fa-brands fa-google h-5 h-5 mr-2"></i> Google
+  <% end %>
+  <%= button_to user_facebook_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "w-full inline-flex justify-center py-2 px-4 my-1 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out" do %>
+    <i class="fa-brands fa-facebook h-5 h-5 mr-2"></i> Facebook
+  <% end %>
 <% end %>

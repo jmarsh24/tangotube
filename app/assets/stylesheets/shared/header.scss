@@ -13,23 +13,23 @@
   align-items: center;
 
   .upperHeadContainer {
-  display: flex;
-  width: 100%;
-  max-width: 1900px;
-  margin: 0 auto;
-  justify-content: flex-end;
-  align-items: center;
-  background-color: $secondary-header-background;
-  padding: 5px 15px;
-  font-size: .9rem;
-  a {
-    margin: 0 .5rem;
-    color: $secondary-header-link-color;
-    &:hover {
-      color: $secondary-header-link-color-hover;
+    display: flex;
+    width: 100%;
+    max-width: 1900px;
+    margin: 0 auto;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: $secondary-header-background;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    a {
+      margin: 0 0.5rem;
+      color: $secondary-header-link-color;
+      &:hover {
+        color: $secondary-header-link-color-hover;
+      }
     }
   }
-}
 
   .lowerHeadContainer {
     flex: 1;
@@ -123,7 +123,7 @@
 
     .searchButton {
       height: 30px;
-      font-size: .8rem;
+      font-size: 0.8rem;
       background-color: $search-bar-button-color;
       border: 1px solid $border-color;
       border-bottom-right-radius: 3px;
@@ -144,7 +144,7 @@
     align-items: center;
   }
 
-  nav#Login{
+  nav#Login {
     font-size: 0.8rem;
   }
 
@@ -159,8 +159,8 @@
     display: flex;
     border-radius: 0.2em;
     padding: 10px;
-    margin: 0 0 0 .5em;
-    background: #FF0000;
+    margin: 0 0 0 0.5em;
+    background: #ff0000;
     color: white;
     &:hover {
       color: $nav-link-color-hover;
@@ -184,14 +184,14 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
   #mastHeadContainer {
     .upperHeadContainer {
       display: none;
     }
 
     .lowerHeadContainer {
-      padding: .2rem .5rem;
+      padding: 0.2rem 0.5rem;
     }
   }
 }

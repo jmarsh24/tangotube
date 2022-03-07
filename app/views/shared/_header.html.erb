@@ -1,7 +1,7 @@
 <div id="mastHeadContainer">
   <% if user_signed_in? %>
     <% if current_user.admin? %>
-      <div class="upperHeadContainer">
+      <div class="upperHeadContainer sm:hidden">
         <div class="add_links">
           <%= link_to "Add Leader", leaders_path %>
           <%= link_to "Add Follower", followers_path %>
@@ -39,15 +39,36 @@
         </div>
       <% end %>
     </div>
-    <nav id="Login">
-      <% if user_signed_in? %>
-        <%= image_tag avatar_url_for(current_user, opts = {}), size: "30x30", style: "border-radius: 50%" %>
-        <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>
-        <%= button_to "Logout", destroy_user_session_path, method: :delete, class:'navbar-link'  %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class:'navbar-link'  %>
-        <%= link_to "Sign up", new_user_registration_path, class:'navbar-link', id: 'sign-up' %>
-      <% end %>
-    </nav>
+    <div class="flex-1 flex justify-end items-center">
+      <div data-controller="dropdown" class="elative">
+        <% if user_signed_in? %>
+          <div>
+            <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid">
+              <%= image_tag avatar_url_for(current_user, opts = {}), size: "30x30", class: "h-8 w-8 rounded-full" %>
+            </button>
+          </div>
+        <% else %>
+          <span class="inline-flex rounded-md shadow-xs">
+            <%= link_to "Login", new_user_session_path, class:'inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-red-600 bg-white hover:bg-gray-50 hover:text-red-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'  %>
+          </span>
+          <%= link_to "Sign up", new_user_registration_path, class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 hover:text-white focus:outline-none focus:shadow-outline transition duration-150 ease-in-out", id: 'sign-up' %>
+        <% end %>
+        <div
+          data-dropdown-target="menu"
+          data-transition-enter-from="opacity-0 scale-95"
+          data-transition-enter-to="opacity-100 scale-100"
+          data-transition-leave-from="opacity-100 scale-100"
+          data-transition-leave-to="opacity-0 scale-95"
+          class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50"
+        >
+          <div class="py-1 rounded-md bg-white shadow-xs">
+            <% if user_signed_in? %>
+              <%= link_to 'Edit profile', edit_user_registration_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100' %>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'w-full inline-flex items-start block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
