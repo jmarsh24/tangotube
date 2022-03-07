@@ -2,7 +2,14 @@ class User < ApplicationRecord
   pay_customer
   acts_as_voter
 
+  after_initialize :set_default_role, if: :new_record?
+  before_save :tileize_name
+
   has_many :comments, dependent: :destroy
+
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_fill: [150, nil]
+  end
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -21,7 +28,6 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
   enum role: {user: 0, admin: 1}
-  after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
     self.role ||= :user
@@ -32,21 +38,30 @@ class User < ApplicationRecord
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$/
 
     errors.add :password,
-"Complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character"
+    "Complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character"
   end
 
-  def self.from_omniauth(access_token)
-    user = User.where(email: access_token.info.email).first
-    user ||= User.create(
-        email: access_token.info.email,
-        password: Devise.friendly_token[0,20],
-        name: access_token.info.name,
-        first_name: access_token.info.first_name,
-        last_name: access_token.info.last_name,
-        image: access_token.info.image,
-        uid: access_token.uid,
-        provider: access_token.info.provider
-      )
-    user
+
+  def tileize_name
+    self.name = name.titleize
+    self.first_name = first_name.titleize
+    self.last_name = last_name.titleize
+  end
+
+  class << self
+    def from_omniauth(access_token)
+      user = User.where(email: access_token.info.email).first
+      user ||= User.create(
+          email: access_token.info.email,
+          password: Devise.friendly_token[0,20],
+          name: access_token.info.name,
+          first_name: access_token.info.first_name,
+          last_name: access_token.info.last_name,
+          image: access_token.info.image,
+          uid: access_token.uid,
+          provider: access_token.info.provider
+        )
+      user
+    end
   end
 end
