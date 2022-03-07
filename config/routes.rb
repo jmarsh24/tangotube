@@ -46,9 +46,6 @@ Rails.application.routes.draw do
       patch "downvote", to: "videos#downvote"
     end
   end
-  resources :discssions do
-    resources :comments, module: :discussions
-  end
   resources :search_suggestions, only: :index do
     collection do
       post :search
