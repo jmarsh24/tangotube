@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  pay_customer
   acts_as_voter
 
   has_many :comments, dependent: :destroy

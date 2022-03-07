@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get "checkout", to: "checkouts#show"
+  get "billing", to: "billing#show"
+
   get 'errors/not_found'
   get 'errors/internal_server_error'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
