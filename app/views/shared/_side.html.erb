@@ -1,8 +1,9 @@
-<%= link_to "Home", "#" %>
-<%= link_to "Global Clips", "#" %>
-<hr>
-<%= link_to "Library", "#" %>
-<%= link_to "History", "#" %>
-<%= link_to "Your Clips", "#" %>
-<%= link_to "Liked Videos", "#" %>
-<%= link_to "Subscriptions", "#" %>
+<div class="side">
+  <%= link_to fa_icon("home", text: "Home"), root_path, class: "side-item" %>
+  <%= link_to fa_icon("scissors", text: "Global Clips"), "#", class: "side-item" %>
+  <%= link_to fa_icon("book", text: "Library"), "#", class: "side-item" %>
+  <%= link_to fa_icon("clock", text: "History"), "#", class: "side-item" %>
+  <%= link_to fa_icon("scissors", text: "Your Clips"), "#", class: "side-item" %>
+  <%= link_to fa_icon("thumbs-up", text: "Liked Videos"), "#", class: "side-item" %>
+  <%= link_to fa_icon("rocket", text: "Subscriptions"), "#", class: "side-item" %>
+</div>

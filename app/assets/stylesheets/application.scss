@@ -106,17 +106,6 @@ input {
   padding-left: 240px;
 }
 
-#sideNavContainer {
-  width: 240px;
-  background-color: $secondary-color;
-  padding-top: 56px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-}
-
 .isHidden {
   display: none !important;
 }

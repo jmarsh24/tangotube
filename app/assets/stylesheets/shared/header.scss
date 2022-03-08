@@ -15,7 +15,6 @@
   .upperHeadContainer {
     display: flex;
     width: 100%;
-    max-width: 1900px;
     margin: 0 auto;
     justify-content: flex-end;
     align-items: center;
@@ -34,7 +33,6 @@
   .lowerHeadContainer {
     flex: 1;
     width: 100%;
-    max-width: 1900px;
     display: flex;
     border-bottom: 1px solid $border-color;
     border-top: 1px solid $border-color;

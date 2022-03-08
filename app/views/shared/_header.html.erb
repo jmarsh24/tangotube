@@ -15,6 +15,7 @@
   <% end %>
   <div class="lowerHeadContainer">
     <div class="logoContainer">
+      <%= button_tag fa_icon("bars"), style: "font-size: 20px;", "data-action": "click->toggle#navShowHide" %>
       <%= link_to "TangoTube", root_path %>
     </div>
     <div class="autocompleteContainer" data-controller="combobox">
