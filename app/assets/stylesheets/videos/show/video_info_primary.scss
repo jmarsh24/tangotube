@@ -77,23 +77,19 @@
 }
 
 .share-container {
-    display:flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 10px;
-    width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
 
   .copy-to-clipboard {
     display: flex;
     justify-content: flex-end;
     margin: 10px 0px;
     width: 100%;
-
-    &__field {
-
-    }
 
     .input {
       font-size: 15px;
@@ -111,6 +107,7 @@
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
       margin: 0 !important;
+      height: 100%;
     }
   }
 
@@ -146,5 +143,4 @@
       font-style: bold;
     }
   }
-
 }
