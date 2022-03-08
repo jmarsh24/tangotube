@@ -184,6 +184,13 @@
   }
 }
 
+.login {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 @media (max-width: 1024px) {
   #mastHeadContainer {
     .upperHeadContainer {
@@ -194,14 +201,14 @@
       padding: 0.2rem 0.5rem;
     }
   }
+
+  .login {
+    display: none;
+  }
 }
 
 @media (max-width: 500px) {
   .buttonSideBar {
-    display: none;
-  }
-
-  nav#Login {
     display: none;
   }
 
