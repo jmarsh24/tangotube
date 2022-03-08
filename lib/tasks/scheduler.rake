@@ -40,7 +40,7 @@ end
 
 desc "Imports all youtube comments for existing videos"
 task import_all_comments: :environment do
-  Video.all.limit(10000).find_each do |video|
+  Video.left_outer_joins(:yt_comments).order('updated_at asc').limit(10).limit(50000).find_each do |video|
     ImportCommentsWorker.perform_async(video.youtube_id)
   end
 end
