@@ -41,13 +41,13 @@
     >
     <div class="youtube-controls">
       <%= render "videos/show/vote" %>
-      <div class="w-full">
+      <div>
         <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", style: "width: 60px;", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",
                                                               "clipboard-target": "startTime",
                                                               "youtube-target": "startTime" } %>
       </div>
       <span class="spacer">-</span>
-      <div class="w-full">
+      <div>
         <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", style: "width: 60px;", data: { action: "keyup->clipboard#changeValue input->youtube#updateEndTime",
                                                               "clipboard-target": "endTime",
                                                               "youtube-target": "endTime" } %>
@@ -57,7 +57,6 @@
                                                              ".5x" => "0.50",
                                                             ".75x" => "0.75",
                                                               "1x" => "1.0"}, @playback_speed.to_f),
-                                                              style: "font-size: 36px;",
                                                                  data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackSpeed",
                                                                          "clipboard-target": "playbackSpeed",
                                                                          "youtube-target": "playbackSpeed" } %>
@@ -65,7 +64,7 @@
     <div class="copy-to-clipboard">
       <%= text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}",
                               readonly: "readonly",
-                                class: "copy-to-clipboard__field input", style: "height: 100%; border-top-right-radius: 0px; border-bottom-right-radius: 0px;",
+                                class: "copy-to-clipboard__field",
                                 data: { "clipboard-target": "source" } %>
       <%= button_tag type: "button",
                         name: "button",
