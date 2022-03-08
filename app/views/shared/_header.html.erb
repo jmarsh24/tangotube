@@ -40,7 +40,7 @@
       <% end %>
     </div>
     <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
-      <div data-controller="dropdown" style="position: relative; display: flex; align-items: center; gap: 10px;">
+      <div class="login" data-controller="dropdown">
         <% if user_signed_in? %>
           <div>
             <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid">
