@@ -55,7 +55,7 @@
             data-controller="filter"
             data-action="filter#filter"
             data-filter-sort-value="videos.performance_date"
-            data-filter-direction-value="desc"
+            data-filter-direction-value="asc"
             class="videos-sortable-button">
           Show More Oldest <%= fa_icon("arrow-right")%>
         </button>
@@ -81,12 +81,11 @@
           </div>
           <div style="display: flex; justify-content: center; align-items: center; padding: 24px 0;">
             <button name="button"
-            type="button"
-            data-controller="filter"
-            data-action="filter#filter"
-            data-filter-sort-value="videos.performance_date"
-            data-filter-direction-value="desc"
-            class="videos-sortable-button">
+              type="button"
+              class="videos-sortable-button"
+              data-controller="filter"
+              data-action="filter#filter"
+              data-filter-watched-value="false">
               Show More New To You <%= fa_icon("arrow-right")%>
             </button>
           </div>
@@ -96,11 +95,11 @@
     <% if @search_most_popular_watched.present? %>
       <% if @search_most_popular_watched.paginated_row.present? %>
         <button name="button"
-            type="button"
-            class="videos-sortable-button"
-            data-controller="filter"
-            data-action="filter#filter"
-            data-filter-watched-value="true">
+          type="button"
+          class="videos-sortable-button"
+          data-controller="filter"
+          data-action="filter#filter"
+          data-filter-watched-value="true">
           <h2 style="margin:0px;">Watched</h2>
         </button>
         <div style="border-bottom: 1px solid #c2c2c2;">
@@ -111,12 +110,11 @@
           </div>
           <div style="display: flex; justify-content: center; align-items: center; padding: 24px 0;">
             <button name="button"
-            type="button"
-            data-controller="filter"
-            data-action="filter#filter"
-            data-filter-sort-value="videos.performance_date"
-            data-filter-direction-value="desc"
-            class="videos-sortable-button">
+              type="button"
+              class="videos-sortable-button"
+              data-controller="filter"
+              data-action="filter#filter"
+              data-filter-watched-value="true">
               Show More Previously Watched <%= fa_icon("arrow-right")%>
             </button>
           </div>
