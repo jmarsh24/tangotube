@@ -12,12 +12,18 @@
   <script src="https://js.stripe.com/v3/"></script>
   <%= render 'shared/meta_tags' %>
 </head>
-<body>
+<body data-controller="toggle">
   <div id="header">
     <%= render 'shared/header' %>
-  </div>
-  <div id="pageContainer" data-controller="toggle">
-    <div id="sideNavContainer" class="isHidden" data-toggle-target="sideNavContainer">
+    <div id="sideNavContainer" class="isHidden
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            admin
+          <% end %>
+        <% end %>"
+        data-toggle-target="sideNavContainer"
+    >
+      <%= render "shared/side" %>
     </div>
     <div id="mainSectionContainer"  data-toggle-target="mainSectionContainer"
     <% if user_signed_in? %>
