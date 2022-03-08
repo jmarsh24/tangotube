@@ -4,7 +4,7 @@
       <%= button_tag type: 'button', data: { action: "click->toggle#toggleFilter",
                                             "toggle-target": "filterButton"},
                                               class: "button isActive" do %>
-        <%= fa_icon "filter 2x", left: true %>Filter
+        <%= fa_icon "filter", left: true %>Filter
       <% end %>
       <div id="filter_results">
         <% if filtering_params.present? %>
@@ -64,18 +64,18 @@
               <% else %>
                 Watched
               <% end %>
-            <%= button_tag type: "button",
+              <%= button_tag type: "button",
                         class: "videos-sortable-button",
                         data: { controller: "filter",
                         action: "filter#filter",
                                 "filter-liked-value": filtering_params["liked"] == "true" ? 0 : "true" } do %>
-            <% if filtering_params["liked"] == "true" %>
-              <%= content_tag(:b, "Liked") %>
-              <%= fa_icon("times", class: "videos-sortable-icon") %>
-            <% else %>
-              Liked
-            <% end %>
-          <% end %>
+                <% if filtering_params["liked"] == "true" %>
+                  <%= content_tag(:b, "Liked") %>
+                  <%= fa_icon("times", class: "videos-sortable-icon") %>
+                <% else %>
+                  Liked
+                <% end %>
+              <% end %>
             <% end %>
             <%= button_tag type: "button",
                           class: "videos-sortable-button",

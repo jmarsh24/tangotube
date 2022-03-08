@@ -1,57 +1,48 @@
-<div id="header">
-  <%= render 'shared/header' %>
-</div>
-<div class="sm:mx-auto sm:w-full sm:max-w-md">
-  <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-    Log in to your account
-  </h2>
-  <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
-    Or
-    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <%= link_to "sign up for an account", new_registration_path(resource_name), class:"font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"%><br />
-    <% end %>
-  </p>
-</div>
-<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email, class: "block text-sm font-medium leading-5 text-gray-700" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-      </div>
-      <div class="field">
-        <%= f.label :password, class: "block text-sm font-medium leading-5 text-gray-700" %>
-        <%= f.password_field :password, autocomplete: "current-password", class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-      </div>
-      <div class="mt-6 flex items-center justify-between">
-        <% if devise_mapping.rememberable? %>
-          <div class="flex items-center">
-            <%= f.check_box :remember_me, class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
-            <%= f.label :remember_me, class: "ml-2 block text-sm leading-5 text-gray-900" %>
+<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <div>
+    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900" style="margin-top: 24px;">
+      Log in to your account
+    </h2>
+    <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w" style= "margin-top: 4px; text-align: center; color: rgb(75, 85, 99);">
+      Or
+      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <%= link_to "sign up for an account", new_registration_path(resource_name), class:"font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150", style: "color: rgb(99, 102, 241);"%>
+      <% end %>
+    </p>
+  </div>
+  <div style="margin-top: 8px;">
+    <div style="width: 428px; background: white; padding: 40px 32px; border-radius: 8px; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <%= f.label :email, class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input--block appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
+          <%= f.label :password, class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "input input--block appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+          <div class="mt-6 flex items-center justify-between" style="margin-top: 24px; display: flex; align-items: center; justify-content: space-between">
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+              <div class="text-sm leading-5">
+                <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-sm leading-5"%>
+              </div>
+            <% end %>
           </div>
-        <% end %>
-        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-          <div class="text-sm leading-5">
-            <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-sm leading-5"%><br />
+          <div>
+            <%= f.submit "Log in", class: "button button--submit button--small button--block w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
           </div>
-        <% end %>
-      </div>
-      <div>
-        <%= f.submit "Log in", class: "w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
-      </div>
-    <% end %>
-    <div class="mt-6">
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-300"></div>
         </div>
-        <div class="relative flex justify-center text-sm leading-5">
-          <span class="px-2 bg-white text-gray-500">
-            Or continue with
-          </span>
+      <% end %>
+      <div class="mt-6" style="margin-top: 24px;">
+        <div class="relative" style="position: relative;">
+          <div class="absolute inset-0 flex items-center" style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; display: flex; align-items: center;">
+            <div class="w-full border-t border-gray-300" style="width: 100%; border-top: 1px solid rgb(229, 231, 235); position: relative;"></div>
+          </div>
+          <div class="relative flex justify-center text-sm leading-5" style="display: flex; justify-content: center;">
+            <span class="px-2 bg-white text-gray-500" style="background: white; padding: 0 8px; z-index: 1;">
+              Or continue with
+            </span>
+          </div>
         </div>
+        <%= render "devise/shared/links" %>
       </div>
-      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>

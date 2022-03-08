@@ -39,19 +39,19 @@
         </div>
       <% end %>
     </div>
-    <div class="flex-1 flex justify-end items-center">
-      <div data-controller="dropdown" class="relative">
+    <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
+      <div data-controller="dropdown" style="position: relative; display: flex; align-items: center; gap: 10px;">
         <% if user_signed_in? %>
           <div>
             <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid">
-              <%= image_tag avatar_url_for(current_user, opts = {}), size: "30x30", class: "h-8 w-8 rounded-full" %>
+              <%= image_tag avatar_url_for(current_user, opts = {}), size: "30x30", style: "border-radius: 50%;" %>
             </button>
           </div>
         <% else %>
-          <span class="inline-flex rounded-md shadow-xs">
-            <%= link_to "Login", new_user_session_path, class:'inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-red-600 bg-white hover:bg-gray-50 hover:text-red-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'  %>
+          <span class="inline-flex rounded-md shadow-xs" style="display: flex;">
+            <%= link_to "Login", new_user_session_path, class:'button'  %>
           </span>
-          <%= link_to "Sign up", new_user_registration_path, class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 hover:text-white focus:outline-none focus:shadow-outline transition duration-150 ease-in-out", id: 'sign-up' %>
+          <%= link_to "Sign up", new_user_registration_path, class: "button button--submit", id: 'sign-up' %>
         <% end %>
         <div
           data-dropdown-target="menu"
@@ -61,10 +61,10 @@
           data-transition-leave-to="opacity-0 scale-95"
           class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50"
         >
-          <div class="py-1 rounded-md bg-white shadow-xs">
+          <div class="py-1 rounded-md bg-white shadow-xs" style="display: flex; align-items: center;">
             <% if user_signed_in? %>
-              <%= link_to 'Edit profile', edit_user_registration_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100' %>
-              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'w-full inline-flex items-start block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100' %>
+              <%= button_to 'Edit profile', edit_user_registration_path, method: :get, class: "button", style: "border: none; padding: 0px;" %>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'button', style: "margin: none; padding: 0px;" %>
             <% end %>
           </div>
         </div>

@@ -1,4 +1,3 @@
 redis:  redis-server
 worker: bundle exec sidekiq
 js: yarn build --watch
-css: bin/rails tailwindcss:watch
