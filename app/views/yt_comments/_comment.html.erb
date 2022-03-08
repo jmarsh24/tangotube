@@ -7,5 +7,5 @@
   Like count: <%= comment.like_count %><br />
   <span>Posted <%= time_ago_in_words(comment.date) %> ago</span>
   <hr />
-  <%= comment.body %>
+  <%= simple_format(comment.body) %>
 </div>
