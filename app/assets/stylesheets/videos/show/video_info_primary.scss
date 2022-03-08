@@ -81,7 +81,7 @@
   justify-content: flex-end;
   flex-direction: column;
   align-items: flex-end;
-  flex-wrap: wrap;
+  flex-flow: wrap;
   gap: 10px;
   width: 100%;
 
@@ -91,11 +91,11 @@
     margin: 10px 0px;
     width: 100%;
 
-    .input {
+    input {
       font-size: 15px;
       width: 100%;
-      // min-width: 340px;
-      // max-width: 700px;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
       border-top: 1px solid rgba(27, 31, 35, 0.15);
       border-left: 1px solid rgba(27, 31, 35, 0.15);
       border-bottom: 1px solid rgba(27, 31, 35, 0.15);
@@ -118,6 +118,7 @@
 
   .youtube-controls {
     display: flex;
+    flex-flow: wrap;
     align-items: center;
     gap: 10px;
     font-size: 16px;
