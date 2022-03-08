@@ -5,11 +5,24 @@
 <% content_for :meta_description,  "#{@video.display.any_song_attributes}" %>
 <% content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg" %>
 <%= render 'shared/header' %>
-<div data-controller="youtube"
+<div data-controller="hotkeys" data-hotkeys-bindings-value='{
+  "space": "#hotkey->youtube#playPause",
+  "shift + 1": "#hotkey->youtube#setTime1",
+  "shift + 2": "#hotkey->youtube#setTime2",
+  "backspace": "#hotkey->youtube#reset",
+  "m": "#hotkey->youtube#toggleMute",
+  "+": "#hotkey->youtube#increaseVolume",
+  "-": "#hotkey->youtube#decreaseVolume",
+  "f": "#hotkey->youtube#playFullscreen ",
+  "left": "#hotkey->youtube#seekBackward",
+  "right": "#hotkey->youtube#seekForward",
+  "shift + . ": "#hotkey->youtube#increasePlaybackRate",
+  "shift + , ": "#hotkey->youtube#decreasePlaybackRate"}'></div>
+<div id="hotkey" data-controller="youtube"
             data-youtube-video-id-value="<%= @video.youtube_id %>"
-            data-youtube-start-seconds-value="<%= @start_value %>"
-            data-youtube-end-seconds-value="<%= @end_value %>"
-            data-youtube-playback-speed-value="<%= @playback_speed %>">
+  data-youtube-start-seconds-value="<%= @start_value %>"
+  data-youtube-end-seconds-value="<%= @end_value %>"
+  data-youtube-playback-speed-value="<%= @playback_speed %>">
   <div class="video-responsive-background">
     <div class="video-responsive-container">
       <div class="video-responsive"

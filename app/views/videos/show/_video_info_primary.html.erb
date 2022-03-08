@@ -34,7 +34,7 @@
     </div>
   </div>
   <div class="share-container"
-    data-controller= "clipboard"
+    data-controller="clipboard"
     data-clipboard-success-content="Copied!"
     data-clipboard-video-id="<%= @video.youtube_id %>"
     data-clipboard-root-url="<%= @root_url %>"
@@ -56,7 +56,11 @@
       <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25",
                                                              ".5x" => "0.50",
                                                             ".75x" => "0.75",
-                                                              "1x" => "1.0"}, @playback_speed.to_f),
+                                                              "1x" => "1.00",
+                                                              "1.25x" => "1.25",
+                                                              "1.5x" => "1.50",
+                                                              "1.75x" => "1.75",
+                                                              "2x" => "2.00" }, sprintf('%.2f', @playback_speed.to_i)),
                                                                  data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackSpeed",
                                                                          "clipboard-target": "playbackSpeed",
                                                                          "youtube-target": "playbackSpeed" } %>
