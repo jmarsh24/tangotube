@@ -44,19 +44,33 @@ body {
 button {
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   &:hover {
     cursor: pointer;
   }
 }
 
+a {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   font-size: 16px;
   height: 36px;
   width: 2.5rem;
   padding-left: 0.7rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  border-radius: 6px;
+  color: black;
 }
 
 input {
