@@ -175,32 +175,77 @@
   }
 }
 
-
 @media (max-width: 1600px) {
-
   .sorting-container {
     padding: 0px;
   }
-
 }
 
 @media (max-width: 800px) {
-
   #filter-container {
     &.filter-container {
       padding: 0px;
     }
   }
 
-
-
   .filter-sorting-container {
     padding: 0 10px;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1225px) {
+  #year-filter {
+    display: none;
+  }
+}
 
+@media (max-width: 1055px) {
+  #orchestra-filter {
+    display: none;
+  }
+}
+
+@media (max-width: 730px) {
+  #follower-filter {
+    display: none;
+  }
+}
+
+@media (max-width: 475px) {
+  .filter-sorting-container {
+    position: relative;
+  }
+  .filter-container {
+    position: absolute;
+    top: 55px;
+    // left: 0px;
+    height: 1420px;
+    width: 270px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px -2px;
+  }
+  .filter-container-upper {
+    flex-direction: column;
+  }
+  .filters {
+    flex-direction: column;
+    gap: 250px;
+    width: 250px;
+    font-size: 50px;
+    width: 100%;
+  }
+  #year-filter,
+  #orchestra-filter,
+  #follower-filter {
+    display: block;
+  }
+
+  .sorting-container {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
   #filter_results {
     font-size: 12px;
   }
