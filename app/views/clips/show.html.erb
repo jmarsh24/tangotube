@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+<%= render @clip %>
+<div>
+  <%= link_to "Edit", edit_clip_path(@clip), class: "link" %> |
+  <%= link_to "Back", clips_path, class: "link" %>
+  <% if current_user = @clip.user %>
+    <%= button_to "Destroy", @clip, method: :delete, class: "button button--danger" %>
+  <% end %>
+</div>

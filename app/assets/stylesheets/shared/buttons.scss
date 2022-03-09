@@ -76,6 +76,17 @@ $btnColor: #fff;
     }
   }
 
+  &--danger {
+    background: rgb(208, 63, 63);
+    color: white;
+    transition: background 220ms ease-in-out;
+
+    &:hover {
+      color: white;
+      background: rgb(229, 70, 78);
+    }
+  }
+
   &--small {
     font-size: 1.15rem;
   }

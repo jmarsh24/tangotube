@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
   resources :channels, only: %i[index create]
   resources :playlists, only: %i[index create]
+  resources :clips
   resources :videos do
     resources :comments, module: :videos
     member do

@@ -1,0 +1,32 @@
+<div id="<%= dom_id clip %>">
+  <div data-controller="youtube"
+        data-youtube-video-id-value="<%= clip.video.youtube_id %>"
+        data-youtube-start-seconds-value="<%= clip.start_seconds %>"
+        data-youtube-end-seconds-value="<%= clip.end_seconds %>"
+        data-youtube-playback-speed-value="<%= clip.playback_rate %>">
+    <div class="video-responsive-background">
+      <div class="video-responsive-container">
+        <div class="video-responsive"
+        >
+          <div data-youtube-target="frame"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <strong>Title:</strong>
+      <%= clip.title %>
+      <div style="display: flex; gap: 20px;">
+        <strong>Start Time:</strong>
+        <%= clip.start_seconds %>
+        <strong>End Time:</strong>
+        <%= clip.end_seconds %>
+        <strong>Playback Rate:</strong>
+        <%= clip.playback_rate %>
+      </div>
+      <strong>Tags:</strong>
+      <%= clip.tags %>
+      <strong>User:</strong>
+      <%= clip.user.name %>
+      <%= link_to "Source Video", "#{watch_path}?v=#{clip.video.youtube_id}"%>
+    </div>
+  </div>

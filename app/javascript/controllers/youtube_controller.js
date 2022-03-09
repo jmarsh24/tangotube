@@ -21,7 +21,7 @@ export default class extends Controller {
         cc_load_policy: 0, // Hide closed captions
         iv_load_policy: 3, // Hide the Video Annotations
         start: this.startSecondsValue,
-        end: this.endSecondsValue,
+        // end: this.endSecondsValue,
       },
     };
 
