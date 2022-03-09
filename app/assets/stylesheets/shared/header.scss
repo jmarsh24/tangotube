@@ -212,17 +212,13 @@
       padding: 0.2rem 0.5rem;
     }
   }
-
-  .login {
-    display: none;
-  }
-
-  #login-flex {
-    display: none;
-  }
 }
 
 @media (max-width: 500px) {
+  #login-flex {
+    display: none;
+  }
+
   .buttonSideBar {
     display: none;
   }
