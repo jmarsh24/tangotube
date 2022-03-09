@@ -46,11 +46,13 @@ export default class extends Controller {
       this.element.setAttribute("data-state", e.data);
       this.element.setAttribute("data-time", this.time);
       this.element.setAttribute("data-playbackRate", this.playbackRateValue);
-      this.element.setAttribute("data-volume", this.volume);
       e.data === 1 ? this.startTimer() : clearInterval(this.timer);
-      if (e.data === YT.PlayerState.ENDED) {
-        this.player.seekTo(this.startSecondsValue);
-      }
+      // debugger;
+      // if (e.data === 0) {
+      //   this.player.seekTo(this.startSecondsValue);
+      // }
+      // console.log(this.element.getAttribute("data-time");
+      // if (this.element.getAttribute("data-time" == thi)
     });
   }
 
@@ -70,7 +72,7 @@ export default class extends Controller {
     this.player.loadVideoById({
       videoId: this.videoIdValue,
       startSeconds: this.startSecondsValue,
-      endSeconds: this.endSecondsValue,
+      // endSeconds: this.endSecondsValue,
     });
   }
 
@@ -86,7 +88,7 @@ export default class extends Controller {
     this.player.loadVideoById({
       videoId: this.videoIdValue,
       startSeconds: this.startSecondsValue,
-      endSeconds: this.endSecondsValue,
+      // endSeconds: this.endSecondsValue,
     });
   }
 
@@ -96,6 +98,9 @@ export default class extends Controller {
 
   startTimer() {
     this.timer = setInterval(() => {
+      if (this.time == this.endSecondsValue) {
+        this.player.seekTo(this.startSecondsValue);
+      }
       this.element.setAttribute("data-time", this.time);
       this.element.dispatchEvent(
         new CustomEvent("youtube", {
