@@ -34,6 +34,8 @@
 
 html,
 body {
+  height: -webkit-fill-available;
+  min-height: 100vh;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   color: $primary-font-color;
   height: 100%;
@@ -90,7 +92,9 @@ input {
 
 #mainSectionContainer {
   padding-top: 68px;
-  flex: 1 0 auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   background-color: $secondary-color;
 
   &.admin {
