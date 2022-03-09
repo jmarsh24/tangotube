@@ -160,6 +160,7 @@ class VideosController < ApplicationController
                                          .references(:song, :leader, :follower, :event, :channel)
                                          .where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
+                                         .has_leader.has_follower
                                          .where(leader_id: @video.leader_id)
                                          .where(follower_id: @video.follower_id)
                                          .where(hidden: false)
