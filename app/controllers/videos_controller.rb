@@ -136,6 +136,7 @@ class VideosController < ApplicationController
 
   def set_recommended_videos
     videos_from_this_performance
+    videos_with_same_dancers
     videos_with_same_event
     videos_with_same_song
     videos_with_same_channel
@@ -150,6 +151,17 @@ class VideosController < ApplicationController
                                          .where(leader_id: @video.leader_id)
                                          .where(follower_id: @video.follower_id)
                                          .order("performance_number ASC")
+                                         .where(hidden: false)
+                                         .limit(8).load_async
+  end
+
+  def videos_with_same_dancers
+    @videos_with_same_dancers = Video.includes(:song, :leader, :follower, :event, :channel)
+                                         .references(:song, :leader, :follower, :event, :channel)
+                                         .where("upload_date <= ?", @video.upload_date + 7.days)
+                                         .where("upload_date >= ?", @video.upload_date - 7.days)
+                                         .where(leader_id: @video.leader_id)
+                                         .where(follower_id: @video.follower_id)
                                          .where(hidden: false)
                                          .limit(8).load_async
   end

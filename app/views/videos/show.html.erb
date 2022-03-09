@@ -85,6 +85,25 @@
               </div>
             <% end %>
           <% end %>
+          <% unless @videos_with_same_dancers.empty? %>
+            <div class="recommended-videos-card" data-toggle-target="recommendedEventVideos">
+              <div class="recommended-videos__header">
+                <h2>Videos from <%= @video.leader.first_name.titleize %> & <%= @video.follower.first_name.titleize %></h2>
+              </div>
+              <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_dancers } %>
+            </div>
+            <% if @videos_with_same_dancers.size > 3 %>
+              <div class="show-more-container">
+                <%= button_tag type: "button",
+                              class: "button",
+                              style: "width: 100%;",
+                              data: { action: "toggle#toggleRecommendedEventVideos" } do %>
+                  <%= fa_icon "angle-down", data: { 'toggle-target': "recommendedEventVideosDownButton" } %>
+                  <%= fa_icon "angle-up", class: "isHidden", data: { 'toggle-target': "recommendedEventVideosUpButton" } %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
           <% unless @videos_with_same_event.empty? %>
             <div class="recommended-videos-card" data-toggle-target="recommendedEventVideos">
               <div class="recommended-videos__header">
