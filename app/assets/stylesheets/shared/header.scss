@@ -191,6 +191,13 @@
   gap: 10px;
 }
 
+#login-flex {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 @media (max-width: 1024px) {
   #mastHeadContainer {
     .upperHeadContainer {
@@ -203,6 +210,10 @@
   }
 
   .login {
+    display: none;
+  }
+
+  #login-flex {
     display: none;
   }
 }
