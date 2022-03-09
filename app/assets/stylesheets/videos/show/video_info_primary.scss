@@ -118,10 +118,10 @@
 
   .youtube-controls {
     display: flex;
-    flex-flow: wrap;
     align-items: center;
     gap: 10px;
     font-size: 16px;
+    margin-top: 15px;
 
     .youtube-controls-time {
       display: flex;
@@ -142,6 +142,14 @@
     .spacer {
       font-size: 20px;
       font-style: bold;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  #downvote-button {
+    span {
+      display: none;
     }
   }
 }

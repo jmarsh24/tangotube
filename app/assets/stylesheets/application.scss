@@ -47,6 +47,22 @@ button {
   }
 }
 
+select {
+  font-size: 16px;
+  height: 36px;
+  width: 2.5rem;
+  padding-left: 0.7rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 #pageContainer {
   width: 100%;
   max-width: 1900px;

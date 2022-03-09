@@ -7,19 +7,18 @@
                           data: { "popper-target": "element",
                           action: "click->popper#show click:outside->popper#hide" } do %>
     <%= button_to downvote_video_path(@video), method: :patch,
-                                              style: "display: flex; justify-content: center; align-items: center; border: none; background: none;" do %>
+                                              style: "display: flex; justify-content: center; align-items: center; border: none; background: none;",
+                                              id: "downvote-button" do %>
       <% if user_signed_in? %>
         <% if current_user.voted_down_on? @video %>
-          <%= fa_icon "thumbs-down solid", text: "Dislike",
-                                        style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
+          <%= fa_icon "thumbs-down solid", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
         <% else %>
-          <%= fa_icon "thumbs-down regular", text: "Dislike",
-                                          style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
+          <%= fa_icon "thumbs-down regular", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
         <% end %>
       <% else %>
-        <%= fa_icon "thumbs-down regular", text: "Dislike",
-                                        style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
+        <%= fa_icon "thumbs-down regular", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
       <% end %>
+      <span>Dislike</span>
     <% end %>
   <% end %>
   <div id="tooltip" role="tooltip" data-popper-target="tooltip">
