@@ -7,16 +7,16 @@
                         data: { "popper-target": "element",
                         action: "click->popper#show click:outside->popper#hide" } do %>
     <%= button_to upvote_video_path(@video), method: :patch,
-                                          style: "display: flex; justify-content: center; align-items: center; border: none; background: none;",
+                                            style: "background: none;",
                                             id: "upvote-button" do %>
       <% if user_signed_in? %>
         <% if current_user.voted_up_on? @video %>
-          <%= fa_icon "thumbs-up solid", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
+          <%= fa_icon "thumbs-up solid", style: "font-size: 30px; color: black;" %>
         <% else %>
-          <%= fa_icon "thumbs-up regular", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
+          <%= fa_icon "thumbs-up regular", style: "font-size: 30px;" %>
         <% end %>
       <% else %>
-        <%= fa_icon "thumbs-up regular", style: "font-size: 30px; margin: 0 10px; border: none; background: none;" %>
+        <%= fa_icon "thumbs-up regular", style: "font-size: 30px; color: black;" %>
       <% end %>
     <% end %>
   <% end %>
