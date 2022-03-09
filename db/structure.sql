@@ -336,6 +336,43 @@ ALTER SEQUENCE public.channels_id_seq OWNED BY public.channels.id;
 
 
 --
+-- Name: clips; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.clips (
+    id bigint NOT NULL,
+    start_seconds integer NOT NULL,
+    end_seconds integer NOT NULL,
+    title text,
+    playback_rate double precision DEFAULT 1.0,
+    tags character varying,
+    user_id bigint NOT NULL,
+    video_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: clips_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.clips_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: clips_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.clips_id_seq OWNED BY public.clips.id;
+
+
+--
 -- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1092,6 +1129,13 @@ ALTER TABLE ONLY public.channels ALTER COLUMN id SET DEFAULT nextval('public.cha
 
 
 --
+-- Name: clips id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.clips ALTER COLUMN id SET DEFAULT nextval('public.clips_id_seq'::regclass);
+
+
+--
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1248,6 +1292,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.channels
     ADD CONSTRAINT channels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: clips clips_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.clips
+    ADD CONSTRAINT clips_pkey PRIMARY KEY (id);
 
 
 --
@@ -1469,6 +1521,20 @@ CREATE UNIQUE INDEX index_ahoy_visits_on_visit_token ON public.ahoy_visits USING
 --
 
 CREATE INDEX index_channels_on_title ON public.channels USING btree (title);
+
+
+--
+-- Name: index_clips_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clips_on_user_id ON public.clips USING btree (user_id);
+
+
+--
+-- Name: index_clips_on_video_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clips_on_video_id ON public.clips USING btree (video_id);
 
 
 --
@@ -1865,6 +1931,14 @@ ALTER TABLE ONLY public.yt_comments
 
 
 --
+-- Name: clips fk_rails_b8e2fc769f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.clips
+    ADD CONSTRAINT fk_rails_b8e2fc769f FOREIGN KEY (video_id) REFERENCES public.videos(id);
+
+
+--
 -- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1886,6 +1960,14 @@ ALTER TABLE ONLY public.pay_payment_methods
 
 ALTER TABLE ONLY public.playlists
     ADD CONSTRAINT fk_rails_d67ef1eb45 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: clips fk_rails_da05a176b5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.clips
+    ADD CONSTRAINT fk_rails_da05a176b5 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -2002,6 +2084,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220224134559'),
 ('20220228110513'),
 ('20220307091518'),
-('20220307112504');
+('20220307112504'),
+('20220309145737');
 
 

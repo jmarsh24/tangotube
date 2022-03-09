@@ -1,0 +1,10 @@
+<h1>Clips</h1>
+<div id="clips">
+  <% @clips.each do |clip| %>
+    <%= render clip %>
+    <p>
+      <%= link_to "Show this clip", clip, class: "link" %>
+    </p>
+  <% end %>
+</div>
+<%= link_to "New clip", new_clip_path, class: "link" %>
