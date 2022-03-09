@@ -53,6 +53,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "letter_opener"
   gem "listen", "~> 3.2"
   gem "rack-mini-profiler"
   gem "rubocop"
@@ -72,3 +73,4 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
