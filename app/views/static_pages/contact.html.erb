@@ -1,13 +1,11 @@
-<div id="header">
-  <%= render 'shared/header' %>
-</div>
-<div class="max-w-7xl mx-auto mb-24 px-4 sm:px-6 lg:px-8 mt-4 lg:mt-10">
-  <div class="prose">
+<div style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <div class="flex-shrink-0 mr-3.5">
       <img alt="Justin Marsh" width="80" class="img-fluid rounded" src="https://secure.gravatar.com/avatar/7130d8bf263859f43cb9a41e2282e451.png">
     </div>
     <h1 class="mt-4">Contact Me</h1>
     <p>If you have question about the project, have feature requests,
-      or have bugs to report I would love to hear from you. <a href="mailto: jmarsh24@gmail.com">Email me!</a></p>
+      or have bugs to report I would love to hear from you. </p>
+    <%= link_to "Email Me!", "mailto: jmarsh24@gmail.com" %>
   </div>
 </div>
