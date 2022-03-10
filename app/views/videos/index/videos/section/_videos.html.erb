@@ -1,0 +1,6 @@
+    
+<div class="video-section">
+  <% videos.paginated_row.each do |video| %>
+    <%= render partial: "videos/index/videos/section/videos/video", locals: { video: video } %>
+  <% end %>
+</div>

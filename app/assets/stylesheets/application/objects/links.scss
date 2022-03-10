@@ -1,4 +1,10 @@
 a {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+a {
   text-decoration: none;
   color: rgb(107, 114, 128);
   &:hover {

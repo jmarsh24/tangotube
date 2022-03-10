@@ -1,0 +1,17 @@
+<button name="button"
+          type="button"
+          data-controller="filter"
+          data-action="filter#filter"
+          <% if defined?(sort_value) %>
+            data-filter-sort-value=<%= sort_value %>
+          <% end %>
+          <% if defined?(direction_value) %>
+            data-filter-direction-value=<%= direction_value %>
+          <% end %>
+          <% if defined?(watched_value) %>
+            data-watched-value=<%= watched_value %>
+          <% end %>
+          class="videos-sortable-button"
+          style="margin: 16px 0;">
+  <h2><%= title %></h2>
+</button>

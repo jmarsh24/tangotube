@@ -1,5 +1,8 @@
 .videos {
-  padding: 0 40px 20px 40px;
+  flex: 1;
+  width: 100%;
+  max-width: 1660px;
+  padding: 0 40px;
 }
 
 .video-section {
@@ -147,21 +150,5 @@
 @media (max-width: 800px) {
   .videos {
     padding: 0px;
-  }
-
-  .video-section {
-    padding: 0.2rem 0.5rem;
-  }
-}
-
-@media (max-width: 500px) {
-  .video-section {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    gap: 0px;
-  }
-  .video-bottom-section {
-    margin: 10px;
   }
 }

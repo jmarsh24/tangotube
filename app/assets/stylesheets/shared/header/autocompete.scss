@@ -4,14 +4,14 @@
   left: 0px;
   background-color: #fff;
   padding-top: 16px;
-  font-size: 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-size: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 999999;
 }
 #search_results ul {
   width: 100%;
   padding: 0;
   margin: 0;
-
 }
 #search_results ul li {
   list-style-type: none;
@@ -24,7 +24,7 @@
       color: inherit;
     }
 
-    &[aria-selected="true"]{
+    &[aria-selected="true"] {
       background: #eee;
     }
   }

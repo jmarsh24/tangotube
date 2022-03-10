@@ -1,0 +1,42 @@
+.sorting-container {
+  display: flex;
+  position: absolute;
+  top: 75px;
+  z-index: 99999;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.videos-sortable-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+  justify-content: flex-start;
+  width: 130px;
+  margin: 10px;
+
+  label {
+    border-bottom: 1px solid #c2c2c2;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 5px;
+    min-width: 50px;
+    color: $sortable-label-color;
+  }
+
+  a {
+    text-decoration: none;
+    color: $primary-font-color;
+    font-size: 0.8rem;
+    text-align: center;
+    &:hover {
+      color: $sortable-label-color-hover;
+    }
+  }
+}
+.sorting-container {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0;
+}

@@ -13,6 +13,7 @@
       </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 20px;">
+      <%= link_to "Show this clip", clip, class: "link" %>
       <strong>Title:</strong>
       <%= clip.title %>
       <div style="display: flex; gap: 20px;">
@@ -30,3 +31,4 @@
       <%= link_to "Source Video", "#{watch_path}?v=#{clip.video.youtube_id}"%>
     </div>
   </div>
+</div>

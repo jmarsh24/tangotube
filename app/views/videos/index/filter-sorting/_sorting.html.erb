@@ -1,0 +1,20 @@
+<div id="sorting-container" class="sorting-container isHidden"  data-toggle-target="sorting">
+  <div class="videos-sortable-container">
+    <label>
+      Sort By
+    </label>
+    <%= sortable 'videos.performance_date', "desc",  "Recent First", @search %>
+    <%= sortable 'videos.performance_date', "asc", "Oldest First", @search %>
+    <%= sortable "videos.view_count", "desc",  "Most Viewed", @search %>
+    <%= sortable "videos.popularity", "desc",  "Trending", @search %>
+    <%= sortable "videos.like_count", "desc",  "Most Liked", @search %>
+  </div>
+  <div class="videos-sortable-container">
+    <label>
+      Group By
+    </label>
+    <%= sortable 'songs.title', "asc", "Song", @search %>
+    <%= sortable 'songs.last_name_search', "asc",  "Orchestra", @search %>
+    <%= sortable 'videos.channel_id', "asc",  "Channel", @search %>
+  </div>
+</div>
