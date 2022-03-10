@@ -15,7 +15,7 @@ module ApplicationHelper
         "https://secure.gravatar.com/avatar/#{hash}.png?s=#{size}"
       end
     else
-      "blank_user"
+      "blank_user.png"
     end
  end
 end
