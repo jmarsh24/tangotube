@@ -5,6 +5,7 @@ button {
   -moz-appearance: none;
   appearance: none;
   background: none;
+  white-space: nowrap;
   border: none;
   display: flex;
   align-items: center;
@@ -138,9 +139,6 @@ button {
 }
 
 .form-button {
-  &--submit {
-  }
-
   &--omniauth {
     width: 100%;
     display: inline-flex;

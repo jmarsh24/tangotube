@@ -1,12 +1,11 @@
 <div class="icons right" data-controller="dropdown">
-  <% if user_signed_in? %>
-    <button type="button" data-action="dropdown#toggle click@window->dropdown#hide">
-      <%= image_tag avatar_url_for(current_user, opts = {}), size: "30x30", style: "border-radius: 50%;" %>
-    </button>
-  <% else %>
+  <div class="buttons-desktop">
     <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
     <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
-  <% end %>
+  </div>
+  <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="avatar">
+    <%= image_tag avatar_url_for(current_user, opts = {}), size: "30x30", style: "border-radius: 50%;" %>
+  </button>
   <div    data-dropdown-target="menu"
           style=" position: relative; margin-top 4px; width: 48xp; border-radius: 4px; z-index: 50px;"
           class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50"
@@ -15,6 +14,9 @@
       <% if user_signed_in? %>
         <%= link_to 'Edit profile', edit_user_registration_path, class: "dropdown-link" %>
         <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-link" %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, method: :get, class: "dropdown-link"  %>
+        <%= link_to "Sign up", new_user_registration_path, method: :get, class: "dropdown-link", id: 'sign-up', style: "background: rgb(72, 63, 208); color: white;" %>
       <% end %>
     </div>
   </div>

@@ -2,6 +2,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buttons-desktop {
+    display: flex;
+    gap: 10px;
+  }
 
   .dropdown {
     display: flex;
@@ -23,6 +35,8 @@
     padding: 12px 25px;
     width: 100%;
     color: rgb(3, 3, 3);
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
     transition: background 150ms ease-in-out;
 
     button {
@@ -37,6 +51,21 @@
       background: #e5e5e5;
       color: rgb(3, 3, 3);
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .buttons-desktop {
+      display: none;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .avatar {
+      display: none;
+    }
+    .dropdown {
+      display: none;
     }
   }
 }
