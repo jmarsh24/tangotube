@@ -10,11 +10,6 @@
                                               class: "button" do %>
       <%= fa_icon "filter", left: true %>Sort
     <% end %>
-    <div id="filter_results">
-      <% if filtering_params.present? %>
-        <%= "#{pluralize(number_with_delimiter(@search.videos.size), "Result")} Found" %>
-      <% end %>
-    </div>
   </div>
   <%= button_tag type: "button",
                           class: "button",
