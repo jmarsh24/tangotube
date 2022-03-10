@@ -1,0 +1,42 @@
+.right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    top: 28px;
+    right: 10px;
+    position: absolute;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    background: white;
+    z-index: 99999;
+  }
+
+  .dropdown-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    width: 100%;
+    color: rgb(3, 3, 3);
+    transition: background 150ms ease-in-out;
+
+    button {
+      width: 100%;
+    }
+
+    span {
+      margin-left: 15px;
+    }
+
+    &:hover {
+      background: #e5e5e5;
+      color: rgb(3, 3, 3);
+      cursor: pointer;
+    }
+  }
+}

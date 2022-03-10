@@ -1,75 +1,10 @@
-<div id="mastHeadContainer">
-  <% if user_signed_in? %>
-    <% if current_user.admin? %>
-      <div class="upperHeadContainer sm:hidden">
-        <div class="add_links">
-          <%= link_to "Add Leader", leaders_path %>
-          <%= link_to "Add Follower", followers_path %>
-          <%= link_to "Add Event", events_path %>
-          <%= link_to "Add Channel", channels_path %>
-          <%= link_to "Add Playlist", playlists_path %>
-          <%= link_to "Add Video", new_video_path %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-  <div class="lowerHeadContainer">
-    <div class="logoContainer">
-      <%= button_tag fa_icon("bars"), style: "font-size: 20px;", "data-action": "click->toggle#navShowHide" %>
-      <%= link_to "TangoTube", root_path %>
-    </div>
-    <div class="autocompleteContainer" data-controller="combobox">
-      <%= form_with url: root_path,
-        method: :get,
-        class: "searchBarContainer",
-        data: { controller: "form",
-                    action: "invalid->form#hideValidationMessage:capture",
-                    "form-url": search_search_suggestions_path } do |f| %>
-        <%= f.search_field :query, class: "searchBar",
-                                  value: params[:query],
-                                  placeholder: "Search #{number_with_delimiter(@videos_total)} videos...",
-                                  autocomplete:"off",
-                                  spellcheck:"false",
-                                  data: { action: "focus->combobox#start
-                                                   input->form#submit",
-                                          "combobox-target": "input",
-                                          "form-target": "input" } %>
-        <%= f.button fa_icon("search"), name: nil, type: 'submit', class: "searchButton" %>
-        <div id="search_results" target="_top" data-combobox-target="window" class="isHidden" data-action="click@window->combobox#stop">
-          <ul role="listbox" data-combobox-target="list"></ul>
-        </div>
-      <% end %>
-    </div>
-    <div id="login-flex">
-      <div class="login" data-controller="dropdown">
-        <% if user_signed_in? %>
-          <div>
-            <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid">
-              <%= image_tag avatar_url_for(current_user, opts = {}), size: "30x30", style: "border-radius: 50%;" %>
-            </button>
-          </div>
-        <% else %>
-          <span class="inline-flex rounded-md shadow-xs" style="display: flex;">
-            <%= link_to "Login", new_user_session_path, class:'button'  %>
-          </span>
-          <%= link_to "Sign up", new_user_registration_path, class: "button button--submit", id: 'sign-up' %>
-        <% end %>
-        <div
-          data-dropdown-target="menu"
-          data-transition-enter-from="opacity-0 scale-95"
-          data-transition-enter-to="opacity-100 scale-100"
-          data-transition-leave-from="opacity-100 scale-100"
-          data-transition-leave-to="opacity-0 scale-95"
-          class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50"
-        >
-          <div class="py-1 rounded-md bg-white shadow-xs" style="display: flex; align-items: center;">
-            <% if user_signed_in? %>
-              <%= button_to 'Edit profile', edit_user_registration_path, method: :get, class: "button", style: "border: none; padding: 0px;" %>
-              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'button', style: "margin: none; padding: 0px;" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+<header id="header" class="header">
+  <div class="top">
+    <%= render "shared/header/top_bar" %>
   </div>
-</div>
+  <div class="bottom">
+    <%= render "shared/header/left" %>
+    <%= render "shared/header/search" %>
+    <%= render "shared/header/right" %>
+  </div>
+</header>

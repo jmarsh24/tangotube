@@ -5,6 +5,12 @@
   --input-focus-l: 42%;
 }
 
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .input {
   font-size: 16px;
   // Capitalized to prevent Sass

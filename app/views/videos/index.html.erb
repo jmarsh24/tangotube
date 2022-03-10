@@ -1,9 +1,9 @@
-<%= render "videos/index/filters" %>
-<div id="videos">
-<%= turbo_frame_tag "videos-#{@page}" do %>
-  <%= render "videos/index/videos" %>
-  <%= turbo_frame_tag "videos-#{@page + 1}" do %>
-    <%= render "videos/index/load_more" %>
+<%= render "videos/index/filter-sorting" %>
+<div class="videos" id="videos">
+  <%= turbo_frame_tag "videos-#{@page}" do %>
+    <%= render "videos/index/videos" %>
+    <%= turbo_frame_tag "videos-#{@page + 1}" do %>
+      <%= render "videos/index/load_more" %>
+    <% end %>
   <% end %>
-<% end %>
 </div>

@@ -1,130 +1,34 @@
-<div class="videos">
-  <% if @page == 1 %>
-    <h3 style="margin: 0px; padding-bottom: 15px; border-bottom: 1px solid rgb(242, 242, 242);">
-      <%= videos_header(filtering_params, sorting_params) %>
-    </h3>
-  <% end %>
-  <% if @search_most_recent.present? %>
-    <button name="button"
-          type="button"
-          data-controller="filter"
-          data-action="filter#filter"
-          data-filter-sort-value="videos.performance_date"
-          data-filter-direction-value="desc"
-          class="videos-sortable-button">
-      <h2 style="margin:0px;">Most Recent</h2>
-    </button>
-    <div style="border-bottom: 1px solid #c2c2c2;">
-      <div class="video-section">
-        <% @search_most_recent.paginated_row.each do |video| %>
-          <%= render partial: "videos/index/videos/video", locals: { video: video } %>
-        <% end %>
-      </div>
-      <div style="display: flex; justify-content: center; align-items: center; padding: 24px 0;">
-        <button name="button"
-            type="button"
-            data-controller="filter"
-            data-action="filter#filter"
-            data-filter-sort-value="videos.performance_date"
-            data-filter-direction-value="desc"
-            class="videos-sortable-button">
-          Show More Most Recent<%= fa_icon("arrow-right")%>
-        </button>
-      </div>
-    </div>
-  <% end %>
-  <% if @search_oldest.present? %>
-    <button name="button"
-          type="button"
-          data-controller="filter"
-          data-action="filter#filter"
-          data-filter-sort-value="videos.performance_date"
-          data-filter-direction-value="asc"
-          class="videos-sortable-button">
-      <h2 style="margin:0px;">Oldest</h2>
-    </button>
-    <div style="border-bottom: 1px solid #c2c2c2;">
-      <div class="video-section">
-        <% @search_oldest.paginated_row.each do |video| %>
-          <%= render partial: "videos/index/videos/video", locals: { video: video } %>
-        <% end %>
-      </div>
-      <div style="display: flex; justify-content: center; align-items: center; padding: 24px 0;">
-        <button name="button"
-            type="button"
-            data-controller="filter"
-            data-action="filter#filter"
-            data-filter-sort-value="videos.performance_date"
-            data-filter-direction-value="asc"
-            class="videos-sortable-button">
-          Show More Oldest <%= fa_icon("arrow-right")%>
-        </button>
-      </div>
-    </div>
-  <% end %>
-  <% if user_signed_in? %>
-    <% if @search_most_popular_new_to_you.present? %>
-      <% if @search_most_popular_new_to_you.paginated_row.present? %>
-        <button name="button"
-            type="button"
-            class="videos-sortable-button"
-            data-controller="filter"
-            data-action="filter#filter"
-            data-filter-watched-value="false">
-          <h2 style="margin:0px;">New To You</h2>
-        </button>
-        <div style="border-bottom: 1px solid #c2c2c2;">
-          <div class="video-section">
-            <% @search_most_popular_new_to_you.paginated_row.each do |video| %>
-              <%= render partial: "videos/index/videos/video", locals: { video: video } %>
-            <% end %>
-          </div>
-          <div style="display: flex; justify-content: center; align-items: center; padding: 24px 0;">
-            <button name="button"
-              type="button"
-              class="videos-sortable-button"
-              data-controller="filter"
-              data-action="filter#filter"
-              data-filter-watched-value="false">
-              Show More New To You <%= fa_icon("arrow-right")%>
-            </button>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-    <% if @search_most_popular_watched.present? %>
-      <% if @search_most_popular_watched.paginated_row.present? %>
-        <button name="button"
-          type="button"
-          class="videos-sortable-button"
-          data-controller="filter"
-          data-action="filter#filter"
-          data-filter-watched-value="true">
-          <h2 style="margin:0px;">Watched</h2>
-        </button>
-        <div style="border-bottom: 1px solid #c2c2c2;">
-          <div class="video-section">
-            <% @search_most_popular_watched.paginated_row.each do |video| %>
-              <%= render partial: "videos/index/videos/video", locals: { video: video } %>
-            <% end %>
-          </div>
-          <div style="display: flex; justify-content: center; align-items: center; padding: 24px 0;">
-            <button name="button"
-              type="button"
-              class="videos-sortable-button"
-              data-controller="filter"
-              data-action="filter#filter"
-              data-filter-watched-value="true">
-              Show More Previously Watched <%= fa_icon("arrow-right")%>
-            </button>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
-  <div class="video-section">
-    <% @search.paginated_videos.each do |video| %>
-      <%= render partial: "videos/index/videos/video", locals: { video: video } %>
-    <% end %>
+  <%= render "videos/index/videos/header" %>
+<% if @search_most_recent.present? %>
+  <div style="border-bottom: 1px solid #c2c2c2;">
+    <%= render "videos/index/videos/section/header", sort_value: "videos.performance_date", direction_value: "asc", title: "Most Recent" %>
+    <%= render "videos/index/videos/section", videos: @search_most_recent %>
+    <%= render "videos/index/videos/section/link", sort_value: "videos.performance_date", direction_value: "asc", title: "Most Recent" %>
   </div>
+<% end %>
+<% if @search_oldest.present? %>
+  <%= render "videos/index/videos/section/header", sort_value: "videos.performance_date", direction_value: "desc", title: "Oldest" %>
+  <%= render "videos/index/videos/section", videos: @search_oldest %>
+  <%= render "videos/index/videos/section/link", sort_value: "videos.performance_date", direction_value: "desc", title: "Oldest" %>
+<% end %>
+<% if user_signed_in? %>
+  <% if @search_most_popular_new_to_you.present? %>
+    <% if @search_most_popular_new_to_you.paginated_row.present? %>
+      <%= render "videos/index/videos/section/header", watched_value: "false", title: "New To You" %>
+      <%= render "videos/index/videos/section", videos: @search_most_popular_new_to_you %>
+      <%= render "videos/index/videos/section/link", watched_value: "false", title: "New To You" %>
+    <% end %>
+  <% end %>
+  <% if @search_most_popular_watched.present? %>
+    <% if @search_most_popular_watched.paginated_row.present? %>
+      <%= render "videos/index/videos/section/header", watched_value: "true", title: "Previously Seen" %>
+      <%= render "videos/index/videos/section", videos: @search_most_popular_watched %>
+      <%= render "videos/index/videos/section/link", watched_value: "true", title: "Previously Seen" %>
+    <% end %>
+  <% end %>
+<% end %>
+<div class="video-section">
+  <% @search.paginated_videos.each do |video| %>
+    <%= render partial: "videos/index/videos/section/videos/video", locals: { video: video } %>
+  <% end %>
 </div>

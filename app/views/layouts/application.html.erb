@@ -4,38 +4,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap' %>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" %>
     <%= favicon_link_tag asset_path("favicon.ico") %>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet"></link>
-  <script src="https://js.stripe.com/v3/"></script>
-  <%= render 'shared/meta_tags' %>
-</head>
-<body data-controller="toggle">
-  <div id="header">
-    <%= render 'shared/header' %>
-    <div id="sideNavContainer" class="isHidden
-        <% if user_signed_in? %>
-          <% if current_user.admin? %>
-            admin
-          <% end %>
-        <% end %>"
-        data-toggle-target="sideNavContainer"
-    >
-      <%= render "shared/side" %>
-    </div>
-    <div id="mainSectionContainer"  data-toggle-target="mainSectionContainer"
-    <% if user_signed_in? %>
-      <% if current_user.admin? %>
-        class="admin"
-      <% end %>
-    <% end %>
-    >
-      <%= render "shared/flash" %>
-      <%= yield %>
-    </div>
-    <%= render 'shared/footer' %>
-  </div>
-</body>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <%= render "shared/meta_tags" %>
+  </head>
+  <body data-controller="toggle">
+    <%= render "shared/header" %>
+    <main>
+      <%= render "shared/sidebar" %>
+      <div class="content">
+        <%= render "shared/flash" %>
+        <%= yield %>
+        <%= render "shared/footer" %>
+      </div>
+    </main>
+  </body>
 </html>

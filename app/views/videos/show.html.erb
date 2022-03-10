@@ -4,7 +4,6 @@
                                               @video.youtube_id)}" %>
 <% content_for :meta_description,  "#{@video.display.any_song_attributes}" %>
 <% content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg" %>
-<%= render 'shared/header' %>
 <div data-controller="hotkeys" data-hotkeys-bindings-value='{
   "space": "#hotkey->youtube#playPause",
   "shift + 1": "#hotkey->youtube#setTime1",
@@ -18,7 +17,7 @@
   "right": "#hotkey->youtube#seekForward",
   "shift + . ": "#hotkey->youtube#increasePlaybackRate",
   "shift + , ": "#hotkey->youtube#decreasePlaybackRate"}'></div>
-<div id="hotkey" data-controller="youtube"
+<div style="width: 100%; "id="hotkey" data-controller="youtube"
             data-youtube-video-id-value="<%= @video.youtube_id %>"
   data-youtube-start-seconds-value="<%= @start_value %>"
   data-youtube-end-seconds-value="<%= @end_value %>"
@@ -88,7 +87,7 @@
           <% unless @videos_with_same_dancers.empty? %>
             <div class="recommended-videos-card" data-toggle-target="recommendedEventVideos">
               <div class="recommended-videos__header">
-                <h2>Videos from <%= @video.leader.first_name.titleize %> & <%= @video.follower.first_name.titleize %></h2>
+                <h2>Videos from <%= @video.leader.name.titleize %> & <%= @video.follower.name.titleize %></h2>
               </div>
               <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_dancers } %>
             </div>

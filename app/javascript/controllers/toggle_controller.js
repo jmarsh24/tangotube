@@ -4,6 +4,8 @@ export default class extends Controller {
   static targets = [
     "filterButton",
     "filter",
+    "sorting",
+    "sortingButton",
     "toggleable",
     "sideNavContainer",
     "mainSectionContainer",
@@ -76,11 +78,23 @@ export default class extends Controller {
 
   toggleFilter() {
     this.filterTarget.classList.toggle("isHidden");
+    this.sortingTarget.classList.add("isHidden");
+    this.sideNavContainerTarget.classList.add("isHidden");
     this.filterButtonTarget.classList.toggle("isActive");
+  }
+
+  toggleSorting() {
+    this.sortingTarget.classList.toggle("isHidden");
+    this.filterTarget.classList.add("isHidden");
+    this.sideNavContainerTarget.classList.add("isHidden");
+    this.sortingButtonTarget.classList.toggle("isActive");
   }
 
   navShowHide() {
     this.sideNavContainerTarget.classList.toggle("isHidden");
+    this.filterTarget.classList.toggle("isHidden");
+    this.filterTarget.classList.add("isHidden");
+    this.sortingTarget.classList.add("isHidden");
   }
 
   disableFilters() {
