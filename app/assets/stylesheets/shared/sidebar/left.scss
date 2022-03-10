@@ -2,6 +2,8 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  color: rgb(3, 3, 3);
+
   h3 {
     color: rgb(3, 3, 3);
   }
@@ -10,11 +12,13 @@
     h3 {
       color: rgb(50, 50, 50);
     }
-    color: rgb(50, 50, 50);
+    button {
+      color: rgb(50, 50, 50);
+    }
   }
-}
 
-.left #menu {
-  padding: 0 7px;
-  cursor: pointer;
+  #menu {
+    padding: 0 7px;
+    cursor: pointer;
+  }
 }

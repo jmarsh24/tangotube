@@ -1,5 +1,7 @@
 <div class="logo left">
-  <%= button_tag fa_icon("bars"), style: "font-size: 20px;", "data-action": "click->toggle#navShowHide" %>
+  <%= button_tag type: "button", style: "font-size: 20px;color: black;", "data-action": "click->toggle#navShowHide" do %>
+    <%= fa_icon("bars") %>
+  <% end %>
   <%= link_to root_path do %>
     <h3>TangoTube</h3>
   <% end %>
