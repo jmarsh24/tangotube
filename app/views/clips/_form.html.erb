@@ -9,19 +9,23 @@
       </ul>
     </div>
   <% end %>
-  <div >
-    <%= form.label :start_seconds, style: "display: block" %>
-    <%= form.number_field :start_seconds %>
-  </div>
   <div>
-    <%= form.label :end_seconds, style: "display: block" %>
-    <%= form.number_field :end_seconds %>
-  </div>
-  <div>
+    <sl-input placeholder="Title"></sl-input>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_area :title %>
   </div>
   <div>
+    <sl-input placeholder="Start Time"></sl-input>
+    <%= form.label :end_seconds, style: "display: block" %>
+    <%= form.number_field :end_seconds %>
+  </div>
+  <div>
+    <sl-input placeholder="End Time"></sl-input>
+    <%= form.label :start_seconds, style: "display: block" %>
+    <%= form.number_field :start_seconds %>
+  </div>
+  <div>
+    <sl-input placeholder="Playback Rate"></sl-input>
     <%= form.label :playback_rate, style: "display: block" %>
     <%= form.text_field :playback_rate %>
   </div>
@@ -30,6 +34,7 @@
     <%= form.text_field :tags %>
   </div>
   <div>
+    <sl-input placeholder="Video ID"></sl-input>
     <%= form.label :video_id, style: "display: block" %>
     <%= form.text_field :video_id %>
   </div>

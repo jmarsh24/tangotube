@@ -17,11 +17,29 @@
       <div style="display: flex; gap: 20px;">
         <%= "#{clip.end_seconds - clip.start_seconds}s @ #{clip.playback_rate}" %>
       </div>
-      <%= clip.tags if clip.tags.present? %>
+      <div class="row" style="gap: 2px;">
+        <% if clip.tags.present? %>
+          <%= clip.tags.split(",").each do |tag| %>
+            <sl-tag variant="neutral"><%= tag.titleize %></sl-tag>
+          <% end %>
+        <% end %>
+      </div>
       <div class="row" style="align-items: center;">
         <%= image_tag avatar_url_for(clip.user), size: "30x30", style: "border-radius: 50%;" %><%= clip.user.name %>
       </div>
       <%= link_to "Source Video", "#{watch_path}?v=#{clip.video.youtube_id}" %>
+      <div class="row">
+        <sl-icon class="mr-2" name="three-dots"></sl-icon>
+        <sl-icon class="mr-2" name="heart"></sl-icon>
+        <sl-icon class="mr-2" name="heart-fill"></sl-icon>
+        <sl-icon class="mr-2" name="hand-thumbs-down"></sl-icon>
+        <sl-icon class="mr-2" name="hand-thumbs-up"></sl-icon>
+        <sl-icon class="mr-2" name="hand-thumbs-down-fill"></sl-icon>
+        <sl-icon class="mr-2" name="hand-thumbs-up-fill"></sl-icon>
+        <sl-icon class="mr-2" name="folder-plus"></sl-icon>
+        <sl-icon class="mr-2" name="share"></sl-icon>
+        <sl-button>Button</sl-button>
+      </div>
     </div>
   </div>
 </div>
