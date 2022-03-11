@@ -2,28 +2,20 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <%= render "shared/meta_tags" %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" %>
-    <%= favicon_link_tag asset_path("favicon.ico") %>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet">
-    <script src="https://js.stripe.com/v3/"></script>
-    <link rel="stylesheet"
-          media="(prefers-color-scheme:light)"
-          href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.71/dist/themes/light.css"
-        />
-    <link rel="stylesheet"
-          media="(prefers-color-scheme:dark)"
-          href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.71/dist/themes/dark.css"
-          onload="document.documentElement.classList.add('sl-theme-dark');"
-    />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.71/dist/shoelace.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.71/dist/themes/light.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.71/dist/themes/dark.css" />
-    <%= render "shared/meta_tags" %>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.71/dist/shoelace.js"></script>
+    <%= favicon_link_tag asset_path("favicon.ico") %>
   </head>
   <body data-controller="toggle">
     <%= render "shared/header" %>

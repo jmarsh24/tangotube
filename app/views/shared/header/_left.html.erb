@@ -1,7 +1,5 @@
 <div class="logo left">
-  <%= button_tag type: "button", style: "font-size: 20px;color: black;", "data-action": "click->toggle#navShowHide" do %>
-    <%= fa_icon("bars") %>
-  <% end %>
+  <sl-icon style="font-size: 20px; cursor: pointer;" class="cursor-pointer" name="list" onclick="document.querySelector('#drawer-placement-left').show()"></sl-icon>
   <%= link_to root_path do %>
     <h3>TangoTube</h3>
   <% end %>

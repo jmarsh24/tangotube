@@ -1,34 +1,66 @@
-<div id="sideNavContainer" class="side-bar isHidden" data-toggle-target="sideNavContainer">
-  <div class="nav">
-    <%= link_to root_path, class: "nav-link" do %>
-      <%= fa_icon("home") %>
-      <span>Home</span>
-    <% end %>
-    <%= link_to clips_path, class: "nav-link" do %>
-      <%= fa_icon("scissors") %>
-        <span>Global Clips</span>
+<sl-drawer no-header placement="start" id="drawer-placement-left" class="drawer-placement-start" style="--size: 240px;">
+  <nav style="margin: -20px;">
+    <div class="row" style="margin-left: 20px; gap: 10px; height: 60px; align-items: center; color: rgb(63, 63, 70); cursor: pointer;">
+      <sl-icon class="cursor-pointer" style="font-size: 20px;" name="list" onclick="document.querySelector('#drawer-placement-left').hide()"></sl-icon>
+      <%= link_to root_path do %>
+        <h3>TangoTube</h3>
       <% end %>
-      <hr style="width: 100%; color: #c2c2c2;">
-      <%#= link_to fa_icon("book"), "#", class: "nav-link" do %>
-        <%# <span>Library</span> %>
-        <%# <% end %>
-        <%= link_to root_path(watced: false), class: "nav-link" do %>
-          <%= fa_icon("compass") %>
-          <span>Explore</span>
-        <% end %>
-        <%= link_to root_path(watched: true), class: "nav-link" do %>
-          <%= fa_icon("clock") %>
-          <span>History</span>
-        <% end %>
-        <%#= link_to fa_icon("scissors"), "#", class: "nav-link" do %>
-          <%# <span>Your Clips</span> %>
-          <%# <% end %>
-          <%= link_to root_path(liked: true), class: "nav-link" do %>
-            <%= fa_icon("thumbs-up") %>
-            <span>Liked Videos</span>
-          <% end %>
-          <%#= link_to fa_icon("rocket"), "#", class: "nav-link" do %>
-            <%# <span>Subscriptions</span> %>
-            <%# <% end %>
-          </div>
-        </div>
+    </div>
+    <sl-divider style="margin-bottom: 16px"></sl-divider>
+    <sl-switch style="margin: 12px 0 12px 25px;" id="toggle-dark-mode">
+      Dark Mode
+    </sl-switch>
+    <script>
+      const toggle = document.querySelector('#toggle-dark-mode');
+
+      toggle.addEventListener('sl-change', () => {
+        if (toggle.checked) {
+          document.querySelector('html').classList.add("sl-theme-dark");
+        } else {
+          document.querySelector('html').classList.remove("sl-theme-dark");
+        }
+      });
+    </script>
+    <sl-divider style="margin:16px 0"></sl-divider>
+    <%= link_to root_path do %>
+      <sl-menu-item>
+        <%= fa_icon("home") %>
+        <span>Home</span>
+      </sl-menu-item>
+    <% end %>
+    <%= link_to clips_path do %>
+      <sl-menu-item>
+        <%= fa_icon("scissors") %>
+        <span>Global Clips</span>
+      </sl-menu-item>
+    <% end %>
+    <sl-divider style="margin:16px 0"></sl-divider>
+    <%= link_to root_path(watched: false) do %>
+      <sl-menu-item>
+        <%= fa_icon("compass") %>
+        <span>Explore</span>
+      </sl-menu-item>
+    <% end %>
+    <%= link_to root_path(watched: true) do %>
+      <sl-menu-item>
+        <%= fa_icon("clock") %>
+        <span>History</span>
+      </sl-menu-item>
+    <% end %>
+    <%= link_to root_path(liked: true) do %>
+      <sl-menu-item>
+        <%= fa_icon("thumbs-up") %>
+        <span>Liked Videos</span>
+      </sl-menu-item>
+    <% end %>
+  </nav>
+</sl-drawer>
+<%#= link_to fa_icon("book"), "#" do %>
+  <%# <span>Library</span> %>
+  <%# <% end %>
+  <%#= link_to fa_icon("scissors"), "#" do %>
+    <%# <span>Your Clips</span> %>
+    <%# <% end %>
+    <%#= link_to fa_icon("rocket"), "#" do %>
+      <%# <span>Subscriptions</span> %>
+      <%# <% end %>
