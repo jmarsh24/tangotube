@@ -1,6 +1,6 @@
 class ClipsController < ApplicationController
   before_action :set_clip, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[ new edit update destroy]
 
   # GET /clips
   def index
@@ -8,8 +8,7 @@ class ClipsController < ApplicationController
   end
 
   # GET /clips/1
-  def show
-  end
+  def show; end
 
   # GET /clips/new
   def new

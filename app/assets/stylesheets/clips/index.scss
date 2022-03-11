@@ -1,7 +1,13 @@
 .clips {
   flex: 1;
-  display: flex;
-  gap: 40px;
-  flex-flow: wrap;
-  max-width: 2200px;
+  width: 100%;
+  max-width: 1660px;
+  padding: 0 40px;
+}
+
+.video-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px 20px;
+  background-color: $secondary-color;
 }
