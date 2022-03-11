@@ -1,7 +1,10 @@
 <h1>Clips</h1>
 <div id="clips" class="clips">
+<div class="video-section">
   <% @clips.each do |clip| %>
     <%= render clip %>
   <% end %>
 </div>
+</div>
+
 <%= link_to "New clip", new_clip_path, class: "link" %>

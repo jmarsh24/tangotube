@@ -6,29 +6,22 @@
         data-youtube-playback-speed-value="<%= clip.playback_rate %>">
     <div class="video-responsive-background">
       <div class="video-responsive-container">
-        <div class="video-responsive"
-        >
+        <div class="video-responsive">
           <div data-youtube-target="frame"></div>
         </div>
       </div>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; flex-direction: column;">
       <%= link_to "Show this clip", clip, class: "link" %>
-      <strong>Title:</strong>
-      <%= clip.title %>
+      <%= clip.title if clip.title.present? %>
       <div style="display: flex; gap: 20px;">
-        <strong>Start Time:</strong>
-        <%= clip.start_seconds %>
-        <strong>End Time:</strong>
-        <%= clip.end_seconds %>
-        <strong>Playback Rate:</strong>
-        <%= clip.playback_rate %>
+        <%= "#{clip.end_seconds - clip.start_seconds}s @ #{clip.playback_rate}" %>
       </div>
-      <strong>Tags:</strong>
-      <%= clip.tags %>
-      <strong>User:</strong>
-      <%= clip.user.name %>
-      <%= link_to "Source Video", "#{watch_path}?v=#{clip.video.youtube_id}"%>
+      <%= clip.tags if clip.tags.present? %>
+      <div class="row" style="align-items: center;">
+        <%= image_tag avatar_url_for(clip.user), size: "30x30", style: "border-radius: 50%;" %><%= clip.user.name %>
+      </div>
+      <%= link_to "Source Video", "#{watch_path}?v=#{clip.video.youtube_id}" %>
     </div>
   </div>
 </div>
