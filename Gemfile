@@ -12,6 +12,9 @@ gem "pg"
 gem "barnes", "~> 0.0.9"
 gem "spring-watcher-listen",  "2.0.1"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "sprockets-rails"
+gem "jsbundling-rails"
+gem "cssbundling-rails"
 
 # app specific gems...................................................................
 gem "acts_as_votable"
@@ -23,7 +26,7 @@ gem "font-awesome-rails"
 gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
-gem "jsbundling-rails"
+
 gem "nokogiri"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
@@ -33,8 +36,8 @@ gem "prettier"
 gem "pg_search"
 gem "rails_autolink"
 gem "rspotify"
-gem "sassc-rails"
 gem "scenic"
+gem "shoelace-rails"
 gem "sidekiq"
 gem "stimulus-rails"
 gem "stripe", "~> 5.45"
@@ -73,6 +76,3 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
-
-
-gem "shoelace-rails", "~> 0.1.0"
