@@ -1,5 +1,5 @@
 web: bin/rails server -p 3000
-redis:  redis-server
+redis: redis-server
 worker: bundle exec sidekiq
 js: yarn build --watch
 css: yarn build --watch
