@@ -205,6 +205,8 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
+    nokogiri (1.13.3-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.9)
@@ -495,7 +497,7 @@ DEPENDENCIES
   solargraph
   spring
   spring-watcher-listen (= 2.0.1)
-  sprockets-rails
+  sprockets-rails (~> 3.4)
   stimulus-rails
   streamio-ffmpeg
   stripe (~> 5.45)

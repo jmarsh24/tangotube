@@ -4,17 +4,16 @@ ruby "3.0.3"
 
 # gems that ship with rails...........................................................
 gem "bootsnap", require: false
-gem "spring"
+gem "cssbundling-rails"
+gem "jsbundling-rails"
 gem "rails", "~> 7.0.2.2"
 gem "redis"
 gem "puma"
 gem "pg"
-gem "barnes", "~> 0.0.9"
-gem "spring-watcher-listen",  "2.0.1"
+gem "spring"
+gem "sprockets-rails", "~> 3.4"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-gem "sprockets-rails"
-gem "jsbundling-rails"
-gem "cssbundling-rails"
+gem "turbo-rails"
 
 # app specific gems...................................................................
 gem "acts_as_votable"
@@ -26,7 +25,6 @@ gem "font-awesome-rails"
 gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
-
 gem "nokogiri"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
@@ -42,7 +40,6 @@ gem "sidekiq"
 gem "stimulus-rails"
 gem "stripe", "~> 5.45"
 gem "streamio-ffmpeg"
-gem "turbo-rails"
 gem "yt"
 
 group :development, :test do
