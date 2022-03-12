@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "3.0.3"
 
 # gems that ship with rails...........................................................
+gem "barnes"
 gem "bootsnap", require: false
 gem "cssbundling-rails"
 gem "jsbundling-rails"
