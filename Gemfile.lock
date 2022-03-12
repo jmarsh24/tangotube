@@ -360,6 +360,9 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    shoelace-rails (0.1.0)
+      actionpack (>= 5.2.0)
+      actionview (>= 5.2.0)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     sidekiq (6.4.1)
@@ -493,6 +496,7 @@ DEPENDENCIES
   sassc-rails
   scenic
   selenium-webdriver
+  shoelace-rails (~> 0.1.0)
   shoulda-matchers
   sidekiq
   simplecov
