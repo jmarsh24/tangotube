@@ -74,3 +74,5 @@ group :test do
   gem "webmock"
 end
 
+
+gem "shoelace-rails", "~> 0.1.0"
