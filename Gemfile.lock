@@ -126,6 +126,8 @@ GEM
     e2mmap (0.1.0)
     errbase (0.2.2)
     erubi (1.10.0)
+    esbuild-rails (0.1.4)
+      rails (>= 6.0.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -456,6 +458,7 @@ DEPENDENCIES
   deepl-rb
   devise
   dotenv-rails
+  esbuild-rails (~> 0.1.4)
   factory_bot_rails
   faker
   faraday
