@@ -2,17 +2,15 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <%= render "shared/meta_tags" %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" />
     <script src="https://js.stripe.com/v3/"></script>
     <%= favicon_link_tag asset_path("favicon.ico") %>
+    <%= javascript_include_tag "application", "data-track-turbo": "true", defer: true %>
   </head>
   <body data-controller="toggle">
     <%= render "shared/header" %>

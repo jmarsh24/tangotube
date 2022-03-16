@@ -1,169 +1,169 @@
-$btnColor: #fff;
+// $btnColor: #fff;
 
-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: none;
-  white-space: nowrap;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  &:hover {
-    cursor: pointer;
-  }
-}
+// button {
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   appearance: none;
+//   background: none;
+//   white-space: nowrap;
+//   border: none;
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+//   &:hover {
+//     cursor: pointer;
+//   }
+// }
 
-.button__icon {
-  width: 0.9em;
-  height: 0.9em;
-  fill: currentcolor;
-  margin-right: 0.5em;
+// .button__icon {
+//   width: 0.9em;
+//   height: 0.9em;
+//   fill: currentcolor;
+//   margin-right: 0.5em;
 
-  &--end {
-    margin-right: 0;
-    margin-left: 0.5em;
-  }
-}
+//   &--end {
+//     margin-right: 0;
+//     margin-left: 0.5em;
+//   }
+// }
 
-// Due to the cascade, find .icon-button after the .button
+// // Due to the cascade, find .icon-button after the .button
 
-// Base button styles
-.button {
-  // Reset
-  text-decoration: none;
-  border: 1px solid rgb(209, 213, 219);
-  font-family: inherit;
-  cursor: pointer;
+// // Base button styles
+// .button {
+//   // Reset
+//   text-decoration: none;
+//   border: 1px solid rgb(209, 213, 219);
+//   font-family: inherit;
+//   cursor: pointer;
 
-  // Display
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  // Optional - see "Gotchas"
-  align-self: start;
-  gap: 5px;
+//   // Display
+//   display: inline-flex;
+//   align-items: center;
+//   justify-content: center;
+//   // Optional - see "Gotchas"
+//   align-self: start;
+//   gap: 5px;
 
-  // Visual
-  font-size: 14px;
-  background-color: $btnColor;
-  color: rgb(107, 114, 128);
-  border-radius: 6px;
-  // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+//   // Visual
+//   font-size: 14px;
+//   background-color: $btnColor;
+//   color: rgb(107, 114, 128);
+//   border-radius: 6px;
+//   // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
 
-  // Size
-  &:not(.icon-button) {
-    padding: 8px 16px;
-    min-width: 10ch;
-    min-height: 44px;
-  }
+//   // Size
+//   &:not(.icon-button) {
+//     padding: 8px 16px;
+//     min-width: 10ch;
+//     min-height: 44px;
+//   }
 
-  // Text
-  text-align: center;
-  line-height: 1.1;
+//   // Text
+//   text-align: center;
+//   line-height: 1.1;
 
-  transition: 220ms all ease-in-out;
-  transition: 220ms fill ease-in-out;
+//   transition: 220ms all ease-in-out;
+//   transition: 220ms fill ease-in-out;
 
-  &:hover,
-  &:active {
-    color: rgb(156, 163, 175);
-    path {
-      fill: rgb(156, 163, 175);
-    }
-    // background-color: scale-color($btnColor, $lightness: -20%);
-  }
+//   &:hover,
+//   &:active {
+//     color: rgb(156, 163, 175);
+//     path {
+//       fill: rgb(156, 163, 175);
+//     }
+//     // background-color: scale-color($btnColor, $lightness: -20%);
+//   }
 
-  &:focus {
-    outline: none;
-    // box-shadow: 0 0 0 4px scale-color($btnColor, $lightness: -40%);
-  }
+//   &:focus {
+//     outline: none;
+//     // box-shadow: 0 0 0 4px scale-color($btnColor, $lightness: -40%);
+//   }
 
-  &--submit {
-    background: rgb(72, 63, 208);
-    color: white;
-    transition: background 220ms ease-in-out;
+//   &--submit {
+//     background: rgb(72, 63, 208);
+//     color: white;
+//     transition: background 220ms ease-in-out;
 
-    &:hover {
-      color: white;
-      background: rgb(79, 70, 229);
-    }
-  }
+//     &:hover {
+//       color: white;
+//       background: rgb(79, 70, 229);
+//     }
+//   }
 
-  &--danger {
-    background: rgb(208, 63, 63);
-    color: white;
-    transition: background 220ms ease-in-out;
+//   &--danger {
+//     background: rgb(208, 63, 63);
+//     color: white;
+//     transition: background 220ms ease-in-out;
 
-    &:hover {
-      color: white;
-      background: rgb(229, 70, 78);
-    }
-  }
+//     &:hover {
+//       color: white;
+//       background: rgb(229, 70, 78);
+//     }
+//   }
 
-  &--small {
-    font-size: 1.15rem;
-  }
+//   &--small {
+//     font-size: 1.15rem;
+//   }
 
-  &--block {
-    width: 100%;
-  }
-}
+//   &--block {
+//     width: 100%;
+//   }
+// }
 
-.icon-button {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  padding: 0.35em;
+// .icon-button {
+//   width: 2.5rem;
+//   height: 2.5rem;
+//   border-radius: 50%;
+//   padding: 0.35em;
 
-  &__icon {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
-  }
-}
+//   &__icon {
+//     width: 100%;
+//     height: 100%;
+//     fill: currentColor;
+//   }
+// }
 
-.button--flash {
-  background: none;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  font-size: 17px;
+// .button--flash {
+//   background: none;
+//   border: none;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 0px;
+//   font-size: 17px;
 
-  &:hover {
-    cursor: pointer;
-  }
-}
+//   &:hover {
+//     cursor: pointer;
+//   }
+// }
 
-.form-button {
-  &--omniauth {
-    width: 100%;
-    display: inline-flex;
-    justify-content: center;
-    padding: 8px 16px;
-    margin: 4px 0;
-    font-size: 16px;
-    gap: 8px;
-    border-radius: 6px;
-    background: white;
-    transition: color 150ms ease-in-out;
-    transition: fill 150ms ease-in-out;
+// .form-button {
+//   &--omniauth {
+//     width: 100%;
+//     display: inline-flex;
+//     justify-content: center;
+//     padding: 8px 16px;
+//     margin: 4px 0;
+//     font-size: 16px;
+//     gap: 8px;
+//     border-radius: 6px;
+//     background: white;
+//     transition: color 150ms ease-in-out;
+//     transition: fill 150ms ease-in-out;
 
-    border: 1px solid rgb(209, 213, 219);
-    color: rgb(107, 114, 128);
+//     border: 1px solid rgb(209, 213, 219);
+//     color: rgb(107, 114, 128);
 
-    &:hover {
-      color: rgb(156, 163, 175);
-      path {
-        fill: rgb(156, 163, 175);
-      }
-    }
+//     &:hover {
+//       color: rgb(156, 163, 175);
+//       path {
+//         fill: rgb(156, 163, 175);
+//       }
+//     }
 
-    &:focus {
-      border: 1px solid rgb(147, 197, 253);
-    }
-  }
-}
+//     &:focus {
+//       border: 1px solid rgb(147, 197, 253);
+//     }
+//   }
+// }

@@ -21,6 +21,7 @@ gem "acts_as_votable"
 gem "ahoy_matey"
 gem "deepl-rb", require: 'deepl'
 gem "devise"
+gem "esbuild-rails", "~> 0.1.4"
 gem "faraday"
 gem "font-awesome-rails"
 gem "hashie"
