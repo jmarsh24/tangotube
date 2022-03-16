@@ -75,3 +75,11 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+<<<<<<< HEAD
+=======
+
+
+gem "cssbundling-rails", "~> 1.1"
+
+gem "sprockets-rails", "~> 3.4"
+>>>>>>> c05ceed4 (Fix login header)

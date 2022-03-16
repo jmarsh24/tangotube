@@ -9,6 +9,7 @@ import "@shoelace-style/shoelace";
 
 import "./channels";
 import "./controllers";
+import "@fortawesome/fontawesome-free/js/all";
 
 // Load the IFrame Player API code asynchronously.
 var tag = document.createElement("script");

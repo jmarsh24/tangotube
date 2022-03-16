@@ -454,7 +454,11 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot
+<<<<<<< HEAD
   cssbundling-rails
+=======
+  cssbundling-rails (~> 1.1)
+>>>>>>> c05ceed4 (Fix login header)
   deepl-rb
   devise
   dotenv-rails
@@ -496,6 +500,10 @@ DEPENDENCIES
   simplecov
   solargraph
   spring
+<<<<<<< HEAD
+=======
+  spring-watcher-listen (= 2.0.1)
+>>>>>>> c05ceed4 (Fix login header)
   sprockets-rails (~> 3.4)
   stimulus-rails
   streamio-ffmpeg
