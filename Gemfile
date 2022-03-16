@@ -75,3 +75,5 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+gem "sassc-rails", "~> 2.1"
