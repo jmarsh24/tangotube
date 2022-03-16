@@ -3,12 +3,14 @@
 @import "@shoelace-style/shoelace/dist/themes/light.css";
 @import "@shoelace-style/shoelace/dist/themes/dark.css";
 
+@import "application/objects/colors.scss";
+
 @import "application/layout.scss";
 @import "application/typography.scss";
 @import "application/modules/dashboard.scss";
 @import "application/modules/profile.scss";
 @import "application/objects/buttons.scss";
-@import "application/objects/colors.scss";
+
 @import "application/objects/forms.scss";
 @import "application/objects/inputs.scss";
 @import "application/objects/links.scss";
