@@ -12,7 +12,7 @@ gem "redis"
 gem "puma"
 gem "pg"
 gem "spring"
-gem "sprockets-rails", "~> 3.4"
+gem "sprockets-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "turbo-rails"
 
