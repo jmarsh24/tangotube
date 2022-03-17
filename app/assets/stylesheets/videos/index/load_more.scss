@@ -29,7 +29,7 @@
   margin: 15px auto;
   &:hover {
     color: var(--sl-color-gray-900);
-    background-color: $border-color-secondary;
+    background-color: var(--sl-color-gray-200);
   }
 }
 

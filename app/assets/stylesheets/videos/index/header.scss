@@ -3,11 +3,10 @@
   gap: 10px;
   margin: 0px;
   padding-bottom: 15px;
-  border-bottom: 1px solid rgb(242, 242, 242);
-  color: rgb(70, 70, 70);
+  border-bottom: $border-color;
 
   h3 {
-    color: rgb(70, 70, 70);
+    color: var(--sl-color-gray-800);
   }
 }
 
