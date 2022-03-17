@@ -25,6 +25,11 @@
     &:hover {
       color: hsl(240 5.2% 33.9%);
     }
+
+    &[aria-selected="true"] {
+      background-color: hsl(240 4.9% 83.9%);
+      border-radius: 4px;
+    }
   }
 }
 
