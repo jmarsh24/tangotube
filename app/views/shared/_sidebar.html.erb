@@ -34,24 +34,26 @@
         <span>Global Clips</span>
       </sl-menu-item>
     <% end %>
-    <sl-divider style="margin:16px 0"></sl-divider>
-    <%= link_to root_path(watched: false) do %>
-      <sl-menu-item>
-        <%= fa_icon("compass") %>
-        <span>Explore</span>
-      </sl-menu-item>
-    <% end %>
-    <%= link_to root_path(watched: true) do %>
-      <sl-menu-item>
-        <%= fa_icon("clock") %>
-        <span>History</span>
-      </sl-menu-item>
-    <% end %>
-    <%= link_to root_path(liked: true) do %>
-      <sl-menu-item>
-        <%= fa_icon("thumbs-up") %>
-        <span>Liked Videos</span>
-      </sl-menu-item>
+    <% if user_signed_in? %>
+      <sl-divider style="margin:16px 0"></sl-divider>
+      <%= link_to root_path(watched: false) do %>
+        <sl-menu-item>
+          <%= fa_icon("compass") %>
+          <span>Explore</span>
+        </sl-menu-item>
+      <% end %>
+      <%= link_to root_path(watched: true) do %>
+        <sl-menu-item>
+          <%= fa_icon("clock") %>
+          <span>History</span>
+        </sl-menu-item>
+      <% end %>
+      <%= link_to root_path(liked: true) do %>
+        <sl-menu-item>
+          <%= fa_icon("thumbs-up") %>
+          <span>Liked Videos</span>
+        </sl-menu-item>
+      <% end %>
     <% end %>
   </nav>
 </sl-drawer>
