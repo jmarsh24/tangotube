@@ -1,5 +1,5 @@
 <div class="right">
-  <% if user_signed_in? %>
+  <div id="dropdown-avatar">
     <sl-dropdown>
       <sl-avatar
       slot="trigger"
@@ -8,15 +8,25 @@
       style="--size: 32px;">
       </sl-avatar>
       <sl-menu>
-        <%= link_to edit_user_registration_path do %>
-          <sl-menu-item>Edit Profile</sl-menu-item>
-        <% end %>
-        <%= button_to destroy_user_session_path, method: :delete, style: "margin: 0; gap: 0px;" do %>
-          <sl-menu-item>Sign Out</sl-menu-item>
+        <% if user_signed_in? %>
+          <%= link_to edit_user_registration_path do %>
+            <sl-menu-item>Edit Profile</sl-menu-item>
+          <% end %>
+          <%= button_to destroy_user_session_path, method: :delete, style: "margin: 0; gap: 0px;" do %>
+            <sl-menu-item>Sign Out</sl-menu-item>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path do %>
+            <sl-menu-item>Login</sl-menu-item>
+          <% end %>
+          <%= link_to new_user_registration_path do %>
+            <sl-menu-item>Sign Up</sl-menu-item>
+          <% end %>
         <% end %>
       </sl-menu>
     </sl-dropdown>
-  <% else %>
+  </div>
+  <% unless user_signed_in? %>
     <div class="buttons-desktop">
       <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
       <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
