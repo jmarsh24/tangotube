@@ -106,6 +106,8 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.1.0)
       railties (>= 6.0.0)
+    dartsass-rails (0.3.0)
+      railties (>= 6.0.0)
     deepl-rb (2.4.0)
     device_detector (1.0.7)
     devise (4.8.1)
@@ -207,8 +209,6 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.13.3-arm64-darwin)
-      racc (~> 1.4)
     nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.9)
@@ -452,6 +452,7 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   cssbundling-rails
+  dartsass-rails
   deepl-rb
   devise
   dotenv-rails
