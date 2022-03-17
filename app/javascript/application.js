@@ -1,12 +1,5 @@
 require("@hotwired/turbo-rails");
 
-import "@fortawesome/fontawesome-free/js/all";
-
-import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
-setBasePath("/shoelace-assets");
-
-import "@shoelace-style/shoelace";
-
 import "./channels";
 import "./controllers";
 import "@fortawesome/fontawesome-free/js/all";
