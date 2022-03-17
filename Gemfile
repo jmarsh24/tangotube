@@ -19,6 +19,7 @@ gem "turbo-rails"
 # app specific gems...................................................................
 gem "acts_as_votable"
 gem "ahoy_matey"
+gem "dartsass-rails"
 gem "deepl-rb", require: 'deepl'
 gem "devise"
 gem "esbuild-rails", "~> 0.1.4"
@@ -74,3 +75,5 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
