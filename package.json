@@ -25,7 +25,8 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "prettier": "2.1.2"
+    "prettier": "2.1.2",
+    "stylelint-config-standard": "^25.0.0"
   },
   "scripts": {
     "build": "node esbuild.config.js"
