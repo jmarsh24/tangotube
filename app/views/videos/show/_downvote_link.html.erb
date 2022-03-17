@@ -11,14 +11,14 @@
                                               id: "downvote-button" do %>
       <% if user_signed_in? %>
         <% if current_user.voted_down_on? @video %>
-          <%= fa_icon "thumbs-down solid", style: "font-size: 30px; color: black;" %>
+          <%= fa_icon "thumbs-down solid", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
         <% else %>
-          <%= fa_icon "thumbs-down regular", style: "font-size: 30px;" %>
+          <%= fa_icon "thumbs-down regular", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
         <% end %>
       <% else %>
-        <%= fa_icon "thumbs-down regular", style: "font-size: 30px;color: black;" %>
+        <%= fa_icon "thumbs-down regular", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
       <% end %>
-      <span>Dislike</span>
+      <span style="color: var(--sl-color-gray-800)">Dislike</span>
     <% end %>
   <% end %>
   <div id="tooltip" role="tooltip" data-popper-target="tooltip">
