@@ -5,7 +5,6 @@ ruby "3.0.3"
 # gems that ship with rails...........................................................
 gem "barnes"
 gem "bootsnap", require: false
-gem "cssbundling-rails"
 gem "jsbundling-rails"
 gem "rails", "~> 7.0.2.2"
 gem "redis"
@@ -75,5 +74,4 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
-
 
