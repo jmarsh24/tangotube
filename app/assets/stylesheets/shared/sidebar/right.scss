@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 10px;
 
   .icons {
     display: flex;
@@ -58,7 +59,17 @@
     }
   }
 
+  @media (min-width: 600px) {
+    #dropdown-avatar {
+      display: none;
+    }
+  }
+
   @media (max-width: 600px) {
+    .buttons-desktop {
+      display: none;
+    }
+
     .buttons-desktop {
       display: none;
     }
