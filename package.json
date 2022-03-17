@@ -11,7 +11,7 @@
     "@rails/actioncable": "^7.0.2-2",
     "@rails/request.js": "^0.0.6",
     "@rails/ujs": "^7.0.2-2",
-    "autoprefixer": "^10.4.4",
+    "@shoelace-style/shoelace": "^2.0.0-beta.71",
     "esbuild": "^0.14.27",
     "esbuild-rails": "^1.0.3",
     "lodash.debounce": "^4.0.8",
@@ -29,6 +29,7 @@
     "stylelint-config-standard": "^25.0.0"
   },
   "scripts": {
-    "build": "node esbuild.config.js"
+    "build": "yarn shoelace:copy-assets && node esbuild.config.js",
+    "shoelace:copy-assets": "mkdir -p public/shoelace-assets && cp -r node_modules/@shoelace-style/shoelace/dist/assets public/shoelace-assets"
   }
 }

@@ -1,48 +1,26 @@
-// .side-bar {
-//   height: calc(100vh - 60px);
-//   width: 240px;
-//   background-color: #ffffff;
-//   overflow-y: hidden;
-//   position: absolute;
-//   z-index: 99999;
-//   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
-// }
+/*!* TODO: Send a pull request to add a sl-menu-item-active-background-color. *!*/
+sl-menu-item:hover:not([aria-disabled="true"])::part(base),
+sl-menu-item:focus:not([aria-disabled="true"])::part(base) {
+  background-color: var(--sl-color-gray-200);
+  color: var(--sl-color-neutral-800);
+}
 
-// @media (max-width: 768px) {
-// }
+sl-card::part(base) {
+  background-color: transparent;
+  box-shadow: none;
+  --padding: var(--sl-spacing-small) 0;
+  --border-width: 0;
+}
 
-// #sideNavContainer {
-//   width: 240px;
-//   background-color: $secondary-color;
-//   margin-top: 68px;
-//   padding-top: 16px;
-//   position: fixed;
-//   z-index: 10000;
-//   top: 0;
-//   bottom: 0;
-//   display: flex;
-//   flex-direction: column;
-//   &.admin {
-//     margin-top: 94px;
-//   }
-// }
+/* TODO: Remove this CSS class */
+.selectable:hover {
+  background-color: var(--sl-color-gray-200);
+}
 
-// .side {
-//   display: flex;
-//   width: 100%;
-//   flex-direction: column;
-// }
-// .side-item {
-//   display: flex;
-//   align-items: center;
-//   gap: 16px;
-//   padding: 0 24px;
-//   min-width: 0;
-//   width: 100%;
-//   height: 48px;
-
-//   &:hover {
-//     background-color: #c2c2c2;
-//     color: inherit;
-//   }
-// }
+/* Work around the issue where the divider may lose the border width */
+sl-divider:not([vertical]) {
+  border-top-width: 1px;
+}
+sl-divider[vertical] {
+  border-left-width: 1px;
+}
