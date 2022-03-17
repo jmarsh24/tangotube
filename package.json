@@ -11,16 +11,10 @@
     "@rails/actioncable": "^7.0.2-2",
     "@rails/request.js": "^0.0.6",
     "@rails/ujs": "^7.0.2-2",
-    "@shoelace-style/shoelace": "^2.0.0-beta.71",
     "autoprefixer": "^10.4.4",
     "esbuild": "^0.14.27",
     "esbuild-rails": "^1.0.3",
     "lodash.debounce": "^4.0.8",
-    "postcss": "^8.4.12",
-    "postcss-cli": "^9.1.0",
-    "postcss-import": "^14.0.2",
-    "postcss-nested": "^5.0.6",
-    "postcss-scss": "^4.0.3",
     "sass": "^1.49.9",
     "slim-select": "^1.27.0",
     "stimulus": "^3.0.1",
@@ -35,7 +29,6 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:css": "yarn shoelace:copy-assets && sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules",
-    "shoelace:copy-assets": "mkdir -p public/shoelace-assets && cp -r node_modules/@shoelace-style/shoelace/dist/assets public/shoelace-assets"
+    "build:css": "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }
