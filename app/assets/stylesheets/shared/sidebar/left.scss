@@ -2,18 +2,10 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  color: rgb(3, 3, 3);
-
-  h3 {
-    color: rgb(3, 3, 3);
-  }
-
-  &:hover {
-    h3 {
-      color: rgb(50, 50, 50);
-    }
-    button {
-      color: rgb(50, 50, 50);
+  a {
+    color: var(--sl-color-gray-700);
+    &:hover {
+      color: var(--sl-color-gray-900);
     }
   }
 

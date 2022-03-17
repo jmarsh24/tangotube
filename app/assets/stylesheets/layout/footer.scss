@@ -7,7 +7,7 @@
   padding-bottom: 1rem;
   font-size: 12px;
   width: 100%;
-  background-color: rgb(247, 250, 252);
+  background-color: var(--sl-color-neutral-100);
   border-top: 1px solid rgb(226, 232, 240);
   a {
     color: rgb(50, 50, 50);
@@ -30,18 +30,18 @@
     align-items: center;
     justify-content: center;
     padding-inline-start: 0;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
   }
 
   li {
     display: flex;
     text-decoration: none;
-    padding: .1rem 0.25rem;
+    padding: 0.1rem 0.25rem;
   }
 }
 
 #button-patreon {
-  background: #FF424D;
+  background: #ff424d;
   padding: 5px;
   color: #f8f8f8;
   border-radius: 2px;
@@ -67,12 +67,12 @@
   a {
     display: flex;
     text-decoration: none;
-    color: #6B7280;
+    color: #6b7280;
   }
 
   a:hover {
     text-decoration: none;
-    color: #9CA3AF;
+    color: #9ca3af;
   }
 }
 
