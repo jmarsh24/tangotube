@@ -1,9 +1,8 @@
 <% flash.each do |key, value| %>
-  <div data-controller="flash" class="flash <%= classes_for_flash(key) %>">
-    <div><%= value %></div>
-
-    <button type="button" class="button--flash" data-action="flash#dismiss">
-      <%= fa_icon "times" %>
-    </button>
+  <div class="flash">
+    <sl-alert open variant="primary" duration="3000" closable>
+      <sl-icon slot="icon" name="info-circle"></sl-icon>
+      <%= value %>
+    </sl-alert>
   </div>
 <% end %>
