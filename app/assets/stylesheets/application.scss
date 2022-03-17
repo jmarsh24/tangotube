@@ -79,6 +79,7 @@ main {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 60px);
+  background-color: var(--sl-color-neutral-0);
 }
 
 .isHidden {

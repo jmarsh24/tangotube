@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px 20px;
-  background-color: $secondary-color;
+  background-color: var(--sl-color-neutral-0);
 }
 
 .video-container {
@@ -75,13 +75,14 @@
 .video-title {
   text-decoration: none;
   font-size: inherit;
-  color: $videos-primary-link;
   font-size: 0.9rem;
   font-weight: 600;
   margin: 0.2rem 0;
-
-  &:hover {
-    color: $videos-primary-link-hover;
+  a {
+    color: var(--sl-color-gray-700);
+    &:hover {
+      color: var(--sl-color-gray-900);
+    }
   }
 }
 
@@ -92,10 +93,10 @@
   a {
     font-size: 0.7rem;
     text-decoration: none;
-    color: $videos-secondary-link;
+    color: var(--sl-color-gray-500);
 
     &:hover {
-      color: $videos-secondary-link-hover;
+      color: var(--sl-color-gray-700);
     }
   }
 }
@@ -110,20 +111,16 @@
 
 .channel-title {
   font-size: 0.8rem;
-  color: #555;
 }
 
 .video-channel {
   display: flex;
   align-items: center;
   a {
-    margin-bottom: 0.1rem;
-    text-decoration: none;
-    transition: color 150ms;
-  }
-
-  a:hover {
-    color: #111;
+    color: var(--sl-color-gray-500);
+    &:hover {
+      color: var(--sl-color-gray-700);
+    }
   }
 }
 

@@ -1,7 +1,8 @@
 .video-info-lyrics {
   flex: 1;
   border: 1px solid $border-color;
-  background-color: $secondary-color;
+  background-color: var(--sl-color-neutral-0);
+  color: var(--sl-color-gray-900);
   text-align: center;
   line-height: 1.5em;
   min-width: 300px;

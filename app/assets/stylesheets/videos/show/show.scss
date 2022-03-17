@@ -41,7 +41,7 @@ $show-video-width: 1300px;
   flex-direction: column;
   margin: 0 auto;
   justify-content: center;
-  background-color: white;
+  background-color: var(--sl-color-neutral-50);
   border-left: 1px solid $border-color;
   border-right: 1px solid $border-color;
 }
