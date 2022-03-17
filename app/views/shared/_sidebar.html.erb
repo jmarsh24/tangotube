@@ -1,7 +1,7 @@
 <sl-drawer no-header placement="start" id="drawer-placement-left" class="drawer-placement-start" style="--size: 240px;">
   <nav style="margin: -20px;">
-    <div class="row" style="margin-left: 20px; gap: 10px; height: 60px; align-items: center; color: rgb(63, 63, 70); cursor: pointer;">
-      <sl-icon class="cursor-pointer" style="font-size: 20px;" name="list" onclick="document.querySelector('#drawer-placement-left').hide()"></sl-icon>
+    <div class="row" style="margin-left: 20px; gap: 10px; height: 60px; align-items: center; color: var(--sl-color-gray-800); cursor: pointer;">
+      <sl-icon class="cursor-pointer" style="font-size: 20px; color: var(--sl-color-gray-800);" name="list" onclick="document.querySelector('#drawer-placement-left').hide()"></sl-icon>
       <%= link_to root_path do %>
         <h3>TangoTube</h3>
       <% end %>

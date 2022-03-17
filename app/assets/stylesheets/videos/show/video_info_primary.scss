@@ -108,6 +108,10 @@
       border-bottom-left-radius: 0px;
       margin: 0 !important;
       height: 100%;
+
+      svg {
+        fill: var(--sl-color-gray-800);
+      }
     }
   }
 
@@ -115,6 +119,8 @@
     display: flex;
     align-items: flex-end;
     gap: 15px;
+    font-size: 30px;
+    color: var(--sl-color-gray-800);
   }
 
   .youtube-controls {

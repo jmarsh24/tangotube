@@ -1,7 +1,7 @@
  <% videos.each do |video| %>
   <article class="recommended-videos-container" data-controller="toggle" style="padding: 5px; border-radius: 5px;
     <% if video.youtube_id == @video.youtube_id %>
-      background-color: rgb(247, 247, 247); "
+      background-color: var(--sl-color-gray-200); "
     <% end %>
     "
   >

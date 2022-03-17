@@ -11,12 +11,12 @@
                                             id: "upvote-button" do %>
       <% if user_signed_in? %>
         <% if current_user.voted_up_on? @video %>
-          <%= fa_icon "thumbs-up solid", style: "font-size: 30px; color: black;" %>
+          <%= fa_icon "thumbs-up solid", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
         <% else %>
-          <%= fa_icon "thumbs-up regular", style: "font-size: 30px;" %>
+          <%= fa_icon "thumbs-up regular", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
         <% end %>
       <% else %>
-        <%= fa_icon "thumbs-up regular", style: "font-size: 30px; color: black;" %>
+        <%= fa_icon "thumbs-up regular", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
       <% end %>
     <% end %>
   <% end %>

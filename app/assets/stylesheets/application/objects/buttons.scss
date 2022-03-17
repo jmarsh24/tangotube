@@ -47,8 +47,8 @@ button {
 
   // Visual
   font-size: 14px;
-  background-color: $btnColor;
-  color: rgb(107, 114, 128);
+  background-color: var(--sl-color-gray-50);
+  color: var(--sl-color-gray-600);
   border-radius: 6px;
   // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
 
@@ -68,16 +68,16 @@ button {
 
   &:hover,
   &:active {
-    color: rgb(156, 163, 175);
+    color: var(--sl-color-gray-700);
     path {
-      fill: rgb(156, 163, 175);
+      fill: var(--sl-color-gray-700);
     }
-    // background-color: scale-color($btnColor, $lightness: -20%);
+    background-color: var(--sl-color-gray-600);
   }
 
   &:focus {
     outline: none;
-    // box-shadow: 0 0 0 4px scale-color($btnColor, $lightness: -40%);
+    box-shadow: 0 0 0 4px var(--sl-color-gray-600);
   }
 
   &--submit {
