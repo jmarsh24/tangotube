@@ -34,8 +34,8 @@
         <span>Global Clips</span>
       </sl-menu-item>
     <% end %>
+    <sl-divider style="margin:16px 0"></sl-divider>
     <% if user_signed_in? %>
-      <sl-divider style="margin:16px 0"></sl-divider>
       <%= link_to root_path(watched: false) do %>
         <sl-menu-item>
           <%= fa_icon("compass") %>
@@ -52,6 +52,17 @@
         <sl-menu-item>
           <%= fa_icon("thumbs-up") %>
           <span>Liked Videos</span>
+        </sl-menu-item>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path do %>
+        <sl-menu-item>
+          <span>Login</span>
+        </sl-menu-item>
+      <% end %>
+      <%= link_to new_user_registration_path do %>
+        <sl-menu-item>
+          <span>Sign Up</span>
         </sl-menu-item>
       <% end %>
     <% end %>
