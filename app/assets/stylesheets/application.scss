@@ -1,6 +1,5 @@
-// Sassy
-
-// Entry point for your Sass build
+@use "@shoelace-style/shoelace/dist/themes/light.css";
+@use "@shoelace-style/shoelace/dist/themes/dark.css";
 
 @import "application/objects/colors.scss";
 
@@ -72,6 +71,8 @@
 
 html,
 body {
+  background-color: var(--sl-color-gray-50);
+  color: var(--sl-color-neutral-800);
   font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
@@ -79,8 +80,6 @@ main {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 60px);
-  background-color: var(--sl-color-neutral-0);
-  color: var(--sl-color-gray-800);
 }
 
 .isHidden {

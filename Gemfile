@@ -37,6 +37,7 @@ gem "pg_search"
 gem "rails_autolink"
 gem "rspotify"
 gem "scenic"
+gem "shoelace-rails"
 gem "sidekiq"
 gem "stimulus-rails"
 gem "stripe", "~> 5.45"
@@ -74,4 +75,3 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
-
