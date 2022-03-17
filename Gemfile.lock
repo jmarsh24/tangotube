@@ -104,8 +104,6 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    cssbundling-rails (1.1.0)
-      railties (>= 6.0.0)
     dartsass-rails (0.3.0)
       railties (>= 6.0.0)
     deepl-rb (2.4.0)
@@ -453,7 +451,6 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot
-  cssbundling-rails
   dartsass-rails
   deepl-rb
   devise
