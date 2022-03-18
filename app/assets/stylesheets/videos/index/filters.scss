@@ -10,6 +10,12 @@
   background-color: var(--sl-color-neutral-0);
 }
 
+@media (max-width: 600px) {
+  .filters {
+    padding: 10px 10px;
+  }
+}
+
 .videos-sortable-button {
   display: flex;
   width: 100%;
