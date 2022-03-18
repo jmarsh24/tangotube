@@ -82,11 +82,10 @@ export default class extends Controller {
       var parsedData = parser.parseFromString(data, "text/html");
 
       const replaceContainers = [
-        "filter-container",
+        "filters",
         "videos",
         "load-more-container",
         "filter_results",
-        "sorting-container",
       ];
 
       replaceContainers.forEach((element) => {

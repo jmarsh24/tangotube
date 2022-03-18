@@ -128,7 +128,7 @@ GEM
     erubi (1.10.0)
     esbuild-rails (0.1.4)
       rails (>= 6.0.0)
-    factory_bot (6.2.0)
+    factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
@@ -210,6 +210,8 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
+    nokogiri (1.13.3-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.9)
@@ -337,7 +339,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.16.0)
       parser (>= 3.1.1.0)
-    rubocop-rails (2.14.1)
+    rubocop-rails (2.14.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
@@ -459,7 +461,7 @@ DEPENDENCIES
   deepl-rb
   devise
   dotenv-rails
-  esbuild-rails (~> 0.1.4)
+  esbuild-rails
   factory_bot_rails
   faker
   faraday
@@ -470,7 +472,7 @@ DEPENDENCIES
   image_processing
   jsbundling-rails
   letter_opener
-  listen (~> 3.2)
+  listen
   nokogiri
   omniauth-facebook
   omniauth-google-oauth2
@@ -501,11 +503,11 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   streamio-ffmpeg
-  stripe (~> 5.45)
+  stripe
   turbo-rails
   tzinfo-data
   vcr
-  web-console (= 4.0.2)
+  web-console
   webdrivers
   webmock
   yt

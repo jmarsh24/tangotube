@@ -1,16 +1,15 @@
-import { Controller } from '@hotwired/stimulus'
-import SlimSelect from 'slim-select'
+import { Controller } from "@hotwired/stimulus";
+import SlimSelect from "slim-select";
 
 export default class extends Controller {
-static values = { placeholder: String }
+  static values = { placeholder: String };
 
-  connect () {
-    const closeOnSelect = false
-    const allowDeselect = true
-    const showContent = 'down'
-    const searchFocus = false
-    const searchPlaceholder = this.placeholderValue
-
+  connect() {
+    const closeOnSelect = false;
+    const allowDeselect = true;
+    const showContent = "down";
+    const searchFocus = false;
+    const searchPlaceholder = this.placeholderValue;
 
     this.slimselect = new SlimSelect({
       select: this.element,
@@ -19,14 +18,10 @@ static values = { placeholder: String }
       allowDeselect,
       showContent,
       searchFocus,
-      beforeClose: function (e) {
-        e.preventDefault()
-      },
-    })
-    this.slimselect.open()
+    });
   }
 
-  disconnect () {
-    this.slimselect.destroy()
+  disconnect() {
+    this.slimselect.destroy();
   }
 }

@@ -1,4 +1,10 @@
 <div class="right">
+  <% unless user_signed_in? %>
+    <div class="buttons-desktop">
+      <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
+      <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
+    </div>
+  <% end %>
   <div id="dropdown-avatar">
     <sl-dropdown>
       <sl-avatar
@@ -26,10 +32,4 @@
       </sl-menu>
     </sl-dropdown>
   </div>
-  <% unless user_signed_in? %>
-    <div class="buttons-desktop">
-      <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
-      <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
-    </div>
-  <% end %>
 </div>
