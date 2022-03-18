@@ -1,4 +1,4 @@
-<%= render "videos/index/filter-sorting" %>
+<%= render "videos/index/filters" %>
 <div class="videos" id="videos">
   <%= turbo_frame_tag "videos-#{@page}" do %>
     <%= render "videos/index/videos" %>

@@ -21,7 +21,7 @@ gem "ahoy_matey"
 gem "dartsass-rails"
 gem "deepl-rb", require: 'deepl'
 gem "devise"
-gem "esbuild-rails", "~> 0.1.4"
+gem "esbuild-rails"
 gem "faraday"
 gem "faraday-multipart"
 gem "font-awesome-rails"
@@ -41,7 +41,7 @@ gem "scenic"
 gem "shoelace-rails"
 gem "sidekiq"
 gem "stimulus-rails"
-gem "stripe", "~> 5.45"
+gem "stripe"
 gem "streamio-ffmpeg"
 gem "yt"
 
@@ -57,13 +57,13 @@ end
 
 group :development do
   gem "letter_opener"
-  gem "listen", "~> 3.2"
+  gem "listen"
   gem "rack-mini-profiler"
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-rspec"
   gem "solargraph"
-  gem "web-console", "4.0.2"
+  gem "web-console"
 end
 
 group :test do
