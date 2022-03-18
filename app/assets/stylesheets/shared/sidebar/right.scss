@@ -4,6 +4,11 @@
   align-items: center;
   margin-left: 10px;
 
+  #dropdown-avatar {
+    cursor: pointer;
+    display: none;
+  }
+
   .icons {
     display: flex;
     gap: 10px;
@@ -59,9 +64,9 @@
     }
   }
 
-  @media (min-width: 600px) {
+  @media (max-width: 600px) {
     #dropdown-avatar {
-      display: none;
+      display: block;
     }
   }
 
