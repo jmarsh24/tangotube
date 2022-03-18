@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import { SlDrawer, SlSwitch, SlTooltip } from "@shoelace-style/shoelace"
+import { SlSwitch } from "@shoelace-style/shoelace"
 
 // Connects to data-controller="dark-mode"
 export default class extends Controller {
