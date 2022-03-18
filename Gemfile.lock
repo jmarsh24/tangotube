@@ -138,6 +138,8 @@ GEM
     faraday (2.2.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
+    faraday-multipart (1.0.3)
+      multipart-post (>= 1.2, < 3)
     faraday-net_http (2.0.1)
     ffi (1.15.5)
     font-awesome-rails (4.7.0.8)
@@ -190,6 +192,7 @@ GEM
     msgpack (1.4.5)
     multi_json (1.15.0)
     multi_xml (0.6.0)
+    multipart-post (2.1.1)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -207,8 +210,6 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.13.3-arm64-darwin)
-      racc (~> 1.4)
     nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.9)
@@ -462,6 +463,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   faraday
+  faraday-multipart
   font-awesome-rails
   hashie
   hotwire-rails

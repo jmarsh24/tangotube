@@ -23,6 +23,7 @@ gem "deepl-rb", require: 'deepl'
 gem "devise"
 gem "esbuild-rails", "~> 0.1.4"
 gem "faraday"
+gem "faraday-multipart"
 gem "font-awesome-rails"
 gem "hashie"
 gem "hotwire-rails"
