@@ -1,26 +1,25 @@
-<sl-drawer no-header placement="start" id="drawer-placement-left" class="drawer-placement-start" style="--size: 240px;">
-  <nav style="margin: -20px;">
+<sl-drawer no-header placement="start" id="drawer-placement-left" style="--size: 240px;" data-drawer-target="drawer">
+  <nav style="margin: -20px;" data-controller="dark-mode">
     <div class="row" style="margin-left: 20px; gap: 10px; height: 60px; align-items: center; color: var(--sl-color-gray-800); cursor: pointer;">
-      <sl-icon class="cursor-pointer" style="font-size: 20px; color: var(--sl-color-gray-800);" name="list" onclick="document.querySelector('#drawer-placement-left').hide()"></sl-icon>
+      <sl-icon class="cursor-pointer" style="font-size: 20px; color: var(--sl-color-gray-800);" name="list" data-action="click->drawer#hide"></sl-icon>
       <%= link_to root_path do %>
         <h3>TangoTube</h3>
       <% end %>
     </div>
     <sl-divider style="margin-bottom: 16px"></sl-divider>
-    <sl-switch style="margin: 12px 0 12px 25px;" id="toggle-dark-mode">
+    <sl-switch style="margin: 12px 0 12px 25px;" data-dark-mode-target="switch" data-action="sl-change->dark-mode#toggle">
       Dark Mode
     </sl-switch>
-    <script>
-      const toggle = document.querySelector('#toggle-dark-mode');
-
-      toggle.addEventListener('sl-change', () => {
-        if (toggle.checked) {
-          document.querySelector('html').classList.add("sl-theme-dark");
-        } else {
-          document.querySelector('html').classList.remove("sl-theme-dark");
-        }
-      });
-    </script>
+    <sl-dropdown>
+      <sl-menu-item slot="trigger">
+        Dark Mode
+      </sl-menu-item>
+      <sl-menu>
+        <sl-menu-item>Light</sl-menu-item>
+        <sl-menu-item>Dark</sl-menu-item>
+        <sl-menu-item>Auto</sl-menu-item>
+      </sl-menu>
+    </sl-dropdown>
     <sl-divider style="margin:16px 0"></sl-divider>
     <%= link_to root_path do %>
       <sl-menu-item>
