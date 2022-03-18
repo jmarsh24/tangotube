@@ -7,7 +7,6 @@ export default class extends Controller {
     "sorting",
     "sortingButton",
     "toggleable",
-    "sideNavContainer",
     "mainSectionContainer",
     "disableable",
     "lyricsEs",
@@ -79,7 +78,6 @@ export default class extends Controller {
   toggleFilter() {
     this.filterTarget.classList.toggle("isHidden");
     this.sortingTarget.classList.add("isHidden");
-    this.sideNavContainerTarget.classList.add("isHidden");
     this.filterButtonTarget.classList.toggle("isActive");
   }
 
