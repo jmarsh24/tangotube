@@ -3,7 +3,7 @@
     <div style="width: 100%; border-top: 1px solid rgb(229, 231, 235); position: relative;"></div>
   </div>
   <div style="display: flex; justify-content: center;">
-    <span style="background: white; padding: 0 8px; z-index: 1;">
+    <span style="background-color: var(--sl-color-gray-200); padding: 0 8px; z-index: 1;">
       Or continue with
     </span>
   </div>
@@ -15,10 +15,12 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 <%- if devise_mapping.omniauthable? %>
-  <%= button_to user_google_oauth2_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button button--block" do %>
-    <i class="button__icon fa-brands fa-google h-5 h-5 mr-2"></i> Google
-  <% end %>
-  <%= button_to user_facebook_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button  button--block" do %>
-    <i class="button__icon fa-brands fa-facebook h-5 h-5 mr-2"></i> Facebook
-  <% end %>
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <%= button_to user_google_oauth2_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button button--block" do %>
+      <i class="button__icon fa-brands fa-google"></i> Google
+    <% end %>
+    <%= button_to user_facebook_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button  button--block" do %>
+      <i class="button__icon fa-brands fa-facebook"></i> Facebook
+    <% end %>
+  </div>
 <% end %>
