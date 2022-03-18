@@ -22,15 +22,6 @@ class Video::YoutubeImport::Video
     if @video.leader.nil? || @video.follower.nil?
       @video.grep_title_leader_follower
     end
-    unless @video.acr_response_code.in? [0,1001]
-      Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
-    end
-    if @video.youtube_song.nil?
-      Video::MusicRecognition::Youtube.fetch(@youtube_id)
-    end
-    if @video.song.nil?
-      @video.grep_title_description_acr_cloud_song
-    end
     if @video.performance_number.nil? || @video.performance_total_number.nil?
       @video.grep_performance_number
     end
@@ -51,6 +42,15 @@ class Video::YoutubeImport::Video
     end
     if @video.performance_number.nil? || @video.performance_total_number.nil?
       @video.grep_performance_number
+    end
+    unless @video.acr_response_code.in? [0,1001]
+      Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
+    end
+    if @video.youtube_song.nil?
+      Video::MusicRecognition::Youtube.fetch(@youtube_id)
+    end
+    if @video.song.nil?
+      @video.grep_title_description_acr_cloud_song
     end
     rescue Yt::Errors::NoItems => e
     if e.present?

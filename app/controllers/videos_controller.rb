@@ -70,6 +70,7 @@ class VideosController < ApplicationController
     else
       Video::YoutubeImport.from_video(show_params[:v])
       @video = Video.find_by(youtube_id: show_params[:v])
+      UpdateVideoWorker.perform_async(show_params[:v])
     end
     set_recommended_videos
     @start_value = params[:start]
