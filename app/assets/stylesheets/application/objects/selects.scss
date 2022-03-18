@@ -6,6 +6,8 @@ select {
   height: 36px;
   width: 2.5rem;
   padding-left: 0.7rem;
-  border-radius: 6px;
-  color: black;
+  border-radius: 4px;
+  background-color: var(--sl-color-neutral-0);
+  border: none;
+  color: var(--sl-color-gray-800);
 }
