@@ -9,11 +9,6 @@
     display: none;
   }
 
-  .icons {
-    display: flex;
-    gap: 10px;
-  }
-
   .buttons {
     display: flex;
     flex-direction: column;
@@ -64,17 +59,13 @@
     }
   }
 
-  @media (max-width: 600px) {
+  @media (min-width: 600px) {
     #dropdown-avatar {
       display: block;
     }
   }
 
   @media (max-width: 600px) {
-    .buttons-desktop {
-      display: none;
-    }
-
     .buttons-desktop {
       display: none;
     }
