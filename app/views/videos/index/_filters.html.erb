@@ -68,8 +68,8 @@
       Sorting
     </sl-button>
     <sl-menu>
-      <sl-menu-label>Sort By</sl-menu-label>
-      <sl-divider></sl-divider>
+      <sl-menu-label style="margin-left: 28px;">Sort By</sl-menu-label>
+      <sl-divider style="margin:12px 0;"></sl-divider>
       <sl-menu-item>
         <%= sortable 'videos.performance_date', "desc",  "Recent First", @search %>
       </sl-menu-item>
@@ -85,9 +85,9 @@
       <sl-menu-item>
         <%= sortable "videos.like_count", "desc",  "Most Liked", @search %>
       </sl-menu-item>
-      <sl-divider></sl-divider>
-      <sl-menu-label>Group By</sl-menu-label>
-      <sl-divider></sl-divider>
+      <sl-divider style="margin:12px 0"></sl-divider>
+      <sl-menu-label style="margin-left: 28px;">Group By</sl-menu-label>
+      <sl-divider style="margin:12px 0;"></sl-divider>
       <sl-menu-item>
         <%= sortable 'songs.title', "asc", "Song", @search %>
       </sl-menu-item>
