@@ -86,7 +86,9 @@
                                                   root_path(query: @video.youtube_artist.to_s.titleize), {'data-turbo-frame': "_top"}) } %>
 <% end %>
 <% if user_signed_in? %>
-  <%= link_to 'Edit', edit_video_path(@video) %>
+  <%= button_to edit_video_path(@video), method: :get do %>
+    <sl-button style="margin: 10px 0;">Edit</sl-button>
+  <% end %>
 <% end %>
 <div class="detail-section-label">
   <h4>Video Info</h4>

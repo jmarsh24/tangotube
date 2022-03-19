@@ -30,7 +30,7 @@
           Performance Date
         </label>
       </div>
-      <div class="attribute-value">
+      <div class="attribute-value" style="display: flex; flex-direction: column; gap: 10px;">
         <%= f.date_select(:performance_date, { start_year: 1980, end_year: Time.now.year, order: [:month, :day, :year], prompt: { day: 'Select Day', month: 'Select Month', year: 'Select Year' } }, selected: @video.performance_date ) %>
       </div>
     </div>
@@ -64,13 +64,11 @@
                                   value: @video.song.try(:title) } %>
   <div>
     <%= f.label 'hidden?' %>
-    <%= f.check_box :hidden ,{}, "true", "false" %>
+    <%= f.check_box :hidden, {}, "true", "false" %>
   </div>
-  <div>
+  <div style="display: flex; gap: 10px; align-items: center; margin: 10px 0; font-size: 14px;">
     <%= f.submit 'Update Video' %>
-  </div>
-  <div>
-    <%= link_to 'Back', watch_path(v: @video.youtube_id) %>
+    <%= link_to 'Back', watch_path(v: @video.youtube_id), style: "font-size: 14px;" %>
   </div>
   <div class="detail-section-label">
     <h4>Video Info</h4>
