@@ -1,12 +1,10 @@
-<% unless video_query_params.empty? %>
-  <div class="videos-header">
-    <div id="filter_results">
-      <% if filtering_params.present? %>
-        <h3><%= "#{pluralize(number_with_delimiter(@search.videos.size), "Result")} Found for..." %></h3>
-      <% end %>
-    </div>
+<div class="videos-header" id="videos-header">
+  <% if filtering_params.present? %>
+    <h3><%= "#{pluralize(number_with_delimiter(@search.videos.size), "Result")} Found for..." %></h3>
+  <% end %>
+  <% if filtering_params.present? || sorting_params.present? %>
     <h3>
       <%= videos_header(filtering_params, sorting_params) %>
     </h3>
-  </div>
-<% end %>
+  <% end %>
+</div>
