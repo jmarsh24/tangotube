@@ -11,12 +11,12 @@
                                             id: "upvote-button" do %>
       <% if user_signed_in? %>
         <% if current_user.voted_up_on? @video %>
-          <sl-icon name="hand-thumbs-up-fill" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+          <sl-icon id="upvote-button" name="hand-thumbs-up-fill" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
         <% else %>
-          <sl-icon name="hand-thumbs-up" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+          <sl-icon id="upvote-button" name="hand-thumbs-up" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
         <% end %>
       <% else %>
-        <sl-icon name="hand-thumbs-up" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+        <sl-icon id="upvote-button" name="hand-thumbs-up" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
       <% end %>
       <%= content_tag "div", id: "like-count-#{@video.id}", style: "display: flex; justify-content: center; align-items: center; font-size: 14px;  color: var(--sl-color-gray-800);" do %>
         <%= @video.cached_votes_score %>
