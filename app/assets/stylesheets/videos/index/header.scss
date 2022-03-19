@@ -1,10 +1,13 @@
 .videos-header {
+  width: 100%;
+  max-width: 1660px;
   display: flex;
+  justify-content: flex-start;
   gap: 10px;
   margin: 0px;
-  padding-bottom: 15px;
   border-bottom: $border-color;
-
+  padding: 0 40px;
+  background-color: var(--sl-color-neutral-0);
   h3 {
     color: var(--sl-color-gray-800);
   }
