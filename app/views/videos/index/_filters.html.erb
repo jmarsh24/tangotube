@@ -100,13 +100,12 @@
     </sl-menu>
   </sl-dropdown>
   <% if filtering_params.present? || sorting_params.present? %>
-    <%= button_tag type: "button",
-                          data: { controller: "filter",
-                          action: "filter#filter",
-                                  "filter-clear-value": "1" } do %>
-      <sl-button variant="danger" outline>
-        Clear All
-      </sl-button>
-    <% end %>
+    <sl-button variant="danger"
+                outline
+                data-controller="filter"
+                data-action="click->filter#filter"
+      data-filter-clear-value= "1">
+      Clear All
+    </sl-button>
   <% end %>
 </div>
