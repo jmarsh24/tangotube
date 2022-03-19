@@ -11,12 +11,12 @@
                                               id: "downvote-button" do %>
       <% if user_signed_in? %>
         <% if current_user.voted_down_on? @video %>
-          <%= fa_icon "thumbs-down solid", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
+          <sl-icon name="hand-thumbs-down-fill" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
         <% else %>
-          <%= fa_icon "thumbs-down regular", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
+          <sl-icon name="hand-thumbs-down" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
         <% end %>
       <% else %>
-        <%= fa_icon "thumbs-down regular", style: "font-size: 30px; color: var(--sl-color-gray-800);" %>
+        <sl-icon name="hand-thumbs-down" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
       <% end %>
       <span style="color: var(--sl-color-gray-800)">Dislike</span>
     <% end %>
