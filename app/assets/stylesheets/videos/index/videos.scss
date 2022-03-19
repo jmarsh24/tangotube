@@ -87,6 +87,10 @@
       color: var(--sl-color-gray-900);
     }
   }
+
+  @media (max-width: 800px) {
+    font-size: 1.2rem;
+  }
 }
 
 .video-song {
@@ -102,6 +106,13 @@
       color: var(--sl-color-gray-700);
     }
   }
+
+  @media (max-width: 800px) {
+    font-size: 0.9rem;
+    a {
+      font-size: 0.9rem;
+    }
+  }
 }
 
 .channel-icon {
@@ -114,6 +125,10 @@
 
 .channel-title {
   font-size: 0.8rem;
+
+  @media (max-width: 800px) {
+    font-size: 1.1rem;
+  }
 }
 
 .video-channel {
@@ -128,8 +143,12 @@
 }
 
 .video-metadata {
-  color: #555;
+  color: var(--sl-color-gray-500);
   font-size: 0.7rem;
+
+  @media (max-width: 800px) {
+    font-size: 0.9rem;
+  }
 }
 
 .video-event {
