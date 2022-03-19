@@ -38,6 +38,7 @@ class Video::Search
         .includes(:leader, :follower, :channel, :song, :event)
         .order(ordering_params)
         .filter_videos(@filtering_params, @user)
+        .where.not(view_count: nil)
         return @videos unless @filtering_params.empty? && @sorting_params.empty?
     @videos.most_viewed_videos_by_month
            .has_leader
