@@ -37,7 +37,7 @@
         <div class="video-info-details-main">
           <%= render partial: "videos/show/video_info_details" %>
           <div class="container">
-            <h3>Comments</h3>
+            <h3 style="margin-top: 10px; margin-bottom: 10px;">Comments</h3>
             <div id="comments">
               <% if user_signed_in? %>
                 <%= render partial: "comments/form", locals: { commentable: @video } %>
