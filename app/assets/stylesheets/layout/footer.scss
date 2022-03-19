@@ -10,14 +10,14 @@
   background-color: var(--sl-color-neutral-100);
   border-top: 1px solid $border-color;
   a {
-    color: rgb(50, 50, 50);
+    color: var(--sl-color-gray-800);
   }
 }
 
 .footerTitle {
   flex: 1;
   text-align: center;
-  color: rgb(99, 99, 99);
+  color: var(--sl-color-gray-800);
 }
 
 .footer nav {
@@ -67,12 +67,12 @@
   a {
     display: flex;
     text-decoration: none;
-    color: #6b7280;
+    color: var(--sl-color-gray-600);
   }
 
   a:hover {
     text-decoration: none;
-    color: #9ca3af;
+    color: var(--sl-color-gray-800);
   }
 }
 
