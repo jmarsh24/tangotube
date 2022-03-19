@@ -9,8 +9,8 @@
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter', width: "300px" } %>
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter', width: "300px" } %>
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @search.years, title: :year, id: 'year-filter', width: "200px" } %>
-      <sl-menu-label>Additional Filters</sl-menu-label>
-      <sl-divider></sl-divider>
+      <sl-menu-label style="margin-left: 28px;">Additional Filters</sl-menu-label>
+      <sl-divider style="margin:12px 0;"></sl-divider>
       <% if current_user %>
         <%= button_tag type: "button",
                           class: "additional-filters-button",
