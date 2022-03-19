@@ -11,3 +11,10 @@
   gap: 20px 20px;
   background-color: $secondary-color;
 }
+
+@media (max-width: 800px) {
+  .video-section {
+    display: flex;
+    flex-direction: column;
+  }
+}

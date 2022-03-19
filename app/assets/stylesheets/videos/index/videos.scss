@@ -153,4 +153,10 @@
   .video-bottom-section {
     padding: 10px;
   }
+
+  .video-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
 }
