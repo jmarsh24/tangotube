@@ -3,6 +3,7 @@
 
 @import "application/objects/colors.scss";
 
+@import "application/reset.scss";
 @import "application/layout.scss";
 @import "application/typography.scss";
 @import "application/modules/dashboard.scss";
@@ -59,15 +60,6 @@
 @import "videos/show/video_info_primary.scss";
 @import "videos/slimselect-customized.scss";
 
-*,
-*::before,
-*::after {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-html,
 body {
   background-color: var(--sl-color-gray-50);
   color: var(--sl-color-neutral-800);
