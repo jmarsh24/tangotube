@@ -1,7 +1,7 @@
 <div class="videos-header" id="videos-header">
   <% if filtering_params.present? %>
     <h3>
-      <%= "#{pluralize(number_with_delimiter(@search.videos.size), "Result")} Found for..." %>
+      <%= "#{@pagy.count} Found for..." %>
       <% if filtering_params.present? || sorting_params.present? %>
         <%= videos_header(filtering_params, sorting_params) %>
       <% end %>

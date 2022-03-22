@@ -22,18 +22,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'videos#index'
-
-  post 'savenew', to: 'users#savenew'
-  get '/watch', to: 'videos#show'
-  get '/privacy', to: 'static_pages#privacy'
-  get '/terms', to: 'static_pages#terms'
-  get '/about', to: 'static_pages#about'
-  get '/contact', to: 'static_pages#contact'
-
-  match "/404", to: "errors#not_found", via: :all
-  match "/500", to: "errors#internal_server_error", via: :all
-
   resources :comments do
     resources :comments, module: :comments
   end
@@ -41,6 +29,9 @@ Rails.application.routes.draw do
   resources :playlists, only: %i[index create]
   resources :clips
   resources :videos do
+    collection do
+      post :index
+    end
     resources :comments, module: :videos
     member do
       patch "upvote", to: "videos#upvote"
@@ -52,8 +43,21 @@ Rails.application.routes.draw do
       post :search
     end
   end
+
   resources :leaders, only: %i[index create]
   resources :followers, only: %i[index create]
   resources :events, only: %i[index create]
   resources :songs, only: :index
+
+  root 'videos#index'
+  post '/' => 'videos#index'
+  post 'savenew', to: 'users#savenew'
+  get '/watch', to: 'videos#show'
+  get '/privacy', to: 'static_pages#privacy'
+  get '/terms', to: 'static_pages#terms'
+  get '/about', to: 'static_pages#about'
+  get '/contact', to: 'static_pages#contact'
+
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
 end
