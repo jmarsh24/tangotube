@@ -1,6 +1,7 @@
 module ApplicationHelper
   include Turbo::StreamsHelper
   include Turbo::FramesHelper
+  include Pagy::Frontend
 
   def avatar_url_for(user, opts = {})
     size = opts[:size || 32]

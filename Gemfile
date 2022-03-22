@@ -28,11 +28,13 @@ gem "font-awesome-rails"
 gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
+gem "meilisearch-rails"
 gem "nokogiri"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem "pay"
+gem "pagy"
 gem "prettier"
 gem "pg_search"
 gem "rails_autolink"
