@@ -1,10 +1,16 @@
 <%= render "videos/index/filters" %>
 <%= render "videos/index/videos/header" %>
 <div class="videos" id="videos">
-  <%= turbo_frame_tag "videos-#{@page}" do %>
-    <%= render "videos/index/videos" %>
-    <%= turbo_frame_tag "videos-#{@page + 1}" do %>
-      <%= render "videos/index/load_more" %>
-    <% end %>
+  <div class="video-section" id="video-section">
+    <%= render @videos %>
+  </div>
+</div>
+<div id="next_link">
+  <% if @pagy.next %>
+    <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
+      <sl-button type="submit" data-controller= "autoclick">
+        Load More
+      </sl-button>
+    </form>
   <% end %>
 </div>

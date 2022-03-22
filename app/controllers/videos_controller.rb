@@ -9,55 +9,94 @@ class VideosController < ApplicationController
 
   def index
     @page = page
-    @search =
-      Video::Search.for(
-        filtering_params: filtering_params,
-        sorting_params: sorting_params,
-        page: page,
-        user: current_user
-      )
-    if sorting_params.empty? && page == 1 && @search.videos.size > 60 && (filtering_for_dancer? || dancer_name_match?)
-        @search_most_recent =
-        Video::Search.for(
-          filtering_params: filtering_params,
-          sorting_params: { direction: "desc", sort: "videos.performance_date" },
-          page: page,
-          user: current_user
-        )
+    @sort_column = sort_column
+    @sort_direction = sort_direction
 
-        @search_oldest =
-        Video::Search.for(
-          filtering_params: filtering_params,
-          sorting_params: { direction: "asc", sort: "videos.performance_date" },
-          page: page,
-          user: current_user
-        )
+    filter_array = []
 
-        @search_most_popular =
-        Video::Search.for(
-          filtering_params: filtering_params,
-          sorting_params: { direction: "desc", sort: "videos.popularity" },
-          page: page,
-          user: current_user
-        )
-        if current_user.present?
-          @search_most_popular_new_to_you =
-          Video::Search.for(
-            filtering_params: filtering_params.merge(watched: "false"),
-            sorting_params: { direction: "desc", sort: "videos.popularity" },
-            page: page,
-            user: current_user
-          )
+    if filtering_params.include?("watched") || filtering_params.include?("liked")
+      filter_array << Video.filter_videos(user_filtering_params, current_user)
+                                   .select(:id)
+                                   .as_json
+                                   .map { |hash| "id = #{hash['id']}" }
+    end
 
-          @search_most_popular_watched =
-          Video::Search.for(
-            filtering_params: filtering_params.merge(watched: "true"),
-            sorting_params: { direction: "desc", sort: "videos.popularity" },
-            page: page,
-            user: current_user
-          )
-        end
+    if filtering_params.except("watched").except("liked").present?
+      filtering_params.except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
+        filter_array << [filter]
       end
+    end
+
+    @video_search = Video.search(params[:query], { filter: filter_array,
+                                                   facetsDistribution: ["genre", "leader", "follower", "orchestra", "year"] } )
+
+    if filtering_params.present? || sorting_params.present?
+      videos =  Video.pagy_search(params[:query],
+                  filter: filter_array,
+                  sort: [ "#{sort_column}:#{sort_direction}" ])
+      @pagy, @videos = pagy_meilisearch(videos, items: 60)
+    else
+      videos = Video.most_viewed_videos_by_month
+                    .has_leader
+                    .has_follower
+      @pagy, @videos = pagy(videos.order("random()"), items: 60)
+    end
+
+
+    # @search =
+    #   Video::Search.for(
+    #     filtering_params: filtering_params,
+    #     sorting_params: sorting_params,
+    #     page: page,
+    #     user: current_user
+    #   )
+    # if sorting_params.empty? && page == 1 && @search.videos.size > 60 && (filtering_for_dancer? || dancer_name_match?)
+    #     @search_most_recent =
+    #     Video::Search.for(
+    #       filtering_params: filtering_params,
+  #       sorting_params: { direction: "desc", sort: "videos.performance_date" },
+    #       page: page,
+    #       user: current_user
+    #     )
+
+    #     @search_oldest =
+    #     Video::Search.for(
+    #       filtering_params: filtering_params,
+    #       sorting_params: { direction: "asc", sort: "videos.performance_date" },
+    #       page: page,
+    #       user: current_user
+    #     )
+
+    #     @search_most_popular =
+    #     Video::Search.for(
+    #       filtering_params: filtering_params,
+    #       sorting_params: { direction: "desc", sort: "videos.popularity" },
+    #       page: page,
+    #       user: current_user
+    #     )
+    #     if current_user.present?
+    #       @search_most_popular_new_to_you =
+    #       Video::Search.for(
+    #         filtering_params: filtering_params.merge(watched: "false"),
+    #         sorting_params: { direction: "desc", sort: "videos.popularity" },
+    #         page: page,
+    #         user: current_user
+    #       )
+
+    #       @search_most_popular_watched =
+    #       Video::Search.for(
+    #         filtering_params: filtering_params.merge(watched: "true"),
+    #         sorting_params: { direction: "desc", sort: "videos.popularity" },
+    #         page: page,
+    #         user: current_user
+    #       )
+    #     end
+    #   end
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
   end
 
   def edit
@@ -227,6 +266,17 @@ class VideosController < ApplicationController
               :id)
   end
 
+  def user_filtering_params
+    params.permit(
+      :watched,
+      :liked,
+    )
+  end
+
+  def meilisearch_filtering_params
+    user_filtering_params
+  end
+
   def filtering_params
     params.permit(
       :leader,
@@ -235,13 +285,21 @@ class VideosController < ApplicationController
       :genre,
       :orchestra,
       :song_id,
-      :query,
       :hd,
       :event_id,
       :year,
       :watched,
-      :liked
+      :liked,
+      :id
     )
+  end
+
+  def sort_column
+    @sort_column ||= sorting_params[:sort] || "popularity"
+  end
+
+  def sort_direction
+    @sort_direction ||= sorting_params[:direction] || "desc"
   end
 
   def sorting_params
