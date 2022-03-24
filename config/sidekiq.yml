@@ -6,6 +6,6 @@ production:
   :timeout: 10
 :queues:
   - high
-  - default
   - ahoy
   - mailers
+  - default
