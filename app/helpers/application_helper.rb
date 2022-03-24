@@ -15,7 +15,7 @@ module ApplicationHelper
         "https://secure.gravatar.com/avatar/#{hash}.png?s=#{size}"
       end
     else
-      image_path("blank_user")
+      image_url("blank_user.png")
     end
   end
 end
