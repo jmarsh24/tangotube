@@ -11,6 +11,8 @@ class Follower < ApplicationRecord
 
   after_create :find_videos
 
+  after_save { videos.each(&:touch) }
+
   def find_videos
     Video.with_dancer_name_in_title(name).find_each do |video|
       video.update(follower: self)
