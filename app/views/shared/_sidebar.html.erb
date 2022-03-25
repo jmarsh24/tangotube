@@ -27,13 +27,11 @@
     <% end %>
     <sl-divider style="margin:16px 0"></sl-divider>
     <% if user_signed_in? %>
-      <% if false %>
-        <%= link_to root_path(watched: false) do %>
-          <sl-menu-item>
-            <%= fa_icon("compass") %>
-            <span>Explore</span>
-          </sl-menu-item>
-        <% end %>
+      <%= link_to root_path(watched: false) do %>
+        <sl-menu-item>
+          <%= fa_icon("compass") %>
+          <span>Explore</span>
+        </sl-menu-item>
       <% end %>
       <%= link_to root_path(watched: true) do %>
         <sl-menu-item>
