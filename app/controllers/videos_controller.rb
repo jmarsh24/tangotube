@@ -14,8 +14,32 @@ class VideosController < ApplicationController
 
     filter_array = []
 
-    filtering_params.to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
-      filter_array << [filter]
+    if filtering_params.include?("watched") || filtering_params.include?("liked")
+
+      if filtering_params.include?("watched")
+        if filtering_params["watched"] == true
+          filter_array << {  watched_by: current_user }
+        end
+        if filtering_params["watched"] == false
+        filter_array << { not_watched_by: current_user }
+        end
+      end
+
+      if filtering_params.include?("liked")
+        if filtering_params["liked"] == true
+          filter_array << { liked_by: current_user }
+        end
+
+        if filtering_params["false"] == true
+          filter_array << { disliked_by: current_user }
+        end
+      end
+    end
+
+    if filtering_params.except("watched").except("liked").present?
+      filtering_params.except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
+        filter_array << [filter]
+      end
     end
 
 
@@ -67,6 +91,7 @@ class VideosController < ApplicationController
     @yt_comments = @video.yt_comments
 
     @video.clicked!
+    MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
     ahoy.track("Video View", video_id: @video.id)
   end
 
