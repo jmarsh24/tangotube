@@ -36,6 +36,9 @@ Rails.application.routes.draw do
     member do
       patch "upvote", to: "videos#upvote"
       patch "downvote", to: "videos#downvote"
+      patch "bookmark", to: "videos#bookmark"
+      patch "complete", to: "videos#complete"
+      patch "watchlist", to: "videos#watchlist"
     end
   end
   resources :search_suggestions, only: :index do

@@ -3,7 +3,7 @@ class VideosController < ApplicationController
 
   before_action :authenticate_user!, only: %i[edit update]
   before_action :current_search, only: %i[index]
-  before_action :set_video, only: %i[show edit update destroy upvote downvote]
+  before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete]
 
   helper_method :sorting_params, :filtering_params
 
@@ -14,18 +14,10 @@ class VideosController < ApplicationController
 
     filter_array = []
 
-    if filtering_params.include?("watched") || filtering_params.include?("liked")
-      filter_array << Video.filter_videos(user_filtering_params, current_user)
-                                   .select(:id)
-                                   .as_json
-                                   .map { |hash| "id = #{hash['id']}" }
+    filtering_params.to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
+      filter_array << [filter]
     end
 
-    if filtering_params.except("watched").except("liked").present?
-      filtering_params.except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
-        filter_array << [filter]
-      end
-    end
 
     @video_search = Video.search(params[:query], { filter: filter_array,
                                                    facetsDistribution: ["genre", "leader", "follower", "orchestra", "year"] } )
@@ -41,57 +33,6 @@ class VideosController < ApplicationController
                     .has_follower
       @pagy, @videos = pagy(videos.order("random()"), items: 60)
     end
-
-
-    # @search =
-    #   Video::Search.for(
-    #     filtering_params: filtering_params,
-    #     sorting_params: sorting_params,
-    #     page: page,
-    #     user: current_user
-    #   )
-    # if sorting_params.empty? && page == 1 && @search.videos.size > 60 && (filtering_for_dancer? || dancer_name_match?)
-    #     @search_most_recent =
-    #     Video::Search.for(
-    #       filtering_params: filtering_params,
-  #       sorting_params: { direction: "desc", sort: "videos.performance_date" },
-    #       page: page,
-    #       user: current_user
-    #     )
-
-    #     @search_oldest =
-    #     Video::Search.for(
-    #       filtering_params: filtering_params,
-    #       sorting_params: { direction: "asc", sort: "videos.performance_date" },
-    #       page: page,
-    #       user: current_user
-    #     )
-
-    #     @search_most_popular =
-    #     Video::Search.for(
-    #       filtering_params: filtering_params,
-    #       sorting_params: { direction: "desc", sort: "videos.popularity" },
-    #       page: page,
-    #       user: current_user
-    #     )
-    #     if current_user.present?
-    #       @search_most_popular_new_to_you =
-    #       Video::Search.for(
-    #         filtering_params: filtering_params.merge(watched: "false"),
-    #         sorting_params: { direction: "desc", sort: "videos.popularity" },
-    #         page: page,
-    #         user: current_user
-    #       )
-
-    #       @search_most_popular_watched =
-    #       Video::Search.for(
-    #         filtering_params: filtering_params.merge(watched: "true"),
-    #         sorting_params: { direction: "desc", sort: "videos.popularity" },
-    #         page: page,
-    #         user: current_user
-    #       )
-    #     end
-    #   end
 
     respond_to do |format|
       format.html # GET
@@ -144,19 +85,46 @@ class VideosController < ApplicationController
   end
 
   def upvote
-    if current_user.voted_up_on? @video
-      @video.unvote_by current_user
+    if current_user.voted_up_on? @video, vote_scope: "like"
+      @video.unvote_by current_user, vote_scope: "like"
     else
-      @video.upvote_by current_user
+      @video.upvote_by current_user, vote_scope: "like"
     end
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   def downvote
-    if current_user.voted_down_on? @video
-      @video.unvote_by current_user
+    if current_user.voted_down_on? @video, vote_scope: "like"
+      @video.unvote_by current_user, vote_scope: "like"
     else
-      @video.downvote_by current_user
+      @video.downvote_by current_user, vote_scope: "like"
+    end
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+  end
+
+  def bookmark
+    if current_user.voted_up_on? @video, vote_scope: "bookmark"
+      @video.unvote_by current_user, vote_scope: "bookmark"
+    else
+      @video.upvote_by current_user, vote_scope: "bookmark"
+    end
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+  end
+
+  def complete
+    if current_user.voted_up_on? @video, vote_scope: "watchlist"
+      @video.unvote_by current_user, vote_scope: "watchlist"
+    else
+      @video.upvote_by current_user, vote_scope: "watchlist"
+    end
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+  end
+
+  def watchlist
+    if current_user.voted_down_on? @video, vote_scope: "watchlist"
+      @video.unvote_by current_user, vote_scope: "watchlist"
+    else
+      @video.downvote_by current_user, vote_scope: "watchlist"
     end
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
