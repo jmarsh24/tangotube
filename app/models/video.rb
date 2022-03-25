@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
   acts_as_votable
 
+
   include Filterable
   include MeiliSearch::Rails
   extend Pagy::Meilisearch
@@ -31,7 +32,13 @@ class Video < ApplicationRecord
 
     attribute(:event_title) { event.title if event.present? }
 
-    add_attribute :thumbnail_url
+    add_attribute :liked_by
+    add_attribute :disliked_by
+    add_attribute :watched_by
+    add_attribute :not_watched_by
+    add_attribute :bookmarked_by
+    add_attribute :watched_later_by
+
     attribute(:year) do
       performance_date.year
     end
@@ -43,6 +50,8 @@ class Video < ApplicationRecord
   PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
 
   validates :youtube_id, presence: true, uniqueness: true
+
+  after_touch :index!
 
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
@@ -229,5 +238,29 @@ class Video < ApplicationRecord
 
   def thumbnail_url
     "https://img.youtube.com/vi/#{youtube_id}/mqdefault.jpg"
+  end
+
+  def liked_by
+    votes_for.where(vote_scope: "like").where(vote_flag: true).voters.map(&:id)
+  end
+
+  def disliked_by
+    votes_for.where(vote_scope: "like").where(vote_flag: false).voters.map(&:id)
+  end
+
+  def watched_by
+    votes_for.where(vote_scope: "watchlist").where(vote_flag: true).voters.map(&:id)
+  end
+
+  def not_watched_by
+    votes_for.where(vote_scope: "watchlist").where(vote_flag: true).voters.map(&:id)
+  end
+
+  def bookmarked_by
+    votes_for.where(vote_scope: "bookmark").voters.map(&:id)
+  end
+
+  def watched_later_by
+    votes_for.where(vote_scope: "watchlist").where(vote_flag: false).voters.map(&:id)
   end
 end
