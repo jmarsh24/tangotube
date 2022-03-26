@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
+ActiveRecord::Schema[7.0].define(version: 2021_03_06_201925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -92,8 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
   create_table "channels", force: :cascade do |t|
     t.string "title"
     t.string "channel_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "thumbnail_url"
     t.boolean "imported", default: false
     t.integer "imported_videos_count", default: 0
@@ -112,8 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "tags"
     t.bigint "user_id", null: false
     t.bigint "video_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_clips_on_user_id"
     t.index ["video_id"], name: "index_clips_on_video_id"
   end
@@ -124,8 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.bigint "commentable_id"
     t.integer "parent_id"
     t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -134,14 +134,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "provider"
     t.string "uid"
     t.string "pid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["pid"], name: "index_deletion_requests_on_pid"
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "title"
     t.string "city"
     t.string "country"
@@ -156,8 +156,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
 
   create_table "followers", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "reviewed"
     t.string "nickname"
     t.string "first_name"
@@ -169,8 +169,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
 
   create_table "leaders", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "reviewed"
     t.string "nickname"
     t.string "first_name"
@@ -190,8 +190,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.integer "amount_refunded"
     t.jsonb "metadata"
     t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_charges_on_customer_id_and_processor_id", unique: true
     t.index ["subscription_id"], name: "index_pay_charges_on_subscription_id"
   end
@@ -204,8 +204,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.boolean "default"
     t.jsonb "data"
     t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
     t.index ["processor", "processor_id"], name: "index_pay_customers_on_processor_and_processor_id", unique: true
   end
@@ -217,8 +217,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "processor_id"
     t.boolean "default"
     t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["owner_type", "owner_id", "processor"], name: "index_pay_merchants_on_owner_type_and_owner_id_and_processor"
   end
 
@@ -228,8 +228,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.boolean "default"
     t.string "type"
     t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_payment_methods_on_customer_id_and_processor_id", unique: true
   end
 
@@ -245,8 +245,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.decimal "application_fee_percent", precision: 8, scale: 2
     t.jsonb "metadata"
     t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_subscriptions_on_customer_id_and_processor_id", unique: true
   end
 
@@ -254,8 +254,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "processor"
     t.string "event_type"
     t.jsonb "event"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "playlists", force: :cascade do |t|
@@ -268,8 +268,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.boolean "imported", default: false
     t.bigint "videos_id"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "reviewed", default: false
     t.index ["user_id"], name: "index_playlists_on_user_id"
     t.index ["videos_id"], name: "index_playlists_on_videos_id"
@@ -279,8 +279,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "genre"
     t.string "title"
     t.string "artist"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "artist_2"
     t.string "composer"
     t.string "author"
@@ -305,8 +305,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: nil
     t.datetime "remember_created_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.string "first_name"
     t.string "last_name"
@@ -324,8 +324,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
   end
 
   create_table "videos", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "title"
     t.string "youtube_id"
     t.bigint "leader_id"
@@ -407,8 +407,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.boolean "vote_flag"
     t.string "vote_scope"
     t.integer "vote_weight"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
@@ -424,8 +424,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_173149) do
     t.string "channel_id", null: false
     t.string "profile_image_url", null: false
     t.string "youtube_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["video_id"], name: "index_yt_comments_on_video_id"
   end
 
