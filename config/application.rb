@@ -16,7 +16,7 @@ module TangoLibrary
     config.exceptions_app = self.routes
     config.assets.paths << Rails.root.join('app', 'assets', 'img')
     config.autoload_paths += %W[#{config.root}/lib]
-    config.active_record.schema_format = :sql
+    config.active_record.schema_format = :ruby
     config.active_job.queue_adapter = :sidekiq
     # Configuration for the application, engines, and railties goes here.
     #
