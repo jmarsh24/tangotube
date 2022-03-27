@@ -1,11 +1,57 @@
 class Video < ApplicationRecord
   acts_as_votable
 
+
   include Filterable
+  include MeiliSearch::Rails
+  extend Pagy::Meilisearch
+  ActiveRecord_Relation.include Pagy::Meilisearch
+
+  meilisearch enqueue: true, per_environment: true, raise_on_failure: Rails.env.development? do
+    attribute(:leader) { leader.normalized_name if leader.present? }
+    attribute(:follower) { follower.normalized_name if follower.present? }
+
+    attribute :title,
+              :description,
+              :tags,
+              :youtube_song,
+              :youtube_artist,
+              :acr_cloud_artist_name,
+              :spotify_artist_name,
+              :spotify_track_name,
+              :youtube_id,
+              :popularity,
+              :hd
+
+    attribute(:channel_title) { channel.title if channel.present? }
+    attribute(:channel_id) { channel.channel_id if channel.present? }
+
+    attribute(:song_title) { song.title if song.present? }
+    attribute(:genre) { song.genre if song.present? }
+    attribute(:orchestra) { song.artist if song.present? }
+
+    attribute(:event_title) { event.title if event.present? }
+
+    add_attribute :liked_by
+    add_attribute :disliked_by
+    add_attribute :watched_by
+    add_attribute :not_watched_by
+    add_attribute :bookmarked_by
+    add_attribute :watched_later_by
+
+    attribute(:year) do
+      performance_date.year
+    end
+
+    filterable_attributes [:orchestra, :year, :genre, :leader, :follower, :hd, :id]
+    sortable_attributes [:view_count, :liked_count, :song_title, :orchestra, :channel_title, :year, :popularity]
+  end
 
   PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
 
   validates :youtube_id, presence: true, uniqueness: true
+
+  after_touch :index!
 
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
@@ -126,19 +172,7 @@ class Video < ApplicationRecord
     # Filters videos by the results from the materialized
     # full text search out of from VideosSearch
     def filter_by_query(query, _user)
-      where(id: VideosSearch.search(query_without_stop_words(query)).select(:video_id))
-    end
-
-    def stop_words
-      %w[and or the a an of to y e &]
-    end
-
-    def stop_words_regex
-      /\b(#{stop_words.map { |word| Regexp.escape(word) }.join('|')})\b/
-    end
-
-    def query_without_stop_words(query)
-      query.gsub(stop_words_regex, "").gsub("'", "").split.map(&:strip).join(" ")
+      search(query)
     end
 
     def most_viewed_videos_by_month
@@ -200,5 +234,33 @@ class Video < ApplicationRecord
     increment(:click_count)
     increment(:popularity)
     save!
+  end
+
+  def thumbnail_url
+    "https://img.youtube.com/vi/#{youtube_id}/mqdefault.jpg"
+  end
+
+  def liked_by
+    votes_for.where(vote_scope: "like").where(vote_flag: true).voters.map(&:id)
+  end
+
+  def disliked_by
+    votes_for.where(vote_scope: "like").where(vote_flag: false).voters.map(&:id)
+  end
+
+  def watched_by
+    votes_for.where(vote_scope: "watchlist").where(vote_flag: true).voters.map(&:id)
+  end
+
+  def not_watched_by
+    votes_for.where(vote_scope: "watchlist").where(vote_flag: true).voters.map(&:id)
+  end
+
+  def bookmarked_by
+    votes_for.where(vote_scope: "bookmark").voters.map(&:id)
+  end
+
+  def watched_later_by
+    votes_for.where(vote_scope: "watchlist").where(vote_flag: false).voters.map(&:id)
   end
 end

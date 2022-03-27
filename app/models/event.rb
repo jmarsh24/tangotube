@@ -5,6 +5,8 @@ class Event < ApplicationRecord
 
   has_many :videos, dependent: :nullify
 
+  after_save { videos.each(&:touch) }
+
   def search_title
     return if title.empty?
 

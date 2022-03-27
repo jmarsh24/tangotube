@@ -1,0 +1,10 @@
+<%= content_tag :div, id: "watchlist-#{video.id}" do %>
+  <%= button_to watchlist_video_path(video), method: :patch do %>
+    <% if current_user&.voted_down_on? video, vote_scope: 'watchlist' %>
+      <sl-icon id="complete-button" name="clock-fill" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+    <% else %>
+      <sl-icon id="complete-button" name="clock" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+    <% end %>
+    <span style="color: var(--sl-color-gray-800)">Watch Later</span>
+  <% end %>
+<% end %>

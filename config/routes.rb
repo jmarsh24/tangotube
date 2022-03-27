@@ -22,8 +22,38 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'videos#index'
+  resources :comments do
+    resources :comments, module: :comments
+  end
+  resources :channels, only: %i[index create]
+  resources :playlists, only: %i[index create]
+  resources :clips
+  resources :videos do
+    collection do
+      post :index
+    end
+    resources :comments, module: :videos
+    member do
+      patch "upvote", to: "videos#upvote"
+      patch "downvote", to: "videos#downvote"
+      patch "bookmark", to: "videos#bookmark"
+      patch "complete", to: "videos#complete"
+      patch "watchlist", to: "videos#watchlist"
+    end
+  end
+  resources :search_suggestions, only: :index do
+    collection do
+      post :search
+    end
+  end
 
+  resources :leaders, only: %i[index create]
+  resources :followers, only: %i[index create]
+  resources :events, only: %i[index create]
+  resources :songs, only: :index
+
+  root 'videos#index'
+  post '/' => 'videos#index'
   post 'savenew', to: 'users#savenew'
   get '/watch', to: 'videos#show'
   get '/privacy', to: 'static_pages#privacy'
@@ -33,27 +63,4 @@ Rails.application.routes.draw do
 
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
-
-  resources :comments do
-    resources :comments, module: :comments
-  end
-  resources :channels, only: %i[index create]
-  resources :playlists, only: %i[index create]
-  resources :clips
-  resources :videos do
-    resources :comments, module: :videos
-    member do
-      patch "upvote", to: "videos#upvote"
-      patch "downvote", to: "videos#downvote"
-    end
-  end
-  resources :search_suggestions, only: :index do
-    collection do
-      post :search
-    end
-  end
-  resources :leaders, only: %i[index create]
-  resources :followers, only: %i[index create]
-  resources :events, only: %i[index create]
-  resources :songs, only: :index
 end

@@ -3,61 +3,65 @@ class VideosController < ApplicationController
 
   before_action :authenticate_user!, only: %i[edit update]
   before_action :current_search, only: %i[index]
-  before_action :set_video, only: %i[show edit update destroy upvote downvote]
+  before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete]
 
   helper_method :sorting_params, :filtering_params
 
   def index
     @page = page
-    @search =
-      Video::Search.for(
-        filtering_params: filtering_params,
-        sorting_params: sorting_params,
-        page: page,
-        user: current_user
-      )
-    if sorting_params.empty? && page == 1 && @search.videos.size > 60 && (filtering_for_dancer? || dancer_name_match?)
-        @search_most_recent =
-        Video::Search.for(
-          filtering_params: filtering_params,
-          sorting_params: { direction: "desc", sort: "videos.performance_date" },
-          page: page,
-          user: current_user
-        )
+    @sort_column = sort_column
+    @sort_direction = sort_direction
 
-        @search_oldest =
-        Video::Search.for(
-          filtering_params: filtering_params,
-          sorting_params: { direction: "asc", sort: "videos.performance_date" },
-          page: page,
-          user: current_user
-        )
+    filter_array = []
 
-        @search_most_popular =
-        Video::Search.for(
-          filtering_params: filtering_params,
-          sorting_params: { direction: "desc", sort: "videos.popularity" },
-          page: page,
-          user: current_user
-        )
-        if current_user.present?
-          @search_most_popular_new_to_you =
-          Video::Search.for(
-            filtering_params: filtering_params.merge(watched: "false"),
-            sorting_params: { direction: "desc", sort: "videos.popularity" },
-            page: page,
-            user: current_user
-          )
+    if filtering_params.include?("watched") || filtering_params.include?("liked")
 
-          @search_most_popular_watched =
-          Video::Search.for(
-            filtering_params: filtering_params.merge(watched: "true"),
-            sorting_params: { direction: "desc", sort: "videos.popularity" },
-            page: page,
-            user: current_user
-          )
+      if filtering_params.include?("watched")
+        if filtering_params["watched"] == true
+          filter_array << {  watched_by: current_user }
+        end
+        if filtering_params["watched"] == false
+        filter_array << { not_watched_by: current_user }
         end
       end
+
+      if filtering_params.include?("liked")
+        if filtering_params["liked"] == true
+          filter_array << { liked_by: current_user }
+        end
+
+        if filtering_params["false"] == true
+          filter_array << { disliked_by: current_user }
+        end
+      end
+    end
+
+    if filtering_params.except("watched").except("liked").present?
+      filtering_params.except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
+        filter_array << [filter]
+      end
+    end
+
+
+    @video_search = Video.search(params[:query], { filter: filter_array,
+                                                   facetsDistribution: ["genre", "leader", "follower", "orchestra", "year"] } )
+
+    if filtering_params.present? || sorting_params.present?
+      videos =  Video.pagy_search(params[:query],
+                  filter: filter_array,
+                  sort: [ "#{sort_column}:#{sort_direction}" ])
+      @pagy, @videos = pagy_meilisearch(videos, items: 60)
+    else
+      videos = Video.most_viewed_videos_by_month
+                    .has_leader
+                    .has_follower
+      @pagy, @videos = pagy(videos.order("random()"), items: 60)
+    end
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
   end
 
   def edit
@@ -87,6 +91,7 @@ class VideosController < ApplicationController
     @yt_comments = @video.yt_comments
 
     @video.clicked!
+    MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
     ahoy.track("Video View", video_id: @video.id)
   end
 
@@ -105,19 +110,46 @@ class VideosController < ApplicationController
   end
 
   def upvote
-    if current_user.voted_up_on? @video
-      @video.unvote_by current_user
+    if current_user.voted_up_on? @video, vote_scope: "like"
+      @video.unvote_by current_user, vote_scope: "like"
     else
-      @video.upvote_by current_user
+      @video.upvote_by current_user, vote_scope: "like"
     end
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   def downvote
-    if current_user.voted_down_on? @video
-      @video.unvote_by current_user
+    if current_user.voted_down_on? @video, vote_scope: "like"
+      @video.unvote_by current_user, vote_scope: "like"
     else
-      @video.downvote_by current_user
+      @video.downvote_by current_user, vote_scope: "like"
+    end
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+  end
+
+  def bookmark
+    if current_user.voted_up_on? @video, vote_scope: "bookmark"
+      @video.unvote_by current_user, vote_scope: "bookmark"
+    else
+      @video.upvote_by current_user, vote_scope: "bookmark"
+    end
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+  end
+
+  def complete
+    if current_user.voted_up_on? @video, vote_scope: "watchlist"
+      @video.unvote_by current_user, vote_scope: "watchlist"
+    else
+      @video.upvote_by current_user, vote_scope: "watchlist"
+    end
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+  end
+
+  def watchlist
+    if current_user.voted_down_on? @video, vote_scope: "watchlist"
+      @video.unvote_by current_user, vote_scope: "watchlist"
+    else
+      @video.downvote_by current_user, vote_scope: "watchlist"
     end
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
@@ -227,6 +259,17 @@ class VideosController < ApplicationController
               :id)
   end
 
+  def user_filtering_params
+    params.permit(
+      :watched,
+      :liked,
+    )
+  end
+
+  def meilisearch_filtering_params
+    user_filtering_params
+  end
+
   def filtering_params
     params.permit(
       :leader,
@@ -235,13 +278,21 @@ class VideosController < ApplicationController
       :genre,
       :orchestra,
       :song_id,
-      :query,
       :hd,
       :event_id,
       :year,
       :watched,
-      :liked
+      :liked,
+      :id
     )
+  end
+
+  def sort_column
+    @sort_column ||= sorting_params[:sort] || "popularity"
+  end
+
+  def sort_direction
+    @sort_direction ||= sorting_params[:direction] || "desc"
   end
 
   def sorting_params

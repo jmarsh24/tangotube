@@ -1,14 +1,14 @@
-<div class="filters" id="filters" data-controller="filter">
+<div class="filters" id="filters">
   <sl-dropdown>
     <sl-button slot="trigger">
       Filter
     </sl-button>
     <sl-menu>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @search.genres, title: :genre, id: 'genre-filter', width: "200px" } %>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @search.leaders, title: :leader, id: 'leader-filter', width: "300px" } %>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @search.followers, title: :follower, id: 'follower-filter', width: "300px" } %>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @search.orchestras, title: :orchestra, id: 'orchestra-filter', width: "300px" } %>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @search.years, title: :year, id: 'year-filter', width: "200px" } %>
+      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @video_search.facets_distribution.fetch("genre").sort_by{|k, v| v}.reverse.map{ |k,v| ["#{k.titleize} (#{v})", "#{k.parameterize}"] }, title: :genre, id: 'genre-filter', width: "200px" } %>
+      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @video_search.facets_distribution.fetch("leader").sort_by{|k, v| v}.reverse.map{ |k,v| ["#{k.titleize} (#{v})", "#{k.parameterize}"] }, title: :leader, id: 'leader-filter', width: "300px" } %>
+      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @video_search.facets_distribution.fetch("follower").sort_by{|k, v| v}.reverse.map{ |k,v| ["#{k.titleize} (#{v})", "#{k.parameterize}"] }, title: :follower, id: 'follower-filter', width: "300px" } %>
+      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @video_search.facets_distribution.fetch("orchestra").sort_by{|k, v| v}.reverse.map{ |k,v| ["#{k.titleize} (#{v})", "#{k.parameterize}"] }, title: :orchestra, id: 'orchestra-filter', width: "300px" } %>
+      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @video_search.facets_distribution.fetch("year").sort_by{|k, v| v}.reverse.map{ |k,v| ["#{k.titleize} (#{v})", "#{k.parameterize}"] }, title: :year, id: 'year-filter', width: "200px" } %>
       <sl-menu-label style="margin-left: 28px;">Additional Filters</sl-menu-label>
       <sl-divider style="margin:12px 0;"></sl-divider>
       <% if current_user %>
@@ -53,8 +53,8 @@
                         class: "additional-filters-button",
                         data: { controller: "filter",
                         action: "filter#filter",
-                                "filter-hd-value": filtering_params["hd"] == "1" ? 0 : "1" } do %>
-        <% if filtering_params["hd"] == "1" %>
+                                "filter-hd-value": filtering_params["hd"] == "true" ? 0 : "true" } do %>
+        <% if filtering_params["hd"] == "true" %>
           <%= content_tag(:b, "HD") %>
           <%= fa_icon("times", class: "videos-sortable-icon") %>
         <% else %>
@@ -71,31 +71,31 @@
       <sl-menu-label style="margin-left: 28px;">Sort By</sl-menu-label>
       <sl-divider style="margin:12px 0;"></sl-divider>
       <sl-menu-item>
-        <%= sortable 'videos.performance_date', "desc",  "Recent First", @search %>
+        <%= sortable 'year', "desc",  "Recent First", @sort_column, @sort_direction %>
       </sl-menu-item>
       <sl-menu-item>
-        <%= sortable 'videos.performance_date', "asc", "Oldest First", @search %>
+        <%= sortable 'year', "asc", "Oldest First", @sort_column, @sort_direction %>
       </sl-menu-item>
       <sl-menu-item>
-        <%= sortable "videos.view_count", "desc",  "Most Viewed", @search %>
+        <%= sortable "view_count", "desc",  "Most Viewed", @sort_column, @sort_direction %>
       </sl-menu-item>
       <sl-menu-item>
-        <%= sortable "videos.popularity", "desc",  "Trending", @search %>
+        <%= sortable "popularity", "desc",  "Trending", @sort_column, @sort_direction %>
       </sl-menu-item>
       <sl-menu-item>
-        <%= sortable "videos.like_count", "desc",  "Most Liked", @search %>
+        <%= sortable "liked_count", "desc",  "Most Liked", @sort_column, @sort_direction %>
       </sl-menu-item>
       <sl-divider style="margin:12px 0"></sl-divider>
       <sl-menu-label style="margin-left: 28px;">Group By</sl-menu-label>
       <sl-divider style="margin:12px 0;"></sl-divider>
       <sl-menu-item>
-        <%= sortable 'songs.title', "asc", "Song", @search %>
+        <%= sortable 'song_title', "asc", "Song", @sort_column, @sort_direction %>
       </sl-menu-item>
       <sl-menu-item>
-        <%= sortable 'songs.last_name_search', "asc",  "Orchestra", @search %>
+        <%= sortable 'orchestra', "asc",  "Orchestra", @sort_column, @sort_direction %>
       </sl-menu-item>
       <sl-menu-item>
-        <%= sortable 'videos.channel_id', "asc",  "Channel", @search %>
+        <%= sortable 'channel_title', "asc",  "Channel", @sort_column, @sort_direction %>
       </sl-menu-item>
     </sl-menu>
   </sl-dropdown>
