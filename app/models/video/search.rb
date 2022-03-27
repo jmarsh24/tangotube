@@ -34,11 +34,11 @@ class Video::Search
   def videos
     @videos =
       Video
-        .not_hidden
+        # .not_hidden
         .includes(:leader, :follower, :channel, :song, :event)
         .order(ordering_params)
         .filter_videos(@filtering_params, @user)
-        .where.not(view_count: nil)
+        # .where.not(view_count: nil)
         return @videos unless @filtering_params.empty? && @sorting_params.empty?
     @videos.most_viewed_videos_by_month
            .has_leader
@@ -109,7 +109,7 @@ class Video::Search
     counts =
       Video
         .filter_videos(@filtering_params, @user)
-        .not_hidden
+        # .not_hidden
         .select(query)
         .group("facet_value")
         .order("facet_value DESC")
@@ -124,7 +124,7 @@ class Video::Search
     counts =
       Video
         .filter_videos(@filtering_params, @user)
-        .not_hidden
+        # .not_hidden
         .joins(model)
         .select(query)
         .group(table_column)
@@ -142,7 +142,7 @@ class Video::Search
     counts =
       Video
         .filter_videos(@filtering_params, @user)
-        .not_hidden
+        # .not_hidden
         .joins(model)
         .select(query)
         .group(table_column, table_column_id)

@@ -84,7 +84,7 @@ export default class extends Controller {
       const replaceContainers = [
         "filters",
         "videos",
-        "load-more-container",
+        "next_link",
         "videos-header",
       ];
 

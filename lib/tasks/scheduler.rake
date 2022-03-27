@@ -45,13 +45,6 @@ task import_all_comments: :environment do
   end
 end
 
-namespace :refreshers do
-  desc "Refresh materialized view for Videos"
-  task videos_searches: :environment do
-    VideosSearch.refresh
-  end
-end
-
 namespace :export do
   desc "Export videos"
   task :videos_to_seeds => :environment do

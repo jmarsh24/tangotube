@@ -4,6 +4,8 @@ class Channel < ApplicationRecord
 
   has_many :videos, dependent: :destroy
 
+  after_save { videos.each(&:touch) }
+
   validates :channel_id, presence: true, uniqueness: true
 
   before_save :update_imported, if: :count_changed?

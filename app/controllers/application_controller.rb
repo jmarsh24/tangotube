@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :set_total_videos_count
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  include Pagy::Backend
   def default_url_options
     { host: ENV["DOMAIN"] || "localhost:3000" }
   end

@@ -1,0 +1,12 @@
+<%= turbo_stream.append "video-section" do %>
+  <%= render partial: "video", collection: @videos %>
+<% end %>
+<%= turbo_stream.update "next_link" do %>
+  <% if @pagy.next %>
+    <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
+      <sl-button type="submit" data-controller= "autoclick">
+        Load More
+      </sl-button>
+    </form>
+  <% end %>
+<% end %>
