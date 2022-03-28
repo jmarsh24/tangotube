@@ -134,6 +134,9 @@ module VideosHelper
     genre_array = []
 
     filtering_params.each do |key, value|
+      if key == "query"
+        words_array << "\"#{value}\""
+      end
       if key == "liked" && value == "true"
         user_attribute_array << "Most Liked"
       end
