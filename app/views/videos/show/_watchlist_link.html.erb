@@ -1,10 +1,29 @@
-<%= content_tag :div, id: "watchlist-#{video.id}" do %>
-  <%= button_to watchlist_video_path(video), method: :patch do %>
-    <% if current_user&.voted_down_on? video, vote_scope: 'watchlist' %>
-      <sl-icon id="complete-button" name="clock-fill" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
-    <% else %>
-      <sl-icon id="complete-button" name="clock" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
-    <% end %>
-    <span style="color: var(--sl-color-gray-800)">Watch Later</span>
-  <% end %>
+<div
+<% unless user_signed_in? %>
+  data-controller="popper"
 <% end %>
+>
+  <%= content_tag "div", id: "upvote-#{video.id}",
+                        data: { "popper-target": "element",
+                        action: "click->popper#show click:outside->popper#hide" } do %>
+    <%= content_tag :div, id: "watchlist-#{video.id}" do %>
+      <%= button_to watchlist_video_path(video), method: :patch do %>
+        <% if current_user&.voted_down_on? video, vote_scope: 'watchlist' %>
+          <sl-icon id="complete-button" name="clock-fill" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+        <% else %>
+          <sl-icon id="complete-button" name="clock" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+        <% end %>
+        <span style="color: var(--sl-color-gray-800)">Watch Later</span>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div id="tooltip" role="tooltip" data-popper-target="tooltip">
+    Want to watch this video later? <br>
+    Sign in to add it to a playlist <br>
+    <br>
+    <div style="margin-bottom: 16px; font-size: 16px;">
+      <%= link_to "Sign up",  new_user_registration_path, 'data-turbo-frame': "_top" %> or <%= link_to "Login", new_user_session_path, 'data-turbo-frame': "_top" %>
+    </div>
+    <div id="arrow" data-popper-arrow></div>
+  </div>
+</div>
