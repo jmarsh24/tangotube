@@ -43,22 +43,6 @@ class Video < ApplicationRecord
       performance_date.year
     end
 
-    ranking_rules [
-      "proximity",
-      "typo",
-      "words",
-      "leader",
-      "follower",
-      "song_title",
-      "song_artist",
-      "title",
-      "description",
-      "tags",
-      "sort",
-      "exactness",
-      "year:desc"
-    ]
-
     filterable_attributes [:orchestra, :year, :genre, :leader, :follower, :hd, :id]
     sortable_attributes [:view_count, :liked_count, :song_title, :orchestra, :channel_title, :year, :popularity]
   end
