@@ -18,9 +18,7 @@
       <% else %>
         <sl-icon id="upvote-button" name="hand-thumbs-up" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
       <% end %>
-      <%= content_tag "div", id: "like-count-#{video.id}", style: "display: flex; justify-content: center; align-items: center; font-size: 14px;  color: var(--sl-color-gray-800);" do %>
-        <%= video.cached_scoped_like_votes_score %>
-      <% end %>
+      <span style="color: var(--sl-color-gray-800)">Like</span>
     <% end %>
   <% end %>
   <div id="tooltip" role="tooltip" data-popper-target="tooltip">
