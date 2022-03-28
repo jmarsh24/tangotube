@@ -28,7 +28,7 @@ class Video < ApplicationRecord
 
     attribute(:song_title) { song.title if song.present? }
     attribute(:genre) { song.genre if song.present? }
-    attribute(:orchestra) { song.artist if song.present? }
+    attribute(:orchestra) { song.artist.parameterize.split("-").join(" ") if song.present? }
 
     attribute(:event_title) { event.title if event.present? }
 
