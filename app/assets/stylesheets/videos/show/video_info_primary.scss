@@ -122,10 +122,15 @@
 
   .like-buttons {
     display: flex;
-    align-items: flex-end;
-    gap: 5px;
+    align-items: flex-start;
+    gap: 24px;
     font-size: 14px;
+    overflow-x: auto;
     color: var(--sl-color-gray-800);
+
+    button {
+      padding: 0px;
+    }
   }
 
   .youtube-controls {
@@ -172,9 +177,9 @@
 }
 
 @media (max-width: 500px) {
-  #downvote-button {
-    span {
-      display: none;
+  .like-buttons {
+    button {
+      flex-direction: column;
     }
   }
 }
