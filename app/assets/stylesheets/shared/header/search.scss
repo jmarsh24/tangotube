@@ -44,6 +44,9 @@
     transition: border 100ms ease-in;
     font-size: 14px;
     background-color: var(--sl-color-neutral-0);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 
     &:focus {
       outline: none;
