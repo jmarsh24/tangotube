@@ -3,7 +3,6 @@ source "https://rubygems.org"
 ruby "3.0.3"
 
 # gems that ship with rails...........................................................
-gem "barnes"
 gem "bootsnap", require: false
 gem "jsbundling-rails"
 gem "rails", "~> 7.0.2.2"
@@ -19,7 +18,7 @@ gem "turbo-rails"
 gem "acts_as_votable"
 gem "ahoy_matey"
 gem "dartsass-rails"
-gem "deepl-rb", require: 'deepl'
+gem "deepl-rb", require: false
 gem "devise"
 gem "esbuild-rails"
 gem "faraday"
