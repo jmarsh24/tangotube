@@ -36,8 +36,8 @@ class VideosController < ApplicationController
       end
     end
 
-    if filtering_params.except("watched").except("liked").present?
-      filtering_params.except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
+    if filtering_params.except("query").except("watched").except("liked").present?
+      filtering_params.except("query").except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
         filter_array << [filter]
       end
     end
@@ -261,17 +261,6 @@ class VideosController < ApplicationController
               :id)
   end
 
-  def user_filtering_params
-    params.permit(
-      :watched,
-      :liked,
-    )
-  end
-
-  def meilisearch_filtering_params
-    user_filtering_params
-  end
-
   def filtering_params
     params.permit(
       :leader,
@@ -285,7 +274,8 @@ class VideosController < ApplicationController
       :year,
       :watched,
       :liked,
-      :id
+      :id,
+      :query
     )
   end
 

@@ -1,15 +1,12 @@
 class Video < ApplicationRecord
   acts_as_votable
 
-
   include Filterable
   include MeiliSearch::Rails
   extend Pagy::Meilisearch
   ActiveRecord_Relation.include Pagy::Meilisearch
 
   meilisearch enqueue: true, per_environment: true, raise_on_failure: Rails.env.development? do
-    attribute(:leader) { leader.normalized_name if leader.present? }
-    attribute(:follower) { follower.normalized_name if follower.present? }
 
     attribute :title,
               :description,
@@ -22,6 +19,9 @@ class Video < ApplicationRecord
               :youtube_id,
               :popularity,
               :hd
+
+    attribute(:leader) { leader.normalized_name if leader.present? }
+    attribute(:follower) { follower.normalized_name if follower.present? }
 
     attribute(:channel_title) { channel.title if channel.present? }
     attribute(:channel_id) { channel.channel_id if channel.present? }
@@ -42,6 +42,22 @@ class Video < ApplicationRecord
     attribute(:year) do
       performance_date.year
     end
+
+    ranking_rules [
+      "proximity",
+      "typo",
+      "words",
+      "leader",
+      "follower",
+      "song_title",
+      "song_artist",
+      "title",
+      "description",
+      "tags",
+      "sort",
+      "exactness",
+      "year:desc"
+    ]
 
     filterable_attributes [:orchestra, :year, :genre, :leader, :follower, :hd, :id]
     sortable_attributes [:view_count, :liked_count, :song_title, :orchestra, :channel_title, :year, :popularity]
