@@ -91,7 +91,9 @@ class VideosController < ApplicationController
     @yt_comments = @video.yt_comments
 
     @video.clicked!
-    MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
+    if user_signed_in?
+      MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
+    end
     ahoy.track("Video View", video_id: @video.id)
   end
 
