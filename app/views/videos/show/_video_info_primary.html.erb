@@ -41,19 +41,20 @@
     >
     <div class="youtube-controls">
       <%= render "videos/show/vote" %>
-      <div>
-        <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", style: "width: 60px;", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <div>
+          <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", style: "width: 60px;", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",
                                                               "clipboard-target": "startTime",
                                                               "youtube-target": "startTime" } %>
-      </div>
-      <span class="spacer">-</span>
-      <div>
-        <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", style: "width: 60px;", data: { action: "keyup->clipboard#changeValue input->youtube#updateEndTime",
+        </div>
+        <span class="spacer">-</span>
+        <div>
+          <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", style: "width: 60px;", data: { action: "keyup->clipboard#changeValue input->youtube#updateEndTime",
                                                               "clipboard-target": "endTime",
                                                               "youtube-target": "endTime" } %>
-      </div>
-      <span class="spacer">:</span>
-      <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25",
+        </div>
+        <span class="spacer">:</span>
+        <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25",
                                                              ".5x" => "0.50",
                                                             ".75x" => "0.75",
                                                               "1x" => "1.00",
@@ -64,6 +65,7 @@
                                                                  data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackSpeed",
                                                                          "clipboard-target": "playbackSpeed",
                                                                          "youtube-target": "playbackSpeed" } %>
+      </div>
     </div>
     <div class="copy-to-clipboard">
       <%= text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}",
