@@ -43,10 +43,6 @@
             <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
           </div>
-          <div class="field">
-            <%= f.label :current_password %>
-            <%= f.password_field :current_password, autocomplete: "current-password", class: "input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;"  %>
-          </div>
           <div class="actions" style="display: flex; flex-direction: column; gap: 6px; align-items: center;">
             <%= f.submit "Update", class: "button button--submit button--small button--block" %>
             <%= link_to "Cancel", root_path, style: "margin: 10px 0;" %>
