@@ -47,12 +47,16 @@ class VideosController < ApplicationController
                                                    facetsDistribution: ["genre", "leader", "follower", "orchestra", "year"] } )
 
     if filtering_params.present? || sorting_params.present?
-      videos =  Video.pagy_search(params[:query],
-                  filter: filter_array,
-                  sort: [ "#{sort_column}:#{sort_direction}" ])
+      videos =  Video.includes(:song, :leader, :follower, :event, :channel)
+                      .references(:song, :leader, :follower, :event, :channel)
+                      .pagy_search(params[:query],
+                      filter: filter_array,
+                      sort: [ "#{sort_column}:#{sort_direction}" ])
       @pagy, @videos = pagy_meilisearch(videos, items: 60)
     else
-      videos = Video.most_viewed_videos_by_month
+      videos = Video.includes(:song, :leader, :follower, :event, :channel)
+                    .references(:song, :leader, :follower, :event, :channel)
+                    .most_viewed_videos_by_month
                     .has_leader
                     .has_follower
       @pagy, @videos = pagy(videos.order("random()"), items: 60)
@@ -88,7 +92,7 @@ class VideosController < ApplicationController
       else
         @video.comments.includes([:commentable]).where(parent_id: nil)
       end
-    @yt_comments = @video.yt_comments
+    @yt_comments = @video.yt_comments.limit(10)
 
     @video.clicked!
     if user_signed_in?
@@ -160,12 +164,12 @@ class VideosController < ApplicationController
 
   def set_video
     @video = Video
-              .includes(:song, :leader, :follower, :event, :channel)
-              .references(:song, :leader, :follower, :event, :channel)
+              .includes(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
+              .references(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
               .find_by(youtube_id: show_params[:v]) if show_params[:v]
     @video = Video
-              .includes(:song, :leader, :follower, :event, :channel)
-              .references(:song, :leader, :follower, :event, :channel)
+              .includes(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
+              .references(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
               .find(show_params[:id]) if show_params[:id]
   end
 
