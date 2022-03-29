@@ -18,7 +18,9 @@ class Video < ApplicationRecord
               :spotify_track_name,
               :youtube_id,
               :popularity,
-              :hd
+              :hd,
+              :view_count,
+              :like_count
 
     attribute(:leader) { leader.normalized_name if leader.present? }
     attribute(:follower) { follower.normalized_name if follower.present? }
@@ -44,7 +46,7 @@ class Video < ApplicationRecord
     end
 
     filterable_attributes [:orchestra, :year, :genre, :leader, :follower, :hd, :id]
-    sortable_attributes [:view_count, :liked_count, :song_title, :orchestra, :channel_title, :year, :popularity]
+    sortable_attributes [:view_count, :like_count, :song_title, :orchestra, :channel_title, :year, :popularity]
   end
 
   PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze

@@ -1,4 +1,4 @@
-# fly.toml file generated for tangotube-meilisearch on 2022-03-27T12:58:39+02:00
+# fly.toml file generated for tangotube-meilisearch on 2022-03-29T10:58:43+02:00
 
 app = "tangotube-meilisearch"
 
@@ -14,7 +14,7 @@ processes = []
 
 [[services]]
   http_checks = []
-  internal_port = 8080
+  internal_port = 7700
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
@@ -38,3 +38,7 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+[mounts]
+source="tangotube_meilisearch_data"
+destination="/data"
