@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-ARG RUBY_VERSION=3.0.3
+ARG RUBY_VERSION=2.7.3
 ARG VARIANT=jemalloc-slim
 FROM quay.io/evl.ms/fullstaq-ruby:${RUBY_VERSION}-${VARIANT} as base
 
@@ -91,3 +91,5 @@ ENV PORT 8080
 ARG SERVER_COMMAND="bundle exec puma -C config/puma.rb"
 ENV SERVER_COMMAND ${SERVER_COMMAND}
 CMD ${SERVER_COMMAND}
+
+

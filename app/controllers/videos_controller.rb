@@ -96,7 +96,7 @@ class VideosController < ApplicationController
 
     @video.clicked!
     if user_signed_in?
-      # MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
+      MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
   end
