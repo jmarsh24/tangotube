@@ -45,7 +45,8 @@ class Video < ApplicationRecord
       performance_date.year
     end
 
-    filterable_attributes [:orchestra, :year, :genre, :leader, :follower, :hd, :id]
+    filterable_attributes [:orchestra, :year, :genre, :leader, :follower, :hd, :id, :watched_by, :not_watched_by, :bookmarked_by, :watched_later_by,
+:liked_by, :disliked_by]
     sortable_attributes [:view_count, :like_count, :song_title, :orchestra, :channel_title, :year, :popularity]
   end
 
@@ -255,7 +256,7 @@ class Video < ApplicationRecord
   end
 
   def not_watched_by
-    votes_for.where(vote_scope: "watchlist").where(vote_flag: true).voters.map(&:id)
+    votes_for.where(vote_scope: "watchlist").where(vote_flag: false).voters.map(&:id)
   end
 
   def bookmarked_by
