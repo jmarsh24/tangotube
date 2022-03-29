@@ -8,4 +8,5 @@ production:
   - high
   - ahoy
   - mailers
+  - meilisearch
   - default

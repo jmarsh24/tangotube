@@ -19,7 +19,7 @@ class VideosController < ApplicationController
         filter_array << "watched_by = #{current_user.id}"
       end
       if filtering_params["watched"] == "false"
-        filter_array << "not_watched_by = #{current_user.id}"
+        filter_array << "watched_by != #{current_user.id}"
       end
     end
 
@@ -28,7 +28,7 @@ class VideosController < ApplicationController
         filter_array << "liked_by = #{current_user.id}"
       end
 
-      if filtering_params["false"] == "false"
+      if filtering_params["liked"] == "false"
         filter_array << "disliked_by = #{current_user.id}"
       end
     end
