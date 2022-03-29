@@ -18,7 +18,7 @@ class Video::YoutubeImport::Video
   end
 
   def import
-    @video.update(to_video_params)
+    @video.update(video_params)
     if @video.leader.nil? || @video.follower.nil?
       @video.grep_title_leader_follower
     end
@@ -32,7 +32,7 @@ class Video::YoutubeImport::Video
   end
 
   def update
-    @video.update(to_video_params)
+    @video.update(update_video_params)
     if @video.leader.nil? || @video.follower.nil?
       @video.grep_title_leader_follower
     end
@@ -60,7 +60,11 @@ class Video::YoutubeImport::Video
     Yt::Video.new id: @youtube_id
   end
 
-  def to_video_params
+  def video_params
+    base_params.merge(count_params).merge(performance_date_params).merge(channel: channel)
+  end
+
+  def update_video_params
     base_params.merge(count_params).merge(channel: channel)
   end
 
@@ -72,11 +76,15 @@ class Video::YoutubeImport::Video
       upload_date: @youtube_video.published_at,
       duration: @youtube_video.duration,
       tags: @youtube_video.tags,
-      hd: @youtube_video.hd?,
-      performance_date: @youtube_video.published_at if @video.performance_date.nil?
+      hd: @youtube_video.hd?
     }
   end
 
+  def performance_date_params
+    {
+      performance_date: @youtube_video.published_at
+    }
+  end
 
   def count_params
     {
