@@ -14,25 +14,22 @@ class VideosController < ApplicationController
 
     filter_array = []
 
-    if filtering_params.include?("watched") || filtering_params.include?("liked")
+    if filtering_params.include?("watched")
+      if filtering_params["watched"] == "true"
+        filter_array << "watched_by = #{current_user.id}"
+      end
+      if filtering_params["watched"] == "false"
+        filter_array << "not_watched_by = #{current_user.id}"
+      end
+    end
 
-      if filtering_params.include?("watched")
-        if filtering_params["watched"] == true
-          filter_array << {  watched_by: current_user }
-        end
-        if filtering_params["watched"] == false
-        filter_array << { not_watched_by: current_user }
-        end
+    if filtering_params.include?("liked")
+      if filtering_params["liked"] == "true"
+        filter_array << "liked_by = #{current_user.id}"
       end
 
-      if filtering_params.include?("liked")
-        if filtering_params["liked"] == true
-          filter_array << { liked_by: current_user }
-        end
-
-        if filtering_params["false"] == true
-          filter_array << { disliked_by: current_user }
-        end
+      if filtering_params["false"] == "false"
+        filter_array << "disliked_by = #{current_user.id}"
       end
     end
 
