@@ -45,9 +45,26 @@ class Video < ApplicationRecord
       performance_date.year
     end
 
-    filterable_attributes [:orchestra, :year, :genre, :leader, :follower, :hd, :id, :watched_by, :not_watched_by, :bookmarked_by, :watched_later_by,
-:liked_by, :disliked_by]
-    sortable_attributes [:view_count, :like_count, :song_title, :orchestra, :channel_title, :year, :popularity]
+    filterable_attributes [ :orchestra,
+                            :year,
+                            :genre,
+                            :leader,
+                            :follower,
+                            :hd,
+                            :id,
+                            :watched_by,
+                            :not_watched_by,
+                            :bookmarked_by,
+                            :watched_later_by,
+                            :liked_by,
+                            :disliked_by ]
+    sortable_attributes [ :view_count,
+                          :like_count,
+                          :song_title,
+                          :orchestra,
+                          :channel_title,
+                          :year,
+                          :popularity ]
   end
 
   PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
