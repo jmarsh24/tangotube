@@ -18,7 +18,7 @@ gem "turbo-rails"
 gem "acts_as_votable"
 gem "ahoy_matey"
 gem "dartsass-rails"
-gem "deepl-rb", require: true
+gem "deepl-rb", require: 'deepl'
 gem "devise"
 gem "esbuild-rails"
 gem "faraday"
@@ -64,6 +64,8 @@ group :development do
   gem "rubocop-rspec"
   gem "solargraph"
   gem "web-console"
+  gem "foreman"
+  gem "htmlbeautifier"
 end
 
 group :test do

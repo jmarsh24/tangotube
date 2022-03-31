@@ -141,6 +141,7 @@ GEM
     ffi (1.15.5)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
+    foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashdiff (1.0.1)
@@ -149,6 +150,7 @@ GEM
       rails (>= 6.0.0)
       stimulus-rails
       turbo-rails
+    htmlbeautifier (1.4.1)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
     httparty (0.20.0)
@@ -470,8 +472,10 @@ DEPENDENCIES
   faraday
   faraday-multipart
   font-awesome-rails
+  foreman
   hashie
   hotwire-rails
+  htmlbeautifier
   image_processing
   jsbundling-rails
   letter_opener
