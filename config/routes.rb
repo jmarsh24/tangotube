@@ -27,11 +27,12 @@ Rails.application.routes.draw do
   end
   resources :channels, only: %i[index create]
   resources :playlists, only: %i[index create]
-  resources :clips
+  resources :clips, only: %i[index]
   resources :videos do
     collection do
       post :index
     end
+    resources :clips
     resources :comments, module: :videos
     member do
       patch "upvote", to: "videos#upvote"

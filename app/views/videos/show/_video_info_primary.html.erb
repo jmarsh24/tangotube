@@ -34,38 +34,32 @@
     </div>
   </div>
   <div class="share-container"
-    data-controller="clipboard"
+      data-controller="clipboard"
     data-clipboard-success-content="Copied!"
     data-clipboard-video-id="<%= @video.youtube_id %>"
     data-clipboard-root-url="<%= @root_url %>"
     >
     <div class="youtube-controls">
       <%= render "videos/show/vote" %>
-      <div style="display: flex; gap: 10px; align-items: center;">
-        <div>
-          <%= text_field_tag 'start_time_value', @start_value.present? ? Time.at(@start_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", style: "width: 60px;", data: { action: "keyup->clipboard#changeValue input->youtube#updateStartTime",
-                                                              "clipboard-target": "startTime",
-                                                              "youtube-target": "startTime" } %>
+      <sl-dropdown stayOpenOnSelect containingElement hoist placement="top-end">
+        <div slot="trigger" class="button--clip">
+          <sl-icon name="scissors" style="font-size: 24px;"></sl-icon> <span>Clip</span>
         </div>
-        <span class="spacer">-</span>
-        <div>
-          <%= text_field_tag 'end_time_value', @end_value.present? ? Time.at(@end_value.to_i).utc.strftime("%_M:%S") : "", placeholder: '0:00', class: "input", style: "width: 60px;", data: { action: "keyup->clipboard#changeValue input->youtube#updateEndTime",
-                                                              "clipboard-target": "endTime",
-                                                              "youtube-target": "endTime" } %>
-        </div>
-        <span class="spacer">:</span>
-        <%= select_tag :playback_speed, options_for_select( { ".25x" => "0.25",
-                                                             ".5x" => "0.50",
-                                                            ".75x" => "0.75",
-                                                              "1x" => "1.00",
-                                                              "1.25x" => "1.25",
-                                                              "1.5x" => "1.50",
-                                                              "1.75x" => "1.75",
-                                                              "2x" => "2.00" }, sprintf('%.2f', @playback_speed.to_i)),
-                                                                 data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackSpeed",
-                                                                         "clipboard-target": "playbackSpeed",
-                                                                         "youtube-target": "playbackSpeed" } %>
-      </div>
+        <sl-menu>
+          <%= turbo_frame_tag dom_id(@clip) do %>
+            <div style="padding: 10px;">
+              <%= render "clips/form", clip: @clip %>
+            </div>
+          <% end %>
+        </sl-menu>
+      </sl-dropdown>
+      <% if false %>
+        <% if @video.clips.present? %>
+          <sl-button href="<%= video_clips_path([@video, @clip]) %>" style="display: flex; flex-direction: column">
+            <sl-icon name="globe"></sl-icon>  View Clips
+          </sl-button>
+        <% end %>
+      <% end %>
     </div>
     <div class="copy-to-clipboard">
       <%= text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}",
@@ -77,7 +71,8 @@
                         class: "copy-to-clipboard__button button",
                         data: { "clipboard-target": "button",
                         action: "click->clipboard#copy"} do %>
-        <%= fa_icon 'share', text: "Share" %>
+        <sl-icon name="share" style="font-size: 20px"></sl-icon>
+        Share
       <% end %>
     </div>
   </div>
