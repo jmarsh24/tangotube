@@ -80,6 +80,7 @@ class Video < ApplicationRecord
   belongs_to :event, optional: true, counter_cache: true
   has_many :comments, as: :commentable
   has_many :yt_comments, dependent: :destroy
+  has_many :clips
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
