@@ -135,7 +135,6 @@
 
   .youtube-controls {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
@@ -174,6 +173,17 @@
       font-style: bold;
     }
   }
+
+  .button--clip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 @media (max-width: 500px) {
@@ -183,7 +193,15 @@
     }
   }
 
+  .button--clip {
+    flex-direction: column;
+  }
+
   #youtube-comments {
+    display: none;
+  }
+
+  #bookmark_button {
     display: none;
   }
 }

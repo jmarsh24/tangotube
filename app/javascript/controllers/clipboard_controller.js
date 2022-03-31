@@ -1,13 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = [
-    "button",
-    "startTime",
-    "endTime",
-    "playbackSpeed",
-    "source",
-  ];
+  static targets = ["button", "startTime", "endTime", "playbackRate", "source"];
   static values = {
     source: String,
     originalText: String,
@@ -16,7 +10,7 @@ export default class extends Controller {
     endTime: Number,
     url: String,
     rootUrl: String,
-    playbackSpeed: Number,
+    playbackRate: Number,
   };
 
   initialize() {
@@ -25,7 +19,7 @@ export default class extends Controller {
 
   connect() {
     this.originalText = this.buttonTarget.innerHTML;
-    this.playbackSpeedValue = this.playbackSpeedTarget.value;
+    this.playbackRateValue = this.playbackRateTarget.value;
     this.startTimeValue = this.parseTime(this.startTimeTarget.value);
     this.endTimeValue = this.parseTime(this.endTimeTarget.value);
     this.urlValueUpdate();
@@ -64,29 +58,29 @@ export default class extends Controller {
     if (
       (this.startTimeValue > 0) &
       (this.endTimeValue > 0) &
-      (this.playbackSpeedValue != 1) &
+      (this.playbackRateValue != 1) &
       (this.startTimeValue < this.endTimeValue)
     ) {
-      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&end=${this.endTimeValue}&speed=${this.playbackSpeedValue}`;
+      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&end=${this.endTimeValue}&speed=${this.playbackRateValue}`;
     } else if (
       (this.startTimeValue > 0) &
       (this.endTimeValue > 0) &
-      (this.playbackSpeedValue == 1) &
+      (this.playbackRateValue == 1) &
       (this.startTimeValue < this.endTimeValue)
     ) {
       this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&end=${this.endTimeValue}`;
     } else if (
       (this.startTimeValue > 0) &
       (this.endTimeValue == 0) &
-      (this.playbackSpeedValue != 1)
+      (this.playbackRateValue != 1)
     ) {
-      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&speed=${this.playbackSpeedValue}`;
+      this.urlValue = `${this.urlValue}&start=${this.startTimeValue}&speed=${this.playbackRateValue}`;
     } else if (
       (this.startTimeValue == 0) &
       (this.endTimeValue == 0) &
-      (this.playbackSpeedValue != 1)
+      (this.playbackRateValue != 1)
     ) {
-      this.urlValue = `${this.urlValue}&speed=${this.playbackSpeedValue}`;
+      this.urlValue = `${this.urlValue}&speed=${this.playbackRateValue}`;
     } else if (this.startTimeValue > 0) {
       this.urlValue = `${this.urlValue}&start=${this.startTimeValue}`;
     }
@@ -94,7 +88,7 @@ export default class extends Controller {
   }
 
   changeValue() {
-    this.playbackSpeedValue = this.playbackSpeedTarget.value;
+    this.playbackRateValue = this.playbackRateTarget.value;
     this.startTimeValue = this.parseTime(this.startTimeTarget.value);
     this.endTimeValue = this.parseTime(this.endTimeTarget.value);
     this.urlValueUpdate();
@@ -104,7 +98,7 @@ export default class extends Controller {
       "",
       `watch?v=${this.data.get("videoId")}&start=${this.startTimeValue}&end=${
         this.endTimeValue
-      }&speed=${this.playbackSpeedValue}`
+      }&speed=${this.playbackRateValue}`
     );
   }
 }
