@@ -82,6 +82,7 @@ class VideosController < ApplicationController
     @end_value = params[:end]
     @root_url = root_url
     @playback_speed = params[:speed] || "1"
+    @clip = Clip.new
 
     @comments =
       if params[:comment]

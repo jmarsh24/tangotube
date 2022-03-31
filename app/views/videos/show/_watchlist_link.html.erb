@@ -2,6 +2,7 @@
 <% unless user_signed_in? %>
   data-controller="popper"
 <% end %>
+id="watchlist_button"
 >
   <%= content_tag "div", id: "upvote-#{video.id}",
                         data: { "popper-target": "element",

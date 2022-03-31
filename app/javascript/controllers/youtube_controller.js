@@ -1,16 +1,18 @@
 import { Controller } from "@hotwired/stimulus";
 import YouTubePlayer from "youtube-player";
+import { useHover } from "stimulus-use";
 
 export default class extends Controller {
   static values = {
     videoId: String,
     startSeconds: Number,
     endSeconds: Number,
-    playbackSpeed: Number,
+    playbackRate: { type: Number, default: 1 },
   };
-  static targets = ["frame", "playbackSpeed", "startTime", "endTime"];
+  static targets = ["frame", "playbackRate", "startTime", "endTime"];
 
   connect() {
+    useHover(this, { element: this.element });
     var playerConfig = {
       videoId: this.videoIdValue,
       playerVars: {
@@ -34,10 +36,10 @@ export default class extends Controller {
       this.element.setAttribute("data-state", -1);
     });
 
-    player.setPlaybackRate(this.playbackSpeedValue);
+    player.setPlaybackRate(this.playbackRateValue);
 
     player.on("playbackRateChange", (e) => {
-      this.playbackSpeedTarget.value = parseFloat(this.player.getPlaybackRate())
+      this.playbackRateTarget.value = parseFloat(this.player.getPlaybackRate())
         .toFixed(2)
         .toString();
     });
@@ -47,17 +49,19 @@ export default class extends Controller {
       this.element.setAttribute("data-time", this.time);
       this.element.setAttribute("data-playbackRate", this.playbackRateValue);
       e.data === 1 ? this.startTimer() : clearInterval(this.timer);
-      // debugger;
-      // if (e.data === 0) {
-      //   this.player.seekTo(this.startSecondsValue);
-      // }
-      // console.log(this.element.getAttribute("data-time");
-      // if (this.element.getAttribute("data-time" == thi)
     });
   }
 
-  updatePlaybackSpeed() {
-    this.player.setPlaybackRate(parseFloat(this.playbackSpeedTarget.value));
+  // mouseEnter() {
+  //   this.play();
+  // }
+
+  // mouseLeave() {
+  //   this.pause();
+  // }
+
+  updatePlaybackRate() {
+    this.player.setPlaybackRate(parseFloat(this.playbackRateTarget.value));
   }
 
   updateStartTime() {
@@ -167,7 +171,7 @@ export default class extends Controller {
     this.startSecondsValue = "";
     this.startTimeTarget.value = "";
     this.player.setPlaybackRate(1);
-    this.playbackSpeedTarget == 1;
+    this.playbackRateTarget == 1;
   }
 
   playFullscreen() {

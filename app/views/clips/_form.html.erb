@@ -1,44 +1,59 @@
-<%= form_with(model: clip) do |form| %>
-  <% if clip.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(clip.errors.count, "error") %> prohibited this clip from being saved:</h2>
-      <ul>
-        <% clip.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= form_with(model: [@video, Clip.new]) do |form| %>
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <% if clip.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(clip.errors.count, "error") %> prohibited this clip from being saved:</h2>
+        <ul>
+          <% clip.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <sl-input placeholder="Title"></sl-input>
+      <%= form.label :title, style: "display: block" %>
+      <%#= form.text_field :title, style: "width: 100%;" %>
     </div>
-  <% end %>
-  <div>
-    <sl-input placeholder="Title"></sl-input>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_area :title %>
-  </div>
-  <div>
-    <sl-input placeholder="Start Time"></sl-input>
-    <%= form.label :end_seconds, style: "display: block" %>
-    <%= form.number_field :end_seconds %>
-  </div>
-  <div>
-    <sl-input placeholder="End Time"></sl-input>
-    <%= form.label :start_seconds, style: "display: block" %>
-    <%= form.number_field :start_seconds %>
-  </div>
-  <div>
-    <sl-input placeholder="Playback Rate"></sl-input>
-    <%= form.label :playback_rate, style: "display: block" %>
-    <%= form.text_field :playback_rate %>
-  </div>
-  <div>
-    <%= form.label :tags, style: "display: block" %>
-    <%= form.text_field :tags %>
-  </div>
-  <div>
-    <sl-input placeholder="Video ID"></sl-input>
-    <%= form.label :video_id, style: "display: block" %>
-    <%= form.text_field :video_id %>
-  </div>
-  <div>
-    <%= form.submit %>
+    <div class="row" style="align-items: center; gap: 10px;">
+      <div>
+        <sl-input placeholder="End Time"></sl-input>
+        <%= form.label :start, style: "display: block; font-size: 10px;" %>
+        <%= form.text_field :start_seconds, placeholder: "0:00", style: "width: 100px;", data: { action: "input->clipboard#changeValue input->youtube#updateStartTime",
+                                                              "clipboard-target": "startTime",
+                                                              "youtube-target": "startTime" } %>
+      </div>
+      <sl-input placeholder="Start Time"></sl-input>
+      <span class="spacer">-</span>
+      <div>
+        <%= form.label :end, style: "display: block; font-size: 10px;" %>
+        <%= form.text_field :end_seconds, placeholder: "0:00", style: "width: 100px;", data: { action: "input->clipboard#changeValue input->youtube#updateEndTime",
+                                                              "clipboard-target": "endTime",
+                                                              "youtube-target": "endTime" }  %>
+      </div>
+      <span class="spacer">:</span>
+      <div>
+        <%= form.label :rate, style: "display: block; font-size: 10px; width: 100px;" %>
+        <%= form.select :playback_rate, options_for_select( { ".25x" => "0.25",
+                                                      ".5x" => "0.50",
+                                                      ".75x" => "0.75",
+                                                      "1x" => "1.00",
+                                                      "1.25x" => "1.25",
+                                                      "1.5x" => "1.50",
+                                                      "1.75x" => "1.75",
+                                                      "2x" => "2.00" }, sprintf('%.2f', @playback_speed.to_i)), {},
+                                                          data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackRate",
+                                                                  "clipboard-target": "playbackRate",
+                                                                  "youtube-target": "playbackRate" } %>
+      </div>
+    </div>
+    <div>
+      <%#= form.label :tags, style: "display: block" %>
+      <%#= form.text_field :tags, style: "width: 100%;" %>
+    </div>
+    <%= form.hidden_field :video_id, value: @video.id %>
+    <div>
+      <%#= form.submit %>
+    </div>
   </div>
 <% end %>
