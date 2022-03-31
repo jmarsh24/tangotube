@@ -201,7 +201,7 @@ class Video < ApplicationRecord
       where( id: Ahoy::Event.most_viewed_videos_by_month)
     end
 
-    def self.trigger_sidekiq_jobr(record, remove)
+    def self.trigger_sidekiq_job(record, remove)
       IndexVideoJob.perform_async(record.id, remove)
     end
   end
