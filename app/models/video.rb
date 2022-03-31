@@ -6,7 +6,7 @@ class Video < ApplicationRecord
   extend Pagy::Meilisearch
   ActiveRecord_Relation.include Pagy::Meilisearch
 
-  meilisearch raise_on_failure: Rails.env.development? do
+  meilisearch enqueue: :trigger_sidekiq_job, force_utf8_encoding: true, raise_on_failure: Rails.env.development? do
 
     attribute :title,
               :description,
@@ -58,6 +58,7 @@ class Video < ApplicationRecord
                             :watched_later_by,
                             :liked_by,
                             :disliked_by ]
+
     sortable_attributes [ :view_count,
                           :like_count,
                           :song_title,
@@ -198,6 +199,10 @@ class Video < ApplicationRecord
 
     def most_viewed_videos_by_month
       where( id: Ahoy::Event.most_viewed_videos_by_month)
+    end
+
+    def self.trigger_sidekiq_jobr(record, remove)
+      IndexVideoJob.perform_async(record.id, remove)
     end
   end
 
