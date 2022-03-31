@@ -9,7 +9,7 @@
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @video_search.facets_distribution.fetch("follower").sort_by{|k, v| v}.reverse.map{ |k,v| ["#{k.titleize} (#{v})", "#{k.parameterize}"] }, title: :follower, id: 'follower-filter', width: "300px" } %>
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @video_search.facets_distribution.fetch("orchestra").sort_by{|k, v| v}.reverse.map{ |k,v| ["#{k.titleize} (#{v})", "#{k.parameterize}"] }, title: :orchestra, id: 'orchestra-filter', width: "300px" } %>
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @video_search.facets_distribution.fetch("year").sort_by{|k, v| v}.reverse.map{ |k,v| ["#{k.titleize} (#{v})", "#{k.parameterize}"] }, title: :year, id: 'year-filter', width: "200px" } %>
-      <sl-menu-label style="margin-left: 28px;">Additional Filters</sl-menu-label>
+      <sl-menu-label>Additional Filters</sl-menu-label>
       <sl-divider style="margin:12px 0;"></sl-divider>
       <% if current_user %>
         <%= button_tag type: "button",
@@ -68,7 +68,7 @@
       Sorting
     </sl-button>
     <sl-menu>
-      <sl-menu-label style="margin-left: 28px;">Sort By</sl-menu-label>
+      <sl-menu-label>Sort By</sl-menu-label>
       <sl-divider style="margin:12px 0;"></sl-divider>
       <sl-menu-item>
         <%= sortable 'year', "desc",  "Recent First", @sort_column, @sort_direction %>
@@ -86,7 +86,7 @@
         <%= sortable "like_count", "desc",  "Most Liked", @sort_column, @sort_direction %>
       </sl-menu-item>
       <sl-divider style="margin:12px 0"></sl-divider>
-      <sl-menu-label style="margin-left: 28px;">Group By</sl-menu-label>
+      <sl-menu-label>Group By</sl-menu-label>
       <sl-divider style="margin:12px 0;"></sl-divider>
       <sl-menu-item>
         <%= sortable 'song_title', "asc", "Song", @sort_column, @sort_direction %>
