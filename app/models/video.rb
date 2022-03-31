@@ -6,7 +6,7 @@ class Video < ApplicationRecord
   extend Pagy::Meilisearch
   ActiveRecord_Relation.include Pagy::Meilisearch
 
-  meilisearch enqueue: true, per_environment: true, raise_on_failure: Rails.env.development? do
+  meilisearch raise_on_failure: Rails.env.development? do
 
     attribute :title,
               :description,
