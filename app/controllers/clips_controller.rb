@@ -53,7 +53,7 @@ class ClipsController < ApplicationController
 
   private
     def set_video
-      @video = Video.find(params[:video_id]) if params[:video_id].present?
+      @video = Video.find_by(youtube_id: params[:video_id]) if params[:video_id].present?
     end
 
     # Use callbacks to share common setup or constraints between actions.

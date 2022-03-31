@@ -66,6 +66,7 @@ class VideosController < ApplicationController
   end
 
   def edit
+    @clip = Clip.new
     set_recommended_videos
   end
 
@@ -100,8 +101,19 @@ class VideosController < ApplicationController
   end
 
   def update
-    @video.update(video_params)
-    redirect_to watch_path(v: @video.youtube_id)
+    @clip = Clip.new
+    respond_to do |format|
+      if @video.update(video_params)
+        # format.turbo_stream do
+        #   render "videos/show", video: @video
+        # end
+        format.html do
+          render partial: "videos/show/video_info_details", video: @video
+        end
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
   end
 
   def create
@@ -168,7 +180,7 @@ class VideosController < ApplicationController
     @video = Video
               .includes(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
               .references(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
-              .find(show_params[:id]) if show_params[:id]
+              .find_by(youtube_id: show_params[:id]) if show_params[:id]
   end
 
   def set_recommended_videos
