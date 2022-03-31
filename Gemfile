@@ -18,7 +18,7 @@ gem "turbo-rails"
 gem "acts_as_votable"
 gem "ahoy_matey"
 gem "dartsass-rails"
-gem "deepl-rb", require: false
+gem "deepl-rb", require: true
 gem "devise"
 gem "esbuild-rails"
 gem "faraday"
