@@ -87,3 +87,11 @@ main {
 .row {
   display: flex;
 }
+
+:not(:defined) {
+  visibility: hidden;
+}
+
+:defined {
+  opacity: 1;
+}
