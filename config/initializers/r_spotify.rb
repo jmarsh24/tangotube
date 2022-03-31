@@ -1,3 +1,3 @@
-if ENV['SPOTIFY_CLIENT_ID'] && ENV['SPOTIFY_SECRET_KEY']
-  RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_KEY'])
+if Rails.application.credentials.spotify[:client_id] && Rails.application.credentials.spotify[:secret_key]
+  Rails.application.credentials.spotify[:client_id], Rails.application.credentials.spotify[:secret_key])
 end

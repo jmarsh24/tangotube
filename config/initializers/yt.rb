@@ -1,4 +1,4 @@
 Yt.configure do |config|
-  config.api_key = ENV['YOUTUBE_API_KEY']
+  config.api_key = Rails.application.credentials.youtube[:api_key]
   config.log_level = :debug
 end
