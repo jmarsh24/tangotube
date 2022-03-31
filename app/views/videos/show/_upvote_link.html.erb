@@ -3,10 +3,10 @@
   data-controller="popper"
 <% end %>
 >
-  <%= content_tag "div", id: "upvote-#{video.id}",
+  <%= content_tag "div", id: "upvote-#{video.youtube_id}",
                         data: { "popper-target": "element",
                         action: "click->popper#show click:outside->popper#hide" } do %>
-    <%= button_to upvote_video_path(video), method: :patch,
+    <%= button_to upvote_video_path(video.youtube_id), method: :patch,
                                             style: "background: none;",
                                             id: "upvote-button" do %>
       <% if user_signed_in? %>
