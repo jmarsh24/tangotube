@@ -1,9 +1,9 @@
 class DeletionRequest < ApplicationRecord
 
-  validates_presence_of :uid, :provider, :pid
+  validates :uid, :provider, :pid, presence: true
 
   # there can only be one entry with given provider + uid
-  validates_uniqueness_of :uid, scope: :provider
+  validates :uid, uniqueness: { scope: :provider }
 
   before_validation :set_pid
 
@@ -24,19 +24,19 @@ class DeletionRequest < ApplicationRecord
 
   def self.from_signed_fb(req)
     data = DeletionRequest.parse_fb_request(req)
-    DeletionRequest.create(provider: 'facebook', uid: data['user_id'])
+    DeletionRequest.create(provider: "facebook", uid: data["user_id"])
   end
 
   def self.parse_fb_request(req)
-    encoded, payload = req.split('.', 2)
+    encoded, payload = req.split(".", 2)
     decoded = Base64.urlsafe_decode64(encoded)
     data = JSON.load(Base64.urlsafe_decode64(payload))
 
     # we need to verify the digest is the same
-    exp = OpenSSL::HMAC.digest("SHA256", Rails.application.credentials.facebook[:secret], payload)
+    exp = OpenSSL::HMAC.digest("SHA256", Rails.application.credentials.dig(:facebook, :secret), payload)
 
     if decoded != exp
-      puts 'FB deletion callback called with weird data'
+      puts "FB deletion callback called with weird data"
       return nil
     end
 
@@ -46,7 +46,7 @@ class DeletionRequest < ApplicationRecord
   private
 
   def set_pid
-    if self.pid.blank?
+    if pid.blank?
       self.pid = random_pid
     end
   end
