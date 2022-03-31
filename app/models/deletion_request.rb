@@ -33,7 +33,7 @@ class DeletionRequest < ApplicationRecord
     data = JSON.load(Base64.urlsafe_decode64(payload))
 
     # we need to verify the digest is the same
-    exp = OpenSSL::HMAC.digest("SHA256", ENV['FACEBOOK_APP_SECRET'], payload)
+    exp = OpenSSL::HMAC.digest("SHA256", Rails.application.credentials.facebook[:secret], payload)
 
     if decoded != exp
       puts 'FB deletion callback called with weird data'
