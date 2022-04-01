@@ -1,4 +1,4 @@
-<%= turbo_stream.append "video-section" do %>
+<%= turbo_stream.append "results" do %>
   <%= render partial: "video", collection: @videos %>
 <% end %>
 <%= turbo_stream.update "next_link" do %>

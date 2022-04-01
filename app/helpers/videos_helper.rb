@@ -200,4 +200,8 @@ module VideosHelper
 
     words_array.flatten.compact_blank.map(&:titleize).join(" - ")
   end
+
+  def filtering_for_dancer?
+    return true if filtering_params.include?(:leader) || filtering_params.include?(:follower)
+  end
 end

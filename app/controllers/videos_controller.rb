@@ -39,7 +39,6 @@ class VideosController < ApplicationController
       end
     end
 
-
     @video_search = Video.search(params[:query], { filter: filter_array,
                                                    facetsDistribution: ["genre", "leader", "follower", "orchestra", "year"] } )
 
@@ -57,6 +56,30 @@ class VideosController < ApplicationController
                     .has_leader
                     .has_follower
       @pagy, @videos = pagy(videos.order("random()"), items: 60)
+    end
+
+    if sorting_params.empty? && (filtering_for_dancer? || dancer_name_match?)
+
+      @videos_most_recent = Video.includes(:song, :leader, :follower, :event, :channel)
+                                  .references(:song, :leader, :follower, :event, :channel)
+                                  .search(params[:query],
+                                  filter: filter_array,
+                                  sort: [ "year:desc" ],
+                                  limit: 10)
+
+      @videos_oldest = Video.includes(:song, :leader, :follower, :event, :channel)
+                            .references(:song, :leader, :follower, :event, :channel)
+                            .search(params[:query],
+                            filter: filter_array,
+                            sort: [ "year:asc" ],
+                            limit: 10)
+
+      @videos_most_viewed = Video.includes(:song, :leader, :follower, :event, :channel)
+                                  .references(:song, :leader, :follower, :event, :channel)
+                                  .search(params[:query],
+                                  filter: filter_array,
+                                  sort: [ "view_count:desc" ],
+                                  limit: 10)
     end
 
     respond_to do |format|
