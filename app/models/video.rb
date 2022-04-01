@@ -28,10 +28,12 @@ class Video < ApplicationRecord
     attribute(:channel_title) { channel.title if channel.present? }
     attribute(:channel_id) { channel.channel_id if channel.present? }
 
+    attribute(:song_id) { song.id if song.present? }
     attribute(:song_title) { song.title if song.present? }
     attribute(:genre) { song.genre if song.present? }
     attribute(:orchestra) { song.artist.parameterize.split("-").join(" ") if song.present? }
 
+    attribute(:event_id) { event.id if event.present? }
     attribute(:event_title) { event.title if event.present? }
 
     add_attribute :liked_by
@@ -57,7 +59,9 @@ class Video < ApplicationRecord
                             :bookmarked_by,
                             :watched_later_by,
                             :liked_by,
-                            :disliked_by ]
+                            :disliked_by,
+                            :song_id,
+                            :event_id]
 
     sortable_attributes [ :view_count,
                           :like_count,
