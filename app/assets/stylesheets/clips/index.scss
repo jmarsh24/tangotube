@@ -4,17 +4,3 @@
   max-width: 1660px;
   padding: 0 40px;
 }
-
-.video-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 20px 20px;
-  background-color: $secondary-color;
-}
-
-@media (max-width: 800px) {
-  .video-section {
-    display: flex;
-    flex-direction: column;
-  }
-}

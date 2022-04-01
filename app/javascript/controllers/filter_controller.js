@@ -13,6 +13,8 @@ export default class extends Controller {
   };
 
   filter() {
+    console.log(this.sortValue);
+    console.log(this.directionValue);
     const url = `${window.location.pathname}?${this.params}`;
 
     this.getBack();
