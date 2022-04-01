@@ -11,7 +11,7 @@ desc "This task indexes with meilisearch"
 task index_videos: :environment do
   puts "Indexing all videos with Meilisearch"
   Video.all.find_each do |video|
-    IndexVideoJob.performance_asnyc(video.id, false)
+    IndexVideoJob.perform_asnyc(video.id, false)
   end
   puts "done."
 end
