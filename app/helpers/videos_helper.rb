@@ -166,28 +166,28 @@ module VideosHelper
       end
     end
 
-    if sorting_params["sort"] == "songs.title" && sorting_params["direction"] == "asc"
+    if sorting_params["sort"] == "song_titile" && sorting_params["direction"] == "asc"
       sorting_array << "Grouped By Song Title"
     end
-    if sorting_params["sort"] == "songs.last_name_search" && sorting_params["direction"] == "asc"
+    if sorting_params["sort"] == "orchestra" && sorting_params["direction"] == "asc"
       sorting_array << "Grouped By Orchestra"
     end
-    if sorting_params["sort"] == "videos.channel_id" && sorting_params["direction"] == "asc"
+    if sorting_params["sort"] == "channel" && sorting_params["direction"] == "asc"
       sorting_array << "Grouped By Channel"
     end
-    if sorting_params["sort"] == "videos.like_count" && sorting_params["direction"] == "desc"
+    if sorting_params["sort"] == "like_count" && sorting_params["direction"] == "desc"
       sorting_array << "Most Liked"
     end
-    if sorting_params["sort"] == "videos.view_count" && sorting_params["direction"] == "desc"
+    if sorting_params["sort"] == "view_count" && sorting_params["direction"] == "desc"
       sorting_array << "Most Viewed"
     end
-    if sorting_params["sort"] == "videos.popularity" && sorting_params["direction"] == "desc"
+    if sorting_params["sort"] == "popularity" && sorting_params["direction"] == "desc"
       sorting_array << "Most Popular"
     end
-    if sorting_params["sort"] == "videos.performance_date" && sorting_params["direction"] == "desc"
+    if sorting_params["sort"] == "year" && sorting_params["direction"] == "desc"
       sorting_array << "Most Recent"
     end
-    if sorting_params["sort"] == "videos.performance_date" && sorting_params["direction"] == "asc"
+    if sorting_params["sort"] == "year" && sorting_params["direction"] == "asc"
       sorting_array << "Oldest"
     end
 
