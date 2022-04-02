@@ -59,16 +59,9 @@ class Video::YoutubeImport::Channel
     { total_videos_count: @youtube_channel.video_count }
   end
 
-  def channel_youtube_ids
-    `#{YOUTUBE_DL_COMMAND_PREFIX + @channel_id + YOUTUBE_DL_COMMAND_SUFFIX}`.split
-    rescue StandardError => e
-    Rails.logger.warn "Video::YoutubeImport::Channel youtube-dl video fetching error: #{e.backtrace.join("\n\t")}"
-    ""
-  end
-
   def external_youtube_ids
     if @youtube_channel.video_count >= 500
-      channel_youtube_ids
+      @youtube_channel.related_playlists.first.playlist_items.map(&:video_id)
     else
       @youtube_channel.videos.map(&:id)
     end
