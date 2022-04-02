@@ -19,7 +19,7 @@ class VideosController < ApplicationController
         filter_array << "watched_by = #{current_user.id}"
       end
       if filtering_params["watched"] == "false"
-        filter_array << "watched_by != #{current_user.id}"
+        filter_array << "not_watched_by = #{current_user.id}"
       end
     end
 
@@ -34,7 +34,7 @@ class VideosController < ApplicationController
     end
 
     if filtering_params.except("query").except("watched").except("liked").present?
-      filtering_params.except("query").except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v.split('-').join(' ')}'"}.each do |filter|
+      filtering_params.except("query").except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v}'"}.each do |filter|
         filter_array << [filter]
       end
     end
