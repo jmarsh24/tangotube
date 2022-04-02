@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
-ruby "3.0.3"
+ruby "3.1.1"
 
 # gems that ship with rails...........................................................
 gem "bootsnap", require: false
 gem "jsbundling-rails"
-gem "rails", "~> 7.0.2.2"
+gem "rails", "~> 7.0.2.3"
 gem "redis"
 gem "puma"
 gem "pg"
@@ -47,11 +47,11 @@ gem "yt"
 
 group :development, :test do
   gem "amazing_print"
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "faker"
   gem "rspec-rails"
-  gem "byebug"
   gem 'webdrivers'
 end
 
