@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_25_125719) do
+ActiveRecord::Schema[7.0].define(version: 2021_03_06_201925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -371,13 +371,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_125719) do
     t.string "spotify_artist_name_1"
     t.integer "performance_number"
     t.integer "performance_total_number"
-    t.integer "cached_scoped_like_votes_total", default: 0
-    t.integer "cached_scoped_like_votes_score", default: 0
-    t.integer "cached_scoped_like_votes_up", default: 0
-    t.integer "cached_scoped_like_votes_down", default: 0
-    t.integer "cached_weighted_like_score", default: 0
-    t.integer "cached_weighted_like_total", default: 0
-    t.float "cached_weighted_like_average", default: 0.0
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
     t.index ["acr_cloud_artist_name"], name: "index_videos_on_acr_cloud_artist_name"
     t.index ["acr_cloud_track_name"], name: "index_videos_on_acr_cloud_track_name"
     t.index ["channel_id"], name: "index_videos_on_channel_id"

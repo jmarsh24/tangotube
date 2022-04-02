@@ -22,16 +22,16 @@ class Video < ApplicationRecord
               :view_count,
               :like_count
 
-    attribute(:leader) { leader.normalized_name if leader.present? }
-    attribute(:follower) { follower.normalized_name if follower.present? }
+    attribute(:leader) { leader.normalized_name.parameterize if leader.present? }
+    attribute(:follower) { follower.normalized_name.parameterize if follower.present? }
 
     attribute(:channel_title) { channel.title if channel.present? }
-    attribute(:channel_id) { channel.channel_id if channel.present? }
+    attribute(:channel) { channel.channel_id if channel.present? }
 
     attribute(:song_id) { song.id if song.present? }
     attribute(:song_title) { song.title if song.present? }
     attribute(:genre) { song.genre if song.present? }
-    attribute(:orchestra) { song.artist.parameterize.split("-").join(" ") if song.present? }
+    attribute(:orchestra) { song.artist.parameterize if song.present? }
 
     attribute(:event_id) { event.id if event.present? }
     attribute(:event_title) { event.title if event.present? }
@@ -49,6 +49,7 @@ class Video < ApplicationRecord
 
     filterable_attributes [ :orchestra,
                             :year,
+                            :channel,
                             :genre,
                             :leader,
                             :follower,
@@ -61,7 +62,7 @@ class Video < ApplicationRecord
                             :liked_by,
                             :disliked_by,
                             :song_id,
-                            :event_id]
+                            :event_id ]
 
     sortable_attributes [ :view_count,
                           :like_count,
