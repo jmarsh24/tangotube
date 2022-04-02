@@ -58,7 +58,7 @@ class VideosController < ApplicationController
       @pagy, @videos = pagy(videos.order("random()"), items: 60)
     end
 
-    if sorting_params.empty? && (filtering_for_dancer? || dancer_name_match?)
+    if sorting_params.empty? && @pagy.next && (filtering_for_dancer? || dancer_name_match?)
 
       @videos_most_recent = Video.includes(:song, :leader, :follower, :event, :channel)
                                   .references(:song, :leader, :follower, :event, :channel)
