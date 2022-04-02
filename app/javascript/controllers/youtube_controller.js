@@ -7,7 +7,7 @@ export default class extends Controller {
     videoId: String,
     startSeconds: Number,
     endSeconds: Number,
-    playbackRate: { type: Number, default: 1 },
+    playbackRate: Number,
   };
   static targets = ["frame", "playbackRate", "startTime", "endTime"];
 

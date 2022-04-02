@@ -41,7 +41,7 @@
                                                       "1.25x" => "1.25",
                                                       "1.5x" => "1.50",
                                                       "1.75x" => "1.75",
-                                                      "2x" => "2.00" }, sprintf('%.2f', @playback_speed.to_i)), {},
+                                                      "2x" => "2.00" }, sprintf('%.2f', @playback_rate.to_i)), {},
                                                           data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackRate",
                                                                   "clipboard-target": "playbackRate",
                                                                   "youtube-target": "playbackRate" } %>
