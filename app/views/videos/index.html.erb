@@ -9,7 +9,7 @@
   <% end %>
   <% if @videos_most_viewed.present? %>
     <%= render partial: "videos/index/videos/section", locals: { videos: @videos_most_viewed, section_title: "Most Viewed", sort_value: "view_count", direction_value: "desc" } %>
-  <% end%>
+  <% end %>
   <div class="video-section">
     <div class="video-section__videos" id="results">
       <%= render @videos %>
@@ -24,3 +24,4 @@
     <sl-spinner style="font-size: 50px; --track-width: 5px;"></sl-spinner>
   <% end %>
 </div>
+<% console %>
