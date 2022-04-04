@@ -1,83 +1,67 @@
 class Video < ApplicationRecord
   acts_as_votable
+  searchkick filterable: [ :orchestra,
+                           :year,
+                           :channel,
+                           :genre,
+                           :leader,
+                           :follower,
+                           :hd,
+                           :id,
+                           :watched_by,
+                           :not_watched_by,
+                           :bookmarked_by,
+                           :watched_later_by,
+                           :liked_by,
+                           :disliked_by,
+                           :song_id,
+                           :event_id,
+                           :song_title,
+                           :channel_title]
+
 
   include Filterable
-  include MeiliSearch::Rails
-  extend Pagy::Meilisearch
-  ActiveRecord_Relation.include Pagy::Meilisearch
+  extend Pagy::Searchkick
 
-  meilisearch enqueue: :trigger_sidekiq_job, force_utf8_encoding: true, raise_on_failure: Rails.env.development? do
-
-    attribute :title,
-              :description,
-              :tags,
-              :youtube_song,
-              :youtube_artist,
-              :acr_cloud_artist_name,
-              :spotify_artist_name,
-              :spotify_track_name,
-              :youtube_id,
-              :popularity,
-              :hd,
-              :view_count,
-              :like_count
-
-    attribute(:leader) { leader.normalized_name.parameterize if leader.present? }
-    attribute(:follower) { follower.normalized_name.parameterize if follower.present? }
-
-    attribute(:channel_title) { channel.title if channel.present? }
-    attribute(:channel) { channel.channel_id if channel.present? }
-
-    attribute(:song_id) { song.id if song.present? }
-    attribute(:song_title) { song.title if song.present? }
-    attribute(:genre) { song.genre if song.present? }
-    attribute(:orchestra) { song.artist.parameterize if song.present? }
-
-    attribute(:event_id) { event.id if event.present? }
-    attribute(:event_title) { event.title if event.present? }
-
-    add_attribute :liked_by
-    add_attribute :disliked_by
-    add_attribute :watched_by
-    add_attribute :not_watched_by
-    add_attribute :bookmarked_by
-    add_attribute :watched_later_by
-
-    attribute(:year) do
-      performance_date.year
-    end
-
-    filterable_attributes [ :orchestra,
-                            :year,
-                            :channel,
-                            :genre,
-                            :leader,
-                            :follower,
-                            :hd,
-                            :id,
-                            :watched_by,
-                            :not_watched_by,
-                            :bookmarked_by,
-                            :watched_later_by,
-                            :liked_by,
-                            :disliked_by,
-                            :song_id,
-                            :event_id ]
-
-    sortable_attributes [ :view_count,
-                          :like_count,
-                          :song_title,
-                          :orchestra,
-                          :channel_title,
-                          :year,
-                          :popularity ]
+  def search_data
+    {
+      title: title,
+      description: description,
+      tags: tags,
+      youtube_song: youtube_song,
+      youtube_artist: youtube_artist,
+      acr_cloud_artist_name: acr_cloud_artist_name,
+      spotify_artist_name: spotify_artist_name,
+      spotify_track_name: spotify_track_name,
+      youtube_id: youtube_id,
+      popularity: popularity,
+      hd: hd,
+      view_count: view_count,
+      like_count: like_count,
+      leader: leader&.normalized_name&.parameterize,
+      follower: follower&.normalized_name&.parameterize,
+      channel_title: channel&.title,
+      channel: channel&.channel_id,
+      song_id: song_id,
+      song_title: song&.title,
+      genre: song&.genre&.parameterize,
+      orchestra: song&.artist&.parameterize,
+      event_id: event_id,
+      event: event&.title,
+      liked_by: liked_by,
+      disliked_by: disliked_by,
+      not_watched_by: not_watched_by,
+      bookmarked_by: bookmarked_by,
+      watched_later_by: watched_later_by,
+      year: performance_date&.year
+    }
   end
 
   PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  after_touch :index!
+  # after_touch :index!
 
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
@@ -126,6 +110,8 @@ class Video < ApplicationRecord
             .or(Video.where(acr_response_code: nil))
         }
 
+
+
   # Attribute Matching Scopes
   scope :with_song_title,
         lambda { |song_title|
@@ -164,6 +150,8 @@ class Video < ApplicationRecord
             dancer_name: "%#{dancer_name}%"
           )
         }
+
+  scope :search_import, -> { includes(:song, :leader, :follower, :event, :channel) }
 
   # Combined Scopes
 

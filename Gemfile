@@ -20,6 +20,7 @@ gem "ahoy_matey"
 gem "dartsass-rails"
 gem "deepl-rb", require: 'deepl'
 gem "devise"
+gem "elasticsearch"
 gem "esbuild-rails"
 gem "faraday"
 gem "faraday-multipart"
@@ -27,7 +28,6 @@ gem "font-awesome-rails"
 gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
-gem "meilisearch-rails"
 gem "nokogiri"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
@@ -38,6 +38,7 @@ gem "prettier"
 gem "pg_search"
 gem "rails_autolink"
 gem "rspotify"
+gem "searchkick"
 gem "shoelace-rails"
 gem "sidekiq"
 gem "stimulus-rails"
@@ -56,6 +57,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "web-console"
   gem "letter_opener"
   gem "listen"
   gem "rack-mini-profiler"
@@ -63,9 +65,9 @@ group :development do
   gem "rubocop-rails"
   gem "rubocop-rspec"
   gem "solargraph"
-  gem "web-console"
   gem "foreman"
   gem "htmlbeautifier"
+  gem "bullet", "~> 7.0"
 end
 
 group :test do
@@ -78,3 +80,5 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+

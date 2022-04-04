@@ -4,7 +4,7 @@ class Channel < ApplicationRecord
 
   has_many :videos, dependent: :destroy
 
-  after_save { videos.each(&:touch) }
+  after_save { videos.find_each(&:reindex) }
 
   validates :channel_id, presence: true, uniqueness: true
 
