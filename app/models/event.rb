@@ -5,7 +5,7 @@ class Event < ApplicationRecord
 
   has_many :videos, dependent: :nullify
 
-  after_save { videos.each(&:touch) }
+  after_commit { videos.find_each(&:reindex) }
 
   def search_title
     return if title.empty?
@@ -53,7 +53,7 @@ class Event < ApplicationRecord
       Event
         .all
         .order(:id)
-        .each { |event| MatchEventWorker.perform_async(event_id) }
+        .each { |_event| MatchEventWorker.perform_async(event_id) }
     end
   end
 end

@@ -82,6 +82,9 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bullet (7.0.1)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.36.0)
       addressable
       matrix
@@ -95,7 +98,7 @@ GEM
       capybara (>= 1.0, < 4)
       launchy
     childprocess (4.1.0)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crack (0.4.5)
       rexml
@@ -123,6 +126,14 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     e2mmap (0.1.0)
+    elasticsearch (7.4.0)
+      elasticsearch-api (= 7.4.0)
+      elasticsearch-transport (= 7.4.0)
+    elasticsearch-api (7.4.0)
+      multi_json
+    elasticsearch-transport (7.4.0)
+      faraday
+      multi_json
     errbase (0.2.2)
     erubi (1.10.0)
     esbuild-rails (0.1.4)
@@ -155,9 +166,6 @@ GEM
     htmlbeautifier (1.4.1)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
-    httparty (0.20.0)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -170,7 +178,6 @@ GEM
     jaro_winkler (1.5.4)
     jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
-    json (2.6.1)
     jwt (2.3.0)
     kramdown (2.3.1)
       rexml
@@ -183,18 +190,13 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.15.0)
+    loofah (2.16.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     matrix (0.4.2)
-    meilisearch (0.18.2)
-      httparty (>= 0.17.1, < 0.21.0)
-    meilisearch-rails (0.5.1)
-      json (>= 1.5.1)
-      meilisearch (>= 0.15.4)
     method_source (1.0.0)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
@@ -369,6 +371,9 @@ GEM
     rubyzip (2.3.2)
     safely_block (0.3.0)
       errbase (>= 0.1.1)
+    searchkick (5.0.3)
+      activemodel (>= 5.2)
+      hashie
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -429,10 +434,11 @@ GEM
       unf_ext
     unf_ext (0.0.8.1)
     unicode-display_width (2.1.0)
+    uniform_notifier (1.16.0)
     vcr (6.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (4.0.2)
+    web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -466,6 +472,7 @@ DEPENDENCIES
   ahoy_matey
   amazing_print
   bootsnap
+  bullet (~> 7.0)
   capybara
   capybara-screenshot
   dartsass-rails
@@ -473,6 +480,7 @@ DEPENDENCIES
   deepl-rb
   devise
   dotenv-rails
+  elasticsearch
   esbuild-rails
   factory_bot_rails
   faker
@@ -487,7 +495,6 @@ DEPENDENCIES
   jsbundling-rails
   letter_opener
   listen
-  meilisearch-rails
   nokogiri
   omniauth-facebook
   omniauth-google-oauth2
@@ -508,6 +515,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
+  searchkick
   selenium-webdriver
   shoelace-rails
   shoulda-matchers

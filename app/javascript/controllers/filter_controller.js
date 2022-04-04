@@ -13,8 +13,6 @@ export default class extends Controller {
   };
 
   filter() {
-    console.log(this.sortValue);
-    console.log(this.directionValue);
     const url = `${window.location.pathname}?${this.params}`;
 
     this.getBack();
@@ -84,7 +82,14 @@ export default class extends Controller {
       var parsedData = parser.parseFromString(data, "text/html");
 
       const replaceContainers = [
-        "filters",
+        "genre-filter",
+        "leader-filter",
+        "follower-filter",
+        "orchestra-filter",
+        "menu-additional-filters",
+        "menu-sorting-filters",
+        "button-clear-all",
+        "year-filter",
         "videos",
         "next_link",
         "videos-header",
