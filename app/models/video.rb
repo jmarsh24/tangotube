@@ -1,7 +1,6 @@
 class Video < ApplicationRecord
   acts_as_votable
-  searchkick deep_paging: true,
-              filterable: [ :orchestra,
+  searchkick filterable: [ :orchestra,
                            :year,
                            :channel,
                            :genre,
