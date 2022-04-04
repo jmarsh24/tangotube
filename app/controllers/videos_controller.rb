@@ -12,74 +12,86 @@ class VideosController < ApplicationController
     @sort_column = sort_column
     @sort_direction = sort_direction
 
-    filter_array = []
+    filters = filtering_params.except(:query, :liked, :watched)
 
     if filtering_params.include?("watched")
       if filtering_params["watched"] == "true"
-        filter_array << "watched_by = #{current_user.id}"
+        filters.merge!({ watched_by: current_user.id })
       end
       if filtering_params["watched"] == "false"
-        filter_array << "not_watched_by = #{current_user.id}"
+        filters.merge!({ not_watched_by: current_user.id })
       end
     end
 
     if filtering_params.include?("liked")
       if filtering_params["liked"] == "true"
-        filter_array << "liked_by = #{current_user.id}"
+        filters.merge!({ liked_by: current_user.id })
       end
 
       if filtering_params["liked"] == "false"
-        filter_array << "disliked_by = #{current_user.id}"
+        filters.merge!({ disliked_by: current_user.id })
       end
     end
-
-    if filtering_params.except("query").except("watched").except("liked").present?
-      filtering_params.except("query").except("watched").except("liked").to_h.map{ |k, v| "#{k} = '#{v}'"}.each do |filter|
-        filter_array << [filter]
-      end
-    end
-
-    @video_search = Video.search(params[:query], { filter: filter_array,
-                                                   facetsDistribution: ["genre", "leader", "follower", "orchestra", "year"] } )
 
     if filtering_params.present? || sorting_params.present?
-      videos =  Video.includes(:song, :leader, :follower, :event, :channel)
-                      .references(:song, :leader, :follower, :event, :channel)
-                      .pagy_search(params[:query],
-                      filter: filter_array,
-                      sort: [ "#{sort_column}:#{sort_direction}" ])
-      @pagy, @videos = pagy_meilisearch(videos, items: 60)
+      videos = Video.pagy_search(filtering_params[:query].presence || "*",
+                                          where: filters,
+                                          order: { sort_column => sort_direction },
+                                          includes: [:song, :leader, :follower, :event, :channel],
+                                          misspellings: {edit_distance: 5})
+      @pagy, @videos = pagy_searchkick(videos, items: 60)
     else
       videos = Video.includes(:song, :leader, :follower, :event, :channel)
-                    .references(:song, :leader, :follower, :event, :channel)
                     .most_viewed_videos_by_month
                     .has_leader
                     .has_follower
       @pagy, @videos = pagy(videos.order("random()"), items: 60)
     end
 
+    video_search = Video.search(filtering_params[:query].presence || "*",
+                                  where: filters,
+                                  aggs: [:genre, :leader, :follower, :orchestra, :year],
+                                  misspellings: {edit_distance: 10})
+
+    @genres= video_search.aggs["genre"]["buckets"]
+                          .sort_by{ |b| b["doc_count"] }
+                          .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+
+    @leaders= video_search.aggs["leader"]["buckets"]
+                          .sort_by{ |b| b["doc_count"] }
+                          .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+
+    @followers= video_search.aggs["follower"]["buckets"]
+                            .sort_by{ |b| b["doc_count"] }
+                            .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+
+    @orchestras= video_search.aggs["orchestra"]["buckets"]
+                            .sort_by{ |b| b["doc_count"] }
+                            .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+
+    @years= video_search.aggs["year"]["buckets"]
+                        .sort_by{ |b| b["doc_count"] }
+                        .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+
     if sorting_params.empty? && @pagy.next && (filtering_for_dancer? || dancer_name_match?)
 
-      @videos_most_recent = Video.includes(:song, :leader, :follower, :event, :channel)
-                                  .references(:song, :leader, :follower, :event, :channel)
-                                  .search(params[:query],
-                                  filter: filter_array,
-                                  sort: [ "year:desc" ],
-                                  limit: 10)
+      @videos_most_recent = Video.search(params[:query],
+                                    where: filters,
+                                    order: { "year" => "desc" },
+                                    includes: [:song, :leader, :follower, :event, :channel],
+                                    limit: 10)
 
-      @videos_oldest = Video.includes(:song, :leader, :follower, :event, :channel)
-                            .references(:song, :leader, :follower, :event, :channel)
-                            .search(params[:query],
-                            filter: filter_array,
-                            sort: [ "year:asc" ],
-                            limit: 10)
+      @videos_oldest = Video.search(params[:query],
+                              where: filters,
+                              order: { "year" => "asc" },
+                              includes: [:song, :leader, :follower, :event, :channel],
+                              limit: 10)
 
-      @videos_most_viewed = Video.includes(:song, :leader, :follower, :event, :channel)
-                                  .references(:song, :leader, :follower, :event, :channel)
-                                  .search(params[:query],
-                                  filter: filter_array,
-                                  sort: [ "view_count:desc" ],
-                                  limit: 10)
+      @videos_most_viewed = Video.search(params[:query],
+                                    where: filters,
+                                    order: { "view_count" => "desc" },
+                                    includes: [:song, :leader, :follower, :event, :channel],
+                                    limit: 10)
     end
 
     respond_to do |format|
@@ -196,14 +208,8 @@ class VideosController < ApplicationController
   private
 
   def set_video
-    @video = Video
-              .includes(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
-              .references(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
-              .find_by(youtube_id: show_params[:v]) if show_params[:v]
-    @video = Video
-              .includes(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
-              .references(:song, :leader, :follower, :event, :channel, :yt_comments, :comments)
-              .find_by(youtube_id: show_params[:id]) if show_params[:id]
+    @video = Video.includes(:song, :leader, :follower, :event, :channel).find_by(youtube_id: show_params[:v]) if show_params[:v]
+    @video = Video.includes(:song, :leader, :follower, :event, :channel).find_by(youtube_id: show_params[:id]) if show_params[:id]
   end
 
   def set_recommended_videos
@@ -216,7 +222,6 @@ class VideosController < ApplicationController
 
   def videos_from_this_performance
     @videos_from_this_performance = Video.includes(:song, :leader, :follower, :event, :channel)
-                                         .references(:song, :leader, :follower, :event, :channel)
                                          .where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
                                          .where(channel_id: @video.channel_id)
@@ -229,7 +234,6 @@ class VideosController < ApplicationController
 
   def videos_with_same_dancers
     @videos_with_same_dancers = Video.includes(:song, :leader, :follower, :event, :channel)
-                                         .references(:song, :leader, :follower, :event, :channel)
                                          .where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
                                          .has_leader.has_follower
@@ -242,7 +246,6 @@ class VideosController < ApplicationController
 
   def videos_with_same_event
     @videos_with_same_event = Video.includes(:song, :leader, :follower, :event, :channel)
-                                   .references(:song, :leader, :follower, :event, :channel)
                                    .where(event_id: @video.event_id)
                                    .where.not(event: nil)
                                    .where("upload_date <= ?", @video.upload_date + 7.days)
@@ -255,7 +258,6 @@ class VideosController < ApplicationController
 
   def videos_with_same_song
     @videos_with_same_song = Video.includes(:song, :leader, :follower, :event, :channel)
-                                  .references(:song, :leader, :follower, :event, :channel)
                                   .where(song_id: @video.song_id)
                                   .has_leader.has_follower
                                   .where(hidden: false)
@@ -266,7 +268,6 @@ class VideosController < ApplicationController
 
   def videos_with_same_channel
     @videos_with_same_channel = Video.includes(:song, :leader, :follower, :event, :channel)
-                                  .references(:song, :leader, :follower, :event, :channel)
                                   .where(channel_id: @video.channel_id)
                                   .has_leader.has_follower
                                   .where(hidden: false)
@@ -313,7 +314,7 @@ class VideosController < ApplicationController
       :liked,
       :id,
       :query
-    )
+    ).to_h
   end
 
   def sort_column
