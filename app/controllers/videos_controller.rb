@@ -75,19 +75,19 @@ class VideosController < ApplicationController
 
     if sorting_params.empty? && @pagy.next && (filtering_for_dancer? || dancer_name_match?)
 
-      @videos_most_recent = Video.search(params[:query],
+      @videos_most_recent = Video.search(filtering_params[:query].presence || "*",
                                     where: filters,
                                     order: { "year" => "desc" },
                                     includes: [:song, :leader, :follower, :event, :channel],
                                     limit: 10)
 
-      @videos_oldest = Video.search(params[:query],
+      @videos_oldest = Video.search(filtering_params[:query].presence || "*",
                               where: filters,
                               order: { "year" => "asc" },
                               includes: [:song, :leader, :follower, :event, :channel],
                               limit: 10)
 
-      @videos_most_viewed = Video.search(params[:query],
+      @videos_most_viewed = Video.search(filtering_params[:query].presence || "*",
                                     where: filters,
                                     order: { "view_count" => "desc" },
                                     includes: [:song, :leader, :follower, :event, :channel],
