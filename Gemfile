@@ -17,6 +17,7 @@ gem "turbo-rails"
 # app specific gems...................................................................
 gem "acts_as_votable"
 gem "ahoy_matey"
+gem "bonsai-searchkick"
 gem "climate_control"
 gem "dartsass-rails"
 gem "deepl-rb", require: 'deepl'
@@ -81,6 +82,8 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
 
 
 
