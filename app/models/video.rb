@@ -1,5 +1,5 @@
 class Video < ApplicationRecord
-  acts_as_votable
+  acts_as_votable cacheable_strategy: :update_columns
   searchkick filterable: [ :orchestra,
                             :year,
                             :channel,
@@ -62,7 +62,7 @@ class Video < ApplicationRecord
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  # after_touch :index!
+  after_touch :reindex
 
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
