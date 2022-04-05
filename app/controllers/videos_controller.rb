@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
   include ActionView::RecordIdentifier
 
-  before_action :authenticate_user!, only: %i[edit update]
+  before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete]
 

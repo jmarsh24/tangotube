@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   after_action :track_action
   before_action :set_total_videos_count
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :require_login
 
   include Pagy::Backend
   def default_url_options
