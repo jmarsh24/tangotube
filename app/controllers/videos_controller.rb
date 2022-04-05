@@ -48,30 +48,32 @@ class VideosController < ApplicationController
       @pagy, @videos = pagy(videos.order("random()"), items: 60)
     end
 
-    video_search = Video.search(filtering_params[:query].presence || "*",
-                                  where: filters,
-                                  aggs: [:genre, :leader, :follower, :orchestra, :year],
-                                  misspellings: {edit_distance: 10})
+    if @page == 1
+      video_search = Video.search(filtering_params[:query].presence || "*",
+                                    where: filters,
+                                    aggs: [:genre, :leader, :follower, :orchestra, :year],
+                                    misspellings: {edit_distance: 10})
 
-    @genres= video_search.aggs["genre"]["buckets"]
-                          .sort_by{ |b| b["doc_count"] }
-                          .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
-
-    @leaders= video_search.aggs["leader"]["buckets"]
-                          .sort_by{ |b| b["doc_count"] }
-                          .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
-
-    @followers= video_search.aggs["follower"]["buckets"]
+      @genres= video_search.aggs["genre"]["buckets"]
                             .sort_by{ |b| b["doc_count"] }
                             .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
 
-    @orchestras= video_search.aggs["orchestra"]["buckets"]
+      @leaders= video_search.aggs["leader"]["buckets"]
                             .sort_by{ |b| b["doc_count"] }
                             .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
 
-    @years= video_search.aggs["year"]["buckets"]
-                        .sort_by{ |b| b["doc_count"] }
-                        .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+      @followers= video_search.aggs["follower"]["buckets"]
+                              .sort_by{ |b| b["doc_count"] }
+                              .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+
+      @orchestras= video_search.aggs["orchestra"]["buckets"]
+                              .sort_by{ |b| b["doc_count"] }
+                              .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+
+      @years= video_search.aggs["year"]["buckets"]
+                          .sort_by{ |b| b["doc_count"] }
+                          .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+    end
 
     if sorting_params.empty? && @pagy.next && (filtering_for_dancer? || dancer_name_match?)
 
