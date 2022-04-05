@@ -106,13 +106,13 @@ class VideosController < ApplicationController
   end
 
   def show
-    # if @video.present?
-    #   UpdateVideoWorker.perform_async(@video.youtube_id)
-    # else
-    #   Video::YoutubeImport.from_video(show_params[:v])
-    #   @video = Video.find_by(youtube_id: show_params[:v])
-    #   UpdateVideoWorker.perform_async(show_params[:v])
-    # end
+    if @video.present?
+      UpdateVideoWorker.perform_async(@video.youtube_id)
+    else
+      Video::YoutubeImport.from_video(show_params[:v])
+      @video = Video.find_by(youtube_id: show_params[:v])
+      UpdateVideoWorker.perform_async(show_params[:v])
+    end
     set_recommended_videos
     @start_value = params[:start]
     @end_value = params[:end]
@@ -129,9 +129,9 @@ class VideosController < ApplicationController
     @yt_comments = @video.yt_comments.limit(10)
 
     @video.clicked!
-    # if user_signed_in?
-    #   MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
-    # end
+    if user_signed_in?
+      MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
+    end
     ahoy.track("Video View", video_id: @video.id)
   end
 
