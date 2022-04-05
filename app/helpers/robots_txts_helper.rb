@@ -1,0 +1,2 @@
+module RobotsTxtsHelper
+end
