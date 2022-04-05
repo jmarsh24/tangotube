@@ -46,4 +46,4 @@ yarn-debug.log*
 !/app/assets/builds/.keep
 
 /app/assets/builds
-/data.ms/*
+latest.dump

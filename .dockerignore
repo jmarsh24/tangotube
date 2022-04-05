@@ -13,4 +13,4 @@
  config/credentials/*.key
 
  node_modules
- data.ms/*
+latest.dump

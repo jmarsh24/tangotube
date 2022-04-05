@@ -1,4 +1,4 @@
-# fly.toml file generated for tangotube on 2022-03-28T22:40:27+02:00
+# fly.toml file generated for tangotube on 2022-04-05T16:16:37+02:00
 
 app = "tangotube"
 
@@ -9,9 +9,9 @@ processes = []
 [build]
 
   [build.args]
-    BUNDLER_VERSION = "2.2.32"
+    BUNDLER_VERSION = "2.3.10"
     NODE_VERSION = "14"
-    RUBY_VERSION = "3.0.3"
+    RUBY_VERSION = "3.1.0"
 
 [deploy]
   release_command = "bundle exec rails db:migrate"
