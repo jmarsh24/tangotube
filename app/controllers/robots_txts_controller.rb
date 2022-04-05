@@ -1,5 +1,4 @@
 class RobotsTxtsController < ApplicationController
-  skip_before_action :require_login
 
   def show
     if disallow_all_crawlers?
