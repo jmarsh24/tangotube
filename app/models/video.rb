@@ -17,7 +17,9 @@ class Video < ApplicationRecord
                             :song_id,
                             :event_id,
                             :song_title,
-                            :channel_title]
+                            :channel_title,
+                            :dancer,
+                            :popularity]
 
 
   include Filterable
@@ -28,6 +30,7 @@ class Video < ApplicationRecord
       title: title,
       description: description,
       tags: tags,
+      dancer: dancer?,
       youtube_song: youtube_song,
       youtube_artist: youtube_artist,
       acr_cloud_artist_name: acr_cloud_artist_name,
@@ -282,5 +285,9 @@ class Video < ApplicationRecord
 
   def watched_later_by
     votes_for.where(vote_scope: "watchlist").where(vote_flag: false).voters.map(&:id)
+  end
+
+  def dancer?
+    leader.present? || follower.present?
   end
 end

@@ -10,6 +10,7 @@ export default class extends Controller {
     watched: String,
     clear: String,
     liked: String,
+    dancer: String,
   };
 
   filter() {
@@ -42,6 +43,7 @@ export default class extends Controller {
     let watchedParam = ["watched", this.watchedValue];
     let clearParam = ["clear", this.clearValue];
     let likedParam = ["liked", this.likedValue];
+    let dancerParam = ["dancer", this.dancerValue];
     let extraParams = [
       sortParam,
       directionParam,
@@ -49,6 +51,7 @@ export default class extends Controller {
       watchedParam,
       clearParam,
       likedParam,
+      dancerParam,
     ];
 
     extraParams.forEach((element) => {
