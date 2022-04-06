@@ -8,5 +8,5 @@ production:
   - high
   - ahoy
   - mailers
-  - meilisearch
+  - searchkick
   - default
