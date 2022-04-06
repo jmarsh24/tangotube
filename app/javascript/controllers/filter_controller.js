@@ -85,6 +85,8 @@ export default class extends Controller {
       var parsedData = parser.parseFromString(data, "text/html");
 
       const replaceContainers = [
+        "button-filter",
+        "button-sorting",
         "genre-filter",
         "leader-filter",
         "follower-filter",
@@ -99,9 +101,9 @@ export default class extends Controller {
       ];
 
       replaceContainers.forEach((element) => {
-        document.getElementById(element).innerHTML = parsedData.getElementById(
+        document.getElementById(element).outerHTML = parsedData.getElementById(
           element
-        ).innerHTML;
+        ).outerHTML;
       });
 
       history.pushState({}, "", `${window.location.pathname}?${this.params}`);
