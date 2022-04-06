@@ -38,7 +38,8 @@ class VideosController < ApplicationController
                                           where: filters,
                                           order: { sort_column => sort_direction },
                                           includes: [:song, :leader, :follower, :event, :channel],
-                                          misspellings: {edit_distance: 5})
+                                          misspellings: {edit_distance: 5},
+                                          body_options: {track_total_hits: true})
       @pagy, @videos = pagy_searchkick(videos, items: 60)
     else
       videos = Video.includes(:song, :leader, :follower, :event, :channel)

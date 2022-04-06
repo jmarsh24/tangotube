@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
   acts_as_votable cacheable_strategy: :update_columns
-  searchkick filterable: [ :orchestra,
+  searchkick  callbacks: :async,
+              filterable: [ :orchestra,
                             :year,
                             :channel,
                             :genre,
@@ -25,47 +26,11 @@ class Video < ApplicationRecord
   include Filterable
   extend Pagy::Searchkick
 
-  def search_data
-    {
-      title: title,
-      description: description,
-      tags: tags,
-      dancer: dancer?,
-      youtube_song: youtube_song,
-      youtube_artist: youtube_artist,
-      acr_cloud_artist_name: acr_cloud_artist_name,
-      spotify_artist_name: spotify_artist_name,
-      spotify_track_name: spotify_track_name,
-      youtube_id: youtube_id,
-      popularity: popularity,
-      hd: hd,
-      view_count: view_count,
-      like_count: like_count,
-      leader: leader&.normalized_name&.parameterize,
-      follower: follower&.normalized_name&.parameterize,
-      channel_title: channel&.title,
-      channel: channel&.channel_id,
-      song_id: song_id,
-      song_title: song&.title,
-      genre: song&.genre&.parameterize,
-      orchestra: song&.artist&.parameterize,
-      event_id: event_id,
-      event: event&.title,
-      liked_by: liked_by,
-      disliked_by: disliked_by,
-      watched_by: watched_by,
-      not_watched_by: not_watched_by,
-      bookmarked_by: bookmarked_by,
-      watched_later_by: watched_later_by,
-      year: performance_date&.year
-    }
-  end
-
   PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  after_touch :reindex
+  after_commit :reindex_video
 
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
@@ -201,6 +166,46 @@ class Video < ApplicationRecord
     def trigger_sidekiq_job(record, remove)
       IndexVideoJob.perform_async(record.id, remove)
     end
+  end
+
+  def search_data
+    {
+      title: title,
+      description: description,
+      tags: tags,
+      dancer: dancer?,
+      youtube_song: youtube_song,
+      youtube_artist: youtube_artist,
+      acr_cloud_artist_name: acr_cloud_artist_name,
+      spotify_artist_name: spotify_artist_name,
+      spotify_track_name: spotify_track_name,
+      youtube_id: youtube_id,
+      popularity: popularity,
+      hd: hd,
+      view_count: view_count,
+      like_count: like_count,
+      leader: leader&.normalized_name&.parameterize,
+      follower: follower&.normalized_name&.parameterize,
+      channel_title: channel&.title,
+      channel: channel&.channel_id,
+      song_id: song_id,
+      song_title: song&.title,
+      genre: song&.genre&.parameterize,
+      orchestra: song&.artist&.parameterize,
+      event_id: event_id,
+      event: event&.title,
+      liked_by: liked_by,
+      disliked_by: disliked_by,
+      watched_by: watched_by,
+      not_watched_by: not_watched_by,
+      bookmarked_by: bookmarked_by,
+      watched_later_by: watched_later_by,
+      year: performance_date&.year
+    }
+  end
+
+  def reindex_video
+    reindex
   end
 
   def grep_title_leader_follower

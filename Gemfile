@@ -31,6 +31,7 @@ gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
 gem "nokogiri"
+gem "oj"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
