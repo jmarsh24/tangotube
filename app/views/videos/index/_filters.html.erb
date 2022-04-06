@@ -1,6 +1,11 @@
 <div class="filters" id="filters">
   <sl-dropdown stay-open-on-select>
-    <sl-button slot="trigger">
+    <sl-button slot="trigger"
+      id="button-filter"
+        <% if filtering_params.present? %>
+          variant="primary"
+        <% end %>
+        outline>
       Filter
     </sl-button>
     <sl-menu>
@@ -78,7 +83,12 @@
     </sl-menu>
   </sl-dropdown>
   <sl-dropdown stay-open-on-select>
-    <sl-button slot="trigger">
+    <sl-button slot="trigger"
+          id="button-sorting"
+        <% if sorting_params.present? %>
+          variant="primary"
+        <% end %>
+        outline>
       Sorting
     </sl-button>
     <sl-menu>
