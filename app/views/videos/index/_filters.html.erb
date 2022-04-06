@@ -62,6 +62,18 @@
             HD
           <% end %>
         <% end %>
+        <%= button_tag type: "button",
+                        class: "additional-filters-button",
+                        data: { controller: "filter",
+                        action: "filter#filter",
+                                "filter-dancer-value": filtering_params["dancer"] == "true" ? 0 : "true" } do %>
+          <% if filtering_params["dancer"] == "true" %>
+            <%= content_tag(:b, "With Dancer") %>
+            <%= fa_icon("times", class: "videos-sortable-icon") %>
+          <% else %>
+            With Dancer
+          <% end %>
+        <% end %>
       </div>
     </sl-menu>
   </sl-dropdown>
