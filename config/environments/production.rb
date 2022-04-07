@@ -104,4 +104,6 @@ Rails.application.configure do
                       compress: true,
                       pool_size: 5,
                       expire_after: 1.year
+
+  config.action_view.image_loading = "lazy"
 end
