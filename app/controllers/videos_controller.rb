@@ -136,7 +136,7 @@ class VideosController < ApplicationController
 
     @video.clicked!
     if user_signed_in?
-      video.upvote_by(current_user, vote_scope: "watchlist")
+      @video.upvote_by(current_user, vote_scope: "watchlist")
     end
     ahoy.track("Video View", video_id: @video.id)
   end
