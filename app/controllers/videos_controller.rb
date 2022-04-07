@@ -39,6 +39,8 @@ class VideosController < ApplicationController
                                           order: { sort_column => sort_direction },
                                           includes: [:song, :leader, :follower, :event, :channel],
                                           misspellings: {edit_distance: 5},
+                                          fields: [:title],
+                                          match: :text_middle,
                                           body_options: {track_total_hits: true})
       @pagy, @videos = pagy_searchkick(videos, items: 60)
     else
@@ -53,6 +55,7 @@ class VideosController < ApplicationController
       video_search = Video.search(filtering_params[:query].presence || "*",
                                     where: filters,
                                     aggs: [:genre, :leader, :follower, :orchestra, :year],
+                                    match: [:title, :description, :leader, :follower],
                                     misspellings: {edit_distance: 10})
 
       @genres= video_search.aggs["genre"]["buckets"]
@@ -133,7 +136,7 @@ class VideosController < ApplicationController
 
     @video.clicked!
     if user_signed_in?
-      MarkVideoAsWatchedJob.perform_async(@video.youtube_id, current_user.id)
+      video.upvote_by(current_user, vote_scope: "watchlist")
     end
     ahoy.track("Video View", video_id: @video.id)
   end
