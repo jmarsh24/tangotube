@@ -6,7 +6,7 @@ production:
   :timeout: 10
 :queues:
   - high
-  - ahoy
   - mailers
   - searchkick
   - default
+  - ahoy
