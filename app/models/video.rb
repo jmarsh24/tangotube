@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
   acts_as_votable cacheable_strategy: :update_columns
   searchkick  callbacks: :async,
+              batch_size: 500,
               text_middle: [:title, :description, :leader, :follower],
               filterable: [ :orchestra,
                             :year,
