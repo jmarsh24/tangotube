@@ -39,16 +39,15 @@ class VideosController < ApplicationController
                                           order: { sort_column => sort_direction },
                                           includes: [:song, :leader, :follower, :event, :channel],
                                           misspellings: {edit_distance: 5},
-                                          fields: [:title],
                                           match: :text_middle,
                                           body_options: {track_total_hits: true})
-      @pagy, @videos = pagy_searchkick(videos, items: 60)
+      @pagy, @videos = pagy_searchkick(videos, items: 24)
     else
       videos = Video.includes(:song, :leader, :follower, :event, :channel)
                     .most_viewed_videos_by_month
                     .has_leader
                     .has_follower
-      @pagy, @videos = pagy(videos.order("random()"), items: 60)
+      @pagy, @videos = pagy(videos.order("random()"), items: 24)
     end
 
     if @page == 1
