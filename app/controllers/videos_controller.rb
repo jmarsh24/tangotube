@@ -39,7 +39,6 @@ class VideosController < ApplicationController
                                           order: { sort_column => sort_direction },
                                           includes: [:song, :leader, :follower, :event, :channel],
                                           misspellings: {edit_distance: 5},
-                                          match: :text_middle,
                                           body_options: {track_total_hits: true})
       @pagy, @videos = pagy_searchkick(videos, items: 24)
     else
