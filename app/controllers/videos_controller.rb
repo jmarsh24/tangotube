@@ -84,19 +84,19 @@ class VideosController < ApplicationController
                                     where: filters,
                                     order: { "year" => "desc" },
                                     includes: [:song, :leader, :follower, :event, :channel],
-                                    limit: 10)
+                                    limit: 8)
 
       @videos_oldest = Video.search(filtering_params[:query].presence || "*",
                               where: filters,
                               order: { "year" => "asc" },
                               includes: [:song, :leader, :follower, :event, :channel],
-                              limit: 10)
+                              limit: 8)
 
       @videos_most_viewed = Video.search(filtering_params[:query].presence || "*",
                                     where: filters,
                                     order: { "view_count" => "desc" },
                                     includes: [:song, :leader, :follower, :event, :channel],
-                                    limit: 10)
+                                    limit: 8)
     end
 
     respond_to do |format|
