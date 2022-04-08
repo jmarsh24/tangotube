@@ -11,6 +11,12 @@
   }
 }
 
+.index-container {
+  width: 100%;
+  max-width: 1660px;
+  padding: 0 40px;
+}
+
 .video-container {
   display: flex;
   flex-direction: column;
@@ -174,6 +180,10 @@
 
 @media (max-width: 800px) {
   .videos {
+    padding: 0px;
+  }
+
+  .index-container {
     padding: 0px;
   }
 
