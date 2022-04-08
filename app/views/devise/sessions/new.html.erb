@@ -12,7 +12,7 @@
   </div>
   <div style="margin-top: 8px;">
     <div style="width: 428px; padding: 40px 32px; border-radius: 8px; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); background-color: var(--sl-color-gray-200);">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
         <div style="display: flex; flex-direction: column; gap: 4px;">
           <%= f.label :email, class: "block text-sm font-medium leading-5 text-gray-700" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
