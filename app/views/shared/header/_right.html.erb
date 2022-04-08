@@ -1,35 +1,77 @@
-<div class="right">
-  <% unless user_signed_in? %>
-    <div class="buttons-desktop">
-      <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
-      <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
-    </div>
-  <% end %>
-  <div id="dropdown-avatar">
-    <sl-dropdown>
-      <sl-avatar
+<div class="right" data-controller="dark-mode">
+  <sl-tooltip content="Light/Dark Mode">
+    <sl-icon-button name="sun"
+                    label="Dark Mode"
+                    style="font-size: 18px;"
+                    data-dark-mode-target="switch"
+                    data-action="click->dark-mode#toggle">
+    </sl-icon-button>
+  </sl-tooltip>
+  <sl-tooltip content="Notifications">
+    <sl-icon-button name="bell" label="Notifications" style="font-size: 18px"></sl-icon-button>
+  </sl-tooltip>
+  <div id="mobile-login" class="login">
+    <div id="dropdown-avatar">
+      <sl-dropdown>
+        <sl-avatar
       slot="trigger"
       image="<%= avatar_url_for(current_user) %>"
       label="user_avatar"
       style="--size: 32px;">
-      </sl-avatar>
-      <sl-menu>
-        <% if user_signed_in? %>
-          <%= link_to edit_user_registration_path do %>
-            <sl-menu-item>Edit Profile</sl-menu-item>
+        </sl-avatar>
+        <sl-menu>
+          <% if user_signed_in? %>
+            <%= link_to edit_user_registration_path do %>
+              <sl-menu-item>Edit Profile</sl-menu-item>
+            <% end %>
+            <%= button_to destroy_user_session_path, data: { turbo: false }, method: :delete do %>
+              <sl-menu-item>Sign Out</sl-menu-item>
+            <% end %>
+          <% else %>
+            <%= link_to new_user_session_path do %>
+              <sl-menu-item>Login</sl-menu-item>
+            <% end %>
+            <%= link_to new_user_registration_path do %>
+              <sl-menu-item>Sign Up</sl-menu-item>
+            <% end %>
           <% end %>
-          <%= button_to destroy_user_session_path, data: { turbo: false }, method: :delete do %>
-            <sl-menu-item>Sign Out</sl-menu-item>
-          <% end %>
-        <% else %>
-          <%= link_to new_user_session_path do %>
-            <sl-menu-item>Login</sl-menu-item>
-          <% end %>
-          <%= link_to new_user_registration_path do %>
-            <sl-menu-item>Sign Up</sl-menu-item>
-          <% end %>
-        <% end %>
-      </sl-menu>
-    </sl-dropdown>
+        </sl-menu>
+      </sl-dropdown>
+    </div>
+  </div>
+  <div id="desktop-login" class="login">
+    <% if !user_signed_in? %>
+      <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
+      <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
+    <% end %>
+    <% if user_signed_in? %>
+      <div id="dropdown-avatar">
+        <sl-dropdown>
+          <sl-avatar
+            slot="trigger"
+            image="<%= avatar_url_for(current_user) %>"
+            label="user_avatar"
+            style="--size: 32px;">
+          </sl-avatar>
+          <sl-menu>
+            <% if user_signed_in? %>
+              <%= link_to edit_user_registration_path do %>
+                <sl-menu-item>Edit Profile</sl-menu-item>
+              <% end %>
+              <%= button_to destroy_user_session_path, data: { turbo: false }, method: :delete do %>
+                <sl-menu-item>Sign Out</sl-menu-item>
+              <% end %>
+            <% else %>
+              <%= link_to new_user_session_path do %>
+                <sl-menu-item>Login</sl-menu-item>
+              <% end %>
+              <%= link_to new_user_registration_path do %>
+                <sl-menu-item>Sign Up</sl-menu-item>
+              <% end %>
+            <% end %>
+          </sl-menu>
+        </sl-dropdown>
+      </div>
+    <% end %>
   </div>
 </div>

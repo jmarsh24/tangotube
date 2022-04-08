@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 1660px;
   gap: 10px;
-  padding: 10px 40px;
+  padding: 10px 0;
   background-color: var(--sl-color-neutral-0);
 }
 
@@ -64,110 +64,3 @@
 .select-filter {
   position: static;
 }
-
-// .filter-sorting-container {
-//   position: relative;
-//   width: 100%;
-//   max-width: 1660px;
-//   padding: 0 40px;
-// }
-
-// .filter-header {
-//   display: flex;
-//   flex-direction: row;
-//   padding: 16px 0;
-//   justify-content: space-between;
-//   background-color: var(--sl-color-gray-50);
-//   color: var(--sl-color-gray-800);
-// }
-
-// .filter-container-button-results {
-//   display: flex;
-//   gap: 10px;
-//   flex-direction: row;
-// }
-
-// .filter-hd {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-// }
-
-// .filter-button {
-//   display: flex;
-//   text-decoration: none;
-//   padding: 6px;
-//   border: 1px solid $border-color;
-//   background: $primary-color;
-//   border-radius: 3px;
-//   letter-spacing: 0.05em;
-//   align-items: center;
-//   font-size: 0.8rem;
-//   z-index: 1011;
-//   cursor: pointer;
-//   svg {
-//     height: 15px;
-//   }
-// }
-
-// #filter-button-text {
-//   font-size: 0.85rem;
-//   margin: 0 0 0 8px;
-// }
-
-// #filter_results {
-//   display: flex;
-//   font-size: 0.8rem;
-//   color: $primary-font-color;
-//   align-items: center;
-//   justify-content: center;
-// }
-
-// .filter-clear-button {
-//   display: flex;
-//   text-decoration: none;
-//   margin: 0 0 0 0.5em;
-//   padding: 7px;
-//   border: 1px solid $border-color;
-//   background: $primary-color;
-//   border-radius: 0.2em;
-//   align-items: center;
-//   letter-spacing: 0.05em;
-//   font-size: 0.7rem;
-//   z-index: 1011;
-//   cursor: pointer;
-//   &:hover {
-//     color: $sortable-label-color-hover;
-//   }
-// }
-
-// .filters {
-//   display: flex;
-//   height: 290px;
-// }
-
-// .filter-container-upper {
-//   display: flex;
-//   flex-wrap: wrap;
-//   height: 100%;
-// }
-
-// @media (max-width: 1220px) {
-//   .filters {
-//     flex-direction: column;
-//     gap: 250px;
-//     width: 250px;
-//     font-size: 50px;
-//     width: 100%;
-//   }
-//   .filter-container {
-//     height: 1420px;
-//     width: 270px;
-//   }
-// }
-
-// @media (max-width: 800px) {
-//   .filter-sorting-container {
-//     padding: 0 10px;
-//   }
-// }
