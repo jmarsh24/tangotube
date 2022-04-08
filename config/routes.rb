@@ -6,6 +6,12 @@ Rails.application.routes.draw do
 
   get 'errors/not_found'
   get 'errors/internal_server_error'
+
+  devise_scope :user do
+    # Redirests signing out users back to sign-in
+    get "users", to: "devise/sessions#new"
+  end
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
                                     confirmations: 'confirmations',
                                     registrations: 'registrations' }

@@ -46,6 +46,7 @@ class VideosController < ApplicationController
                     .most_viewed_videos_by_month
                     .has_leader
                     .has_follower
+                    .load_async
       @pagy, @videos = pagy(videos.order("random()"), items: 24)
     end
 
