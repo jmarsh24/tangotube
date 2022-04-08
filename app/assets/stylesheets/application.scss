@@ -66,12 +66,6 @@ body {
   font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 60px);
-}
-
 .isHidden {
   display: none !important;
 }

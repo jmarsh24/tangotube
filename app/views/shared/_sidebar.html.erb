@@ -1,63 +1,64 @@
-<sl-drawer no-header placement="start" id="drawer-placement-left" style="--size: 240px;" data-drawer-target="drawer">
-  <nav style="margin: -20px;" data-controller="dark-mode">
-    <div class="row" style="margin-left: 20px; gap: 10px; height: 60px; align-items: center; color: var(--sl-color-gray-800); cursor: pointer;">
-      <sl-icon class="cursor-pointer" style="font-size: 20px; color: var(--sl-color-gray-800);" name="list" data-action="click->drawer#hide"></sl-icon>
-      <%= link_to root_path do %>
-        <h3>TangoTube</h3>
-      <% end %>
+<sl-drawer no-header placement="start" id="drawer-placement-left" class="drawer" style="--size: 240px; --body-spacing: 0;" data-drawer-target="drawer">
+  <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100vh;">
+    <div>
+      <div class="row" style="margin-left: 20px; gap: 10px; height: 56px; align-items: center; color: var(--sl-color-gray-800); cursor: pointer;">
+        <sl-icon class="cursor-pointer" style="font-size: 20px; color: var(--sl-color-gray-800);" name="list" data-action="click->drawer#hide"></sl-icon>
+        <%= link_to root_path do %>
+          <h3>TangoTube</h3>
+        <% end %>
+      </div>
+      <nav>
+        <sl-divider style="margin: 0; margin-bottom: 16px;"></sl-divider>
+        <%= link_to root_path do %>
+          <sl-menu-item>
+            <%= fa_icon("home") %>
+            <span>Home</span>
+          </sl-menu-item>
+        <% end %>
+        <% if false %>
+          <%= link_to clips_path do %>
+            <sl-menu-item href="<%= clips_path %>">
+              <%= fa_icon("scissors") %>
+              <span>Global Clips</span>
+            </sl-menu-item>
+          <% end %>
+        <% end %>
+        <sl-divider style="margin:16px 0;"></sl-divider>
+        <% if user_signed_in? %>
+          <%= link_to root_path(watched: false) do %>
+            <sl-menu-item>
+              <%= fa_icon("compass") %>
+              <span>Explore</span>
+            </sl-menu-item>
+          <% end %>
+          <%= link_to root_path(watched: true) do %>
+            <sl-menu-item>
+              <%= fa_icon("clock") %>
+              <span>History</span>
+            </sl-menu-item>
+          <% end %>
+          <%= link_to root_path(liked: true) do %>
+            <sl-menu-item>
+              <%= fa_icon("thumbs-up") %>
+              <span>Liked Videos</span>
+            </sl-menu-item>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path do %>
+            <sl-menu-item>
+              <span>Login</span>
+            </sl-menu-item>
+          <% end %>
+          <%= link_to new_user_registration_path do %>
+            <sl-menu-item>
+              <span>Sign Up</span>
+            </sl-menu-item>
+          <% end %>
+        <% end %>
+      </nav>
     </div>
-    <sl-divider style="margin-bottom: 16px"></sl-divider>
-    <sl-switch style="margin: 12px 0 12px 25px;" data-dark-mode-target="switch" data-action="sl-change->dark-mode#toggle">
-      Dark Mode
-    </sl-switch>
-    <sl-divider style="margin:16px 0"></sl-divider>
-    <%= link_to root_path do %>
-      <sl-menu-item>
-        <%= fa_icon("home") %>
-        <span>Home</span>
-      </sl-menu-item>
-    <% end %>
-    <% if false %>
-      <%= link_to clips_path do %>
-        <sl-menu-item href="<%= clips_path %>">
-          <%= fa_icon("scissors") %>
-          <span>Global Clips</span>
-        </sl-menu-item>
-      <% end %>
-    <% end %>
-    <sl-divider style="margin:16px 0"></sl-divider>
-    <% if user_signed_in? %>
-      <%= link_to root_path(watched: false) do %>
-        <sl-menu-item>
-          <%= fa_icon("compass") %>
-          <span>Explore</span>
-        </sl-menu-item>
-      <% end %>
-      <%= link_to root_path(watched: true) do %>
-        <sl-menu-item>
-          <%= fa_icon("clock") %>
-          <span>History</span>
-        </sl-menu-item>
-      <% end %>
-      <%= link_to root_path(liked: true) do %>
-        <sl-menu-item>
-          <%= fa_icon("thumbs-up") %>
-          <span>Liked Videos</span>
-        </sl-menu-item>
-      <% end %>
-    <% else %>
-      <%= link_to new_user_session_path do %>
-        <sl-menu-item>
-          <span>Login</span>
-        </sl-menu-item>
-      <% end %>
-      <%= link_to new_user_registration_path do %>
-        <sl-menu-item>
-          <span>Sign Up</span>
-        </sl-menu-item>
-      <% end %>
-    <% end %>
-  </nav>
+    <%= render "shared/footer" %>
+  </div>
 </sl-drawer>
 <%#= link_to fa_icon("book"), "#" do %>
   <%# <span>Library</span> %>

@@ -14,13 +14,10 @@
   </head>
   <body data-controller="toggle drawer">
     <%= render "shared/header" %>
-    <main>
-      <%= render "shared/sidebar" %>
-      <div class="content">
-        <%= render "shared/flash" %>
-        <%= yield %>
-        <%= render "shared/footer" %>
-      </div>
-    </main>
+    <%= render "shared/sidebar" %>
+    <div class="content">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -7,17 +7,9 @@
 
   #dropdown-avatar {
     cursor: pointer;
-  }
-
-  .buttons {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .buttons-desktop {
-    display: flex;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
   }
 
   .dropdown {
@@ -57,10 +49,23 @@
       color: rgb(3, 3, 3);
       cursor: pointer;
     }
+
+    .login {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #mobile-login: {
+      display: none;
+    }
   }
 
   @media (max-width: 600px) {
-    .buttons-desktop {
+    #mobile-login {
+      display: flex;
+    }
+    #desktop-login {
       display: none;
     }
   }
@@ -71,6 +76,10 @@
     }
     .dropdown {
       display: none;
+    }
+
+    #desktop-login {
+      display: flex;
     }
   }
 }

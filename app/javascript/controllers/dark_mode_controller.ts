@@ -20,17 +20,19 @@ export default class extends Controller {
     // }
 
     if (this.htmlElement.classList.contains("sl-theme-dark")) {
-      this.switchTarget.setAttribute("checked", "")
+      this.switchTarget.setAttribute("name", "sun")
     }
   }
 
   toggle() {
-    if (this.switchTarget.checked) {
-      this.htmlElement.classList.add("sl-theme-dark")
-      localStorage.setItem('darkModeStatus', "true");
-    } else {
+    if (this.htmlElement.classList.contains("sl-theme-dark")) {
       this.htmlElement.classList.remove("sl-theme-dark")
       localStorage.setItem('darkModeStatus', "false");
+      this.switchTarget.setAttribute("name", "sun-fill")
+    } else {
+      this.htmlElement.classList.add("sl-theme-dark")
+      localStorage.setItem('darkModeStatus', "true");
+      this.switchTarget.setAttribute("name", "sun")
     }
   }
 
