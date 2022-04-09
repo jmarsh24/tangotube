@@ -111,13 +111,13 @@ class VideosController < ApplicationController
   end
 
   def show
-    if @video.present?
-      UpdateVideoWorker.perform_async(@video.youtube_id)
-    else
-      Video::YoutubeImport.from_video(show_params[:v])
-      @video = Video.find_by(youtube_id: show_params[:v])
-      UpdateVideoWorker.perform_async(show_params[:v])
-    end
+    # if @video.present?
+    #   UpdateVideoWorker.perform_async(@video.youtube_id)
+    # else
+    #   Video::YoutubeImport.from_video(show_params[:v])
+    #   @video = Video.find_by(youtube_id: show_params[:v])
+    #   UpdateVideoWorker.perform_async(show_params[:v])
+    # end
     set_recommended_videos
     @start_value = params[:start]
     @end_value = params[:end]

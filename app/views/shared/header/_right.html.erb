@@ -1,15 +1,26 @@
 <div class="right" data-controller="dark-mode">
-  <sl-tooltip content="Light/Dark Mode">
-    <sl-icon-button name="sun"
+  <sl-drawer no-header id="mobile-drawer-top" label="Drawer" placement="top" class="drawer-placement-top" style="--size: 450px; --body-spacing: 0 12px;">
+    <div style="display: flex; align-items: center">
+      <sl-icon-button name="chevron-left" id="search-close"></sl-icon-button>
+      <%= render "shared/header/search", id: "mobile-search" %>
+    </div>
+  </sl-drawer>
+  <sl-icon-button name="search" id="mobile-search-icon"></sl-icon-button>
+  <script>
+    const topDrawer = document.querySelector('.drawer-placement-top');
+    const searchCloseButton = document.querySelector('#search-close');
+    const openButton = document.querySelector('#mobile-search-icon');
+
+    searchCloseButton.addEventListener('click', () => topDrawer.hide());
+    openButton.addEventListener('click', () => topDrawer.show());
+  </script>
+  <sl-icon-button name="sun"
                     label="Dark Mode"
                     style="font-size: 18px;"
                     data-dark-mode-target="switch"
                     data-action="click->dark-mode#toggle">
-    </sl-icon-button>
-  </sl-tooltip>
-  <sl-tooltip content="Notifications">
-    <sl-icon-button name="bell" label="Notifications" style="font-size: 18px"></sl-icon-button>
-  </sl-tooltip>
+  </sl-icon-button>
+  <sl-icon-button name="bell" label="Notifications" style="font-size: 18px"></sl-icon-button>
   <div id="mobile-login" class="login">
     <div id="dropdown-avatar">
       <sl-dropdown>

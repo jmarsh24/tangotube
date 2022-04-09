@@ -34,15 +34,8 @@ class SearchSuggestionsController < ApplicationController
           .first(10)
           .map(&:titleize)
 
-
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.update("search_results",
-          partial: "search_suggestions/search_results",
-          locals: { search_results: @search_results })
-        ]
-      end
+      format.turbo_stream
     end
   end
 end
