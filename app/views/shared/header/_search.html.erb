@@ -2,6 +2,7 @@
   <%= form_with url: root_path,
         method: :get,
         class: "searchBarContainer",
+        id: id,
         data: { controller: "form",
                         "form-url": search_search_suggestions_path,
                         action: "invalid->form#hideValidationMessage:capture"
@@ -17,6 +18,6 @@
                                                   "combobox-target": "input",
                                                   "form-target": "input" } %>
     <%= f.button fa_icon("search"), name: nil, type: 'submit' %>
-    <%= render "shared/header/search/autocomplete" %>
+    <%= render "shared/header/search/autocomplete", id: id %>
   <% end %>
 </div>

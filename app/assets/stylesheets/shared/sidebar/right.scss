@@ -68,6 +68,9 @@
     #desktop-login {
       display: none;
     }
+    #mobile-drawer-top {
+      display: block;
+    }
   }
 
   @media (min-width: 600px) {
@@ -84,6 +87,9 @@
 
     #desktop-login {
       display: flex;
+    }
+    #mobile-drawer-top {
+      display: none;
     }
   }
 }

@@ -62,3 +62,19 @@
     display: none;
   }
 }
+
+@media (min-width: 600px) {
+  #mobile-search {
+    display: none;
+  }
+
+  #mobile-search-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  #desktop-search {
+    display: none;
+  }
+}
