@@ -1,19 +1,17 @@
-<div class="right" data-controller="dark-mode">
-  <sl-drawer no-header id="mobile-drawer-top" label="Drawer" placement="top" class="drawer-placement-top" style="--size: 450px; --body-spacing: 0 12px;">
+<div class="right" data-controller="dark-mode drawer">
+  <sl-drawer no-header
+              id="mobile-drawer-top"
+              label="Drawer"
+              placement="top"
+              class="drawer-placement-top"
+              style="--size: 450px; --body-spacing: 0 12px;"
+              data-drawer-target="drawer">
     <div style="display: flex; align-items: center">
-      <sl-icon-button name="chevron-left" id="search-close"></sl-icon-button>
+      <sl-icon-button name="chevron-left" id="search-close" data-action="click->drawer#hide"></sl-icon-button>
       <%= render "shared/header/search", id: "mobile-search" %>
     </div>
   </sl-drawer>
-  <sl-icon-button name="search" id="mobile-search-icon"></sl-icon-button>
-  <script>
-    const topDrawer = document.querySelector('.drawer-placement-top');
-    const searchCloseButton = document.querySelector('#search-close');
-    const openButton = document.querySelector('#mobile-search-icon');
-
-    searchCloseButton.addEventListener('click', () => topDrawer.hide());
-    openButton.addEventListener('click', () => topDrawer.show());
-  </script>
+  <sl-icon-button name="search" id="mobile-search-icon" data-action="click->drawer#show"></sl-icon-button>
   <sl-icon-button name="sun"
                     label="Dark Mode"
                     style="font-size: 18px;"
