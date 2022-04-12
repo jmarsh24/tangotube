@@ -6,7 +6,7 @@
   padding-top: 16px;
   font-size: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: var(--sl-z-index-dropdown);
+  z-index: 100000000000;
   border-radius: 4px;
 }
 .search_results ul {
