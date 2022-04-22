@@ -33,7 +33,7 @@
             <%= link_to edit_user_registration_path do %>
               <sl-menu-item>Edit Profile</sl-menu-item>
             <% end %>
-            <%= button_to destroy_user_session_path, data: { turbo: false }, method: :delete do %>
+            <%= button_to destroy_user_session_path, method: :delete, data: { turbo: false } do %>
               <sl-menu-item>Sign Out</sl-menu-item>
             <% end %>
           <% else %>
@@ -67,7 +67,7 @@
               <%= link_to edit_user_registration_path do %>
                 <sl-menu-item>Edit Profile</sl-menu-item>
               <% end %>
-              <%= button_to destroy_user_session_path, data: { turbo: false }, method: :delete do %>
+              <%= button_to destroy_user_session_path, method: :delete, data: { turbo: false } do %>
                 <sl-menu-item>Sign Out</sl-menu-item>
               <% end %>
             <% else %>

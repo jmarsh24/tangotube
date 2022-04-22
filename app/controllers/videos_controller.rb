@@ -74,7 +74,7 @@ class VideosController < ApplicationController
                               .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
 
       @years= video_search.aggs["year"]["buckets"]
-                          .sort_by{ |b| b["doc_count"] }
+                          .sort_by{ |b| b["key"] }
                           .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
     end
 
