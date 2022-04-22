@@ -54,7 +54,6 @@ class VideosController < ApplicationController
       video_search = Video.search(filtering_params[:query].presence || "*",
                                     where: filters,
                                     aggs: [:genre, :leader, :follower, :orchestra, :year],
-                                    match: [:title, :description, :leader, :follower],
                                     misspellings: {edit_distance: 10})
 
       @genres= video_search.aggs["genre"]["buckets"]
