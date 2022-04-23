@@ -29,7 +29,7 @@ class Video < ApplicationRecord
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  after_commit :reindex_video
+  after_commit :reindex
 
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
