@@ -3,13 +3,13 @@
   <%= render "videos/index/videos/header" %>
   <div id="videos">
     <% if @videos_most_recent.present? %>
-      <%= render partial: "videos/index/videos/section", locals: { videos: @videos_most_recent, section_title: "Most Recent", sort_value: "year", direction_value: "desc" } %>
+      <%#= render partial: "videos/index/videos/section", locals: { videos: @videos_most_recent, section_title: "Most Recent", sort_value: "year", direction_value: "desc" } %>
     <% end %>
     <% if @videos_oldest.present? %>
-      <%= render partial: "videos/index/videos/section", locals: { videos: @videos_oldest, section_title: "Oldest", sort_value: "year", direction_value: "asc" } %>
+      <%#= render partial: "videos/index/videos/section", locals: { videos: @videos_oldest, section_title: "Oldest", sort_value: "year", direction_value: "asc" } %>
     <% end %>
     <% if @videos_most_viewed.present? %>
-      <%= render partial: "videos/index/videos/section", locals: { videos: @videos_most_viewed, section_title: "Most Viewed", sort_value: "view_count", direction_value: "desc" } %>
+      <%#= render partial: "videos/index/videos/section", locals: { videos: @videos_most_viewed, section_title: "Most Viewed", sort_value: "view_count", direction_value: "desc" } %>
     <% end %>
     <div class="video-section">
       <div class="video-section__videos" id="results">
