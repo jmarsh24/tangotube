@@ -1,5 +1,5 @@
 class Video < ApplicationRecord
-  acts_as_votable cacheable_strategy: :update_columns
+  acts_as_votable
   searchkick  callbacks: :async,
               filterable: [ :orchestra,
                             :year,
@@ -29,7 +29,7 @@ class Video < ApplicationRecord
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  after_commit :reindex
+  after_save :reindex_video
 
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
@@ -208,11 +208,9 @@ class Video < ApplicationRecord
   end
 
   def grep_title_leader_follower
-
     self.leader = Leader.all.find { |leader| title.parameterize.match(leader.name.parameterize) }
     self.follower = Follower.all.find { |follower| title.parameterize.match(follower.name.parameterize) }
     save
-
   end
 
   def grep_performance_number
@@ -230,7 +228,6 @@ class Video < ApplicationRecord
   end
 
   def grep_title_description_acr_cloud_song
-
     array = []
     array << title if title.present?
     array << description if description.present?
@@ -250,7 +247,6 @@ class Video < ApplicationRecord
                     .find_all { |song| search_string.parameterize.match(song.title.parameterize)}
                     .find { |song| search_string.parameterize.match(song.last_name_search.parameterize)}
     save
-
   end
 
   def display
