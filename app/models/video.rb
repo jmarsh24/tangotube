@@ -275,7 +275,7 @@ class Video < ApplicationRecord
   end
 
   def not_watched_by
-    User.all.pluck(:id) - votes_for.where(vote_scope: "watchlist").where(vote_flag: false).voters.map(&:id)
+    User.all.pluck(:id) - votes_for.where(vote_scope: "watchlist").where(vote_flag: true).voters.map(&:id)
   end
 
   def bookmarked_by
