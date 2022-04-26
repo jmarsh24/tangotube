@@ -38,8 +38,6 @@ class VideosController < ApplicationController
                                           where: filters,
                                           order: { sort_column => sort_direction },
                                           includes: [:song, :leader, :follower, :event, :channel],
-                                          fields: ["title^10", "leader^10", "follower^10", "song_title^5", "song_artist^5"],
-                                          boost_by: [:popularity],
                                           misspellings: {edit_distance: 5},
                                           body_options: {track_total_hits: true})
       @pagy, @videos = pagy_searchkick(videos, items: 24)
