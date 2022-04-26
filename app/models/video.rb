@@ -19,8 +19,7 @@ class Video < ApplicationRecord
                             :event_id,
                             :song_title,
                             :channel_title,
-                            :dancer,
-                            :popularity]
+                            :dancer]
 
   include Filterable
   extend Pagy::Searchkick
