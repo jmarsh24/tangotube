@@ -9,11 +9,21 @@
       Filter
     </sl-button>
     <sl-menu>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @genres , title: :genre, id: 'genre-filter', width: "200px" } %>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @leaders, title: :leader, id: 'leader-filter', width: "300px" } %>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @followers, title: :follower, id: 'follower-filter', width: "300px" } %>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @orchestras, title: :orchestra, id: 'orchestra-filter', width: "300px" } %>
-      <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @years, title: :year, id: 'year-filter', width: "200px" } %>
+      <%= turbo_frame_tag :filter , loading: :lazy do %>
+        <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @genres , title: :genre, id: 'genre-filter', width: "200px" } %>
+      <% end %>
+      <%= turbo_frame_tag :filter , loading: :lazy do %>
+        <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @leaders, title: :leader, id: 'leader-filter', width: "300px" } %>
+      <% end %>
+      <%= turbo_frame_tag :filter , loading: :lazy do %>
+        <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @followers, title: :follower, id: 'follower-filter', width: "300px" } %>
+      <% end %>
+      <%= turbo_frame_tag :filter , loading: :lazy do %>
+        <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @orchestras, title: :orchestra, id: 'orchestra-filter', width: "300px" } %>
+      <% end %>
+      <%= turbo_frame_tag :filter , loading: :lazy do %>
+        <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @years, title: :year, id: 'year-filter', width: "200px" } %>
+      <% end %>
       <sl-menu-label>Additional Filters</sl-menu-label>
       <sl-divider style="margin:12px 0;"></sl-divider>
       <div id="menu-additional-filters">
