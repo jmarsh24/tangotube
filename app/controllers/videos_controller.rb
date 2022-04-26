@@ -38,6 +38,8 @@ class VideosController < ApplicationController
                                           where: filters,
                                           order: { sort_column => sort_direction },
                                           includes: [:song, :leader, :follower, :event, :channel],
+                                          fields: ["title^10", "leader^10", "follower^10", "song_title^5", "song_artist^5"],
+                                          boost_by: [:popularity],
                                           misspellings: {edit_distance: 5},
                                           body_options: {track_total_hits: true})
       @pagy, @videos = pagy_searchkick(videos, items: 24)
@@ -135,7 +137,7 @@ class VideosController < ApplicationController
     @video.clicked!
 
     if user_signed_in?
-      MarkVideoAsWatchedJob.perform_async(show_params[:v])
+      MarkVideoAsWatchedJob.perform_async(show_params[:v], current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
   end
