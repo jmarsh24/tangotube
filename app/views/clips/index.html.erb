@@ -6,8 +6,10 @@
 <% end %>
 <div id="clips" class="clips">
   <div class="video-section">
-    <% @clips.each do |clip| %>
-      <%= render clip %>
-    <% end %>
+    <div class="video-section__videos">
+      <% @clips.each do |clip| %>
+        <%= render clip %>
+      <% end %>
+    </div>
   </div>
 </div>
