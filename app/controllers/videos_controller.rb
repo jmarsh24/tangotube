@@ -14,6 +14,10 @@ class VideosController < ApplicationController
 
     filters = filtering_params.except(:query, :liked, :watched)
 
+    if sorting_params.present?
+      order = { sort_column => sort_direction }
+    end
+
     if filtering_params.include?("watched")
       if filtering_params["watched"] == "true"
         filters.merge!({ watched_by: current_user.id })
@@ -36,7 +40,7 @@ class VideosController < ApplicationController
     if filtering_params.present? || sorting_params.present?
       videos = Video.pagy_search(filtering_params[:query].presence || "*",
                                           where: filters,
-                                          order: { sort_column => sort_direction },
+                                          order: order,
                                           includes: [:song, :leader, :follower, :event, :channel],
                                           fields: ["title^10", "leader^10", "follower^10", "song_title^5", "song_artist^5"],
                                           boost_by: [:popularity],
@@ -326,11 +330,11 @@ class VideosController < ApplicationController
   end
 
   def sort_column
-    @sort_column ||= sorting_params[:sort] || "popularity"
+    @sort_column ||= sorting_params[:sort]
   end
 
   def sort_direction
-    @sort_direction ||= sorting_params[:direction] || "desc"
+    @sort_direction ||= sorting_params[:direction]
   end
 
   def sorting_params

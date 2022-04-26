@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.1.0"
+ruby "3.1.2"
 
 # gems that ship with rails...........................................................
 gem "bootsnap", require: false
