@@ -133,8 +133,9 @@ class VideosController < ApplicationController
     @yt_comments = @video.yt_comments.limit(10)
 
     @video.clicked!
+
     if user_signed_in?
-      @video.upvote_by(current_user, vote_scope: "watchlist")
+      MarkVideoAsWatchedJob.perform_async(show_params[:v])
     end
     ahoy.track("Video View", video_id: @video.id)
   end
