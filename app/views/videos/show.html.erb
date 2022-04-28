@@ -34,9 +34,7 @@
     <%= render partial: "videos/show/video_info_primary" %>
     <div class="video-info-container-secondary">
       <div class="video-info-details-main">
-        <%= turbo_frame_tag "video_#{@video.youtube_id}" do %>
-          <%= render partial: "videos/show/video_info_details" %>
-        <% end %>
+        <%= render partial: "videos/show/video_info_details" %>
         <div class="container">
           <h3 style="margin-top: 10px; margin-bottom: 10px;">Comments</h3>
           <div id="comments">

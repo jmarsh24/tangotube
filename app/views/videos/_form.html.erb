@@ -70,19 +70,4 @@
     <%= f.submit 'Update Video' %>
     <%= link_to 'Back', watch_path(v: video.youtube_id), style: "font-size: 14px;" %>
   </div>
-  <div class="detail-section-label">
-    <h4>Video Info</h4>
-  </div>
-  <%= render partial: "videos/show/video_info_item",
-                    locals: { header: "Title",
-                    value:  video.title } %>
-  <%= render partial: "videos/show/video_info_item",
-                            locals: { header: "Description",
-                            value:  auto_link(simple_format(truncate(video.description, length: 200, omission: '')), html: { target: '_blank' }) } if video.description.present? %>
-  <%= render partial: "videos/show/video_info_item",
-                            locals: { header: "Upload Date",
-                            value: video.upload_date.to_formatted_s(:long) } %>
-  <%= render partial: "videos/show/video_info_item",
-                            locals: { header: "Duration",
-                            value: Time.at(video.duration).utc.strftime("%M:%S") } %>
 <% end %>

@@ -1,109 +1,117 @@
-<%= turbo_frame_tag "video_#{@video.youtube_id}" do %>
-  <% if @video.leader.present? || @video.follower.present? %>
-    <div class="detail-section-label">
-      <h4>Performers</h4>
-      <%= render partial: "videos/show/video_info_item",
+<sl-tab-group>
+  <sl-tab slot="nav" panel="general">Video Info</sl-tab>
+  <sl-tab slot="nav" panel="custom">Additional Info</sl-tab>
+  <sl-tab-panel name="general">
+    <%= turbo_frame_tag "video_#{@video.youtube_id}" do %>
+      <% if @video.leader.present? || @video.follower.present? %>
+        <div class="detail-section-label">
+          <h4>Performers</h4>
+          <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Leader",
                         value: link_to(@video.leader.try(:name),
                                         root_path(leader: @video.leader.normalized_name.parameterize), {'data-turbo-frame': "_top"}) } if @video.leader.present? %>
-      <%= render partial: "videos/show/video_info_item",
+          <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Follower",
                         value: link_to(@video.follower.try(:name),
                                         root_path(follower: @video.follower.normalized_name.parameterize), {'data-turbo-frame': "_top"}) } if @video.follower.present? %>
-    </div>
-  <% end %>
-  <% if @video.event.present? || @video.performance_date.present? || @video.performance_number.present? || @video.performance_total_number.present? %>
-    <div class="detail-section-label">
-      <h4>Event Info</h4>
-    </div>
-    <%= render partial: "videos/show/video_info_item",
+        </div>
+      <% end %>
+      <% if @video.event.present? || @video.performance_date.present? || @video.performance_number.present? || @video.performance_total_number.present? %>
+        <div class="detail-section-label">
+          <h4>Event Info</h4>
+        </div>
+        <%= render partial: "videos/show/video_info_item",
                           locals: { header: "Title",
                           value:  link_to(@video.event.title.to_s.titleize, root_path(event_id: @video.event.id), {'data-turbo-frame': "_top"}) } if @video.event.present? %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                           locals: { header: "Location",
                           value:  "#{@video.event.city.to_s.titleize}, #{@video.event.country.to_s.titleize}" } if @video.event.present? %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Performance Date",
                       value: @video.performance_date.strftime('%B %d, %Y') }if @video.performance_date.present? %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                     locals: { header: "Performance Number",
                     value: @video.performance_number } if @video.performance_number.present? %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                   locals: { header: "Performance Total Number",
                   value: @video.performance_total_number } if @video.performance_number.present? %>
-  <% end %>
-  <% if @video.song.present? || @video.spotify_track_name.present? || @video.youtube_song.present? %>
-    <div class="detail-section-label">
-      <h4>Music</h4>
-    </div>
-  <% end %>
-  <% if @video.song.present? %>
-    <%= render partial: "videos/show/video_info_item",
+      <% end %>
+      <% if @video.song.present? || @video.spotify_track_name.present? || @video.youtube_song.present? %>
+        <div class="detail-section-label">
+          <h4>Music</h4>
+        </div>
+      <% end %>
+      <% if @video.song.present? %>
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Title",
                         value: link_to(@video.song.try(:title).to_s.titleize,
                                         root_path(song_id: @video.song.id), {'data-turbo-frame': "_top"}) } %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Genre",
                         value: @video.song.try(:genre).to_s.titleize } %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Orchestra",
                         value: link_to(@video.song.try(:artist).to_s.split("'").map(&:titleize).join("'"),
                                         root_path(orchestra: @video.song.artist.downcase), {'data-turbo-frame': "_top"}) } %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Singer",
                                   value: @video.song.try(:artist_2).to_s.titleize } if @video.song.artist_2.present? %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Recording Date",
                         value: @video.song.date.strftime('%B %d, %Y') } if @video.song.date.present? %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Composer",
                         value: @video.song.composer.to_s.titleize } if @video.song.composer.present? %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Author",
                         value: @video.song.author.to_s.titleize } if @video.song.author.present? %>
-  <% end %>
-  <% if @video.song.blank? && @video.spotify_track_name.present? %>
-    <%= render partial: "videos/show/video_info_item",
+      <% end %>
+      <% if @video.song.blank? && @video.spotify_track_name.present? %>
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Title",
                                   value: link_to(@video.spotify_track_name.to_s.titleize,
                                                   root_path(query: @video.spotify_track_name.to_s.titleize + ' ' + @video.spotify_artist_name.to_s.titleize), {'data-turbo-frame': "_top"}) } %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Artist",
                                   value: link_to(@video.spotify_artist_name.to_s.titleize,
                                                   root_path(query: @video.spotify_artist_name.to_s.titleize), {'data-turbo-frame': "_top"}) } %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Artist 2",
                                   value: link_to(@video.spotify_artist_name_2.to_s.titleize,
                                                   root_path(query: @video.spotify_artist_name_2.to_s.titleize), {'data-turbo-frame': "_top"}) } if @video.spotify_artist_name_2.present? %>
-  <% end %>
-  <% if @video.song.blank? && @video.spotify_track_name.blank? && @video.youtube_song.present? %>
-    <%= render partial: "videos/show/video_info_item",
+      <% end %>
+      <% if @video.song.blank? && @video.spotify_track_name.blank? && @video.youtube_song.present? %>
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Title",
                                   value: link_to(@video.youtube_song.to_s.titleize,
                                                   root_path(query: @video.youtube_song.to_s.titleize), {'data-turbo-frame': "_top"}) } %>
-    <%= render partial: "videos/show/video_info_item",
+        <%= render partial: "videos/show/video_info_item",
                         locals: { header: "Artist",
                                   value: link_to(@video.youtube_artist.to_s.titleize,
                                                   root_path(query: @video.youtube_artist.to_s.titleize), {'data-turbo-frame': "_top"}) } %>
-  <% end %>
-  <% if user_signed_in? %>
-    <%= button_to edit_video_path(@video.youtube_id), method: :get do %>
-      <sl-button style="margin: 10px 0;">Edit</sl-button>
+      <% end %>
+      <% if user_signed_in? %>
+        <%= button_to edit_video_path(@video.youtube_id), method: :get do %>
+          <sl-button style="margin: 10px 0;">Edit</sl-button>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-  <div class="detail-section-label">
-    <h4>Video Info</h4>
-  </div>
-  <%= render partial: "videos/show/video_info_item",
+  </sl-tab-panel>
+  <sl-tab-panel name="custom">
+    <div class="detail-section-label">
+      <h4>Youtube Info</h4>
+    </div>
+    <%= render partial: "videos/show/video_info_item",
                     locals: { header: "Title",
                     value:  @video.title } %>
-  <%= render partial: "videos/show/video_info_item",
+    <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Description",
                       value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: ''), {'data-turbo-frame': "_top"}), html: { target: '_blank' }) } if @video.description.present? %>
-  <%= render partial: "videos/show/video_info_item",
+    <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Upload Date",
                       value: @video.upload_date.to_formatted_s(:long) } %>
-  <%= render partial: "videos/show/video_info_item",
+    <%= render partial: "videos/show/video_info_item",
                       locals: { header: "Duration",
                       value: Time.at(@video.duration).utc.strftime("%M:%S") } %>
-<% end %>
+  </sl-tab-panel>
+</sl-tab-group>
