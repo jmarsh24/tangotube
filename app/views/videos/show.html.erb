@@ -49,14 +49,6 @@
               </div>
             <% end %>
             <%= render @comments, continue_thread: 5 %>
-            <% if @yt_comments.present? %>
-              <div id="youtube-comments">
-                <h3>Youtube Comments</h3>
-                <% @yt_comments.each do |comment| %>
-                  <%= render partial: "yt_comments/comment", locals: { comment: comment } %>
-                <% end %>
-              </div>
-            <% end %>
           </div>
         </div>
       </div>
