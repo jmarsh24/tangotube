@@ -196,5 +196,10 @@
     flex-direction: column;
     gap: 0;
     padding: 0;
+
+    &__videos {
+      display: flex;
+      grid-template-columns: none;
+    }
   }
 }
