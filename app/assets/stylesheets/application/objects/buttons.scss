@@ -65,13 +65,15 @@ button {
 
   transition: 220ms all ease-in-out;
   transition: 220ms fill ease-in-out;
+  transition: background 220ms ease-in-out;
+  transition: background-color 220ms ease-in-out;
 
   &:hover,
   &:active {
     path {
       fill: var(--sl-color-gray-700);
     }
-    background-color: var(--sl-color-gray-300);
+    background-color: var(--sl-color-gray-400);
   }
 
   &:focus {
@@ -82,7 +84,6 @@ button {
   &--submit {
     background: rgb(72, 63, 208);
     color: white;
-    transition: background 220ms ease-in-out;
 
     &:hover {
       color: white;
