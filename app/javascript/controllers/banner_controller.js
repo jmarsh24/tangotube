@@ -3,7 +3,7 @@ import Swiper, { Navigation, Pagination } from "swiper";
 
 // Connects to data-controller="banner"
 export default class extends Controller {
-  static targets: ["banner"];
+  static targets = ["banner"];
 
   connect() {
     swiper = new Swiper(this.bannerTarget, {
