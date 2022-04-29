@@ -18,7 +18,6 @@ gem "turbo-rails"
 gem "acts_as_votable"
 gem "ahoy_matey"
 gem "bonsai-searchkick"
-gem "climate_control"
 gem "dartsass-rails"
 gem "deepl-rb", require: 'deepl'
 gem "devise"

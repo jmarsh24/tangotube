@@ -1,5 +1,4 @@
 require_relative "boot"
-require_relative "../lib/rack_x_robots_tag"
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
