@@ -7,33 +7,6 @@ import "@fortawesome/fontawesome-free/js/all";
 import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
 setBasePath("/shoelace-assets");
 
-// core version + navigation, pagination modules:
-import Swiper, { Navigation, Pagination } from "swiper";
-
-// init Swiper:
-const swiper = new Swiper(".swiper", {
-  // configure Swiper to use modules
-  modules: [Navigation, Pagination],
-  centeredSlides: true,
-  loop: true,
-  autoplay: {
-    delay: 1000,
-    disableOnInteraction: true,
-  },
-
-  // If we need pagination
-  pagination: {
-    el: ".swiper-pagination",
-    // clickable: true,
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
-
 import "@shoelace-style/shoelace/dist/components/dropdown/dropdown.js";
 import "@shoelace-style/shoelace/dist/components/avatar/avatar.js";
 import "@shoelace-style/shoelace/dist/components/alert/alert.js";
