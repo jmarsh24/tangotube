@@ -100,7 +100,6 @@ GEM
       capybara (>= 1.0, < 4)
       launchy
     childprocess (4.1.0)
-    climate_control (1.0.1)
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crack (0.4.5)
@@ -480,7 +479,6 @@ DEPENDENCIES
   bullet (~> 7.0)
   capybara
   capybara-screenshot
-  climate_control
   dartsass-rails
   debug
   deepl-rb
