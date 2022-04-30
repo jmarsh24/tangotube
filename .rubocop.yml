@@ -85,7 +85,7 @@ AllCops:
     - config.ru
     - Gemfile
     - Rakefile
-  TargetRubyVersion: 2.7.2
+  TargetRubyVersion: 3.1.2
 
 RSpec/NestedGroups:
   Max: 4
