@@ -4,7 +4,6 @@ class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete featured]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete featured]
-  after_action :reindex, only: %i[update destroy upvote downvote bookmark watchlist complete featured]
 
   helper_method :sorting_params, :filtering_params
 
@@ -179,6 +178,7 @@ class VideosController < ApplicationController
       MarkVideoAsWatchedJob.perform_async(show_params[:v], current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
+    @video.reindex
   end
 
   def update
@@ -194,13 +194,14 @@ class VideosController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
+      @video.reindex
     end
   end
 
   def create
     @video = Video.create(youtube_id: params[:video][:youtube_id])
     fetch_new_video
-
+    @video.reindex
     redirect_to root_path,
                 notice:
                   "Video Sucessfully Added: The video must be approved before the videos are added"
@@ -212,6 +213,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "like"
     end
+    @video.reindex
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -221,6 +223,7 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user, vote_scope: "like"
     end
+    @video.reindex
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -230,6 +233,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "bookmark"
     end
+    @video.reindex
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -239,6 +243,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "watchlist"
     end
+    @video.reindex
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -248,6 +253,7 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user, vote_scope: "watchlist"
     end
+    @video.reindex
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -257,6 +263,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "featured"
     end
+    @video.reindex
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
