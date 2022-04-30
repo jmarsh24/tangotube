@@ -45,7 +45,7 @@ class VideosController < ApplicationController
     if filtering_params.present? || sorting_params.present?
       videos = Video.pagy_search(filtering_params[:query].presence || "*",
                                           where: filters,
-                                          order: order,
+                                          order:,
                                           includes: [:song, :leader, :follower, :event, :channel],
                                           fields: ["title^10", "leader^10", "follower^10", "song_title^5", "song_artist^5"],
                                           boost_by: [:popularity],
@@ -87,9 +87,9 @@ class VideosController < ApplicationController
           })
         @pagy_featured_videos, @featured_videos = pagy_searchkick(featured_videos, items: 24)
       end
-
-      @pagy, @videos = pagy_searchkick(videos, items: 24)
     end
+
+    @pagy, @videos = pagy_searchkick(videos, items: 24)
 
     if @page == 1
       video_search = Video.search(filtering_params[:query].presence || "*",
