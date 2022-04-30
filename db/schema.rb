@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_30_111452) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_30_140721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -378,7 +378,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_111452) do
     t.integer "cached_weighted_like_score", default: 0
     t.integer "cached_weighted_like_total", default: 0
     t.float "cached_weighted_like_average", default: 0.0
-    t.boolean "featured", default: false
     t.index ["acr_cloud_artist_name"], name: "index_videos_on_acr_cloud_artist_name"
     t.index ["acr_cloud_track_name"], name: "index_videos_on_acr_cloud_track_name"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
