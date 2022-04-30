@@ -1,9 +1,10 @@
 class VideosController < ApplicationController
   include ActionView::RecordIdentifier
 
-  before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete]
+  before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete featured]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete featured]
+  after_action :reindex, only: %i[update destroy upvote downvote bookmark watchlist complete featured]
 
   helper_method :sorting_params, :filtering_params
 
@@ -71,24 +72,20 @@ class VideosController < ApplicationController
         })
 
       if page == 1
-        featured_videos = Video.includes(:song, :leader, :follower, :event, :channel)
-                              .where(featured: true)
-                              .order("random()")
-
-        featured_videos_length = featured_videos.length
-
-        if featured_videos_length < 4
-          featured_videos = []
-          elsif featured_videos_length < 12
-            featured_videos = featured_videos.limit(4)
-          elsif featured_videos_length > 12 && featured_videos_length < 24
-            featured_videos = featured_videos.limit(12)
-          elsif featured_videos_length >= 24
-            featured_videos = featured_videos.limit(24)
-        end
-
-
-        @featured_videos = featured_videos
+        featured_videos = Video.pagy_search("*", includes: [:song, :leader, :follower, :event, :channel],
+          body: {
+            query: {
+              function_score: {
+                query: {
+                  match: { featured: true },
+                  },
+                random_score: {
+                  seed: DateTime.now.to_i
+                }
+              }
+            }
+          })
+        @pagy_featured_videos, @featured_videos = pagy_searchkick(featured_videos, items: 24)
       end
 
       @pagy, @videos = pagy_searchkick(videos, items: 24)
