@@ -18,6 +18,10 @@ class VideosController < ApplicationController
       order = { sort_column => sort_direction }
     end
 
+    if user_signed_in?
+      user_id = current_user.id
+    end
+
     if filtering_params.include?("watched")
       if filtering_params["watched"] == "true"
         filters.merge!({ watched_by: current_user.id })
@@ -45,15 +49,50 @@ class VideosController < ApplicationController
                                           fields: ["title^10", "leader^10", "follower^10", "song_title^5", "song_artist^5"],
                                           boost_by: [:popularity],
                                           misspellings: {edit_distance: 5},
-                                          body_options: {track_total_hits: true})
+                                          body_options: {track_total_hits: true},
+                                          boost_by_recency: {updated_at: {scale: "7d", decay: 0.5}},
+                                          boost_where: {watched_by: user_id})
       @pagy, @videos = pagy_searchkick(videos, items: 24)
     else
-      videos = Video.includes(:song, :leader, :follower, :event, :channel)
-                    .most_viewed_videos_by_month
-                    .has_leader
-                    .has_follower
-                    .load_async
-      @pagy, @videos = pagy(videos.order("random()"), items: 24)
+      videos = Video.pagy_search("*",
+        includes: [:song, :leader, :follower, :event, :channel],
+        body: {
+          query: {
+            function_score: {
+              query: {
+                match: { has_leader: true },
+                match: { has_follower: true },
+                match: { viewed_within_last_month: true },
+                },
+              random_score: {
+                seed: DateTime.now.to_i
+              }
+            }
+          }
+        })
+
+      if page == 1
+        featured_videos = Video.includes(:song, :leader, :follower, :event, :channel)
+                              .where(featured: true)
+                              .order("random()")
+
+        featured_videos_length = featured_videos.length
+
+        if featured_videos_length < 4
+          featured_videos = []
+          elsif featured_videos_length < 12
+            featured_videos = featured_videos.limit(4)
+          elsif featured_videos_length > 12 && featured_videos_length < 24
+            featured_videos = featured_videos.limit(12)
+          elsif featured_videos_length >= 24
+            featured_videos = featured_videos.limit(24)
+        end
+
+
+        @featured_videos = featured_videos
+      end
+
+      @pagy, @videos = pagy_searchkick(videos, items: 24)
     end
 
     if @page == 1

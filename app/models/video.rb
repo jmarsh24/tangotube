@@ -171,16 +171,21 @@ class Video < ApplicationRecord
       title: title,
       description: description,
       tags: tags,
+      created_at: created_at,
       dancer: dancer?,
       youtube_song: youtube_song,
       youtube_artist: youtube_artist,
       acr_cloud_artist_name: acr_cloud_artist_name,
+      featured: featured,
       spotify_artist_name: spotify_artist_name,
       spotify_track_name: spotify_track_name,
       youtube_id: youtube_id,
       popularity: popularity,
       hd: hd,
+      has_leader: leader.present?,
+      has_follower: follower.present?,
       view_count: view_count,
+      viewed_within_last_month: Ahoy::Event.most_viewed_videos_by_month.include?(id),
       like_count: like_count,
       leader: leader&.normalized_name&.parameterize,
       follower: follower&.normalized_name&.parameterize,
@@ -188,6 +193,7 @@ class Video < ApplicationRecord
       channel: channel&.channel_id,
       song_id: song_id,
       song_title: song&.title,
+      updated_at: updated_at,
       genre: song&.genre&.parameterize,
       orchestra: song&.artist&.parameterize,
       event_id: event_id,
@@ -288,5 +294,9 @@ class Video < ApplicationRecord
 
   def dancer?
     leader.present? || follower.present?
+  end
+
+  def toggle_featured
+  toggle!(:featured)
   end
 end
