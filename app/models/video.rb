@@ -28,8 +28,6 @@ class Video < ApplicationRecord
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  after_save :reindex_video
-
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
   belongs_to :song, optional: true, counter_cache: true
@@ -161,9 +159,6 @@ class Video < ApplicationRecord
       where( id: Ahoy::Event.most_viewed_videos_by_month)
     end
 
-    def trigger_sidekiq_job(record, remove)
-      IndexVideoJob.perform_async(record.id, remove)
-    end
   end
 
   def search_data
@@ -176,7 +171,7 @@ class Video < ApplicationRecord
       youtube_song: youtube_song,
       youtube_artist: youtube_artist,
       acr_cloud_artist_name: acr_cloud_artist_name,
-      featured: featured,
+      featured: featured?,
       spotify_artist_name: spotify_artist_name,
       spotify_track_name: spotify_track_name,
       youtube_id: youtube_id,
@@ -206,10 +201,6 @@ class Video < ApplicationRecord
       watched_later_by: watched_later_by,
       year: performance_date&.year
     }
-  end
-
-  def reindex_video
-    reindex
   end
 
   def grep_title_leader_follower
@@ -292,7 +283,7 @@ class Video < ApplicationRecord
     votes_for.where(vote_scope: "watchlist").where(vote_flag: false).voters.map(&:id)
   end
 
-  def featured
+  def featured?
     get_upvotes(vote_scope: "featured").any?
   end
 

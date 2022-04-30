@@ -7,15 +7,6 @@ task import_all_reviewed_playlists: :environment do
   puts "done."
 end
 
-desc "This task indexes with meilisearch"
-task index_videos: :environment do
-  puts "Indexing all videos with Meilisearch"
-  Video.all.find_each do |video|
-    IndexVideoJob.perform_async(video.id, false)
-  end
-  puts "done."
-end
-
 desc "This task updates channels"
 task update_all_channels: :environment do
   Channel.where('total_videos_count < 500').find_each do |channel|
