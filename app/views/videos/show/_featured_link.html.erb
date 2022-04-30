@@ -1,0 +1,12 @@
+<%= content_tag "div", id: "upvote-#{video.youtube_id}" do %>
+  <%= content_tag :div, id: "featured-#{video.youtube_id}" do %>
+    <%= button_to featured_video_path(video.youtube_id), method: :patch do %>
+      <% if current_user&.voted_up_on? video, vote_scope: 'featured' %>
+        <sl-icon id="featured-button" name="star-fill" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+      <% else %>
+        <sl-icon id="featured-button" name="star" style="font-size: 24px; color: var(--sl-color-gray-800);"></sl-icon>
+      <% end %>
+      <span style="color: var(--sl-color-gray-800)">Featured</span>
+    <% end %>
+  <% end %>
+<% end %>
