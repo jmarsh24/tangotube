@@ -5,5 +5,8 @@
     <%= render "videos/show/bookmark_link", video: @video %>
     <%#= render 'videos/show/complete_link', video: @video %>
     <%= render 'videos/show/watchlist_link', video: @video %>
+    <% if current_user.admin? %>
+      <%= render 'videos/show/featured_link', video: @video %>
+    <% end %>
   </div>
 <% end %>

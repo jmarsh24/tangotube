@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       patch "bookmark", to: "videos#bookmark"
       patch "complete", to: "videos#complete"
       patch "watchlist", to: "videos#watchlist"
+      patch "featured", to: "videos#featured"
     end
   end
   resources :search_suggestions, only: :index do

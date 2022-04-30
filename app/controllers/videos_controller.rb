@@ -3,7 +3,7 @@ class VideosController < ApplicationController
 
   before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete]
   before_action :current_search, only: %i[index]
-  before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete]
+  before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete featured]
 
   helper_method :sorting_params, :filtering_params
 
@@ -52,7 +52,6 @@ class VideosController < ApplicationController
                                           body_options: {track_total_hits: true},
                                           boost_by_recency: {updated_at: {scale: "7d", decay: 0.5}},
                                           boost_where: {watched_by: user_id})
-      @pagy, @videos = pagy_searchkick(videos, items: 24)
     else
       videos = Video.pagy_search("*",
         includes: [:song, :leader, :follower, :event, :channel],
@@ -251,6 +250,15 @@ class VideosController < ApplicationController
       @video.unvote_by current_user, vote_scope: "watchlist"
     else
       @video.downvote_by current_user, vote_scope: "watchlist"
+    end
+    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+  end
+
+  def featured
+    if current_user.voted_up_on? @video, vote_scope: "featured"
+      @video.unvote_by current_user, vote_scope: "featured"
+    else
+      @video.upvote_by current_user, vote_scope: "featured"
     end
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end

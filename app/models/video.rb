@@ -292,11 +292,11 @@ class Video < ApplicationRecord
     votes_for.where(vote_scope: "watchlist").where(vote_flag: false).voters.map(&:id)
   end
 
-  def dancer?
-    leader.present? || follower.present?
+  def featured
+    get_upvotes(vote_scope: "featured").any?
   end
 
-  def toggle_featured
-  toggle!(:featured)
+  def dancer?
+    leader.present? || follower.present?
   end
 end
