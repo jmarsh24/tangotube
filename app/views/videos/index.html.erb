@@ -5,7 +5,20 @@
     <%= render "shared/banner" %>
   <% end %>
   <div id="videos">
+    <% if @featured_videos.present? %>
+      <div class="video-section">
+        <div class="video-section">
+          <%= render "videos/index/videos/section/header", title: "Featured" %>
+          <div class="video-section__videos">
+            <%= render @featured_videos %>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <div class="video-section">
+      <% if @featured_videos.present? %>
+        <%= render "videos/index/videos/section/header", title: "Trending" %>
+      <% end %>
       <div class="video-section__videos" id="results">
         <%= render @videos %>
       </div>
