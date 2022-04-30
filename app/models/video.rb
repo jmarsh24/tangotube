@@ -19,12 +19,24 @@ class Video < ApplicationRecord
                             :event_id,
                             :song_title,
                             :channel_title,
-                            :dancer]
+                            :dancer],
+              word_middle: [:title,
+                            :description,
+                            :leader,
+                            :follower,
+                            :song_title,
+                            :orchestra,
+                            :youtube_song,
+                            :youtube_artist,
+                            :acr_cloud_artist_name,
+                            :acr_cloud_track_name,
+                            :spotify_artist_name,
+                            :spotify_track_name]
 
   include Filterable
   extend Pagy::Searchkick
 
-  PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
+  PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
 
   validates :youtube_id, presence: true, uniqueness: true
 
@@ -42,8 +54,8 @@ class Video < ApplicationRecord
   scope :filter_by_leader, ->(leader, _user) { joins(:leader).where("unaccent(leaders.name) ILIKE unaccent(?)", leader) }
   scope :filter_by_follower, ->(follower, _user) { joins(:follower).where("unaccent(followers.name) ILIKE unaccent(?)", follower) }
   scope :filter_by_channel, ->(channel_id, _user) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
-  scope :filter_by_event_id, ->(event_id, _user) { where(event_id: event_id) }
-  scope :filter_by_song_id, ->(song_id, _user) { where(song_id: song_id) }
+  scope :filter_by_event_id, ->(event_id, _user) { where(event_id:) }
+  scope :filter_by_song_id, ->(song_id, _user) { where(song_id:) }
   scope :filter_by_hd, ->(boolean, _user) { where(hd: boolean) }
   scope :filter_by_year,->(year, _user) { where("extract(year from performance_date) = ?", year) }
   scope :filter_by_upload_year,->(year, _user) { where("extract(year from upload_date) = ?", year) }
@@ -163,42 +175,42 @@ class Video < ApplicationRecord
 
   def search_data
     {
-      title: title,
-      description: description,
-      tags: tags,
-      created_at: created_at,
+      title:,
+      description:,
+      tags:,
+      created_at:,
       dancer: dancer?,
-      youtube_song: youtube_song,
-      youtube_artist: youtube_artist,
-      acr_cloud_artist_name: acr_cloud_artist_name,
+      youtube_song:,
+      youtube_artist:,
+      acr_cloud_artist_name:,
       featured: featured?,
-      spotify_artist_name: spotify_artist_name,
-      spotify_track_name: spotify_track_name,
-      youtube_id: youtube_id,
-      popularity: popularity,
-      hd: hd,
+      spotify_artist_name:,
+      spotify_track_name:,
+      youtube_id:,
+      popularity:,
+      hd:,
       has_leader: leader.present?,
       has_follower: follower.present?,
-      view_count: view_count,
+      view_count:,
       viewed_within_last_month: Ahoy::Event.most_viewed_videos_by_month.include?(id),
-      like_count: like_count,
+      like_count:,
       leader: leader&.normalized_name&.parameterize,
       follower: follower&.normalized_name&.parameterize,
       channel_title: channel&.title,
       channel: channel&.channel_id,
-      song_id: song_id,
+      song_id:,
       song_title: song&.title,
-      updated_at: updated_at,
+      updated_at:,
       genre: song&.genre&.parameterize,
       orchestra: song&.artist&.parameterize,
-      event_id: event_id,
+      event_id:,
       event: event&.title,
-      liked_by: liked_by,
-      disliked_by: disliked_by,
-      watched_by: watched_by,
-      not_watched_by: not_watched_by,
-      bookmarked_by: bookmarked_by,
-      watched_later_by: watched_later_by,
+      liked_by:,
+      disliked_by:,
+      watched_by:,
+      not_watched_by:,
+      bookmarked_by:,
+      watched_later_by:,
       year: performance_date&.year
     }
   end
