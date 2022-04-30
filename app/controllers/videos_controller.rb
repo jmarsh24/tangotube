@@ -48,10 +48,12 @@ class VideosController < ApplicationController
                                           includes: [:song, :leader, :follower, :event, :channel],
                                           fields: ["title^10", "leader^10", "follower^10", "song_title^5", "song_artist^5"],
                                           boost_by: [:popularity],
-                                          misspellings: {edit_distance: 5},
-                                          body_options: {track_total_hits: true},
-                                          boost_by_recency: {updated_at: {scale: "7d", decay: 0.5}},
-                                          boost_where: {watched_by: user_id})
+                                          misspellings: { edit_distance: 5  },
+                                          body_options: { track_total_hits: true  },
+                                          boost_by_recency: { updated_at: {scale: "7d", decay: 0.5  } },
+                                          boost_where: {  watched_by: user_id,
+                                                          has_follower: true,
+                                                          has_leader: true  })
     else
       videos = Video.pagy_search("*",
         includes: [:song, :leader, :follower, :event, :channel],
