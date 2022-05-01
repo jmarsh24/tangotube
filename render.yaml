@@ -8,9 +8,6 @@ services:
     dockerfilePath: Dockerfile.render
     plan: starter # optional; defaults to starter
     numInstances: 1
-    domains: # custom domains
-      - 'tangotube.tv'
-      - 'www.tangotube.tv'
     envVars:
       - key: BONSAI_URL # Imported from Heroku app
         value: https://f4nmzumvzb:2fj6pcm3vk@tangotube-production-7618181255.eu-central-1.bonsaisearch.net:443
