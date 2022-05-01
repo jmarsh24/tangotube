@@ -296,7 +296,7 @@ class Video < ApplicationRecord
   end
 
   def featured?
-    get_upvotes(vote_scope: "featured").any?
+    featured
   end
 
   def dancer?

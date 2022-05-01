@@ -261,11 +261,13 @@ class VideosController < ApplicationController
   end
 
   def featured
-    if current_user.voted_up_on? @video, vote_scope: "featured"
-      @video.unvote_by current_user, vote_scope: "featured"
+    @video.featured =
+    if @video.featured?
+      false
     else
-      @video.upvote_by current_user, vote_scope: "featured"
+      true
     end
+    @video.save
     @video.reindex
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
