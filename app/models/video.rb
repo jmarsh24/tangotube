@@ -21,7 +21,6 @@ class Video < ApplicationRecord
                             :channel_title,
                             :dancer],
               word_middle: [:title,
-                            :description,
                             :leader,
                             :follower,
                             :song_title,
