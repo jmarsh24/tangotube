@@ -13,6 +13,7 @@ module VideosHelper
   end
 
   def formatted_performance_date(performance_date)
+    return if performance_date.blank?
     performance_date.strftime("%B %Y")
   end
 
@@ -67,10 +68,11 @@ module VideosHelper
   end
 
   def hd_duration_data(video)
+    return if video.duration.blank?
     if video.hd?
-      "HD #{Time.at(video.duration).utc.strftime('%M:%S')}"
+      "HD #{Time.at(video&.duration).utc.strftime('%M:%S')}"
     else
-      Time.at(video.duration).utc.strftime("%M:%S")
+      Time.at(video&.duration).utc.strftime("%M:%S")
     end
   end
 
