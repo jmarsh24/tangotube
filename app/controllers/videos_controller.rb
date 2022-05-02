@@ -62,11 +62,32 @@ class VideosController < ApplicationController
           query: {
             function_score: {
               query: {
-                match: { has_leader: true },
-                match: { has_follower: true },
-                match: { viewed_within_last_month: true },
-                match: { featured: false },
-                },
+                bool: {
+                  must: [
+                    {
+                      match: {
+                        has_leader: true
+                      }
+                    },
+                    {
+                      match: {
+                        has_follower: true
+                      }
+                    },
+                    {
+                      match: {
+                        viewed_within_last_month: true
+                      }
+                    },
+                    {
+                      match: {
+                        featured: false
+                      }
+                    }
+                  ]
+                }
+
+              },
               random_score: {
                 seed: DateTime.now.to_i
               }
