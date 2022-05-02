@@ -283,13 +283,7 @@ class VideosController < ApplicationController
   end
 
   def featured
-    @video.featured =
-    if @video.featured?
-      false
-    else
-      true
-    end
-    @video.save
+    @video.toggle!(:featured)
     @video.reindex
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
