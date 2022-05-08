@@ -1,7 +1,7 @@
 class ClipsController < ApplicationController
   before_action :set_clip, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, only: %i[ new edit update destroy]
-  before_action :set_video
+  before_action :set_video, only: %i[ create show edit update destroy ]
 
   # GET /clips
   def index
@@ -23,6 +23,7 @@ class ClipsController < ApplicationController
   def create
     @clip = Clip.new(clip_params)
     @clip.user = current_user
+    @clip.video = @video
 
     if @clip.save
       redirect_to watch_path( v: @clip.video.youtube_id,
@@ -53,7 +54,7 @@ class ClipsController < ApplicationController
 
   private
     def set_video
-      @video = Video.find_by(youtube_id: params[:video_id]) if params[:video_id].present?
+      @video = Video.find(params[:video_id]) if params[:video_id].present?
     end
 
     # Use callbacks to share common setup or constraints between actions.
