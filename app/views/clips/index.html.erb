@@ -1,15 +1,17 @@
-<% if params.include?(:video_id) %>
-  <h1>This Video's Clips</h1>
-  <%= link_to "Back to Video", watch_path(v: @video.youtube_id) %>
-<% else %>
-  <h1> All Clips</h1>
-<% end %>
-<div id="clips" class="clips">
-  <div class="video-section">
-    <div class="video-section__videos">
-      <% @clips.each do |clip| %>
-        <%= render clip %>
-      <% end %>
+<div class="index-container">
+  <% if params.include?(:video_id) %>
+    <h1>This Video's Clips</h1>
+    <%= link_to "Back to Video", watch_path(v: @video.youtube_id) %>
+  <% else %>
+    <h1> All Clips</h1>
+  <% end %>
+  <div id="clips" class="clips">
+    <div class="video-section">
+      <div class="video-section__videos">
+        <% @clips.each do |clip| %>
+          <%= render clip %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

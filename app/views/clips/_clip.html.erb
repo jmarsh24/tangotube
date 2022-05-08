@@ -1,17 +1,9 @@
-<div id="<%= dom_id clip %>">
-  <div data-controller="youtube"
-        data-youtube-video-id-value="<%= clip.video.youtube_id %>"
-        data-youtube-start-seconds-value="<%= clip.start_seconds %>"
-        data-youtube-end-seconds-value="<%= clip.end_seconds %>"
-        data-youtube-playback-speed-value="<%= clip.playback_rate %>">
-    <div class="video-responsive-background">
-      <div class="video-responsive-container">
-        <div class="video-responsive">
-          <div data-youtube-target="frame"></div>
-        </div>
-      </div>
+<div id="<%= dom_id clip %>" class="video-container">
+  <%= link_to watch_path(v: clip.video.youtube_id, start: clip.start_seconds, end: clip.end_seconds, speed: clip.playback_rate), 'data-turbo-frame': "_top" do %>
+    <div class="thumbnail" data-duration= "<%= "#{clip.end_seconds - clip.start_seconds} sec  " %>">
+      <%= image_tag "https://media.giphy.com/media/#{clip.giphy_id}/giphy.gif", class: "thumbnail-image" %>
     </div>
-  </div>
+  <% end %>
   <div style="display: flex; flex-direction: column; gap: 5px;">
     <%= link_to watch_path(v: clip.video.youtube_id, start: clip.start_seconds, end: clip.end_seconds, speed: clip.playback_rate) do %>
       <%= clip.title if clip.title.present? %>
