@@ -6,7 +6,7 @@ class Clip::Gif::Giphy
   class << self
     def upload(file_path)
       uploader = new(file_path)
-      uploader.upload
+      uploader.id
       uploader
     end
   end
