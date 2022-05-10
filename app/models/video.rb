@@ -19,7 +19,7 @@ class Video < ApplicationRecord
                             :event_id,
                             :song_title,
                             :channel_title,
-                            :dancer],
+                            :dancer]
               # word_middle: [:title,
               #               :leader,
               #               :follower,
