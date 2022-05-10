@@ -96,10 +96,10 @@
         <sl-menu-label>Sort By</sl-menu-label>
         <sl-divider style="margin:12px 0;"></sl-divider>
         <sl-menu-item>
-          <%= sortable 'year', "desc",  "Recent First", @sort_column, @sort_direction %>
+          <%= sortable 'date', "desc",  "Recent First", @sort_column, @sort_direction %>
         </sl-menu-item>
         <sl-menu-item>
-          <%= sortable 'year', "asc", "Oldest First", @sort_column, @sort_direction %>
+          <%= sortable 'date', "asc", "Oldest First", @sort_column, @sort_direction %>
         </sl-menu-item>
         <sl-menu-item>
           <%= sortable "view_count", "desc",  "Most Viewed", @sort_column, @sort_direction %>
