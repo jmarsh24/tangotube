@@ -5,7 +5,7 @@ class ClipsController < ApplicationController
 
   # GET /clips
   def index
-    @clips = @video.present? ? @video.clips.includes(:video) : Clip.all.includes(:video)
+    @clips = Clip.all.includes(:video).order(created_at: :desc)
   end
 
   # GET /clips/1
