@@ -19,19 +19,7 @@ class Video < ApplicationRecord
                             :event_id,
                             :song_title,
                             :channel_title,
-                            :dancer],
-              text_middle: [:title,
-                            :leader,
-                            :follower,
-                            :song_title,
-                            :orchestra,
-                            :youtube_song,
-                            :youtube_artist,
-                            :acr_cloud_artist_name,
-                            :acr_cloud_track_name,
-                            :spotify_artist_name,
-                            :spotify_track_name]
-
+                            :dancer]
   include Filterable
   extend Pagy::Searchkick
 
