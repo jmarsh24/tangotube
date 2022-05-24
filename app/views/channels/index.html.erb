@@ -1,21 +1,8 @@
-<div class="channels-index-container">
-  <h2>All Channels</h2>
-  <%= form_with model: Channel.new, local: true, class: 'channel-form' do |f| %>
-    youtube.com/channel/
-    <%= f.text_field :channel_id, placeholder: 'insert channel id here...' %>
-    <%= f.submit "Add New Channel" %>
-  <% end %>
+<p style="color: green"><%= notice %></p>
+<h1>Channels</h1>
+<div id="channels">
   <% @channels.each do |channel| %>
-  <div class="channels-index-row">
-    <div class="channels-index-item" id="id">
-      <%= channel.id %>
-    </div>
-    <div class="channels-index-item" id="title">
-      <%= channel.title %>
-    </div>
-    <div class="channels-index-item" id="channel_id">
-      <%= channel.channel_id %>
-    </div>
-  </div>
+    <%= render channel %>
   <% end %>
 </div>
+<%= link_to "New channel", new_channel_path %>

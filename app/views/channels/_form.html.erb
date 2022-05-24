@@ -1,0 +1,23 @@
+<%= form_with(model: channel, id: "channel_#{channel.channel_id}_form") do |form| %>
+  <% if channel.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(channel.errors.count, "error") %> prohibited this channel from being saved:</h2>
+      <ul>
+        <% channel.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="row" style="align-items:center; gap: 10px;">
+      channel_id <%= form.text_field "channel_id" %>
+    </div>
+    <div class="row" style="align-items:center; gap: 10px;">
+      active? <%= form.check_box :active, {}, "true", "false" %>
+    </div>
+    <div>
+      <%= form.submit %>
+    </div>
+  </div>
+<% end %>

@@ -15,7 +15,7 @@ class Video::YoutubeImport::Channel
 
   def initialize(channel_id)
     @channel_id = channel_id
-    @channel = Channel.find_or_create_by(channel_id: channel_id)
+    @channel = Channel.find_or_create_by(channel_id:)
     @youtube_channel = fetch_by_id(channel_id)
   end
 
@@ -28,6 +28,7 @@ class Video::YoutubeImport::Channel
   end
 
   def import_videos
+    return nil unless @channel.active?
     new_videos.each do |youtube_id|
       ImportVideoWorker.perform_async(youtube_id)
     end

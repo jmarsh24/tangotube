@@ -9,10 +9,10 @@ end
 
 desc "This task updates channels"
 task update_all_channels: :environment do
-  Channel.where('total_videos_count < 500').find_each do |channel|
+  Channel.where('total_videos_count < 500').where(active: true).find_each do |channel|
     ImportChannelWorker.perform_async(channel.channel_id)
   end
-  Channel.where('total_videos_count > 500').find_each do |channel|
+  Channel.where('total_videos_count > 500').where(active: true).find_each do |channel|
     ImportChannelWorker.perform_async(channel.channel_id)
   end
   puts "done."

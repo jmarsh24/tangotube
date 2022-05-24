@@ -1,7 +1,7 @@
 class DestroyVideoJob
   include Sidekiq::Job
 
-  def perform(video_id)
-    Video.find(video_id).destroy
+  def perform(youtube_id)
+    Video.find_by(youtube_id: youtube_id).destroy
   end
 end

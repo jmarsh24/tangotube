@@ -20,13 +20,14 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticate :user, -> (u) { u.admin? } do
       mount Sidekiq::Web, at: 'sidekiq', as: :sidekiq
+      resources :channels
     end
   end
 
   resources :comments do
     resources :comments, module: :comments
   end
-  resources :channels, only: %i[index create]
+
   resources :playlists, only: %i[index create]
   resources :clips, only: %i[index]
   resources :videos do
