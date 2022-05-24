@@ -1,3 +1,10 @@
-<h1><%= @channel.title %></h1><br>
-Channel ID: <%= @channel.channel_id %><br>
-Channel Video Count: <%= @channel.total_videos_count %><br>
+<p style="color: green"><%= notice %></p>
+
+<%= render @channel %>
+
+<div>
+  <%= link_to "Edit this channel", edit_channel_path(@channel) %> |
+  <%= link_to "Back to channels", channels_path %>
+
+  <%= button_to "Destroy this channel", @channel, method: :delete %>
+</div>
