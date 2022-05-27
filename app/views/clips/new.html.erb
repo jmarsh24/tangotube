@@ -1,5 +1,4 @@
 <h2>New clip</h2>
-<%= render "clips/form", clip: @clip %>
-<div>
-  <%#= link_to "Back to clips", [@video, @clip] %>
-</div>
+<%= turbo_frame_tag @clip do %>
+  <%= render "clips/form", clip: @clip %>
+<% end%>
