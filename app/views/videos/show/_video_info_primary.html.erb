@@ -41,17 +41,15 @@
     >
     <div class="youtube-controls">
       <%= render "videos/show/vote" %>
-      <sl-dropdown stayOpenOnSelect containingElement hoist placement="top-end">
+      <sl-dropdown>
         <div slot="trigger" class="button--clip">
           <sl-icon name="scissors" style="font-size: 24px;"></sl-icon> <span>Clip</span>
         </div>
-        <sl-menu>
-          <%= turbo_frame_tag dom_id(@clip) do %>
-            <div style="padding: 10px;">
-              <%= render "clips/form", clip: @clip %>
-            </div>
-          <% end %>
-        </sl-menu>
+        <%= turbo_frame_tag dom_id(@clip) do %>
+          <div style="padding: 10px; background-color: var(--sl-color-neutral-50);">
+            <%= render "clips/form", clip: @clip %>
+          </div>
+        <% end %>
       </sl-dropdown>
       <% if false %>
         <% if @video.clips.present? %>

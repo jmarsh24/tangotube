@@ -8,7 +8,7 @@
         outline>
       Filter
     </sl-button>
-    <sl-menu>
+    <div style="background-color: var(--sl-color-neutral-50);">
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @genres , title: :genre, id: 'genre-filter', width: "200px" } %>
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @leaders, title: :leader, id: 'leader-filter', width: "300px" } %>
       <%= render partial: "videos/index/filter-sorting/filters/filter", locals: { options: @followers, title: :follower, id: 'follower-filter', width: "300px" } %>
@@ -80,7 +80,7 @@
           <% end %>
         <% end %>
       </div>
-    </sl-menu>
+    </div>
   </sl-dropdown>
   <sl-dropdown stay-open-on-select>
     <sl-button slot="trigger"
