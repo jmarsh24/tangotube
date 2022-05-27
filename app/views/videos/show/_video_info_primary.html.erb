@@ -48,7 +48,7 @@
         <sl-menu>
           <%= turbo_frame_tag dom_id(@clip) do %>
             <div style="padding: 10px;">
-              <%= render "clips/new", clip: @clip %>
+              <%= render "clips/form", clip: @clip %>
             </div>
           <% end %>
         </sl-menu>
