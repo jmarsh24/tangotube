@@ -1,5 +1,5 @@
 <%= form_with(model: [@video, Clip.new]) do |form| %>
-  <div style="display: flex; flex-direction: column; gap: 10px;">
+  <div style="display: flex; flex-direction: column; gap: 10px; background-color: var(--sl-color-neutral-50); padding: 10px;">
     <% if clip.errors.any? %>
       <div style="color: red">
         <h2><%= pluralize(clip.errors.count, "error") %> prohibited this clip from being saved:</h2>
