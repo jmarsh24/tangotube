@@ -51,8 +51,10 @@
       <%#= form.label :tags, style: "display: block" %>
       <%#= form.text_field :tags, style: "width: 100%;" %>
     </div>
-    <div>
-      <%= form.submit %>
-    </div>
+    <% if user_signed_in? %>
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
   </div>
 <% end %>
