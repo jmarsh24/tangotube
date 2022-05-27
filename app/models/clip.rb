@@ -7,7 +7,7 @@ class Clip < ApplicationRecord
   validates :end_seconds, presence: true
 
 
-  after_create :create_gif
+  after_save :create_gif
 
   def create_gif
     gif = Clip::Gif.create( { youtube_id: video.youtube_id,
