@@ -20,13 +20,11 @@
             <span>Home</span>
           </sl-menu-item>
         <% end %>
-        <% if false %>
-          <%= link_to clips_path do %>
-            <sl-menu-item href="<%= clips_path %>">
-              <%= fa_icon("scissors") %>
-              <span>Global Clips</span>
-            </sl-menu-item>
-          <% end %>
+        <%= link_to clips_path do %>
+          <sl-menu-item href="<%= clips_path %>">
+            <%= fa_icon("scissors") %>
+            <span>Clips</span>
+          </sl-menu-item>
         <% end %>
         <sl-divider style="margin:16px 0;"></sl-divider>
         <% if user_signed_in? %>
