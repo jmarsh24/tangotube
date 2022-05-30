@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get 'errors/internal_server_error'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
-                                    confirmations: 'confirmations',
-                                    registrations: 'registrations' }
+                                    confirmations: 'users/confirmations',
+                                    registrations: 'users/registrations' }
 
   resources :deletion_requests, only: [:show] do
     collection do
