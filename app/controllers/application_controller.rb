@@ -5,16 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   include Pagy::Backend
-  def default_url_options
-    { host: ENV["DOMAIN"] || "localhost:3000" }
-  end
-
-  if ENV["DISALLOW_ALL_WEB_CRAWLERS"].present?
-    http_basic_authenticate_with(
-      name: ENV.fetch("BASIC_AUTH_USERNAME"),
-      password: ENV.fetch("BASIC_AUTH_PASSWORD"),
-    )
-  end
 
   private
 
@@ -31,4 +21,5 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :email, :password, :current_password)}
   end
+
 end
