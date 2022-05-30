@@ -4,6 +4,7 @@ class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete featured]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete featured]
+  after_action :track_action
 
   helper_method :sorting_params, :filtering_params
 

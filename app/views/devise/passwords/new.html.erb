@@ -11,7 +11,7 @@
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
         <div class="actions" >
-          <%= f.submit "Send me reset password instructions", style: "border: none;" %>
+          <%= f.submit "Send me reset password instructions", style: "border: none;", data: { turbo: false }  %>
         </div>
       <% end %>
     </div>
