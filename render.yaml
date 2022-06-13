@@ -1,7 +1,7 @@
 databases:
   - name: tangotube_production
     databaseName: tangotube_production
-    user: admin
+    user: justin
 
 services:
   - name: tangotube
