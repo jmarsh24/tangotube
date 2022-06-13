@@ -9,9 +9,6 @@ services:
     startCommand: "bundle exec puma -C config/puma.rb"
     plan: starter # optional; defaults to starter
     numInstances: 1
-    domains: # custom domains
-      - 'tangotube.tv'
-      - 'www.tangotube.tv'
     envVars:
       - key: DOMAIN # Imported from Heroku app
         value: www.tangotube.tv
