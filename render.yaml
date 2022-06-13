@@ -4,13 +4,15 @@
 services:
   - type: web # valid values: https://render.com/docs/yaml-spec#type
     name: tangotube
-    env: docker # valid values: https://render.com/docs/yaml-spec#environment
-    dockerfilePath: Dockerfile.render
+    env: ruby # valid values: https://render.com/docs/yaml-spec#environment
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
     plan: starter # optional; defaults to starter
     numInstances: 1
+    domains: # custom domains
+      - 'tangotube.tv'
+      - 'www.tangotube.tv'
     envVars:
-      - key: BONSAI_URL # Imported from Heroku app
-        value: https://f4nmzumvzb:2fj6pcm3vk@tangotube-production-7618181255.eu-central-1.bonsaisearch.net:443
       - key: DOMAIN # Imported from Heroku app
         value: www.tangotube.tv
       - key: LANG # Imported from Heroku app
@@ -37,29 +39,21 @@ services:
         value: 1
       - key: YARN_PRODUCTION # Imported from Heroku app
         value: false
-      - key: DATABASE_URL # Render managed PostgreSQL database
+      - key: DATABASE_URL # Render PostgreSQL database
         fromDatabase:
           name: postgresql-flat-53027
           property: connectionString
-      - key: REDIS_HOST # Render private service
+      - key: REDIS_URL # Render Redis service
         fromService:
           name: redis-cubic-93644
-          type: pserv
-          property: host
-      - key: REDIS_PORT
-        fromService:
-          name: redis-cubic-93644
-          type: pserv
-          property: port
-  - type: pserv # Redis private service
+          type: redis
+          property: connectionString
+  - type: redis # Render Redis service
     name: redis-cubic-93644
-    env: docker
-    repo: https://github.com/render-examples/redis.git
-    disk:
-      name: redis-cubic-93644-data
-      mountPath: /var/lib/redis
-      sizeGB: 10 # optional
+    plan: starter # optional (defaults to starter)
+    maxmemoryPolicy: allkeys-lru # optional (defaults to allkeys-lru)
+    ipAllowList: [] # only allow internal connections
 
-databases: # Render PostgreSQL managed database
+databases: # Render PostgreSQL database
   - name: postgresql-flat-53027
     ipAllowList: [] # only allow internal connections
