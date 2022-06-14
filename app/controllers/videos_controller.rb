@@ -43,7 +43,7 @@ class VideosController < ApplicationController
     end
 
     if filtering_params.present? || sorting_params.present?
-      videos = Video.pagy_search(filtering_params[:query].presence || "*",
+      videos = Video.pagy_search(query_without_stop_words(filtering_params[:query]).presence || "*",
                                           where: filters,
                                           order:,
                                           includes: [:song, :leader, :follower, :event, :channel],
@@ -399,6 +399,18 @@ class VideosController < ApplicationController
       :query,
       :dancer
     ).to_h
+  end
+
+  def stop_words
+    %w[and or the a an of to y e &]
+  end
+
+  def stop_words_regex
+    /\b(#{stop_words.map { |word| Regexp.escape(word) }.join('|')})\b/
+  end
+
+  def query_without_stop_words(query)
+    query.gsub(stop_words_regex, "").gsub("'", "").split.map(&:strip).join(" ")
   end
 
   def sort_column
