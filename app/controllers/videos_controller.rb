@@ -410,6 +410,7 @@ class VideosController < ApplicationController
   end
 
   def query_without_stop_words(query)
+    return nil if query.nil?
     query.gsub(stop_words_regex, "").gsub("'", "").split.map(&:strip).join(" ")
   end
 
