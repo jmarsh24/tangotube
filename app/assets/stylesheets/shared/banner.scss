@@ -37,7 +37,26 @@
   object-fit: cover;
 }
 
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--sl-color-red-400);
+}
+
+.swiper-pagination {
+  color: var(--sl-color-red-400);
+}
+
+.banner__buttons {
+  display: none;
+  gap: 10px;
+  padding-top: 10px;
+}
+
 @media (max-width: 600px) {
+  .banner__buttons {
+    display: block;
+  }
+
   .swiper-slide {
     padding-left: 80px;
     padding-right: 80px;
