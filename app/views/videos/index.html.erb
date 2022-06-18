@@ -10,7 +10,7 @@
         <div class="video-section">
           <%= render "videos/index/videos/section/header", title: "Featured" %>
           <div class="video-section__videos">
-            <%= render @featured_videos %>
+            <%= render partial: "video", collection: @featured_videos, cached: true %>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
         <%= render "videos/index/videos/section/header", title: "Trending" %>
       <% end %>
       <div class="video-section__videos" id="results">
-        <%= render @videos %>
+        <%= render partial: "video", collection: @videos, cached: true %>
       </div>
     </div>
   </div>
