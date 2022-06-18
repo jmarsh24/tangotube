@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       patch "featured", to: "videos#featured"
     end
   end
+
   resources :search_suggestions, only: :index do
     collection do
       post :search
@@ -55,6 +56,11 @@ Rails.application.routes.draw do
   resources :followers, only: %i[index create]
   resources :events, only: %i[index create]
   resources :songs, only: :index
+
+  get "filters/leader", to: "filters#leader"
+  get "filters/follower", to: "filters#follower"
+  get "filters/year", to: "filters#year"
+  get "filters/genre", to: "filters#genre"
 
   root 'videos#index'
   post '/' => 'videos#index'
