@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ["banner"];
 
   connect() {
-    swiper = new Swiper(this.bannerTarget, {
+    new Swiper(this.bannerTarget, {
       modules: [Navigation, Pagination],
       centeredSlides: true,
       loop: true,
