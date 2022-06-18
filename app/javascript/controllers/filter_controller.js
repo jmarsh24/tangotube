@@ -18,7 +18,7 @@ export default class extends Controller {
     const filters_url = `${window.location.pathname}videos/filters/?${this.params}`;
 
     this.getBack();
-    this.replaceContens(url);
+    this.replaceContents(url);
     this.replaceFilters(filters_url);
   }
 
@@ -78,7 +78,7 @@ export default class extends Controller {
     return searchParams;
   }
 
-  async replaceContens(url) {
+  async replaceContents(url) {
     const request = new FetchRequest("get", url, { responseKind: "html" });
     const response = await request.perform();
     if (response.ok) {
