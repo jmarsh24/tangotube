@@ -82,12 +82,19 @@ button {
   }
 
   &--submit {
-    background: rgb(72, 63, 208);
+    background: linear-gradient(
+      to right,
+      #e52d27 0%,
+      #b31217 51%,
+      #e52d27 100%
+    );
+    transition: 0.5s;
+    background-size: 200% auto;
     color: white;
 
     &:hover {
       color: white;
-      background: rgb(79, 70, 229);
+      background-position: right center;
     }
   }
 

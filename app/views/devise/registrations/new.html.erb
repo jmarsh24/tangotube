@@ -6,7 +6,7 @@
     <p style="margin-top: 4px; text-align: center; color: rgb(75, 85, 99);">
       Or
       <%- if controller_name != 'sessions' %>
-        <%= link_to "Log in to your account", new_session_path(resource_name), style: "color: rgb(99, 102, 241);" %><br />
+        <%= link_to "Log in to your account", new_session_path(resource_name) %><br />
       <% end %>
     </p>
   </div>
@@ -17,27 +17,27 @@
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <%= f.label :first_name %>
           <div class="mt-1 rounded-md shadow-sm">
-            <%= f.text_field :first_name, autofocus: true, autocomplete: "first name", class:"input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: "first name", class:"input input--block", style: "width: 100%; padding 4px 6px;" %>
           </div>
           <div>
             <%= f.label :last_name  %>
             <div class="mt-1 rounded-md shadow-sm">
-              <%= f.text_field :last_name, autofocus: true, autocomplete: "last name", class:"input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
+              <%= f.text_field :last_name, autofocus: true, autocomplete: "last name", class:"input input--block", style: "width: 100%; padding 4px 6px;" %>
             </div>
           </div>
           <div>
             <%= f.label :email  %>
             <div class="mt-1 rounded-md shadow-sm">
-              <%= f.email_field :email, autocomplete: "email", class:"input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
+              <%= f.email_field :email, autocomplete: "email", class:"input input--block", style: "width: 100%; padding 4px 6px;" %>
             </div>
           </div>
           <div>
             <%= f.label :password  %>
             <div class="mt-1 rounded-md shadow-sm">
-              <%= f.password_field :password, autocomplete: "new-password", class:"input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
+              <%= f.password_field :password, autocomplete: "new-password", class:"input input--block", style: "width: 100%; padding 4px 6px;" %>
             </div>
           </div>
-          <p class="mb-2 text-xs text-gray-500">By registering, you agree to the <%= link_to "Privacy Policy", privacy_path, style: "color: rgb(99, 102, 241);" %> and <%= link_to "Terms & Conditions", terms_path, style: "color: rgb(99, 102, 241);" %>
+          <p class="mb-2 text-xs text-gray-500">By registering, you agree to the <%= link_to "Privacy Policy", privacy_path %> and <%= link_to "Terms & Conditions", terms_path %>
             <div>
               <%= f.submit "Sign Up", class: "button button--block button--submit", data: { turbo: false }  %>
             </div>

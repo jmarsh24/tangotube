@@ -6,10 +6,12 @@
     <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
       <h2>TangoTube</h2>
       <h4>A Video Platform for dancers, by dancers.</h4>
-      <h5 style="margin: 3px; font-weight: 400; color">Login to access extra features</h5>
-      <div class="row" style="gap: 10px; padding-top: 10px;">
-        <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
-        <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
+      <div class="banner__buttons">
+        <h5 style="margin: 3px; font-weight: 400; color">Login to access extra features</h5>
+        <div class="row">
+          <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
+          <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
+        </div>
       </div>
     </div>
     <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">

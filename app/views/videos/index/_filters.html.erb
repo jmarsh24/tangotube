@@ -4,87 +4,87 @@
       id="button-filter"
         <% if filtering_params.present? %>
           variant="primary"
-        <% end %>
-        outline>
+          outline
+        <% end %>>
       Filter
     </sl-button>
     <div style="background-color: var(--sl-color-neutral-50);">
       <%= turbo_frame_tag "filters", src: filters_path %>
       <sl-menu-label>Additional Filters</sl-menu-label>
-      <sl-divider style="margin:12px 0;"></sl-divider>
-      <div id="menu-additional-filters">
-        <% if current_user %>
-          <%= button_tag type: "button",
+    <sl-divider style="margin:12px 0;"></sl-divider>
+    <div id="menu-additional-filters">
+      <% if current_user %>
+        <%= button_tag type: "button",
                           class: "additional-filters-button",
                           data: { controller: "filter",
                           action: "filter#filter",
                                   "filter-watched-value": filtering_params["watched"] == "true" ? 0 : "true" } do %>
-            <% if filtering_params["watched"] == "true" %>
-              <%= content_tag(:b, "Watched") %>
-              <%= fa_icon("times", class: "videos-sortable-icon") %>
-            <% else %>
-              Watched
-            <% end %>
+          <% if filtering_params["watched"] == "true" %>
+            <%= content_tag(:b, "Watched") %>
+            <%= fa_icon("times", class: "videos-sortable-icon") %>
+          <% else %>
+            Watched
           <% end %>
-          <%= button_tag type: "button",
+        <% end %>
+        <%= button_tag type: "button",
                         class: "additional-filters-button",
                         data:  {controller: "filter",
                         action: "filter#filter",
                                 "filter-liked-value": filtering_params["liked"] == "true" ? 0 : "true" } do %>
-            <% if filtering_params["liked"] == "true" %>
-              <%= content_tag(:b, "Liked") %>
-              <%= fa_icon("times", class: "videos-sortable-icon") %>
-            <% else %>
-              Liked
-            <% end %>
+          <% if filtering_params["liked"] == "true" %>
+            <%= content_tag(:b, "Liked") %>
+            <%= fa_icon("times", class: "videos-sortable-icon") %>
+          <% else %>
+            Liked
           <% end %>
-          <%= button_tag type: "button",
+        <% end %>
+        <%= button_tag type: "button",
                           class: "additional-filters-button",
                           data: { controller: "filter",
                           action: "filter#filter",
                                   "filter-watched-value": filtering_params["watched"] == "false" ? 0 : "false" } do %>
-            <% if filtering_params["watched"] == "false" %>
-              <%= content_tag(:b, "New To You") %>
-              <%= fa_icon("times", class: "videos-sortable-icon") %>
-            <% else %>
-              New to You
-            <% end %>
+          <% if filtering_params["watched"] == "false" %>
+            <%= content_tag(:b, "New To You") %>
+            <%= fa_icon("times", class: "videos-sortable-icon") %>
+          <% else %>
+            New to You
           <% end %>
         <% end %>
-        <%= button_tag type: "button",
+      <% end %>
+      <%= button_tag type: "button",
                         class: "additional-filters-button",
                         data: { controller: "filter",
                         action: "filter#filter",
                                 "filter-hd-value": filtering_params["hd"] == "true" ? 0 : "true" } do %>
-          <% if filtering_params["hd"] == "true" %>
-            <%= content_tag(:b, "HD") %>
-            <%= fa_icon("times", class: "videos-sortable-icon") %>
-          <% else %>
-            HD
-          <% end %>
+        <% if filtering_params["hd"] == "true" %>
+          <%= content_tag(:b, "HD") %>
+          <%= fa_icon("times", class: "videos-sortable-icon") %>
+        <% else %>
+          HD
         <% end %>
-        <%= button_tag type: "button",
+      <% end %>
+      <%= button_tag type: "button",
                         class: "additional-filters-button",
                         data: { controller: "filter",
                         action: "filter#filter",
                                 "filter-dancer-value": filtering_params["dancer"] == "true" ? 0 : "true" } do %>
-          <% if filtering_params["dancer"] == "true" %>
-            <%= content_tag(:b, "With Dancer") %>
-            <%= fa_icon("times", class: "videos-sortable-icon") %>
-          <% else %>
-            With Dancer
-          <% end %>
+        <% if filtering_params["dancer"] == "true" %>
+          <%= content_tag(:b, "With Dancer") %>
+          <%= fa_icon("times", class: "videos-sortable-icon") %>
+        <% else %>
+          With Dancer
         <% end %>
-      </div>
+      <% end %>
     </div>
-  </sl-dropdown>
-  <sl-dropdown stay-open-on-select>
-    <sl-button slot="trigger"
+  </div>
+</sl-dropdown>
+<sl-dropdown stay-open-on-select>
+  <sl-button slot="trigger"
           id="button-sorting"
         <% if sorting_params.present? %>
           variant="primary"
-        <% end %>
-        outline>
+          outline
+        <% end %>>
       Sorting
     </sl-button>
     <sl-menu>
@@ -94,43 +94,43 @@
         <sl-menu-item>
           <%= sortable 'date', "desc",  "Recent First", @sort_column, @sort_direction %>
         </sl-menu-item>
-        <sl-menu-item>
-          <%= sortable 'date', "asc", "Oldest First", @sort_column, @sort_direction %>
-        </sl-menu-item>
-        <sl-menu-item>
-          <%= sortable "view_count", "desc",  "Most Viewed", @sort_column, @sort_direction %>
-        </sl-menu-item>
-        <sl-menu-item>
-          <%= sortable "popularity", "desc",  "Trending", @sort_column, @sort_direction %>
-        </sl-menu-item>
-        <sl-menu-item>
-          <%= sortable "like_count", "desc",  "Most Liked", @sort_column, @sort_direction %>
-        </sl-menu-item>
-        <sl-divider style="margin:12px 0"></sl-divider>
-        <sl-menu-label>Group By</sl-menu-label>
-        <sl-divider style="margin:12px 0;"></sl-divider>
-        <sl-menu-item>
-          <%= sortable 'song_title', "asc", "Song", @sort_column, @sort_direction %>
-        </sl-menu-item>
-        <sl-menu-item>
-          <%= sortable 'orchestra', "asc",  "Orchestra", @sort_column, @sort_direction %>
-        </sl-menu-item>
-        <sl-menu-item>
-          <%= sortable 'channel_title', "asc",  "Channel", @sort_column, @sort_direction %>
-        </sl-menu-item>
-      </div>
-    </sl-menu>
-  </sl-dropdown>
-  <div id="button-clear-all">
-    <% if filtering_params.present? || sorting_params.present? %>
-      <sl-button variant="danger"
+    <sl-menu-item>
+      <%= sortable 'date', "asc", "Oldest First", @sort_column, @sort_direction %>
+    </sl-menu-item>
+    <sl-menu-item>
+      <%= sortable "view_count", "desc",  "Most Viewed", @sort_column, @sort_direction %>
+    </sl-menu-item>
+    <sl-menu-item>
+      <%= sortable "popularity", "desc",  "Trending", @sort_column, @sort_direction %>
+    </sl-menu-item>
+    <sl-menu-item>
+      <%= sortable "like_count", "desc",  "Most Liked", @sort_column, @sort_direction %>
+    </sl-menu-item>
+    <sl-divider style="margin:12px 0"></sl-divider>
+    <sl-menu-label>Group By</sl-menu-label>
+    <sl-divider style="margin:12px 0;"></sl-divider>
+    <sl-menu-item>
+      <%= sortable 'song_title', "asc", "Song", @sort_column, @sort_direction %>
+    </sl-menu-item>
+    <sl-menu-item>
+      <%= sortable 'orchestra', "asc",  "Orchestra", @sort_column, @sort_direction %>
+    </sl-menu-item>
+    <sl-menu-item>
+      <%= sortable 'channel_title', "asc",  "Channel", @sort_column, @sort_direction %>
+    </sl-menu-item>
+  </div>
+</sl-menu>
+</sl-dropdown>
+<div id="button-clear-all">
+  <% if filtering_params.present? || sorting_params.present? %>
+    <sl-button variant="danger"
                 outline
                 data-controller="filter"
                 data-action="click->filter#filter"
-        data-filter-clear-value= "1"
-        id="button-clear-all">
-        Clear All
-      </sl-button>
-    <% end %>
-  </div>
+      data-filter-clear-value= "1"
+      id="button-clear-all">
+      Clear All
+    </sl-button>
+  <% end %>
+</div>
 </div>
