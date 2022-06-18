@@ -15,9 +15,11 @@ export default class extends Controller {
 
   filter() {
     const url = `${window.location.pathname}?${this.params}`;
+    const filters_url = `${window.location.pathname}filters/?${this.params}`;
 
     this.getBack();
-    this.replaceContents(url);
+    this.replaceVideos(url);
+    this.replaceContents(filters_url);
   }
 
   get params() {
@@ -76,6 +78,35 @@ export default class extends Controller {
     return searchParams;
   }
 
+  async replaceVideos(url) {
+    const request = new FetchRequest("get", url, { responseKind: "html" });
+    const response = await request.perform();
+    if (response.ok) {
+      const data = await response.html;
+      var parser = new DOMParser();
+      var parsedData = parser.parseFromString(data, "text/html");
+
+      const replaceContainers = [
+        "videos",
+        "next_link",
+        "button-filter",
+        "button-sorting",
+        "menu-additional-filters",
+        "menu-sorting-filters",
+        "button-clear-all",
+        "videos-header",
+      ];
+
+      replaceContainers.forEach((element) => {
+        document.getElementById(element).outerHTML = parsedData.getElementById(
+          element
+        ).outerHTML;
+      });
+
+      history.pushState({}, "", `${window.location.pathname}?${this.params}`);
+    }
+  }
+
   async replaceContents(url) {
     const request = new FetchRequest("get", url, { responseKind: "html" });
     const response = await request.perform();
@@ -85,19 +116,11 @@ export default class extends Controller {
       var parsedData = parser.parseFromString(data, "text/html");
 
       const replaceContainers = [
-        "button-filter",
-        "button-sorting",
         "genre-filter",
         "leader-filter",
         "follower-filter",
         "orchestra-filter",
-        "menu-additional-filters",
-        "menu-sorting-filters",
-        "button-clear-all",
         "year-filter",
-        "videos",
-        "next_link",
-        "videos-header",
       ];
 
       replaceContainers.forEach((element) => {

@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   resources :events, only: %i[index create]
   resources :songs, only: :index
 
+  get "filters", to: "filters#filters"
   get "filters/leader", to: "filters#leader"
   get "filters/follower", to: "filters#follower"
   get "filters/year", to: "filters#year"

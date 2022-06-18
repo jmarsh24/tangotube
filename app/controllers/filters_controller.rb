@@ -1,6 +1,23 @@
 class FiltersController < ApplicationController
   before_action :video_search
 
+  def filters
+    genre
+    leader
+    follower
+    orchestra
+    year
+  end
+
+  private
+
+  def video_search
+    @video_search ||= Video.search(query_params.presence || "*",
+      where: filtering_params,
+      aggs: [:genre, :leader, :follower, :orchestra, :year],
+      misspellings: {edit_distance: 10})
+  end
+
   def genre
     @genres ||= @video_search.aggs["genre"]["buckets"]
                               .sort_by{ |b| b["doc_count"] }
@@ -29,15 +46,6 @@ class FiltersController < ApplicationController
     @years ||= @video_search.aggs["year"]["buckets"]
                             .sort_by{ |b| b["key"] }
                             .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
-  end
-
-  private
-
-  def video_search
-    @video_search ||= Video.search(query_params.presence || "*",
-      where: filtering_params,
-      aggs: [:genre, :leader, :follower, :orchestra, :year],
-      misspellings: {edit_distance: 10})
   end
 
   def filtering_params

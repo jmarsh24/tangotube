@@ -9,11 +9,7 @@
       Filter
     </sl-button>
     <div style="background-color: var(--sl-color-neutral-50);">
-      <%= render filters_genre_path %>
-      <%= render filters_leader_path %>
-      <%= render filters_follower_path %>
-      <%= render filters_orchestra_path %>
-      <%= render filters_year_path %>
+      <%= turbo_frame_tag "filters", src: filters_path %>
       <sl-menu-label>Additional Filters</sl-menu-label>
       <sl-divider style="margin:12px 0;"></sl-divider>
       <div id="menu-additional-filters">
