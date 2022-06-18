@@ -33,6 +33,8 @@ GEM
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
+    actionpack-action_caching (1.2.2)
+      actionpack (>= 4.0.0)
     actiontext (7.0.2.3)
       actionpack (= 7.0.2.3)
       activerecord (= 7.0.2.3)
@@ -469,6 +471,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  actionpack-action_caching (~> 1.2)
   acts_as_votable
   ahoy_matey
   amazing_print

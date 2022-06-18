@@ -15,11 +15,11 @@ export default class extends Controller {
 
   filter() {
     const url = `${window.location.pathname}?${this.params}`;
-    const filters_url = `${window.location.pathname}filters/?${this.params}`;
+    const filters_url = `${window.location.pathname}videos/filters/?${this.params}`;
 
     this.getBack();
-    this.replaceVideos(url);
-    this.replaceContents(filters_url);
+    this.replaceContens(url);
+    this.replaceFilters(filters_url);
   }
 
   get params() {
@@ -78,7 +78,7 @@ export default class extends Controller {
     return searchParams;
   }
 
-  async replaceVideos(url) {
+  async replaceContens(url) {
     const request = new FetchRequest("get", url, { responseKind: "html" });
     const response = await request.perform();
     if (response.ok) {
@@ -107,7 +107,7 @@ export default class extends Controller {
     }
   }
 
-  async replaceContents(url) {
+  async replaceFilters(url) {
     const request = new FetchRequest("get", url, { responseKind: "html" });
     const response = await request.perform();
     if (response.ok) {

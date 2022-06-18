@@ -1,14 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_action :set_total_videos_count
+  before_action :total_videos_count
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   include Pagy::Backend
 
   private
 
-  def set_total_videos_count
-    @videos_total = Video.not_hidden.size
+  def total_videos_count
+    @videos_total = Rails.cache.fetch("total_videos_count", expires_in: 12.hours) do
+      Video.not_hidden.size
+    end
   end
 
   def track_action
