@@ -5,7 +5,7 @@ export default class extends Controller {
   static values = { placeholder: String };
 
   connect() {
-    const closeOnSelect = false;
+    const closeOnSelect = true;
     const allowDeselect = true;
     const showContent = "down";
     const searchFocus = false;
