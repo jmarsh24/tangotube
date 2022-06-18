@@ -2,49 +2,48 @@ class FiltersController < ApplicationController
   before_action :videos_search
 
   def filters
-    genre
-    leader
-    follower
-    orchestra
-    year
+    genres
+    leaders
+    followers
+    orchestras
+    years
   end
 
   private
 
   def videos_search
-    @videos_search = Rails.cache.fetch("videos_search", expired_in: 12.hours) do
+    @videos_search =
       Video.search(query_params.presence || "*",
       where: filtering_params,
       aggs: [:genre, :leader, :follower, :orchestra, :year],
       misspellings: {edit_distance: 10})
-    end
   end
 
-  def genre
+  def genres
     @genres ||= @videos_search.aggs["genre"]["buckets"]
                               .sort_by{ |b| b["doc_count"] }
                               .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
   end
 
-  def leader
+  def leaders
     @leaders ||= @videos_search.aggs["leader"]["buckets"]
                               .sort_by{ |b| b["doc_count"] }
                               .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
   end
 
-  def follower
+  def followers
     @followers ||= @videos_search.aggs["follower"]["buckets"]
                                 .sort_by{ |b| b["doc_count"] }
                                 .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
   end
 
-  def orchestra
+  def orchestras
     @orchestras ||= @videos_search.aggs["orchestra"]["buckets"]
                                   .sort_by{ |b| b["doc_count"] }
                                   .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
   end
 
-  def year
+  def years
     @years ||= @videos_search.aggs["year"]["buckets"]
                             .sort_by{ |b| b["key"] }
                             .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
