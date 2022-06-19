@@ -1,1 +1,3 @@
-<%= render partial: "filter", locals: { options: @followers, title: :follower, id: 'follower-filter', width: "300px" } %>
+<% cache "filter_followers_#{filtering_params}" do %>
+  <%= render partial: "filter", locals: { options: @followers, title: :follower, id: 'follower-filter', width: "300px" } %>
+<% end %>

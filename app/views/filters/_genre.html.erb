@@ -1,1 +1,3 @@
-<%= render partial: "filter", locals: { options: @genres , title: :genre, id: 'genre-filter', width: "200px" } %>
+<% cache "filter_genres_#{filtering_params}" do %>
+  <%= render partial: "filter", locals: { options: @genres , title: :genre, id: 'genre-filter', width: "200px" } %>
+<% end %>

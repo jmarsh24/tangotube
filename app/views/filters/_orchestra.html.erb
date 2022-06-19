@@ -1,1 +1,3 @@
-<%= render partial: "filter", locals: { options: @orchestras, title: :orchestra, id: 'orchestra-filter', width: "300px" } %>
+<% cache "filter_orchestras_#{filtering_params}" do %>
+  <%= render partial: "filter", locals: { options: @orchestras, title: :orchestra, id: 'orchestra-filter', width: "300px" } %>
+<% end %>
