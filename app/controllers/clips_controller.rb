@@ -19,6 +19,7 @@ class ClipsController < ApplicationController
   # GET /clips/1/edit
   def edit; end
 
+
   # POST /clips
   def create
     @clip = Clip.new(clip_params)
@@ -26,12 +27,15 @@ class ClipsController < ApplicationController
     @clip.video = @video
 
     if @clip.save
-      redirect_to watch_path( v: @clip.video.youtube_id,
-                              start: @clip.start_seconds,
-                              end: @clip.end_seconds,
-                              speed: @clip.playback_rate),
-                              target: "_top",
-                              notice: "Clip was successfully created."
+      respond_to do |format|
+        format.html do
+          redirect_to watch_path( v: @clip.video.youtube_id,
+                                  start: @clip.start_seconds,
+                                  end: @clip.end_seconds,
+                                  speed: @clip.playback_rate),
+                                  notice: "Clip was successfully created. Click #{view_context.link_to('Here',clips_path)} to view your clip."
+        end
+      end
     else
       render :new, status: :unprocessable_entity
     end
