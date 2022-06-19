@@ -53,6 +53,23 @@ services:
       mountPath: /var/lib/redis
       sizeGB: 1
 
+  - type: pserv
+    name: elasticsearch
+    env: docker
+    plan: standard
+    disk:
+      name: esdata
+      mountPath: /usr/share/elasticsearch/data
+      sizeGB: 10
+    autoDeploy: false # so ES does not restart on a push to this repository.
+    envVars:
+    - key: ES_JAVA_OPTS
+      value: "-Xms512m -Xmx512m"
+    - key: discovery.type
+      value: single-node
+    - key: cluster.name
+      value: elastic
+
 databases:
   - name: tangotube-db
     plan: starter
