@@ -52,6 +52,7 @@ services:
         fromService:
           name: tangotube-elasticsearch
           type: pserv
+          property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
 
