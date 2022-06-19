@@ -9,6 +9,10 @@ services:
     startCommand: REDIS_URL="redis://${REDIS_HOST}" bundle exec puma -C config/puma.rb
     # domains:
       # - tangotube.tv
+    disk:
+      name: tangotube-data
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
       - key: DATABASE_URL
         fromDatabase:
