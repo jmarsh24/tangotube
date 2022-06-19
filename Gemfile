@@ -5,6 +5,7 @@ ruby "3.1.2"
 # gems that ship with rails...........................................................
 gem "bootsnap", require: false
 gem "jsbundling-rails"
+gem "dartsass-rails"
 gem "rails", "~> 7.0.2.3"
 gem "redis"
 gem "puma"
@@ -18,7 +19,6 @@ gem "turbo-rails"
 gem "acts_as_votable"
 gem "ahoy_matey"
 gem "barnes"
-gem "dartsass-rails"
 gem "deepl-rb", require: 'deepl'
 gem "devise"
 gem "elasticsearch"
