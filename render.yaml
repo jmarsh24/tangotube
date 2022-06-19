@@ -7,8 +7,8 @@ services:
     numInstances: 1
     buildCommand: ./bin/render-build.sh
     startCommand: REDIS_URL="redis://${REDIS_HOST}" bundle exec puma -C config/puma.rb
-    domains:
-      - tangotube.tv # replace with your domain name
+    # domains:
+      # - tangotube.tv
     envVars:
       - key: DATABASE_URL
         fromDatabase:
