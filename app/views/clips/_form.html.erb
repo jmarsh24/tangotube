@@ -53,7 +53,7 @@
     </div>
     <% if user_signed_in? %>
       <div>
-        <%= form.submit %>
+        <%= form.submit data: { turbo: false } %>
       </div>
     <% end %>
   </div>
