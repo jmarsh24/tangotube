@@ -1,4 +1,4 @@
-  <% cache_if !@video.hidden?, "video_show_#{@video.youtube_id}", expires_in: 24.hours do %>
+  <% cache_if !@video.hidden?, "video_show_#{@video.youtube_id} #{user_signed_in? ? "_user_#{current_user.id}" : ''} ", expires_in: 24.hours do %>
   <% content_for :meta_title, "#{primary_title(@video.display.dancer_names,
                                               @video.title,
                                               @video.display.any_song_attributes,
