@@ -21,7 +21,7 @@ class Clip::Gif::GifGenerator
   end
 
   def output_path
-    "/tmp/#{File.basename(source_file, '.*')}_#{start_time}_#{end_time}.webp"
+    "/tmp/#{File.basename(source_file, '.*')}_#{start_time}_#{end_time}.gif"
   end
 
 end
