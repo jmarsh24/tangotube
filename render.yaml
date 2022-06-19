@@ -7,7 +7,7 @@ services:
   - name: tangotube
     type: web
     env: ruby
-    buildCommand: bundle install
+    buildCommand: "./bin/render-build.sh"
     startCommand: bundle exec puma -C config/puma.rb
     envVars:
       - key: DATABASE_URL
