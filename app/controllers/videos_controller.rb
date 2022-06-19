@@ -44,7 +44,7 @@ class VideosController < ApplicationController
 
     if filtering_params.present? || sorting_params.present?
       videos = Video.pagy_search(query_without_stop_words(filtering_params[:query]).presence || "*",
-                                          where: filters,
+                                          where: filters.merge(hidden: false),
                                           order:,
                                           includes: [:song, :leader, :follower, :event, :channel],
                                           fields: ["title^10", "leader^10", "follower^10", "song_title^5", "song_artist^5"],
@@ -54,7 +54,8 @@ class VideosController < ApplicationController
                                           boost_by_recency: { updated_at: {scale: "7d", decay: 0.5  } },
                                           boost_where: {  watched_by: user_id,
                                                           has_follower: true,
-                                                          has_leader: true  })
+                                                          has_leader: true  }
+                                          )
     else
       videos = Video.pagy_search("*",
         includes: [:song, :leader, :follower, :event, :channel],

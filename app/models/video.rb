@@ -199,7 +199,8 @@ class Video < ApplicationRecord
       not_watched_by:,
       bookmarked_by:,
       watched_later_by:,
-      year: performance_date&.year
+      year: performance_date&.year,
+      hidden:
     }
   end
 
