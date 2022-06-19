@@ -54,7 +54,7 @@ services:
       sizeGB: 1
 
   - type: pserv
-    name: elasticsearch
+    name: tangotube-elasticsearch
     env: docker
     plan: standard
     disk:
