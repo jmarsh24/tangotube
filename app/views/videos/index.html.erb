@@ -10,28 +10,28 @@
         <div class="video-section">
           <%= render "videos/index/videos/section/header", title: "Featured" %>
           <div class="video-section__videos">
-            <%#= cache "featured_videos_#{rand(1...5)}", expires_in: 10.minutes do %>
+            <%= cache "featured_videos_#{rand(1...5)}", expires_in: 10.minutes do %>
               <%= render partial: "video", collection: @featured_videos %>
-              <%# end %>
-            </div>
+            <% end %>
           </div>
         </div>
+      </div>
+    <% end %>
+    <div class="video-section">
+      <% if @featured_videos.present? %>
+        <%= render "videos/index/videos/section/header", title: "Trending" %>
       <% end %>
-      <div class="video-section">
-        <% if @featured_videos.present? %>
-          <%= render "videos/index/videos/section/header", title: "Trending" %>
-        <% end %>
-        <div class="video-section__videos" id="results">
-          <%= render partial: "video", collection: @videos %>
-        </div>
+      <div class="video-section__videos" id="results">
+        <%= render partial: "video", collection: @videos %>
       </div>
     </div>
-    <div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">
-      <% if @pagy.next %>
-        <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
-          <button type="submit" data-controller="autoclick"></button>
-        </form>
-        <sl-spinner style="font-size: 50px; --track-width: 5px;"></sl-spinner>
-      <% end %>
-    </div>
   </div>
+  <div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">
+    <% if @pagy.next %>
+      <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
+        <button type="submit" data-controller="autoclick"></button>
+      </form>
+      <sl-spinner style="font-size: 50px; --track-width: 5px;"></sl-spinner>
+    <% end %>
+  </div>
+</div>

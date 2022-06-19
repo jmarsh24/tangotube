@@ -1,3 +1,3 @@
-<%# cache "filter_leaders_#{filtering_params}" do %>
+<% cache "filter_leaders_#{filtering_params}" do %>
   <%= render partial: "filter", locals: { options: @leaders, title: :leader, id: 'leader-filter', width: "300px" } %>
-  <%# end %>
+<% end %>
