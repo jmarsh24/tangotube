@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: dtangotube-web
+    name: tangotube-web
     env: ruby
     region: frankfurt # or oregon
     plan: starter
@@ -12,18 +12,18 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: dtangotube-db
+          name: tangotube-db
           property: connectionString
       - key: REDIS_HOST
         fromService:
-          name: dtangotube-redis
+          name: tangotube-redis
           type: pserv
           property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
 
   - type: worker
-    name: dtangotube-sidekiq
+    name: tangotube-sidekiq
     env: ruby
     region: frankfurt # or oregon
     plan: starter
@@ -32,28 +32,28 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: dtangotube-db
+          name: tangotube-db
           property: connectionString
       - key: REDIS_HOST
         fromService:
-          name: dtangotube-redis
+          name: tangotube-redis
           type: pserv
           property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
 
   - type: pserv
-    name: dtangotube-redis
+    name: tangotube-redis
     env: docker
     region: frankfurt # or oregon
     repo: https://github.com/render-examples/redis.git
     numInstances: 1
     disk:
-      name: dtangotube-redis-data
+      name: tangotube-redis-data
       mountPath: /var/lib/redis
       sizeGB: 1
 
 databases:
-  - name: dtangotube-db
+  - name: tangotube-db
     plan: starter
     region: frankfurt # or oregon
