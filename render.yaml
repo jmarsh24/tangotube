@@ -69,8 +69,8 @@ services:
   - type: pserv
     name: tangotube-elasticsearch
     env: docker
-    plan: standard
     region: frankfurt
+    plan: standard
     disk:
       name: esdata
       mountPath: /usr/share/elasticsearch/data
