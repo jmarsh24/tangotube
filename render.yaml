@@ -2,7 +2,7 @@ services:
   - type: web
     name: tangotube-web
     env: ruby
-    region: frankfurt # or oregon
+    region: frankfurt
     plan: starter
     numInstances: 1
     buildCommand: ./bin/render-build.sh
@@ -34,7 +34,7 @@ services:
   - type: worker
     name: tangotube-sidekiq
     env: ruby
-    region: frankfurt # or oregon
+    region: frankfurt
     plan: starter
     buildCommand: bundle install && bundle exec rake assets:precompile
     startCommand: REDIS_URL="redis://${REDIS_HOST}" bundle exec sidekiq -e production
@@ -58,7 +58,7 @@ services:
   - type: pserv
     name: tangotube-redis
     env: docker
-    region: frankfurt # or oregon
+    region: frankfurt
     repo: https://github.com/render-examples/redis.git
     numInstances: 1
     disk:
@@ -70,11 +70,12 @@ services:
     name: tangotube-elasticsearch
     env: docker
     plan: standard
+    region: frankfurt
     disk:
       name: esdata
       mountPath: /usr/share/elasticsearch/data
       sizeGB: 10
-    autoDeploy: false # so ES does not restart on a push to this repository.
+    autoDeploy: false
     envVars:
     - key: ES_JAVA_OPTS
       value: "-Xms512m -Xmx512m"
@@ -86,4 +87,4 @@ services:
 databases:
   - name: tangotube-db
     plan: starter
-    region: frankfurt # or oregon
+    region: frankfurt
