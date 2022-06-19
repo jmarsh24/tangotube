@@ -8,7 +8,7 @@ services:
     buildCommand: ./bin/render-build.sh
     startCommand: REDIS_URL="redis://${REDIS_HOST}" bundle exec puma -C config/puma.rb
     domains:
-      - example.com # replace with your domain name
+      - tangotube.tv # replace with your domain name
     envVars:
       - key: DATABASE_URL
         fromDatabase:
