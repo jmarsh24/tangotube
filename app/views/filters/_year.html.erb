@@ -1,3 +1,3 @@
-<%# cache "filter_years_#{filtering_params}" do %>
+<% cache "filter_years_#{filtering_params}" do %>
   <%= render partial: "filter", locals: { options: @years, title: :year, id: 'year-filter', width: "200px" } %>
-  <%# end %>
+<% end %>
