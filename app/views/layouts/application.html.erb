@@ -17,7 +17,9 @@
     <%= render "shared/header" %>
     <%= render "shared/sidebar" %>
     <div class="content">
-      <%= render "shared/flash" %>
+      <div id="flash" class="flash">
+        <%= render "layouts/flash" %>
+      </div>
       <%= yield %>
     </div>
   </body>

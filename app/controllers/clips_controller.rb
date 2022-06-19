@@ -33,7 +33,10 @@ class ClipsController < ApplicationController
                                   start: @clip.start_seconds,
                                   end: @clip.end_seconds,
                                   speed: @clip.playback_rate),
-                                  notice: "Clip was successfully created. Click #{view_context.link_to('Here',clips_path)} to view your clip."
+                                  notice: "Clip was successfully created. Click #{view_context.link_to('Here', clips_path)} to view your clip."
+        end
+        format.turbo_stream do
+          flash.now[:notice] = "Clip was successfully created. Click #{view_context.link_to('Here',clips_path)} to view your clip."
         end
       end
     else

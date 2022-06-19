@@ -128,9 +128,7 @@ class VideosController < ApplicationController
   end
 
   def show
-    if @video.present?
-      UpdateVideoWorker.perform_async(@video.youtube_id)
-    else
+    if @video.nil?
       Video::YoutubeImport.from_video(show_params[:v])
       @video = Video.find_by(youtube_id: show_params[:v])
       UpdateVideoWorker.perform_async(show_params[:v])
@@ -156,7 +154,7 @@ class VideosController < ApplicationController
       MarkVideoAsWatchedJob.perform_async(show_params[:v], current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
-    @video.reindex
+    # @video.reindex
   end
 
   def update
