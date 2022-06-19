@@ -1,3 +1,14 @@
+.recommended-videos-section {
+  flex: 1;
+  margin: 0 0.5em;
+  flex-direction: column;
+  width: 100%;
+  min-width: 400px;
+  @media (max-width: 700px) {
+    min-width: none;
+  }
+}
+
 .recommended-videos-container {
   display: flex;
   gap: 10px;
@@ -7,6 +18,7 @@
 
   @media (max-width: 800px) {
     flex-direction: column;
+    min-width: none;
   }
 
   &.active {

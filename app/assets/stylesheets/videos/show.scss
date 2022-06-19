@@ -76,13 +76,6 @@ $show-video-width: 1300px;
   }
 }
 
-.recommended-videos-section {
-  flex: 1;
-  margin: 0 0.5em;
-  flex-direction: column;
-  width: 100%;
-}
-
 @media (max-width: 700px) {
   .grid-container-show {
     display: flex;
