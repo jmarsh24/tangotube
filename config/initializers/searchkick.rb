@@ -1,5 +1,5 @@
 Searchkick.client_options = {
-  url: "https://elastic:6OtTwHipOBOQjMSUJuGb@elasticsearch-wqd0.onrender.com:443",
+  url: ENV["ELASTICSEARCH_URL"],
   retry_on_failure: true,
   transport_options:
     { request: { timeout: 250 } }

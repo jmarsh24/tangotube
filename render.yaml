@@ -23,6 +23,11 @@ services:
           name: tangotube-redis
           type: pserv
           property: hostport
+      - key: ELASTICSEARCH_URL
+        fromService:
+          name: tangotube-elasticsearch
+          type: pserv
+          property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
 
@@ -43,6 +48,10 @@ services:
           name: tangotube-redis
           type: pserv
           property: hostport
+      - key: ELASTICSEARCH_URL
+        fromService:
+          name: tangotube-elasticsearch
+          type: pserv
       - key: RAILS_MASTER_KEY
         sync: false
 
