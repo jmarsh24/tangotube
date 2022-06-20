@@ -58,6 +58,7 @@ services:
   - type: cron
     name: tangotube-cron
     env: ruby
+    region: frankfurt
     schedule: 0 3 * * *
     buildCommand: bundle install
     startCommand: >
