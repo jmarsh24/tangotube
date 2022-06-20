@@ -17,10 +17,8 @@ RUN sh -c "echo deb https://deb.nodesource.com/node_14.x buster main > /etc/apt/
 
 # Adds nodejs and upgrade yarn
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  build-essential \
   nodejs \
   yarn \
-  postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
 ENV APP_PATH /opt/app
@@ -30,7 +28,8 @@ WORKDIR $APP_PATH
 COPY . .
 RUN rm -rf node_modules vendor
 RUN gem install rails bundler
+RUN bundle install
 RUN yarn install
 
-ENTRYPOINT ["/bin/render-build.sh"]
+# ENTRYPOINT ["/bin/render-build.sh"]
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
