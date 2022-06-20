@@ -80,6 +80,7 @@ services:
     type: redis
     region: frankfurt
     ipAllowList: []
+    maxmemoryPolicy: allkeys-lru
 
   - type: pserv
     name: tangotube-elasticsearch
