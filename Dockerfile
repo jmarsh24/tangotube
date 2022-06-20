@@ -31,6 +31,7 @@ COPY . .
 RUN rm -rf node_modules vendor
 RUN gem install rails bundler
 RUN yarn install
+RUN chown -R render:render /opt/app
 
 ENTRYPOINT ["/bin/render-build.sh"]
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
