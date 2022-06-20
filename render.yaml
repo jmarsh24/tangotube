@@ -83,10 +83,6 @@ services:
   - name: tangotube-redis
     type: redis
     region: frankfurt
-    disk:
-      name: tangotube-redis-data
-      mountPath: /var/lib/redis
-      sizeGB: 1
 
   - type: pserv
     name: tangotube-elasticsearch
