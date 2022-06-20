@@ -20,9 +20,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
   nodejs \
   yarn \
+  postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
-ENV APP_PATH /opt/app/veue
+ENV APP_PATH /opt/app
 RUN mkdir -p $APP_PATH
 
 WORKDIR $APP_PATH
@@ -32,4 +33,4 @@ RUN gem install rails bundler
 RUN yarn install
 
 ENTRYPOINT ["/bin/render-build.sh"]
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
