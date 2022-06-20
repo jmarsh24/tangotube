@@ -61,12 +61,7 @@ services:
     env: ruby
     schedule: 0 3 * * *
     buildCommand: bundle install
-    startCommand: >
-      bundle exec rake preindex
-      && bundle exec rake downloads
-      && bundle exec rake remote_genbook2
-      && bundle exec rake search_index
-      && bundle exec rake search_index_book
+    startCommand:
     envVars:
       - key: SECRET_KEY_BASE
         generateValue: true
