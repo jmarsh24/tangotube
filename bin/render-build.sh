@@ -5,7 +5,7 @@ indent() {
 }
 
 echo "-----> Installing yt-dlp"
-cd $1
+cd $home
 mkdir -p "vendor"
 cd "vendor"
 mkdir -p ./yt-dlp/bin/
