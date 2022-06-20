@@ -6,7 +6,7 @@ services:
     plan: starter
     numInstances: 1
     buildCommand: ./bin/render-build.sh
-    startCommand: REDIS_URL="redis://${REDIS_HOST}" bundle exec puma -C config/puma.rb
+    startCommand: bundle exec puma -C config/puma.rb
     # domains:
       # - tangotube.tv
     disk:
@@ -37,17 +37,17 @@ services:
     region: frankfurt
     plan: starter
     buildCommand: bundle install && bundle exec rake assets:precompile
-    startCommand: REDIS_URL="redis://${REDIS_HOST}" bundle exec sidekiq -e production
+    startCommand: bundle exec sidekiq -e production
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: tangotube-db
           property: connectionString
-      - key: REDIS_HOST
+      - key: REDIS_URL
         fromService:
           name: tangotube-redis
-          type: pserv
-          property: hostport
+          type: redis
+          property: connectionString
       - key: ELASTICSEARCH_URL
         fromService:
           name: tangotube-elasticsearch
@@ -56,12 +56,33 @@ services:
       - key: RAILS_MASTER_KEY
         sync: false
 
-  - type: pserv
-    name: tangotube-redis
-    env: docker
+  - name: tangotube-cron
+    type: cron
+    env: ruby
+    schedule: 0 3 * * *
+    buildCommand: bundle install
+    startCommand: >
+      bundle exec rake preindex
+      && bundle exec rake downloads
+      && bundle exec rake remote_genbook2
+      && bundle exec rake search_index
+      && bundle exec rake search_index_book
+    envVars:
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: tangotube-redis
+          property: connectionString
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tangotube-db
+          property: connectionString
+
+  - name: tangotube-redis
+    type: redis
     region: frankfurt
-    repo: https://github.com/render-examples/redis.git
-    numInstances: 1
     disk:
       name: tangotube-redis-data
       mountPath: /var/lib/redis
