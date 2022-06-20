@@ -4,6 +4,8 @@ services:
     region: frankfurt
     plan: starter plus
     env: docker
+    domains:
+      - tangotube.tv
     disk:
       name: tangotube-data
       mountPath: /var/data

@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
   nodejs \
   yarn \
-  postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
 ENV APP_PATH /opt/app/veue
@@ -31,7 +30,6 @@ COPY . .
 RUN rm -rf node_modules vendor
 RUN gem install rails bundler
 RUN yarn install
-RUN chown -R render:render /opt/app
 
 ENTRYPOINT ["/bin/render-build.sh"]
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
