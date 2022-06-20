@@ -1,15 +1,15 @@
 set -o errexit
 
-indent() {
-  sed -u 's/^/       /'
-}
+# indent() {
+#   sed -u 's/^/       /'
+# }
 
-echo "-----> Installing yt-dlp"
-cd $1
-mkdir -p "vendor"
-cd "vendor"
-mkdir -p ./yt-dlp/bin/
-cd ./yt-dlp/bin/
+# echo "-----> Installing yt-dlp"
+# cd $1
+# mkdir -p "vendor"
+# cd "vendor"
+# mkdir -p ./yt-dlp/bin/
+# cd ./yt-dlp/bin/
 wget $(curl -s https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest \
 | grep -e "browser_download_url.*yt-dlp" \
 | cut -d : -f 2,3 \
