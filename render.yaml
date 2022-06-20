@@ -6,8 +6,6 @@ services:
     plan: starter plus
     buildCommand: ./bin/render-build.sh
     startCommand: bundle exec puma -C config/puma.rb
-    domains:
-      - tangotube.tv
     disk:
       name: tangotube-data
       mountPath: /var/data
