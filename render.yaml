@@ -1,11 +1,9 @@
 services:
   - type: web
     name: tangotube-web
-    env: ruby
     region: frankfurt
     plan: starter plus
-    buildCommand: ./bin/render-build.sh
-    startCommand: bundle exec puma -C config/puma.rb
+    env: docker
     disk:
       name: tangotube-data
       mountPath: /var/data
@@ -32,11 +30,9 @@ services:
 
   - type: worker
     name: tangotube-sidekiq
-    env: ruby
     region: frankfurt
     plan: starter plus
-    buildCommand: ./bin/render-build.sh
-    startCommand: bundle exec sidekiq -e production
+    env: docker
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -87,6 +83,7 @@ services:
   - type: pserv
     name: tangotube-elasticsearch
     env: docker
+    dockerCommand: "./elasticsearch"
     region: frankfurt
     plan: standard
     disk:
