@@ -14,7 +14,7 @@ RUN chmod a+rx /usr/local/bin/yt-dlp
 # Adds nodejs and upgrade yarn
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
-  nodejs=16.5.1 \
+  nodejs16 \
   yarn \
   postgresql-client \
   && rm -rf /var/lib/apt/lists/*
