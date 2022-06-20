@@ -19,14 +19,13 @@
     "shift + . ": "#hotkey->youtube#increasePlaybackRate",
     "shift + , ": "#hotkey->youtube#decreasePlaybackRate"}'></div>
   <div style="width: 100%; "id="hotkey" data-controller="youtube"
-            data-youtube-video-id-value="<%= @video.youtube_id %>"
-  data-youtube-start-seconds-value="<%= @start_value %>"
-  data-youtube-end-seconds-value="<%= @end_value %>"
-  data-youtube-playback-rate-value="<%= @playback_rate %>">
+    data-youtube-video-id-value="<%= @video.youtube_id %>"
+    data-youtube-start-seconds-value="<%= @start_value %>"
+    data-youtube-end-seconds-value="<%= @end_value %>"
+    data-youtube-playback-rate-value="<%= @playback_rate %>">
     <div class="video-responsive-background">
       <div class="video-responsive-container">
-        <div class="video-responsive"
-        >
+        <div class="video-responsive">
           <div data-youtube-target="frame"></div>
         </div>
       </div>
