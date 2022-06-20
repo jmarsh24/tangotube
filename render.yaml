@@ -85,6 +85,7 @@ services:
   - type: pserv
     name: tangotube-elasticsearch
     env: docker
+    dockerfilePath: "./elasticsearch/Dockerfile"
     region: frankfurt
     plan: standard
     disk:
