@@ -28,6 +28,7 @@ WORKDIR $APP_PATH
 COPY . .
 RUN rm -rf node_modules vendor
 RUN gem install rails bundler
+RUN bundle install
 RUN yarn install
 
 ENTRYPOINT ["/bin/render-build.sh"]
