@@ -22,6 +22,7 @@ PROFILE="$HOME/.profile.d/yt-dlp.sh"
 mkdir -p "$HOME/.profile.d/"
 touch $PROFILE
 echo export PATH="$PATH:$HOME/vendor/yt-dlp/bin" >> $PROFILE
+source $HOME/.profile.d/yt-dlp.sh
 
 cd $HOME/project/src
 
