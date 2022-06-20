@@ -35,7 +35,7 @@ services:
     env: ruby
     region: frankfurt
     plan: starter plus
-    buildCommand: bundle install && bundle exec rake assets:precompile
+    buildCommand: ./bin/render-build.sh
     startCommand: bundle exec sidekiq -e production
     envVars:
       - key: DATABASE_URL
