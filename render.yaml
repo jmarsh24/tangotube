@@ -27,8 +27,6 @@ services:
           property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
-      - key: SECRET_KEY_BASE
-        generateValue: true
 
   - type: worker
     name: tangotube-sidekiq
@@ -63,8 +61,6 @@ services:
       bundle exec rake update_all_channels
       && bundle exec update_all_videos
     envVars:
-      - key: SECRET_KEY_BASE
-        generateValue: true
       - key: REDIS_URL
         fromService:
           type: redis
