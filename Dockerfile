@@ -30,9 +30,7 @@ WORKDIR $APP_PATH
 COPY . .
 RUN rm -rf node_modules vendor
 RUN gem install rails bundler
-RUN bundle install
 RUN yarn install
-# RUN chown -R user:user /opt/app
 
 ENTRYPOINT ["/bin/render-build.sh"]
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
