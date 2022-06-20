@@ -5,7 +5,7 @@ indent() {
 }
 
 echo "-----> Installing yt-dlp"
-cd $HOME
+cd /
 mkdir -p "vendor"
 cd "vendor"
 mkdir -p ./yt-dlp/bin/
@@ -19,10 +19,12 @@ chmod a+rx yt-dlp
 echo "Adding to PATH" | indent
 echo $(ls)
 
-PROFILE="$HOME/.profile.d/yt-dlp.sh"
-mkdir -p "$HOME/.profile.d/"
+PROFILE=".profile.d/yt-dlp.sh"
+mkdir -p ".profile.d/"
 touch $PROFILE
 echo 'export PATH="$PATH:$HOME/vendor/yt-dlp/bin"' >> $PROFILE
+
+cd ./opt/render/project/src
 
 bundle install
 
