@@ -83,6 +83,7 @@ services:
   - name: tangotube-redis
     type: redis
     region: frankfurt
+    ipAllowList: []
 
   - type: pserv
     name: tangotube-elasticsearch
@@ -106,3 +107,4 @@ databases:
   - name: tangotube-db
     plan: standard
     region: frankfurt
+    ipAllowList: []
