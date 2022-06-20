@@ -32,4 +32,4 @@ RUN bundle install
 RUN yarn install
 
 ENTRYPOINT ["/bin/render-build.sh"]
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
