@@ -8,7 +8,7 @@
       <h4>A Video Platform for dancers, by dancers.</h4>
       <div class="banner__buttons">
         <h5 style="margin: 3px; font-weight: 400; color">Login to access extra features</h5>
-        <div class="row">
+        <div class="row" style="justify-content: center; gap 10px;">
           <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
           <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
         </div>

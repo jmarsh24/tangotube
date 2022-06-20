@@ -19,7 +19,7 @@
       <div>
         <sl-input placeholder="End Time"></sl-input>
         <%= form.label :start, style: "display: block; font-size: 10px;" %>
-        <%= form.text_field :start_seconds, placeholder: "0:00", style: "width: 100px;", data: { action: "input->clipboard#changeValue input->youtube#updateStartTime",
+        <%= form.text_field :start_seconds, value: @start_value, placeholder: "0s", style: "width: 100px;", data: { action: "input->clipboard#changeValue input->youtube#updateStartTime",
                                                               "clipboard-target": "startTime",
                                                               "youtube-target": "startTime" } %>
       </div>
@@ -27,7 +27,7 @@
       <span class="spacer">-</span>
       <div>
         <%= form.label :end, style: "display: block; font-size: 10px;" %>
-        <%= form.text_field :end_seconds, placeholder: "0:00", style: "width: 100px;", data: { action: "input->clipboard#changeValue input->youtube#updateEndTime",
+        <%= form.text_field :end_seconds, value: @end_value, placeholder: "0s", style: "width: 100px;", data: { action: "input->clipboard#changeValue input->youtube#updateEndTime",
                                                               "clipboard-target": "endTime",
                                                               "youtube-target": "endTime" }  %>
       </div>
