@@ -87,5 +87,5 @@ services:
 
 databases:
   - name: tangotube-db
-    plan: starter
+    plan: standard
     region: frankfurt
