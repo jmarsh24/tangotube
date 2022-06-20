@@ -19,8 +19,8 @@ chmod a+rx yt-dlp
 echo "Adding to PATH" | indent
 echo $(ls)
 
-PROFILE="$1/.profile.d/yt-dlp.sh"
-mkdir -p "$1/.profile.d/"
+PROFILE="$home/.profile.d/yt-dlp.sh"
+mkdir -p "$home/.profile.d/"
 touch $PROFILE
 echo 'export PATH="$PATH:$HOME/vendor/yt-dlp/bin"' >> $PROFILE
 
