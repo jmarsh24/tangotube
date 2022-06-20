@@ -8,7 +8,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /root/yarn-pubkey.gpg &
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 
 # Adds nodejs and upgrade yarn
-
+RUN apt install software-properties-common
 RUN apt-add-repository ppa:tomtomtom/yt-dlp
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
