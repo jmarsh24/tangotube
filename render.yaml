@@ -78,7 +78,7 @@ services:
 
   - name: tangotube-redis
     type: redis
-    plan: free
+    plan: starter
     region: frankfurt
     ipAllowList: []
     maxmemoryPolicy: allkeys-lru
