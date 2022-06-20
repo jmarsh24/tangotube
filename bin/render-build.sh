@@ -1,5 +1,9 @@
 set -o errexit
 
+indent() {
+  sed -u 's/^/       /'
+}
+
 echo "-----> Installing yt-dlp"
 cd $1
 mkdir -p "vendor"
