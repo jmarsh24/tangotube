@@ -1,11 +1,38 @@
-# The official Elasticsearch Docker image
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.16.1@sha256:1000eae211ce9e3fcd1850928eea4ee45a0a5173154df954f7b4c7a093b849f8
+# This is intended to only be used by Render.
+# Do not use this for local development.
+# You have been warned.
+FROM ruby:2.7 AS veue-rails
 
-# Copy our config file over
-COPY --chown=1000:0 config/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
+ARG USER_ID
+ARG GROUP_ID
 
-# Allow Elasticsearch to create `elasticsearch.keystore`
-# to circumvent https://github.com/elastic/ansible-elasticsearch/issues/430
-RUN chmod g+ws /usr/share/elasticsearch/config
+RUN addgroup --gid $GROUP_ID user
+RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
 
-USER 1000:0
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /root/yarn-pubkey.gpg && apt-key add /root/yarn-pubkey.gpg
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+
+# Adds nodejs and upgrade yarn
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  build-essential \
+  nodejs \
+  yarn \
+  postgresql-client \
+  yt-dlp\
+  && rm -rf /var/lib/apt/lists/*
+
+ENV APP_PATH /opt/app/veue
+RUN mkdir -p $APP_PATH
+
+WORKDIR $APP_PATH
+COPY . .
+RUN rm -rf node_modules vendor
+RUN gem install rails bundler
+RUN bundle install
+RUN yarn install
+RUN chown -R user:user /opt/app
+
+USER $USER_ID
+ENTRYPOINT ["/bin/render-build.sh"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
