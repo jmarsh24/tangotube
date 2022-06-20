@@ -7,5 +7,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= "redis://#{ENV.fetch('REDIS_HOST')}" %>
+  url: <%= ENV.fetch('REDIS_URL') %>
   channel_prefix: tangotube_production
