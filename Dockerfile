@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   nodejs \
   yarn \
   postgresql-client \
-  yt-dlp\
+  yt-dlp \
   && rm -rf /var/lib/apt/lists/*
 
 ENV APP_PATH /opt/app/veue
