@@ -24,7 +24,7 @@ mkdir -p "$HOME/.profile.d/"
 touch $PROFILE
 echo 'export PATH="$PATH:$HOME/vendor/yt-dlp/bin"' >> $PROFILE
 
-cd ./opt/render/project/src
+cd ~/src
 
 bundle install
 
