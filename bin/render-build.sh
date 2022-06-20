@@ -5,7 +5,7 @@ indent() {
 }
 
 echo "-----> Installing yt-dlp"
-cd /
+cd $home
 mkdir -p "vendor"
 cd "vendor"
 mkdir -p ./yt-dlp/bin/
@@ -17,8 +17,8 @@ wget $(curl -s https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest \
 | grep -e "yt-dlp$")
 chmod a+rx yt-dlp
 echo "Adding to PATH" | indent
-PROFILE="/.profile.d/yt-dlp.sh"
-mkdir -p "/.profile.d/"
+PROFILE="$home/.profile.d/yt-dlp.sh"
+mkdir -p "$home/.profile.d/"
 touch $PROFILE
 echo 'export PATH="$PATH:$HOME/vendor/yt-dlp/bin"' >> $PROFILE
 
