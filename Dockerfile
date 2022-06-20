@@ -31,5 +31,5 @@ RUN gem install rails bundler
 RUN bundle install
 RUN yarn install
 
-ENTRYPOINT ["/bin/render-build.sh"]
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+ENTRYPOINT ["./bin/render-build.sh"]
+CMD ["bundle", "exec", "rails", "-C", "config/puma.rb", "-b", "0.0.0.0"]
