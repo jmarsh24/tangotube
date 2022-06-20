@@ -56,8 +56,8 @@ services:
       - key: RAILS_MASTER_KEY
         sync: false
 
-  - name: tangotube-cron
-    type: cron
+  - type: cron
+    name: tangotube-cron
     env: ruby
     schedule: 0 3 * * *
     buildCommand: bundle install
