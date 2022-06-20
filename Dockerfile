@@ -1,7 +1,7 @@
 # This is intended to only be used by Render.
 # Do not use this for local development.
 # You have been warned.
-FROM ruby:2.7 AS veue-rails
+FROM ruby:3.1.2 AS veue-rails
 
 # Install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /root/yarn-pubkey.gpg && apt-key add /root/yarn-pubkey.gpg
