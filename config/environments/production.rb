@@ -98,7 +98,7 @@ Rails.application.configure do
 
   config.cache_store =
     :redis_cache_store,
-    { url: ENV.fetch('REDIS_URL') }
+    { url: "redis://#{ENV.fetch('REDIS_HOST')}" }
   config.session_store :cache_store,
                       key: '_session',
                       compress: true,
