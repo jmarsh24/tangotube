@@ -79,14 +79,5 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 50
-  timeout: 5000
-  variables:
-    statement_timeout: <%= ENV["STATEMENT_TIMEOUT"] || "5s" %>
-  database: tangotube_production
-  username: justin
-  password: <%= ENV['TANGOTUBE_DATABASE_PASSWORD'] %>
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>

@@ -96,9 +96,7 @@ Rails.application.configure do
 
   config.active_record.async_query_executor = :global_thread_pool
 
-  config.cache_store =
-    :redis_cache_store,
-    { url: ENV.fetch('REDIS_URL') }
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
   config.session_store :cache_store,
                       key: '_session',
                       compress: true,
@@ -106,4 +104,8 @@ Rails.application.configure do
                       expire_after: 1.year
 
   config.action_view.image_loading = "lazy"
+
+  # Disable serving static files from the `/public` folder by default since
+  # Apache or NGINX already handles this.
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present? || ENV['RENDER'].present?
 end
