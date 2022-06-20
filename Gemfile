@@ -7,7 +7,7 @@ gem "bootsnap", require: false
 gem "jsbundling-rails"
 gem "dartsass-rails"
 gem "rails", "~> 7.0.2.3"
-gem "redis"
+gem 'hiredis'
 gem "puma"
 gem "pg"
 gem "spring"
