@@ -18,11 +18,11 @@ services:
         fromDatabase:
           name: tangotube-db
           property: connectionString
-      - key: REDIS_HOST
+      - key: REDIS_URL
         fromService:
           name: tangotube-redis
-          type: pserv
-          property: hostport
+          type: redis
+          property: connectionString
       - key: ELASTICSEARCH_URL
         fromService:
           name: tangotube-elasticsearch
