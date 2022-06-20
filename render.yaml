@@ -3,7 +3,7 @@ services:
     name: tangotube-web
     env: ruby
     region: frankfurt
-    plan: starter-plus
+    plan: starter plus
     buildCommand: ./bin/render-build.sh
     startCommand: bundle exec puma -C config/puma.rb
     domains:
@@ -36,7 +36,7 @@ services:
     name: tangotube-sidekiq
     env: ruby
     region: frankfurt
-    plan: starter-plus
+    plan: starter plus
     buildCommand: bundle install && bundle exec rake assets:precompile
     startCommand: bundle exec sidekiq -e production
     envVars:
