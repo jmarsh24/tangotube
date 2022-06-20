@@ -30,6 +30,8 @@ services:
           property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: SECRET_KEY_BASE
+        generateValue: true
 
   - type: worker
     name: tangotube-sidekiq
