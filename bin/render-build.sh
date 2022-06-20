@@ -17,14 +17,13 @@ wget $(curl -s https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest \
 | grep -e "yt-dlp$")
 chmod a+rx yt-dlp
 echo "Adding to PATH" | indent
-echo $(ls)
 
 PROFILE="$HOME/.profile.d/yt-dlp.sh"
 mkdir -p "$HOME/.profile.d/"
 touch $PROFILE
 echo 'export PATH="$PATH:$HOME/vendor/yt-dlp/bin"' >> $PROFILE
 
-cd /project/src
+cd ~/project/src
 
 bundle install
 
