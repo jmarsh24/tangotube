@@ -21,9 +21,9 @@ echo "Adding to PATH" | indent
 PROFILE="$HOME/.profile.d/yt-dlp.sh"
 mkdir -p "$HOME/.profile.d/"
 touch $PROFILE
-echo 'export PATH="$PATH:$HOME/vendor/yt-dlp/bin"' >> $PROFILE
+export PATH="$PATH:$HOME/vendor/yt-dlp/bin" >> $PROFILE
 
-cd ~/project/src
+cd $HOME/project/src
 
 bundle install
 
