@@ -3,12 +3,11 @@ services:
     name: tangotube-web
     env: ruby
     region: frankfurt
-    plan: starter
-    numInstances: 1
+    plan: starter-plus
     buildCommand: ./bin/render-build.sh
     startCommand: bundle exec puma -C config/puma.rb
-    # domains:
-      # - tangotube.tv
+    domains:
+      - tangotube.tv
     disk:
       name: tangotube-data
       mountPath: /var/data
@@ -37,7 +36,7 @@ services:
     name: tangotube-sidekiq
     env: ruby
     region: frankfurt
-    plan: starter
+    plan: starter-plus
     buildCommand: bundle install && bundle exec rake assets:precompile
     startCommand: bundle exec sidekiq -e production
     envVars:
@@ -63,7 +62,9 @@ services:
     env: ruby
     schedule: 0 3 * * *
     buildCommand: bundle install
-    startCommand:
+    startCommand: >
+      bundle exec rake update_all_channels
+      && bundle exec update_all_videos
     envVars:
       - key: SECRET_KEY_BASE
         generateValue: true
