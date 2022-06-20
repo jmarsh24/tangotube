@@ -3,12 +3,6 @@
 # You have been warned.
 FROM ruby:2.7 AS veue-rails
 
-ARG USER_ID
-ARG GROUP_ID
-
-RUN addgroup --gid $GROUP_ID user
-RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
-
 # Install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /root/yarn-pubkey.gpg && apt-key add /root/yarn-pubkey.gpg
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
@@ -33,6 +27,5 @@ RUN bundle install
 RUN yarn install
 RUN chown -R user:user /opt/app
 
-USER $USER_ID
 ENTRYPOINT ["/bin/render-build.sh"]
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
