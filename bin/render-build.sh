@@ -17,7 +17,7 @@ wget $(curl -s https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest \
 | grep -e "yt-dlp$")
 chmod a+rx yt-dlp
 echo "Adding to PATH" | indent
-echo ls
+echo $(ls)
 
 PROFILE="$1/.profile.d/yt-dlp.sh"
 mkdir -p "$1/.profile.d/"
