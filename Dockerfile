@@ -11,10 +11,14 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.lis
 RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
 RUN chmod a+rx /usr/local/bin/yt-dlp
 
+# Install nodejs
+RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+RUN sh -c "echo deb https://deb.nodesource.com/node_14.x buster main > /etc/apt/sources.list.d/nodesource.list"
+
 # Adds nodejs and upgrade yarn
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
-  nodejs16 \
+  nodejs \
   yarn \
   postgresql-client \
   && rm -rf /var/lib/apt/lists/*
