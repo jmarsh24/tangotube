@@ -30,5 +30,5 @@ RUN rm -rf node_modules vendor
 RUN gem install rails bundler
 RUN yarn install
 
-ENTRYPOINT ["./bin/render-build.sh"]
+ENTRYPOINT ["/bin/render-build.sh"]
 CMD ["bundle", "exec", "rails", "-C", "config/puma.rb", "-b", "0.0.0.0"]
