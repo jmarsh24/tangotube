@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   def index
     respond_to do
       |format|
-        format.html { @events = Event.all.order(:id)}
+        format.html { @events = Event.all.order(:title)}
         format.json { render json: @events =  Event.title_search(params[:q])
                                                     .distinct
                                                     .order(:title)
