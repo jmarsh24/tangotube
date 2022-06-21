@@ -2,8 +2,8 @@
   <sl-dropdown stay-open-on-select>
     <sl-button slot="trigger"
       id="button-filter"
+      class="white-button"
         <% if filtering_params.present? %>
-          variant="primary"
           outline
         <% end %>>
       Filter
@@ -81,9 +81,9 @@
 <sl-dropdown stay-open-on-select>
   <sl-button slot="trigger"
           id="button-sorting"
+          class="white-button"
         <% if sorting_params.present? %>
-          variant="primary"
-          outline
+         outline
         <% end %>>
       Sorting
     </sl-button>
