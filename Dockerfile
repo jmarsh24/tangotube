@@ -31,4 +31,3 @@ RUN gem install rails bundler
 RUN yarn install
 
 ENTRYPOINT ["./bin/render-build.sh"]
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "0.0.0.0"]
