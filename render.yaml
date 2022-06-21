@@ -3,10 +3,13 @@ services:
     name: tangotube-web
     region: frankfurt
     plan: starter plus
-    env: docker
+    env: ruby
+    buildCommand: ./bin/render-build.sh
+    startCommand: bundle exec puma -C config/puma.rb
     domains:
       - tangotube.tv
-    dockerCommand: "./bin/render-build.sh && bundle exec puma -C config/puma.rb -b 0.0.0.0"
+
+    # dockerCommand: "./bin/render-build.sh && bundle exec puma -C config/puma.rb -b 0.0.0.0"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -29,8 +32,10 @@ services:
     name: tangotube-sidekiq
     region: frankfurt
     plan: starter plus
-    env: docker
-    dockerCommand: "./bin/render-build.sh && bundle exec sidekiq"
+    env: ruby
+    buildCommand: bundle install && bundle exec rake assets:precompile
+    startCommand: bundle exec sidekiq -e production
+    # dockerCommand: "./bin/render-build.sh && bundle exec sidekiq"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
