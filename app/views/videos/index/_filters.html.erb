@@ -6,12 +6,12 @@
         <% if filtering_params.present? %>
           outline
         <% end %>>
-      Filter
+      Filters
     </sl-button>
-    <div style="background-color: var(--sl-color-neutral-50);">
+    <sl-menu style="background-color: var(--sl-color-neutral-50);">
       <%= turbo_frame_tag "filters", src: filters_videos_path %>
-      <sl-menu-label>Additional Filters</sl-menu-label>
     <sl-divider style="margin:12px 0;"></sl-divider>
+    <sl-menu-label>Additional Filters</sl-menu-label>
     <div id="menu-additional-filters">
       <% if current_user %>
         <%= button_tag type: "button",
@@ -76,7 +76,7 @@
         <% end %>
       <% end %>
     </div>
-  </div>
+  </sl-menu>
 </sl-dropdown>
 <sl-dropdown stay-open-on-select>
   <sl-button slot="trigger"
@@ -90,7 +90,6 @@
     <sl-menu>
       <div id="menu-sorting-filters">
         <sl-menu-label>Sort By</sl-menu-label>
-        <sl-divider style="margin:12px 0;"></sl-divider>
         <sl-menu-item>
           <%= sortable 'date', "desc",  "Recent First", @sort_column, @sort_direction %>
         </sl-menu-item>
@@ -106,9 +105,7 @@
     <sl-menu-item>
       <%= sortable "like_count", "desc",  "Most Liked", @sort_column, @sort_direction %>
     </sl-menu-item>
-    <sl-divider style="margin:12px 0"></sl-divider>
     <sl-menu-label>Group By</sl-menu-label>
-    <sl-divider style="margin:12px 0;"></sl-divider>
     <sl-menu-item>
       <%= sortable 'song_title', "asc", "Song", @sort_column, @sort_direction %>
     </sl-menu-item>
