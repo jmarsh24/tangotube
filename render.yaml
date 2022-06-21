@@ -4,7 +4,6 @@ services:
     region: frankfurt
     plan: starter plus
     env: docker
-    dockerCommand: "bundle exec rails -C config/puma.rb -b 0.0.0.0"
     domains:
       - tangotube.tv
     envVars:
