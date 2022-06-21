@@ -1,0 +1,32 @@
+.white-menu-item[checked]::part(base) {
+  background: var(--sl-color-gray-200);
+}
+
+#mobile-drawer-top::part(panel) {
+  background: none;
+}
+
+#mobile-drawer-top::part(body) {
+  padding: 0;
+}
+
+.white-button::part(base) {
+  background: var(--sl-color-gray-100);
+  border: solid 1px var(--sl-color-gray-300);
+}
+
+.white-button::part(base):hover {
+  background: var(--sl-color-gray-400);
+}
+
+.white-button::part(base):active {
+  background: var(--sl-color-gray-900);
+}
+
+.white-button[outline]::part(base) {
+  background: var(--sl-color-gray-400);
+}
+
+.white-button::part(label) {
+  color: var(--sl-color-neutral-1000);
+}
