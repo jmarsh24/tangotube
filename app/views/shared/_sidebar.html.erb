@@ -15,13 +15,21 @@
       <nav>
         <sl-divider style="margin: 0; margin-bottom: 16px;"></sl-divider>
         <%= link_to root_path do %>
-          <sl-menu-item>
+          <sl-menu-item class="white-menu-item"
+            <% if current_page?(root_path, check_parameters: true) %>
+              checked
+          <% end %>
+          >
             <%= fa_icon("home") %>
             <span>Home</span>
           </sl-menu-item>
         <% end %>
         <%= link_to clips_path do %>
-          <sl-menu-item href="<%= clips_path %>">
+          <sl-menu-item class="white-menu-item"
+          <% if current_page?(clips_path) %>
+          checked
+        <% end %>
+        >
             <%= fa_icon("scissors") %>
             <span>Clips</span>
           </sl-menu-item>
@@ -29,19 +37,31 @@
         <sl-divider style="margin:16px 0;"></sl-divider>
         <% if user_signed_in? %>
           <%= link_to root_path(watched: false) do %>
-            <sl-menu-item>
+            <sl-menu-item class="white-menu-item"
+          <% if current_page?(root_path(watched: false)) %>
+          checked
+          <% end %>
+          >
               <%= fa_icon("compass") %>
               <span>Explore</span>
             </sl-menu-item>
           <% end %>
           <%= link_to root_path(watched: true) do %>
-            <sl-menu-item>
+            <sl-menu-item class="white-menu-item"
+          <% if current_page?(root_path(watched: true)) %>
+          checked
+          <% end %>
+          >
               <%= fa_icon("clock") %>
               <span>History</span>
             </sl-menu-item>
           <% end %>
           <%= link_to root_path(liked: true) do %>
-            <sl-menu-item>
+            <sl-menu-item class="white-menu-item"
+          <% if current_page?(root_path(liked: true)) %>
+          checked
+          <% end %>
+          >
               <%= fa_icon("thumbs-up") %>
               <span>Liked Videos</span>
             </sl-menu-item>
