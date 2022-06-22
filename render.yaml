@@ -5,7 +5,7 @@ services:
     plan: standard
     env: ruby
     buildCommand: ./bin/render-build.sh
-    startCommand: bundle exec puma -C config/puma.rb; echo $PATH
+    startCommand: bundle exec puma -C config/puma.rb
     domains:
       - tangotube.tv
     envVars:
@@ -34,7 +34,7 @@ services:
     plan: starter plus
     env: ruby
     buildCommand: ./bin/render-build.sh
-    startCommand: bundle exec sidekiq -e production; echo $PATH
+    startCommand: bundle exec sidekiq -e production
     envVars:
       - key: DATABASE_URL
         fromDatabase:
