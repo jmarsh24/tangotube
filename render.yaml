@@ -5,11 +5,9 @@ services:
     plan: starter plus
     env: ruby
     buildCommand: ./bin/render-build.sh
-    startCommand: bundle exec puma -C config/puma.rb
+    startCommand: export PATH="$PATH:$HOME/project/src/yt-dlp"; bundle exec puma -C config/puma.rb
     domains:
       - tangotube.tv
-
-    # dockerCommand: "./bin/render-build.sh && bundle exec puma -C config/puma.rb -b 0.0.0.0"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -34,8 +32,7 @@ services:
     plan: starter plus
     env: ruby
     buildCommand: ./bin/render-build.sh
-    startCommand: bundle exec sidekiq -e production
-    # dockerCommand: "./bin/render-build.sh && bundle exec sidekiq"
+    startCommand: export PATH="$PATH:$HOME/project/src/yt-dlp"; bundle exec sidekiq -e production
     envVars:
       - key: DATABASE_URL
         fromDatabase:
