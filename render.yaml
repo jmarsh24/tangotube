@@ -2,7 +2,7 @@ services:
   - type: web
     name: tangotube-web
     region: frankfurt
-    plan: free
+    plan: standard
     env: ruby
     buildCommand: ./bin/render-build.sh
     startCommand: bundle exec puma -C config/puma.rb; echo $PATH
