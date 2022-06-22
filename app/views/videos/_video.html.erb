@@ -2,7 +2,13 @@
   <article class="video-container">
     <%= link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top", id: "video-link" } do %>
       <div class="thumbnail" data-duration= "<%= hd_duration_data(video) %>" >
-        <%= image_tag("https://i.ytimg.com/vi_webp/#{video.youtube_id}/maxresdefault.webp", rescue image_tag("https://i.ytimg.com/vi/#{video.youtube_id}/hqdefault.jpg"), class: "thumbnail-image") %>
+        <%= image_tag("https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg",
+           "data-controller": "thumbnail",
+           "data-action": "load->thumbnail#check",
+          "data-thumbnail-target": "image",
+           "data-thumbnail-url-value": "https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg",
+           class: "thumbnail-image")
+        %>
       </div>
     <% end %>
     <div class="video-bottom-section">

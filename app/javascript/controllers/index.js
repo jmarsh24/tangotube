@@ -46,6 +46,9 @@ application.register("slimselect", SlimselectController);
 import SlimselectEditController from "./slimselect_edit_controller.js";
 application.register("slimselect-edit", SlimselectEditController);
 
+import ThumbnailController from "./thumbnail_controller.js";
+application.register("thumbnail", ThumbnailController);
+
 import ToggleController from "./toggle_controller.js";
 application.register("toggle", ToggleController);
 
