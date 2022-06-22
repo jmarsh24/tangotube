@@ -79,7 +79,7 @@ services:
     type: redis
     plan: starter
     region: frankfurt
-    ipAllowList: []
+    ipAllowList: [158.181.72.99/32]
     maxmemoryPolicy: allkeys-lru
 
   - type: pserv
@@ -105,4 +105,4 @@ databases:
   - name: tangotube-db
     plan: standard
     region: frankfurt
-    ipAllowList: []
+    ipAllowList: [158.181.72.99/32]
