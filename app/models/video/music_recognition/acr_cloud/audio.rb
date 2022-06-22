@@ -1,5 +1,5 @@
 class Video::MusicRecognition::AcrCloud::Audio
-  YOUTUBE_DL_COMMAND_PREFIX = "$HOME/project/src/yt-dlp https://www.youtube.com/watch?v=".freeze
+  YOUTUBE_DL_COMMAND_PREFIX = "$HOME/project/src/yt-dlp/yt-dlp https://www.youtube.com/watch?v=".freeze
   YOUTUBE_DL_COMMAND_DOWNLOAD_AUDIO = " -f 140 --force-overwrites -o".freeze
 
   class << self
