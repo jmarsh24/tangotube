@@ -8,10 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def total_videos_count
-    @videos_total =
-    Rails.cache.fetch("total_videos_count", expires_in: 12.hours) do
-      Video.not_hidden.size
-    end
+    @videos_total = Video.not_hidden.size
   end
 
   def track_action
