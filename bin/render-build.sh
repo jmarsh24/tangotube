@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 # exit on error
 set -o errexit
@@ -16,17 +17,9 @@ fi
 mkdir -p $HOME/project/src/yt-dlp
 cp $XDG_CACHE_HOME/yt-dlp/yt-dlp $HOME/project/src/yt-dlp/
 
-# add it to the PATH as part of the start command/script:
-
-export PATH="$PATH:$HOME/project/src/yt-dlp"
-
-echo $PATH
-
 # Add the rest of your build commands
 # bundle install, etc.
-
 bundle install
 bundle exec rails assets:precompile
 bundle exec rails assets:clean
 bundle exec rails db:migrate
-
