@@ -20,7 +20,7 @@ class Clip::Gif::VideoDownloader
   end
 
   def download
-    system("yt-dlp -f 18 '#{url}' -o #{download_path}")
+    system("$HOME/project/src/yt-dlp -f 18 '#{url}' -o #{download_path}")
   end
 
   def download_path
