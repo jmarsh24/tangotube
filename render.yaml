@@ -25,8 +25,6 @@ services:
           property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
-      - key: PATH
-        value: $PATH:$HOME/project/src/yt-dlp
 
   - type: worker
     name: tangotube-sidekiq
@@ -52,8 +50,6 @@ services:
           property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
-      - key: PATH
-        value: $PATH:$HOME/project/src/yt-dlp
 
   - type: cron
     name: tangotube-cron
