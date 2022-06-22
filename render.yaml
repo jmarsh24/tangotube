@@ -33,7 +33,7 @@ services:
     region: frankfurt
     plan: starter plus
     env: ruby
-    buildCommand: bundle install && bundle exec rake assets:precompile
+    buildCommand: ./bin/render-build.sh
     startCommand: bundle exec sidekiq -e production
     # dockerCommand: "./bin/render-build.sh && bundle exec sidekiq"
     envVars:
