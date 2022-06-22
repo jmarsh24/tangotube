@@ -5,7 +5,7 @@ services:
     plan: free
     env: ruby
     buildCommand: ./bin/render-build.sh
-    startCommand: export PATH="$PATH:$HOME/project/src/yt-dlp"; bundle exec puma -C config/puma.rb; echo $PATH
+    startCommand: bundle exec puma -C config/puma.rb; echo $PATH
     domains:
       - tangotube.tv
     envVars:
@@ -25,6 +25,8 @@ services:
           property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: PATH
+        value: $PATH:$HOME/project/src/yt-dlp
 
   - type: worker
     name: tangotube-sidekiq
@@ -32,7 +34,7 @@ services:
     plan: starter plus
     env: ruby
     buildCommand: ./bin/render-build.sh
-    startCommand: export PATH="$PATH:$HOME/project/src/yt-dlp"; bundle exec sidekiq -e production; echo $PATH
+    startCommand: bundle exec sidekiq -e production; echo $PATH
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -50,6 +52,8 @@ services:
           property: hostport
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: PATH
+        value: $PATH:$HOME/project/src/yt-dlp
 
   - type: cron
     name: tangotube-cron
