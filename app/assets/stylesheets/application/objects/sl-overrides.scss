@@ -20,7 +20,7 @@
 }
 
 .white-button::part(base):active {
-  background: var(--sl-color-gray-900);
+  background: var(--sl-color-gray-100);
 }
 
 .white-button[outline]::part(base) {
