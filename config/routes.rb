@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticate :user, -> (u) { u.admin? } do
       mount Sidekiq::Web, at: 'sidekiq', as: :sidekiq
-      resources :channels
+      resources :channels do
+        post "deactivate", to: "channels#deactivate"
+      end
     end
   end
 
