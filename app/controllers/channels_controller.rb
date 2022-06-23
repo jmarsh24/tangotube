@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: %i[ show edit update destroy ]
+  before_action :set_channel, only: %i[ show edit update destroy deactivate ]
 
   # GET /channels
   def index
@@ -44,15 +44,21 @@ class ChannelsController < ApplicationController
     redirect_to channels_url, notice: "Channel was successfully destroyed."
   end
 
+  def deactivate
+    @channel.active = false
+    DestroyAllVideoJob.perform_async(@channel.channel_id)
+    redirect_to root_path(channel: @channel.channel_id), notice: "Channel has been inactivated"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_channel
-      @channel = Channel.find(params[:id])
+      @channel = Channel.find_by(channel_id: channel_params[:channel_id])
     end
 
     # Only allow a list of trusted parameters through.
     def channel_params
-      params.fetch(:channel, {})
+      params.permit(:channel_id, :channel, :id)
     end
 
     def fetch_new_channel
