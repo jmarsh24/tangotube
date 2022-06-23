@@ -131,7 +131,7 @@
     </sl-button>
   <% end %>
 </div>
-<% if current_user.admin? && filtering_params.has_key?(:channel) && Channel.find_by(channel_id: filtering_params[:channel]).active? %>
+<% if current_user.&admin? && filtering_params.has_key?(:channel) && Channel.find_by(channel_id: filtering_params[:channel]).active? %>
   <form action="<%=  channel_deactivate_path(filtering_params[:channel]) %>" method="post" data-turbo="false">
     <sl-button type="submit"
                 variant="danger"
