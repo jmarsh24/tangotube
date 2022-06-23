@@ -31,5 +31,4 @@ class Channel < ApplicationRecord
     total_videos_count_changed? || videos_count_changed?
   end
 
-
 end

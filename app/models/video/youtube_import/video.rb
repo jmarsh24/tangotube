@@ -1,5 +1,5 @@
 class Video::YoutubeImport::Video
-  PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/.freeze
+  PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
 
   class << self
     def import(youtube_id)
@@ -14,7 +14,7 @@ class Video::YoutubeImport::Video
   def initialize(youtube_id)
     @youtube_id = youtube_id
     @youtube_video = fetch_by_id
-    @video = Video.find_or_create_by!(youtube_id: @youtube_id, channel: channel)
+    @video = Video.find_or_create_by!(youtube_id: @youtube_id, channel:)
   end
 
   def import
@@ -27,6 +27,9 @@ class Video::YoutubeImport::Video
     end
     rescue Yt::Errors::NoItems => e
     if e.present?
+      @video.destroy
+    end
+    unless @video.channel.active?
       @video.destroy
     end
   end
@@ -61,11 +64,11 @@ class Video::YoutubeImport::Video
   end
 
   def video_params
-    base_params.merge(count_params).merge(performance_date_params).merge(channel: channel)
+    base_params.merge(count_params).merge(performance_date_params).merge(channel:)
   end
 
   def update_video_params
-    base_params.merge(count_params).merge(channel: channel)
+    base_params.merge(count_params).merge(channel:)
   end
 
   def base_params
@@ -91,7 +94,7 @@ class Video::YoutubeImport::Video
       view_count: @youtube_video.view_count,
       favorite_count: @youtube_video.favorite_count,
       comment_count: @youtube_video.comment_count,
-      like_count: like_count,
+      like_count:,
       dislike_count: @youtube_video.dislike_count
     }
   end
