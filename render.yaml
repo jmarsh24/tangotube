@@ -9,22 +9,7 @@ services:
     domains:
       - tangotube.tv
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: tangotube-db
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          name: tangotube-redis
-          type: redis
-          property: connectionString
-      - key: ELASTICSEARCH_URL
-        fromService:
-          name: tangotube-elasticsearch
-          type: pserv
-          property: hostport
-      - key: RAILS_MASTER_KEY
-        sync: false
+    - fromGroup: tangotube-environment-group
 
   - type: worker
     name: tangotube-sidekiq
@@ -34,22 +19,7 @@ services:
     buildCommand: ./bin/render-build.sh
     startCommand: export PATH="$PATH:$HOME/project/src/yt-dlp"; bundle exec sidekiq -e production
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: tangotube-db
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          name: tangotube-redis
-          type: redis
-          property: connectionString
-      - key: ELASTICSEARCH_URL
-        fromService:
-          name: tangotube-elasticsearch
-          type: pserv
-          property: hostport
-      - key: RAILS_MASTER_KEY
-        sync: false
+      - fromGroup: tangotube-environment-group
 
   - type: cron
     name: tangotube-cron
@@ -61,15 +31,7 @@ services:
       bundle exec rake update_all_channels
       && bundle exec update_all_videos
     envVars:
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: tangotube-redis
-          property: connectionString
-      - key: DATABASE_URL
-        fromDatabase:
-          name: tangotube-db
-          property: connectionString
+    - fromGroup: tangotube-environment-group
 
   - name: tangotube-redis
     type: redis
@@ -106,3 +68,23 @@ databases:
     ipAllowList:
       - source: "158.181.72.99/32"
         description: home
+
+envVarGroups:
+  - name: tangotube-environment-group
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tangotube-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: tangotube-redis
+          type: redis
+          property: connectionString
+      - key: ELASTICSEARCH_URL
+        fromService:
+          name: tangotube-elasticsearch
+          type: pserv
+          property: hostport
+      - key: RAILS_MASTER_KEY
+        sync: false
