@@ -93,14 +93,14 @@ body {
   opacity: 1;
 }
 
-/* Make the scrollbar color compatible with the dark mode */
-::-webkit-scrollbar,
-::-webkit-scrollbar-track {
-  background: var(--sl-color-gray-50);
-}
+// /* Make the scrollbar color compatible with the dark mode */
+// ::-webkit-scrollbar,
+// ::-webkit-scrollbar-track {
+//   background: var(--sl-color-gray-50);
+// }
 
-::-webkit-scrollbar-thumb {
-  background-color: var(--sl-color-neutral-300);
-  border-radius: var(--sl-border-radius-pill);
-  border: 3px solid var(--sl-color-gray-50);
-}
+// ::-webkit-scrollbar-thumb {
+//   background-color: var(--sl-color-neutral-300);
+//   border-radius: var(--sl-border-radius-pill);
+//   border: 3px solid var(--sl-color-gray-50);
+// }
