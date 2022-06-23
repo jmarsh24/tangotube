@@ -46,6 +46,7 @@ class ChannelsController < ApplicationController
 
   def deactivate
     @channel.active = false
+    @channel.save
     DestroyAllChannelVideosJob.perform_async(@channel.channel_id)
     redirect_to root_path(channel: @channel.channel_id), notice: "Channel has been inactivated"
   end
