@@ -23,8 +23,7 @@ services:
           name: tangotube-elasticsearch
           type: pserv
           property: hostport
-      - key: RAILS_MASTER_KEY
-        sync: false
+      - fromGroup: tangotube-environment-group
 
   - type: worker
     name: tangotube-sidekiq
@@ -48,8 +47,7 @@ services:
           name: tangotube-elasticsearch
           type: pserv
           property: hostport
-      - key: RAILS_MASTER_KEY
-        sync: false
+      - fromGroup: tangotube-environment-group
 
   - type: cron
     name: tangotube-cron
@@ -70,6 +68,7 @@ services:
         fromDatabase:
           name: tangotube-db
           property: connectionString
+      - fromGroup: tangotube-environment-group
 
   - name: tangotube-redis
     type: redis
