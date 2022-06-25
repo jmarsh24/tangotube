@@ -8,7 +8,7 @@
         <% end %>>
       Filters
     </sl-button>
-    <sl-menu style="background-color: var(--sl-color-neutral-50);">
+    <div style="background-color: var(--sl-color-neutral-50);">
       <%= turbo_frame_tag "filters", src: filters_videos_path %>
     <sl-divider style="margin:12px 0;"></sl-divider>
     <sl-menu-label>Additional Filters</sl-menu-label>
@@ -76,7 +76,7 @@
         <% end %>
       <% end %>
     </div>
-  </sl-menu>
+  </div>
 </sl-dropdown>
 <sl-dropdown stay-open-on-select>
   <sl-button slot="trigger"
