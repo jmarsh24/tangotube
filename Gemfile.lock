@@ -49,6 +49,10 @@ GEM
     activejob (7.0.2.3)
       activesupport (= 7.0.2.3)
       globalid (>= 0.3.6)
+    activejob-traffic_control (0.1.3)
+      activejob (>= 4.2)
+      activesupport (>= 4.2)
+      suo
     activemodel (7.0.2.3)
       activesupport (= 7.0.2.3)
     activerecord (7.0.2.3)
@@ -103,6 +107,7 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
+    dalli (3.2.2)
     dartsass-rails (0.3.0)
       railties (>= 6.0.0)
     debug (1.5.0)
@@ -420,6 +425,10 @@ GEM
       multi_json (~> 1.8)
     stripe (5.45.0)
     strscan (3.0.1)
+    suo (0.4.0)
+      dalli
+      msgpack
+      redis
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.2.0)
@@ -466,6 +475,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activejob-traffic_control (~> 0.1.3)
   acts_as_votable
   ahoy_matey
   amazing_print

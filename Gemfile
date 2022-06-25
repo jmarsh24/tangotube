@@ -25,6 +25,7 @@ gem "esbuild-rails"
 gem "faraday"
 gem "faraday-multipart"
 gem "font-awesome-rails"
+gem "activejob-traffic_control", "~> 0.1.3"
 gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
@@ -80,6 +81,8 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
 
 
 
