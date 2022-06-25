@@ -4,3 +4,9 @@ Searchkick.client_options = {
   transport_options:
     { request: { timeout: 10000 } }
 }
+
+ActiveJob::TrafficControl.client = Searchkick.redis
+
+class Searchkick::BulkReindexJob
+  concurrency 3
+end
