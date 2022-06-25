@@ -1,54 +1,33 @@
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-  <div>
-    <h2 style="margin-top: 24px;">Edit <%= resource_name.to_s.humanize %></h2>
-  </div>
-  <div style="margin-top: 8px;">
-    <div style="max-width: 428px; width: 100%; padding: 40px 32px; border-radius: 8px; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <%= render "devise/shared/error_messages", resource: resource %>
-          <div class="field">
-            <div class="row">
-              <div class="column" class="display: flex; justify-center">
-                <%= image_tag avatar_url_for(resource, opts = {}), class: "img-fluid rounded", style: "border-radius: 6px;" %>
-              </div>
-              <%= f.file_field :avatar, style: "background: none; width: 100%;" %>
-            </div>
-          </div>
-          <div class="field">
-            <%= f.label :email %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
-          </div>
-          <div class="field">
-            <%= f.label :first_name %>
-            <%= f.text_field :first_name, autocomplete: "last name", class: "input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
-          </div>
-          <div class="field">
-            <%= f.label :last_name %>
-            <%= f.text_field :last_name, autocomplete: "first_name", class: "input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
-          </div>
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
-          <div class="field">
-            <div class="flex align-center" style="display: flex; align-items: center; gap: 10px;">
-              <%= f.label :password %>
-              <% if @minimum_password_length %>
-                <p><%= @minimum_password_length %> characters minimum</p>
-              <% end %>
-            </div>
-            <%= f.password_field :password, autocomplete: "new-password", class: "input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;"%>
-          </div>
-          <div class="field">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input--block", style: "width: 100%; padding 4px 6px; border: 1px solid;" %>
-          </div>
-          <div class="actions" style="display: flex; flex-direction: column; gap: 6px; align-items: center;">
-            <%= f.submit "Update", class: "button button--submit button--small button--block", data: { turbo: false }  %>
-            <%= link_to "Cancel", root_path, style: "margin: 10px 0;" %>
-          </div>
-        </div>
-      <% end %>
+<div style="height: 80vh; width: 100%; max-width: 24rem; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: var(--sl-font-size-small); color: var(--sl-color-neutral-500);">
+  <div style="display: flex; justify-content: center;">
+    <div style="font-size: var(--sl-font-size-2x-large); color: var(--sl-color-neutral-1000);">
+      <h4>Edit <%= resource_name.to_s.humanize %></h4>
     </div>
   </div>
-</div>
+  <div style="display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 24rem;">
+    <%= sl_form_for resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }  do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="field">
+        <div class="row">
+          <div class="column" class="display: flex; justify-center">
+            <%= image_tag avatar_url_for(resource, opts = {}), class: "img-fluid rounded", style: "border-radius: 6px;" %>
+          </div>
+          <%= f.file_field :avatar, style: "background: none; width: 100%;" %>
+        </div>
+      </div>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.text_field :first_name, autocomplete: "off", style: "margin-bottom: 8px;" %>
+      <%= f.text_field :last_name, autocomplete: "off", style: "margin-bottom: 8px;" %>
+      <%= f.email_field :email, autofocus: true, style: "margin-bottom: 8px;" %>
+      <%= f.password_field :password, autocomplete: "off", style: "margin-bottom: 8px;", "toggle-password": "" %>
+      <%= f.submit "Update", class: "primary-button", style: "width: 100%;" %>
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 8px;">
+        <sl-button href="<%= root_path %>" class="white-button" style="width: 100%;">
+          Back
+        </sl-button>
+      </div>
+    <% end %>
+    <div style="margin-top: 24px;">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>

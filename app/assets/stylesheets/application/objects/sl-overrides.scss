@@ -30,3 +30,24 @@
 .white-button::part(label) {
   color: var(--sl-color-neutral-1000);
 }
+
+.primary-button::part(base) {
+  background: rgb(229, 45, 39);
+  border: solid 1px rgb(229, 45, 39);
+}
+
+.primary-button::part(base):hover {
+  background: rgb(250, 45, 39);
+}
+
+.primary-button::part(base):active {
+  background: rgb(229, 45, 39);
+}
+
+.primary-button[outline]::part(base) {
+  background: rgb(250, 45, 39);
+}
+
+.primary-button::part(label) {
+  color: #fff;
+}

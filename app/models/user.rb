@@ -33,9 +33,8 @@ class User < ApplicationRecord
   end
 
   def tileize_name
-    self.name = name.titleize if name.present?
-    self.first_name = first_name.titleize if name.present?
-    self.last_name = last_name.titleize if name.present?
+    self.first_name = first_name.compact.titleize if name.present?
+    self.last_name = last_name.compact.titleize if name.present?
   end
 
   class << self
