@@ -179,6 +179,7 @@ class Video < ApplicationRecord
       hd:,
       has_leader: leader.present?,
       has_follower: follower.present?,
+      has_song: song.present?,
       view_count:,
       viewed_within_last_month: Ahoy::Event.most_viewed_videos_by_month.include?(id),
       like_count:,
