@@ -1,51 +1,23 @@
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-  <div style="margin-top: 24px;">
-    <h2>
-      Sign up for an account
-    </h2>
-    <p style="margin-top: 4px; text-align: center; color: rgb(75, 85, 99);">
-      Or
-      <%- if controller_name != 'sessions' %>
-        <%= link_to "Log in to your account", new_session_path(resource_name) %><br />
-      <% end %>
-    </p>
+<div style="height: 80vh; width: 100%; max-width: 24rem; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: var(--sl-font-size-small); color: var(--sl-color-neutral-500);">
+  <div style="display: flex; justify-content: center;">
+    <div style="font-size: var(--sl-font-size-2x-large); color: var(--sl-color-neutral-1000);">
+      <h4>Sign Up</h4>
+    </div>
   </div>
-  <div style="margin-top: 8px;">
-    <div style="width: 428px; padding: 40px 32px; border-radius: 8px; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <%= f.label :first_name %>
-          <div class="mt-1 rounded-md shadow-sm">
-            <%= f.text_field :first_name, autofocus: true, autocomplete: "first name", class:"input input--block", style: "width: 100%; padding 4px 6px;" %>
-          </div>
-          <div>
-            <%= f.label :last_name  %>
-            <div class="mt-1 rounded-md shadow-sm">
-              <%= f.text_field :last_name, autofocus: true, autocomplete: "last name", class:"input input--block", style: "width: 100%; padding 4px 6px;" %>
-            </div>
-          </div>
-          <div>
-            <%= f.label :email  %>
-            <div class="mt-1 rounded-md shadow-sm">
-              <%= f.email_field :email, autocomplete: "email", class:"input input--block", style: "width: 100%; padding 4px 6px;" %>
-            </div>
-          </div>
-          <div>
-            <%= f.label :password  %>
-            <div class="mt-1 rounded-md shadow-sm">
-              <%= f.password_field :password, autocomplete: "new-password", class:"input input--block", style: "width: 100%; padding 4px 6px;" %>
-            </div>
-          </div>
-          <p class="mb-2 text-xs text-gray-500">By registering, you agree to the <%= link_to "Privacy Policy", privacy_path %> and <%= link_to "Terms & Conditions", terms_path %>
-            <div>
-              <%= f.submit "Sign Up", class: "button button--block button--submit", data: { turbo: false }  %>
-            </div>
-          <% end %>
-          <div style="margin-top: 24px;">
-            <%= render "devise/shared/links" %>
-          </div>
-        </div>
+  <div style="display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 24rem;">
+    <%= sl_form_for resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }  do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.text_field :first_name, autocomplete: "off", style: "margin-bottom: 8px;" %>
+      <%= f.text_field :last_name, autocomplete: "off", style: "margin-bottom: 8px;" %>
+      <%= f.email_field :email, autofocus: true, style: "margin-bottom: 8px;" %>
+      <%= f.password_field :password, autocomplete: "off", style: "margin-bottom: 8px;", "toggle-password": "" %>
+      <%= f.submit "Create An Accont", class: "primary-button", style: "width: 100%; margin-top: 8px;" %>
+      <div style="width: 100%; text-align: center; margin-top: 16px">
+        Already registered?
+        <%= link_to "Login", new_user_session_path, style: "color: var(--sl-color-primary-500);" %>
       </div>
+    <% end %>
+    <div style="margin-top: 24px;">
+      <%= render "devise/shared/links" %>
     </div>
   </div>

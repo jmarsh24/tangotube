@@ -38,7 +38,8 @@ puts 'Seeding admin user into database'
 if Rails.env.development?
   User.create!(
     email: 'admin@example.com',
-    password: 'password',
-    password_confirmation: 'password'
+    first_name: 'admin',
+    last_name: 'example',
+    password: 'password'
   ).admin!
 end
