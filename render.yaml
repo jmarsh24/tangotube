@@ -2,7 +2,7 @@ services:
   - type: web
     name: tangotube-web
     region: frankfurt
-    plan: starter
+    plan: starter-plus
     env: ruby
     buildCommand: ./bin/render-build.sh
     startCommand: export PATH="$PATH:$HOME/project/src/yt-dlp"; bundle exec puma -C config/puma.rb
