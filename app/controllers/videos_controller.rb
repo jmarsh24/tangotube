@@ -54,7 +54,8 @@ class VideosController < ApplicationController
                                           boost_by_recency: { updated_at: {scale: "7d", decay: 0.5  } },
                                           boost_where: {  watched_by: user_id,
                                                           has_follower: true,
-                                                          has_leader: true  }
+                                                          has_leader: true,
+                                                          has_song: true}
                                           )
     else
       videos = Video.pagy_search("*",
