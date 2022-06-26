@@ -28,10 +28,12 @@
     throttle = RateThrottleClient::ExponentialIncreaseProportionalRemainingDecrease.new
 
     response = throttle.call do
-      `#{YOUTUBE_DL_COMMAND_PREFIX + @youtube_id} + #{YOUTUBE_DL_COMMAND_SUFFIX}`
+      youtube_response = `#{YOUTUBE_DL_COMMAND_PREFIX + @youtube_id} + #{YOUTUBE_DL_COMMAND_SUFFIX}`
       rescue StandardError => e
       Rails.logger.warn("Video::MusicRecognition::Youtube yt-dlp video fetching error: #{e.backtrace.join("\n\t")}")
       ""
+      puts "youtube-dl-print-out" youtube_response
+      youtube_response
     end
     puts response
   end
