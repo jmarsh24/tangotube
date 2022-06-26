@@ -1,6 +1,6 @@
 class Video < ApplicationRecord
   acts_as_votable
-  searchkick  callbacks: :async,
+  searchkick  callbacks: false,
               filterable: [ :orchestra,
                             :year,
                             :channel,
@@ -208,7 +208,6 @@ class Video < ApplicationRecord
   def grep_title_leader_follower
     self.leader = Leader.all.find { |leader| title.parameterize.match(leader.name.parameterize) }
     self.follower = Follower.all.find { |follower| title.parameterize.match(follower.name.parameterize) }
-    save
   end
 
   def grep_performance_number
@@ -222,7 +221,6 @@ class Video < ApplicationRecord
     return if performance_array.first > performance_array.second || performance_array.second == 1
     self.performance_number = performance_array.first
     self.performance_total_number = performance_array.second
-    save
   end
 
   def grep_title_description_acr_cloud_song
@@ -244,7 +242,6 @@ class Video < ApplicationRecord
     self.song = Song.filter_by_active
                     .find_all { |song| search_string.parameterize.match(song.title.parameterize)}
                     .find { |song| search_string.parameterize.match(song.last_name_search.parameterize)}
-    save
   end
 
   def display

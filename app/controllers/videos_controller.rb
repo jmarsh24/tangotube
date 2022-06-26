@@ -155,7 +155,7 @@ class VideosController < ApplicationController
       MarkVideoAsWatchedJob.perform_async(show_params[:v], current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
-    # @video.reindex
+    @video.reindex
   end
 
   def update

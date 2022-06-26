@@ -32,6 +32,7 @@ class Video::YoutubeImport::Video
     unless @video.channel.active?
       @video.destroy
     end
+    @video.save
   end
 
   def update
@@ -55,6 +56,7 @@ class Video::YoutubeImport::Video
     if e.present?
       @video.destroy
     end
+    @video.save
   end
 
   private
