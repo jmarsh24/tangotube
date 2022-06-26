@@ -57,7 +57,7 @@ services:
     buildCommand: bundle install
     startCommand: >
       bundle exec rake update_all_channels
-      && bundle exec rake update_all_videos
+      && bundle exec rake update_all_videos_missing_acr_response_code
     envVars:
       - key: REDIS_URL
         fromService:
