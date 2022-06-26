@@ -20,7 +20,7 @@ end
 
 desc "This task updates videos"
 task update_all_videos: :environment do
-  Video.all.order('updated_at ASC').find_each do |video|
+  Video.all.find_each do |video|
     UpdateVideoWorker.perform_async(video.youtube_id)
   end
   puts "done."
