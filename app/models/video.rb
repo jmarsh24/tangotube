@@ -282,7 +282,7 @@ class Video < ApplicationRecord
   end
 
   def watched_later_by
-    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: false)&x.voters&.map(&:id)
+    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: false)&.voters&.map(&:id)
   end
 
   def featured?
