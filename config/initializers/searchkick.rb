@@ -5,3 +5,4 @@ Searchkick.client_options = {
     { request: { timeout: 10000 } }
 }
 
+Searchkick.redis = Redis.new

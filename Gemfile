@@ -40,10 +40,10 @@ gem "prettier"
 gem "pg_search"
 gem "rails_autolink"
 gem "rspotify"
-gem "rate_throttle_client", "~> 0.1.2"
 gem "searchkick"
 gem "shoelace-rails"
 gem "sidekiq"
+gem "sidekiq-throttled", "~> 0.16.1"
 gem "stimulus-rails"
 gem "stripe"
 gem "streamio-ffmpeg"
@@ -82,3 +82,5 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
