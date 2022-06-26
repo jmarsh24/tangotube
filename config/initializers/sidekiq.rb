@@ -1,3 +1,5 @@
+require "active_job/traffic_control"
+
 Sidekiq.configure_server do |config|
   config.redis = {url: ENV["REDIS_URL"]}
 end
@@ -9,11 +11,15 @@ end
 ActiveJob::TrafficControl.client = Searchkick.redis
 
 class Searchkick::BulkReindexJob
-  concurrency 3
+  include ActiveJob::TrafficControl::Concurrency
+
+  concurrency 3, drop: false
 end
 
 class Searchkick::ReindexV2Job
-  concurrency 3
+  include ActiveJob::TrafficControl::Concurrency
+
+  concurrency 3, drop: false
 end
 
 
