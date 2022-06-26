@@ -1,4 +1,5 @@
-require "active_job/traffic_control"
+require "sidekiq/throttled"
+Sidekiq::Throttled.setup!
 
 Sidekiq.configure_server do |config|
   config.redis = {url: ENV["REDIS_URL"]}

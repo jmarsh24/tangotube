@@ -254,10 +254,6 @@ class Video < ApplicationRecord
     save!
   end
 
-  def thumbnail_url
-    "https://img.youtube.com/vi/#{youtube_id}/mqdefault.jpg"
-  end
-
   def liked_by
     votes_for.where(vote_scope: "like")&.where(vote_flag: true)&.map(&:voter_id)
   end
