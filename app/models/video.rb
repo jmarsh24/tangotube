@@ -171,6 +171,7 @@ class Video < ApplicationRecord
       youtube_song:,
       youtube_artist:,
       acr_cloud_artist_name:,
+      acr_cloud_track_name:,
       featured: featured?,
       spotify_artist_name:,
       spotify_track_name:,
