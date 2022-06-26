@@ -1,4 +1,4 @@
-<%= form_with(model: [@video, Clip.new]) do |form| %>
+<%= sl_form_with(model: [@video, Clip.new], data: { turbo: false }) do |form| %>
   <div style="display: flex; flex-direction: column; gap: 10px; background-color: var(--sl-color-neutral-50); padding: 10px;">
     <% if clip.errors.any? %>
       <div style="color: red">
@@ -10,47 +10,46 @@
         </ul>
       </div>
     <% end %>
-    <div>
-      <sl-input placeholder="Title"></sl-input>
-      <%= form.label :title, style: "display: block" %>
-      <%= form.text_field :title, style: "width: 100%;" %>
-    </div>
+    <%= form.text_field :title, placeholder: "Title", style: 'width: 100%;' %>
     <div class="row" style="align-items: center; gap: 10px;">
-      <div>
-        <sl-input placeholder="End Time"></sl-input>
-        <%= form.label :start, style: "display: block; font-size: 10px;" %>
-        <%= form.text_field :start_seconds, value: @start_value, placeholder: "0s", style: "width: 100px;", data: { action: "input->clipboard#changeValue input->youtube#updateStartTime",
-                                                              "clipboard-target": "startTime",
-                                                              "youtube-target": "startTime" } %>
-      </div>
-      <sl-input placeholder="Start Time"></sl-input>
+      <%= form.text_field :start_seconds,
+          label: "Start Time",
+          value: @start_value,
+          placeholder: "0s",
+          style: "width: 100px;",
+          data: { action: "input->clipboard#changeValue
+                        input->youtube#updateStartTime",
+                        "clipboard-target": "startTime",
+                        "youtube-target": "startTime" } %>
       <span class="spacer">-</span>
-      <div>
-        <%= form.label :end, style: "display: block; font-size: 10px;" %>
-        <%= form.text_field :end_seconds, value: @end_value, placeholder: "0s", style: "width: 100px;", data: { action: "input->clipboard#changeValue input->youtube#updateEndTime",
-                                                              "clipboard-target": "endTime",
-                                                              "youtube-target": "endTime" }  %>
-      </div>
+      <%= form.text_field :end_seconds,
+          label: "Start Time",
+          value: @end_value,
+          placeholder: "0s",
+          style: "width: 100px;",
+          data: { action: "input->clipboard#changeValue
+          input->youtube#updateEndTime",
+          "clipboard-target": "endTime",
+          "youtube-target": "endTime" }  %>
       <span class="spacer">:</span>
       <div>
-        <%= form.label :rate, style: "display: block; font-size: 10px; width: 100px;" %>
-        <%= form.select :playback_rate, options_for_select( { ".25x" => "0.25",
-                                                      ".5x" => "0.50",
-                                                      ".75x" => "0.75",
-                                                      "1x" => "1.00",
-                                                      "1.25x" => "1.25",
-                                                      "1.5x" => "1.50",
-                                                      "1.75x" => "1.75",
-                                                      "2x" => "2.00" }, sprintf('%.2f', @playback_rate.to_i)), {},
-                                                          data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackRate",
-                                                                  "clipboard-target": "playbackRate",
-                                                                  "youtube-target": "playbackRate" } %>
+        <%= label_tag :rate %>
+        <%= select_tag :playback_rate, options_for_select([[".25x", "0.25"],
+                                        [".5x", "0.50"],
+                                        [".75x", "0.75"],
+                                        ["1x", "1.00"],
+                                        ["1.25x", "1.25"],
+                                        ["1.5x", "1.50"],
+                                        ["1.75x", "1.75"],
+                                        ["2x", "2.00"]], sprintf('%.2f', @playback_rate.to_i)),
+                                                      data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackRate",
+                                                                              "clipboard-target": "playbackRate",
+                                                                              "youtube-target": "playbackRate" },
+                                                              hoist: "",
+                                                              label: "Rate" %>
       </div>
     </div>
-    <div>
-      <%#= form.label :tags, style: "display: block" %>
-      <%#= form.text_field :tags, style: "width: 100%;" %>
-    </div>
+    <%#= form.text_field :tags, style: "width: 100%;" %>
     <% if user_signed_in? %>
       <div>
         <%= form.submit %>
