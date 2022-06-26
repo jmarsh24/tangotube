@@ -1,4 +1,4 @@
-  class Video::MusicRecognition::Youtube
+class Video::MusicRecognition::Youtube
   YOUTUBE_DL_COMMAND_PREFIX = "yt-dlp \"https://www.youtube.com/watch?v=".freeze
   YOUTUBE_DL_COMMAND_SUFFIX = "\" --skip-download --print-json".freeze
 
@@ -25,16 +25,10 @@
   private
 
   def fetch_youtube_video_info_by_id
-    throttle = RateThrottleClient::ExponentialIncreaseProportionalRemainingDecrease.new
-
-    response = throttle.call do
-      youtube_response = `#{YOUTUBE_DL_COMMAND_PREFIX + @youtube_id} + #{YOUTUBE_DL_COMMAND_SUFFIX}`
-      rescue StandardError => e
-      Rails.logger.warn("Video::MusicRecognition::Youtube yt-dlp video fetching error: #{e.backtrace.join("\n\t")}")
-      puts "youtube-dl-print-out #{youtube_response}"
-      youtube_response
-    end
-    puts response
+    `#{YOUTUBE_DL_COMMAND_PREFIX + @youtube_id} + #{YOUTUBE_DL_COMMAND_SUFFIX}`
+    rescue StandardError => e
+    Rails.logger.warn("Video::MusicRecognition::Youtube yt-dlp video fetching error: #{e.backtrace.join("\n\t")}")
+    ""
   end
 
   def parsed_response
