@@ -259,27 +259,27 @@ class Video < ApplicationRecord
   end
 
   def liked_by
-    votes_for.where(vote_scope: "like")&.where(vote_flag: true)&.voters&.map(&:id)
+    votes_for.where(vote_scope: "like")&.where(vote_flag: true)&.map(&:voter_id)
   end
 
   def disliked_by
-    votes_for.where(vote_scope: "like")&.where(vote_flag: false)&.voters&.map(&:id)
+    votes_for.where(vote_scope: "like")&.where(vote_flag: false)&.map(&:voter_id)
   end
 
   def watched_by
-    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: true)&.voters&.map(&:id)
+    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: true)&.map(&:voter_id)
   end
 
   def not_watched_by
-    User.all.pluck(:id) - votes_for.where(vote_scope: "watchlist")&.where(vote_flag: true)&.voters&.map(&:id)
+    User.all.pluck(:id) - votes_for.where(vote_scope: "watchlist")&.where(vote_flag: true)&.map(&:voter_id)
   end
 
   def bookmarked_by
-    votes_for.where(vote_scope: "bookmark")&.voters&.map(&:id)
+    votes_for.where(vote_scope: "bookmark")&.map(&:voter_id)
   end
 
   def watched_later_by
-    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: false)&.voters&.map(&:id)
+    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: false)&.map(&:voter_id)
   end
 
   def featured?
