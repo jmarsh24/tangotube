@@ -13,7 +13,7 @@ class Searchkick::BulkReindexJob
 end
 
 class Searchkick::ReindexV2Job
-  concurrency 5
+  concurrency 3
 end
 
 
