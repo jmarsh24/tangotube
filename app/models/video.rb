@@ -266,11 +266,11 @@ class Video < ApplicationRecord
   end
 
   def disliked_by
-    votes_for.where(vote_scope: "like")&.where(vote_flag: false)&.voters.map(&:id)
+    votes_for.where(vote_scope: "like")&.where(vote_flag: false)&.voters&.map(&:id)
   end
 
   def watched_by
-    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: true)&.voters.map(&:id)
+    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: true)&.voters&.map(&:id)
   end
 
   def not_watched_by
