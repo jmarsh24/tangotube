@@ -33,7 +33,7 @@
       Rails.logger.warn("Video::MusicRecognition::Youtube yt-dlp video fetching error: #{e.backtrace.join("\n\t")}")
       ""
     end
-    response
+    puts response
   end
 
   def parsed_response
