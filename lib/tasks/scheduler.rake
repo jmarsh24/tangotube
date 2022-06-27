@@ -28,7 +28,7 @@ end
 
 desc "This task updates videos"
 task update_all_videos_missing_acr_response_code: :environment do
-  Video.not_hidden.missing_acr_response_code.limit(10000).find_each do |video|
+  Video.not_hidden.not_scanned_acrcloud.limit(10000).find_each do |video|
     UpdateVideoWorker.perform_async(video.youtube_id)
   end
   puts "done."
