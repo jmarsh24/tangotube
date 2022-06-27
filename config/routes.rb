@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'cookies', to: 'cookies#index'
   get "checkout", to: "checkouts#show"
   get "billing", to: "billing#show"
 

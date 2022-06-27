@@ -20,7 +20,9 @@
       <div id="flash" class="flash">
         <%= render "layouts/flash" %>
       </div>
+      <%= session[:cookies_accepted] %>
       <%= yield %>
+      <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
     </div>
   </body>
 </html>
