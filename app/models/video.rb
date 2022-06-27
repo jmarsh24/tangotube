@@ -20,8 +20,8 @@ class Video < ApplicationRecord
                             :song_title,
                             :channel_title,
                             :dancer],
-                            text_middle: [:leader, :follower, :song_title, :channel, :acr_track_name, :spotify_track_name, :artist],
-                            suggest: [:leader, :follower, :song_title, :channel, :acr_track_name, :spotify_track_name, :artist]
+                            text_middle: [:leader_name, :follower_name, :song_title, :channel, :acr_track_name, :spotify_track_name, :artist],
+                            suggest: [:leader_name, :follower_name, :song_title, :channel, :acr_track_name, :spotify_track_name, :artist]
   include Filterable
   extend Pagy::Searchkick
 
