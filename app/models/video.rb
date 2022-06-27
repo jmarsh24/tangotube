@@ -20,7 +20,7 @@ class Video < ApplicationRecord
                             :song_full_title,
                             :channel_title,
                             :dancer],
-                            text_middle: [:leader_name, :follower_name, :song_full_title, :channel, :acr_track_name, :spotify_track_name, :artist],
+                            word_middle: [:leader_name, :follower_name, :song_full_title, :channel, :acr_track_name, :spotify_track_name, :artist],
                             suggest: [:leader_name, :follower_name, :song_full_title, :channel, :acr_track_name, :spotify_track_name, :artist]
   include Filterable
   extend Pagy::Searchkick
@@ -29,7 +29,7 @@ class Video < ApplicationRecord
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  belongs_to :leader, optional: true, counter_cache: true
+belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
