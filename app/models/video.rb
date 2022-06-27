@@ -188,6 +188,8 @@ class Video < ApplicationRecord
       like_count:,
       leader: leader&.normalized_name&.parameterize,
       follower: follower&.normalized_name&.parameterize,
+      leader_name: leader.name,
+      follower_name: follower.name,
       channel_title: channel&.title,
       channel: channel&.channel_id,
       song_id:,

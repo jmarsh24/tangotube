@@ -112,11 +112,11 @@ class VideosController < ApplicationController
               }
             }
           })
-        @pagy_featured_videos, @featured_videos = pagy_searchkick(featured_videos, items: 24, suggest: true)
+        @pagy_featured_videos, @featured_videos = pagy_searchkick(featured_videos, items: 24)
       end
     end
 
-    @pagy, @videos = pagy_searchkick(videos, items: 24, suggest: true)
+    @pagy, @videos = pagy_searchkick(videos, items: 24)
 
     respond_to do |format|
       format.html # GET
