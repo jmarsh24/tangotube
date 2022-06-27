@@ -55,7 +55,8 @@ class VideosController < ApplicationController
                                           boost_where: {  watched_by: user_id,
                                                           has_follower: true,
                                                           has_leader: true,
-                                                          has_song: true}
+                                                          has_song: true},
+                                          suggest: true
                                           )
     else
       videos = Video.pagy_search("*",
@@ -111,11 +112,11 @@ class VideosController < ApplicationController
               }
             }
           })
-        @pagy_featured_videos, @featured_videos = pagy_searchkick(featured_videos, items: 24)
+        @pagy_featured_videos, @featured_videos = pagy_searchkick(featured_videos, items: 24, suggest: true)
       end
     end
 
-    @pagy, @videos = pagy_searchkick(videos, items: 24)
+    @pagy, @videos = pagy_searchkick(videos, items: 24, suggest: true)
 
     respond_to do |format|
       format.html # GET

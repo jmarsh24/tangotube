@@ -1,4 +1,6 @@
 class Song < ApplicationRecord
+  searchkick
+
   validates :genre, presence: true
   validates :title, presence: true
   validates :artist, presence: true
@@ -42,5 +44,10 @@ class Song < ApplicationRecord
     def missing_english_translation
       where.not(lyrics: nil).where(lyrics_en: nil)
     end
+  end
+
+  def search_data
+    { full_title:
+    }
   end
 end
