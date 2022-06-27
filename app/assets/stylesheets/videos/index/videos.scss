@@ -9,6 +9,14 @@
     gap: 20px 20px;
     background-color: var(--sl-color-neutral-0);
   }
+
+  @media (max-width: 800px) {
+    .video-section {
+      &__videos {
+        grid-template-columns: none;
+      }
+    }
+  }
 }
 
 .index-container {
