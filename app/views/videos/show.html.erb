@@ -6,10 +6,10 @@
   <% content_for :meta_description,  "#{@video.display.any_song_attributes}" %>
   <% content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg" %>
   <div data-controller="hotkeys" data-hotkeys-bindings-value='{
-  "space": "#hotkey->youtube#playPause",
+  <%# "space": "#hotkey->youtube#playPause", %>
     "shift + 1": "#hotkey->youtube#setTime1",
     "shift + 2": "#hotkey->youtube#setTime2",
-    "backspace": "#hotkey->youtube#reset",
+    <%# "backspace": "#hotkey->youtube#reset", %>
     "m": "#hotkey->youtube#toggleMute",
     "+": "#hotkey->youtube#increaseVolume",
     "-": "#hotkey->youtube#decreaseVolume",
