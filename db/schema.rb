@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_18_191129) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_27_101611) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -109,7 +109,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_191129) do
     t.integer "start_seconds", null: false
     t.integer "end_seconds", null: false
     t.text "title"
-    t.float "playback_rate", default: 1.0
+    t.decimal "playback_rate", precision: 5, scale: 3, default: "1.0"
     t.string "tags"
     t.bigint "user_id", null: false
     t.bigint "video_id", null: false
@@ -130,6 +130,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_191129) do
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "couples", force: :cascade do |t|
+    t.bigint "dancer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dancer_id"], name: "index_couples_on_dancer_id"
+  end
+
+  create_table "dancers", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "middle_name"
+    t.string "nick_name"
+    t.integer "gender"
+    t.bigint "user_id"
+    t.text "bio"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_dancers_on_user_id"
   end
 
   create_table "deletion_requests", force: :cascade do |t|
@@ -320,7 +341,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_191129) do
     t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.integer "role"
+    t.bigint "dancer_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["dancer_id"], name: "index_users_on_dancer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -381,9 +404,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_191129) do
     t.integer "cached_weighted_like_total", default: 0
     t.float "cached_weighted_like_average", default: 0.0
     t.boolean "featured", default: false
+    t.bigint "dancer_id"
+    t.bigint "couple_id"
     t.index ["acr_cloud_artist_name"], name: "index_videos_on_acr_cloud_artist_name"
     t.index ["acr_cloud_track_name"], name: "index_videos_on_acr_cloud_track_name"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
+    t.index ["couple_id"], name: "index_videos_on_couple_id"
+    t.index ["dancer_id"], name: "index_videos_on_dancer_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["follower_id"], name: "index_videos_on_follower_id"
     t.index ["hd"], name: "index_videos_on_hd"
@@ -437,6 +464,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_191129) do
   add_foreign_key "clips", "users"
   add_foreign_key "clips", "videos"
   add_foreign_key "comments", "users"
+  add_foreign_key "couples", "dancers"
+  add_foreign_key "dancers", "users"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
