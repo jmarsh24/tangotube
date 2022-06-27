@@ -1,20 +1,27 @@
 .cookies-modal {
-  position: absolute;
-  padding: 0.5rem;
+  position: fixed;
   z-index: 2;
-  left: 0.5rem;
-  bottom: 0.5rem;
-  min-width: 50%;
-  max-width: 24rem;
+  left: 0;
+  bottom: 0;
+  right: 0;
   word-break: break-word;
   border-radius: 0.5rem;
   background: var(--sl-color-neutral-50);
-}
 
-a:link {
-  text-decoration: none;
-}
+  &__copy {
+    max-width: 960px;
+  }
 
-a {
-  text-decoration: none;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1580px;
+    margin: 0 auto;
+    padding: 32px 0;
+  }
+
+  &__buttons {
+    display: flex;
+  }
 }
