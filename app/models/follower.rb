@@ -3,6 +3,8 @@ class Follower < ApplicationRecord
   include Reviewable
   include Normalizeable
 
+  searchkick
+
   validates :name, presence: true, uniqueness: true
 
   has_many :videos
@@ -20,5 +22,9 @@ class Follower < ApplicationRecord
 
   def reindex_video
     video.reindex
+  end
+
+  def search_data
+    { full_name: }
   end
 end

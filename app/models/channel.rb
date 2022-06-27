@@ -2,6 +2,8 @@ class Channel < ApplicationRecord
   include Reviewable
   include Importable
 
+  searchkick
+
   has_many :videos, dependent: :destroy
 
   after_save { videos.find_each(&:reindex) }
@@ -31,4 +33,9 @@ class Channel < ApplicationRecord
     total_videos_count_changed? || videos_count_changed?
   end
 
+  def search_data
+    {
+      title:
+    }
+  end
 end

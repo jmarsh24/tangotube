@@ -1,30 +1,12 @@
 class SearchSuggestionsController < ApplicationController
   def search
-    @leaders =
-      Leader
-        .joins(:videos)
-        .distinct
-        .full_name_search(params[:query])
-        .limit(10)
-        .pluck(:name)
+    @leaders = Leader.search(params[:query], misspellings: { edit_distance: 5  }).map(&:full_name)
 
-    @followers =
-      Follower
-        .joins(:videos)
-        .distinct
-        .full_name_search(params[:query])
-        .limit(10)
-        .pluck(:name)
+    @followers = Follower.search(params[:query], misspellings: { edit_distance: 5  }).map(&:full_name)
 
-    @songs =
-      Song
-        .joins(:videos)
-        .distinct
-        .full_title_search(params[:query])
-        .limit(10)
-        .map(&:full_title)
+    @songs = Song.search(params[:query], misspellings: { edit_distance: 5  }).map(&:full_title)
 
-    @channels = Channel.title_search(params[:query]).limit(10).pluck(:title)
+    @channels = Channel.search(params[:query], misspellings: { edit_distance: 5  }).map(&:title)
 
     return @search_results = [] if params[:query].blank?
 

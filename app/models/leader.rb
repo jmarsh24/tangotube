@@ -3,6 +3,8 @@ class Leader < ApplicationRecord
   include Reviewable
   include Normalizeable
 
+  searchkick
+
   validates :name, presence: true, uniqueness: true
 
   has_many :videos
@@ -16,5 +18,11 @@ class Leader < ApplicationRecord
     Video.with_dancer_name_in_title(name).find_each do |video|
       video.update(leader: self)
     end
+  end
+
+  def search_data
+    {
+      full_name:
+    }
   end
 end
