@@ -16,12 +16,19 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    max-width: 1580px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 32px 0;
   }
 
   &__buttons {
     display: flex;
+  }
+
+  @media (max-width: 800px) {
+    &__inner {
+      max-width: none;
+      padding: 24px 32px;
+    }
   }
 }
