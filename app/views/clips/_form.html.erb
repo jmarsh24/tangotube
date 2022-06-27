@@ -1,3 +1,4 @@
+<%# clip = Clip.new(playback_rate: s) %>
 <%= sl_form_with(model: [@video, Clip.new], data: { turbo: false }) do |form| %>
   <div style="display: flex; flex-direction: column; gap: 10px; background-color: var(--sl-color-neutral-50); padding: 10px;">
     <% if clip.errors.any? %>
@@ -32,22 +33,21 @@
           "clipboard-target": "endTime",
           "youtube-target": "endTime" }  %>
       <span class="spacer">:</span>
-      <div>
-        <%= label_tag :rate %>
-        <%= select_tag :playback_rate, options_for_select([[".25x", "0.25"],
-                                        [".5x", "0.50"],
-                                        [".75x", "0.75"],
-                                        ["1x", "1.00"],
-                                        ["1.25x", "1.25"],
-                                        ["1.5x", "1.50"],
-                                        ["1.75x", "1.75"],
-                                        ["2x", "2.00"]], sprintf('%.2f', @playback_rate.to_i)),
-                                                      data: { action: "change->clipboard#changeValue change->youtube#updatePlaybackRate",
-                                                                              "clipboard-target": "playbackRate",
-                                                                              "youtube-target": "playbackRate" },
-                                                              hoist: "",
-                                                              label: "Rate" %>
-      </div>
+      <%= form.select :playback_rate, {  ".25x" => "0.25",
+                                          ".5x" => "0.50",
+                                          ".75x" => "0.75",
+                                          "1x" => "1.0",
+                                          "1.25x" => "1.25",
+                                          "1.5x" => "1.50",
+                                          "1.75x" => "1.75",
+                                          "2x" => "2.0" },
+                                          {},
+                                          { value: printf('%.2f', @playback_rate.to_i),
+                                            label: "Rate",
+                                            hoist: "",
+                                            data: { action: "sl-change->clipboard#changeValue sl-change->youtube#updatePlaybackRate",
+                                                            "clipboard-target": "playbackRate",
+                                                            "youtube-target": "playbackRate" }} %>
     </div>
     <%#= form.text_field :tags, style: "width: 100%;" %>
     <% if user_signed_in? %>
