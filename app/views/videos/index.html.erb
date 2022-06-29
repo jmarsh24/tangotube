@@ -1,5 +1,5 @@
   <% if !user_signed_in? %>
-  <%= render "shared/banner" %>
+  <%= turbo_frame_tag "banner" , src: banner_videos_path %>
 <% end %>
 <div class="index-container">
   <%= render "videos/index/filters" %>

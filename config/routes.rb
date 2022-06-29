@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     resources :clips
     collection do
       get 'filters', to: "filters#filters"
+      get 'banner', to: "videos#banner"
     end
     resources :comments, module: :videos
     member do
