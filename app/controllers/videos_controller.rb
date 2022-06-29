@@ -241,6 +241,8 @@ class VideosController < ApplicationController
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
+  def banner; end
+
   private
 
   def set_video
