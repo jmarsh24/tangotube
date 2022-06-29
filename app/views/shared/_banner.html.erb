@@ -1,52 +1,71 @@
-<!-- Slider main container -->
-<div class="swiper" data-controller="banner" data-banner-target="banner">
-  <!-- Additional required wrapper -->
-  <div class="swiper-wrapper">
-    <!-- Slides -->
-    <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
-      <h2>TangoTube</h2>
-      <h4>A Video Platform for dancers, by dancers.</h4>
-      <div class="banner__buttons">
-        <h5 style="margin: 3px; font-weight: 400; color">Login to access extra features</h5>
-        <div class="row" style="justify-content: center; gap 10px;">
-          <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
-          <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
+<div class="banner">
+  <%= video_tag "Tango Blues.mp4", { width: "100%", height: "100%", muted: :muted, autoplay: :autoplay, loop: :loop } %>
+  <div class="banner__card">
+    <h1>"Experience the better<br/>
+      way to watch tango"</h1>
+    <h4>
+      All the tango videos in one place!<br/>
+      Commercial Free Browsing <br/>
+      Learn more about the songs<br/>
+    </h4>
+    <sl-button
+      href="<%= new_user_registration_path %>"
+      class="primary-button">
+      Try it Now
+    </sl-button>
+  </div>
+</div>
+<% if false %>
+  <!-- Slider main container -->
+  <div class="swiper" data-controller="banner" data-banner-target="banner">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
+        <h2>TangoTube</h2>
+        <h4>A Video Platform for dancers, by dancers.</h4>
+        <div class="banner__buttons">
+          <h5 style="margin: 3px; font-weight: 400; color">Login to access extra features</h5>
+          <div class="row" style="justify-content: center; gap 10px;">
+            <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
+            <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
+          </div>
         </div>
       </div>
+      <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
+        <h2>Commercial Free</h2>
+        <h4>Never have to wait for an add to pass in order to start watching a video. On Tangotube there are no commercials.</h4>
+      </div>
+      <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
+        <h2>Discover More</h2>
+        <h4>Powerful filters which allow you to search for performances to specific orchestras, different dance partners, and much more!</h4>
+      </div>
+      <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
+        <h2>Know who's playing</h2>
+        <h4>Tangotube identifies the song and provides info like author, singer, composer, orchestra, and recording date.
+        </h4>
+      </div>
+      <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
+        <h2>Know what the songs are about</h2>
+        <h4>Every songs lyrics are translated in English, even if you don't understand Spanish you can now learn what the songs are about.</h4>
+      </div>
+      <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
+        <h2>Look back in history</h2>
+        <h4>The “Oldest First” filter allows you to see the very first videos from your favorite dancers.</h4>
+      </div>
+      <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
+        <h2>Fresh videos</h2>
+        <h4>The “New To You” filter shows only videos which you haven't seen yet.</h4>
+      </div>
+      <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
+        <h2>Find Videos Easily </h2>
+        <h4>All the relevant information like Performer Names, Song Info (title, orchestra, genre), Event, are already included in the video title. You never have to guess a video by its thumbnail again! </h4>
+      </div>
     </div>
-    <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
-      <h2>Commercial Free</h2>
-      <h4>Never have to wait for an add to pass in order to start watching a video. On Tangotube there are no commercials.</h4>
-    </div>
-    <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
-      <h2>Discover More</h2>
-      <h4>Powerful filters which allow you to search for performances to specific orchestras, different dance partners, and much more!</h4>
-    </div>
-    <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
-      <h2>Know who's playing</h2>
-      <h4>Tangotube identifies the song and provides info like author, singer, composer, orchestra, and recording date.
-      </h4>
-    </div>
-    <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
-      <h2>Know what the songs are about</h2>
-      <h4>Every songs lyrics are translated in English, even if you don't understand Spanish you can now learn what the songs are about.</h4>
-    </div>
-    <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
-      <h2>Look back in history</h2>
-      <h4>The “Oldest First” filter allows you to see the very first videos from your favorite dancers.</h4>
-    </div>
-    <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
-      <h2>Fresh videos</h2>
-      <h4>The “New To You” filter shows only videos which you haven't seen yet.</h4>
-    </div>
-    <div class="swiper-slide" style="display: flex; align-items: center; flex-direction: column;">
-      <h2>Find Videos Easily </h2>
-      <h4>All the relevant information like Performer Names, Song Info (title, orchestra, genre), Event, are already included in the video title. You never have to guess a video by its thumbnail again! </h4>
-    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
   </div>
-  <!-- If we need pagination -->
-  <div class="swiper-pagination"></div>
-  <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
-</div>
+<% end %>
