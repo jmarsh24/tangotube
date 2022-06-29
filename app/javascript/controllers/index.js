@@ -7,9 +7,6 @@ import { application } from "./application";
 import AutoclickController from "./autoclick_controller.js";
 application.register("autoclick", AutoclickController);
 
-import BannerController from "./banner_controller.js";
-application.register("banner", BannerController);
-
 import ClipboardController from "./clipboard_controller.js";
 application.register("clipboard", ClipboardController);
 

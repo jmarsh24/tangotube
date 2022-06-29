@@ -34,7 +34,7 @@
               <sl-menu-item>Edit Profile</sl-menu-item>
             <% end %>
             <%= link_to destroy_user_session_path do %>
-              <sl-menu-item href="<%=  %>">Sign Out</sl-menu-item>
+              <sl-menu-item>Sign Out</sl-menu-item>
             <% end %>
           <% else %>
             <%= link_to new_user_session_path do %>
@@ -50,8 +50,8 @@
   </div>
   <div id="desktop-login" class="login">
     <% if !user_signed_in? %>
-      <%= button_to "Login", new_user_session_path, method: :get, class:'button'  %>
-      <%= button_to "Sign up", new_user_registration_path, method: :get, class: "button button--submit", id: 'sign-up' %>
+      <sl-button href="<%= new_user_session_path %>" class="white-button">Login</sl-button>
+      <sl-button href="<%= new_user_session_path %>" class="primary-button">Sign Up</sl-button>
     <% end %>
     <% if user_signed_in? %>
       <div id="dropdown-avatar">
