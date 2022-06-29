@@ -3,6 +3,10 @@
   color: #fff;
   font-family: var(--sl-font-sans);
 
+  &__video {
+    width: 100%;
+  }
+
   &__card {
     position: absolute;
     left: 0;
@@ -24,6 +28,13 @@
     h2 {
       font-size: clamp(14px, 1vw, 28px);
       font-weight: 100;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .banner__video {
+      height: 500px;
+      width: unset;
     }
   }
 }
