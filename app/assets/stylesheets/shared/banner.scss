@@ -69,6 +69,7 @@
 
 .banner {
   position: relative;
+  color: #fff;
 
   &__card {
     position: absolute;
@@ -99,7 +100,7 @@
     .banner {
       &__card {
         h1 {
-          font-size: 25px;
+          font-size: 18px;
         }
         h4 {
           font-size: 12px;
