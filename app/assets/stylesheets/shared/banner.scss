@@ -18,12 +18,11 @@
     background-color: rgba(0, 0, 0, 0.4);
 
     h1 {
-      font-size: 4vw;
+      font-size: clamp(16px, 4vw, 81px);
     }
 
-    h4 {
-      font-size: 1.5vw;
-      font-family: Roboto;
+    h2 {
+      font-size: clamp(14px, 1vw, 28px);
       font-weight: 100;
     }
   }
