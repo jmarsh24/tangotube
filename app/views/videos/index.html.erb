@@ -1,9 +1,9 @@
+  <% if !user_signed_in? %>
+  <%= render "shared/banner" %>
+<% end %>
 <div class="index-container">
   <%= render "videos/index/filters" %>
   <%= render "videos/index/videos/header" %>
-  <% if !user_signed_in? %>
-    <%= render "shared/banner" %>
-  <% end %>
   <div id="videos">
     <% if @featured_videos.present? %>
       <div class="video-section">
