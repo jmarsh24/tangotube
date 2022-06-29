@@ -50,12 +50,6 @@
       cursor: pointer;
     }
 
-    .login {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
     #mobile-login: {
       display: none;
     }
@@ -87,6 +81,7 @@
 
     #desktop-login {
       display: flex;
+      gap: 8px;
     }
     #mobile-drawer-top {
       display: none;
