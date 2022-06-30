@@ -1,6 +1,6 @@
 .banner {
   position: relative;
-  height: 800px;
+  height: 768px;
   width: calc(100vw - 15px);
   overflow: hidden;
   font-family: var(--sl-font-sans);
@@ -42,7 +42,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .banner {
     height: 500px;
     width: 100vw;
