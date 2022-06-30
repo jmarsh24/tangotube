@@ -10,7 +10,7 @@
     background-color: var(--sl-color-neutral-0);
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 640px) {
     .video-section {
       &__videos {
         grid-template-columns: none;
@@ -99,7 +99,7 @@
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     font-size: 1.1rem;
     margin: 0;
   }
@@ -119,7 +119,7 @@
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     font-size: 0.9rem;
     a {
       font-size: 0.9rem;
@@ -138,7 +138,7 @@
 .channel-title {
   font-size: 0.8rem;
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     font-size: 1rem;
   }
 }
@@ -158,7 +158,7 @@
   color: var(--sl-color-gray-500);
   font-size: 0.7rem;
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     font-size: 0.9rem;
   }
 }
@@ -177,7 +177,7 @@
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     font-size: 0.9rem;
     a {
       font-size: 0.9rem;
@@ -185,7 +185,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .videos {
     padding: 0px;
   }
