@@ -1,10 +1,19 @@
 .banner {
   position: relative;
-  color: #fff;
+  height: 800px;
+  width: calc(100vw - 15px);
+  overflow: hidden;
   font-family: var(--sl-font-sans);
 
   &__video {
-    width: 100%;
+    position: absolute;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   &__card {
@@ -12,13 +21,14 @@
     left: 0;
     right: 0;
     top: 0;
-    bottom: 6px;
+    bottom: 0;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 16px;
+    color: #fff;
     background-color: rgba(0, 0, 0, 0.4);
 
     h1 {
@@ -30,11 +40,16 @@
       font-weight: 100;
     }
   }
+}
 
-  @media (max-width: 800px) {
-    .banner__video {
+@media (max-width: 800px) {
+  .banner {
+    height: 500px;
+    width: 100vw;
+
+    &__video {
       height: 500px;
-      width: unset;
+      min-height: 500px;
     }
   }
 }
