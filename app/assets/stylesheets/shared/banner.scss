@@ -2,15 +2,12 @@
   position: relative;
   height: 768px;
   width: calc(100vw - 15px);
+  max-width: 100%;
   overflow: hidden;
   font-family: var(--sl-font-sans);
 
   &__video {
     position: absolute;
-    width: auto;
-    height: auto;
-    min-width: 100%;
-    min-height: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -36,7 +33,7 @@
     }
 
     h2 {
-      font-size: clamp(14px, 1vw, 28px);
+      font-size: clamp(18px, 1vw, 28px);
       font-weight: 100;
     }
   }
@@ -46,7 +43,6 @@
   .banner {
     height: 500px;
     width: 100vw;
-    max-width: 100%;
 
     &__video {
       height: 500px;
