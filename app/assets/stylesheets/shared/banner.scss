@@ -1,17 +1,12 @@
 .banner {
   position: relative;
-  height: 768px;
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 56px);
   width: calc(100vw - 15px);
   max-width: 100%;
   overflow: hidden;
   font-family: var(--sl-font-sans);
-
-  &__video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 
   &__card {
     position: absolute;
@@ -37,16 +32,24 @@
       font-weight: 100;
     }
   }
+
+  &__video {
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__icon {
+    position: absolute;
+    bottom: 16px;
+    font-size: var(--sl-font-size-2x-large);
+  }
 }
 
 @media (max-width: 768px) {
   .banner {
-    height: 500px;
     width: 100vw;
-
-    &__video {
-      height: 500px;
-      min-height: 500px;
-    }
   }
 }

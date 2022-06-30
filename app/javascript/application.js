@@ -8,6 +8,7 @@ import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.j
 setBasePath("/shoelace-assets");
 
 import "@shoelace-style/shoelace/dist/components/dropdown/dropdown.js";
+import "@shoelace-style/shoelace/dist/components/animation/animation.js";
 import "@shoelace-style/shoelace/dist/components/avatar/avatar.js";
 import "@shoelace-style/shoelace/dist/components/alert/alert.js";
 import "@shoelace-style/shoelace/dist/components/checkbox/checkbox.js";
