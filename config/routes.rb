@@ -1,17 +1,19 @@
-require 'sidekiq/web'
+require "sidekiq/web"
 
 Rails.application.routes.draw do
-  get 'cookies', to: 'cookies#index'
-  post 'cookies', to: 'cookies#index'
+  get "cookies", to: "cookies#index"
+  post "cookies", to: "cookies#index"
+  get "banner", to: "banner#index"
+  post "banner", to: "banner#index"
   get "checkout", to: "checkouts#show"
   get "billing", to: "billing#show"
 
-  get 'errors/not_found'
-  get 'errors/internal_server_error'
+  get "errors/not_found"
+  get "errors/internal_server_error"
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
-                                    confirmations: 'users/confirmations',
-                                    registrations: 'users/registrations' }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks",
+                                    confirmations: "users/confirmations",
+                                    registrations: "users/registrations" }
 
   resources :deletion_requests, only: [:show] do
     collection do
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     authenticate :user, -> (u) { u.admin? } do
-      mount Sidekiq::Web, at: 'sidekiq', as: :sidekiq
+      mount Sidekiq::Web, at: "sidekiq", as: :sidekiq
       resources :channels do
         post "deactivate", to: "channels#deactivate"
       end
@@ -40,8 +42,7 @@ Rails.application.routes.draw do
     end
     resources :clips
     collection do
-      get 'filters', to: "filters#filters"
-      get 'banner', to: "videos#banner"
+      get "filters", to: "filters#filters"
     end
     resources :comments, module: :videos
     member do
@@ -67,14 +68,14 @@ Rails.application.routes.draw do
 
 
 
-  root 'videos#index'
-  post '/' => 'videos#index'
-  post 'savenew', to: 'users#savenew'
-  get '/watch', to: 'videos#show'
-  get '/privacy', to: 'static_pages#privacy'
-  get '/terms', to: 'static_pages#terms'
-  get '/about', to: 'static_pages#about'
-  get '/contact', to: 'static_pages#contact'
+  root "videos#index"
+  post "/" => "videos#index"
+  post "savenew", to: "users#savenew"
+  get "/watch", to: "videos#show"
+  get "/privacy", to: "static_pages#privacy"
+  get "/terms", to: "static_pages#terms"
+  get "/about", to: "static_pages#about"
+  get "/contact", to: "static_pages#contact"
 
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all

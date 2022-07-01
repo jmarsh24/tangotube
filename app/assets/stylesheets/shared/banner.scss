@@ -48,6 +48,16 @@
     bottom: 16px;
     font-size: var(--sl-font-size-2x-large);
   }
+
+  &__close {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 @media (max-width: 768px) {
