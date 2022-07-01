@@ -1,6 +1,4 @@
-  <% if !user_signed_in? %>
-  <%= turbo_frame_tag "banner" , src: banner_videos_path %>
-<% end %>
+<%= turbo_frame_tag "banner", src: banner_path if session[:banner_closed].nil? %>
 <div class="index-container">
   <%= render "videos/index/filters" %>
   <%= render "videos/index/videos/header" %>
