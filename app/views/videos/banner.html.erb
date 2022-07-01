@@ -1,14 +1,17 @@
 <%= turbo_frame_tag "banner" do %>
   <div class="banner">
     <%= video_tag "Tango Blues.mp4",
-        class: "banner__video",controls: false,
+        class: "banner__video",
+        controls: false,
         type: 'video/mp4',
-        autoplay: :autoplay,
-        loop: :loop,
-        muted: :muted,
+        poster: "video-poster.jpg",
+        preload: true,
+        autoplay: true,
+        loop: true,
+        muted: true,
         controls: false,
         autobuffer: true,
-        poster: "video-poster.jpg" %>
+        playsinline: true %>
     <div class="banner__card">
       <h1>"Experience the new<br/>
         way to watch tango"</h1>
