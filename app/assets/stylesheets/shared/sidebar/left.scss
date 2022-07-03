@@ -4,9 +4,12 @@
   align-items: center;
   margin-right: 10px;
   a {
-    color: var(--sl-color-gray-700);
+    height: 22px;
+  }
+  svg {
+    fill: var(--sl-color-gray-700);
     &:hover {
-      color: var(--sl-color-gray-800);
+      fill: var(--sl-color-gray-800);
     }
   }
 
