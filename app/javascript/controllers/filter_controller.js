@@ -17,9 +17,10 @@ export default class extends Controller {
     const url = `${window.location.pathname}?${this.params}`;
     const filters_url = `${window.location.pathname}videos/filters/?${this.params}`;
 
-    this.getBack();
     this.replaceContents(url);
     this.replaceFilters(filters_url);
+    this.updateURL(url);
+    this.getBack();
   }
 
   get params() {
@@ -102,8 +103,6 @@ export default class extends Controller {
           element
         ).outerHTML;
       });
-
-      history.pushState({}, "", `${window.location.pathname}?${this.params}`);
     }
   }
 
@@ -128,9 +127,11 @@ export default class extends Controller {
           element
         ).outerHTML;
       });
-
-      history.pushState({}, "", `${window.location.pathname}?${this.params}`);
     }
+  }
+
+  updateURL(url) {
+    history.pushState({}, "", url);
   }
 
   getBack() {
