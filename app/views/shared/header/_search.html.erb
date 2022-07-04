@@ -7,8 +7,7 @@
                         "form-url": search_search_suggestions_path,
                         action: "invalid->form#hideValidationMessage:capture"
                          } do |f| %>
-    <% cache "search_bar" do %>
-      <%= f.search_field :query, class: "searchBar",
+    <%= f.search_field :query, class: "searchBar",
                                 value: params[:query],
                                 placeholder: "Search #{number_with_delimiter(@videos_total)} videos...",
                                 autocomplete: "off",
@@ -18,7 +17,6 @@
                                                   input->form#submit",
                                                   "combobox-target": "input",
                                                   "form-target": "input" } %>
-    <% end %>
     <%= f.button fa_icon("search"), name: nil, type: 'submit' %>
     <%= render "shared/header/search/autocomplete", id: id %>
   <% end %>
