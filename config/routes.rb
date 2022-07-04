@@ -35,7 +35,11 @@ Rails.application.routes.draw do
   end
 
   resources :playlists, only: %i[index create]
-  resources :clips, only: %i[index]
+  resources :clips do
+    collection do
+      post :index
+    end
+  end
   resources :videos do
     collection do
       post :index
