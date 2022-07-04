@@ -5,7 +5,7 @@ class ClipsController < ApplicationController
 
   # GET /clips
   def index
-    @pagy, @clips = pagy(Clip.all.includes(:video).order(created_at: :desc), items: 24)
+    @pagy, @clips = pagy(Clip.all.includes(:video).order(created_at: :desc), items: 12)
   end
 
   # GET /clips/1
