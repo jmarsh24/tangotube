@@ -9,7 +9,7 @@
       Filters
     </sl-button>
     <div style="background-color: var(--sl-color-neutral-50);">
-      <%= turbo_frame_tag "filters", src: filters_videos_path %>
+      <%= turbo_frame_tag "filters", src: filters_videos_path(filtering_params) %>
     <sl-divider style="margin:12px 0;"></sl-divider>
     <sl-menu-label>Additional Filters</sl-menu-label>
     <div id="menu-additional-filters">

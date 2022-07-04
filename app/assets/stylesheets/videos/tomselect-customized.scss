@@ -1,0 +1,53 @@
+.ts-wrapper {
+  background-color: var(--sl-color-neutral-0) !important;
+}
+
+.ts-wrapper.single .ts-control:after {
+  border-color: white transparent transparent !important;
+}
+
+.ts-wrapper.plugin-remove_button .item .remove {
+  border-left: unset !important;
+}
+
+input::placeholder {
+  color: white;
+}
+
+.ts-dropdown {
+  border: unset !important;
+  background: var(--sl-color-neutral-0) !important;
+}
+
+.ts-control,
+.ts-control input,
+.ts-dropdown {
+  color: #d2d2d2 !important;
+}
+
+.ts-dropdown .active,
+.ts-dropdown .create:hover,
+.ts-dropdown .option:hover {
+  color: white !important;
+}
+
+.ts-control {
+  background-color: var(--sl-color-neutral-0) !important;
+  border: unset !important;
+}
+
+.ts-dropdown.single,
+.ts-wrapper.single .ts-control {
+  border-color: unset !important;
+}
+
+.ts-control,
+.ts-wrapper.single.input-active .ts-control {
+  background-color: var(--sl-color-neutral-0) !important;
+  background-image: unset !important;
+  box-shadow: unset !important;
+}
+
+.ts-wrapper .option {
+  background-color: var(--sl-color-neutral-0) !important;
+}

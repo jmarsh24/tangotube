@@ -49,5 +49,8 @@ application.register("thumbnail", ThumbnailController);
 import ToggleController from "./toggle_controller.js";
 application.register("toggle", ToggleController);
 
+import TomSelectController from "./tom_select_controller.js";
+application.register("tom-select", TomSelectController);
+
 import YoutubeController from "./youtube_controller.js";
 application.register("youtube", YoutubeController);
