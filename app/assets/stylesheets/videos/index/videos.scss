@@ -10,7 +10,7 @@
     background-color: var(--sl-color-neutral-0);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .video-section {
       &__videos {
         grid-template-columns: none;
@@ -175,29 +175,6 @@
     font-size: 0.9rem;
   }
 }
-
-// .video-event {
-//   font-size: 0.7rem;
-//   text-decoration: none;
-//   margin: 3px 0;
-//   a {
-//     font-size: 0.7rem;
-//     text-decoration: none;
-//     color: var(--sl-color-gray-500);
-
-//     &:hover {
-//       color: var(--sl-color-gray-700);
-//       cursor:
-//     }
-//   }
-
-//   @media (max-width: 768px) {
-//     font-size: 0.9rem;
-//     a {
-//       font-size: 0.9rem;
-//     }
-//   }
-// }
 
 @media (max-width: 768px) {
   .videos {

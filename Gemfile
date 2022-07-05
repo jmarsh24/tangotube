@@ -17,6 +17,7 @@ gem "turbo-rails"
 
 # app specific gems...................................................................
 gem "acts_as_votable"
+gem "acts-as-taggable-on", "~> 9.0"
 gem "ahoy_matey"
 gem "deepl-rb", require: 'deepl'
 gem "devise"
@@ -82,5 +83,7 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
 
 
