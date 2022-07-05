@@ -97,6 +97,10 @@
   flex-direction: column;
   gap: 4px;
   width: 100%;
+
+  &__item {
+    height: 24px;
+  }
 }
 
 .video-title {
