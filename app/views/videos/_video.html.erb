@@ -28,16 +28,16 @@
         </div>
         <% if video.display.any_song_attributes.present? %>
           <div class="video-details__item">
-            <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
+            <sl-tag size="small">
               <%= link_to_song(video.display.el_recodo_attributes,
-                              video.display.external_song_attributes,
-                              video) %>
+                                video.display.external_song_attributes,
+                                video) %>
             </sl-tag>
           </div>
         <% end %>
         <% if video.event.present? %>
           <div class="video-details__item">
-            <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
+            <sl-tag size="small">
               <%= link_to root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } do %>
                 <%= video.event.title.titleize %>
               <% end %>
