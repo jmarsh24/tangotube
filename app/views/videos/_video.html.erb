@@ -26,24 +26,24 @@
                                     video.display.any_song_attributes,
                                     video.youtube_id) %>
         </div>
-        <div class="video-details__item">
-          <% if video.display.any_song_attributes.present? %>
+        <% if video.display.any_song_attributes.present? %>
+          <div class="video-details__item">
             <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
               <%= link_to_song(video.display.el_recodo_attributes,
                               video.display.external_song_attributes,
                               video) %>
             </sl-tag>
-          <% end %>
-        </div>
-        <div class="video-details__item">
-          <% if video.event.present? %>
+          </div>
+        <% end %>
+        <% if video.event.present? %>
+          <div class="video-details__item">
             <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
               <%= link_to root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } do %>
                 <%= video.event.title.titleize %>
               <% end %>
             </sl-tag>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
         <div class="video-channel">
           <%= link_to image_tag(video.channel.thumbnail_url,
                           class: 'channel-icon'),
