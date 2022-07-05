@@ -27,9 +27,6 @@ Rails.application.routes.draw do
       resources :channels do
         post "deactivate", to: "channels#deactivate"
       end
-      resources :videos do
-        post "hide", to: "videos#hide"
-      end
     end
   end
 
@@ -60,6 +57,7 @@ Rails.application.routes.draw do
       patch "complete", to: "videos#complete"
       patch "watchlist", to: "videos#watchlist"
       patch "featured", to: "videos#featured"
+      post "hide", to: "videos#hide"
     end
   end
 
