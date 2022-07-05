@@ -6,6 +6,7 @@
   font-size: 14px;
   background-color: var(--sl-color-neutral-100);
   border-top: 1px solid $border-color;
+  z-index: 2;
 
   a {
     color: var(--sl-color-gray-600);
