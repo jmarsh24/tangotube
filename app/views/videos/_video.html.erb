@@ -2,7 +2,7 @@
   <article class="video-container" id="<%= "video_#{video.youtube_id}" %>">
     <% if current_user.try(:admin?) && !video.hidden? %>
       <div class="hide-button">
-        <form action="<%=  video_hide_path(video.youtube_id) %>" method="post">
+        <form action="<%=  hide_video_path(video.youtube_id) %>" method="post">
           <sl-button type="submit"
                 variant="danger"
                 outline
