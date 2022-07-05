@@ -26,7 +26,7 @@
                                     video.display.any_song_attributes,
                                     video.youtube_id) %>
         </div>
-        <div>
+        <div class="video-details__item">
           <% if video.display.any_song_attributes.present? %>
             <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
               <%= link_to_song(video.display.el_recodo_attributes,
@@ -35,7 +35,7 @@
             </sl-tag>
           <% end %>
         </div>
-        <div>
+        <div class="video-details__item">
           <% if video.event.present? %>
             <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
               <%= link_to root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } do %>
