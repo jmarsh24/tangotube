@@ -6,8 +6,8 @@ a {
 
 a {
   text-decoration: none;
-  color: rgb(107, 114, 128);
+  color: var(--sl-color-gray-600);
   &:hover {
-    color: $link-color;
+    color: var(--sl-color-gray-800);
   }
 }
