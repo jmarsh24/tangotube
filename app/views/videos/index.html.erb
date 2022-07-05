@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">
+  <div class="next-link" id="next_link">
     <% if @pagy.next %>
       <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
         <button type="submit" data-controller="autoclick"></button>

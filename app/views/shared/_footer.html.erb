@@ -1,19 +1,18 @@
 <footer class="footer">
-  <nav class="footer-nav">
-    <ul class="primary-links">
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Contact", contact_path %></li>
-      <li><%= link_to "Billing", billing_path %></li>
-      <li><%= button_to "Become A Supporter", checkout_path, method: :get, class: "button button--submit" %></li>
-    </ul>
-    <ul class="secondary-links">
-      <li><%= link_to "Privacy Policy", privacy_path, class: "link-secondary" %></li>
-      <li><%= link_to "Terms of Service", terms_path, class: "link-secondary" %></li>
-      <li><%= link_to "G​oogle Privacy Policy", "http://www.google.com/policies/privacy", class: "link-secondary" %></li>
-    </ul>
-    <div class="footerTitle">
-      <span style="font-weight: 600">TangoTubeTV</span><br />
-      <span style="font-size: 10px;">Powered by Youtube API</span>
+  <div class="footer__inner">
+    <div class="footer__section">
+      <span>&copy; TangoTube</span>
+      <%= link_to "Privacy", privacy_path, class: "link-secondary" %>
+      <span aria-hidden="true">·</span>
+      <%= link_to "Terms", terms_path, class: "link-secondary" %>
+      <span aria-hidden="true">·</span>
+      <%= link_to "G​oogle Privacy Policy", "http://www.google.com/policies/privacy", class: "link-secondary" %>
     </div>
-  </nav>
+    <div class="footer__section">
+      <%= link_to "About", about_path %>
+      <%= link_to "Contact", contact_path %>
+      <%= link_to "Billing", billing_path %>
+      <sl-button  href="%<= checkout_path %>" variant="danger" size="small" outline pill>Become A Supporter</sl-button>
+    </div>
+  </div>
 </footer>
