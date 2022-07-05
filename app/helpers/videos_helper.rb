@@ -58,7 +58,7 @@ module VideosHelper
   end
 
   def formatted_metadata(video)
-    "#{formatted_performance_date(video.performance_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes #{performance_number(video)}"
+    "#{formatted_performance_date(video.performance_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes"
   end
 
   def performance_number(video)
