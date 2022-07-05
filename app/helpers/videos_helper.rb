@@ -63,7 +63,7 @@ module VideosHelper
 
   def performance_number(video)
     if video.performance_number.present? & video.performance_total_number.present?
-      " • #{video.performance_number} / #{video.performance_total_number}"
+      "#{video.performance_number} / #{video.performance_total_number}"
     end
   end
 
