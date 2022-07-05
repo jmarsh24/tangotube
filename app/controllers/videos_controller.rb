@@ -3,7 +3,7 @@ class VideosController < ApplicationController
 
   before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete featured]
   before_action :current_search, only: %i[index]
-  before_action :set_video, only: %i[show edit update destroy upvote downvote bookmark watchlist complete featured]
+  before_action :set_video, only: %i[show edit update destroy hide upvote downvote bookmark watchlist complete featured]
   after_action :track_action
 
   helper_method :sorting_params, :filtering_params
@@ -185,6 +185,13 @@ class VideosController < ApplicationController
                   "Video Sucessfully Added: The video must be approved before the videos are added"
   end
 
+  def hide
+    @video.hidden = true
+    @video.save
+    @video.reindex
+    render turbo_stream: turbo_stream.remove("video_#{@video.youtube_id}")
+  end
+
   def upvote
     if current_user.voted_up_on? @video, vote_scope: "like"
       @video.unvote_by current_user, vote_scope: "like"
@@ -248,6 +255,7 @@ class VideosController < ApplicationController
   def set_video
     @video = Video.includes(:song, :leader, :follower, :event, :channel).find_by(youtube_id: show_params[:v]) if show_params[:v]
     @video = Video.includes(:song, :leader, :follower, :event, :channel).find_by(youtube_id: show_params[:id]) if show_params[:id]
+    @video = Video.find_by(youtube_id: show_params[:video_id]) if show_params[:video_id]
   end
 
   def set_recommended_videos
@@ -382,7 +390,7 @@ class VideosController < ApplicationController
   end
 
   def show_params
-    params.permit(:v, :id)
+    params.permit(:v, :id, :video_id)
   end
 
   def filtering_for_dancer?

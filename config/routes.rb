@@ -27,6 +27,9 @@ Rails.application.routes.draw do
       resources :channels do
         post "deactivate", to: "channels#deactivate"
       end
+      resources :videos do
+        post "hide", to: "videos#hide"
+      end
     end
   end
 
@@ -41,6 +44,7 @@ Rails.application.routes.draw do
     end
   end
   resources :videos do
+
     collection do
       post :index
     end

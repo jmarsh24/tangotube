@@ -64,6 +64,16 @@
   font-size: 0.7rem;
 }
 
+.hide-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  font-size: 0.7rem;
+  z-index: 1;
+}
+
 .performance-number {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.85);
