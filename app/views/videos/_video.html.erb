@@ -2,58 +2,61 @@
   <article class="video-container">
     <%= link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top", id: "video-link" } do %>
       <div class="thumbnail"
-      data-duration= "<%= hd_duration_data(video) %>"
-      <% if video.performance_number.present? && video.performance_total_number.present? %>
-        data-performance-number= "<%= performance_number(video) %>" >
-      <% end %>
-      <%= image_tag("https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg",
+        data-duration= "<%= hd_duration_data(video) %>"
+      >
+        <% if video.performance_number.present? && video.performance_total_number.present? %>
+          <div class="performance-number">
+            <%= performance_number(video) %>
+          </div>
+        <% end %>
+        <%= image_tag("https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg",
            "data-controller": "thumbnail",
            "data-action": "load->thumbnail#check",
           "data-thumbnail-target": "image",
            "data-thumbnail-url-value": "https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg",
            class: "thumbnail-image")
         %>
-    </div>
-  <% end %>
-  <div class="video-bottom-section">
-    <div class="video-details">
-      <div class="video-title">
-        <%= link_to_primary_title(video.display.dancer_names,
+      </div>
+    <% end %>
+    <div class="video-bottom-section">
+      <div class="video-details">
+        <div class="video-title">
+          <%= link_to_primary_title(video.display.dancer_names,
                                     video.title,
                                     video.display.any_song_attributes,
                                     video.youtube_id) %>
-      </div>
-      <div>
-        <% if video.display.any_song_attributes.present? %>
-          <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
-            <%= link_to_song(video.display.el_recodo_attributes,
+        </div>
+        <div>
+          <% if video.display.any_song_attributes.present? %>
+            <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
+              <%= link_to_song(video.display.el_recodo_attributes,
                               video.display.external_song_attributes,
                               video) %>
-          </sl-tag>
-        <% end %>
-      </div>
-      <div>
-        <% if video.event.present? %>
-          <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
-            <%= link_to root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } do %>
-              <%= video.event.title.titleize %>
-            <% end %>
-          </sl-tag>
-        <% end %>
-      </div>
-      <div class="video-channel">
-        <%= link_to image_tag(video.channel.thumbnail_url,
+            </sl-tag>
+          <% end %>
+        </div>
+        <div>
+          <% if video.event.present? %>
+            <sl-tag size="small" style="overflow: hidden; max-width: 75ch;">
+              <%= link_to root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } do %>
+                <%= video.event.title.titleize %>
+              <% end %>
+            </sl-tag>
+          <% end %>
+        </div>
+        <div class="video-channel">
+          <%= link_to image_tag(video.channel.thumbnail_url,
                           class: 'channel-icon'),
                           root_path(channel: video.channel.channel_id),
                           { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present? %>
-        <%= link_to channel_title(video),
+          <%= link_to channel_title(video),
                           root_path(channel: video.channel.channel_id),
                           { class: "channel-title", 'data-turbo-frame': "_top" } if video.channel.title.present? %>
-      </div>
-      <div class="video-metadata">
-        <%= formatted_metadata(video) %>
+        </div>
+        <div class="video-metadata">
+          <%= formatted_metadata(video) %>
+        </div>
       </div>
     </div>
-  </div>
-</article>
+  </article>
 <% end %>
