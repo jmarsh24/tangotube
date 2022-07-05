@@ -1,5 +1,18 @@
 <% cache_if video.present? && !video.hidden?, ["video", video.youtube_id, video.updated_at] do %>
   <article class="video-container" id="<%= "video_#{video.youtube_id}" %>">
+    <% if current_user.try(:admin?) && !video.hidden? %>
+      <div class="hide-button">
+        <form action="<%=  video_hide_path(video.youtube_id) %>" method="post">
+          <sl-button type="submit"
+                variant="danger"
+                outline
+                size="small"
+                pill>
+            Hide
+          </sl-button>
+        </form>
+      </div>
+    <% end %>
     <%= link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top", id: "video-link" } do %>
       <div class="thumbnail"
         data-duration= "<%= hd_duration_data(video) %>"
@@ -7,19 +20,6 @@
         <% if video.performance_number.present? && video.performance_total_number.present? %>
           <div class="performance-number">
             <%= performance_number(video) %>
-          </div>
-        <% end %>
-        <% if current_user.try(:admin?) && !video.hidden? %>
-          <div class="hide-button">
-            <form action="<%=  video_hide_path(video.youtube_id) %>" method="post">
-              <sl-button type="submit"
-                variant="danger"
-                outline
-                size="small"
-                pill>
-                Hide
-              </sl-button>
-            </form>
           </div>
         <% end %>
         <%= image_tag("https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg",
