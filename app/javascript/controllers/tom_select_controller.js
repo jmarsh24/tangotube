@@ -10,7 +10,6 @@ export default class extends Controller {
       create: false,
       maxItems: 1,
       persist: false,
-      allowEmptyOption: true,
       sortField: [{ field: "$order" }],
     });
   }
