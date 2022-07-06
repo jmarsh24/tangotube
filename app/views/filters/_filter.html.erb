@@ -2,12 +2,15 @@
 		 	style="width: <%= width %>"
       class="filter"
   >
+  <div class="label" style="font-size: 12px; padding-left: 4px;">
+    <%= title.to_s.titleize %>
+  </div>
   <%= select_tag title.to_s,
 		options_for_select(options, params[title].presence),
-						{	include_blank: true,
+						{	include_blank: "Any",
 							multiple: false,
 							autocomplete: "off",
-							placeholder: "Select a #{title.to_s}...",
+							placeholder: "Search for #{title.to_s}...",
               id: id,
 							data: { controller: "tom-select",
 											action: "filter#filter",
