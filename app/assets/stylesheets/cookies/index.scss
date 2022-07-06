@@ -2,8 +2,8 @@
   position: fixed;
   z-index: 2;
   left: 0;
-  bottom: 48px;
   right: 0;
+  bottom: 48px;
   word-break: break-word;
   border-radius: 0.5rem;
   background: var(--sl-color-neutral-50);
@@ -24,11 +24,11 @@
   &__buttons {
     display: flex;
   }
+}
 
-  @media (max-width: 768px) {
-    .cookies-modal {
-      bottom: 0;
-    }
+@media (max-width: 768px) {
+  .cookies-modal {
+    bottom: 0px;
     &__inner {
       max-width: none;
       padding: 24px 32px;
