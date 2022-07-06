@@ -5,11 +5,12 @@ import TomSelect from "tom-select";
 export default class extends Controller {
   connect() {
     this.control = new TomSelect(this.element, {
-      plugins: ["remove_button", "input_autogrow", "no_backspace_delete"],
+      plugins: ["clear_button"],
       maxOptions: 100,
       create: false,
       maxItems: 1,
       persist: false,
+      allowEmptyOption: true,
       sortField: [{ field: "$order" }],
     });
   }
