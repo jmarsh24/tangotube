@@ -115,17 +115,17 @@ export default class extends Controller {
       var parsedData = parser.parseFromString(data, "text/html");
 
       const replaceContainers = [
-        "genre-filter",
-        "leader-filter",
-        "follower-filter",
-        "orchestra-filter",
-        "year-filter",
+        "#genre-filter",
+        "#leader-filter",
+        "#follower-filter",
+        "#orchestra-filter",
+        "#year-filter",
       ];
 
       replaceContainers.forEach((element) => {
-        document.getElementsById(element).outerHTML = parsedData.getElementById(
-          element
-        ).outerHTML;
+        document.querySelectorAll(element).forEach((e) => {
+          e.outerHTML = parsedData.querySelector(element).outerHTML;
+        });
       });
     }
   }
