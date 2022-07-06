@@ -21,8 +21,8 @@
         <%= render "layouts/flash" %>
       </div>
       <%= yield %>
-      <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
     </div>
+    <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
     <%= render "shared/footer" %>
   </body>
 </html>

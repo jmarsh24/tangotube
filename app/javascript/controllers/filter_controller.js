@@ -123,7 +123,7 @@ export default class extends Controller {
       ];
 
       replaceContainers.forEach((element) => {
-        document.getElementById(element).outerHTML = parsedData.getElementById(
+        document.getElementsById(element).outerHTML = parsedData.getElementById(
           element
         ).outerHTML;
       });
