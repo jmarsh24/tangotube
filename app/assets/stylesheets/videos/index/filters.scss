@@ -12,7 +12,9 @@
 }
 
 #mobile-filters {
-  display: hidden;
+  .filters {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
