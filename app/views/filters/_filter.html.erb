@@ -7,7 +7,7 @@
   </div>
   <%= select_tag title.to_s,
 		options_for_select(options, params[title].presence),
-						{	include_blank: "Any",
+						{	include_blank: true,
 							multiple: false,
 							autocomplete: "off",
 							placeholder: "Search for #{title.to_s}...",
