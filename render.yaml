@@ -28,7 +28,7 @@ services:
   - type: worker
     name: tangotube-sidekiq
     region: frankfurt
-    plan: standard
+    plan: starter-plus
     env: ruby
     buildCommand: ./bin/render-build.sh
     startCommand: export PATH="$PATH:$HOME/project/src/yt-dlp"; bundle exec sidekiq -e production
