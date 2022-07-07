@@ -3,11 +3,6 @@
   gap: 16px;
   padding-top: 10px;
   align-items: flex-end;
-  overflow-x: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  scrollbar-width: none;
 }
 
 .filters {
@@ -16,17 +11,13 @@
   gap: 8px;
 }
 
-#desktop-filters {
-  width: calc(100% - 56px);
-}
-
 #mobile-filters {
   .filters {
     display: none;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
   .filters-section {
     padding-top: 16px;
     padding-left: 16px;
@@ -83,7 +74,4 @@
     // color: var(--sl-color-gray-900);
     background-color: var(--sl-color-gray-200);
   }
-}
-
-.filter {
 }
