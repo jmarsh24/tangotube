@@ -1,16 +1,14 @@
-#tooltip {
-  background: #f2f2f2;
-  color: $primary-font-color;
+.tooltip {
+  background: var(--sl-color-neutral-50);
+  color: var(--sl-color-neutral-1000);
+  border: 1px solid var(--sl-color-gray-200);
   font-weight: bold;
   padding: 8px 12px;
   font-size: 17px;
   border-radius: 4px;
   display: none;
-
-  a {
-    color: $link-color;
-  }
 }
+
 #arrow,
 #arrow::before {
   position: absolute;
