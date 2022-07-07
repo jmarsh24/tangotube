@@ -39,7 +39,7 @@
     data-clipboard-video-id="<%= @video.youtube_id %>"
     data-clipboard-root-url="<%= @root_url %>"
     >
-    <div class="youtube-controls">
+    <div class="youtube-controls" data-controller="scroll">
       <%= render "videos/show/vote" %>
       <sl-dropdown>
         <div slot="trigger" class="button--clip">
