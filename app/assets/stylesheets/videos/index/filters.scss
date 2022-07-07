@@ -3,12 +3,21 @@
   gap: 16px;
   padding-top: 10px;
   align-items: flex-end;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
 }
 
 .filters {
   display: flex;
   flex-direction: row;
   gap: 8px;
+}
+
+#desktop-filters {
+  width: calc(100% - 56px);
 }
 
 #mobile-filters {
