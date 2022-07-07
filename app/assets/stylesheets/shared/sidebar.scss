@@ -32,6 +32,11 @@ sl-divider[vertical] {
       color: var(--sl-color-gray-800);
     }
   }
-  nav {
+  svg {
+    fill: var(--sl-color-gray-700);
+
+    &:hover {
+      fill: var(--sl-color-gray-800);
+    }
   }
 }
