@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_05_111220) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_07_131803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -91,7 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_111220) do
 
   create_table "channels", force: :cascade do |t|
     t.string "title"
-    t.string "channel_id"
+    t.string "channel_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "thumbnail_url"
@@ -102,6 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_111220) do
     t.boolean "reviewed", default: false
     t.integer "videos_count", default: 0, null: false
     t.boolean "active", default: true
+    t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
     t.index ["title"], name: "index_channels_on_title"
   end
 
