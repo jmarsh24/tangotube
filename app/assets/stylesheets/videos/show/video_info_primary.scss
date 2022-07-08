@@ -16,16 +16,6 @@
     margin: 0;
     font-weight: 400;
   }
-
-  a {
-    font-size: 1rem;
-    text-decoration: none;
-    color: $show-primary-song;
-
-    &:hover {
-      color: $show-primary-song-hover;
-    }
-  }
 }
 
 .show-channel-icon {
@@ -65,15 +55,6 @@
   font-size: 1rem;
   text-decoration: none;
   margin: 3px 0;
-  a {
-    font-size: 1rem;
-    text-decoration: none;
-    color: $show-primary-video-event;
-
-    &:hover {
-      color: $show-primary-video-event-hover;
-    }
-  }
 }
 
 .share-container {

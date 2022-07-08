@@ -5,7 +5,10 @@ class ClipsController < ApplicationController
 
   # GET /clips
   def index
-    @pagy, @clips = pagy(Clip.all.includes(:video).order(created_at: :desc), items: 12)
+    clips = Clip.all.includes(:video)
+    clips = clips.tagged_with(params[:tag]) if params[:tag].present?
+    clips = clips.order(created_at: :desc)
+    @pagy, @clips = pagy(clips, items: 12)
   end
 
   # GET /clips/1
@@ -71,6 +74,6 @@ class ClipsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def clip_params
-      params.require(:clip).permit(:start_seconds, :end_seconds, :title, :playback_rate, :tags, :user_id, :video_id)
+      params.require(:clip).permit(:start_seconds, :end_seconds, :title, :playback_rate, :user_id, :video_id, :tag_list)
     end
 end

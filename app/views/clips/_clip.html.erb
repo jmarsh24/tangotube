@@ -13,17 +13,15 @@
     <%= "&" if clip.video.leader.present? && clip.video.follower.present? %>
     <%= clip.video.follower.full_name if clip.video.follower.present? %>
     <div class="row" style="gap: 5px;">
-      <% if clip.tags.present? %>
-        <% clip.tags.split(",").each do |tag| %>
-          <sl-tag variant="neutral" size="small"><%= tag.titleize %></sl-tag>
+      <% if clip.tag_list.present? %>
+        <% clip.tag_list.each do |tag| %>
+          <sl-tag variant="neutral" size="small">
+            <%= link_to clips_path(tag: tag.parameterize) do %>
+              <%= tag.titleize %>
+            <% end %>
+          </sl-tag>
         <% end %>
       <% end %>
-    </div>
-    <div class="row" style="align-items: center;">
-      <%#= image_tag avatar_url_for(clip.user), size: "30x30", style: "border-radius: 50%;" %><%#= clip.user.name %>
-    </div>
-    <%#= link_to "Source Video", "#{watch_path}?v=#{clip.video.youtube_id}" %>
-    <div class="row">
     </div>
   </div>
 </div>
