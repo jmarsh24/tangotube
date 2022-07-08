@@ -24,7 +24,7 @@
       <% end %>
     </div>
     <% if current_user == clip.user %>
-      <%= link_to "Edit Clip", edit_clip_path(clip) %>
+      <%= link_to "Edit Clip", edit_video_clip_path(clip.video, clip) %>
     <% end %>
   </div>
 </div>
