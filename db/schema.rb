@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_07_131803) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_08_093031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -111,7 +111,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_07_131803) do
     t.integer "end_seconds", null: false
     t.text "title"
     t.decimal "playback_rate", precision: 5, scale: 3, default: "1.0"
-    t.string "tags"
     t.bigint "user_id", null: false
     t.bigint "video_id", null: false
     t.datetime "created_at", null: false

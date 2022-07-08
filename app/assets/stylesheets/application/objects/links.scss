@@ -9,5 +9,6 @@ a {
   color: var(--sl-color-gray-600);
   &:hover {
     color: var(--sl-color-gray-800);
+    cursor: pointer;
   }
 }

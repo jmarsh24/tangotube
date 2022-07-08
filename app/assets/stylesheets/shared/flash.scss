@@ -1,8 +1,8 @@
 .flash {
+  position: fixed;
+  top: 56px;
   display: flex;
   justify-content: space-between;
-  position: absolute;
-  top: 0;
   right: 0;
   z-index: var(--sl-z-index-dialog);
 }

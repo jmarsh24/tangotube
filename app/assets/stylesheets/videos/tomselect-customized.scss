@@ -74,3 +74,9 @@ input::placeholder {
   background-color: var(--sl-color-neutral-100) !important;
   border-radius: 4px !important;
 }
+
+.ts-dropdown .active,
+.ts-dropdown .create:hover,
+.ts-dropdown .option:hover {
+  background-color: var(--sl-color-red-400);
+}
