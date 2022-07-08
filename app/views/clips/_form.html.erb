@@ -1,13 +1,11 @@
+<% start_seconds = local_assigns[:start_seconds] %>
+<% end_seconds = local_assigns[:end_seconds] %>
+<% playback_rate = local_assigns[:playback_rate] %>
 <%= sl_form_with(model: [@video, clip]) do |form| %>
   <div style="display: flex; flex-direction: column; gap: 10px; background-color: var(--sl-color-neutral-50); padding: 10px; overflow: visible;">
     <% if clip.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(clip.errors.count, "error") %> prohibited this clip from being saved:</h2>
-        <ul>
-          <% clip.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
+      <div class="error-message">
+        <%= clip.errors.full_messages.to_sentence.capitalize %>
       </div>
     <% end %>
     <%= form.text_field :title, placeholder: "Title", style: 'width: 100%;' %>
@@ -27,7 +25,7 @@
     <div class="row" style="align-items: center; gap: 10px;">
       <%= form.text_field :start_seconds,
           label: "Start Time",
-          value: @start_value,
+          value: clip.start_seconds || start_seconds,
           placeholder: "0s",
           style: "width: 100px;",
           data: { action: "sl-input->clipboard#changeValue
@@ -37,7 +35,7 @@
       <span class="spacer">-</span>
       <%= form.text_field :end_seconds,
           label: "Start Time",
-          value: @end_value,
+          value: clip.end_seconds || end_seconds ,
           placeholder: "0s",
           style: "width: 100px;",
           data: { action: "sl-input->clipboard#changeValue
@@ -54,7 +52,7 @@
                                           "1.75x" => "1.75",
                                           "2x" => "2.0" },
                                           {},
-                                          { value: printf('%.2f', @playback_rate.to_i),
+                                          { value: printf('%.2f', clip.playback_rate.to_i || playback_rate ),
                                             label: "Rate",
                                             hoist: "",
                                             data: { action: "sl-change->clipboard#changeValue sl-change->youtube#updatePlaybackRate",
