@@ -3,3 +3,11 @@ form {
   -moz-appearance: none;
   appearance: none;
 }
+
+.error-message {
+  width: 100%;
+  color: var(--sl-color-red-400);
+  background-color: var(--sl-color-neutral-0);
+  padding: var(--sl-spacing-x-small);
+  border-radius: var(--sl-border-radius-medium);
+}

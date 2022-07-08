@@ -11,7 +11,6 @@ export default class extends Controller {
     this.control = new TomSelect(this.element, {
       plugins: ["clear_button"],
       create: this.createValue,
-      maxItems: 1,
       persist: false,
       sortField: [{ field: "$order" }],
     });
