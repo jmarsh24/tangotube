@@ -2,6 +2,6 @@
 <%= render "form", clip: @clip %>
 <br>
 <div>
-  <%= link_to "Show this clip", [@video, @clip] %> |
-  <%= link_to "Back to clips", video_clips_path(@video) %>
+  <%= link_to "Show this clip", watch_path(v: @clip.video.youtube_id, start: @clip.start_seconds, end: @clip.end_seconds, speed: @clip.playback_rate) %> |
+  <%= link_to "Back to clips", clips_path %>
 </div>

@@ -23,5 +23,8 @@
         <% end %>
       <% end %>
     </div>
+    <% if current_user == clip.user %>
+      <%= link_to "Edit Clip", edit_clip_path(clip) %>
+    <% end %>
   </div>
 </div>
