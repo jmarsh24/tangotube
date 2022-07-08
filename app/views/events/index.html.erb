@@ -1,22 +1,14 @@
-<div class="channels-index-container">
-  <h2>All events</h2>
-  <%= form_with model: Event.new, local: true, class: 'events-form' do |f| %>
-    <%= f.label :title, "Event Title" %>
-    <%= f.text_field :title, placeholder: 'insert event title here...' %>
-    <%= f.label :country, "Country" %>
-    <%= f.text_field :country, placeholder: 'Insert Country here' %>
-    <%= f.label :city, "City" %>
-    <%= f.text_field :city, placeholder: 'Insert City here' %>
-    <%= f.submit "Add New event" %>
-  <% end %>
+<p style="color: green"><%= notice %></p>
+
+<h1>Events</h1>
+
+<div id="events">
   <% @events.each do |event| %>
-    <div class="channels-index-row">
-      <div class="channels-index-item" id="title">
-        <%= event.title %>
-      </div>
-      <div class="channels-index-item" id="location">
-        <%= "#{event.city}, #{event.country}"  %>
-      </div>
-    </div>
+    <%= render event %>
+    <p>
+      <%= link_to "Show this event", event %>
+    </p>
   <% end %>
 </div>
+
+<%= link_to "New event", new_event_path %>

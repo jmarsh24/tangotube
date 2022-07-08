@@ -7,7 +7,4 @@
       <% end %>
     </h3>
   <% end %>
-  <% if @videos.suggestions.any? %>
-    Did you mean <%= link_to @videos.suggestions.first.titleize, root_path(query: @videos.suggestions.first) %>
-  <% end %>
 </div>

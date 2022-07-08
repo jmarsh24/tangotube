@@ -67,10 +67,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :leaders, only: %i[index create]
-  resources :followers, only: %i[index create]
-  resources :events, only: %i[index create]
-  resources :songs, only: :index
+  resources :leaders
+  resources :followers
+  resources :events
+  resources :songs
 
 
 

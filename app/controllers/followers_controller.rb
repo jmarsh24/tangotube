@@ -3,10 +3,8 @@ class FollowersController < ApplicationController
     respond_to do
       |format|
         format.html { @followers = Follower.all.order(:id)}
-        format.json { render json: Follower.full_name_search(params[:q])
-                                          .distinct
-                                          .order(:name)
-                                          .pluck(:name, :id)}
+        format.json do render json: Follower.search(params[:q], order: :name).map { |follower| { text: follower.name, value: follower.id} }
+      end
     end
   end
 

@@ -1,12 +1,8 @@
-<div class="attribute-row">
-  <div class="attribute-label">
-    <%= f.label id %>
-  </div>
-  <div class="attribute-value">
-    <%= f.select params_name, [],
-                              {},
-                              { data: { controller: "slimselect-edit",
-                                        'slimselect-url': url,
-                                        'slimselect-data-value': value }, id: id, class: 'select-edit' } %>
-  </div>
-</div>
+<%= f.select params_name, [value], {},
+              placeholder: 'Type to search',
+              id: id,
+              class: 'select-edit',
+              data: {
+                controller: 'tom-select-edit',
+                tom_select_edit_url_value: url
+              } %>

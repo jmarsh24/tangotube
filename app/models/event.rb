@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  searchkick word_middle: [:title, :city, :country]
+
   validates :title, presence: true, uniqueness: true
   validates :city, presence: true
   validates :country, presence: true
@@ -38,6 +40,14 @@ class Event < ApplicationRecord
     search_title.split.size < 2 || videos_with_event_title_match.empty?
   end
 
+  def search_data
+    {
+      title:,
+      city:,
+      country:
+    }
+  end
+
   class << self
     def title_search(query)
       words = query.to_s.strip.split
@@ -57,3 +67,4 @@ class Event < ApplicationRecord
     end
   end
 end
+
