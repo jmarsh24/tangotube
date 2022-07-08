@@ -10,9 +10,8 @@ export default class extends Controller {
   connect() {
     this.control = new TomSelect(this.element, {
       plugins: ["clear_button"],
-      maxOptions: 100,
       create: this.createValue,
-      // maxItems: 1,
+      maxItems: 1,
       persist: false,
       sortField: [{ field: "$order" }],
     });

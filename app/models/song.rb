@@ -1,5 +1,5 @@
 class Song < ApplicationRecord
-  searchkick
+  searchkick word_middle: [:title, :artist]
 
   validates :genre, presence: true
   validates :title, presence: true
@@ -25,6 +25,13 @@ class Song < ApplicationRecord
     update(lyrics_en: translation.text)
   end
 
+  def search_data
+    {
+      title:,
+      artist:
+    }
+  end
+
   class << self
     def full_title_search(query)
       words = query.to_s.strip.split
@@ -44,10 +51,5 @@ class Song < ApplicationRecord
     def missing_english_translation
       where.not(lyrics: nil).where(lyrics_en: nil)
     end
-  end
-
-  def search_data
-    { full_title:
-    }
   end
 end

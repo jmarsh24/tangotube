@@ -3,7 +3,7 @@ class Follower < ApplicationRecord
   include Reviewable
   include Normalizeable
 
-  searchkick
+  searchkick word_middle: [:name]
 
   validates :name, presence: true, uniqueness: true
 
@@ -25,6 +25,6 @@ class Follower < ApplicationRecord
   end
 
   def search_data
-    { full_name: }
+    { name: }
   end
 end

@@ -3,7 +3,7 @@ class Leader < ApplicationRecord
   include Reviewable
   include Normalizeable
 
-  searchkick
+  searchkick word_middle: [:name]
 
   validates :name, presence: true, uniqueness: true
 
@@ -22,7 +22,7 @@ class Leader < ApplicationRecord
 
   def search_data
     {
-      full_name:
+      name:
     }
   end
 end

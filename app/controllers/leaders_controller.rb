@@ -3,10 +3,10 @@ class LeadersController < ApplicationController
     respond_to do
       |format|
         format.html { @leaders = Leader.all.order(:id)}
-        format.json { render json: Leader.full_name_search(params[:q])
-                                          .distinct
-                                          .order(:name)
-                                          .pluck(:name, :id)}
+        format.json do
+          render json:
+          Leader.search(params[:q], order: :name).map { |leader| { text: leader.name, value: leader.id } }
+      end
     end
   end
 

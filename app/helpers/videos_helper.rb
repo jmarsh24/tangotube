@@ -23,15 +23,15 @@ module VideosHelper
             { "data-turbo-frame": "_top" }
   end
 
-  def link_to_song_id(song_attributes, video)
+  def link_to_song_slug(song_attributes, video)
     link_to song_attributes,
-            root_path(song_id: video.song_id),
+            root_path(song: video.song.slug),
             { "data-turbo-frame": "_top" }
   end
 
   def link_to_song(el_recodo_attributes, external_song_attributes, video)
     if el_recodo_attributes.present?
-      link_to_song_id(el_recodo_attributes, video)
+      link_to_song_slug(el_recodo_attributes, video)
     elsif external_song_attributes.present?
       link_to_query(external_song_attributes)
     end
@@ -106,7 +106,7 @@ module VideosHelper
   def cache_params
     params.permit(
       "channel",
-      "event_id",
+      "event",
       "follower",
       "genre",
       "hd",
@@ -115,7 +115,7 @@ module VideosHelper
       "orchestra",
       "popularity",
       "query",
-      "song_id",
+      "song",
       "upload_date",
       "view_count",
       "year",
@@ -129,7 +129,7 @@ module VideosHelper
   def video_query_params
     params.permit(
       "channel",
-      "event_id",
+      "event",
       "follower",
       "genre",
       "hd",
@@ -138,7 +138,7 @@ module VideosHelper
       "orchestra",
       "popularity",
       "query",
-      "song_id",
+      "song",
       "upload_date",
       "view_count",
       "year",

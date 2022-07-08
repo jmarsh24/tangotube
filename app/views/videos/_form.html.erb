@@ -8,13 +8,13 @@
                             id: 'leader',
                             f: f,
                             url: '/leaders.json',
-                            value: video.leader.try(:name) } %>
+                            value: [video&.leader&.name, video&.leader&.id] } %>
     <%= render partial: "videos/edit/video_info_detail_item_edit",
                   locals: { params_name: :follower_id,
                             id: 'follower',
                             f: f,
                             url: '/followers.json',
-                            value: video.follower.try(:name) } %>
+                            value: [video&.follower&.name, video&.leader&.id] } %>
     <div class="detail-section-label">
       <h4>Event Info</h4>
     </div>
@@ -23,7 +23,7 @@
                             id: 'event',
                             f: f,
                             url: '/events.json',
-                            value: video.event.try(:title) } %>
+                            value: [video&.event&.title, video&.event&.id] } %>
     <div class="attribute-row">
       <div class="attribute-label">
         <label>
@@ -31,7 +31,7 @@
         </label>
       </div>
       <div class="attribute-value" style="display: flex; flex-direction: column; gap: 10px;">
-        <%= f.date_select(:performance_date, { start_year: 1980, end_year: Time.now.year, order: [:month, :day, :year], prompt: { day: 'Select Day', month: 'Select Month', year: 'Select Year' } }, selected: video.performance_date ) %>
+        <%= f.date_field(:performance_date, selected: video.performance_date ) %>
       </div>
     </div>
     <div class="attribute-row">
@@ -41,7 +41,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.select(:performance_number, (1..8), { value: video.performance_number, prompt: "Select Performance Number" }) %>
+        <%= f.select(:performance_number, (1..8), { value: video.performance_number, prompt: "Select Performance Number" }, "data-controller": "tom-select") %>
       </div>
     </div>
     <div class="attribute-row">
@@ -51,7 +51,7 @@
         </label>
       </div>
       <div class="attribute-value">
-        <%= f.select(:performance_total_number, (1..8), { value: video.performance_total_number, prompt: "Select Total Number of Performance" }) %>
+        <%= f.select(:performance_total_number, (1..8), { value: video.performance_total_number, prompt: "Select Total Number of Performance" }, "data-controller": "tom-select") %>
       </div>
     </div>
     <h4>Music</h4>
@@ -61,7 +61,7 @@
                                   id: 'song',
                                   f: f,
                                   url: '/songs.json',
-                                  value: video.song.try(:title) } %>
+                                  value: [video&.song&.full_title, video&.song&.id] } %>
   <div>
     <%= f.label 'hidden?' %>
     <%= f.check_box :hidden, {}, "true", "false" %>

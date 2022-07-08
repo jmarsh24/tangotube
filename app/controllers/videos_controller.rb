@@ -47,7 +47,6 @@ class VideosController < ApplicationController
                                           where: filters.merge(hidden: false),
                                           order:,
                                           includes: [:song, :leader, :follower, :event, :channel],
-                                          fields: ["title^10", "leader^10", "follower^10", "song_full_title^5", "song_artist^5"],
                                           boost_by: [:popularity],
                                           misspellings: { edit_distance: 5  },
                                           body_options: { track_total_hits: true  },
@@ -55,8 +54,7 @@ class VideosController < ApplicationController
                                           boost_where: {  watched_by: user_id,
                                                           has_follower: true,
                                                           has_leader: true,
-                                                          has_song: true},
-                                          suggest: true
+                                                          has_song: true}
                                           )
     else
       videos = Video.pagy_search("*",
@@ -352,9 +350,9 @@ class VideosController < ApplicationController
       :channel,
       :genre,
       :orchestra,
-      :song_id,
+      :song,
       :hd,
-      :event_id,
+      :event,
       :year,
       :watched,
       :liked,

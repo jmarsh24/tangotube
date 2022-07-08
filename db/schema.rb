@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_08_093031) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_08_114155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -153,6 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_093031) do
     t.boolean "active", default: true
     t.boolean "reviewed", default: false
     t.integer "videos_count", default: 0, null: false
+    t.string "slug"
     t.index ["title"], name: "index_events_on_title"
   end
 
@@ -295,6 +296,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_093031) do
     t.integer "el_recodo_song_id"
     t.integer "videos_count", default: 0, null: false
     t.string "lyrics_en"
+    t.string "slug"
     t.index ["artist"], name: "index_songs_on_artist"
     t.index ["genre"], name: "index_songs_on_genre"
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
