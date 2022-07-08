@@ -1,4 +1,4 @@
-<div id="<%= dom_id clip %>" class="video-container">
+<%= turbo_frame_tag clip, class: "video-container" do %>
   <%= link_to watch_path(v: clip.video.youtube_id, start: clip.start_seconds, end: clip.end_seconds, speed: clip.playback_rate), 'data-turbo-frame': "_top" do %>
     <div class="thumbnail" data-duration= "<%= "#{clip.end_seconds - clip.start_seconds} sec  " %>">
       <%= image_tag "https://media1.giphy.com/media/#{clip.giphy_id}/200.webp", class: "thumbnail-image" %>
@@ -27,4 +27,4 @@
       <%= link_to "Edit Clip", edit_video_clip_path(clip.video, clip) %>
     <% end %>
   </div>
-</div>
+<% end %>

@@ -50,7 +50,7 @@ class ClipsController < ApplicationController
   # PATCH/PUT /clips/1
   def update
     if @clip.update(clip_params)
-      redirect_to video_clips_path(@video), notice: "Clip was successfully updated."
+      redirect_to clips_path(@clip), notice: "Clip was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -59,7 +59,10 @@ class ClipsController < ApplicationController
   # DELETE /clips/1
   def destroy
     @clip.destroy
-    redirect_to video_clips_path(@video), notice: "Clip was successfully destroyed."
+    respond_to do |format|
+      format.html { redirect_to clips_path, notice: "Clip was successfully destroyed." }
+      format.turbo_stream
+    end
   end
 
   private

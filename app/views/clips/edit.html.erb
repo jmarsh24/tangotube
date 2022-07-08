@@ -1,7 +1,14 @@
 <h1>Editing clip</h1>
-<%= render "form", clip: @clip %>
-<br>
-<div>
-  <%= link_to "Show this clip", watch_path(v: @clip.video.youtube_id, start: @clip.start_seconds, end: @clip.end_seconds, speed: @clip.playback_rate) %> |
-  <%= link_to "Back to clips", clips_path %>
-</div>
+<%= turbo_frame_tag @clip do %>
+  <%= render "form", clip: @clip %>
+  <br>
+  <div class="row">
+    <sl-button href="<%= watch_path(v: @clip.video.youtube_id, start: @clip.start_seconds, end: @clip.end_seconds, speed: @clip.playback_rate) %>">
+      Show This Clip
+    </sl-button>
+    <%= button_to "Destroy", video_clip_path(@clip), method: :delete, class: "button button--danger" %>
+    <sl-button href="<%=  clips_path %>">
+      Back to clips
+    </sl-button>
+  </div>
+<% end %>
