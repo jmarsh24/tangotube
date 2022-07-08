@@ -25,7 +25,7 @@ class Video::YoutubeImport::Video
     if @video.performance_number.nil? || @video.performance_total_number.nil?
       @video.grep_performance_number
     end
-    rescue Yt::Errors::NoItems => e
+    rescue Yt::Errors::NoItems, JSON::ParserError => e
     if e.present?
       @video.destroy
     end
@@ -52,7 +52,7 @@ class Video::YoutubeImport::Video
     if @video.song.nil?
       @video.grep_title_description_acr_cloud_song
     end
-    rescue Yt::Errors::NoItems => e
+    rescue Yt::Errors::NoItems, JSON::ParserError => e
     if e.present?
       @video.destroy
     end
