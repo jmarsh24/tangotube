@@ -6,9 +6,7 @@
     <sl-button href="<%= watch_path(v: @clip.video.youtube_id, start: @clip.start_seconds, end: @clip.end_seconds, speed: @clip.playback_rate) %>">
       Show This Clip
     </sl-button>
-    <%= button_to "Destroy", video_clip_path(@clip), method: :delete, class: "button button--danger" %>
-    <sl-button href="<%=  clips_path %>">
-      Back to clips
-    </sl-button>
+    <%= button_to "Destroy", video_clip_path(@clip), method: :delete,  form: { data: { turbo_confirm: "Are you sure?" } }, class: "button button--danger" %>
+    <%= link_to "Back to clips", clips_path %>
   </div>
 <% end %>
