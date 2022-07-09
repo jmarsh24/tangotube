@@ -17,7 +17,7 @@
       <% if clip.tag_list.present? %>
         <% clip.tag_list.each do |tag| %>
           <sl-tag variant="neutral" size="small">
-            <%= link_to clips_path(tag: tag.parameterize) do %>
+            <%= link_to clips_path(tag: tag.parameterize), target:"_top" do %>
               <%= tag.titleize %>
             <% end %>
           </sl-tag>
