@@ -103,50 +103,6 @@ module VideosHelper
     column == sort_column && direction == sort_direction
   end
 
-  def cache_params
-    params.permit(
-      "channel",
-      "event",
-      "follower",
-      "genre",
-      "hd",
-      "leader",
-      "like_count",
-      "orchestra",
-      "popularity",
-      "query",
-      "song",
-      "upload_date",
-      "view_count",
-      "year",
-      "direction",
-      "sort",
-      "watched",
-      "page"
-    ).to_h.flatten.join("_")
-  end
-
-  def video_query_params
-    params.permit(
-      "channel",
-      "event",
-      "follower",
-      "genre",
-      "hd",
-      "leader",
-      "like_count",
-      "orchestra",
-      "popularity",
-      "query",
-      "song",
-      "upload_date",
-      "view_count",
-      "year",
-      "direction",
-      "sort",
-      "watched",
-    )
-  end
 
   def videos_header(filtering_params, sorting_params)
     words_array = []
