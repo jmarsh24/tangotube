@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_08_114155) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_073111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -132,6 +132,39 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_114155) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "couples", force: :cascade do |t|
+    t.bigint "dancer_a_id"
+    t.bigint "dancer_b_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dancer_a_id", "dancer_b_id"], name: "index_couples_on_dancer_a_id_and_dancer_b_id", unique: true
+  end
+
+  create_table "dancer_videos", force: :cascade do |t|
+    t.bigint "dancer_id"
+    t.bigint "video_id"
+    t.integer "role", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dancer_id"], name: "index_dancer_videos_on_dancer_id"
+    t.index ["video_id"], name: "index_dancer_videos_on_video_id"
+  end
+
+  create_table "dancers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "middle_name"
+    t.string "nick_name"
+    t.bigint "user_id"
+    t.text "bio"
+    t.string "slug"
+    t.boolean "reviewed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_dancers_on_user_id"
+  end
+
   create_table "deletion_requests", force: :cascade do |t|
     t.string "provider"
     t.string "uid"
@@ -154,6 +187,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_114155) do
     t.boolean "reviewed", default: false
     t.integer "videos_count", default: 0, null: false
     t.string "slug"
+    t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["title"], name: "index_events_on_title"
   end
 
@@ -300,6 +334,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_114155) do
     t.index ["artist"], name: "index_songs_on_artist"
     t.index ["genre"], name: "index_songs_on_genre"
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
+    t.index ["slug"], name: "index_songs_on_slug", unique: true
     t.index ["title"], name: "index_songs_on_title"
   end
 
@@ -470,6 +505,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_114155) do
   add_foreign_key "clips", "users"
   add_foreign_key "clips", "videos"
   add_foreign_key "comments", "users"
+  add_foreign_key "dancers", "users"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"

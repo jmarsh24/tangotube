@@ -7,6 +7,7 @@ class Event < ApplicationRecord
 
   has_many :videos, dependent: :nullify
 
+  after_validation :set_slug, only: [:create, :update]
   after_commit { videos.find_each(&:reindex) }
 
   def search_title
@@ -48,6 +49,10 @@ class Event < ApplicationRecord
     }
   end
 
+  def set_slug
+    title.to_s.parameterize
+  end
+
   class << self
     def title_search(query)
       words = query.to_s.strip.split
@@ -59,12 +64,13 @@ class Event < ApplicationRecord
       end
     end
 
-    def match_all_events(event_id)
+    def match_all_events(_event_id)
       Event
         .all
         .order(:id)
-        .each { |_event| MatchEventWorker.perform_async(event_id) }
+        .each { |event| MatchEventWorker.perform_async(event.id) }
     end
   end
 end
+
 

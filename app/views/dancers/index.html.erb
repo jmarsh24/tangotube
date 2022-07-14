@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+<%= link_to "New dancer", new_dancer_path %>
+<h1>Dancers</h1>
+<div id="dancers">
+  <% @dancers.each do |dancer| %>
+    <%= render dancer %>
+    <%= link_to "Show this dancer", dancer %>
+  <% end %>
+</div>
+<div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">
+  <% if @pagy.next %>
+    <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
+      <button type="submit" data-controller="autoclick"></button>
+    </form>
+    <sl-spinner style="font-size: 50px; --track-width: 5px; --indicator-color: var(--sl-color-red-400"></sl-spinner>
+  <% end %>
+</div>

@@ -8,6 +8,7 @@ class Song < ApplicationRecord
   has_many :videos, dependent: :nullify
   has_many :leader, through: :videos
   has_many :follower, through: :videos
+  after_validation :set_slug, only: [:create, :update]
 
   scope :sort_by_popularity, -> { order(popularity: :desc) }
   scope :filter_by_popularity, -> { where.not(popularity: nil) }
@@ -30,6 +31,10 @@ class Song < ApplicationRecord
       title:,
       artist:
     }
+  end
+
+  def set_slug
+    self.slug = "#{title}-#{artist}".parameterize
   end
 
   class << self

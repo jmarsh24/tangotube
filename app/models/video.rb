@@ -19,8 +19,16 @@ class Video < ApplicationRecord
                             :event,
                             :song_full_title,
                             :channel_title,
-                            :dancer],
-                            word_middle: [:leader_name, :follower_name, :song_full_title, :channel, :acr_track_name, :spotify_track_name, :artist]
+                            :dancer
+                          ],
+            word_middle: [  :leader_name,
+                            :follower_name,
+                            :song_full_title,
+                            :channel,
+                            :acr_track_name,
+                            :spotify_track_name,
+                            :artist
+                         ]
   include Filterable
   extend Pagy::Searchkick
 
@@ -33,9 +41,12 @@ class Video < ApplicationRecord
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   has_many :yt_comments, dependent: :destroy
-  has_many :clips
+  has_many :clips, dependent: :destroy
+  has_many :dancer_videos, dependent: :destroy
+  has_many :dancers, through: :dancer_videos
+  has_many :couples
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
@@ -72,7 +83,6 @@ class Video < ApplicationRecord
         -> {
           where
             .not(acr_response_code: [0, 1001])
-            .or(Video.where(acr_response_code: nil))
         }
 
 
@@ -108,14 +118,6 @@ class Video < ApplicationRecord
           )
         }
 
-  scope :with_dancer_name_in_title,
-        lambda { |dancer_name|
-          where(
-            "unaccent(title) ILIKE unaccent(:dancer_name)",
-            dancer_name: "%#{dancer_name}%"
-          )
-        }
-
   scope :search_import, -> { includes(:song, :leader, :follower, :event, :channel) }
 
   # Combined Scopes
@@ -130,6 +132,12 @@ class Video < ApplicationRecord
         }
 
   class << self
+
+    def with_dancer_name_in_title(name)
+      search( name,
+              mispellings: { edit_distance: 2 },
+              field: :title )
+    end
 
     def filter_by_watched(boolean, user)
       case boolean
