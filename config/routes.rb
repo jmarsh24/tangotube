@@ -40,6 +40,11 @@ Rails.application.routes.draw do
       post :index
     end
   end
+  resources :couples do
+    collection do
+      post :index
+    end
+  end
   resources :videos do
 
     collection do
@@ -67,12 +72,23 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :dancers do
+    collection do
+      post :index
+    end
+  end
   resources :leaders
   resources :followers
-  resources :events
-  resources :songs
-
-
+  resources :events do
+    collection do
+      post :index
+    end
+  end
+  resources :songs do
+    collection do
+      post :index
+    end
+  end
 
   root "videos#index"
   post "/" => "videos#index"

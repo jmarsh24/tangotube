@@ -1,0 +1,7 @@
+<div id="<%= dom_id couple %>">
+  <p>
+    <%= "#{Dancer.find(couple.dancer_a_id).name} & #{Dancer.find(couple.dancer_b_id).name}" %>
+  </p>
+  <%= link_to Dancer.find(couple.dancer_a_id).name, dancer_path(couple.dancer_a_id) %>
+  <%= link_to Dancer.find(couple.dancer_b_id).name, dancer_path(couple.dancer_b_id) %>
+</div>
