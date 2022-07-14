@@ -1,10 +1,9 @@
 <p style="color: green"><%= notice %></p>
-
 <%= render @couple %>
-
 <div>
-  <%= link_to "Edit this couple", edit_couple_path(@couple) %> |
   <%= link_to "Back to couples", couples_path %>
-
-  <%= button_to "Destroy this couple", @couple, method: :delete %>
+  <% if current_user&.admin? %>
+    <%= link_to "Edit this couple", edit_couple_path(@couple) %> |
+    <%= button_to "Destroy this couple", @couple, method: :delete %>
+  <% end %>
 </div>
