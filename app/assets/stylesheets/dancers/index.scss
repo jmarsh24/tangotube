@@ -5,25 +5,28 @@
   grid-template-columns: repeat(auto-fill, minmax(320px, 2fr));
   gap: 20px 20px;
 }
-.__card {
-  border: 1px solid var(--sl-color-neutral-500);
-  border-radius: var(--sl-border-radius-medium);
-  img {
-    object-fit: cover;
-    width: 320px;
-    height: 320px;
-    margin: 0 auto;
-  }
 
-  &__body {
-    padding: var(--sl-spacing-small);
-    background-color: var(--sl-color-neutral-0);
-  }
+.dancer {
+  &__card {
+    border: 1px solid var(--sl-color-neutral-500);
+    border-radius: var(--sl-border-radius-medium);
+    img {
+      object-fit: cover;
+      width: 320px;
+      height: 320px;
+      margin: 0 auto;
+    }
 
-  &__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--sl-spacing-small);
+    &__body {
+      padding: var(--sl-spacing-small);
+      background-color: var(--sl-color-neutral-0);
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--sl-spacing-small);
+    }
   }
 }
