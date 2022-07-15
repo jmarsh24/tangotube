@@ -1,9 +1,56 @@
-<p style="color: green"><%= notice %></p>
-<%= render @dancer %>
 <div>
-  <%= link_to "Back to dancers", dancers_path %>
-  <% if current_user&.admin? %>
-    <%= link_to "Edit this dancer", edit_dancer_path(@dancer) %>
-    <%= button_to "Destroy this dancer", @dancer, method: :delete %>
-  <% end %>
+  <%= render @dancer %>
+  <div style="width: 100%;">
+    <p>
+      <strong>First name:</strong>
+      <%= @dancer.first_name %>
+    </p>
+    <p>
+      <strong>Last name:</strong>
+      <%= @dancer.last_name %>
+    </p>
+    <p>
+      <strong>Middle name:</strong>
+      <%= @dancer.middle_name %>
+    </p>
+    <p>
+      <strong>Nick name:</strong>
+      <%= @dancer.nick_name %>
+    </p>
+    <p>
+      <strong>User:</strong>
+      <%= @dancer.user_id %>
+    </p>
+    <p>
+      <strong>Bio:</strong>
+      <%= @dancer.bio %>
+    </p>
+    <p>
+      <strong>Slug:</strong>
+      <%= @dancer.slug %>
+    </p>
+    <p>
+      <strong>Reviewed:</strong>
+      <%= @dancer.reviewed %>
+    </p>
+    <strong>Parters:</strong>
+    <% @dancer.couples.each do |couple| %>
+      <p>
+        <% if @dancer == Dancer.find(couple.dancer_a_id) %>
+          <%= link_to Dancer.find(couple.dancer_b_id).name, Dancer.find(couple.dancer_b_id) %>
+        <% else %>
+          <%= link_to Dancer.find(couple.dancer_a_id).name, Dancer.find(couple.dancer_a_id) %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+  <div>
+    <sl-button href="<%= dancers_path %>">Back</sl-button>
+    <% if current_user&.admin? %>
+      <sl-button href="<%= edit_dancer_path(@dancer) %>">Edit</sl-button>
+      <%= button_to @dancer, method: :delete do %>
+        <sl-button variant="danger" outline>Delete</sl-button>
+      <% end %>
+    <% end %>
+  </div>
 </div>

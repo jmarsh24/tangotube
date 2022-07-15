@@ -22,6 +22,9 @@ application.register("drawer", DrawerController)
 import DropdownController from "./dropdown_controller.js"
 application.register("dropdown", DropdownController)
 
+import DropzoneController from "./dropzone_controller.js"
+application.register("dropzone", DropzoneController)
+
 import FilterController from "./filter_controller.js"
 application.register("filter", FilterController)
 

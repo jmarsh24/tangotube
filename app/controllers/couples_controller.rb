@@ -1,4 +1,5 @@
 class CouplesController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_couple, only: %i[ show edit update destroy ]
 
   # GET /couples
@@ -52,6 +53,6 @@ class CouplesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def couple_params
-      params.require(:couple).permit(:dancer_id)
+      params.require(:couple).permit(:dancer_id, :feature_image)
     end
 end
