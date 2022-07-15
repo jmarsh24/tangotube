@@ -19,6 +19,7 @@ gem "turbo-rails"
 gem "acts_as_votable"
 gem "acts-as-taggable-on", "~> 9.0"
 gem "ahoy_matey"
+gem "aws-sdk-s3", "~> 1.114"
 gem "deepl-rb", require: 'deepl'
 gem "devise"
 gem "elasticsearch"
@@ -83,6 +84,8 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
 
 
 
