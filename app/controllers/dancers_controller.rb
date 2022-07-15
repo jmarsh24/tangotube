@@ -5,7 +5,7 @@ class DancersController < ApplicationController
   # GET /dancers
   def index
     dancers = if params[:query].present?
-      Dancer.where("name ILIKE ?", "%#{params[:query]}%").order(:name)
+      Dancer.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query]}%").order(:name)
     else
       Dancer.all.order(:name)
     end
