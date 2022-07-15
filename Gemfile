@@ -19,7 +19,7 @@ gem "turbo-rails"
 gem "acts_as_votable"
 gem "acts-as-taggable-on", "~> 9.0"
 gem "ahoy_matey"
-gem "aws-sdk-s3", "~> 1.114"
+gem "aws-sdk-s3", "~> 1.114", require: false
 gem "deepl-rb", require: 'deepl'
 gem "devise"
 gem "elasticsearch"
