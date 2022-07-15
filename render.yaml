@@ -10,7 +10,7 @@ services:
       - tangotube.tv
     disk:
       name: data
-      mountPath: /data/
+      mountPath: /var/lib/data
       sizeGB: 5
     envVars:
       - key: DATABASE_URL
