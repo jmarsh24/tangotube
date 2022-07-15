@@ -63,6 +63,7 @@ class DancersController < ApplicationController
               :slug,
               :reviewed,
               :couple_id,
-              :feature_image)
+              :profile_image,
+              :cover_image)
     end
 end
