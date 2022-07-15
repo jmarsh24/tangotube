@@ -8,6 +8,10 @@ services:
     startCommand: export PATH="$PATH:$HOME/project/src/yt-dlp"; bundle exec puma -C config/puma.rb
     domains:
       - tangotube.tv
+    disk:
+      name: data
+      mountPath: /data/
+      sizeGB: 5
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -56,11 +60,7 @@ services:
     schedule: 0 3 * * *
     buildCommand: bundle install
     startCommand: >
-      bundle exec rake dancer:create_dancer_from_leaders
-      && bundle exec rake dancer:create_dancer_from_followers
-      && bundle exec rake dancer:create_dancer_video_from_leaders
-      && bundle exec rake dancer:create_dancer_video_from_followers
-      && bundle exec rake dancer:create_couples_from_dancer_videos
+      bundle exec rake update_all_channels
     envVars:
       - key: REDIS_URL
         fromService:
