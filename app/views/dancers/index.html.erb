@@ -1,10 +1,9 @@
 <p style="color: green"><%= notice %></p>
 <%= link_to "New dancer", new_dancer_path %>
 <h1>Dancers</h1>
-<div id="dancers">
+<div id="dancers" class="dancers">
   <% @dancers.each do |dancer| %>
     <%= render dancer %>
-    <%= link_to "Show this dancer", dancer %>
   <% end %>
 </div>
 <div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">

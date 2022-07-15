@@ -1,9 +1,10 @@
 class DancersController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_dancer, only: %i[ show edit update destroy ]
 
   # GET /dancers
   def index
-    dancers = Dancer.all
+    dancers = Dancer.all.order(:name)
     @pagy, @dancers = pagy(dancers, items: 12)
   end
 
@@ -52,6 +53,16 @@ class DancersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dancer_params
-      params.require(:dancer).permit(:first_name, :last_name, :middle_name, :nick_name, :user_id, :bio, :slug, :reviewed, :couple_id)
+      params.require(:dancer)
+            .permit(:first_name,
+              :last_name,
+              :middle_name,
+              :nick_name,
+              :user_id,
+              :bio,
+              :slug,
+              :reviewed,
+              :couple_id,
+              :feature_image)
     end
 end

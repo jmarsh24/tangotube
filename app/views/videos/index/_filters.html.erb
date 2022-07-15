@@ -10,8 +10,8 @@
     </sl-button>
     <div style="background-color: var(--sl-color-neutral-50); padding-bottom: 12px;">
     <div id="mobile-filters">
-      <%= turbo_frame_tag "filters", src: filters_videos_path(filtering_params) %>
-      <sl-divider></sl-divider>
+      <%= turbo_frame_tag :filters, src: filters_videos_path(filtering_params) %>
+  <sl-divider></sl-divider>
   </div>
   <div id="menu-additional-filters">
     <% if current_user %>

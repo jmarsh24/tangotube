@@ -1,4 +1,9 @@
 <div id="<%= dom_id couple %>">
+  <div>
+    <%= link_to couple do %>
+      <%= image_tag couple.profile_image if couple.profile_image.present? %>
+    <% end %>
+  </div>
   <p>
     <%= "#{Dancer.find(couple.dancer_a_id).name} & #{Dancer.find(couple.dancer_b_id).name}" %>
   </p>
