@@ -4,7 +4,11 @@ class DancersController < ApplicationController
 
   # GET /dancers
   def index
-    dancers = Dancer.all.order(:name)
+    dancers = if params[:query].present?
+      Dancer.where("name ILIKE ?", "%#{params[:query]}%").order(:name)
+    else
+      Dancer.all.order(:name)
+    end
     @pagy, @dancers = pagy(dancers, items: 12)
   end
 
