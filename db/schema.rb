@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_11_073111) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_16_004804) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -162,6 +162,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_073111) do
     t.boolean "reviewed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "videos_count", default: 0, null: false
     t.index ["user_id"], name: "index_dancers_on_user_id"
   end
 
