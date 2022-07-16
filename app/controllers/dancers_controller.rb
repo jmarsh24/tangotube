@@ -7,7 +7,7 @@ class DancersController < ApplicationController
     dancers = if params[:query].present?
       Dancer.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query]}%").order(:name)
     else
-      Dancer.all.order(:name)
+      Dancer.all.order(videos_count: :desc)
     end
     @pagy, @dancers = pagy(dancers, items: 12)
   end

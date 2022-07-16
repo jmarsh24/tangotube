@@ -45,8 +45,8 @@ class Video < ApplicationRecord
   has_many :yt_comments, dependent: :destroy
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
-  has_many :dancers, through: :dancer_videos, counter_cache: true
-  has_many :couples, counter_cache: true
+  has_many :dancers, through: :dancer_videos
+  has_many :couples
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }

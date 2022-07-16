@@ -7,6 +7,8 @@ class Dancer < ApplicationRecord
   has_one_attached :profile_image
   has_one_attached :cover_image
 
+
+
   # validates :first_name, presence: true
   # validates :last_name, presence: true
   # validates :reviewed, presence: true
