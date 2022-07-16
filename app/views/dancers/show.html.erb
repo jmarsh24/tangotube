@@ -1,56 +1,42 @@
-<div>
-  <%= render @dancer %>
-  <div style="width: 100%;">
-    <p>
-      <strong>First name:</strong>
-      <%= @dancer.first_name %>
-    </p>
-    <p>
-      <strong>Last name:</strong>
-      <%= @dancer.last_name %>
-    </p>
-    <p>
-      <strong>Middle name:</strong>
-      <%= @dancer.middle_name %>
-    </p>
-    <p>
-      <strong>Nick name:</strong>
-      <%= @dancer.nick_name %>
-    </p>
-    <p>
-      <strong>User:</strong>
-      <%= @dancer.user_id %>
-    </p>
-    <p>
-      <strong>Bio:</strong>
-      <%= @dancer.bio %>
-    </p>
-    <p>
-      <strong>Slug:</strong>
-      <%= @dancer.slug %>
-    </p>
-    <p>
-      <strong>Reviewed:</strong>
-      <%= @dancer.reviewed %>
-    </p>
-    <strong>Parters:</strong>
-    <% @dancer.couples.each do |couple| %>
-      <p>
-        <% if @dancer == Dancer.find(couple.dancer_a_id) %>
-          <%= link_to Dancer.find(couple.dancer_b_id).name, Dancer.find(couple.dancer_b_id) %>
-        <% else %>
-          <%= link_to Dancer.find(couple.dancer_a_id).name, Dancer.find(couple.dancer_a_id) %>
+<div style="max-width: 1660px; width: 100%;">
+  <%= image_tag dancer_cover(@dancer.id), style: "width: 100%; height: 475px; object-fit: cover;" %>
+  <div style="position: relative; position: absolute; width: 100%;">
+    <div style="padding: 0 16px;">
+      <%= image_tag dancer_avatar(@dancer.id), style: "border-radius: 50%; width: 250px; position: absolute; top: -75px; left: 125px;" %>
+      <div style=" width: 100%; max-width: 1660px; height: 200px; padding-right: 16px; padding-left: 425px;">
+        <h1 style="font-size: 64px;">
+          <%= @dancer.name %>
+        </h1>
+        <div style="display: flex; justify-content: space-between;">
+          <%= "#{@dancer.videos_count} Videos" %>
+          <% if current_user&.admin? %>
+            <sl-dropdown>
+              <sl-button slot="trigger">
+                <sl-icon slot="prefix" name="three-dots"></sl-icon>
+              </sl-button>
+              <sl-menu>
+                <%= link_to edit_dancer_path(@dancer) do %>
+                  <sl-menu-item>Edit</sl-menu-item>
+                <% end %>
+                <%= button_to @dancer, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } do %>
+                  <sl-button variant="danger" outline>Delete</sl-button>
+                <% end %>
+              </sl-menu>
+            </sl-dropdown>
+          <% end %>
+        </div>
+      </div>
+      <h1>
+        Dance Partners
+      </h1>
+      <% @dancer.couples.each do |couple| %>
+        <% dancer = ([ Dancer.find(couple.dancer_a_id), Dancer.find(couple.dancer_b_id)] - [@dancer])[0] %>
+        <%= link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+          <%= image_tag dancer_avatar(dancer.id), style: "border-radius: 50%; width: 32px;" %>
+          <%= dancer.name %>
+          <%= "(#{dancer.videos_count})" %>
         <% end %>
-      </p>
-    <% end %>
-  </div>
-  <div>
-    <sl-button href="<%= dancers_path %>">Back</sl-button>
-    <% if current_user&.admin? %>
-      <sl-button href="<%= edit_dancer_path(@dancer) %>">Edit</sl-button>
-      <%= button_to @dancer, method: :delete do %>
-        <sl-button variant="danger" outline>Delete</sl-button>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
