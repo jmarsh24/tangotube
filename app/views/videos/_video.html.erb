@@ -34,7 +34,14 @@
     <div class="video-bottom-section">
       <div class="video-details">
         <div class="video-title">
-          <%= link_to_primary_title(video.display.dancer_names,
+          <% video.dancers.each do |dancer| %>
+            <sl-tag size="small">
+              <%= link_to dancer_path(dancer.id) do %>
+                <%= dancer.name %>
+              <% end %>
+            </sl-tag>
+          <% end %>
+          <%#= link_to_primary_title(video.display.dancer_names,
                                     video.title,
                                     video.display.any_song_attributes,
                                     video.youtube_id) %>

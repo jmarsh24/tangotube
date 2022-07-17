@@ -10,10 +10,23 @@ class DancersController < ApplicationController
       Dancer.all.order(videos_count: :desc)
     end
     @pagy, @dancers = pagy(dancers, items: 12)
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
   end
 
   # GET /dancers/1
-  def show; end
+  def show
+    videos = @dancer.videos
+    @pagy, @videos = pagy(videos, items: 12)
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
+  end
 
   # GET /dancers/new
   def new

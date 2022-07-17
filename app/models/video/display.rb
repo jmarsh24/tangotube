@@ -45,9 +45,10 @@ class Video::Display
   end
 
   def dancer_names
-    return if @video.leader.blank? || @video.follower.blank?
+    return if @video.dancers.empty?
+    dancer_names_array = @video.dancers.map(&:name)
+    dancer_names_array.join(',')
 
-    "#{@video.leader.name.to_s.titleize.gsub("&amp;","&")} & #{@video.follower.name.to_s.titleize.gsub("&amp;","&")}"
   end
 
   private

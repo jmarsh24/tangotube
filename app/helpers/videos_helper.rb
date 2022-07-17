@@ -133,7 +133,7 @@ module VideosHelper
       if key == "genre"
         genre_array << value
       end
-      if key == "leader"
+      if key == "dancer"
         dancer_array << value
       end
       if key == "follower"
@@ -183,6 +183,6 @@ module VideosHelper
   end
 
   def filtering_for_dancer?
-    return true if filtering_params.include?(:leader) || filtering_params.include?(:follower)
+    return true if filtering_params.include?(:dancer) || filtering_params.include?(:follower)
   end
 end
