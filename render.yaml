@@ -61,7 +61,7 @@ services:
     buildCommand: bundle install
     startCommand: >
       bundle exec rake dancers:create_dancer_video_from_leaders
-      && bundle exec rake dancers: reate_dancer_video_from_followers
+      && bundle exec rake dancers:create_dancer_video_from_followers
       && bundle exec rake dancers:create_couples_from_dancer_videos
 
     envVars:
