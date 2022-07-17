@@ -1,6 +1,6 @@
 <div style="max-width: 1660px; width: 100%;">
   <%= image_tag dancer_cover(@dancer.id), style: "width: 100%; height: 475px; object-fit: cover;" %>
-  <div style="position: relative; position: absolute; width: 100%;">
+  <div style="position: relative; width: 100%;">
     <div style="padding: 0 16px;">
       <%= image_tag dancer_avatar(@dancer.id), style: "border-radius: 50%; width: 250px; position: absolute; top: -75px; left: 125px;" %>
       <div style=" width: 100%; max-width: 1660px; height: 200px; padding-right: 16px; padding-left: 425px;">
@@ -44,14 +44,14 @@
       <div class="index-container">
         <%= turbo_frame_tag :videos, src: videos_path(dancer: @dancer.name) %>
       </div>
-      <div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">
-        <% if @pagy.next %>
-          <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
-            <button type="submit" data-controller="autoclick"></button>
-          </form>
-          <sl-spinner style="font-size: 50px; --track-width: 5px; --indicator-color: var(--sl-color-red-400"></sl-spinner>
-        <% end %>
-      </div>
     </div>
+  </div>
+  <div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">
+    <% if @pagy.next %>
+      <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
+        <button type="submit" data-controller="autoclick"></button>
+      </form>
+      <sl-spinner style="font-size: 50px; --track-width: 5px; --indicator-color: var(--sl-color-red-400"></sl-spinner>
+    <% end %>
   </div>
 </div>
