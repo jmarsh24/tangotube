@@ -1,4 +1,4 @@
 cluster.name: "elastic"
 # bind to all network interfaces
 network.host: 0.0.0.0
-node.max_local_storage_nodes: 5
+node.max_local_storage_nodes: 4
