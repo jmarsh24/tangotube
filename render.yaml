@@ -78,9 +78,9 @@ services:
     plan: starter
     region: frankfurt
     ipAllowList:
-      - source: "158.181.72.99/32"
+      - source: "0.0.0.0/0"
         description: home
-    maxmemoryPolicy: noeviction
+    maxmemoryPolicy: volatile-lfu
 
   - type: pserv
     name: tangotube-elasticsearch
