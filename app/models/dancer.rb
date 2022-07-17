@@ -31,7 +31,13 @@ class Dancer < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def to_param
+    "#{id}-#{slug}"
+  end
+
+  private
+
   def set_slug
-    self.slug = "#{first_name}-#{last_name}".parameterize
+    self.slug = name.parameterize
   end
 end
