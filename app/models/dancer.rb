@@ -6,8 +6,7 @@ class Dancer < ApplicationRecord
   has_many :dancer_b_couples, foreign_key: "dancer_b_id", class_name: "Couple", dependent: :destroy
   has_one_attached :profile_image
   has_one_attached :cover_image
-
-
+  enum gender: { male: 0, female: 1 }
 
   # validates :first_name, presence: true
   # validates :last_name, presence: true
