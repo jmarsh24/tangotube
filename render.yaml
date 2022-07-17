@@ -60,8 +60,8 @@ services:
     schedule: 0 3 * * *
     buildCommand: bundle install
     startCommand: >
-      bundle exec rake dancer: create_dancer_video_from_leaders
-      && bundle exec rake dancer: create_dancer_video_from_followers
+      bundle exec rake dancers: create_dancer_video_from_leaders
+      && bundle exec rake dancers: create_dancer_video_from_followers
 
     envVars:
       - key: REDIS_URL
