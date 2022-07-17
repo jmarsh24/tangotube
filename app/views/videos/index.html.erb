@@ -2,7 +2,7 @@
 <div class="index-container">
   <%= render "videos/index/filters" %>
   <%= render "videos/index/videos/header" %>
-  <div id="videos">
+  <%= turbo_frame_tag :videos do %>
     <% if @featured_videos.present? %>
       <div class="video-section">
         <%= render "videos/index/videos/section/header", title: "Featured" %>
@@ -21,7 +21,7 @@
         <%= render partial: "video", collection: @videos %>
       </div>
     </div>
-  </div>
+  <% end %>
   <div class="next-link" id="next_link">
     <% if @pagy.next %>
       <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
