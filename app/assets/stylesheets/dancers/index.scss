@@ -1,6 +1,6 @@
 .dancers {
-  width: 100%;
   max-width: 1660px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(275px, 275px));
   gap: 20px 20px;
