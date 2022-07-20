@@ -1,0 +1,10 @@
+<sl-card class="orchestra__card" id="<%= dom_id orchestra %>">
+  <%= link_to orchestra do %>
+    <%= image_tag orchestra_avatar(orchestra.id), slot: "image" %>
+  <% end %>
+  <div class="orchestra__card__body">
+    <%= link_to orchestra do %>
+      <%= orchestra.name.titleize %>
+    <% end %>
+  </div>
+</sl-card>

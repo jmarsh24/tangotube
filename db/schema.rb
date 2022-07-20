@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_20_182926) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_20_200312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -223,6 +223,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_182926) do
     t.index ["name"], name: "index_leaders_on_name"
   end
 
+  create_table "orchestras", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "bio"
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_orchestras_on_name", unique: true
+  end
+
   create_table "pay_charges", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "subscription_id"
@@ -337,9 +346,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_182926) do
     t.integer "videos_count", default: 0, null: false
     t.string "lyrics_en"
     t.string "slug"
+    t.bigint "orchestra_id"
     t.index ["artist"], name: "index_songs_on_artist"
     t.index ["genre"], name: "index_songs_on_genre"
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
+    t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
     t.index ["title"], name: "index_songs_on_title"
   end

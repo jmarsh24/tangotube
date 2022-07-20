@@ -34,6 +34,13 @@
 @import "devise/shared/error_messages.scss";
 @import "devise/shared/links.scss";
 @import "events/events.scss";
+@import "orchestras/_form.scss";
+@import "orchestras/_orchestra.scss";
+@import "orchestras/edit.scss";
+@import "orchestras/index.scss";
+@import "orchestras/new.scss";
+@import "orchestras/show.scss";
+
 @import "layout/footer.scss";
 @import "playlists/index.scss";
 
