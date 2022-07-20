@@ -49,9 +49,9 @@ namespace :dancer do
 
     DancerVideo.where(video_id: videos_with_multiple_dancers_per_id).group_by(&:video_id).each do |_video_id, dancer_videos|
       dancers_in_video = dancer_videos.map(&:dancer_id)
-      dancer_a_id = dancers_in_video[0]
-      dancer_b_id = dancers_in_video[1]
-      Couple.create(dancer_a_id:, dancer_b_id:)
+      dancer_a = Dancer.find(dancers_in_video[0])
+      dancer_a.couples.create(partner_id: dancers_in_video[1])
+    rescue ActiveRecord::RecordNotUnique
     end
   end
 end

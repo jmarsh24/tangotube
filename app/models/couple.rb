@@ -1,16 +1,42 @@
 class Couple < ApplicationRecord
-  belongs_to :dancer_a, class_name: "Dancer"
-  belongs_to :dancer_b, class_name: "Dancer"
+  belongs_to :dancer
+  belongs_to :partner, class_name: "Dancer"
 
-  has_one_attached :profile_image
-  has_one_attached :cover_image
+  after_create :create_inverse, unless: :has_inverse?
+  after_destroy :destroy_inverses, if: :has_inverse?
+  after_touch :set_videos_count
 
-  validate :dancers_not_the_same
-  validates :dancer_a, uniqueness: { scope: :dancer_b, message: "There already exists a couple with these dancers." }
+  def create_inverse
+    self.class.create(inverse_couple_options)
+  end
 
+  def destroy_inverses
+    inverses.destroy_all
+  end
 
-  def dancers_not_the_same
-    @errors.add(:base, "The dancers should be not be the same") if dancer_a == dancer_b
+  def has_inverse?
+    self.class.exists?(inverse_couple_options)
+  end
+
+  def inverses
+    self.class.where(inverse_couple_options)
+  end
+
+  def inverse_couple_options
+    { dancer_id: partner_id, partner_id: dancer_id}
+  end
+
+  def videos
+    Video.where(id: DancerVideo.where(dancer_id: [dancer_id, partner_id])
+                                .group(:video_id)
+                                .having("count(*) = ?", [dancer_id, partner_id].count)
+                                .select(:video_id))
+  end
+
+  private
+
+  def set_videos_count
+    self.videos_count = videos.size
+    save
   end
 end
-

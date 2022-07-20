@@ -31,12 +31,12 @@
           Dance Partners
         </h1>
         <div style="height: 250px; width: 300px; overflow: auto;">
-          <% @dancer.couples.each do |couple| %>
-            <% dancer = ([ Dancer.find(couple.dancer_a_id), Dancer.find(couple.dancer_b_id)] - [@dancer])[0] %>
-            <%= link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-              <%= image_tag dancer_avatar(dancer.id), style: "border-radius: 50%; width: 32px;" %>
-              <%= dancer.name %>
-              <%= "(#{dancer.videos_count})" %>
+          <% @dancer.couples.order(videos_count: :desc ).each do |couple| %>
+            <% partner = couple.partner%>
+            <%= link_to partner, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+              <%= image_tag dancer_avatar(partner.id), style: "border-radius: 50%; width: 32px;" %>
+              <%= partner.name %>
+              <%= "(#{couple.videos_count})" %>
             <% end %>
           <% end %>
         </div>
