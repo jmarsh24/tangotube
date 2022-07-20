@@ -5,6 +5,7 @@ class Song < ApplicationRecord
   validates :title, presence: true
   validates :artist, presence: true
 
+  belongs_to :orchestra
   has_many :videos, dependent: :nullify
   has_many :leader, through: :videos
   has_many :follower, through: :videos

@@ -1,0 +1,6 @@
+<%= render @orchestra %>
+<div>
+  <%= link_to "Edit this orchestra", edit_orchestra_path(@orchestra) %> |
+  <%= link_to "Back to orchestras", orchestras_path %>
+  <%= button_to "Destroy this orchestra", @orchestra, method: :delete %>
+</div>
