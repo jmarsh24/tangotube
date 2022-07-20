@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_17_091308) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_20_182926) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -133,11 +133,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_17_091308) do
   end
 
   create_table "couples", force: :cascade do |t|
-    t.bigint "dancer_a_id"
-    t.bigint "dancer_b_id"
+    t.bigint "dancer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dancer_a_id", "dancer_b_id"], name: "index_couples_on_dancer_a_id_and_dancer_b_id", unique: true
+    t.bigint "partner_id"
+    t.integer "videos_count", default: 0, null: false
+    t.index ["dancer_id", "partner_id"], name: "index_couples_on_dancer_id_and_partner_id", unique: true
+    t.index ["dancer_id"], name: "index_couples_on_dancer_id"
+    t.index ["partner_id"], name: "index_couples_on_partner_id"
   end
 
   create_table "dancer_videos", force: :cascade do |t|
@@ -508,6 +511,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_17_091308) do
   add_foreign_key "clips", "users"
   add_foreign_key "clips", "videos"
   add_foreign_key "comments", "users"
+  add_foreign_key "couples", "dancers"
+  add_foreign_key "couples", "dancers", column: "partner_id"
   add_foreign_key "dancers", "users"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
