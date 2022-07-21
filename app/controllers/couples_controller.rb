@@ -7,7 +7,7 @@ class CouplesController < ApplicationController
     couples = if params[:query].present?
       Couple.where("unaccent(slug) ILIKE unaccent(?)", "%#{params[:query]}%").order(videos_count: :desc)
     else
-      Couple.where(id: Couple.select("DISTINCT ON (unique_couple_id) *").map(&:id)).order(videos_count: :desc)
+      Couple.where(unique_couple_id: Couple.select(:unique_couple_id).distinct.pluck(:unique_couple_id)).order(videos_count: :desc)
     end
     @pagy, @couples = pagy(couples, items: 12)
   end
