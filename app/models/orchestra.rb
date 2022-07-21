@@ -1,6 +1,7 @@
 class Orchestra < ApplicationRecord
   has_many :songs, dependent: :destroy
   has_many :videos, through: :songs
+  has_many :dancers, through: :videos
 
   validates :name, presence: true, uniqueness: true
 
