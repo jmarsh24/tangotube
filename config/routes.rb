@@ -45,6 +45,9 @@ Rails.application.routes.draw do
     collection do
       post :index
     end
+    member do
+      post :show
+    end
   end
   resources :orchestras do
     collection do
@@ -95,10 +98,16 @@ Rails.application.routes.draw do
     collection do
       post :index
     end
+    member do
+      post :show
+    end
   end
   resources :songs do
     collection do
       post :index
+    end
+    member do
+      post :show
     end
   end
 
