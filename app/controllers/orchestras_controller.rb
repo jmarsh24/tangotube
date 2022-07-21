@@ -65,7 +65,7 @@ class OrchestrasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orchestra
-      @orchestra = Orchestra.find(params[:id])
+      @orchestra = Orchestra.includes(:couples, :dancers).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
