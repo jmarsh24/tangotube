@@ -4,12 +4,24 @@ class CouplesController < ApplicationController
 
   # GET /couples
   def index
-    couples = Couple.all.includes(:dancer_a, :dancer_b)
+    couples = if params[:query].present?
+      Couple.where("unaccent(slug) ILIKE unaccent(?)", "%#{params[:query]}%").order(videos_count: :desc)
+    else
+      Couple.where(id: Couple.select("DISTINCT ON (unique_couple_id) *").map(&:id)).order(videos_count: :desc)
+    end
     @pagy, @couples = pagy(couples, items: 12)
   end
 
   # GET /couples/1
-  def show; end
+  def show
+    videos = @couple.videos
+    @pagy, @videos = pagy(videos, items: 12)
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
+  end
 
   # GET /couples/new
   def new

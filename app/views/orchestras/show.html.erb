@@ -23,35 +23,37 @@
       <% end %>
     </div>
   </div>
-  <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
-    <h1>
-      Dancers
-    </h1>
-    <div style="height: 250px; width: 300px; overflow: auto;">
-      <% @orchestra.dancers.distinct.order(videos_count: :desc ).each do |dancer| %>
-        <%= link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-          <%= image_tag dancer_avatar(dancer.id), style: "border-radius: 50%; width: 32px;" %>
-          <%= dancer.name %>
-          <%= "(#{dancer.videos_count})" %>
+  <div style="display: flex; gap: 16px;">
+    <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
+      <h1>
+        Dancers
+      </h1>
+      <div style="height: 250px; width: 300px; overflow: auto;">
+        <% @orchestra.dancers.distinct.order(videos_count: :desc ).each do |dancer| %>
+          <%= link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+            <%= image_tag dancer_avatar(dancer.id), style: "border-radius: 50%; width: 32px;" %>
+            <%= dancer.name %>
+            <%= "(#{dancer.videos_count})" %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
-    <h1>
-      Couples
-    </h1>
-    <div style="height: 250px; width: 300px; overflow: auto;">
-      <% @orchestra.couples.each do |couple| %>
-        <% partner = couple.partner %>
-        <% dancer = couple.dancer %>
-        <%= link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-          <%= image_tag dancer_avatar(partner.id), style: "border-radius: 50%; width: 32px;" %>
-          <%= image_tag dancer_avatar(couple.id), style: "border-radius: 50%; width: 32px;" %>
-          <%= "#{dancer.name partner.name}" %>
-          <%= "(#{couple.videos_count})" %>
+    <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
+      <h1>
+        Couples
+      </h1>
+      <div style="height: 250px; width: 300px; overflow: auto;">
+        <% @orchestra.couples.distinct.find_each do |couple| %>
+          <% partner = couple.partner %>
+          <% dancer = couple.dancer %>
+          <%= link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+            <%= image_tag dancer_avatar(dancer.id), style: "border-radius: 50%; width: 32px;" %>
+            <%= image_tag dancer_avatar(partner.id), style: "border-radius: 50%; width: 32px;" %>
+            <%= "#{dancer.name} & #{partner.name}" %>
+            <%= "(#{couple.videos_count})" %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
   <div class="index-container">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_21_103031) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_21_145814) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -138,9 +138,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_103031) do
     t.datetime "updated_at", null: false
     t.bigint "partner_id"
     t.integer "videos_count", default: 0, null: false
+    t.string "slug"
+    t.string "unique_couple_id"
     t.index ["dancer_id", "partner_id"], name: "index_couples_on_dancer_id_and_partner_id", unique: true
     t.index ["dancer_id"], name: "index_couples_on_dancer_id"
     t.index ["partner_id"], name: "index_couples_on_partner_id"
+    t.index ["unique_couple_id"], name: "index_couples_on_unique_couple_id"
   end
 
   create_table "dancer_videos", force: :cascade do |t|
