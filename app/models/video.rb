@@ -38,7 +38,7 @@ class Video < ApplicationRecord
 
   belongs_to :leader, optional: true, counter_cache: true
   belongs_to :follower, optional: true, counter_cache: true
-  belongs_to :song, optional: true, counter_cache: true
+  belongs_to :song, optional: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy
@@ -47,6 +47,7 @@ class Video < ApplicationRecord
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
   has_many :couples, through: :dancers
+  counter_culture :song
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
