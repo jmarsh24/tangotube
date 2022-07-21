@@ -36,6 +36,10 @@ class Couple < ApplicationRecord
                                 .select(:video_id))
   end
 
+  def to_param
+    "#{id}-#{slug}"
+  end
+
   def couple_names
     "#{dancer.name} #{partner.name}"
   end
