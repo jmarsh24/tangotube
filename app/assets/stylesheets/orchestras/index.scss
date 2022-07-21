@@ -1,7 +1,9 @@
 .orchestras {
   max-width: 1660px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(275px, 275px));
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   gap: 20px 20px;
 }

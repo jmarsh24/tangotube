@@ -9,6 +9,8 @@ class Song < ApplicationRecord
   has_many :videos, dependent: :nullify
   has_many :leader, through: :videos
   has_many :follower, through: :videos
+  counter_culture :orchestra, column_name: "videos_count"
+
   after_validation :set_slug, only: [:create, :update]
 
   scope :sort_by_popularity, -> { order(popularity: :desc) }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_20_200312) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_21_090315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -229,6 +229,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_200312) do
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "videos_count", default: 0, null: false
     t.index ["name"], name: "index_orchestras_on_name", unique: true
   end
 
@@ -351,7 +352,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_200312) do
     t.index ["genre"], name: "index_songs_on_genre"
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
     t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
-    t.index ["slug"], name: "index_songs_on_slug", unique: true
     t.index ["title"], name: "index_songs_on_title"
   end
 

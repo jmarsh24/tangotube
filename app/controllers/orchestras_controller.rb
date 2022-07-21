@@ -7,7 +7,7 @@ class OrchestrasController < ApplicationController
     orchestras = if params[:query].present?
       Orchestra.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query]}%").order(:name)
     else
-      Orchestra.all.order(name: :asc)
+      Orchestra.all.order(videos_count: :desc)
     end
     @pagy, @orchestras = pagy(orchestras, items: 12)
 
