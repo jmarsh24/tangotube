@@ -19,7 +19,8 @@ class Video < ApplicationRecord
                             :event,
                             :song_full_title,
                             :channel_title,
-                            :dancer
+                            :dancer,
+                            :couple
                           ],
             word_middle: [  :leader_name,
                             :follower_name,
@@ -198,6 +199,7 @@ class Video < ApplicationRecord
       like_count:,
       leader: leader&.normalized_name&.parameterize,
       follower: follower&.normalized_name&.parameterize,
+      couples: couples.map(&:slug),
       leader_name: leader&.name,
       follower_name: follower&.name,
       channel_title: channel&.title,

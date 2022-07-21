@@ -10,7 +10,6 @@ class Song < ApplicationRecord
   has_many :leader, through: :videos
   has_many :follower, through: :videos
   counter_culture :orchestra, column_name: "songs_count"
-  counter_culture [:orchestra, :videos], column_name: "videos_count"
 
   after_validation :set_slug, only: [:create, :update]
 

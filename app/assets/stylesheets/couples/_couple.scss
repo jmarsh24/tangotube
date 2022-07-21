@@ -1,0 +1,26 @@
+.couple__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
+
+  &__body {
+    font-size: 14px;
+    padding: var(--sl-spacing-small);
+    background-color: var(--sl-color-neutral-0);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sl-spacing-small);
+  }
+}

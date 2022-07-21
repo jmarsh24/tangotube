@@ -1,12 +1,12 @@
-<div id="<%= dom_id couple %>">
-  <div>
-    <%= link_to couple do %>
-      <%= image_tag couple.profile_image if couple.profile_image.present? %>
-    <% end %>
+<sl-card class="couple__card" id="<%= dom_id couple %>">
+  <%= link_to couple do %>
+    <div style="position: relative; height: 300px; width: 450px;">
+      <%= image_tag dancer_avatar(couple.dancer.id), style: "position: absolute; top: 0; left: 0;" %>
+      <%= image_tag dancer_avatar(couple.partner.id), style: "position: absolute; top: 0; left: 200px;" %>
+    </div>
+  <% end %>
+  <div class="couple__body">
+    <%= "#{couple.dancer.name} & #{couple.partner.name}" %>
   </div>
-  <p>
-    <%= "#{Dancer.find(couple.dancer_a_id).name} & #{Dancer.find(couple.dancer_b_id).name}" %>
-  </p>
-  <%= link_to Dancer.find(couple.dancer_a_id).name, dancer_path(couple.dancer_a_id) %>
-  <%= link_to Dancer.find(couple.dancer_b_id).name, dancer_path(couple.dancer_b_id) %>
-</div>
+  <%= "#{couple.videos_count} Videos" %>
+</sl-card>

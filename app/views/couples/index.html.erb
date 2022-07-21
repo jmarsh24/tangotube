@@ -1,12 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<%= form_with(url: couples_path, method: :get) do |form| %>
+  <%= form.label :query, "Search by dancer name:" %>
+  <div>
+    <%= form.text_field :query %>
+    <%= form.submit 'Search' %>
+  </div>
+<% end %>
 <%= link_to "New couple", new_couple_path %>
 <h1>Couples</h1>
-<div id="couples">
+<div id="couples" class="couples">
   <% @couples.each do |couple| %>
     <%= render couple %>
-    <p>
-      <%= link_to "Show this couple", couple %>
-    </p>
   <% end %>
 </div>
 <div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">

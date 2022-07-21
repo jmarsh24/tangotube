@@ -1,10 +1,13 @@
 class Couple < ApplicationRecord
   belongs_to :dancer
   belongs_to :partner, class_name: "Dancer"
+  has_many :videos
 
+  after_validation :set_slug, only: [:create, :update]
+  before_save :set_videos_count
+  before_save :set_unique_couple_id
   after_create :create_inverse, unless: :has_inverse?
   after_destroy :destroy_inverses, if: :has_inverse?
-  after_touch :set_videos_count
 
   def create_inverse
     self.class.create(inverse_couple_options)
@@ -33,10 +36,21 @@ class Couple < ApplicationRecord
                                 .select(:video_id))
   end
 
+  def couple_names
+    "#{dancer.name} #{partner.name}"
+  end
+
   private
 
   def set_videos_count
     self.videos_count = videos.size
-    save
+  end
+
+  def set_slug
+    self.slug = couple_names.parameterize
+  end
+
+  def set_unique_couple_id
+    self.unique_couple_id = [dancer_id, partner_id].sort.map(&:to_s).join("|")
   end
 end

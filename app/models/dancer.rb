@@ -25,10 +25,6 @@ class Dancer < ApplicationRecord
   #   end
   # end
 
-  # def couples
-  #   Couple.where("dancer_a_id = ? OR dancer_b_id = ?", id, id)
-  # end
-
   def full_name
     "#{first_name} #{last_name}"
   end
