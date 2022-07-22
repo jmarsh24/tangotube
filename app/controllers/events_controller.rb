@@ -3,18 +3,31 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    respond_to do
-      |format|
-        format.html { @events = Event.all.order(:title).limit(10)}
-        format.json do render json:
-          @events =  Event.
-          search(params[:q], order: :title).map{ |event| { text: event.title, value: event.id } }
+    events = Event.all.order(videos_count: :desc)
+    events = if params[:q].present?
+      Event.where("unaccent(title) ILIKE unaccent(?)", "%#{params[:q]}%").order(videos_count: :desc)
+    else
+      Event.all.order(videos_count: :desc)
+    end
+    @pagy, @events = pagy(events, items: 12)
+    respond_to do |format|
+        format.html
+        format.turbo_stream
+        format.json do
+          render json: events.map{ |event| { text: event.title, value: event.id } }
       end
     end
   end
 
   # GET /events/1
-  def show; end
+  def show
+    videos = @event.videos
+    @pagy, @videos = pagy(videos, items: 12)
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
+  end
 
   # GET /events/new
   def new
@@ -65,6 +78,15 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.fetch(:event, {})
+      params.require(:event)
+            .permit(:title,
+              :city,
+              :country,
+              :start_date,
+              :end_date,
+              :active,
+              :reviewed,
+              :profile_image,
+              :cover_image)
     end
 end

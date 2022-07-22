@@ -1,20 +1,14 @@
-<div id="<%= dom_id event %>">
+<sl-card class="event__card" id="<%= dom_id event %>">
+  <%= link_to event do %>
+    <%= image_tag event_avatar(event) %>
+  <% end %>
+  <%= link_to event do %>
+    <%= event.title %>
+  <% end %>
   <div>
-    Title: <%= event.title %>
+    <%= "#{event.city}, #{event.country}" %>
   </div>
   <div>
-    City: <%= event.city %>
+    <%= "#{event.videos_count} Total Videos" %>
   </div>
-  <div>
-    Country: <%= event.country %>
-  </div>
-  <div>
-    Start Date: <%= event.start_date %>
-  </div>
-  <div>
-    End Date: <%= event.end_date %>
-  </div>
-  <div>
-    Active: <%= event.active %>
-  </div>
-</div>
+</sl-card>

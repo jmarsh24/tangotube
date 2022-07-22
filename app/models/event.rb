@@ -1,14 +1,15 @@
 class Event < ApplicationRecord
   searchkick word_middle: [:title, :city, :country]
 
+  has_many :videos
+  has_one_attached :profile_image
+  has_one_attached :cover_image
+
   validates :title, presence: true, uniqueness: true
   validates :city, presence: true
   validates :country, presence: true
 
-  has_many :videos, dependent: :nullify
-
   after_validation :set_slug, only: [:create, :update]
-  after_commit { videos.find_each(&:reindex) }
 
   def search_title
     return if title.empty?
@@ -49,8 +50,8 @@ class Event < ApplicationRecord
     }
   end
 
-  def set_slug
-    title.to_s.parameterize
+  def to_param
+    "#{id}-#{slug}"
   end
 
   class << self
@@ -70,6 +71,12 @@ class Event < ApplicationRecord
         .order(:id)
         .each { |event| MatchEventWorker.perform_async(event.id) }
     end
+  end
+
+  private
+
+  def set_slug
+    title.parameterize
   end
 end
 
