@@ -19,6 +19,7 @@ class DancersController < ApplicationController
 
   # GET /dancers/1
   def show
+    @orchestras = @dancer.orchestras.distinct.includes(profile_image_attachment: :blob).order(videos_count: :desc)
     videos = @dancer.videos
     @pagy, @videos = pagy(videos, items: 12)
 
