@@ -1,0 +1,13 @@
+<%= turbo_stream.append "events" do %>
+  <%= render partial: "event", collection: @events %>
+<% end %>
+<%= turbo_stream.update "next_link" do %>
+  <% if @pagy.next %>
+    <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
+      <button type="submit" data-controller="autoclick"></button>
+    </form>
+    <sl-spinner style="font-size: 50px; --track-width: 5px; --indicator-color: var(--sl-color-red-400)"></sl-spinner>
+  <% else %>
+    <span><%= "Displaying #{@pagy.count} Results" %></span>
+  <% end %>
+<% end %>

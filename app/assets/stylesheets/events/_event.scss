@@ -1,0 +1,23 @@
+.event {
+  &__card {
+    img {
+      object-fit: cover;
+      width: 320px;
+      height: 320px;
+      margin: 0 auto;
+    }
+
+    &__body {
+      font-size: 14px;
+      padding: var(--sl-spacing-small);
+      background-color: var(--sl-color-neutral-0);
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--sl-spacing-small);
+    }
+  }
+}

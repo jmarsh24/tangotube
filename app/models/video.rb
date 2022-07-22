@@ -51,6 +51,7 @@ class Video < ApplicationRecord
   has_one :orchestra, through: :song
   counter_culture :song
   counter_culture [:song, :orchestra]
+  counter_culture :event
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
