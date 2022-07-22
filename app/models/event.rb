@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   searchkick word_middle: [:title, :city, :country]
 
-  has_many :videos
+  has_many :videos, dependent: :nullify
   has_one_attached :profile_image
   has_one_attached :cover_image
 
@@ -76,7 +76,7 @@ class Event < ApplicationRecord
   private
 
   def set_slug
-    title.parameterize
+    title.to_s.parameterize
   end
 end
 
