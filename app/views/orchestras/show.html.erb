@@ -29,9 +29,9 @@
         Dancers
       </h1>
       <div style="height: 250px; width: 300px; overflow: auto;">
-        <% @orchestra.dancers.distinct.order(videos_count: :desc ).each do |dancer| %>
+        <% @dancers.each do |dancer| %>
           <%= link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-            <%= image_tag dancer_avatar(dancer.id), style: "border-radius: 50%; width: 32px;" %>
+            <%= image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;" %>
             <%= dancer.name %>
             <%= "(#{dancer.videos_count})" %>
           <% end %>
@@ -42,13 +42,13 @@
       <h1>
         Couples
       </h1>
-      <div style="height: 250px; width: 300px; overflow: auto;">
-        <% @orchestra.couples.distinct.find_each do |couple| %>
+      <div style="height: 250px; width: 450px; overflow: auto;">
+        <% @couples.find_each do |couple| %>
           <% partner = couple.partner %>
           <% dancer = couple.dancer %>
           <%= link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-            <%= image_tag dancer_avatar(dancer.id), style: "border-radius: 50%; width: 32px;" %>
-            <%= image_tag dancer_avatar(partner.id), style: "border-radius: 50%; width: 32px;" %>
+            <%= image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;" %>
+            <%= image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;" %>
             <%= "#{dancer.name} & #{partner.name}" %>
             <%= "(#{couple.videos_count})" %>
           <% end %>

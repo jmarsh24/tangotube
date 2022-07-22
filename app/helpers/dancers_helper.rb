@@ -1,6 +1,5 @@
 module DancersHelper
-  def dancer_avatar(dancer_id)
-    dancer = Dancer.find(dancer_id)
+  def dancer_avatar(dancer)
     if dancer.profile_image.attached?
       dancer.profile_image
     else
@@ -8,8 +7,7 @@ module DancersHelper
     end
   end
 
-  def dancer_cover(dancer_id)
-    dancer = Dancer.find(dancer_id)
+  def dancer_cover(dancer)
     if dancer.cover_image.attached?
       dancer.cover_image
     else

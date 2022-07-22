@@ -1,8 +1,8 @@
 <div style="max-width: 1660px; width: 100%;">
-  <%= image_tag dancer_cover(@dancer.id), style: "width: 100%; height: 475px; object-fit: cover;" %>
+  <%= image_tag dancer_cover(@dancer), style: "width: 100%; height: 475px; object-fit: cover;" %>
   <div style="position: relative; width: 100%;">
     <div style="padding: 0 16px;">
-      <%= image_tag dancer_avatar(@dancer.id), style: "border-radius: 50%; width: 250px; height: 250px; position: absolute; top: -75px; left: 125px;" %>
+      <%= image_tag dancer_avatar(@dancer), style: "border-radius: 50%; width: 250px; height: 250px; position: absolute; top: -75px; left: 125px;" %>
       <div style=" width: 100%; max-width: 1660px; height: 200px; padding-right: 16px; padding-left: 425px;">
         <h1 style="font-size: 64px;">
           <%= @dancer.name %>
@@ -34,7 +34,7 @@
           <% @dancer.couples.order(videos_count: :desc ).each do |couple| %>
             <% partner = couple.partner%>
             <%= link_to partner, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-              <%= image_tag dancer_avatar(partner.id), style: "border-radius: 50%; width: 32px;" %>
+              <%= image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;" %>
               <%= partner.name %>
               <%= "(#{couple.videos_count})" %>
             <% end %>

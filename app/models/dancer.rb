@@ -2,6 +2,8 @@ class Dancer < ApplicationRecord
   belongs_to :user, optional: true
   has_many :dancer_videos, dependent: :destroy
   has_many :videos, through: :dancer_videos
+  has_many :orchestras, through: :videos
+  has_many :songs, through: :videos
 
   has_many :couples, dependent: :destroy
   has_many :partners, through: :couples
