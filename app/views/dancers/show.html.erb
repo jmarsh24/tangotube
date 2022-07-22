@@ -26,19 +26,35 @@
           <% end %>
         </div>
       </div>
-      <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
-        <h1>
-          Dance Partners
-        </h1>
-        <div style="height: 250px; width: 300px; overflow: auto;">
-          <% @dancer.couples.order(videos_count: :desc ).each do |couple| %>
-            <% partner = couple.partner%>
-            <%= link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-              <%= image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;" %>
-              <%= partner.name %>
-              <%= "(#{couple.videos_count})" %>
+      <div style="display:flex; gap: 16px;">
+        <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
+          <h1>
+            Dance Partners
+          </h1>
+          <div style="height: 250px; width: 300px; overflow: auto;">
+            <% @dancer.couples.order(videos_count: :desc ).each do |couple| %>
+              <% partner = couple.partner%>
+              <%= link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+                <%= image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;" %>
+                <%= partner.name %>
+                <%= "(#{couple.videos_count})" %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
+        </div>
+        <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
+          <h1>
+            Orchestras
+          </h1>
+          <div style="height: 250px; width: 450px; overflow: auto;">
+            <% @orchestras.each do |orchestra| %>
+              <%= link_to orchestra, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+                <%= image_tag dancer_avatar(orchestra), style: "border-radius: 50%; width: 32px;" %>
+                <%= orchestra.name %>
+                <%= "(#{orchestra.videos_count})" %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
       <div class="index-container">
