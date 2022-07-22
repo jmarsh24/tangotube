@@ -33,7 +33,7 @@
         <div style="height: 250px; width: 300px; overflow: auto;">
           <% @dancer.couples.order(videos_count: :desc ).each do |couple| %>
             <% partner = couple.partner%>
-            <%= link_to partner, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+            <%= link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
               <%= image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;" %>
               <%= partner.name %>
               <%= "(#{couple.videos_count})" %>
