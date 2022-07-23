@@ -44,6 +44,12 @@
 @import "orchestras/index.scss";
 @import "orchestras/new.scss";
 @import "orchestras/show.scss";
+@import "performances/_form.scss";
+@import "performances/_performance.scss";
+@import "performances/edit.scss";
+@import "performances/index.scss";
+@import "performances/new.scss";
+@import "performances/show.scss";
 
 @import "layout/footer.scss";
 @import "playlists/index.scss";
@@ -70,6 +76,7 @@
 @import "videos/index/index.scss";
 @import "videos/index/load_more.scss";
 @import "videos/index/videos.scss";
+@import "videos/_video.scss";
 @import "videos/new/new.scss";
 @import "videos/show/lyrics.scss";
 @import "videos/show/recommended_videos.scss";

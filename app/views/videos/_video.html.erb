@@ -17,7 +17,7 @@
       <div class="thumbnail"
         data-duration= "<%= hd_duration_data(video) %>"
       >
-        <% if video.performance_number.present? && video.performance_total_number.present? %>
+        <% if video.performance.present? %>
           <div class="performance-number">
             <%= performance_number(video) %>
           </div>
