@@ -1,7 +1,6 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
-
   get "cookies", to: "cookies#index"
   post "cookies", to: "cookies#index"
   get "banner", to: "banner#index"
@@ -55,6 +54,11 @@ Rails.application.routes.draw do
     end
     member do
       post :show
+    end
+  end
+  resources :performances do
+    collection do
+      post :index
     end
   end
   resources :videos do

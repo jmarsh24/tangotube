@@ -49,6 +49,8 @@ class Video < ApplicationRecord
   has_many :dancers, through: :dancer_videos
   has_many :couples, through: :dancers
   has_one :orchestra, through: :song
+  has_one :performance_video, dependent: :destroy
+  has_one :performance, through: :performance_video
   counter_culture :song
   counter_culture [:song, :orchestra]
   counter_culture :event

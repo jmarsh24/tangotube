@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_21_145814) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_22_181705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -315,6 +315,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_145814) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "performance_videos", force: :cascade do |t|
+    t.bigint "video_id"
+    t.bigint "performance_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["performance_id"], name: "index_performance_videos_on_performance_id"
+    t.index ["video_id"], name: "index_performance_videos_on_video_id"
+  end
+
+  create_table "performances", force: :cascade do |t|
+    t.date "date"
+    t.integer "videos_count"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "playlists", force: :cascade do |t|
     t.string "slug"
     t.string "title"
@@ -423,7 +441,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_145814) do
     t.bigint "follower_id"
     t.string "description"
     t.integer "duration"
-    t.date "upload_date"
+    t.datetime "upload_date", precision: nil
     t.integer "view_count"
     t.string "tags"
     t.bigint "song_id"

@@ -1,0 +1,47 @@
+<%= form_with(model: performance) do |form| %>
+  <% if performance.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(performance.errors.count, "error") %> prohibited this performance from being saved:</h2>
+
+      <ul>
+        <% performance.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :event_id, style: "display: block" %>
+    <%= form.text_field :event_id %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :video_id, style: "display: block" %>
+    <%= form.text_field :video_id %>
+  </div>
+
+  <div>
+    <%= form.label :videos_count, style: "display: block" %>
+    <%= form.number_field :videos_count %>
+  </div>
+
+  <div>
+    <%= form.label :position, style: "display: block" %>
+    <%= form.number_field :position %>
+  </div>
+
+  <div>
+    <%= form.label :slug, style: "display: block" %>
+    <%= form.text_field :slug %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
