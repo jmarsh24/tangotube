@@ -12,20 +12,22 @@ class Dancer < ApplicationRecord
   has_one_attached :cover_image
   enum gender: { male: 0, female: 1 }
 
-  # validates :first_name, presence: true
-  # validates :last_name, presence: true
-  # validates :reviewed, presence: true
-
-  # searchkick word_middle: [:full_name]
+  searchkick word_middle: [:full_name]
 
   after_validation :set_slug, only: [:create, :update]
-  # after_save :find_videos
+  after_save :find_videos
 
-  # def find_videos
-  #   Video.with_dancer_name_in_title(full_name).find_each do |video|
-  #     DancerVideo.create(video:, role: , dancer:)
-  #   end
-  # end
+  def find_videos
+    Video.with_dancer_name_in_title(name).each do |video|
+      dancer_gender = gender
+      role = if dancer_gender == :male
+        :leader
+      else
+        :follower
+      end
+      DancerVideo.create(video:, role:, dancer: self)
+    end
+  end
 
   def full_name
     "#{first_name} #{last_name}"

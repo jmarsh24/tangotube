@@ -142,8 +142,8 @@ class Video < ApplicationRecord
 
     def with_dancer_name_in_title(name)
       search( name,
-              mispellings: { edit_distance: 2 },
-              field: :title )
+              misspellings: { edit_distance: 5  },
+              fields: [:title] )
     end
 
     def filter_by_watched(boolean, user)
