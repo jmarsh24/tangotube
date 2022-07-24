@@ -58,7 +58,7 @@
         <% if video.event.present? %>
           <div class="video-details__item">
             <sl-tag size="small">
-              <%= link_to root_path(event: video.event.slug), { 'data-turbo-frame': "_top" } do %>
+              <%= link_to video.event, { 'data-turbo-frame': "_top" } do %>
                 <%= video.event.title.titleize %>
               <% end %>
             </sl-tag>
