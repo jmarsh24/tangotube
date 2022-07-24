@@ -47,8 +47,7 @@ class Video::Display
   def dancer_names
     return if @video.dancers.empty?
     dancer_names_array = @video.dancers.map(&:name)
-    dancer_names_array.join(',')
-
+    dancer_names_array.join(" & ")
   end
 
   private
