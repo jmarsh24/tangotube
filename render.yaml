@@ -81,7 +81,7 @@ services:
     ipAllowList:
       - source: "0.0.0.0/0"
         description: home
-    maxmemoryPolicy: allkeys-lru
+    maxmemoryPolicy: noeviction
 
   - type: pserv
     name: tangotube-elasticsearch
