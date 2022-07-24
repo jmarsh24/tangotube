@@ -228,9 +228,9 @@ class Video < ApplicationRecord
     }
   end
 
-  def grep_title_leader_follower
-    self.leader = Leader.all.find { |leader| title.parameterize.match(leader.name.parameterize) }
-    self.follower = Follower.all.find { |follower| title.parameterize.match(follower.name.parameterize) }
+  def grep_title_for_dancer
+    Dancer.all.find { |dancer| title.parameterize.match(dancer.name.parameterize) }
+    self.dancers << dancer if dancer.present?
   end
 
   def grep_performance_number
