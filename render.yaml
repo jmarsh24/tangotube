@@ -28,6 +28,12 @@ services:
           type: pserv
           property: hostport
       - fromGroup: tangotube-environment-group
+      - key: MEILISEARCH_URL
+        fromService:
+          name: tangotube-meilisearch
+          type: pserv
+          property: hostport
+      - fromGroup: tangotube-environment-group
 
   - type: worker
     name: tangotube-sidekiq
@@ -49,6 +55,12 @@ services:
       - key: ELASTICSEARCH_URL
         fromService:
           name: tangotube-elasticsearch
+          type: pserv
+          property: hostport
+      - fromGroup: tangotube-environment-group
+      - key: MEILISEARCH_URL
+        fromService:
+          name: tangotube-meilisearch
           type: pserv
           property: hostport
       - fromGroup: tangotube-environment-group
@@ -101,6 +113,26 @@ services:
       value: single-node
     - key: cluster.name
       value: elastic
+
+  - type: pserv
+    name: tangotube-meilisearch
+    env: docker
+    dockerfilePath: "./meilisearch/Dockerfile"
+    region: frankfurt
+    plan: standard
+    disk:
+      name: meili-data
+      mountPath: /meili-data
+      sizeGB: 10
+    envVars:
+    - key: MEILI_HTTP_ADDR
+      value: 0.0.0.0:80
+    - key: MEILI_MASTER_KEY
+      generateValue: true
+    - key: MEILI_DB_PATH
+      value: /meili-data
+    - key: MEILI_ENV
+      value: development
 
 databases:
   - name: tangotube-db
