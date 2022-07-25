@@ -6,8 +6,8 @@ class CreatePerformanceVideosJob
     performance_videos =
     Video.includes(:dancers, :performance)
           .references(:dancers, :performance)
-          .where("upload_date <= ?", video.upload_date + 1.day)
-          .where("upload_date >= ?", video.upload_date - 1.day)
+          .where("upload_date <= ?", video.upload_date + 7.day)
+          .where("upload_date >= ?", video.upload_date - 7.day)
           .where(dancers: { id: video.dancers.map(&:id) })
           .order(performance_number: :asc)
           .where(hidden: false)
