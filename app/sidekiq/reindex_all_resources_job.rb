@@ -6,6 +6,8 @@ class ReindexAllResourcesJob
     Follower.reindex!
     Song.reindex!
     Event.reindex!
-    Video.reindex!
+    Video.all.find_each do |video|
+      ReindexAllResourcesJob.perform_async(video.id)
+    end
   end
 end
