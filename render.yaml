@@ -99,8 +99,6 @@ services:
     envVars:
     - key: MEILI_HTTP_ADDR
       value: 0.0.0.0:80
-    - key: MEILI_MASTER_KEY
-      generateValue: true
     - key: MEILI_DB_PATH
       value: /meili-data
     - key: MEILI_ENV
