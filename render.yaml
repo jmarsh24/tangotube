@@ -22,11 +22,6 @@ services:
           name: tangotube-redis
           type: redis
           property: connectionString
-      - key: ELASTICSEARCH_URL
-        fromService:
-          name: tangotube-elasticsearch
-          type: pserv
-          property: hostport
       - fromGroup: tangotube-environment-group
       - key: MEILISEARCH_URL
         fromService:
@@ -52,11 +47,6 @@ services:
           name: tangotube-redis
           type: redis
           property: connectionString
-      - key: ELASTICSEARCH_URL
-        fromService:
-          name: tangotube-elasticsearch
-          type: pserv
-          property: hostport
       - fromGroup: tangotube-environment-group
       - key: MEILISEARCH_URL
         fromService:
