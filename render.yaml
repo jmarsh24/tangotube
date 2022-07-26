@@ -96,25 +96,6 @@ services:
     maxmemoryPolicy: noeviction
 
   - type: pserv
-    name: tangotube-elasticsearch
-    env: docker
-    dockerfilePath: "./elasticsearch/Dockerfile"
-    region: frankfurt
-    plan: standard
-    disk:
-      name: esdata
-      mountPath: /usr/share/elasticsearch/data
-      sizeGB: 50
-    autoDeploy: false
-    envVars:
-    - key: ES_JAVA_OPTS
-      value: "-Xms512m -Xmx512m"
-    - key: discovery.type
-      value: single-node
-    - key: cluster.name
-      value: elastic
-
-  - type: pserv
     name: tangotube-meilisearch
     env: docker
     dockerfilePath: "./meilisearch/Dockerfile"
