@@ -7,7 +7,7 @@ class ReindexAllResourcesJob
     Song.reindex!
     Event.reindex!
     Video.all.find_each do |video|
-      MySidekiqJob.perform_async(video.id)
+      MySidekiqJob.perform_async(video.id, false)
     end
   end
 end
