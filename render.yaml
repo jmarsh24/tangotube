@@ -104,7 +104,7 @@ services:
     - key: MEILI_DB_PATH
       value: /meili-data
     - key: MEILI_ENV
-      value: development
+      value: production
 
 databases:
   - name: tangotube-db
