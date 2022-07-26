@@ -168,8 +168,7 @@ class Video < ApplicationRecord
       "words",
       "attribute",
       "sort",
-      "exactness",
-      "upload_date:desc"
+      "exactness"
     ]
   end
 
