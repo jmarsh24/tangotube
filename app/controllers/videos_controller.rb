@@ -9,8 +9,8 @@ class VideosController < ApplicationController
   helper_method :sorting_params, :filtering_params
 
   def index
-    filter = "hidden=false"
     if meilisearch_filter_params.present?
+      filter = "hidden=false"
       meilisearch_filter_params.each do |k, v|
         filter += " AND #{k}='#{v}'"
       end
@@ -184,11 +184,11 @@ class VideosController < ApplicationController
   end
 
   def featured
-    if featured?
-      @video.featured = true
+    @video.featured = if featured?
+      true
     else
-      @video.featured = false
-    end
+      false
+                      end
     @video.save
     @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
