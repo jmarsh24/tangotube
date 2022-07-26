@@ -1,4 +1,12 @@
 class Event < ApplicationRecord
+  include MeiliSearch::Rails
+
+  meilisearch do
+    attribute :title
+
+    searchable_attributes [:title]
+  end
+
   has_many :videos, dependent: :nullify
   has_one_attached :profile_image
   has_one_attached :cover_image
