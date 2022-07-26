@@ -101,6 +101,9 @@ class Video < ApplicationRecord
       performance_date&.year
     end
     attribute :hidden
+    attribute :performance do
+      performance&.id
+    end
 
     searchable_attributes [
       :title,
@@ -160,7 +163,8 @@ class Video < ApplicationRecord
        :channel_title,
        :year,
        :popularity,
-       :date
+       :date,
+       :performance
       ]
 
     ranking_rules [
@@ -195,8 +199,7 @@ class Video < ApplicationRecord
   counter_culture [:song, :orchestra]
   counter_culture :event
 
-
-  scope :meilisearch_import, -> { includes(:song, :leader, :follower, :event, :channel, :performance, :dancers, :couples, :votes) }
+  scope :meilisearch_import, -> { includes(:song, :leader, :follower, :event, :channel, :performance, :dancers, :couples, :votes, :performance) }
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
