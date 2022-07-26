@@ -169,8 +169,7 @@ class Video < ApplicationRecord
       "attribute",
       "sort",
       "exactness",
-      "upload_date:desc",
-      "popularity:desc"
+      "upload_date:desc"
     ]
   end
 
