@@ -12,41 +12,66 @@ class FiltersController < ApplicationController
   private
 
   def videos_search
+    filter_array = []
+    filtering_params.map { |k, v| "#{k} = '#{v}'" }.each do |filter|
+      filter_array << filter
+    end
+
     @videos_search =
       Video.search(query_params.presence || "*",
-      where: filtering_params,
-      aggs: [:genre, :leader, :follower, :orchestra, :year],
-      misspellings: {edit_distance: 10})
+       filter: filter_array,
+        facets: ["genre", "leader", "follower", "orchestra", "year"]
+       )
   end
 
   def genres
-    @genres ||= @videos_search.aggs["genre"]["buckets"]
-                              .sort_by{ |b| b["doc_count"] }
-                              .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+    @genres =
+    @videos_search
+    .facets_distribution
+    .fetch("genre")
+    .sort_by{|_k, v| v}
+    .reverse
+    .map{ |k,v| ["#{k.titleize} (#{v})", k.parameterize] }
   end
 
   def leaders
-    @leaders ||= @videos_search.aggs["leader"]["buckets"]
-                              .sort_by{ |b| b["doc_count"] }
-                              .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+    @leaders =
+    @videos_search
+    .facets_distribution
+    .fetch("leader")
+    .sort_by{|_k, v| v}
+    .reverse
+    .map{ |k,v| ["#{k.titleize} (#{v})", k.parameterize] }
   end
 
   def followers
-    @followers ||= @videos_search.aggs["follower"]["buckets"]
-                                .sort_by{ |b| b["doc_count"] }
-                                .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+    @followers =
+    @videos_search
+    .facets_distribution
+    .fetch("follower")
+    .sort_by{|_k, v| v}
+    .reverse
+    .map{ |k,v| ["#{k.titleize} (#{v})", k.parameterize] }
   end
 
   def orchestras
-    @orchestras ||= @videos_search.aggs["orchestra"]["buckets"]
-                                  .sort_by{ |b| b["doc_count"] }
-                                  .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+    @orchestras =
+    @videos_search
+    .facets_distribution
+    .fetch("orchestra")
+    .sort_by{|_k, v| v}
+    .reverse
+    .map{ |k,v| ["#{k.titleize} (#{v})", k.parameterize] }
   end
 
   def years
-    @years ||= @videos_search.aggs["year"]["buckets"]
-                            .sort_by{ |b| b["key"] }
-                            .reverse.map{ |bucket| ["#{bucket['key'].titleize} (#{bucket['doc_count']})", bucket["key"].parameterize] }
+    @years =
+    @videos_search
+    .facets_distribution
+    .fetch("year")
+    .sort_by{|_k, v| v}
+    .reverse
+    .map{ |k,v| ["#{k.titleize} (#{v})", k.parameterize] }
   end
 
   def filtering_params
@@ -54,7 +79,7 @@ class FiltersController < ApplicationController
   end
 
   def query_params
-    permitted_params.slice(:query).to_h
+    permitted_params.slice(:query)[:query]
   end
 
   def permitted_params

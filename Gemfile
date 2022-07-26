@@ -6,7 +6,7 @@ ruby "3.1.2"
 gem "bootsnap", require: false
 gem "jsbundling-rails"
 gem "dartsass-rails"
-gem "rails", "~> 7.0.2.3"
+gem "rails", "~> 7.0.3.1"
 gem 'hiredis'
 gem "puma"
 gem "pg"
@@ -23,7 +23,6 @@ gem "aws-sdk-s3", "~> 1.114", require: false
 gem "counter_culture", "~> 3.2"
 gem "deepl-rb", require: 'deepl'
 gem "devise"
-gem "elasticsearch"
 gem "esbuild-rails"
 gem "faraday"
 gem "faraday-multipart"
@@ -32,18 +31,18 @@ gem "activejob-traffic_control", "~> 0.1.3"
 gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
+gem "meilisearch-rails", "~> 0.7.0"
 gem "nokogiri"
 gem "oj"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem "pay"
-gem "pagy"
+gem "pagy", :github => 'benbws/pagy', :branch => 'patch-1'
 gem "prettier"
 gem "pg_search"
 gem "rails_autolink"
 gem "rspotify"
-gem "searchkick"
 gem "shoelace-rails"
 gem "sidekiq"
 gem "sidekiq-throttled", "~> 0.16.1"
@@ -85,11 +84,3 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
-
-
-
-
-
-
-
-

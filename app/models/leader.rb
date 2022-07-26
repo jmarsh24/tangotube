@@ -2,8 +2,13 @@ class Leader < ApplicationRecord
   include FullNameable
   include Reviewable
   include Normalizeable
+  include MeiliSearch::Rails
 
-  searchkick word_middle: [:name]
+  meilisearch do
+    attribute :name
+
+    searchable_attributes [:name]
+  end
 
   validates :name, presence: true, uniqueness: true
 
@@ -12,7 +17,7 @@ class Leader < ApplicationRecord
   has_many :song, through: :videos
 
   after_create :find_videos
-  after_commit { videos.find_each(&:reindex) }
+  after_commit { videos.find_each(&:reindex!) }
 
   def find_videos
     Video.with_dancer_name_in_title(name).find_each do |video|
@@ -20,9 +25,4 @@ class Leader < ApplicationRecord
     end
   end
 
-  def search_data
-    {
-      name:
-    }
-  end
 end

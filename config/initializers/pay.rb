@@ -5,8 +5,6 @@ Pay.setup do |config|
   config.application_name = "TANGOTUBETV"
   config.support_email = "jmarsh24@gmail.com"
 
-  config.send_emails = true
-
   config.default_product_name = "Subscription"
   config.default_plan_name = "Premium"
 

@@ -133,7 +133,7 @@ module VideosHelper
       if key == "genre"
         genre_array << value
       end
-      if key == "dancer"
+      if key == "leader"
         dancer_array << value
       end
       if key == "follower"

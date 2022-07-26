@@ -3,7 +3,11 @@ class Follower < ApplicationRecord
   include Reviewable
   include Normalizeable
 
-  searchkick word_middle: [:name]
+  include MeiliSearch::Rails
+
+  meilisearch do
+    attribute :name
+  end
 
   validates :name, presence: true, uniqueness: true
 
@@ -12,7 +16,7 @@ class Follower < ApplicationRecord
   has_many :song, through: :videos
 
   after_create :find_videos
-  after_commit { videos.find_each(&:reindex) }
+  after_commit { videos.find_each(&:reindex!) }
 
   def find_videos
     Video.with_dancer_name_in_title(name).find_each do |video|
@@ -21,7 +25,7 @@ class Follower < ApplicationRecord
   end
 
   def reindex_video
-    video.reindex
+    video.reindex!
   end
 
   def search_data
