@@ -5,7 +5,7 @@ class LeadersController < ApplicationController
         format.html { @leaders = Leader.all.order(:id)}
         format.json do
           render json:
-          Leader.search(params[:q], order: :name).map { |leader| { text: leader.name, value: leader.id } }
+          Leader.search(params[:q], sort: :name).map { |leader| { text: leader.name, value: leader.id } }
       end
     end
   end

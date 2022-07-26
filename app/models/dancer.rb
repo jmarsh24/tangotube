@@ -12,7 +12,6 @@ class Dancer < ApplicationRecord
   has_one_attached :cover_image
   enum gender: { male: 0, female: 1 }
 
-  searchkick word_middle: [:full_name]
 
   after_validation :set_slug, only: [:create, :update]
   after_save :find_videos

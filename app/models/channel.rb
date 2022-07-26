@@ -1,12 +1,17 @@
 class Channel < ApplicationRecord
   include Reviewable
   include Importable
+  include MeiliSearch::Rails
 
-  searchkick
+  meilisearch do
+    attribute :title
+
+    searchable_attributes [:title]
+  end
 
   has_many :videos, dependent: :destroy
 
-  after_save { videos.find_each(&:reindex) }
+  after_save { videos.find_each(&:reindex!) }
 
   validates :channel_id, presence: true, uniqueness: true
 
@@ -31,11 +36,5 @@ class Channel < ApplicationRecord
 
   def count_changed?
     total_videos_count_changed? || videos_count_changed?
-  end
-
-  def search_data
-    {
-      title:
-    }
   end
 end

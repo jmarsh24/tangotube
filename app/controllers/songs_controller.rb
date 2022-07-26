@@ -10,8 +10,7 @@ class SongsController < ApplicationController
             render json:
             Song.search(params[:q],
               match: :word_middle,
-              order: :title,
-              misspellings: { below: 2 },
+              sort: :title,
             ).map { |song| { text: song.full_title, value: song.id } }
           end
       end

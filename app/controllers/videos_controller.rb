@@ -9,9 +9,10 @@ class VideosController < ApplicationController
   helper_method :sorting_params, :filtering_params
 
   def index
-    @page = page
     @sort_column = sort_column
     @sort_direction = sort_direction
+
+    filter_array = []
 
     filters = filtering_params.except(:query, :liked, :watched)
 
@@ -25,96 +26,57 @@ class VideosController < ApplicationController
 
     if filtering_params.include?("watched")
       if filtering_params["watched"] == "true"
-        filters.merge!({ watched_by: current_user.id })
+        filters.merge!({ watched_by: user_id })
       end
       if filtering_params["watched"] == "false"
-        filters.merge!({ not_watched_by: current_user.id })
+        filters.merge!({ not_watched_by: user_id })
       end
     end
 
     if filtering_params.include?("liked")
       if filtering_params["liked"] == "true"
-        filters.merge!({ liked_by: current_user.id })
+        filters.merge!({ liked_by: user_id })
       end
 
       if filtering_params["liked"] == "false"
-        filters.merge!({ disliked_by: current_user.id })
+        filters.merge!({ disliked_by: user_id })
+      end
+    end
+
+    if filtering_params.except("query").except("watched").except("liked").present?
+      filtering_params.except("query").except("watched").except("liked").to_h.map { |k, v| "#{k} = '#{v}'" }.each do |filter|
+        filter_array << filter
       end
     end
 
     if filtering_params.present? || sorting_params.present?
-      videos = Video.pagy_search(query_without_stop_words(filtering_params[:query]).presence || "*",
-                                          where: filters.merge(hidden: false),
-                                          order:,
-                                          includes: [:song, :leader, :follower, :event, :channel],
-                                          boost_by: [:popularity],
-                                          misspellings: { edit_distance: 5  },
-                                          body_options: { track_total_hits: true  },
-                                          boost_by_recency: { updated_at: {scale: "7d", decay: 0.5  } },
-                                          boost_where: {  watched_by: user_id,
-                                                          has_follower: true,
-                                                          has_leader: true,
-                                                          has_song: true}
-                                          )
+      videos =  Video.includes(:song, :leader, :follower, :event, :channel)
+                      .references(:song, :leader, :follower, :event, :channel)
+                      .pagy_search(params[:query],
+                        filter: filter_array,
+                        sort: [ "#{sort_column}:#{sort_direction}" ])
+
+      @pagy, @videos = pagy_meilisearch(videos, items: 24)
     else
-      videos = Video.pagy_search("*",
-        includes: [:song, :leader, :follower, :event, :channel],
-        body: {
-          query: {
-            function_score: {
-              query: {
-                bool: {
-                  must: [
-                    {
-                      match: {
-                        has_leader: true
-                      }
-                    },
-                    {
-                      match: {
-                        has_follower: true
-                      }
-                    },
-                    {
-                      match: {
-                        viewed_within_last_month: true
-                      }
-                    },
-                    {
-                      match: {
-                        featured: false
-                      }
-                    }
-                  ]
-                }
+      @featured_videos =
+      Video.includes(:song, :leader, :follower, :event, :channel)
+            .references(:song, :leader, :follower, :event, :channel)
+            .featured?
+            .has_leader
+            .has_follower
+            .order("random()")
+            .limit(24)
 
-              },
-              random_score: {
-                seed: DateTime.now.to_i
-              }
-            }
-          }
-        })
+      videos =
+      Video.includes(:song, :leader, :follower, :event, :channel)
+            .references(:song, :leader, :follower, :event, :channel)
+            .most_viewed_videos_by_month
+            .has_leader
+            .has_follower
+            .order("random()")
 
-      if page == 1
-        featured_videos = Video.pagy_search("*", includes: [:song, :leader, :follower, :event, :channel],
-          body: {
-            query: {
-              function_score: {
-                query: {
-                  match: { featured: true },
-                  },
-                random_score: {
-                  seed: DateTime.now.to_i
-                }
-              }
-            }
-          })
-        @pagy_featured_videos, @featured_videos = pagy_searchkick(featured_videos, items: 24)
-      end
+      @pagy, @videos = pagy(videos, items: 24)
     end
-
-    @pagy, @videos = pagy_searchkick(videos, items: 24)
 
     respond_to do |format|
       format.html # GET
@@ -154,30 +116,30 @@ class VideosController < ApplicationController
       MarkVideoAsWatchedJob.perform_async(show_params[:v], current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
-    @video.reindex
+    @video.index!
   end
 
   def update
     @clip = Clip.new
     respond_to do |format|
       if @video.update(video_params)
-        # format.turbo_stream do
-        #   render "videos/show", video: @video
-        # end
+        format.turbo_stream do
+          render "videos/show", video: @video
+        end
         format.html do
           render partial: "videos/show/video_info_details", video: @video
         end
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
-      @video.reindex
+      @video.index!
     end
   end
 
   def create
     @video = Video.create(youtube_id: params[:video][:youtube_id])
     fetch_new_video
-    @video.reindex
+    @video.index!
     redirect_to root_path,
                 notice:
                   "Video Sucessfully Added: The video must be approved before the videos are added"
@@ -186,7 +148,7 @@ class VideosController < ApplicationController
   def hide
     @video.hidden = true
     @video.save
-    @video.reindex
+    @video.index!
     render turbo_stream: turbo_stream.remove("video_#{@video.youtube_id}")
   end
 
@@ -196,7 +158,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "like"
     end
-    @video.reindex
+    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -206,7 +168,7 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user, vote_scope: "like"
     end
-    @video.reindex
+    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -216,7 +178,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "bookmark"
     end
-    @video.reindex
+    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -226,7 +188,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "watchlist"
     end
-    @video.reindex
+    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -236,17 +198,18 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user, vote_scope: "watchlist"
     end
-    @video.reindex
+    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   def featured
     @video.toggle!(:featured)
-    @video.reindex
+    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
-  def banner; end
+  def banner
+  end
 
   private
 
@@ -323,10 +286,6 @@ class VideosController < ApplicationController
     @current_search = params[:query]
   end
 
-  def page
-    @page ||= params.permit(:page).fetch(:page, 1).to_i
-  end
-
   def video_params
     params
       .require(:video)
@@ -363,25 +322,12 @@ class VideosController < ApplicationController
     ).to_h
   end
 
-  def stop_words
-    %w[and or the a an of to y e &]
-  end
-
-  def stop_words_regex
-    /\b(#{stop_words.map { |word| Regexp.escape(word) }.join('|')})\b/
-  end
-
-  def query_without_stop_words(query)
-    return nil if query.nil?
-    query.gsub(stop_words_regex, "").gsub("'", "").split.map(&:strip).join(" ")
-  end
-
   def sort_column
-    @sort_column ||= sorting_params[:sort]
+    @sort_column ||= sorting_params[:sort] || "popularity"
   end
 
   def sort_direction
-    @sort_direction ||= sorting_params[:direction]
+    @sort_direction ||= sorting_params[:direction] || "desc"
   end
 
   def sorting_params

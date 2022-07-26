@@ -1,6 +1,4 @@
 class Event < ApplicationRecord
-  searchkick word_middle: [:title, :city, :country]
-
   has_many :videos, dependent: :nullify
   has_one_attached :profile_image
   has_one_attached :cover_image

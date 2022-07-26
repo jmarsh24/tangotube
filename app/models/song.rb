@@ -1,5 +1,11 @@
 class Song < ApplicationRecord
-  searchkick word_middle: [:title, :artist]
+  include MeiliSearch::Rails
+
+  meilisearch do
+    attribute :full_title
+
+    searchable_attributes [:full_title]
+  end
 
   validates :genre, presence: true
   validates :title, presence: true

@@ -23,7 +23,7 @@
     </div>
   <% end %>
   <div class="next-link" id="next_link">
-    <% if @pagy.next %>
+    <% if @pagy.next.present? %>
       <form action="<%= pagy_url_for(@pagy, @pagy.next) %>" method="post">
         <button type="submit" data-controller="autoclick"></button>
       </form>
