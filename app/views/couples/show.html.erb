@@ -25,7 +25,10 @@
     </div>
   </div>
   <div class="index-container">
-    <%= turbo_frame_tag :videos, src: videos_path(couples: @couple.slug) %>
+    <div class="video-section__videos" id="results">
+      <%= render @videos %>
+    </div>
+    <%#= turbo_frame_tag :videos, src: videos_path(couples: @couple.slug) %>
   </div>
 </div>
 <div id="next_link" style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;">

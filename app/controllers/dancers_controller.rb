@@ -19,8 +19,16 @@ class DancersController < ApplicationController
 
   # GET /dancers/1
   def show
-    @orchestras = @dancer.orchestras.distinct.includes(profile_image_attachment: :blob).order(videos_count: :desc)
-    videos = @dancer.videos
+    @orchestras = @dancer.orchestras
+                         .distinct
+                         .includes(profile_image_attachment: :blob)
+                         .order(videos_count: :desc)
+
+
+    videos = Video.includes(:dancers, :orchestra)
+                  .references(:dancers, :orchestra)
+                  .where(dancers: { id: @dancer.id })
+
     @pagy, @videos = pagy(videos, items: 12)
 
     respond_to do |format|
@@ -35,7 +43,8 @@ class DancersController < ApplicationController
   end
 
   # GET /dancers/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /dancers
   def create
@@ -83,5 +92,11 @@ class DancersController < ApplicationController
               :couple_id,
               :profile_image,
               :cover_image)
+    end
+
+    def filtering_params
+      params.permit(:orchestra,
+                    :year,
+                    :genre)
     end
 end
