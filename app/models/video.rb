@@ -1,9 +1,9 @@
 class Video < ApplicationRecord
   acts_as_votable
   include Filterable
-  include MeiliSearch::Rails
-  extend Pagy::Meilisearch
+  include SchemaSearchable
   ActiveRecord_Relation.include Pagy::Meilisearch
+  after_touch :index!
 
   meilisearch enqueue: :trigger_sidekiq_job do
     attribute :title
@@ -149,7 +149,8 @@ class Video < ApplicationRecord
       :has_follower,
       :viewed_within_last_month,
       :genre,
-      :year
+      :year,
+      :hidden
     ]
     sortable_attributes [
        :view_count,
@@ -194,7 +195,6 @@ class Video < ApplicationRecord
   counter_culture [:song, :orchestra]
   counter_culture :event
 
-  after_update :index!
 
   scope :meilisearch_import, -> { includes(:song, :leader, :follower, :event, :channel, :performance, :dancers, :couples, :votes) }
 
@@ -279,6 +279,16 @@ class Video < ApplicationRecord
 
   class << self
 
+    def search_includes
+      %i[
+        song
+        leader
+        follower
+        event
+        channel
+      ]
+    end
+
     def with_dancer_name_in_title(name)
       search( name,
               fields: [:title] )
@@ -310,10 +320,6 @@ class Video < ApplicationRecord
 
     def most_viewed_videos_by_month
       where( id: Ahoy::Event.most_viewed_videos_by_month)
-    end
-
-    def trigger_sidekiq_job(record, remove)
-      MySidekiqJob.perform_async(record.id, remove)
     end
   end
 
