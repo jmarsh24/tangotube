@@ -9,71 +9,52 @@ class VideosController < ApplicationController
   helper_method :sorting_params, :filtering_params
 
   def index
-    @sort_column = sort_column
-    @sort_direction = sort_direction
-
-    filter_array = []
-
-    filters = filtering_params.except(:query, :liked, :watched)
-
-    if sorting_params.present?
-      order = { sort_column => sort_direction }
-    end
-
-    if user_signed_in?
-      user_id = current_user.id
-    end
-
-    if filtering_params.include?("watched")
-      if filtering_params["watched"] == "true"
-        filters.merge!({ watched_by: user_id })
-      end
-      if filtering_params["watched"] == "false"
-        filters.merge!({ not_watched_by: user_id })
+    filter = "hidden=false"
+    if meilisearch_filter_params.present?
+      meilisearch_filter_params.each do |k, v|
+        filter += " AND #{k}='#{v}'"
       end
     end
 
-    if filtering_params.include?("liked")
-      if filtering_params["liked"] == "true"
-        filters.merge!({ liked_by: user_id })
+    if filtering_params.include?(:watched)
+      if filtering_params[:watched] == "true"
+        filter += " AND watched_by='#{current_user.id}'"
       end
-
-      if filtering_params["liked"] == "false"
-        filters.merge!({ disliked_by: user_id })
+      if filtering_params[:watched] == "false"
+        filter += " AND not_watched_by='#{current_user.id}'"
       end
     end
 
-    if filtering_params.except("query").except("watched").except("liked").present?
-      filtering_params.except("query").except("watched").except("liked").to_h.map { |k, v| "#{k} = '#{v}'" }.each do |filter|
-        filter_array << filter
+    if filtering_params.include?(:liked)
+      if filtering_params[:liked] == "true"
+        filter += " AND liked_by='#{current_user.id}'"
+      end
+
+      if filtering_params[:liked] == "false"
+        filter += " AND disliked_by='#{current_user.id}'"
       end
     end
 
     if filtering_params.present? || sorting_params.present?
-      videos =  Video.includes(:song, :leader, :follower, :event, :channel)
-                      .references(:song, :leader, :follower, :event, :channel)
-                      .pagy_search(params[:query],
-                        filter: filter_array,
+      videos =  Video.includes(Video.search_includes)
+                      .pagy_search(filtering_params[:query].presence || "*",
+                        filter:,
                         sort: [ "#{sort_column}:#{sort_direction}" ])
 
       @pagy, @videos = pagy_meilisearch(videos, items: 24)
     else
-      @featured_videos =
-      Video.includes(:song, :leader, :follower, :event, :channel)
-            .references(:song, :leader, :follower, :event, :channel)
-            .featured?
-            .has_leader
-            .has_follower
-            .order("random()")
-            .limit(24)
+      @featured_videos = Video.includes(Video.search_includes)
+                              .featured?
+                              .has_leader
+                              .has_follower
+                              .order("random()")
+                              .limit(24)
 
-      videos =
-      Video.includes(:song, :leader, :follower, :event, :channel)
-            .references(:song, :leader, :follower, :event, :channel)
-            .most_viewed_videos_by_month
-            .has_leader
-            .has_follower
-            .order("random()")
+      videos = Video.includes(Video.search_includes)
+                    .most_viewed_videos_by_month
+                    .has_leader
+                    .has_follower
+                    .order("random()")
 
       @pagy, @videos = pagy(videos, items: 24)
     end
@@ -203,7 +184,12 @@ class VideosController < ApplicationController
   end
 
   def featured
-    @video.toggle!(:featured)
+    if featured?
+      @video.featured = true
+    else
+      @video.featured = false
+    end
+    @video.save
     @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
@@ -214,8 +200,8 @@ class VideosController < ApplicationController
   private
 
   def set_video
-    @video = Video.includes(:song, :leader, :follower, :event, :channel).find_by(youtube_id: show_params[:v]) if show_params[:v]
-    @video = Video.includes(:song, :leader, :follower, :event, :channel).find_by(youtube_id: show_params[:id]) if show_params[:id]
+    @video = Video.includes(Video.search_includes).find_by(youtube_id: show_params[:v]) if show_params[:v]
+    @video = Video.includes(Video.search_includes).find_by(youtube_id: show_params[:id]) if show_params[:id]
     @video = Video.find_by(youtube_id: show_params[:video_id]) if show_params[:video_id]
   end
 
@@ -228,7 +214,7 @@ class VideosController < ApplicationController
   end
 
   def videos_from_this_performance
-    @videos_from_this_performance = Video.includes(:song, :leader, :follower, :event, :channel)
+    @videos_from_this_performance = Video.includes(Video.search_includes)
                                          .where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
                                          .where(channel_id: @video.channel_id)
@@ -240,7 +226,7 @@ class VideosController < ApplicationController
   end
 
   def videos_with_same_dancers
-    @videos_with_same_dancers = Video.includes(:song, :leader, :follower, :event, :channel)
+    @videos_with_same_dancers = Video.includes(Video.search_includes)
                                          .where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
                                          .has_leader.has_follower
@@ -252,7 +238,7 @@ class VideosController < ApplicationController
   end
 
   def videos_with_same_event
-    @videos_with_same_event = Video.includes(:song, :leader, :follower, :event, :channel)
+    @videos_with_same_event = Video.includes(Video.search_includes)
                                    .where(event_id: @video.event_id)
                                    .where.not(event: nil)
                                    .where("upload_date <= ?", @video.upload_date + 7.days)
@@ -264,7 +250,7 @@ class VideosController < ApplicationController
   end
 
   def videos_with_same_song
-    @videos_with_same_song = Video.includes(:song, :leader, :follower, :event, :channel)
+    @videos_with_same_song = Video.includes(Video.search_includes)
                                   .where(song_id: @video.song_id)
                                   .has_leader.has_follower
                                   .where(hidden: false)
@@ -274,7 +260,7 @@ class VideosController < ApplicationController
   end
 
   def videos_with_same_channel
-    @videos_with_same_channel = Video.includes(:song, :leader, :follower, :event, :channel)
+    @videos_with_same_channel = Video.includes(Video.search_includes)
                                   .where(channel_id: @video.channel_id)
                                   .has_leader.has_follower
                                   .where(hidden: false)
@@ -346,5 +332,9 @@ class VideosController < ApplicationController
     if filtering_params.fetch(:query, false).present?
       Leader.full_name_search(filtering_params.fetch(:query, false)) || Follower.full_name_search(filtering_params.fetch(:query, false))
     end
+  end
+
+  def meilisearch_filter_params
+   @meilisearch_filter_params ||= filtering_params.except(:query, :watched, :liked)
   end
 end

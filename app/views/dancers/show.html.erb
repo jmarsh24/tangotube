@@ -42,27 +42,22 @@
             <% end %>
           </div>
         </div>
-        <% if false %>
-          <div style="padding: 32px; 16px; max-width: 1660px;">
-            <h1>
-              Orchestras
-            </h1>
-            <div style="height: 250px; width: 300px; overflow-y: auto;">
-              <% @orchestras.each do |orchestra| %>
-                <%= link_to dancer_path(orchestra: orchestra.slug), style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-                  <%= image_tag dancer_avatar(orchestra), style: "border-radius: 50%; width: 32px;" %>
-                  <%= orchestra.name.titleize %>
-                <% end %>
+        <div style="padding: 32px; 16px; max-width: 1660px;">
+          <h1>
+            Orchestras
+          </h1>
+          <div style="height: 250px; width: 300px; overflow-y: auto;">
+            <% @orchestras.each do |orchestra| %>
+              <%= link_to dancer_path(orchestra: orchestra.slug), style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+                <%= image_tag dancer_avatar(orchestra), style: "border-radius: 50%; width: 32px;" %>
+                <%= orchestra.name.titleize %>
               <% end %>
-            </div>
+            <% end %>
           </div>
-        <% end %>
+        </div>
       </div>
       <div class="index-container">
-        <div class="video-section__videos" id="results">
-          <%= render @videos %>
-        </div>
-        <%#= turbo_frame_tag :videos, src: videos_path(dancer: @dancer.slug) %>
+        <%= turbo_frame_tag :videos, src: videos_path(dancer: @dancer.slug, orchestra: "osvaldo") %>
       </div>
     </div>
   </div>
