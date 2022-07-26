@@ -107,7 +107,7 @@ services:
     disk:
       name: meili-data
       mountPath: /meili-data
-      sizeGB: 10
+      sizeGB: 50
     autoDeploy: false
     envVars:
     - key: MEILI_HTTP_ADDR
