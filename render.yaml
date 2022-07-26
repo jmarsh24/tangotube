@@ -32,7 +32,7 @@ services:
         fromService:
           name: tangotube-meilisearch
           type: pserv
-          property: hostport
+          envVarKey: MEILI_MASTER_KEY
 
   - type: worker
     name: tangotube-sidekiq
@@ -61,7 +61,7 @@ services:
         fromService:
           name: tangotube-meilisearch
           type: pserv
-          property: hostport
+          envVarKey: MEILI_MASTER_KEY
 
   - type: cron
     name: tangotube-cron
@@ -87,7 +87,7 @@ services:
         fromService:
           name: tangotube-meilisearch
           type: pserv
-          property: hostport
+          envVarKey: MEILI_MASTER_KEY
 
   - name: tangotube-redis
     type: redis
