@@ -27,11 +27,11 @@
         </div>
       </div>
       <div style="display:flex; gap: 16px;">
-        <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
+        <div style="padding: 32px; 16px; max-width: 1660px;">
           <h1>
             Dance Partners
           </h1>
-          <div style="height: 250px; width: 300px; overflow: auto;">
+          <div style="height: 250px; width: 300px; overflow-y: auto;">
             <% @dancer.couples.order(videos_count: :desc ).each do |couple| %>
               <% partner = couple.partner%>
               <%= link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
@@ -42,23 +42,27 @@
             <% end %>
           </div>
         </div>
-        <div style="padding: 32px; 16px; width: 100%; max-width: 1660px;">
-          <h1>
-            Orchestras
-          </h1>
-          <div style="height: 250px; width: 450px; overflow: auto;">
-            <% @orchestras.each do |orchestra| %>
-              <%= link_to orchestra, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-                <%= image_tag dancer_avatar(orchestra), style: "border-radius: 50%; width: 32px;" %>
-                <%= orchestra.name %>
-                <%= "(#{orchestra.videos_count})" %>
+        <% if false %>
+          <div style="padding: 32px; 16px; max-width: 1660px;">
+            <h1>
+              Orchestras
+            </h1>
+            <div style="height: 250px; width: 300px; overflow-y: auto;">
+              <% @orchestras.each do |orchestra| %>
+                <%= link_to dancer_path(orchestra: orchestra.slug), style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
+                  <%= image_tag dancer_avatar(orchestra), style: "border-radius: 50%; width: 32px;" %>
+                  <%= orchestra.name.titleize %>
+                <% end %>
               <% end %>
-            <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
       <div class="index-container">
-        <%= turbo_frame_tag :videos, src: videos_path(dancer: @dancer.name) %>
+        <div class="video-section__videos" id="results">
+          <%= render @videos %>
+        </div>
+        <%#= turbo_frame_tag :videos, src: videos_path(dancer: @dancer.slug) %>
       </div>
     </div>
   </div>
