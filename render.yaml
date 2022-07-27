@@ -102,7 +102,7 @@ services:
     name: tangotube-meilisearch
     env: docker
     dockerfilePath: "./meilisearch/Dockerfile"
-    dockerCommand: ./meilisearch --enable-auto-batching
+    dockerCommand: "/bin/sh -c /bin/meilisearch --enable-auto-batching"
     region: frankfurt
     plan: standard
     disk:
