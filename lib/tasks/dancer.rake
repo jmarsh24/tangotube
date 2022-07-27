@@ -59,5 +59,6 @@ namespace :dancer do
     Dancer.where(slug: [nil, ""]).each do |dancer|
       dancer.slug = dancer.name.parameterize
       dancer.save
+    end
   end
 end
