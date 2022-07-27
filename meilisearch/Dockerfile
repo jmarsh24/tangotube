@@ -1,5 +1,5 @@
 FROM getmeili/meilisearch:latest
 
-CMD /bin/meilisearch --enable-auto-batching
+CMD ./meilisearch --enable-auto-batching
 
 EXPOSE 7700
