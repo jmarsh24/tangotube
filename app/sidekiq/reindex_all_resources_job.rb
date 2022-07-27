@@ -14,8 +14,6 @@ class ReindexAllResourcesJob
         }
       }
     )
-    Video.all.find_each do |video|
-      MeilisearchEnqueueJob.perform_async("Video", video.id, false)
-    end
+    Video.reindex!
   end
 end
