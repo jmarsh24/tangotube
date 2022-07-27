@@ -54,4 +54,10 @@ namespace :dancer do
     rescue ActiveRecord::RecordNotUnique
     end
   end
+
+  task :create_slug_for_dancers_with_empty_or_nil_string => :environment do
+    Dancer.where(slug: [nil, ""]).each do |dancer|
+      dancer.slug = dancer.name.parameterize
+      dancer.save
+  end
 end
