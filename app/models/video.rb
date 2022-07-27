@@ -16,7 +16,7 @@ class Video < ApplicationRecord
     attribute :youtube_song
     attribute :youtube_artist
     attribute :dancer do
-      dancers.pluck(:name)
+      dancers.map { |dancer| dancer&.name&.parameterize }
     end
     attribute :acr_cloud_artist_name
     attribute :acr_cloud_track_name
@@ -127,6 +127,7 @@ class Video < ApplicationRecord
     ]
 
     filterable_attributes [
+      :title,
       :orchestra,
       :year,
       :channel,
@@ -191,7 +192,8 @@ class Video < ApplicationRecord
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
-  has_many :couples, through: :dancers
+  has_many :couple_videos
+  has_many :couples, through: :couple_videos
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
@@ -292,9 +294,9 @@ class Video < ApplicationRecord
       ]
     end
 
-    def with_dancer_name_in_title(name)
-      search( name,
-              fields: [:title] )
+    def with_dancer_name_in_title(_name)
+      search( "*",
+              filter: ["title = name"] )
     end
 
     def filter_by_watched(boolean, user)

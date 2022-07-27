@@ -30,6 +30,6 @@ module DancersHelper
       :liked,
       :id,
       :query,
-      :dancer).to_h.flatten.join("_")
+      :dancer)
   end
 end

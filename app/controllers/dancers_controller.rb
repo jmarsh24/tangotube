@@ -25,12 +25,6 @@ class DancersController < ApplicationController
                          .order(videos_count: :desc)
 
 
-    videos = Video.includes(:dancers, :orchestra)
-                  .references(:dancers, :orchestra)
-                  .where(dancers: { id: @dancer.id })
-
-    @pagy, @videos = pagy(videos, items: 12)
-
     respond_to do |format|
       format.html # GET
       format.turbo_stream # POST
