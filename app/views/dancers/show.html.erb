@@ -1,64 +1,62 @@
-<div style="max-width: 1660px; width: 100%;">
-  <%= image_tag dancer_cover(@dancer), style: "width: 100%; height: 475px; object-fit: cover;" %>
-  <div style="position: relative; width: 100%;">
-    <div style="padding: 0 16px;">
-      <%= image_tag dancer_avatar(@dancer), style: "border-radius: 50%; width: 250px; height: 250px; position: absolute; top: -75px; left: 125px;" %>
-      <div style=" width: 100%; max-width: 1660px; height: 200px; padding-right: 16px; padding-left: 425px;">
-        <h1 style="font-size: 64px;">
-          <%= @dancer.name %>
+<div class="dancer-show">
+  <%= image_tag dancer_cover(@dancer), class: "dancer-show__cover-image" %>
+  <div class="dancer-show__body">
+    <%= image_tag dancer_avatar(@dancer), class: "dancer-show__avatar" %>
+    <div class="dancer-show__body__header">
+      <h1>
+        <%= @dancer.name %>
+      </h1>
+      <div class="dancer-show__admin">
+        <%= "#{@dancer.videos_count} Videos" %>
+        <% if current_user&.admin? %>
+          <sl-dropdown>
+            <sl-button slot="trigger">
+              <sl-icon slot="prefix" name="three-dots"></sl-icon>
+            </sl-button>
+            <sl-menu>
+              <%= link_to edit_dancer_path(@dancer) do %>
+                <sl-menu-item>Edit</sl-menu-item>
+              <% end %>
+              <%= button_to @dancer, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } do %>
+                <sl-button variant="danger" outline>Delete</sl-button>
+              <% end %>
+            </sl-menu>
+          </sl-dropdown>
+        <% end %>
+      </div>
+    </div>
+    <div class="dancer-show__facets">
+      <div class="dancer-show__facets__facet">
+        <h1>
+          Dance Partners
         </h1>
-        <div style="display: flex; justify-content: space-between;">
-          <%= "#{@dancer.videos_count} Videos" %>
-          <% if current_user&.admin? %>
-            <sl-dropdown>
-              <sl-button slot="trigger">
-                <sl-icon slot="prefix" name="three-dots"></sl-icon>
-              </sl-button>
-              <sl-menu>
-                <%= link_to edit_dancer_path(@dancer) do %>
-                  <sl-menu-item>Edit</sl-menu-item>
-                <% end %>
-                <%= button_to @dancer, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } do %>
-                  <sl-button variant="danger" outline>Delete</sl-button>
-                <% end %>
-              </sl-menu>
-            </sl-dropdown>
+        <div class="dancer-show__facets__facet__menu">
+          <% @dancer.couples.order(videos_count: :desc).each do |couple| %>
+            <% partner = couple.partner%>
+            <%= link_to couple, class: "dancer-show__facets__facet__menu__item" do %>
+              <%= image_tag dancer_avatar(partner), class: "dancer-show__facets__facet__menu__item__avatar" %>
+              <%= partner.name %>
+              <%= "(#{couple.videos_count})" %>
+            <% end %>
           <% end %>
         </div>
       </div>
-      <div style="display:flex; gap: 16px;">
-        <div style="padding: 32px; 16px; max-width: 1660px;">
-          <h1>
-            Dance Partners
-          </h1>
-          <div style="height: 250px; width: 300px; overflow-y: auto;">
-            <% @dancer.couples.order(videos_count: :desc ).each do |couple| %>
-              <% partner = couple.partner%>
-              <%= link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-                <%= image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;" %>
-                <%= partner.name %>
-                <%= "(#{couple.videos_count})" %>
-              <% end %>
+      <div class="dancer-show__facets__facet">
+        <h1>
+          Orchestras
+        </h1>
+        <div class="dancer-show__facets__facet__menu">
+          <% @orchestras.each do |orchestra| %>
+            <%= link_to dancer_path(orchestra: orchestra.slug), class: "dancer-show__facets__facet__menu__item" do %>
+              <%= image_tag dancer_avatar(orchestra), class: "dancer-show__facets__facet__menu__item__avatar" %>
+              <%= orchestra.name.titleize %>
             <% end %>
-          </div>
-        </div>
-        <div style="padding: 32px; 16px; max-width: 1660px;">
-          <h1>
-            Orchestras
-          </h1>
-          <div style="height: 250px; width: 300px; overflow-y: auto;">
-            <% @orchestras.each do |orchestra| %>
-              <%= link_to dancer_path(orchestra: orchestra.slug), style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do %>
-                <%= image_tag dancer_avatar(orchestra), style: "border-radius: 50%; width: 32px;" %>
-                <%= orchestra.name.titleize %>
-              <% end %>
-            <% end %>
-          </div>
+          <% end %>
         </div>
       </div>
-      <div class="index-container">
-        <%= turbo_frame_tag :videos, src: videos_path(dancer: @dancer.slug, orchestra: params[:orchestra], ) %>
-      </div>
+    </div>
+    <div class="index-container">
+      <%= turbo_frame_tag :videos, src: videos_path(dancer: @dancer.slug, orchestra: params[:orchestra]) %>
     </div>
   </div>
 </div>
