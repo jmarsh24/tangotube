@@ -29,6 +29,4 @@ COPY . .
 RUN rm -rf node_modules vendor
 RUN gem install rails bundler
 RUN yarn install
-
-# Execute the Procfile
-CMD ["bin/run-dev.sh"]
+RUN bundle install
