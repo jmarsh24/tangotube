@@ -31,6 +31,6 @@ RUN gem install rails bundler
 RUN yarn install
 RUN bundle install
 RUN RAILS_SERVE_STATIC_FILES=true \
-  RAILS_MASTER_KEY=054ef579f31d3f4ce3d0b2ed3a2f1098eb8780a18c0628f50f39dbf5a2f68becae7997dc37d336ae1cfb661b77c1d8ea6f9bb7e9d5d5f37de51bd7b405403aae \
+  RAILS_MASTER_KEY=6153bc2799ba60890c3cbf3be7b82ebe \
   bundle exec rails assets:precompile
 
