@@ -31,51 +31,49 @@
         %>
       </div>
     <% end %>
-    <div class="video-bottom-section">
-      <div class="video-details">
-        <div class="video-title">
-          <% video.dancers.each do |dancer| %>
-            <sl-tag size="small">
-              <%= link_to dancer, { 'data-turbo-frame': "_top" } do %>
-                <%= dancer.name %>
-              <% end %>
-            </sl-tag>
-          <% end %>
-          <%#= link_to_primary_title(video.display.dancer_names,
+    <div class="video-details">
+      <div class="video-title">
+        <% video.dancers.each do |dancer| %>
+          <sl-tag size="small">
+            <%= link_to dancer, { 'data-turbo-frame': "_top" } do %>
+              <%= dancer.name %>
+            <% end %>
+          </sl-tag>
+        <% end %>
+        <%#= link_to_primary_title(video.display.dancer_names,
                                     video.title,
                                     video.display.any_song_attributes,
                                     video.youtube_id) %>
-        </div>
-        <% if video.display.any_song_attributes.present? %>
-          <div class="video-details__item">
-            <sl-tag size="small">
-              <%= link_to_song(video.display.el_recodo_attributes,
+      </div>
+      <% if video.display.any_song_attributes.present? %>
+        <div class="video-details__item">
+          <sl-tag size="small">
+            <%= link_to_song(video.display.el_recodo_attributes,
                                 video.display.external_song_attributes,
                                 video) %>
-            </sl-tag>
-          </div>
-        <% end %>
-        <% if video.event.present? %>
-          <div class="video-details__item">
-            <sl-tag size="small">
-              <%= link_to video.event, { 'data-turbo-frame': "_top" } do %>
-                <%= video.event.title.titleize %>
-              <% end %>
-            </sl-tag>
-          </div>
-        <% end %>
-        <div class="video-channel">
-          <%= link_to image_tag(video.channel.thumbnail_url,
+          </sl-tag>
+        </div>
+      <% end %>
+      <% if video.event.present? %>
+        <div class="video-details__item">
+          <sl-tag size="small">
+            <%= link_to video.event, { 'data-turbo-frame': "_top" } do %>
+              <%= video.event.title.titleize %>
+            <% end %>
+          </sl-tag>
+        </div>
+      <% end %>
+      <div class="video-channel">
+        <%= link_to image_tag(video.channel.thumbnail_url,
                           class: 'channel-icon'),
                           root_path(channel: video.channel.channel_id),
                           { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present? %>
-          <%= link_to channel_title(video),
+        <%= link_to channel_title(video),
                           root_path(channel: video.channel.channel_id),
                           { class: "channel-title", 'data-turbo-frame': "_top" } if video.channel.title.present? %>
-        </div>
-        <div class="video-metadata">
-          <%= formatted_metadata(video) %>
-        </div>
+      </div>
+      <div class="video-metadata">
+        <%= formatted_metadata(video) %>
       </div>
     </div>
   </article>
