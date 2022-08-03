@@ -38,7 +38,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem "pay"
-gem "pagy", :github => 'benbws/pagy', :branch => 'patch-1'
+gem "pagy"
 gem "prettier"
 gem "pg_search"
 gem "rails_autolink"
