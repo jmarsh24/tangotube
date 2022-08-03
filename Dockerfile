@@ -30,3 +30,7 @@ RUN rm -rf node_modules vendor
 RUN gem install rails bundler
 RUN yarn install
 RUN bundle install
+RUN bundle exec rails db:migrate
+RUN bundle exec rails db:seed
+RUN RAILS_SERVE_STATIC_FILES=true bundle exec rails assets:precompile
+
