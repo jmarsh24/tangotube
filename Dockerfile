@@ -29,4 +29,4 @@ COPY . .
 RUN rm -rf node_modules vendor
 RUN gem install rails bundler
 RUN yarn install
-ENTRYPOINT [ "./bin/start.sh" ]
+CMD [ "./bin/start.sh" ]
