@@ -29,8 +29,4 @@ COPY . .
 RUN rm -rf node_modules vendor
 RUN gem install rails bundler
 RUN yarn install
-RUN bundle install
-RUN RAILS_SERVE_STATIC_FILES=true \
-  RAILS_MASTER_KEY=6153bc2799ba60890c3cbf3be7b82ebe \
-  bundle exec rails assets:precompile
-
+ENTRYPOINT [ "./bin/render-build.sh" ]
