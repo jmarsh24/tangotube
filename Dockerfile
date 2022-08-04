@@ -30,4 +30,4 @@ RUN rm -rf node_modules vendor
 RUN gem install rails bundler
 RUN yarn install
 RUN bundle install
-CMD [ "./bin/start.sh" ]
+CMD ["bin/prod"]
