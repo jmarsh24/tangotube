@@ -379,7 +379,7 @@ GEM
       addressable (~> 2.8.0)
       omniauth-oauth2 (>= 1.6)
       rest-client (~> 2.0.2)
-    rubocop (1.32.0)
+    rubocop (1.33.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
@@ -455,7 +455,7 @@ GEM
       railties (>= 6.0.0)
     streamio-ffmpeg (3.0.2)
       multi_json (~> 1.8)
-    stripe (7.0.0)
+    stripe (6.5.0)
     strscan (3.0.4)
     suo (0.4.0)
       dalli
@@ -582,7 +582,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   streamio-ffmpeg
-  stripe
+  stripe (~> 6.0)
   turbo-rails
   tzinfo-data
   vcr

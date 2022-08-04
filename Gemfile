@@ -47,7 +47,7 @@ gem "shoelace-rails"
 gem "sidekiq"
 gem "sidekiq-throttled", "~> 0.16.1"
 gem "stimulus-rails"
-gem "stripe"
+gem "stripe", "~> 6.0"
 gem "streamio-ffmpeg"
 gem "yt"
 
