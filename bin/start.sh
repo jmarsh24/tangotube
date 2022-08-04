@@ -1,4 +1,7 @@
+export RAILS_ENV=production
 bundle install
-bundle exec rails assets:precompile
-bundle exec rails assets:clean
-bundle exec rails db:migrate
+yarn install
+yarn build
+yarn build:css
+bin/rails assets:precompile
+bin/rails server -b 0.0.0.0
