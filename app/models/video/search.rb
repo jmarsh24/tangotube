@@ -2,7 +2,7 @@ class Video::Search
   SEARCHABLE_COLUMNS = %w[
     songs.title
     songs.last_name_search
-    videos.channel_id
+    videos.channel_title
     videos.performance_date
     videos.view_count
     videos.updated_at
@@ -16,10 +16,10 @@ class Video::Search
   class << self
     def for(filtering_params:, sorting_params:, page:, user:)
       new(
-        filtering_params: filtering_params,
-        sorting_params: sorting_params,
-        page: page,
-        user: user
+        filtering_params:,
+        sorting_params:,
+        page:,
+        user:
       )
     end
   end

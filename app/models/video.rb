@@ -291,6 +291,7 @@ class Video < ApplicationRecord
         follower
         event
         channel
+        dancers
       ]
     end
 
