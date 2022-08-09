@@ -1,5 +1,11 @@
 .git
- .dockerignore
- .env
- node_modules/
- vendor/bundle
+.gitignore
+Dockerfile
+.DS_Store
+README.md
+.env
+node_modules/
+vendor/bundle
+*.ms
+latest.dump
+/log/*
