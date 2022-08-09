@@ -31,9 +31,9 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 RUN yarn install
 RUN bundle install
 
-COPY bin/entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+COPY bin/entrypoint.sh /myapp/bin/
+RUN chmod +x /myapp/bin/entrypoint.sh
+ENTRYPOINT ["bin/entrypoint.sh"]
 EXPOSE 3000
 
 # Configure the main process to run when running the image
