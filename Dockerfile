@@ -1,34 +1,22 @@
-FROM ruby:3.1.2-alpine
+FROM ruby:3.1.2
 
-RUN apk add --update --virtual \
-  runtime-deps \
+RUN apt-get update -qq && apt-get install -y \
   postgresql-client \
-  build-base \
   libxml2-dev \
   libxslt-dev \
   nodejs \
   yarn \
   libffi-dev \
-  readline \
-  build-base \
-  postgresql-dev \
-  sqlite-dev \
   libc-dev \
-  linux-headers \
-  readline-dev \
   file \
   imagemagick \
   git \
   tzdata \
-  gcompat \
-  ffmpeg \
-  yt-dlp \
-  && rm -rf /var/cache/apk/*
+  ffmpeg
 
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
-RUN yarn install
 RUN bundle install
 
 COPY bin/entrypoint.sh /myapp/bin/
