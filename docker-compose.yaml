@@ -37,7 +37,7 @@ services:
   web:
     build: .
     restart: always
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: ash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     depends_on:
       - postgres
       - redis
@@ -52,15 +52,7 @@ services:
     networks:
       - backend
 
-  sidekiq:
-    build: .
-    restart: always
-    command: bundle exec sidekiq
-    environment:
-      - DATABASE_URL=postgres://postgres:password@postgres:5432/postgres
-      - REDIS_URL=redis://redis:6379
-    networks:
-      - backend
+
 
 volumes:
   dbdata:
