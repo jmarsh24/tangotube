@@ -1,6 +1,6 @@
 MeiliSearch::Rails.configuration = {
-  meilisearch_host: Rails.env.production? ? "#{ENV["MEILISEARCH_URL"]}" : "http://localhost:7700",
-  meilisearch_api_key: Rails.env.production? ? ENV["MEILI_MASTER_KEY"] : "",
+  meilisearch_host: "http://#{ENV.fetch("MEILISEARCH_URL", '127.0.0.1:7700')}",
+  meilisearch_api_key: ENV.fetch('MEILI_MASTER_KEY', nil),
   timeout: 10,
   max_retries: 1
 }
