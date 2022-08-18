@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_26_235943) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_14_233834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -503,6 +503,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_235943) do
     t.index ["acr_cloud_track_name"], name: "index_videos_on_acr_cloud_track_name"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
+    t.index ["featured"], name: "index_videos_on_featured"
     t.index ["follower_id"], name: "index_videos_on_follower_id"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"

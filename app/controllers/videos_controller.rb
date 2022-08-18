@@ -47,14 +47,12 @@ class VideosController < ApplicationController
                               .featured?
                               .has_leader
                               .has_follower
-                              .order("random()")
                               .limit(24)
 
       videos = Video.includes(Video.search_includes)
                     .most_viewed_videos_by_month
                     .has_leader
                     .has_follower
-                    .order("random()")
 
       @pagy, @videos = pagy(videos, items: 24)
     end
