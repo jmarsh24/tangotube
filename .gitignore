@@ -39,6 +39,9 @@ yarn-debug.log*
 .yarn-integrity
 .env
 *.rdb
+/db_dump/*
+/meilisearch/data.ms
+dump.rdb
 
 **/.DS_Store
 
