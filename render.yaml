@@ -23,7 +23,7 @@ services:
           type: redis
           property: connectionString
       - fromGroup: tangotube-environment-group
-      - key: MEILISEARCH_URL
+      - key: MEILISEARCH_HOST
         fromService:
           name: tangotube-meilisearch
           type: pserv
@@ -52,7 +52,7 @@ services:
           type: redis
           property: connectionString
       - fromGroup: tangotube-environment-group
-      - key: MEILISEARCH_URL
+      - key: MEILISEARCH_HOST
         fromService:
           name: tangotube-meilisearch
           type: pserv
