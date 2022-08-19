@@ -96,7 +96,7 @@ services:
     ipAllowList:
       - source: "0.0.0.0/0"
         description: home
-    maxmemoryPolicy: noeviction
+    maxmemoryPolicy: allkeys-lru
 
   - type: pserv
     name: tangotube-meilisearch
