@@ -28,11 +28,11 @@ services:
           name: tangotube-meilisearch
           type: pserv
           property: hostport
-      - key: MEILI_API_KEY
+      - key: MEILISEARCH_API_KEY
         fromService:
           name: tangotube-meilisearch
           type: pserv
-          envVarKey: MEILI_API_KEY
+          envVarKey: MEILISEARCH_API_KEY
 
   - type: worker
     name: tangotube-sidekiq
@@ -57,11 +57,11 @@ services:
           name: tangotube-meilisearch
           type: pserv
           property: hostport
-      - key: MEILI_API_KEY
+      - key: MEILISEARCH_API_KEY
         fromService:
           name: tangotube-meilisearch
           type: pserv
-          envVarKey: MEILI_API_KEY
+          envVarKey: MEILISEARCH_API_KEY
 
   - type: cron
     name: tangotube-cron
@@ -83,11 +83,11 @@ services:
           name: tangotube-db
           property: connectionString
       - fromGroup: tangotube-environment-group
-      - key: MEILI_API_KEY
+      - key: MEILISEARCH_API_KEY
         fromService:
           name: tangotube-meilisearch
           type: pserv
-          envVarKey: MEILI_API_KEY
+          envVarKey: MEILISEARCH_API_KEY
 
   - name: tangotube-redis
     type: redis
@@ -113,7 +113,7 @@ services:
     envVars:
     - key: MEILI_HTTP_ADDR
       value: 0.0.0.0:80
-    - key: MEILI_API_KEY
+    - key: MEILISEARCH_API_KEY
       generateValue: true
     - key: MEILI_DB_PATH
       value: /meili-data
