@@ -98,28 +98,6 @@ services:
         description: home
     maxmemoryPolicy: allkeys-lru
 
-  - type: pserv
-    name: tangotube-meilisearch
-    env: docker
-    dockerfilePath: "./meilisearch/Dockerfile"
-    dockerCommand: "/bin/sh -c /bin/meilisearch --enable-auto-batching"
-    region: frankfurt
-    plan: standard
-    disk:
-      name: meili-data
-      mountPath: /meili-data
-      sizeGB: 50
-    autoDeploy: false
-    envVars:
-    - key: MEILI_HTTP_ADDR
-      value: 0.0.0.0:80
-    - key: MEILISEARCH_API_KEY
-      generateValue: true
-    - key: MEILI_DB_PATH
-      value: /meili-data
-    - key: MEILI_ENV
-      value: production
-
 databases:
   - name: tangotube-db
     plan: standard
