@@ -93,7 +93,7 @@
       <div id="menu-sorting-filters">
         <sl-menu-label>Sort By</sl-menu-label>
         <sl-menu-item>
-          <%= sortable 'video.performance_date', "desc",  "Recent First", @sort_column, @sort_direction %>
+          <%= sortable 'videos.performance_date', "desc",  "Recent First", @sort_column, @sort_direction %>
         </sl-menu-item>
     <sl-menu-item>
       <%= sortable 'videos.performance_date', "asc", "Oldest First", @sort_column, @sort_direction %>
