@@ -1,17 +1,8 @@
 class Channel < ApplicationRecord
   include Reviewable
   include Importable
-  include MeiliSearch::Rails
-
-  meilisearch do
-    attribute :title
-
-    searchable_attributes [:title]
-  end
 
   has_many :videos, dependent: :destroy
-
-  after_save { videos.find_each(&:reindex!) }
 
   validates :channel_id, presence: true, uniqueness: true
 

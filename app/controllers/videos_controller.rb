@@ -9,39 +9,12 @@ class VideosController < ApplicationController
   helper_method :sorting_params, :filtering_params
 
   def index
-    if meilisearch_filter_params.present?
-      filter = "hidden=false"
-      meilisearch_filter_params.each do |k, v|
-        filter += " AND #{k}='#{v}'"
-      end
-    end
-
-    if filtering_params.include?(:watched)
-      if filtering_params[:watched] == "true"
-        filter += " AND watched_by='#{current_user.id}'"
-      end
-      if filtering_params[:watched] == "false"
-        filter += " AND not_watched_by='#{current_user.id}'"
-      end
-    end
-
-    if filtering_params.include?(:liked)
-      if filtering_params[:liked] == "true"
-        filter += " AND liked_by='#{current_user.id}'"
-      end
-
-      if filtering_params[:liked] == "false"
-        filter += " AND disliked_by='#{current_user.id}'"
-      end
-    end
-
     if filtering_params.present? || sorting_params.present?
-      videos =  Video.includes(Video.search_includes)
-                      .pagy_search(filtering_params[:query].presence || "*",
-                        filter:,
-                        sort: [ "#{sort_column}:#{sort_direction}" ])
-
-      @pagy, @videos = pagy_meilisearch(videos, items: 24)
+      videos =  Video::Search.for(  filtering_params:,
+                                    sorting_params:,
+                                    page:,
+                                    user: current_user)
+                              .videos
     else
       @featured_videos = Video.includes(Video.search_includes)
                               .featured?
@@ -53,10 +26,8 @@ class VideosController < ApplicationController
                     .most_viewed_videos_by_month
                     .has_leader
                     .has_follower
-
-      @pagy, @videos = pagy(videos, items: 24)
     end
-
+    @pagy, @videos = pagy(videos, items: 24)
     respond_to do |format|
       format.html # GET
       format.turbo_stream # POST
@@ -95,7 +66,7 @@ class VideosController < ApplicationController
       MarkVideoAsWatchedJob.perform_async(show_params[:v], current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
-    @video.index!
+
   end
 
   def update
@@ -111,14 +82,13 @@ class VideosController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
-      @video.index!
     end
   end
 
   def create
     @video = Video.create(youtube_id: params[:video][:youtube_id])
     fetch_new_video
-    @video.index!
+
     redirect_to root_path,
                 notice:
                   "Video Sucessfully Added: The video must be approved before the videos are added"
@@ -127,7 +97,6 @@ class VideosController < ApplicationController
   def hide
     @video.hidden = true
     @video.save
-    @video.index!
     render turbo_stream: turbo_stream.remove("video_#{@video.youtube_id}")
   end
 
@@ -137,7 +106,6 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "like"
     end
-    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -147,7 +115,6 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user, vote_scope: "like"
     end
-    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -157,7 +124,6 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "bookmark"
     end
-    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -167,7 +133,6 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: "watchlist"
     end
-    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -177,18 +142,17 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user, vote_scope: "watchlist"
     end
-    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
   def featured
-    @video.featured = if featured?
+    @video.featured =
+    if featured?
       true
     else
       false
-                      end
+    end
     @video.save
-    @video.index!
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
@@ -303,15 +267,11 @@ class VideosController < ApplicationController
       :query,
       :dancer,
       :couples
-    ).to_h
+    )
   end
 
-  def sort_column
-    @sort_column ||= sorting_params[:sort] || "popularity"
-  end
-
-  def sort_direction
-    @sort_direction ||= sorting_params[:direction] || "desc"
+  def page
+    params.permit(:page)
   end
 
   def sorting_params
@@ -330,9 +290,5 @@ class VideosController < ApplicationController
     if filtering_params.fetch(:query, false).present?
       Leader.full_name_search(filtering_params.fetch(:query, false)) || Follower.full_name_search(filtering_params.fetch(:query, false))
     end
-  end
-
-  def meilisearch_filter_params
-   @meilisearch_filter_params ||= filtering_params.except(:query, :watched, :liked)
   end
 end

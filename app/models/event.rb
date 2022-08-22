@@ -1,11 +1,6 @@
 class Event < ApplicationRecord
-  include MeiliSearch::Rails
-
-  meilisearch do
-    attribute :title
-
-    searchable_attributes [:title]
-  end
+  include PgSearch::Model
+  multisearchable against: [:title, :city, :country]
 
   has_many :videos, dependent: :nullify
   has_one_attached :profile_image
@@ -48,14 +43,6 @@ class Event < ApplicationRecord
     search_title.split.size < 2 || videos_with_event_title_match.empty?
   end
 
-  def search_data
-    {
-      title:,
-      city:,
-      country:
-    }
-  end
-
   def to_param
     "#{id}-#{slug}"
   end
@@ -76,6 +63,10 @@ class Event < ApplicationRecord
         .all
         .order(:id)
         .each { |event| MatchEventWorker.perform_async(event.id) }
+    end
+
+    def rebuild_pg_search_documents
+      find_each { |record| record.update_pg_search_document }
     end
   end
 

@@ -3,4 +3,3 @@ redis: redis-server
 worker: bundle exec sidekiq
 js: yarn build --watch
 css: bin/rails dartsass:watch
-meilisearch: meilisearch --enable-auto-batching

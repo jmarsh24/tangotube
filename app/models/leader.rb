@@ -2,13 +2,6 @@ class Leader < ApplicationRecord
   include FullNameable
   include Reviewable
   include Normalizeable
-  include MeiliSearch::Rails
-
-  meilisearch do
-    attribute :name
-
-    searchable_attributes [:name]
-  end
 
   validates :name, presence: true, uniqueness: true
 

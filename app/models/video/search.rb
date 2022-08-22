@@ -2,6 +2,8 @@ class Video::Search
   SEARCHABLE_COLUMNS = %w[
     songs.title
     songs.last_name_search
+    channels.title
+    performance_videos.performance_id
     videos.channel_title
     videos.performance_date
     videos.view_count
@@ -32,25 +34,18 @@ class Video::Search
   end
 
   def videos
-    @videos =
-      Video
-        # .not_hidden
-        .includes(:leader, :follower, :channel, :song, :event)
-        .order(ordering_params)
-        .filter_videos(@filtering_params, @user)
-        # .where.not(view_count: nil)
-        return @videos unless @filtering_params.empty? && @sorting_params.empty?
-    @videos.most_viewed_videos_by_month
-           .has_leader
-           .has_follower
+    @videos = Video.includes(Video.search_includes)
+                   .not_hidden
+                   .order(ordering_params)
+                   .filter_by(@filtering_params, @user)
   end
 
   def paginated_videos
-    @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE).load_async
+    @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
   end
 
   def paginated_row
-    @paginated_videos_row = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_ROW).load_async
+    @paginated_videos_row = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_ROW)
   end
 
   def displayed_videos_count
@@ -108,8 +103,8 @@ class Video::Search
       "extract(year from #{table_column})::int AS facet_value, count(#{table_column}) AS occurrences"
     counts =
       Video
-        .filter_videos(@filtering_params, @user)
-        # .not_hidden
+        .filter_by(@filtering_params, @user)
+        .not_hidden
         .select(query)
         .group("facet_value")
         .order("facet_value DESC")
@@ -123,8 +118,8 @@ class Video::Search
       "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
     counts =
       Video
-        .filter_videos(@filtering_params, @user)
-        # .not_hidden
+        .filter_by(@filtering_params, @user)
+        .not_hidden
         .joins(model)
         .select(query)
         .group(table_column)
@@ -141,8 +136,8 @@ class Video::Search
       "#{table_column} AS facet_value, count(#{table_column}) AS occurrences, #{table_column_id} AS facet_id_value"
     counts =
       Video
-        .filter_videos(@filtering_params, @user)
-        # .not_hidden
+        .filter_by(@filtering_params, @user)
+        .not_hidden
         .joins(model)
         .select(query)
         .group(table_column, table_column_id)

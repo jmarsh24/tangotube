@@ -1,11 +1,6 @@
 class Song < ApplicationRecord
-  include MeiliSearch::Rails
-
-  meilisearch do
-    attribute :full_title
-
-    searchable_attributes [:full_title]
-  end
+  include PgSearch::Model
+  multisearchable against: [:title, :artist]
 
   validates :genre, presence: true
   validates :title, presence: true
@@ -35,13 +30,6 @@ class Song < ApplicationRecord
     update(lyrics_en: translation.text)
   end
 
-  def search_data
-    {
-      title:,
-      artist:
-    }
-  end
-
   def set_slug
     self.slug = "#{title}-#{artist}".parameterize
   end
@@ -64,6 +52,10 @@ class Song < ApplicationRecord
 
     def missing_english_translation
       where.not(lyrics: nil).where(lyrics_en: nil)
+    end
+
+    def rebuild_pg_search_documents
+      find_each { |record| record.update_pg_search_document }
     end
   end
 end

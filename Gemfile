@@ -83,3 +83,6 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
+gem "scenic", "~> 1.6"
