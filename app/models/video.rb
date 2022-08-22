@@ -109,11 +109,11 @@ class Video < ApplicationRecord
 
   class << self
 
-    def search(query)
+    def search(query, _user)
       filter_by_query(query)
     end
 
-    def filter_by_query(query)
+    def filter_by_query(query, _user)
       where(id: VideoSearch.search(query).select(:video_id))
     end
 
