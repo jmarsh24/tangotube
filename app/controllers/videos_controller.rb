@@ -147,10 +147,10 @@ class VideosController < ApplicationController
 
   def featured
     @video.featured =
-    if featured?
-      true
-    else
+    if @video.featured?
       false
+    else
+      true
     end
     @video.save
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
