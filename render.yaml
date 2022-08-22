@@ -23,16 +23,6 @@ services:
           type: redis
           property: connectionString
       - fromGroup: tangotube-environment-group
-      - key: MEILISEARCH_HOST
-        fromService:
-          name: tangotube-meilisearch
-          type: pserv
-          property: hostport
-      - key: MEILISEARCH_API_KEY
-        fromService:
-          name: tangotube-meilisearch
-          type: pserv
-          envVarKey: MEILISEARCH_API_KEY
 
   - type: worker
     name: tangotube-sidekiq
@@ -52,16 +42,6 @@ services:
           type: redis
           property: connectionString
       - fromGroup: tangotube-environment-group
-      - key: MEILISEARCH_HOST
-        fromService:
-          name: tangotube-meilisearch
-          type: pserv
-          property: hostport
-      - key: MEILISEARCH_API_KEY
-        fromService:
-          name: tangotube-meilisearch
-          type: pserv
-          envVarKey: MEILISEARCH_API_KEY
 
   - type: cron
     name: tangotube-cron
@@ -83,11 +63,6 @@ services:
           name: tangotube-db
           property: connectionString
       - fromGroup: tangotube-environment-group
-      - key: MEILISEARCH_API_KEY
-        fromService:
-          name: tangotube-meilisearch
-          type: pserv
-          envVarKey: MEILISEARCH_API_KEY
 
   - name: tangotube-redis
     type: redis
