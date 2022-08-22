@@ -31,7 +31,6 @@ gem "activejob-traffic_control", "~> 0.1.3"
 gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
-gem "meilisearch-rails"
 gem "nokogiri"
 gem "oj"
 gem 'omniauth-facebook'
@@ -84,3 +83,6 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
+gem "scenic", "~> 1.6"

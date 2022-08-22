@@ -1,4 +1,7 @@
 class Dancer < ApplicationRecord
+  include PgSearch::Model
+  multisearchable against: [:name]
+
   belongs_to :user, optional: true
   has_many :dancer_videos, dependent: :destroy
   has_many :videos, through: :dancer_videos
@@ -34,6 +37,10 @@ class Dancer < ApplicationRecord
 
   def to_param
     "#{id}-#{slug}"
+  end
+
+  def self.rebuild_pg_search_documents
+    find_each { |record| record.update_pg_search_document }
   end
 
   private

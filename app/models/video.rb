@@ -1,182 +1,6 @@
 class Video < ApplicationRecord
   acts_as_votable
   include Filterable
-  include SchemaSearchable
-  ActiveRecord_Relation.include Pagy::Meilisearch
-  after_touch :index!
-
-  meilisearch enqueue: :trigger_sidekiq_job do
-    attribute :title
-    attribute :description
-    attribute :tags
-    attribute :created_at
-    attribute :date do
-      performance_date
-    end
-    attribute :youtube_song
-    attribute :youtube_artist
-    attribute :dancer do
-      dancers.map { |dancer| dancer&.name&.parameterize }
-    end
-    attribute :acr_cloud_artist_name
-    attribute :acr_cloud_track_name
-    attribute :featured do
-      featured?
-    end
-    attribute :spotify_artist_name
-    attribute :spotify_track_name
-    attribute :youtube_id
-    attribute :popularity
-    attribute :hd
-    attribute :has_leader do
-      leader.present?
-    end
-    attribute :has_follower do
-      follower.present?
-    end
-    attribute :has_song do
-      song.present?
-    end
-    attribute :view_count
-    attribute :viewed_within_last_month do
-      viewed_within_last_month?
-    end
-    attribute :like_count
-    attribute :leader do
-      leader&.normalized_name&.parameterize
-    end
-    attribute :follower do
-      follower&.normalized_name&.parameterize
-    end
-    attribute :couples do
-      couples&.pluck(:slug)
-    end
-    attribute :leader_name do
-      leader&.name
-    end
-    attribute :follower_name do
-      follower&.name
-    end
-    attribute :channel_title do
-      channel&.title
-    end
-    attribute :channel do
-      channel&.channel_id
-    end
-    attribute :song_id do
-      song&.id
-    end
-    attribute :song do
-      song&.slug
-    end
-    attribute :song_title do
-      song&.title
-    end
-    attribute :song_full_title do
-      song&.full_title
-    end
-    attribute :updated_at
-    attribute :genre do
-      song&.genre&.parameterize
-    end
-    attribute :orchestra do
-      song&.artist&.parameterize
-    end
-    attribute :event_id do
-      event&.id
-    end
-    attribute :event do
-      event&.slug
-    end
-    attribute :event_title do
-      event&.title
-    end
-    attribute :liked_by
-    attribute :disliked_by
-    attribute :watched_by
-    attribute :not_watched_by
-    attribute :bookmarked_by
-    attribute :watched_later_by
-    attribute :year do
-      performance_date&.year
-    end
-    attribute :hidden
-    attribute :performance do
-      performance&.id
-    end
-
-    searchable_attributes [
-      :title,
-      :description,
-      :tags,
-      :youtube_song,
-      :youtube_artist,
-      :dancer,
-      :acr_cloud_artist_name,
-      :acr_cloud_track_name,
-      :spotify_artist_name,
-      :spotify_track_name,
-      :couples,
-      :leader_name,
-      :follower_name,
-      :channel_title,
-      :song_title,
-      :song_full_title,
-      :orchestra,
-      :event_title,
-    ]
-
-    filterable_attributes [
-      :title,
-      :orchestra,
-      :year,
-      :channel,
-      :genre,
-      :leader,
-      :follower,
-      :hd,
-      :id,
-      :watched_by,
-      :not_watched_by,
-      :bookmarked_by,
-      :watched_later_by,
-      :liked_by,
-      :disliked_by,
-      :song,
-      :event,
-      :song_full_title,
-      :channel_title,
-      :dancer,
-      :couples,
-      :featured,
-      :has_leader,
-      :has_follower,
-      :viewed_within_last_month,
-      :genre,
-      :year,
-      :hidden
-    ]
-    sortable_attributes [
-       :view_count,
-       :like_count,
-       :song_title,
-       :orchestra,
-       :channel_title,
-       :year,
-       :popularity,
-       :date,
-       :performance
-      ]
-
-    ranking_rules [
-      "proximity",
-      "typo",
-      "words",
-      "attribute",
-      "sort",
-      "exactness"
-    ]
-  end
 
   PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
 
@@ -201,24 +25,17 @@ class Video < ApplicationRecord
   counter_culture [:song, :orchestra]
   counter_culture :event
 
-  scope :meilisearch_import, -> { includes( :song,
-                                            :leader,
-                                            :follower,
-                                            :event,
-                                            :channel,
-                                            :performance,
-                                            :dancers,
-                                            :couples,
-                                            :performance) }
-
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
   scope :filter_by_leader, ->(leader, _user) { joins(:leader).where("unaccent(leaders.name) ILIKE unaccent(?)", leader) }
   scope :filter_by_follower, ->(follower, _user) { joins(:follower).where("unaccent(followers.name) ILIKE unaccent(?)", follower) }
   scope :filter_by_channel, ->(channel_id, _user) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
   scope :filter_by_event_id, ->(event_id, _user) { where(event_id:) }
+  scope :filter_by_event, ->(event_slug, _user) { joins(:event).where("events.slug ILIKE ?", event_slug) }
   scope :filter_by_song_id, ->(song_id, _user) { where(song_id:) }
+  scope :filter_by_song, ->(song_slug, _user) { joins(:song).where("songs.slug ILIKE ?", song_slug) }
   scope :filter_by_hd, ->(boolean, _user) { where(hd: boolean) }
+  scope :filter_by_dancer, ->(_boolean, _user) { joins(:leader, :follower) }
   scope :filter_by_year,->(year, _user) { where("extract(year from performance_date) = ?", year) }
   scope :filter_by_upload_year,->(year, _user) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
@@ -292,6 +109,21 @@ class Video < ApplicationRecord
 
   class << self
 
+    def search(query)
+      filter_by_query(query)
+    end
+
+    def filter_by_query(query)
+      where(id: VideoSearch.search(query).select(:video_id))
+    end
+
+    def refresh_materialized_view
+      Scenic.database.refresh_materialized_view(
+        :video_searches,
+        concurrently: true,
+      )
+    end
+
     def search_includes
       %i[
         song
@@ -313,25 +145,19 @@ class Video < ApplicationRecord
     def filter_by_watched(boolean, user)
       case boolean
       when "true"
-        where(id: Ahoy::Event.viewed_by_user(user))
+        where(id: user.votes.where(vote_scope: "watchlist").pluck(:id))
       when "false"
-        where.not(id: Ahoy::Event.viewed_by_user(user))
+        where.not(id: user.votes.where(vote_scope: "watchlist").pluck(:id))
       end
     end
 
     def filter_by_liked(boolean, user)
       case boolean
       when "true"
-        where(id: user.find_up_voted_items.map(&:id))
+        where(id: user.find_up_voted_items.pluck(:id))
       when "false"
-        where(id: user.find_up_downsvoted_items.map(&:id))
+        where(id: user.find_up_downsvoted_items.pluck(:id))
       end
-    end
-
-    # Filters videos by the results from the materialized
-    # full text search out of from VideosSearch
-    def filter_by_query(query, _user)
-      search(query)
     end
 
     def most_viewed_videos_by_month
@@ -422,5 +248,17 @@ class Video < ApplicationRecord
 
   def dancer?
     leader.present? || follower.present?
+  end
+
+  def dancers_names
+    dancer&.map(&:name)
+  end
+
+  def song_title
+    song&.title
+  end
+
+  def song_artist
+    song&.artist
   end
 end
