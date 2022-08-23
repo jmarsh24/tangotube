@@ -66,7 +66,7 @@ class Video::YoutubeImport::Video
   end
 
   def video_params
-    base_params.merge(count_params).merge(performance_date_params).merge(channel:)
+    base_params.merge(count_params).merge(channel:)
   end
 
   def update_video_params
@@ -82,11 +82,6 @@ class Video::YoutubeImport::Video
       duration: @youtube_video.duration,
       tags: @youtube_video.tags,
       hd: @youtube_video.hd?
-    }
-  end
-
-  def performance_date_params
-    {
       performance_date: @youtube_video.published_at
     }
   end
@@ -96,15 +91,9 @@ class Video::YoutubeImport::Video
       view_count: @youtube_video.view_count,
       favorite_count: @youtube_video.favorite_count,
       comment_count: @youtube_video.comment_count,
-      like_count:,
+      like_count: @youtube_video.like_count || 0,
       dislike_count: @youtube_video.dislike_count
     }
-  end
-
-  def like_count
-    like_count = @youtube_video.like_count
-    like_count = 0 if like_count.nil?
-    like_count
   end
 
   def channel
