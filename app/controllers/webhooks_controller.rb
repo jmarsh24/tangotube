@@ -3,7 +3,7 @@ class WebhooksController < ApplicationController
 
   def create
     youtube_event = YoutubeEvent.create!(
-      data: Hash.from_trusted_xml(request.body.read).as_json,
+      data: Hash.from_xml(request.body.read).as_json,
     )
     YoutubeEventHandlerJob.perform_async(youtube_event.id)
     render json: { status: "ok"}
