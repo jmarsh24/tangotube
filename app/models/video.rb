@@ -35,7 +35,6 @@ class Video < ApplicationRecord
   scope :filter_by_song_id, ->(song_id, _user) { where(song_id:) }
   scope :filter_by_song, ->(song_slug, _user) { joins(:song).where("songs.slug ILIKE ?", song_slug) }
   scope :filter_by_hd, ->(boolean, _user) { where(hd: boolean) }
-  scope :filter_by_dancer, ->(_boolean, _user) { joins(:leader, :follower) }
   scope :filter_by_year,->(year, _user) { where("extract(year from performance_date) = ?", year) }
   scope :filter_by_upload_year,->(year, _user) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
@@ -140,6 +139,14 @@ class Video < ApplicationRecord
     def with_dancer_name_in_title(_name)
       search( "*",
               filter: ["title = name"] )
+    end
+
+    def filter_by_dancer(name, _user)
+      if name == "true"
+        joins(:dancers)
+      else
+        joins(:dancers).where("dancers.slug ILIKE ?", name)
+      end
     end
 
     def filter_by_watched(boolean, user)

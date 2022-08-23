@@ -24,7 +24,6 @@ class DancersController < ApplicationController
                          .includes(profile_image_attachment: :blob)
                          .order(videos_count: :desc)
 
-
     respond_to do |format|
       format.html # GET
       format.turbo_stream # POST
