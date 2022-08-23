@@ -81,7 +81,7 @@ class Video::YoutubeImport::Video
       upload_date: @youtube_video.published_at,
       duration: @youtube_video.duration,
       tags: @youtube_video.tags,
-      hd: @youtube_video.hd?
+      hd: @youtube_video.hd?,
       performance_date: @youtube_video.published_at
     }
   end
