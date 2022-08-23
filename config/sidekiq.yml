@@ -7,6 +7,5 @@ production:
 :queues:
   - high
   - mailers
-  - meilisearch
   - default
   - ahoy

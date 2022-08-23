@@ -170,7 +170,7 @@ class Video < ApplicationRecord
   end
 
   def grep_title_for_dancer
-    Dancer.all.find { |dancer| title.parameterize.match(dancer.name.parameterize) }
+    dancer = Dancer.all.find { |dancer| title.parameterize.match(dancer.name.parameterize) }
     dancers << dancer if dancer.present?
   end
 
