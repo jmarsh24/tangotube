@@ -563,6 +563,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 7.0.3.1)
   rails_autolink
+  rexml (~> 3.2)
   rspec-rails
   rspec-sidekiq
   rspotify

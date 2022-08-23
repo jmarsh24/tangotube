@@ -41,7 +41,9 @@ gem "pagy"
 gem "prettier"
 gem "pg_search"
 gem "rails_autolink"
+gem "rexml", "~> 3.2"
 gem "rspotify"
+gem "scenic", "~> 1.6"
 gem "shoelace-rails"
 gem "sidekiq"
 gem "sidekiq-throttled", "~> 0.16.1"
@@ -85,4 +87,3 @@ group :test do
 end
 
 
-gem "scenic", "~> 1.6"
