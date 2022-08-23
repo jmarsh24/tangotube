@@ -9,8 +9,8 @@ class VideosController < ApplicationController
   helper_method :sorting_params, :filtering_params
 
   def index
-    if filtering_params.present? || sorting_params.present?
-      videos =  Video::Search.for(  filtering_params:,
+    videos = if filtering_params.present? || sorting_params.present?
+      Video::Search.for(  filtering_params:,
                                     sorting_params:,
                                     page:,
                                     user: current_user)
@@ -21,12 +21,14 @@ class VideosController < ApplicationController
                               .has_leader
                               .has_follower
                               .limit(24)
+                              .order("random()")
 
-      videos = Video.includes(Video.search_includes)
+      Video.includes(Video.search_includes)
                     .most_viewed_videos_by_month
                     .has_leader
                     .has_follower
-    end
+                    .order("random()")
+             end
     @pagy, @videos = pagy(videos, items: 24)
     respond_to do |format|
       format.html # GET
