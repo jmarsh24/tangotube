@@ -16,7 +16,7 @@ class Video < ApplicationRecord
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
-  has_many :couple_videos
+  has_many :couple_videos, dependent: :destroy
   has_many :couples, through: :couple_videos
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
