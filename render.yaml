@@ -50,7 +50,8 @@ services:
     schedule: 0 3 * * *
     buildCommand: bundle install
     startCommand: >
-      bundle exec rake performance:createPerformances
+      bundle exec rake subscription:to_all_channels
+      bundle exec rake update_all_channels
 
     envVars:
       - key: REDIS_URL
