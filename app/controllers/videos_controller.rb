@@ -22,13 +22,7 @@ class VideosController < ApplicationController
                               .has_follower
                               .limit(24)
                               .order("random()")
-
-      Video.includes(Video.search_includes)
-                    .most_viewed_videos_by_month
-                    .has_leader
-                    .has_follower
-                    .order("random()")
-             end
+    end
     @pagy, @videos = pagy(videos, items: 24)
     respond_to do |format|
       format.html # GET
