@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_21_111426) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_22_193925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -535,6 +535,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_111426) do
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
+  end
+
+  create_table "youtube_events", force: :cascade do |t|
+    t.jsonb "data"
+    t.integer "status", default: 0
+    t.string "processing_errors"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "yt_comments", force: :cascade do |t|

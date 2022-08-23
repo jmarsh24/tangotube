@@ -82,6 +82,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :webhooks
+
   resources :search_suggestions, only: :index do
     collection do
       post :search
