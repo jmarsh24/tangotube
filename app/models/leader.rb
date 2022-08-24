@@ -13,7 +13,7 @@ class Leader < ApplicationRecord
   after_commit { videos.find_each(&:reindex!) }
 
   def find_videos
-    Video.with_dancer_name_in_title(name).find_each do |video|
+    Video.grep_title_for_dancer(name).find_each do |video|
       video.update(leader: self)
     end
   end
