@@ -67,7 +67,7 @@ services:
 
   - name: tangotube-redis
     type: redis
-    plan: starter
+    plan: free
     region: frankfurt
     ipAllowList:
       - source: "0.0.0.0/0"
