@@ -20,7 +20,7 @@ class YoutubeEvent < ApplicationRecord
 
   def handle_event
     video = Video.find_by(youtube_id:)
-    channel = Channel.find_by(youtube_id:)
+    channel = Channel.find_by(channel_id:)
     if channel.active?
       if video.present? && data.dig("feed", "deleted_entry").present?
         video.destroy
