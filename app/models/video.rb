@@ -136,9 +136,8 @@ class Video < ApplicationRecord
       ]
     end
 
-    def with_dancer_name_in_title(_name)
-      search( "*",
-              filter: ["title = name"] )
+    def with_dancer_name_in_title(name)
+      where("unaccent(title) ILIKE unaccent(?)", "%#{name}%")
     end
 
     def filter_by_dancer(name, _user)
