@@ -16,7 +16,7 @@ class YoutubeEvent < ApplicationRecord
 
   def channel_id
     @channel_id ||= data.dig("feed", "entry", "channelId")
-  end 
+  end
 
   def handle_event
     video = Video.find_by(youtube_id:)
