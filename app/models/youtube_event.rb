@@ -14,15 +14,22 @@ class YoutubeEvent < ApplicationRecord
     @title ||= data.dig("feed", "entry", "title")
   end
 
+  def channel_id
+    @channel_id ||= data.dig("feed", "entry", "channelId")
+  end 
+
   def handle_event
     video = Video.find_by(youtube_id:)
-    if video.present? && data.dig("feed", "deleted_entry").present?
-      video.destroy
-    elsif video.present? && data.dig("feed", "deleted_entry").nil?
-      video.title = title
-      video.save
-    else
-      Video::YoutubeImport.from_video(youtube_id)
+    channel = Channel.find_by(youtube_id:)
+    if channel.active?
+      if video.present? && data.dig("feed", "deleted_entry").present?
+        video.destroy
+      elsif video.present? && data.dig("feed", "deleted_entry").nil?
+        video.title = title
+        video.save
+      else
+        Video::YoutubeImport.from_video(youtube_id)
+      end
     end
   end
 end

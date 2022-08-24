@@ -1,9 +1,9 @@
 development:
   :concurrency: 20
-  :timeout: 500
+  # :timeout: 500  
 production:
   :concurrency: <%= ENV["SIDEKIQ_CONCURRENCY_VALUE"] || 10 %>
-  :timeout: 10
+  # :timeout: 10
 :queues:
   - high
   - mailers
