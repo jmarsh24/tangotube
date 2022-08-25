@@ -43,16 +43,6 @@ services:
           property: connectionString
       - fromGroup: tangotube-environment-group
 
-  - type: cron
-    name: tangotube-cron
-    env: ruby
-    region: frankfurt
-    schedule: 0 3 * * *
-    buildCommand: bundle install
-    startCommand: >
-      rake subscription:to_all_channels &&
-      rake update_all_channels
-
     envVars:
       - key: REDIS_URL
         fromService:
@@ -67,12 +57,12 @@ services:
 
   - name: tangotube-redis
     type: redis
-    plan: free
+    plan: starter
     region: frankfurt
     ipAllowList:
       - source: "0.0.0.0/0"
         description: home
-    maxmemoryPolicy: allkeys-lru
+    maxmemoryPolicy: no-eviction
 
 databases:
   - name: tangotube-db
