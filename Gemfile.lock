@@ -402,6 +402,7 @@ GEM
     scenic (1.6.0)
       activerecord (>= 4.0.0)
       railties (>= 4.0.0)
+    scheduler (0.3)
     selenium-webdriver (4.4.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -571,6 +572,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   scenic (~> 1.6)
+  scheduler (~> 0.3)
   selenium-webdriver
   shoelace-rails
   shoulda-matchers

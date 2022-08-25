@@ -44,6 +44,7 @@ gem "rails_autolink"
 gem "rexml", "~> 3.2"
 gem "rspotify"
 gem "scenic", "~> 1.6"
+gem "scheduler", "~> 0.3"
 gem "shoelace-rails"
 gem "sidekiq"
 gem "sidekiq-throttled", "~> 0.16.1"
@@ -85,5 +86,7 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+
 
 
