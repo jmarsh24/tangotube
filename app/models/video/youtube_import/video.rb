@@ -44,10 +44,10 @@ class Video::YoutubeImport::Video
       @video.grep_performance_number
     end
     unless @video.acr_response_code.in? [0,1001]
-      AcrcloudMusicMatchJob(@youtube_id)
+      AcrcloudMusicMatchJob.perform_async(@youtube_id)
     end
     if @video.youtube_song.nil?
-      YoutubeMusicMatchJob(@youtube_id)
+      YoutubeMusicMatchJob.perform_async(@youtube_id)
     end
     if @video.song.nil?
       @video.grep_title_description_acr_cloud_song
