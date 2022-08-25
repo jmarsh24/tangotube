@@ -3,18 +3,15 @@
   <sl-tab slot="nav" panel="custom">Additional Info</sl-tab>
   <sl-tab-panel name="general">
     <%= turbo_frame_tag "video_#{@video.youtube_id}" do %>
-      <% if @video.leader.present? || @video.follower.present? %>
-        <div class="detail-section-label">
-          <h4>Performers</h4>
-          <%= render partial: "videos/show/video_info_item",
-                        locals: { header: "Leader",
-                        value: link_to(@video.leader.try(:name),
-                                        root_path(leader: @video.leader.normalized_name.parameterize), {'data-turbo-frame': "_top"}) } if @video.leader.present? %>
-          <%= render partial: "videos/show/video_info_item",
-                        locals: { header: "Follower",
-                        value: link_to(@video.follower.try(:name),
-                                        root_path(follower: @video.follower.normalized_name.parameterize), {'data-turbo-frame': "_top"}) } if @video.follower.present? %>
-        </div>
+      <% if @video.dancers.present? %>
+          <div class="detail-section-label">
+            <h4>Performers</h4>
+            <% @video.dancers.each do |dancer| %>
+              <%= render partial: "videos/show/video_info_item",
+                            locals: { header: "",
+                            value: link_to(dancer.name, dancer, {'data-turbo-frame': "_top"}) } %>
+            <% end %>
+          </div>
       <% end %>
       <% if @video.event.present? || @video.performance_date.present? || @video.performance_number.present? || @video.performance_total_number.present? %>
         <div class="detail-section-label">
