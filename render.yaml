@@ -50,7 +50,7 @@ services:
     ipAllowList:
       - source: "0.0.0.0/0"
         description: home
-    maxmemoryPolicy: no-eviction
+    maxmemoryPolicy: noeviction
 
 databases:
   - name: tangotube-db
