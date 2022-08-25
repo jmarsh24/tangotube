@@ -176,9 +176,10 @@ class Video < ApplicationRecord
   end
 
   def grep_title_for_dancer
-    dancer = Dancer.all.find { |dancer| title.parameterize.match(dancer.name.parameterize) }
-    return nil if dancers.include?(dancer)
-    dancers << dancer if dancer.present?
+    dancer_matches = Dancer.all.select { |dancer| title.parameterize.match(dancer.name.parameterize) }
+    dancer_matches.each do |dancer|
+      dancers << dancer unless dancers.include?(dancer)
+    end
   end
 
   def grep_performance_number
