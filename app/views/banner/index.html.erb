@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "banner" do %>
   <% if session[:banner_closed].nil? %>
     <div class="banner">
-      <%= video_tag "Tango Blues.mp4",
+      <%= video_tag "tangotube_intro.mp4",
         class: "banner__video",
         controls: false,
         type: 'video/mp4',
