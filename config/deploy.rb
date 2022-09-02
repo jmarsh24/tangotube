@@ -9,7 +9,7 @@ server "142.93.101.60", user: "deploy", roles: %w[app db web]
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/tangotube"
+set :deploy_to, "/home/deploy/tangotube"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
