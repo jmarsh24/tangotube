@@ -4,42 +4,42 @@ ruby "3.1.2"
 
 # gems that ship with rails...........................................................
 gem "bootsnap", require: false
-gem "jsbundling-rails"
 gem "dartsass-rails"
-gem "rails", "~> 7.0.3.1"
-gem 'hiredis'
-gem "puma"
+gem "hiredis"
+gem "jsbundling-rails"
 gem "pg"
+gem "puma"
+gem "rails", "~> 7.0.3.1"
 gem "spring"
 gem "sprockets-rails"
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "turbo-rails"
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # app specific gems...................................................................
-gem "acts_as_votable"
+gem "activejob-traffic_control", "~> 0.1.3"
 gem "acts-as-taggable-on", "~> 9.0"
+gem "acts_as_votable"
 gem "ahoy_matey"
 gem "aws-sdk-s3", "~> 1.114", require: false
 gem "counter_culture", "~> 3.2"
-gem "deepl-rb", require: 'deepl'
+gem "deepl-rb", require: "deepl"
 gem "devise"
 gem "esbuild-rails"
 gem "faraday"
 gem "faraday-multipart"
 gem "font-awesome-rails"
-gem "activejob-traffic_control", "~> 0.1.3"
 gem "hashie"
 gem "hotwire-rails"
 gem "image_processing"
 gem "nokogiri"
 gem "oj"
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
+gem "omniauth-facebook"
+gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
-gem "pay"
 gem "pagy"
-gem "prettier"
+gem "pay"
 gem "pg_search"
+gem "prettier"
 gem "rails_autolink"
 gem "rexml", "~> 3.2"
 gem "rspotify"
@@ -49,8 +49,8 @@ gem "shoelace-rails"
 gem "sidekiq"
 gem "sidekiq-throttled", "~> 0.16.1"
 gem "stimulus-rails"
-gem "stripe", "~> 7.0"
 gem "streamio-ffmpeg"
+gem "stripe", "~> 7.0"
 gem "yt"
 
 group :development, :test do
@@ -59,11 +59,19 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "rspec-rails"
-  gem 'webdrivers'
+  gem "webdrivers"
 end
 
 group :development do
-  gem "web-console"
+  gem "bcrypt_pbkdf"
+  gem "bullet"
+  gem "capistrano"
+  gem "capistrano-passenger"
+  gem "capistrano-rails"
+  gem "capistrano-rbenv"
+  gem "ed25519"
+  gem "foreman"
+  gem "htmlbeautifier"
   gem "letter_opener"
   gem "listen"
   gem "rack-mini-profiler"
@@ -71,18 +79,16 @@ group :development do
   gem "rubocop-rails"
   gem "rubocop-rspec"
   gem "solargraph"
-  gem "foreman"
-  gem "htmlbeautifier"
-  gem "bullet", "~> 7.0"
+  gem "web-console"
 end
 
 group :test do
   gem "capybara"
-  gem 'capybara-screenshot'
+  gem "capybara-screenshot"
+  gem "rspec-sidekiq"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "simplecov", require: false
-  gem 'rspec-sidekiq'
   gem "vcr"
   gem "webmock"
 end
