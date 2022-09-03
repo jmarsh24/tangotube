@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
+    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css",
     "shoelace:copy-assets": "mkdir -p public/shoelace-assets && cp -r node_modules/@shoelace-style/shoelace/dist/assets public/shoelace-assets"
   }
 }
