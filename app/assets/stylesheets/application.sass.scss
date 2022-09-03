@@ -1,0 +1,135 @@
+@use "@shoelace-style/shoelace/dist/themes/light.css";
+@use "@shoelace-style/shoelace/dist/themes/dark.css";
+
+@import "application/objects/colors.scss";
+
+@import "application/reset.scss";
+@import "application/layout.scss";
+@import "application/typography.scss";
+@import "application/modules/dashboard.scss";
+@import "application/modules/profile.scss";
+@import "application/objects/buttons.scss";
+
+@import "application/objects/forms.scss";
+@import "application/objects/inputs.scss";
+@import "application/objects/links.scss";
+@import "application/objects/selects.scss";
+@import "application/objects/sl-overrides.scss";
+@import "channels/index.scss";
+@import "clips/clip.scss";
+@import "clips/edit.scss";
+@import "clips/form.scss";
+@import "clips/index.scss";
+@import "clips/show.scss";
+@import "comments/comments-with-replies.scss";
+@import "comments/comments.scss";
+@import "cookies/index.scss";
+@import "couples/index.scss";
+@import "couples/_couple.scss";
+@import "dancers/index.scss";
+@import "dancers/show.scss";
+@import "dancers/_dancer.scss";
+@import "devise/registration/edit.scss";
+@import "devise/registration/new.scss";
+@import "devise/sessions/new.scss";
+@import "devise/shared/error_messages.scss";
+@import "devise/shared/links.scss";
+@import "events/index.scss";
+@import "events/_event.scss";
+@import "events/show.scss";
+@import "events/events.scss";
+@import "orchestras/_form.scss";
+@import "orchestras/_orchestra.scss";
+@import "orchestras/edit.scss";
+@import "orchestras/index.scss";
+@import "orchestras/new.scss";
+@import "orchestras/show.scss";
+@import "performances/_form.scss";
+@import "performances/_performance.scss";
+@import "performances/edit.scss";
+@import "performances/index.scss";
+@import "performances/new.scss";
+@import "performances/show.scss";
+
+@import "layout/footer.scss";
+@import "playlists/index.scss";
+
+@import "shared/header/autocomplete.scss";
+@import "shared/banner.scss";
+@import "shared/header/search.scss";
+@import "shared/sidebar/left.scss";
+@import "shared/sidebar/nav.scss";
+@import "shared/sidebar/right.scss";
+@import "shared/flash.scss";
+@import "shared/header.scss";
+@import "shared/sidebar.scss";
+@import "shared/tooltip.scss";
+
+@import "static_pages/about.scss";
+@import "static_pages/contact.scss";
+@import "static_pages/privacy.scss";
+@import "static_pages/terms.scss";
+
+@import "videos/edit/edit.scss";
+@import "videos/index/filters.scss";
+@import "videos/index/header.scss";
+@import "videos/index/index.scss";
+@import "videos/index/load_more.scss";
+@import "videos/index/videos.scss";
+@import "videos/_video.scss";
+@import "videos/new/new.scss";
+@import "videos/show/lyrics.scss";
+@import "videos/show/recommended_videos.scss";
+@import "videos/show.scss";
+@import "videos/show/video_info_details.scss";
+@import "videos/show/video_info_primary.scss";
+
+@import "videos/slimselect-customized.scss";
+@import "videos/tomselect-customized.scss";
+
+body {
+  background-color: var(--sl-color-neutral-0);
+  color: var(--sl-color-gray-800);
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  padding-bottom: 48px;
+
+  @media (max-width: 768px) {
+    padding-bottom: 0px;
+  }
+}
+
+.isHidden {
+  display: none !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.isActive {
+  font-weight: bold !important;
+}
+
+.row {
+  display: flex;
+}
+
+:not(:defined) {
+  visibility: hidden;
+}
+
+:defined {
+  opacity: 1;
+}
+
+// /* Make the scrollbar color compatible with the dark mode */
+// ::-webkit-scrollbar,
+// ::-webkit-scrollbar-track {
+//   background: var(--sl-color-gray-50);
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background-color: var(--sl-color-neutral-300);
+//   border-radius: var(--sl-border-radius-pill);
+//   border: 3px solid var(--sl-color-gray-50);
+// }
