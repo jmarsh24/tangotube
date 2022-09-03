@@ -1,5 +1,49 @@
 [
   {
+    "name": "1-circle-fill",
+    "title": "1 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "1-circle",
+    "title": "1 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "1-square-fill",
+    "title": "1 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "1-square",
+    "title": "1 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
     "name": "123",
     "title": 123,
     "categories": [
@@ -7,6 +51,358 @@
     ],
     "tags": [
       "numbers"
+    ]
+  },
+  {
+    "name": "2-circle-fill",
+    "title": "2 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "2-circle",
+    "title": "2 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "2-square-fill",
+    "title": "2 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "2-square",
+    "title": "2 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "3-circle-fill",
+    "title": "3 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "3-circle",
+    "title": "3 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "3-square-fill",
+    "title": "3 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "3-square",
+    "title": "3 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "4-circle-fill",
+    "title": "4 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "4-circle",
+    "title": "4 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "4-square-fill",
+    "title": "4 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "4-square",
+    "title": "4 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "5-circle-fill",
+    "title": "5 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "5-circle",
+    "title": "5 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "5-square-fill",
+    "title": "5 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "5-square",
+    "title": "5 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "6-circle-fill",
+    "title": "6 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "6-circle",
+    "title": "6 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "6-square-fill",
+    "title": "6 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "6-square",
+    "title": "6 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "7-circle-fill",
+    "title": "7 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "7-circle",
+    "title": "7 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "7-square-fill",
+    "title": "7 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "7-square",
+    "title": "7 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "8-circle-fill",
+    "title": "8 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "8-circle",
+    "title": "8 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "8-square-fill",
+    "title": "8 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "8-square",
+    "title": "8 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "9-circle-fill",
+    "title": "9 circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "9-circle",
+    "title": "9 circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "9-square-fill",
+    "title": "9 square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
+    ]
+  },
+  {
+    "name": "9-square",
+    "title": "9 square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "number",
+      "numeral"
     ]
   },
   {
@@ -19,6 +415,62 @@
       "pulse",
       "heartbeat",
       "rhythm"
+    ]
+  },
+  {
+    "name": "airplane-engines-fill",
+    "title": "Airplane engines fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "flight",
+      "flying",
+      "plane",
+      "air",
+      "airport"
+    ]
+  },
+  {
+    "name": "airplane-engines",
+    "title": "Airplane engines",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "flight",
+      "flying",
+      "plane",
+      "air",
+      "airport"
+    ]
+  },
+  {
+    "name": "airplane-fill",
+    "title": "Airplane fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "flight",
+      "flying",
+      "plane",
+      "air",
+      "airport"
+    ]
+  },
+  {
+    "name": "airplane",
+    "title": "Airplane",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "flight",
+      "flying",
+      "plane",
+      "air",
+      "airport"
     ]
   },
   {
@@ -44,6 +496,12 @@
       "clock",
       "time"
     ]
+  },
+  {
+    "name": "alexa",
+    "title": "Alexa",
+    "categories": null,
+    "tags": null
   },
   {
     "name": "align-bottom",
@@ -118,6 +576,16 @@
     ]
   },
   {
+    "name": "alipay",
+    "title": "Alipay",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "payments"
+    ]
+  },
+  {
     "name": "alt",
     "title": "Alt",
     "categories": [
@@ -127,6 +595,28 @@
       "key",
       "alt",
       "option"
+    ]
+  },
+  {
+    "name": "android",
+    "title": "Android",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "google",
+      "droid"
+    ]
+  },
+  {
+    "name": "android2",
+    "title": "Android2",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "google",
+      "droid"
     ]
   },
   {
@@ -2596,6 +3086,28 @@
     ]
   },
   {
+    "name": "box-fill",
+    "title": "Box fill",
+    "categories": [
+      "Real world"
+    ],
+    "tags": [
+      "cardboard",
+      "package"
+    ]
+  },
+  {
+    "name": "box-seam-fill",
+    "title": "Box seam fill",
+    "categories": [
+      "Real world"
+    ],
+    "tags": [
+      "cardboard",
+      "package"
+    ]
+  },
+  {
     "name": "box-seam",
     "title": "Box seam",
     "categories": [
@@ -2863,6 +3375,50 @@
     ]
   },
   {
+    "name": "browser-chrome",
+    "title": "Browser Chrome",
+    "categories": [
+      "Brands"
+    ],
+    "tags": [
+      "google",
+      "webkit",
+      "blink"
+    ]
+  },
+  {
+    "name": "browser-edge",
+    "title": "Browser Edge",
+    "categories": [
+      "Brands"
+    ],
+    "tags": [
+      "microsoft",
+      "webkit"
+    ]
+  },
+  {
+    "name": "browser-firefox",
+    "title": "Browser Firefox",
+    "categories": [
+      "Brands"
+    ],
+    "tags": [
+      "gecko"
+    ]
+  },
+  {
+    "name": "browser-safari",
+    "title": "Browser Safari",
+    "categories": [
+      "Brands"
+    ],
+    "tags": [
+      "webkit",
+      "apple"
+    ]
+  },
+  {
     "name": "brush-fill",
     "title": "Brush fill",
     "categories": [
@@ -2950,6 +3506,46 @@
     ],
     "tags": [
       "target"
+    ]
+  },
+  {
+    "name": "c-circle-fill",
+    "title": "C circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "copyright"
+    ]
+  },
+  {
+    "name": "c-circle",
+    "title": "C circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "copyright"
+    ]
+  },
+  {
+    "name": "c-square-fill",
+    "title": "C square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "copyright"
+    ]
+  },
+  {
+    "name": "c-square",
+    "title": "C square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "copyright"
     ]
   },
   {
@@ -3854,6 +4450,62 @@
     ]
   },
   {
+    "name": "capsule-pill",
+    "title": "Capsule pill",
+    "categories": [
+      "Medical"
+    ],
+    "tags": [
+      "rx",
+      "pills",
+      "capsules",
+      "medicine"
+    ]
+  },
+  {
+    "name": "capsule",
+    "title": "Capsule",
+    "categories": [
+      "Medical"
+    ],
+    "tags": [
+      "rx",
+      "pills",
+      "capsules",
+      "medicine"
+    ]
+  },
+  {
+    "name": "car-front-fill",
+    "title": "Car front fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "automobile",
+      "automotive",
+      "auto",
+      "sedan",
+      "drive",
+      "driving"
+    ]
+  },
+  {
+    "name": "car-front",
+    "title": "Car front",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "automobile",
+      "automotive",
+      "auto",
+      "sedan",
+      "drive",
+      "driving"
+    ]
+  },
+  {
     "name": "card-checklist",
     "title": "Card checklist",
     "categories": [
@@ -4343,6 +4995,30 @@
     ]
   },
   {
+    "name": "cassette-fill",
+    "title": "Cassette fill",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "tape",
+      "music",
+      "audio"
+    ]
+  },
+  {
+    "name": "cassette",
+    "title": "Cassette",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "tape",
+      "music",
+      "audio"
+    ]
+  },
+  {
     "name": "cast",
     "title": "Cast",
     "categories": [
@@ -4353,6 +5029,46 @@
       "project",
       "stream",
       "display"
+    ]
+  },
+  {
+    "name": "cc-circle-fill",
+    "title": "CC circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "creative commons"
+    ]
+  },
+  {
+    "name": "cc-circle",
+    "title": "CC circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "creative commons"
+    ]
+  },
+  {
+    "name": "cc-square-fill",
+    "title": "CC square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "creative commons"
+    ]
+  },
+  {
+    "name": "cc-square",
+    "title": "CC square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "creative commons"
     ]
   },
   {
@@ -6486,6 +7202,32 @@
     ]
   },
   {
+    "name": "cup-hot-fill",
+    "title": "Cup hot fill",
+    "categories": [
+      "Real world"
+    ],
+    "tags": [
+      "mug",
+      "steam",
+      "coffee",
+      "tea"
+    ]
+  },
+  {
+    "name": "cup-hot",
+    "title": "Cup hot",
+    "categories": [
+      "Real world"
+    ],
+    "tags": [
+      "mug",
+      "steam",
+      "coffee",
+      "tea"
+    ]
+  },
+  {
     "name": "cup-straw",
     "title": "Cup straw",
     "categories": [
@@ -6556,6 +7298,17 @@
   {
     "name": "currency-pound",
     "title": "Currency pound",
+    "categories": [
+      "Commerce"
+    ],
+    "tags": [
+      "money",
+      "finance"
+    ]
+  },
+  {
+    "name": "currency-rupee",
+    "title": "Currency rupee",
     "categories": [
       "Commerce"
     ],
@@ -7190,6 +7943,16 @@
     ],
     "tags": [
       "social"
+    ]
+  },
+  {
+    "name": "dropbox",
+    "title": "Dropbox",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "dropbox"
     ]
   },
   {
@@ -8018,6 +8781,18 @@
     ]
   },
   {
+    "name": "escape",
+    "title": "Escape",
+    "categories": [
+      "UI and Keyboard"
+    ],
+    "tags": [
+      "esc",
+      "quit",
+      "exit"
+    ]
+  },
+  {
     "name": "ethernet",
     "title": "Ethernet",
     "categories": [
@@ -8028,6 +8803,28 @@
       "connection",
       "port",
       "plug"
+    ]
+  },
+  {
+    "name": "ev-station-fill",
+    "title": "EV station fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "charging",
+      "electric vehicle"
+    ]
+  },
+  {
+    "name": "ev-station",
+    "title": "EV station",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "charging",
+      "electric vehicle"
     ]
   },
   {
@@ -8284,6 +9081,78 @@
       "fan",
       "vent",
       "airflow"
+    ]
+  },
+  {
+    "name": "fast-forward-btn-fill",
+    "title": "Fast forward btn fill",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "fast-forward-btn",
+    "title": "Fast forward btn",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "fast-forward-circle-fill",
+    "title": "Fast forward circle fill",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "fast-forward-circle",
+    "title": "Fast forward circle",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "fast-forward-fill",
+    "title": "Fast forward fill",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "fast-forward",
+    "title": "Fast forward",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
     ]
   },
   {
@@ -10381,6 +11250,19 @@
     ]
   },
   {
+    "name": "filetype-sql",
+    "title": "Filetype SQL",
+    "categories": [
+      "Files and folders"
+    ],
+    "tags": [
+      "file",
+      "file type",
+      "extension",
+      "mysql"
+    ]
+  },
+  {
     "name": "filetype-svg",
     "title": "Filetype svg",
     "categories": [
@@ -10622,6 +11504,17 @@
     ]
   },
   {
+    "name": "fire",
+    "title": "Fire",
+    "categories": [
+      "Real world"
+    ],
+    "tags": [
+      "burning",
+      "smoke"
+    ]
+  },
+  {
     "name": "flag-fill",
     "title": "Flag fill",
     "categories": [
@@ -10830,6 +11723,58 @@
     "tags": [
       "forward",
       "layer"
+    ]
+  },
+  {
+    "name": "fuel-pump-diesel-fill",
+    "title": "Fuel pump diesel fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "gas",
+      "petrol",
+      "fuel",
+      "gas station"
+    ]
+  },
+  {
+    "name": "fuel-pump-diesel",
+    "title": "Fuel pump diesel",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "gas",
+      "petrol",
+      "fuel",
+      "gas station"
+    ]
+  },
+  {
+    "name": "fuel-pump-fill",
+    "title": "Fuel pump fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "gas",
+      "petrol",
+      "fuel",
+      "gas station"
+    ]
+  },
+  {
+    "name": "fuel-pump",
+    "title": "Fuel pump",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "gas",
+      "petrol",
+      "fuel",
+      "gas station"
     ]
   },
   {
@@ -11104,6 +12049,19 @@
     ]
   },
   {
+    "name": "google-play",
+    "title": "Google Play",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "app store",
+      "apps",
+      "store",
+      "android"
+    ]
+  },
+  {
     "name": "google",
     "title": "Google",
     "categories": [
@@ -11304,6 +12262,50 @@
     "tags": [
       "drag",
       "grab"
+    ]
+  },
+  {
+    "name": "h-circle-fill",
+    "title": "H circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "hospital",
+      "helicopter"
+    ]
+  },
+  {
+    "name": "h-circle",
+    "title": "H circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "hospital",
+      "helicopter"
+    ]
+  },
+  {
+    "name": "h-square-fill",
+    "title": "H square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "hospital",
+      "helicopter"
+    ]
+  },
+  {
+    "name": "h-square",
+    "title": "H square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "hospital",
+      "helicopter"
     ]
   },
   {
@@ -12060,6 +13062,17 @@
       "private",
       "investigator",
       "secret"
+    ]
+  },
+  {
+    "name": "indent",
+    "title": "Indent",
+    "categories": [
+      "UI and Keyboard"
+    ],
+    "tags": [
+      "tab",
+      "indent"
     ]
   },
   {
@@ -13034,6 +14047,30 @@
     ]
   },
   {
+    "name": "lungs-fill",
+    "title": "Lungs fill",
+    "categories": [
+      "Medical"
+    ],
+    "tags": [
+      "medicine",
+      "health",
+      "breathing"
+    ]
+  },
+  {
+    "name": "lungs",
+    "title": "Lungs",
+    "categories": [
+      "Medical"
+    ],
+    "tags": [
+      "medicine",
+      "health",
+      "breathing"
+    ]
+  },
+  {
     "name": "magic",
     "title": "Magic",
     "categories": [
@@ -13394,6 +14431,17 @@
       "sound",
       "input",
       "microphone"
+    ]
+  },
+  {
+    "name": "microsoft-teams",
+    "title": "Microsoft Teams",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "social",
+      "messaging"
     ]
   },
   {
@@ -13861,6 +14909,46 @@
     ]
   },
   {
+    "name": "p-circle-fill",
+    "title": "P circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "parking"
+    ]
+  },
+  {
+    "name": "p-circle",
+    "title": "P circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "parking"
+    ]
+  },
+  {
+    "name": "p-square-fill",
+    "title": "P square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "parking"
+    ]
+  },
+  {
+    "name": "p-square",
+    "title": "P square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "parking"
+    ]
+  },
+  {
     "name": "paint-bucket",
     "title": "Paint bucket",
     "categories": [
@@ -13934,6 +15022,18 @@
       "body",
       "content"
     ]
+  },
+  {
+    "name": "pass-fill",
+    "title": "Pass fill",
+    "categories": null,
+    "tags": null
+  },
+  {
+    "name": "pass",
+    "title": "Pass",
+    "categories": null,
+    "tags": null
   },
   {
     "name": "patch-check-fill",
@@ -15242,6 +16342,32 @@
     ]
   },
   {
+    "name": "prescription",
+    "title": "Prescription",
+    "categories": [
+      "Medical"
+    ],
+    "tags": [
+      "rx",
+      "pills",
+      "capsules",
+      "medicine"
+    ]
+  },
+  {
+    "name": "prescription2",
+    "title": "Prescription2",
+    "categories": [
+      "Medical"
+    ],
+    "tags": [
+      "rx",
+      "pills",
+      "capsules",
+      "medicine"
+    ]
+  },
+  {
     "name": "printer-fill",
     "title": "Printer fill",
     "categories": [
@@ -15447,6 +16573,50 @@
       "blockquote",
       "quotes",
       "quotation"
+    ]
+  },
+  {
+    "name": "r-circle-fill",
+    "title": "R circle fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "registered",
+      "trademark"
+    ]
+  },
+  {
+    "name": "r-circle",
+    "title": "R circle",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "registered",
+      "trademark"
+    ]
+  },
+  {
+    "name": "r-square-fill",
+    "title": "R square fill",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "registered",
+      "trademark"
+    ]
+  },
+  {
+    "name": "r-square",
+    "title": "R square",
+    "categories": [
+      "Shapes"
+    ],
+    "tags": [
+      "registered",
+      "trademark"
     ]
   },
   {
@@ -15693,6 +16863,30 @@
     ]
   },
   {
+    "name": "repeat-1",
+    "title": "Repeat 1",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "repeat",
+    "title": "Repeat",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
     "name": "reply-all-fill",
     "title": "Reply all fill",
     "categories": [
@@ -15734,6 +16928,78 @@
     "tags": [
       "mail",
       "email"
+    ]
+  },
+  {
+    "name": "rewind-btn-fill",
+    "title": "Rewind btn fill",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "rewind-btn",
+    "title": "Rewind btn",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "rewind-circle-fill",
+    "title": "Rewind circle fill",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "rewind-circle",
+    "title": "Rewind circle",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "rewind-fill",
+    "title": "Rewind fill",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
+    ]
+  },
+  {
+    "name": "rewind",
+    "title": "Rewind",
+    "categories": [
+      "Media"
+    ],
+    "tags": [
+      "audio",
+      "video",
+      "av"
     ]
   },
   {
@@ -16452,6 +17718,194 @@
     "tags": [
       "shuffle",
       "random"
+    ]
+  },
+  {
+    "name": "sign-stop-fill",
+    "title": "Sign stop fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "stop sign",
+      "intersection",
+      "road",
+      "driving"
+    ]
+  },
+  {
+    "name": "sign-stop-lights-fill",
+    "title": "Sign stop lights fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "stop sign",
+      "intersection",
+      "road",
+      "driving"
+    ]
+  },
+  {
+    "name": "sign-stop-lights",
+    "title": "Sign stop lights",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "stop sign",
+      "intersection",
+      "road",
+      "driving"
+    ]
+  },
+  {
+    "name": "sign-stop",
+    "title": "Sign stop",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "stop sign",
+      "intersection",
+      "road",
+      "driving"
+    ]
+  },
+  {
+    "name": "sign-turn-left-fill",
+    "title": "Sign turn left fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "navigate",
+      "navigation",
+      "route"
+    ]
+  },
+  {
+    "name": "sign-turn-left",
+    "title": "Sign turn left",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "navigate",
+      "navigation",
+      "route"
+    ]
+  },
+  {
+    "name": "sign-turn-right-fill",
+    "title": "Sign turn right fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "navigate",
+      "navigation",
+      "route"
+    ]
+  },
+  {
+    "name": "sign-turn-right",
+    "title": "Sign turn right",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "navigate",
+      "navigation",
+      "route"
+    ]
+  },
+  {
+    "name": "sign-turn-slight-left-fill",
+    "title": "Sign turn slight left fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "navigate",
+      "navigation",
+      "route"
+    ]
+  },
+  {
+    "name": "sign-turn-slight-left",
+    "title": "Sign turn slight left",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "navigate",
+      "navigation",
+      "route"
+    ]
+  },
+  {
+    "name": "sign-turn-slight-right-fill",
+    "title": "Sign turn slight right fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "navigate",
+      "navigation",
+      "route"
+    ]
+  },
+  {
+    "name": "sign-turn-slight-right",
+    "title": "Sign turn slight right",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "navigate",
+      "navigation",
+      "route"
+    ]
+  },
+  {
+    "name": "sign-yield-fill",
+    "title": "Sign yield fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "intersection"
+    ]
+  },
+  {
+    "name": "sign-yield",
+    "title": "Sign yield",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "road",
+      "driving",
+      "intersection"
     ]
   },
   {
@@ -18536,6 +19990,78 @@
     ]
   },
   {
+    "name": "train-freight-front-fill",
+    "title": "Train freight front fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "transit",
+      "public",
+      "rail"
+    ]
+  },
+  {
+    "name": "train-freight-front",
+    "title": "Train freight front",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "transit",
+      "public",
+      "rail"
+    ]
+  },
+  {
+    "name": "train-front-fill",
+    "title": "Train front fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "transit",
+      "public",
+      "rail"
+    ]
+  },
+  {
+    "name": "train-front",
+    "title": "Train front",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "transit",
+      "public",
+      "rail"
+    ]
+  },
+  {
+    "name": "train-lightrail-front-fill",
+    "title": "Train lightrail front fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "transit",
+      "public",
+      "rail"
+    ]
+  },
+  {
+    "name": "train-lightrail-front",
+    "title": "Train lightrail front",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "transit",
+      "public",
+      "rail"
+    ]
+  },
+  {
     "name": "translate",
     "title": "Translate",
     "categories": [
@@ -18719,6 +20245,34 @@
     ]
   },
   {
+    "name": "truck-front-fill",
+    "title": "Truck front fill",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "vehicle",
+      "shipping",
+      "transit",
+      "haul",
+      "freight"
+    ]
+  },
+  {
+    "name": "truck-front",
+    "title": "Truck front",
+    "categories": [
+      "Transportation"
+    ],
+    "tags": [
+      "vehicle",
+      "shipping",
+      "transit",
+      "haul",
+      "freight"
+    ]
+  },
+  {
     "name": "truck",
     "title": "Truck",
     "categories": [
@@ -18880,6 +20434,17 @@
     ]
   },
   {
+    "name": "ubuntu",
+    "title": "Ubuntu",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "linux",
+      "distro"
+    ]
+  },
+  {
     "name": "ui-checks-grid",
     "title": "UI checks grid",
     "categories": [
@@ -18944,6 +20509,17 @@
     ]
   },
   {
+    "name": "unindent",
+    "title": "Unindent",
+    "categories": [
+      "UI and Keyboard"
+    ],
+    "tags": [
+      "tab",
+      "indent"
+    ]
+  },
+  {
     "name": "union",
     "title": "Union",
     "categories": [
@@ -18954,6 +20530,38 @@
       "vector",
       "merge",
       "layers"
+    ]
+  },
+  {
+    "name": "unity",
+    "title": "Unity",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "gaming"
+    ]
+  },
+  {
+    "name": "universal-access-circle",
+    "title": "Universal access circle",
+    "categories": [
+      "UI and Keyboard"
+    ],
+    "tags": [
+      "accessibility",
+      "a11y"
+    ]
+  },
+  {
+    "name": "universal-access",
+    "title": "Universal Access",
+    "categories": [
+      "UI and Keyboard"
+    ],
+    "tags": [
+      "accessibility",
+      "a11y"
     ]
   },
   {
@@ -19231,6 +20839,28 @@
     ]
   },
   {
+    "name": "virus",
+    "title": "Virus",
+    "categories": [
+      "Medical"
+    ],
+    "tags": [
+      "covid",
+      "viral"
+    ]
+  },
+  {
+    "name": "virus2",
+    "title": "Virus2",
+    "categories": [
+      "Medical"
+    ],
+    "tags": [
+      "covid",
+      "viral"
+    ]
+  },
+  {
     "name": "voicemail",
     "title": "Voicemail",
     "categories": [
@@ -19441,6 +21071,17 @@
     "tags": [
       "camera",
       "video"
+    ]
+  },
+  {
+    "name": "wechat",
+    "title": "Wechat",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "social",
+      "messaging"
     ]
   },
   {
@@ -19864,6 +21505,17 @@
     "tags": [
       "microsoft",
       "gaming"
+    ]
+  },
+  {
+    "name": "yelp",
+    "title": "Yelp",
+    "categories": [
+      "Brand"
+    ],
+    "tags": [
+      "social",
+      "reviews"
     ]
   },
   {

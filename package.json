@@ -16,7 +16,6 @@
     "lodash.debounce": "^4.0.8",
     "sass": "^1.54.8",
     "slim-select": "^1.27.1",
-    "stimulus": "^3.0.1",
     "stimulus-dropdown": "^2.0.0",
     "stimulus-hotkeys": "^1.0.5",
     "stimulus-use": "^0.41.0",
@@ -30,7 +29,7 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css",
+    "build:css": "yarn shoelace:copy-assets && sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
     "shoelace:copy-assets": "mkdir -p public/shoelace-assets && cp -r node_modules/@shoelace-style/shoelace/dist/assets public/shoelace-assets"
   }
 }
