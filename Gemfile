@@ -4,6 +4,7 @@ ruby "3.1.2"
 
 # gems that ship with rails...........................................................
 gem "bootsnap", require: false
+gem "cssbundling-rails"
 gem "dartsass-rails"
 gem "hiredis"
 gem "jsbundling-rails"
@@ -47,7 +48,7 @@ gem "scenic", "~> 1.6"
 gem "scheduler", "~> 0.3"
 gem "shoelace-rails"
 gem "sidekiq"
-gem "sidekiq-throttled", "~> 0.16.1"
+gem "sidekiq-throttled", :github => 'ixti/sidekiq-throttled', :branch => 'main'
 gem "stimulus-rails"
 gem "streamio-ffmpeg"
 gem "stripe", "~> 7.0"
@@ -94,7 +95,3 @@ group :test do
 end
 
 
-
-
-
-gem "rack-cors", "~> 1.1"
