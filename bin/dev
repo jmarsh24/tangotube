@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-if command -v overmind &> /dev/null
-then
-  overmind s -f Procfile.dev -p ${PORT:-3000} -P 10
-  exit
-fi
-
-if ! gem list --silent --installed foreman
+if ! foreman version &> /dev/null
 then
   echo "Installing foreman..."
   gem install foreman
