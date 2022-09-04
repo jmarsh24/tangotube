@@ -5,7 +5,6 @@ ruby "3.1.2"
 # gems that ship with rails...........................................................
 gem "bootsnap", require: false
 gem "cssbundling-rails"
-gem "dartsass-rails"
 gem "hiredis"
 gem "jsbundling-rails"
 gem "pg"
@@ -17,7 +16,6 @@ gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # app specific gems...................................................................
-gem "activejob-traffic_control", "~> 0.1.3"
 gem "acts-as-taggable-on", "~> 9.0"
 gem "acts_as_votable"
 gem "ahoy_matey"
