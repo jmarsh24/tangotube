@@ -3,7 +3,7 @@ lock "~> 3.17.1"
 
 set :application, "tangotube"
 set :repo_url, "git@github.com:jmarsh24/tangotube.git"
-server "142.93.101.60", user: "deploy", roles: %w[app db web]
+server "46.101.98.136", user: "deploy", roles: %w[app db web]
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
