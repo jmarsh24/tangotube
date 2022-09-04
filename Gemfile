@@ -91,3 +91,5 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+gem 'net-ssh', '7.0.0.beta1'
