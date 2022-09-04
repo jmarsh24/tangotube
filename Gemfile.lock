@@ -580,7 +580,6 @@ DEPENDENCIES
   jsbundling-rails
   letter_opener
   listen
-  net-ssh (~> 7.0)
   nokogiri
   oj
   omniauth-facebook
