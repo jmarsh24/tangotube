@@ -16,6 +16,7 @@
     "lodash.debounce": "^4.0.8",
     "sass": "^1.54.8",
     "slim-select": "^1.27.1",
+    "stimulus": "npm:@hotwired/stimulus",
     "stimulus-dropdown": "^2.0.0",
     "stimulus-hotkeys": "^1.0.5",
     "stimulus-use": "^0.41.0",
