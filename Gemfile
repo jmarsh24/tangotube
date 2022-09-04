@@ -93,3 +93,5 @@ group :test do
 end
 
 
+
+gem "net-ssh", '7.0.0.beta1'
