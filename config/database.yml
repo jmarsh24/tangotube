@@ -18,3 +18,5 @@ test:
 
 production:
   <<: *default
+    database: tangotube_production
+    port: 5432
