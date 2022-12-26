@@ -16,11 +16,11 @@ gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # app specific gems...................................................................
-gem "acts-as-taggable-on", "~> 9.0"
+gem "acts-as-taggable-on"
 gem "acts_as_votable"
 gem "ahoy_matey"
-gem "aws-sdk-s3", "~> 1.114", require: false
-gem "counter_culture", "~> 3.2"
+gem "aws-sdk-s3", require: false
+gem "counter_culture"
 gem "deepl-rb", require: "deepl"
 gem "devise"
 gem "esbuild-rails"
@@ -40,17 +40,19 @@ gem "pay"
 gem "pg_search"
 gem "prettier"
 gem "rails_autolink"
-gem "rexml", "~> 3.2"
+gem "rexml"
 gem "rspotify"
-gem "scenic", "~> 1.6"
-gem "scheduler", "~> 0.3"
+gem "scenic"
+gem "scheduler"
 gem "shoelace-rails"
 gem "sidekiq"
 gem "sidekiq-throttled", :github => 'ixti/sidekiq-throttled', :branch => 'main'
 gem "stimulus-rails"
 gem "streamio-ffmpeg"
-gem "stripe", "~> 7.0"
+gem "stripe"
 gem "yt"
+gem "redis"
+gem 'net-ssh'
 
 group :development, :test do
   gem "amazing_print"
@@ -92,5 +94,4 @@ group :test do
   gem "webmock"
 end
 
-gem 'net-ssh', '7.0.0.beta1'
-gem "redis", "~> 5.0"
+

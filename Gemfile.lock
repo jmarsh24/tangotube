@@ -550,11 +550,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  acts-as-taggable-on (~> 9.0)
+  acts-as-taggable-on
   acts_as_votable
   ahoy_matey
   amazing_print
-  aws-sdk-s3 (~> 1.114)
+  aws-sdk-s3
   bcrypt_pbkdf
   bootsnap
   bullet
@@ -564,7 +564,7 @@ DEPENDENCIES
   capistrano-rbenv
   capybara
   capybara-screenshot
-  counter_culture (~> 3.2)
+  counter_culture
   cssbundling-rails
   debug
   deepl-rb
@@ -585,7 +585,7 @@ DEPENDENCIES
   jsbundling-rails
   letter_opener
   listen
-  net-ssh (= 7.0.0.beta1)
+  net-ssh
   nokogiri
   oj
   omniauth-facebook
@@ -600,16 +600,16 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 7.0.3.1)
   rails_autolink
-  redis (~> 5.0)
-  rexml (~> 3.2)
+  redis
+  rexml
   rspec-rails
   rspec-sidekiq
   rspotify
   rubocop
   rubocop-rails
   rubocop-rspec
-  scenic (~> 1.6)
-  scheduler (~> 0.3)
+  scenic
+  scheduler
   selenium-webdriver
   shoelace-rails
   shoulda-matchers
@@ -621,7 +621,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   streamio-ffmpeg
-  stripe (~> 7.0)
+  stripe
   turbo-rails
   tzinfo-data
   vcr
