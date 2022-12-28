@@ -1,6 +1,7 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
+  mount Avo::Engine, at: Avo.configuration.root_path
   get "cookies", to: "cookies#index"
   post "cookies", to: "cookies#index"
   get "banner", to: "banner#index"

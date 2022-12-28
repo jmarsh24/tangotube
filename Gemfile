@@ -19,6 +19,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "acts-as-taggable-on"
 gem "acts_as_votable"
 gem "ahoy_matey"
+gem "avo"
 gem "aws-sdk-s3", require: false
 gem "counter_culture"
 gem "deepl-rb", require: "deepl"
@@ -93,5 +94,3 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
-
-
