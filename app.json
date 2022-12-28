@@ -1,5 +1,5 @@
 {
-  "addons": ["newrelic", "heroku-postgresql", "heroku-redis"],
+  "addons": ["heroku-postgresql", "heroku-redis"],
   "buildpacks": [
     {
       "url": "https://github.com/brandoncc/heroku-buildpack-vips.git"
