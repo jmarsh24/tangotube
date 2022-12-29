@@ -67,10 +67,6 @@ end
 group :development do
   gem "bcrypt_pbkdf"
   gem "bullet"
-  gem "capistrano"
-  gem "capistrano-passenger"
-  gem "capistrano-rails"
-  gem "capistrano-rbenv"
   gem "ed25519"
   gem "foreman"
   gem "htmlbeautifier"
