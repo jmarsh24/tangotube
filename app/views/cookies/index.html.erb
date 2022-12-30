@@ -1,5 +1,5 @@
 <%= turbo_frame_tag :cookies_modal do %>
-  <% if session[:cookies_accepted].nil? %>
+  <% if cookies[:cookies_accepted].blank? %>
     <section class="cookies-modal">
       <div class="cookies-modal__inner">
         <div class="cookies-modal__copy">

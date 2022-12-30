@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "banner" do %>
-  <% if session[:banner_closed].nil? %>
+  <% if cookies[:banner_closed].blank? %>
     <div class="banner">
       <%= video_tag "banner.webm",
         type: "video/webm",
