@@ -10,10 +10,10 @@ gem "jsbundling-rails"
 gem "pg"
 gem "puma"
 gem "rails", "~> 7.0.3.1"
-gem "spring"
 gem "sprockets-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "dotenv-rails"
 
 # app specific gems...................................................................
 gem "acts-as-taggable-on"
@@ -22,6 +22,7 @@ gem "ahoy_matey"
 gem "avo"
 gem "aws-sdk-s3", require: false
 gem "counter_culture"
+gem "dalli"
 gem "deepl-rb", require: "deepl"
 gem "devise"
 gem "esbuild-rails"
