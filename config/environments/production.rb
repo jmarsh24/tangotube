@@ -104,7 +104,6 @@ config.cache_store = :mem_cache_store,
 
   config.active_record.async_query_executor = :global_thread_pool
 
-  config.cache_store = :redis_cache_store, { namespace: "tangotube-cache", url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" }, expires_in: 2.weeks }
   config.session_store :cookie_store, key: "_tangotube_session", expire_after: 1.year
 
   config.action_view.image_loading = "lazy"
