@@ -56,15 +56,15 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-config.cache_store = :mem_cache_store,
-                    (ENV["MEMCACHIER_SERVERS"] || "").split(","),
-                    {:username => ENV["MEMCACHIER_USERNAME"],
-                     :password => ENV["MEMCACHIER_PASSWORD"],
-                     :failover => true,
-                     :socket_timeout => 1.5,
-                     :socket_failure_delay => 0.2,
-                     :down_retry_delay => 60
-                    }
+  config.cache_store = :mem_cache_store,
+                      (ENV.fetch("MEMCACHIER_SERVERS") || "").split(","),
+                      { username: ENV.fetch("MEMCACHIER_USERNAME"),
+                        password: ENV.fetch("MEMCACHIER_PASSWORD"),
+                        failover: true,
+                        socket_timeout: 1.5,
+                        socket_failure_delay: 0.2,
+                        down_retry_delay: 60
+                      }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter     = :sidekiq
@@ -73,7 +73,7 @@ config.cache_store = :mem_cache_store,
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options ={host: "tangotube.tv", protocol: "https"}
+  config.action_mailer.default_url_options = { host: "tangotube.tv", protocol: "https" }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
