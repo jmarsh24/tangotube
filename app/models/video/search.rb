@@ -57,11 +57,11 @@ class Video::Search
   end
 
   def leaders
-    @leaders ||= facet("leaders.name", :leader)
+    @leaders ||= facet("dancers.name", { dancer_videos: :dancer }, role: :leader)
   end
 
   def followers
-    @followers ||= facet("followers.name", :follower)
+    @followers ||= facet("dancers.name", { dancer_videos: :dancer }, role: :follower)
   end
 
   def orchestras
@@ -113,19 +113,18 @@ class Video::Search
     counts.map { |c| ["#{c.facet_value} (#{c.occurrences})", c.facet_value] }
   end
 
-  def facet(table_column, model)
-    query =
-      "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
-    counts =
-      Video
-        .filter_by(@filtering_params, @user)
-        .not_hidden
-        .joins(model)
-        .select(query)
-        .group(table_column)
-        .order("occurrences DESC")
-        .having("count(#{table_column}) > 0")
-        .load_async
+  def facet(table_column, model, role: nil)
+    query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
+    videos = Video.filter_by(@filtering_params, @user)
+                  .not_hidden
+                  .joins(model)
+    videos = videos.where(dancer_videos: { role: }) if role.present?
+    counts = videos
+                  .select(query)
+                  .group(table_column)
+                  .order("occurrences DESC")
+                  .having("count(#{table_column}) > 0")
+                  .load_async
     counts.map do |c|
       ["#{c.facet_value.split("'").map(&:titleize).join("'")} (#{c.occurrences})", c.facet_value.downcase]
     end
