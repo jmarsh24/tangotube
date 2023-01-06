@@ -1,8 +1,6 @@
 class SearchSuggestionsController < ApplicationController
   def search
-    @leaders = Leader.where("name ILIKE ?", "%#{params[:query]}%").map(&:full_name)
-
-    @followers = Follower.where("name ILIKE ?", "%#{params[:query]}%").map(&:full_name)
+    @dancers = Dancer.where("name ILIKE ?", "%#{params[:query]}%").map(&:full_name)
 
     @songs = Song.where("title ILIKE ?", "%#{params[:query]}%").map(&:full_title)
 
@@ -11,7 +9,7 @@ class SearchSuggestionsController < ApplicationController
     @search_results = []
 
        @search_results =
-        [@leaders + @followers + @songs + @channels].flatten
+        [@dancers + @songs + @channels].flatten
           .uniq
           .first(10)
           .map(&:titleize)

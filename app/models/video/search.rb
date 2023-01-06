@@ -118,7 +118,7 @@ class Video::Search
     videos = Video.filter_by(@filtering_params, @user)
                   .not_hidden
                   .joins(model)
-    videos = videos.where(dancer_videos: { role: }) if role.present?
+    videos = videos.merge(Video.where(dancer_videos: { role: })) if role.present?
     counts = videos
                   .select(query)
                   .group(table_column)

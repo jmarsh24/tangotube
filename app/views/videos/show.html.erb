@@ -78,7 +78,7 @@
           <% unless @videos_with_same_dancers.empty? %>
             <div class="recommended-videos-card" data-toggle-target="recommendedEventVideos">
               <div class="recommended-videos__header">
-                <h2>Videos from <%= @video.leader.name.titleize %> & <%= @video.follower.name.titleize %></h2>
+                <h2>Videos from <%= @video.leaders.first.name.titleize %> & <%= @video.followers.first.name.titleize %></h2>
               </div>
               <%= render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_dancers } %>
             </div>

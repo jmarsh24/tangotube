@@ -99,8 +99,6 @@ Rails.application.routes.draw do
       post :show
     end
   end
-  resources :leaders
-  resources :followers
   resources :events do
     collection do
       post :index

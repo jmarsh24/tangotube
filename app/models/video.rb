@@ -6,8 +6,6 @@ class Video < ApplicationRecord
 
   validates :youtube_id, presence: true, uniqueness: true
 
-  belongs_to :leader, optional: true, counter_cache: true
-  belongs_to :follower, optional: true, counter_cache: true
   belongs_to :song, optional: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
@@ -16,6 +14,11 @@ class Video < ApplicationRecord
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
+  has_many :follower_roles, ->(role) { where(role: :follower) }, class_name: 'DancerVideo'
+  has_many :leader_roles, ->(role) { where(role: :leader) }, class_name: 'DancerVideo'
+  has_many :leaders, through: :leader_roles, source: :dancer
+  has_many :followers, through: :follower_roles, source: :dancer
+
   has_many :couple_videos, dependent: :destroy
   has_many :couples, through: :couple_videos
   has_one :orchestra, through: :song
@@ -27,8 +30,18 @@ class Video < ApplicationRecord
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
-  scope :filter_by_leader, ->(leader, _user) { joins(:leader).where("unaccent(leaders.name) ILIKE unaccent(?)", leader) }
-  scope :filter_by_follower, ->(follower, _user) { joins(:follower).where("unaccent(followers.name) ILIKE unaccent(?)", follower) }
+  scope :with_leader, ->(dancer){
+    where(id: DancerVideo.where(role: :leader, dancer: dancer).select(:video_id))
+  }
+  scope :with_follower, ->(dancer){
+    where(id: DancerVideo.where(role: :follower, dancer: dancer).select(:video_id))
+  }
+  scope :filter_by_leader, ->(dancer_name, _user){
+    with_leader(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
+  }
+  scope :filter_by_follower, ->(dancer_name, _user){
+    with_follower(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
+  }
   scope :filter_by_channel, ->(channel_id, _user) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
   scope :filter_by_event_id, ->(event_id, _user) { where(event_id:) }
   scope :filter_by_event, ->(event_slug, _user) { joins(:event).where("events.slug ILIKE ?", event_slug) }
@@ -40,13 +53,12 @@ class Video < ApplicationRecord
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :featured?,-> { where(featured: true) }
-
-  # Active Admin scopes
   scope :has_song, -> { where.not(song_id: nil) }
-  scope :has_leader, -> { where.not(leader_id: nil) }
-  scope :has_follower, -> { where.not(follower_id: nil) }
-  scope :missing_follower, -> { where(follower_id: nil) }
-  scope :missing_leader, -> { where(leader_id: nil) }
+  scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer: dancer).select(:video_id)) }
+  scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer: dancer).select(:video_id)) }
+  scope :has_leader_and_follower, -> { joins(:dancer_videos).where(dancer_videos: { role: [:leader, :follower]}) }
+  scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: { role: :follower }) }
+  scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: { role: :leader }) }
   scope :missing_song, -> { where(song_id: nil) }
 
   # Youtube Music Scopes
@@ -125,9 +137,8 @@ class Video < ApplicationRecord
 
     def search_includes
       %i[
+        dancer_videos
         song
-        leader
-        follower
         event
         channel
         dancers

@@ -15,13 +15,13 @@ puts "There are now #{Event.count} events in the database."
 
 # Seed read Leaders
 data = YAML.load_file(Rails.root.join('seed', 'data', 'leader.yml').to_s)
-data.each { |e| Leader.create!(e) }
-puts "There are now #{Leader.count} leaders in the database."
+data.each { |e| Dancer.create!(e) }
+puts "There are now #{Dancer.count} dancers in the database."
 
 # Seed read Followers
 data = YAML.load_file(Rails.root.join('seed', 'data', 'follower.yml').to_s)
-data.each { |e| Follower.create!(e) }
-puts "There are now #{Follower.count} followers in the database."
+data.each { |e| Dancer.create!(e) }
+puts "There are now #{Dancer.count} dancers in the database."
 
 # Seed read Videos
 data = YAML.load_file(Rails.root.join('seed', 'data', 'song.yml').to_s)

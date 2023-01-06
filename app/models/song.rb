@@ -8,8 +8,8 @@ class Song < ApplicationRecord
 
   belongs_to :orchestra
   has_many :videos, dependent: :nullify
-  has_many :leader, through: :videos
-  has_many :follower, through: :videos
+  has_many :leaders, through: :videos
+  has_many :followers, through: :videos
   counter_culture :orchestra, column_name: "songs_count"
 
   after_validation :set_slug, only: [:create, :update]

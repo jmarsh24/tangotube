@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_28_225935) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_194357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -208,32 +208,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_225935) do
     t.string "slug"
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["title"], name: "index_events_on_title"
-  end
-
-  create_table "followers", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "reviewed"
-    t.string "nickname"
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "videos_count", default: 0, null: false
-    t.string "normalized_name"
-    t.index ["name"], name: "index_followers_on_name"
-  end
-
-  create_table "leaders", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "reviewed"
-    t.string "nickname"
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "videos_count", default: 0, null: false
-    t.string "normalized_name"
-    t.index ["name"], name: "index_leaders_on_name"
   end
 
   create_table "orchestras", force: :cascade do |t|
@@ -581,16 +555,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_225935) do
 
   create_view "video_searches", materialized: true, sql_definition: <<-SQL
       SELECT videos.id AS video_id,
-      (((((((((((((((((((((((setweight(to_tsvector('english'::regconfig, (COALESCE(channels.title, ''::character varying))::text), 'C'::"char") || setweight(to_tsvector('english'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((dancers.name)::text, ' ; '::text), ''::text)), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((dancers.nick_name)::text, ' ; '::text), ''::text)), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(leaders.name, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(leaders.nickname, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(followers.name, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(followers.nickname, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.city, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.title, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.country, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.genre, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.title, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.artist, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.acr_cloud_track_name, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.acr_cloud_artist_name, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.description, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(videos.title, ''::text)), 'A'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.tags, ''::character varying))::text), 'B'::"char")) AS tsv_content_tsearch
-     FROM (((((((videos
+      (((((((((((((((((((setweight(to_tsvector('english'::regconfig, (COALESCE(channels.title, ''::character varying))::text), 'C'::"char") || setweight(to_tsvector('english'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((dancers.name)::text, ' ; '::text), ''::text)), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((dancers.nick_name)::text, ' ; '::text), ''::text)), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.city, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.title, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.country, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.genre, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.title, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.artist, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.acr_cloud_track_name, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.acr_cloud_artist_name, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.description, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(videos.title, ''::text)), 'A'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.tags, ''::character varying))::text), 'B'::"char")) AS tsv_content_tsearch
+     FROM (((((videos
        LEFT JOIN channels ON ((channels.id = videos.channel_id)))
-       LEFT JOIN leaders ON ((leaders.id = videos.leader_id)))
-       LEFT JOIN followers ON ((followers.id = videos.follower_id)))
        LEFT JOIN songs ON ((songs.id = videos.song_id)))
        LEFT JOIN events ON ((events.id = videos.event_id)))
-       JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
-       JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
-    GROUP BY videos.id, channels.id, songs.id, events.id, leaders.id, followers.id;
+       LEFT JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
+       LEFT JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
+    GROUP BY videos.id, channels.id, songs.id, events.id;
   SQL
   add_index "video_searches", ["tsv_content_tsearch"], name: "index_video_searches_on_tsv_content_tsearch", using: :gin
   add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true

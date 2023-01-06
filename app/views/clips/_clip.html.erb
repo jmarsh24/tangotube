@@ -9,9 +9,9 @@
       <%= clip.title if clip.title.present? %>
     <% end %>
     <%= clip.video.song.genre.titleize if clip.video.song.present? %> <br />
-    <%= clip.video.leader.full_name if clip.video.leader.present? %>
-    <%= "&" if clip.video.leader.present? && clip.video.follower.present? %>
-    <%= clip.video.follower.full_name if clip.video.follower.present? %>
+    <%= clip.video.leaders.first.full_name if clip.video.leaders.present? %>
+    <%= "&" if clip.video.leaders.present? && clip.video.followers.present? %>
+    <%= clip.video.followers.first.full_name if clip.video.followers.present? %>
     <%= clip.user.first_name if clip.user.present? %>
     <div class="row" style="gap: 5px;">
       <% if clip.tag_list.present? %>

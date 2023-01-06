@@ -14,7 +14,7 @@ namespace :export do
   desc "Export leaders"
   task :leader_to_seeds => :environment do
     FileUtils.mkdir_p(Rails.root.join("seed", "data"))
-    data = Leader.all.map do |e|
+    data = Dancer.leader.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")
     end
 
@@ -26,7 +26,7 @@ namespace :export do
   desc "Export followers"
   task :follower_to_seeds => :environment do
     FileUtils.mkdir_p(Rails.root.join("seed", "data"))
-    data = Follower.all.map do |e|
+    data = Dancer.follower.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")
     end
 

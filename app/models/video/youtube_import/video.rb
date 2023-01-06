@@ -19,7 +19,7 @@ class Video::YoutubeImport::Video
 
   def import
     @video.update(video_params)
-    if @video.leader.nil? || @video.follower.nil?
+    if @video.leaders.nil? || @video.followers.nil?
       @video.grep_title_for_dancer
     end
     if @video.performance_number.nil? || @video.performance_total_number.nil?
@@ -37,7 +37,7 @@ class Video::YoutubeImport::Video
 
   def update
     @video.update(update_video_params)
-    if @video.leader.nil? || @video.follower.nil?
+    if @video.leaders.nil? || @video.followers.nil?
       @video.grep_title_for_dancer
     end
     if @video.performance_number.nil? || @video.performance_total_number.nil?

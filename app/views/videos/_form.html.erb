@@ -8,13 +8,14 @@
                             id: 'leader',
                             f: f,
                             url: '/leaders.json',
-                            value: [video&.leader&.name, video&.leader&.id] } %>
+                            value: [video&.leaders.first&.name, video&.leaders.first
+&.id] } %>
     <%= render partial: "videos/edit/video_info_detail_item_edit",
                   locals: { params_name: :follower_id,
                             id: 'follower',
                             f: f,
                             url: '/followers.json',
-                            value: [video&.follower&.name, video&.leader&.id] } %>
+                            value: [video&.follower.first&.name, video&.leaders.first&.id] } %>
     <div class="detail-section-label">
       <h4>Event Info</h4>
     </div>

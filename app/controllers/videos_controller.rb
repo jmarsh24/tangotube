@@ -11,15 +11,14 @@ class VideosController < ApplicationController
   def index
     videos = if filtering_params.present? || sorting_params.present?
       Video::Search.for(  filtering_params:,
-                                    sorting_params:,
-                                    page:,
-                                    user: current_user)
+                          sorting_params:,
+                          page:,
+                          user: current_user)
                               .videos
     else
       @featured_videos = Video.includes(Video.search_includes)
+                              .has_leader_and_follower
                               .featured?
-                              .has_leader
-                              .has_follower
                               .limit(24)
                               .order("random()")
     end
@@ -176,8 +175,8 @@ class VideosController < ApplicationController
                                          .where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
                                          .where(channel_id: @video.channel_id)
-                                         .where(leader_id: @video.leader_id)
-                                         .where(follower_id: @video.follower_id)
+                                         .with_leader(@video.leaders.first)
+                                         .with_follower(@video.followers.first)
                                          .order("performance_number ASC")
                                          .where(hidden: false)
                                          .limit(8).load_async
@@ -187,9 +186,9 @@ class VideosController < ApplicationController
     @videos_with_same_dancers = Video.includes(Video.search_includes)
                                          .where("upload_date <= ?", @video.upload_date + 7.days)
                                          .where("upload_date >= ?", @video.upload_date - 7.days)
-                                         .has_leader.has_follower
-                                         .where(leader_id: @video.leader_id)
-                                         .where(follower_id: @video.follower_id)
+                                        .has_leader_and_follower
+                                        .with_leader(@video.leaders.first)
+                                        .with_follower(@video.followers.first)
                                          .where(hidden: false)
                                          .where.not(youtube_id: @video.youtube_id)
                                          .limit(8).load_async
@@ -210,7 +209,7 @@ class VideosController < ApplicationController
   def videos_with_same_song
     @videos_with_same_song = Video.includes(Video.search_includes)
                                   .where(song_id: @video.song_id)
-                                  .has_leader.has_follower
+                                  .has_leader_and_follower
                                   .where(hidden: false)
                                   .where.not(song_id: nil)
                                   .where.not(youtube_id: @video.youtube_id)
@@ -220,7 +219,7 @@ class VideosController < ApplicationController
   def videos_with_same_channel
     @videos_with_same_channel = Video.includes(Video.search_includes)
                                   .where(channel_id: @video.channel_id)
-                                  .has_leader.has_follower
+                                  .has_leader_and_follower
                                   .where(hidden: false)
                                   .where.not(youtube_id: @video.youtube_id)
                                   .limit(8).load_async
