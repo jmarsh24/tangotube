@@ -20,7 +20,7 @@ class Dancer < ApplicationRecord
   after_save :find_videos
 
   def find_videos
-    Video.with_dancer_name_in_title(name).each do |video|
+    Video.with_dancer_name_in_title(full_name).each do |video|
       dancer_gender = gender
       role = if dancer_gender == :male
         :leader
