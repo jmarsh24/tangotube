@@ -2,7 +2,7 @@ require "rails_helper"
 require "sidekiq/testing"
 Sidekiq::Testing.fake!
 
-RSpec.describe Video::YoutubeImport, type: :model do
+RSpec.describe Video::YoutubeImport do
   describe ".from_channel" do
     it "creates channel if doesn't already exist" do
       VCR.use_cassette("spec/cassettes/video/youtube_import/from_channel") do
@@ -22,7 +22,7 @@ RSpec.describe Video::YoutubeImport, type: :model do
     it "adds only new videos" do
       VCR.use_cassette("spec/cassettes/video/youtube_import/from_channel") do
         channel = create(:channel, channel_id: "UC9lGGipk4wth0rDyy4419aw")
-        create(:video, youtube_id: "s8olH-kdwzw", channel: channel)
+        create(:video, youtube_id: "s8olH-kdwzw", channel:)
         expect { described_class.from_channel("UC9lGGipk4wth0rDyy4419aw") }.not_to change(Channel, :count)
         expect { described_class.from_channel("UC9lGGipk4wth0rDyy4419aw") }.to change(ImportVideoWorker.jobs, :size).by(4)
       end

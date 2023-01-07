@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Videos::Index", type: :system do
+RSpec.describe "Videos::Index" do
   describe "registered user flow" do
     it "login existing account, shows header, edit user page, add resource...", js: true do
       set_up_videos
@@ -62,7 +62,7 @@ RSpec.describe "Videos::Index", type: :system do
     @leader = create(:leader, name: "Leader Name")
     @video = create(:watched_video, :display, title: "expected_result", popularity: "1", leader: @leader)
     create(:watched_video, :display, title: "video_b", popularity: "2")
-    VideosSearch.refresh
+    Video.refresh_materialized_view
   end
 
   def shows_page_navigation

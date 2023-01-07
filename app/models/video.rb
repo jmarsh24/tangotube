@@ -14,8 +14,8 @@ class Video < ApplicationRecord
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
-  has_many :follower_roles, ->(role) { where(role: :follower) }, class_name: 'DancerVideo'
-  has_many :leader_roles, ->(role) { where(role: :leader) }, class_name: 'DancerVideo'
+  has_many :follower_roles, ->(_role) { where(role: :follower) }, class_name: "DancerVideo"
+  has_many :leader_roles, ->(_role) { where(role: :leader) }, class_name: "DancerVideo"
   has_many :leaders, through: :leader_roles, source: :dancer
   has_many :followers, through: :follower_roles, source: :dancer
 
@@ -31,10 +31,10 @@ class Video < ApplicationRecord
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
   scope :with_leader, ->(dancer){
-    where(id: DancerVideo.where(role: :leader, dancer: dancer).select(:video_id))
+    where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id))
   }
   scope :with_follower, ->(dancer){
-    where(id: DancerVideo.where(role: :follower, dancer: dancer).select(:video_id))
+    where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id))
   }
   scope :filter_by_leader, ->(dancer_name, _user){
     with_leader(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
@@ -54,8 +54,8 @@ class Video < ApplicationRecord
   scope :not_hidden, -> { where(hidden: false) }
   scope :featured?,-> { where(featured: true) }
   scope :has_song, -> { where.not(song_id: nil) }
-  scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer: dancer).select(:video_id)) }
-  scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer: dancer).select(:video_id)) }
+  scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id)) }
+  scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id)) }
   scope :has_leader_and_follower, -> { joins(:dancer_videos).where(dancer_videos: { role: [:leader, :follower]}) }
   scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: { role: :follower }) }
   scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: { role: :leader }) }
@@ -199,7 +199,7 @@ class Video < ApplicationRecord
     array << description if description.present?
     search_string = array.join(" ")
     return unless search_string.match?(PERFORMANCE_REGEX)
-    performance_array = search_string.match(PERFORMANCE_REGEX)[0].tr("^0-9", " ").split(" ").map(&:to_i)
+    performance_array = search_string.match(PERFORMANCE_REGEX)[0].tr("^0-9", " ").split.map(&:to_i)
     return if performance_array.empty?
     return if performance_array.first > performance_array.second || performance_array.second == 1
     self.performance_number = performance_array.first
@@ -223,7 +223,7 @@ class Video < ApplicationRecord
     search_string = array.join(" ")
 
     self.song = Song.filter_by_active
-                    .find_all { |song| search_string.parameterize.match(song.title.parameterize)}
+                    .select { |song| search_string.parameterize.match(song.title.parameterize)}
                     .find { |song| search_string.parameterize.match(song.last_name_search.parameterize)}
   end
 

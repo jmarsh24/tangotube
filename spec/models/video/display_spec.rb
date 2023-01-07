@@ -10,7 +10,7 @@ RSpec.describe Video::Display do
           artist: "Angel D'AGOSTINO",
           genre: "TANGO"
         )
-      video = build(:video, click_count: 0, song: song)
+      video = build(:video, click_count: 0, song:)
       display = described_class.new(video)
       expect(display.any_song_attributes).to eq(
         "No Vendrá - Angel D'Agostino - Tango"
@@ -20,7 +20,7 @@ RSpec.describe Video::Display do
     it "song doesn't exist" do
       video = build(:video)
       display = described_class.new(video)
-      expect(display.any_song_attributes).to eq(nil)
+      expect(display.any_song_attributes).to be_nil
     end
 
     it "only youtube song exists" do
@@ -100,7 +100,7 @@ RSpec.describe Video::Display do
     it "no song attributes exist" do
       video = build(:video)
       display = described_class.new(video)
-      expect(display.external_song_attributes).to eq(nil)
+      expect(display.external_song_attributes).to be_nil
     end
   end
 
@@ -108,7 +108,7 @@ RSpec.describe Video::Display do
     it "missing song" do
       video = build(:video, song: nil)
       display = described_class.new(video)
-      expect(display.el_recodo_attributes).to eq(nil)
+      expect(display.el_recodo_attributes).to be_nil
     end
 
     it "has all attributes" do
@@ -119,7 +119,7 @@ RSpec.describe Video::Display do
           artist: "Angel D'AGOSTINO",
           genre: "TANGO"
         )
-      video = build(:video, song: song)
+      video = build(:video, song:)
       display = described_class.new(video)
       expect(display.el_recodo_attributes).to eq(
         "No Vendrá - Angel D'Agostino - Tango"
@@ -143,7 +143,7 @@ RSpec.describe Video::Display do
       video =
         build(:video, spotify_track_name: "No Vendrá", spotify_artist_name: nil)
       display = described_class.new(video)
-      expect(display.spotify_attributes).to eq(nil)
+      expect(display.spotify_attributes).to be_nil
     end
 
     it "missing track_name" do
@@ -154,7 +154,7 @@ RSpec.describe Video::Display do
           spotify_track_name: nil
         )
       display = described_class.new(video)
-      expect(display.spotify_attributes).to eq(nil)
+      expect(display.spotify_attributes).to be_nil
     end
   end
 
@@ -174,14 +174,14 @@ RSpec.describe Video::Display do
       video =
         build(:video, youtube_artist: "Angel D'AGOSTINO", youtube_song: nil)
       display = described_class.new(video)
-      expect(display.youtube_attributes).to eq(nil)
+      expect(display.youtube_attributes).to be_nil
     end
 
     it "missing artist_name" do
       video =
         build(:video, youtube_song: "Angel D'AGOSTINO", youtube_artist: nil)
       display = described_class.new(video)
-      expect(display.youtube_attributes).to eq(nil)
+      expect(display.youtube_attributes).to be_nil
     end
   end
 
@@ -194,7 +194,7 @@ RSpec.describe Video::Display do
           acr_cloud_track_name: nil
         )
       display = described_class.new(video)
-      expect(display.acr_cloud_attributes).to eq(nil)
+      expect(display.acr_cloud_attributes).to be_nil
     end
 
     it "missing acr_cloud_artist_name" do
@@ -205,7 +205,7 @@ RSpec.describe Video::Display do
           acr_cloud_artist_name: nil
         )
       display = described_class.new(video)
-      expect(display.acr_cloud_attributes).to eq(nil)
+      expect(display.acr_cloud_attributes).to be_nil
     end
 
     it "has both acr_cloud_track_name and acr_cloud_artist_name" do
@@ -223,22 +223,22 @@ RSpec.describe Video::Display do
   describe ".display.dancer_names" do
     it "missing leader" do
       follower = build(:follower, name: "Noelia Hurtado")
-      video = build(:video, leader: nil, follower: follower)
+      video = build(:video, leader: nil, follower:)
       display = described_class.new(video)
-      expect(display.dancer_names).to eq(nil)
+      expect(display.dancer_names).to be_nil
     end
 
     it "missing follower" do
       leader = build(:leader, name: "Carlitos Espinoza")
-      video = build(:video, leader: leader, follower: nil)
+      video = build(:video, leader:, follower: nil)
       display = described_class.new(video)
-      expect(display.dancer_names).to eq(nil)
+      expect(display.dancer_names).to be_nil
     end
 
     it "has both leader and follower" do
       leader = build(:leader, name: "Carlitos Espinoza")
       follower = build(:follower, name: "Noelia Hurtado")
-      video = build(:video, leader: leader, follower: follower)
+      video = build(:video, leader:, follower:)
       display = described_class.new(video)
       expect(display.dancer_names).to eq("Carlitos Espinoza & Noelia Hurtado")
     end

@@ -14,7 +14,7 @@ class Song::RecodoLyrics
   def fetch_page(id)
     Rails.logger.info "Page Number: #{id}"
 
-    page = Page.new(id: id)
+    page = Page.new(id:)
     page.update_song_from_lyrics
   end
 end

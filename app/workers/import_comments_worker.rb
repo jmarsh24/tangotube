@@ -3,7 +3,7 @@ class ImportCommentsWorker
   sidekiq_options queue: :default, retry: 3
 
   def perform(youtube_id)
-    video = Video.find_by(youtube_id: youtube_id)
+    video = Video.find_by(youtube_id:)
     yt_video = Yt::Video.new id: youtube_id
     yt_video_comment_ids = yt_video.comment_threads.take(10000).map(&:id)
     yt_video_comment_ids.each do |comment_id|

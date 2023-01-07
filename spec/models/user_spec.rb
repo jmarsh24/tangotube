@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   context "validation tests" do
     let(:user) { build(:user) }
 
@@ -23,17 +23,17 @@ RSpec.describe User, type: :model do
     end
 
     it "ensures last name presence" do
-      user = User.new(first_name: "First", email: "sample@example.com", password: "password").save
+      user = described_class.new(first_name: "First", email: "sample@example.com", password: "password").save
       expect(user).to be(false)
     end
 
     it "ensures last name presence" do
-      user = User.new(first_name: "First", last_name: "Last", password: "password").save
+      user = described_class.new(first_name: "First", last_name: "Last", password: "password").save
       expect(user).to be(false)
     end
 
     it "ensures last name presence" do
-      user = User.new(first_name: "First", last_name: "Last", email: "sample@example.com", password: "password").save
+      user = described_class.new(first_name: "First", last_name: "Last", email: "sample@example.com", password: "password").save
       expect(user).to be(true)
     end
 

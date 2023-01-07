@@ -37,8 +37,8 @@ class Video::MusicRecognition::AcrCloud::Client
       access_key: ACR_CLOUD_ACCESS_KEY,
       data_type: ACR_CLOUD_DATA_TYPE,
       signature_version: ACR_CLOUD_SIGNATURE_VERSION,
-      signature: signature,
-      sample_bytes: sample_bytes,
+      signature:,
+      sample_bytes:,
       timestamp: ACR_CLOUD_TIMESTAMP
     }
   end

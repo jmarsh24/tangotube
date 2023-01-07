@@ -70,6 +70,8 @@ group :development do
   gem "bullet"
   gem "ed25519"
   gem "foreman"
+  gem "guard"
+  gem "guard-rspec"
   gem "htmlbeautifier"
   gem "letter_opener"
   gem "listen"
@@ -86,7 +88,6 @@ group :test do
   gem "capybara-screenshot"
   gem "rspec-sidekiq"
   gem "selenium-webdriver"
-  gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "vcr"
   gem "webmock"

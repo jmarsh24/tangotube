@@ -5,7 +5,7 @@ class DeletionRequestsController < ApplicationController
 
   def facebook
     DeletionRequest
-      .from_signed_fb(params['signed_request'])
+      .from_signed_fb(params["signed_request"])
       .run
 
     render json: {
@@ -15,9 +15,11 @@ class DeletionRequestsController < ApplicationController
   end
 
   def show
-    dr = DeletionRequest.find_by_pid!(params[:id])
-    render text: dr.deleted? ?
-      "Your data has been completely deleted" :
-      "Your deletion request is still in progress"
+    dr = DeletionRequest.find_by!(pid: params[:id])
+    render text: if dr.deleted?
+  "Your data has been completely deleted"
+else
+  "Your deletion request is still in progress"
+end
   end
 end

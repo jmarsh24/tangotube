@@ -13,7 +13,8 @@ class PerformancesController < ApplicationController
   end
 
   # GET /performances/1
-  def show; end
+  def show
+  end
 
   # GET /performances/new
   def new
@@ -21,7 +22,8 @@ class PerformancesController < ApplicationController
   end
 
   # GET /performances/1/edit
-def edit; end
+def edit
+end
 
   # POST /performances
   def create

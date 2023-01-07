@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Videos::Index", type: :system do
+RSpec.describe "Videos::Index" do
   it "shows videos, display and populates filters", js: true do
     setup_videos
     visit root_path
@@ -190,11 +190,11 @@ RSpec.describe "Videos::Index", type: :system do
   end
 
   def video_thumbnail_collection
-    page.all("img.thumbnail-image").map { |img| img["src"] }
+    page.all("img.thumbnail-image").pluck("src")
   end
 
   def video_thumnbail_details_collection
-    page.all("div.thumbnail").map { |data| data["data-duration"] }
+    page.all("div.thumbnail").pluck("data-duration")
   end
 
   def video_title_collection

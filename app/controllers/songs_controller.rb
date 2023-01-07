@@ -17,7 +17,8 @@ class SongsController < ApplicationController
   end
 
   # GET /songs/1
-  def show; end
+  def show
+  end
 
   # GET /songs/new
   def new
@@ -25,7 +26,8 @@ class SongsController < ApplicationController
   end
 
   # GET /songs/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /songs
   def create

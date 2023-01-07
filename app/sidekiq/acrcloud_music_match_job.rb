@@ -8,7 +8,7 @@ class AcrcloudMusicMatchJob
     threshold: { limit: 10_000, period: 1.day }
   )
 
-  def perform(*args)
+  def perform(*_args)
     Video::MusicRecognition::AcrCloud.fetch(@youtube_id)
   end
 end

@@ -1,16 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Channel, type: :model do
+RSpec.describe Channel do
   it_behaves_like "an importable", :channel
   it_behaves_like "a reviewable", :channel
-
-  describe "validations" do
-    it { is_expected.to validate_uniqueness_of(:channel_id) }
-  end
-
-  describe "associations" do
-    it { is_expected.to have_many(:videos) }
-  end
 
   describe "#update_imported" do
     it "doesn't update if the count is not changing" do

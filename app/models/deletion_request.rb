@@ -8,14 +8,14 @@ class DeletionRequest < ApplicationRecord
   before_validation :set_pid
 
   def run
-    u = User.where(provider: provider, uid: uid).first
+    u = User.where(provider:, uid:).first
     if u.present?
       u.destroy!
     end
   end
 
   def deleted?
-    User.where(provider: provider, uid: uid).count == 0
+    User.where(provider:, uid:).count.zero?
   end
 
   # ============
@@ -30,13 +30,13 @@ class DeletionRequest < ApplicationRecord
   def self.parse_fb_request(req)
     encoded, payload = req.split(".", 2)
     decoded = Base64.urlsafe_decode64(encoded)
-    data = JSON.load(Base64.urlsafe_decode64(payload))
+    data = JSON.parse(Base64.urlsafe_decode64(payload))
 
     # we need to verify the digest is the same
     exp = OpenSSL::HMAC.digest("SHA256", Rails.application.credentials.dig(:facebook, :secret), payload)
 
     if decoded != exp
-      puts "FB deletion callback called with weird data"
+      Rails.logger.debug "FB deletion callback called with weird data"
       return nil
     end
 

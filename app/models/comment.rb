@@ -4,11 +4,11 @@ class Comment < ApplicationRecord
   belongs_to :parent, optional: true, class_name: "Comment"
 
   def comments
-    Comment.includes([:commentable]).where(commentable: commentable, parent_id: id)
+    Comment.includes([:commentable]).where(commentable:, parent_id: id)
   end
 
   def parent_comments
-    Comment.where(commentable: commentable, id: parent_id)
+    Comment.where(commentable:, id: parent_id)
   end
 
   def destroy

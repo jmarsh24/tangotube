@@ -9,7 +9,7 @@ class Video::MusicRecognition::AcrCloud
 
   def initialize(youtube_id)
     @youtube_id = youtube_id
-    @video = Video.find_by(youtube_id: youtube_id)
+    @video = Video.find_by(youtube_id:)
   end
 
   def update_video
@@ -37,24 +37,24 @@ class Video::MusicRecognition::AcrCloud
 
   def video_params
     {
-      acr_response_code: acr_response_code,
-      spotify_album_id: spotify_album_id,
-      spotify_album_name: spotify_album_name,
-      spotify_artist_id: spotify_artist_id,
-      spotify_artist_id_1: spotify_artist_id_1,
-      spotify_artist_id_2: spotify_artist_id_2,
-      spotify_artist_name: spotify_artist_name,
-      spotify_artist_name_1: spotify_artist_name_1,
-      spotify_artist_name_2: spotify_artist_name_2,
-      spotify_track_id: spotify_track_id,
-      spotify_track_name: spotify_track_name,
-      acr_cloud_artist_name: acr_cloud_artist_name,
-      acr_cloud_artist_name_1: acr_cloud_artist_name_1,
-      acr_cloud_album_name: acr_cloud_album_name,
-      acr_cloud_track_name: acr_cloud_track_name,
-      youtube_song_id: youtube_song_id,
-      acrid: acrid,
-      isrc: isrc
+      acr_response_code:,
+      spotify_album_id:,
+      spotify_album_name:,
+      spotify_artist_id:,
+      spotify_artist_id_1:,
+      spotify_artist_id_2:,
+      spotify_artist_name:,
+      spotify_artist_name_1:,
+      spotify_artist_name_2:,
+      spotify_track_id:,
+      spotify_track_name:,
+      acr_cloud_artist_name:,
+      acr_cloud_artist_name_1:,
+      acr_cloud_album_name:,
+      acr_cloud_track_name:,
+      youtube_song_id:,
+      acrid:,
+      isrc:
     }
   end
 

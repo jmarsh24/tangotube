@@ -39,7 +39,8 @@ class OrchestrasController < ApplicationController
   end
 
   # GET /orchestras/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /orchestras
   def create

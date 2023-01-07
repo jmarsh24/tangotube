@@ -22,9 +22,9 @@ class Song::RecodoLyrics::Page
 
     song.update(
       el_recodo_song_id: @id,
-      lyrics: lyrics,
-      artist: artist,
-      title: title
+      lyrics:,
+      artist:,
+      title:
     )
   end
 

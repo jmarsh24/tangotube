@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Videos::Index::Videos", type: :system do
+RSpec.describe "Videos::Index::Videos" do
   it "reformats title with leader & follower" do
     setup_video
     updates_video_title_when_song_leader_follower_present

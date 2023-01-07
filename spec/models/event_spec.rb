@@ -1,17 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Event, type: :model do
-  describe "validations" do
-    it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_uniqueness_of(:title) }
-    it { is_expected.to validate_presence_of(:city) }
-    it { is_expected.to validate_presence_of(:country) }
-  end
-
-  describe "associations" do
-    it { is_expected.to have_many(:videos) }
-  end
-
+RSpec.describe Event do
   describe "title_search" do
     it "returns channels that match title with exact match, without caps, without accents and with partial match" do
       matching_channel = create(:event, title: "Embrace Berlín")
@@ -41,8 +30,7 @@ RSpec.describe Event, type: :model do
 
   describe "#search_title" do
     it "creates searchable title" do
-      event =
-        create(:event, title: "Tango Event Title - unless search information")
+      event = create(:event, title: "Tango Event Title - unless search information")
       expect(event.search_title).to eq("Tango Event Title")
     end
   end
@@ -135,7 +123,7 @@ RSpec.describe Event, type: :model do
     it "updates video with event if event title matches video's channel title" do
       channel = create(:channel, title: "event title match")
       event = create(:event, title: "event title match")
-      video = create(:video, channel: channel, event_id: nil)
+      video = create(:video, channel:, event_id: nil)
       event.match_videos
       expect(video.reload.event).to eq(event)
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_06_194357) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_07_151014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -196,9 +196,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_194357) do
   create_table "events", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
-    t.string "city"
-    t.string "country"
+    t.string "title", null: false
+    t.string "city", null: false
+    t.string "country", null: false
     t.string "category"
     t.date "start_date"
     t.date "end_date"
@@ -207,7 +207,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_194357) do
     t.integer "videos_count", default: 0, null: false
     t.string "slug"
     t.index ["slug"], name: "index_events_on_slug", unique: true
-    t.index ["title"], name: "index_events_on_title"
+    t.index ["title"], name: "index_events_on_title", unique: true
   end
 
   create_table "orchestras", force: :cascade do |t|
@@ -316,6 +316,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_194357) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
   create_table "playlists", force: :cascade do |t|

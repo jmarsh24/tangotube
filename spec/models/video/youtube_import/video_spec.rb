@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Video::YoutubeImport::Video, type: :model do
+RSpec.describe Video::YoutubeImport::Video do
   describe ".import" do
     it "creates new video and channel if missing" do
       VCR.use_cassette("video/youtubeimport/video/api_response") do

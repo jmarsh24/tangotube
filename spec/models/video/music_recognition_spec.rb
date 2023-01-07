@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Video::MusicRecognition, type: :model do
+RSpec.describe Video::MusicRecognition do
   describe ".from_youtube_id" do
     it "updates song attributes from youtube and acrcloud" do
       expect(Video::MusicRecognition::AcrCloud).to receive(:fetch).with("s6iptZdCcG0")

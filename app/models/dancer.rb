@@ -1,6 +1,6 @@
 class Dancer < ApplicationRecord
-  include PgSearch::Model
-  multisearchable against: [:name]
+  # include PgSearch::Model
+  # multisearchable against: [:name]
 
   belongs_to :user, optional: true
   has_many :dancer_videos, dependent: :destroy
@@ -14,7 +14,6 @@ class Dancer < ApplicationRecord
   has_one_attached :profile_image
   has_one_attached :cover_image
   enum gender: { male: 0, female: 1 }
-
 
   after_validation :set_slug, only: [:create, :update]
   after_save :find_videos
@@ -40,7 +39,7 @@ class Dancer < ApplicationRecord
   end
 
   def self.rebuild_pg_search_documents
-    find_each { |record| record.update_pg_search_document }
+    find_each(&:update_pg_search_document)
   end
 
   private

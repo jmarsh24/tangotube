@@ -7,7 +7,8 @@ class ChannelsController < ApplicationController
   end
 
   # GET /channels/1
-  def show; end
+  def show
+  end
 
   # GET /channels/new
   def new
@@ -15,7 +16,8 @@ class ChannelsController < ApplicationController
   end
 
   # GET /channels/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /channels
   def create

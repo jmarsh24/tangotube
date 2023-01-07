@@ -2,6 +2,12 @@ class CommentsController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :authenticate_user!
 
+  def show
+    @comment = Comment.find params[:id]
+  end
+  def edit
+    @comment = Comment.find params[:id]
+  end
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
@@ -14,13 +20,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-    @comment = Comment.find params[:id]
-  end
 
-  def show
-    @comment = Comment.find params[:id]
-  end
 
   def update
     @comment = Comment.find params[:id]

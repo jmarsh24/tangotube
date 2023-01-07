@@ -7,7 +7,7 @@ class YoutubeMusicMatchJob
     concurrency: { limit: 3 },
   )
 
-  def perform(*args)
+  def perform(*_args)
     Video::MusicRecognition::Youtube.fetch(@youtube_id)
   end
 end

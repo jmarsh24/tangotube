@@ -1,6 +1,6 @@
 require "rails_helper"
 
- RSpec.describe Video::MusicRecognition::Youtube, type: :model do
+ RSpec.describe Video::MusicRecognition::Youtube do
     describe ".import" do
      it "updates existing record" do
        video = create(:video, youtube_id: "ABC", youtube_song: nil, youtube_artist: nil)

@@ -29,7 +29,8 @@ class CouplesController < ApplicationController
   end
 
   # GET /couples/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /couples
   def create

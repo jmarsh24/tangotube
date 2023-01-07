@@ -29,11 +29,6 @@ class VideosController < ApplicationController
     end
   end
 
-  def edit
-    @clip = Clip.new
-    set_recommended_videos
-  end
-
   def show
     if @video.nil?
       Video::YoutubeImport.from_video(show_params[:v])
@@ -63,7 +58,20 @@ class VideosController < ApplicationController
     ahoy.track("Video View", video_id: @video.id)
 
   end
+  def edit
+    @clip = Clip.new
+    set_recommended_videos
+  end
 
+
+  def create
+    @video = Video.create(youtube_id: params[:video][:youtube_id])
+    fetch_new_video
+
+    redirect_to root_path,
+                notice:
+                  "Video Sucessfully Added: The video must be approved before the videos are added"
+  end
   def update
     @clip = Clip.new
     respond_to do |format|
@@ -80,14 +88,6 @@ class VideosController < ApplicationController
     end
   end
 
-  def create
-    @video = Video.create(youtube_id: params[:video][:youtube_id])
-    fetch_new_video
-
-    redirect_to root_path,
-                notice:
-                  "Video Sucessfully Added: The video must be approved before the videos are added"
-  end
 
   def hide
     @video.hidden = true
@@ -142,11 +142,7 @@ class VideosController < ApplicationController
 
   def featured
     @video.featured =
-    if @video.featured?
-      false
-    else
-      true
-    end
+    !@video.featured?
     @video.save
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end

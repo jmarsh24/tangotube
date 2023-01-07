@@ -2,7 +2,7 @@ require "rails_helper"
 require "sidekiq/testing"
 Sidekiq::Testing.fake!
 
-RSpec.describe Video::YoutubeImport::Playlist, type: :model do
+RSpec.describe Video::YoutubeImport::Playlist do
   describe "#import" do
     it "creates new playlist if missing" do
       VCR.use_cassette("video/youtubeimport/playlist/api_response") do
@@ -12,10 +12,10 @@ RSpec.describe Video::YoutubeImport::Playlist, type: :model do
         expect(playlist.title).to eq("tangotube test")
         expect(playlist.description).to eq("")
         expect(playlist.channel_title).to eq("Justin Marsh")
-        expect(playlist.channel_id).to eq(nil)
+        expect(playlist.channel_id).to be_nil
         expect(playlist.video_count).to eq("2")
-        expect(playlist.imported).to eq(false)
-        expect(playlist.reviewed).to eq(false)
+        expect(playlist.imported).to be(false)
+        expect(playlist.reviewed).to be(false)
       end
     end
 
@@ -30,10 +30,10 @@ RSpec.describe Video::YoutubeImport::Playlist, type: :model do
         expect(playlist.title).to eq("tangotube test")
         expect(playlist.description).to eq("")
         expect(playlist.channel_title).to eq("Justin Marsh")
-        expect(playlist.channel_id).to eq(nil)
+        expect(playlist.channel_id).to be_nil
         expect(playlist.video_count).to eq("2")
-        expect(playlist.imported).to eq(false)
-        expect(playlist.reviewed).to eq(false)
+        expect(playlist.imported).to be(false)
+        expect(playlist.reviewed).to be(false)
       end
     end
   end
