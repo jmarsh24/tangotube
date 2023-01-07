@@ -64,8 +64,8 @@ Rails.application.routes.draw do
       post :index
     end
   end
+  resource :manifest, only: :show
   resources :videos do
-
     collection do
       post :index
     end
