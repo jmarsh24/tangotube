@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: performances
+#
+#  id           :bigint           not null, primary key
+#  date         :date
+#  videos_count :integer
+#  slug         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
 class Performance < ApplicationRecord
   has_many :performance_videos
   has_many :videos, through: :performance_videos

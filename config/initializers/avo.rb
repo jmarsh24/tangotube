@@ -1,7 +1,7 @@
 # For more information regarding these settings check out our docs https://docs.avohq.io
 Avo.configure do |config|
   ## == Routing ==
-  config.root_path = '/avo'
+  config.root_path = '/admin'
 
   # Where should the user be redirected when visting the `/avo` url
   # config.home_path = nil
@@ -16,10 +16,10 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
+
   Avo.configure do |config|
     config.current_user_method = :current_user
   end
-  # config.authenticate_with = {}
 
   ## == Authorization ==
   # config.authorization_methods = {
@@ -32,7 +32,7 @@ Avo.configure do |config|
   #   destroy: 'destroy?',
   # }
   # config.raise_error_on_missing_policy = false
-  # config.authorization_client = :pundit
+  config.authorization_client = :pundit
 
   ## == Localization ==
   # config.locale = 'en-US'

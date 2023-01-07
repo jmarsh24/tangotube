@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: clips
+#
+#  id            :bigint           not null, primary key
+#  start_seconds :integer          not null
+#  end_seconds   :integer          not null
+#  title         :text
+#  playback_rate :decimal(5, 3)    default(1.0)
+#  user_id       :bigint           not null
+#  video_id      :bigint           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  giphy_id      :string
+#
 class Clip < ApplicationRecord
   acts_as_taggable_on :tags
 
@@ -20,5 +35,9 @@ class Clip < ApplicationRecord
 
   def create_gif_job
     CreateGifJob.perform_async(id)
+  end
+
+  def giphy_url
+    "https://media1.giphy.com/media/#{giphy_id}/200.webp"
   end
 end

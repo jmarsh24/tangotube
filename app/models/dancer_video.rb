@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: dancer_videos
+#
+#  id         :bigint           not null, primary key
+#  dancer_id  :bigint
+#  video_id   :bigint
+#  role       :integer          default("neither"), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class DancerVideo < ApplicationRecord
   belongs_to :dancer
   belongs_to :video

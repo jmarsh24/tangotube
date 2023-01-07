@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: deletion_requests
+#
+#  id         :bigint           not null, primary key
+#  provider   :string
+#  uid        :string
+#  pid        :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class DeletionRequest < ApplicationRecord
 
   validates :uid, :provider, :pid, presence: true

@@ -22,11 +22,11 @@
             <%= performance_number(video) %>
           </div>
         <% end %>
-        <%= image_tag("https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg",
+        <%= image_tag(video.thumbnail_url,
            "data-controller": "thumbnail",
            "data-action": "load->thumbnail#check",
           "data-thumbnail-target": "image",
-           "data-thumbnail-url-value": "https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg",
+           "data-thumbnail-url-value": video.thumbnail_url,
            class: "thumbnail-image")
         %>
       </div>

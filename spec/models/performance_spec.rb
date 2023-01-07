@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: performances
+#
+#  id           :bigint           not null, primary key
+#  date         :date
+#  videos_count :integer
+#  slug         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
 require "rails_helper"
 
 RSpec.describe Performance do

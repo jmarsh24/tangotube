@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: youtube_events
+#
+#  id                :bigint           not null, primary key
+#  data              :jsonb
+#  status            :integer          default("pending")
+#  processing_errors :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
 class YoutubeEvent < ApplicationRecord
   enum status: {
     pending: 0,
