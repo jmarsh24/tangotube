@@ -1,6 +1,4 @@
 class ManifestsController < ApplicationController
-  skip_after_action :verify_authorized
-
   # @route GET /:locale/manifest (manifest)
   def show
     render json: {
