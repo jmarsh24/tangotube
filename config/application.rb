@@ -10,7 +10,7 @@ module TangoTube
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.exceptions_app = self.routes
-    config.assets.paths << Rails.root.join('app', 'assets', 'img')
+    config.assets.paths << Rails.root.join('app', 'assets', 'img', 'videos')
     config.autoload_paths += %W[#{config.root}/lib]
     config.active_record.schema_format = :ruby
     config.active_job.queue_adapter = :sidekiq

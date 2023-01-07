@@ -1,7 +1,7 @@
 <%= turbo_frame_tag clip, class: "video-container" do %>
   <%= link_to watch_path(v: clip.video.youtube_id, start: clip.start_seconds, end: clip.end_seconds, speed: clip.playback_rate), 'data-turbo-frame': "_top" do %>
     <div class="thumbnail" data-duration= "<%= "#{clip.end_seconds - clip.start_seconds} sec  " %>">
-      <%= image_tag clip.gif_url, class: "thumbnail-image" %>
+      <%= image_tag clip.giphy_url, class: "thumbnail-image" %>
     </div>
   <% end %>
   <div style="display: flex; flex-direction: column; gap: 5px;">
