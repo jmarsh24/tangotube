@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require "sidekiq/web"
+require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
-  authenticate :user, -> user { user.admin? } do
+  authenticate :user, ->(user) { user.admin? } do
     mount Avo::Engine, at: Avo.configuration.root_path
   end
   get "cookies", to: "cookies#index"
@@ -14,9 +17,9 @@ Rails.application.routes.draw do
   get "errors/not_found"
   get "errors/internal_server_error"
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks",
-                                    confirmations: "users/confirmations",
-                                    registrations: "users/registrations" }
+  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks",
+                                   confirmations: "users/confirmations",
+                                   registrations: "users/registrations"}
 
   resources :deletion_requests, only: [:show] do
     collection do
@@ -25,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :user do
-    authenticate :user, -> (u) { u.admin? } do
+    authenticate :user, ->(u) { u.admin? } do
       mount Sidekiq::Web, at: "sidekiq", as: :sidekiq
       resources :channels do
         post "deactivate", to: "channels#deactivate"

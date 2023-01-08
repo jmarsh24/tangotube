@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CoupleResource < Avo::BaseResource
   self.title = :couple_names
   self.includes = []

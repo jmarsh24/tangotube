@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Filterable
   extend ActiveSupport::Concern
 
   module ClassMethods
-
     def filter_by(filtering_params, user)
       results = where(nil)
       filtering_params.each do |key, value|

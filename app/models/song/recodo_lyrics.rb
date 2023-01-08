@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Song::RecodoLyrics
   SONG_ID_MAX_NUMBER = 20_000
 

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ClipsController < ApplicationController
-  before_action :set_clip, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: %i[ new edit update destroy]
-  before_action :set_video, only: %i[ create show edit update destroy ]
+  before_action :set_clip, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[new edit update destroy]
+  before_action :set_video, only: %i[create show edit update destroy]
 
   # GET /clips
   def index
@@ -24,7 +26,6 @@ class ClipsController < ApplicationController
   def edit
   end
 
-
   # POST /clips
   def create
     @clip = Clip.new(clip_params)
@@ -34,14 +35,14 @@ class ClipsController < ApplicationController
     if @clip.save
       respond_to do |format|
         format.html do
-          redirect_to watch_path( v: @clip.video.youtube_id,
-                                  start: @clip.start_seconds,
-                                  end: @clip.end_seconds,
-                                  speed: @clip.playback_rate),
-                                  notice: "Clip was successfully created. Click #{view_context.link_to('Here', clips_path)} to view your clip."
+          redirect_to watch_path(v: @clip.video.youtube_id,
+            start: @clip.start_seconds,
+            end: @clip.end_seconds,
+            speed: @clip.playback_rate),
+            notice: "Clip was successfully created. Click #{view_context.link_to("Here", clips_path)} to view your clip."
         end
         format.turbo_stream do
-          flash.now[:notice] = "Clip was successfully created. Click #{view_context.link_to('Here',clips_path)} to view your clip."
+          flash.now[:notice] = "Clip was successfully created. Click #{view_context.link_to("Here", clips_path)} to view your clip."
         end
       end
     else
@@ -68,17 +69,18 @@ class ClipsController < ApplicationController
   end
 
   private
-    def set_video
-      @video = Video.find(params[:video_id]) if params[:video_id].present?
-    end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_clip
-      @clip = Clip.find(params[:id])
-    end
+  def set_video
+    @video = Video.find(params[:video_id]) if params[:video_id].present?
+  end
 
-    # Only allow a list of trusted parameters through.
-    def clip_params
-      params.require(:clip).permit(:start_seconds, :end_seconds, :title, :playback_rate, :user_id, :video_id, :tag_list)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_clip
+    @clip = Clip.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def clip_params
+    params.require(:clip).permit(:start_seconds, :end_seconds, :title, :playback_rate, :user_id, :video_id, :tag_list)
+  end
 end

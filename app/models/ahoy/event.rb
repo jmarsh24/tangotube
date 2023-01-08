@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: ahoy_events
@@ -19,24 +21,24 @@ class Ahoy::Event < AhoyRecord
 
   class << self
     def most_viewed_videos_by_month
-       where("time > ?", 30.days.ago)
-      .where(name: "Video View")
-      .select("properties")
-      .group("properties")
-      .having("count(properties) >= ?", MIN_NUMBER_OF_VIEWS)
-      .map(&:properties)
-      .pluck("video_id")
-      .compact
+      where("time > ?", 30.days.ago)
+        .where(name: "Video View")
+        .select("properties")
+        .group("properties")
+        .having("count(properties) >= ?", MIN_NUMBER_OF_VIEWS)
+        .map(&:properties)
+        .pluck("video_id")
+        .compact
     end
 
     def viewed_by_user(user)
       where(name: "Video View")
-     .where(user_id: user.id)
-     .select("properties")
-     .group("properties")
-     .map(&:properties)
-     .pluck("video_id")
-     .compact
-   end
+        .where(user_id: user.id)
+        .select("properties")
+        .group("properties")
+        .map(&:properties)
+        .pluck("video_id")
+        .compact
+    end
   end
 end

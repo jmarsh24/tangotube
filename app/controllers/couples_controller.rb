@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CouplesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_couple, only: %i[ show edit update destroy ]
+  before_action :set_couple, only: %i[show edit update destroy]
 
   # GET /couples
   def index
@@ -59,13 +61,14 @@ class CouplesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_couple
-      @couple = Couple.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def couple_params
-      params.require(:couple).permit(:dancer_id, :feature_image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_couple
+    @couple = Couple.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def couple_params
+    params.require(:couple).permit(:dancer_id, :feature_image)
+  end
 end

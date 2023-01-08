@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: yt_comments
@@ -16,6 +18,5 @@
 #
 FactoryBot.define do
   factory :yt_comment do
-    
   end
 end

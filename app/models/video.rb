@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: videos
@@ -63,7 +65,7 @@ class Video < ApplicationRecord
   acts_as_votable
   include Filterable
 
-  PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
+  PERFORMANCE_REGEX = /(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
 
   validates :youtube_id, presence: true, uniqueness: true
 
@@ -89,18 +91,18 @@ class Video < ApplicationRecord
   counter_culture [:song, :orchestra]
   counter_culture :event
 
-  scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist)}
+  scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist) }
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
-  scope :with_leader, ->(dancer){
+  scope :with_leader, ->(dancer) {
     where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id))
   }
-  scope :with_follower, ->(dancer){
+  scope :with_follower, ->(dancer) {
     where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id))
   }
-  scope :filter_by_leader, ->(dancer_name, _user){
+  scope :filter_by_leader, ->(dancer_name, _user) {
     with_leader(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
   }
-  scope :filter_by_follower, ->(dancer_name, _user){
+  scope :filter_by_follower, ->(dancer_name, _user) {
     with_follower(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
   }
   scope :filter_by_channel, ->(channel_id, _user) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
@@ -109,17 +111,17 @@ class Video < ApplicationRecord
   scope :filter_by_song_id, ->(song_id, _user) { where(song_id:) }
   scope :filter_by_song, ->(song_slug, _user) { joins(:song).where("songs.slug ILIKE ?", song_slug) }
   scope :filter_by_hd, ->(boolean, _user) { where(hd: boolean) }
-  scope :filter_by_year,->(year, _user) { where("extract(year from performance_date) = ?", year) }
-  scope :filter_by_upload_year,->(year, _user) { where("extract(year from upload_date) = ?", year) }
+  scope :filter_by_year, ->(year, _user) { where("extract(year from performance_date) = ?", year) }
+  scope :filter_by_upload_year, ->(year, _user) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
-  scope :featured?,-> { where(featured: true) }
+  scope :featured?, -> { where(featured: true) }
   scope :has_song, -> { where.not(song_id: nil) }
   scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id)) }
   scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id)) }
-  scope :has_leader_and_follower, -> { joins(:dancer_videos).where(dancer_videos: { role: [:leader, :follower]}) }
-  scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: { role: :follower }) }
-  scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: { role: :leader }) }
+  scope :has_leader_and_follower, -> { joins(:dancer_videos).where(dancer_videos: {role: [:leader, :follower]}) }
+  scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :follower}) }
+  scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :leader}) }
   scope :missing_song, -> { where(song_id: nil) }
 
   # Youtube Music Scopes
@@ -132,29 +134,29 @@ class Video < ApplicationRecord
   scope :not_successful_acrcloud, -> { where(acr_response_code: 1001) }
   scope :scanned_acrcloud, -> { where(acr_response_code: [0, 1001]) }
   scope :not_scanned_acrcloud,
-        -> {
-          where
-            .not(acr_response_code: [0, 1001])
-        }
+    -> {
+      where
+        .not(acr_response_code: [0, 1001])
+    }
 
   # Attribute Matching Scopes
   scope :with_song_title,
-        lambda { |song_title|
-          where(
-            'unaccent(spotify_track_name) ILIKE unaccent(:song_title)
+    lambda { |song_title|
+      where(
+        'unaccent(spotify_track_name) ILIKE unaccent(:song_title)
                                     OR unaccent(youtube_song) ILIKE unaccent(:song_title)
                                     OR unaccent(title) ILIKE unaccent(:song_title)
                                     OR unaccent(description) ILIKE unaccent(:song_title)
                                     OR unaccent(tags) ILIKE unaccent(:song_title)
                                     OR unaccent(acr_cloud_track_name) ILIKE unaccent(:song_title)',
-            song_title: "%#{song_title}%"
-          )
-        }
+        song_title: "%#{song_title}%"
+      )
+    }
 
   scope :with_song_artist_keyword,
-        lambda { |song_artist_keyword|
-          where(
-            'spotify_artist_name ILIKE :song_artist_keyword
+    lambda { |song_artist_keyword|
+      where(
+        'spotify_artist_name ILIKE :song_artist_keyword
                                             OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
                                             OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
                                             OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
@@ -164,23 +166,22 @@ class Video < ApplicationRecord
                                             OR unaccent(acr_cloud_album_name) ILIKE unaccent(:song_artist_keyword)
                                             OR unaccent(acr_cloud_artist_name) ILIKE unaccent(:song_artist_keyword)
                                             OR unaccent(acr_cloud_artist_name_1) ILIKE unaccent(:song_artist_keyword)',
-            song_artist_keyword: "%#{song_artist_keyword}%"
-          )
-        }
+        song_artist_keyword: "%#{song_artist_keyword}%"
+      )
+    }
 
   # Combined Scopes
 
   scope :title_match_missing_leader,
-        ->(leader_name) {
-          missing_leader.with_dancer_name_in_title(leader_name)
-        }
+    ->(leader_name) {
+      missing_leader.with_dancer_name_in_title(leader_name)
+    }
   scope :title_match_missing_follower,
-        ->(follower_name) {
-          missing_follower.with_dancer_name_in_title(follower_name)
-        }
+    ->(follower_name) {
+      missing_follower.with_dancer_name_in_title(follower_name)
+    }
 
   class << self
-
     def search(query, _user)
       filter_by_query(query)
     end
@@ -192,7 +193,7 @@ class Video < ApplicationRecord
     def refresh_materialized_view
       Scenic.database.refresh_materialized_view(
         :video_searches,
-        concurrently: true,
+        concurrently: true
       )
     end
 
@@ -239,12 +240,12 @@ class Video < ApplicationRecord
     end
 
     def most_viewed_videos_by_month
-      where( id: Ahoy::Event.most_viewed_videos_by_month)
+      where(id: Ahoy::Event.most_viewed_videos_by_month)
     end
   end
 
   def viewed_within_last_month?
-    Video.where( id: Ahoy::Event.most_viewed_videos_by_month).any?
+    Video.where(id: Ahoy::Event.most_viewed_videos_by_month).any?
   end
 
   def grep_title_for_dancer
@@ -284,8 +285,8 @@ class Video < ApplicationRecord
     search_string = array.join(" ")
 
     self.song = Song.filter_by_active
-                    .select { |song| search_string.parameterize.match(song.title.parameterize)}
-                    .find { |song| search_string.parameterize.match(song.last_name_search.parameterize)}
+      .select { |song| search_string.parameterize.match(song.title.parameterize) }
+      .find { |song| search_string.parameterize.match(song.last_name_search.parameterize) }
   end
 
   def display

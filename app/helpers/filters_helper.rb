@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FiltersHelper
   def filtering_params
     params.permit(
@@ -14,6 +16,7 @@ module FiltersHelper
       :liked,
       :id,
       :query,
-      :dancer).to_h.flatten.join("_")
+      :dancer
+    ).to_h.flatten.join("_")
   end
 end

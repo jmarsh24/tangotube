@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchSuggestionsController < ApplicationController
   def search
     @dancers = Dancer.where("name ILIKE ?", "%#{params[:query]}%").map(&:full_name)
@@ -8,11 +10,11 @@ class SearchSuggestionsController < ApplicationController
 
     @search_results = []
 
-       @search_results =
-        [@dancers + @songs + @channels].flatten
-          .uniq
-          .first(10)
-          .map(&:titleize)
+    @search_results =
+      [@dancers + @songs + @channels].flatten
+        .uniq
+        .first(10)
+        .map(&:titleize)
 
     respond_to do |format|
       format.turbo_stream

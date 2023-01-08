@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOrchestras < ActiveRecord::Migration[7.0]
   def change
     create_table :orchestras do |t|
@@ -8,6 +10,6 @@ class CreateOrchestras < ActiveRecord::Migration[7.0]
       t.timestamps
     end
     add_reference :songs, :orchestra
-    add_index :orchestras, :name, unique: true 
+    add_index :orchestras, :name, unique: true
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::Search
   SEARCHABLE_COLUMNS = %w[
     songs.title
@@ -35,9 +37,9 @@ class Video::Search
 
   def videos
     @videos = Video.includes(Video.search_includes)
-                   .not_hidden
-                   .order(ordering_params)
-                   .filter_by(@filtering_params, @user)
+      .not_hidden
+      .order(ordering_params)
+      .filter_by(@filtering_params, @user)
   end
 
   def paginated_videos
@@ -57,11 +59,11 @@ class Video::Search
   end
 
   def leaders
-    @leaders ||= facet("dancers.name", { dancer_videos: :dancer }, role: :leader)
+    @leaders ||= facet("dancers.name", {dancer_videos: :dancer}, role: :leader)
   end
 
   def followers
-    @followers ||= facet("dancers.name", { dancer_videos: :dancer }, role: :follower)
+    @followers ||= facet("dancers.name", {dancer_videos: :dancer}, role: :follower)
   end
 
   def orchestras
@@ -95,7 +97,7 @@ class Video::Search
   private
 
   def ordering_params
-    @filtering_params.empty? && @sorting_params.empty? ? "RANDOM()": "#{sort_column} #{sort_direction}"
+    (@filtering_params.empty? && @sorting_params.empty?) ? "RANDOM()" : "#{sort_column} #{sort_direction}"
   end
 
   def facet_on_year(table_column)
@@ -116,15 +118,15 @@ class Video::Search
   def facet(table_column, model, role: nil)
     query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
     videos = Video.filter_by(@filtering_params, @user)
-                  .not_hidden
-                  .joins(model)
-    videos = videos.merge(Video.where(dancer_videos: { role: })) if role.present?
+      .not_hidden
+      .joins(model)
+    videos = videos.merge(Video.where(dancer_videos: {role:})) if role.present?
     counts = videos
-                  .select(query)
-                  .group(table_column)
-                  .order("occurrences DESC")
-                  .having("count(#{table_column}) > 0")
-                  .load_async
+      .select(query)
+      .group(table_column)
+      .order("occurrences DESC")
+      .having("count(#{table_column}) > 0")
+      .load_async
     counts.map do |c|
       ["#{c.facet_value.split("'").map(&:titleize).join("'")} (#{c.occurrences})", c.facet_value.downcase]
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -42,13 +44,13 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :confirmable,
-         :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :timeoutable,
-         :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
+    :database_authenticatable,
+    :registerable,
+    :recoverable,
+    :rememberable,
+    :timeoutable,
+    :validatable,
+    :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
   enum role: {user: 0, admin: 1}
 
@@ -65,15 +67,15 @@ class User < ApplicationRecord
     def from_omniauth(access_token)
       user = User.where(email: access_token.info.email).first
       user ||= User.create(
-          email: access_token.info.email,
-          password: Devise.friendly_token[0,20],
-          name: access_token.info.name,
-          first_name: access_token.info.first_name,
-          last_name: access_token.info.last_name,
-          image: access_token.info.image,
-          uid: access_token.uid,
-          provider: access_token.info.provider
-        )
+        email: access_token.info.email,
+        password: Devise.friendly_token[0, 20],
+        name: access_token.info.name,
+        first_name: access_token.info.first_name,
+        last_name: access_token.info.last_name,
+        image: access_token.info.image,
+        uid: access_token.uid,
+        provider: access_token.info.provider
+      )
       user
     end
   end

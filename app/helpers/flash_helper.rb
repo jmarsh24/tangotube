@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FlashHelper
   def classes_for_flash(flash_key)
     case flash_key.to_sym

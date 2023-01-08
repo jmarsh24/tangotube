@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: %i[ show edit update destroy deactivate ]
+  before_action :set_channel, only: %i[show edit update destroy deactivate]
 
   # GET /channels
   def index
@@ -49,22 +51,23 @@ class ChannelsController < ApplicationController
   def deactivate
     @channel.active = false
     @channel.save
-    DestroyAllChannelVideosJob.perform_async(@channel.channel_id)
+    DestroyAllChannelVideosJob.perform_later(@channel.channel_id)
     redirect_to root_path(channel: @channel.channel_id), notice: "Channel has been inactivated"
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_channel
-      @channel = Channel.find_by(channel_id: channel_params[:channel_id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def channel_params
-      params.permit(:channel_id, :channel, :id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_channel
+    @channel = Channel.find_by(channel_id: channel_params[:channel_id])
+  end
 
-    def fetch_new_channel
-      ImportChannelWorker.perform_async(@channel.channel_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def channel_params
+    params.permit(:channel_id, :channel, :id)
+  end
+
+  def fetch_new_channel
+    ImportChannelJob.perform_later(@channel.channel_id)
+  end
 end

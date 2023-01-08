@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DancerResource < Avo::BaseResource
   self.title = :name
   self.includes = []

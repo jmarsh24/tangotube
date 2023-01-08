@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Video::MusicRecognition::AcrCloud
   class << self
     def fetch(youtube_id)
       new(youtube_id).update_video
-      rescue StandardError => e
-        Rails.logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e}\n\t#{e.backtrace.join("\n\t")}"
+    rescue => e
+      Rails.logger.warn "Video::MusicRecognition::AcrCloud no video found: #{e}\n\t#{e.backtrace.join("\n\t")}"
     end
   end
 
@@ -32,7 +34,7 @@ class Video::MusicRecognition::AcrCloud
     audio_file = FFMPEG::Movie.new(input_file_path)
     start_time = audio_file.duration / 2
     end_time = start_time + 20
-    audio_file.transcode(output_file_path, { custom: %W[-y -ss #{start_time} -to #{end_time}] })
+    audio_file.transcode(output_file_path, {custom: %W[-y -ss #{start_time} -to #{end_time}]})
   end
 
   def video_params

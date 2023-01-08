@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 ruby File.read(".ruby-version").strip
@@ -43,16 +45,13 @@ gem "pundit"
 gem "ransack"
 gem "rails_autolink"
 gem "rails-i18n"
-gem "rexml"
 gem "scenic"
-gem "scheduler"
 gem "shimmer"
-gem "shoelace-rails"
 gem "slim-rails"
 gem "sidekiq"
-gem "sidekiq-throttled"
+gem "sidekiq-scheduler"
 gem "streamio-ffmpeg"
-gem 'net-ssh'
+gem "net-ssh"
 gem "yael"
 
 # Assets
@@ -106,10 +105,4 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rspec"
   gem "rubocop-rake"
-  gem "capistrano"
-  gem "capistrano-rails"
-  gem "capistrano-rbenv"
-  gem "capistrano-bundler"
-  gem "capistrano-sidekiq"
-  gem "capistrano-rails-console"
 end

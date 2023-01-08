@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: yt_comments
@@ -24,5 +26,4 @@ class YtComment < ApplicationRecord
   validates :channel_id, presence: true
   validates :youtube_id, presence: true
   validates :user_name, presence: true
-
 end

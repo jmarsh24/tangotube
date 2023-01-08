@@ -1,26 +1,55 @@
+# frozen_string_literal: true
+
 require_relative "boot"
-require "rails/all"
+
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+require "active_storage/engine"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_mailbox/engine"
+require "action_text/engine"
+require "action_view/railtie"
+require "action_cable/engine"
+# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Config = Shimmer::Config.instance.freeze
+
 module TangoTube
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.exceptions_app = self.routes
-    config.assets.paths << Rails.root.join('app', 'assets', 'img', 'videos')
-    config.autoload_paths += %W[#{config.root}/lib]
-    config.active_record.schema_format = :ruby
-    config.active_job.queue_adapter = :sidekiq
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
-    config.hosts = nil
+    config.exceptions_app = routes
+    config.time_zone = "Berlin"
+    config.require_master_key = true
+
+    config.autoload_paths << "#{root}/app/avo/actions"
+    config.autoload_paths << "#{root}/app/policies/concerns"
+
+    config.middleware.use Shimmer::CloudflareProxy
+
+    host = if ENV["HOST"].present?
+      ENV["HOST"]
+    elsif ENV["HEROKU_APP_NAME"].present?
+      "#{ENV["HEROKU_APP_NAME"]}.herokuapp.com"
+    else
+      "localhost:3000"
+    end
+
+    protocol = host.include?("localhost") ? "http" : "https"
+    Rails.application.routes.default_url_options[:host] = host
+    config.action_mailer.default_url_options({host:})
+    config.action_mailer.asset_host = "#{protocol}://#{host}"
+    config.active_storage.variant_processor = :mini_magick
+
+    config.assets.paths << Rails.root.join("node_modules")
+    ActiveRecord::Tasks::DatabaseTasks.fixtures_path = Rails.root.join("spec/fixtures")
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateVideoSearches < ActiveRecord::Migration[7.0]
   def change
     create_view :video_searches, materialized: true

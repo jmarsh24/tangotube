@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VideosController < ApplicationController
   include ActionView::RecordIdentifier
 
@@ -10,17 +12,17 @@ class VideosController < ApplicationController
 
   def index
     videos = if filtering_params.present? || sorting_params.present?
-      Video::Search.for(  filtering_params:,
-                          sorting_params:,
-                          page:,
-                          user: current_user)
-                              .videos
+      Video::Search.for(filtering_params:,
+        sorting_params:,
+        page:,
+        user: current_user)
+        .videos
     else
       @featured_videos = Video.includes(Video.search_includes)
-                              .has_leader_and_follower
-                              .featured?
-                              .limit(24)
-                              .order("random()")
+        .has_leader_and_follower
+        .featured?
+        .limit(24)
+        .order("random()")
     end
     @pagy, @videos = pagy(videos, items: 24)
     respond_to do |format|
@@ -34,7 +36,7 @@ class VideosController < ApplicationController
       Video::YoutubeImport.from_video(show_params[:v])
       @video = Video.find_by(youtube_id: show_params[:v])
     end
-    UpdateVideoWorker.perform_async(show_params[:v])
+    UpdateVideoJob.perform_later(show_params[:v])
     set_recommended_videos
     @start_value = params[:start]
     @end_value = params[:end]
@@ -53,25 +55,25 @@ class VideosController < ApplicationController
     @video.clicked!
 
     if user_signed_in?
-      MarkVideoAsWatchedJob.perform_async(show_params[:v], current_user.id)
+      MarkVideoAsWatchedJob.perform_later(show_params[:v], current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
-
   end
+
   def edit
     @clip = Clip.new
     set_recommended_videos
   end
-
 
   def create
     @video = Video.create(youtube_id: params[:video][:youtube_id])
     fetch_new_video
 
     redirect_to root_path,
-                notice:
-                  "Video Sucessfully Added: The video must be approved before the videos are added"
+      notice:
+        "Video Sucessfully Added: The video must be approved before the videos are added"
   end
+
   def update
     @clip = Clip.new
     respond_to do |format|
@@ -87,7 +89,6 @@ class VideosController < ApplicationController
       end
     end
   end
-
 
   def hide
     @video.hidden = true
@@ -142,7 +143,7 @@ class VideosController < ApplicationController
 
   def featured
     @video.featured =
-    !@video.featured?
+      !@video.featured?
     @video.save
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
@@ -168,57 +169,57 @@ class VideosController < ApplicationController
 
   def videos_from_this_performance
     @videos_from_this_performance = Video.includes(Video.search_includes)
-                                         .where("upload_date <= ?", @video.upload_date + 7.days)
-                                         .where("upload_date >= ?", @video.upload_date - 7.days)
-                                         .where(channel_id: @video.channel_id)
-                                         .with_leader(@video.leaders.first)
-                                         .with_follower(@video.followers.first)
-                                         .order("performance_number ASC")
-                                         .where(hidden: false)
-                                         .limit(8).load_async
+      .where("upload_date <= ?", @video.upload_date + 7.days)
+      .where("upload_date >= ?", @video.upload_date - 7.days)
+      .where(channel_id: @video.channel_id)
+      .with_leader(@video.leaders.first)
+      .with_follower(@video.followers.first)
+      .order("performance_number ASC")
+      .where(hidden: false)
+      .limit(8).load_async
   end
 
   def videos_with_same_dancers
     @videos_with_same_dancers = Video.includes(Video.search_includes)
-                                         .where("upload_date <= ?", @video.upload_date + 7.days)
-                                         .where("upload_date >= ?", @video.upload_date - 7.days)
-                                        .has_leader_and_follower
-                                        .with_leader(@video.leaders.first)
-                                        .with_follower(@video.followers.first)
-                                         .where(hidden: false)
-                                         .where.not(youtube_id: @video.youtube_id)
-                                         .limit(8).load_async
+      .where("upload_date <= ?", @video.upload_date + 7.days)
+      .where("upload_date >= ?", @video.upload_date - 7.days)
+      .has_leader_and_follower
+      .with_leader(@video.leaders.first)
+      .with_follower(@video.followers.first)
+      .where(hidden: false)
+      .where.not(youtube_id: @video.youtube_id)
+      .limit(8).load_async
   end
 
   def videos_with_same_event
     @videos_with_same_event = Video.includes(Video.search_includes)
-                                   .where(event_id: @video.event_id)
-                                   .where.not(event: nil)
-                                   .where("upload_date <= ?", @video.upload_date + 7.days)
-                                   .where("upload_date >= ?", @video.upload_date - 7.days)
-                                   .where(hidden: false)
-                                   .where.not(youtube_id: @video.youtube_id)
-                                   .limit(16).load_async
+      .where(event_id: @video.event_id)
+      .where.not(event: nil)
+      .where("upload_date <= ?", @video.upload_date + 7.days)
+      .where("upload_date >= ?", @video.upload_date - 7.days)
+      .where(hidden: false)
+      .where.not(youtube_id: @video.youtube_id)
+      .limit(16).load_async
     @videos_with_same_event -= @videos_from_this_performance
   end
 
   def videos_with_same_song
     @videos_with_same_song = Video.includes(Video.search_includes)
-                                  .where(song_id: @video.song_id)
-                                  .has_leader_and_follower
-                                  .where(hidden: false)
-                                  .where.not(song_id: nil)
-                                  .where.not(youtube_id: @video.youtube_id)
-                                  .limit(8).load_async
+      .where(song_id: @video.song_id)
+      .has_leader_and_follower
+      .where(hidden: false)
+      .where.not(song_id: nil)
+      .where.not(youtube_id: @video.youtube_id)
+      .limit(8).load_async
   end
 
   def videos_with_same_channel
     @videos_with_same_channel = Video.includes(Video.search_includes)
-                                  .where(channel_id: @video.channel_id)
-                                  .has_leader_and_follower
-                                  .where(hidden: false)
-                                  .where.not(youtube_id: @video.youtube_id)
-                                  .limit(8).load_async
+      .where(channel_id: @video.channel_id)
+      .has_leader_and_follower
+      .where(hidden: false)
+      .where.not(youtube_id: @video.youtube_id)
+      .limit(8).load_async
   end
 
   def current_search
@@ -229,16 +230,16 @@ class VideosController < ApplicationController
     params
       .require(:video)
       .permit(:leader_id,
-              :follower_id,
-              :song_id,
-              :event_id,
-              :hidden,
-              :"performance_date(1i)",
-              :"performance_date(2i)",
-              :"performance_date(3i)",
-              :performance_number,
-              :performance_total_number,
-              :id)
+        :follower_id,
+        :song_id,
+        :event_id,
+        :hidden,
+        :"performance_date(1i)",
+        :"performance_date(2i)",
+        :"performance_date(3i)",
+        :performance_number,
+        :performance_total_number,
+        :id)
   end
 
   def filtering_params

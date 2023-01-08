@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class DancersController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_dancer, only: %i[ show edit update destroy ]
+  before_action :set_dancer, only: %i[show edit update destroy]
 
   # GET /dancers
   def index
@@ -20,9 +22,9 @@ class DancersController < ApplicationController
   # GET /dancers/1
   def show
     @orchestras = @dancer.orchestras
-                         .distinct
-                         .includes(profile_image_attachment: :blob)
-                         .order(videos_count: :desc)
+      .distinct
+      .includes(profile_image_attachment: :blob)
+      .order(videos_count: :desc)
 
     respond_to do |format|
       format.html # GET
@@ -66,30 +68,31 @@ class DancersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dancer
-      @dancer = Dancer.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def dancer_params
-      params.require(:dancer)
-            .permit(:first_name,
-              :last_name,
-              :middle_name,
-              :nick_name,
-              :user_id,
-              :bio,
-              :slug,
-              :reviewed,
-              :couple_id,
-              :profile_image,
-              :cover_image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dancer
+    @dancer = Dancer.find(params[:id])
+  end
 
-    def filtering_params
-      params.permit(:orchestra,
-                    :year,
-                    :genre)
-    end
+  # Only allow a list of trusted parameters through.
+  def dancer_params
+    params.require(:dancer)
+      .permit(:first_name,
+        :last_name,
+        :middle_name,
+        :nick_name,
+        :user_id,
+        :bio,
+        :slug,
+        :reviewed,
+        :couple_id,
+        :profile_image,
+        :cover_image)
+  end
+
+  def filtering_params
+    params.permit(:orchestra,
+      :year,
+      :genre)
+  end
 end

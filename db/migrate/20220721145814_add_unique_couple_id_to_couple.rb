@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddUniqueCoupleIdToCouple < ActiveRecord::Migration[7.0]
   def change
     add_column :couples, :unique_couple_id, :string

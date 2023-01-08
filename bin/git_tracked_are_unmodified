@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ -z "$(git status --untracked-files=no --porcelain)" ]; then
+  # Working directory clean
+  exit 0
+fi
+
+# Uncommitted changes
+echo "The following tracked files have changed:"
+git status --untracked-files=no --porcelain
+echo ""
+echo "Here is the complete diff:"
+git --no-pager diff --diff-algorithm=patience --color
+
+exit 1

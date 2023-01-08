@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class OrchestrasController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_orchestra, only: %i[ show edit update destroy ]
+  before_action :set_orchestra, only: %i[show edit update destroy]
 
   # GET /orchestras
   def index
@@ -20,9 +22,9 @@ class OrchestrasController < ApplicationController
   # GET /orchestras/1
   def show
     @dancers = @orchestra.dancers.distinct.includes(profile_image_attachment: :blob).order(videos_count: :desc)
-    @couples = Couple.includes(partner: { profile_image_attachment: :blob }, dancer: { profile_image_attachment: :blob })
-                      .where(id: Couple.select("DISTINCT ON (unique_couple_id) *").map(&:id))
-                      .order(videos_count: :desc)
+    @couples = Couple.includes(partner: {profile_image_attachment: :blob}, dancer: {profile_image_attachment: :blob})
+      .where(id: Couple.select("DISTINCT ON (unique_couple_id) *").map(&:id))
+      .order(videos_count: :desc)
 
     videos = @orchestra.videos
     @pagy, @videos = pagy(videos, items: 12)
@@ -69,20 +71,21 @@ class OrchestrasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_orchestra
-      @orchestra = Orchestra.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def orchestra_params
-      params.require(:orchestra)
-            .permit(:song_id,
-              :video_id,
-              :name,
-              :bio,
-              :slug,
-              :profile_image,
-              :cover_image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_orchestra
+    @orchestra = Orchestra.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def orchestra_params
+    params.require(:orchestra)
+      .permit(:song_id,
+        :video_id,
+        :name,
+        :bio,
+        :slug,
+        :profile_image,
+        :cover_image)
+  end
 end

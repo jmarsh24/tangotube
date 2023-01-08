@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::Display
   def initialize(video)
     @video = video

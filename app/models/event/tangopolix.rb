@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Event::Tangopolix
   PAGINATION_MAX_NUMBER = 469
 

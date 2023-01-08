@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: videos
@@ -77,8 +79,8 @@ RSpec.describe Video do
         song = create(:song, artist: "Juan d'Arienzo")
         video = create(:video, song:)
         expect(described_class.filter_by_orchestra("Juan d'Arienzo")).to eq [
-             video
-           ]
+          video
+        ]
       end
 
       it "does not return videos without corresponding orchestra name" do
@@ -100,7 +102,6 @@ RSpec.describe Video do
         video = create(:video)
         expect(described_class.filter_by_genre("Tango")).not_to eq [video]
       end
-
     end
 
     describe ".filter_by_leader" do
@@ -606,8 +607,8 @@ RSpec.describe Video do
         video = create(:video, title: "Title with carlitos espinoza")
         described_class.refresh_materialized_view
         expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [
-             video
-           ]
+          video
+        ]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
         expect(described_class.filter_by_query("Carlitos Espin")).to eq [video]
       end
@@ -617,8 +618,8 @@ RSpec.describe Video do
           create(:video, description: "description with carlitos espinoza")
         described_class.refresh_materialized_view
         expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [
-             video
-           ]
+          video
+        ]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
         expect(described_class.filter_by_query("Carlitos Espin")).to eq [video]
       end
@@ -628,8 +629,8 @@ RSpec.describe Video do
         video = create(:video, leader:)
         described_class.refresh_materialized_view
         expect(described_class.filter_by_query("Carlitos Espinoza")).to eq [
-             video
-           ]
+          video
+        ]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
         expect(described_class.filter_by_query("Carlitos Espin")).to eq [video]
       end
@@ -720,8 +721,8 @@ RSpec.describe Video do
         ).to eq [video]
         expect(described_class.filter_by_query("John Doe")).not_to eq [video]
         expect(described_class.filter_by_query("UCtdgMR0bmogczrZNpPaO")).to eq [
-             video
-           ]
+          video
+        ]
       end
 
       it "returns video with song genre that matches query" do
@@ -758,12 +759,11 @@ RSpec.describe Video do
         video2 = create(:video, youtube_id: "video_2")
         video3 = create(:video, youtube_id: "video_3")
         allow(Ahoy::Event).to receive(:most_viewed_videos_by_month)
-          .and_return( ["video_3", "video_2", "video_1"] )
+          .and_return(["video_3", "video_2", "video_1"])
         youtube_id_result = described_class.most_viewed_videos_by_month
         expect(youtube_id_result).to eq([video1, video2, video3])
       end
     end
-
 
     describe ".paginate" do
       it "limits pagination to 1" do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ManifestsController < ApplicationController
   # @route GET /:locale/manifest (manifest)
   def show
@@ -10,7 +12,7 @@ class ManifestsController < ApplicationController
       background_color: "#000000",
       icons: [
         {
-          src: asset_path("tangotube_logo_512w.png"),
+          src: asset_path("app_icon.png"),
           sizes: "144x144",
           type: "image/png",
           purpose: "any maskable"

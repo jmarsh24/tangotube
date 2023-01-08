@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlaylistsController < ApplicationController
   def index
     @playlists = Playlist.all.order(:id)
@@ -8,13 +10,13 @@ class PlaylistsController < ApplicationController
     fetch_new_playlist
 
     redirect_to root_path,
-                notice:
-                  "Playlist Sucessfully Added: The playlist must be approved before the videos are added"
+      notice:
+        "Playlist Sucessfully Added: The playlist must be approved before the videos are added"
   end
 
   private
 
   def fetch_new_playlist
-    ImportPlaylistWorker.perform_async(@playlist.slug)
+    ImportPlaylistJob.perform_later(@playlist.slug)
   end
 end

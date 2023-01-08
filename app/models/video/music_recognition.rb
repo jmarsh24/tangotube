@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::MusicRecognition
   class << self
     def from_youtube_id(youtube_id)

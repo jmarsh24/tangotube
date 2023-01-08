@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "Videos::Index" do
@@ -333,8 +335,7 @@ RSpec.describe "Videos::Index" do
     click_on("Popularity")
     expect(page).to have_select("genre-filter",
       with_options: ["", "Genre A (1)", "Genre B (1)", "Genre C (1)"],
-      visible: :all
-    )
+      visible: :all)
     expect(page).to have_select(
       "leader-filter",
       with_options: ["", "Leader Name (1)"],

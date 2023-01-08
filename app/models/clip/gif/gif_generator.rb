@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Clip::Gif::GifGenerator
-  SIZE="400x225".freeze
+  SIZE = "400x225"
 
   class << self
     def generate(configuration)
@@ -12,8 +14,8 @@ class Clip::Gif::GifGenerator
   attr_reader :source_file, :start_time, :end_time, :output_path
   def initialize(configuration)
     @source_file = configuration[:source_file]
-    @start_time  = configuration[:start_time]
-    @end_time    = configuration[:end_time]
+    @start_time = configuration[:start_time]
+    @end_time = configuration[:end_time]
   end
 
   def generate
@@ -21,7 +23,6 @@ class Clip::Gif::GifGenerator
   end
 
   def output_path
-    "/tmp/#{File.basename(source_file, '.*')}_#{start_time}_#{end_time}.gif"
+    "/tmp/#{File.basename(source_file, ".*")}_#{start_time}_#{end_time}.gif"
   end
-
 end

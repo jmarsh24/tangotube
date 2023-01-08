@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 namespace :export do
   desc "Export videos"
-  task :videos_to_seeds => :environment do
+  task videos_to_seeds: :environment do
     FileUtils.mkdir_p(Rails.root.join("seed", "data"))
     data = Video.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")
@@ -12,7 +13,7 @@ namespace :export do
   end
 
   desc "Export leaders"
-  task :leader_to_seeds => :environment do
+  task leader_to_seeds: :environment do
     FileUtils.mkdir_p(Rails.root.join("seed", "data"))
     data = Dancer.leader.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")
@@ -24,7 +25,7 @@ namespace :export do
   end
 
   desc "Export followers"
-  task :follower_to_seeds => :environment do
+  task follower_to_seeds: :environment do
     FileUtils.mkdir_p(Rails.root.join("seed", "data"))
     data = Dancer.follower.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")
@@ -36,8 +37,8 @@ namespace :export do
   end
 
   desc "Export songs"
-  task :song_to_seeds => :environment do
-      FileUtils.mkdir_p(Rails.root.join("seed", "data"))
+  task song_to_seeds: :environment do
+    FileUtils.mkdir_p(Rails.root.join("seed", "data"))
     data = Song.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")
     end
@@ -48,7 +49,7 @@ namespace :export do
   end
 
   desc "Export events"
-  task :event_to_seeds => :environment do
+  task event_to_seeds: :environment do
     FileUtils.mkdir_p(Rails.root.join("seed", "data"))
     data = Event.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")
@@ -60,7 +61,7 @@ namespace :export do
   end
 
   desc "Export channels"
-  task :channel_to_seeds => :environment do
+  task channel_to_seeds: :environment do
     FileUtils.mkdir_p(Rails.root.join("seed", "data"))
     data = Channel.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")
@@ -71,9 +72,8 @@ namespace :export do
     end
   end
 
-
   desc "Export playlists"
-  task :playlist_to_seeds => :environment do
+  task playlist_to_seeds: :environment do
     FileUtils.mkdir_p(Rails.root.join("seed", "data"))
     data = Playlist.all.map do |e|
       e.attributes.except("created_at", "updated_at", "id")

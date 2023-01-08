@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: video_searches
@@ -17,7 +19,7 @@ class VideoSearch < ApplicationRecord
         dictionary: "english",
         tsvector_column: ["tsv_content_tsearch"]
       }
-    },
+    }
   )
 
   def readonly?

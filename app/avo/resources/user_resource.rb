@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserResource < Avo::BaseResource
   self.title = :id
   self.includes = []
@@ -10,7 +12,7 @@ class UserResource < Avo::BaseResource
     as: :gravatar,
     rounded: false,
     size: 60,
-    default_url: 'some image url'
+    default_url: "some image url"
   field :name, as: :text
   field :first_name, as: :text
   field :last_name, as: :text

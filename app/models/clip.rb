@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: clips
@@ -26,15 +28,15 @@ class Clip < ApplicationRecord
   after_create :create_gif_job
 
   def create_gif
-    gif = Clip::Gif.create( { youtube_id: video.youtube_id,
+    gif = Clip::Gif.create({youtube_id: video.youtube_id,
                               start_time: start_seconds,
-                              end_time: end_seconds } )
+                              end_time: end_seconds})
     self.giphy_id = gif.id
     save
   end
 
   def create_gif_job
-    CreateGifJob.perform_async(id)
+    CreateGifJob.perform_later(id)
   end
 
   def giphy_url

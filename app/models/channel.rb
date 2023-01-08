@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: channels
@@ -28,9 +30,9 @@ class Channel < ApplicationRecord
   after_save :destroy_all_videos, unless: :active?
 
   scope :title_search,
-        lambda { |query|
-          where("unaccent(title) ILIKE unaccent(?)", "%#{query}%")
-        }
+    lambda { |query|
+      where("unaccent(title) ILIKE unaccent(?)", "%#{query}%")
+    }
 
   def destroy_all_videos
     return "This Channel doesn't have any videos" if videos.nil?
@@ -40,7 +42,7 @@ class Channel < ApplicationRecord
   private
 
   def update_imported
-   self.imported = videos_count >= total_videos_count
+    self.imported = videos_count >= total_videos_count
   end
 
   def count_changed?

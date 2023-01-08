@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: channels
@@ -25,10 +27,7 @@ RSpec.describe Channel do
   describe "#update_imported" do
     it "doesn't update if the count is not changing" do
       channel = create(:channel, total_videos_count: 500, videos_count: 499)
-      expect { channel.update(title: "blah blah") }.not_to change(
-        channel.reload,
-        :imported
-      )
+      expect { channel.update(title: "blah blah") }.not_to change { channel.reload.imported }
     end
 
     it "updates the imported status if count is equal" do

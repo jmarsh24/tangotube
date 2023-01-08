@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OrchestrasHelper
   def orchestra_avatar(orchestra_id)
     orchestra = Orchestra.find(orchestra_id)
@@ -32,6 +34,7 @@ module OrchestrasHelper
       :liked,
       :id,
       :query,
-      :dancer).to_h.flatten.join("_")
+      :dancer
+    ).to_h.flatten.join("_")
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :total_videos_count
@@ -16,11 +18,10 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password)}
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password) }
 
     devise_parameter_sanitizer.permit(:account_update) do |u|
       u.permit(:first_name, :last_name, :email, :password, :current_password)
     end
   end
-
 end
