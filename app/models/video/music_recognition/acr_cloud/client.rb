@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class Video::MusicRecognition::AcrCloud::Client
-  ACR_CLOUD_HTTP_METHOD = "POST".freeze
-  ACR_CLOUD_HTTP_URI = "/v1/identify".freeze
-  ACR_CLOUD_DATA_TYPE = "audio".freeze
-  ACR_CLOUD_SIGNATURE_VERSION = "1".freeze
+  ACR_CLOUD_HTTP_METHOD = "POST"
+  ACR_CLOUD_HTTP_URI = "/v1/identify"
+  ACR_CLOUD_DATA_TYPE = "audio"
+  ACR_CLOUD_SIGNATURE_VERSION = "1"
   ACR_CLOUD_TIMESTAMP = Time.now.utc.to_i.to_s.freeze
-  ACR_CLOUD_ACCESS_KEY = Rails.application.credentials.dig(:acr_cloud, :access_key)
-  ACR_CLOUD_ACCESS_SECRET = Rails.application.credentials.dig(:acr_cloud, :secret_key)
-  ACR_CLOUD_REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify".freeze
+  ACR_CLOUD_ACCESS_KEY = Rails.application.credentials.dig(:acr_cloud, :access_key).freeze
+  ACR_CLOUD_ACCESS_SECRET = Rails.application.credentials.dig(:acr_cloud, :secret_key).freeze
+  ACR_CLOUD_REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify"
 
   class << self
     def send_audio(file_path)
@@ -20,10 +22,10 @@ class Video::MusicRecognition::AcrCloud::Client
 
   def get_audio_from_acr_cloud
     faraday = Faraday.new do |f|
-                f.request :multipart
-                f.request :url_encoded
-                f.adapter :net_http
-              end
+      f.request :multipart
+      f.request :url_encoded
+      f.adapter :net_http
+    end
 
     response = faraday.post(url, body)
     response.body

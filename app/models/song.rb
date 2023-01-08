@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: songs
@@ -44,7 +46,7 @@ class Song < ApplicationRecord
   scope :filter_by_active, -> { where(active: true) }
   scope :filter_by_not_active, -> { where(active: false) }
   scope :title_match,
-        ->(query) { where("unaccent(title) ILIKE unaccent(?)", "%#{query}%") }
+    ->(query) { where("unaccent(title) ILIKE unaccent(?)", "%#{query}%") }
 
   def full_title
     "#{title.titleize} - #{artist.split("'").map(&:titleize).join("'")} - #{genre.titleize}"

@@ -1,5 +1,6 @@
-class Users::RegistrationsController < Devise::RegistrationsController
+# frozen_string_literal: true
 
+class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def update_resource(resource, account_update_params)

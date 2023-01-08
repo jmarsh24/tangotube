@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::YoutubeImport
   class << self
     def from_channel(channel_id)

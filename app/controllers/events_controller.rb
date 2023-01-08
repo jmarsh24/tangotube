@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_event, only: %i[show edit update destroy]
 
   # GET /events
   def index
@@ -11,10 +13,10 @@ class EventsController < ApplicationController
     end
     @pagy, @events = pagy(events, items: 12)
     respond_to do |format|
-        format.html
-        format.turbo_stream
-        format.json do
-          render json: events.map{ |event| { text: event.title, value: event.id } }
+      format.html
+      format.turbo_stream
+      format.json do
+        render json: events.map { |event| {text: event.title, value: event.id} }
       end
     end
   end
@@ -40,19 +42,18 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
-    @event = Event.create( title: params[:event][:title],
-                            city: params[:event][:city],
-                            country: params[:event][:country]
-              )
+    @event = Event.create(title: params[:event][:title],
+      city: params[:event][:city],
+      country: params[:event][:country])
     if @event.save
       match_event(@event.id)
       redirect_to root_path,
-      notice:
-      "Event Sucessfully Added"
+        notice:
+        "Event Sucessfully Added"
     else
       redirect_to events_path,
-      notice:
-      "Event not saved."
+        notice:
+        "Event not saved."
     end
   end
 
@@ -72,22 +73,23 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.require(:event)
-            .permit(:title,
-              :city,
-              :country,
-              :start_date,
-              :end_date,
-              :active,
-              :reviewed,
-              :profile_image,
-              :cover_image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.require(:event)
+      .permit(:title,
+        :city,
+        :country,
+        :start_date,
+        :end_date,
+        :active,
+        :reviewed,
+        :profile_image,
+        :cover_image)
+  end
 end

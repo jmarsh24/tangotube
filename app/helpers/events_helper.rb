@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EventsHelper
   def event_avatar(event)
     if event.profile_image.attached?

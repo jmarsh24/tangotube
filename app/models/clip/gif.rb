@@ -1,5 +1,6 @@
-class Clip::Gif
+# frozen_string_literal: true
 
+class Clip::Gif
   class << self
     def create(configuration)
       gif = new(configuration)
@@ -16,11 +17,11 @@ class Clip::Gif
   end
 
   def generate_gif
-    GifGenerator.generate( {
+    GifGenerator.generate({
       source_file: VideoDownloader.download(@youtube_id).download_path,
       start_time: @start_time,
-      end_time: @end_time }
-    )
+      end_time: @end_time
+    })
   end
 
   def upload_gif
@@ -30,5 +31,4 @@ class Clip::Gif
   def id
     @id ||= upload_gif.id
   end
-
 end

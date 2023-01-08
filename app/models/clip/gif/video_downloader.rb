@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Clip::Gif::VideoDownloader
-  DOWNLOAD_PATH = "/tmp".freeze
-  URL_PREFIX = "https://youtube.com/watch?v=".freeze
+  DOWNLOAD_PATH = "/tmp"
+  URL_PREFIX = "https://youtube.com/watch?v="
 
   class << self
     def download(youtube_id)
@@ -28,7 +30,8 @@ class Clip::Gif::VideoDownloader
   end
 
   private
-    def target_file_name
-      "#{@youtube_id}.mp4"
-    end
+
+  def target_file_name
+    "#{@youtube_id}.mp4"
+  end
 end

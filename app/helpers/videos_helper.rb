@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module VideosHelper
   def formatted_view_count(view_count)
     number_to_human(
@@ -19,14 +21,14 @@ module VideosHelper
 
   def link_to_query(external_song_attributes)
     link_to external_song_attributes,
-            root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
-            { "data-turbo-frame": "_top" }
+      root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
+      {"data-turbo-frame": "_top"}
   end
 
   def link_to_song_slug(song_attributes, video)
     link_to song_attributes,
-            root_path(song: video.song.slug),
-            { "data-turbo-frame": "_top" }
+      root_path(song: video.song.slug),
+      {"data-turbo-frame": "_top"}
   end
 
   def link_to_song(el_recodo_attributes, external_song_attributes, video)
@@ -40,12 +42,12 @@ module VideosHelper
   def link_to_primary_title(dancer_names, title, song_attributes, youtube_id)
     if dancer_names.present? && song_attributes.present?
       link_to dancer_names,
-              watch_path(v: youtube_id),
-              { "data-turbo-frame": "_top" }
+        watch_path(v: youtube_id),
+        {"data-turbo-frame": "_top"}
     else
       link_to truncate(title, length: 85),
-              watch_path(v: youtube_id),
-              { "data-turbo-frame": "_top" }
+        watch_path(v: youtube_id),
+        {"data-turbo-frame": "_top"}
     end
   end
 
@@ -70,7 +72,7 @@ module VideosHelper
   def hd_duration_data(video)
     return if video.duration.blank?
     if video.hd?
-      "HD #{Time.at(video&.duration).utc.strftime('%M:%S')}"
+      "HD #{Time.at(video&.duration).utc.strftime("%M:%S")}"
     else
       Time.at(video&.duration).utc.strftime("%M:%S")
     end
@@ -82,14 +84,14 @@ module VideosHelper
 
   def sortable(column, direction, title = "", sort_column, sort_direction)
     title ||= column.titleize
-    column == sort_column ? "current #{sort_direction}" : nil
+    (column == sort_column) ? "current #{sort_direction}" : nil
 
-    button_tag({ type:  "button",
-                 data:  { controller: "filter",
-                          action: "filter#filter",
-                          "filter-sort-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : column,
-                          "filter-direction-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : direction },
-                 class: "videos-sortable-button" }) do
+    button_tag({type:  "button",
+                 data:  {controller: "filter",
+                         action: "filter#filter",
+                         "filter-sort-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : column,
+                         "filter-direction-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : direction},
+                 class: "videos-sortable-button"}) do
       if button_active?(column, direction, sort_column, sort_direction)
         concat content_tag(:b, title.to_s)
         concat fa_icon("times", class: "videos-sortable-icon")
@@ -102,7 +104,6 @@ module VideosHelper
   def button_active?(column, direction, sort_column, sort_direction)
     column == sort_column && direction == sort_direction
   end
-
 
   def videos_header(filtering_params, sorting_params)
     words_array = []

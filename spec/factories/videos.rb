@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: videos
@@ -66,7 +68,6 @@ FactoryBot.define do
     sequence(:youtube_id) { |n| "fancy_youtube_slug#{n}" }
     performance_date { "2017-10-26" }
 
-
     trait :display do
       duration { "100" }
       upload_date { "2017-10-26" }
@@ -76,9 +77,8 @@ FactoryBot.define do
       leader
       follower
       after(:create) do |video|
-
         ahoy = Ahoy::Tracker.new
-        ahoy.track( "Video View", youtube_id: video.youtube_id )
+        ahoy.track("Video View", youtube_id: video.youtube_id)
       end
     end
   end

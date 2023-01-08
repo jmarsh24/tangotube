@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: deletion_requests
@@ -10,11 +12,10 @@
 #  updated_at :datetime         not null
 #
 class DeletionRequest < ApplicationRecord
-
   validates :uid, :provider, :pid, presence: true
 
   # there can only be one entry with given provider + uid
-  validates :uid, uniqueness: { scope: :provider }
+  validates :uid, uniqueness: {scope: :provider}
 
   before_validation :set_pid
 
@@ -65,5 +66,4 @@ class DeletionRequest < ApplicationRecord
   def random_pid
     SecureRandom.hex(4)
   end
-
 end

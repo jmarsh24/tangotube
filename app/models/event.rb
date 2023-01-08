@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: events
@@ -80,7 +82,7 @@ class Event < ApplicationRecord
       Event
         .all
         .order(:id)
-        .each { |event| MatchEventWorker.perform_async(event.id) }
+        .each { |event| MatchEventJob.perform_later(event.id) }
     end
 
     def rebuild_pg_search_documents
@@ -94,5 +96,3 @@ class Event < ApplicationRecord
     title.to_s.parameterize
   end
 end
-
-

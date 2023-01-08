@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VideoResource < Avo::BaseResource
   self.title = :title
   self.includes = [Video.search_includes]

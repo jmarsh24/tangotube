@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Clip::Gif::Giphy
   GIPHY_API_KEY = Rails.application.credentials[Rails.env.to_sym].dig(:giphy, :api_key).freeze
   URI = URI("http://upload.giphy.com/v1/gifs").to_s.freeze
-  USERNAME = "TangoTubeTV".freeze
+  USERNAME = "TangoTubeTV"
 
   class << self
     def upload(file_path)

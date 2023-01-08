@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::YoutubeImport::Playlist
   class << self
     def import(playlist_id)
@@ -23,12 +25,12 @@ class Video::YoutubeImport::Playlist
   end
 
   def import_videos
-    new_videos.each { |youtube_id| ImportVideoWorker.perform_async(youtube_id) }
+    new_videos.each { |youtube_id| ImportVideoJob.perform_later(youtube_id) }
   end
 
   def import_channels
     new_channels.each do |channel_id|
-      ImportChannelWorker.perform_async(channel_id)
+      ImportChannelJob.perform_later(channel_id)
     end
   end
 
@@ -52,7 +54,7 @@ class Video::YoutubeImport::Playlist
   end
 
   def count_params
-    { video_count: @youtube_playlist.playlist_items.count }
+    {video_count: @youtube_playlist.playlist_items.count}
   end
 
   def youtube_playlist_videos

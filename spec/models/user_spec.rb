@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -72,11 +74,11 @@ RSpec.describe User do
     #     User.new((params).merge(active: false)).save
     #   end
     # end
-      # it 'should return active users' do
-      #   expect(User.active_users.size).to eq(3)
-      # end
-      # it 'should return inactive users' do
-      #   expect(User.inactive_users.size).to eq(2)
-      # end
+    # it 'should return active users' do
+    #   expect(User.active_users.size).to eq(3)
+    # end
+    # it 'should return inactive users' do
+    #   expect(User.inactive_users.size).to eq(2)
+    # end
   end
 end

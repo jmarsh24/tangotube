@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: songs
@@ -54,8 +56,8 @@ RSpec.describe Song do
         no_match_song = create(:song, title: "Not matching song")
         expect(described_class.title_match("no vendra")).to eq [match_song]
         expect(described_class.title_match("no vendra")).not_to eq [
-             no_match_song
-           ]
+          no_match_song
+        ]
         expect(described_class.title_match("No Ven")).to eq [match_song]
         expect(described_class.title_match("No Ven")).not_to eq [no_match_song]
         expect(described_class.title_match("endra")).to eq [match_song]
@@ -64,12 +66,12 @@ RSpec.describe Song do
         expect(described_class.title_match("vend")).not_to eq [no_match_song]
         expect(described_class.title_match("No Vendra")).to eq [match_song]
         expect(described_class.title_match("No Vendra")).not_to eq [
-             no_match_song
-           ]
+          no_match_song
+        ]
         expect(described_class.title_match("no vendra")).to eq [match_song]
         expect(described_class.title_match("no vendra")).not_to eq [
-             no_match_song
-           ]
+          no_match_song
+        ]
       end
     end
   end
@@ -119,36 +121,36 @@ RSpec.describe Song do
       no_match_song = create(:song, title: "Not matching song")
       expect(described_class.full_title_search("angel d'agostino")).to eq [song]
       expect(described_class.full_title_search("angel d'agostino")).not_to eq [
-           no_match_song
-         ]
+        no_match_song
+      ]
       expect(described_class.full_title_search("agostino")).to eq [song]
       expect(described_class.full_title_search("agostino")).not_to eq [
-           no_match_song
-         ]
+        no_match_song
+      ]
       expect(described_class.full_title_search("tango")).to eq [song]
       expect(described_class.full_title_search("tango")).not_to eq [
-           no_match_song
-         ]
+        no_match_song
+      ]
       expect(described_class.full_title_search("ango")).to eq [song]
       expect(described_class.full_title_search("ango")).not_to eq [
-           no_match_song
-         ]
+        no_match_song
+      ]
       expect(described_class.full_title_search("no vendra")).to eq [song]
       expect(described_class.full_title_search("no vendra")).not_to eq [
-           no_match_song
-         ]
+        no_match_song
+      ]
       expect(described_class.full_title_search("endra")).to eq [song]
       expect(described_class.full_title_search("endra")).not_to eq [
-           no_match_song
-         ]
+        no_match_song
+      ]
       expect(described_class.full_title_search("agostino vendra")).to eq [song]
       expect(described_class.full_title_search("agostino vendra")).not_to eq [
-           no_match_song
-         ]
+        no_match_song
+      ]
       expect(described_class.full_title_search("dagostino")).to eq [song]
       expect(described_class.full_title_search("dagostino")).not_to eq [
-           no_match_song
-         ]
+        no_match_song
+      ]
     end
   end
 end

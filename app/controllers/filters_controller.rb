@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FiltersController < ApplicationController
   before_action :videos_search
 
@@ -13,10 +15,10 @@ class FiltersController < ApplicationController
 
   def videos_search
     @videos_search ||=
-    Video::Search.for(  filtering_params:,
-                        sorting_params: nil,
-                        page: nil,
-                        user: current_user)
+      Video::Search.for(filtering_params:,
+        sorting_params: nil,
+        page: nil,
+        user: current_user)
   end
 
   def genres
@@ -40,17 +42,17 @@ class FiltersController < ApplicationController
   end
 
   def filtering_params
-    params.permit(  :leader,
-                    :follower,
-                    :channel,
-                    :genre,
-                    :orchestra,
-                    :song,
-                    :hd,
-                    :event,
-                    :year,
-                    :id,
-                    :dancer,
-                    :query)
+    params.permit(:leader,
+      :follower,
+      :channel,
+      :genre,
+      :orchestra,
+      :song,
+      :hd,
+      :event,
+      :year,
+      :id,
+      :dancer,
+      :query)
   end
 end

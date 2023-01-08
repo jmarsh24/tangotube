@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DancersHelper
   def dancer_avatar(dancer)
     if dancer.profile_image.attached?
@@ -30,6 +32,7 @@ module DancersHelper
       :liked,
       :id,
       :query,
-      :dancer)
+      :dancer
+    )
   end
 end

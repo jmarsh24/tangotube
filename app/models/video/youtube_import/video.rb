@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Video::YoutubeImport::Video
-  PERFORMANCE_REGEX=/(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
+  PERFORMANCE_REGEX = /(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
 
   class << self
     def import(youtube_id)
@@ -25,7 +27,7 @@ class Video::YoutubeImport::Video
     if @video.performance_number.nil? || @video.performance_total_number.nil?
       @video.grep_performance_number
     end
-    rescue Yt::Errors::NoItems, JSON::ParserError => e
+  rescue Yt::Errors::NoItems, JSON::ParserError => e
     if e.present?
       @video.destroy
     end
@@ -43,16 +45,16 @@ class Video::YoutubeImport::Video
     if @video.performance_number.nil? || @video.performance_total_number.nil?
       @video.grep_performance_number
     end
-    unless @video.acr_response_code.in? [0,1001]
-      AcrcloudMusicMatchJob.perform_async(@youtube_id)
+    unless @video.acr_response_code.in? [0, 1001]
+      AcrcloudMusicMatchJob.perform_later(@youtube_id)
     end
     if @video.youtube_song.nil?
-      YoutubeMusicMatchJob.perform_async(@youtube_id)
+      YoutubeMusicMatchJob.perform_later(@youtube_id)
     end
     if @video.song.nil?
       @video.grep_title_description_acr_cloud_song
     end
-    rescue Yt::Errors::NoItems, JSON::ParserError => e
+  rescue Yt::Errors::NoItems, JSON::ParserError => e
     if e.present?
       @video.destroy
     end
@@ -101,7 +103,7 @@ class Video::YoutubeImport::Video
     if @channel.nil?
       Video::YoutubeImport::Channel.import(@youtube_video.channel_id)
       @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id)
-      ImportChannelWorker.perform_async(@youtube_video.channel_id)
+      ImportChannelJob.perform_later(@youtube_video.channel_id)
     end
     @channel
   end

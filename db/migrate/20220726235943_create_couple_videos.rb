@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCoupleVideos < ActiveRecord::Migration[7.0]
   def change
     create_table :couple_videos do |t|

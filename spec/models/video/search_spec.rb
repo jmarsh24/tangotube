@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Video::Search do
@@ -160,7 +162,7 @@ RSpec.describe Video::Search do
         leader = create(:leader)
         video_a = create(:video, leader:)
 
-        search = described_class.new(filtering_params: { leader: leader.name })
+        search = described_class.new(filtering_params: {leader: leader.name})
         expect(search.videos).to eq [video_a]
       end
 
@@ -169,7 +171,7 @@ RSpec.describe Video::Search do
         video_a = create(:video, follower:)
 
         search =
-          described_class.new(filtering_params: { follower: follower.name })
+          described_class.new(filtering_params: {follower: follower.name})
 
         expect(search.videos).to eq [video_a]
       end
@@ -178,7 +180,7 @@ RSpec.describe Video::Search do
         channel = create(:channel)
         video_a = create(:video, channel:)
 
-        search = described_class.new(filtering_params: { channel: channel.title })
+        search = described_class.new(filtering_params: {channel: channel.title})
 
         expect(search.videos).to eq [video_a]
       end
@@ -187,7 +189,7 @@ RSpec.describe Video::Search do
         song = create(:song, genre: "Tango")
         video_a = create(:video, song:)
 
-        search = described_class.new(filtering_params: { genre: "Tango" })
+        search = described_class.new(filtering_params: {genre: "Tango"})
 
         expect(search.videos).to eq [video_a]
       end
@@ -197,7 +199,7 @@ RSpec.describe Video::Search do
         video_a = create(:video, song:)
 
         search =
-          described_class.new(filtering_params: { orchestra: "Di Sarli" })
+          described_class.new(filtering_params: {orchestra: "Di Sarli"})
 
         expect(search.videos).to eq [video_a]
       end
@@ -207,7 +209,7 @@ RSpec.describe Video::Search do
         video_a = create(:video, song:)
         video_b = create(:video)
 
-        search = described_class.new(filtering_params: { song_id: song.id })
+        search = described_class.new(filtering_params: {song_id: song.id})
 
         expect(search.videos).to eq [video_a]
       end
@@ -216,9 +218,9 @@ RSpec.describe Video::Search do
         video_a = create(:video, hd: true)
         video_b = create(:video, hd: false)
 
-        search_a = described_class.new(filtering_params: { hd: 1 })
+        search_a = described_class.new(filtering_params: {hd: 1})
 
-        search_b = described_class.new(filtering_params: { hd: 0 })
+        search_b = described_class.new(filtering_params: {hd: 0})
 
         expect(search_a.videos).to eq [video_a]
         expect(search_b.videos).to eq [video_b]
@@ -228,7 +230,7 @@ RSpec.describe Video::Search do
         event = create(:event)
         video_a = create(:video, event:)
 
-        search = described_class.new(filtering_params: { event_id: event.id })
+        search = described_class.new(filtering_params: {event_id: event.id})
 
         expect(search.videos).to eq [video_a]
       end
@@ -236,7 +238,7 @@ RSpec.describe Video::Search do
       it "filters by year" do
         video_a = create(:video, upload_date: Time.zone.local(2018, 1, 1))
 
-        search = described_class.new(filtering_params: { year: "2018" })
+        search = described_class.new(filtering_params: {year: "2018"})
 
         expect(search.videos).to eq [video_a]
       end
@@ -252,9 +254,9 @@ RSpec.describe Video::Search do
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
+            described_class.new(filtering_params: {query: "No Match"})
           search_c =
-            described_class.new(filtering_params: { query: "Carlitos Espin" })
+            described_class.new(filtering_params: {query: "Carlitos Espin"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -271,9 +273,9 @@ RSpec.describe Video::Search do
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
+            described_class.new(filtering_params: {query: "No Match"})
           search_c =
-            described_class.new(filtering_params: { query: "Carlitos Espin" })
+            described_class.new(filtering_params: {query: "Carlitos Espin"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -290,9 +292,9 @@ RSpec.describe Video::Search do
               }
             )
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
+            described_class.new(filtering_params: {query: "No Match"})
           search_c =
-            described_class.new(filtering_params: { query: "Carlitos Espin" })
+            described_class.new(filtering_params: {query: "Carlitos Espin"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -303,10 +305,10 @@ RSpec.describe Video::Search do
           video = create(:video, leader:)
           Video.refresh_materialized_view
           search_a =
-            described_class.new(filtering_params: { query: "Carlitos" })
+            described_class.new(filtering_params: {query: "Carlitos"})
           search_b =
-            described_class.new(filtering_params: { query: "no match" })
-          search_c = described_class.new(filtering_params: { query: "Carlit" })
+            described_class.new(filtering_params: {query: "no match"})
+          search_c = described_class.new(filtering_params: {query: "Carlit"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -317,10 +319,10 @@ RSpec.describe Video::Search do
           video = create(:video, follower:)
           Video.refresh_materialized_view
           search_a =
-            described_class.new(filtering_params: { query: "Noelia Hurtado" })
+            described_class.new(filtering_params: {query: "Noelia Hurtado"})
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "noeli" })
+            described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "noeli"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -330,10 +332,10 @@ RSpec.describe Video::Search do
           follower = create(:follower, nickname: "Noelia")
           video = create(:video, follower:)
           Video.refresh_materialized_view
-          search_a = described_class.new(filtering_params: { query: "Noelia" })
+          search_a = described_class.new(filtering_params: {query: "Noelia"})
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "Noel" })
+            described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "Noel"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -343,11 +345,11 @@ RSpec.describe Video::Search do
           video = create(:video, youtube_id: "s6iptZdCcG0")
           Video.refresh_materialized_view
           search_a =
-            described_class.new(filtering_params: { query: "s6iptZdCcG0" })
+            described_class.new(filtering_params: {query: "s6iptZdCcG0"})
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
+            described_class.new(filtering_params: {query: "No Match"})
           search_c =
-            described_class.new(filtering_params: { query: "s6iptZdCcG" })
+            described_class.new(filtering_params: {query: "s6iptZdCcG"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -357,10 +359,10 @@ RSpec.describe Video::Search do
           video = create(:video, youtube_artist: "Angel D'Agostino")
           Video.refresh_materialized_view
           search_a =
-            described_class.new(filtering_params: { query: "d'agostino" })
+            described_class.new(filtering_params: {query: "d'agostino"})
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "Dagost" })
+            described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "Dagost"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -370,10 +372,10 @@ RSpec.describe Video::Search do
           video = create(:video, youtube_song: "No Vendrá")
           Video.refresh_materialized_view
           search_a =
-            described_class.new(filtering_params: { query: "no vendrá" })
+            described_class.new(filtering_params: {query: "no vendrá"})
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "no vend" })
+            described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "no vend"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -383,10 +385,10 @@ RSpec.describe Video::Search do
           video = create(:video, spotify_track_name: "No Vendrá")
           Video.refresh_materialized_view
           search_a =
-            described_class.new(filtering_params: { query: "no vendrá" })
+            described_class.new(filtering_params: {query: "no vendrá"})
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "no vend" })
+            described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "no vend"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -395,9 +397,9 @@ RSpec.describe Video::Search do
         it "returns video with spotify_artist_name that matches query" do
           video = create(:video, spotify_artist_name: "Angel D'Agostino")
           Video.refresh_materialized_view
-          search_a = described_class.new(filtering_params: { query: "dagostino" })
-          search_b = described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "Angel D'Agosti" })
+          search_a = described_class.new(filtering_params: {query: "dagostino"})
+          search_b = described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "Angel D'Agosti"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -407,9 +409,9 @@ RSpec.describe Video::Search do
           channel = create(:channel, title: "030 Tango")
           video = create(:video, channel:)
           Video.refresh_materialized_view
-          search_a = described_class.new(filtering_params: { query: "030 tango" })
-          search_b = described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "030 T" })
+          search_a = described_class.new(filtering_params: {query: "030 tango"})
+          search_b = described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "030 T"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -419,9 +421,9 @@ RSpec.describe Video::Search do
           channel = create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
           video = create(:video, channel:)
           Video.refresh_materialized_view
-          search_a = described_class.new( filtering_params: { query: "UCtdgMR0bmogczrZNpPaO66Q" } )
-          search_b = described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new( filtering_params: { query: "UCtdgMR0bmogczrZNpPaO" } )
+          search_a = described_class.new(filtering_params: {query: "UCtdgMR0bmogczrZNpPaO66Q"})
+          search_b = described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "UCtdgMR0bmogczrZNpPaO"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -431,10 +433,10 @@ RSpec.describe Video::Search do
           song = create(:song, genre: "Tango")
           video = create(:video, song:)
           Video.refresh_materialized_view
-          search_a = described_class.new(filtering_params: { query: "tango" })
+          search_a = described_class.new(filtering_params: {query: "tango"})
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "tang" })
+            described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "tang"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -445,10 +447,10 @@ RSpec.describe Video::Search do
           video = create(:video, song:)
           Video.refresh_materialized_view
           search_a =
-            described_class.new(filtering_params: { query: "mentirosa" })
+            described_class.new(filtering_params: {query: "mentirosa"})
           search_b =
-            described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "menti" })
+            described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "menti"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -458,9 +460,9 @@ RSpec.describe Video::Search do
           song = create(:song, artist: "Angel D'Agostino")
           video = create(:video, song:)
           Video.refresh_materialized_view
-          search_a = described_class.new(filtering_params: { query: "d'agostino" })
-          search_b = described_class.new(filtering_params: { query: "No Match" })
-          search_c = described_class.new(filtering_params: { query: "dAgosti" })
+          search_a = described_class.new(filtering_params: {query: "d'agostino"})
+          search_b = described_class.new(filtering_params: {query: "No Match"})
+          search_c = described_class.new(filtering_params: {query: "dAgosti"})
           expect(search_a.videos).to eq [video]
           expect(search_b.videos).not_to eq [video]
           expect(search_c.videos).to eq [video]
@@ -492,7 +494,7 @@ RSpec.describe Video::Search do
       video2 = create(:watched_video, hd: 1, popularity: 2)
       video3 = create(:watched_video, hd: 1, popularity: 1)
 
-      page_not_shuffled = described_class.new(page: 1, filtering_params: { hd: 1 })
+      page_not_shuffled = described_class.new(page: 1, filtering_params: {hd: 1})
       expect(page_not_shuffled.paginated_videos).to eq([video1, video2, video3])
     end
   end

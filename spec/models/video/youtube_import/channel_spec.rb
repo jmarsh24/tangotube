@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 require "sidekiq/testing"
 Sidekiq::Testing.fake!
@@ -6,7 +8,7 @@ RSpec.describe Video::YoutubeImport::Channel do
   describe "#import" do
     it "creates new channel if missing" do
       VCR.use_cassette("video/youtubeimport/channel/api_response") do
-        expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.to change(Channel, :count).from(0).to(1)
+        expect { described_class.import("UC9lGGipk4wth0rDyy4419aw") }.to change { Channel.count }.from(0).to(1)
         channel = Channel.find_by(channel_id: "UC9lGGipk4wth0rDyy4419aw")
         expect(channel.channel_id).to eq("UC9lGGipk4wth0rDyy4419aw")
         expect(channel.thumbnail_url).to eq("https://yt3.ggpht.com/ytc/AAUvwnjGYCOkZDPgEinTJCtfCH5iwBR4w3YPVYwNOg=s88-c-k-c0x00ffffff-no-rj")
@@ -22,7 +24,7 @@ RSpec.describe Video::YoutubeImport::Channel do
       VCR.use_cassette("video/youtubeimport/channel/api_response") do
         channel = create(:channel, channel_id: "UC9lGGipk4wth0rDyy4419aw")
         expect(Channel.count).to eq(1)
-        expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.not_to change(Channel, :count)
+        expect { described_class.import("UC9lGGipk4wth0rDyy4419aw") }.not_to change { Channel.count }
         channel.reload
 
         expect(channel.channel_id).to eq("UC9lGGipk4wth0rDyy4419aw")
@@ -39,19 +41,19 @@ RSpec.describe Video::YoutubeImport::Channel do
   describe "#import_videos" do
     it "import all videos" do
       VCR.use_cassette("video/youtubeimport/channel/api_response_videos") do
-        expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.to change(Channel, :count).from(0).to(1)
+        expect { described_class.import("UC9lGGipk4wth0rDyy4419aw") }.to change { Channel.count }.from(0).to(1)
 
-        expect{described_class.import_videos("UC9lGGipk4wth0rDyy4419aw")}.to change(ImportVideoWorker.jobs, :size).by(5)
+        expect { described_class.import_videos("UC9lGGipk4wth0rDyy4419aw") }.to change { ImportVideoJob.jobs.size }.by(5)
       end
     end
 
     it "imports only new videos" do
       VCR.use_cassette("video/youtubeimport/channel/api_response_videos") do
         channel = create(:channel, channel_id: "UC9lGGipk4wth0rDyy4419aw")
-        expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.not_to change(Channel, :count)
+        expect { described_class.import("UC9lGGipk4wth0rDyy4419aw") }.not_to change { Channel.count }
         create(:video, youtube_id: "s8olH-kdwzw", channel:)
 
-        expect{described_class.import_videos("UC9lGGipk4wth0rDyy4419aw")}.to change(ImportVideoWorker.jobs, :size).by(4)
+        expect { described_class.import_videos("UC9lGGipk4wth0rDyy4419aw") }.to change { ImportVideoJob.jobs.size }.by(4)
       end
     end
 
@@ -64,9 +66,9 @@ RSpec.describe Video::YoutubeImport::Channel do
         create(:video, youtube_id: "xMuN6myb2eQ", channel:)
         create(:video, youtube_id: "Iyl-PPdB4XU", channel:)
 
-        expect{described_class.import("UC9lGGipk4wth0rDyy4419aw")}.not_to change(Channel, :count)
+        expect { described_class.import("UC9lGGipk4wth0rDyy4419aw") }.not_to change { Channel.count }
 
-        expect{described_class.import_videos("UC9lGGipk4wth0rDyy4419aw")}.not_to change(ImportVideoWorker.jobs, :size)
+        expect { described_class.import_videos("UC9lGGipk4wth0rDyy4419aw") }.not_to change { ImportVideoJob.jobs.size }
       end
     end
   end

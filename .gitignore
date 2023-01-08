@@ -21,33 +21,20 @@
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
-
-# Ignore coverage files .
-/coverage/*
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
 
 /public/assets
-.byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+!.keep
+app/assets/builds
+node_modules
+.DS_Store
+.byebug_history
+/doc
 
-/public/packs
-/public/packs-test
-/node_modules
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
-.env
-*.rdb
-/db_dump/*
-/meilisearch/data.ms
-dump.rdb
-
-**/.DS_Store
-
-/app/assets/builds/*
-!/app/assets/builds/.keep
-
-/app/assets/builds
-latest.dump
-data.ms
+# Ignore shoelace assets
+/public/shoelace-assets/*

@@ -1,16 +1,10 @@
-development:
-  :concurrency: 20
-  :timeout: 500  
-production:
-  :concurrency: <%= ENV["SIDEKIQ_CONCURRENCY_VALUE"] || 10 %>
-  :timeout: 10
+:concurrency: 3
 :queues:
-  - high
-  - mailers
+  - dispatch
   - default
+  - mailers
+  - low_priority
+  - active_storage_analysis
+  - active_storage_purge
   - ahoy
-
-:schedule:
-  hello_world:
-    cron: '0 * * * * *'   # Runs once per minute
-    class: HelloWorld
+  - high

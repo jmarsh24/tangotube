@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Video::YoutubeImport::Channel
   YOUTUBE_DL_COMMAND_PREFIX =
-    "yt-dlp https://www.youtube.com/channel/".freeze
-  YOUTUBE_DL_COMMAND_SUFFIX = "/videos  --get-id --skip-download".freeze
+    "yt-dlp https://www.youtube.com/channel/"
+  YOUTUBE_DL_COMMAND_SUFFIX = "/videos  --get-id --skip-download"
 
   class << self
     def import(channel_id)
@@ -21,21 +23,21 @@ class Video::YoutubeImport::Channel
 
   def import
     @channel.update(to_channel_params)
-    rescue Yt::Errors::NoItems
-      Rails.logger.warn "Channel does not exist"
-    rescue Yt::Errors::RequestError
-      Rails.logger.warn "Invalid Request"
+  rescue Yt::Errors::NoItems
+    Rails.logger.warn "Channel does not exist"
+  rescue Yt::Errors::RequestError
+    Rails.logger.warn "Invalid Request"
   end
 
   def import_videos
     return nil unless @channel.active?
     new_videos.each do |youtube_id|
-      ImportVideoWorker.perform_async(youtube_id)
+      ImportVideoJob.perform_later(youtube_id)
     end
-    rescue Yt::Errors::NoItems
-      Rails.logger.warn "Channel does not exist"
-    rescue Yt::Errors::RequestError
-      Rails.logger.warn "Invalid Request"
+  rescue Yt::Errors::NoItems
+    Rails.logger.warn "Channel does not exist"
+  rescue Yt::Errors::RequestError
+    Rails.logger.warn "Invalid Request"
   end
 
   private
@@ -57,7 +59,7 @@ class Video::YoutubeImport::Channel
   end
 
   def count_params
-    { total_videos_count: @youtube_channel.video_count }
+    {total_videos_count: @youtube_channel.video_count}
   end
 
   def external_youtube_ids

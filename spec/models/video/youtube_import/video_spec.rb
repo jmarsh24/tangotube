@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Video::YoutubeImport::Video do
   describe ".import" do
     it "creates new video and channel if missing" do
       VCR.use_cassette("video/youtubeimport/video/api_response") do
-        expect{described_class.import("s6iptZdCcG0")}.to change(Video, :count).from(0).to(1)
+        expect { described_class.import("s6iptZdCcG0") }.to change { Video.count }.from(0).to(1)
 
         video = Video.find_by(youtube_id: "s6iptZdCcG0")
         channel = Channel.find_by(channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
@@ -30,16 +32,16 @@ RSpec.describe Video::YoutubeImport::Video do
     it "updates video if already exists" do
       VCR.use_cassette("video/youtubeimport/video/api_response") do
         video = create(:video, youtube_id: "s6iptZdCcG0",
-                                title: "old title",
-                                description: "old description",
-                                upload_date: "old date",
-                                duration: "old duration",
-                                hd: false,
-                                view_count: 0,
-                                favorite_count: 0,
-                                comment_count: 0,
-                                like_count: 0,
-                                dislike_count: 0)
+          title: "old title",
+          description: "old description",
+          upload_date: "old date",
+          duration: "old duration",
+          hd: false,
+          view_count: 0,
+          favorite_count: 0,
+          comment_count: 0,
+          like_count: 0,
+          dislike_count: 0)
         described_class.import("s6iptZdCcG0")
         video.reload
 
@@ -62,7 +64,7 @@ RSpec.describe Video::YoutubeImport::Video do
     it "assigns video to channel if it already exists" do
       VCR.use_cassette("video/youtubeimport/video/api_response") do
         channel = create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
-        expect{described_class.import("s6iptZdCcG0")}.to change(Video, :count).from(0).to(1)
+        expect { described_class.import("s6iptZdCcG0") }.to change { Video.count }.from(0).to(1)
         video = Video.find_by(youtube_id: "s6iptZdCcG0")
 
         expect(video.youtube_id).to eq("s6iptZdCcG0")

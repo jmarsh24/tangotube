@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 module FullNameable
   extend ActiveSupport::Concern
 
   included do
     scope :full_name_search,
-          lambda { |query|
-            where(
-              'unaccent(name) ILIKE unaccent(:query) OR
+      lambda { |query|
+        where(
+          'unaccent(name) ILIKE unaccent(:query) OR
                                   unaccent(first_name) ILIKE unaccent(:query) OR
                                   unaccent(last_name) ILIKE unaccent(:query)',
-              query: "%#{query}%"
-            )
-          }
+          query: "%#{query}%"
+        )
+      }
   end
 
   def full_name

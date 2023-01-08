@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PerformancesController < ApplicationController
-  before_action :set_performance, only: %i[ show edit update destroy ]
+  before_action :set_performance, only: %i[show edit update destroy]
 
   # GET /performances
   def index
@@ -22,8 +24,8 @@ class PerformancesController < ApplicationController
   end
 
   # GET /performances/1/edit
-def edit
-end
+  def edit
+  end
 
   # POST /performances
   def create
@@ -52,13 +54,14 @@ end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_performance
-      @performance = Performance.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def performance_params
-      params.require(:performance).permit(:event_id, :date, :video_id, :videos_count, :position, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_performance
+    @performance = Performance.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def performance_params
+    params.require(:performance).permit(:event_id, :date, :video_id, :videos_count, :position, :slug)
+  end
 end

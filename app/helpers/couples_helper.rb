@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CouplesHelper
   def dancer_avatar(dancer)
     if dancer.profile_image.attached?

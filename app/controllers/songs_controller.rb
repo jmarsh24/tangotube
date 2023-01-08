@@ -1,19 +1,20 @@
+# frozen_string_literal: true
+
 class SongsController < ApplicationController
-  before_action :set_song, only: %i[ show edit update destroy ]
+  before_action :set_song, only: %i[show edit update destroy]
 
   # GET /songs
   def index
-      @songs = Song.all.limit(10)
-      respond_to do |format|
-          format.html
-          format.json do
-            render json:
-            Song.search(params[:q],
-              match: :word_middle,
-              sort: :title,
-            ).map { |song| { text: song.full_title, value: song.id } }
-          end
+    @songs = Song.all.limit(10)
+    respond_to do |format|
+      format.html
+      format.json do
+        render json:
+        Song.search(params[:q],
+          match: :word_middle,
+          sort: :title).map { |song| {text: song.full_title, value: song.id} }
       end
+    end
   end
 
   # GET /songs/1
@@ -56,13 +57,14 @@ class SongsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_song
-      @song = Song.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def song_params
-      params.fetch(:song, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_song
+    @song = Song.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def song_params
+    params.fetch(:song, {})
+  end
 end
