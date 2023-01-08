@@ -3,10 +3,11 @@
   display: flex;
   justify-content: center;
   height: calc(100vh - 56px);
-  width: calc(100vw - 15px);
+  width: calc(100vw);
   max-width: 100%;
   overflow: hidden;
-  font-family: var(--sl-font-sans);
+  font-family: Poppins, Arial, sans-serif;
+  font-weight: 700;
 
   &__card {
     position: absolute;
@@ -52,7 +53,7 @@
 
   &__close {
     position: absolute;
-    right: 0;
+    right: 16px;
     top: 16px;
 
     &:hover {
