@@ -4,18 +4,16 @@ require "sidekiq/web"
 require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
   authenticate :user, ->(user) { user.admin? } do
     mount Avo::Engine, at: Avo.configuration.root_path
   end
+  get "sitemaps/*path", to: "shimmer/sitemaps#show"
   get "cookies", to: "cookies#index"
   post "cookies", to: "cookies#index"
   get "banner", to: "banner#index"
   post "banner", to: "banner#index"
-  get "checkout", to: "checkouts#show"
-  get "billing", to: "billing#show"
-
-  get "errors/not_found"
-  get "errors/internal_server_error"
 
   devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks",
                                    confirmations: "users/confirmations",
@@ -121,15 +119,12 @@ Rails.application.routes.draw do
     end
   end
 
-  root "videos#index"
-  post "/" => "videos#index"
   post "savenew", to: "users#savenew"
+  post "/" => "videos#index"
   get "/watch", to: "videos#show"
-  get "/privacy", to: "static_pages#privacy"
-  get "/terms", to: "static_pages#terms"
-  get "/about", to: "static_pages#about"
-  get "/contact", to: "static_pages#contact"
-
-  match "/404", to: "errors#not_found", via: :all
-  match "/500", to: "errors#internal_server_error", via: :all
+  get "/privacy", to: "pages#privacy"
+  get "/terms", to: "pages#terms"
+  get "/about", to: "pages#about"
+  get "/contact", to: "pages#contact"
+  root "videos#index"
 end
