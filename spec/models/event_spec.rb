@@ -47,8 +47,8 @@ RSpec.describe Event do
   end
 
   describe "#search_title" do
-    it "creates searchable title" do
-      event = create(:event, title: "Tango Event Title - unless search information")
+    fit "creates searchable title" do
+      event = create(:event, title: "Tango Event Title - useless search information")
       expect(event.search_title).to eq("Tango Event Title")
     end
   end

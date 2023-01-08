@@ -1,98 +1,115 @@
 source "https://rubygems.org"
 
-ruby "3.1.2"
+ruby File.read(".ruby-version").strip
 
-# gems that ship with rails...........................................................
-gem "bootsnap", require: false
-gem "cssbundling-rails"
-gem "hiredis"
-gem "jsbundling-rails"
-gem "pg"
-gem "puma"
 gem "rails", "~> 7.0.3.1"
-gem "sprockets-rails"
-gem "turbo-rails"
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-gem "dotenv-rails"
+gem "puma"
+
+# databases
+gem "pg"
+gem "redis"
+
+gem "oj"
+gem "bootsnap", require: false
 
 # app specific gems...................................................................
 gem "acts-as-taggable-on"
 gem "acts_as_votable"
+gem "acts_as_list"
 gem "activestorage"
 gem "ahoy_matey"
-gem "annotate"
+gem "amazing_print"
 gem "avo"
-gem "aws-sdk-s3", require: false
 gem "chartkick"
 gem "counter_culture"
 gem "dalli"
-gem "deepl-rb", require: "deepl"
 gem "devise"
+gem "dotenv-rails"
 gem "esbuild-rails"
 gem "faraday"
 gem "faraday-multipart"
 gem "font-awesome-rails"
 gem "hashie"
-gem "hotwire-rails"
 gem "image_processing"
+gem "mini_magick"
 gem "nokogiri"
-gem "oj"
 gem "omniauth-facebook"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "pagy"
 gem "pay"
 gem "pg_search"
-gem "prettier"
 gem "pundit"
+gem "ransack"
 gem "rails_autolink"
+gem "rails-i18n"
 gem "rexml"
-gem "rspotify"
 gem "scenic"
 gem "scheduler"
+gem "shimmer"
 gem "shoelace-rails"
+gem "slim-rails"
 gem "sidekiq"
-gem "sidekiq-throttled", :github => 'ixti/sidekiq-throttled', :branch => 'main'
-gem "stimulus-rails"
+gem "sidekiq-throttled"
 gem "streamio-ffmpeg"
-gem "stripe"
-gem "yt"
-gem "redis"
 gem 'net-ssh'
+gem "yael"
+
+# Assets
+gem "jsbundling-rails"
+gem "stimulus-rails"
+gem "sassc-rails"
+gem "autoprefixer-rails"
+gem "turbo-rails"
+gem "serviceworker-rails"
+
+# External Services
+gem "aws-sdk-s3"
+gem "deepl-rb", require: "deepl"
+gem "yt"
+gem "stripe"
+gem "rspotify"
+gem "newrelic_rpm"
+gem "barnes" # enables detailed metrics within heroku
+gem "skylight"
+gem "sentry-ruby"
+gem "sentry-rails"
 
 group :development, :test do
-  gem "amazing_print"
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "factory_bot_rails"
-  gem "faker"
   gem "rspec-rails"
-  gem "webdrivers"
+  gem "standard"
+  gem "capybara"
+  gem "cuprite"
+  gem "i18n-tasks", "0.9.35"
+  gem "rack_session_access"
+  gem "chusaku", require: false
+  gem "pry-rails"
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "rspec-retry"
+  gem "webmock", require: false
+  gem "capybara-screenshot-diff"
 end
 
 group :development do
-  gem "bcrypt_pbkdf"
-  gem "bullet"
-  gem "ed25519"
-  gem "foreman"
+  gem "listen"
+  gem "web-console"
+  gem "annotate"
+  gem "rb-fsevent"
+  gem "letter_opener"
+  gem "debug"
   gem "guard"
   gem "guard-rspec"
-  gem "htmlbeautifier"
-  gem "letter_opener"
-  gem "listen"
-  gem "rack-mini-profiler"
-  gem "rubocop"
-  gem "rubocop-rails"
-  gem "rubocop-rspec"
   gem "solargraph"
-  gem "web-console"
-end
-
-group :test do
-  gem "capybara"
-  gem "capybara-screenshot"
-  gem "rspec-sidekiq"
-  gem "selenium-webdriver"
-  gem "simplecov", require: false
-  gem "vcr"
-  gem "webmock"
+  gem "solargraph-standardrb"
+  gem "rubocop-rails"
+  gem "rubocop-performance"
+  gem "rubocop-rspec"
+  gem "rubocop-rake"
+  gem "capistrano"
+  gem "capistrano-rails"
+  gem "capistrano-rbenv"
+  gem "capistrano-bundler"
+  gem "capistrano-sidekiq"
+  gem "capistrano-rails-console"
 end

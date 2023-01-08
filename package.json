@@ -1,22 +1,32 @@
 {
-  "name": "tangodb",
-  "private": true,
+    "scripts": {
+    "format": "prettier --write \"app/**/*.{tsx,ts,scss,json}\"",
+    "lint": "yarn lint:types && yarn lint:style && yarn lint:format",
+    "lint:types": "tsc --noEmit",
+    "lint:style": "eslint app/javascript/**/*.ts --max-warnings 0",
+    "lint:format": "prettier --list-different \"app/**/*.{ts,scss,json}\"",
+    "build": "esbuild app/javascript/*.* --bundle --minify --sourcemap --outdir=app/assets/builds --define:process.env.RAILS_ENV=\\\"$RAILS_ENV\\\" --define:process.env.SENTRY_ENVIRONMENT=\\\"$SENTRY_ENVIRONMENT\\\"",
+    "build:css": "yarn shoelace:copy-assets && sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
+    "shoelace:copy-assets": "mkdir -p public/shoelace-assets && cp -r node_modules/@shoelace-style/shoelace/dist/assets public/shoelace-assets",
+    "bundle-size": "npx source-map-explorer app/assets/builds/application.js app/assets/builds/application.js.map --no-border-checks",
+    "start": "yarn build --watch",
+    "live": "yarn livereload -e scss app/assets"
+  },
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.0.0",
     "@github/combobox-nav": "^2.0.2",
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.1.1",
+    "@nerdgeschoss/shimmer": "^0.0.27",
     "@popperjs/core": "^2.11.2",
     "@rails/activestorage": "^7.0.3-1",
     "@rails/request.js": "^0.0.6",
     "@shoelace-style/shoelace": "^2.0.0-beta.77",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.14.27",
-    "esbuild-rails": "^1.0.3",
     "lodash.debounce": "^4.0.8",
-    "sass": "^1.54.8",
     "slim-select": "^1.27.1",
-    "stimulus": "npm:@hotwired/stimulus",
     "stimulus-dropdown": "^2.0.0",
     "stimulus-hotkeys": "^1.0.5",
     "stimulus-use": "^0.41.0",
@@ -27,10 +37,5 @@
   "devDependencies": {
     "prettier": "2.1.2",
     "stylelint-config-standard": "^25.0.0"
-  },
-  "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:css": "yarn shoelace:copy-assets && sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
-    "shoelace:copy-assets": "mkdir -p public/shoelace-assets && cp -r node_modules/@shoelace-style/shoelace/dist/assets public/shoelace-assets"
   }
 }
