@@ -3,6 +3,8 @@
 class ApplicationController < ActionController::Base
   newrelic_ignore_enduser
   include Pundit::Authorization
+  include Shimmer::Localizable
+  include Shimmer::RemoteNavigation
   before_action :total_videos_count
   before_action :configure_permitted_parameters, if: :devise_controller?
 
