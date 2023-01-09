@@ -6,8 +6,8 @@ class Video::MusicRecognition::AcrCloud::Client
   ACR_CLOUD_DATA_TYPE = "audio"
   ACR_CLOUD_SIGNATURE_VERSION = "1"
   ACR_CLOUD_TIMESTAMP = Time.now.utc.to_i.to_s.freeze
-  ACR_CLOUD_ACCESS_KEY = Rails.application.credentials.dig(:acr_cloud, :access_key).freeze
-  ACR_CLOUD_ACCESS_SECRET = Rails.application.credentials.dig(:acr_cloud, :secret_key).freeze
+  ACR_CLOUD_ACCESS_KEY = ENV["ACR_CLOUD_ACCESS_KEY"] || Rails.application.credentials.dig(:acr_cloud, :access_key)
+  ACR_CLOUD_ACCESS_SECRET = ENV["ACR_CLOUD_SECRET_KEY"] || Rails.application.credentials.dig(:acr_cloud, :secret_key).freeze
   ACR_CLOUD_REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify"
 
   class << self
