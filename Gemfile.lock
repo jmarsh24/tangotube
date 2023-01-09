@@ -419,6 +419,7 @@ GEM
       redis-client (>= 0.9.0)
     redis-client (0.11.2)
       connection_pool
+    redis-prescription (1.0.0)
     regexp_parser (2.6.1)
     reline (0.3.2)
       io-console (~> 0.5)
@@ -519,6 +520,10 @@ GEM
       rufus-scheduler (~> 3.2)
       sidekiq (>= 4, < 7)
       tilt (>= 1.4.0)
+    sidekiq-throttled (0.17.0)
+      concurrent-ruby
+      redis-prescription
+      sidekiq (>= 6.4)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
     skylight (5.3.4)
@@ -692,6 +697,7 @@ DEPENDENCIES
   shimmer
   sidekiq
   sidekiq-scheduler
+  sidekiq-throttled
   sitemap_generator
   skylight
   slim-rails
