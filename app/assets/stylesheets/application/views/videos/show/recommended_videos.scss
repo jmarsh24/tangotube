@@ -3,7 +3,7 @@
   margin: 0 0.5em;
   flex-direction: column;
   width: 100%;
-  min-width: 400px;
+  min-width: 430px;
   @media (max-width: 700px) {
     min-width: none;
   }
@@ -27,12 +27,14 @@
 }
 
 .thumbnail--recommended {
-  width: 160px;
+  width: 180px;
+  img {
+    width: 100%;
+  }
 
   @media (max-width: 768px) {
-    width: 100%;
     img {
-      width: 100%;
+      width: 50px;
     }
   }
 }

@@ -88,8 +88,7 @@
   font-weight: 600;
   overflow-x: auto;
   overflow-y: hidden;
-  height: 25px;
-
+  font-size: .9rem;
   a {
     color: var(--sl-color-gray-700);
     &:hover {
@@ -101,6 +100,10 @@
     font-size: 1.1rem;
     margin: 0;
   }
+}
+
+.video-event {
+  font-size: .9rem;
 }
 
 .video-song {
