@@ -8,120 +8,28 @@
         <% end %>>
       Filters
     </sl-button>
-    <div style="background-color: var(--sl-color-neutral-50); padding-bottom: 12px;">
+  <div style="background-color: var(--sl-color-neutral-50); padding-bottom: 12px;">
     <div id="mobile-filters">
       <%= turbo_frame_tag :filters, src: filters_videos_path(filtering_params) %>
-  <sl-divider></sl-divider>
+      <sl-divider></sl-divider>
   </div>
-  <div id="menu-additional-filters">
-    <% if current_user %>
-      <%= button_tag type: "button",
-                          class: "additional-filters-button",
-                          data: { controller: "filter",
-                          action: "filter#filter",
-                                  "filter-watched-value": filtering_params["watched"] == "true" ? 0 : "true" } do %>
-        <% if filtering_params["watched"] == "true" %>
-          <%= content_tag(:b, "Watched") %>
-          <%= fa_icon("times", class: "videos-sortable-icon") %>
-        <% else %>
-          Watched
-        <% end %>
-      <% end %>
-      <%= button_tag type: "button",
-                        class: "additional-filters-button",
-                        data:  {controller: "filter",
-                        action: "filter#filter",
-                                "filter-liked-value": filtering_params["liked"] == "true" ? 0 : "true" } do %>
-        <% if filtering_params["liked"] == "true" %>
-          <%= content_tag(:b, "Liked") %>
-          <%= fa_icon("times", class: "videos-sortable-icon") %>
-        <% else %>
-          Liked
-        <% end %>
-      <% end %>
-      <%= button_tag type: "button",
-                          class: "additional-filters-button",
-                          data: { controller: "filter",
-                          action: "filter#filter",
-                                  "filter-watched-value": filtering_params["watched"] == "false" ? 0 : "false" } do %>
-        <% if filtering_params["watched"] == "false" %>
-          <%= content_tag(:b, "New To You") %>
-          <%= fa_icon("times", class: "videos-sortable-icon") %>
-        <% else %>
-          New to You
-        <% end %>
-      <% end %>
-    <% end %>
-    <%= button_tag type: "button",
-                        class: "additional-filters-button",
-                        data: { controller: "filter",
-                        action: "filter#filter",
-                                "filter-hd-value": filtering_params["hd"] == "true" ? 0 : "true" } do %>
-      <% if filtering_params["hd"] == "true" %>
-        <%= content_tag(:b, "HD") %>
-        <%= fa_icon("times", class: "videos-sortable-icon") %>
-      <% else %>
-        HD
-      <% end %>
-    <% end %>
-    <%= button_tag type: "button",
-                        class: "additional-filters-button",
-                        data: { controller: "filter",
-                        action: "filter#filter",
-                                "filter-dancer-value": filtering_params["dancer"] == "true" ? 0 : "true" } do %>
-      <% if filtering_params["dancer"] == "true" %>
-        <%= content_tag(:b, "With Dancer") %>
-        <%= fa_icon("times", class: "videos-sortable-icon") %>
-      <% else %>
-        With Dancer
-      <% end %>
-    <% end %>
-  </div>
+  <%= render partial: "videos/index/filter-sorting/filtering" %>
 </div>
 </sl-dropdown>
 <sl-dropdown stay-open-on-select>
   <sl-button slot="trigger"
           id="button-sorting"
           class="white-button"
-
         <% if sorting_params.present? %>
          outline
         <% end %>>
       Sorting
-    </sl-button>
-    <sl-menu>
-      <div id="menu-sorting-filters">
-        <sl-menu-label>Sort By</sl-menu-label>
-        <sl-menu-item>
-          <%= sortable 'videos.performance_date', "desc",  "Recent First", @sort_column, @sort_direction %>
-        </sl-menu-item>
-    <sl-menu-item>
-      <%= sortable 'videos.performance_date', "asc", "Oldest First", @sort_column, @sort_direction %>
-    </sl-menu-item>
-    <sl-menu-item>
-      <%= sortable "videos.view_count", "desc",  "Most Viewed", @sort_column, @sort_direction %>
-    </sl-menu-item>
-    <sl-menu-item>
-      <%= sortable "videos.popularity", "desc",  "Trending", @sort_column, @sort_direction %>
-    </sl-menu-item>
-    <sl-menu-item>
-      <%= sortable "videos.like_count", "desc",  "Most Liked", @sort_column, @sort_direction %>
-    </sl-menu-item>
-    <sl-menu-label>Group By</sl-menu-label>
-    <sl-menu-item>
-      <%= sortable 'song.title', "asc", "Song", @sort_column, @sort_direction %>
-    </sl-menu-item>
-    <sl-menu-item>
-      <%= sortable 'song.orchestra', "asc",  "Orchestra", @sort_column, @sort_direction %>
-    </sl-menu-item>
-    <sl-menu-item>
-      <%= sortable 'channels.title', "asc",  "Channel", @sort_column, @sort_direction %>
-    </sl-menu-item>
-    <sl-menu-item>
-      <%= sortable 'performance_videos.performance_id', "asc",  "Performance", @sort_column, @sort_direction %>
-    </sl-menu-item>
+  </sl-button>
+  <div style="background-color: var(--sl-color-neutral-50); padding-bottom: 12px;">
+  <sl-menu>
+    <%= render partial: "videos/index/filter-sorting/sorting" %>
+  </sl-menu>
   </div>
-</sl-menu>
 </sl-dropdown>
 <div id="desktop-filters">
   <%= turbo_frame_tag "filters", src: filters_videos_path(filtering_params) %>
