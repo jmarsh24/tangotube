@@ -60,13 +60,13 @@ $show-video-width: 1300px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 0.5em;
 }
 
 .video-info-details-main {
   flex: 1;
   flex-direction: column;
   min-width: 450px;
+  padding: 0 0.5em;
   a {
     color: $link-color;
     font-size: 0.8rem;
