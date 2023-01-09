@@ -1,20 +1,31 @@
-<div id="sorting-container" class="sorting-container isHidden"  data-toggle-target="sorting">
-  <div class="videos-sortable-container">
-    <label>
-      Sort By
-    </label>
-    <%= sortable 'videos.performance_date', "desc",  "Recent First", @search %>
-    <%= sortable 'videos.performance_date', "asc", "Oldest First", @search %>
-    <%= sortable "videos.view_count", "desc",  "Most Viewed", @search %>
-    <%= sortable "videos.popularity", "desc",  "Trending", @search %>
-    <%= sortable "videos.like_count", "desc",  "Most Liked", @search %>
-  </div>
-  <div class="videos-sortable-container">
-    <label>
-      Group By
-    </label>
-    <%= sortable 'songs.title', "asc", "Song", @search %>
-    <%= sortable 'songs.last_name_search', "asc",  "Orchestra", @search %>
-    <%= sortable 'videos.channel_title', "asc",  "Channel", @search %>
-  </div>
+<div id="menu-sorting-filters" class="sorting-container"  data-toggle-target="sorting">
+  <sl-menu-label>Sort By</sl-menu-label>
+  <sl-menu-item>
+    <%= sortable 'videos.performance_date', "desc",  "Recent First", @sort_column, @sort_direction %>
+  </sl-menu-item>
+  <sl-menu-item>
+    <%= sortable 'videos.performance_date', "asc", "Oldest First", @sort_column, @sort_direction %>
+  </sl-menu-item>
+  <sl-menu-item>
+    <%= sortable "videos.view_count", "desc",  "Most Viewed", @sort_column, @sort_direction %>
+  </sl-menu-item>
+  <sl-menu-item>
+    <%= sortable "videos.popularity", "desc",  "Trending", @sort_column, @sort_direction %>
+  </sl-menu-item>
+  <sl-menu-item>
+    <%= sortable "videos.like_count", "desc",  "Most Liked", @sort_column, @sort_direction %>
+  </sl-menu-item>
+  <sl-menu-label>Group By</sl-menu-label>
+  <sl-menu-item>
+    <%= sortable 'song.title', "asc", "Song", @sort_column, @sort_direction %>
+  </sl-menu-item>
+  <sl-menu-item>
+    <%= sortable 'song.orchestra', "asc",  "Orchestra", @sort_column, @sort_direction %>
+  </sl-menu-item>
+  <sl-menu-item>
+    <%= sortable 'channels.title', "asc",  "Channel", @sort_column, @sort_direction %>
+  </sl-menu-item>
+  <sl-menu-item>
+    <%= sortable 'performance_videos.performance_id', "asc",  "Performance", @sort_column, @sort_direction %>
+  </sl-menu-item>
 </div>

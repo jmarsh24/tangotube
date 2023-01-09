@@ -15,7 +15,7 @@
       <div style="width: 100%; display: flex; align-items: bottom; justify-content: space-between; margin: 16px 0px; padding: 0 10px;">
         <% if devise_mapping.rememberable? -%>
           <%= f.check_box :remember_me %>
-        <% end -%>
+        <% end %>
         <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
           <%= link_to "Forgot your password?", new_password_path(resource_name)%>
         <% end %>
