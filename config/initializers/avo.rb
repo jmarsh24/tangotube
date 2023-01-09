@@ -9,8 +9,8 @@ Avo.configure do |config|
   config.home_path = "/admin/resources/videos"
 
   ## == Licensing ==
-  config.license = "community" # change this to 'pro' when you add the license key
-  # config.license_key = Config.avo_license_key!
+  config.license = "pro" # change this to 'pro' when you add the license key
+  config.license_key = Config.avo_license_key!
 
   ## == Set the context ==
   config.set_context do
