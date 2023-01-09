@@ -76,7 +76,7 @@
             <% end %>
           <% end %>
           <% unless @videos_with_same_dancers.empty? %>
-            <div class="recommended-videos-card" data-toggle-target="recommendedEventVideos">
+            <div class="recommended-videos-card" data-toggle-target="recommendedSameDancersVideos">
               <div class="recommended-videos__header">
                 <h2>Videos from <%= @video.leaders.first.name.titleize %> & <%= @video.followers.first.name.titleize %></h2>
               </div>
@@ -87,9 +87,9 @@
                 <%= button_tag type: "button",
                               class: "button",
                               style: "width: 100%;",
-                              data: { action: "toggle#toggleRecommendedEventVideos" } do %>
-                  <%= fa_icon "angle-down", data: { 'toggle-target': "recommendedEventVideosDownButton" } %>
-                  <%= fa_icon "angle-up", class: "isHidden", data: { 'toggle-target': "recommendedEventVideosUpButton" } %>
+                              data: { action: "toggle#toggleRecommendedSameDancersVideos" } do %>
+                  <%= fa_icon "angle-down", data: { 'toggle-target': "recommendedSameDancersVideosDownButton" } %>
+                  <%= fa_icon "angle-up", class: "isHidden", data: { 'toggle-target': "recommendedSameDancersVideosUpButton" } %>
                 <% end %>
               </div>
             <% end %>
