@@ -20,9 +20,6 @@
 #  gender       :integer
 #
 class Dancer < ApplicationRecord
-  # include PgSearch::Model
-  # multisearchable against: [:name]
-
   belongs_to :user, optional: true
   has_many :dancer_videos, dependent: :destroy
   has_many :videos, through: :dancer_videos
