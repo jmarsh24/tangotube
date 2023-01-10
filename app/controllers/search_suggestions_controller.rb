@@ -2,7 +2,7 @@
 
 class SearchSuggestionsController < ApplicationController
   def search
-    @dancers = Dancer.where("name ILIKE ?", "%#{params[:query]}%").map(&:full_name)
+    @dancers = Dancer.where("CONCAT_WS(' ', first_name, last_name) ILIKE unaccent(?)", "%#{params[:query]}%").map(&:full_name)
 
     @songs = Song.where("title ILIKE ?", "%#{params[:query]}%").map(&:full_title)
 
