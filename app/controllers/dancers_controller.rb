@@ -7,7 +7,7 @@ class DancersController < ApplicationController
   # GET /dancers
   def index
     dancers = if params[:query].present?
-      Dancer.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query]}%").order(:name)
+      Dancer.search_by_full_name(params[:query]).order(:name)
     else
       Dancer.all.order(videos_count: :desc)
     end
@@ -16,6 +16,9 @@ class DancersController < ApplicationController
     respond_to do |format|
       format.html # GET
       format.turbo_stream # POST
+      format.json do
+        render json: Dancer.search_by_full_name(params[:query]).map { |dancer| {text: dancer.name, value: dancer.id} }
+      end
     end
   end
 

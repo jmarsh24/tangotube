@@ -95,9 +95,6 @@ Rails.application.routes.draw do
   end
 
   resources :dancers do
-    collection do
-      post :index
-    end
     member do
       post :show
     end
