@@ -36,6 +36,8 @@ class Dancer < ApplicationRecord
   after_validation :set_slug, only: [:create, :update]
   after_save :find_videos
 
+  scope :search_by_full_name, ->(query) { where("CONCAT_WS(' ', unaccent(first_name), unaccent(last_name)) ILIKE unaccent(?)", "%#{query}%") }
+
   def find_videos
     Video.with_dancer_name_in_title(full_name).each do |video|
       dancer_gender = gender
