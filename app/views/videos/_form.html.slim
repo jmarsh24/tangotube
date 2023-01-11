@@ -1,0 +1,32 @@
+= form_with model: @video, url: video_path(video.youtube_id), method: :patch do |f|
+  .video-info-details-main
+    .detail-section-label
+      h4 Performers
+    = render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :dancer_id, id: "leader", f: f, url: "/dancers.json", value: [video&.leaders.first&.name, video&.leaders.first&.id] }
+    = render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :dancer_id, id: "follower", f: f, url: "/dancers.json", value: [video&.followers.first&.name, video&.followers.first&.id] }
+    .detail-section-label
+      h4 Event Info
+    = render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :event_id, id: "event", f: f, url: "/events.json", value: [video&.event&.title, video&.event&.id] }
+    .attribute_row
+      .attribute-label
+        label Performance Date
+      .attribute-value style="display: flex; flex-direction: column; gap: 10px;"
+        = f.date_field(:performance_date, selected: video.performance_date )
+    .attribute-row
+      .attribute-label
+        label Performance Number
+      .attribute-value
+        = f.select(:performance_number, (1..8), { value: video.performance_number, prompt: "Select Performance Number" }, "data-controller": "tom-select")
+    .attribute-row
+      .attribute-label
+        label Total Number
+      .attribute-value
+        = f.select(:performance_total_number, (1..8), { value: video.performance_total_number, prompt: "Select Total Number of Performance" }, "data-controller": "tom-select")
+    h4 Music
+  = render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :song_id, id: "song", f: f, url: "/songs.json", value: [video&.song&.full_title, video&.song&.id] }
+  div
+    = f.label "hidden?"
+    = f.check_box :hidden, {}, "true", "false"
+  div style="display: flex; gap: 10px; align-items: center; margin: 10px 0; font-size: 14px;"
+    = f.submit "Update Video"
+    = link_to "Back", watch_path(v: video.youtube_id), style: "font-size: 14px;"
