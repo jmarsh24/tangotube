@@ -16,6 +16,23 @@ en:
       show_this_clip: Show this clip
     index:
       loading_spinner: Loading spinner
+  components:
+    cookie_consent:
+      accept_all: Accept all
+      banner_description_html: Banner description html
+      banner_title: Banner title
+      deny: Deny
+      essential: Essential
+      essential_description: Essential description
+      manage: Manage
+      manage_description: Manage description
+      manage_title: Manage title
+      privacy: Privacy
+      save_preferences: Save preferences
+      statistic: Statistic
+      statistic_description: Statistic description
+      targeting: Targeting
+      targeting_description: Targeting description
   couples:
     show:
       delete: Delete
@@ -50,6 +67,9 @@ en:
     show:
       delete: Delete
       loading_spinner: Loading spinner
+  pages:
+    contact:
+      contact_me: Contact me
   performances:
     index:
       loading_spinner: Loading spinner
