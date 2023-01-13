@@ -9,4 +9,5 @@ html lang=I18n.locale class="sl-theme-dark"
         = render "layouts/flash"
       = yield
     = turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil?
-    = render "shared/footer"
+    = render "components/footer"
+    = render "components/cookie_consent"
