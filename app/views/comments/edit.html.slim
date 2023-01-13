@@ -1,0 +1,25 @@
+= turbo_frame_tag @comment do
+  div style="padding-left: 16px; margin-top: 16px;"
+    div style="display: flex; justify-content: flex-start; align-items: flex-end; gap: 10px; font-size: 14px; "
+      div style="color: rgb(7, 89, 133); font-weight: 500;"
+        = "#{@comment.user.first_name.titleize} #{@comment.user.last_name.titleize}"
+      div style="color: rgb(150, 150, 150);"
+        = "#{time_ago_in_words(@comment.updated_at)} ago"
+    div style="margin-top: 16px;"
+      = form_with model: @comment, html: { class: local_assigns[:class], style: local_assigns[:style], data: { target: local_assigns[:target] } } do |f|
+        .form-group
+          - if f.object.errors.any?
+            .alert.alert-danger
+              - f.object.errors.full_messages.each do |message|
+                div
+                  = message
+          = f.text_area :body, placeholder: "Add a comment", class: "form-control", style: "width: 100%; border-radius: 4px; border: 1px solid #c2c2c2; padding: 8px 12px; color: var(--sl-color-gray-800); font-size: 16px; max-width: 100%;"
+        .form-group style= "display: flex; align-items: center; gap: 16px;"
+          = f.hidden_field :parent_id, value: local_assigns[:parent_id]
+          = f.submit class: "button button-primary"
+          = link_to "Cancel", comment_path(@comment), style: "color: red;"
+
+
+
+
+

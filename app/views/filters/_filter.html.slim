@@ -1,0 +1,4 @@
+div	data-controller="filter" style="width: #{width}" class="filter"
+  div class="label" style="font-size: 12px; padding-left: 4px;"
+    = title.to_s.titleize
+  = select_tag title.to_s, options_for_select(options, params[title].presence), {	include_blank: true, 	multiple: false, 	autocomplete: "off", 	placeholder: "Any #{title.to_s}...",   id: id, 	data: { controller: "tom-select", action: "filter#filter", "filter-target": "filter", "tom-select-create-value": "false" } }

@@ -1,0 +1,5 @@
+= turbo_stream.update "mobile-search_results" do
+  = render partial: "search_suggestions/search_results", locals: { search_results: @search_results }
+= turbo_stream.update "desktop-search_results" do
+  = render partial: "search_suggestions/search_results", locals: { search_results: @search_results }
+

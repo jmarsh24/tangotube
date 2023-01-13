@@ -1,0 +1,16 @@
+.video-info-lyrics style="padding: 16px;" data-controller="toggle"
+  .detail-item-heading-lyrics style="padding: 16px;"
+    h4 Lyrics
+  div style="display: flex; justify-content: center; gap: 10px;"
+    = button_tag type: "button", class: "button", data: { action: "toggle#toggleLyricsSpanish" } do
+      = t(".spanish")
+    = button_tag type: "button", class: "button", data: { action: "toggle#toggleLyricsEnglish" } do
+      = t(".english")
+  .detail-column-lyrics style="padding: 16px;"
+    div data-toggle-target="lyricsEs"
+      = simple_format(@video.song.lyrics)
+    .isHidden data-toggle-target="lyricsEn"
+      = simple_format(@video.song.lyrics_en)
+
+
+

@@ -1,0 +1,8 @@
+#videos-header.videos-header
+  - if filtering_params.present?
+    h3
+      = "#{@pagy.count} Found for..."
+      - if filtering_params.present? || sorting_params.present?
+        = videos_header(filtering_params, sorting_params)
+
+

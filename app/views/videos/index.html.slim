@@ -1,0 +1,24 @@
+= turbo_frame_tag "banner", src: banner_path if session[:banner_closed].blank?
+.index-container
+  = render "videos/index/filters"
+  = render "videos/index/videos/header"
+  = turbo_frame_tag :videos do
+    - if @featured_videos.present?
+      .video-section
+        = render "videos/index/videos/section/header", title: "Featured"
+        .video-section__videos
+            = render partial: "video", collection: @featured_videos
+      .video-section
+        - if @featured_videos.present?
+          = render "videos/index/videos/section/header", title: "Trending"
+        #results.video-section__videos
+          = render partial: "video", collection: @videos
+      #next_link.next-link
+        - if @pagy.next.present?
+          form action="#{pagy_url_for(@pagy, @pagy.next)}" method="post"
+            button type="submit" data-controller="autoclick">
+          = t(".loading_spinner")
+
+
+
+

@@ -1,0 +1,7 @@
+.orchestra__card id=dom_id(orchestra)
+  = link_to orchestra do
+    = image_tag orchestra_avatar(orchestra.id)
+  .orchestra__card__body
+    = link_to orchestra do
+      = orchestra.name.titleize
+    = "#{orchestra.videos_count} total videos"

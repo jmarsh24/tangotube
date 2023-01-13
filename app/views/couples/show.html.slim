@@ -1,0 +1,21 @@
+div style="max-width: 1660px; width: 100%;"
+  div style="margin: 64px auto; display: flex; flex-direction: column; align-items: center;"
+    div style="display: flex; gap: 16px;"
+      = image_tag dancer_avatar(@couple.dancer), style: "border-radius: 50%; width: 250px; height: 250px;"
+      = image_tag dancer_avatar(@couple.partner), style: "border-radius: 50%; width: 250px; height: 250px;"
+    h1 style="font-size: 64px;"
+      = "#{@couple.dancer.name} & #{@couple.partner.name}"
+    div style="display: flex; justify-content: space-between; gap: 16px;"
+      = "#{@couple.videos_count} Total Videos"
+      - if current_user&.admin?
+        div
+          = button_to "dropdown"
+          div
+            = link_to t(".edit"), edit_orchestra_path(@couple)
+            = button_to t(".delete"), @couple, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }
+  .index-container
+    #results.video-section__videos
+      = render @videos
+    = turbo_frame_tag :videos, src: videos_path(couples: @couple.slug)
+
+

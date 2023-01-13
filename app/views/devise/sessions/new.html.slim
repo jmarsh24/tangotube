@@ -1,0 +1,22 @@
+div style="margin: 0 auto; height: 80vh; width: 100%; max-width: 24rem; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: var(--sl-font-size-small); color: var(--sl-color-neutral-500);"
+  div style="display: flex; justify-content: center;"
+    div style="font-size: var(--sl-font-size-2x-large); font: poppins; color: var(--sl-color-neutral-1000);"
+      h3 TangoTube
+  div style="display: flex; flex-direction: column; gap: 16px; width: 100%; "
+    div style="margin: 36px 0px; text-align: center;"
+      Sign in to watch, bookmark. Create playlists and leave comments.
+    - form_for resource, as: resource_name, url: session_path(resource_name), data: { turbo: false } do |f|
+      - render "devise/shared/error_messages", resource: resource
+      - f.email_field :email, autofocus: true, style: "margin-bottom: 8px;"
+      - f.password_field :password, autocomplete: "off", style: "margin-bottom: 8px;", "toggle-password": ""
+      div style="width: 100%; display: flex; align-items: bottom; justify-content: space-between; margin: 16px 0px; padding: 0 10px;"
+        - if devise_mapping.rememberable?
+          - f.check_box :remember_me
+        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+          - link_to "Forgot your password?", new_password_path(resource_name)
+      - f.submit "Log in", class: "primary-button", style: "width: 100%; margin-top: 8px;"
+      div style="width: 100%; text-align: center; margin-top: 16px;"
+        Not registered yet?
+        - link_to "Create an account", new_user_registration_path, style: "color: var(--sl-color-primary-500);"
+    div style="margin-top: 24px;"
+      - render "devise/shared/links"

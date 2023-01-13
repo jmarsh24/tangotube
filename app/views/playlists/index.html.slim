@@ -1,0 +1,16 @@
+.playlists-index-container
+  h2 All playlists
+  = form_with model: Playlist.new, local: true, class: 'playlist-form' do |f|
+    "youtube.com/playlist/"
+    = f.text_field :slug, placeholder: 'insert playlist id here...'
+    = f.submit "Add New Playlist"
+  - @playlists.each do |playlist|
+    .playlists-index-row"
+      #id.playlists-index-item
+        = playlist.slug
+      #title.playlists-index-item
+        = playlist.title
+
+
+
+
