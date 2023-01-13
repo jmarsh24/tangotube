@@ -1,0 +1,43 @@
+.right
+  #mobile-drawer-top.drawer.drawer-placement-top style="--size: 100%; --body-spacing: 0 12px;"
+    div style="display: flex; align-items: center; background-color: var(--sl-color-neutral-50); padding: 0 12px;"
+      = t(".chevron_left_icon")
+      = render "shared/header/search", id: "mobile-search"
+  = t(".search_icon")
+  = t("lighbulb_icon")
+  #mobile-login.login
+    #dropdown-avatar
+      .dropdown
+        div label="user_avatar" style="--size: 32px;"
+            = image_tag avatar_url_for(current_user)
+        .menu
+          - if user_signed_in?
+            = link_to edit_user_registration_path do
+              div Edit Profile
+            = link_to destroy_user_session_path do
+              div Sign Out
+          - else
+            = link_to new_user_session_path do
+              div Login
+            = link_to edit_user_registration_path do
+              div Sign Up
+  #desktop-login.login
+    - if !user_signed_in?
+      = link_to t(".Login"), new_user_session_path
+      = link_to t(".Sign Up"), new_user_session_path
+    - if user_signed_in?
+      #dropdown-avatar
+        .dropdown
+          div label="user_avatar" style="--size: 32px;"
+            = image_tag avatar_url_for(current_user)
+          .menu
+            - if user_signed_in?
+              = link_to edit_user_registration_path do
+                div Edit Profile
+              = link_to destroy_user_session_path do
+                  div Sign Out
+            - else
+              = link_to new_user_session_path do
+                div Login
+              = link_to edit_user_registration_path do
+                div Sign Up
