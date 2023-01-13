@@ -42,6 +42,7 @@ en:
     show:
       delete: Delete
       dropdown_button: Dropdown button
+  lighbulb_icon: Lighbulb icon
   loading_spinner: Loading spinner
   orchestras:
     index:
@@ -52,6 +53,12 @@ en:
   performances:
     index:
       loading_spinner: Loading spinner
+  shared:
+    header:
+      right:
+        Login: Login
+        chevron_left_icon: Chevron left icon
+        search_icon: Search icon
   videos:
     index:
       filter-sorting:
