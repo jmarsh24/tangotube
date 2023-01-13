@@ -1,0 +1,7 @@
+p style="color: green"
+  = notice
+h1 Channels
+#channels
+  - @channels.each do |channel|
+    = render channel
+= link_to "New channel", new_channel_path

@@ -1,0 +1,39 @@
+---
+en:
+  accept: Accept
+  banner:
+    index:
+      close: Close
+      try_it_now: Try it now
+  channels:
+    channel:
+      pencil_square_icon: Pencil square icon
+      trash_icon: Trash icon
+  clips:
+    edit:
+      back_to_clips: Back to clips
+      destroy: Destroy
+      show_this_clip: Show this clip
+    index:
+      loading_spinner: Loading spinner
+  couples:
+    show:
+      delete: Delete
+      edit: Edit
+  dancers:
+    index:
+      loading_spinner: Loading spinner
+    show:
+      delete: Delete
+      dropdown: Dropdown
+      edit: Edit
+      loading_spinner: Loading spinner
+  decline: Decline
+  devise:
+    registrations:
+      edit:
+        back: Back
+  errors:
+    messages:
+      not_saved: Not saved
+  loading_spinner: Loading spinner

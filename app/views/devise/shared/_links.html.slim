@@ -1,0 +1,16 @@
+div style="position: relative;"
+  div style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; display: flex; align-items: center;"
+    div style="width: 100%; border-top: 1px solid rgb(229, 231, 235); position: relative;"
+  div style="display: flex; justify-content: center;"
+    span style="background-color: var(--sl-color-neutral-0); padding: 0 8px; z-index: 1;"
+      Or continue with
+- if devise_mapping.confirmable? && controller_name != 'confirmations'
+  = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
+- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
+  = link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name)
+- if devise_mapping.omniauthable?
+   style="display: flex; flex-direction: column; gap: 10px;"
+    = button_to user_google_oauth2_omniauth_authorize_path, "data-turbo": false, data: { disable_with: "Connecting..." }, class: "button button--block" do
+      = image_tag "google.svg", class: "button__icon"
+
+

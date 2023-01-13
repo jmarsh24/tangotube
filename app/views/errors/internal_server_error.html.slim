@@ -1,0 +1,8 @@
+div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-flow: wrap; padding-top: 100px; width: 100%;"
+  - content_for(:title, 'Not Found')
+  = image_tag('error-404.svg', alt: '404', lazy: false, style: "max-width: 80%")
+  div
+    h3 Page Not Found
+    Oops, this is a little embarrassing. Proceed back to the #{link_to "homepage", root_path, style: "color: blue"}
+
+

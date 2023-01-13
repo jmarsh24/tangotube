@@ -1,0 +1,27 @@
+= form_with(model: performance) do |f|
+  - if performance.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(performance.errors.count, "error")} prohibited this performance from being saved:"
+      ul
+        - performance.errors.each do |error|
+          li = error.full_message
+  div
+    = f.label :event_id, style: "display: block"
+    = f.text_field :event_id
+  div
+    = f.label :date, style: "display: block"
+    = f.date_field :date
+  div
+    = f.label :video_id, style: "display: block"
+    = f.text_field :video_id
+  div
+    = f.label :videos_count, style: "display: block"
+    = f.number_field :videos_count
+  div
+    = f.label :position, style: "display: block"
+    = f.number_field :position
+  div
+    = f.label :slug, style: "display: block"
+    = f.text_field :slug
+  div
+    = f.submit

@@ -1,0 +1,8 @@
+h1 Editing clip
+= turbo_frame_tag @clip do
+  = render "form", clip: @clip
+  br
+  div class="row"
+    = button_to t(".show_this_clip"),watch_path(v: @clip.video.youtube_id, start: @clip.start_seconds, end: @clip.end_seconds, speed: @clip.playback_rate)
+    = button_to t(".destroy"), video_clip_path(@clip), method: :delete,  form: { data: { turbo_confirm: "Are you sure?" } }, class: "button button--danger"
+    = link_to t(".back_to_clips"), clips_path

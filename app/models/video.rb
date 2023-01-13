@@ -105,6 +105,9 @@ class Video < ApplicationRecord
   scope :filter_by_follower, ->(dancer_name, _user) {
     with_follower(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
   }
+  scope :filter_by_couples, ->(couple_name, _user) {
+    where(id: CoupleVideo.joins(:couple).where(couple: {slug: couple_name}).select(:video_id))
+  }
   scope :filter_by_channel, ->(channel_id, _user) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
   scope :filter_by_event_id, ->(event_id, _user) { where(event_id:) }
   scope :filter_by_event, ->(event_slug, _user) { joins(:event).where("events.slug ILIKE ?", event_slug) }

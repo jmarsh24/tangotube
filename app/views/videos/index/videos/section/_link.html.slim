@@ -1,0 +1,10 @@
+div style="display: flex; justify-content: center; align-items: center; padding: 24px 0;"
+  button name="button" type="button" data-controller="filter" data-action="filter#filter"
+    - if defined?(sort_value)
+      "data-filter-sort-value=#{sort_value}
+    - if defined?(direction_value)
+      "data-filter-direction-value="#{direction_value}"
+    - if defined?(watched_value)
+      "data-watched-value=#{watched_value}"
+    style="color: var(--sl-color-gray-800); font-size: 14px;"
+    "Show More #{title} #{fa_icon("arrow-right")}"
