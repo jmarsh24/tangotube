@@ -10,8 +10,6 @@ Rails.application.routes.draw do
     mount Avo::Engine, at: Avo.configuration.root_path
   end
   get "sitemaps/*path", to: "shimmer/sitemaps#show"
-  get "cookies", to: "cookies#index"
-  post "cookies", to: "cookies#index"
   get "banner", to: "banner#index"
   post "banner", to: "banner#index"
 
