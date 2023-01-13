@@ -2,61 +2,64 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from './application';
 
-import AutoclickController from "./autoclick_controller.js"
-application.register("autoclick", AutoclickController)
+import AutoclickController from './autoclick_controller';
+application.register('autoclick', AutoclickController);
 
-import ClipboardController from "./clipboard_controller.js"
-application.register("clipboard", ClipboardController)
+import AutosubmitController from './autosubmit_controller';
+application.register('autosubmit', AutosubmitController);
 
-import ComboboxController from "./combobox_controller.js"
-application.register("combobox", ComboboxController)
+import ClipboardController from './clipboard_controller';
+application.register('clipboard', ClipboardController);
 
-import DarkModeController from "./dark_mode_controller.ts"
-application.register("dark-mode", DarkModeController)
+import CollapsibleController from './collapsible_controller';
+application.register('collapsible', CollapsibleController);
 
-import DrawerController from "./drawer_controller.ts"
-application.register("drawer", DrawerController)
+import CollapsiblePanelController from './collapsible_panel_controller';
+application.register('collapsible-panel', CollapsiblePanelController);
 
-import DropdownController from "./dropdown_controller.js"
-application.register("dropdown", DropdownController)
+import ComboboxController from './combobox_controller';
+application.register('combobox', ComboboxController);
 
-import DropzoneController from "./dropzone_controller.js"
-application.register("dropzone", DropzoneController)
+import FilterController from './filter_controller';
+application.register('filter', FilterController);
 
-import FilterController from "./filter_controller.js"
-application.register("filter", FilterController)
+import FlashController from './flash_controller';
+application.register('flash', FlashController);
 
-import FlashController from "./flash_controller.js"
-application.register("flash", FlashController)
+import FormController from './form_controller';
+application.register('form', FormController);
 
-import FormController from "./form_controller.js"
-application.register("form", FormController)
+import HideController from './hide_controller';
+application.register('hide', HideController);
 
-import PopperController from "./popper_controller.js"
-application.register("popper", PopperController)
+import ImageErrorController from './image_error_controller';
+application.register('image-error', ImageErrorController);
 
-import ReplyController from "./reply_controller.js"
-application.register("reply", ReplyController)
+import PopperController from './popper_controller';
+application.register('popper', PopperController);
 
-import SlimselectController from "./slimselect_controller.js"
-application.register("slimselect", SlimselectController)
+import ReplyController from './reply_controller';
+application.register('reply', ReplyController);
 
-import SlimselectEditController from "./slimselect_edit_controller.js"
-application.register("slimselect-edit", SlimselectEditController)
+import SearchController from './search_controller';
+application.register('search', SearchController);
 
-import ThumbnailController from "./thumbnail_controller.js"
-application.register("thumbnail", ThumbnailController)
+import ShareController from './share_controller';
+application.register('share', ShareController);
 
-import ToggleController from "./toggle_controller.js"
-application.register("toggle", ToggleController)
+import ThumbnailController from './thumbnail_controller';
+application.register('thumbnail', ThumbnailController);
 
-import TomSelectController from "./tom_select_controller.js"
-application.register("tom-select", TomSelectController)
+import ToggleController from './toggle_controller';
+application.register('toggle', ToggleController);
 
-import TomSelectEditController from "./tom_select_edit_controller.js"
-application.register("tom-select-edit", TomSelectEditController)
+import TomSelectController from './tom_select_controller';
+application.register('tom-select', TomSelectController);
 
-import YoutubeController from "./youtube_controller.js"
-application.register("youtube", YoutubeController)
+import TomSelectEditController from './tom_select_edit_controller';
+application.register('tom-select-edit', TomSelectEditController);
+
+import YoutubeController from './youtube_controller';
+application.register('youtube', YoutubeController);
