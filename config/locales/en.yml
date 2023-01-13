@@ -1,5 +1,7 @@
 ---
 en:
+  404_icon: 404 icon
+  404_not_found: 404 not found
   accept: Accept
   banner:
     index:
@@ -33,6 +35,19 @@ en:
       statistic_description: Statistic description
       targeting: Targeting
       targeting_description: Targeting description
+    footer:
+      links:
+        about: About
+        contact: Contact
+        google_privacy_policy: Google privacy policy
+        info: Info
+        privacy: Privacy
+        terms: Terms
+    navbar:
+      right:
+        Login: Login
+        chevron_left_icon: Chevron left icon
+        search_icon: Search icon
   couples:
     show:
       delete: Delete
@@ -51,8 +66,17 @@ en:
       edit:
         back: Back
   errors:
+    button: Button
+    internal_server_error:
+      internal_server_error: Internal server error
+      meta_title: Meta title
+      please_try_again: Please try again
     messages:
       not_saved: Not saved
+    not_found:
+      meta_title: Meta title
+      page_does_not_exist: Page does not exist
+      page_not_found: Page not found
   events:
     index:
       loading_spinner: Loading spinner
