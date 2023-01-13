@@ -1,0 +1,15 @@
+.links
+  .container
+    .stack.stack--tablet-lg
+      header.links__header: h2.action-footer-link.action-footer-link--bold = t '.info'
+      ul.stack.stack--sm.stack--tablet-lg
+        li.links__item
+          = link_to t(".privacy"), privacy_path, class: 'action-footer-link'
+        li.links__item
+          = link_to t(".terms"), terms_path, class: 'action-footer-link'
+        li.links__item
+          = link_to t(".google_privacy_policy"), "http://www.google.com/policies/privacy", target: "_blank", class: 'action-footer-link'
+        li.links__item
+          = link_to t(".contact"), contact_path, class: 'action-footer-link'
+        li.links__item
+          = link_to t(".about"), about_path, class: 'action-footer-link'
