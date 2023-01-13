@@ -36,4 +36,60 @@ en:
   errors:
     messages:
       not_saved: Not saved
+  events:
+    index:
+      loading_spinner: Loading spinner
+    show:
+      delete: Delete
+      dropdown_button: Dropdown button
   loading_spinner: Loading spinner
+  orchestras:
+    index:
+      loading_spinner: Loading spinner
+    show:
+      delete: Delete
+      loading_spinner: Loading spinner
+  performances:
+    index:
+      loading_spinner: Loading spinner
+  videos:
+    index:
+      filter-sorting:
+        filtering:
+          hd: Hd
+          liked: Liked
+          new_to_you: New to you
+          watched: Watched
+          with_dancer: With dancer
+      filters:
+        clear_all: Clear all
+        filters: Filters
+      loading_spinner: Loading spinner
+    show:
+      bookmark_link:
+        bookmark: Bookmark
+        bookmarked: Bookmarked
+      complete_link:
+        complete: Complete
+      downvote_link:
+        dislike: Dislike
+        disliked: Disliked
+      lyrics:
+        english: English
+        spanish: Spanish
+      upvote_link:
+        like: Like
+        liked: Liked
+      video_info_details:
+        edit: Edit
+      video_info_primary:
+        clip: Clip
+        scissors: Scissors
+        share: Share
+        share_icon: Share icon
+      watchlist_link:
+        watch: Watch
+        watch_later: Watch later
+        watched: Watched
+    video:
+      hide: Hide
