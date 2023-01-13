@@ -1,8 +1,13 @@
-div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-flow: wrap; padding-top: 100px; width: 100%;"
-  - content_for(:title, 'Not Found')
-  = image_tag('error-404.svg', alt: '404', lazy: false, style: "max-width: 80%")
-  div
-    h3 Page Not Found
-    Oops, this is a little embarrassing. Proceed back to the #{link_to "homepage", root_path, style: "color: blue"}
-
-
+- meta.title = t(".meta_title")
+.container
+  .card.text-align-center.expired
+    .expired__content
+      .stack.stack--xl
+        .stack
+          .stack.stack--sm.stack--justify-center.stack--tablet-xl
+            = image_tag "error_404.svg", alt: t("404_icon")
+            h1.heading-3.heading-3--bold = t ".internal_server_error"
+          p.paragraph = t ".please_try_again"
+        footer.stack
+          div
+            = link_to t("errors.button"), root_path(anchor: "categories" ), class: 'button button--sm button--primary button--icon-arrow'
