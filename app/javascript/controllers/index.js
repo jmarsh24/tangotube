@@ -2,64 +2,79 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from './application';
+import { application } from "./application"
 
-import AutoclickController from './autoclick_controller';
-application.register('autoclick', AutoclickController);
+import AutoclickController from "./autoclick_controller"
+application.register("autoclick", AutoclickController)
 
-import AutosubmitController from './autosubmit_controller';
-application.register('autosubmit', AutosubmitController);
+import AutosubmitController from "./autosubmit_controller"
+application.register("autosubmit", AutosubmitController)
 
-import ClipboardController from './clipboard_controller';
-application.register('clipboard', ClipboardController);
+import ClipboardController from "./clipboard_controller"
+application.register("clipboard", ClipboardController)
 
-import CollapsibleController from './collapsible_controller';
-application.register('collapsible', CollapsibleController);
+import CollapsibleController from "./collapsible_controller"
+application.register("collapsible", CollapsibleController)
 
-import CollapsiblePanelController from './collapsible_panel_controller';
-application.register('collapsible-panel', CollapsiblePanelController);
+import CollapsiblePanelController from "./collapsible_panel_controller"
+application.register("collapsible-panel", CollapsiblePanelController)
 
-import ComboboxController from './combobox_controller';
-application.register('combobox', ComboboxController);
+import ComboboxController from "./combobox_controller"
+application.register("combobox", ComboboxController)
 
-import FilterController from './filter_controller';
-application.register('filter', FilterController);
+import DarkModeController from "./dark_mode_controller"
+application.register("dark-mode", DarkModeController)
 
-import FlashController from './flash_controller';
-application.register('flash', FlashController);
+import DrawerController from "./drawer_controller"
+application.register("drawer", DrawerController)
 
-import FormController from './form_controller';
-application.register('form', FormController);
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
 
-import HideController from './hide_controller';
-application.register('hide', HideController);
+import FilterController from "./filter_controller"
+application.register("filter", FilterController)
 
-import ImageErrorController from './image_error_controller';
-application.register('image-error', ImageErrorController);
+import FlashController from "./flash_controller"
+application.register("flash", FlashController)
 
-import PopperController from './popper_controller';
-application.register('popper', PopperController);
+import FormController from "./form_controller"
+application.register("form", FormController)
 
-import ReplyController from './reply_controller';
-application.register('reply', ReplyController);
+import HideController from "./hide_controller"
+application.register("hide", HideController)
 
-import SearchController from './search_controller';
-application.register('search', SearchController);
+import ImageErrorController from "./image_error_controller"
+application.register("image-error", ImageErrorController)
 
-import ShareController from './share_controller';
-application.register('share', ShareController);
+import PopoverController from "./popover_controller"
+application.register("popover", PopoverController)
 
-import ThumbnailController from './thumbnail_controller';
-application.register('thumbnail', ThumbnailController);
+import PopperController from "./popper_controller"
+application.register("popper", PopperController)
 
-import ToggleController from './toggle_controller';
-application.register('toggle', ToggleController);
+import ReadMoreController from "./read_more_controller"
+application.register("read-more", ReadMoreController)
 
-import TomSelectController from './tom_select_controller';
-application.register('tom-select', TomSelectController);
+import ReplyController from "./reply_controller"
+application.register("reply", ReplyController)
 
-import TomSelectEditController from './tom_select_edit_controller';
-application.register('tom-select-edit', TomSelectEditController);
+import SearchController from "./search_controller"
+application.register("search", SearchController)
 
-import YoutubeController from './youtube_controller';
-application.register('youtube', YoutubeController);
+import ShareController from "./share_controller"
+application.register("share", ShareController)
+
+import ThumbnailController from "./thumbnail_controller"
+application.register("thumbnail", ThumbnailController)
+
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
+
+import TomSelectController from "./tom_select_controller"
+application.register("tom-select", TomSelectController)
+
+import TomSelectEditController from "./tom_select_edit_controller"
+application.register("tom-select-edit", TomSelectEditController)
+
+import YoutubeController from "./youtube_controller"
+application.register("youtube", YoutubeController)

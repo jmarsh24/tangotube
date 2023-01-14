@@ -25,7 +25,6 @@
 #  role                   :integer
 #
 class User < ApplicationRecord
-  pay_customer
   acts_as_voter
 
   after_initialize :set_default_role, if: :new_record?

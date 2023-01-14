@@ -33,7 +33,7 @@
     "stimulus": "^3.2.1",
     "stimulus-dropdown": "^2.0.0",
     "stimulus-hotkeys": "^1.0.5",
-    "stimulus-use": "^0.41.0",
+    "stimulus-use": "^0.51.2",
     "tom-select": "^2.0.3",
     "youtube-player": "^5.5.2"
   },
