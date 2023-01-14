@@ -1426,14 +1426,7 @@ stimulus-hotkeys@^1.0.5:
     hotkeys-js "^3.8.7"
     stimulus ">= 2.0.0"
 
-stimulus-use@^0.41.0:
-  version "0.41.0"
-  resolved "https://registry.yarnpkg.com/stimulus-use/-/stimulus-use-0.41.0.tgz#afe2559281ebe0504b1d35eb0e8e77df9ebd6fb6"
-  integrity sha512-d+XWb5YN2L9I+4zQDtE1sJVy1DBO+1qgNcjV0XpMw7KXPJ8m8JA5lcJk3qgbxV86ePHko0CP9F3dzVsapQwzmA==
-  dependencies:
-    hotkeys-js ">=3"
-
-stimulus-use@^0.51.1:
+stimulus-use@^0.51.1, stimulus-use@^0.51.2:
   version "0.51.2"
   resolved "https://registry.yarnpkg.com/stimulus-use/-/stimulus-use-0.51.2.tgz#06d993854abb219399657b6e30c64554b2f4c05b"
   integrity sha512-EY+f5X5gmWBmwxyRqAWOzk/JAsp4fawC8LW8jzgq2fUxZQMYlErMvKdo5aeTej18ZY6cWE4aKOdeoHlC7TZ41w==
