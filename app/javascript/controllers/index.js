@@ -58,11 +58,17 @@ application.register("read-more", ReadMoreController)
 import ReplyController from "./reply_controller"
 application.register("reply", ReplyController)
 
+import RevealController from "./reveal_controller"
+application.register("reveal", RevealController)
+
 import SearchController from "./search_controller"
 application.register("search", SearchController)
 
 import ShareController from "./share_controller"
 application.register("share", ShareController)
+
+import TabsController from "./tabs_controller"
+application.register("tabs", TabsController)
 
 import ThumbnailController from "./thumbnail_controller"
 application.register("thumbnail", ThumbnailController)
