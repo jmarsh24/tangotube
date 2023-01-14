@@ -1,7 +1,8 @@
-= turbo_frame_tag "filters" do
-  div class="filters"
-    = render partial: "genre"
-    = render partial: "leader"
-    = render partial: "follower"
-    = render partial: "orchestra"
-    = render partial: "year"
+= cache ["filters", filtering_params, sorting_params, current_user]
+  = turbo_frame_tag "filters" do
+    div class="filters"
+      = render partial: "genre"
+      = render partial: "leader"
+      = render partial: "follower"
+      = render partial: "orchestra"
+      = render partial: "year"

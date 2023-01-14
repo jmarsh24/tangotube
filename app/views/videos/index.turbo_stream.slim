@@ -4,7 +4,7 @@
   - if @pagy.next.present?
     form action="#{pagy_url_for(@pagy, @pagy.next)}" method="post"
       button type="submit" data-controller="autoclick"
-   = t(".loading_spinner")
+    = t(".loading_spinner")
   - else
     span "Displaying #{@pagy.count} Results"
 

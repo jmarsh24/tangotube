@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px 20px;
-    background-color: var(--sl-color-neutral-0);
+    // background-color: var(--sl-color-neutral-0);
   }
 
   @media (max-width: 768px) {
@@ -16,19 +16,5 @@
         grid-template-columns: none;
       }
     }
-  }
-}
-
-.index-container {
-  width: 100%;
-  max-width: 1660px;
-  padding: 0 40px;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-
-  .index-container {
-    padding: 0px;
   }
 }

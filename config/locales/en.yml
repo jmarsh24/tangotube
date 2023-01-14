@@ -43,6 +43,9 @@ en:
         info: Info
         privacy: Privacy
         terms: Terms
+      social_links:
+        about: About
+        contact: Contact
     navbar:
       right:
         Login: Login
@@ -65,6 +68,17 @@ en:
     registrations:
       edit:
         back: Back
+        sign_in: Sign in
+      new:
+        sign_in: Sign in
+    sessions:
+      new:
+        sign_in: Sign in
+    shared:
+      links:
+        forgot_password: Forgot password
+        log_in: Log in
+        sign_in_with_google: Sign in with google
   errors:
     button: Button
     internal_server_error:
@@ -83,6 +97,19 @@ en:
     show:
       delete: Delete
       dropdown_button: Dropdown button
+  filters:
+    filter-sorting:
+      filtering:
+        hd: Hd
+        liked: Liked
+        new_to_you: New to you
+        watched: Watched
+        with_dancer: With dancer
+    filters:
+      clear_all: Clear all
+      deactivate: Deactivate
+      filters: Filters
+      sorting: Sorting
   lighbulb_icon: Lighbulb icon
   loading_spinner: Loading spinner
   orchestras:
@@ -116,6 +143,8 @@ en:
         clear_all: Clear all
         filters: Filters
       loading_spinner: Loading spinner
+      meta_description: Meta description
+      meta_title: Meta title
     show:
       bookmark_link:
         bookmark: Bookmark

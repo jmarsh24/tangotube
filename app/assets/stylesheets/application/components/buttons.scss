@@ -1,0 +1,125 @@
+.button {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 5px;
+  padding: calc(var(--spacing-xxs) - 1px) var(--spacing-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  position: relative;
+
+  &>input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  &--primary {
+    color: #ffffff;
+    background-color: var(--background-primary-100);
+
+    &:hover {
+      background-color: var(--background-primary-100-hover);
+    }
+
+    &:disabled {
+      background-color: var(--background-button-primary-inactive);
+    }
+  }
+
+  &--secondary {
+    background-color: transparent;
+    border-color: var(--background-primary-100);
+    color: var(--background-primary-100);
+
+    &:hover {
+      background-color: var(--background-primary-50);
+    }
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  &--sm {
+    padding: 9px 24px;
+  }
+
+  &--link {
+    background-color: transparent;
+    color: var(--text-link-primary-base);
+    padding: 0px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    text-transform: uppercase;
+
+    &.button--sm {
+      font-size: 14px;
+      line-height: 21px;
+    }
+
+    &:hover {
+      color: var(--background-primary-100-hover);
+    }
+  }
+
+  &--link-secondary {
+    @extend .button--link;
+    color: var(--text-link-secondary-base);
+
+    &:hover {
+      color: darken(#a886f7, 5%);
+    }
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  @include breakpoint-tablet {
+    &--sm {
+      padding: calc(var(--spacing-xs) - 1px) var(--spacing-xl);
+    }
+
+    &--link {
+      padding: 0;
+
+      &.button--tablet-md {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  @each $icon in $icons {
+    &--icon-#{$icon} {
+      display: inline-flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+
+      &::after {
+        @include maskedBackground;
+        content: '';
+        height: 24px;
+        width: 24px;
+        display: block;
+        mask-image: asset-url('icons/#{$icon}.svg');
+      }
+
+      &.button--icon-left {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+}

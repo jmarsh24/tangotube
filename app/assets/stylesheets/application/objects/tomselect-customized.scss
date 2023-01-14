@@ -1,0 +1,98 @@
+.ts-wrapper {
+  background-color: var(--sl-color-neutral-0) !important;
+  border: solid 1px var(--sl-color-gray-300);
+  border-radius: 4px !important;
+}
+
+.plugin-clear_button .clear-button {
+  height: 24px;
+  font-size: 1.5rem;
+}
+
+.plugin-clear_button.focus.has-items .clear-button,
+.plugin-clear_button:not(.disabled).has-items .clear-button {
+  opacity: 1;
+}
+
+.plugin-clear_button.form-select .clear-button,
+.plugin-clear_button.single .clear-button {
+  right: 12px !important;
+}
+
+.ts-control {
+  display: flex;
+  width: 100% !important;
+  height: 38px !important;
+}
+
+.ts-control > input {
+  min-width: unset !important;
+}
+
+.search input {
+  font-size: 12px !important;
+}
+
+.ts-control,
+.ts-control input,
+.ts-dropdown {
+  font-size: 12px !important;
+}
+
+.has-items .ts-control > input {
+  margin: 0 !important;
+}
+
+.ts-wrapper.single .ts-control:after {
+  border-color: var(--sl-color-neutral-1000) transparent transparent !important;
+}
+
+input::placeholder {
+  color: var(--sl-color-neutral-1000);
+}
+
+.ts-dropdown {
+  border: solid 1px var(--sl-color-gray-300) !important;
+  background: var(--sl-color-neutral-100) !important;
+}
+
+.ts-control,
+.ts-control input,
+.ts-dropdown {
+  color: var(--sl-color-gray-800) !important;
+}
+
+.ts-dropdown .active,
+.ts-dropdown .create:hover,
+.ts-dropdown .option:hover {
+  color: var(--sl-color-neutral-1000) !important;
+}
+
+.ts-control {
+  background-color: var(--sl-color-neutral-100) !important;
+  border: solid 1px var(--sl-color-gray-300) !important;
+}
+
+.ts-dropdown.single,
+.ts-wrapper.single .ts-control {
+  border: solid 1px var(--sl-color-gray-300) !important;
+  border-radius: 4px !important;
+}
+
+.ts-control,
+.ts-wrapper.single.input-active .ts-control {
+  background-color: var(--sl-color-neutral-100) !important;
+  background-image: unset !important;
+  box-shadow: unset !important;
+}
+
+.ts-wrapper .option {
+  background-color: var(--sl-color-neutral-100) !important;
+  border-radius: 4px !important;
+}
+
+.ts-dropdown .active,
+.ts-dropdown .create:hover,
+.ts-dropdown .option:hover {
+  background-color: var(--sl-color-red-400);
+}

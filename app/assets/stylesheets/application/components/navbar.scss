@@ -1,0 +1,131 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-navbar);
+  display: flex;
+  justify-content: space-between;
+  background-color: $color-background-menu;
+  padding: 0 var(--spacing-md);
+
+  &__overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-navbar-1);
+  }
+  &__main {
+    position: relative;
+    padding: var(--spacing-md) 0;
+    background-color: white;
+    z-index: var(--z-navbar-2);
+  }
+  &__logo {
+    display: block;
+    height: 16px;
+    width: 149px;
+    img {
+      height: 100%;
+    }
+    &:hover {
+      // background-color: darken(#2d93e7, 5%);
+    }
+  }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__close {
+    display: none;
+    margin-left: auto;
+  }
+
+  &__navigation {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(calc(100% - 16px));
+    width: 100%;
+    background-color: white;
+  }
+
+  &__link-item {
+    &:not(:last-child) {
+      border-bottom: 1px solid #a5a5a5;
+    }
+  }
+
+  &__link {
+    font-size: 20px;
+    line-height: 30px;
+    display: block;
+    padding: 16px 0;
+    text-decoration: none;
+    color: black;
+  }
+
+  &.active {
+    .navbar {
+      &__overlay {
+        display: block;
+        background-color: rgba(black, 0.3);
+      }
+      &__logo {
+        opacity: 0;
+      }
+      &__open {
+        display: none;
+      }
+      &__close,
+      &__navigation {
+        display: block;
+      }
+    }
+  }
+
+  &__desktop-links {
+    display: none;
+    .navbar__links {
+      display: flex;
+      gap: var(--spacing-xl);
+    }
+    .navbar__link {
+      padding: 0px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 700;
+    }
+    .navbar__link-item:not(:last-child) {
+      border-bottom: none;
+    }
+  }
+
+  &--minimal {
+    position: relative;
+    .navbar__top {
+      justify-content: center;
+    }
+  }
+
+  @include breakpoint-tablet {
+    &__logo {
+      height: 40px;
+      width: 187px;
+    }
+  }
+
+  @include breakpoint-desktop {
+    &__main {
+      padding: var(--spacing-lg) 0;
+    }
+    &__open {
+      display: none;
+    }
+    &__desktop-links {
+      display: unset;
+    }
+  }
+}

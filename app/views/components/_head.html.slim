@@ -8,20 +8,18 @@ head
   meta name="theme-color" content="#2D93E7"
   meta name="apple-mobile-web-app-status-bar-style" content="default"
   meta name="apple-mobile-web-app-capable" content="yes"
+  meta name="facebook-domain-verification" content="6cwcjj98isfwgew99e0uokdkw4zzyp"
+
   /SEO
   = favicon_link_tag asset_path('favicon.svg')
 
-    / Security
+  / Security
   = csrf_meta_tags
   = csp_meta_tag
 
   / Assets
   = stylesheet_link_tag "application", "data-turbo-track": "reload"
   = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
-
-  = stylesheet_link_tag "application", "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-  link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.3/css/tom-select.default.min.css"
-  link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/basic.min.css"
 
   = render_meta
 

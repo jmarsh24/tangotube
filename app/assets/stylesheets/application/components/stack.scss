@@ -1,0 +1,150 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+
+  > * {
+    min-width: 0;
+  }
+
+  &--inline {
+    display: inline-flex;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  &--line {
+    flex-direction: row;
+    align-items: center;
+    &.stack--justify-center {
+      justify-content: center;
+    }
+    &.stack--justify-right {
+      justify-content: flex-end;
+    }
+  }
+
+  &--justify-left {
+    align-items: center;
+  }
+
+  &--justify-center {
+    align-items: center;
+  }
+
+  &--justify-right {
+    align-items: flex-end;
+  }
+
+  &--justify-space-between {
+    justify-content: space-between;
+  }
+
+  &--justify-space-around {
+    justify-content: space-around;
+  }
+
+  &--align-top {
+    align-items: flex-start;
+  }
+
+  &--align-stretch {
+    align-items: stretch;
+  }
+
+  &--align-bottom {
+    align-items: flex-end;
+  }
+
+  &--zero {
+    gap: 0;
+  }
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  @each $size-name, $size-value in $sizes {
+    &--#{$size-name} {
+      gap: var(--spacing-#{$size-name});
+    }
+  }
+
+  @include breakpoint-tablet {
+    @each $size-name, $size-value in $sizes {
+      &--tablet-#{$size-name} {
+        gap: var(--spacing-#{$size-name});
+      }
+    }
+    &--tablet-line {
+      flex-direction: row;
+      align-items: center;
+      &.stack--justify-center {
+        justify-content: center;
+      }
+      &.stack--align-top {
+        align-items: flex-start;
+      }
+      &.stack--align-stretch {
+        align-items: stretch;
+      }
+    }
+    &--line,
+    &--tablet-line {
+      &.stack--tablet-justify-left {
+        justify-content: flex-start;
+      }
+      &.stack--tablet-justify-right {
+        justify-content: flex-end;
+      }
+      &.stack--tablet-justify-center {
+        justify-content: center;
+      }
+      &.stack--tablet-reverse {
+        flex-direction: row-reverse;
+      }
+    }
+    &--tablet-justify-center {
+      align-items: center;
+    }
+    &--tablet-inline {
+      display: inline-flex;
+      width: auto;
+      flex-shrink: 0;
+    }
+  }
+  @include breakpoint-desktop {
+    @each $size-name, $size-value in $sizes {
+      &--desktop-#{$size-name} {
+        gap: var(--spacing-#{$size-name});
+      }
+    }
+    &--desktop-reverse {
+      flex-direction: row-reverse;
+      &.stack--desktop-justify-left {
+        justify-content: flex-end;
+      }
+    }
+    &--desktop-line {
+      flex-direction: row;
+      align-items: center;
+      &.stack--desktop-align-top {
+        align-items: flex-start;
+      }
+    }
+    &--line,
+    &--tablet-line {
+      &.stack--desktop-justify-right {
+        justify-content: flex-end;
+      }
+    }
+    &--desktop-justify-left {
+      align-items: flex-start;
+    }
+  }
+}

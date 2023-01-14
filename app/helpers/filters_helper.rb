@@ -19,4 +19,8 @@ module FiltersHelper
       :dancer
     ).to_h.flatten.join("_")
   end
+
+  def sorting_params
+    params.permit(:direction, :sort).to_h.flatten.join("_")
+  end
 end

@@ -1,0 +1,31 @@
+.tag {
+  display: inline-block;
+  border-radius: 3px;
+  padding: .2em .5em .3em;
+  border-radius: 3px;
+  background: red;
+  color: white;
+  font-weight: 600;
+  margin: .25em .1em;
+}
+
+h1.tag {
+  margin-left: 0;
+  margin-right: 0
+}
+
+.tag-sm {
+  font-size: .7em;
+  display: inline-block;
+  letter-spacing: .15ch;
+  font-weight: 400
+}
+
+.tag-lg {
+  font-size: 1.2em;
+  border-radius: 4px
+}
+
+.tag-bg {
+  background: var(--background)
+}
