@@ -13,10 +13,9 @@ $sizes: (
   'mega-2': 96px,
 );
 
-$icons: 'burger', 'close', 'heart', 'clock', 'thumbs-up', 'star', 'check',
-  'star-filled', 'minus', 'plus', 'pinterest', 'facebook', 'youtube', 'text',
-  'image', 'file-upload', 'arrow', 'edit', 'whatsapp', 'share', 'download',
-  'diamond', 'arrow-left', 'payment';
+$icons: 'arrow', 'burger', 'check', 'clock', 'close', 'edit', 'facebook', 'google', 'heart',
+  'image', 'minus', 'payment', 'play', 'plus', 'start-filled', 'star',
+  'text', 'thumbs-up', 'youtube';
 
 // Breakpoints
 @mixin breakpoint-tablet {
@@ -57,8 +56,8 @@ $icons: 'burger', 'close', 'heart', 'clock', 'thumbs-up', 'star', 'check',
   }
 
   --background-primary-50: #fff1fb;
-  --background-primary-100: #f057c1;
-  --background-primary-100-hover: #dd38aa;
+  --background-primary-100: #bababa;
+  --background-primary-100-hover: #9f9f9f;
   --background-secondary-50: #f6f3fe;
   --background-secondary-100: #a886f7;
   --background-tertiary-100: #7bc1fd;
@@ -90,11 +89,6 @@ $icons: 'burger', 'close', 'heart', 'clock', 'thumbs-up', 'star', 'check',
   --text-button-secondary-hover: var(--background-secondary-100);
   --background-icon-success-base: #18c371;
 
-  --z-index-video-overlay: 1;
-
-  --z-index-navbar-1: 2;
-  --z-index-navbar-2: 3;
-
   --border-radius-input: 30px;
   --border-radius-input-sm: 16px;
   --border-radius-card: 20px;
@@ -110,6 +104,15 @@ $icons: 'burger', 'close', 'heart', 'clock', 'thumbs-up', 'star', 'check',
   --z-nav: 900;
   --z-modal: 1000;
   --z-modal-close: 1001;
+  --z-menu: 50;
+  --z-dropdown: 1000;
+  --z-navbar: 1002;
+  --z-navbar-1: 0;
+  --z-navbar-1: 2;
+  --z-navbar-2: 3;
+  --z-navbar-3: 4;
+  --z-drawer: 1001;
+  --z-index-video-overlay: 1;
 
   --navbar-height: 80px;
 
@@ -124,4 +127,10 @@ $icons: 'burger', 'close', 'heart', 'clock', 'thumbs-up', 'star', 'check',
     --container-gap: 64px;
     --navbar-height: 120px;
   }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-label-primary-base);
+  position: relative;
 }

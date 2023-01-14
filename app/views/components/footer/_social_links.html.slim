@@ -1,7 +1,7 @@
 ul.social-links.stack.stack--xxs.stack--line
   li
-    = link_to "https://www.facebook.com/tangotubetv/", class: 'social-link', target: "_blank", "aria-label": "Facebook"
-      .icon.icon--facebook
+    = link_to t(".contact"), contact_path, class: 'action-footer-link'
   li
-    = link_to "https://www.patreon.com/tangotube", class: 'social-link', target: "_blank", "aria-label": "Patreon"
-      .icon.icon--patreon
+    = link_to t(".about"), about_path, class: 'action-footer-link'
+  li
+    = link_to "Support The Project", "https://www.patreon.com/tangotube", class: 'social-link', target: "_blank", "aria-label": "Patreon"

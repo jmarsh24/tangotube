@@ -1,43 +1,3 @@
-@font-face {
-  font-family: 'Poppins';
-  src: asset-url('Poppins-Regular.woff2');
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: asset-url('Poppins-SemiBold.woff2');
-  font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: asset-url('Poppins-Bold.woff2');
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: asset-url('Inter-Regular.woff2');
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: asset-url('Inter-Bold.woff2');
-  font-weight: 700;
-  font-display: swap;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  color: var(--text-label-primary-base);
-}
-
 $primary-color: #ffffff;
 $secondary-color: #f9f9f9;
 
@@ -97,3 +57,39 @@ $video-info-details-value: var(--sl-color-gray-800);
 
 $ss-search-background: #f9f9f9;
 $ss-search-background-focus: #5897fb;
+
+$color-border: #e9e9e9;
+
+$z-menu: 99;
+$z-footer: 99;
+$z-performance_number: 99;
+$size-navbar: 56px;
+
+// colors
+$color-tint: #e73420;
+
+$color-text: #232323;
+$color-text-muted: #c5c5c5;
+$color-text-label: #9d9d9d;
+
+$color-background: white;
+$color-background-context: #232323;
+$color-background-menu: #f2f2f2;
+$color-background-tabs: #f9f9f9;
+$color-bar: #7f8c8d;
+$color-border: #e9e9e9;
+$color-error: #e74c3c;
+
+$tag-color: white;
+$tag-bg: #454e56;
+
+// sizes
+$size-text: 16px;
+$size-navbar: 60px;
+$size-text-label: 0.75em;
+
+// breakpoints
+$tablet: 740px;
+$desktop: 1000px;
+$widescreen: 1180px;
+

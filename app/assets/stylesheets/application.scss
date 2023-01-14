@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require tom-select/dist/css/tom-select.min.css
  *= require_self
  */
 
@@ -18,42 +19,7 @@
 @import './application/reset';
 @import './application/base';
 @import './application/variables';
-// @import './application/components/**/*';
-// @import './application/modals/**/*';
+@import './application/components/**/*';
+@import './application/modals/**/*';
 @import './application/objects/**/*';
 @import './application/views/**/*';
-
-body {
-  background-color: var(--sl-color-neutral-0);
-  color: var(--sl-color-gray-800);
-  font-family: Roboto, Arial, Helvetica, sans-serif;
-  padding-bottom: 48px;
-
-  @media (max-width: 768px) {
-    padding-bottom: 0px;
-  }
-}
-
-.isHidden {
-  display: none !important;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.isActive {
-  font-weight: bold !important;
-}
-
-.row {
-  display: flex;
-}
-
-:not(:defined) {
-  visibility: hidden;
-}
-
-:defined {
-  opacity: 1;
-}

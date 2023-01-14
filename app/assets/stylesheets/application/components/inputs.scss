@@ -1,0 +1,490 @@
+@keyframes shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+$size-icon: 16px;
+
+.input {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 16px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &__description {
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1;
+    color: $color-text-label;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__error {
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1;
+    color: $color-error;
+  }
+
+  &__error,
+  &__description {
+    &:last-child {
+      margin-bottom: -8px;
+    }
+  }
+
+  &__inline-submit {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    display: block !important;
+    width: auto !important;
+    padding: 5px !important;
+    border: none !important;
+    border-radius: 50%;
+  }
+
+  +h3 {
+    margin-top: 40px;
+  }
+
+  &--inline {
+    .input__inputs {
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-start;
+
+      >.input {
+        width: auto;
+
+        +.input {
+          margin-left: 2em;
+        }
+      }
+    }
+  }
+
+  &--textarea {
+    >textarea {
+      resize: vertical;
+    }
+  }
+}
+
+.input--no-label {
+  >label {
+    display: none;
+  }
+}
+
+.input--error {
+  >label {
+    color: $color-error !important;
+  }
+
+  >input,
+  >select,
+  >textarea {
+    border-color: $color-error !important;
+  }
+
+  animation: shake 1s;
+}
+
+.input__icon~label,
+.input--date>label,
+.input--time>label,
+.input--datetime>label {
+  left: 30px !important;
+}
+
+.input__icon~input,
+.input--date>input,
+.input--time>input,
+.input--datetime>input {
+  width: calc(100% - 30px) !important;
+  margin-left: 30px;
+}
+
+.input--checkbox {
+  display: flex;
+  align-items: baseline;
+  padding: 16px 0;
+
+  >input {
+    position: relative;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    margin-right: 1ex;
+    border: 2px solid $color-text-label;
+    border-radius: 3px;
+    outline: none;
+    appearance: none;
+
+    &:focus {
+      border-color: $color-tint;
+    }
+
+    &:checked::after {
+      position: absolute;
+      display: block;
+      width: 18px;
+      height: 18px;
+      margin-top: -4px;
+      background-image: asset-url("icons/checkbox.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: "";
+    }
+  }
+}
+
+.input--checkbox-collection {
+  >label {
+    position: absolute;
+    top: 0;
+    font-size: 12px;
+    line-height: 1;
+    color: $color-text-label;
+  }
+}
+
+.input--radio {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+
+  >input {
+    width: 16px;
+    height: 16px;
+    border: 2px solid $color-text-label;
+    border-radius: 50%;
+    outline: none;
+    appearance: none;
+
+    &:focus {
+      border-color: $color-tint;
+    }
+
+    &:checked::after {
+      position: absolute;
+      display: block;
+      width: 18px;
+      height: 18px;
+      margin-top: -4px;
+      background-image: asset-url("icons/checkbox.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: "";
+    }
+  }
+
+  >label {
+    margin-left: 12px;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  +.input--radio {
+    margin-top: -24px;
+  }
+
+  &-collection {
+    padding-top: 1em;
+
+    >label {
+      position: absolute;
+      top: 0;
+      font-size: 12px;
+      line-height: 1;
+      color: $color-text-label;
+    }
+  }
+}
+
+.input--select {
+  &::after {
+    position: absolute;
+    top: 24px;
+    right: 0;
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-image: asset-url("icons/dropdown.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: "";
+  }
+
+  >select {
+    display: block;
+    width: 100%;
+    padding: 20px 0 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $color-border;
+    border-radius: 0;
+    outline: none;
+    transition: border-bottom-color 0.4s;
+    appearance: none;
+
+    &:focus {
+      border-bottom-color: $color-tint;
+
+      ~label {
+        color: $color-tint;
+      }
+    }
+  }
+
+  >label {
+    position: absolute;
+    top: 0;
+    font-size: 12px;
+    line-height: 1;
+    color: $color-text-label;
+  }
+}
+
+.input--placeholder {
+
+  >input,
+  textarea {
+    ~label {
+      top: 0;
+      font-size: 12px;
+      cursor: inherit;
+    }
+  }
+}
+
+.input--text,
+.input--textarea,
+.input--date,
+.input--time,
+.input--datetime,
+.input--email {
+
+  >input,
+  textarea {
+    display: inline-block;
+    width: 100%;
+    min-width: 1em;
+    padding: 20px 0 8px;
+    color: $color-text;
+    border: none;
+    border-bottom: 1px solid $color-border;
+    outline: none;
+    box-shadow: 0 0 0 50px #fff inset; // hack to overdraw the yellow background color of autofilled values (setting the background color doesn't work)
+    transition: border-bottom-color 0.4s;
+    appearance: none;
+
+    &:not(:required)+label::after {
+      content: " (optional)";
+    }
+
+    &:disabled {
+      color: $color-text-muted;
+    }
+
+    &.has-content~label {
+      transition: none;
+    }
+
+    &.has-content,
+    &:focus {
+      ~label {
+        top: 0;
+        font-size: 12px;
+        cursor: inherit;
+      }
+    }
+
+    &:focus {
+      border-bottom-color: $color-tint;
+
+      ~label {
+        color: $color-tint;
+      }
+    }
+  }
+
+  textarea {
+    line-height: 1.3;
+  }
+
+  >label {
+    position: absolute;
+    top: 22px;
+    left: 0;
+    font-size: 13px;
+    line-height: 1;
+    color: $color-text-label;
+    cursor: text;
+
+    transition: all 0.4s;
+  }
+
+  &.input--no-label {
+    >input {
+      padding: 8px 0;
+    }
+  }
+}
+
+.input--file {
+  height: 48px;
+  overflow: hidden;
+  border-bottom: 1px solid $color-border;
+
+  >label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    line-height: 1;
+    color: $color-text-label;
+  }
+
+  >input {
+    position: absolute;
+    margin: 20px 0 8px;
+    outline: none;
+
+    transition: top 0.5s;
+
+    &:focus {
+      ~label {
+        color: $color-tint;
+      }
+    }
+  }
+
+  >input[type="checkbox"] {
+    left: -20px;
+
+    &:checked {
+      ~.input-preview {
+        top: 48px;
+      }
+
+      ~input {
+        top: 0;
+      }
+    }
+  }
+
+  .input__preview {
+    position: absolute;
+    top: 0;
+    margin: 20px 0 8px;
+    font-weight: 600;
+    color: $color-tint;
+    transition: top 0.5s;
+
+    &::after {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-top: -2px;
+      margin-left: 10px;
+      vertical-align: middle;
+      background-image: asset-url("icons/download.svg");
+      background-size: contain;
+      content: "";
+    }
+
+    ~input {
+      top: 48px;
+    }
+  }
+
+  .input__remove {
+    position: absolute;
+    top: 24px;
+    right: 0;
+    left: auto;
+    width: 16px;
+    height: 16px;
+    background-image: asset-url("icons/minus.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+
+.input--image {
+  .input__preview {
+    top: 0;
+    right: 0;
+    height: 100%;
+    margin: 0;
+  }
+}
+
+.input--date,
+.input--time,
+.input--datetime {
+  &::before {
+    position: absolute;
+    top: 22px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-image: asset-url("icons/calendar.svg");
+    background-size: contain;
+    content: "";
+  }
+}
+
+.input--time::before {
+  background-image: asset-url("icons/time.svg");
+}
+
+.input--right {
+  input {
+    text-align: right;
+  }
+
+  &.input--checkbox {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

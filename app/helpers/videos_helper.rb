@@ -22,13 +22,15 @@ module VideosHelper
   def link_to_query(external_song_attributes)
     link_to external_song_attributes,
       root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
-      {"data-turbo-frame": "_top"}
+      "data-turbo-frame": "_top",
+      class: "tag tag-sm"
   end
 
   def link_to_song_slug(song_attributes, video)
     link_to song_attributes,
       root_path(song: video.song.slug),
-      {"data-turbo-frame": "_top"}
+      "data-turbo-frame": "_top",
+      class: "tag tag-sm"
   end
 
   def link_to_song(el_recodo_attributes, external_song_attributes, video)
@@ -85,18 +87,19 @@ module VideosHelper
   def sortable(column, direction, title = "", sort_column, sort_direction)
     title ||= column.titleize
     (column == sort_column) ? "current #{sort_direction}" : nil
-
-    button_tag({type:  "button",
-                 data:  {controller: "filter",
-                         action: "filter#filter",
-                         "filter-sort-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : column,
-                         "filter-direction-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : direction},
-                 class: "videos-sortable-button"}) do
-      if button_active?(column, direction, sort_column, sort_direction)
-        concat content_tag(:b, title.to_s)
-        concat fa_icon("times", class: "videos-sortable-icon")
-      else
-        title
+    content_tag :div, class: "dropdown__menu__item" do
+      button_tag({type:  "button",
+                  data:  {controller: "filter",
+                          action: "filter#filter",
+                          "filter-sort-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : column,
+                          "filter-direction-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : direction},
+                  class: "videos-sortable-button"}) do
+        if button_active?(column, direction, sort_column, sort_direction)
+          concat content_tag(:b, title.to_s)
+          concat fa_icon("times", class: "videos-sortable-icon")
+        else
+          title
+        end
       end
     end
   end

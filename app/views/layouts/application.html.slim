@@ -1,9 +1,9 @@
 doctype html
-html lang=I18n.locale class="sl-theme-dark"
+html lang=I18n.locale class="theme-dark"
   = render "components/head"
-  body class=Rails.env
+  body class=Rails.env data-controller="reveal" data-reveal-hidden-class="closed"
     = render "components/navbar"
-    = render "components/sidebar"
+    = render "components/drawer"
     = yield
     = render "components/footer"
     = render "components/cookie_consent"

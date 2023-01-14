@@ -1,0 +1,42 @@
+.personalization-request {
+  @extend .caption;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0px 2px 12px -1px rgba(20, 26, 48, 0.16);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  padding: var(--spacing-md) 0;
+  z-index: var(--z-nav);
+
+  &__content {
+    @include breakpoint-tablet {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__text {
+    @include breakpoint-tablet {
+      margin-bottom: 0;
+      margin-right: 40px;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  p+p {
+    margin-top: 12px;
+  }
+
+  .heading {
+    margin-bottom: 20px;
+  }
+
+  @include breakpoint-tablet {
+    padding: 24px 0 32px;
+  }
+}

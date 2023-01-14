@@ -1,0 +1,31 @@
+.drawer.closed data-reveal-target="item"
+  = link_to root_path do
+    .drawer__item class=(current_page?(root_path, check_parameters: true) ? "checked" : "")
+      = fa_icon("home")
+      span Home
+  = link_to clips_path do
+    .drawer__item class=(current_page?(clips_path) ? "checked" : "")
+      = fa_icon("scissors")
+      span Clips
+  - if user_signed_in?
+    = link_to root_path(watched: false) do
+      .drawer__item class=(current_page?(root_path(watched: false)) ? "checked" : "")
+        = fa_icon("compass")
+        span Explore
+    = link_to root_path(watched: true) do
+      .drawer__item class=(current_page?(root_path(watched: true)) ? "checked" : "")
+        = fa_icon("clock")
+        span History
+    = link_to root_path(liked: true) do
+      .drawer__item class=(current_page?(root_path(liked: true)) ? "checked" : "")
+        = fa_icon("thumbs-up")
+        span Liked Videos
+  - else
+    = link_to new_user_session_path do
+      .drawer__item
+        span Login
+    = link_to new_user_registration_path do
+      .drawer__item
+        span Sign Up
+
+
