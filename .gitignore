@@ -36,5 +36,3 @@ node_modules
 .byebug_history
 /doc
 
-# Ignore shoelace assets
-/public/shoelace-assets/*
