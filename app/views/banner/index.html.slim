@@ -8,7 +8,7 @@
           h2 Explore Tango History
           h2 Learn the Lyrics & Orchestras
           h2 Watch Without Ads
-          = button_to t(".try_it_now"), new_user_registration_path, class: "button button--primary"
+          = link_to t(".try_it_now"), new_user_registration_path, class: "button button--primary"
           = button_to banner_path(banner_closed: true), class: "banner__close" do
             .icon.icon--close.icon--xl
 
