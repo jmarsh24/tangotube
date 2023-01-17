@@ -1,7 +1,5 @@
-.search data-controller="combobox"
-  = form_with url: root_path, method: :get, class: "searchBarContainer", id: id, data: { controller: "form", "form-url": search_search_suggestions_path, action: "invalid->form#hideValidationMessage:capture" } do |f|
-    = f.search_field :query, class: "searchBar", value: params[:query], placeholder: "Search #{number_with_delimiter(@videos_total)} videos...", autocomplete: "off", spellcheck: "false", required: true, data: { action: "focus->combobox#start input->form#submit", "combobox-target": "input", "form-target": "input" }
-    = f.button type: "submit" do
-      .icon.icon--magnifying-glass
-
-  = render "components/navbar/search/autocomplete", id: id
+= form_with url: root_path, method: :get, class: "navbar__search-form searchBarContainer", id: id, data: { controller: "form combobox", "form-url": search_search_suggestions_path, action: "invalid->form#hideValidationMessage:capture" } do |f|
+  = f.search_field :query, class: "input input--input searchBar", value: params[:query], placeholder: t(".search.placeholder", total_videos_count: number_with_delimiter(@videos_total)), autocomplete: "off", spellcheck: "false", required: true, data: { action: "focus->combobox#start input->form#submit", "combobox-target": "input", "form-target": "input" }
+  = f.button type: "submit", class: "button button--primary" do
+    .icon.icon--magnifying-glass
+= render "components/navbar/search/autocomplete", id: id

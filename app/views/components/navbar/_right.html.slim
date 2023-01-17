@@ -9,7 +9,7 @@
       .dropdown data-controller="dropdown"
         button label="user_avatar" data-action="dropdown#toggle click@window->dropdown#hide"
           = image_tag avatar_url_for(current_user), class: "avatar"
-        .dropdown__menu.hidden data-dropdown-target="menu"
+        .dropdown__menu.dropdown__menu--right.hidden data-dropdown-target="menu"
           - if user_signed_in?
             = link_to edit_user_registration_path do
                 .dropdown__menu__item Edit Profile

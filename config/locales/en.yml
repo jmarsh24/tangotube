@@ -48,6 +48,9 @@ en:
         Login: Login
         login_button: Login button
         sign_up_button: Sign up button
+      search:
+        search:
+          placeholder: Placeholder
   couples:
     show:
       delete: Delete
@@ -117,6 +120,8 @@ en:
   performances:
     index:
       loading_spinner: Loading spinner
+  search:
+    placeholder: Placeholder
   videos:
     index:
       loading_spinner: Loading spinner
