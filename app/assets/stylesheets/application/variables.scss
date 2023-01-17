@@ -55,11 +55,11 @@ $icons: 'arrow', 'burger', 'check', 'clock', 'close', 'edit', 'facebook', 'googl
     --spacing-#{$size-name}: #{$size-value};
   }
 
-  --background-primary-50: #fff1fb;
-  --background-primary-100: #bababa;
-  --background-primary-100-hover: #9f9f9f;
-  --background-secondary-50: #f6f3fe;
-  --background-secondary-100: #a886f7;
+  --background-primary-50: rgb(249, 51, 45);
+  --background-primary-100: rgb(229, 45, 39);
+  --background-primary-100-hover: rgb(249, 51, 45);
+  --background-secondary-50: rgb(161, 161, 170);;
+  --background-secondary-100: rgb(244, 244, 245);
   --background-tertiary-100: #7bc1fd;
   --background-tertiary-150: #2d93e7;
   --background-neutral-100: #ffffff;
