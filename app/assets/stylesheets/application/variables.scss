@@ -13,9 +13,16 @@ $sizes: (
   'mega-2': 96px,
 );
 
-$icons: 'arrow', 'burger', 'check', 'clock', 'close', 'edit', 'facebook', 'google', 'heart',
-  'image', 'minus', 'payment', 'play', 'plus', 'start-filled', 'star',
-  'text', 'thumbs-up', 'youtube';
+$icons: 'arrow-down', 'arrow-up',
+        'bookmark-fill', 'bookmark', 'burger',
+        'clock-fill', 'clock', 'close',
+        'facebook', 'google', 'heart-fill',
+        'heart', 'house-fill', 'magnifying-glass',
+        'scissors-circle-fill', 'scissors-circle',
+        'scissors', 'star-filled', 'star',
+        'sun-max-full', 'sun-max', 'square-and-arrow-up',
+        'thumbs-down-fill', 'thumbs-down', 'thumbs-up-fill',
+        'thumbs-up';
 
 // Breakpoints
 @mixin breakpoint-tablet {

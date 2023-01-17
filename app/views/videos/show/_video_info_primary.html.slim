@@ -16,24 +16,22 @@
   .share-container data-controller="clipboard" data-clipboard-success-content="Copied!" data-clipboard-video-id="#{@video.youtube_id}" data-clipboard-root-url="#{@root_url}"
     .youtube-controls
       = render "videos/show/vote"
-      div
-        div slot="trigger" class="button--clip"
-          = t(".scissors")
-          span
-            = t(".clip")
+        button class="button button--seconday"
+          .icon.icon--scissors
+          span = t(".clip")
         = turbo_frame_tag "new_clip" do
           = render partial: "clips/form", locals: { clip: Clip.new, start_seconds: params[:start], end_seconds: params[:end], playback_rate: params[:speed] }
     .copy-to-clipboard
       = text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}",
                               readonly: "readonly",
-                                class: "copy-to-clipboard__field",
-                                data: { "clipboard-target": "source" }
+                              class: "input input--input",
+                              data: { "clipboard-target": "source" }
       = button_tag type: "button",
                         name: "button",
-                        class: "copy-to-clipboard__button button",
+                        class: "button button--secondary",
                         data: { "clipboard-target": "button",
                         action: "click->clipboard#copy"} do
-        = t(".share_icon")
-        = t(".share")
+        .icon.icon--thumbs-up
+        = t(".share_button")
 
 

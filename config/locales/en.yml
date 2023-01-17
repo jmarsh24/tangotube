@@ -14,6 +14,8 @@ en:
       back_to_clips: Back to clips
       destroy: Destroy
       show_this_clip: Show this clip
+    form:
+      clips_input_placeholder: Clips input placeholder
     index:
       loading_spinner: Loading spinner
   components:
@@ -44,6 +46,8 @@ en:
     navbar:
       right:
         Login: Login
+        login_button: Login button
+        sign_up_button: Sign up button
   couples:
     show:
       delete: Delete
@@ -127,6 +131,8 @@ en:
       downvote_link:
         dislike: Dislike
         disliked: Disliked
+      featured_link:
+        ":": ":"
       lyrics:
         english: English
         spanish: Spanish
@@ -139,6 +145,7 @@ en:
         clip: Clip
         scissors: Scissors
         share: Share
+        share_button: Share button
         share_icon: Share icon
       watchlist_link:
         watch: Watch
