@@ -3,9 +3,9 @@
     = content_tag :div, id: "upvote-#{video.youtube_id}" do
       = button_to upvote_video_path(video.youtube_id), method: :patch do
         - if current_user&.voted_down_on? video, vote_scope: 'like'
-          = t(".like")
+          .icon.icon--thumbs-up
         - else
-          = t(".liked")
+          .icon.icon--thumbs-up-fill
         span Like
   #tooltip.tooltip role="tooltip" data-popper-target="tooltip"
     = "Like this video?"

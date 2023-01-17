@@ -3,12 +3,10 @@
     = content_tag :div, id: "watchlist-#{video.youtube_id}" do
       = button_to watchlist_video_path(video.youtube_id), method: :patch do
         - if current_user&.voted_down_on? video, vote_scope: 'watch'
-          = t(".watch")
+          .icon.icon--clock
         - else
-          = t(".watched")
-        span
-          = image_tag "icons/clock.svg"
-          = t(".watch_later")
+          .icon.icon--clock-fill
+        span = t(".watch_later")
   #tooltip.tooltip role="tooltip" data-popper-target="tooltip"
     = "Want to watch this video later?"
     br
