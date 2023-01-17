@@ -1,11 +1,11 @@
 .drawer.closed data-reveal-target="item"
   = link_to root_path do
     .drawer__item class=(current_page?(root_path, check_parameters: true) ? "checked" : "")
-      = fa_icon("home")
+      .icon.icon--house-fill
       span Home
   = link_to clips_path do
     .drawer__item class=(current_page?(clips_path) ? "checked" : "")
-      = fa_icon("scissors")
+      .icon.icon--scissors
       span Clips
   - if user_signed_in?
     = link_to root_path(watched: false) do
