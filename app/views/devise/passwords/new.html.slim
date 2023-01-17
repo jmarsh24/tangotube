@@ -2,8 +2,9 @@
   h4 Forgot your password?
   p We will send you an email with link to reset your password.
   = form_for resource, as: resource_name, url: password_path(resource_name), data: { turbo: false }  do |f|
-    = render "devise/shared/error_messages", resource: resource
-    = f.input :email, as: :email, autofocus: true, class: "input input--text"
-    = f.submit "Send", class: "primary-button"
+    .stack.stack--xs.stack--tablet-xs
+      = render "devise/shared/error_messages", resource: resource
+      = f.input :email, as: :email, autofocus: true, class: "input input--text"
+      = f.submit "Send", class: "primary-button"
 
 
