@@ -1,6 +1,6 @@
 .cookies-modal {
   position: fixed;
-  z-index: 2;
+  z-index: var(--cookies-modal);
   left: 0;
   right: 0;
   bottom: 48px;

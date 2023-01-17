@@ -3,6 +3,7 @@
   bottom: 0;
   background: black;
   width: 100%;
+  z-index: var(--z-footer);
 
   @include breakpoint-tablet {
     // padding-top: var(--spacing-xl);
