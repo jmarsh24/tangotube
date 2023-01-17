@@ -1,10 +1,9 @@
-p
+.stack.stack--xs.stack--tablet-xs
   - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-    small.link = link_to t(".forgot_password"), new_password_path(resource_name)
+    link = link_to t(".forgot_password"), new_password_path(resource_name), class: "link"
   - if controller_name != 'sessions'
-    small.link = link_to t(".log_in"), new_session_path(resource_name)
-  = button_to user_google_oauth2_omniauth_authorize_path, class:"button button--block button--primary", "data-turbo": false, data: { disable_with: "Connecting..." } do
-    .icon.icon--google.icon--xl
+    link = link_to t(".log_in"), new_session_path(resource_name), class: "link"
+  = button_to user_google_oauth2_omniauth_authorize_path, class:"button button--block button--primary button--icon-google button--icon-left", "data-turbo": false, data: { disable_with: "Connecting..." } do
     = t(".sign_in_with_google")
 
 
