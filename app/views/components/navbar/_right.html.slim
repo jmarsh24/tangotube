@@ -22,8 +22,8 @@
                 .dropdown__menu__item Sign Up
   #desktop-login.login
     - if !user_signed_in?
-      = link_to t(".Login"), new_user_session_path
-      = link_to t(".Sign Up"), new_user_session_path
+      = link_to t(".Login"), new_user_session_path, class: "button button--secondary"
+      = link_to t(".Sign Up"), new_user_session_path, class: "button button--primary"
     - if user_signed_in?
       #dropdown-avatar
         .dropdown data-controller="dropdown"
@@ -36,7 +36,7 @@
               = link_to destroy_user_session_path do
                   .dropdown__menu__item Sign Out
             - else
-              = link_to new_user_session_path do
-                  .button.button--primary Login
-              = link_to edit_user_registration_path do
-                  .button.button--primary Sign Up
+              = link_to new_user_session_path, class: "button button--primary" do
+                = t(".login_button")
+              = link_to edit_user_registration_path, class: "button button--primary" do
+                = t(".sign_up_button")

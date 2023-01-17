@@ -1,13 +1,13 @@
 .filter-bar
   .dropdown data-controller="dropdown"
-    button data-action="dropdown#toggle click@window->dropdown#hide" class="button button--primary" id="button-filter" class=(filtering_params.present? ? "active" : "")
+    button data-action="dropdown#toggle click@window->dropdown#hide" class="button button--secondary" id="button-filter" class=(filtering_params.present? ? "active" : "")
       = t(".filters")
     .dropdown__menu.hidden data-dropdown-target="menu"
       #mobile-filters
         = turbo_frame_tag :filters, src: filters_videos_path(filtering_params)
       = render partial: "filters/filter-sorting/filtering"
   .dropdown data-controller="dropdown"
-    button data-action="dropdown#toggle click@window->dropdown#hide" id="button-sorting" class="button button--primary" class=(sorting_params.present? ? "active" : "")
+    button data-action="dropdown#toggle click@window->dropdown#hide" id="button-sorting" class="button button--secondary" class=(sorting_params.present? ? "active" : "")
       = t(".sorting")
     .dropdown__menu.hidden data-dropdown-target="menu"
       = render partial: "filters/filter-sorting/sorting"
