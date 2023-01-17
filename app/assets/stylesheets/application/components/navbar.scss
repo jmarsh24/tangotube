@@ -7,6 +7,10 @@
   background-color: $color-background-menu;
   padding: 0 var(--spacing-md);
 
+  &__search-form {
+    display: flex;
+  }
+
   &__overlay {
     display: none;
     position: fixed;
