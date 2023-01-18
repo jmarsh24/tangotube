@@ -18,9 +18,9 @@ $icons: 'arrow-down', 'arrow-up',
         'clock-fill', 'clock', 'close',
         'facebook', 'google', 'heart-fill',
         'heart', 'house-fill', 'magnifying-glass',
-        'scissors-circle-fill', 'scissors-circle',
-        'scissors', 'star-filled', 'star',
-        'sun-max-full', 'sun-max', 'square-and-arrow-up',
+        'safari', 'safari-fill','scissors-circle-fill',
+        'scissors-circle', 'scissors', 'star-filled',
+        'star','sun-max-full', 'sun-max', 'square-and-arrow-up',
         'thumbs-down-fill', 'thumbs-down', 'thumbs-up-fill',
         'thumbs-up';
 
@@ -65,14 +65,14 @@ $icons: 'arrow-down', 'arrow-up',
   --background-primary-50: rgb(249, 51, 45);
   --background-primary-100: rgb(229, 45, 39);
   --background-primary-100-hover: rgb(249, 51, 45);
-  --background-secondary-50: rgb(161, 161, 170);;
+  --background-secondary-50: rgb(161, 161, 170);
   --background-secondary-100: rgb(244, 244, 245);
   --background-tertiary-100: #7bc1fd;
   --background-tertiary-150: #2d93e7;
   --background-neutral-100: #ffffff;
   --background-neutral-150: #fcfcfc;
   --background-neutral-200: #cfcfcf;
-  --background-neutral-250: #a5a5a5;
+  --background-neutral-250: rgb(52, 53, 57);;
   --background-button-primary-base: var(--background-primary-100);
   --background-button-primary-inactive: #f4e1ed;
   --background-button-border-primary: var(--background-secondary-100);
@@ -85,19 +85,19 @@ $icons: 'arrow-down', 'arrow-up',
   --background-icon-social-primary: #43d954;
   --background-icon-social-secondary: #2d93e7;
   --background-icon-action-base: #a882fa;
-  --background-input-border-primary-default: #dcd8e7;
+  --background-input-border-primary-default: #979797;
   --container-gap: 16px;
   --text-input-primary-base: var(--background-neutral-250);
   --text-label-primary-base: #343539;
   --text-link-primary-base: var(--background-primary-100);
-  --text-label-secondary-weak: #ffffff;
+  --text-label-secondary-weak: var(--background-neutral-150);
   --text-label-tertiary-base: var(--background-neutral-250);
   --text-link-secondary-base: var(--background-secondary-100);
   --text-button-secondary-hover: var(--background-secondary-100);
   --background-icon-success-base: #18c371;
 
-  --border-radius-input: 30px;
-  --border-radius-input-sm: 16px;
+  --border-radius-input: .5rem;
+  --border-radius-input-sm: .25rem;
   --border-radius-card: 20px;
   --border-radius-card-sm: 16px;
   --border-radius-card-xs: 4px;

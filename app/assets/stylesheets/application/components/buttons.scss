@@ -5,8 +5,8 @@
   line-height: 24px;
   text-align: center;
   text-transform: uppercase;
-  border-radius: 100px;
-  padding: calc(var(--spacing-xs) - 1px) var(--spacing-xl);
+  border-radius: 0.25rem;
+  padding: var(--spacing-xxs) var(--spacing-xs);
   border: 1px solid transparent;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -42,6 +42,7 @@
     color: var(--background-primary-100);
 
     &:hover {
+      color: white;
       background-color: var(--background-primary-50);
     }
   }

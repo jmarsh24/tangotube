@@ -6,4 +6,5 @@
       - if devise_mapping.rememberable?
         = f.input :remember_me, as: :checkbox, class: "input input__input input--checkbox"
       = f.submit class: "button button--primary button--block"
+      a.link href=edit_user_registration_path
       = render "devise/shared/links"

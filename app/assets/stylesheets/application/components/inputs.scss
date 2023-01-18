@@ -12,9 +12,10 @@
     font-family: inherit;
     border: 1px solid var(--background-input-border-primary-default);
     border-radius: var(--border-radius-input);
-    padding: var(--spacing-xs) var(--spacing-md);
+    padding: var(--spacing-xxxs) var(--spacing-md);
     transition: border-color 0.2s;
     background-color: transparent;
+    color: --text-input-primary-base;
 
     &::placeholder {
       color: var(--text-input-primary-base);
@@ -80,5 +81,9 @@
         background-repeat: no-repeat;
       }
     }
+  }
+
+  &--search {
+    width: 100%;
   }
 }
