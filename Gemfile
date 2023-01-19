@@ -56,11 +56,13 @@ gem "yael"
 
 # Assets
 gem "jsbundling-rails"
+gem "cssbundling-rails"
 gem "stimulus-rails"
-gem "sassc-rails"
 gem "autoprefixer-rails"
 gem "turbo-rails"
 gem "serviceworker-rails"
+gem "hotwire-livereload"
+gem "propshaft"
 
 # External Services
 gem "aws-sdk-s3"

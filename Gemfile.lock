@@ -154,6 +154,8 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
+    cssbundling-rails (1.1.2)
+      railties (>= 6.0.0)
     cuprite (0.14.3)
       capybara (~> 3.0)
       ferrum (~> 0.13.0)
@@ -222,6 +224,9 @@ GEM
     hashdiff (1.0.1)
     hashie (5.0.0)
     highline (2.1.0)
+    hotwire-livereload (1.2.3)
+      listen (>= 3.0.0)
+      rails (>= 6.0.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     httparty (0.21.0)
@@ -345,6 +350,11 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    propshaft (0.6.4)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -487,14 +497,6 @@ GEM
       fugit (~> 1.1, >= 1.1.6)
     safely_block (0.3.0)
       errbase (>= 0.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     scenic (1.7.0)
       activerecord (>= 4.0.0)
       railties (>= 4.0.0)
@@ -552,13 +554,6 @@ GEM
     solargraph-standardrb (0.0.4)
       solargraph (>= 0.39.1)
       standard (>= 0.4.1)
-    sprockets (4.2.0)
-      concurrent-ruby (~> 1.0)
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.4.2)
-      actionpack (>= 5.2)
-      activesupport (>= 5.2)
-      sprockets (>= 3.0.0)
     standard (1.21.1)
       language_server-protocol (~> 3.17.0.2)
       rubocop (= 1.42.0)
@@ -635,6 +630,7 @@ DEPENDENCIES
   chartkick
   chusaku
   counter_culture
+  cssbundling-rails
   cuprite
   dalli
   debug
@@ -647,6 +643,7 @@ DEPENDENCIES
   guard
   guard-rspec
   hashie
+  hotwire-livereload
   i18n-tasks (= 0.9.35)
   image_processing
   jsbundling-rails
@@ -663,6 +660,7 @@ DEPENDENCIES
   pagy
   pg
   pg_search
+  propshaft
   pry-byebug
   pry-doc
   pry-rails
@@ -682,7 +680,6 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rake
   rubocop-rspec
-  sassc-rails
   scenic
   sentry-rails
   sentry-ruby

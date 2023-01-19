@@ -6,11 +6,10 @@
     "lint:style": "eslint app/javascript/**/*.ts --max-warnings 0",
     "lint:format": "prettier --list-different \"app/**/*.{ts,scss,json}\"",
     "build": "esbuild app/javascript/*.* --bundle --minify --sourcemap --outdir=app/assets/builds --define:process.env.RAILS_ENV=\\\"$RAILS_ENV\\\" --define:process.env.SENTRY_ENVIRONMENT=\\\"$SENTRY_ENVIRONMENT\\\"",
-    "bundle-size": "npx source-map-explorer app/assets/builds/application.js app/assets/builds/application.js.map --no-border-checks",
-    "start": "yarn build --watch",
-    "live": "yarn livereload -e scss app/assets"
+    "build:css": "bin/sass.js"
   },
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "@github/combobox-nav": "^2.0.2",
     "@hotwired/stimulus": "^3.0.1",
@@ -19,11 +18,11 @@
     "@rails/activestorage": "^7.0.4",
     "@rails/request.js": "^0.0.6",
     "@sentry/browser": "^7.29.0",
-    "copyfiles": "^2.4.1",
-    "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.14.27",
+    "esbuild-sass-glob": "^1.0.8",
+    "esbuild-sass-plugin": "^2.4.5",
     "lodash.debounce": "^4.0.8",
-    "slim-select": "^1.27.1",
+    "sass": "^1.57.1",
     "stimulus": "^3.2.1",
     "stimulus-dropdown": "^2.0.0",
     "stimulus-hotkeys": "^1.0.5",
@@ -38,7 +37,6 @@
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "livereload": "^0.9.3",
     "prettier": "^2.8.2",
     "stylelint-config-standard": "^25.0.0"
   }
