@@ -20,7 +20,7 @@ $icon-sizes: (
 
   @each $icon in $icons {
     &--#{$icon} {
-      mask-image: url('icons/#{$icon}.svg');
+      mask-image: url('@assets/images/icons/#{$icon}.svg');
     }
   }
 

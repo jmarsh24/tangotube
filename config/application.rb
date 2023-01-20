@@ -50,7 +50,7 @@ module TangoTube
     config.action_mailer.asset_host = "#{protocol}://#{host}"
     config.active_storage.variant_processor = :mini_magick
 
-    config.assets.paths << Rails.root.join("node_modules")
+    config.javascript_path = "frontend"
     ActiveRecord::Tasks::DatabaseTasks.fixtures_path = Rails.root.join("spec/fixtures")
   end
 end

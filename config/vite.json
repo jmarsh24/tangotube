@@ -1,0 +1,27 @@
+{
+  "all": {
+    "sourceCodeDir": "app/javascript",
+    "entrypointsDir": "app/javascript/entrypoints",
+    "additionalEntrypoints": [
+      "app/javascript/**/*.{ts,js}",
+      "app/assets/stylesheets/**/*.{css,scss,sass,less}",
+      "app/assets/images/**/*.{png,jpg,jpeg,gif,svg,ico}",
+      "app/assets/fonts/**/*.{eot,ttf,woff,woff2}",
+      "app/assets/videos/**/*.{mp4,webm,ogv}"
+    ],
+    "watchAdditionalPaths": [
+      "app/javascript/**/*.{ts,js}",
+      "app/frontend/**/*.{css,scss,sass,less}"
+    ]
+  },
+  "development": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-dev",
+    "port": 3036
+  },
+  "test": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-test",
+    "port": 3037
+  }
+}
