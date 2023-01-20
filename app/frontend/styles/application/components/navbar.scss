@@ -9,7 +9,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: $color-background-menu;
+  background-color: var(--background-secondary-100);
 
   #start {
     display: flex;
@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: center;
     min-width: 60px;
-    color: var(--text-link-primary-base);
+    color: var(--text-input-primary-base);
 
     &--menu {
       display: flex;

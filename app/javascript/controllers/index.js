@@ -2,6 +2,10 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
+import { registerControllers } from 'stimulus-vite-helpers';
+
+const controllers = import.meta.globEager('./**/*_controller.js');
+
 import { application } from './application';
 
 import AutoclickController from './autoclick_controller';
@@ -31,8 +35,8 @@ application.register('filter', FilterController);
 import FlashController from './flash_controller';
 application.register('flash', FlashController);
 
-import FormController from './form_controller';
-application.register('form', FormController);
+// import FormController from './form_controller';
+// application.register('form', FormController);
 
 import HideController from './hide_controller';
 application.register('hide', HideController);
