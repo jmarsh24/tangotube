@@ -55,11 +55,11 @@ gem "net-ssh"
 gem "yael"
 
 # Assets
+gem "vite_rails"
+gem "propshaft"
 gem "stimulus-rails"
-gem "autoprefixer-rails"
 gem "turbo-rails"
 gem "serviceworker-rails"
-gem "vite_rails"
 
 # External Services
 gem "aws-sdk-s3"
