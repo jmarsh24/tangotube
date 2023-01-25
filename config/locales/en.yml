@@ -35,6 +35,14 @@ en:
       statistic_description: Statistic description
       targeting: Targeting
       targeting_description: Targeting description
+    drawer:
+      clips: Clips
+      explore: Explore
+      history: History
+      home: Home
+      liked: Liked
+      login: Login
+      sign_up: Sign up
     footer:
       links:
         google_privacy_policy: Google privacy policy
@@ -44,13 +52,14 @@ en:
         about: About
         contact: Contact
     navbar:
+      login: Login
       right:
         Login: Login
         login_button: Login button
         sign_up_button: Sign up button
       search:
         search:
-          placeholder: Placeholder
+          placeholder: Search 300,000+ videos
   couples:
     show:
       delete: Delete
@@ -121,7 +130,7 @@ en:
     index:
       loading_spinner: Loading spinner
   search:
-    placeholder: Placeholder
+    placeholder: Search 300,000+ videos
   videos:
     index:
       loading_spinner: Loading spinner
@@ -138,6 +147,7 @@ en:
         disliked: Disliked
       featured_link:
         ":": ":"
+        featured_button: Featured button
       lyrics:
         english: English
         spanish: Spanish

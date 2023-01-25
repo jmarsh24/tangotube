@@ -1,6 +1,6 @@
 .ts-wrapper {
-  background-color: var(--background-secondary-100) !important;
-  border: solid 1px var(--sl-color-gray-300);
+  background-color: var(--background-neutral-800) !important;
+  border: solid 1px var(--background-neutral-700);
   border-radius: 4px !important;
 }
 
@@ -44,55 +44,55 @@
 }
 
 .ts-wrapper.single .ts-control:after {
-  border-color: var(--sl-color-neutral-1000) transparent transparent !important;
+  border-color: var(--background-neutral-900) transparent transparent !important;
 }
 
 input::placeholder {
-  color: var(--sl-color-neutral-1000);
+  color: var(--background-neutral-100);
 }
 
 .ts-dropdown {
-  border: solid 1px var(--sl-color-gray-300) !important;
+  border: solid 1px var(--background-neutral-800) !important;
   background: var(--background-secondary-100) !important;
 }
 
 .ts-control,
 .ts-control input,
 .ts-dropdown {
-  color: var(--sl-color-gray-800) !important;
+  color: var(--background-neutral-100) !important;
 }
 
 .ts-dropdown .active,
 .ts-dropdown .create:hover,
 .ts-dropdown .option:hover {
-  color: var(--sl-color-neutral-1000) !important;
+  color: var(--background-neutral-100) !important;
 }
 
 .ts-control {
-  background-color: var(--sl-color-neutral-100) !important;
-  border: solid 1px var(--sl-color-gray-300) !important;
+  background-color: var(--background-neutral-900) !important;
+  border: solid 1px var(--background-neutral-700) !important;
 }
 
 .ts-dropdown.single,
 .ts-wrapper.single .ts-control {
-  border: solid 1px var(--sl-color-gray-300) !important;
+  border: solid 1px var(--background-neutral-700) !important;
   border-radius: 4px !important;
 }
 
 .ts-control,
 .ts-wrapper.single.input-active .ts-control {
-  background-color: var(--sl-color-neutral-100) !important;
+  background-color: var(--background-neutral-900) !important;
   background-image: unset !important;
   box-shadow: unset !important;
 }
 
 .ts-wrapper .option {
-  background-color: var(--sl-color-neutral-100) !important;
+  background-color: var(--background-neutral-900) !important;
   border-radius: 4px !important;
 }
 
 .ts-dropdown .active,
 .ts-dropdown .create:hover,
 .ts-dropdown .option:hover {
-  background-color: var(--sl-color-red-400);
+  background-color: var(--background-primary-900);
 }

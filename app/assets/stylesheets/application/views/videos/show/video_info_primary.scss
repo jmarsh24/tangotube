@@ -2,7 +2,7 @@
   h1 {
     text-decoration: none;
     font-size: inherit;
-    color: $show-primary-title;
+    color: var(--background-neutral-200);
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0.2em 0;
@@ -27,7 +27,7 @@
 
 .show-channel-title {
   font-size: 0.8rem;
-  color: $show-primary-channel-title;
+  color: var(--background-neutral-200);
 }
 
 .show-video-channel {
@@ -38,16 +38,16 @@
     margin-bottom: 0.1em;
     text-decoration: none;
     transition: color 150ms;
-    color: $show-primary-channel-title;
+    color: var(--background-neutral-200);
   }
 
   a:hover {
-    color: $show-primary-channel-title-hover;
+    color: var(--background-neutral-200);
   }
 }
 
 .show-video-metadata {
-  color: $show-primary-channel-title;
+  color: var(--background-neutral-200);
   font-size: 0.7rem;
 }
 

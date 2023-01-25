@@ -1,6 +1,6 @@
 div style="max-width: 1660px; width: 100%;"
   div style="display: flex; align-items: flex-end; justify-content: center; gap: 16px; margin: 64px 0;"
-    = vite_image_tag orchestra_avatar(@orchestra.id), style: "margin: 16px; width: 300px; height: 300px; border-radius: 50%; object-fit: cover;"
+    = image_tag orchestra_avatar(@orchestra.id), style: "margin: 16px; width: 300px; height: 300px; border-radius: 50%; object-fit: cover;"
     div
       h1 style="font-size: 64px;"
         = @orchestra.name.titleize
@@ -19,7 +19,7 @@ div style="max-width: 1660px; width: 100%;"
       div style="height: 250px; width: 300px; overflow: auto;"
         = @dancers.each do |dancer|
           = link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do
-            = vite_image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;"
+            = image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;"
             = dancer.name
             = "(#{dancer.videos_count})"
     div style="padding: 32px; 16px; max-width: 1660px;"
@@ -30,8 +30,8 @@ div style="max-width: 1660px; width: 100%;"
           = partner = couple.partner
           = dancer = couple.dancer
           = link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do
-            = vite_image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;"
-            = vite_image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;"
+            = image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;"
+            = image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;"
             = "#{dancer.name} & #{partner.name}"
             = "(#{couple.videos_count})"
   .index-container

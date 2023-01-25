@@ -1,6 +1,6 @@
 .orchestra__card id=dom_id(orchestra)
   = link_to orchestra do
-    = vite_image_tag orchestra_avatar(orchestra.id)
+    = image_tag orchestra_avatar(orchestra.id)
   .orchestra__card__body
     = link_to orchestra do
       = orchestra.name.titleize

@@ -1,8 +1,8 @@
 .couple__card id=dom_id(couple)
   = link_to couple do
     div style="position: relative; height: 300px; width: 450px;"
-      = vite_image_tag dancer_avatar(couple.dancer), style: "position: absolute; top: 0; left: 0;"
-      = vite_image_tag dancer_avatar(couple.partner), style: "position: absolute; top: 0; left: 200px;"
+      = image_tag dancer_avatar(couple.dancer), style: "position: absolute; top: 0; left: 0;"
+      = image_tag dancer_avatar(couple.partner), style: "position: absolute; top: 0; left: 200px;"
   .couple__body
     = "#{couple.dancer.name} & #{couple.partner.name}"
   = "#{couple.videos_count} Videos"

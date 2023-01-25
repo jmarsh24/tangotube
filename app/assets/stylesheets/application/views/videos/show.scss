@@ -1,5 +1,3 @@
-$show-video-width: 1300px;
-
 .under-video-container {
   display: flex;
   justify-content: space-between;
@@ -10,13 +8,13 @@ $show-video-width: 1300px;
 
 .video-responsive-container {
   width: 100%;
-  max-width: $show-video-width;
+  max-width: 1660px;
   max-height: auto; //necessary to keep proportion
   margin: 0 auto; //centering
 }
 
 .video-responsive-background {
-  background-color: $show-video-background;
+  background-color: var(--background-neutral-800);
 }
 
 .video-responsive {
@@ -37,17 +35,17 @@ $show-video-width: 1300px;
 
 .video-info-container {
   display: flex;
-  max-width: $show-video-width;
+  max-width: 1660px;
   flex-direction: column;
   margin: 0 auto;
   justify-content: center;
-  background-color: var(--sl-color-neutral-50);
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
+  background-color: var(--background-neutral-950);
+  border-left: 1px solid var(--background-neutral-800);
+  border-right: 1px solid var(--background-neutral-800);
 }
 
 .video-info-primary-container {
-  max-width: $show-video-width;
+  max-width: 1660px;
   width: 100%;
   text-align: left;
 }
@@ -56,7 +54,7 @@ $show-video-width: 1300px;
   display: flex;
   gap: 20px;
   justify-content: space-between;
-  max-width: $show-video-width;
+  max-width: 1660px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -68,7 +66,7 @@ $show-video-width: 1300px;
   min-width: 450px;
   padding: 0 0.5em;
   a {
-    color: $link-color;
+    color: var(--background-sky-400);
     font-size: 0.8rem;
   }
   p {

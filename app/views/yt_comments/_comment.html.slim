@@ -1,6 +1,6 @@
 div class="comment-= comment.id %> container" style="border: 1px solid black; padding: 1em; margin: 1em;"
   div style="display: flex; align-items: center;">
-    = vite_image_tag(comment.profile_image_url, class: 'channel-icon')
+    = image_tag(comment.profile_image_url, class: 'channel-icon')
     = comment.user_name
   br
   "Like count: #{comment.like_count}"

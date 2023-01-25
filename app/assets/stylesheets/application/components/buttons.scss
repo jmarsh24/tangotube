@@ -28,7 +28,7 @@
     background-color: var(--background-primary-100);
 
     &:hover {
-      background-color: var(--background-primary-100-hover);
+      background-color: var(--background-primary-100);
     }
 
     &:disabled {
@@ -37,13 +37,13 @@
   }
 
   &--secondary {
-    background-color: transparent;
-    border-color: var(--background-primary-100);
-    color: var(--background-primary-100);
+    background-color: var(--background-button-secondary-base);
+    border-color: var(--background-button-border-secondary);
+    color: var(--text-button-secondary-base);
 
     &:hover {
       color: white;
-      background-color: var(--background-primary-50);
+      background-color: var(--background-button-secondary-base);
     }
   }
 
@@ -70,8 +70,14 @@
     }
 
     &:hover {
-      color: var(--background-primary-100-hover);
+      color: var(--background-primary-200);
     }
+  }
+
+  &--search {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border: 0px;
   }
 
   &--link-secondary {
@@ -115,7 +121,7 @@
         height: 24px;
         width: 24px;
         display: block;
-        mask-image: asset-url('icons/#{$icon}.svg');
+        mask-image: url('@assets/images/icons/#{$icon}.svg');
       }
 
       &.button--icon-left {

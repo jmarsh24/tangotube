@@ -1,13 +1,13 @@
 .navbar data-controller="toggle"
   #start
-    .icon.icon--burger.icon--md data-action="click->reveal#toggle"
+    .button.icon.icon--burger.icon--md data-action="click->reveal#toggle"
     a.navbar__item.navbar__item--logo href=root_path
   #center.navbar__item.navbar__item--search = render "components/navbar/search"
   #end.navbar__item.navbar__item--links
-    .icon.icon--sun-max
+    .button.icon.icon--sun-max
     - if current_user.present? && user_signed_in?
       .dropdown data-controller="dropdown"
-        button data-action="dropdown#toggle click@window->dropdown#hide"
+        button class="button" data-action="dropdown#toggle click@window->dropdown#hide"
           = image_tag avatar_url_for(current_user), class: "avatar"
         .dropdown__menu.dropdown__menu--right.hidden data-dropdown-target="menu"
           - if user_signed_in?
@@ -18,7 +18,7 @@
           - else
             = link_to t(".login"), new_user_session_path, class: "button button--primary"
     - else
-      = link_to t(".Login"), new_user_session_path, class: "button button--secondary"
+      = link_to t(".login"), new_user_session_path, class: "button button--secondary"
           / #mobile-drawer-top.drawer.drawer-placement-top style="--size: 100%; --body-spacing: 0 12px;"
     /   div style="display: flex; align-items: center; background-color: var(--sl-color-neutral-50); padding: 0 12px;"
     /     = t(".chevron_left_icon")

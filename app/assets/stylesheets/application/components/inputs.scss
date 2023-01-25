@@ -26,7 +26,7 @@
     }
 
     &:focus {
-      border-color: var(--background-secondary-100);
+      border-color: var(--background-neutral-250);
     }
   }
 
@@ -84,6 +84,8 @@
   }
 
   &--search {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     width: 100%;
   }
 }
