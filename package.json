@@ -18,7 +18,7 @@
     "@types/lodash.debounce": "^4.0.7",
     "@types/node": "^18.11.18",
     "autoprefixer": "^10.4.13",
-    "lodash.debounce": "^4.0.8",
+    "lodash": "^4.17.21",
     "path": "^0.12.7",
     "sass": "^1.57.1",
     "stimulus-dropdown": "^2.0.0",
