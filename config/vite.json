@@ -3,15 +3,12 @@
     "sourceCodeDir": "app/javascript",
     "entrypointsDir": "app/javascript/entrypoints",
     "additionalEntrypoints": [
-      "app/javascript/**/*.{ts,js}",
-      "app/assets/stylesheets/**/*.{css,scss,sass,less}",
-      "app/assets/images/**/*.{png,jpg,jpeg,gif,svg,ico}",
-      "app/assets/fonts/**/*.{eot,ttf,woff,woff2}",
-      "app/assets/videos/**/*.{mp4,webm,ogv}"
+      "app/javascript/entrypoints/application.ts",
+      "app/assets/images/**/*"
     ],
     "watchAdditionalPaths": [
-      "app/javascript/**/*.{ts,js}",
-      "app/frontend/**/*.{css,scss,sass,less}"
+      "app/javascript/**/*",
+      "app/assets/**/*"
     ]
   },
   "development": {

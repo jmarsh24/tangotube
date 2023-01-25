@@ -1,30 +1,33 @@
 import { Controller } from '@hotwired/stimulus';
 import { FetchRequest } from '@rails/request.js';
-const debounce = require('lodash.debounce');
+import { debounce } from 'lodash.debounce';
 
-// export default class extends Controller {
-//   static get targets() {
-//     return ['input'];
-//   }
+export default class extends Controller {
+  inputTarget!: HTMLInputElement;
+  event!: Event;
 
-//   initialize() {
-//     this.submit = debounce(this.submit, 200).bind(this);
-//   }
+  static get targets() {
+    return ['input'];
+  }
 
-//   async submit() {
-//     const url = this.data.get('url');
-//     const request = new FetchRequest(
-//       'post',
-//       `${url}?query=${this.inputTarget.value}`,
-//       {
-//         responseKind: 'turbo-stream',
-//       }
-//     );
-//     await request.perform();
-//   }
+  initialize() {
+    this.submit = debounce(this.submit, 200).bind(this);
+  }
 
-//   hideValidationMessage(event) {
-//     event.stopPropagation();
-//     event.preventDefault();
-//   }
-// }
+  async submit() {
+    const url = this.data.get('url');
+    const request = new FetchRequest(
+      'post',
+      `${url}?query=${this.inputTarget.value}`,
+      {
+        responseKind: 'turbo-stream',
+      }
+    );
+    await request.perform();
+  }
+
+  hideValidationMessage(event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}

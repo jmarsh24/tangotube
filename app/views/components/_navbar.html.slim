@@ -8,7 +8,7 @@
     - if current_user.present? && user_signed_in?
       .dropdown data-controller="dropdown"
         button data-action="dropdown#toggle click@window->dropdown#hide"
-          = vite_image_tag avatar_url_for(current_user), class: "avatar"
+          = image_tag avatar_url_for(current_user), class: "avatar"
         .dropdown__menu.dropdown__menu--right.hidden data-dropdown-target="menu"
           - if user_signed_in?
             = link_to edit_user_registration_path do

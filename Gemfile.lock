@@ -85,8 +85,6 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
-    autoprefixer-rails (10.4.7.0)
-      execjs (~> 2)
     avo (2.24.0)
       actionview (>= 6.0)
       active_link_to
@@ -185,7 +183,6 @@ GEM
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
-    execjs (2.8.1)
     faraday (2.7.3)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -342,6 +339,11 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    propshaft (0.6.4)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -618,7 +620,6 @@ DEPENDENCIES
   ahoy_matey
   amazing_print
   annotate
-  autoprefixer-rails
   avo
   aws-sdk-s3
   barnes
@@ -655,6 +656,7 @@ DEPENDENCIES
   pagy
   pg
   pg_search
+  propshaft
   pry-byebug
   pry-doc
   pry-rails

@@ -75,7 +75,7 @@
 
       &:checked {
         background-color: var(--background-icon-action-base);
-        background-image: asset-url('icons/check-white.svg');
+        background-image: url('@assets/images/icons/check-white.svg');
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
