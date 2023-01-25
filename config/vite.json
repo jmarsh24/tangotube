@@ -8,7 +8,8 @@
     ],
     "watchAdditionalPaths": [
       "app/javascript/**/*",
-      "app/assets/**/*"
+      "app/assets/**/*",
+      "config/locales/**/*"
     ]
   },
   "development": {

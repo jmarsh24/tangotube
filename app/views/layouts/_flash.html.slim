@@ -1,4 +1,4 @@
 - flash.each do |key, value|
   div
-    = vite_image_tag "icons/#{key}.svg", class: "sl-alert-icon"
+    = image_tag "icons/#{key}.svg", class: "sl-alert-icon"
     = value.html_safe

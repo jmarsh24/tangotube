@@ -7,7 +7,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--background-secondary-100);
+  background-color: var(--background-neutral-950);
 
   #start {
     display: flex;
@@ -64,10 +64,6 @@
     }
 
   }
-
-  // &__search-form {
-  //   display: flex;
-  // }
 
   &__overlay {
     display: none;
