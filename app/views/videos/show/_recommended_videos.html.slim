@@ -1,30 +1,38 @@
- - videos.each do |video|
-  article class="recommended-videos-container" class=(video.youtube_id == @video.youtube_id ? "active" : "") data-controller="toggle"
-    - if video.youtube_id == @video.youtube_id
-      div
-        .thumbnail--recommended data-duration="= hd_duration_data(video) "
-          = image_tag("https://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg")
-    - else
-      = link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top" } do
-        .thumbnail--recommended data-duration="= hd_duration_data(video) "
-          = image_tag("https://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg")
-    .video-bottom-section
-      .video-details
-        .video-title
+- if videos.present?
+  .recommended-videos-card data-controller="reveal" data-reveal-hidden-class="active" data-reveal-target="item"
+    .recommended_videos__body data-collapsible-target="content"
+      .recommended-videos-card__header
+        h2 = header
+      - videos.each do |video|
+        .recommended-videos-container class=(video.youtube_id == @video.youtube_id ? "active" : "")
           - if video.youtube_id == @video.youtube_id
-            = primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
+            div
+              .thumbnail--recommended data-duration="= hd_duration_data(video) "
+                = image_tag("https://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg")
           - else
-            = link_to_primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
-        .video-song
-          - if video.display.any_song_attributes.present?
-            = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)
-        .video-event
-          = link_to video.event.title.titleize, root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } if video.event.present?
-        .video-channel
-          = link_to image_tag(video.channel.thumbnail_url, class: 'channel-icon'), root_path(channel: video.channel.channel_id), { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present?
-          = link_to channel_title(video), root_path(channel: video.channel.channel_id), { class: "channel-title", 'data-turbo-frame': "_top" } if video.channel.title.present?
-        .video-metadata
-          = formatted_metadata(video)
+            = link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top" } do
+              .thumbnail--recommended data-duration="= hd_duration_data(video) "
+                = image_tag("https://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg")
+          .video-bottom-section
+            .video-details
+              .video-title
+                - if video.youtube_id == @video.youtube_id
+                  = primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
+                - else
+                  = link_to_primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
+              .video-song
+                - if video.display.any_song_attributes.present?
+                  = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)
+              .video-event
+                = link_to video.event.title.titleize, root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } if video.event.present?
+              .video-channel
+                = link_to image_tag(video.channel.thumbnail_url, class: 'channel-icon'), root_path(channel: video.channel.channel_id), { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present?
+                = link_to channel_title(video), root_path(channel: video.channel.channel_id), { class: "channel-title", 'data-turbo-frame': "_top" } if video.channel.title.present?
+              .video-metadata
+                = formatted_metadata(video)
+    - if videos.size > 3
+      button type="button" class="button button--secondary button--block" data-action="click->reveal#toggle"
+        .icon.icon--arrow-down
 
 
 

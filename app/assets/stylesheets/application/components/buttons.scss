@@ -110,22 +110,28 @@
 
   @each $icon in $icons {
     &--icon-#{$icon} {
-      display: inline-flex;
-      gap: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xxs);
       align-items: center;
       justify-content: center;
 
-      &::after {
+      &::before {
         @include maskedBackground;
         content: '';
-        height: 24px;
-        width: 24px;
+        height: var(--spacing-md);
+        width: var(--spacing-md);
         display: block;
         mask-image: url('@assets/images/icons/#{$icon}.svg');
       }
 
       &.button--icon-left {
+        display: flex;
         flex-direction: row-reverse;
+      }
+
+      &.button--icon-top {
+        display: block;
       }
     }
   }

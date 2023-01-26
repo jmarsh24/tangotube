@@ -139,15 +139,17 @@ en:
     show:
       bookmark_link:
         bookmark: Bookmark
+        bookmark_tooltip: Bookmark tooltip
         bookmarked: Bookmarked
       complete_link:
         complete: Complete
+        complete_tooltip: Complete tooltip
       downvote_link:
         dislike: Dislike
         disliked: Disliked
       featured_link:
         ":": ":"
-        featured_button: Featured button
+        featured_button: Featured
       lyrics:
         english: English
         spanish: Spanish
@@ -160,11 +162,11 @@ en:
         clip: Clip
         scissors: Scissors
         share: Share
-        share_button: Share button
-        share_icon: Share icon
+        share_button: Share
       watchlist_link:
         watch: Watch
         watch_later: Watch later
+        watch_later_tooltip: Watch later tooltip
         watched: Watched
     video:
       hide: Hide

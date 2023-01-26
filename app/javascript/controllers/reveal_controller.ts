@@ -1,10 +1,10 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  hasHiddenClass: boolean;
-  hiddenClass: string;
-  itemTargets: HTMLElement[];
-  class: string;
+  hasHiddenClass!: boolean;
+  hiddenClass!: string;
+  itemTargets!: HTMLElement[];
+  class!: string;
 
   static targets = ['item'];
   static classes = ['hidden'];
