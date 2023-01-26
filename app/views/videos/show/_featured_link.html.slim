@@ -1,7 +1,3 @@
-= content_tag :div, id: "featured-#{video.youtube_id}" do
-  = button_to featured_video_path(video.youtube_id), method: :patch do
-    - if video.featured?
-      .icon.icon--star-filled
-    - else
-      .icon.icon--star
-    span = t(".featured_button")
+div id="featured-#{video.youtube_id}"
+  = button_to featured_video_path(video.youtube_id), method: :patch, class: ["button", video.featured? ? "button--icon-star-filled" : "button--icon-star"]
+    = t(".featured_button")

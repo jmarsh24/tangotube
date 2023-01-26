@@ -1,3 +1,28 @@
+.recommended-videos-card {
+  overflow-y: hidden;
+  max-height: 500px;
+
+  &__header {
+
+  }
+
+  &__close {
+
+  }
+
+  &__open {
+
+  }
+
+  &__content {
+
+  }
+
+  &.active {
+
+  }
+}
+
 .recommended-videos-section {
   flex: 1;
   margin: 0 0.5em;
@@ -23,7 +48,7 @@
   }
 
   &.active {
-    background-color: var(--sl-color-gray-200);
+    background-color: var(--background-neutral-800);
   }
 }
 
@@ -41,7 +66,7 @@
 .recommended-videos__header {
   border-bottom: 1px solid #c2c2c2;
   margin-bottom: 10px;
-  color: var(--sl-color-gray-800);
+  color: var(--background-neutral-200);
 
   h2 {
     margin-top: 0;
@@ -51,12 +76,12 @@
 
 .recommended-videos-card {
   margin-bottom: 10px;
-  max-height: 500px;
-  overflow-y: hidden;
+  // max-height: 500px;
+  // overflow-y: hidden;
 
-  @media (max-width: 768px) {
-    max-height: 1500px;
-  }
+  // @media (max-width: 768px) {
+  //   max-height: 1500px;
+  // }
 
   &--active {
     max-height: fit-content;
