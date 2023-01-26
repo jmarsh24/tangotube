@@ -2,6 +2,7 @@
 
 class BannerController < ApplicationController
   def index
-    session[:banner_closed] = params[:banner_closed] if params[:banner_closed]
+    cookies[:banner_closed] = params[:banner_closed] if params[:banner_closed]
+    ui.remove("banner")
   end
 end

@@ -1,7 +1,7 @@
 - meta.title = t(".meta_title")
 - meta.description = t(".meta_description")
 / - meta.image = image_url("share.jpg")
-= turbo_frame_tag "banner", src: banner_path if session[:banner_closed].blank?
+= render "banner/index"
 .container
   = render "filters/filters"
   = render "videos/index/videos/header"
