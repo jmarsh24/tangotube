@@ -11,11 +11,11 @@
   &__input {
     font-family: inherit;
     border: 1px solid var(--background-input-border-primary-default);
-    border-radius: var(--border-radius-input);
-    padding: var(--spacing-xxxs) var(--spacing-md);
+    border-radius: var(--border-radius-input-sm);
+    padding: var(--spacing-xxxs) var(--spacing-xxs);
     transition: border-color 0.2s;
     background-color: transparent;
-    color: --text-input-primary-base;
+    color: var(--text-input-primary-base);
 
     &::placeholder {
       color: var(--text-input-primary-base);
