@@ -14,21 +14,21 @@
               .thumbnail--recommended data-duration="= hd_duration_data(video) "
                 = image_tag(video.thumbnail_url)
           .video-bottom-section
-            .video-details
-              .video-title
+            .video-card__details
+              .video-card__title
                 - if video.youtube_id == @video.youtube_id
                   = primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
                 - else
                   = link_to_primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
-              .video-song
+              .video-card__song
                 - if video.display.any_song_attributes.present?
                   = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)
-              .video-event
+              .video-card__event
                 = link_to video.event.title.titleize, root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } if video.event.present?
-              .video-channel
-                = link_to image_tag(video.channel.thumbnail_url, class: 'channel-icon'), root_path(channel: video.channel.channel_id), { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present?
-                = link_to channel_title(video), root_path(channel: video.channel.channel_id), { class: "channel-title", 'data-turbo-frame': "_top" } if video.channel.title.present?
-              .video-metadata
+              .video-card__channel
+                = link_to image_tag(video.channel.thumbnail_url, class: 'video-card__details__channel__icon'), root_path(channel: video.channel.channel_id), { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present?
+                = link_to channel_title(video), root_path(channel: video.channel.channel_id), { class: "video-card__channel__title", 'data-turbo-frame': "_top" } if video.channel.title.present?
+              .video-card__metadata
                 = formatted_metadata(video)
     - if videos.size > 3
       button type="button" class="button button--secondary button--block" data-action="click->reveal#toggle"
