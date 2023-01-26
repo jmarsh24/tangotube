@@ -25,10 +25,10 @@
 
   &--primary {
     color: #ffffff;
-    background-color: var(--background-primary-400);
+    background-color: var(--background-primary-500);
 
     &:hover {
-      background-color: var(--background-primary-100);
+      background-color: var(--background-primary-400);
     }
 
     &:disabled {

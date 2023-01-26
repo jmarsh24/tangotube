@@ -8,11 +8,11 @@
           - if video.youtube_id == @video.youtube_id
             div
               .thumbnail--recommended data-duration="= hd_duration_data(video) "
-                = image_tag("https://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg")
+                = image_tag(video.thumbnail_url)
           - else
             = link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top" } do
               .thumbnail--recommended data-duration="= hd_duration_data(video) "
-                = image_tag("https://img.youtube.com/vi/#{video.youtube_id}/mqdefault.jpg")
+                = image_tag(video.thumbnail_url)
           .video-bottom-section
             .video-details
               .video-title
