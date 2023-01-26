@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-navbar);
-  padding: 0 16px;
+  padding: var(--spacing-xxs) var(--spacing-sm);
   display: flex;
   flex-direction: row;
   align-items: center;

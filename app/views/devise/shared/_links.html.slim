@@ -3,7 +3,7 @@
     link = link_to t(".forgot_password"), new_password_path(resource_name), class: "link"
   - if controller_name != 'sessions'
     link = link_to t(".log_in"), new_session_path(resource_name), class: "link"
-  = button_to user_google_oauth2_omniauth_authorize_path, class:"button button--block button--primary button--icon-google button--icon-left", "data-turbo": false, data: { disable_with: "Connecting..." } do
+  = button_to user_google_oauth2_omniauth_authorize_path, class:"button button--block button--secondary button--icon-google button--icon-left", "data-turbo": false, data: { disable_with: "Connecting..." } do
     = t(".sign_in_with_google")
 
 

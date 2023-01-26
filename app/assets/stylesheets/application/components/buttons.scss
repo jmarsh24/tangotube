@@ -25,7 +25,7 @@
 
   &--primary {
     color: #ffffff;
-    background-color: var(--background-primary-100);
+    background-color: var(--background-primary-400);
 
     &:hover {
       background-color: var(--background-primary-100);
@@ -127,7 +127,7 @@
 
       &.button--icon-left {
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: row;
       }
 
       &.button--icon-top {
