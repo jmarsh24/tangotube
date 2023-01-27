@@ -24,11 +24,14 @@ class VideosController < ApplicationController
         .limit(24)
         .order("random()")
     end
-    @pagy, @videos = pagy(videos, items: 24)
-    respond_to do |format|
-      format.html # GET
-      format.turbo_stream # POST
-    end
+    @videos = paginated(videos)
+    # respond_to do |format|
+    #   format.html
+    #   format.turbo_stream do
+    #     ui.append "results", with: "components/pagination", items: @videos
+    #     ui.replace "next_link", with: "videos/next_link", pagy: @pagy
+    #   end
+    # end
   end
 
   def show

@@ -4,6 +4,11 @@
   background: black;
   width: 100%;
   z-index: var(--z-footer);
+  height: 40px;
+
+  &__spacer {
+    height: 40px;
+  }
 
   @include breakpoint-tablet {
     // padding-top: var(--spacing-xl);

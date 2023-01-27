@@ -18,6 +18,11 @@ export default class extends Controller {
   }
 
   private onChange(event: InputEvent): void {
+    Array.from(event.target.form.elements).forEach((element) => {
+      if (element.value == '') {
+        element.disabled = true;
+      }
+    });
     (event.target as HTMLInputElement).form.requestSubmit();
   }
 }
