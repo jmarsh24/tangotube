@@ -65,9 +65,6 @@
 
     &__title {
       font-weight: 600;
-      overflow-x: auto;
-      overflow-y: hidden;
-      font-size: .9rem;
 
       a {
         color: var(--sl-color-gray-700);
@@ -78,7 +75,6 @@
       }
 
       @media (max-width: 768px) {
-        font-size: 1.1rem;
         margin: 0;
       }
     }

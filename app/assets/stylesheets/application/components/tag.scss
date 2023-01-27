@@ -1,31 +1,31 @@
 .tag {
   display: inline-block;
   border-radius: 3px;
-  padding: .2em .5em .3em;
+  padding: 0.2em 0.5em 0.3em;
   border-radius: 3px;
   background: var(--background-neutral-900);
   color: var(--background-neutral-100);
   font-weight: 600;
-  margin: .25em .1em;
+  margin: 0.25em 0.3em;
 }
 
 h1.tag {
   margin-left: 0;
-  margin-right: 0
+  margin-right: 0;
 }
 
 .tag-sm {
-  font-size: .7em;
+  font-size: 0.7em;
   display: inline-block;
-  letter-spacing: .15ch;
-  font-weight: 400
+  letter-spacing: 0.15ch;
+  font-weight: 400;
 }
 
 .tag-lg {
   font-size: 1.2em;
-  border-radius: 4px
+  border-radius: 4px;
 }
 
 .tag-bg {
-  background: var(--background)
+  background: var(--background);
 }
