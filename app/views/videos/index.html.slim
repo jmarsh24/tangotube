@@ -3,24 +3,12 @@
 / - meta.image = image_url("share.jpg")
 = render "banner/index"
 .container
-  = render "filters/filters"
+  = turbo_frame_tag :filters, src: filters_videos_path(filtering_params), target: "_top"
   = render "videos/index/videos/header"
-  = turbo_frame_tag :videos do
+  - if @featured_videos.present?
     .video-section
       = render "videos/index/videos/section/header", title: "Featured"
-      .video-section__videos
-        = render partial: "video", collection: @featured_videos
-    .video-section
-      - if @featured_videos.present?
-        = render "videos/index/videos/section/header", title: "Trending"
-      #results.video-section__videos
-        = render partial: "video", collection: @videos
-    #next_link.next-link
-      - if @pagy.next.present?
-        form action="#{pagy_url_for(@pagy, @pagy.next)}" method="post"
-          button type="submit" data-controller="autoclick">
-        = t(".loading_spinner")
-
-
-
-
+      .grid = render @featured_videos
+  .video-section
+    = render "videos/index/videos/section/header", title: "Trending"
+    = paginated @videos, class: "grid"

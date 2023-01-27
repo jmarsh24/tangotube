@@ -67,9 +67,6 @@ Rails.application.routes.draw do
   end
   resource :manifest, only: :show
   resources :videos do
-    collection do
-      post :index
-    end
     resources :clips
     collection do
       get "filters", to: "filters#filters"

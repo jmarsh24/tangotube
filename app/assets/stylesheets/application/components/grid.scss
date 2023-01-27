@@ -1,0 +1,8 @@
+.grid {
+  display: grid;
+  gap: 20px;
+
+  @include breakpoint-tablet {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}

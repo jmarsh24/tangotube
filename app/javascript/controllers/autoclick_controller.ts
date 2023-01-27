@@ -1,10 +1,10 @@
-import { Controller } from "@hotwired/stimulus";
-import { useIntersection } from "stimulus-use";
+import { Controller } from '@hotwired/stimulus';
+import { useIntersection } from 'stimulus-use';
 
 // Connects to data-controller="autoclick"
 export default class extends Controller {
   options = {
-    threshold: 1,
+    threshold: 0.1,
   };
 
   connect() {
