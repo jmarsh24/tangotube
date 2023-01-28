@@ -6,6 +6,7 @@ class VideosController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete featured]
   before_action :current_search, only: %i[index]
   before_action :set_video, only: %i[show edit update destroy hide upvote downvote bookmark watchlist complete featured]
+  before_action :check_for_clear, only: [:index]
   after_action :track_action
 
   helper_method :sorting_params, :filtering_params
@@ -25,13 +26,6 @@ class VideosController < ApplicationController
         .order("random()")
     end
     @videos = paginated(videos)
-    # respond_to do |format|
-    #   format.html
-    #   format.turbo_stream do
-    #     ui.append "results", with: "components/pagination", items: @videos
-    #     ui.replace "next_link", with: "videos/next_link", pagy: @pagy
-    #   end
-    # end
   end
 
   def show
@@ -151,10 +145,13 @@ class VideosController < ApplicationController
     render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
   end
 
-  def banner
-  end
-
   private
+
+  def check_for_clear
+    if params[:commit] == "Clear"
+      redirect_to root_path
+    end
+  end
 
   def set_video
     @video = Video.includes(Video.search_includes).find_by(youtube_id: show_params[:v]) if show_params[:v]
