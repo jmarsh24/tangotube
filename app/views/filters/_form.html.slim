@@ -1,7 +1,8 @@
-= form_with url: root_path, method: :get, data: { controller: "autosubmit" }, class: "stack stack--line" do |f|
-  = f.select :genre, options_for_select(@genres, params[:genre].presence), { include_blank: true, multiple: false, autocomplete: "off", placeholder: "Any Genre...", "data-controller": "tom-select" }, "data-controller": "tom-select", class: "input input__input", style: "width: 160px"
-  = f.select :leader, options_for_select(@leaders, params[:leader].presence), { include_blank: true, multiple: false, autocomplete: "off", placeholder: "Any Leader...", "data-controller": "tom-select" }, "data-controller": "tom-select", class: "input input__input", style: "width: 240px"
-  = f.select :follower, options_for_select(@followers, params[:follower].presence), { include_blank: true, multiple: false, autocomplete: "off", placeholder: "Any Follower...", "data-controller": "tom-select" }, "data-controller": "tom-select", class: "input input__input", style: "width: 200px"
-  = f.select :orchestra, options_for_select(@orchestras, params[:orchestra].presence), { include_blank: true, multiple: false, autocomplete: "off", placeholder: "Any Orchestra...", "data-controller": "tom-select" }, "data-controller": "tom-select", class: "input input__input", style: "width: 160px"
-  = f.select :year, options_for_select(@years, params[:year].presence), { include_blank: true, multiple: false, autocomplete: "off", placeholder: "Any Year..." }, "data-controller": "tom-select", class: "input input__input", style: "width: 100px"
-  = f.submit "Filter", style: "display: none"
+- cache [current_user, params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year]] do
+  = form_with url: root_path, method: :get, data: { controller: "autosubmit" }, class: "stack stack--line" do |f|
+    = f.select :genre, options_for_select(@genres, params[:genre].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Genre...", "data-controller": "tom-select", class: "input input__input", style: "width: 160px"
+    = f.select :leader, options_for_select(@leaders, params[:leader].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Leader...", "data-controller": "tom-select", class: "input input__input", style: "width: 240px"
+    = f.select :follower, options_for_select(@followers, params[:follower].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Follower...", "data-controller": "tom-select", class: "input input__input", style: "width: 200px"
+    = f.select :orchestra, options_for_select(@orchestras, params[:orchestra].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Orchestra...", "data-controller": "tom-select", class: "input input__input", style: "width: 160px"
+    = f.select :year, options_for_select(@years, params[:year].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Year...", "data-controller": "tom-select" ,class: "input input__input", style: "width: 100px"
+    = f.submit "Filter", style: "display: none"
