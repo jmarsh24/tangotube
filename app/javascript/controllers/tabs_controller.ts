@@ -1,7 +1,44 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus';
 
-// Connects to data-controller="tabs"
 export default class extends Controller {
-  connect() {
+  tabPanelTargets!: HTMLElement[];
+  tabTargets!: HTMLElement[];
+
+  static targets = ['tab', 'tabPanel'];
+
+  initialize() {
+    this.showTab();
+  }
+
+  change(e) {
+    this.index = this.tabTargets.indexOf(e.target.parentNode);
+    this.showTab(this.index);
+  }
+
+  showTab() {
+    this.tabPanelTargets.forEach((el, i) => {
+      if (i == this.index) {
+        el.classList.remove('hidden');
+      } else {
+        el.classList.add('hidden');
+      }
+    });
+
+    this.tabTargets.forEach((el, i) => {
+      if (i == this.index) {
+        el.classList.add('active');
+      } else {
+        el.classList.remove('active');
+      }
+    });
+  }
+
+  get index() {
+    return parseInt(this.data.get('index'));
+  }
+
+  set index(value) {
+    this.data.set('index', value);
+    this.showTab();
   }
 }

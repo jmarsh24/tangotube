@@ -1,16 +1,11 @@
-.video-info-lyrics style="padding: 16px;" data-controller="toggle"
-  .detail-item-heading-lyrics style="padding: 16px;"
-    h4 Lyrics
-  div style="display: flex; justify-content: center; gap: 10px;"
-    = button_tag type: "button", class: "button", data: { action: "toggle#toggleLyricsSpanish" } do
-      = t(".spanish")
-    = button_tag type: "button", class: "button", data: { action: "toggle#toggleLyricsEnglish" } do
-      = t(".english")
-  .detail-column-lyrics style="padding: 16px;"
-    div data-toggle-target="lyricsEs"
-      = simple_format(@video.song.lyrics)
-    .isHidden data-toggle-target="lyricsEn"
-      = simple_format(@video.song.lyrics_en)
-
-
-
+.stack.stack--justify-center data-controller="tabs" data-tabs-index="1"
+  h2.heading-2.heading-4--bold = t ".lyrics_header"
+  .tabs.stack.stack--line.stack--justify-center.stack--zero
+    .tabs__tab data-tabs-target="tab"
+      a data={ action: "click->tabs#change" } = t ".Spanish"
+    .tabs__tab data-tabs-target="tab"
+      a data={ action: "click->tabs#change" } = t ".English"
+  .tabs__panel.tabs__panel--lyrics data={ "tabs-target": "tabPanel" }
+     = simple_format(@video.song.lyrics)
+  .tabs__panel.tabs__panel--lyrics data={ "tabs-target": "tabPanel" }
+     = simple_format(@video.song.lyrics_en)

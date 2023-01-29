@@ -45,6 +45,10 @@
       color: var(--color-neutral-0);
       background-color: var(--color-neutral-400);
     }
+
+    &.active {
+      background-color: var(--color-neutral-400);
+    }
   }
 
   &--block {
