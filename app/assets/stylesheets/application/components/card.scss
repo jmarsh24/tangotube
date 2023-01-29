@@ -7,10 +7,46 @@
   border-radius: var(--border-radius);
 
   &__image {
+    position: relative;
     display: flex;
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
-    margin: calc(-1 * var(--border-width));
+    aspect-ratio: 16 / 9;
     overflow: hidden;
+
+    &::after {
+      content: attr(data-duration);
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      right: 5px;
+      bottom: 5px;
+      padding: 0 0.3em;
+      border-radius: 0.3em;
+      font-size: 0.7rem;
+    }
+  }
+
+  &__performance-number {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    right: 5px;
+    top: 5px;
+    padding: 0.1em 0.3em;
+    border-radius: 0.3em;
+    font-size: 0.7rem;
+    z-index: 1;
+  }
+
+  &__header {
+    display: block;
+    border-bottom: solid var(--border-width) var(--border-color);
+    padding: calc(var(--padding) / 2) var(--padding);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxxs);
+    padding: var(--spacing-xxs) 0;
   }
 }

@@ -6,13 +6,11 @@
   background: var(--color-neutral-100);
   color: var(--color-neutral-900);
   font-weight: 600;
-  margin: var(--spacing-xxxs) var(--spacing-xxxs);
 
   &--sm {
     font-size: 0.8em;
     display: inline-block;
-    letter-spacing: 0.15ch;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   &--lg {
