@@ -2,7 +2,7 @@
   position: relative;
   height: calc(100vh - 96px);
   background-size: cover;
-  padding: 46px var(--padding-x);
+  // padding: 0 var(--padding-xs);
   margin: 0 auto;
   max-width: 25rem;
   display: flex;
@@ -18,5 +18,4 @@
   .logo {
     margin-bottom: 120px;
   }
-
 }

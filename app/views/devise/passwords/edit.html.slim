@@ -1,5 +1,5 @@
 .login-page
-  = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, data: { turbo: false }  do |f|
+  = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, data: { turbo: false }, class: "stack"  do |f|
     .stack.stack--xs.stack--tablet-xs
       = render "devise/shared/error_messages", resource: resource
       = f.hidden_field :reset_password_token
