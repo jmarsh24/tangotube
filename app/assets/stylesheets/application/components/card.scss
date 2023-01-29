@@ -5,6 +5,7 @@
   box-shadow: var(--shadow-x-small);
   border: solid var(--border-width) var(--border-color);
   border-radius: var(--border-radius);
+  font-size: var(--font-size-sm);
 
   &__image {
     position: relative;
