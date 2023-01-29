@@ -3,7 +3,7 @@
   grid-template-columns:
     minmax(var(--container-gap), 1fr)
     0
-    minmax(0, 2256px)
+    minmax(0, var(--grid-width))
     0
     minmax(var(--container-gap), 1fr);
 
