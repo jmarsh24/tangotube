@@ -1,7 +1,8 @@
 .ts-wrapper {
   background-color: var(--background-neutral-800) !important;
-  border: solid 1px var(--background-neutral-700);
+  border: none;
   border-radius: 4px !important;
+  padding: 0px;
 }
 
 .plugin-clear_button .clear-button {
@@ -22,7 +23,7 @@
 .ts-control {
   display: flex;
   width: 100% !important;
-  height: 38px !important;
+  height: 42px !important;
 }
 
 .ts-control > input {
@@ -30,13 +31,13 @@
 }
 
 .search input {
-  font-size: 12px !important;
+  font-size: 1em !important;
 }
 
 .ts-control,
 .ts-control input,
 .ts-dropdown {
-  font-size: 12px !important;
+  font-size: 1em !important;
 }
 
 .has-items .ts-control > input {
@@ -53,7 +54,7 @@ input::placeholder {
 
 .ts-dropdown {
   border: solid 1px var(--background-neutral-800) !important;
-  background: var(--background-secondary-100) !important;
+  background: var(--background-neutral-900) !important;
 }
 
 .ts-control,

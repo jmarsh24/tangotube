@@ -13,7 +13,7 @@
   text-decoration: none;
   position: relative;
 
-  &>input {
+  & > input {
     position: absolute;
     top: 0;
     left: 0;
@@ -78,6 +78,9 @@
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     border: 0px;
+    &:hover {
+      background: var(--background-neutral-600);
+    }
   }
 
   &--link-secondary {
