@@ -1,5 +1,5 @@
 #videos-header.videos-header
   - if filtering_params.present?
-    h3
+    h3.heading-3
       - if filtering_params.present? || sorting_params.present?
         = videos_header(filtering_params, sorting_params)
