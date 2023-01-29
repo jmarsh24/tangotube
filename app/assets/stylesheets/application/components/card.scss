@@ -1,6 +1,16 @@
 .card {
-  background-color: white;
-  padding: var(--spacing-sm);
-  padding-bottom: var(--spacing-md);
-  border-radius: var(--border-radius-card);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--panel-background-color);
+  box-shadow: var(--shadow-x-small);
+  border: solid var(--border-width) var(--border-color);
+  border-radius: var(--border-radius);
+
+  &__image {
+    display: flex;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    margin: calc(-1 * var(--border-width));
+    overflow: hidden;
+  }
 }
