@@ -23,14 +23,14 @@ module VideosHelper
     link_to external_song_attributes,
       root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
       "data-turbo-frame": "_top",
-      class: "tag tag-sm"
+      class: "tag tag--sm"
   end
 
   def link_to_song_slug(song_attributes, video)
     link_to song_attributes,
       root_path(song: video.song.slug),
       "data-turbo-frame": "_top",
-      class: "tag tag-sm"
+      class: "tag tag--sm"
   end
 
   def link_to_song(el_recodo_attributes, external_song_attributes, video)

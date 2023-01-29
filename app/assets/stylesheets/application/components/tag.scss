@@ -1,31 +1,22 @@
 .tag {
   display: inline-block;
   border-radius: 3px;
-  padding: 0.2em 0.5em 0.3em;
+  padding: var(--spacing-xxxs) var(--spacing-xxxs);
   border-radius: 3px;
   background: var(--color-neutral-100);
   color: var(--color-neutral-900);
   font-weight: 600;
-  margin: 0.25em 0.3em;
-}
+  margin: var(--spacing-xxxs) var(--spacing-xxxs);
 
-h1.tag {
-  margin-left: 0;
-  margin-right: 0;
-}
+  &--sm {
+    font-size: 0.7em;
+    display: inline-block;
+    letter-spacing: 0.15ch;
+    font-weight: 400;
+  }
 
-.tag-sm {
-  font-size: 0.7em;
-  display: inline-block;
-  letter-spacing: 0.15ch;
-  font-weight: 400;
-}
-
-.tag-lg {
-  font-size: 1.2em;
-  border-radius: 4px;
-}
-
-.tag-bg {
-  background: var(--background);
+  &--lg {
+    font-size: 1.2em;
+    border-radius: 4px;
+  }
 }
