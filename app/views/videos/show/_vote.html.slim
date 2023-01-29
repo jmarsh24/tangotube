@@ -1,5 +1,5 @@
 div id="#{dom_id(@video)}_vote"
-  .like-buttons
+  .stack.stack--line
     = render "videos/show/upvote_link", video: @video
     = render "videos/show/downvote_link", video: @video
     = render "videos/show/bookmark_link", video: @video

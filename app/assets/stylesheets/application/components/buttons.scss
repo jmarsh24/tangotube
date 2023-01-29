@@ -12,6 +12,7 @@
   transition: background-color 0.2s;
   text-decoration: none;
   position: relative;
+  white-space: nowrap;
 
   & > input {
     position: absolute;
