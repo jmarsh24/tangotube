@@ -4,7 +4,7 @@
     = f.text_field :query
     = f.submit 'Search'
 = link_to "New couple", new_couple_path
-h1 Couples
+h1.heading-1.heading-1--boldCouples
 #couples.couples
   - @couples.each do |couple|
     = render couple

@@ -13,7 +13,7 @@
               = button_to t(".dropdown_button")
               div
                 = link_to edit_event_path(@event) do
-                  h2 Edit
+                  h2.heading-2.heading-2--boldEdit
                 = button_to t(".delete"), @event, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }
       .index-container
         = turbo_frame_tag :videos, src: videos_path(event: @event.slug)

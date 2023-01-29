@@ -4,7 +4,7 @@
     = f.text_field :q
     = f.submit 'Search'
 = link_to "New event", new_event_path
-h1 Events
+h1.heading-1.heading-1--boldEvents
 #events
   - @events.each do |event|
     = render event

@@ -4,7 +4,7 @@ class Event::Tangopolix::Page
   TANGOPOLIX_URL_PREFIX =
     "https://www.tangopolix.com/archived-events/page-"
   TANGOPOLIX_ARTICLE_METADATA_HTML_MARKER = "article"
-  TANGOPOLIX_TITLE_HTML_MARKER = "h1 a"
+  TANGOPOLIX_TITLE_HTML_MARKER = "h1.heading-1.heading-1--bolda"
   TANGOPOLIX_DATE_HTML_MARKER = "span.uk-icon-calendar"
   TANGOPOLIX_LOCATION_HTML_MARKER = "span.uk-icon-medium"
   TANGOPOLIX_CATEGORY_HTML_MARKER = "div.uk-vertical-align-bottom a"

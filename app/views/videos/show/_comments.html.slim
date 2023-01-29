@@ -1,5 +1,5 @@
 #comments
-  h3 Comments
+  h3.heading-3.heading-3--boldComments
     - if user_signed_in?
       = render partial: "comments/form", commentable: @video
       - if params[:comment]
