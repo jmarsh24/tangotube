@@ -2,7 +2,7 @@
   position: absolute;
   top: 45px;
   left: 0px;
-  background-color: #fff;
+  background-color: var(--color-neutral-0);
   padding-top: 16px;
   font-size: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -18,21 +18,21 @@
   list-style-type: none;
   border-radius: 4px;
   a {
-    color: rgb(82, 82, 91);
+    color: var(--color-neutral-1000);
     display: block;
     padding: 4px 24px 4px 10px;
 
     &:hover {
-      color: rgb(82, 82, 91);
+      color: var(--color-neutral-800);
     }
 
-    &[aria-selected="true"] {
-      background-color: rgb(212, 212, 216);
+    &[aria-selected='true'] {
+      background-color: var(--color-neutral-50);
       border-radius: 4px;
     }
   }
 }
 
 .search_results ul li:hover {
-  background: rgb(212, 212, 216);
+  background: var(--color-neutral-50);
 }
