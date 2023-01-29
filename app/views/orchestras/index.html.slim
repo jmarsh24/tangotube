@@ -4,7 +4,7 @@
     = f.text_field :query
     = f.submit "Search"
 = link_to "New orchestra", new_orchestra_path
-h1.heading-1.heading-1--boldOrchestras
+h1.heading-1.heading-1--bold Orchestras
 #orchestras.orchestras
   - @orchestras.each do |orchestra|
     = render orchestra

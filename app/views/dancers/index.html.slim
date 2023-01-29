@@ -5,7 +5,7 @@
       = f.text_field :query
       = f.submit 'Search'
   = link_to "New dancer", new_dancer_path
-  h1.heading-1.heading-1--boldDancers
+  h1.heading-1.heading-1--bold Dancers
   div id="dancers" class="dancers"
     - @dancers.each do |dancer|
       = render dancer
