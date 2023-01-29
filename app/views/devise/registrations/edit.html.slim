@@ -1,5 +1,5 @@
 .login-page
-  = form_with model: resource, url: user_session_path, local: true do |f|
+  = form_with model: resource, url: user_session_path, local: true, class: "stack" do |f|
     .stack.stack--xs.stack--tablet-xs
       .file-upload
         = f.file_field :avatar, class: "file-upload__input"
