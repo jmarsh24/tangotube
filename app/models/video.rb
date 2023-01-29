@@ -347,6 +347,6 @@ class Video < ApplicationRecord
   end
 
   def thumbnail_url
-    "https://i3.ytimg.com/vi/#{youtube_id}/maxresdefault.jpg"
+    "https://i.ytimg.com/vi/#{youtube_id}/hq720.jpg"
   end
 end
