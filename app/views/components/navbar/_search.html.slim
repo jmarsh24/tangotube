@@ -2,5 +2,5 @@
   = f.search_field :query, class: "input input__input input--search", value: params[:query], placeholder: t(".search.placeholder", total_videos_count: number_with_delimiter(@videos_total)), autocomplete: "off", spellcheck: "false", required: true, data: { action: "focus->combobox#start input->form#submit", "combobox-target": "input", "form-target": "input" }
   = f.button name: "", class: "button button--secondary button--search" do
     .icon.icon--magnifying-glass
-  div id="search_results" class="search_results" target="_top" data-combobox-target="window" class="isHidden" data-action="click@window->combobox#stop"
+  div id="search_results" class="search_results" target="_top" data-combobox-target="window" class="hidden" data-action="click@window->combobox#stop"
     ul role="listbox" data-combobox-target="list"
