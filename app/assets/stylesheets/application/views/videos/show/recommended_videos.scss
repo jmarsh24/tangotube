@@ -1,23 +1,17 @@
 .recommended-videos-card {
-
   &__header {
-
   }
 
   &__close {
-
   }
 
   &__open {
-
   }
 
   &__content {
-
   }
 
   &.active {
-
   }
 }
 
@@ -46,7 +40,7 @@
   }
 
   &.active {
-    background-color: var(--background-neutral-800);
+    background-color: var(--color-neutral-200);
   }
 }
 
@@ -64,7 +58,7 @@
 .recommended-videos__header {
   border-bottom: 1px solid #c2c2c2;
   margin-bottom: 10px;
-  color: var(--background-neutral-200);
+  color: var(--color-neutral-800);
 
   h2 {
     margin-top: 0;

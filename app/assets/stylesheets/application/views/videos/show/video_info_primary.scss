@@ -2,7 +2,7 @@
   h1 {
     text-decoration: none;
     font-size: inherit;
-    color: var(--background-neutral-200);
+    color: var(--color-neutral-800);
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0.2em 0;
@@ -27,7 +27,7 @@
 
 .show-channel-title {
   font-size: 0.8rem;
-  color: var(--background-neutral-200);
+  color: var(--color-neutral-800);
 }
 
 .show-video-channel {
@@ -38,16 +38,16 @@
     margin-bottom: 0.1em;
     text-decoration: none;
     transition: color 150ms;
-    color: var(--background-neutral-200);
+    color: var(--color-neutral-800);
   }
 
   a:hover {
-    color: var(--background-neutral-200);
+    color: var(--color-neutral-800);
   }
 }
 
 .show-video-metadata {
-  color: var(--background-neutral-200);
+  color: var(--color-neutral-800);
   font-size: 0.7rem;
 }
 
@@ -67,8 +67,8 @@
   width: 100%;
 
   input {
-    background-color: var(--sl-color-neutral-0);
-    color: var(--sl-color-gray-800);
+    background-color: var(--color-neutral-0);
+    color: var(--color-gray-200);
   }
 
   .copy-to-clipboard {
@@ -96,7 +96,7 @@
       height: 100%;
 
       svg {
-        fill: var(--sl-color-gray-800);
+        fill: var(--color-gray-200);
       }
     }
   }
@@ -107,7 +107,7 @@
     gap: 24px;
     font-size: 14px;
     overflow-x: auto;
-    color: var(--sl-color-gray-800);
+    color: var(--color-gray-200);
 
     button {
       padding: 0px;
@@ -123,13 +123,13 @@
     margin-top: 15px;
 
     input {
-      background-color: var(--sl-color-neutral-0);
-      color: var(--sl-color-gray-800);
+      background-color: var(--color-neutral-0);
+      color: var(--color-gray-200);
     }
 
     select {
-      background-color: var(--sl-color-neutral-0);
-      color: var(--sl-color-gray-800);
+      background-color: var(--color-neutral-0);
+      color: var(--color-gray-200);
     }
 
     .youtube-controls-time {
@@ -139,14 +139,14 @@
       .input {
         width: 100%;
         width: 60px;
-        background-color: var(--sl-color-neutral-0);
+        background-color: var(--color-neutral-1000);
       }
     }
 
     .select {
       height: 40px;
       line-height: 40px;
-      background-color: var(--sl-color-neutral-0);
+      background-color: var(--color-neutral-1000);
     }
 
     .spacer {

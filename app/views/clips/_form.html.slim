@@ -2,7 +2,7 @@
 - end_seconds = local_assigns[:end_seconds]
 - playback_rate = local_assigns[:playback_rate]
 = form_with(model: [@video, clip]) do |f|
-  div style="display: flex; flex-direction: column; gap: 10px; background-color: var(--sl-color-neutral-50); padding: 10px; overflow: visible;"
+  div style="display: flex; flex-direction: column; gap: 10px; background-color: var(--color-neutral-50); padding: 10px; overflow: visible;"
     - if clip.errors.any?
       .error-message
         = clip.errors.full_messages.to_sentence.capitalize
