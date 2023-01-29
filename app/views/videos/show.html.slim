@@ -8,15 +8,15 @@
       .video-responsive-container
         .video-responsive
           div data-youtube-target="frame"
-    .video-info-container
-      = render partial: "videos/show/video_info_primary"
-      .video-info-container-secondary
-        .video-info-details-main
-          = render partial: "videos/show/video_info_details"
-          = render partial: "videos/show/lyrics" if @video.song.present? && @video.song.lyrics.present?
-        .recommended-videos-section
-          = render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance, header: "Videos from this Performance" }
-          = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_dancers, header: "Videos from #{@video.leaders.first.name.titleize} & #{@video.followers.first.name.titleize}" } if @video.leaders.present? && @video.followers.present?
-          = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event, header: "Videos from #{@video.event.title}" } if @video.event.present?
-          = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song, header: "Videos with #{@video.song.title.titleize} by #{@video.song.artist.titleize}" } if @video.song.present?
-          = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel, header: "Videos from #{@video.channel.title}" }
+    = render partial: "videos/show/video_info_primary"
+    .columns
+      .column
+        = render partial: "videos/show/video_info_details"
+      .column
+        = render partial: "videos/show/lyrics" if @video.song.present? && @video.song.lyrics.present?
+      .column
+        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance, header: "Videos from this Performance" }
+        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_dancers, header: "Videos from #{@video.leaders.first.name.titleize} & #{@video.followers.first.name.titleize}" } if @video.leaders.present? && @video.followers.present?
+        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event, header: "Videos from #{@video.event.title}" } if @video.event.present?
+        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song, header: "Videos with #{@video.song.title.titleize} by #{@video.song.artist.titleize}" } if @video.song.present?
+        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel, header: "Videos from #{@video.channel.title}" }

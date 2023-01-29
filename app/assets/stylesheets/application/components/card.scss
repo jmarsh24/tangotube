@@ -7,6 +7,28 @@
   border-radius: var(--border-radius);
   font-size: var(--font-size-sm);
 
+  &--compact {
+    flex-direction: row;
+    padding: var(--spacing-xxs) 0px;
+
+    &__image {
+      max-width: 168px;
+      width: 100%;
+      flex: none;
+      position: relative;
+      display: flex;
+      overflow: hidden;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    &__body {
+      padding: 0px;
+    }
+  }
+
   &__image {
     position: relative;
     display: flex;
@@ -14,7 +36,7 @@
     aspect-ratio: 16 / 9;
 
     img {
-      width: 100%;
+      max-width: 100%;
     }
 
     &::after {
@@ -26,7 +48,6 @@
       bottom: 5px;
       padding: 0 0.3em;
       border-radius: 0.3em;
-      font-size: 0.7rem;
     }
   }
 
@@ -38,7 +59,6 @@
     top: 5px;
     padding: 0.1em 0.3em;
     border-radius: 0.3em;
-    font-size: 0.7rem;
     z-index: 1;
   }
 
@@ -51,6 +71,7 @@
   &__body {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: var(--spacing-xxxs);
     padding: var(--spacing-xxs) 0;
   }

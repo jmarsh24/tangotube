@@ -1,0 +1,12 @@
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 var(--spacing-xs);
+  gap: var(--spacing-md);
+
+  &__column {
+    padding: 16px;
+    margin: 5px;
+    background-color: #cccccc;
+  }
+}
