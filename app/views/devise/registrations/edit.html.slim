@@ -8,9 +8,9 @@
           img.w-picker src=avatar_url_for(resource, opts = {})
           footer.stack.stack--line.stack--justify-right
             label.button.button--link.button--sm.button--tablet-md for="avatar" = t(".replace_image")
-      = f.input :first_name, as: :string, autocomplete: "off", class: "input input__input input--text"
-      = f.input :last_name, as: :string, autocomplete: "off", class: "input input__input input--text"
-      = f.input :email, as: :email, class: "input input__input input--email"
-      = f.input :password, as: :password, class: "input input__input input--text"
+      = f.input :first_name, as: :string, autocomplete: "off", class: "form form__input input--text"
+      = f.input :last_name, as: :string, autocomplete: "off", class: "form form__input input--text"
+      = f.input :email, as: :email, class: "form form__input input--email"
+      = f.input :password, as: :password, class: "form form__input input--text"
       = f.submit t(".save"), class: "button button--primary"
 

@@ -1,5 +1,5 @@
 #menu-sorting-filters data-toggle-target="sorting"
-  h2 Sort By
+  h4.heading-4.dropdown__label Sort By
   = sortable 'videos.performance_date', "desc",  "Recent First", @sort_column, @sort_direction
 
   = sortable 'videos.performance_date', "asc", "Oldest First", @sort_column, @sort_direction
@@ -9,7 +9,7 @@
   = sortable "videos.popularity", "desc",  "Trending", @sort_column, @sort_direction
 
   = sortable "videos.like_count", "desc",  "Most Liked", @sort_column, @sort_direction
-  h2 Group By
+  h4.heading-4.dropdown__label Group By
   = sortable 'song.title', "asc", "Song", @sort_column, @sort_direction
 
   = sortable 'song.orchestra', "asc",  "Orchestra", @sort_column, @sort_direction

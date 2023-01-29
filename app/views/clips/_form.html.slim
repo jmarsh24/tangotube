@@ -6,7 +6,7 @@
     - if clip.errors.any?
       .error-message
         = clip.errors.full_messages.to_sentence.capitalize
-    = f.text_field :title, placeholder: t(".clips_input_placeholder"), class: "input input__input"
+    = f.text_field :title, placeholder: t(".clips_input_placeholder"), class: "form form__input"
       - if user_signed_in?
         label
           Tags

@@ -3,7 +3,11 @@
   display: inline-block;
   z-index: var(--z-dropdown);
 
-  .dropdown__item {
+  &__label {
+    padding: var(--spacing-xxs) var(--spacing-sm);
+  }
+
+  &__item {
     border-left: 1px solid var(--color-neutral-200);
 
     &:first-child {

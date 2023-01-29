@@ -1,7 +1,7 @@
 doctype html
 html lang=I18n.locale
   = render "components/head"
-  body class=Rails.env data-controller="reveal" data-reveal-hidden-class="closed"
+  body class=Rails.env class="dark-mode" data-controller="reveal" data-reveal-hidden-class="closed"
     = render "components/navbar"
     = render "components/drawer"
     = yield

@@ -1,5 +1,5 @@
 #menu-additional-filters
-  h2 Addition Filters
+  h4.heading-4.dropdown__label Addition Filters
   - if current_user
     .dropdown__menu__item
       = button_tag class: "dropdown__menu__item", data: { controller: "filter", action: "filter#filter dropdown#toggle", "filter-watched-value": filtering_params["watched"] == "true" ? 0 : "true" } do
