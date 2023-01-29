@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/nerdgeschoss/shimmer.git
+  revision: 8190c025144b9dea090d0cd7c7289976c135d58e
+  branch: feature/add_update_action_to_remote_navigation
+  specs:
+    shimmer (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -317,7 +324,7 @@ GEM
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oauth2.heading-2.heading-2--bold(2.0.9)
+    oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
       multi_xml (~> 0.5)
@@ -330,14 +337,14 @@ GEM
       rack (>= 2.2.3)
       rack-protection
     omniauth-facebook (9.0.0)
-      omniauth-oauth2.heading-2.heading-2--bold(~> 1.2)
-    omniauth-google-oauth2.heading-2.heading-2--bold(1.1.1)
+      omniauth-oauth2 (~> 1.2)
+    omniauth-google-oauth2 (1.1.1)
       jwt (>= 2.0)
-      oauth2.heading-2.heading-2--bold(~> 2.0.6)
+      oauth2 (~> 2.0.6)
       omniauth (~> 2.0)
-      omniauth-oauth2.heading-2.heading-2--bold(~> 1.8.0)
-    omniauth-oauth2.heading-2.heading-2--bold(1.8.0)
-      oauth2.heading-2.heading-2--bold(>= 1.4, < 3)
+      omniauth-oauth2 (~> 1.8.0)
+    omniauth-oauth2 (1.8.0)
+      oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
     omniauth-rails_csrf_protection (1.0.1)
       actionpack (>= 4.2)
@@ -467,7 +474,7 @@ GEM
     rspec-support (3.12.0)
     rspotify (2.11.1)
       addressable (~> 2.8.0)
-      omniauth-oauth2.heading-2.heading-2--bold(>= 1.6)
+      omniauth-oauth2 (>= 1.6)
       rest-client (~> 2.0.2)
     rubocop (1.42.0)
       json (~> 2.3)
@@ -514,7 +521,6 @@ GEM
     serviceworker-rails (0.6.0)
       railties (>= 3.1)
     shellany (0.0.1)
-    shimmer (0.0.27)
     sidekiq (6.5.5)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -692,7 +698,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   serviceworker-rails
-  shimmer
+  shimmer!
   sidekiq
   sidekiq-scheduler
   sidekiq-throttled
