@@ -25,11 +25,11 @@
   }
 
   &--primary {
-    color: var(--color-neutral-0);
+    color: var(--color-neutral-1000);
     background-color: var(--color-primary-500);
 
     &:hover {
-      background-color: var(--color-primary-400);
+      background-color: var(--color-primary-600);
     }
 
     &:disabled {
@@ -38,17 +38,17 @@
   }
 
   &--secondary {
-    background-color: var(--color-neutral-300);
-    border-color: var(--color-neutral-300);
+    background-color: var(--color-neutral-400);
+    border-color: var(--color-neutral-400);
     color: var(--color-neutral-0);
 
     &:hover {
       color: var(--color-neutral-0);
-      background-color: var(--color-neutral-400);
+      background-color: var(--color-neutral-600);
     }
 
     &.active {
-      background-color: var(--color-neutral-400);
+      background-color: var(--color-neutral-500);
     }
   }
 
