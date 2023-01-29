@@ -4,7 +4,7 @@
     a.navbar__item.navbar__item--logo href=root_path
   #center.navbar__item.navbar__item--search = render "components/navbar/search"
   #end.navbar__item.navbar__item--links
-    .button.icon.icon--sun-max
+    .button.icon.icon--sun-max data-controller="dark-mode" data-action="click->dark-mode#toggle"
     - if current_user.present? && user_signed_in?
       .dropdown data-controller="dropdown"
         button class="button" data-action="dropdown#toggle click@window->dropdown#hide"

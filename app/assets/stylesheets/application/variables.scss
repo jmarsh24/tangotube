@@ -13,16 +13,12 @@ $sizes: (
   'mega-2': 96px,
 );
 
-$icons: 'arrow-down', 'arrow-up',
-        'bookmark-fill', 'bookmark', 'burger',
-        'clock-fill', 'clock', 'close',
-        'facebook', 'google', 'heart-fill',
-        'heart', 'house-fill', 'magnifying-glass',
-        'safari', 'safari-fill','scissors-circle-fill',
-        'scissors-circle', 'scissors', 'star-filled',
-        'star','sun-max-full', 'sun-max', 'square-and-arrow-up',
-        'thumbs-down-fill', 'thumbs-down', 'thumbs-up-fill',
-        'thumbs-up';
+$icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
+  'clock-fill', 'clock', 'close', 'facebook', 'google', 'heart-fill', 'heart',
+  'house-fill', 'magnifying-glass', 'safari', 'safari-fill',
+  'scissors-circle-fill', 'scissors-circle', 'scissors', 'star-filled', 'star',
+  'sun-max-fill', 'sun-max', 'square-and-arrow-up', 'thumbs-down-fill',
+  'thumbs-down', 'thumbs-up-fill', 'thumbs-up';
 
 // Breakpoints
 @mixin breakpoint-tablet {
@@ -56,9 +52,7 @@ $icons: 'arrow-down', 'arrow-up',
 }
 
 :root {
-
-  @each $size-name,
-  $size-value in $sizes {
+  @each $size-name, $size-value in $sizes {
     --spacing-#{$size-name}: #{$size-value};
   }
 
@@ -73,14 +67,14 @@ $icons: 'arrow-down', 'arrow-up',
   --background-primary-900: #ffcece;
   --background-primary-950: #ffeaea;
   --background-sky-500: #7bc1fd;
-  --background-sky-400: #1689CC;
+  --background-sky-400: #1689cc;
   --background-neutral-50: #242428;
   --background-neutral-100: #2c2c31;
   --background-neutral-200: #36363b;
-  --background-neutral-300: #43434A;
+  --background-neutral-300: #43434a;
   --background-neutral-400: #56565f;
-  --background-neutral-500: #6C6C74;
-  --background-neutral-700: #b6b6bE;
+  --background-neutral-500: #6c6c74;
+  --background-neutral-700: #b6b6be;
   --background-neutral-800: #d3d3d9;
   --background-neutral-900: #e8e8ec;
   --background-neutral-950: #f2f2f2;
@@ -123,8 +117,8 @@ $icons: 'arrow-down', 'arrow-up',
   --text-button-secondary-hover: var(--background-secondary-100);
   --background-icon-success-base: #18c371;
 
-  --border-radius-input: .5rem;
-  --border-radius-input-sm: .25rem;
+  --border-radius-input: 0.5rem;
+  --border-radius-input-sm: 0.25rem;
   --border-radius-card: 20px;
   --border-radius-card-sm: 16px;
   --border-radius-card-xs: 4px;
