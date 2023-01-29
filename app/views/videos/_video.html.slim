@@ -12,14 +12,14 @@
     .video-card__details
       .video-card__details__title
         - video.dancers.each do |dancer|
-          = link_to dancer, class: "tag tag-sm", "data-turbo-frame": "_top" do
+          = link_to dancer, class: "tag tag--sm", "data-turbo-frame": "_top" do
             = dancer.name
       - if video.display.any_song_attributes.present?
         .video-card__details__item
           = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)
       - if video.event.present?
         .video-card__details__item
-          = link_to video.event, class: "tag tag-sm", "data-turbo-frame": "_top" do
+          = link_to video.event, class: "tag tag--sm", "data-turbo-frame": "_top" do
             = video.event.title.titleize
         .video-card__details__channel
           = link_to image_tag(video.channel.thumbnail_url, class: "video-card__details__channel__icon"), root_path(channel: video.channel.channel_id), { "data-turbo-frame": "_top" } if video.channel.thumbnail_url.present?
