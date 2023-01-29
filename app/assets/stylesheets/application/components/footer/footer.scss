@@ -1,10 +1,12 @@
 .footer {
   position: fixed;
   bottom: 0;
-  background: black;
+  background: var(--color-neutral-100);
   width: 100%;
   z-index: var(--z-footer);
-  height: 40px;
+  height: 48px;
+  display: flex;
+  align-items: center;
 
   &__spacer {
     height: 40px;

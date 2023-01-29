@@ -6,7 +6,6 @@
     minmax(0, 2256px)
     0
     minmax(var(--container-gap), 1fr);
-  background-color: var(--color-neutral-0);
 
   & > * {
     grid-column: 3/3;
