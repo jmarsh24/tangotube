@@ -42,8 +42,8 @@
 .videos-sortable-button {
   display: flex;
   width: 100%;
-  color: var(--sl-color-gray-800);
-  background-color: var(--sl-color-gray-600);
+  color: var(--color-gray-800);
+  background-color: var(--color-gray-600);
   justify-content: flex-start;
   align-items: center;
   padding: 6px 24px 6px 0px;
@@ -53,15 +53,15 @@
   border-radius: 2px;
   cursor: pointer;
   &:hover {
-    background-color: var(--sl-color-gray-200);
+    background-color: var(--color-gray-200);
   }
 }
 
 .additional-filters-button {
   display: flex;
   width: 100%;
-  color: var(--sl-color-gray-800);
-  background-color: var(--sl-color-gray-600);
+  color: var(--color-gray-800);
+  background-color: var(--color-gray-600);
   justify-content: flex-start;
   align-items: center;
   padding: 6px 24px 6px 24px;
@@ -71,7 +71,7 @@
   border-radius: 2px;
   cursor: pointer;
   &:hover {
-    // color: var(--sl-color-gray-900);
-    background-color: var(--sl-color-gray-200);
+    // color: var(--color-gray-900);
+    background-color: var(--color-gray-200);
   }
 }

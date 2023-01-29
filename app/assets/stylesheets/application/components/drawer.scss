@@ -1,10 +1,10 @@
 .drawer {
   height: 100%;
   width: 240px;
-  position: fixed;;
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: #ffffff;
+  background: var(--color-neutral-0);
   overflow-x: hidden;
   padding-top: 56px;
   transition: 0.5s;

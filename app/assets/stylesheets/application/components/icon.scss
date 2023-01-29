@@ -10,6 +10,7 @@ $icon-sizes: (
   height: map-get($icon-sizes, 'md');
   width: map-get($icon-sizes, 'md');
   flex-shrink: 0;
+  color: var(--color-neutral-1000);
 
   @each $size-name, $size-value in $icon-sizes {
     &--#{$size-name} {
@@ -22,9 +23,5 @@ $icon-sizes: (
     &--#{$icon} {
       mask-image: url('@assets/images/icons/#{$icon}.svg');
     }
-  }
-
-  &--green {
-    color: #27ae60;
   }
 }

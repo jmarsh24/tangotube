@@ -7,7 +7,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--background-neutral-950);
+  background-color: var(--color-neutral-100);
 
   #start {
     display: flex;
@@ -31,12 +31,12 @@
 
     &--logo {
       &::before {
-          display: block;
-          content: '';
-          width: 112px;
-          height: 22px;
-          background-image: url('@assets/images/app_logo.svg');
-        }
+        display: block;
+        content: '';
+        width: 112px;
+        height: 22px;
+        background-image: url('@assets/images/app_logo.svg');
+      }
     }
 
     &--search {
@@ -62,7 +62,6 @@
       display: flex;
       gap: 10px;
     }
-
   }
 
   &__overlay {

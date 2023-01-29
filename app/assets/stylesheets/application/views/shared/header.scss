@@ -5,8 +5,8 @@
   position: sticky;
   justify-content: space-between;
   padding: 0 16px;
-  background-color: var(--sl-color-neutral-50);
-  color: var(--sl-color-gray-800);
-  z-index: calc(var(--sl-z-index-drawer) - 1);
+  background-color: var(--color-neutral-50);
+  color: var(--color-gray-800);
+  z-index: calc(var(--z-index-drawer) - 1);
   height: 56px;
 }

@@ -67,10 +67,10 @@
       font-weight: 600;
 
       a {
-        color: var(--sl-color-gray-700);
+        color: var(--color-gray-700);
 
         &:hover {
-          color: var(--sl-color-gray-900);
+          color: var(--color-gray-900);
         }
       }
 
@@ -90,10 +90,10 @@
       align-items: center;
 
       a {
-        color: var(--background-neutral-500);
+        color: var(--color-neutral-500);
 
         &:hover {
-          color: var(--background-neutral-300);
+          color: var(--color-neutral-300);
         }
       }
 
@@ -102,12 +102,12 @@
         border-radius: 50%;
         width: 18px;
         height: 18px;
-        background-color: var(--background-neutral-800);
+        background-color: var(--color-neutral-800);
       }
     }
 
     &__metadata {
-      color: var(--background-neutral-500);
+      color: var(--color-neutral-500);
       font-size: 0.7rem;
 
       @media (max-width: 768px) {

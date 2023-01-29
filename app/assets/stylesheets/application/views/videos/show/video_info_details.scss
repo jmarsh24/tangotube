@@ -15,14 +15,14 @@
 
 .detail-section-label {
   width: 100%;
-  color: var(--background-neutral-200);
+  color: var(--color-neutral-800);
 }
 
 .detail-row {
   display: flex;
   flex-direction: row;
   width: 100%;
-  border-bottom: 1px solid var(--background-neutral-800);
+  border-bottom: 1px solid var(--color-neutral-200);
   padding: 0.5em 0;
 
   &:last-child {
@@ -41,13 +41,13 @@
   text-align: left;
   font-weight: 600;
   font-size: 0.8rem;
-  color: var(--background-neutral-200);
+  color: var(--color-neutral-800);
 }
 
 .detail-item-value {
   text-align: right;
   font-size: 0.8rem;
-  color: var(--background-neutral-200);
+  color: var(--color-neutral-800);
 }
 
 .detail-item-value {
