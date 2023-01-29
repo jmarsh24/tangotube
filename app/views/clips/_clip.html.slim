@@ -1,20 +1,23 @@
-= turbo_frame_tag clip, class: "video-container" do
+= turbo_frame_tag clip, class: "card" do
   = link_to watch_path(v: clip.video.youtube_id, start: clip.start_seconds, end: clip.end_seconds, speed: clip.playback_rate), 'data-turbo-frame': "_top" do
-    .thumbnail data-duration="#{clip.end_seconds - clip.start_seconds} sec"
+    .card__image data-duration="#{clip.end_seconds - clip.start_seconds} sec"
       = image_tag clip.giphy_url, class: "thumbnail-image"
-  div style="display: flex; flex-direction: column; gap: 5px;"
-    = link_to watch_path(v: clip.video.youtube_id, start: clip.start_seconds, end: clip.end_seconds, speed: clip.playback_rate), 'data-turbo-frame': "_top" do
-      = clip.title if clip.title.present?
-    = clip.video.song.genre.titleize if clip.video.song.present?
-    = clip.video.leaders.first.full_name if clip.video.leaders.present?
-    = "&" if clip.video.leaders.present? && clip.video.followers.present?
-    = clip.video.followers.first.full_name if clip.video.followers.present?
-    = clip.user.first_name if clip.user.present?
-    .row style="gap: 5px;"
+  .card__body
+    .stack.stack--xxs
+      = link_to watch_path(v: clip.video.youtube_id, start: clip.start_seconds, end: clip.end_seconds, speed: clip.playback_rate), 'data-turbo-frame': "_top" do
+        = clip.title if clip.title.present?
+      div
+        = clip.video.song.genre.titleize if clip.video.song.present?
+      = clip.video.leaders.first.full_name if clip.video.leaders.present?
+      = " & " if clip.video.leaders.present? && clip.video.followers.present?
+      = clip.video.followers.first.full_name if clip.video.followers.present?
+      div
+        = clip.user.first_name if clip.user.present?
+    .stack.stack--line.stack--xxs
       - if clip.tag_list.present?
         - clip.tag_list.each do |tag|
           div
-            = link_to clips_path(tag: tag.parameterize), 'data-turbo-frame': "_top" do
+            = link_to clips_path(tag: tag.parameterize), 'data-turbo-frame': "_top", class: "tag tag--sm" do
               = tag.titleize
     - if current_user == clip.user || current_user.try(:admin?)
       = link_to "Edit Clip", edit_video_clip_path(clip.video, clip)
