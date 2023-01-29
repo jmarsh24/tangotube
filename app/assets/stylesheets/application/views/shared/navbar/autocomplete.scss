@@ -8,31 +8,36 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 100000000000;
   border-radius: 4px;
-}
-.search_results ul {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-.search_results ul li {
-  list-style-type: none;
-  border-radius: 4px;
-  a {
-    color: var(--color-neutral-1000);
-    display: block;
-    padding: 4px 24px 4px 10px;
 
-    &:hover {
-      color: var(--color-neutral-800);
+  &.hidden {
+    display: none;
+  }
+
+  ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul li {
+    list-style-type: none;
+    border-radius: 4px;
+    a {
+      color: var(--color-neutral-1000);
+      display: block;
+      padding: 4px 24px 4px 10px;
+
+      &:hover {
+        color: var(--color-neutral-800);
+      }
+
+      &[aria-selected='true'] {
+        background-color: var(--color-neutral-50);
+        border-radius: 4px;
+      }
     }
-
-    &[aria-selected='true'] {
-      background-color: var(--color-neutral-50);
-      border-radius: 4px;
+    ul li:hover {
+      background: var(--color-neutral-50);
     }
   }
-}
-
-.search_results ul li:hover {
-  background: var(--color-neutral-50);
 }

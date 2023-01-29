@@ -1,9 +1,16 @@
 import { Controller } from '@hotwired/stimulus';
 import Combobox from '@github/combobox-nav';
+import { useClickOutside } from 'stimulus-use';
 
 export default class extends Controller {
-  static get targets() {
-    return ['input', 'list', 'window'];
+  inputTarget!: HTMLInputElement;
+  listTarget!: HTMLUListElement;
+  windowTarget!: HTMLDivElement;
+
+  static targets = ['input', 'list', 'window'];
+
+  connect() {
+    useClickOutside(this, { element: this.element });
   }
 
   disconnect() {
@@ -16,17 +23,21 @@ export default class extends Controller {
 
   hidden() {
     if (this.listTarget.innerHTML.trim().length == 0) {
-      this.windowTarget.classList.add('isHidden');
+      this.windowTarget.classList.add('hidden');
     }
     if (this.listTarget.innerHTML.trim().length > 0) {
-      this.windowTarget.classList.remove('isHidden');
+      this.windowTarget.classList.remove('hidden');
     }
     if (this.inputTarget.value.trim().length == 0) {
-      this.windowTarget.classList.add('isHidden');
+      this.windowTarget.classList.add('hidden');
     }
     if (this.inputTarget.value.trim().length > 0) {
-      this.windowTarget.classList.remove('isHidden');
+      this.windowTarget.classList.remove('hidden');
     }
+  }
+
+  clickOutside() {
+    this.windowTarget.classList.add('hidden');
   }
 
   start() {
@@ -37,7 +48,7 @@ export default class extends Controller {
   }
 
   stop() {
-    this.windowTarget.classList.add('isHidden');
+    this.windowTarget.classList.add('hidden');
     this.combobox?.stop();
   }
 }
