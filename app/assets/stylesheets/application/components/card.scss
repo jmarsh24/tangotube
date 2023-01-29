@@ -9,8 +9,12 @@
   &__image {
     position: relative;
     display: flex;
-    aspect-ratio: 16 / 9;
     overflow: hidden;
+    aspect-ratio: 16 / 9;
+
+    img {
+      width: 100%;
+    }
 
     &::after {
       content: attr(data-duration);
