@@ -14,9 +14,6 @@ class SearchSuggestionsController < ApplicationController
         .uniq
         .first(10)
         .map(&:titleize)
-
-    respond_to do |format|
-      format.turbo_stream
-    end
+    ui.update "search_results", with: "search_suggestions/search_results", search_results: @search_results
   end
 end
