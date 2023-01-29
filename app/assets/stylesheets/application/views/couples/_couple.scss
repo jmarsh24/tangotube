@@ -13,14 +13,14 @@
 
   &__body {
     font-size: 14px;
-    padding: var(--sl-spacing-small);
-    background-color: var(--sl-color-neutral-0);
+    padding: var(--spacing-small);
+    background-color: var(--color-neutral-0);
   }
 
   &__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--sl-spacing-small);
+    padding: var(--spacing-small);
   }
 }

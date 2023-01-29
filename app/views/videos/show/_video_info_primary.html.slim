@@ -19,7 +19,7 @@
         = turbo_frame_tag "new_clip" do
           = render partial: "clips/form", clip: Clip.new, start_seconds: params[:start], end_seconds: params[:end], playback_rate: params[:speed]
     .copy-to-clipboard
-      = text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}", readonly: "readonly", class: "input input__input", data: { "clipboard-target": "source" }
+      = text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}", readonly: "readonly", class: "form form__input", data: { "clipboard-target": "source" }
       button class="button button-sm button--secondary button--icon-thumbs-up button--icon-left" data-clipboard-target="button" data-action="click->clipboard#copy"
         = t(".share_button")
 

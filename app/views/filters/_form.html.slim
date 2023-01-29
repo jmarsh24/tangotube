@@ -1,6 +1,6 @@
 - cache [current_user, params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year]] do
   - options = { include_blank: true, multiple: false, autocomplete: "off" }
-  - klass = "input input__input"
+  - klass = "form form__input"
   = form_with url: root_path, method: :get, data: { controller: "autosubmit" }, class: "stack stack--line" do |f|
     = f.select :genre, options_for_select(@genres, params[:genre].presence), options, placeholder: "Any Genre...", "data-controller": "tom-select", class: klass, style: "width: 160px"
     = f.select :leader, options_for_select(@leaders, params[:leader].presence), options, placeholder: "Any Leader...", "data-controller": "tom-select", class: klass, style: "width: 240px"

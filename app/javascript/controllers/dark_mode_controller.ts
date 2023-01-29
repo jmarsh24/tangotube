@@ -18,14 +18,14 @@ export default class extends Controller {
   toggle() {
     if (this.htmlElement.classList.contains('dark-mode')) {
       this.htmlElement.classList.remove('dark-mode');
+      this.htmlElement.classList.add('light-mode');
       localStorage.setItem('darkModeStatus', 'false');
       this.element.classList.remove('icon--sun-max');
       this.element.classList.add('icon--sun-max-fill');
-      // this.element.setAttribute('name', 'sun-fill');
     } else {
       this.htmlElement.classList.add('dark-mode');
+      this.htmlElement.classList.remove('light-mode');
       localStorage.setItem('darkModeStatus', 'true');
-      // this.element.setAttribute('name', 'sun');
       this.element.classList.remove('icon--sun-max-fill');
       this.element.classList.add('icon--sun-max');
     }

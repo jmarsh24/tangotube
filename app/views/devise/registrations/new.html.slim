@@ -1,9 +1,9 @@
 .login-page
   = form_with model: resource, url: user_session_path, local: true do |f|
     .stack.stack--xs.stack--tablet-xs
-      = f.input :email, as: :email, class: "input input__input input--email"
-      = f.input :password, as: :password, class: "input input__input input--text"
+      = f.input :email, as: :email, class: "form form__input input--email"
+      = f.input :password, as: :password, class: "form form__input input--text"
       - if devise_mapping.rememberable?
-        = f.input :remember_me, as: :checkbox, class: "input input__input input--checkbox"
+        = f.input :remember_me, as: :checkbox, class: "form form__input input--checkbox"
       = f.submit t(".sign_in"), class: "button button--primary button--fill"
       = render "devise/shared/links"
