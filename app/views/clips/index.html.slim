@@ -1,10 +1,10 @@
 .index-container
   - if params.include?(:video_id)
-    h1 This Video's Clips
+    h1.heading-1.heading-1--boldThis Video's Clips
     = link_to "Back to Video", watch_path(v: @video.youtube_id)
   - else
     = link_to clips_path do
-      h1 All Clips
+      h1.heading-1.heading-1--boldAll Clips
   #clips.clips
     .video-section
       #results.video-section__videos

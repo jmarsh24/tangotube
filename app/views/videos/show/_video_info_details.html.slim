@@ -43,7 +43,7 @@ div data-controller="tabs" data-tabs-index="1"
           = t(".edit")
   .tabs__panel data={ "tabs-target": "tabPanel"}
     .detail-section-label
-      h4 Youtube Info
+      h4.heading-4.heading-4--boldYoutube Info
     = render partial: "videos/show/video_info_item", locals: { header: "Title", value:  @video.title }
     = render partial: "videos/show/video_info_item", locals: { header: "Description", value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: ""), {"data-turbo-frame": "_top"}), html: { target: "_blank" }) } if @video.description.present?
     = render partial: "videos/show/video_info_item", locals: { header: "Upload Date", value: @video.upload_date.to_formatted_s(:long) }

@@ -2,7 +2,7 @@ div style="max-width: 1660px; width: 100%;"
   div style="display: flex; align-items: flex-end; justify-content: center; gap: 16px; margin: 64px 0;"
     = image_tag orchestra_avatar(@orchestra.id), style: "margin: 16px; width: 300px; height: 300px; border-radius: 50%; object-fit: cover;"
     div
-      h1 style="font-size: 64px;"
+      h1.heading-1.heading-1--boldstyle="font-size: 64px;"
         = @orchestra.name.titleize
       = "#{@orchestra.videos_count} Total Videos"
     div style="display: flex; justify-content: space-between;"
@@ -15,7 +15,7 @@ div style="max-width: 1660px; width: 100%;"
             = button_to t(".delete"), @orchestra, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }
   div style="display: flex; gap: 16px;"
     div style="padding: 32px; 16px; max-width: 1660px;"
-      h1 Dancers
+      h1.heading-1.heading-1--boldDancers
       div style="height: 250px; width: 300px; overflow: auto;"
         = @dancers.each do |dancer|
           = link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do

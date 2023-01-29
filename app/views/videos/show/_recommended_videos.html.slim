@@ -2,7 +2,7 @@
   .recommended-videos-card data-controller="reveal" data-reveal-hidden-class="active" data-reveal-target="item"
     .recommended_videos__body data-collapsible-target="content"
       .recommended-videos-card__header
-        h2 = header
+        h2.heading-2.heading-2--bold = header
       - videos.each do |video|
         .recommended-videos-container class=(video.youtube_id == @video.youtube_id ? "active" : "")
           - if video.youtube_id == @video.youtube_id

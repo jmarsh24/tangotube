@@ -1,7 +1,7 @@
 = form_with(model: performance) do |f|
   - if performance.errors.any?
     div style="color: red"
-      h2 = "#{pluralize(performance.errors.count, "error")} prohibited this performance from being saved:"
+      h2.heading-2.heading-2--bold= "#{pluralize(performance.errors.count, "error")} prohibited this performance from being saved:"
       ul
         - performance.errors.each do |error|
           li = error.full_message

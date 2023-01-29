@@ -24,12 +24,12 @@
     color: #fff;
     background-color: rgba(0, 0, 0, 0.4);
 
-    h1 {
+    h1.heading-1.heading-1--bold {
       font-size: clamp(48px, 4vw, 81px);
       text-shadow: 3px 3px #000;
     }
 
-    h2 {
+    h2.heading-2.heading-2--bold {
       font-size: clamp(18px, 1vw, 28px);
       font-weight: 100;
     }

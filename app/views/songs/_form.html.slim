@@ -1,7 +1,7 @@
 = form_with(model: song) do |form|
   - if song.errors.any?
     <div style="color: red">
-      h2 "#{pluralize(song.errors.count, "error")}  prohibited this song from being saved:"
+      h2.heading-2.heading-2--bold"#{pluralize(song.errors.count, "error")}  prohibited this song from being saved:"
       ul
         - song.errors.each do |error|
           li

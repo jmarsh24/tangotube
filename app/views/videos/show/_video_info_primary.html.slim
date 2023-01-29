@@ -1,9 +1,9 @@
 .under-video-container
   .video-info-primary-container
     .show-video-title
-      h1 = primary_title(@video.display.dancer_names, @video.title, @video.display.any_song_attributes, @video.youtube_id)
+      h1.heading-3.heading-3--bold= primary_title(@video.display.dancer_names, @video.title, @video.display.any_song_attributes, @video.youtube_id)
     .show-video-song
-      h2 = link_to_song( @video.display.el_recodo_attributes, @video.display.external_song_attributes, @video)
+      h2.heading-4= link_to_song( @video.display.el_recodo_attributes, @video.display.external_song_attributes, @video)
     .show-video-event
       = link_to @video.event.title.titleize, root_path(event_id: @video.event.id), { "data-turbo-frame": "_top" } if @video.event.present?
     .show-video-channel

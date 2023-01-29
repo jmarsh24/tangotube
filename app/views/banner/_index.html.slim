@@ -2,10 +2,10 @@
   #banner.banner
     = video_tag(asset_path("banner.webm"), poster: asset_path("hero_video_preview.jpg"), controls: false, loop: true, muted: true, playsinline: true, autobuffer: true, autoplay: true, type: "video/webm", class: "banner__video")
     .banner__card
-      h1 The new way to watch Tango
-      h2 Explore Tango History
-      h2 Learn the Lyrics & Orchestras
-      h2 Watch Without Ads
+      h1.heading-1.heading-1--bold The new way to watch Tango
+      h2.heading-2.heading-2--bold Explore Tango History
+      h2.heading-2.heading-2--bold Learn the Lyrics & Orchestras
+      h2.heading-2.heading-2--bold Watch Without Ads
       = link_to t(".try_it_now"), new_user_registration_path, class: "button button--primary"
       = button_to banner_path(banner_closed: true), class: "banner__close" do
         .icon.icon--close.icon--xl
