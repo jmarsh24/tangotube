@@ -60,6 +60,10 @@ en:
       search:
         search:
           placeholder: Search 300,000+ videos
+    next_page_link:
+      load_more: Load more
+    pagination:
+      load_more: Load more
   couples:
     show:
       delete: Delete
@@ -151,7 +155,10 @@ en:
         ":": ":"
         featured_button: Featured
       lyrics:
+        English: English
+        Spanish: Spanish
         english: English
+        lyrics_header: Lyrics
         spanish: Spanish
       upvote_link:
         like: Like
