@@ -11,16 +11,16 @@
       = link_to truncate(@video.channel.title, length: 45, omission: ""), root_path(channel: @video.channel.channel_id), { class: "channel-title", "data-turbo-frame": "_top" }
     .show-video-metadata
       = formatted_metadata(@video)
-  .share-container data-controller="clipboard" data-clipboard-success-content="Copied!" data-clipboard-video-id="#{@video.youtube_id}" data-clipboard-root-url="#{@root_url}"
+  .stack data-controller="clipboard" data-clipboard-success-content="Copied!" data-clipboard-video-id="#{@video.youtube_id}" data-clipboard-root-url="#{@root_url}"
     .youtube-controls
       = render "videos/show/vote"
         button class="button button--seconday button--icon--scissors"
           = t(".clip")
         = turbo_frame_tag "new_clip" do
           = render partial: "clips/form", clip: Clip.new, start_seconds: params[:start], end_seconds: params[:end], playback_rate: params[:speed]
-    .copy-to-clipboard
-      = text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}", readonly: "readonly", class: "input input__input", data: { "clipboard-target": "source" }
-      button class="button button-sm button--secondary button--icon-thumbs-up button--icon-left" data-clipboard-target="button" data-action="click->clipboard#copy"
+    .stack.stack--line.stack--zero
+      = text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}", readonly: "readonly", class: "input input__input input--share", data: { "clipboard-target": "source" }
+      button class="button button--secondary button--icon-square-and-arrow-up button--icon-left" data-clipboard-target="button" data-action="click->clipboard#copy"
         = t(".share_button")
 
 
