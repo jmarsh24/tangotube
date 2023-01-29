@@ -5,8 +5,8 @@
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.2s;
-  color: white;
+  color: var(--color-neutral-800);
   &:hover {
-    background-color: var(--color-neutral-0);
+    color: var(--color-neutral-1000);
   }
 }
