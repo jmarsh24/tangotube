@@ -21,11 +21,11 @@
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: var(--size-16);
-    color: #818181;
+    color: var(--color-neutral-900);
     transition: 0.3s;
 
     &:hover {
-      background-color: #f2f2f2;
+      background-color: var(--color-neutral-100);
     }
   }
 }
