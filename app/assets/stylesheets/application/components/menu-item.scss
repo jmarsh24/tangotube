@@ -1,6 +1,6 @@
 .menu-item {
   display: flex;
-  justify-content: space-between;
+  gap: var(--spacing-xs);
   align-items: center;
   padding: 8px 16px;
   min-width: 120px;
