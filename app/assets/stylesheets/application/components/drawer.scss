@@ -1,31 +1,16 @@
 .drawer {
   height: 100%;
-  width: 240px;
   position: fixed;
   top: 0;
   left: 0;
-  background: var(--color-neutral-0);
-  overflow-x: hidden;
-  padding-top: 56px;
-  transition: 0.5s;
+  left: calc(-1 * var(--app-drawer-width));
+  width: var(--app-drawer-width);
+  background: var(--color-neutral-50);
+  padding-top: calc(56px + var(--spacing-sm));
+  animation: left var(--transition-fast);
   z-index: var(--z-drawer);
 
-  &.closed {
-    display: none;
-  }
-
-  &__item {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: var(--size-16);
-    color: var(--color-neutral-900);
-    transition: 0.3s;
-
-    &:hover {
-      background-color: var(--color-neutral-100);
-    }
+  &.open {
+    left: 0;
   }
 }

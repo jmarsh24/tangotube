@@ -144,6 +144,7 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
 
     --container-gap: 16px;
     --grid-width: 2256px;
+    --app-drawer-width: 196px;
   }
 
   @include breakpoint-tablet() {
