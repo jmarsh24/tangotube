@@ -87,7 +87,7 @@ module VideosHelper
   def sortable(column, direction, title = "", sort_column, sort_direction)
     title ||= column.titleize
     (column == sort_column) ? "current #{sort_direction}" : nil
-    link_to root_path(request.query_parameters.merge(sort: column, direction: direction)) do
+    link_to root_path(request.query_parameters.merge(sort: column, direction: direction)), class: "menu-item" do
       if link_active?(column, direction, sort_column, sort_direction)
         content_tag(:span, title.to_s)
         content_tag(:div, class: "icon icon--close icon--xs")
