@@ -4,7 +4,12 @@
     a.navbar__item.navbar__item--logo href=root_path
   #center.navbar__item.navbar__item--search = render "components/navbar/search"
   #end.navbar__item.navbar__item--links
-    .button.icon.icon--sun-max data-controller="dark-mode" data-action="click->dark-mode#toggle"
+    .dropdown data-controller="dropdown dark"
+      button.button.icon.icon--sun-max data-action="dropdown#toggle click@window->dropdown#hide" data-dark-target="icon"
+      .dropdown__menu.dropdown__menu--right data-dropdown-target="menu"
+        .dropdown__menu__item data-action="click->dark#light" Light
+        .dropdown__menu__item data-action="click->dark#dark" Dark
+        .dropdown__menu__item data-action="click->dark#auto" Auto
     - if current_user.present? && user_signed_in?
       .dropdown data-controller="dropdown"
         button class="button" data-action="dropdown#toggle click@window->dropdown#hide"
