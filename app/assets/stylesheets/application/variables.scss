@@ -21,6 +21,13 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
   'thumbs-down', 'thumbs-up-fill', 'thumbs-up';
 
 // Breakpoints
+
+@mixin breakpoint-mobile {
+  @media (min-width: 568px) {
+    @content;
+  }
+}
+
 @mixin breakpoint-tablet {
   @media (min-width: 744px) {
     @content;
@@ -52,6 +59,8 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
 }
 
 :root {
+  color-scheme: light dark;
+
   @each $size-name, $size-value in $sizes {
     --spacing-#{$size-name}: #{$size-value};
 
