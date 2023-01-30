@@ -14,42 +14,4 @@
       border-left: none;
     }
   }
-
-  &__menu {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-neutral-50);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 5px 5px;
-    overflow: hidden;
-    margin-top: var(--spacing-xs);
-
-    &--right {
-      right: 0;
-    }
-
-    &--left {
-      left: 0;
-    }
-
-    &__item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 16px;
-      min-width: 120px;
-      color: var(--color-neutral-800);
-      font-size: 14px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: var(--color-neutral-200);
-      }
-    }
-
-    &.hidden {
-      display: none;
-    }
-  }
 }
