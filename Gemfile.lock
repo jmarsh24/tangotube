@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/nerdgeschoss/shimmer.git
-  revision: 8190c025144b9dea090d0cd7c7289976c135d58e
-  branch: feature/add_update_action_to_remote_navigation
-  specs:
-    shimmer (0.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -521,6 +514,7 @@ GEM
     serviceworker-rails (0.6.0)
       railties (>= 3.1)
     shellany (0.0.1)
+    shimmer (0.0.1)
     sidekiq (6.5.5)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -698,7 +692,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   serviceworker-rails
-  shimmer!
+  shimmer
   sidekiq
   sidekiq-scheduler
   sidekiq-throttled

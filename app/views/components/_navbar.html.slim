@@ -7,8 +7,8 @@
     .dropdown data-controller="dropdown dark"
       button.button.icon.icon--sun-max data-action="dropdown#toggle click@window->dropdown#hide" data-dark-target="icon"
       .dropdown__menu.dropdown__menu--right data-dropdown-target="menu"
-        .dropdown__menu__item data-action="click->dark#light" Light
-        .dropdown__menu__item data-action="click->dark#dark" Dark
+        .dropdown__menu__item data-action="click->dark#setLight" Light
+        .dropdown__menu__item data-action="click->dark#setDark" Dark
         .dropdown__menu__item data-action="click->dark#auto" Auto
     - if current_user.present? && user_signed_in?
       .dropdown data-controller="dropdown"

@@ -8,28 +8,50 @@ export default class extends Controller {
 
   connect() {
     if (this.darkMode) {
-      document.body.classList.remove('light');
-      this.iconTarget.classList.remove('icon--sun-max-fill');
-      this.iconTarget.classList.add('icon--sun-max');
+      this.dark();
     } else {
-      document.body.classList.add('light');
-      this.iconTarget.classList.remove('icon--sun-max');
-      this.iconTarget.classList.add('icon--sun-max-fill');
+      this.light();
+    }
+
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      this.setDarkIcon();
+    } else {
+      this.setLightIcon();
     }
   }
 
-  dark() {
+  setLight() {
+    this.darkMode = true;
+    this.light();
+    this.setLightIcon();
+    this.light();
+  }
+
+  setDark() {
     this.darkMode = false;
+    this.dark();
+    this.setDarkIcon();
+  }
+
+  dark() {
     document.body.classList.remove('light');
-    this.iconTarget.classList.remove('icon--sun-max-fill');
-    this.iconTarget.classList.add('icon--sun-max');
   }
 
   light() {
-    this.darkMode = true;
     document.body.classList.add('light');
+  }
+
+  setDarkIcon() {
     this.iconTarget.classList.remove('icon--sun-max');
-    this.iconTarget.classList.add('icon--sun-max-fill');
+    this.iconTarget.classList.add('icon--moon-fill');
+  }
+
+  setLightIcon() {
+    this.iconTarget.classList.remove('icon--moon-fill');
+    this.iconTarget.classList.add('icon--sun-max');
   }
 
   auto() {
