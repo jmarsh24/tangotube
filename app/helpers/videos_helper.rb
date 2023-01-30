@@ -87,24 +87,17 @@ module VideosHelper
   def sortable(column, direction, title = "", sort_column, sort_direction)
     title ||= column.titleize
     (column == sort_column) ? "current #{sort_direction}" : nil
-    content_tag :div, class: "dropdown__menu__item" do
-      button_tag({type:  "button",
-                  data:  {controller: "filter",
-                          action: "filter#filter",
-                          "filter-sort-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : column,
-                          "filter-direction-value": button_active?(column, direction, sort_column, sort_direction) ? 0 : direction},
-                  class: "videos-sortable-button"}) do
-        if button_active?(column, direction, sort_column, sort_direction)
-          concat content_tag(:b, title.to_s)
-          concat fa_icon("times", class: "videos-sortable-icon")
-        else
-          title
-        end
+    link_to root_path(request.query_parameters.merge("#{column}": direction)) do
+      if link_active?(column, direction, sort_column, sort_direction)
+        span title.to_s
+        div class: "icon.icon--close.icon--xs"
+      else
+        title
       end
     end
   end
 
-  def button_active?(column, direction, sort_column, sort_direction)
+  def link_active?(column, direction, sort_column, sort_direction)
     column == sort_column && direction == sort_direction
   end
 

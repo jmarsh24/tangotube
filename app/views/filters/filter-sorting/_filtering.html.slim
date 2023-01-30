@@ -1,38 +1,38 @@
 #menu-additional-filters
   h4.heading-4.heading-4--bold.dropdown__label Addition Filters
   - if current_user
-    .dropdown__menu__item
-      = button_tag class: "dropdown__menu__item", data: { controller: "filter", action: "filter#filter dropdown#toggle", "filter-watched-value": filtering_params["watched"] == "true" ? 0 : "true" } do
-        - if filtering_params["watched"] == "true"
-          = content_tag(:b, "Watched")
-          = fa_icon("times", class: "videos-sortable-icon")
-        - else
-          = t(".watched")
-    .dropdown__menu__item
-      = button_tag class: "dropdown__menu__item", data:  {controller: "filter", action: "filter#filter dropdown#toggle", "filter-liked-value": filtering_params["liked"] == "true" ? 0 : "true" } do
-        - if filtering_params["liked"] == "true"
-          = content_tag(:b, "Liked")
-          = fa_icon("times", class: "videos-sortable-icon")
-        - else
-          = t(".liked")
-    .dropdown__menu__item
-      = button_tag class: "dropdown__menu__item",data: { controller: "filter",action: "filter#filter dropdown#toggle", "filter-watched-value": filtering_params["watched"] == "false" ? 0 : "false" } do
-        - if filtering_params["watched"] == "false"
-          = content_tag(:b, "New To You")
-          = fa_icon("times", class: "videos-sortable-icon")
-        - else
-          = t(".new_to_you")
-  .dropdown__menu__item
-    = button_tag class: "dropdown__menu__item", data: { controller: "filter", action: "filter#filter dropdown#toggle", "filter-hd-value": filtering_params["hd"] == "true" ? 0 : "true" } do
-      - if filtering_params["hd"] == "true"
-        = content_tag(:b, "HD")
-        = fa_icon("times", class: "videos-sortable-icon")
+    - path = request.query_parameters[:watched] == "true" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: true))
+    = link_to path, class: "dropdown__menu__item" do
+      - if request.params["watched"] == "true"
+        span = t ".watched"
+        .icon.icon--close.icon--xs
       - else
-        = t(".hd")
-  .dropdown__menu__item
-    = button_tag class: "dropdown__menu__item", data: { controller: "filter", action: "filter#filter dropdown#toggle", "filter-dancer-value": filtering_params["dancer"] == "true" ? 0 : "true" } do
-      - if filtering_params["dancer"] == "true"
-        = content_tag(:b, "With Dancer")
-        = fa_icon("times", class: "videos-sortable-icon")
+        = t(".watched")
+    - path = request.query_parameters[:liked] == "true" ? root_path(request.query_parameters.except(:liked)) : root_path(request.query_parameters.merge(liked: true))
+    = link_to path, class: "dropdown__menu__item" do
+      - if request.query_parameters[:liked] == "true"
+        span = t ".liked"
+        .icon.icon--close.icon--xs
       - else
-        = t(".with_dancer")
+        = t(".liked")
+    - path = request.query_parameters[:watched] == "false" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: false))
+    = link_to path, class: "dropdown__menu__item" do
+      - if request.query_parameters[:watched] == "false"
+        span = t ".new_to_you"
+        .icon.icon--close.icon--xs
+      - else
+        = t(".new_to_you")
+  - path = request.query_parameters[:hd] == "true" ? root_path(request.query_parameters.except(:hd)) : root_path(request.query_parameters.merge(hd: true))
+  = link_to path, class: "dropdown__menu__item" do
+    - if request.query_parameters[:hd] == "true"
+      span = t ".hd"
+      .icon.icon--close.icon--xs
+    - else
+      = t(".hd")
+  - path = request.query_parameters[:dancer] == "true" ? root_path(request.query_parameters.except(:dancer)) : root_path(request.query_parameters.merge(dancer: true))
+  = link_to path, class: "dropdown__menu__item" do
+    - if request.query_parameters[:dancer] == "true"
+      span = t ".with_dancer"
+      .icon.icon--close.icon--xs
+    - else
+      = t(".with_dancer")

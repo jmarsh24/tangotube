@@ -1,6 +1,6 @@
 .columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   margin: 0 var(--spacing-xs);
   gap: var(--spacing-md);
 
@@ -8,5 +8,10 @@
     padding: 16px;
     margin: 5px;
     background-color: #cccccc;
+  }
+
+  @include breakpoint-tablet {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
