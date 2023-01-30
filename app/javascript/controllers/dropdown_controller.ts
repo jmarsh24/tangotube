@@ -2,10 +2,10 @@ import { Controller } from '@hotwired/stimulus';
 import { useTransition } from 'stimulus-use';
 
 export default class extends Controller {
-  menuTarget: HTMLElement;
-  toggleTransition: (event?: Event) => void;
-  leave: (event?: Event) => void;
-  transitioned: false;
+  menuTarget!: HTMLElement;
+  toggleTransition!: (event?: Event) => void;
+  leave!: (event?: Event) => void;
+  transitioned!: false;
 
   static targets = ['menu'];
 
