@@ -3,6 +3,8 @@
   flex-direction: column;
   margin: 0 var(--spacing-xs);
   gap: var(--spacing-md);
+  max-width: 1660px;
+  margin: 0 auto;
 
   &__column {
     padding: 16px;
