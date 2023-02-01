@@ -89,6 +89,16 @@
     }
   }
 
+  &--share {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border: 0px;
+    background: var(--color-gray-300);
+    &:hover {
+      background: var(--color-gray-200);
+    }
+  }
+
   &--link-secondary {
     @extend .button--link;
     color: var(--text-link-secondary-base);
