@@ -7,12 +7,7 @@
   display: flex;
   align-items: center;
 
-  &__spacer {
-    height: 40px;
-  }
-
   @include breakpoint-tablet {
-    // padding-top: var(--spacing-xl);
     display: grid;
     grid-template-columns:
       minmax(var(--container-gap), 1fr)
@@ -30,10 +25,6 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-    }
-
-    &__links-contact {
-      // padding-bottom: 40px;
     }
 
     &__links {
