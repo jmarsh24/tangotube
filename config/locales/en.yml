@@ -41,8 +41,6 @@ en:
       history: History
       home: Home
       liked: Liked
-      login: Login
-      sign_up: Sign up
     footer:
       links:
         google_privacy_policy: Google privacy policy
@@ -53,10 +51,6 @@ en:
         contact: Contact
     navbar:
       login: Login
-      right:
-        Login: Login
-        login_button: Login button
-        sign_up_button: Sign up button
       search:
         search:
           placeholder: Search 300,000+ videos
@@ -84,6 +78,9 @@ en:
         save: Save
       new:
         sign_in: Sign in
+    sessions:
+      new:
+        login: Login
     shared:
       links:
         forgot_password: Forgot password
@@ -116,8 +113,6 @@ en:
         watched: Watched
         with_dancer: With dancer
     filters:
-      clear_all: Clear all
-      deactivate: Deactivate
       filters: Filters
       sorting: Sorting
   loading_spinner: Loading spinner
@@ -133,47 +128,32 @@ en:
   performances:
     index:
       loading_spinner: Loading spinner
-  search:
-    placeholder: Search 300,000+ videos
   videos:
     index:
-      loading_spinner: Loading spinner
       meta_description: Meta description
       meta_title: Meta title
     show:
       bookmark_link:
         bookmark: Bookmark
         bookmark_tooltip: Bookmark tooltip
-        bookmarked: Bookmarked
       complete_link:
         complete: Complete
         complete_tooltip: Complete tooltip
       downvote_link:
         dislike: Dislike
-        disliked: Disliked
       featured_link:
-        ":": ":"
         featured_button: Featured
       lyrics:
         English: English
         Spanish: Spanish
-        english: English
         lyrics_header: Lyrics
-        spanish: Spanish
       upvote_link:
         like: Like
-        liked: Liked
       video_info_details:
         edit: Edit
       video_info_primary:
         clip: Clip
-        scissors: Scissors
-        share: Share
         share_button: Share
       watchlist_link:
-        watch: Watch
         watch_later: Watch later
         watch_later_tooltip: Watch later tooltip
-        watched: Watched
-    video:
-      hide: Hide
