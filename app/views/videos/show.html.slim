@@ -3,7 +3,7 @@
   - content_for :meta_description, @video.display.any_song_attributes
   - content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
   .container
-    .video-responsive data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
+    .video data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
       div data-youtube-target="frame"
     = render partial: "videos/show/video_info_primary"
     .columns
