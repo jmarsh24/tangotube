@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   change(e) {
-    this.index = this.tabTargets.indexOf(e.target.parentNode);
+    this.index = this.tabTargets.indexOf(e.target);
     this.showTab(this.index);
   }
 
@@ -37,7 +37,7 @@ export default class extends Controller {
     return parseInt(this.data.get('index'));
   }
 
-  set index(value) {
+  set index(value): number {
     this.data.set('index', value);
     this.showTab();
   }
