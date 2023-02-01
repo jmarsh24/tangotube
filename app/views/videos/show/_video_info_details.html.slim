@@ -1,12 +1,9 @@
-div data-controller="tabs" data-tabs-index="0"
+.stack data-controller="tabs" data-tabs-index="0"
   .tabs
-    .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" }
-      a Video Info
-    .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" }
-      a Additional Info
+    .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } Video Info
+    .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } Additional Info
     - if @video.song.present?
-      .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" }
-        a Music
+      .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } Music
   .tabs__panel data={ "tabs-target": "tabPanel" }
     = turbo_frame_tag "video_#{@video.youtube_id}" do
       - if @video.dancers.present?
