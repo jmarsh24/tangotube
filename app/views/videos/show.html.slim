@@ -13,8 +13,6 @@
       .column
         = render partial: "videos/show/video_info_details"
       .column
-        = render partial: "videos/show/lyrics" if @video.song.present? && @video.song.lyrics.present?
-      .column
         = render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance, header: "Videos from this Performance" }
         = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_dancers, header: "Videos from #{@video.leaders.first.name.titleize} & #{@video.followers.first.name.titleize}" } if @video.leaders.present? && @video.followers.present?
         = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event, header: "Videos from #{@video.event.title}" } if @video.event.present?
