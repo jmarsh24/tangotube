@@ -1,6 +1,5 @@
 .columns {
-  display: flex;
-  flex-direction: column;
+  grid-template-columns: auto;
   margin: 0 var(--spacing-xs);
   gap: var(--spacing-md);
   max-width: 1660px;
@@ -14,6 +13,6 @@
 
   @include breakpoint-tablet {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
   }
 }
