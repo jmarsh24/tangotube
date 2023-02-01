@@ -1,38 +1,9 @@
-.under-video-container {
-  // display: grid;
-  // justify-content: space-between;
-  // flex-direction: row;
-  width: 100%;
-  padding: 16px;
-  width: min(100%, 1660px);
-  margin-inline: var(--spacing-md);
-}
-
-.video-responsive-container {
-  width: 100%;
-  max-width: 1660px;
-  max-height: auto; //necessary to keep proportion
-  margin: 0 auto; //centering
-}
-
-.video-responsive-background {
-  background-color: var(--color-neutral-200);
-}
-
-.video-responsive {
-  width: 100%;
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-}
-
 .video-responsive iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  aspect-ratio: 16 / 9;
+  width: min(100%, var(--grid-width));
   height: 100%;
   border: 0;
+  margin: 0 auto;
 }
 
 .video-info-container {
