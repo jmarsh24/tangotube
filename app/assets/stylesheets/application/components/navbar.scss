@@ -43,7 +43,7 @@
       align-items: center;
       flex: 0 1 728px;
       min-width: 0px;
-
+      margin-inline: var(--spacing-md);
       &__form {
         display: flex;
         flex-direction: row;
