@@ -1,6 +1,5 @@
 .footer {
-  position: fixed;
-  bottom: 0;
+  grid-column: 1 / 4;
   background: var(--color-neutral-100);
   width: 100%;
   z-index: var(--z-footer);

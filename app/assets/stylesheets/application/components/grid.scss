@@ -1,8 +1,15 @@
 .grid {
   display: grid;
-  gap: 20px;
 
-  @include breakpoint-tablet {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  &--videos {
+    gap: 20px;
+    @include breakpoint-tablet {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+  }
+
+  &--holy-grail {
+    grid-template: auto 1fr auto / auto 1fr auto;
+    height: 100vh;
   }
 }
