@@ -1,6 +1,11 @@
 .grid {
   display: grid;
 
+  &--main {
+    grid-column: 2 / 4;
+    overflow-y: scroll;
+  }
+
   &--videos {
     gap: 20px;
     @include breakpoint-tablet {

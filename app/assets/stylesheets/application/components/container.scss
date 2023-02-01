@@ -1,5 +1,13 @@
 .container {
   display: grid;
-  grid-template-columns: auto;
-  margin-inline: var(--container-gap);
+  grid-template-columns:
+    minmax(var(--container-gap), 1fr)
+    0
+    minmax(0, var(--grid-width))
+    0
+    minmax(var(--container-gap), 1fr);
+
+  & > * {
+    grid-column: 3/3;
+  }
 }
