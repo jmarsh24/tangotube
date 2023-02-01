@@ -1,16 +1,13 @@
 .drawer {
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  left: calc(-1 * var(--app-drawer-width));
+  grid-column: 1 / 2;
   width: var(--app-drawer-width);
   background: var(--color-neutral-50);
-  padding-top: calc(56px + var(--spacing-sm));
-  animation: left var(--transition-fast);
+  max-width: 0px;
+  overflow: hidden;
   z-index: var(--z-drawer);
+  transition: var(--transition-f) ease-in-out;
 
   &.open {
-    left: 0;
+    max-width: var(--app-drawer-width);
   }
 }

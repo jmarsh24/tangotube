@@ -6,9 +6,9 @@
   = turbo_frame_tag :filters, src: filters_videos_path(filtering_params), target: "_top"
   = render "videos/index/videos/header"
   - if @featured_videos.present?
-    .video-section
+    .stack
       = render "videos/index/videos/section/header", title: "Featured"
-      .grid = render @featured_videos
-  .video-section
+      .grid.grid--videos = render @featured_videos
+  .stack
     = render "videos/index/videos/section/header", title: "Trending"
-    = paginated @videos, class: "grid"
+    = paginated @videos, class: "grid grid--videos"

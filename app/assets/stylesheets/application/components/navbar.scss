@@ -1,6 +1,5 @@
 .navbar {
-  position: sticky;
-  top: 0;
+  grid-column: 1 / 4;
   z-index: var(--z-navbar);
   padding: var(--spacing-xxxs) var(--spacing-sm);
   display: flex;
