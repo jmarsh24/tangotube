@@ -10,4 +10,10 @@
   & > * {
     grid-column: 3/3;
   }
+
+  &.devise {
+    margin-top: 60px;
+    margin-inline: auto;
+    width: min(100% - var(--spacing-md), 500px);
+  }
 }

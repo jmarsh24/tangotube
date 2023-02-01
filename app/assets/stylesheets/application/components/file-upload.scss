@@ -1,0 +1,53 @@
+.file-upload {
+  position: relative;
+
+  &.hidden {
+    display: none;
+  }
+
+  &__label {
+    @extend .caption;
+    border: 1px dotted var(--background-input-border-primary-default);
+    border-radius: var(--border-radius-card-sm);
+    padding: var(--spacing-xxl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-lg);
+
+    &::before {
+      content: '';
+      background-image: url('@assets/images/icons/file-upload.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 36px;
+      width: 56px;
+      display: block;
+    }
+  }
+  &__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
+
+#user_avatar:valid ~ #drag_and_drop {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+#user_avatar:invalid ~ #replace_image {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.w-picker {
+  max-height: 350px;
+  width: 100%;
+}

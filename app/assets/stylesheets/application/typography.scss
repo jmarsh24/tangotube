@@ -32,3 +32,15 @@
   font-weight: 700;
   src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff2');
 }
+
+.caption {
+  font-size: 12px;
+  line-height: 18px;
+  &--bold {
+    font-weight: 700;
+  }
+  @include breakpoint-tablet {
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
