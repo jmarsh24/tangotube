@@ -1,15 +1,12 @@
-.under-video-container
-  .video-info-primary-container
-    .show-video-title
-      h1.heading-3.heading-3--bold= primary_title(@video.display.dancer_names, @video.title, @video.display.any_song_attributes, @video.youtube_id)
-    .show-video-song
-      h2.heading-4= link_to_song( @video.display.el_recodo_attributes, @video.display.external_song_attributes, @video)
-    .show-video-event
-      = link_to @video.event.title.titleize, root_path(event_id: @video.event.id), { "data-turbo-frame": "_top" } if @video.event.present?
-    .show-video-channel
+.stack.stack--line.stack--justify-space-between
+  .stack.stack--zero
+    h1.heading-3.heading-3--bold= primary_title(@video.display.dancer_names, @video.title, @video.display.any_song_attributes, @video.youtube_id)
+    h2.heading-4= link_to_song( @video.display.el_recodo_attributes, @video.display.external_song_attributes, @video)
+    = link_to @video.event.title.titleize, root_path(event_id: @video.event.id), { "data-turbo-frame": "_top" } if @video.event.present?
+    div
       = link_to image_tag(@video.channel.thumbnail_url, class: "video-card__details__channel__icon"), root_path(channel: @video.channel.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?
       = link_to truncate(@video.channel.title, length: 45, omission: ""), root_path(channel: @video.channel.channel_id), { class: "channel-title", "data-turbo-frame": "_top" }
-    .show-video-metadata
+    div
       = formatted_metadata(@video)
   .stack data-controller="clipboard" data-clipboard-success-content="Copied!" data-clipboard-video-id="#{@video.youtube_id}" data-clipboard-root-url="#{@root_url}"
     .youtube-controls

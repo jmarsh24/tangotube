@@ -1,11 +1,11 @@
 .under-video-container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  // display: grid;
+  // justify-content: space-between;
+  // flex-direction: row;
   width: 100%;
   padding: 16px;
-  max-width: 1660px;
-  margin: 0 auto;
+  width: min(100%, 1660px);
+  margin-inline: var(--spacing-md);
 }
 
 .video-responsive-container {
