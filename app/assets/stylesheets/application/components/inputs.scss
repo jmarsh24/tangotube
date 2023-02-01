@@ -87,7 +87,8 @@
   &--search {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-    width: 100%;
+    padding: var(--spacing-xxs) var(--spacing-xxs);
+    font-size: var(--font-size-sm);
   }
 
   &--share {
