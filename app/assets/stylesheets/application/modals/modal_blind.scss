@@ -1,0 +1,17 @@
+.modal-blind {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: var(--z-modal);
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.modal-open .modal-blind {
+  opacity: 1;
+  pointer-events: all;
+}

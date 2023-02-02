@@ -1,0 +1,9 @@
+.event__card id=#{dom_id(event)}
+  = link_to event do
+    = image_tag event_avatar(event)
+  = link_to event do
+    = event.title
+  div
+    = "#{event.city}, #{event.country}"
+  div
+    = "#{event.videos_count} Total Videos"

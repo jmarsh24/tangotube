@@ -6,12 +6,12 @@ require "sidekiq-scheduler/web"
 Rails.application.routes.draw do
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
+
   authenticate :user, ->(user) { user.admin? } do
     mount Avo::Engine, at: Avo.configuration.root_path
   end
   get "sitemaps/*path", to: "shimmer/sitemaps#show"
-  get "cookies", to: "cookies#index"
-  post "cookies", to: "cookies#index"
+  get "status", to: "system_status#show"
   get "banner", to: "banner#index"
   post "banner", to: "banner#index"
 
@@ -67,9 +67,6 @@ Rails.application.routes.draw do
   end
   resource :manifest, only: :show
   resources :videos do
-    collection do
-      post :index
-    end
     resources :clips
     collection do
       get "filters", to: "filters#filters"

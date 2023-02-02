@@ -1,0 +1,33 @@
+.split {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+
+  @include breakpoint-tablet {
+    gap: var(--spacing-xl);
+  }
+
+  @include breakpoint-desktop {
+    display: grid;
+    grid-template-columns: auto 1px auto;
+    gap: var(--spacing-mega);
+
+    &>*:first-child {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &>*:last-child {
+      grid-column: 3;
+    }
+
+    &::before {
+      content: '';
+      height: 100%;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.1);
+      grid-column: 2;
+    }
+  }
+}

@@ -1,0 +1,3 @@
+div id="featured-#{video.youtube_id}"
+  = button_to featured_video_path(video.youtube_id), method: :patch, class: ["button button--secondary button--icon-left", video.featured? ? "button--icon-star-filled" : "button--icon-star"]
+    = t(".featured_button")

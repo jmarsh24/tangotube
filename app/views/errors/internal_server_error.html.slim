@@ -1,0 +1,13 @@
+- meta.title = t(".meta_title")
+.container
+  .card.text-align-center.expired
+    .expired__content
+      .stack.stack--xl
+        .stack
+          .stack.stack--sm.stack--justify-center.stack--tablet-xl
+            = image_tag "error-404.svg", alt: t("404_icon")
+            h1.heading-3.heading-3--bold = t ".internal_server_error"
+          p.paragraph = t ".please_try_again"
+        footer.stack
+          div
+            = link_to t("errors.button"), root_path, class: 'button button--sm button--primary button--icon-arrow'

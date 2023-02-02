@@ -2,7 +2,7 @@
   width: 700px;
   max-width: 100%;
   margin: auto;
-  background-color: var(--sl-color-neutral-50);
+  background-color: var(--color-neutral-50);
   border: 1px solid transparent; /* Removes margin collapse */
 }
 
@@ -29,14 +29,14 @@
   font-size: 14px;
 }
 .comment-info {
-  color: var(--sl-color-gray-800);
+  color: var(--color-gray-800);
 
   &__time {
     margin: 0;
   }
 }
 .comment-author {
-  color: var(--sl-color-gray-800);
+  color: var(--color-gray-800);
   font-weight: bold;
   text-decoration: none;
 }
@@ -56,12 +56,12 @@
   height: calc(100% - 50px);
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  background-color: var(--sl-color-neutral-50);
+  background-color: var(--color-neutral-50);
   background-clip: padding-box;
   margin-left: 4px;
 }
 .comment-border-link:hover {
-  background-color: var(--sl-color-neutral-50);
+  background-color: var(--color-neutral-50);
 }
 .comment-body {
   padding-left: 28px;
@@ -84,7 +84,7 @@ details.comment summary::-webkit-details-marker {
   display: none;
 }
 details.comment:not([open]) .comment-heading {
-  border-bottom: 1px solid var(--sl-color-gray-200);
+  border-bottom: 1px solid var(--color-gray-200);
 }
 .comment-heading::after {
   display: inline-block;
@@ -95,10 +95,10 @@ details.comment:not([open]) .comment-heading {
   color: rgba(0, 0, 0, 0.55);
 }
 details.comment[open] .comment-heading::after {
-  content: "Click to hide";
+  content: 'Click to hide';
 }
 details.comment:not([open]) .comment-heading::after {
-  content: "Click to show";
+  content: 'Click to show';
 }
 
 /* Adjustment for Internet Explorer */
@@ -110,15 +110,15 @@ details.comment:not([open]) .comment-heading::after {
   }
   details.comment[open] .comment-heading::after,
   details.comment:not([open]) .comment-heading::after {
-    content: " ";
+    content: ' ';
   }
 }
 
 /* Styling the reply to comment form */
 
 .reply-form textarea {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 16px;
   width: 100%;
   max-width: 100%;

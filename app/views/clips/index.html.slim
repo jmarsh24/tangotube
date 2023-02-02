@@ -1,0 +1,6 @@
+.container
+  = link_to clips_path do
+    h1.heading-1.heading-1--bold All Clips
+  #clips.clips
+    .video-section
+      = paginated @clips, class: "grid"

@@ -1,0 +1,11 @@
+= turbo_frame_tag channel, class: "row", style: "padding-bottom: 10px; align-items: center; gap: 10px;" do
+  div id="channel_#{channel.channel_id}_thumbnail"
+    = image_tag channel.thumbnail_url if channel.thumbnail_url.present?
+  div
+    = channel.title
+    = channel.channel_id
+    = channel.active
+    = "#{channel.videos_count} videos"
+  .row style="align-items: center;"
+    = link_to t(".pencil_square_icon"), edit_channel_path(channel)
+    = button_to t(".trash_icon"), channel_path(channel), method: :delete

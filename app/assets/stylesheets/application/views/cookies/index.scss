@@ -1,12 +1,12 @@
 .cookies-modal {
   position: fixed;
-  z-index: 2;
+  z-index: var(--cookies-modal);
   left: 0;
   right: 0;
   bottom: 48px;
   word-break: break-word;
   border-radius: 0.5rem;
-  background: var(--sl-color-neutral-50);
+  background: var(--color-neutral-50);
 
   &__copy {
     max-width: 960px;
