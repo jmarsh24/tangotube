@@ -1,12 +1,2 @@
-#watch_list_button data-controller=(!user_signed_in? ? "popper" : "")
-  = content_tag :div, id: "watchlist-#{video.youtube_id}", data: { "popper-target": "element", action: "click->popper#show click:outside->popper#hide" } do
-    = content_tag :div, id: "watchlist-#{video.youtube_id}" do
-      = button_to watchlist_video_path(video.youtube_id), method: :patch, class: ["button button--secondary button--icon-left", current_user&.voted_down_on?(video, vote_scope: "watch") ? "button--icon-clock-fill" : "button--icon-clock"] do
-        = t(".watch_later")
-  #tooltip.tooltip role="tooltip" data-popper-target="tooltip"
-    = t(".watch_later_tooltip")
-    div
-      = link_to "Sign up",  new_user_registration_path, 'data-turbo-frame': "_top"
-      = link_to "Login", new_user_session_path, 'data-turbo-frame': "_top"
-    #arrow data-popper-arrow
-
+= button_to watchlist_video_path(video.youtube_id), method: :patch, class: ["button button--secondary button--icon-left", current_user&.voted_down_on?(video, vote_scope: "watchlist") ? "button--icon-clock-fill" : "button--icon-clock"] do
+  = t(".watch_later")

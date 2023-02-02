@@ -1,4 +1,4 @@
-- cache_if video.present? && !video.hidden?, ["video", video.youtube_id, video.updated_at] do
+- cache_if !video.hidden?, ["video", video.youtube_id] do
   .card id="video_#{video.youtube_id}"
     / - if current_user.try(:admin?) && !video.hidden?
     /   .card__hide-button

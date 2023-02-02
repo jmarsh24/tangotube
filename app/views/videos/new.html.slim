@@ -1,6 +1,6 @@
 div class="videos-new-container">
 div class="videos-new-form-container">
-  h4.heading-4.heading-4--boldAdd Video
+  h4.heading-4.heading-4--bold Add Video
     = form_with model: Video.new, local: true, class: 'video-form' do |f|
       "youtube.com/watch?v=""
       = f.text_field :youtube_id, placeholder: 'insert video id here...'
