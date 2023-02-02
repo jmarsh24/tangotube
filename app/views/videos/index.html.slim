@@ -3,12 +3,14 @@
 / - meta.image = image_url("share.jpg")
 = render "banner/index"
 .container
-  = turbo_frame_tag :filters, src: filters_videos_path(filtering_params), target: "_top"
-  = render "videos/index/videos/header"
-  - if @featured_videos.present?
+  = render "filters/filters"
+  #videos
+    = render "videos/index/videos/header"
+    - if @featured_videos.present?
+      .stack
+        = render "videos/index/videos/section/header", title: "Featured"
+        .grid.grid--videos = render @featured_videos
     .stack
-      = render "videos/index/videos/section/header", title: "Featured"
-      .grid.grid--videos = render @featured_videos
-  .stack
-    = render "videos/index/videos/section/header", title: "Trending"
-    = paginated @videos, class: "grid grid--videos"
+      = render "videos/index/videos/section/header", title: "Trending"
+      = paginated @videos, class: "grid grid--videos"
+

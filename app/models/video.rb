@@ -173,6 +173,52 @@ class Video < ApplicationRecord
       )
     }
 
+  scope :with_same_performance, ->(video) {
+                                  includes(Video.search_includes)
+                                    .where(channel_id: video.channel_id)
+                                    .has_leader_and_follower
+                                    .where(hidden: false)
+                                    .where.not(youtube_id: video.youtube_id)
+                                }
+
+  scope :with_same_dancers, ->(video) {
+    includes(Video.search_includes)
+      .where("upload_date <= ?", video.upload_date + 7.days)
+      .where("upload_date >= ?", video.upload_date - 7.days)
+      .has_leader_and_follower
+      .with_leader(video.leaders.first)
+      .with_follower(video.followers.first)
+      .where(hidden: false)
+      .where.not(youtube_id: video.youtube_id)
+  }
+
+  scope :with_same_event, ->(video) {
+    includes(Video.search_includes)
+      .where(event_id: video.event_id)
+      .where.not(event: nil)
+      .where("upload_date <= ?", video.upload_date + 7.days)
+      .where("upload_date >= ?", video.upload_date - 7.days)
+      .where(hidden: false)
+      .where.not(youtube_id: video.youtube_id)
+  }
+
+  scope :with_same_song, ->(video) {
+    includes(Video.search_includes)
+      .where(song_id: video.song_id)
+      .has_leader_and_follower
+      .where(hidden: false)
+      .where.not(song_id: nil)
+      .where.not(youtube_id: video.youtube_id)
+  }
+
+  scope :with_same_channel, ->(video) {
+    includes(Video.search_includes)
+      .where(channel_id: video.channel_id)
+      .has_leader_and_follower
+      .where(hidden: false)
+      .where.not(youtube_id: video.youtube_id)
+  }
+
   # Combined Scopes
 
   scope :title_match_missing_leader,
