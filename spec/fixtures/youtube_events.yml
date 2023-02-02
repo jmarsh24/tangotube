@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: youtube_events
@@ -11,10 +9,3 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
-FactoryBot.define do
-  factory :youtube_event do
-    data { "MyText" }
-    status { 1 }
-    processing_errors { "MyString" }
-  end
-end

@@ -21,8 +21,14 @@
 require "rails_helper"
 
 RSpec.describe Event do
+  fixtures :all
+
+  let(:event) do
+    event = events(:festival)
+  end
+
   describe "title_search" do
-    it "returns channels that match title with exact match, without caps, without accents and with partial match" do
+    fit "returns channels that match title with exact match, without caps, without accents and with partial match" do
       matching_channel = create(:event, title: "Embrace Berlín")
       no_match_channel = create(:event)
       expect(described_class.title_search("Embrace Berlin")).to include(
@@ -49,7 +55,7 @@ RSpec.describe Event do
   end
 
   describe "#search_title" do
-    fit "creates searchable title" do
+    it "creates searchable title" do
       event = create(:event, title: "Tango Event Title - useless search information")
       expect(event.search_title).to eq("Tango Event Title")
     end
