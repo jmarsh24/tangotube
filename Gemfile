@@ -107,3 +107,5 @@ group :development do
   gem "rubocop-rspec"
   gem "rubocop-rake"
 end
+
+gem "vcr"

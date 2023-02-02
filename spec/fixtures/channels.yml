@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: channels
@@ -18,8 +16,3 @@
 #  videos_count          :integer          default(0), not null
 #  active                :boolean          default(TRUE)
 #
-FactoryBot.define do
-  factory :channel do
-    sequence(:channel_id) { |n| "fancy_youtube_slug#{n}" }
-  end
-end

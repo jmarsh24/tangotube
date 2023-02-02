@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: songs
@@ -25,10 +23,3 @@
 #  slug              :string
 #  orchestra_id      :bigint
 #
-FactoryBot.define do
-  factory :song do
-    genre { Faker::Music.genre }
-    title { Faker::Music::RockBand.song }
-    artist { Faker::Music::RockBand.name }
-  end
-end

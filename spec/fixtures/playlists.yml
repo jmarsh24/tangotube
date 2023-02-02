@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: playlists
@@ -18,8 +16,3 @@
 #  updated_at    :datetime         not null
 #  reviewed      :boolean          default(FALSE)
 #
-FactoryBot.define do
-  factory :playlist do
-    sequence(:slug) { |n| "Slug#{n}" }
-  end
-end
