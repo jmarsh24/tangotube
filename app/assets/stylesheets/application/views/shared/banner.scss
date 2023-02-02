@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   justify-content: center;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 96px);
   width: calc(100vw);
   max-width: 100%;
   overflow: hidden;
@@ -24,12 +24,12 @@
     color: #fff;
     background-color: rgba(0, 0, 0, 0.4);
 
-    h1 {
+    h1.heading-1.heading-1--bold {
       font-size: clamp(48px, 4vw, 81px);
       text-shadow: 3px 3px #000;
     }
 
-    h2 {
+    h2.heading-2.heading-2--bold {
       font-size: clamp(18px, 1vw, 28px);
       font-weight: 100;
     }
@@ -48,7 +48,7 @@
   &__icon {
     position: absolute;
     bottom: 16px;
-    font-size: var(--sl-font-size-2x-large);
+    font-size: var(--font-size-2x-large);
   }
 
   &__close {

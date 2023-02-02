@@ -1,7 +1,6 @@
 .tooltip {
-  background: var(--sl-color-neutral-50);
-  color: var(--sl-color-neutral-1000);
-  border: 1px solid var(--sl-color-gray-200);
+  background: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-700);
   font-weight: bold;
   padding: 8px 12px;
   font-size: 17px;
@@ -23,22 +22,22 @@
 
 #arrow::before {
   visibility: visible;
-  content: "";
+  content: '';
   transform: rotate(45deg);
 }
-#tooltip[data-popper-placement^="top"] > #arrow {
+#tooltip[data-popper-placement^='top'] > #arrow {
   bottom: -4px;
 }
 
-#tooltip[data-popper-placement^="bottom"] > #arrow {
+#tooltip[data-popper-placement^='bottom'] > #arrow {
   top: -4px;
 }
 
-#tooltip[data-popper-placement^="left"] > #arrow {
+#tooltip[data-popper-placement^='left'] > #arrow {
   right: -4px;
 }
 
-#tooltip[data-popper-placement^="right"] > #arrow {
+#tooltip[data-popper-placement^='right'] > #arrow {
   left: -4px;
 }
 

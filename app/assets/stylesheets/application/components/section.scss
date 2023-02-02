@@ -1,0 +1,7 @@
+.section {
+  padding: var(--spacing-mega) 0;
+  &__anchor {
+    padding-top: var(--navbar-height);
+    margin-top: calc(var(--navbar-height) * -1);
+  }
+}

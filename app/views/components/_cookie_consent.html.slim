@@ -1,0 +1,32 @@
+- deny_tag = tag.a(t(".deny"), data: {action: "consent#denyAll"})
+- if !consent_settings.given?
+  .personalization-request data-controller="consent"
+    .container
+      .heading = t ".banner_title"
+      .personalization-request__content.stack
+        .personalization-request__text
+          = simple_format t ".banner_description_html", deny: deny_tag, privacy: link_to(t(".privacy"), privacy_path)
+        .stack.stack--sm.stack--tablet-line.stack--tablet-justify-right
+          a.button.button--sm.button--secondary data-action="consent#manage" = t(".manage")
+          a.button.button--sm.button--primary data-action="consent#permitAll" = t(".accept_all")
+.personalization-request#personalization-settings data-controller="consent" hidden=true
+  .container
+    .heading = t ".manage_title"
+    .stack
+      .line = simple_format t ".manage_description", deny: deny_tag, privacy: link_to(t(".privacy"), privacy_path)
+      - [:essential, :targeting, :statistic].each do |setting|
+        .personalization-request__setting
+          .input.input--checkbox
+            label.input__label for="personalization-#{setting}"
+              / i18n-tasks-use t('.essential')
+              / i18n-tasks-use t('.targeting')
+              / i18n-tasks-use t('.statistic')
+              .subheading = t ".#{setting}"
+              / i18n-tasks-use t('.essential_description')
+              / i18n-tasks-use t('.targeting_description')
+              / i18n-tasks-use t('.statistic_description')
+              p = t ".#{setting}_description"
+            input.input__input type="checkbox" data-consent-target="check" name=setting id="personalization-#{setting}" disabled=(setting == :essential)
+      footer.stack.stack--sm.stack--tablet-line.stack--tablet-justify-right
+        a.button.button--sm.button--primary data-action="consent#save" = t(".save_preferences")
+

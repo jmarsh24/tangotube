@@ -10,7 +10,7 @@ class ClipsController < ApplicationController
     clips = Clip.all.includes(:video)
     clips = clips.tagged_with(params[:tag]) if params[:tag].present?
     clips = clips.order(created_at: :desc)
-    @pagy, @clips = pagy(clips, items: 12)
+    @clips = paginated(clips)
   end
 
   # GET /clips/1

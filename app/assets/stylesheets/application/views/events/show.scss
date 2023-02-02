@@ -18,7 +18,7 @@
       padding-right: 16px;
       padding-left: 425px;
 
-      h1 {
+      h1.heading-1.heading-1--bold {
         font-size: 64px;
       }
     }
@@ -45,7 +45,7 @@
     &__facet {
       padding: 32px 16px;
       width: 100%;
-      max-width: 300px;
+      max-width: 1660px;
 
       &__menu {
         height: 250px;
@@ -75,7 +75,7 @@
         margin: 0 auto;
         height: 100%;
 
-        h1 {
+        h1.heading-1.heading-1--bold {
           font-size: 64px;
         }
       }

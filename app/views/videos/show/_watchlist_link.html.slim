@@ -1,0 +1,2 @@
+= button_to watchlist_video_path(video.youtube_id), method: :patch, class: ["button button--secondary button--icon-left", current_user&.voted_down_on?(video, vote_scope: "watchlist") ? "button--icon-clock-fill" : "button--icon-clock"] do
+  = t(".watch_later")

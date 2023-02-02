@@ -1,0 +1,11 @@
+= turbo_stream.append "results" do
+  = render partial: "videos/video", collection: @videos
+= turbo_stream.update "next_link" do
+  - if @pagy.next
+    form action="= pagy_url_for(@pagy, @pagy.next) " method="post"
+      button type="submit" data-controller="autoclick"
+    = t(".loading_spinner")
+  - else
+    span "Displaying #{@pagy.count} Results"
+
+

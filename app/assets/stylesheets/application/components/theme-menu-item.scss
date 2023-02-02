@@ -1,0 +1,23 @@
+.theme-menu-item {
+  &--auto {
+    background: var(--color-neutral-200);
+    [data-theme='light'] & {
+      background: none;
+    }
+    [data-theme='dark'] & {
+      background: none;
+    }
+  }
+
+  &--light {
+    [data-theme='light'] & {
+      background: var(--color-neutral-200);
+    }
+  }
+
+  &--dark {
+    [data-theme='dark'] & {
+      background: var(--color-neutral-200);
+    }
+  }
+}
