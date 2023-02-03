@@ -58,10 +58,6 @@ class Dancer < ApplicationRecord
     "#{id}-#{slug}"
   end
 
-  def self.rebuild_pg_search_documents
-    find_each(&:update_pg_search_document)
-  end
-
   private
 
   def set_slug

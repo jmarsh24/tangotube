@@ -26,7 +26,6 @@ class SongResource < Avo::BaseResource
   field :lyrics_en, as: :text
   # field :slug, as: :text
   # field :orchestra_id, as: :number
-  # field :pg_search_document, as: :has_one
   field :orchestra, as: :belongs_to
   field :videos, as: :has_many
   # field :leaders, as: :has_many, through: :videos

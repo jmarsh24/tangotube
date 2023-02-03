@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_07_151014) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_095816) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "fuzzystrmatch"
-  enable_extension "pg_trgm"
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
@@ -43,50 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_151014) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "ahoy_events", id: false, force: :cascade do |t|
-    t.bigserial "id", null: false
-    t.bigint "visit_id"
-    t.bigint "user_id"
-    t.string "name"
-    t.jsonb "properties"
-    t.datetime "time", precision: nil
-    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
-    t.index ["properties"], name: "index_ahoy_events_on_properties", opclass: :jsonb_path_ops, using: :gin
-    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
-    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
-  end
-
-  create_table "ahoy_visits", id: false, force: :cascade do |t|
-    t.bigserial "id", null: false
-    t.string "visit_token"
-    t.string "visitor_token"
-    t.bigint "user_id"
-    t.string "ip"
-    t.text "user_agent"
-    t.text "referrer"
-    t.string "referring_domain"
-    t.text "landing_page"
-    t.string "browser"
-    t.string "os"
-    t.string "device_type"
-    t.string "country"
-    t.string "region"
-    t.string "city"
-    t.float "latitude"
-    t.float "longitude"
-    t.string "utm_source"
-    t.string "utm_medium"
-    t.string "utm_term"
-    t.string "utm_content"
-    t.string "utm_campaign"
-    t.string "app_version"
-    t.string "os_version"
-    t.string "platform"
-    t.datetime "started_at", precision: nil
-    t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
-    t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
   create_table "channels", force: :cascade do |t|
@@ -528,20 +483,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_151014) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "yt_comments", force: :cascade do |t|
-    t.bigint "video_id", null: false
-    t.text "body", null: false
-    t.text "user_name", null: false
-    t.integer "like_count", default: 0, null: false
-    t.date "date", null: false
-    t.string "channel_id", null: false
-    t.string "profile_image_url", null: false
-    t.string "youtube_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["video_id"], name: "index_yt_comments_on_video_id"
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clips", "users"
@@ -560,20 +501,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_151014) do
   add_foreign_key "playlists", "videos", column: "videos_id"
   add_foreign_key "taggings", "tags"
   add_foreign_key "videos", "events"
-  add_foreign_key "yt_comments", "videos"
-
-  create_view "video_searches", materialized: true, sql_definition: <<-SQL
-      SELECT videos.id AS video_id,
-      (((((((((((((((((((setweight(to_tsvector('english'::regconfig, (COALESCE(channels.title, ''::character varying))::text), 'C'::"char") || setweight(to_tsvector('english'::regconfig, (COALESCE(channels.channel_id, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((dancers.name)::text, ' ; '::text), ''::text)), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((dancers.nick_name)::text, ' ; '::text), ''::text)), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.city, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.title, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(events.country, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.genre, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.title, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(songs.artist, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.acr_cloud_track_name, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.acr_cloud_artist_name, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.description, ''::character varying))::text), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(videos.title, ''::text)), 'A'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_artist, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_id, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.youtube_song, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.spotify_artist_name, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.spotify_track_name, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(videos.tags, ''::character varying))::text), 'B'::"char")) AS tsv_content_tsearch
-     FROM (((((videos
-       LEFT JOIN channels ON ((channels.id = videos.channel_id)))
-       LEFT JOIN songs ON ((songs.id = videos.song_id)))
-       LEFT JOIN events ON ((events.id = videos.event_id)))
-       LEFT JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
-       LEFT JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
-    GROUP BY videos.id, channels.id, songs.id, events.id;
-  SQL
-  add_index "video_searches", ["tsv_content_tsearch"], name: "index_video_searches_on_tsv_content_tsearch", using: :gin
-  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
-
 end
