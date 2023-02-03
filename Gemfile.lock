@@ -614,7 +614,7 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_list
   acts_as_votable
-  ahoy (~> 0.1.4)
+  ahoy
   amazing_print
   annotate
   avo
