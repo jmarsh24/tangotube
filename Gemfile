@@ -101,3 +101,5 @@ group :development do
   gem "rubocop-rspec"
   gem "rubocop-rake"
 end
+
+gem "scenic", "~> 1.7"

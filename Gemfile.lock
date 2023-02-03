@@ -496,6 +496,9 @@ GEM
     ruby2_keywords (0.0.5)
     rufus-scheduler (3.8.2)
       fugit (~> 1.1, >= 1.1.6)
+    scenic (1.7.0)
+      activerecord (>= 4.0.0)
+      railties (>= 4.0.0)
     sentry-rails (5.7.0)
       railties (>= 5.0)
       sentry-ruby (~> 5.7.0)
@@ -682,6 +685,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rake
   rubocop-rspec
+  scenic (~> 1.7)
   sentry-rails
   sentry-ruby
   serviceworker-rails
