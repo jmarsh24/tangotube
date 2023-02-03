@@ -19,9 +19,6 @@
 #  slug         :string
 #
 class Event < ApplicationRecord
-  include PgSearch::Model
-  multisearchable against: [:title, :city, :country]
-
   has_many :videos, dependent: :nullify
   has_one_attached :profile_image
   has_one_attached :cover_image
@@ -83,10 +80,6 @@ class Event < ApplicationRecord
         .all
         .order(:id)
         .each { |event| MatchEventJob.perform_later(event.id) }
-    end
-
-    def rebuild_pg_search_documents
-      find_each(&:update_pg_search_document)
     end
   end
 
