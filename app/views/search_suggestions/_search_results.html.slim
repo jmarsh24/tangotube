@@ -1,0 +1,4 @@
+ul role="listbox" data-combobox-target="list" class="#{"isHidden" if search_results.blank?}"
+  - search_results.each_with_index do |result, index|
+    li
+      = link_to highlight(result, params[:query], :highlighter => '<b>\1</b>'), root_path(query: result.parameterize(separator: " ")), role: "option", id: "search_result_#{index}"

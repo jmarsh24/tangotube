@@ -1,0 +1,16 @@
+.columns {
+  grid-template-columns: auto;
+  gap: var(--spacing-md);
+  max-width: 1660px;
+
+  &__column {
+    padding: 16px;
+    margin: 5px;
+    background-color: #cccccc;
+  }
+
+  @include breakpoint-tablet {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+}

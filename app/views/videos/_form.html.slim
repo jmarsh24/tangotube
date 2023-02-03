@@ -1,12 +1,9 @@
 = form_with model: @video, url: video_path(video.youtube_id), method: :patch do |f|
   .video-info-details-main
     .detail-section-label
-      h4 Performers
-    = render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :dancer_id, id: "leader", f: f, url: "/dancers.json", value: [video&.leaders.first&.name, video&.leaders.first&.id] }
-    = render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :dancer_id, id: "follower", f: f, url: "/dancers.json", value: [video&.followers.first&.name, video&.followers.first&.id] }
+      h4.heading-4.heading-4--bold Performers
     .detail-section-label
-      h4 Event Info
-    = render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :event_id, id: "event", f: f, url: "/events.json", value: [video&.event&.title, video&.event&.id] }
+      h4.heading-4.heading-4--bold Event Info
     .attribute_row
       .attribute-label
         label Performance Date
@@ -22,8 +19,7 @@
         label Total Number
       .attribute-value
         = f.select(:performance_total_number, (1..8), { value: video.performance_total_number, prompt: "Select Total Number of Performance" }, "data-controller": "tom-select")
-    h4 Music
-  = render partial: "videos/edit/video_info_detail_item_edit", locals: { params_name: :song_id, id: "song", f: f, url: "/songs.json", value: [video&.song&.full_title, video&.song&.id] }
+    h4.heading-4.heading-4--bold Music
   div
     = f.label "hidden?"
     = f.check_box :hidden, {}, "true", "false"

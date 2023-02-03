@@ -1,0 +1,79 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--panel-background-color);
+  box-shadow: var(--shadow-x-small);
+  border: solid var(--border-width) var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-sm);
+
+  &--compact {
+    flex-direction: row;
+    padding: var(--spacing-xxs) 0px;
+
+    &__image {
+      max-width: 168px;
+      width: 100%;
+      flex: none;
+      position: relative;
+      display: flex;
+      overflow: hidden;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    &__body {
+      padding: 0px;
+    }
+  }
+
+  &__image {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+
+    img {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    &::after {
+      content: attr(data-duration);
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      right: 5px;
+      bottom: 5px;
+      padding: 0 0.3em;
+      border-radius: 0.3em;
+    }
+  }
+
+  &__performance-number {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    right: 5px;
+    top: 5px;
+    padding: 0.1em 0.3em;
+    border-radius: 0.3em;
+    z-index: 1;
+  }
+
+  &__header {
+    display: block;
+    border-bottom: solid var(--border-width) var(--border-color);
+    padding: calc(var(--padding) / 2) var(--padding);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--spacing-xxxs);
+    padding: var(--spacing-xxs) 0;
+  }
+}

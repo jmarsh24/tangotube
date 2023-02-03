@@ -1,0 +1,5 @@
+div class="video-section"
+  = render "videos/index/videos/section/header", title: section_title, direction_value: direction_value, sort_value: sort_value
+  div class="video-section__videos"
+    - videos.each do |video|
+      = render partial: "video", locals: { video: video }
