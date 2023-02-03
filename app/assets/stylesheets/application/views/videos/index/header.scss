@@ -5,12 +5,8 @@
   justify-content: flex-start;
   gap: 10px;
   margin: 10px 0px;
-  // padding: 10px 0px;
-  border-bottom: $border-color;
-  background-color: var(--sl-color-neutral-0);
-  h3 {
-    color: var(--sl-color-gray-800);
-  }
+  border-bottom: var(--color-neutral-800);
+  background-color: var(--color-neutral-0);
 }
 
 @media (max-width: 600px) {

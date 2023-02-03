@@ -1,0 +1,15 @@
+.theme-icon {
+  mask-image: url('@assets/images/icons/moon-fill.svg');
+
+  @media (prefers-color-scheme: light) {
+    mask-image: url('@assets/images/icons/sun-max.svg');
+  }
+
+  [data-theme='dark'] & {
+    mask-image: url('@assets/images/icons/moon-fill.svg');
+  }
+
+  [data-theme='light'] & {
+    mask-image: url('@assets/images/icons/sun-max.svg');
+  }
+}

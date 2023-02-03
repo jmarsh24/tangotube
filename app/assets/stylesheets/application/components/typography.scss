@@ -1,0 +1,108 @@
+.mega {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 72px;
+}
+
+.heading-1 {
+  font-size: 28px;
+  line-height: 42px;
+  &--bold {
+    font-weight: 700;
+  }
+
+  @include breakpoint-tablet {
+    font-size: 36px;
+    line-height: 54px;
+  }
+}
+
+.heading-2 {
+  font-size: 20px;
+  line-height: 30px;
+
+  &--bold {
+    font-weight: 700;
+  }
+
+  @include breakpoint-tablet {
+    font-size: 24px;
+    line-height: 36px;
+  }
+}
+
+.heading-3 {
+  font-size: 20px;
+  line-height: 30px;
+  &--bold {
+    font-weight: 700;
+  }
+
+  @include breakpoint-tablet {
+    font-size: 22px;
+    line-height: 33px;
+  }
+}
+
+.heading-4 {
+  font-size: 16px;
+  line-height: 24px;
+  &--bold {
+    font-weight: 700;
+  }
+  @include breakpoint-tablet {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}
+
+.paragraph {
+  font-size: 16px;
+  line-height: 24px;
+  &--bold {
+    font-weight: 700;
+  }
+}
+
+.caption {
+  font-size: 12px;
+  line-height: 18px;
+  &--bold {
+    font-weight: 700;
+  }
+  @include breakpoint-tablet {
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.action-footer-link {
+  font-size: 14px;
+  line-height: 21px;
+  text-decoration: none;
+  color: inherit;
+  &--bold {
+    font-weight: 700;
+  }
+}
+
+.action-small-links {
+  font-size: 14px;
+  line-height: 21px;
+  &--bold {
+    font-weight: 700;
+  }
+
+  @include breakpoint-tablet {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

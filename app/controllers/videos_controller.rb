@@ -1,42 +1,57 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
-  include ActionView::RecordIdentifier
-
-  before_action :authenticate_user!, only: %i[edit update create upvote downvote bookmark watchlist complete featured]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :current_search, only: %i[index]
-  before_action :set_video, only: %i[show edit update destroy hide upvote downvote bookmark watchlist complete featured]
+  before_action :set_video, except: %i[index]
+  before_action :check_for_clear, only: [:index]
   after_action :track_action
 
-  helper_method :sorting_params, :filtering_params
+  helper_method :filtering_params, :sorting_params
 
   def index
-    videos = if filtering_params.present? || sorting_params.present?
-      Video::Search.for(filtering_params:,
-        sorting_params:,
-        page:,
-        user: current_user)
-        .videos
-    else
-      @featured_videos = Video.includes(Video.search_includes)
-        .has_leader_and_follower
-        .featured?
-        .limit(24)
-        .order("random()")
+    video_search = Video::Search.for(filtering_params:, sorting_params:, page:, user: current_user)
+    videos = video_search.videos
+
+    @featured_videos = Video.includes(Video.search_includes)
+      .has_leader_and_follower
+      .featured?
+      .limit(24)
+      .order("random()")
+
+    @current_page = video_params[:page]&.to_i || 1
+    scope = videos.page(@current_page).per(12)
+    @has_more_pages = !scope.next_page.nil? unless @has_more_pages == true
+
+    if @current_page == 1
+      @genres = video_search.genres
+      @leaders = video_search.leaders
+      @followers = video_search.followers
+      @orchestras = video_search.orchestras
+      @years = video_search.years
     end
-    @pagy, @videos = pagy(videos, items: 24)
-    respond_to do |format|
-      format.html # GET
-      format.turbo_stream # POST
+
+    if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
+      url = request.fullpath.gsub("&filtering=true", "").gsub("&pagination=true", "").gsub("filtering=true", "")
+      ui.replace "filters", with: "filters/filters", genres: @genres, leaders: @leaders, followers: @followers, orchestras: @orchestras, years: @years
+      ui.run_javascript "Turbo.navigator.history.push('#{url}')"
+      ui.run_javascript "history.pushState({}, '', '#{url}')"
+      ui.run_javascript "window.onpopstate = function () {Turbo.visit(document.location)}"
+      ui.replace "videos", with: "videos/videos", items: scope, partial: params[:partial]
     end
+    if @current_page > 1 && video_params[:pagination] == "true"
+      ui.remove "next-page-link"
+      ui.append "pagination-frame", with: "components/pagination", items: scope, partial: params[:partial]
+    end
+    @videos = scope
   end
 
   def show
     if @video.nil?
-      Video::YoutubeImport.from_video(show_params[:v])
-      @video = Video.find_by(youtube_id: show_params[:v])
+      Video::YoutubeImport.from_video(video_params[:v])
+      @video = Video.find_by(youtube_id: video_params[:v])
     end
-    UpdateVideoJob.perform_later(show_params[:v])
+    UpdateVideoJob.perform_later(video_params[:v])
     set_recommended_videos
     @start_value = params[:start]
     @end_value = params[:end]
@@ -55,7 +70,7 @@ class VideosController < ApplicationController
     @video.clicked!
 
     if user_signed_in?
-      MarkVideoAsWatchedJob.perform_later(show_params[:v], current_user.id)
+      MarkVideoAsWatchedJob.perform_later(video_params[:v], current_user.id)
     end
     ahoy.track("Video View", video_id: @video.id)
   end
@@ -97,152 +112,59 @@ class VideosController < ApplicationController
   end
 
   def upvote
-    if current_user.voted_up_on? @video, vote_scope: "like"
-      @video.unvote_by current_user, vote_scope: "like"
-    else
-      @video.upvote_by current_user, vote_scope: "like"
-    end
-    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    update_upvote "like"
   end
 
   def downvote
-    if current_user.voted_down_on? @video, vote_scope: "like"
-      @video.unvote_by current_user, vote_scope: "like"
-    else
-      @video.downvote_by current_user, vote_scope: "like"
-    end
-    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    update_downvote "like"
   end
 
   def bookmark
-    if current_user.voted_up_on? @video, vote_scope: "bookmark"
-      @video.unvote_by current_user, vote_scope: "bookmark"
-    else
-      @video.upvote_by current_user, vote_scope: "bookmark"
-    end
-    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    update_upvote "bookmark"
   end
 
   def complete
-    if current_user.voted_up_on? @video, vote_scope: "watchlist"
-      @video.unvote_by current_user, vote_scope: "watchlist"
-    else
-      @video.upvote_by current_user, vote_scope: "watchlist"
-    end
-    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    update_upvote "watchlist"
   end
 
   def watchlist
-    if current_user.voted_down_on? @video, vote_scope: "watchlist"
-      @video.unvote_by current_user, vote_scope: "watchlist"
-    else
-      @video.downvote_by current_user, vote_scope: "watchlist"
-    end
-    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
+    update_downvote "watchlist"
   end
 
   def featured
     @video.featured =
       !@video.featured?
     @video.save
-    render turbo_stream: turbo_stream.update("#{dom_id(@video)}_vote", partial: "videos/show/vote")
-  end
-
-  def banner
+    render turbo_stream: turbo_stream.update("video_#{@video.youtube_id}_vote", partial: "videos/show/vote")
   end
 
   private
 
+  def check_for_clear
+    if video_params[:commit] == "Clear"
+      redirect_to root_path
+    end
+  end
+
   def set_video
-    @video = Video.includes(Video.search_includes).find_by(youtube_id: show_params[:v]) if show_params[:v]
-    @video = Video.includes(Video.search_includes).find_by(youtube_id: show_params[:id]) if show_params[:id]
-    @video = Video.find_by(youtube_id: show_params[:video_id]) if show_params[:video_id]
+    @video = Video.includes(Video.search_includes).find_by(youtube_id: video_params[:v]) if video_params[:v]
+    @video = Video.includes(Video.search_includes).find_by(youtube_id: video_params[:id]) if video_params[:id]
+    @video = Video.find_by(youtube_id: video_params[:video_id]) if video_params[:video_id]
   end
 
   def set_recommended_videos
-    videos_from_this_performance
-    videos_with_same_dancers
-    videos_with_same_event
-    videos_with_same_song
-    videos_with_same_channel
-  end
-
-  def videos_from_this_performance
-    @videos_from_this_performance = Video.includes(Video.search_includes)
-      .where("upload_date <= ?", @video.upload_date + 7.days)
-      .where("upload_date >= ?", @video.upload_date - 7.days)
-      .where(channel_id: @video.channel_id)
-      .with_leader(@video.leaders.first)
-      .with_follower(@video.followers.first)
-      .order("performance_number ASC")
-      .where(hidden: false)
-      .limit(8).load_async
-  end
-
-  def videos_with_same_dancers
-    @videos_with_same_dancers = Video.includes(Video.search_includes)
-      .where("upload_date <= ?", @video.upload_date + 7.days)
-      .where("upload_date >= ?", @video.upload_date - 7.days)
-      .has_leader_and_follower
-      .with_leader(@video.leaders.first)
-      .with_follower(@video.followers.first)
-      .where(hidden: false)
-      .where.not(youtube_id: @video.youtube_id)
-      .limit(8).load_async
-  end
-
-  def videos_with_same_event
-    @videos_with_same_event = Video.includes(Video.search_includes)
-      .where(event_id: @video.event_id)
-      .where.not(event: nil)
-      .where("upload_date <= ?", @video.upload_date + 7.days)
-      .where("upload_date >= ?", @video.upload_date - 7.days)
-      .where(hidden: false)
-      .where.not(youtube_id: @video.youtube_id)
-      .limit(16).load_async
-    @videos_with_same_event -= @videos_from_this_performance
-  end
-
-  def videos_with_same_song
-    @videos_with_same_song = Video.includes(Video.search_includes)
-      .where(song_id: @video.song_id)
-      .has_leader_and_follower
-      .where(hidden: false)
-      .where.not(song_id: nil)
-      .where.not(youtube_id: @video.youtube_id)
-      .limit(8).load_async
-  end
-
-  def videos_with_same_channel
-    @videos_with_same_channel = Video.includes(Video.search_includes)
-      .where(channel_id: @video.channel_id)
-      .has_leader_and_follower
-      .where(hidden: false)
-      .where.not(youtube_id: @video.youtube_id)
-      .limit(8).load_async
+    @videos_from_this_performance = Video.with_same_performance(@video).limit(8)
+    @videos_with_same_dancers = Video.with_same_dancers(@video).limit(8)
+    @videos_with_same_event = (Video.with_same_event(@video).limit(16) - Video.with_same_performance(@video).limit(16))
+    @videos_with_same_song = Video.with_same_song(@video).limit(8)
+    @videos_with_same_channel = Video.with_same_channel(@video).limit(8)
   end
 
   def current_search
-    @current_search = params[:query]
+    @current_search = video_params[:query]
   end
 
   def video_params
-    params
-      .require(:video)
-      .permit(:leader_id,
-        :follower_id,
-        :song_id,
-        :event_id,
-        :hidden,
-        :"performance_date(1i)",
-        :"performance_date(2i)",
-        :"performance_date(3i)",
-        :performance_number,
-        :performance_total_number,
-        :id)
-  end
-
-  def filtering_params
     params.permit(
       :leader,
       :follower,
@@ -258,29 +180,76 @@ class VideosController < ApplicationController
       :id,
       :query,
       :dancer,
+      :couples,
+      :page,
+      :direction,
+      :sort,
+      :leader_id,
+      :follower_id,
+      :song_id,
+      :event_id,
+      :hidden,
+      :"performance_date(1i)",
+      :"performance_date(2i)",
+      :"performance_date(3i)",
+      :performance_number,
+      :performance_total_number,
+      :id,
+      :v,
+      :video_id,
+      :filtering,
+      :pagination
+    )
+  end
+
+  def filtering_params
+    video_params.slice(
+      :leader,
+      :follower,
+      :channel,
+      :genre,
+      :orchestra,
+      :song,
+      :hd,
+      :event,
+      :year,
+      :watched,
+      :liked,
+      :id,
+      :song_id,
+      :event_id,
+      :query,
+      :dancer,
       :couples
     )
   end
 
-  def page
-    params.permit(:page)
-  end
-
   def sorting_params
-    params.permit(:direction, :sort)
+    video_params.slice(
+      :direction,
+      :sort
+    )
   end
 
-  def show_params
-    params.permit(:v, :id, :video_id)
+  def page
+    video_params[:page]
   end
 
-  def filtering_for_dancer?
-    return true if filtering_params.include?(:leader) || filtering_params.include?(:follower)
-  end
-
-  def dancer_name_match?
-    if filtering_params.fetch(:query, false).present?
-      Leader.full_name_search(filtering_params.fetch(:query, false)) || Follower.full_name_search(filtering_params.fetch(:query, false))
+  def update_upvote(scope)
+    if current_user.voted_up_on? @video, vote_scope: scope
+      @video.unvote_by current_user, vote_scope: scope
+    else
+      @video.upvote_by current_user, vote_scope: scope
     end
+    render turbo_stream: turbo_stream.update("video_#{@video.id}_vote", partial: "videos/show/vote")
+  end
+
+  def update_downvote(scope)
+    if current_user.voted_down_on? @video, vote_scope: scope
+      @video.unvote_by current_user, vote_scope: scope
+    else
+      @video.downvote_by current_user, vote_scope: scope
+    end
+    render turbo_stream: turbo_stream.update("video_#{@video.id}_vote", partial: "videos/show/vote")
   end
 end

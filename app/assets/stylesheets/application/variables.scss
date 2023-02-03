@@ -1,99 +1,158 @@
-@font-face {
-  font-family: 'Poppins';
-  src: asset-url('Poppins-Regular.woff2');
-  font-weight: 400;
-  font-display: swap;
+$sizes: (
+  'zero': 0px,
+  'xxxs': 4px,
+  'xxs': 8px,
+  'xs': 12px,
+  'sm': 16px,
+  'md': 24px,
+  'lg': 32px,
+  'xl': 40px,
+  'xxl': 48px,
+  'xxxl': 64px,
+  'mega': 80px,
+  'mega-2': 96px,
+);
+
+$icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
+  'clock-fill', 'clock', 'close', 'facebook', 'google', 'heart-fill', 'heart',
+  'house-fill', 'magnifying-glass', 'moon-fill', 'safari', 'safari-fill',
+  'scissors-circle-fill', 'scissors-circle', 'scissors', 'star-filled', 'star',
+  'sun-max-fill', 'sun-max', 'square-and-arrow-up', 'thumbs-down-fill',
+  'thumbs-down', 'thumbs-up-fill', 'thumbs-up';
+
+// Breakpoints
+
+@mixin breakpoint-mobile {
+  @media (min-width: 568px) {
+    @content;
+  }
 }
 
-@font-face {
-  font-family: 'Poppins';
-  src: asset-url('Poppins-SemiBold.woff2');
-  font-weight: 600;
-  font-display: swap;
+@mixin breakpoint-tablet {
+  @media (min-width: 744px) {
+    @content;
+  }
 }
 
-@font-face {
-  font-family: 'Poppins';
-  src: asset-url('Poppins-Bold.woff2');
-  font-weight: 700;
-  font-display: swap;
+@mixin breakpoint-desktop {
+  @media (min-width: 1280px) {
+    @content;
+  }
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: asset-url('Inter-Regular.woff2');
-  font-weight: 400;
-  font-display: swap;
+@mixin hideScrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: asset-url('Inter-Bold.woff2');
-  font-weight: 700;
-  font-display: swap;
+@mixin maskedBackground {
+  background-color: currentColor;
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  color: var(--text-label-primary-base);
+:root {
+  color-scheme: light dark;
+
+  @each $size-name, $size-value in $sizes {
+    --spacing-#{$size-name}: #{$size-value};
+
+    --border-radius-input: 0.5rem;
+    --border-radius-input-sm: 0.25rem;
+    --border-radius-card: 20px;
+    --border-radius-card-sm: 16px;
+    --border-radius-card-xs: 4px;
+    --border-radius-feedback-item: 10px;
+
+    --border-radius-sm: 0.1875rem; /* 3px */
+    --border-radius-md: 0.25rem; /* 4px */
+    --border-radius-lg: 0.5rem; /* 8px */
+    --border-radius-xl: 1rem; /* 16px */
+
+    --border-radius-circle: 50%;
+    --border-radius-pill: 9999px;
+
+    --logo-height-home: 100px;
+    --logo-height-modal: 80px;
+
+    --z-search: 800;
+    --z-nav: 900;
+    --z-modal: 1000;
+    --z-modal-close: 1001;
+    --z-menu: 50;
+    --z-dropdown: 1000;
+    --z-navbar: 1002;
+    --z-navbar-1: 0;
+    --z-navbar-1: 2;
+    --z-navbar-2: 3;
+    --z-navbar-3: 4;
+    --z-drawer: 1001;
+    --z-index-video-overlay: 1;
+    --z-cookies-modal: 999;
+    --z-menu: 99;
+    --z-footer: 99;
+    --z-performance_number: 99;
+
+    --navbar-height: 80px;
+    --video-aspect-ratio: 0.8;
+
+    --transition-xs: 1000ms;
+    --transition-s: 500ms;
+    --transition-md: 250ms;
+    --transition-f: 150ms;
+    --transition-xf: 50ms;
+
+    --letter-spacing-denser: -0.03em;
+    --letter-spacing-dense: -0.015em;
+    --letter-spacing-normal: normal;
+    --letter-spacing-loose: 0.075em;
+    --letter-spacing-looser: 0.15em;
+
+    --line-height-denser: 1;
+    --line-height-dense: 1.4;
+    --line-height-normal: 1.8;
+    --line-height-loose: 2.2;
+    --line-height-looser: 2.6;
+
+    --font-size-xxs: 0.625rem;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-l: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2.25rem;
+    --font-size-xxxl: 3rem;
+    --font-size-xxxxl: 4.5rem;
+
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 700;
+
+    --z-index-drawer: 700;
+    --z-index-dialog: 800;
+    --z-index-dropdown: 900;
+    --z-index-toast: 950;
+    --z-index-tooltip: 1000;
+
+    --container-gap: 16px;
+    --grid-width: 1660px;
+  }
+
+  @include breakpoint-tablet() {
+    --container-gap: 32px;
+    --navbar-height: 88px;
+  }
+
+  @include breakpoint-desktop() {
+    --container-gap: 64px;
+    --navbar-height: 120px;
+  }
 }
-
-$primary-color: #ffffff;
-$secondary-color: #f9f9f9;
-
-$primary-font-color: rgb(80, 80, 80);
-$secondary-font-color: white;
-
-$sortable-label-color: rgb(50, 50, 50);
-$sortable-label-color-hover: rgb(3, 3, 3);
-$sortable-border-bottom-color: rgba(0, 0, 0, 0.1);
-
-$link-color: rgb(6, 95, 212);
-
-$border-color: var(--sl-color-gray-200);
-$border-color-secondary: #e2e2e2;
-$button-color: #c2c2c2;
-
-$button-primary-background-color: #ffffff;
-$button-primary-background-color-hover: #c2c2c2;
-
-$filter-border-color: #e8e8e8;
-$logo-hover-color: #3d3d3d;
-
-$search-bar-font-color: rgb(17, 17, 17);
-$search-bar-button-color: rgb(248, 248, 248);
-$search-bar-button-color-hover: rgb(240, 240, 240);
-$search-bar-focus-color: #719ece;
-
-$placeholder-font-color: rgb(17, 17, 17);
-
-$nav-link-color-hover: #222222;
-
-$primary-header-background: #e8e8e8;
-$primary-header-link-color: #ffffff;
-
-$secondary-header-background: #f2f2f2;
-$secondary-header-link-color: rgb(97, 97, 97);
-$secondary-header-link-color-hover: rgb(3, 3, 3);
-
-$show-video-background: black;
-
-$videos-primary-link: purple;
-$videos-primary-link-hover: purple;
-
-$videos-secondary-link: rgb(97, 97, 97);
-$videos-secondary-link-hover: rgb(3, 3, 3);
-
-$show-primary-title: var(--sl-color-gray-800);
-$show-primary-song: var(--sl-color-gray-700);
-$show-primary-song-hover: var(--sl-color-gray-900);
-$show-primary-channel-title: var(--sl-color-gray-600);
-$show-primary-channel-title-hover: var(--sl-color-gray-800);
-$show-primary-video-event: var(--sl-color-gray-800);
-$show-primary-video-event-hover: var(--sl-color-gray-900);
-
-$video-info-details-heading: var(--sl-color-gray-800);
-$video-info-details-value: var(--sl-color-gray-800);
-
-$ss-search-background: #f9f9f9;
-$ss-search-background-focus: #5897fb;

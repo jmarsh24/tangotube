@@ -1,0 +1,27 @@
+$icon-sizes: (
+  'xs': 16px,
+  'md': 20px,
+  'lg': 24px,
+  'xl': 32px,
+);
+
+.icon {
+  @include maskedBackground;
+  height: map-get($icon-sizes, 'md');
+  width: map-get($icon-sizes, 'md');
+  flex-shrink: 0;
+  color: var(--color-neutral-1000);
+
+  @each $size-name, $size-value in $icon-sizes {
+    &--#{$size-name} {
+      height: $size-value;
+      width: $size-value;
+    }
+  }
+
+  @each $icon in $icons {
+    &--#{$icon} {
+      mask-image: url('@assets/images/icons/#{$icon}.svg');
+    }
+  }
+}

@@ -1,0 +1,26 @@
+head
+  meta charset="UTF-8"
+
+  /WebApp
+  meta name="viewport" content="width=device-width, initial-scale = 1.0, viewport-fit=cover"
+  link rel="manifest" href=manifest_path
+  link rel="apple-touch-icon" href=asset_path("app_icon.png")
+  meta name="theme-color" content="#2D93E7"
+  meta name="color-scheme" content="dark light"
+  meta name="apple-mobile-web-app-status-bar-style" content="default"
+  meta name="apple-mobile-web-app-capable" content="yes"
+  meta name="facebook-domain-verification" content="6cwcjj98isfwgew99e0uokdkw4zzyp"
+
+  /SEO
+  = favicon_link_tag asset_path("favicon.svg")
+
+  / Security
+  = csrf_meta_tags
+  = csp_meta_tag
+
+  / Assets
+  = vite_typescript_tag "entrypoints/application"
+
+  = render_meta
+
+  = yield :additional_head_tags if content_for? :additional_head_tags

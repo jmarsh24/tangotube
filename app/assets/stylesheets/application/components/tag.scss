@@ -1,0 +1,20 @@
+.tag {
+  display: inline-block;
+  border-radius: 3px;
+  padding: var(--spacing-xxxs) var(--spacing-xxxs);
+  border-radius: 3px;
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+  font-weight: 600;
+
+  &--sm {
+    font-size: 0.8em;
+    display: inline-block;
+    font-weight: 500;
+  }
+
+  &--lg {
+    font-size: 1.2em;
+    border-radius: 4px;
+  }
+}

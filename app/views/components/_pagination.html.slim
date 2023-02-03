@@ -1,0 +1,8 @@
+- if partial
+  = render partial: partial, collection: items
+- else
+  = render items
+- if @has_more_pages
+  - url = Kaminari::Helpers::NextPage.new(self, current_page: @current_page, params: { partial: partial }).url
+  - url = url.concat("&pagination=true") if url.present?
+  a#next-page-link.button.pagination-button data={ "turbo-frame": "pagination-frame", controller: "viewport-click", "turbo-stream": "true" } href=url = t(".load_more")

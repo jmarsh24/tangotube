@@ -1,0 +1,12 @@
+#comments
+  h3.heading-3.heading-3--boldComments
+    - if user_signed_in?
+      = render partial: "comments/form", commentable: @video
+      - if params[:comment]
+        = "Single comment thread. #{link_to "View all comments", url_for()}"
+    - else
+      div style="margin-bottom: 16px; font-size: 12px;"
+        = link_to "Sign up", new_user_registration_path, style: "font-size: 0.8rem", 'data-turbo-frame': "_top"
+        = link_to "Login", new_user_session_path, style: "font-size: 12px;", 'data-turbo-frame': "_top"
+        = "to reply"
+    = render @comments, continue_thread: 5

@@ -1,0 +1,17 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: var(--z-dropdown);
+
+  &__label {
+    padding: var(--spacing-xxs) var(--spacing-sm);
+  }
+
+  &__item {
+    border-left: 1px solid var(--color-neutral-200);
+
+    &:first-child {
+      border-left: none;
+    }
+  }
+}

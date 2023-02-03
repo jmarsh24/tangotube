@@ -1,0 +1,16 @@
+- meta.title = t(".meta_title")
+- meta.description = t(".meta_description")
+/ - meta.image = image_url("share.jpg")
+= render "banner/index"
+.container
+  = render "filters/filters"
+  #videos
+    = render "videos/index/videos/header"
+    - if @featured_videos.present?
+      .stack
+        = render "videos/index/videos/section/header", title: "Featured"
+        .grid.grid--videos = render @featured_videos
+    .stack
+      = render "videos/index/videos/section/header", title: "Trending"
+      = paginated @videos, class: "grid grid--videos"
+
