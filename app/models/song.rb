@@ -26,9 +26,6 @@
 #  orchestra_id      :bigint
 #
 class Song < ApplicationRecord
-  include PgSearch::Model
-  multisearchable against: [:title, :artist]
-
   validates :genre, presence: true
   validates :title, presence: true
   validates :artist, presence: true
@@ -79,10 +76,6 @@ class Song < ApplicationRecord
 
     def missing_english_translation
       where.not(lyrics: nil).where(lyrics_en: nil)
-    end
-
-    def rebuild_pg_search_documents
-      find_each { |record| record.update_pg_search_document }
     end
   end
 end
