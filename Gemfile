@@ -49,6 +49,7 @@ gem "sitemap_generator"
 gem "streamio-ffmpeg"
 gem "net-ssh"
 gem "yael"
+gem "ahoy"
 
 # Assets
 gem "vite_rails"
