@@ -34,7 +34,7 @@ admin:
   provider:
   role: 1
 
-normal_user:
+regular:
   email: 'user@example.com'
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   name:
