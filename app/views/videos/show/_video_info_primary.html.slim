@@ -4,7 +4,7 @@
     h2.heading-4= link_to_song( @video.display.el_recodo_attributes, @video.display.external_song_attributes, @video)
     = link_to @video.event.title.titleize, root_path(event_id: @video.event.id), { "data-turbo-frame": "_top" } if @video.event.present?
     div
-      = link_to image_tag(@video.channel.thumbnail_url, class: "video-card__details__channel__icon"), root_path(channel: @video.channel.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?
+      = link_to image_tag(@video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: @video.channel.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?
       = link_to truncate(@video.channel.title, length: 45, omission: ""), root_path(channel: @video.channel.channel_id), { class: "channel-title", "data-turbo-frame": "_top" }
     div
       = formatted_metadata(@video)
