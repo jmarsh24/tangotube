@@ -5,7 +5,6 @@ class VideosController < ApplicationController
   before_action :current_search, only: %i[index]
   before_action :set_video, except: %i[index]
   before_action :check_for_clear, only: [:index]
-  after_action :track_action
 
   helper_method :filtering_params, :sorting_params
 
