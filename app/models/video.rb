@@ -64,6 +64,7 @@
 class Video < ApplicationRecord
   acts_as_votable
   include Filterable
+  include Indexable
 
   PERFORMANCE_REGEX = /(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
 
@@ -231,48 +232,45 @@ class Video < ApplicationRecord
     }
 
   class << self
-
     def index_query
       <<~SQL
-        UPDATE orders
+        UPDATE videos
         SET index = query.index
         FROM (
           SELECT
-            orders.id,
+            videos.id,
             LOWER(
               CONCAT_WS(' ',
-                orders.reference, ARRAY_TO_STRING(orders.tags, ' '),
-                MIN(users.email), MIN(users.first_name), MIN(users.last_name),
-                MIN(companies.slug), MIN(companies.name),
-                STRING_AGG(invoices.reference, ' '), STRING_AGG(invoices.booking_number::text, ' '), STRING_AGG(invoices.address ->> 'city', ' '), STRING_AGG(invoices.address ->> 'first_name', ' '), STRING_AGG(invoices.address ->> 'last_name', ' '),
-                STRING_AGG(deliveries.reference, ' '), STRING_AGG(deliveries.tracking_code, ' '), STRING_AGG(deliveries.address ->> 'city', ' '), STRING_AGG(deliveries.address ->> 'first_name', ' '), STRING_AGG(deliveries.address ->> 'last_name', ' '),
-                STRING_AGG(picklists.reference, ' '),
-                STRING_AGG(products.sku, ' '), STRING_AGG(products.slug, ' '), STRING_AGG(products.name::text, ' '), STRING_AGG(products.artist::text, ' '),
-                STRING_AGG(product_variants.sku, ' '),
-                STRING_AGG(items.validation_code, ' ')
+                videos.title,
+                videos.acr_cloud_track_name,
+                videos.acr_cloud_artist_name,
+                videos.description,
+                videos.youtube_artist,
+                videos.youtube_id,
+                videos.youtube_song,
+                videos.spotify_artist_name,
+                videos.spotify_track_name,
+                ARRAY_TO_STRING(array_agg(videos.tags), ' '),
+                MIN(dancers.first_name), MIN(dancers.last_name), MIN(dancers.nick_name),
+                MIN(channels.channel_id), MIN(channels.title),
+                STRING_AGG(songs.title, ' '), STRING_AGG(songs.genre, ' '), STRING_AGG(songs.artist, ' '),
+                STRING_AGG(events.city, ' '), STRING_AGG(events.title, ' '), STRING_AGG(events.country, ' ')
               )
             ) as index
-          FROM orders
-          LEFT JOIN users ON users.id = orders.user_id
-          LEFT JOIN companies ON companies.id = orders.company_id
-          LEFT JOIN invoices ON invoices.order_id = orders.id
-          LEFT JOIN deliveries ON deliveries.order_id = orders.id
-          LEFT JOIN picklists ON picklists.id = deliveries.picklist_id
-          LEFT JOIN items ON items.invoice_id = invoices.id OR items.delivery_id = deliveries.id OR items.incoming_delivery_id = deliveries.id
-          LEFT JOIN products ON items.product_id = products.id
-          LEFT JOIN product_variants ON items.product_variant_id = product_variants.id
-          GROUP BY orders.id
+          FROM videos
+          LEFT JOIN channels ON channels.id = videos.channel_id
+          LEFT JOIN songs ON songs.id = videos.song_id
+          LEFT JOIN events ON events.id = videos.event_id
+          LEFT JOIN dancer_videos ON dancer_videos.video_id = videos.id
+          LEFT JOIN dancers ON dancers.id = dancer_videos.dancer_id
+          GROUP BY videos.id
         ) AS query
-        WHERE orders.id IN (?) and query.id = orders.id
+        WHERE videos.id IN (?) and query.id = videos.id
       SQL
-    end
-  end
-
-    def search(query, _user)
-      filter_by_query(query)
     end
 
     def filter_by_query(query, _user)
+      search(query)
     end
 
     def search_includes
