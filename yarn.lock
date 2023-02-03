@@ -1338,13 +1338,6 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
-stimulus-dropdown@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/stimulus-dropdown/-/stimulus-dropdown-2.1.0.tgz#22f15cd1dc247e08f04c3f95d7ab9d8102602a07"
-  integrity sha512-p4Bs56/ilB2E0lfFaNajKIHZK1PMUUDnhDl74f97bn087fxIfRB7WQekVtTTWJdRlf3EIgSsDX7K1TsaLiIcLg==
-  dependencies:
-    stimulus-use "^0.51.1"
-
 stimulus-hotkeys@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/stimulus-hotkeys/-/stimulus-hotkeys-1.0.5.tgz#8b9c25feb9412254e8708c3c49c05be7c043ceab"
@@ -1353,7 +1346,7 @@ stimulus-hotkeys@^1.0.5:
     hotkeys-js "^3.8.7"
     stimulus ">= 2.0.0"
 
-stimulus-use@^0.51.1, stimulus-use@^0.51.2:
+stimulus-use@^0.51.2:
   version "0.51.3"
   resolved "https://registry.yarnpkg.com/stimulus-use/-/stimulus-use-0.51.3.tgz#d7ac671aff8d0db253296dec89d38aa6f4b27e2a"
   integrity sha512-V4YETxMFL4/bpmcqlwFtaOaJg9sLF+XlWsvXrsoWVA5jffsqe7uAvV6gGPPQta7Hgx01vovA0yNsWUe2eU9Jmw==
