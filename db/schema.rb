@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_095816) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_113051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
@@ -437,6 +438,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_095816) do
     t.integer "cached_weighted_like_total", default: 0
     t.float "cached_weighted_like_average", default: 0.0
     t.boolean "featured", default: false
+    t.text "index"
     t.index ["acr_cloud_artist_name"], name: "index_videos_on_acr_cloud_artist_name"
     t.index ["acr_cloud_track_name"], name: "index_videos_on_acr_cloud_track_name"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
@@ -445,6 +447,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_095816) do
     t.index ["follower_id"], name: "index_videos_on_follower_id"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
+    t.index ["index"], name: "index_videos_on_index", opclass: :gin_trgm_ops, using: :gin
     t.index ["leader_id"], name: "index_videos_on_leader_id"
     t.index ["performance_date"], name: "index_videos_on_performance_date"
     t.index ["popularity"], name: "index_videos_on_popularity"

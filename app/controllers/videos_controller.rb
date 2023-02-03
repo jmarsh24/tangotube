@@ -12,11 +12,13 @@ class VideosController < ApplicationController
     video_search = Video::Search.for(filtering_params:, sorting_params:, page:, user: current_user)
     videos = video_search.videos
 
-    @featured_videos = Video.includes(Video.search_includes)
-      .has_leader_and_follower
-      .featured?
-      .limit(24)
-      .order("random()")
+    if !filtering_params.present?
+      @featured_videos = Video.includes(Video.search_includes)
+        .has_leader_and_follower
+        .featured?
+        .limit(24)
+        .order("random()")
+    end
 
     @current_page = video_params[:page]&.to_i || 1
     scope = videos.page(@current_page).per(12)
