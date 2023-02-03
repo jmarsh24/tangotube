@@ -23,3 +23,10 @@
 #  slug              :string
 #  orchestra_id      :bigint
 #
+
+song_1:
+  genre: 'genre'
+  title: 'title'
+  artist: 'artist'
+  artist_2: 'artist_2'
+  composer: 'composer'

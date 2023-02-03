@@ -14,3 +14,13 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
+
+yt_comment_1:
+  video_id: 1
+  body: 'comment'
+  user_name: 'user'
+  like_count: 1
+  date: '2019-01-01'
+  channel_id: 'channel'
+  profile_image_url: 'url'
+  youtube_id: 'id'

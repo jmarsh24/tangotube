@@ -18,6 +18,7 @@ gem "bootsnap", require: false
 gem "acts-as-taggable-on"
 gem "acts_as_votable"
 gem "acts_as_list"
+gem "ahoy_matey"
 gem "amazing_print"
 gem "avo"
 gem "chartkick"
@@ -79,6 +80,7 @@ group :development, :test do
   gem "rspec-retry"
   gem "webmock", require: false
   gem "capybara-screenshot-diff"
+  gem "vcr"
 end
 
 group :development do
@@ -97,5 +99,3 @@ group :development do
   gem "rubocop-rspec"
   gem "rubocop-rake"
 end
-
-gem "vcr"

@@ -16,3 +16,11 @@
 #  videos_count          :integer          default(0), not null
 #  active                :boolean          default(TRUE)
 #
+
+channel_1:
+  title: 'title'
+  channel_id: 'channel_id'
+  thumbnail_url: 'thumbnail_url'
+  imported: false
+  reviewed: false
+  active: true

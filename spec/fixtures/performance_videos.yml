@@ -9,3 +9,8 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
+
+peformance_video_1:
+  video_id: 1
+  performance_id: 1
+  position: 1

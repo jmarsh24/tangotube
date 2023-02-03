@@ -9,3 +9,7 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
+
+performance_1:
+  date: '2019-01-01'
+  videos_count: 1

@@ -9,3 +9,13 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+
+dancer_video_1:
+  dancer_id: 1
+  video_id: 1
+  role: 0
+
+dancer_video_2:
+  dancer_id: 1
+  video_id: 2
+  role: 0

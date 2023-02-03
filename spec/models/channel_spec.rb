@@ -21,6 +21,9 @@
 require "rails_helper"
 
 RSpec.describe Channel do
+  fixtures :all
+  let(:channel) { channels(:channel_1) }
+
   it_behaves_like "an importable", :channel
   it_behaves_like "a reviewable", :channel
 

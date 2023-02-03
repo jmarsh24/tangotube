@@ -11,3 +11,10 @@
 #  slug             :string
 #  unique_couple_id :string
 #
+
+couple_1:
+  dancer_id: 1
+  partner_id: 2
+  videos_count: 2
+  slug: 'slug'
+  unique_couple_id: 'unique_couple_id'
