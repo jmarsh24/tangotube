@@ -66,7 +66,6 @@ class VideosController < ApplicationController
       else
         @video.comments.includes([:commentable]).where(parent_id: nil)
       end
-    @yt_comments = @video.yt_comments.limit(10)
 
     @video.clicked!
 
