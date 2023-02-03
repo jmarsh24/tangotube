@@ -76,10 +76,6 @@ GEM
     acts_as_votable (0.14.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    ahoy_matey (4.1.0)
-      activesupport (>= 5.2)
-      device_detector
-      safely_block (>= 0.2.1)
     amazing_print (1.4.0)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
@@ -160,7 +156,6 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     deepl-rb (2.5.3)
-    device_detector (1.1.0)
     devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -178,7 +173,6 @@ GEM
     dry-cli (1.0.0)
     dry-initializer (3.1.1)
     e2mmap (0.1.0)
-    errbase (0.2.2)
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
@@ -347,9 +341,6 @@ GEM
     parser (3.2.0.0)
       ast (~> 2.4.1)
     pg (1.4.5)
-    pg_search (2.3.6)
-      activerecord (>= 5.2)
-      activesupport (>= 5.2)
     propshaft (0.6.4)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -490,8 +481,6 @@ GEM
     ruby2_keywords (0.0.5)
     rufus-scheduler (3.8.2)
       fugit (~> 1.1, >= 1.1.6)
-    safely_block (0.3.0)
-      errbase (>= 0.1.1)
     scenic (1.7.0)
       activerecord (>= 4.0.0)
       railties (>= 4.0.0)
@@ -618,7 +607,6 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_list
   acts_as_votable
-  ahoy_matey
   amazing_print
   annotate
   avo
@@ -655,7 +643,6 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg
-  pg_search
   propshaft
   puma
   pundit
@@ -677,7 +664,7 @@ DEPENDENCIES
   sentry-ruby
   serviceworker-rails
   shimmer
-  sidekiq (~> 6.2.2)
+  sidekiq
   sidekiq-scheduler
   sidekiq-throttled
   sitemap_generator

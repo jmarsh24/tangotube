@@ -72,7 +72,6 @@ class VideosController < ApplicationController
     if user_signed_in?
       MarkVideoAsWatchedJob.perform_later(video_params[:v], current_user.id)
     end
-    ahoy.track("Video View", video_id: @video.id)
   end
 
   def edit

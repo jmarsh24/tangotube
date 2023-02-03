@@ -11,10 +11,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def track_action
-    ahoy.track "Ran action", request.params
-  end
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password) }
 

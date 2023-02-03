@@ -236,14 +236,6 @@ class Video < ApplicationRecord
     end
 
     def filter_by_query(query, _user)
-      where(id: VideoSearch.search(query).select(:video_id))
-    end
-
-    def refresh_materialized_view
-      Scenic.database.refresh_materialized_view(
-        :video_searches,
-        concurrently: true
-      )
     end
 
     def search_includes
@@ -287,14 +279,6 @@ class Video < ApplicationRecord
         where(id: user.find_up_downsvoted_items.pluck(:id))
       end
     end
-
-    def most_viewed_videos_by_month
-      where(id: Ahoy::Event.most_viewed_videos_by_month)
-    end
-  end
-
-  def viewed_within_last_month?
-    Video.where(id: Ahoy::Event.most_viewed_videos_by_month).any?
   end
 
   def grep_title_for_dancer
