@@ -47,10 +47,3 @@ task parse_all_performance_dates: :environment do
   end
   puts "done."
 end
-
-desc "Imports all youtube comments for existing videos"
-task import_all_comments: :environment do
-  Video.left_outer_joins(:yt_comments).order("updated_at asc").limit(10).limit(50000).find_each do |video|
-    ImportCommentsJob.perform_later(video.youtube_id)
-  end
-end

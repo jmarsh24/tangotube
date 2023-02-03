@@ -74,7 +74,6 @@ class Video < ApplicationRecord
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :yt_comments, dependent: :destroy
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos

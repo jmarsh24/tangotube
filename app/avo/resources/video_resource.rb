@@ -76,7 +76,6 @@ class VideoResource < Avo::BaseResource
   # field :channel, as: :belongs_to
   # field :event, as: :belongs_to
   # field :comments, as: :has_many
-  # field :yt_comments, as: :has_many
   # field :clips, as: :has_many
   # field :dancer_videos, as: :has_many
   # field :dancers, as: :has_many, through: :dancer_videos
