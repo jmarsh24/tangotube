@@ -21,7 +21,7 @@ class VideosController < ApplicationController
     end
 
     @current_page = video_params[:page]&.to_i || 1
-    scope = videos.page(@current_page).per(12)
+    scope = videos.page(@current_page).without_count.per(12)
     @has_more_pages = !scope.next_page.nil? unless @has_more_pages == true
 
     if @current_page == 1
