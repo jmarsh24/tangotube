@@ -31,5 +31,4 @@ RSpec.describe User do
 
   let(:admin_user) { users(:admin) }
   let(:user) { users(:regular) }
-  end
 end
