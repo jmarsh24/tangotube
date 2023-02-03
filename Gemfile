@@ -54,7 +54,6 @@ gem "streamio-ffmpeg"
 gem "translate_client"
 gem "net-ssh"
 gem "yael"
-gem "ahoy"
 
 # Assets
 gem "vite_rails"
