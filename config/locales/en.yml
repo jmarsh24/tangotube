@@ -113,6 +113,7 @@ en:
         watched: Watched
         with_dancer: With dancer
     filters:
+      deactivate: Deactivate
       filters: Filters
       sorting: Sorting
   loading_spinner: Loading spinner
@@ -135,7 +136,6 @@ en:
     show:
       bookmark_link:
         bookmark: Bookmark
-        bookmark_tooltip: Bookmark tooltip
       complete_link:
         complete: Complete
         complete_tooltip: Complete tooltip
@@ -156,4 +156,3 @@ en:
         share_button: Share
       watchlist_link:
         watch_later: Watch later
-        watch_later_tooltip: Watch later tooltip
