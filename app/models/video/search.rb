@@ -37,7 +37,6 @@ class Video::Search
 
   def videos
     @videos = Video.includes(Video.search_includes)
-      .not_hidden
       .order(ordering_params)
       .filter_by(@filtering_params, @user)
   end
