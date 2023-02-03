@@ -2,11 +2,11 @@
 
 ## What is TangoTube?
 
-A video platform for dancers by dancers. Searching for tango videos across the web can be a mess. TangoTube fixes this issue by curating, enriching, and organizing all the tango videos across youtube. Making it easier to search, discover and enjoy more tango content. 
+A video platform for dancers by dancers. Searching for tango videos across the web can be a mess. TangoTube fixes this issue by curating, enriching, and organizing all the tango videos across youtube. Making it easier to search, discover and enjoy more tango content.
 
 ### How does it work?
 
-TangoTube scans for new tango videos across the web and recognizes the dancers in the video, the performance song, event and location. This information is organized and reformatted so the viewer can see the critical information right up front when choosing which video to watch. 
+TangoTube scans for new tango videos across the web and recognizes the dancers in the video, the performance song, event and location. This information is organized and reformatted so the viewer can see the critical information right up front when choosing which video to watch.
 
 We apply a music recognition system which identifies the song in each tango video and categorizes it with our tango music database. This allows us to identify the correct genre of the music.
 
@@ -46,3 +46,34 @@ The project during the COVID outbreak in March of 2020. A dancer started curatin
 - Search for practice content by tag name (walking, giros, sacadas, barridas, chains)
 - Ability to search by performance at a specific event and year
 - Plug in with Spotify and other major music platforms
+
+
+# Development
+## Index and Search
+
+Some models (ex: Videos) are indexed in an optimized fashion, requiring a SQL statement to be executed on creation and update.
+When a model's `index_query` is modified (ex: new field to search on), it will only affect data being added or modified from
+this point on. After deploying, it's important to perform a re-indexing of the affected model by connecting to the specified
+environment (ex: `heroku run rails c --app=tangotube-staging`) and performing the following command (here Videos as an example).
+
+```ruby
+Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: false) }
+```
+
+Hint: Change to `now: true` for a synchronous action and be aware of when the process has completed. Otherwise, it will be
+enqueued to _Sidekiq_ and run asynchronously.
+
+## Skylight
+
+When configured, _Skylight_ is normally automatically enabled. To prevent this behavior, it's now
+needed to set ENV `SKYLIGHT_EXPLICIT_ENABLED` to `true`
+
+When disabled, this confusing warning appears in the log. It is simply what _Skylight_ outputs when
+either `SKYLIGHT_ENABLED` is set to `false`, or when `SKYLIGHT_EXPLICIT_ENABLED` is not explicitly
+set to `true`.
+
+> WARN -- Skylight: [SKYLIGHT] [5.3.4] You are running in the production environment but haven't added it to config.skylight.environments, so no data will be sent to Skylight servers.
+
+### Caching in Development
+
+Run `rails cache:dev` to toggle caching.
