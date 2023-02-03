@@ -680,11 +680,7 @@ DEPENDENCIES
   stimulus-rails
   streamio-ffmpeg
   turbo-rails
-<<<<<<< HEAD
   vcr
-=======
-  vite_rails
->>>>>>> main
   web-console
   webmock
   yael
