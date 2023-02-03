@@ -24,7 +24,7 @@
   .tabs__panel data={ "tabs-target": "tabPanel"}
     h4.heading-4.heading-4--bold Youtube Info
     = render partial: "videos/show/video_info_item", locals: { header: "Title", value:  @video.title }
-    = render partial: "videos/show/video_info_item", locals: { header: "Description", value:  auto_link(simple_format(truncate(@video.description, length: 200, omission: ""), {"data-turbo-frame": "_top"}), html: { target: "_blank" }) } if @video.description.present?
+    = render partial: "videos/show/video_info_item", locals: { header: "Description", value:  simple_format(truncate(@video.description, length: 200, omission: ""), {"data-turbo-frame": "_top"}), html: { target: "_blank" } } if @video.description.present?
     = render partial: "videos/show/video_info_item", locals: { header: "Upload Date", value: @video.upload_date.to_formatted_s(:long) }
     = render partial: "videos/show/video_info_item", locals: { header: "Duration", value: Time.at(@video.duration).utc.strftime("%M:%S") }
   - if @video.song.present? || @video.spotify_track_name.present? || @video.youtube_song.present?
