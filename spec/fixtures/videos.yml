@@ -59,3 +59,57 @@
 #  cached_weighted_like_average   :float            default(0.0)
 #  featured                       :boolean          default(FALSE)
 #
+
+video_1:
+  title: 'Video 1'
+  youtube_id: '1234567890'
+  leader_id: 1
+  follower_id: 1
+  description: 'Video 1 description'
+  duration: 100
+  upload_date: '2019-01-01 00:00:00'
+  view_count: 100
+  tags: 'tag1, tag2, tag3'
+  song_id: 1
+  youtube_song: 'Song 1'
+  youtube_artist: 'Artist 1'
+  acrid: '1234567890'
+  spotify_album_id: '1234567890'
+  spotify_album_name: 'Album 1'
+  spotify_artist_id: '1234567890'
+  spotify_artist_id_2: '1234567890'
+  spotify_artist_name: 'Artist 1'
+  spotify_artist_name_2: 'Artist 2'
+  spotify_track_id: '1234567890'
+  spotify_track_name: 'Song 1'
+  youtube_song_id: '1234567890'
+  isrc: '1234567890'
+  acr_response_code: 1
+  channel_id: 1
+  scanned_song: true
+  hidden: false
+  hd: false
+  popularity: 100
+  like_count: 100
+  dislike_count: 100
+  favorite_count: 100
+  comment_count: 100
+  event_id: 1
+  scanned_youtube_music: true
+  click_count: 100
+  acr_cloud_artist_name: 'Artist 1'
+  acr_cloud_artist_name_1: 'Artist 1'
+  acr_cloud_album_name: 'Album 1'
+  acr_cloud_track_name: 'Song 1'
+  performance_date: '2019-01-01 00:00:00'
+  spotify_artist_id_1: '1234567890'
+  spotify_artist_name_1: 'Artist 1'
+  performance_number: 1
+  performance_total_number: 1
+  cached_scoped_like_votes_total: 100
+  cached_scoped_like_votes_score: 100
+  cached_scoped_like_votes_up: 100
+  cached_scoped_like_votes_down: 100
+  cached_weighted_like_score: 100
+  cached_weighted_like_total: 100
+  cached_weighted_like_average: 100.

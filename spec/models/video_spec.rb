@@ -64,6 +64,9 @@
 require "rails_helper"
 
 RSpec.describe Video do
+  fixtures :all
+  let(:video) { videos(:video_1) }
+
   describe "#clicked!" do
     it "increments the click count" do
       video = create(:video, click_count: 0, popularity: 0)

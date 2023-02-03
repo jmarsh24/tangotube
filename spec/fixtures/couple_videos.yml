@@ -8,3 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+
+couple_video:
+  video_id: 1
+  couple_id: 1

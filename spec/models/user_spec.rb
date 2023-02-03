@@ -27,9 +27,12 @@
 require "rails_helper"
 
 RSpec.describe User do
-  context "validation tests" do
-    let(:user) { build(:user) }
+  fixtures :all
 
+  let(:admin_user) { users(:admin) }
+  let(:user) { users(:normal_user) }
+
+  context "validation tests" do
     it "is valid with valid attributes" do
       user.first_name = "John"
       user.last_name = "Doe"

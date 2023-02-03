@@ -28,6 +28,10 @@
 require "rails_helper"
 
 RSpec.describe Song do
+  fixtures :all
+
+  let(:song) { songs(:song_1) }
+
   describe "scope" do
     describe ".sort_by_popularity" do
       it "order songs in database in descending order" do

@@ -13,3 +13,12 @@
 #  updated_at    :datetime         not null
 #  giphy_id      :string
 #
+
+clip_1:
+  start_seconds: 1
+  end_seconds: 2
+  title: 'clip'
+  playback_rate: 1.0
+  user_id: 1
+  video_id: 1
+  giphy_id: 'giphy_id'

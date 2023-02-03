@@ -17,3 +17,25 @@
 #  videos_count :integer          default(0), not null
 #  gender       :integer
 #
+
+unreviewed_dancer:
+  name: 'first_name last_name'
+  first_name: 'first_name'
+  last_name: 'last_name'
+  middle_name: 'middle_name'
+  nick_name: 'nick_name'
+  bio: 'bio'
+  slug: 'slug'
+  reviewed: false
+  gender: 0
+
+reviewed_dancer:
+  name: 'first_name last_name'
+  first_name: 'first_name'
+  last_name: 'last_name'
+  middle_name: 'middle_name'
+  nick_name: 'nick_name'
+  bio: 'bio'
+  slug: 'slug'
+  reviewed: true
+  gender: 0

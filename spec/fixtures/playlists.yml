@@ -16,3 +16,13 @@
 #  updated_at    :datetime         not null
 #  reviewed      :boolean          default(FALSE)
 #
+
+playlist_1:
+  slug: 'slug'
+  title: 'title'
+  description: 'description'
+  channel_title: 'channel_title'
+  channel_id: 'channel_id'
+  video_count: 'video_count'
+  imported: false
+  reviewed: false

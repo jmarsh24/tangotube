@@ -11,3 +11,8 @@
 #  videos_count :integer          default(0), not null
 #  songs_count  :integer          default(0), not null
 #
+
+orchestra_1:
+  name: 'orchestra_1'
+  bio: 'bio'
+  slug: 'slug'
