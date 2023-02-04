@@ -1,17 +1,17 @@
 - if videos.present?
   .stack data-controller="reveal" data-reveal-hidden-class="open"
-    .recommended-videos-card data-reveal-target="item"
+    .recommended-videos-card.stack.stack--md data-reveal-target="item"
       h2.heading-2.heading-2--bold = header
       - videos.each do |video|
-        .card.card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
+        .video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
           - if video.youtube_id == @video.youtube_id
-            .card--compact__image data-duration=hd_duration_data(video)
+            .video-card__image.video-card--compact__image data-duration=hd_duration_data(video)
               = image_tag(video.thumbnail_url)
           - else
-            .card__image.card--compact__image data-duration=hd_duration_data(video)
+            .video-card__image.video-card--compact__image data-duration=hd_duration_data(video)
               = link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top" } do
                 = image_tag(video.thumbnail_url)
-          .card__body.card--compact__body
+          .stack.stack--xxxs
             .stack.stack--line
               - if video.youtube_id == @video.youtube_id
                 = primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
