@@ -12,7 +12,7 @@ header.navbar data-controller="toggle"
         .menu-item.theme-menu-item--auto data-action="click->dark#auto" Auto
     - if current_user.present? && user_signed_in?
       .dropdown data-controller="dropdown"
-        button class="button" data-action="dropdown#toggle click@window->dropdown#hide"
+        button data-action="dropdown#toggle click@window->dropdown#hide"
           = image_tag avatar_url_for(current_user), class: "avatar"
         .menu.menu--right.hidden data-dropdown-target="menu"
           - if user_signed_in?
@@ -23,7 +23,7 @@ header.navbar data-controller="toggle"
           - else
             = link_to t(".login"), new_user_session_path, class: "button button--primary"
     - else
-      = link_to t(".login"), new_user_session_path, class: "button button--secondary"
+      = link_to t(".login"), new_user_session_path, class: "button button--secondary button--sm"
           / #mobile-drawer-top.drawer.drawer-placement-top style="--size: 100%; --body-spacing: 0 12px;"
     /   div style="display: flex; align-items: center; background-color: var(--color-neutral-50); padding: 0 12px;"
     /     = t(".chevron_left_icon")
