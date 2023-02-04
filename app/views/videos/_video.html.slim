@@ -9,11 +9,12 @@
           .card__performance-number
             = performance_number(video)
         = image_tag(video.thumbnail_url, "data-controller": "thumbnail", "data-action": "load->thumbnail#check", "data-thumbnail-target": "image", "data-thumbnail-url-value": video.thumbnail_url)
-    .video-card__body.stack.stack--xxxs
+    .stack.stack--xxxs
       .stack.stack--line.stack--xxxs
-        - video.dancers.each do |dancer|
-          = link_to dancer, class: "tag tag--sm", "data-turbo-frame": "_top" do
-            = dancer.name
+        - video.dancer_videos.each do |dv|
+          - link = dv.role == "leader" ? root_path(leader: dv.dancer.name.to_param) : root_path(follower: dv.dancer.name.to_param)
+          = link_to link, class: "tag tag--sm", "data-turbo-frame": "_top" do
+            = dv.dancer.name
       - if video.display.any_song_attributes.present?
         .stack.stack--line.stack--xxxs
           = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)

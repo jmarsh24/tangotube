@@ -1,8 +1,5 @@
 .recommended-videos-card {
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  max-width: 468px;
   max-height: 500px;
   overflow-y: hidden;
   transition: max-height var(--transition-s) ease-in-out;

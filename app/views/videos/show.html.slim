@@ -3,15 +3,17 @@
   - content_for :meta_description, @video.display.any_song_attributes
   - content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
   .container
-    .video data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
-      div data-youtube-target="frame"
-    = render partial: "videos/show/video_info_primary"
-    .columns
-      .column
-        = render partial: "videos/show/video_info_details"
-      .column
-        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance, header: "Videos from this Performance" }
-        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_dancers, header: "Videos from #{@video.leaders.first.name.titleize} & #{@video.followers.first.name.titleize}" } if @video.leaders.present? && @video.followers.present?
-        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event, header: "Videos from #{@video.event.title}" } if @video.event.present?
-        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song, header: "Videos with #{@video.song.title.titleize} by #{@video.song.artist.titleize}" } if @video.song.present?
-        = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel, header: "Videos from #{@video.channel.title}" }
+    .stack
+      .video data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
+        div data-youtube-target="frame"
+      .stack
+        = render partial: "videos/show/video_info_primary"
+        .columns
+          .column
+            = render partial: "videos/show/video_info_details"
+          .column
+            = render partial: "videos/show/recommended_videos", locals: { videos: @videos_from_this_performance, header: "Videos from this Performance" }
+            = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_dancers, header: "Videos from #{@video.leaders.first.name.titleize} & #{@video.followers.first.name.titleize}" } if @video.leaders.present? && @video.followers.present?
+            = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_event, header: "Videos from #{@video.event.title}" } if @video.event.present?
+            = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_song, header: "Videos with #{@video.song.title.titleize} by #{@video.song.artist.titleize}" } if @video.song.present?
+            = render partial: "videos/show/recommended_videos", locals: { videos: @videos_with_same_channel, header: "Videos from #{@video.channel.title}" }
