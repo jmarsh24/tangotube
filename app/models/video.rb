@@ -428,4 +428,8 @@ class Video < ApplicationRecord
   ensure
     thumbnail.attach(io: yt_thumbnail, filename: "#{youtube_id}.jpg")
   end
+
+  def grab_thumbnail_later
+    GrabThumbnailJob.perform_later(self)
+  end
 end
