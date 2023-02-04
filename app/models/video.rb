@@ -87,6 +87,11 @@ class Video < ApplicationRecord
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
+
+  has_one_attached :thumbnail
+
+  before_save :grab_image
+
   counter_culture :song
   counter_culture [:song, :orchestra]
   counter_culture :event
@@ -412,5 +417,10 @@ class Video < ApplicationRecord
 
   def thumbnail_url
     "https://i.ytimg.com/vi/#{youtube_id}/hq720.jpg"
+  end
+
+  def grab_image
+    yt_thumbnail = URI.parse(thumbnail_url).open
+    thumbnail.attach(io: yt_thumbnail, filename: "#{youtube_id}.jpg")
   end
 end
