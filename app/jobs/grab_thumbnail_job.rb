@@ -3,7 +3,7 @@
 class GrabThumbnailJob < ApplicationJob
   queue_as :low_priority
 
-  def perform(youtube_id)
-    Video.find_by(youtube_id: youtube_id).grab_thumbnail
+  def perform(video)
+    video.grab_thumbnail
   end
 end
