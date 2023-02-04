@@ -1,7 +1,7 @@
 .navbar {
   grid-column: 1 / 4;
   z-index: var(--z-navbar);
-  padding: var(--spacing-xxxs) var(--spacing-sm);
+  padding: var(--spacing-xxs) var(--spacing-sm);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -58,7 +58,6 @@
     }
 
     &--links {
-      display: flex;
       gap: 10px;
     }
   }
