@@ -23,7 +23,7 @@
           = link_to video.event, class: "tag tag--sm", "data-turbo-frame": "_top" do
             = video.event.title.titleize
       .stack.stack--line.stack--xxs
-        = link_to image_tag(video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id), { "data-turbo-frame": "_top" } if video.channel.thumbnail_url.present?
+        = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id), { "data-turbo-frame": "_top" }
         = link_to channel_title(video), root_path(channel: video.channel.channel_id), "data-turbo-frame": "_top" if video.channel.title.present?
       = formatted_metadata(video)
 

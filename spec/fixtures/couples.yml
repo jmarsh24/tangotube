@@ -12,9 +12,22 @@
 #  unique_couple_id :string
 #
 
-couple_1:
-  dancer_id: 1
-  partner_id: 2
-  videos_count: 2
-  slug: 'slug'
-  unique_couple_id: 'unique_couple_id'
+carlitos_noelia:
+  dancer: carlitos
+  partner: noelia
+
+jonathan_clarisa:
+  dancer: jonathan
+  partner: clarisa
+
+corina_inez:
+  dancer: corina
+  partner: inez
+
+gianpiero_lorena:
+  dancer: gianpiero
+  partner: lorena
+
+octavio_corina:
+  dancer: octavio
+  partner: corina

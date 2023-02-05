@@ -2,6 +2,7 @@
 
 # Seed Admin User in Development
 Rails.logger.debug "Seeding admin user into database"
+
 if Rails.env.development?
   user = User.create(
     first_name: "Admin",
