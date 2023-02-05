@@ -1,6 +1,6 @@
 - if videos.present?
-  .stack data-controller="reveal" data-reveal-hidden-class="open"
-    .recommended-videos-card.stack.stack--md data-reveal-target="item"
+  .recommended-videos-card.stack data-controller="reveal" data-reveal-hidden-class="open" data-reveal-target="item"
+    .recommended-videos-card__videos.stack.stack--md
       h2.heading-2.heading-2--bold = header
       - videos.each do |video|
         .video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
@@ -27,8 +27,9 @@
             .stack.stack--line
               = formatted_metadata(video)
     - if videos.size > 3
-      button type="button" class="button button--secondary button--block stack stack--justify-center" data-action="click->reveal#toggle"
-        .icon.icon--arrow-down
+      button.button.button--secondary.stack.stack--justify-center data-action="click->reveal#toggle"
+        .recommended-videos-card__icon.icon
+
 
 
 
