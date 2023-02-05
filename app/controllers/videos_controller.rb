@@ -34,7 +34,7 @@ class VideosController < ApplicationController
 
     if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
       url = request.fullpath.gsub("&filtering=true", "").gsub("&pagination=true", "").gsub("filtering=true", "")
-      ui.replace "filters", with: "filters/filters", genres: @genres, leaders: @leaders, followers: @followers, orchestras: @orchestras, years: @years
+      ui.replace "filter-bar", with: "filters/filters", genres: @genres, leaders: @leaders, followers: @followers, orchestras: @orchestras, years: @years
       ui.run_javascript "Turbo.navigator.history.push('#{url}')"
       ui.run_javascript "history.pushState({}, '', '#{url}')"
       ui.run_javascript "window.onpopstate = function () {Turbo.visit(document.location)}"
