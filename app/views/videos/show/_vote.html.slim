@@ -1,8 +1,7 @@
-div id="#{dom_id(@video)}_vote"
-  .stack.stack--line
-    = render "videos/show/upvote_link", video: @video
-    = render "videos/show/downvote_link", video: @video
-    = render "videos/show/bookmark_link", video: @video
-    = render 'videos/show/watchlist_link', video: @video
-    - if user_signed_in? && current_user.admin?
-      = render 'videos/show/featured_link', video: @video
+.stack.stack--line id="#{dom_id(@video)}_vote"
+  = render "videos/show/upvote_link", video: @video
+  = render "videos/show/downvote_link", video: @video
+  = render "videos/show/bookmark_link", video: @video
+  = render 'videos/show/watchlist_link', video: @video
+  - if user_signed_in? && current_user.admin?
+    = render 'videos/show/featured_link', video: @video

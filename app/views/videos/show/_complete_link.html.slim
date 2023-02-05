@@ -1,7 +1,7 @@
 #complete_button data-controller=(!user_signed_in? ? "popper" : "")
   = content_tag :div, id: "upvote-#{video.youtube_id}", data: { "popper-target": "element", action: "click->popper#show click:outside->popper#hide" } do
     = content_tag :div, id: "bookmark-#{video.youtube_id}" do
-      = button_to complete_video_path(video.youtube_id), method: :patch, class: "button button--secondary button--icon-left" do
+      = button_to complete_video_path(video.youtube_id), method: :patch, class: "button button--secondary" do
         - if current_user&.voted_up_on? video, vote_scope: 'complete'
           = t(".complete")
         - else
