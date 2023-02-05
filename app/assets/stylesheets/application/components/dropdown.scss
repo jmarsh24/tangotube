@@ -5,6 +5,12 @@
   align-content: center;
   z-index: var(--z-dropdown);
 
+  // &:not(.show) {
+  //   .menu {
+  //     display: none;
+  //   }
+  // }
+
   &__label {
     padding: var(--spacing-xxs) var(--spacing-sm);
   }

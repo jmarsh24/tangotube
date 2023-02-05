@@ -6,7 +6,7 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   border-radius: 0 0 5px 5px;
   overflow: hidden;
-  margin-top: var(--spacing-xs);
+  top: var(--spacing-xxl);
 
   &--right {
     right: 0;
@@ -17,6 +17,19 @@
   }
 
   &.hidden {
-    opacity: 0;
+    display: none;
+  }
+
+  @include breakpoint-tablet {
+    #filters {
+      position: unset;
+      background-color: unset;
+      margin-top: unset;
+      display: block !important;
+
+      #menu-additional-filters {
+        display: none;
+      }
+    }
   }
 }
