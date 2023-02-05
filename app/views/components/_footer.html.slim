@@ -1,5 +1,13 @@
-footer#footer.footer
-  section.footer__links-contact
-    section.footer__links
-      = render "components/footer/links"
-      = render "components/footer/contact"
+footer.footer.stack.stack--justify-center.stack--tablet-line
+  .stack.stack--sm.stack--line.stack--justify-center.stack--tablet-justify-left
+    a.navbar__item.navbar__item--logo href=root_path
+    = link_to t(".privacy"), privacy_path, class: 'social-link'
+    = link_to t(".terms"), terms_path, class: 'social-link'
+    = link_to t(".google_privacy_policy"), "http://www.google.com/policies/privacy", target: "_blank", class: 'social-link'
+  .stack.stack--sm.stack--line.stack--justify-center.stack--tablet-justify-right
+    = link_to t(".contact"), contact_path, class: 'social-link'
+    = link_to t(".about"), about_path, class: 'social-link'
+    = link_to "Support The Project", "https://www.patreon.com/tangotube", class: 'link link--primary', target: "_blank", "aria-label": "Patreon"
+
+
+

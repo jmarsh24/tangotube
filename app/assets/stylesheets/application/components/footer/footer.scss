@@ -3,37 +3,9 @@
   background: var(--color-neutral-100);
   width: 100%;
   z-index: var(--z-footer);
-  height: 48px;
-  display: flex;
-  align-items: center;
+  padding: var(--spacing-md);
 
   @include breakpoint-tablet {
-    display: grid;
-    grid-template-columns:
-      minmax(var(--container-gap), 1fr)
-      0
-      minmax(0, var(--grid-width))
-      0
-      minmax(var(--container-gap), 1fr);
-
-    & > * {
-      grid-column: 3/3;
-    }
-
-    &__links {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    &__links {
-      grid-template-columns: auto 1fr;
-    }
-  }
-  @include breakpoint-desktop {
-    &__links {
-      grid-template-columns: 1fr 1fr;
-    }
+    padding: var(--spacing-xs);
   }
 }
