@@ -25,22 +25,16 @@
 
 admin:
   email: 'admin@tangotube.tv'
-  name:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  first_name:
-  last_name:
-  image:
-  uid:
-  provider:
-  role: 1
+
 
 regular:
   email: 'user@example.com'
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  name:
-  first_name:
-  last_name:
-  image:
-  uid:
-  provider:
-  role: 0
+
+dancer:
+  email: 'carlitos@tango.com'
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  name: 'Carlitos Espinoza'
+  first_name: 'Carlitos'
+  last_name: 'Espinoza'

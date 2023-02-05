@@ -19,23 +19,69 @@
 #
 
 unreviewed_dancer:
-  name: 'first_name last_name'
-  first_name: 'first_name'
-  last_name: 'last_name'
-  middle_name: 'middle_name'
-  nick_name: 'nick_name'
-  bio: 'bio'
-  slug: 'slug'
+  name: 'John Doe'
+  first_name: 'John'
+  last_name: 'Doe'
   reviewed: false
   gender: 0
 
-reviewed_dancer:
-  name: 'first_name last_name'
-  first_name: 'first_name'
-  last_name: 'last_name'
-  middle_name: 'middle_name'
-  nick_name: 'nick_name'
-  bio: 'bio'
-  slug: 'slug'
+carlitos:
+  name: 'Carlitos Espinoza'
+  first_name: 'Carlitos'
+  last_name: 'Espinoza'
+  nick_name: 'Carlitos'
   reviewed: true
+  gender: 0
+
+noelia:
+  name: 'Noelia Hurtado'
+  first_name: 'Noelia'
+  last_name: 'Hurtado'
+  reviewed: true
+  gender: 1
+
+jonathan:
+  name: 'Jonathan Saavedra'
+  first_name: 'Jonathan'
+  last_name: 'Saavedra'
+  reviewed: true
+  gender: 0
+
+clarisa:
+  name: 'Clarisa Aragon'
+  first_name: 'Clarisa'
+  last_name: 'Aragon'
+  reviewed: true
+  gender: 1
+
+gianpiero:
+  name: 'Gianpiero Ya Galdi'
+  first_name: 'Gianpiero'
+  last_name: 'Galdi'
+  reviewed: true
+  gender: 1
+
+lorena:
+  name: 'Lorena Tarrantino'
+  first_name: 'Lorena'
+  last_name: 'Tarrantino'
+  reviewed: true
+  gender: 1
+
+corina:
+  name: 'Corina Herrera'
+  first_name: 'Corina'
+  last_name: 'Herrera'
+  gender: 0
+
+inez:
+  name: 'Inez Muzzopapa'
+  first_name: 'Inez'
+  last_name: 'Muzzopapa'
+  gender: 0
+
+octavio:
+  name: 'Octavio Fernandez'
+  first_name: 'Octavio'
+  last_name: 'Fernandez'
   gender: 0

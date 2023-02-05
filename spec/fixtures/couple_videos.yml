@@ -10,5 +10,25 @@
 #
 
 couple_video:
-  video_id: 1
-  couple_id: 1
+  video: video_1_featured
+  couple: carlitos_noelia
+
+couple_video_2:
+  video: video_2_featured
+  couple: gianpiero_lorena
+
+couple_video_3:
+  video: video_3_featured
+  couple: jonathan_clarisa
+
+couple_video_4:
+  video: video_4_featured
+  couple: carlitos_noelia
+
+couple_video_5:
+  video: video_5
+  couple: corina_inez
+
+couple_video_6:
+  video: video_6
+  couple: octavio_corina

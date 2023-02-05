@@ -12,13 +12,11 @@ class VideosController < ApplicationController
     video_search = Video::Search.for(filtering_params:, sorting_params:, page:, user: current_user)
     videos = video_search.videos
 
-    if !filtering_params.present?
-      @featured_videos = Video.includes(Video.search_includes)
-        .has_leader_and_follower
+    @featured_videos =
+      video_search.videos
         .featured?
         .limit(24)
         .order("random()")
-    end
 
     @current_page = video_params[:page]&.to_i || 1
     scope = videos.page(@current_page).without_count.per(12)
@@ -44,7 +42,7 @@ class VideosController < ApplicationController
       ui.remove "next-page-link"
       ui.append "pagination-frame", with: "components/pagination", items: scope, partial: params[:partial]
     end
-    @videos = scope
+    @videos = scope - @featured_videos
   end
 
   def show

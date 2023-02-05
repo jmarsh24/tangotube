@@ -131,8 +131,8 @@ en:
       loading_spinner: Loading spinner
   videos:
     index:
-      meta_description: Meta description
-      meta_title: Meta title
+      meta_description: This is a search engine for tango videos. Search for tango videos by title, artist, orchestra, dancer, couple, or event.
+      meta_title: ""
     show:
       bookmark_link:
         bookmark: Bookmark

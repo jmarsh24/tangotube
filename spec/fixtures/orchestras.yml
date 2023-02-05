@@ -11,8 +11,23 @@
 #  videos_count :integer          default(0), not null
 #  songs_count  :integer          default(0), not null
 #
+d_arienzo:
+  name: "Juan D'Arienzo"
+  slug: "juan-darienzo"
 
-orchestra_1:
-  name: 'orchestra_1'
-  bio: 'bio'
-  slug: 'slug'
+di_sarli:
+  name: 'Carlos Di Sarli'
+  slug: 'carlos-di-sarli'
+
+pugliese:
+  name: 'Osvaldo Pugliese'
+  slug: 'osvaldo-pugliese'
+
+troilo:
+  name: 'Anibal Troilo'
+  slug: 'anibal-troilo'
+
+castillo:
+  name: 'Alberto Castillo'
+  slug: 'alberto-castillo'
+
