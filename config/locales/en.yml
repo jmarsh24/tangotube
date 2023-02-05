@@ -42,13 +42,11 @@ en:
       home: Home
       liked: Liked
     footer:
-      links:
-        google_privacy_policy: Google privacy policy
-        privacy: Privacy
-        terms: Terms
-      social_links:
-        about: About
-        contact: Contact
+      about: About
+      contact: Contact
+      google_privacy_policy: Google privacy policy
+      privacy: Privacy
+      terms: Terms
     navbar:
       login: Login
       search:
@@ -131,8 +129,9 @@ en:
       loading_spinner: Loading spinner
   videos:
     index:
-      meta_description: This is a search engine for tango videos. Search for tango videos by title, artist, orchestra, dancer, couple, or event.
-      meta_title: ""
+      meta_description: This is a search engine for tango videos. Search for tango
+        videos by title, artist, orchestra, dancer, couple, or event.
+      meta_title: ''
     show:
       bookmark_link:
         bookmark: Bookmark
