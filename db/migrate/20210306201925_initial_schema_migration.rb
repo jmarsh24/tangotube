@@ -12,7 +12,7 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.string "record_type", null: false
       t.bigint "record_id", null: false
       t.bigint "blob_id", null: false
-      t.datetime "created_at", null: false
+      t.datetime "created_at", precision: nil, null: false
       t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
       t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
     end
@@ -25,7 +25,7 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.string "service_name", null: false
       t.bigint "byte_size", null: false
       t.string "checksum"
-      t.datetime "created_at", null: false
+      t.datetime "created_at", precision: nil, null: false
       t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
     end
 
@@ -35,55 +35,11 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
     end
 
-    create_table "ahoy_events", id: false, force: :cascade do |t|
-      t.bigserial "id", null: false
-      t.bigint "visit_id"
-      t.bigint "user_id"
-      t.string "name"
-      t.jsonb "properties"
-      t.datetime "time", precision: nil
-      t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
-      t.index ["properties"], name: "index_ahoy_events_on_properties", opclass: :jsonb_path_ops, using: :gin
-      t.index ["user_id"], name: "index_ahoy_events_on_user_id"
-      t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
-    end
-
-    create_table "ahoy_visits", id: false, force: :cascade do |t|
-      t.bigserial "id", null: false
-      t.string "visit_token"
-      t.string "visitor_token"
-      t.bigint "user_id"
-      t.string "ip"
-      t.text "user_agent"
-      t.text "referrer"
-      t.string "referring_domain"
-      t.text "landing_page"
-      t.string "browser"
-      t.string "os"
-      t.string "device_type"
-      t.string "country"
-      t.string "region"
-      t.string "city"
-      t.float "latitude"
-      t.float "longitude"
-      t.string "utm_source"
-      t.string "utm_medium"
-      t.string "utm_term"
-      t.string "utm_content"
-      t.string "utm_campaign"
-      t.string "app_version"
-      t.string "os_version"
-      t.string "platform"
-      t.datetime "started_at", precision: nil
-      t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
-      t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
-    end
-
     create_table "channels", force: :cascade do |t|
       t.string "title"
-      t.string "channel_id"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.string "channel_id", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
       t.string "thumbnail_url"
       t.boolean "imported", default: false
       t.integer "imported_videos_count", default: 0
@@ -91,6 +47,8 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.integer "yt_api_pull_count", default: 0
       t.boolean "reviewed", default: false
       t.integer "videos_count", default: 0, null: false
+      t.boolean "active", default: true
+      t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
       t.index ["title"], name: "index_channels_on_title"
     end
 
@@ -98,12 +56,12 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.integer "start_seconds", null: false
       t.integer "end_seconds", null: false
       t.text "title"
-      t.float "playback_rate", default: 1.0
-      t.string "tags"
+      t.decimal "playback_rate", precision: 5, scale: 3, default: "1.0"
       t.bigint "user_id", null: false
       t.bigint "video_id", null: false
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
+      t.string "giphy_id"
       t.index ["user_id"], name: "index_clips_on_user_id"
       t.index ["video_id"], name: "index_clips_on_video_id"
     end
@@ -114,136 +72,116 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.bigint "commentable_id"
       t.integer "parent_id"
       t.text "body"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
       t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
       t.index ["user_id"], name: "index_comments_on_user_id"
+    end
+
+    create_table "couple_videos", force: :cascade do |t|
+      t.bigint "video_id", null: false
+      t.bigint "couple_id", null: false
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["couple_id"], name: "index_couple_videos_on_couple_id"
+      t.index ["video_id", "couple_id"], name: "index_couple_videos_on_video_id_and_couple_id", unique: true
+      t.index ["video_id"], name: "index_couple_videos_on_video_id"
+    end
+
+    create_table "couples", force: :cascade do |t|
+      t.bigint "dancer_id", null: false
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.bigint "partner_id"
+      t.integer "videos_count", default: 0, null: false
+      t.string "slug"
+      t.string "unique_couple_id"
+      t.index ["dancer_id", "partner_id"], name: "index_couples_on_dancer_id_and_partner_id", unique: true
+      t.index ["dancer_id"], name: "index_couples_on_dancer_id"
+      t.index ["partner_id"], name: "index_couples_on_partner_id"
+      t.index ["unique_couple_id"], name: "index_couples_on_unique_couple_id"
+    end
+
+    create_table "dancer_videos", force: :cascade do |t|
+      t.bigint "dancer_id"
+      t.bigint "video_id"
+      t.integer "role", default: 0, null: false
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["dancer_id", "video_id"], name: "index_dancer_videos_on_dancer_id_and_video_id", unique: true
+      t.index ["dancer_id"], name: "index_dancer_videos_on_dancer_id"
+      t.index ["video_id"], name: "index_dancer_videos_on_video_id"
+    end
+
+    create_table "dancers", force: :cascade do |t|
+      t.string "name", null: false
+      t.string "first_name"
+      t.string "last_name"
+      t.string "middle_name"
+      t.string "nick_name"
+      t.bigint "user_id"
+      t.text "bio"
+      t.string "slug"
+      t.boolean "reviewed", default: false, null: false
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.integer "videos_count", default: 0, null: false
+      t.integer "gender"
+      t.index ["user_id"], name: "index_dancers_on_user_id"
     end
 
     create_table "deletion_requests", force: :cascade do |t|
       t.string "provider"
       t.string "uid"
       t.string "pid"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
       t.index ["pid"], name: "index_deletion_requests_on_pid"
     end
 
     create_table "events", force: :cascade do |t|
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.string "title"
-      t.string "city"
-      t.string "country"
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
+      t.string "title", null: false
+      t.string "city", null: false
+      t.string "country", null: false
       t.string "category"
       t.date "start_date"
       t.date "end_date"
       t.boolean "active", default: true
       t.boolean "reviewed", default: false
       t.integer "videos_count", default: 0, null: false
-      t.index ["title"], name: "index_events_on_title"
+      t.string "slug"
+      t.index ["slug"], name: "index_events_on_slug", unique: true
+      t.index ["title"], name: "index_events_on_title", unique: true
     end
 
-    create_table "followers", force: :cascade do |t|
+    create_table "orchestras", force: :cascade do |t|
       t.string "name", null: false
+      t.text "bio"
+      t.string "slug", null: false
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.boolean "reviewed"
-      t.string "nickname"
-      t.string "first_name"
-      t.string "last_name"
       t.integer "videos_count", default: 0, null: false
-      t.string "normalized_name"
-      t.index ["name"], name: "index_followers_on_name"
+      t.integer "songs_count", default: 0, null: false
+      t.index ["name"], name: "index_orchestras_on_name", unique: true
     end
 
-    create_table "leaders", force: :cascade do |t|
-      t.string "name", null: false
+    create_table "performance_videos", force: :cascade do |t|
+      t.bigint "video_id"
+      t.bigint "performance_id"
+      t.integer "position"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.boolean "reviewed"
-      t.string "nickname"
-      t.string "first_name"
-      t.string "last_name"
-      t.integer "videos_count", default: 0, null: false
-      t.string "normalized_name"
-      t.index ["name"], name: "index_leaders_on_name"
+      t.index ["performance_id", "video_id"], name: "index_performance_videos_on_performance_id_and_video_id"
+      t.index ["performance_id"], name: "index_performance_videos_on_performance_id"
+      t.index ["video_id"], name: "index_performance_videos_on_video_id"
     end
 
-    create_table "pay_charges", force: :cascade do |t|
-      t.integer "customer_id", null: false
-      t.integer "subscription_id"
-      t.string "processor_id", null: false
-      t.integer "amount", null: false
-      t.string "currency"
-      t.integer "application_fee_amount"
-      t.integer "amount_refunded"
-      t.jsonb "metadata"
-      t.jsonb "data"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["customer_id", "processor_id"], name: "index_pay_charges_on_customer_id_and_processor_id", unique: true
-      t.index ["subscription_id"], name: "index_pay_charges_on_subscription_id"
-    end
-
-    create_table "pay_customers", force: :cascade do |t|
-      t.string "owner_type"
-      t.integer "owner_id"
-      t.string "processor", null: false
-      t.string "processor_id"
-      t.boolean "default"
-      t.jsonb "data"
-      t.datetime "deleted_at", precision: nil
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
-      t.index ["processor", "processor_id"], name: "index_pay_customers_on_processor_and_processor_id", unique: true
-    end
-
-    create_table "pay_merchants", force: :cascade do |t|
-      t.string "owner_type"
-      t.integer "owner_id"
-      t.string "processor", null: false
-      t.string "processor_id"
-      t.boolean "default"
-      t.jsonb "data"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["owner_type", "owner_id", "processor"], name: "index_pay_merchants_on_owner_type_and_owner_id_and_processor"
-    end
-
-    create_table "pay_payment_methods", force: :cascade do |t|
-      t.integer "customer_id", null: false
-      t.string "processor_id", null: false
-      t.boolean "default"
-      t.string "type"
-      t.jsonb "data"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["customer_id", "processor_id"], name: "index_pay_payment_methods_on_customer_id_and_processor_id", unique: true
-    end
-
-    create_table "pay_subscriptions", force: :cascade do |t|
-      t.integer "customer_id", null: false
-      t.string "name", null: false
-      t.string "processor_id", null: false
-      t.string "processor_plan", null: false
-      t.integer "quantity", default: 1, null: false
-      t.string "status", null: false
-      t.datetime "trial_ends_at", precision: nil
-      t.datetime "ends_at", precision: nil
-      t.decimal "application_fee_percent", precision: 8, scale: 2
-      t.jsonb "metadata"
-      t.jsonb "data"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["customer_id", "processor_id"], name: "index_pay_subscriptions_on_customer_id_and_processor_id", unique: true
-    end
-
-    create_table "pay_webhooks", force: :cascade do |t|
-      t.string "processor"
-      t.string "event_type"
-      t.jsonb "event"
+    create_table "performances", force: :cascade do |t|
+      t.date "date"
+      t.integer "videos_count"
+      t.string "slug"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
@@ -258,8 +196,8 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.boolean "imported", default: false
       t.bigint "videos_id"
       t.bigint "user_id"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
       t.boolean "reviewed", default: false
       t.index ["user_id"], name: "index_playlists_on_user_id"
       t.index ["videos_id"], name: "index_playlists_on_videos_id"
@@ -269,8 +207,8 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.string "genre"
       t.string "title"
       t.string "artist"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
       t.string "artist_2"
       t.string "composer"
       t.string "author"
@@ -283,10 +221,44 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.integer "el_recodo_song_id"
       t.integer "videos_count", default: 0, null: false
       t.string "lyrics_en"
+      t.string "slug"
+      t.bigint "orchestra_id"
       t.index ["artist"], name: "index_songs_on_artist"
       t.index ["genre"], name: "index_songs_on_genre"
       t.index ["last_name_search"], name: "index_songs_on_last_name_search"
+      t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
       t.index ["title"], name: "index_songs_on_title"
+    end
+
+    create_table "taggings", force: :cascade do |t|
+      t.bigint "tag_id"
+      t.string "taggable_type"
+      t.bigint "taggable_id"
+      t.string "tagger_type"
+      t.bigint "tagger_id"
+      t.string "context", limit: 128
+      t.datetime "created_at", precision: nil
+      t.string "tenant", limit: 128
+      t.index ["context"], name: "index_taggings_on_context"
+      t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+      t.index ["tag_id"], name: "index_taggings_on_tag_id"
+      t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
+      t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
+      t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
+      t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
+      t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
+      t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
+      t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
+      t.index ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
+      t.index ["tenant"], name: "index_taggings_on_tenant"
+    end
+
+    create_table "tags", force: :cascade do |t|
+      t.string "name"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.integer "taggings_count", default: 0
+      t.index ["name"], name: "index_tags_on_name", unique: true
     end
 
     create_table "users", force: :cascade do |t|
@@ -295,8 +267,8 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.string "reset_password_token"
       t.datetime "reset_password_sent_at", precision: nil
       t.datetime "remember_created_at", precision: nil
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
       t.string "name"
       t.string "first_name"
       t.string "last_name"
@@ -314,12 +286,10 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
     end
 
     create_table "videos", force: :cascade do |t|
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
       t.text "title"
       t.string "youtube_id"
-      t.bigint "leader_id"
-      t.bigint "follower_id"
       t.string "description"
       t.integer "duration"
       t.date "upload_date"
@@ -361,21 +331,16 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.string "spotify_artist_name_1"
       t.integer "performance_number"
       t.integer "performance_total_number"
-      t.integer "cached_votes_total", default: 0
-      t.integer "cached_votes_score", default: 0
-      t.integer "cached_votes_up", default: 0
-      t.integer "cached_votes_down", default: 0
-      t.integer "cached_weighted_score", default: 0
-      t.integer "cached_weighted_total", default: 0
-      t.float "cached_weighted_average", default: 0.0
+      t.boolean "featured", default: false
+      t.text "index"
       t.index ["acr_cloud_artist_name"], name: "index_videos_on_acr_cloud_artist_name"
       t.index ["acr_cloud_track_name"], name: "index_videos_on_acr_cloud_track_name"
       t.index ["channel_id"], name: "index_videos_on_channel_id"
       t.index ["event_id"], name: "index_videos_on_event_id"
-      t.index ["follower_id"], name: "index_videos_on_follower_id"
+      t.index ["featured"], name: "index_videos_on_featured"
       t.index ["hd"], name: "index_videos_on_hd"
       t.index ["hidden"], name: "index_videos_on_hidden"
-      t.index ["leader_id"], name: "index_videos_on_leader_id"
+      t.index ["index"], name: "index_videos_on_index", opclass: :gin_trgm_ops, using: :gin
       t.index ["performance_date"], name: "index_videos_on_performance_date"
       t.index ["popularity"], name: "index_videos_on_popularity"
       t.index ["song_id"], name: "index_videos_on_song_id"
@@ -397,26 +362,20 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.boolean "vote_flag"
       t.string "vote_scope"
       t.integer "vote_weight"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
       t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
       t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
       t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
       t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
     end
 
-    create_table "yt_comments", force: :cascade do |t|
-      t.bigint "video_id", null: false
-      t.text "body", null: false
-      t.text "user_name", null: false
-      t.integer "like_count", default: 0, null: false
-      t.date "date", null: false
-      t.string "channel_id", null: false
-      t.string "profile_image_url", null: false
-      t.string "youtube_id", null: false
+    create_table "youtube_events", force: :cascade do |t|
+      t.jsonb "data"
+      t.integer "status", default: 0
+      t.string "processing_errors"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.index ["video_id"], name: "index_yt_comments_on_video_id"
     end
 
     add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -424,13 +383,14 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
     add_foreign_key "clips", "users"
     add_foreign_key "clips", "videos"
     add_foreign_key "comments", "users"
-    add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
-    add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
-    add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
-    add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
+    add_foreign_key "couple_videos", "couples"
+    add_foreign_key "couple_videos", "videos"
+    add_foreign_key "couples", "dancers"
+    add_foreign_key "couples", "dancers", column: "partner_id"
+    add_foreign_key "dancers", "users"
     add_foreign_key "playlists", "users"
     add_foreign_key "playlists", "videos", column: "videos_id"
+    add_foreign_key "taggings", "tags"
     add_foreign_key "videos", "events"
-    add_foreign_key "yt_comments", "videos"
   end
 end
