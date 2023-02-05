@@ -1,10 +1,19 @@
 .recommended-videos-card {
-  width: 100%;
-  max-height: 500px;
-  overflow-y: hidden;
-  transition: max-height var(--transition-s) ease-in-out;
-
+  &__videos {
+    width: 100%;
+    max-height: 500px;
+    overflow-y: hidden;
+    transition: max-height var(--transition-f) ease-in-out;
+  }
+  &__icon {
+    mask-image: url('@assets/images/icons/arrow-down.svg');
+  }
   &.open {
-    max-height: 2000px;
+    .recommended-videos-card__videos {
+      max-height: 2000px;
+    }
+    .recommended-videos-card__icon {
+      mask-image: url('@assets/images/icons/arrow-up.svg');
+    }
   }
 }
