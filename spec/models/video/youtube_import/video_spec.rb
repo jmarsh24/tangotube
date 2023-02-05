@@ -3,86 +3,58 @@
 require "rails_helper"
 
 RSpec.describe Video::YoutubeImport::Video do
-  # describe ".import" do
-  #   it "creates new video and channel if missing" do
-  #     VCR.use_cassette("video/youtubeimport/video/api_response") do
-  #       expect { described_class.import("s6iptZdCcG0") }.to change { Video.count }.from(0).to(1)
+  fixtures :all
+  let(:video) { videos(:video_1_featured) }
+  let(:channel) { channels(:jkukla_video) }
 
-  #       video = Video.find_by(youtube_id: "s6iptZdCcG0")
-  #       channel = Channel.find_by(channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
+  describe ".import" do
+    context "when channel exists" do
+      it "creates a new video" do
+        video.destroy
 
-  #       expect(video.youtube_id).to eq("s6iptZdCcG0")
-  #       expect(video.title).to eq("Noelia Hurtado and Carlitos Espinoza – La mentirosa #NoeliayCarlitos")
-  #       expect(video.description).to eq("Noelia Hurtado and Carlitos Espinoza dance “La mentirosa” by Osvaldo Pugliese, sung by Alberto Morán, at the milonga Ballhaus Rixdorf in Berlin, Germany.\n\nIf you love Tango videos, help us create more on\nhttp://www.patreon.com/030tango\n\nVisit 030tango at\nhttp://www.030tango.com\n\nRecorded on 2016/06/04\n#030tango #tango #NoeliayCarlitos")
-  #       expect(video.upload_date.to_s).to eq("2018-03-04")
-  #       expect(video.duration).to eq(219)
-  #       expect(video.hd).to be(true)
-  #       expect(video.performance_date).to eq("2016/06/04")
+        VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+          expect { Video::YoutubeImport::Video.import(video.youtube_id) }
+            .to change { Video.count }.by(1)
 
-  #       expect(video.view_count).to eq(46181)
-  #       expect(video.favorite_count).to eq(0)
-  #       expect(video.comment_count).to eq(8)
-  #       expect(video.like_count).to eq(295)
-  #       expect(video.dislike_count).to eq(9)
+          expect(video.youtube_id).to eq("AQ9Ri3kWa_4")
+          expect(video.title).to eq("Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1")
+          expect(video.description).to eq("24-26.10.2014 r., Amsterdam, Netherlands, Performance 25th Oct, \"Salon de los Sabados\" in Academia de Tango")
+          expect(video.upload_date.to_s).to eq("2014-10-26")
+          expect(video.duration).to eq(167)
+          expect(video.hd).to be(true)
+          expect(video.performance_date).to eq("2014-10-26 16:21:29.000000000 +0100")
 
-  #       expect(video.channel).to eq(channel)
-  #     end
-  #   end
+          expect(video.view_count).to eq(1042)
+          expect(video.favorite_count).to eq(0)
+          expect(video.comment_count).to eq(0)
+          expect(video.like_count).to eq(3)
+          expect(video.channel).to eq(channels(:jkukla_video))
+        end
+      end
+    end
 
-  #   it "updates video if already exists" do
-  #     VCR.use_cassette("video/youtubeimport/video/api_response") do
-  #       video = create(:video, youtube_id: "s6iptZdCcG0",
-  #         title: "old title",
-  #         description: "old description",
-  #         upload_date: "old date",
-  #         duration: "old duration",
-  #         hd: false,
-  #         view_count: 0,
-  #         favorite_count: 0,
-  #         comment_count: 0,
-  #         like_count: 0,
-  #         dislike_count: 0)
-  #       described_class.import("s6iptZdCcG0")
-  #       video.reload
+    context "when channel does not exists" do
+      it "creates new video and channel" do
+        video.destroy
+        channel.destroy
 
-  #       expect(video.youtube_id).to eq("s6iptZdCcG0")
-  #       expect(video.title).to eq("Noelia Hurtado and Carlitos Espinoza – La mentirosa #NoeliayCarlitos")
-  #       expect(video.description).to eq("Noelia Hurtado and Carlitos Espinoza dance “La mentirosa” by Osvaldo Pugliese, sung by Alberto Morán, at the milonga Ballhaus Rixdorf in Berlin, Germany.\n\nIf you love Tango videos, help us create more on\nhttp://www.patreon.com/030tango\n\nVisit 030tango at\nhttp://www.030tango.com\n\nRecorded on 2016/06/04\n#030tango #tango #NoeliayCarlitos")
-  #       expect(video.upload_date.to_s).to eq("2018-03-04")
-  #       expect(video.duration).to eq(219)
-  #       expect(video.hd).to be(true)
-  #       expect(video.performance_date).to eq("2016/06/04")
+        VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+          expect { Video::YoutubeImport::Video.import(video.youtube_id) }
+            .to change { Video.count }.by(1).and \
+              change { Channel.count }.by(1)
+        end
+      end
+    end
 
-  #       expect(video.view_count).to eq(46181)
-  #       expect(video.favorite_count).to eq(0)
-  #       expect(video.comment_count).to eq(8)
-  #       expect(video.like_count).to eq(295)
-  #       expect(video.dislike_count).to eq(9)
-  #     end
-  #   end
+    context "when video exists" do
+      it "updates video" do
+        video.update!(title: "Old title")
 
-  #   it "assigns video to channel if it already exists" do
-  #     VCR.use_cassette("video/youtubeimport/video/api_response") do
-  #       channel = create(:channel, channel_id: "UCtdgMR0bmogczrZNpPaO66Q")
-  #       expect { described_class.import("s6iptZdCcG0") }.to change { Video.count }.from(0).to(1)
-  #       video = Video.find_by(youtube_id: "s6iptZdCcG0")
-
-  #       expect(video.youtube_id).to eq("s6iptZdCcG0")
-  #       expect(video.title).to eq("Noelia Hurtado and Carlitos Espinoza – La mentirosa #NoeliayCarlitos")
-  #       expect(video.description).to eq("Noelia Hurtado and Carlitos Espinoza dance “La mentirosa” by Osvaldo Pugliese, sung by Alberto Morán, at the milonga Ballhaus Rixdorf in Berlin, Germany.\n\nIf you love Tango videos, help us create more on\nhttp://www.patreon.com/030tango\n\nVisit 030tango at\nhttp://www.030tango.com\n\nRecorded on 2016/06/04\n#030tango #tango #NoeliayCarlitos")
-  #       expect(video.upload_date.to_s).to eq("2018-03-04")
-  #       expect(video.duration).to eq(219)
-  #       expect(video.hd).to be(true)
-  #       expect(video.performance_date).to eq("2016/06/04")
-
-  #       expect(video.view_count).to eq(46181)
-  #       expect(video.favorite_count).to eq(0)
-  #       expect(video.comment_count).to eq(8)
-  #       expect(video.like_count).to eq(295)
-  #       expect(video.dislike_count).to eq(9)
-
-  #       expect(video.channel).to eq(channel)
-  #     end
-  #   end
-  # end
+        VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+          expect { Video::YoutubeImport::Video.import(video.youtube_id) }
+            .to change { video.reload.title }.from("Old title").to("Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1")
+        end
+      end
+    end
+  end
 end
