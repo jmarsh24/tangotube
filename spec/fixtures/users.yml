@@ -24,9 +24,8 @@
 #
 
 admin:
-  email: 'admin@tangotube.tv'
+  email: 'admin@example.com'
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-
 
 regular:
   email: 'user@example.com'
