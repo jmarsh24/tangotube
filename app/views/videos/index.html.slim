@@ -4,7 +4,7 @@
 = render "banner/index"
 .container
   = render "filters/filters"
-  #videos
+  #videos.stack
     = render "videos/index/videos/header"
     - if @featured_videos.present?
       .stack
