@@ -35,14 +35,6 @@ jobs:
           cache: yarn
       - name: Install yarn
         run: yarn install
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.10'
-      - name: Install Python requirements
-        run: pip3 install -r requirements.txt
-      - name: Lint Python
-        run: find . -iname "*.py" | xargs autopep8 --diff --exit-code --aggressive
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
