@@ -2,18 +2,7 @@
   grid-column: 1 / 4;
   z-index: var(--z-navbar);
   padding: var(--spacing-xxs) var(--spacing-sm);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   background-color: var(--color-neutral-100);
-
-  #start {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-  }
 
   &__item {
     position: relative;
@@ -28,30 +17,6 @@
       flex-direction: column;
     }
 
-    &--logo {
-      &::before {
-        display: block;
-        content: '';
-        width: 112px;
-        height: 22px;
-        mask-image: url('@assets/images/app_logo.svg');
-        background: var(--color-neutral-1000);
-      }
-    }
-
-    &--search {
-      align-items: center;
-      flex: 0 1 728px;
-      min-width: 0px;
-      margin-inline: var(--spacing-md);
-      &__form {
-        display: flex;
-        flex-direction: row;
-        padding: 0 4px;
-        flex: 1;
-      }
-    }
-
     &--account {
       display: flex;
       gap: 10px;
@@ -60,6 +25,10 @@
     &--links {
       gap: 10px;
     }
+  }
+
+  &__search {
+    margin-inline: var(--spacing-md);
   }
 
   &__overlay {
@@ -79,11 +48,11 @@
   }
   &__logo {
     display: block;
-    height: 16px;
-    width: 149px;
-    img {
-      height: 100%;
-    }
+    mask-image: url('@assets/images/app_logo.svg');
+    mask-size: fit;
+    mask-position: center left;
+    mask-repeat: no-repeat;
+    background: var(--color-neutral-800);
     &:hover {
       background: var(--color-neutral-1000);
     }
