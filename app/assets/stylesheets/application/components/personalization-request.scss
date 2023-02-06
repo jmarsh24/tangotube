@@ -5,10 +5,10 @@
   right: 0;
   bottom: 0;
   box-shadow: 0px 2px 12px -1px rgba(20, 26, 48, 0.16);
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--color-neutral-0);
   backdrop-filter: blur(6px);
   padding: var(--spacing-md) 0;
-  z-index: var(--z-nav);
+  z-index: var(--z-index-cookies);
 
   &__content {
     @include breakpoint-tablet {
@@ -28,7 +28,7 @@
     }
   }
 
-  p+p {
+  p + p {
     margin-top: 12px;
   }
 
