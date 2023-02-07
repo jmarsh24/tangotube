@@ -1,10 +1,10 @@
-header.navbar.stack.stack--line.stack--justify-space-between data-controller="toggle"
-  .stack.stack--line.stack--md
+header.navbar.stack.stack--line.stack--justify-space-between.stack--md data-controller="toggle"
+  .stack.stack--inline.stack--md
     .button.icon.icon--burger.icon--md data-action="click->navbar#toggle"
     a.navbar__logo href=root_path
   .navbar__search.stack.stack--line
     = render "components/navbar/search"
-  .stack.stack--line.stack--md.stack--justify-right
+  .stack.stack--inline.stack--md.stack--justify-right
     .navbar__item.navbar__item--links
       .dropdown data-controller="dropdown dark"
         button.button.icon.theme-icon data-action="dropdown#toggle click@window->dropdown#hide"
