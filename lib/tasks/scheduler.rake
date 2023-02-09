@@ -36,6 +36,14 @@ task update_all_videos_missing_acr_response_code: :environment do
   puts "done."
 end
 
+desc "This task recognizes audio from acrcloud"
+task batch_acrcloud_update: :environment do
+  Video.not_hidden.not_scanned_acrcloud.limit(10000).find_each do |video|
+    AcrcloudMusicMatchJob.perform_later(video.youtube_id)
+  end
+  puts "done."
+end
+
 desc "This task parses the performance date from the description and title"
 task parse_all_performance_dates: :environment do
   puts "Parsing all missing performance dates"
