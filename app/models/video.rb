@@ -422,6 +422,6 @@ class Video < ApplicationRecord
   end
 
   def grab_thumbnail_later
-    GrabThumbnailJob.perform_later(self)
+    GrabVideoThumbnailJob.perform_later(self)
   end
 end
