@@ -55,5 +55,11 @@ RSpec.describe Video::YoutubeImport::Video do
         end
       end
     end
+
+    context "when video does not exists" do
+      it "raises error" do
+        expect { Video::YoutubeImport::Video.import("123456789") }.to raise_error("Video with youtube_id: 123456789 does not exist in YouTube")
+      end
+    end
   end
 end
