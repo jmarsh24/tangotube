@@ -76,8 +76,7 @@ class Event::Tangopolix::Page
   end
 
   def articles_metadata
-    @article_metadata ||=
-      parsed_body.css(TANGOPOLIX_ARTICLE_METADATA_HTML_MARKER)
+    @articles_metadata ||= parsed_body.css(TANGOPOLIX_ARTICLE_METADATA_HTML_MARKER)
   end
 
   def parsed_body
