@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemovePayTables < ActiveRecord::Migration[7.0]
   def change
     drop_table :pay_charges, force: :cascade
