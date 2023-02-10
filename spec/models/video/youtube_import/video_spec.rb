@@ -72,5 +72,59 @@ RSpec.describe Video::YoutubeImport::Video do
         expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to change { video.reload.dancers.count }.by(2)
       end
     end
+
+    it "tries to search for acrcloud match if doesn't exist yet" do
+      video = videos :video_1_featured
+      video.update!(acr_response_code: 3003)
+
+      VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to have_enqueued_job(AcrcloudMusicMatchJob).exactly(1)
+      end
+    end
+
+    it "does not try to search for acrcloud match has a response code of 1001" do
+      video = videos :video_1_featured
+      video.update!(acr_response_code: 1001)
+
+      VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.not_to have_enqueued_job(AcrcloudMusicMatchJob).exactly(1)
+      end
+    end
+
+    it "does not try to search for acrcloud match has a response code of 0" do
+      video = videos :video_1_featured
+      video.update!(acr_response_code: 0)
+
+      VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.not_to have_enqueued_job(AcrcloudMusicMatchJob).exactly(1)
+      end
+    end
+
+    it "tries to search for acrcloud match if doesn't exist yet" do
+      video = videos :video_1_featured
+      video.update!(acr_response_code: 3003)
+
+      VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to have_enqueued_job(AcrcloudMusicMatchJob).exactly(1)
+      end
+    end
+
+    it "youtube_song is missing then it will try to get it from youtube" do
+      video = videos :video_1_featured
+      video.update!(youtube_song: nil)
+
+      VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to have_enqueued_job(YoutubeMusicMatchJob).exactly(1)
+      end
+    end
+
+    it "does not try to get song from youtube if already has a youtube_song" do
+      video = videos :video_1_featured
+      video.update!(youtube_song: "malandraca")
+
+      VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.not_to have_enqueued_job(YoutubeMusicMatchJob).exactly(1)
+      end
+    end
   end
 end
