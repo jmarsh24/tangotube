@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-class InitialSchemaMigration < ActiveRecord::Migration[6.1]
+class InitialSchemaMigration < ActiveRecord::Migration[7.0]
   def change
-    enable_extension "fuzzystrmatch"
+    # These are extensions that must be enabled in order to support this database
+    enable_extension "btree_gin"
+    enable_extension "pg_stat_statements"
     enable_extension "pg_trgm"
     enable_extension "plpgsql"
     enable_extension "unaccent"
