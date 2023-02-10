@@ -9,7 +9,7 @@
     div
       = formatted_metadata(@video)
   .stack data-controller="clipboard" data-clipboard-success-content="Copied!" data-clipboard-video-id="#{@video.youtube_id}" data-clipboard-root-url="#{@root_url}"
-    .youtube-controls
+    .stack
       = render "videos/show/vote"
         button class="button button--seconday button--icon--scissors"
           = t(".clip")

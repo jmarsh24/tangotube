@@ -1,11 +1,13 @@
 .footer {
   grid-column: 1 / 4;
+  display: none;
   background: var(--color-neutral-100);
   width: 100%;
   z-index: var(--z-footer);
   padding: var(--spacing-md);
 
   @include breakpoint-tablet {
+    display: block;
     padding: var(--spacing-xs);
   }
 }
