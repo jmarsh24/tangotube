@@ -84,7 +84,7 @@ module VideosHelper
     truncate(video.channel.title, length: 45, omission: "")
   end
 
-  def sortable(column, direction, title = "", sort_column, sort_direction)
+  def sortable(column, direction, sort_column, sort_direction, title = "")
     title ||= column.titleize
     (column == sort_column) ? "current #{sort_direction}" : nil
     link_to root_path(request.query_parameters.merge(sort: column, direction: direction)), class: "menu-item" do
