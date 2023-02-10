@@ -129,10 +129,8 @@ class VideosController < ApplicationController
   end
 
   def featured
-    @video.featured =
-      !@video.featured?
-    @video.save
-    render turbo_stream: turbo_stream.update("video_#{@video.youtube_id}_vote", partial: "videos/show/vote")
+    @video.update!(featured: !@video.featured?)
+    ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 
   private
@@ -238,7 +236,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: scope
     end
-    render turbo_stream: turbo_stream.update("video_#{@video.id}_vote", partial: "videos/show/vote")
+    ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 
   def update_downvote(scope)
@@ -247,6 +245,6 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user, vote_scope: scope
     end
-    render turbo_stream: turbo_stream.update("video_#{@video.id}_vote", partial: "videos/show/vote")
+    ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 end
