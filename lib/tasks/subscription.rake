@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 namespace :subscription do
-  task to_all_channels: :environment do
-    Channel.all.find_each do |channel|
-      Subscription.to_youtube_channel(channel.channel_id)
+  desc "Create subscriptions for all channels" do
+    task to_all_channels: :environment do
+      Channel.all.find_each do |channel|
+        Subscription.to_youtube_channel(channel.channel_id)
+      end
     end
   end
 end
