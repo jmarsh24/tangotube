@@ -43,21 +43,11 @@ class Video::YoutubeImport::Video
 
   def update
     @video.update(update_video_params)
-    if @video.leaders.empty? || @video.followers.empty?
-      @video.grep_title_for_dancer
-    end
-    if @video.performance_number.nil? || @video.performance_total_number.nil?
-      @video.grep_performance_number
-    end
-    unless @video.acr_response_code.in? [0, 1001]
-      AcrcloudMusicMatchJob.perform_later(@youtube_id)
-    end
-    if @video.youtube_song.nil?
-      YoutubeMusicMatchJob.perform_later(@youtube_id)
-    end
-    if @video.song.nil?
-      @video.grep_title_description_acr_cloud_song
-    end
+    @video.grep_title_for_dancer if @video.leaders.empty? || @video.followers.empty?
+    @video.grep_performance_number if @video.performance_number.nil? || @video.performance_total_number.nil?
+    AcrcloudMusicMatchJob.perform_later(@youtube_id) if !@video.acr_response_code.in? [0, 1001]
+    YoutubeMusicMatchJob.perform_later(@youtube_id) if @video.youtube_song.nil?
+    @video.grep_title_description_acr_cloud_song if @video.song.nil?
   rescue Yt::Errors::NoItems, JSON::ParserError => e
     if e.present?
       @video.destroy
