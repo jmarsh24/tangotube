@@ -103,7 +103,7 @@ class Video::YoutubeImport::Video
   end
 
   def channel
-    @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id) if @youtube_video.channel_id.present?
+    @channel ||= Channel.find_or_create_by(channel_id: @youtube_video.channel_id) if @youtube_video.channel_id.present?
     if @channel.present? && @channel.nil?
       Video::YoutubeImport::Channel.import(@youtube_video.channel_id)
       @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id)
