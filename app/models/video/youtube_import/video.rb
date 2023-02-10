@@ -17,7 +17,7 @@ class Video::YoutubeImport::Video
     @youtube_id = youtube_id
     @youtube_video = fetch_by_id
     @video = Video.find_or_create_by!(youtube_id: @youtube_id, channel:)
-  rescue Yt::Errors::NoItems,
+  rescue Yt::Errors::NoItems
     raise StandardError, "Video with youtube_id: #{@youtube_id} does not exist in YouTube"
   rescue Yt::Errors::Forbidden
     raise StandardError, "Youtube API key is not valid or quota is exceeded"
@@ -103,8 +103,8 @@ class Video::YoutubeImport::Video
   end
 
   def channel
-    @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id)
-    if @channel.nil?
+    @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id) if @youtube_video.channel_id.present?
+    if @channel.present? && @channel.nil?
       Video::YoutubeImport::Channel.import(@youtube_video.channel_id)
       @channel ||= Channel.find_by(channel_id: @youtube_video.channel_id)
       ImportChannelJob.perform_later(@youtube_video.channel_id)
