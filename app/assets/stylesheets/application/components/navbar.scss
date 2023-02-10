@@ -50,7 +50,9 @@
     z-index: var(--z-navbar-2);
   }
   &__logo {
-    display: block;
+    display: none;
+    width: 112px;
+    height: 22px;
     mask-image: url('@assets/images/app_logo.svg');
     mask-size: fit;
     mask-position: center left;
@@ -95,6 +97,9 @@
   }
 
   @include breakpoint-tablet {
+    .navbar__logo {
+      display: block;
+    }
   }
 
   @include breakpoint-desktop {
