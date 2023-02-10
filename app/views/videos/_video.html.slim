@@ -7,7 +7,7 @@
       .video-card__image data-duration="#{hd_duration_data(video)}"
         - if video.performance.present?
           .card__performance-number
-            = performance_number(video)
+            = performance_number video
         = image_tag video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 385, height: 216
     .stack.stack--xxxs
       .stack.stack--line.stack--xxxs
