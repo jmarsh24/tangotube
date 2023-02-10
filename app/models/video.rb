@@ -69,8 +69,8 @@ class Video < ApplicationRecord
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
-  has_many :follower_roles, ->(_role) { where(role: :follower) }, class_name: "DancerVideo"
-  has_many :leader_roles, ->(_role) { where(role: :leader) }, class_name: "DancerVideo"
+  has_many :follower_roles, ->(_role) { where(role: :follower) }, class_name: "DancerVideo", inverse_of: :followers, dependent: :destroy
+  has_many :leader_roles, ->(_role) { where(role: :leader) }, class_name: "DancerVideo", inverse_of: :leaders, dependent: :destroy
   has_many :leaders, through: :leader_roles, source: :dancer
   has_many :followers, through: :follower_roles, source: :dancer
 

@@ -11,7 +11,7 @@ class Clip::Gif::GifGenerator
     end
   end
 
-  attr_reader :source_file, :start_time, :end_time, :output_path
+  attr_reader :source_file, :start_time, :end_time
   def initialize(configuration)
     @source_file = configuration[:source_file]
     @start_time = configuration[:start_time]

@@ -12,7 +12,6 @@ class Clip::Gif::VideoDownloader
     end
   end
 
-  attr_reader :url
   def initialize(youtube_id)
     @youtube_id = youtube_id
   end
