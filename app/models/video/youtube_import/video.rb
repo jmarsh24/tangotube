@@ -17,6 +17,8 @@ class Video::YoutubeImport::Video
     @youtube_id = youtube_id
     @youtube_video = fetch_by_id
     @video = Video.find_or_create_by!(youtube_id: @youtube_id, channel:)
+  rescue Yt::Errors::NoItems
+    raise StandardError, "Video with youtube_id: #{@youtube_id} does not exist in YouTube"
   end
 
   def import
