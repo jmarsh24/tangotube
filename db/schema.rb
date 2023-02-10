@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_05_212257) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_10_174621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -147,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_212257) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["pid"], name: "index_deletion_requests_on_pid"
+    t.index ["uid"], name: "index_deletion_requests_on_uid", unique: true
   end
 
   create_table "events", force: :cascade do |t|
@@ -209,6 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_212257) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "reviewed", default: false
+    t.index ["slug"], name: "index_playlists_on_slug", unique: true
     t.index ["user_id"], name: "index_playlists_on_user_id"
     t.index ["videos_id"], name: "index_playlists_on_videos_id"
   end
