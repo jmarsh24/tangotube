@@ -1,17 +1,17 @@
 - if videos.present?
-  .stack data-controller="reveal" data-reveal-hidden-class="open"
-    .recommended-videos-card data-reveal-target="item"
+  .recommended-videos-card.stack data-controller="reveal" data-reveal-hidden-class="open" data-reveal-target="item"
+    .recommended-videos-card__videos.stack.stack--md
       h2.heading-2.heading-2--bold = header
       - videos.each do |video|
-        .card.card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
+        .video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
           - if video.youtube_id == @video.youtube_id
-            .card--compact__image data-duration=hd_duration_data(video)
-              = image_tag(video.thumbnail_url)
+            .video-card__image.video-card--compact__image data-duration=hd_duration_data(video)
+              = image_tag video.thumbnail_url, width: 178, height: 100
           - else
-            .card__image.card--compact__image data-duration=hd_duration_data(video)
+            .video-card__image.video-card--compact__image data-duration=hd_duration_data(video)
               = link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top" } do
-                = image_tag(video.thumbnail_url)
-          .card__body.card--compact__body
+                = image_tag video.thumbnail_url, width: 178, height: 100
+          .stack.stack--xxxs
             .stack.stack--line
               - if video.youtube_id == @video.youtube_id
                 = primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
@@ -22,13 +22,14 @@
                 = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)
             = link_to video.event.title.titleize, root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } if video.event.present?
             .stack.stack--line.stack--xxxs
-              = link_to image_tag(video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id), { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present?
+              = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id), { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present?
               = link_to channel_title(video), root_path(channel: video.channel.channel_id), { class: "video-card__channel__title", 'data-turbo-frame': "_top" } if video.channel.title.present?
             .stack.stack--line
               = formatted_metadata(video)
     - if videos.size > 3
-      button type="button" class="button button--secondary button--block stack stack--justify-center" data-action="click->reveal#toggle"
-        .icon.icon--arrow-down
+      button.button.button--secondary.stack.stack--justify-center data-action="click->reveal#toggle"
+        .recommended-videos-card__icon.icon
+
 
 
 

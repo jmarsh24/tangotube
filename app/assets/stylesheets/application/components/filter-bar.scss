@@ -1,0 +1,7 @@
+#filters-bar {
+  padding-top: var(--spacing-md);
+  @include breakpoint-desktop {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+}

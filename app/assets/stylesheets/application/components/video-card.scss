@@ -1,39 +1,52 @@
 .video-card {
+  font-size: var(--font-size-sm);
+
+  &--compact {
+    display: flex;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+
+    &__image {
+      height: 100px;
+      aspect-ratio: 16 / 9;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
   &__image {
     position: relative;
 
-    &::after {
-      content: attr(data-duration);
-      position: absolute;
-      background-color: rgba(0, 0, 0, 0.85);
-      color: white;
-      right: 5px;
-      bottom: 5px;
-      padding: 0 0.3em;
-      border-radius: 0.3em;
-      font-size: 0.7rem;
-    }
-
-    &__performance-number {
-      position: absolute;
-      background-color: rgba(0, 0, 0, 0.85);
-      color: white;
-      right: 5px;
-      top: 5px;
-      padding: 0.1em 0.3em;
-      border-radius: 0.3em;
-      font-size: 0.7rem;
-      z-index: 1;
-    }
-  }
-  &__body {
-  }
-
-  &__image {
     img {
       aspect-ratio: 16 / 9;
       object-fit: cover;
       width: 100%;
+    }
+
+    &::after {
+      content: attr(data-duration);
+      position: absolute;
+      background-color: black;
+      color: var(--color-neutral-1000);
+      right: 5px;
+      bottom: 5px;
+      padding: 0 0.3em;
+      border-radius: 0.3em;
+    }
+
+    &__performance-number {
+      position: absolute;
+      background-color: black;
+      color: var(--color-neutral-1000);
+      right: 5px;
+      top: 5px;
+      padding: 0.1em 0.3em;
+      border-radius: 0.3em;
+      z-index: 1;
     }
   }
 }

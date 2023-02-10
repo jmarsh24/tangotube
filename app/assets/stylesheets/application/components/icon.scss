@@ -24,4 +24,8 @@ $icon-sizes: (
       mask-image: url('@assets/images/icons/#{$icon}.svg');
     }
   }
+
+  &--white {
+    color: white;
+  }
 }

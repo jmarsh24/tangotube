@@ -17,22 +17,54 @@
 #  slug         :string
 #
 
-event_1:
-  title: 'title'
-  city: 'city'
-  country: 'country'
-  category: 'category'
-  start_date: '2019-01-01'
-  end_date: '2019-01-01'
-  active: true
-  reviewed: false
-
-event_2:
-  title: 'title_1'
-  city: 'city'
-  country: 'country'
-  category: 'category'
-  start_date: '2019-01-01'
-  end_date: '2019-01-01'
+academia_de_tango:
+  title: 'Academia de Tango'
+  city: 'Brussels'
+  country: 'Netherlands'
+  category: 'Milonga'
+  start_date: '2014-10-25'
+  end_date: '2014-26-25'
   active: true
   reviewed: true
+
+krakus_aires_tango_festival:
+  title: 'Krakus Aires Tango Festival'
+  city: 'Krakow'
+  country: 'Poland'
+  category: 'Festival'
+  start_date: '2019-05-05'
+  end_date: '2019-05-05'
+  active: true
+  reviewed: true
+
+bailemos_tango_festival:
+  title: 'Bailemos Tango Festival'
+  city: 'Kyiv'
+  country: 'Ukraine'
+  category: 'Festival'
+  start_date: '2021-11-31'
+  end_date: '2021-11-31'
+
+laquila_tango_festival:
+  title: 'Laquila Tango Festival'
+  city: "L'Aquila"
+  country: 'Italy'
+  category: 'Festival'
+  start_date: '2013-25-05'
+  end_date: '2013-25-05'
+
+el_garron_la_grande_tutti:
+  title: 'La Grande Tutti + El Garon union'
+  city: 'Paris'
+  country: 'France'
+  category: 'Milonga'
+  start_date: '2018-21-07'
+  end_date: '2018-21-07'
+
+ladys_tango_festival:
+  title: "Lady's Tango Festival"
+  city: 'Buenos Aires'
+  country: 'Argentina'
+  category: 'Festival'
+  start_date: '2020-08-03'
+  end_date: '2020-08-03'

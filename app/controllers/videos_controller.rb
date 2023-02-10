@@ -12,13 +12,11 @@ class VideosController < ApplicationController
     video_search = Video::Search.for(filtering_params:, sorting_params:, page:, user: current_user)
     videos = video_search.videos
 
-    if !filtering_params.present?
-      @featured_videos = Video.includes(Video.search_includes)
-        .has_leader_and_follower
-        .featured?
+    @featured_videos =
+      video_search.videos
+        .featured
         .limit(24)
         .order("random()")
-    end
 
     @current_page = video_params[:page]&.to_i || 1
     scope = videos.page(@current_page).without_count.per(12)
@@ -34,7 +32,7 @@ class VideosController < ApplicationController
 
     if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
       url = request.fullpath.gsub("&filtering=true", "").gsub("&pagination=true", "").gsub("filtering=true", "")
-      ui.replace "filters", with: "filters/filters", genres: @genres, leaders: @leaders, followers: @followers, orchestras: @orchestras, years: @years
+      ui.update "filters-bar", with: "filters/filters", genres: @genres, leaders: @leaders, followers: @followers, orchestras: @orchestras, years: @years
       ui.run_javascript "Turbo.navigator.history.push('#{url}')"
       ui.run_javascript "history.pushState({}, '', '#{url}')"
       ui.run_javascript "window.onpopstate = function () {Turbo.visit(document.location)}"
@@ -44,7 +42,7 @@ class VideosController < ApplicationController
       ui.remove "next-page-link"
       ui.append "pagination-frame", with: "components/pagination", items: scope, partial: params[:partial]
     end
-    @videos = scope
+    @videos = scope - @featured_videos
   end
 
   def show
@@ -52,7 +50,7 @@ class VideosController < ApplicationController
       Video::YoutubeImport.from_video(video_params[:v])
       @video = Video.find_by(youtube_id: video_params[:v])
     end
-    UpdateVideoJob.perform_later(video_params[:v])
+    # UpdateVideoJob.perform_later(video_params[:v])
     set_recommended_videos
     @start_value = params[:start]
     @end_value = params[:end]
@@ -131,10 +129,8 @@ class VideosController < ApplicationController
   end
 
   def featured
-    @video.featured =
-      !@video.featured?
-    @video.save
-    render turbo_stream: turbo_stream.update("video_#{@video.youtube_id}_vote", partial: "videos/show/vote")
+    @video.update!(featured: !@video.featured?)
+    ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 
   private
@@ -240,7 +236,7 @@ class VideosController < ApplicationController
     else
       @video.upvote_by current_user, vote_scope: scope
     end
-    render turbo_stream: turbo_stream.update("video_#{@video.id}_vote", partial: "videos/show/vote")
+    ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 
   def update_downvote(scope)
@@ -249,6 +245,6 @@ class VideosController < ApplicationController
     else
       @video.downvote_by current_user, vote_scope: scope
     end
-    render turbo_stream: turbo_stream.update("video_#{@video.id}_vote", partial: "videos/show/vote")
+    ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 end

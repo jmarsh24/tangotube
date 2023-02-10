@@ -11,5 +11,20 @@
 #
 
 performance_1:
-  date: '2019-01-01'
-  videos_count: 1
+  videos_count: 4
+
+performance_2:
+  videos_count: 5
+
+performance_3:
+  videos_count: 5
+
+performance_4:
+  videos_count: 5
+
+performance_5:
+  videos_count: 2
+
+performance_6:
+  videos_count: 5
+

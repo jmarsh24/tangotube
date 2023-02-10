@@ -15,10 +15,19 @@
 #
 
 clip_1:
-  start_seconds: 1
-  end_seconds: 2
-  title: 'clip'
+  start_seconds: 100
+  end_seconds: 110
+  title: 'Sacada Boleo Combo'
   playback_rate: 1.0
-  user_id: 1
-  video_id: 1
-  giphy_id: 'giphy_id'
+  user: admin
+  video: video_6
+  giphy_id: 'RvQ7gPWkm1h8mpt6dJ'
+
+clip_2:
+  start_seconds: 151
+  end_seconds: 161
+  title: 'Cool Vals Acceleration'
+  playback_rate: 1.0
+  user: admin
+  video: video_4_featured
+  giphy_id: 'uMHdkIZxN9rNO7bEBt'

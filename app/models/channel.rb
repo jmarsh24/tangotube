@@ -24,6 +24,8 @@ class Channel < ApplicationRecord
 
   has_many :videos, dependent: :destroy
 
+  has_one_attached :thumbnail
+
   validates :channel_id, presence: true, uniqueness: true
 
   before_save :update_imported, if: :count_changed?
@@ -37,6 +39,18 @@ class Channel < ApplicationRecord
   def destroy_all_videos
     return "This Channel doesn't have any videos" if videos.nil?
     videos.find_each(&:destroy)
+  end
+
+  def grab_thumbnail
+    yt_thumbnail = URI.parse(thumbnail_url).open
+  rescue OpenURI::HTTPError
+    yt_thumbnail = URI.parse(backup_thumbnail_url).open
+  ensure
+    thumbnail.attach(io: yt_thumbnail, filename: "#{youtube_id}.jpg")
+  end
+
+  def grab_thumbnail_later
+    GrabChannelThumbnailJob.perform_later(self)
   end
 
   private

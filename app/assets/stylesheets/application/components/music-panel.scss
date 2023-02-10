@@ -1,10 +1,7 @@
 .music-panel {
-  display: grid;
-  grid-template-columns: auto;
-  gap: 20px;
   padding: 20px;
 
-  @include breakpoint-tablet {
-    grid-template-columns: minmax(300px, 1fr) minmax(400px, 1fr);
+  @include breakpoint-mobile {
+    flex-direction: row;
   }
 }

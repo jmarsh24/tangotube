@@ -141,9 +141,11 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
     --z-index-dropdown: 900;
     --z-index-toast: 950;
     --z-index-tooltip: 1000;
+    --z-index-cookies: 1000;
 
     --container-gap: 16px;
     --grid-width: 1660px;
+    --app-drawer-width: 200px;
   }
 
   @include breakpoint-tablet() {

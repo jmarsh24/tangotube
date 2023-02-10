@@ -18,11 +18,10 @@
 #
 
 playlist_1:
-  slug: 'slug'
-  title: 'title'
-  description: 'description'
-  channel_title: 'channel_title'
-  channel_id: 'channel_id'
-  video_count: 'video_count'
-  imported: false
-  reviewed: false
+  slug: 'PL_HOpEXNpyAbAXT8wsbVq7Yja411Q2_Ax'
+  title: 'Tango'
+  channel_title: 'Justin Marsh'
+  channel_id: 'UChq5Pjw2tJRUA2-DT9rfC2w'
+  video_count: 200
+  imported: true
+  reviewed: true

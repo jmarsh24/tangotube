@@ -1,38 +1,37 @@
-#menu-additional-filters
-  h4.heading-4.heading-4--bold.dropdown__label Addition Filters
-  - if current_user
-    - path = request.query_parameters[:watched] == "true" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: true))
-    = link_to path, class: "menu-item" do
-      - if request.params["watched"] == "true"
-        span = t ".watched"
-        .icon.icon--close.icon--xs
-      - else
-        = t(".watched")
-    - path = request.query_parameters[:liked] == "true" ? root_path(request.query_parameters.except(:liked)) : root_path(request.query_parameters.merge(liked: true))
-    = link_to path, class: "menu-item" do
-      - if request.query_parameters[:liked] == "true"
-        span = t ".liked"
-        .icon.icon--close.icon--xs
-      - else
-        = t(".liked")
-    - path = request.query_parameters[:watched] == "false" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: false))
-    = link_to path, class: "menu-item" do
-      - if request.query_parameters[:watched] == "false"
-        span = t ".new_to_you"
-        .icon.icon--close.icon--xs
-      - else
-        = t(".new_to_you")
-  - path = request.query_parameters[:hd] == "true" ? root_path(request.query_parameters.except(:hd)) : root_path(request.query_parameters.merge(hd: true))
+h4.heading-4.heading-4--bold.dropdown__label Addition Filters
+- if current_user
+  - path = request.query_parameters[:watched] == "true" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: true))
   = link_to path, class: "menu-item" do
-    - if request.query_parameters[:hd] == "true"
-      span = t ".hd"
+    - if request.params["watched"] == "true"
+      span = t ".watched"
       .icon.icon--close.icon--xs
     - else
-      = t(".hd")
-  - path = request.query_parameters[:dancer] == "true" ? root_path(request.query_parameters.except(:dancer)) : root_path(request.query_parameters.merge(dancer: true))
+      = t(".watched")
+  - path = request.query_parameters[:liked] == "true" ? root_path(request.query_parameters.except(:liked)) : root_path(request.query_parameters.merge(liked: true))
   = link_to path, class: "menu-item" do
-    - if request.query_parameters[:dancer] == "true"
-      span = t ".with_dancer"
+    - if request.query_parameters[:liked] == "true"
+      span = t ".liked"
       .icon.icon--close.icon--xs
     - else
-      = t(".with_dancer")
+      = t(".liked")
+  - path = request.query_parameters[:watched] == "false" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: false))
+  = link_to path, class: "menu-item" do
+    - if request.query_parameters[:watched] == "false"
+      span = t ".new_to_you"
+      .icon.icon--close.icon--xs
+    - else
+      = t(".new_to_you")
+- path = request.query_parameters[:hd] == "true" ? root_path(request.query_parameters.except(:hd)) : root_path(request.query_parameters.merge(hd: true))
+= link_to path, class: "menu-item" do
+  - if request.query_parameters[:hd] == "true"
+    span = t ".hd"
+    .icon.icon--close.icon--xs
+  - else
+    = t(".hd")
+- path = request.query_parameters[:dancer] == "true" ? root_path(request.query_parameters.except(:dancer)) : root_path(request.query_parameters.merge(dancer: true))
+= link_to path, class: "menu-item" do
+  - if request.query_parameters[:dancer] == "true"
+    span = t ".with_dancer"
+    .icon.icon--close.icon--xs
+  - else
+    = t(".with_dancer")
