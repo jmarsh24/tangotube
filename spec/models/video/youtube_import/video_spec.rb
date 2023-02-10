@@ -10,11 +10,10 @@ RSpec.describe Video::YoutubeImport::Video do
       it "creates a new video" do
         video = videos :video_1_featured
         channel = channels :jkukla_video
-        video.destroy
+        video.destroy!
 
         VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
-          expect { Video::YoutubeImport::Video.import(video.youtube_id) }
-            .to change { Video.count }.by(1)
+          expect { Video::YoutubeImport::Video.import("AQ9Ri3kWa_4") }.to change(Video, :count).by(1)
 
           expect(video.youtube_id).to eq("AQ9Ri3kWa_4")
           expect(video.title).to eq("Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1")
@@ -37,11 +36,11 @@ RSpec.describe Video::YoutubeImport::Video do
       it "creates new video and channel" do
         video = videos :video_1_featured
         channel = channels :jkukla_video
+        channel.destroy!
+        video.destroy!
 
         VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
-          expect { Video::YoutubeImport::Video.import(video.youtube_id) }
-            .to change { Video.count }.by(1).and \
-              change { Channel.count }.by(1)
+          expect { Video::YoutubeImport::Video.import("AQ9Ri3kWa_4") }.to change { Video.count }.by(1).and change { Channel.count }.by(1)
         end
       end
     end
@@ -52,8 +51,7 @@ RSpec.describe Video::YoutubeImport::Video do
         video.update! title: "Old title"
 
         VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
-          expect { Video::YoutubeImport::Video.import(video.youtube_id) }
-            .to change { video.reload.title }.from("Old title").to("Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1")
+          expect { Video::YoutubeImport::Video.import(video.youtube_id) }.to change { video.reload.title }.from("Old title").to("Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1")
         end
       end
     end
