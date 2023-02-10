@@ -21,7 +21,7 @@ en:
   components:
     cookie_consent:
       accept_all: Accept all
-      banner_description_html:  |
+      banner_description_html: |
         We use cookies on our website. Some of them are essential (e.g. for privacy settings), while others help us to improve our online offering and operate it economically.
 
         For the most comfortable use of our website and to support your search with product recommendations, we also analyze, with your consent, the use of our website with tracking technologies as well as third-party cookies. To the extent described in our privacy policy, your data may be transferred to the USA and processed there. Your consent is voluntary and can be revoked at any time. You can find more information in our %{privacy}.
