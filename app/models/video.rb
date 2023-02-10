@@ -313,7 +313,8 @@ class Video < ApplicationRecord
   def grep_title_for_dancer
     dancer_matches = Dancer.all.select { |dancer| title.parameterize.match(dancer.name.parameterize) }
     dancer_matches.each do |dancer|
-      dancers << dancer unless dancers.include?(dancer)
+      role = dancer.male? ? :leader : :follower
+      dancer_videos << DancerVideo.new(dancer: dancer, role:) if !dancers.include?(dancer)
     end
   end
 

@@ -62,5 +62,15 @@ RSpec.describe Video::YoutubeImport::Video do
         expect(Video.find_by(youtube_id: "123456789")).to be_nil
       end
     end
+
+    it "adds dancers if there is a title match" do
+      video = videos :video_1_featured
+      video.dancer_videos.map(&:destroy!)
+      video.update! title: "Carlitos Espinoza & Noelia Hurtado in Amsterdam 2014 #1"
+
+      VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to change { video.reload.dancers.count }.by(2)
+      end
+    end
   end
 end
