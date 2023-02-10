@@ -13,7 +13,6 @@ class Clip::Gif::Giphy
     end
   end
 
-  attr_reader :id
   def initialize(configuration)
     @file_path = configuration[:file_path]
   end

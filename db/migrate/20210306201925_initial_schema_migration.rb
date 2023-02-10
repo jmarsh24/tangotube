@@ -33,6 +33,8 @@ class InitialSchemaMigration < ActiveRecord::Migration[6.1]
       t.bigint "blob_id", null: false
       t.string "variation_digest", null: false
       t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+      t.datetime "created_at", precision: nil, null: false
+      t.datetime "updated_at", precision: nil, null: false
     end
 
     create_table "channels", force: :cascade do |t|
