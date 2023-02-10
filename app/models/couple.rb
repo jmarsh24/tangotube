@@ -48,7 +48,7 @@ class Couple < ApplicationRecord
   def videos
     Video.where(id: DancerVideo.where(dancer_id: [dancer_id, partner_id])
                                 .group(:video_id)
-                                .having("count(*) = ?", [dancer_id, partner_id].size)
+                                .having("count(*) = ?", 2)
                                 .select(:video_id))
   end
 
