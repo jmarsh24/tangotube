@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_10_180208) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_10_181512) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -362,7 +362,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_180208) do
     t.index ["upload_date"], name: "index_videos_on_upload_date"
     t.index ["view_count"], name: "index_videos_on_view_count"
     t.index ["youtube_artist"], name: "index_videos_on_youtube_artist"
-    t.index ["youtube_id"], name: "index_videos_on_youtube_id"
+    t.index ["youtube_id"], name: "index_videos_on_youtube_id", unique: true
     t.index ["youtube_song"], name: "index_videos_on_youtube_song"
   end
 
