@@ -29,7 +29,7 @@
     = render partial: "videos/show/video_info_item", locals: { header: "Duration", value: Time.at(@video.duration).utc.strftime("%M:%S") }
   - if @video.song.present? || @video.spotify_track_name.present? || @video.youtube_song.present?
     .tabs__panel data={ "tabs-target": "tabPanel"}
-      .music-panel
+      .stack.stack--align-top.stack--desktop-line
         .stack.stack--xs
           h4.heading-4.heading-4--bold Music
           - if @video.song.present?

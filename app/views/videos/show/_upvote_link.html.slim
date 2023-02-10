@@ -1,3 +1,3 @@
 div id="upvote-#{video.youtube_id}"
-  = button_to upvote_video_path(video.youtube_id), method: :patch, class: ["button button--secondary button--icon-left", current_user&.voted_up_on?(video, vote_scope: 'like') ? "button--icon-thumbs-up-fill" : "button--icon-thumbs-up"] do
+  = button_to upvote_video_path(video.youtube_id), method: :patch, class: ["button button--secondary", current_user&.voted_up_on?(video, vote_scope: 'like') ? "button--icon-thumbs-up-fill" : "button--icon-thumbs-up"] do
     = t('.like')

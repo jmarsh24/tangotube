@@ -1,6 +1,6 @@
 - cache [current_user, params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year]] do
   = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
-    .stack.stack--line
+    .stack.stack--desktop-line
       = f.select :genre, options_for_select(@genres, params[:genre].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Genre...", "data-controller": "tom-select", class: "input input__input", style: "width: 160px"
       = f.select :leader, options_for_select(@leaders, params[:leader].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Leader...", "data-controller": "tom-select", class: "input input__input", style: "width: 240px"
       = f.select :follower, options_for_select(@followers, params[:follower].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Follower...", "data-controller": "tom-select", class: "input input__input", style: "width: 240px"

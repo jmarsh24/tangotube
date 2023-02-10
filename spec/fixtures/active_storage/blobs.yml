@@ -1,0 +1,45 @@
+audio_snippet_mp3: <%= ActiveStorage::FixtureSet.blob filename: "audio_109_129.mp3" %>
+audio_full_mp3: <%= ActiveStorage::FixtureSet.blob filename: "audio.mp3" %>
+
+avatar_carlitos: <%= ActiveStorage::FixtureSet.blob filename: "avatar_carlitos.jpg" %>
+avatar_clarisa: <%= ActiveStorage::FixtureSet.blob filename: "avatar_clarisa.jpg" %>
+avatar_noelia: <%= ActiveStorage::FixtureSet.blob filename: "avatar_noelia.jpg" %>
+avatar_gianpiero: <%= ActiveStorage::FixtureSet.blob filename: "avatar_gianpiero.jpg" %>
+avatar_jonathan: <%= ActiveStorage::FixtureSet.blob filename: "avatar_jonathan.jpg" %>
+avatar_lorena: <%= ActiveStorage::FixtureSet.blob filename: "avatar_lorena.jpg" %>
+avatar_octavio: <%= ActiveStorage::FixtureSet.blob filename: "avatar_octavio.jpg" %>
+avatar_corina: <%= ActiveStorage::FixtureSet.blob filename: "avatar_corina.jpg" %>
+
+avatar_darienzo: <%= ActiveStorage::FixtureSet.blob filename: "avatar_darienzo.webp" %>
+avatar_di_sarli: <%= ActiveStorage::FixtureSet.blob filename: "avatar_di_sarli.webp" %>
+avatar_pugliese: <%= ActiveStorage::FixtureSet.blob filename: "avatar_pugliese.webp" %>
+avatar_troilo: <%= ActiveStorage::FixtureSet.blob filename: "avatar_troilo.webp" %>
+avatar_castillo: <%= ActiveStorage::FixtureSet.blob filename: "avatar_castillo.jpg" %>
+
+cover_channel_030: <%= ActiveStorage::FixtureSet.blob filename: "cover_channel_030.jpg" %>
+cover_channel_peppa_palazon: <%= ActiveStorage::FixtureSet.blob filename: "cover_channel_peppa_palazon.png" %>
+cover_channel_tango_nuevo_tv: <%= ActiveStorage::FixtureSet.blob filename: "cover_channel_tango_nuevo_tv.png" %>
+
+cover_user_carlitos: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_carlitos.jpg" %>
+cover_user_clarisa: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_clarisa.jpg" %>
+cover_user_gianpiero: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_gianpiero.jpg" %>
+cover_user_noelia: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_noelia.jpg" %>
+cover_user_jonathan: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_jonathan.jpg" %>
+cover_user_lorena: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_lorena.jpg" %>
+cover_user_noelia: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_noelia.jpg" %>
+cover_user_octavio: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_octavio.jpg" %>
+cover_user_corina: <%= ActiveStorage::FixtureSet.blob filename: "cover_user_corina.jpg" %>
+
+thumbnail_1: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_1.jpg" %>
+thumbnail_2: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_2.jpg" %>
+thumbnail_3: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_3.jpg" %>
+thumbnail_4: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_4.jpg" %>
+thumbnail_5: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_5.jpg" %>
+thumbnail_6: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_6.jpg" %>
+
+thumbnail_030tango: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_030tango.jpg" %>
+thumbnail_amelle_tango: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_amelle_tango.jpg" %>
+thumbnail_peppa_palazon: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_peppa_palazon.jpg" %>
+thumbnail_jkukla_video: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_jkukla_video.jpg" %>
+thumbnail_tango_nuevo_tv: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_tango_nuevo_tv.jpg" %>
+thumbnail_giorgio_scattorlini: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_giorgio_scattorlini.jpg" %>

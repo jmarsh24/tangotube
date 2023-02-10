@@ -21,20 +21,33 @@ en:
   components:
     cookie_consent:
       accept_all: Accept all
-      banner_description_html: Banner description html
-      banner_title: Banner title
-      deny: Deny
-      essential: Essential
-      essential_description: Essential description
-      manage: Manage
-      manage_description: Manage description
-      manage_title: Manage title
-      privacy: Privacy
+      banner_description_html: |
+        We use cookies on our website. Some of them are essential (e.g. for privacy settings), while others help us to improve our online offering and operate it economically.
+
+        For the most comfortable use of our website and to support your search with product recommendations, we also analyze, with your consent, the use of our website with tracking technologies as well as third-party cookies. To the extent described in our privacy policy, your data may be transferred to the USA and processed there. Your consent is voluntary and can be revoked at any time. You can find more information in our %{privacy}.
+      banner_title: Privacy settings
+      deny: Decline
+      essential: Essential cookies
+      essential_description: Allow essential cookies for basic website functions and
+        proper functioning.
+      manage: Change settings
+      manage_description: We use cookies and other analytics technologies to better
+        understand how you use our website. By anonymously analyzing the movement
+        and search behavior of users on our website, we can optimize our website and
+        further improve interaction with users.
+      manage_title: Settings for cookies and tools
+      privacy: Privacy statement
       save_preferences: Save preferences
-      statistic: Statistic
-      statistic_description: Statistic description
+      statistic: Analytics and statistics cookies
+      statistic_description: We use cookies and other analytics technologies to better
+        understand how you use our website. By anonymously analyzing the movement
+        and search behavior of users on our website, we can optimize our website and
+        further improve interaction with users.
       targeting: Targeting
-      targeting_description: Targeting description
+      targeting_description: Our recommendation tool is based on your individual user
+        behavior. We collect and analyze your user data to provide personalized recommendations.
+        We use our own software for this service which works without a third-party
+        tool.
     drawer:
       clips: Clips
       explore: Explore
@@ -42,13 +55,11 @@ en:
       home: Home
       liked: Liked
     footer:
-      links:
-        google_privacy_policy: Google privacy policy
-        privacy: Privacy
-        terms: Terms
-      social_links:
-        about: About
-        contact: Contact
+      about: About
+      contact: Contact
+      google_privacy_policy: Google privacy policy
+      privacy: Privacy
+      terms: Terms
     navbar:
       login: Login
       search:
@@ -131,8 +142,9 @@ en:
       loading_spinner: Loading spinner
   videos:
     index:
-      meta_description: Meta description
-      meta_title: Meta title
+      meta_description: This is a search engine for tango videos. Search for tango
+        videos by title, artist, orchestra, dancer, couple, or event.
+      meta_title: ''
     show:
       bookmark_link:
         bookmark: Bookmark

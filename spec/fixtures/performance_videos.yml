@@ -11,6 +11,31 @@
 #
 
 peformance_video_1:
-  video_id: 1
-  performance_id: 1
+  video: video_1_featured
+  performance: performance_1
   position: 1
+
+performance_video_2:
+  video: video_2_featured
+  performance: performance_2
+  position: 4
+
+performance_video_3:
+  video: video_3_featured
+  performance: performance_3
+  position: 1
+
+performance_video_4:
+  video: video_4_featured
+  performance: performance_4
+  position: 1
+
+performance_video_5:
+  video: video_5
+  performance: performance_5
+  position: 1
+
+performance_video_6:
+  video: video_6
+  performance: performance_6
+  position: 3

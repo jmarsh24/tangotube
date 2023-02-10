@@ -4,62 +4,54 @@
 #
 # Table name: videos
 #
-#  id                             :bigint           not null, primary key
-#  created_at                     :datetime         not null
-#  updated_at                     :datetime         not null
-#  title                          :text
-#  youtube_id                     :string
-#  leader_id                      :bigint
-#  follower_id                    :bigint
-#  description                    :string
-#  duration                       :integer
-#  upload_date                    :datetime
-#  view_count                     :integer
-#  tags                           :string
-#  song_id                        :bigint
-#  youtube_song                   :string
-#  youtube_artist                 :string
-#  acrid                          :string
-#  spotify_album_id               :string
-#  spotify_album_name             :string
-#  spotify_artist_id              :string
-#  spotify_artist_id_2            :string
-#  spotify_artist_name            :string
-#  spotify_artist_name_2          :string
-#  spotify_track_id               :string
-#  spotify_track_name             :string
-#  youtube_song_id                :string
-#  isrc                           :string
-#  acr_response_code              :integer
-#  channel_id                     :bigint
-#  scanned_song                   :boolean          default(FALSE)
-#  hidden                         :boolean          default(FALSE)
-#  hd                             :boolean          default(FALSE)
-#  popularity                     :integer          default(0)
-#  like_count                     :integer          default(0)
-#  dislike_count                  :integer          default(0)
-#  favorite_count                 :integer          default(0)
-#  comment_count                  :integer          default(0)
-#  event_id                       :bigint
-#  scanned_youtube_music          :boolean          default(FALSE)
-#  click_count                    :integer          default(0)
-#  acr_cloud_artist_name          :string
-#  acr_cloud_artist_name_1        :string
-#  acr_cloud_album_name           :string
-#  acr_cloud_track_name           :string
-#  performance_date               :datetime
-#  spotify_artist_id_1            :string
-#  spotify_artist_name_1          :string
-#  performance_number             :integer
-#  performance_total_number       :integer
-#  cached_scoped_like_votes_total :integer          default(0)
-#  cached_scoped_like_votes_score :integer          default(0)
-#  cached_scoped_like_votes_up    :integer          default(0)
-#  cached_scoped_like_votes_down  :integer          default(0)
-#  cached_weighted_like_score     :integer          default(0)
-#  cached_weighted_like_total     :integer          default(0)
-#  cached_weighted_like_average   :float            default(0.0)
-#  featured                       :boolean          default(FALSE)
+#  id                       :bigint           not null, primary key
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  title                    :text
+#  youtube_id               :string
+#  description              :string
+#  duration                 :integer
+#  upload_date              :date
+#  view_count               :integer
+#  tags                     :string
+#  song_id                  :bigint
+#  youtube_song             :string
+#  youtube_artist           :string
+#  acrid                    :string
+#  spotify_album_id         :string
+#  spotify_album_name       :string
+#  spotify_artist_id        :string
+#  spotify_artist_id_2      :string
+#  spotify_artist_name      :string
+#  spotify_artist_name_2    :string
+#  spotify_track_id         :string
+#  spotify_track_name       :string
+#  youtube_song_id          :string
+#  isrc                     :string
+#  acr_response_code        :integer
+#  channel_id               :bigint
+#  scanned_song             :boolean          default(FALSE)
+#  hidden                   :boolean          default(FALSE)
+#  hd                       :boolean          default(FALSE)
+#  popularity               :integer          default(0)
+#  like_count               :integer          default(0)
+#  dislike_count            :integer          default(0)
+#  favorite_count           :integer          default(0)
+#  comment_count            :integer          default(0)
+#  event_id                 :bigint
+#  scanned_youtube_music    :boolean          default(FALSE)
+#  click_count              :integer          default(0)
+#  acr_cloud_artist_name    :string
+#  acr_cloud_artist_name_1  :string
+#  acr_cloud_album_name     :string
+#  acr_cloud_track_name     :string
+#  performance_date         :datetime
+#  spotify_artist_id_1      :string
+#  spotify_artist_name_1    :string
+#  performance_number       :integer
+#  performance_total_number :integer
+#  featured                 :boolean          default(FALSE)
+#  index                    :text
 #
 class Video < ApplicationRecord
   acts_as_votable
@@ -87,6 +79,9 @@ class Video < ApplicationRecord
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
+
+  has_one_attached :thumbnail
+
   counter_culture :song
   counter_culture [:song, :orchestra]
   counter_culture :event
@@ -118,7 +113,7 @@ class Video < ApplicationRecord
   scope :filter_by_upload_year, ->(year, _user) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
-  scope :featured?, -> { where(featured: true) }
+  scope :featured, -> { where(featured: true) }
   scope :has_song, -> { where.not(song_id: nil) }
   scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id)) }
   scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id)) }
@@ -318,7 +313,8 @@ class Video < ApplicationRecord
   def grep_title_for_dancer
     dancer_matches = Dancer.all.select { |dancer| title.parameterize.match(dancer.name.parameterize) }
     dancer_matches.each do |dancer|
-      dancers << dancer unless dancers.include?(dancer)
+      role = dancer.male? ? :leader : :follower
+      dancer_videos << DancerVideo.new(dancer: dancer, role:) if !dancers.include?(dancer)
     end
   end
 
@@ -412,5 +408,21 @@ class Video < ApplicationRecord
 
   def thumbnail_url
     "https://i.ytimg.com/vi/#{youtube_id}/hq720.jpg"
+  end
+
+  def backup_thumbnail_url
+    "https://i.ytimg.com/vi/#{youtube_id}/hqdefault.jpg"
+  end
+
+  def grab_thumbnail
+    yt_thumbnail = URI.parse(thumbnail_url).open
+  rescue OpenURI::HTTPError
+    yt_thumbnail = URI.parse(backup_thumbnail_url).open
+  ensure
+    thumbnail.attach(io: yt_thumbnail, filename: "#{youtube_id}.jpg")
+  end
+
+  def grab_thumbnail_later
+    GrabVideoThumbnailJob.perform_later(self)
   end
 end

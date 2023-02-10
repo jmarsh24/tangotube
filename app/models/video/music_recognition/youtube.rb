@@ -34,6 +34,7 @@ class Video::MusicRecognition::Youtube
   end
 
   def parsed_response
+    return nil if @youtube_dl_json_response.empty?
     JSON.parse(@youtube_dl_json_response)
   end
 
