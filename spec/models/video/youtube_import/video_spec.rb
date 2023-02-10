@@ -4,12 +4,12 @@ require "rails_helper"
 
 RSpec.describe Video::YoutubeImport::Video do
   fixtures :all
-  let(:video) { videos(:video_1_featured) }
-  let(:channel) { channels(:jkukla_video) }
 
   describe ".import" do
     context "when channel exists" do
       it "creates a new video" do
+        video = videos :video_1_featured
+        channel = channels :jkukla_video
         video.destroy
 
         VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
@@ -28,15 +28,15 @@ RSpec.describe Video::YoutubeImport::Video do
           expect(video.favorite_count).to eq(0)
           expect(video.comment_count).to eq(0)
           expect(video.like_count).to eq(3)
-          expect(video.channel).to eq(channels(:jkukla_video))
+          expect(video.channel).to eq(channel)
         end
       end
     end
 
     context "when channel does not exists" do
       it "creates new video and channel" do
-        video.destroy
-        channel.destroy
+        video = videos :video_1_featured
+        channel = channels :jkukla_video
 
         VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
           expect { Video::YoutubeImport::Video.import(video.youtube_id) }
@@ -48,7 +48,8 @@ RSpec.describe Video::YoutubeImport::Video do
 
     context "when video exists" do
       it "updates video" do
-        video.update!(title: "Old title")
+        video = videos :video_1_featured
+        video.update! title: "Old title"
 
         VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
           expect { Video::YoutubeImport::Video.import(video.youtube_id) }

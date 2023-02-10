@@ -76,6 +76,7 @@ group :development, :test do
   gem "standard"
   gem "capybara"
   gem "cuprite"
+  gem "debug"
   gem "i18n-tasks", "0.9.35"
   gem "rack_session_access"
   gem "chusaku", require: false
@@ -91,7 +92,6 @@ group :development do
   gem "annotate"
   gem "rb-fsevent"
   gem "letter_opener"
-  gem "debug"
   gem "guard"
   gem "guard-rspec"
   gem "solargraph"
