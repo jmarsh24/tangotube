@@ -58,10 +58,26 @@ require "rails_helper"
 RSpec.describe Video do
   fixtures :all
 
-  let(:video_1) { videos(:video_1) }
-  let(:song_1) { songs(:song_1) }
-  let(:leader_1) { leaders(:leader_1) }
-  let(:follower_1) { followers(:follower_1) }
-  let(:channel_1) { channels(:channel_1) }
-  let(:event_1) { events(:event_1) }
+  let(:video_1) { videos :video_1_featured }
+  let(:song_1) { songs :song_1 }
+  let(:leader_1) { dancers :carlitos }
+  let(:follower_1) { dancers :noelia }
+  let(:channel_1) { channels :"030tango" }
+  let(:event_1) { events :academia_de_tango }
+
+  it "creates associates of dancers from video title if exact match" do
+    video_1.dancer_videos.map(&:destroy)
+    video_1.grep_title_for_dancer
+    expect(video_1.leaders).to include(leader_1)
+    expect(video_1.followers).to include(follower_1)
+  end
+
+  it "creates association of dancers from video title if not an exact match" do
+    video_1.dancer_videos.map(&:destroy)
+    video_1.update!(title: "Carlitos Espinoza y Noelia Hurtado")
+    video_1.grep_title_for_dancer
+    video_1.reload
+    expect(video_1.leaders).to include(leader_1)
+    expect(video_1.followers).to include(follower_1)
+  end
 end

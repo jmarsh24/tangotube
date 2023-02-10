@@ -16,7 +16,7 @@
 class Couple < ApplicationRecord
   belongs_to :dancer
   belongs_to :partner, class_name: "Dancer"
-  has_many :couple_videos
+  has_many :couple_videos, dependent: :destroy
   has_many :videos, through: :couple_videos
 
   after_validation :set_slug, only: [:create, :update]
