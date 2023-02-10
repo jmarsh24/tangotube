@@ -14,7 +14,7 @@ class VideosController < ApplicationController
 
     @featured_videos =
       video_search.videos
-        .featured?
+        .featured
         .limit(24)
         .order("random()")
 
