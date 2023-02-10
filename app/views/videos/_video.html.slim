@@ -8,7 +8,7 @@
         - if video.performance.present?
           .card__performance-number
             = performance_number(video)
-        = image_tag video.thumbnail.present? ? video.thumbnail : video.thumbnail_url
+        = image_tag video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 385, height: 216
     .stack.stack--xxxs
       .stack.stack--line.stack--xxxs
         - video.dancer_videos.each do |dv|
