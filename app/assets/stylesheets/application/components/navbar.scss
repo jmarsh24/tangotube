@@ -30,7 +30,6 @@
   &__search {
     position: relative;
     flex: 0 1 728px;
-    margin-inline: var(--spacing-md);
     width: 100%;
   }
 
@@ -97,8 +96,13 @@
   }
 
   @include breakpoint-tablet {
-    .navbar__logo {
-      display: block;
+    .navbar {
+      &__search {
+        margin-inline: var(--spacing-md);
+      }
+      &__logo {
+        display: block;
+      }
     }
   }
 
