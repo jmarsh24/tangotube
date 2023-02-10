@@ -50,7 +50,7 @@ class VideosController < ApplicationController
       Video::YoutubeImport.from_video(video_params[:v])
       @video = Video.find_by(youtube_id: video_params[:v])
     end
-    # UpdateVideoJob.perform_later(video_params[:v])
+    UpdateVideoJob.perform_later(video_params[:v])
     set_recommended_videos
     @start_value = params[:start]
     @end_value = params[:end]
