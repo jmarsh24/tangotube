@@ -113,7 +113,7 @@ class Video < ApplicationRecord
   scope :filter_by_upload_year, ->(year, _user) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
-  scope :featured?, -> { where(featured: true) }
+  scope :featured, -> { where(featured: true) }
   scope :has_song, -> { where.not(song_id: nil) }
   scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id)) }
   scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id)) }
