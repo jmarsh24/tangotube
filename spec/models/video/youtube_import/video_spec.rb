@@ -13,7 +13,7 @@ RSpec.describe Video::YoutubeImport::Video do
         video.destroy!
 
         VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
-          expect { Video::YoutubeImport::Video.import("AQ9Ri3kWa_4") }.to change(Video, :count).by(1)
+          expect { Video::YoutubeImport::Video.import("AQ9Ri3kWa_4") }.to change { Video.count }.by(1)
 
           expect(video.youtube_id).to eq("AQ9Ri3kWa_4")
           expect(video.title).to eq("Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1")

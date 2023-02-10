@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Indexable
   extend ActiveSupport::Concern
 
@@ -31,7 +33,7 @@ module Indexable
         .map { |e| e.tr("*", "").downcase }
         .reduce(self) do |scope, term|
           negate = term.starts_with? "-"
-          scope.where("index #{"NOT" if negate} LIKE ?", "%#{negate ? term[1..-1] : term}%")
+          scope.where("index #{"NOT" if negate} LIKE ?", "%#{negate ? term[1..] : term}%")
         end
     end
 
