@@ -1,5 +1,10 @@
 .drawer {
   grid-column: 1 / 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding-top: var(--header-height);
   width: var(--app-drawer-width);
   background: var(--color-neutral-50);
   max-width: 0px;
@@ -10,5 +15,12 @@
 
   &.open {
     max-width: var(--app-drawer-width);
+  }
+}
+
+@include breakpoint-tablet {
+  .drawer {
+    display: block;
+    padding: var(--spacing-xs);
   }
 }
