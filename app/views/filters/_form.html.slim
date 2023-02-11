@@ -7,6 +7,4 @@
       = f.select :orchestra, options_for_select(@orchestras, params[:orchestra].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Orchestra...", "data-controller": "tom-select", class: "input input__input", style: "width: 200px"
       = f.select :year, options_for_select(@years, params[:year].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Year...", "data-controller": "tom-select" , class: "input input__input", style: "width: 140px"
       = f.hidden_field :filtering, value: "true"
-      - if filtering_params.present? || sorting_params.present?
-        = f.submit "Clear All", name: "clear", type: "button", class: "button button--secondary", "data-action": "click->autosubmit#clear"
 
