@@ -179,9 +179,6 @@ class Video < ApplicationRecord
 
   scope :with_same_dancers, ->(video) {
     includes(Video.search_includes)
-      .where("upload_date <= ?", video.upload_date + 7.days)
-      .where("upload_date >= ?", video.upload_date - 7.days)
-      .has_leader_and_follower
       .with_leader(video.leaders.first)
       .with_follower(video.followers.first)
       .where(hidden: false)
