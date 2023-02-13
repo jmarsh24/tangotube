@@ -174,6 +174,7 @@ class Video < ApplicationRecord
                                     .has_leader_and_follower
                                     .where(hidden: false)
                                     .where.not(youtube_id: video.youtube_id)
+                                    .where(upload_date: (video.upload_date - 7.days)..(video.upload_date + 7.days))
                                 }
 
   scope :with_same_dancers, ->(video) {
