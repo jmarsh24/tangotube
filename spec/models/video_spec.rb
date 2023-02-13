@@ -59,7 +59,7 @@ RSpec.describe Video do
   fixtures :all
 
   let(:video_1) { videos :video_1_featured }
-  let(:song_1) { songs :song_1 }
+  let(:song_1) { songs :nueve_de_julio }
   let(:leader_1) { dancers :carlitos }
   let(:follower_1) { dancers :noelia }
   let(:channel_1) { channels :"030tango" }
@@ -79,5 +79,42 @@ RSpec.describe Video do
     video_1.reload
     expect(video_1.leaders).to include(leader_1)
     expect(video_1.followers).to include(follower_1)
+  end
+
+  it "returns videos with the same performance" do
+    video_same_performance = videos(:video_4_featured)
+    video_same_performance.update!(channel: channels(:jkukla_video),
+      upload_date: video_1.upload_date)
+    expect(Video.with_same_performance(video_1)).to include(video_same_performance)
+    expect(Video.with_same_performance(video_1)).not_to include(video_1)
+  end
+
+  it "with_same_dancers" do
+    video_carlitos_noelia_2 = videos(:video_4_featured)
+    expect(Video.with_same_dancers(video_1)).to include(video_carlitos_noelia_2)
+    expect(Video.with_same_dancers(video_1)).not_to include(video_1)
+  end
+
+  it "with_same_event" do
+    video_same_event = videos(:video_4_featured)
+
+    video_same_event.update!(event: event_1, upload_date: video_1.upload_date)
+    expect(Video.with_same_event(video_1)).to include(video_same_event)
+    expect(Video.with_same_dancers(video_1)).not_to include(video_1)
+  end
+
+  it "with_same_song" do
+    video_same_song = videos(:video_4_featured)
+
+    video_same_song.update!(song: songs(:cuando_el_amor_muere))
+    expect(Video.with_same_song(video_1)).to include(video_same_song)
+    expect(Video.with_same_song(video_1)).not_to include(video_1)
+  end
+
+  it "with_same_channel" do
+    video_same_channel = videos(:video_4_featured)
+    video_same_channel.update!(channel: channels(:jkukla_video))
+    expect(Video.with_same_channel(video_1)).to include(video_same_channel)
+    expect(Video.with_same_channel(video_1)).not_to include(video_1)
   end
 end
