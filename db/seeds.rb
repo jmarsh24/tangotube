@@ -9,9 +9,9 @@ if Rails.env.development?
     last_name: "User",
     email: "admin@tangotube.tv",
     password: "password",
-    password_confirmation: "password",
-    admin: true
+    password_confirmation: "password"
   )
   user.skip_confirmation!
   user.save!
+  user.admin!
 end
