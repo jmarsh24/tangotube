@@ -10,6 +10,7 @@ if Rails.env.development?
     email: "admin@tangotube.tv",
     password: "password",
     password_confirmation: "password"
+    admin: true
   )
   user.skip_confirmation!
   user.save!
