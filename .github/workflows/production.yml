@@ -16,8 +16,3 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           name: github-actions
           known_hosts: unnecessary
-      - name: Deploy with Capistrano
-        run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/github-actions
-          bundle exec cap production deploy
