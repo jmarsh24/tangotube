@@ -32,7 +32,7 @@ module Indexable
       Array.wrap(terms)
         .map { |e| e.tr("*", "").downcase }
         .reduce(self) do |scope, term|
-          scope.where("word_similarity(?,index) > 0.7", "#{negate ? term[1..] : term}")
+          scope.where("word_similarity(?,index) > 0.7", "#{term}")
         end
     end
     def index!(now: false)
