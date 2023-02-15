@@ -84,6 +84,8 @@ group :development, :test do
   gem "webmock", require: false
   gem "capybara-screenshot-diff"
   gem "vcr"
+  gem "factory_bot_rails"
+  gem "faker"
 end
 
 group :development do

@@ -81,11 +81,15 @@ RSpec.describe Video do
     expect(video_1.followers).to include(follower_1)
   end
 
-  it "returns videos with the same performance" do
-    video_same_performance = videos(:video_4_featured)
-    video_same_performance.update!(channel: channels(:jkukla_video),
-      upload_date: video_1.upload_date)
-    expect(Video.with_same_performance(video_1)).to include(video_same_performance)
+  fit "returns videos with the same performance" do
+    channel = create(:channel)
+    leader = create(:dancer)
+    follower = create(:dancer)
+
+    video_1 = create(:video, channel:, )
+    video_2 = create(:video, channel:)
+    debugger
+    expect(Video.with_same_performance(video_1)).to include(video_2)
     expect(Video.with_same_performance(video_1)).not_to include(video_1)
   end
 
