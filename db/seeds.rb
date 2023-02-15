@@ -4,7 +4,7 @@
 Rails.logger.debug "Seeding admin user into database"
 
 if Rails.env.development?
-  user = User.create(
+  user = User.new(
     first_name: "Admin",
     last_name: "User",
     email: "admin@tangotube.tv",
