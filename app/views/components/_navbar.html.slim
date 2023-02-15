@@ -20,7 +20,7 @@ header.navbar.stack.stack--line.stack--justify-space-between.stack--md data-cont
           .menu.menu--right.hidden data-dropdown-target="menu"
             = link_to edit_user_registration_path do
               .menu-item Edit Profile
-            = link_to destroy_user_session_path do
+            = link_to destroy_user_session_path, data: { turbo_method: :delete } do
               .menu-item Sign Out
       - else
         = link_to t(".login"), new_user_session_path, class: "button button--primary"
