@@ -4,7 +4,7 @@ declare const process: { env: Record<string, string> };
 
 export function startErrorTracking(): void {
   Sentry.init({
-    dsn: 'https://592faee491bc43e2a188bc260fe817e2@o385233.ingest.sentry.io/4504315490074624',
+    dsn: 'https://a50690fbdd8546f49dd1153095fce6cd@o4504470653173760.ingest.sentry.io/4504470654681088',
     environment:
       import.meta.env.SENTRY_ENVIRONMENT || import.meta.env.RAILS_ENV,
   });
