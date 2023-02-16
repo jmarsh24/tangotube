@@ -32,7 +32,7 @@ module Indexable
       Array.wrap(terms)
         .map { |e| e.tr("*", "").downcase }
         .reduce(self) do |scope, term|
-          scope.where("index like ?", term.to_s)
+          scope.where("index LIKE ?", "%#{term}%")
         end
     end
     def index!(now: false)
