@@ -15,12 +15,12 @@
 
   &.open {
     max-width: var(--app-drawer-width);
+    padding-inline: var(--spacing-xs);
   }
 }
 
 @include breakpoint-tablet {
   .drawer {
     display: block;
-    padding: var(--spacing-xs);
   }
 }
