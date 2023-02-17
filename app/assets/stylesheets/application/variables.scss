@@ -100,7 +100,7 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
     --z-footer: 99;
     --z-performance_number: 99;
 
-    --navbar-height: 80px;
+    --navbar-height: 56px;
     --video-aspect-ratio: 0.8;
 
     --transition-xs: 1000ms;
@@ -151,11 +151,9 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
 
   @include breakpoint-tablet() {
     --container-gap: 32px;
-    --navbar-height: 88px;
   }
 
   @include breakpoint-desktop() {
     --container-gap: 64px;
-    --navbar-height: 120px;
   }
 }

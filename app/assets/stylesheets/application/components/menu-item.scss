@@ -2,7 +2,7 @@
   display: flex;
   gap: var(--spacing-xs);
   align-items: center;
-  padding: 8px 16px;
+  padding: var(--spacing-xs) var(--spacing-md);
   min-width: 120px;
   color: var(--color-neutral-800);
   font-size: 14px;

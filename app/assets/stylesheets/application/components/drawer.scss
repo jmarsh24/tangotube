@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  padding-top: var(--header-height);
+  padding-top: var(--navbar-height);
   width: var(--app-drawer-width);
   background: var(--color-neutral-50);
   max-width: 0px;
@@ -15,7 +15,6 @@
 
   &.open {
     max-width: var(--app-drawer-width);
-    // padding-inline: var(--spacing-xs);
   }
 }
 
