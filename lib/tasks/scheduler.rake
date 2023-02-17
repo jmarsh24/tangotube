@@ -39,7 +39,7 @@ end
 desc "This task recognizes audio from acrcloud"
 task batch_acrcloud_update: :environment do
   Video.not_hidden.not_scanned_acrcloud.limit(10000).find_each do |video|
-    AcrcloudMusicMatchJob.perform_later(video.youtube_id)
+    AcrMusicMatchJob.perform_later(video.youtube_id)
   end
   puts "done."
 end
