@@ -6,7 +6,6 @@
     minmax(0, var(--grid-width))
     0
     minmax(var(--container-gap), 1fr);
-  margin-bottom: var(--spacing-xxxl);
 
   & > * {
     grid-column: 3/3;
