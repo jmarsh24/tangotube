@@ -42,6 +42,7 @@ gem "kaminari"
 gem "pundit"
 gem "ransack"
 gem "rails-i18n"
+gem "safety_mailer"
 gem "shimmer"
 gem "slim-rails"
 gem "sidekiq"
@@ -74,10 +75,11 @@ gem "sentry-rails"
 group :development, :test do
   gem "rspec-rails"
   gem "standard"
-  gem "capybara"
-  gem "cuprite"
-  gem "debug"
-  gem "i18n-tasks", "0.9.35"
+  gem "pry-rails"
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "debug", platforms: %i[mri mingw x64_mingw]
+  gem "i18n-tasks"
   gem "rack_session_access"
   gem "chusaku", require: false
   gem "rspec-retry"
@@ -100,4 +102,10 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rspec"
   gem "rubocop-rake"
+end
+
+group :test do
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
+  gem "cuprite"
 end
