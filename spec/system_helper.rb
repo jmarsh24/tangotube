@@ -20,3 +20,5 @@ RSpec.configure do |config|
     Capybara.reset!
   end
 end
+
+Capybara.disable_animation = true
