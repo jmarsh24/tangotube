@@ -3,7 +3,7 @@
 require "rails_helper"
 require "rack_session_access/capybara"
 
-Rails.application.routes.default_url_options[:locale] = :en
+# Rails.application.routes.default_url_options[:locale] = :en
 Capybara::Screenshot::Diff.enabled = false
 Capybara::Screenshot.enabled = Config.screenshots?
 
