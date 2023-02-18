@@ -29,8 +29,8 @@
     = render partial: "videos/show/video_info_item", locals: { header: "Duration", value: Time.at(@video.duration).utc.strftime("%M:%S") }
   - if @video.song.present? || @video.spotify_track_name.present? || @video.youtube_song.present?
     .tabs__panel data={ "tabs-target": "tabPanel"}
-      .stack.stack--align-top.stack--desktop-line
-        .stack.stack--xs
+      .stack.stack--desktop-line
+        .stack.stack--align-top.stack--xs
           h4.heading-4.heading-4--bold Music
           - if @video.song.present?
             = render partial: "videos/show/video_info_item", locals: { header: "Title", value: link_to(@video.song.try(:title).to_s.titleize, root_path(song_id: @video.song.id), {"data-turbo-frame": "_top"}) }
