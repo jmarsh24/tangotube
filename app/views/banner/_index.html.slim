@@ -1,6 +1,6 @@
 - if cookies[:banner_closed].blank?
   #banner.banner
-    = video_tag([asset_path("banner.webm"), asset_path("banner.mp4")], poster: asset_path("hero_video_preview.jpg"), loop: true, muted: true, playsinline: true, autoplay: true, class: "banner__video")
+    = video_tag([asset_path("banner.mp4"),asset_path("banner.webm")], poster: asset_path("hero_video_preview.jpg"), loop: true, muted: true, playsinline: true, autoplay: true, class: "banner__video")
     .banner__card.stack.stack--md
       h1.heading-1.heading-1--bold The new way to watch Tango
       h2.heading-2.heading-2--bold Explore Tango History
