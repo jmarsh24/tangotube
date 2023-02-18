@@ -18,7 +18,6 @@ class Video::YoutubeImport::Video
     @youtube_video = fetch_by_id
     @video = Video.find_or_create_by!(youtube_id: @youtube_id, channel:)
   rescue Yt::Errors::NoItems
-    @video.destroy!
     raise StandardError, "Video with youtube_id: #{@youtube_id} does not exist in YouTube"
   rescue Yt::Errors::Forbidden
     raise StandardError, "Youtube API key is not valid or quota is exceeded"
@@ -46,7 +45,7 @@ class Video::YoutubeImport::Video
     @video.update(update_video_params)
     @video.grep_title_for_dancer if @video.leaders.empty? || @video.followers.empty?
     @video.grep_performance_number if @video.performance_number.nil? || @video.performance_total_number.nil?
-    AcrcloudMusicMatchJob.perform_later(@youtube_id) if !@video.acr_response_code.in? [0, 1001]
+    AcrMusicMatchJob.perform_later(@youtube_id) if !@video.acr_response_code.in? [0, 1001]
     YoutubeMusicMatchJob.perform_later(@youtube_id) if @video.youtube_song.nil?
     @video.grep_title_description_acr_cloud_song if @video.song.nil?
   rescue Yt::Errors::NoItems, JSON::ParserError => e
