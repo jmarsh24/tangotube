@@ -1,0 +1,7 @@
+.vote-bar {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-sm);
+  overflow-x: scroll;
+  scrollbar-width: none;
+}

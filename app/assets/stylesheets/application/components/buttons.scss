@@ -1,11 +1,11 @@
 .button {
   font-family: inherit;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--font-size-md);
+  line-height: var(--spacing-md);
   text-align: center;
   text-transform: uppercase;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius-md);
   padding: var(--spacing-xxs) var(--spacing-xs);
   border: 1px solid transparent;
   cursor: pointer;
@@ -64,14 +64,14 @@
     background-color: transparent;
     color: var(--text-link-primary-base);
     padding: 0px;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 27px;
-    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-loose);
+    // text-transform: uppercase;
 
     &.button--sm {
-      font-size: 14px;
-      line-height: 21px;
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-normal);
     }
 
     &:hover {
@@ -104,7 +104,7 @@
     color: var(--text-link-secondary-base);
 
     &:hover {
-      color: darken(#a886f7, 5%);
+      color: var(--color-primary-200);
     }
   }
 
@@ -113,20 +113,24 @@
   }
 
   @include breakpoint-tablet {
+    &--sm {
+      padding: calc(var(--spacing-xs) - 1px) var(--spacing-xl);
+    }
+
     &--link {
       padding: 0;
 
       &.button--tablet-md {
-        font-size: 16px;
-        line-height: 24px;
+        font-size: var(--font-size-lg);
+        line-height: var(--font-size-lg);
       }
     }
   }
 
   @each $icon in $icons {
     &--icon-#{$icon} {
-      display: flex;
-      flex-direction: column;
+      display: inline-flex;
+      flex-direction: row;
       gap: var(--spacing-xxs);
       align-items: center;
       justify-content: center;
@@ -143,10 +147,6 @@
       &.button--icon-left {
         display: flex;
         flex-direction: row;
-      }
-
-      &.button--icon-top {
-        display: block;
       }
     }
   }
