@@ -21,6 +21,15 @@ module CupriteHelper
     super("#{name}--tablet")
     page.current_window.resize_to(width, height)
   end
+
+  def fill_in_tom_select_field(id, value)
+    container = find(id).sibling(".ts-wrapper")
+    within(container) do
+      find(".ts-control input").send_keys(value)
+    end
+
+    all(".ts-dropdown .ts-dropdown-content .option", text: /#{Regexp.quote(value)}/i)[0].click
+  end
 end
 
 RSpec.configure do |config|
