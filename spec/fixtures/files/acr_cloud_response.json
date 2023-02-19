@@ -1,0 +1,50 @@
+{
+  "result_type": 0,
+  "cost_time": 5.1740000247955,
+  "status": { "msg": "Success", "code": 0, "version": "1.0" },
+  "metadata": {
+    "timestamp_utc": "2023-02-19 12:22:08",
+    "music": [
+      {
+        "artists": [
+          {
+            "name": "Osvaldo Pugliese",
+            "langs": [
+              { "code": "ja-Jpan", "name": "オスバルド・プグリエーセ" },
+              { "code": "ja-Hrkt", "name": "オスバルドプグリエーセ" }
+            ]
+          },
+          {
+            "name": "Alberto Moran",
+            "langs": [
+              { "code": "ja-Jpan", "name": "アルベルト・モラン" },
+              { "code": "ja-Hrkt", "name": "アルベルトモラン" }
+            ]
+          }
+        ],
+        "acrid": "0d07891de1a0b282efce9b20dfce2bba",
+        "external_ids": { "isrc": "ARF040200415" },
+        "external_metadata": {
+          "spotify": {
+            "album": { "name": "Canta garganta con arena" },
+            "artists": [
+              { "name": "Osvaldo Pugliese" },
+              { "name": "Alberto Moran" }
+            ],
+            "track": { "name": "La Mentirosa", "id": "0iAj9eP9ZjNw7QcvjRoxgO" }
+          },
+          "youtube": { "vid": "9Yj-xPNOMo8" }
+        },
+        "result_from": 3,
+        "genres": [{ "name": "Tango" }, { "name": "World" }],
+        "duration_ms": 195000,
+        "release_date": "2020-04-08",
+        "play_offset_ms": 12060,
+        "title": "La Mentirosa",
+        "album": { "name": "Cantan Alberto Morán Y Roberto Chanel" },
+        "label": "UMG - Universal Music Argentina S.A.",
+        "score": 100
+      }
+    ]
+  }
+}
