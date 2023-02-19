@@ -23,11 +23,11 @@ VCR.configure do |config|
   config.ignore_localhost = true
   config.allow_http_connections_when_no_cassette = true
   config.configure_rspec_metadata!
-  config.define_cassette_placeholder("<SPOTIFY_CLIENT_ID>") { Rails.application.credentials.dig(:acr_cloud, :client_id) }
-  config.define_cassette_placeholder("<SPOTIFY_SECRET_KEY>") { Rails.application.credentials.dig(:spotify, :secret_key) }
-  config.define_cassette_placeholder("<ACRCLOUD_ACCESS_KEY>") { Rails.application.credentials.dig(:acr_cloud, :access_key) }
-  config.define_cassette_placeholder("<ACRCLOUD_SECRET_KEY>") { Rails.application.credentials.dig(:acr_cloud, :secret_key) }
-  config.define_cassette_placeholder("<YOUTUBE_API_KEY>") { Rails.application.credentials.dig(:youtube, :api_key) }
+  config.define_cassette_placeholder("<SPOTIFY_CLIENT_ID>") { Config.spotify_client_id! }
+  config.define_cassette_placeholder("<SPOTIFY_SECRET_KEY>") { Config.spotify_secret_key! }
+  config.define_cassette_placeholder("<ACRCLOUD_ACCESS_KEY>") { Config.acr_cloud_access_key! }
+  config.define_cassette_placeholder("<ACRCLOUD_SECRET_KEY>") { Config.acr_cloud_secret_key! }
+  config.define_cassette_placeholder("<YOUTUBE_API_KEY>") { Config.youtube_api_key! }
 end
 
 RSpec.configure do |config|
