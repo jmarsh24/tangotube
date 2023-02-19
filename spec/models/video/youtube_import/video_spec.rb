@@ -78,7 +78,7 @@ RSpec.describe Video::YoutubeImport::Video do
       video.update!(acr_response_code: 3003)
 
       VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
-        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to have_enqueued_job(AcrcloudMusicMatchJob).exactly(1)
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to have_enqueued_job(AcrMusicMatchJob).exactly(1)
       end
     end
 
@@ -87,7 +87,7 @@ RSpec.describe Video::YoutubeImport::Video do
       video.update!(acr_response_code: 1001)
 
       VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
-        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.not_to have_enqueued_job(AcrcloudMusicMatchJob).exactly(1)
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.not_to have_enqueued_job(AcrMusicMatchJob).exactly(1)
       end
     end
 
@@ -96,7 +96,7 @@ RSpec.describe Video::YoutubeImport::Video do
       video.update!(acr_response_code: 0)
 
       VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
-        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.not_to have_enqueued_job(AcrcloudMusicMatchJob).exactly(1)
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.not_to have_enqueued_job(AcrMusicMatchJob).exactly(1)
       end
     end
 
@@ -105,7 +105,7 @@ RSpec.describe Video::YoutubeImport::Video do
       video.update!(acr_response_code: 3003)
 
       VCR.use_cassette("video/youtubeimport/video", record: :new_episodes) do
-        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to have_enqueued_job(AcrcloudMusicMatchJob).exactly(1)
+        expect { Video::YoutubeImport::Video.update(video.youtube_id) }.to have_enqueued_job(AcrMusicMatchJob).exactly(1)
       end
     end
 

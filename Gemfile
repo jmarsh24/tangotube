@@ -42,11 +42,11 @@ gem "kaminari"
 gem "pundit"
 gem "ransack"
 gem "rails-i18n"
+gem "safety_mailer"
 gem "shimmer"
 gem "slim-rails"
 gem "sidekiq"
 gem "sidekiq-scheduler"
-gem "sidekiq-throttled"
 gem "sitemap_generator"
 gem "streamio-ffmpeg"
 gem "store_model"
@@ -75,10 +75,12 @@ gem "sentry-rails"
 group :development, :test do
   gem "rspec-rails"
   gem "standard"
-  gem "capybara"
-  gem "cuprite"
+
+  gem "pry-rails"
+  gem "pry-byebug"
+  gem "pry-doc"
   gem "debug"
-  gem "i18n-tasks", "0.9.35"
+  gem "i18n-tasks"
   gem "rack_session_access"
   gem "chusaku", require: false
   gem "rspec-retry"
@@ -101,4 +103,9 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rspec"
   gem "rubocop-rake"
+end
+
+group :test do
+  gem "capybara"
+  gem "cuprite"
 end

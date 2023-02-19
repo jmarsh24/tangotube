@@ -12,6 +12,7 @@ class Video::Search
     videos.updated_at
     videos.popularity
     videos.like_count
+    videos.upload_date
   ].freeze
 
   NUMBER_OF_VIDEOS_PER_PAGE = 60
