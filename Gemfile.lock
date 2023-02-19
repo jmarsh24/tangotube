@@ -206,8 +206,6 @@ GEM
     faraday (2.7.4)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-multipart (1.0.4)
-      multipart-post (~> 2)
     faraday-net_http (3.0.2)
     ferrum (0.13)
       addressable (~> 2.5)
@@ -321,7 +319,6 @@ GEM
     msgpack (1.6.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.3.0)
     nenv (0.3.0)
     net-imap (0.3.4)
       date
@@ -672,13 +669,12 @@ DEPENDENCIES
   devise!
   document_serializable
   dotenv-rails
-  faraday
-  faraday-multipart
   friendly_id
   groupdate
   guard
   guard-rspec
   hashie
+  httparty
   i18n-tasks
   image_processing
   kaminari
