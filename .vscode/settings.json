@@ -13,7 +13,7 @@
   "ruby.format": "rubocop",
   "[ruby]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "castwide.solargraph"
+    "editor.defaultFormatter": "misogi.ruby-rubocop"
   },
   "solargraph.formatting": true
 }
