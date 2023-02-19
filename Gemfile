@@ -47,7 +47,6 @@ gem "shimmer"
 gem "slim-rails"
 gem "sidekiq"
 gem "sidekiq-scheduler"
-gem "sidekiq-throttled"
 gem "sitemap_generator"
 gem "streamio-ffmpeg"
 gem "translate_client"
@@ -75,10 +74,11 @@ gem "sentry-rails"
 group :development, :test do
   gem "rspec-rails"
   gem "standard"
+
   gem "pry-rails"
   gem "pry-byebug"
   gem "pry-doc"
-  gem "debug", platforms: %i[mri mingw x64_mingw]
+  gem "debug"
   gem "i18n-tasks"
   gem "rack_session_access"
   gem "chusaku", require: false
@@ -105,7 +105,6 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "cuprite"
 end
