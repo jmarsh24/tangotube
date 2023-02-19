@@ -1,7 +1,7 @@
 #menu-sorting-filters.stack.stack--zero data-toggle-target="sorting"
   h4.heading-4.heading-4--bold.dropdown__label Sort By
-  = sortable 'videos.performance_date', "desc", @sort_column, @sort_direction, "Recent First"
-  = sortable 'videos.performance_date', "asc", @sort_column, @sort_direction, "Oldest First"
+  = sortable 'videos.upload_date', "desc", @sort_column, @sort_direction, "Recent First"
+  = sortable 'videos.upload_date', "asc", @sort_column, @sort_direction, "Oldest First"
   = sortable "videos.view_count", "desc", @sort_column, @sort_direction, "Most Viewed"
   = sortable "videos.popularity", "desc", @sort_column, @sort_direction, "Trending"
   = sortable "videos.like_count", "desc", @sort_column, @sort_direction, "Most Liked"

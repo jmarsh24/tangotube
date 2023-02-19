@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "sidekiq/throttled"
-Sidekiq::Throttled.setup!
-
 Sidekiq.configure_server do |config|
   config.redis = {ssl_params: {verify_mode: OpenSSL::SSL::VERIFY_NONE}}
 end
