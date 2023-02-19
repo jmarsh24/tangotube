@@ -9,7 +9,9 @@ RSpec.describe AcrCloud do
 
   describe "send" do
     it "send a request to ACR Cloud" do
-      AcrCloud.send(sound_file:).data
+      VCR.use_cassette("acr_cloud") do
+        AcrCloud.send(sound_file:).data
+      end
     end
   end
 end

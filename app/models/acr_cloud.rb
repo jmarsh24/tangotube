@@ -13,7 +13,7 @@ class AcrCloud
   end
 
   def initialize(sound_file)
-    @sound_file = sound_file
+    @sound_file = File.open(sound_file)
     @data = {}
   end
 
@@ -39,7 +39,7 @@ class AcrCloud
   end
 
   def sample_bytes
-    File.size(@sound_file)
+    @sound_file.size
   end
 
   def unsigned_string
