@@ -31,11 +31,11 @@ VCR.configure do |config|
   config.define_cassette_placeholder("<ACRCLOUD_SECRET_KEY>") { Config.acr_cloud_secret_key! }
   config.define_cassette_placeholder("<SPOTIFY_CLIENT_ID>") { Config.spotify_client_id! }
   config.define_cassette_placeholder("<SPOTIFY_SECRET_KEY>") { Config.spotify_secret_key! }
-  config.define_cassette_placeholder("<SENDGRID_USERNAME>") { Config.sendgrid_user_name! }
+  config.define_cassette_placeholder("<SENDGRID_USERNAME>") { Config.sendgrid_username! }
   config.define_cassette_placeholder("<SENDGRID_PASSWORD>") { Config.sendgrid_password! }
   config.define_cassette_placeholder("<SENDGRID_API_KEY>") { Config.sendgrid_api_key! }
   config.define_cassette_placeholder("<AWS_ACCESS_KEY_ID>") { Config.aws_access_key_id! }
-  config.define_cassette_placeholder("<AWS_ACCESS_ACCESS_KEY>") { Config.aws_access_access_key! }
+  config.define_cassette_placeholder("<AWS_SECRET_ACCESS_KEY>") { Config.aws_secret_access_key! }
   config.define_cassette_placeholder("<GITHUB_KEY>") { Config.github_key! }
   config.define_cassette_placeholder("<GITHUB_SECRET>") { Config.github_secret! }
   config.define_cassette_placeholder("<GOOGLE_CLIENT_ID>") { Config.google_client_id! }
