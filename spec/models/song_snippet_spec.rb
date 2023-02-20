@@ -7,7 +7,7 @@ RSpec.describe SongSnippet do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "create" do
-    fit "returns the audio file from a slug", :vcr do
+    it "returns the audio file from a slug", :vcr do
       song_snippet = File.open SongSnippet.create(slug).filepath
       expected_path = Rails.root.join "tmp/audio/video_AQ9Ri3kWa_4/AQ9Ri3kWa_4_snippet.mp3"
       expect(song_snippet.size).to eq 320926
