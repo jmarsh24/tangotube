@@ -2,6 +2,7 @@ class Youtube
   attr_reader :data
 
   def initialize(slug)
+    @slug = slug
     @video = Yt::Video.new id: slug
   end
 
@@ -22,7 +23,14 @@ class Youtube
       view_count: @video.view_count,
       favorite_count: @video.favorite_count,
       comment_count: @video.comment_count,
-      like_count: @video.like_count
+      like_count: @video.like_count,
+      youtube_music: youtube_music_data
     }
+  end
+
+  private
+
+  def youtube_music_data
+    YoutubeScraper.scrape(@slug).data
   end
 end
