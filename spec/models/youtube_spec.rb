@@ -11,5 +11,10 @@ RSpec.describe Youtube do
       video_data = Youtube.fetch(slug:).metadata
       expect(video_data.as_json).to eq JSON.parse file_fixture("youtube_response.json").read
     end
+
+    it "returns a thumbnail", :vcr do
+      expect(File.exist?(Youtube.fetch(slug:).thumbnail)).to be true
+      expect(File.size(Youtube.fetch(slug:).thumbnail)).to be 76935
+    end
   end
 end
