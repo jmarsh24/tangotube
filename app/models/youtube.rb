@@ -1,17 +1,17 @@
 class Youtube
-  attr_reader :data
+  attr_reader :metadata
 
   def initialize(slug)
     @slug = slug
     @video = Yt::Video.new id: slug
   end
 
-  def self.fetch(slug)
+  def self.fetch(slug:)
     new(slug).tap(&:fetch)
   end
 
   def fetch
-    @data = {
+    @metadata = {
       youtube_id: @video.id,
       title: @video.title,
       description: @video.description,
@@ -31,6 +31,6 @@ class Youtube
   private
 
   def youtube_music_data
-    YoutubeScraper.scrape(@slug).data
+    YoutubeScraper.scrape(@slug).metadata
   end
 end

@@ -1,0 +1,83 @@
+{
+  "youtube": {
+    "youtube_id": "AQ9Ri3kWa_4",
+    "title": "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
+    "description": "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
+    "upload_date": "2014-10-26T15:21:29.000Z",
+    "duration": 167,
+    "tags": [
+      "Amsterdam",
+      "Netherlands",
+      "tango",
+      "argentinian tango",
+      "milonga",
+      "noelia hurtado",
+      "carlitos espinoza",
+      "carlos espinoza",
+      "espinoza",
+      "hurtado",
+      "noelia",
+      "hurtado espinoza",
+      "Salon de los Sabados",
+      "Academia de Tango",
+      "Nederland"
+    ],
+    "hd": true,
+    "performance_date": "2014-10-26T15:21:29.000Z",
+    "view_count": 1044,
+    "favorite_count": 0,
+    "comment_count": 0,
+    "like_count": 3,
+    "youtube_music": [
+      "Cuando El Amor Muere",
+      "Carlos Di Sarli y su Orquesta Típica"
+    ]
+  },
+  "acrcloud": {
+    "metadata": {
+      "music": [
+        {
+          "db_begin_time_offset_ms": 88540,
+          "sample_begin_time_offset_ms": 1060,
+          "sample_end_time_offset_ms": 9280,
+          "play_offset_ms": 99480,
+          "result_from": 1,
+          "artists": [
+            {
+              "roles": ["AssociatedPerformer", "MainArtist"],
+              "name": "Carlos Di Sarli y su Orquesta Típica"
+            }
+          ],
+          "external_ids": { "isrc": "ARF034100046" },
+          "genres": [{ "name": "Tango" }],
+          "title": "Cuando El Amor Muere",
+          "album": { "name": "Serie 78 RPM : Carlos Di Sarli Vol.2" },
+          "duration_ms": 167000,
+          "acrid": "a8d9899317fd427b6741b739de8ded15",
+          "external_metadata": {
+            "spotify": {
+              "track": {
+                "id": "66jpnblQkPOngiFwEEyUW3",
+                "name": "Cuando El Amor Muere"
+              },
+              "album": { "name": "Classics (1940-1943)" },
+              "artists": [
+                { "name": "Carlos Acuña" },
+                { "name": "Carlos Di Sarli" }
+              ]
+            },
+            "youtube": { "vid": "p0AQ3gx3eo8" }
+          },
+          "label": "SME - RCA Victor",
+          "score": 82,
+          "release_date": "2004-07-15",
+          "db_end_time_offset_ms": 96760
+        }
+      ],
+      "timestamp_utc": "2023-02-20 19:59:20"
+    },
+    "cost_time": 0.78999996185303,
+    "status": { "msg": "Success", "version": "1.0", "code": 0 },
+    "result_type": 0
+  }
+}
