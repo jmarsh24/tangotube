@@ -8,7 +8,7 @@ RSpec.describe YoutubeScraper do
 
   describe "scrape" do
     it "returns song artist and title if present", :vcr do
-      data = YoutubeScraper.scrape(slug).data
+      metadata = YoutubeScraper.scrape(slug).metadata
       expect(data).to eq ["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"]
     end
   end

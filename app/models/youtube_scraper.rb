@@ -4,11 +4,11 @@ class YoutubeScraper
   YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v=".freeze
   RETRY_COUNT = 1000
 
-  attr_reader :data
+  attr_reader :metadata
 
   def initialize(slug)
     @slug = slug
-    @data = []
+    @metadata = []
     @reties = 0
     @music_elements = []
   end
@@ -26,10 +26,10 @@ class YoutubeScraper
     end
 
     @music_elements.each do |row|
-      @data << row.find_css(MUSIC_ROW_DATA_SELECTOR)[0].all_text
+      @metadata << row.find_css(MUSIC_ROW_DATA_SELECTOR)[0].all_text
     end
 
-    @data.compact_blank!.uniq!
+    @metadata.compact_blank!.uniq!
   end
 
   private
