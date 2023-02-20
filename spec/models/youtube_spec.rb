@@ -7,7 +7,7 @@ RSpec.describe Youtube do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "fetch" do
-    fit "returns the video data from youtube", :vcr do
+    it "returns the video data from youtube", :vcr do
       video_data = Youtube.fetch(slug).data
       expect(video_data.as_json).to eq JSON.parse file_fixture("youtube_response.json").read
     end
