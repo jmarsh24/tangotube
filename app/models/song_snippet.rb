@@ -5,17 +5,11 @@ class SongSnippet
     @slug = slug
   end
 
-  def self.create(slug)
+  def self.create(slug:)
     new(slug).tap(&:create)
   end
 
   def create
-    @filepath = AudioProcessor.process(audio_filepath).snippet_filepath
-  end
-
-  private
-
-  def audio_filepath
-    AudioDownloader.download(@slug).audio_filepath
+    @filepath = AudioProcessor.process(slug: @slug).filepath
   end
 end

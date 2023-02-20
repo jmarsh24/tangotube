@@ -7,12 +7,12 @@ class AcrCloud
 
   attr_reader :data
 
-  def self.send(sound_file:)
-    new(sound_file).tap(&:send)
+  def self.send(audio_file:)
+    new(audio_file).tap(&:send)
   end
 
-  def initialize(sound_file)
-    @sound_file = File.open(sound_file)
+  def initialize(audio_file)
+    @audio_file = File.open(audio_file)
     @data = {}
   end
 
@@ -27,7 +27,7 @@ class AcrCloud
 
   def body
     {
-      sample: @sound_file,
+      sample: @audio_file,
       access_key: Config.acr_cloud_access_key!,
       data_type: DATA_TYPE,
       signature_version: SIGNATURE_VERSION,
@@ -38,7 +38,7 @@ class AcrCloud
   end
 
   def sample_bytes
-    @sound_file.size
+    @audio_file.size
   end
 
   def unsigned_string

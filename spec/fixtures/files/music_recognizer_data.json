@@ -1,20 +1,92 @@
 {
-  "acr_response_code": 0,
-  "spotify_album_id": null,
-  "spotify_album_name": "Canta garganta con arena",
-  "spotify_artist_id": null,
-  "spotify_artist_id_1": null,
-  "spotify_artist_id_2": null,
-  "spotify_artist_name": "Osvaldo Pugliese",
-  "spotify_artist_name_1": "Alberto Moran",
-  "spotify_artist_name_2": null,
-  "spotify_track_id": "0iAj9eP9ZjNw7QcvjRoxgO",
-  "spotify_track_name": "La Mentirosa",
-  "acr_cloud_artist_name": "Osvaldo Pugliese",
-  "acr_cloud_artist_name_1": "Alberto Moran",
-  "acr_cloud_album_name": "Cantan Alberto Morán Y Roberto Chanel",
-  "acr_cloud_track_name": "La Mentirosa",
-  "youtube_song_id": "9Yj-xPNOMo8",
-  "acrid": "0d07891de1a0b282efce9b20dfce2bba",
-  "isrc": "ARF040200415"
+  "cost_time": 0.60599994659424,
+  "metadata": {
+    "music": [
+      {
+        "label": "UMG - Universal Music Argentina S.A.",
+        "title": "La Mentirosa",
+        "album": {
+          "name": "Cantan Alberto Morán Y Roberto Chanel"
+        },
+        "score": 100,
+        "artists": [
+          {
+            "langs": [
+              {
+                "name": "オスバルド・プグリエーセ",
+                "code": "ja-Jpan"
+              },
+              {
+                "name": "オスバルドプグリエーセ",
+                "code": "ja-Hrkt"
+              }
+            ],
+            "name": "Osvaldo Pugliese"
+          },
+          {
+            "langs": [
+              {
+                "name": "アルベルト・モラン",
+                "code": "ja-Jpan"
+              },
+              {
+                "name": "アルベルトモラン",
+                "code": "ja-Hrkt"
+              }
+            ],
+            "name": "Alberto Moran"
+          }
+        ],
+        "acrid": "0d07891de1a0b282efce9b20dfce2bba",
+        "external_ids": {
+          "isrc": "ARF040200415"
+        },
+        "external_metadata": {
+          "youtube": {
+            "vid": "9Yj-xPNOMo8"
+          },
+          "spotify": {
+            "track": {
+              "id": "0iAj9eP9ZjNw7QcvjRoxgO",
+              "name": "La Mentirosa"
+            },
+            "artists": [
+              {
+                "name": "Osvaldo Pugliese"
+              },
+              {
+                "name": "Alberto Moran"
+              }
+            ],
+            "album": {
+              "name": "Canta garganta con arena"
+            }
+          }
+        },
+        "result_from": 3,
+        "genres": [
+          {
+            "name": "Tango"
+          },
+          {
+            "name": "World"
+          }
+        ],
+        "release_date": "2020-04-08",
+        "duration_ms": 195000,
+        "db_begin_time_offset_ms": 109060,
+        "db_end_time_offset_ms": 119840,
+        "sample_begin_time_offset_ms": 0,
+        "sample_end_time_offset_ms": 10780,
+        "play_offset_ms": 121000
+      }
+    ],
+    "timestamp_utc": "2023-02-19 14:07:17"
+  },
+  "status": {
+    "msg": "Success",
+    "code": 0,
+    "version": "1.0"
+  },
+  "result_type": 0
 }
