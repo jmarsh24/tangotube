@@ -52,6 +52,8 @@ gem "store_model"
 gem "translate_client"
 gem "net-ssh"
 gem "yael"
+gem "capybara"
+gem "cuprite"
 
 # Assets
 gem "vite_rails"
@@ -101,9 +103,4 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rspec"
   gem "rubocop-rake"
-end
-
-group :test do
-  gem "capybara"
-  gem "cuprite"
 end
