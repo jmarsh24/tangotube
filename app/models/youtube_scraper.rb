@@ -1,9 +1,16 @@
 class YoutubeScraper
+  MUSIC_ROW_SELECTOR = "#info-row-header".freeze
+  MUSIC_ROW_DATA_SELECTOR = "#default-metadata".freeze
+  YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v=".freeze
+  RETRY_COUNT = 1000
+
   attr_reader :data
 
   def initialize(slug)
     @slug = slug
-    @data ||= []
+    @data = []
+    @reties = 0
+    @music_elements = []
   end
 
   def self.scrape(slug)
@@ -11,19 +18,27 @@ class YoutubeScraper
   end
 
   def scrape
-    driver = Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
-    driver.visit "https://www.youtube.com/watch?v=#{@slug}"
-    music_elements = driver.find(:css, "#info-row-header")
-    retries = 0
-    while music_elements.empty? || retries == 1000
-      retries += 1
-      music_elements = driver.find(:css, "#info-row-header")
+    driver.visit url
+
+    while @reties == RETRY_COUNT || @music_elements.empty?
+      @reties += 1
+      @music_elements = driver.find_css(MUSIC_ROW_SELECTOR)
     end
-    music_elements.each do |metadata_row|
-      @data << metadata_row.find_css("#default-metadata")[0].all_text
+
+    @music_elements.each do |row|
+      @data << row.find_css(MUSIC_ROW_DATA_SELECTOR)[0].all_text
     end
-    @data.compact_blank!
-    @data.uniq!
-    driver.quit
+
+    @data.compact_blank!.uniq!
+  end
+
+  private
+
+  def driver
+    @driver ||= Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
+  end
+
+  def url
+    (YOUTUBE_URL_PREFIX + @slug).to_s
   end
 end
