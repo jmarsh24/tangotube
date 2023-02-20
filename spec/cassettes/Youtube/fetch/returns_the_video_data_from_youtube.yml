@@ -1,0 +1,257 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=<YOUTUBE_API_KEY>&part=snippet
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Mon, 20 Feb 2023 14:54:37 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "kind": "youtube#videoListResponse",
+          "etag": "INi2D6cd3BjdCt7wW6o-LDoowlE",
+          "items": [
+            {
+              "kind": "youtube#video",
+              "etag": "k_n6x9XT6eBNq8UjBBzo8a8pHJk",
+              "id": "AQ9Ri3kWa_4",
+              "snippet": {
+                "publishedAt": "2014-10-26T15:21:29Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
+                "description": "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
+                "thumbnails": {
+                  "default": {
+                    "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg",
+                    "width": 120,
+                    "height": 90
+                  },
+                  "medium": {
+                    "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg",
+                    "width": 320,
+                    "height": 180
+                  },
+                  "high": {
+                    "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg",
+                    "width": 480,
+                    "height": 360
+                  },
+                  "standard": {
+                    "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg",
+                    "width": 640,
+                    "height": 480
+                  },
+                  "maxres": {
+                    "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg",
+                    "width": 1280,
+                    "height": 720
+                  }
+                },
+                "channelTitle": "jkuklaVideo",
+                "tags": [
+                  "Amsterdam",
+                  "Netherlands",
+                  "tango",
+                  "argentinian tango",
+                  "milonga",
+                  "noelia hurtado",
+                  "carlitos espinoza",
+                  "carlos espinoza",
+                  "espinoza",
+                  "hurtado",
+                  "noelia",
+                  "hurtado espinoza",
+                  "Salon de los Sabados",
+                  "Academia de Tango",
+                  "Nederland"
+                ],
+                "categoryId": "19",
+                "liveBroadcastContent": "none",
+                "localized": {
+                  "title": "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
+                  "description": "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango"
+                }
+              }
+            }
+          ],
+          "pageInfo": {
+            "totalResults": 1,
+            "resultsPerPage": 1
+          }
+        }
+  recorded_at: Mon, 20 Feb 2023 14:54:37 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=<YOUTUBE_API_KEY>&maxResults=50&part=contentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Mon, 20 Feb 2023 14:54:37 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "kind": "youtube#videoListResponse",
+          "etag": "v179_MUeNoqLfia8EP9gYz4Z8dk",
+          "items": [
+            {
+              "kind": "youtube#video",
+              "etag": "n09gRRorLX1SXYLFGR6QLyoOzGA",
+              "id": "AQ9Ri3kWa_4",
+              "contentDetails": {
+                "duration": "PT2M47S",
+                "dimension": "2d",
+                "definition": "hd",
+                "caption": "false",
+                "licensedContent": false,
+                "regionRestriction": {
+                  "blocked": [
+                    "RU"
+                  ]
+                },
+                "contentRating": {},
+                "projection": "rectangular"
+              }
+            }
+          ],
+          "pageInfo": {
+            "totalResults": 1,
+            "resultsPerPage": 1
+          }
+        }
+  recorded_at: Mon, 20 Feb 2023 14:54:37 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=<YOUTUBE_API_KEY>&maxResults=50&part=statistics
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Mon, 20 Feb 2023 14:54:37 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "kind": "youtube#videoListResponse",
+          "etag": "r5i-9un6n4VMBwAPu7nnYw1xBiY",
+          "items": [
+            {
+              "kind": "youtube#video",
+              "etag": "D411X8Bc3_M4gXPHuq74l52Clkk",
+              "id": "AQ9Ri3kWa_4",
+              "statistics": {
+                "viewCount": "1044",
+                "likeCount": "3",
+                "favoriteCount": "0",
+                "commentCount": "0"
+              }
+            }
+          ],
+          "pageInfo": {
+            "totalResults": 1,
+            "resultsPerPage": 1
+          }
+        }
+  recorded_at: Mon, 20 Feb 2023 14:54:37 GMT
+recorded_with: VCR 6.1.0
