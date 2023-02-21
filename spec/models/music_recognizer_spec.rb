@@ -9,7 +9,7 @@ RSpec.describe MusicRecognizer do
   describe "recognize" do
     it "returns the music data from ACR Cloud and Spotify", vcr: {preserve_exact_body_bytes: true} do
       music_metadata = MusicRecognizer.process(slug:).metadata
-      expected_response = JSON.parse file_fixture("music_recognizer_data.json").read
+      expected_response = JSON.parse file_fixture("music_recognizer_data.json").read, symbolize_names: true
       expect(File.exist?("/tmp/audio/video_#{slug}/#{slug}_snippet.mp3")).to be false
       expect(music_metadata).to eq expected_response
     end
