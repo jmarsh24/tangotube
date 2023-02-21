@@ -17,10 +17,7 @@ class AcrCloud
   end
 
   def send
-    @data = JSON.parse HTTParty.post(
-      REQ_URL,
-      body: body
-    )
+    @data = JSON.parse HTTParty.post(REQ_URL, body: body), symbolize_names: true
   end
 
   private
