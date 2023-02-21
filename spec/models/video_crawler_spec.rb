@@ -21,9 +21,9 @@ RSpec.describe VideoCrawler do
       expect(data.dig(:tags)).to eq ["Amsterdam", "Netherlands", "tango", "argentinian tango", "milonga", "noelia hurtado", "carlitos espinoza", "carlos espinoza", "espinoza", "hurtado", "noelia", "hurtado espinoza", "Salon de los Sabados", "Academia de Tango", "Nederland"]
       expect(data.dig(:hd)).to eq true
       expect(data.dig(:view_count)).to eq 1044
-      expect(data.dig(:favorite_count)).to eq "2014-10-26 15:21:29 UTC"
+      expect(data.dig(:favorite_count)).to eq 0
       expect(data.dig(:like_count)).to eq 3
-      expect(data.dig(:youtube_music)).eq ["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"]
+      expect(data.dig(:youtube_music)).to eq ["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"]
     end
 
     it "returns the video data from acr cloud", vcr: {preserve_exact_body_bytes: true} do
