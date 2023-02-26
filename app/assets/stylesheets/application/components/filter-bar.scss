@@ -4,5 +4,6 @@
   @include breakpoint-desktop {
     display: flex;
     gap: var(--spacing-md);
+    padding-inline: 0;
   }
 }
