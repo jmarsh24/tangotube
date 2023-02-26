@@ -40,6 +40,9 @@ class Video::Search
     @videos = Video.includes(Video.search_includes)
       .order(ordering_params)
       .filter_by(@filtering_params, @user)
+      if @sorting_params.empty? && @filtering_params.empty?
+        @videos = @videos.has_leader.has_follower
+      end
   end
 
   def paginated_videos
