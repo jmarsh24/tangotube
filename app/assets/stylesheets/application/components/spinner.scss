@@ -2,11 +2,10 @@
   position: relative;
   width: var(--spacing-xxl);
   height: var(--spacing-xxl);
-  display: inline-block;
-  margin-left: 50%;
-  margin-right: 50%;
-  padding: 10px;
-  border-radius: 10px;
+  display: inline-flex;
+  margin-inline: auto;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
 
   div {
     width: 6%;
