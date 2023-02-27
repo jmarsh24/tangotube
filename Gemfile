@@ -74,7 +74,6 @@ gem "sentry-rails"
 group :development, :test do
   gem "rspec-rails"
   gem "standard"
-
   gem "pry-rails"
   gem "pry-byebug"
   gem "pry-doc"
