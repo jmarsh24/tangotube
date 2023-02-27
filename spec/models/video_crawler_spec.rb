@@ -8,6 +8,8 @@ RSpec.describe VideoCrawler do
 
   describe "crawl" do
     before :each do
+      allow(YoutubeScraper).to receive(:metadata).and_return(["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"])
+      allow(AudioDownloader).to receive(:filepath).and_return(file_fixture("audio.mp3").to_path)
       @data = VideoCrawler.crawl(slug).metadata
     end
 
