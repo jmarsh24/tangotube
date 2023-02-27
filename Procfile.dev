@@ -1,3 +1,3 @@
-web: rdbg --sock_path=./tmp/web_rdbg.sock --open --nonstop -c -- bundle exec puma -C config/puma.rb -p ${PORT:-3000}
-worker: DB_POOL=3 rdbg --sock_path=./tmp/worker_rdbg.sock --open --nonstop -c -- bundle exec sidekiq -C config/sidekiq.yml
+web: bundle exec rails s -p ${PORT:-3000} -b 0.0.0.0
+worker: bundle exec sidekiq
 vite: bin/vite dev
