@@ -10,8 +10,7 @@
       .stack
         = render "videos/index/videos/section/header", title: "Featured"
         .grid.grid--videos = render @featured_videos
-    .stack
-      - if @videos.present?
+    - if @videos.present?
+      .stack
         = render "videos/index/videos/section/header", title: "Trending"
         = paginated @videos, class: "grid grid--videos"
-

@@ -6,13 +6,23 @@
   "configurations": [
     {
       "type": "rdbg",
-      "name": "Rails Server",
-      "request": "launch",
-      "command": "bin/rails",
-      "script": "server",
-      "args": [],
-      "askParameters": false,
-      "useBundler": true
+      "name": "Attach to 'web'",
+      "request": "attach",
+      "localfs": true,
+      "env": "RUBY_DEBUG_SOCK_PATH=${workspaceFolder}/tmp/web_rdbg.sock"
+    },
+    {
+      "type": "rdbg",
+      "name": "Attach to 'worker'",
+      "request": "attach",
+      "localfs": true,
+      "env": "RUBY_DEBUG_SOCK_PATH=${workspaceFolder}/tmp/worker_rdbg.sock"
+    },
+    {
+      "type": "rdbg",
+      "name": "Attach with rdbg",
+      "request": "attach",
+      "localfs": true
     }
   ]
 }

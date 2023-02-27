@@ -1,11 +1,11 @@
 .container {
   display: grid;
   grid-template-columns:
-    minmax(var(--container-gap), 1fr)
+    minmax(0, 1fr)
     0
     minmax(0, var(--grid-width))
     0
-    minmax(var(--container-gap), 1fr);
+    minmax(0, 1fr);
 
   & > * {
     grid-column: 3/3;
@@ -15,5 +15,14 @@
     margin-top: 60px;
     margin-inline: auto;
     width: min(100% - var(--spacing-md), 500px);
+  }
+
+  @include breakpoint-tablet {
+  grid-template-columns:
+    minmax(var(--container-gap), 1fr)
+    0
+    minmax(0, var(--grid-width))
+    0
+    minmax(var(--container-gap), 1fr);
   }
 }
