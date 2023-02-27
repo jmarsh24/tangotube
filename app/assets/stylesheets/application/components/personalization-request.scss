@@ -7,7 +7,7 @@
   box-shadow: 0px 2px 12px -1px rgba(20, 26, 48, 0.16);
   background-color: var(--color-neutral-0);
   backdrop-filter: blur(6px);
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-md) var(--spacing-md);
   z-index: var(--z-index-cookies);
 
   &__content {

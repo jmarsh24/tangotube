@@ -2,6 +2,6 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-sm);
-  overflow-x: scroll;
+  overflow-x: auto;
   scrollbar-width: none;
 }

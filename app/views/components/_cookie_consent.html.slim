@@ -2,7 +2,7 @@
 - if !consent_settings.given?
   .personalization-request data-controller="consent"
     .container
-      .heading = t ".banner_title"
+      .heading.heading-2 = t ".banner_title"
       .personalization-request__content.stack
         .personalization-request__text
           = simple_format t ".banner_description_html", deny: deny_tag, privacy: link_to(t(".privacy"), privacy_path)
@@ -29,4 +29,3 @@
             input.input__input type="checkbox" data-consent-target="check" name=setting id="personalization-#{setting}" disabled=(setting == :essential)
       footer.stack.stack--sm.stack--tablet-line.stack--tablet-justify-right
         a.button.button--sm.button--primary data-action="consent#save" = t(".save_preferences")
-
