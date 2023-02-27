@@ -8,6 +8,7 @@ RSpec.describe AudioProcessor do
 
   describe "download" do
     it "returns the video data from youtube and acrcloud" do
+      allow(AudioDownloader).to receive(:filepath).and_return(file_fixture("audio.mp3").to_path)
       snippet_filepath = AudioProcessor.process(slug:).filepath
       expected_filepath = Rails.root.join "tmp/audio/video_AQ9Ri3kWa_4/AQ9Ri3kWa_4_snippet.mp3"
       expect(snippet_filepath.to_s).to eq expected_filepath.to_s
