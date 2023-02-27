@@ -46,7 +46,7 @@ class Youtube
   private
 
   def youtube_metadata
-    YoutubeScraper.new(@slug)
+    YoutubeScraper.new(@slug).metadata
   end
 
   def thumbnail_url
