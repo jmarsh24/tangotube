@@ -115,8 +115,8 @@ class Video < ApplicationRecord
   scope :not_hidden, -> { where(hidden: false) }
   scope :featured, -> { where(featured: true) }
   scope :has_song, -> { where.not(song_id: nil) }
-  scope :has_leader, -> { where(id: DancerVideo.where(role: :leader).select(:video_id)) }
-  scope :has_follower, -> { where(id: DancerVideo.where(role: :follower).select(:video_id)) }
+  scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id)) }
+  scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id)) }
   scope :has_leader_and_follower, -> { joins(:dancer_videos).where(dancer_videos: {role: [:leader, :follower]}) }
   scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :follower}) }
   scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :leader}) }
@@ -179,6 +179,9 @@ class Video < ApplicationRecord
 
   scope :with_same_dancers, ->(video) {
     includes(Video.search_includes)
+      .where("upload_date <= ?", video.upload_date + 7.days)
+      .where("upload_date >= ?", video.upload_date - 7.days)
+      .has_leader_and_follower
       .with_leader(video.leaders.first)
       .with_follower(video.followers.first)
       .where(hidden: false)
