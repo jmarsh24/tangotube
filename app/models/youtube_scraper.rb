@@ -4,8 +4,6 @@ class YoutubeScraper
   YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v=".freeze
   RETRY_COUNT = 1000
 
-  attr_reader :metadata
-
   def initialize(slug)
     @slug = slug
     @metadata = []
@@ -13,11 +11,7 @@ class YoutubeScraper
     @music_elements = []
   end
 
-  def self.scrape(slug)
-    new(slug).tap(&:scrape)
-  end
-
-  def scrape
+  def metadata
     driver.visit url
 
     while @reties == RETRY_COUNT || @music_elements.empty?
@@ -29,7 +23,7 @@ class YoutubeScraper
       @metadata << row.find_css(MUSIC_ROW_DATA_SELECTOR)[0].all_text
     end
 
-    @metadata.compact_blank!.uniq!
+    @metadata ||= @metadata.compact_blank!.uniq!
   end
 
   private

@@ -8,6 +8,7 @@ RSpec.describe Youtube do
 
   describe "fetch" do
     it "returns the video data from youtube", :vcr do
+      allow(YoutubeScraper).to receive(:new).and_return(["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"])
       video_data = Youtube.fetch(slug:).metadata
       expect(video_data.as_json).to eq JSON.parse file_fixture("youtube_response.json").read
     end

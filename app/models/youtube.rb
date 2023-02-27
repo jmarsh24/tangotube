@@ -35,7 +35,7 @@ class Youtube
       yt_thumbnail = URI.parse(backup_thumbnail_url).open
     ensure
       directory_name = "tmp/video_#{@slug}"
-      Dir.mkdir directory_name unless File.exists?(directory_name)
+      Dir.mkdir directory_name unless File.exist?(directory_name)
       file = File.open("tmp/video_#{@slug}/#{@slug}_thumbnail.jpg", "wb")
       file.write(yt_thumbnail.read)
       file.close
@@ -46,7 +46,7 @@ class Youtube
   private
 
   def youtube_metadata
-    YoutubeScraper.scrape(@slug).metadata
+    YoutubeScraper.new(@slug)
   end
 
   def thumbnail_url
