@@ -7,7 +7,7 @@ RSpec.describe MusicRecognizer do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "recognize" do
-    it "returns the music data from ACR Cloud and Spotify", vcr: {preserve_exact_body_bytes: true} do
+    it "returns the music data from ACR Cloud and Spotify", :vcr do
       allow(AudioTrimmer).to receive(:trim).and_return(file_fixture("audio_snippet.mp3").open)
       allow(YoutubeAudioDownloader).to receive(:with_download_file).and_return(file_fixture("audio.mp3").open)
       data = MusicRecognizer.new.process_audio_snippet(slug)

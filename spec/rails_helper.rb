@@ -21,7 +21,7 @@ VCR.configure do |config|
   config.cassette_library_dir = "#{::Rails.root}/spec/cassettes"
   config.hook_into :webmock
   config.ignore_localhost = true
-  config.allow_http_connections_when_no_cassette = true
+  config.allow_http_connections_when_no_cassette = false
   config.configure_rspec_metadata!
   config.define_cassette_placeholder("<YOUTUBE_API_KEY>") { Config.youtube_api_key! }
   config.define_cassette_placeholder("DEEPL_AUTH_KEY") { Config.deepl_auth_key! }
