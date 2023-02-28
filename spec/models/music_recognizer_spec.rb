@@ -8,8 +8,8 @@ RSpec.describe MusicRecognizer do
 
   describe "recognize" do
     it "returns the music data from ACR Cloud and Spotify", vcr: {preserve_exact_body_bytes: true} do
-      # allow(AudioDownloader).to receive(:filepath).and_return(file_fixture("audio.mp3").to_path)
-      # allow(AudioProcessor).to receive(:filepath).and_return(file_fixture("audio_snippet.mp3").to_path)
+      allow(AudioTrimmer).to receive(:trim).and_return(file_fixture("audio_snippet.mp3").open)
+      allow(YoutubeAudioDownloader).to receive(:with_download_file).and_return(file_fixture("audio.mp3").open)
       @data = MusicRecognizer.new.process_audio_snippet(slug)
       status = @data.dig :status
       metadata = @data.dig :metadata
