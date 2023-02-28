@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby File.read(".ruby-version").strip
+ruby "3.1.3"
 
 gem "rails", "~> 7.0.4"
 gem "puma"
@@ -74,7 +74,6 @@ gem "sentry-rails"
 group :development, :test do
   gem "rspec-rails"
   gem "standard"
-
   gem "pry-rails"
   gem "pry-byebug"
   gem "pry-doc"
