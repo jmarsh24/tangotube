@@ -3,7 +3,7 @@
 class Subscription < ApplicationRecord
   SUBSCRIBE_URL = "https://pubsubhubbub.appspot.com/subscribe"
   TOPIC_URL = "https://www.youtube.com/xml/feeds/videos.xml?channel_id="
-  CALLBACK_URL = "https://#{Rails.application.credentials[Rails.env.to_sym][:base_uri]}/webhooks".freeze
+  CALLBACK_URL = "https://#{Config.base_uri!}/webhooks".freeze
 
   class << self
     def to_youtube_channel(channel_id)
