@@ -1,24 +1,8 @@
 class VideoCrawler
-  attr_reader :metadata
-
-  def initialize(slug)
-    @slug = slug
-  end
-
-  def self.crawl(slug)
-    new(slug).tap(&:crawl)
-  end
-
-  def crawl
-    @metadata = get_video_metadata
-  end
-
-  private
-
-  def get_video_metadata
+  def crawl(slug)
     {
-      youtube: Youtube.fetch(slug: @slug).metadata,
-      acrcloud: MusicRecognizer.process(slug: @slug).metadata
+      youtube: Youtube.new.fetch(slug: slug),
+      acrcloud: MusicRecognizer.new.process_audio_snippet(slug: slug)
     }
   end
 end

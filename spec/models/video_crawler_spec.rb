@@ -9,11 +9,11 @@ RSpec.describe VideoCrawler do
   describe "crawl" do
     before :each do
       allow(YoutubeScraper).to receive(:metadata).and_return(["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"])
-      allow(AudioDownloader).to receive(:filepath).and_return(file_fixture("audio.mp3").to_path)
-      @data = VideoCrawler.crawl(slug).metadata
+      allow(YoutubeAudioDownloader).to receive(:with_download_file).and_return(file_fixture("audio.mp3"))
+      @data = VideoCrawler.new.crawl(slug)
     end
 
-    xit "returns the video data from youtube", vcr: {preserve_exact_body_bytes: true} do
+    it "returns the video data from youtube", vcr: {preserve_exact_body_bytes: true} do
       data = @data.dig(:youtube)
       expect(data.dig(:slug)).to eq "AQ9Ri3kWa_4"
       expect(data.dig(:title)).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
@@ -28,7 +28,7 @@ RSpec.describe VideoCrawler do
       expect(data.dig(:youtube_music)).to eq ["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"]
     end
 
-    xit "returns the video data from acr cloud", vcr: {preserve_exact_body_bytes: true} do
+    it "returns the video data from acr cloud", vcr: {preserve_exact_body_bytes: true} do
       status = @data.dig :acrcloud, :status
       data = @data.dig :acrcloud, :metadata
       music = data.dig(:music)[0]
