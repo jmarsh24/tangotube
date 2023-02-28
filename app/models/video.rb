@@ -406,4 +406,24 @@ class Video < ApplicationRecord
   def song_artist
     song&.artist
   end
+
+  def thumbnail_url
+    "https://i.ytimg.com/vi/#{youtube_id}/hq720.jpg"
+  end
+
+  def backup_thumbnail_url
+    "https://i.ytimg.com/vi/#{youtube_id}/hqdefault.jpg"
+  end
+
+  def grab_thumbnail
+    yt_thumbnail = URI.parse(thumbnail_url).open
+  rescue OpenURI::HTTPError
+    yt_thumbnail = URI.parse(backup_thumbnail_url).open
+  ensure
+    thumbnail.attach(io: yt_thumbnail, filename: "#{youtube_id}.jpg")
+  end
+
+  def grab_thumbnail_later
+    GrabVideoThumbnailJob.perform_later(self)
+  end
 end
