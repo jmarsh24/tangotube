@@ -9,9 +9,9 @@ RSpec.describe AcrCloud do
 
   describe "send" do
     it "send a request to ACR Cloud", vcr: {preserve_exact_body_bytes: true} do
-      @data = AcrCloud.new.upload(audio_file)
-      status = @data.dig :status
-      metadata = @data.dig :metadata
+      data = AcrCloud.new.upload(audio_file)
+      status = data.dig :status
+      metadata = data.dig :metadata
       music = metadata.dig(:music)[0]
       expect(status.dig(:code)).to eq 0
       expect(status.dig(:msg)).to eq "Success"

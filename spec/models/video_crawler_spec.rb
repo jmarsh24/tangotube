@@ -10,6 +10,37 @@ RSpec.describe VideoCrawler do
     before :each do
       allow(YoutubeScraper).to receive(:metadata).and_return(["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"])
       allow(YoutubeAudioDownloader).to receive(:with_download_file).and_return(file_fixture("audio.mp3"))
+      allow(MusicRecognizer).to receive(:process_audio_snippet).and_return(
+        {cost_time: 0.60599994659424,
+         metadata: {music: [{label: "UMG - Universal Music Argentina S.A.",
+                             title: "La Mentirosa",
+                             album: {name: "Cantan Alberto Morán Y Roberto Chanel"},
+                             score: 100,
+                             artists: [{langs: [{name: "オスバルド・プグリエーセ", code: "ja-Jpan"},
+                               {name: "オスバルドプグリエーセ", code: "ja-Hrkt"}],
+                                        name: "Osvaldo Pugliese"},
+                               {langs: [{name: "アルベルト・モラン", code: "ja-Jpan"},
+                                 {name: "アルベルトモラン", code: "ja-Hrkt"}],
+                                name: "Alberto Moran"}],
+                             acrid: "0d07891de1a0b282efce9b20dfce2bba",
+                             external_ids: {isrc: "ARF040200415"},
+                             external_metadata: {youtube: {vid: "9Yj-xPNOMo8"},
+                                                 spotify: {track: {id: "0iAj9eP9ZjNw7QcvjRoxgO", name: "La Mentirosa"},
+                                                           artists: [{name: "Osvaldo Pugliese"}, {name: "Alberto Moran"}],
+                                                           album: {name: "Canta garganta con arena"}}},
+                             result_from: 3,
+                             genres: [{name: "Tango"}, {name: "World"}],
+                             release_date: "2020-04-08",
+                             duration_ms: 195000,
+                             db_begin_time_offset_ms: 109060,
+                             db_end_time_offset_ms: 119840,
+                             sample_begin_time_offset_ms: 0,
+                             sample_end_time_offset_ms: 10780,
+                             play_offset_ms: 121000}],
+                    timestamp_utc: "2023-02-19 14:07:17"},
+         status: {msg: "Success", code: 0, version: "1.0"},
+         result_type: 0}
+      )
       @data = VideoCrawler.new.crawl(slug)
     end
 
@@ -30,8 +61,8 @@ RSpec.describe VideoCrawler do
 
     it "returns the video data from acr cloud", vcr: {preserve_exact_body_bytes: true} do
       status = @data.dig :acrcloud, :status
-      data = @data.dig :acrcloud, :metadata
-      music = data.dig(:music)[0]
+      metadata = @data.dig :acrcloud, :metadata
+      music = metadata.dig(:music)[0]
       expect(status.dig(:code)).to eq 0
       expect(status.dig(:msg)).to eq "Success"
       expect(music.dig(:title)).to eq "Cuando El Amor Muere"
