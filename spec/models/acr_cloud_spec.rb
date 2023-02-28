@@ -9,7 +9,7 @@ RSpec.describe AcrCloud do
 
   describe "send" do
     it "send a request to ACR Cloud", vcr: {preserve_exact_body_bytes: true} do
-      @data = AcrCloud.send(audio_file:)
+      @data = AcrCloud.new.upload(audio_file)
       status = @data.dig :status
       metadata = @data.dig :metadata
       music = metadata.dig(:music)[0]

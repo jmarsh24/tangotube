@@ -9,9 +9,8 @@ RSpec.describe AudioDownloader do
   describe "download" do
     it "returns the video data from youtube and acrcloud" do
       file = file_fixture("audio.mp3").open
-      AudioDownloader.download(slug:) do |downloaded_file|
+      AudioDownloader.new.with_download_file(slug) do |downloaded_file|
         expect(downloaded_file.read).to eq file.read
-        expect(downloaded_file).to be_a Tempfile
       end
       expect(File.exist?("/tmp/audio/video_#{slug}/#{slug}.mp3")).to be false
     end

@@ -1,17 +1,7 @@
 class AudioTrimmer
-  def initialize(slug)
-    @slug = slug
-  end
-
-  def self.trim(slug:)
-    new(slug).trim do |file|
-      yield file
-    end
-  end
-
-  def trim
-    Tempfile.create("#{@slug}_snippet") do |file|
-      AudioDownloader.download(slug: @slug) do |external_audio|
+  def trim(slug)
+    Tempfile.create(["#{slug}_snippet", ".mp3"]) do |file|
+      AudioDownloader.new.with_download_file(slug) do |external_audio|
         transcode_audio_file(external_audio, file)
       end
     end
