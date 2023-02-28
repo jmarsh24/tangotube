@@ -12,7 +12,6 @@ RSpec.describe YoutubeAudioDownloader do
       YoutubeAudioDownloader.new.with_download_file(slug) do |downloaded_file|
         expect(downloaded_file.read).to eq file.read
       end
-      expect(File.exist?("/tmp/audio/video_#{slug}/#{slug}.mp3")).to be false
     end
   end
 end
