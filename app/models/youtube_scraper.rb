@@ -4,45 +4,34 @@ class YoutubeScraper
   YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v=".freeze
   RETRY_COUNT = 1000
 
-  def initialize(slug)
-    @slug = slug
-    @reties = 0
-  end
+  def metadata(slug)
+    metadata = []
 
-  def metadata
-    driver.visit url
+    music_elements(slug).each do |row|
+      metadata << row.find_css(MUSIC_ROW_DATA_SELECTOR)[0].all_text
+    end
 
-    @metadata ||= music_row_data.compact_blank!.uniq!
+    metadata.compact_blank!.uniq!
   end
 
   private
 
-  def music_row_data
-    metadata = []
+  def music_elements(slug)
+    driver ||= Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
+    driver.visit url(slug)
 
-    music_elements.each do |row|
-      metadata << row.find_css(MUSIC_ROW_DATA_SELECTOR)[0].all_text
-    end
-
-    metadata
-  end
-
-  def music_elements
     music_elements = []
+    retries = 0
 
-    while @reties == RETRY_COUNT || music_elements.empty?
-      @reties += 1
+    while retries < RETRY_COUNT || music_elements.empty?
+      retries += 1
       music_elements = driver.find_css(MUSIC_ROW_SELECTOR)
     end
 
     music_elements
   end
 
-  def driver
-    @driver ||= Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
-  end
-
-  def url
-    (YOUTUBE_URL_PREFIX + @slug).to_s
+  def url(slug)
+    (YOUTUBE_URL_PREFIX + slug).to_s
   end
 end
