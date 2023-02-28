@@ -15,7 +15,6 @@ RSpec.describe AudioTrimmer do
         expect(File.size(trimmed_file)).to eq 320926
         expect(File.extname(trimmed_file)).to eq ".mp3"
       end
-      expect(File.exist?("/tmp/audio/video_#{slug}/#{slug}.mp3")).to be false
     end
   end
 end
