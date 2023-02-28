@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Clip::Gif::Giphy
-  GIPHY_API_KEY = Config.giphy_api_key!
+  GIPHY_API_KEY = Config.giphy_api_key!.freeze
   URI = URI("http://upload.giphy.com/v1/gifs").to_s.freeze
   USERNAME = "TangoTubeTV"
 
