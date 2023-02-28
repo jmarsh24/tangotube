@@ -1,7 +1,7 @@
 class AudioTrimmer
   def trim(slug)
     Tempfile.create(["#{slug}_snippet", ".mp3"]) do |file|
-      AudioDownloader.new.with_download_file(slug) do |external_audio|
+      YoutubeAudioDownloader.new.with_download_file(slug) do |external_audio|
         transcode_audio_file(external_audio, file)
       end
     end
