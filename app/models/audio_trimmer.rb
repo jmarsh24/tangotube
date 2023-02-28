@@ -4,6 +4,7 @@ class AudioTrimmer
       YoutubeAudioDownloader.new.with_download_file(slug) do |external_audio|
         transcode_audio_file(external_audio, file)
       end
+      yield file
     end
   end
 
