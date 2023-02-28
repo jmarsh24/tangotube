@@ -227,10 +227,6 @@ class Video < ApplicationRecord
     }
 
   class << self
-    def self.import!
-      ExternalVideoImporter.import(slug: youtube_id)
-    end
-
     def index_query
       <<~SQL
         UPDATE videos
