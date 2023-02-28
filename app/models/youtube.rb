@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Youtube
   def initialize(slug)
     @slug = slug

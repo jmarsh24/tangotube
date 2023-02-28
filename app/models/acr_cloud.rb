@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class AcrCloud
-  HTTP_METHOD = "POST".freeze
-  HTTP_URI = "/v1/identify".freeze
-  DATA_TYPE = "audio".freeze
-  SIGNATURE_VERSION = "1".freeze
-  REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify".freeze
+  HTTP_METHOD = "POST"
+  HTTP_URI = "/v1/identify"
+  DATA_TYPE = "audio"
+  SIGNATURE_VERSION = "1"
+  REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify"
 
   def upload(audio_file)
     JSON.parse HTTParty.post(REQ_URL, body: body(audio_file)), symbolize_names: true

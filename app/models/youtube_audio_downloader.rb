@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class YoutubeAudioDownloader
-  YT_DLP_COMMAND_PREFIX = " https://www.youtube.com/watch?v=".freeze
-  YT_DLP_COMMAND_DOWNLOAD_AUDIO = " -f 140 --force-overwrites -o ".freeze
+  YT_DLP_COMMAND_PREFIX = " https://www.youtube.com/watch?v="
+  YT_DLP_COMMAND_DOWNLOAD_AUDIO = " -f 140 --force-overwrites -o "
 
   def with_download_file(slug)
     Tempfile.create([slug.to_s, ".mp3"]) do |file|

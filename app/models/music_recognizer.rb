@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MusicRecognizer
   def process_audio_snippet(slug)
     AudioTrimmer.new.trim(slug) do |trimmed_audio|
