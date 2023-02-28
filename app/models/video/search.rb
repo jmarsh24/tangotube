@@ -15,47 +15,24 @@ class Video::Search
     videos.upload_date
   ].freeze
 
-  NUMBER_OF_VIDEOS_PER_PAGE = 60
-  NUMBER_OF_VIDEOS_PER_ROW = 10
-
-  class << self
-    def for(filtering_params:, sorting_params:, page:, user:)
-      new(
-        filtering_params:,
-        sorting_params:,
-        page:,
-        user:
-      )
-    end
-  end
-
-  def initialize(filtering_params: {}, sorting_params: {}, page: 1, user: nil)
+  def initialize(filtering_params: {}, sorting_params: {}, user: nil)
     @filtering_params = filtering_params
     @sorting_params = sorting_params
-    @page = page
     @user = user
+  end
+
+  def self.for(filtering_params:, sorting_params:, user:)
+    new(
+      filtering_params:,
+      sorting_params:,
+      user:
+    )
   end
 
   def videos
     @videos = Video.includes(Video.search_includes)
       .order(ordering_params)
       .filter_by(@filtering_params, @user)
-  end
-
-  def paginated_videos
-    @paginated_videos = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_PAGE)
-  end
-
-  def paginated_row
-    @paginated_videos_row = videos.paginate(@page, NUMBER_OF_VIDEOS_PER_ROW)
-  end
-
-  def displayed_videos_count
-    @displayed_videos_count ||= ((@page - 1) * NUMBER_OF_VIDEOS_PER_PAGE) + paginated_videos.size
-  end
-
-  def next_page?
-    @next_page ||= displayed_videos_count < videos.size
   end
 
   def leaders

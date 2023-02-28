@@ -1,5 +1,5 @@
 = form_with url: root_path, local: true, method: :get, class: "stack", data: { turbo: false, controller: "form combobox", "form-url": search_search_suggestions_path, action: "invalid->form#hideValidationMessage:capture" } do |f|
-  .stack.stack--line.stack--zero
+  .search_bar
     = f.search_field :query, class: "input input__input input--search", value: params[:query], placeholder: t(".search.placeholder", total_videos_count: number_with_delimiter(@videos_total)), autocomplete: "off", spellcheck: "false", required: true, data: { action: "focus->combobox#start input->form#submit", "combobox-target": "input", "form-target": "input" }
     = f.button name: "", class: "button button--secondary button--search" do
       .icon.icon--magnifying-glass
