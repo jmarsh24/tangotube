@@ -1,0 +1,28 @@
+class AudioTrimmer
+  def initialize(slug)
+    @slug = slug
+  end
+
+  def self.trim(slug:)
+    new(slug).trim do |file|
+      yield file
+    end
+  end
+
+  def trim
+    Tempfile.create("#{@slug}_snippet") do |file|
+      AudioDownloader.download(slug: @slug) do |external_audio|
+        transcode_audio_file(external_audio, file)
+      end
+    end
+  end
+
+  private
+
+  def transcode_audio_file(input_file, output_file)
+    audio_file = FFMPEG::Movie.new(input_file.path)
+    start_time = audio_file.duration / 2
+    end_time = start_time + 20
+    audio_file.transcode(output_file.path, {custom: %W[-y -ss #{start_time} -to #{end_time}]})
+  end
+end
