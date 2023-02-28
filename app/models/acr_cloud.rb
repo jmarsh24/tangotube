@@ -5,19 +5,16 @@ class AcrCloud
   SIGNATURE_VERSION = "1".freeze
   REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify".freeze
 
-  attr_reader :data
-
   def self.send(audio_file:)
-    new(audio_file).tap(&:send)
+    new(audio_file).send
   end
 
   def initialize(audio_file)
-    @audio_file = File.open(audio_file)
-    @data = {}
+    @audio_file = audio_file
   end
 
   def send
-    @data = JSON.parse HTTParty.post(REQ_URL, body: body), symbolize_names: true
+    JSON.parse HTTParty.post(REQ_URL, body: body), symbolize_names: true
   end
 
   private
