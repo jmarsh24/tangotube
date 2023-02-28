@@ -7,7 +7,7 @@ RSpec.describe Youtube do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "fetch" do
-    it "returns the video data from youtube" do
+    it "returns the video data from youtube", :vcr do
       allow(YoutubeScraper).to receive(:metadata).and_return(["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"])
 
       metadata = Youtube.new(slug).metadata
@@ -40,12 +40,10 @@ RSpec.describe Youtube do
       expect(metadata.dig(:youtube_music, 1)).to eq "Carlos Di Sarli y su Orquesta Típica"
     end
 
-    xit "returns a thumbnail", :vcr do
-      thumbnail = Youtube.new(slug).thumbnail
-      expected_thumbnail = file_fixture("thumbnail_1.jpg").open
-      expect(thumbnail).to eq expected_thumbnail
-      expect(thumbnail).to be true
-      expect(thumbnail).to be 76935
+    it "returns a thumbnail", :vcr do
+      Youtube.new(slug).thumbnail do |thumbnail|
+        expect(thumbnail.size).to eq 76935
+      end
     end
   end
 end

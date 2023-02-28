@@ -22,17 +22,17 @@ class Youtube
   end
 
   def thumbnail
-    yt_thumbnail = URI.parse(thumbnail_url).open
-  rescue OpenURI::HTTPError => err
-    Rails.logger.error "Error downloading hd thumbnail for #{@slug}: #{err}"
-    yt_thumbnail = URI.parse(backup_thumbnail_url).open
-  ensure
-    directory_name = "tmp/video_#{@slug}"
-    Dir.mkdir directory_name unless File.exist?(directory_name)
-    file = File.open("tmp/video_#{@slug}/#{@slug}_thumbnail.jpg", "wb")
-    file.write(yt_thumbnail.read)
-    file.close
-    file.path
+    Tempfile.create ["#{@slug}_thumbnail", ".jpg"] do |file|
+      file.binmode
+      yt_thumbnail = HTTParty.get thumbnail_url
+    rescue OpenURI::HTTPError => err
+      Rails.logger.error "Error downloading hd thumbnail for #{@slug}: #{err}"
+      yt_thumbnail = HTTParty.get backup_thumbnail_url
+    ensure
+      file.write yt_thumbnail.body
+      file.rewind
+      yield file if block_given?
+    end
   end
 
   private
