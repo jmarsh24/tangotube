@@ -11,7 +11,6 @@ RSpec.describe Youtube do
       allow(YoutubeScraper).to receive(:metadata).and_return(["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"])
 
       metadata = Youtube.new(slug).metadata
-      binding.pry
       expect(metadata.dig(:slug)).to eq slug
       expect(metadata.dig(:title)).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
       expect(metadata.dig(:description)).to eq "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango"
