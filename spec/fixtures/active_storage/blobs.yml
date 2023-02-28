@@ -1,4 +1,4 @@
-audio_snippet_mp3: <%= ActiveStorage::FixtureSet.blob filename: "audio_109_129.mp3" %>
+audio_snippet_mp3: <%= ActiveStorage::FixtureSet.blob filename: "audio_snippet" %>
 audio_full_mp3: <%= ActiveStorage::FixtureSet.blob filename: "audio.mp3" %>
 
 avatar_carlitos: <%= ActiveStorage::FixtureSet.blob filename: "avatar_carlitos.jpg" %>
