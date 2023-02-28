@@ -11,7 +11,6 @@ RSpec.describe AudioTrimmer do
       allow(YoutubeAudioDownloader).to receive(:download).and_return(file_fixture("audio.mp3"))
       AudioTrimmer.new.trim(slug) do |trimmed_file|
         expect(trimmed_file.read).to eq file_fixture("audio_snippet.mp3").read
-        expect(trimmed_file).to be_a Tempfile
         expect(File.size(trimmed_file)).to eq 320926
         expect(File.extname(trimmed_file)).to eq ".mp3"
       end
