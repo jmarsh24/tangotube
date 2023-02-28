@@ -7,7 +7,7 @@ RSpec.describe AudioTrimmer do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "download" do
-    it "returns the video data from youtube and acrcloud" do
+    it "returns the video data from youtube and acrcloud", :vcr do
       allow(YoutubeAudioDownloader).to receive(:download).and_return(file_fixture("audio.mp3"))
       AudioTrimmer.new.trim(slug) do |trimmed_file|
         expect(trimmed_file.read).to eq file_fixture("audio_snippet.mp3").read
