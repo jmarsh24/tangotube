@@ -13,7 +13,6 @@ class Youtube
       duration: @youtube_video.duration,
       tags: @youtube_video.tags,
       hd: @youtube_video.hd?,
-      performance_date: @youtube_video.published_at,
       view_count: @youtube_video.view_count,
       favorite_count: @youtube_video.favorite_count,
       comment_count: @youtube_video.comment_count,

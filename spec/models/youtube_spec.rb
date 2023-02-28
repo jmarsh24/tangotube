@@ -32,7 +32,6 @@ RSpec.describe Youtube do
         "Academia de Tango",
         "Nederland"]
       expect(metadata.dig(:hd)).to eq true
-      expect(metadata.dig(:performance_date)).to eq "2014-10-26 15:21:29 UTC"
       expect(metadata.dig(:view_count)).to eq 1044
       expect(metadata.dig(:favorite_count)).to eq 0
       expect(metadata.dig(:comment_count)).to eq 0
