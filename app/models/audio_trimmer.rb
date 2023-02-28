@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AudioTrimmer
   def trim(slug)
     Tempfile.create(["#{slug}_snippet", ".mp3"]) do |file|

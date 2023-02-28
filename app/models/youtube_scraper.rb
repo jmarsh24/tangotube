@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class YoutubeScraper
-  MUSIC_ROW_SELECTOR = "#info-row-header".freeze
-  MUSIC_ROW_DATA_SELECTOR = "#default-metadata".freeze
-  YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v=".freeze
+  MUSIC_ROW_SELECTOR = "#info-row-header"
+  MUSIC_ROW_DATA_SELECTOR = "#default-metadata"
+  YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v="
   RETRY_COUNT = 1000
 
   def metadata(slug)
