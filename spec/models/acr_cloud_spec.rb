@@ -8,7 +8,7 @@ RSpec.describe AcrCloud do
   let(:audio_file) { file_fixture("audio.mp3").open }
 
   describe "send" do
-    it "send a request to ACR Cloud", vcr: {preserve_exact_body_bytes: true} do
+    it "send a request to ACR Cloud", :vcr do
       data = AcrCloud.new.upload(audio_file)
       status = data.dig :status
       metadata = data.dig :metadata
