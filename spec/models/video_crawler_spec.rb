@@ -8,43 +8,82 @@ RSpec.describe VideoCrawler do
 
   describe "crawl" do
     before :each do
-      allow(YoutubeScraper).to receive(:metadata).and_return(["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"])
-      allow(YoutubeAudioDownloader).to receive(:with_download_file).and_return(file_fixture("audio.mp3"))
-      allow(MusicRecognizer).to receive(:process_audio_snippet).and_return(
-        {cost_time: 0.60599994659424,
-         metadata: {music: [{label: "UMG - Universal Music Argentina S.A.",
-                             title: "La Mentirosa",
-                             album: {name: "Cantan Alberto Morán Y Roberto Chanel"},
-                             score: 100,
-                             artists: [{langs: [{name: "オスバルド・プグリエーセ", code: "ja-Jpan"},
-                               {name: "オスバルドプグリエーセ", code: "ja-Hrkt"}],
-                                        name: "Osvaldo Pugliese"},
-                               {langs: [{name: "アルベルト・モラン", code: "ja-Jpan"},
-                                 {name: "アルベルトモラン", code: "ja-Hrkt"}],
-                                name: "Alberto Moran"}],
-                             acrid: "0d07891de1a0b282efce9b20dfce2bba",
-                             external_ids: {isrc: "ARF040200415"},
-                             external_metadata: {youtube: {vid: "9Yj-xPNOMo8"},
-                                                 spotify: {track: {id: "0iAj9eP9ZjNw7QcvjRoxgO", name: "La Mentirosa"},
-                                                           artists: [{name: "Osvaldo Pugliese"}, {name: "Alberto Moran"}],
-                                                           album: {name: "Canta garganta con arena"}}},
-                             result_from: 3,
-                             genres: [{name: "Tango"}, {name: "World"}],
-                             release_date: "2020-04-08",
-                             duration_ms: 195000,
-                             db_begin_time_offset_ms: 109060,
-                             db_end_time_offset_ms: 119840,
-                             sample_begin_time_offset_ms: 0,
-                             sample_end_time_offset_ms: 10780,
-                             play_offset_ms: 121000}],
-                    timestamp_utc: "2023-02-19 14:07:17"},
-         status: {msg: "Success", code: 0, version: "1.0"},
-         result_type: 0}
+      # allow(MusicRecognizer).to receive(:process_audio_snippet).and_return(
+      #   {cost_time: 0.60599994659424,
+      #    metadata: {music: [{label: "UMG - Universal Music Argentina S.A.",
+      #                        title: "La Mentirosa",
+      #                        album: {name: "Cantan Alberto Morán Y Roberto Chanel"},
+      #                        score: 100,
+      #                        artists: [{langs: [{name: "オスバルド・プグリエーセ", code: "ja-Jpan"},
+      #                          {name: "オスバルドプグリエーセ", code: "ja-Hrkt"}],
+      #                                   name: "Osvaldo Pugliese"},
+      #                          {langs: [{name: "アルベルト・モラン", code: "ja-Jpan"},
+      #                            {name: "アルベルトモラン", code: "ja-Hrkt"}],
+      #                           name: "Alberto Moran"}],
+      #                        acrid: "0d07891de1a0b282efce9b20dfce2bba",
+      #                        external_ids: {isrc: "ARF040200415"},
+      #                        external_metadata: {youtube: {vid: "9Yj-xPNOMo8"},
+      #                                            spotify: {track: {id: "0iAj9eP9ZjNw7QcvjRoxgO", name: "La Mentirosa"},
+      #                                                      artists: [{name: "Osvaldo Pugliese"}, {name: "Alberto Moran"}],
+      #                                                      album: {name: "Canta garganta con arena"}}},
+      #                        result_from: 3,
+      #                        genres: [{name: "Tango"}, {name: "World"}],
+      #                        release_date: "2020-04-08",
+      #                        duration_ms: 195000,
+      #                        db_begin_time_offset_ms: 109060,
+      #                        db_end_time_offset_ms: 119840,
+      #                        sample_begin_time_offset_ms: 0,
+      #                        sample_end_time_offset_ms: 10780,
+      #                        play_offset_ms: 121000}],
+      #               timestamp_utc: "2023-02-19 14:07:17"},
+      #    status: {msg: "Success", code: 0, version: "1.0"},
+      #    result_type: 0}
+      # )
+      video_metadata = VideoMetadata.new(
+        slug: "AQ9Ri3kWa_4",
+        title: "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
+        description:
+          "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
+        upload_date: "2014-10-26 15:21:29 UTC",
+        duration: 167,
+        tags:
+          ["Amsterdam",
+            "Netherlands",
+            "tango",
+            "argentinian tango",
+            "milonga",
+            "noelia hurtado",
+            "carlitos espinoza",
+            "carlos espinoza",
+            "espinoza",
+            "hurtado",
+            "noelia",
+            "hurtado espinoza",
+            "Salon de los Sabados",
+            "Academia de Tango",
+            "Nederland"],
+        hd: true,
+        view_count: 1046,
+        favorite_count: 0,
+        comment_count: 0,
+        like_count: 3,
+        song:
+          SongMetadata.new(
+            title: "Cuando El Amor Muere",
+            artist: "Carlos Di Sarli y su Orquesta Típica",
+            album: nil
+          ),
+        thumbnail_urls:
+          ["https://i.ytimg.com/vi/AQ9Ri3kWa_4/hq720.jpg",
+            "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"]
       )
+      youtube_scraper = YoutubeScraper.new
+      allow(youtube_scraper).to receive(:metadata).and_return(video_metadata)
+
       @data = VideoCrawler.new.crawl(slug)
     end
 
-    it "returns the video data from youtube", :vcr do
+    fit "returns the video data from youtube" do
       data = @data.dig(:youtube)
       expect(data.dig(:slug)).to eq "AQ9Ri3kWa_4"
       expect(data.dig(:title)).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"

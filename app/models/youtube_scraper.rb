@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "capybara/cuprite"
+
 class YoutubeScraper
   MUSIC_ROW_SELECTOR = "#info-row-header"
   MUSIC_ROW_DATA_SELECTOR = "#default-metadata"
@@ -52,7 +54,7 @@ class YoutubeScraper
 
   def music_html_nodes(slug)
     @driver ||= Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
-    @driver.headers = {"Content-Language": "en-US", "Accept-Language": "en"}
+    @driver.headers = {"Accept-Language": "en"}
     @driver.visit url(slug)
 
     music_elements = []
@@ -65,7 +67,6 @@ class YoutubeScraper
 
       music_elements = @driver.find_css(MUSIC_ROW_SELECTOR)
     end
-
     music_elements
   end
 
