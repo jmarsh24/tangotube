@@ -1,5 +1,10 @@
 AllCops:
   TargetRubyVersion: 3.1
+  Exclude:
+    - "scratchpad.rb"
+    - "scratchpad.sql"
+    - "db/schema.rb"
+    - "bin/bundle"
 
 inherit_gem:
   shimmer: config/rubocop_base.yml
