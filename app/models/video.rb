@@ -69,8 +69,8 @@ class Video < ApplicationRecord
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
-  has_many :follower_roles, ->(_role) { where(role: :follower) }, class_name: "DancerVideo", inverse_of: :dancer_videos, dependent: :destroy
-  has_many :leader_roles, ->(_role) { where(role: :leader) }, class_name: "DancerVideo", inverse_of: :dancer_videos, dependent: :destroy
+  has_many :follower_roles, ->(_role) { where(role: :follower) }, class_name: "DancerVideo", inverse_of: :dancer, dependent: :destroy
+  has_many :leader_roles, ->(_role) { where(role: :leader) }, class_name: "DancerVideo", inverse_of: :dancer, dependent: :destroy
   has_many :leaders, through: :leader_roles, source: :dancer
   has_many :followers, through: :follower_roles, source: :dancer
 
@@ -179,9 +179,6 @@ class Video < ApplicationRecord
 
   scope :with_same_dancers, ->(video) {
     includes(Video.search_includes)
-      .where("upload_date <= ?", video.upload_date + 7.days)
-      .where("upload_date >= ?", video.upload_date - 7.days)
-      .has_leader_and_follower
       .with_leader(video.leaders.first)
       .with_follower(video.followers.first)
       .where(hidden: false)
