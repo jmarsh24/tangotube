@@ -14,7 +14,7 @@ RSpec.describe VideoCrawler do
         album: nil
       )
 
-      thumbnail_urls =
+      thumbnail_url =
         ThumbnailUrl.new(
           default: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg",
           medium: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg",
@@ -52,7 +52,7 @@ RSpec.describe VideoCrawler do
         comment_count: 0,
         like_count: 3,
         song:,
-        thumbnail_urls:
+        thumbnail_url:
       )
 
       music_metadata = MusicRecognitionMetadata.new(
@@ -93,11 +93,11 @@ RSpec.describe VideoCrawler do
       expect(metadata.view_count).to eq 1046
       expect(metadata.favorite_count).to eq 0
       expect(metadata.like_count).to eq 3
-      expect(metadata.thumbnail_urls.default).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg"
-      expect(metadata.thumbnail_urls.medium).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg"
-      expect(metadata.thumbnail_urls.high).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"
-      expect(metadata.thumbnail_urls.standard).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg"
-      expect(metadata.thumbnail_urls.maxres).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
+      expect(metadata.thumbnail_url.default).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg"
+      expect(metadata.thumbnail_url.medium).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg"
+      expect(metadata.thumbnail_url.high).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"
+      expect(metadata.thumbnail_url.standard).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg"
+      expect(metadata.thumbnail_url.maxres).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
       expect(metadata.song.title).to eq "Cuando El Amor Muere"
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
     end

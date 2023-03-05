@@ -25,7 +25,7 @@ class YoutubeScraper
       comment_count: youtube_video.comment_count,
       like_count: youtube_video.like_count,
       song: song(slug),
-      thumbnail_urls: ThumbnailUrl.new(
+      thumbnail_url: ThumbnailUrl.new(
         default: youtube_video.thumbnail_url(:default),
         medium: youtube_video.thumbnail_url(:medium),
         high: youtube_video.thumbnail_url(:high),
