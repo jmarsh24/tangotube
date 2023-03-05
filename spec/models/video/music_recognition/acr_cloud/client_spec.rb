@@ -8,7 +8,7 @@ RSpec.describe Video::MusicRecognition::AcrCloud::Client do
   describe ".import" do
     it "successfully sends audio and returns response" do
       VCR.use_cassette "video/music_recognition/acr_cloud/client/api_response", record: :new_episodes do
-        acr_cloud_api_response = Video::MusicRecognition::AcrCloud::Client.send_audio(file_fixture("audio_109_129.mp3").to_s)
+        acr_cloud_api_response = Video::MusicRecognition::AcrCloud::Client.send_audio(file_fixture("audio_snippet.mp3").to_s)
         expected_acr_cloud_response = {"status" =>
                                         {"msg" => "Success", "code" => 0, "version" => "1.0"},
                                        "metadata" =>
