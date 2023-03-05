@@ -7,7 +7,7 @@ RSpec.describe YoutubeScraper do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "fetch" do
-    fit "returns the video metadata from youtube" do
+    it "returns the video metadata from youtube" do
       stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&part=snippet")
         .with(
           headers: {
