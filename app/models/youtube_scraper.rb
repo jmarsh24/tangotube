@@ -12,7 +12,7 @@ class YoutubeScraper
   def video_metadata(slug)
     youtube_video = Yt::Video.new id: slug
 
-    VideoMetadata.new(
+    YoutubeVideoMetadata.new(
       slug: youtube_video.id,
       title: youtube_video.title,
       description: youtube_video.description,

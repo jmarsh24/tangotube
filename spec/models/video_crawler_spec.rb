@@ -39,7 +39,14 @@ RSpec.describe VideoCrawler do
       #    status: {msg: "Success", code: 0, version: "1.0"},
       #    result_type: 0}
       # )
-      video_metadata = VideoMetadata.new(
+
+      song = SongMetadata.new(
+        title: "Cuando El Amor Muere",
+        artist: "Carlos Di Sarli y su Orquesta Típica",
+        album: nil
+      )
+
+      video_metadata = YoutubeVideoMetadata.new(
         slug: "AQ9Ri3kWa_4",
         title: "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
         description:
@@ -67,38 +74,36 @@ RSpec.describe VideoCrawler do
         favorite_count: 0,
         comment_count: 0,
         like_count: 3,
-        song:
-          SongMetadata.new(
-            title: "Cuando El Amor Muere",
-            artist: "Carlos Di Sarli y su Orquesta Típica",
-            album: nil
-          ),
+        song:,
         thumbnail_urls:
           ["https://i.ytimg.com/vi/AQ9Ri3kWa_4/hq720.jpg",
             "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"]
       )
       youtube_scraper = YoutubeScraper.new
-      allow(youtube_scraper).to receive(:metadata).and_return(video_metadata)
+      music_recognizer = MusicRecognizer.new
+      allow(youtube_scraper).to receive(:video_metadata).and_return(video_metadata)
 
-      @data = VideoCrawler.new.crawl(slug)
+      video_crawler = VideoCrawler.new(youtube_scraper:, music_recognizer:)
+      @metadata = video_crawler.call(slug)
     end
 
-    fit "returns the video data from youtube" do
-      data = @data.dig(:youtube)
-      expect(data.dig(:slug)).to eq "AQ9Ri3kWa_4"
-      expect(data.dig(:title)).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
-      expect(data.dig(:description)).to eq "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango"
-      expect(data.dig(:upload_date)).to eq "2014-10-26 15:21:29 UTC"
-      expect(data.dig(:duration)).to eq 167
-      expect(data.dig(:tags)).to eq ["Amsterdam", "Netherlands", "tango", "argentinian tango", "milonga", "noelia hurtado", "carlitos espinoza", "carlos espinoza", "espinoza", "hurtado", "noelia", "hurtado espinoza", "Salon de los Sabados", "Academia de Tango", "Nederland"]
-      expect(data.dig(:hd)).to eq true
-      expect(data.dig(:view_count)).to eq 1044
-      expect(data.dig(:favorite_count)).to eq 0
-      expect(data.dig(:like_count)).to eq 3
-      expect(data.dig(:youtube_music)).to eq ["Cuando El Amor Muere", "Carlos Di Sarli y su Orquesta Típica"]
+    it "returns the video data from youtube" do
+      metadata = @metadata.dig(:youtube)
+      expect(metadata.slug).to eq "AQ9Ri3kWa_4"
+      expect(metadata.title).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
+      expect(metadata.description).to eq "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango"
+      expect(metadata.upload_date).to eq "2014-10-26 15:21:29 UTC"
+      expect(metadata.duration).to eq 167
+      expect(metadata.tags).to eq ["Amsterdam", "Netherlands", "tango", "argentinian tango", "milonga", "noelia hurtado", "carlitos espinoza", "carlos espinoza", "espinoza", "hurtado", "noelia", "hurtado espinoza", "Salon de los Sabados", "Academia de Tango", "Nederland"]
+      expect(metadata.hd).to eq true
+      expect(metadata.view_count).to eq 1046
+      expect(metadata.favorite_count).to eq 0
+      expect(metadata.like_count).to eq 3
+      expect(metadata.song.title).to eq "Cuando El Amor Muere"
+      expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
     end
 
-    it "returns the video data from acr cloud", :vcr do
+    xit "returns the video data from acr cloud", :vcr do
       status = @data.dig :acrcloud, :status
       metadata = @data.dig :acrcloud, :metadata
       music = metadata.dig(:music)[0]

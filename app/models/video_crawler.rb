@@ -1,11 +1,15 @@
-# frozen_string_literal: true
+class VideoCrawler
+  attr_reader :youtube_scraper, :music_recognizer
 
-VideoCrawler = Struct.new(:slug, :youtube, :acrcloud, keyword_init: true) do
-  def self.crawl(slug)
-    new(
-      slug: slug,
-      youtube: YoutubeScraper.new.video_metadata(slug),
-      acrcloud: MusicRecognizer.new.process_audio_snippet(slug)
+  def initialize(youtube_scraper: YouTubeScraper.new, music_recognizer: MusicRecognizer.new)
+    @youtube_scraper = youtube_scraper
+    @music_recognizer = music_recognizer
+  end
+
+  def call(slug)
+    VideoMetadata.new(
+      youtube: youtube_scraper.video_metadata(slug)
+      # accrloud: music_recognizer.process_audio_snippet(slug)
     )
   end
 end
