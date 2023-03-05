@@ -3,7 +3,6 @@
 require "system_helper"
 
 RSpec.describe "video filter", type: :system do
-
   it "closes banner and stores state" do
     visit root_path
     expect(page).to have_css ".banner__card"
