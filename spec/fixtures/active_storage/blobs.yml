@@ -1,3 +1,4 @@
+blank_audio_mp3: <%= ActiveStorage::FixtureSet.blob filename: "blank_audio.mp3" %>
 audio_snippet_mp3: <%= ActiveStorage::FixtureSet.blob filename: "audio_snippet.mp3" %>
 audio_full_mp3: <%= ActiveStorage::FixtureSet.blob filename: "audio.mp3" %>
 

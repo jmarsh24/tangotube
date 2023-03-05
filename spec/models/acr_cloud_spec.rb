@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe AcrCloud do
   fixtures :all
 
-  let(:audio_file) { file_fixture("audio.mp3").open }
+  let(:audio_file) { file_fixture("blank_audio.mp3").open }
 
   describe "send" do
     it "send a request to ACR Cloud" do

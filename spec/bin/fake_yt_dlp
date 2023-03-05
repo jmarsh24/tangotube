@@ -11,7 +11,7 @@ def download_audio
   audio_filepath = ARGV[ARGV.index("-o") + 1]
   puts "Downloading audio to #{audio_filepath}"
   FileUtils.mkdir_p(File.dirname(audio_filepath.to_s))
-  FileUtils.cp "spec/fixtures/files/audio.mp3", audio_filepath.to_s
+  FileUtils.cp "spec/fixtures/files/blank_audio.mp3", audio_filepath.to_s
 end
 
 if ARGV[ARGV.index("-f") + 1] == "140"
