@@ -14,6 +14,15 @@ RSpec.describe VideoCrawler do
         album: nil
       )
 
+      thumbnail_urls =
+      ThumbnailUrl.new(
+        default: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg",
+        medium: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg",
+        high: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg",
+        standard: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg",
+        maxres: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
+      )
+
       video_metadata = YoutubeVideoMetadata.new(
         slug: "AQ9Ri3kWa_4",
         title: "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
@@ -44,8 +53,6 @@ RSpec.describe VideoCrawler do
         like_count: 3,
         song:,
         thumbnail_urls:
-          ["https://i.ytimg.com/vi/AQ9Ri3kWa_4/hq720.jpg",
-            "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"]
       )
 
       music_metadata = MusicRecognitionMetadata.new(
@@ -86,6 +93,11 @@ RSpec.describe VideoCrawler do
       expect(metadata.view_count).to eq 1046
       expect(metadata.favorite_count).to eq 0
       expect(metadata.like_count).to eq 3
+      expect(metadata.thumbnail_urls.default).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg"
+      expect(metadata.thumbnail_urls.medium).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg"
+      expect(metadata.thumbnail_urls.high).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"
+      expect(metadata.thumbnail_urls.standard).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg"
+      expect(metadata.thumbnail_urls.maxres).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
       expect(metadata.song.title).to eq "Cuando El Amor Muere"
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
     end
