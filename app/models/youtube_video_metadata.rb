@@ -14,5 +14,4 @@ YoutubeVideoMetadata =
     :like_count,
     :song,
     :thumbnail_urls,
-    :youtube_music,
     keyword_init: true)
