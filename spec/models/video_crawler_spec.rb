@@ -15,13 +15,13 @@ RSpec.describe VideoCrawler do
       )
 
       thumbnail_urls =
-      ThumbnailUrl.new(
-        default: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg",
-        medium: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg",
-        high: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg",
-        standard: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg",
-        maxres: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
-      )
+        ThumbnailUrl.new(
+          default: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg",
+          medium: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg",
+          high: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg",
+          standard: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg",
+          maxres: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
+        )
 
       video_metadata = YoutubeVideoMetadata.new(
         slug: "AQ9Ri3kWa_4",
