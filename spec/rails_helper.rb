@@ -18,7 +18,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 VCR.configure do |config|
-  config.cassette_library_dir = "#{::Rails.root}/spec/cassettes"
+  config.cassette_library_dir = "spec/cassettes"
   config.hook_into :webmock
   config.ignore_localhost = true
   config.allow_http_connections_when_no_cassette = false
@@ -51,7 +51,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Warden::Test::Helpers
 
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = Rails.root.join("/spec/fixtures").to_s
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
