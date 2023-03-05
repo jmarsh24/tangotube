@@ -103,7 +103,7 @@ RSpec.describe VideoCrawler do
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
     end
 
-    xit "returns the video data from acr cloud", :vcr do
+    it "returns the video data from acr cloud" do
       status = @data.dig :acrcloud, :status
       metadata = @data.dig :acrcloud, :metadata
       music = metadata.dig(:music)[0]
