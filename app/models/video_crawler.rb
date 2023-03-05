@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VideoCrawler
   attr_reader :youtube_scraper, :music_recognizer
 
