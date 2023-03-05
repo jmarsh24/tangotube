@@ -657,7 +657,6 @@ DEPENDENCIES
   capybara-screenshot-diff
   chartkick
   chusaku
-  connection_pool
   counter_culture
   countries
   cuprite
