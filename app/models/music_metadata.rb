@@ -6,7 +6,7 @@ MusicMetadata =
     :artist,
     :acrid,
     :isrc,
-    :acr_artist_name,
+    :acr_artist_names,
     :acr_album_name,
     :spotify_artist_name,
     :spotify_track_name,

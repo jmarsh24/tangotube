@@ -15,7 +15,7 @@ class MusicRecognizer
     MusicRecognitionMetadata.new(
       code:,
       message:,
-      acr_title:,
+      acr_song_title:,
       acr_artist_names:,
       acr_album_name:,
       acrid:,
@@ -60,7 +60,7 @@ class MusicRecognizer
     music&.dig :external_metadata
   end
 
-  def acr_title
+  def acr_song_title
     music&.dig :title
   end
 

@@ -14,13 +14,13 @@ RSpec.describe MusicRecognizer do
       allow(audio_trimmer).to receive(:trim).and_return(file_fixture("audio_snippet.mp3"))
       youtube_audio_downloader = YoutubeAudioDownloader.new
       allow(youtube_audio_downloader).to receive(:with_download_file).and_return(file_fixture("audio.mp3"))
-      music_recognizer = MusicRecognizer.new(slug:, acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
+      music_recognizer = MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
 
       metadata = music_recognizer.process_audio_snippet(slug)
 
       expect(metadata.code).to eq 0
       expect(metadata.message).to eq "Success"
-      expect(metadata.acr_title).to eq "Cuando El Amor Muere"
+      expect(metadata.acr_song_title).to eq "Cuando El Amor Muere"
       expect(metadata.acr_album_name).to eq "Serie 78 RPM : Carlos Di Sarli Vol.2"
       expect(metadata.acrid).to eq "a8d9899317fd427b6741b739de8ded15"
       expect(metadata.isrc).to eq "ARF034100046"

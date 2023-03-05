@@ -2,7 +2,7 @@ MusicRecognitionMetadata =
   Struct.new(
     :code,
     :message,
-    :acr_title,
+    :acr_song_title,
     :acr_artist_names,
     :acr_album_name,
     :acrid,

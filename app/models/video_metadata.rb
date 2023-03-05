@@ -1,1 +1,7 @@
-VideoMetadata = Struct.new(:slug, :youtube, :acrcloud, keyword_init: true)
+VideoMetadata =
+  Struct.new(
+    :slug,
+    :youtube,
+    :acr_cloud,
+    keyword_init: true
+  )
