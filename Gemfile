@@ -73,10 +73,6 @@ gem "skylight"
 gem "sentry-ruby"
 gem "sentry-rails"
 
-group :test do
-  gem "climate_control"
-end
-
 group :development, :test do
   gem "rspec-rails"
   gem "standard"

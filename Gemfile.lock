@@ -162,7 +162,6 @@ GEM
     chunky_png (1.4.0)
     chusaku (0.6.1)
       railties (>= 3.0)
-    climate_control (1.2.0)
     coderay (1.1.3)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -658,7 +657,6 @@ DEPENDENCIES
   capybara-screenshot-diff
   chartkick
   chusaku
-  climate_control
   connection_pool
   counter_culture
   countries
