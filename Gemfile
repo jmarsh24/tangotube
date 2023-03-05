@@ -90,7 +90,6 @@ group :development, :test do
   gem "rspec-retry"
   gem "webmock", require: false
   gem "capybara-screenshot-diff"
-  gem "vcr"
 end
 
 group :development do
