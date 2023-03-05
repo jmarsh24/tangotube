@@ -7,7 +7,7 @@ RSpec.describe YoutubeScraper do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "fetch" do
-    it "returns the video metadata from youtube" do
+    fit "returns the video metadata from youtube" do
       stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&part=snippet")
         .with(
           headers: {
@@ -63,6 +63,11 @@ RSpec.describe YoutubeScraper do
       expect(metadata.favorite_count).to eq 0
       expect(metadata.comment_count).to eq 0
       expect(metadata.like_count).to eq 3
+      expect(metadata.thumbnail_urls.default).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg"
+      expect(metadata.thumbnail_urls.medium).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg"
+      expect(metadata.thumbnail_urls.high).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"
+      expect(metadata.thumbnail_urls.standard).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg"
+      expect(metadata.thumbnail_urls.maxres).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
       expect(metadata.song.title).to eq "Cuando El Amor Muere"
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
     end

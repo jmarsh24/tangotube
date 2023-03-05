@@ -25,8 +25,13 @@ class YoutubeScraper
       comment_count: youtube_video.comment_count,
       like_count: youtube_video.like_count,
       song: song(slug),
-      thumbnail_urls: ["https://i.ytimg.com/vi/#{slug}/hq720.jpg",
-        "https://i.ytimg.com/vi/#{slug}/hqdefault.jpg"]
+      thumbnail_urls: ThumbnailUrl.new(
+        default: youtube_video.thumbnail_url(:default),
+        medium: youtube_video.thumbnail_url(:medium),
+        high: youtube_video.thumbnail_url(:high),
+        standard: youtube_video.thumbnail_url(:standard),
+        maxres: youtube_video.thumbnail_url(:maxres)
+      )
     )
   end
 
