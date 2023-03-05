@@ -7,7 +7,7 @@ class YoutubeAudioDownloader
   def with_download_file(slug)
     Tempfile.create([slug.to_s, ".mp3"]) do |file|
       system(yt_dlp_command(file, slug))
-      yield file
+      yield file if block_given?
     end
   end
 

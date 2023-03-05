@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class AudioTrimmer
-  def trim(slug)
-    Tempfile.create(["#{slug}_snippet", ".mp3"]) do |file|
-      YoutubeAudioDownloader.new.with_download_file(slug) do |external_audio|
-        transcode_audio_file(external_audio, file)
-      end
-      yield file
+  def trim(audio_file)
+    Tempfile.create(["#{audio_file.basename.to_s.split(".")[0]}_snippet", ".mp3"]) do |file|
+      transcode_audio_file(audio_file.open, file)
+      yield file if block_given?
     end
   end
 

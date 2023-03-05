@@ -7,28 +7,31 @@ RSpec.describe MusicRecognizer do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "recognize" do
-    it "returns the music data from ACR Cloud and Spotify", :vcr do
+    it "returns the music data from ACR Cloud and Spotify" do
       acr_cloud = AcrCloud.new
       allow(acr_cloud).to receive(:upload).and_return(file_fixture("acr_cloud_response.json").read)
-      audio_file = file_fixture("audio_snippet.mp3").open
-      music_recognizer = MusicRecognizer.new(acr_cloud:, audio_file:)
+      audio_trimmer = AudioTrimmer.new
+      allow(audio_trimmer).to receive(:trim).and_return(file_fixture("audio_snippet.mp3"))
+      youtube_audio_downloader = YoutubeAudioDownloader.new
+      allow(youtube_audio_downloader).to receive(:with_download_file).and_return(file_fixture("audio.mp3"))
+      music_recognizer = MusicRecognizer.new(slug:, acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
 
       metadata = music_recognizer.process_audio_snippet(slug)
 
-      expect(metadata.status).to eq 0
+      expect(metadata.code).to eq 0
       expect(metadata.message).to eq "Success"
-      expect(metadata.acr_title).to eq "La Mentirosa"
-      expect(metadata.acr_album_name).to eq "Cantan Alberto Morán Y Roberto Chanel"
-      expect(metadata.acrid).to eq "0d07891de1a0b282efce9b20dfce2bba"
-      expect(metadata.isrc).to eq "ARF040200415"
-      expect(metadata.acr_artist_name).to eq ["Osvaldo Pugliese", "Alberto Moran"]
-      expect(metadata.acr_album_name).to eq "Cantan Alberto Morán Y Roberto Chanel"
+      expect(metadata.acr_title).to eq "Cuando El Amor Muere"
+      expect(metadata.acr_album_name).to eq "Serie 78 RPM : Carlos Di Sarli Vol.2"
+      expect(metadata.acrid).to eq "a8d9899317fd427b6741b739de8ded15"
+      expect(metadata.isrc).to eq "ARF034100046"
+      expect(metadata.acr_artist_names).to eq ["Carlos Di Sarli y su Orquesta Típica"]
+      expect(metadata.acr_album_name).to eq "Serie 78 RPM : Carlos Di Sarli Vol.2"
       expect(metadata.genre).to eq "Tango"
-      expect(metadata.spotify_artist_name).to eq ["Osvaldo Pugliese", "Alberto Moran"]
-      expect(metadata.spotify_track_name).to eq "La Mentirosa"
-      expect(metadata.spotify_track_id).to eq "0iAj9eP9ZjNw7QcvjRoxgO"
-      expect(metadata.spotify_album_id).to eq "Canta garganta con arena"
-      expect(metadata.youtube_vid).to eq "9Yj-xPNOMo8"
+      expect(metadata.spotify_artist_names).to eq ["Carlos Acuña", "Carlos Di Sarli"]
+      expect(metadata.spotify_track_name).to eq "Cuando El Amor Muere"
+      expect(metadata.spotify_track_id).to eq "66jpnblQkPOngiFwEEyUW3"
+      expect(metadata.spotify_album_id).to eq nil
+      expect(metadata.youtube_vid).to eq "p0AQ3gx3eo8"
     end
   end
 end
