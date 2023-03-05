@@ -47,16 +47,35 @@ RSpec.describe VideoCrawler do
           ["https://i.ytimg.com/vi/AQ9Ri3kWa_4/hq720.jpg",
             "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"]
       )
+
+      music_metadata = MusicRecognitionMetadata.new(
+        code: 0,
+        message: "Success",
+        acr_song_title: "Cuando El Amor Muere",
+        acr_artist_names: ["Carlos Di Sarli y su Orquesta Típica"],
+        acr_album_name: "Serie 78 RPM : Carlos Di Sarli Vol.2",
+        acrid: "a8d9899317fd427b6741b739de8ded15",
+        isrc: "ARF034100046",
+        genre: "Tango",
+        spotify_artist_names: ["Carlos Acuña", "Carlos Di Sarli"],
+        spotify_track_name: "Cuando El Amor Muere",
+        spotify_track_id: "66jpnblQkPOngiFwEEyUW3",
+        spotify_album_name: "Serie 78 RPM : Carlos Di Sarli Vol.2",
+        spotify_album_id: nil,
+        youtube_vid: "p0AQ3gx3eo8"
+      )
+
       youtube_scraper = YoutubeScraper.new
-      music_recognizer = MusicRecognizer.new
       allow(youtube_scraper).to receive(:video_metadata).and_return(video_metadata)
+      music_recognizer = MusicRecognizer.new
+      allow(music_recognizer).to receive(:process_audio_snippet).and_return(music_metadata)
 
       video_crawler = VideoCrawler.new(youtube_scraper:, music_recognizer:)
       @metadata = video_crawler.call(slug)
     end
 
-    xit "returns the video data from youtube" do
-      metadata = @metadata.dig(:youtube)
+    it "returns the video data from youtube" do
+      metadata = @metadata.youtube
       expect(metadata.slug).to eq "AQ9Ri3kWa_4"
       expect(metadata.title).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
       expect(metadata.description).to eq "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango"
@@ -71,21 +90,21 @@ RSpec.describe VideoCrawler do
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
     end
 
-    xit "returns the video data from acr cloud" do
-      metadata = @data.acr_acrloud
+    it "returns the video data from acr cloud" do
+      metadata = @metadata.acr_cloud
       expect(metadata.code).to eq 0
-      expect(metadata.msg).to eq "Success"
-      expect(metadata.acr_title).to eq "Cuando El Amor Muere"
+      expect(metadata.message).to eq "Success"
+      expect(metadata.acr_song_title).to eq "Cuando El Amor Muere"
       expect(metadata.acr_album_name).to eq "Serie 78 RPM : Carlos Di Sarli Vol.2"
       expect(metadata.acrid).to eq "a8d9899317fd427b6741b739de8ded15"
       expect(metadata.isrc).to eq "ARF034100046"
-      expect(metadata.acr_artists_name).to eq "Carlos Di Sarli y su Orquesta Típica"
+      expect(metadata.acr_artist_names).to eq ["Carlos Di Sarli y su Orquesta Típica"]
       expect(metadata.acr_album_name).to eq "Serie 78 RPM : Carlos Di Sarli Vol.2"
       expect(metadata.genre).to eq "Tango"
       expect(metadata.spotify_artist_names).to eq ["Carlos Acuña", "Carlos Di Sarli"]
       expect(metadata.spotify_track_name).to eq "Cuando El Amor Muere"
       expect(metadata.spotify_track_id).to eq "66jpnblQkPOngiFwEEyUW3"
-      expect(metadata.spotify_album_name).to eq "Classics (1940-1943)"
+      expect(metadata.spotify_album_id).to eq nil
       expect(metadata.youtube_vid).to eq "p0AQ3gx3eo8"
     end
   end
