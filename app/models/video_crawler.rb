@@ -9,7 +9,7 @@ class VideoCrawler
   def call(slug)
     VideoMetadata.new(
       youtube: youtube_scraper.video_metadata(slug),
-      acrcloud: music_recognizer.process_audio_snippet(slug)
+      acr_cloud: music_recognizer.process_audio_snippet(slug)
     )
   end
 end

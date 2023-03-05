@@ -1,43 +1,55 @@
 # frozen_string_literal: true
 
 class MusicRecognizer
-  attr_reader :acr_cloud
-  def initialize(audio_file:, acr_cloud: AcrCloud.new)
+  attr_reader :acr_cloud, :audio_trimmer, :youtube_audio_downloader
+  def initialize(acr_cloud: AcrCloud.new, audio_trimmer: AudioTrimmer.new, youtube_audio_downloader: YoutubeAudioDownloader.new)
     @acr_cloud = acr_cloud
-    @audio_file = audio_file
+    @audio_trimmer = audio_trimmer
+    @youtube_audio_downloader = youtube_audio_downloader
   end
 
-  def process_audio_snippet(audio_file)
-    data = acr_cloud.upload(audio_file)
+  def process_audio_snippet(slug)
+    data = acr_cloud.upload(trimmed_audio_file(slug))
     @data = JSON.parse(data, symbolize_names: true)
 
     MusicRecognitionMetadata.new(
       code:,
       message:,
       acr_title:,
+      acr_artist_names:,
       acr_album_name:,
       acrid:,
       isrc:,
       genre:,
       spotify_artist_names:,
       spotify_track_name:,
+      spotify_track_id:,
       spotify_album_name:,
+      spotify_album_id:,
       youtube_vid:
     )
   end
 
   private
 
+  def trimmed_audio_file(slug)
+    audio_trimmer.trim(audio_file(slug))
+  end
+
+  def audio_file(slug)
+    youtube_audio_downloader.with_download_file(slug)
+  end
+
   def status
     @data.dig :status
   end
 
   def message
-    status.dig :msg
+    status&.dig :msg
   end
 
   def code
-    status.dig :code
+    status&.dig :code
   end
 
   def music
@@ -45,27 +57,31 @@ class MusicRecognizer
   end
 
   def external_metadata
-    music.dig :external_metadata
+    music&.dig :external_metadata
   end
 
   def acr_title
-    music.dig :title
+    music&.dig :title
+  end
+
+  def acr_artist_names
+    music&.dig(:artists)&.map { |e| e[:name] }
   end
 
   def acr_album_name
-    music.dig :album, :name
+    music&.dig :album, :name
   end
 
   def acrid
-    music.dig :acrid
+    music&.dig :acrid
   end
 
   def isrc
-    music.dig :external_ids, :isrc
+    music&.dig :external_ids, :isrc
   end
 
   def genre
-    music.dig :genres, 0, :name
+    music&.dig :genres, 0, :name
   end
 
   def spotify
@@ -73,26 +89,26 @@ class MusicRecognizer
   end
 
   def spotify_artist_names
-    return if spotify.nil?
-    spotify.dig(:artists).map { |e| e[:name] }
+    spotify&.dig(:artists)&.map { |e| e[:name] }
   end
 
   def spotify_track_name
-    return if spotify.nil?
-    spotify.dig :track, :name
+    spotify&.dig :track, :name
   end
 
   def spotify_album_name
-    return if spotify.nil?
-    spotify.dig :album, :name
+    spotify&.dig :album, :name
   end
 
   def spotify_track_id
-    return if spotify.nil?
-    spotify.dig :track, :id
+    spotify&.dig :track, :id
+  end
+
+  def spotify_album_id
+    spotify&.dig :album, :id
   end
 
   def youtube_vid
-    external_metadata.dig :youtube, :vid
+    external_metadata&.dig :youtube, :vid
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe YoutubeAudioDownloader do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "download" do
-    it "returns the video data from youtube and acrcloud", :vcr do
+    it "returns the video data from youtube and acrcloud" do
       file = file_fixture("audio.mp3").open
       YoutubeAudioDownloader.new.with_download_file(slug) do |downloaded_file|
         expect(downloaded_file.read).to eq file.read
