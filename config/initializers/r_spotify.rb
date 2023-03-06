@@ -1,3 +1,5 @@
 # frozen_string_literal: true
 
-RSpotify.authenticate(Config.spotify_client_id!, Config.spotify_secret_key!)
+unless Rails.env.test?
+   RSpotify.authenticate(Config.spotify_client_id!, Config.spotify_secret_key!)
+ end
