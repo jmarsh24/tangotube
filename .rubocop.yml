@@ -1,5 +1,6 @@
 AllCops:
   TargetRubyVersion: 3.1
+  NewCops: enable
   Exclude:
     - "scratchpad.rb"
     - "scratchpad.sql"
