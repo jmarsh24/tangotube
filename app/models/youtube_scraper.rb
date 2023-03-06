@@ -8,6 +8,11 @@ class YoutubeScraper
   MUSIC_TOW_TITLE_SELECTOR = "#title"
   YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v="
   RETRY_COUNT = 100
+  attr_reader :driver
+
+  def initialize(driver: Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true}))
+    @driver = driver
+  end
 
   def video_metadata(slug)
     youtube_video = Yt::Video.new id: slug
@@ -58,7 +63,6 @@ class YoutubeScraper
   end
 
   def music_html_nodes(slug)
-    @driver ||= Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
     @driver.headers = {"Accept-Language": "en"}
     @driver.visit url(slug)
 

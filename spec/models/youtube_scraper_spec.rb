@@ -31,7 +31,6 @@ RSpec.describe YoutubeScraper do
             "User-Agent" => "Yt::Request (gzip)"
           }
         ).to_return(status: 200, body: file_fixture("youtube_scraper_response_2.json").read, headers: {})
-
       youtube_scraper = YoutubeScraper.new
       allow(youtube_scraper).to receive(:song).and_return(SongMetadata.new(title: "Cuando El Amor Muere", artist: "Carlos Di Sarli y su Orquesta Típica"))
       metadata = youtube_scraper.video_metadata(slug)
