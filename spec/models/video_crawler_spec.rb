@@ -78,7 +78,7 @@ RSpec.describe VideoCrawler do
       allow(music_recognizer).to receive(:process_audio_snippet).and_return(music_metadata)
 
       video_crawler = VideoCrawler.new(youtube_scraper:, music_recognizer:)
-      @metadata = video_crawler.call(slug)
+      @metadata = video_crawler.video_metadata(slug)
     end
 
     it "returns the video data from youtube" do
