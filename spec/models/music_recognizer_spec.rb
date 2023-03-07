@@ -6,7 +6,7 @@ RSpec.describe MusicRecognizer do
   fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
 
-  describe "recognize" do
+  describe "process_audio_snippet" do
     it "returns the music data from ACR Cloud and Spotify" do
       acr_cloud = AcrCloud.new
       allow(acr_cloud).to receive(:analyze).and_return JSON.parse file_fixture("acr_cloud_response.json").read, symbolize_names: true

@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe AudioTrimmer do
   fixtures :all
 
-  describe "download" do
-    it "returns the video data from youtube and acrcloud" do
+  describe "trim" do
+    it "takes an audio file and creates a 15s snippet" do
       audio_file = file_fixture("audio.mp3").open
       AudioTrimmer.new.trim(audio_file) do |trimmed_file|
         expect(trimmed_file.read).to eq file_fixture("audio_snippet.mp3").read

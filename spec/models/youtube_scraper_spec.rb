@@ -6,16 +6,21 @@ RSpec.describe YoutubeScraper do
   fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
 
+  def stub_youtube_api
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&part=snippet")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response.json").read, headers: {})
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&maxResults=50&part=contentDetails")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_1.json").read, headers: {})
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&maxResults=50&part=statistics")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_2.json").read, headers: {})
+  end
+
   describe "fetch" do
     it "returns the video metadata from youtube" do
-      stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&part=snippet")
-        .to_return(status: 200, body: file_fixture("youtube_scraper_response.json").read, headers: {})
+      stub_youtube_api
 
-      stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&maxResults=50&part=contentDetails")
-        .to_return(status: 200, body: file_fixture("youtube_scraper_response_1.json").read, headers: {})
-
-      stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&maxResults=50&part=statistics")
-        .to_return(status: 200, body: file_fixture("youtube_scraper_response_2.json").read, headers: {})
       youtube_scraper = YoutubeScraper.new
       allow(youtube_scraper).to receive(:song).and_return(SongMetadata.new(title: "Cuando El Amor Muere", artist: "Carlos Di Sarli y su Orquesta Típica"))
       metadata = youtube_scraper.video_metadata(slug)

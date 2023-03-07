@@ -6,7 +6,7 @@ RSpec.describe VideoCrawler do
   fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
 
-  describe "crawl" do
+  describe "video_metadata" do
     before :each do
       song = SongMetadata.new(
         title: "Cuando El Amor Muere",
