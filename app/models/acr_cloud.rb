@@ -8,7 +8,7 @@ class AcrCloud
   REQ_URL = "http://identify-eu-west-1.acrcloud.com/v1/identify"
 
   def upload(audio_file)
-    JSON.parse HTTParty.post(REQ_URL, body: body(audio_file)), symbolize_names: true
+    JSON.parse(HTTParty.post(REQ_URL, body: body(audio_file)), symbolize_names: true)
   end
 
   private

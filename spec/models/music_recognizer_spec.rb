@@ -9,11 +9,14 @@ RSpec.describe MusicRecognizer do
   describe "recognize" do
     it "returns the music data from ACR Cloud and Spotify" do
       acr_cloud = AcrCloud.new
-      allow(acr_cloud).to receive(:upload).and_return(file_fixture("acr_cloud_response.json").read)
+      allow(acr_cloud).to receive(:upload).and_return JSON.parse file_fixture("acr_cloud_response.json").read, symbolize_names: true
+
       audio_trimmer = AudioTrimmer.new
-      allow(audio_trimmer).to receive(:trim).and_return(file_fixture("audio_snippet.mp3"))
+      allow(audio_trimmer).to receive(:trim).and_return file_fixture "audio_snippet.mp3"
+
       youtube_audio_downloader = YoutubeAudioDownloader.new
-      allow(youtube_audio_downloader).to receive(:with_download_file).and_return(file_fixture("blank_audio.mp3"))
+      allow(youtube_audio_downloader).to receive(:with_download_file).and_return file_fixture "blank_audio.mp3"
+
       music_recognizer = MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
 
       metadata = music_recognizer.process_audio_snippet(slug)
