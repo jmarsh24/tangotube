@@ -9,7 +9,7 @@ class MusicRecognizer
   end
 
   def process_audio_snippet(slug)
-    @data = acr_cloud.upload(trimmed_audio_file(slug))
+    @data = acr_cloud.analyze(trimmed_audio_file(slug))
 
     MusicRecognitionMetadata.new(
       code:,
