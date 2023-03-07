@@ -78,6 +78,7 @@ class MusicRecognizer
   end
 
   def spotify
+    return nil unless external_metadata
     external_metadata.dig(:spotify)
   end
 
