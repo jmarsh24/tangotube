@@ -23,7 +23,7 @@ RSpec.describe MusicRecognizer do
       audio_file.binmode
       audio_file.write file_fixture("audio_snippet.mp3").read
       audio_file.rewind
-      allow(youtube_audio_downloader).to receive(:download_file).and_return(audio_file)
+      allow(youtube_audio_downloader).to receive(:download_file).and_return audio_file
 
       music_recognizer = MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
 
