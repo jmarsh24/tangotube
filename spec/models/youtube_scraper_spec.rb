@@ -17,11 +17,11 @@ RSpec.describe YoutubeScraper do
       .to_return(status: 200, body: file_fixture("youtube_scraper_response_2.json").read, headers: {})
   end
 
-  describe "fetch" do
+  describe "video_metadata" do
     it "returns the video metadata from youtube" do
       stub_youtube_api
 
-      youtube_scraper = YoutubeScraper.new
+      youtube_scraper = double(YoutubeScraper)
       allow(youtube_scraper).to receive(:song).and_return(SongMetadata.new(title: "Cuando El Amor Muere", artist: "Carlos Di Sarli y su Orquesta Típica"))
       metadata = youtube_scraper.video_metadata(slug)
 

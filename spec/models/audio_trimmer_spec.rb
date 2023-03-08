@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe AudioTrimmer do
   fixtures :all
 
-  describe "trim" do
+  describe "#trim" do
     it "takes an audio file and creates a 15s snippet" do
       audio_file = Tempfile.new
       audio_file.binmode

@@ -6,7 +6,7 @@ RSpec.describe VideoCrawler do
   fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
 
-  describe "video_metadata" do
+  describe "#video_metadata" do
     before :each do
       song = SongMetadata.new(
         title: "Cuando El Amor Muere",
@@ -73,9 +73,9 @@ RSpec.describe VideoCrawler do
       )
 
       youtube_scraper = YoutubeScraper.new
-      allow(youtube_scraper).to receive(:video_metadata).and_return(video_metadata)
+      allow(youtube_scraper).to receive(:video_metadata).and_return video_metadata
       music_recognizer = MusicRecognizer.new
-      allow(music_recognizer).to receive(:process_audio_snippet).and_return(music_metadata)
+      allow(music_recognizer).to receive(:process_audio_snippet).and_return music_metadata
 
       video_crawler = VideoCrawler.new(youtube_scraper:, music_recognizer:)
       @metadata = video_crawler.video_metadata(slug)

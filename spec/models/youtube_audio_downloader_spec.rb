@@ -6,7 +6,7 @@ RSpec.describe YoutubeAudioDownloader do
   fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
 
-  describe "download_file" do
+  describe "#download_file" do
     it "returns the video data from youtube and acrcloud" do
       audio_file = Tempfile.new
       audio_file.binmode
