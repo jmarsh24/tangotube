@@ -2,8 +2,11 @@
 
 SongMetadata =
   Struct.new(
-    :title,
+    :titles,
+    :song_url,
     :artist,
+    :artist_url,
+    :writers,
     :album,
     keyword_init: true
   )
