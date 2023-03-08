@@ -9,7 +9,7 @@ class YoutubeAudioDownloader
     full_length_audio_file.binmode
     system(yt_dlp_command(full_length_audio_file, slug))
     full_length_audio_file.rewind
-    File.open(full_length_audio_file.path)
+    full_length_audio_file
   end
 
   private
