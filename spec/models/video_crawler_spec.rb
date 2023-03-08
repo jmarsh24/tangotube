@@ -9,7 +9,7 @@ RSpec.describe VideoCrawler do
   describe "#video_metadata" do
     before :each do
       song = SongMetadata.new(
-        title: "Cuando El Amor Muere",
+        titles: ["Cuando El Amor Muere"],
         artist: "Carlos Di Sarli y su Orquesta Típica",
         album: nil
       )
@@ -52,7 +52,8 @@ RSpec.describe VideoCrawler do
         comment_count: 0,
         like_count: 3,
         song:,
-        thumbnail_url:
+        thumbnail_url:,
+        recommended_video_ids: ["p0AQ3gx3eo8", "p0AQ3gx3eo8", "p0AQ3gx3eo8"]
       )
 
       music_metadata = MusicRecognitionMetadata.new(
@@ -98,8 +99,9 @@ RSpec.describe VideoCrawler do
       expect(metadata.thumbnail_url.high).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"
       expect(metadata.thumbnail_url.standard).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg"
       expect(metadata.thumbnail_url.maxres).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
-      expect(metadata.song.title).to eq "Cuando El Amor Muere"
+      expect(metadata.song.titles).to eq ["Cuando El Amor Muere"]
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
+      expect(metadata.recommended_video_ids).to eq ["p0AQ3gx3eo8", "p0AQ3gx3eo8", "p0AQ3gx3eo8"]
     end
 
     it "returns the video data from acr cloud" do

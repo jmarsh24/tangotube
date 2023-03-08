@@ -9,6 +9,7 @@ class YoutubeAudioDownloader
     full_length_audio_file.binmode
     system(yt_dlp_command(full_length_audio_file, slug))
     full_length_audio_file.rewind
+    yield full_length_audio_file if block_given?
     full_length_audio_file
   end
 

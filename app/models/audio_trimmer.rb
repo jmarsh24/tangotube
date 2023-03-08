@@ -6,6 +6,7 @@ class AudioTrimmer
     trimmed_file.binmode
     transcode_audio_file(audio_file, trimmed_file)
     trimmed_file.rewind
+    yield trimmed_file if block_given?
     trimmed_file
   end
 
