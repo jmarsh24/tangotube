@@ -120,7 +120,6 @@ class YoutubeScraper
     @driver.headers = {"Accept-Language": "en"}
     @driver.visit url(slug)
 
-    binding.pry
     retries = 0
 
     while retries < RETRY_COUNT || @driver.find(:css, "#related")[0].find(:css, "#spinner").any?
