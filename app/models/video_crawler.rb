@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VideoCrawler
-  def initialize(youtube_scraper: YouTubeScraper.new, music_recognizer: MusicRecognizer.new)
+  def initialize(youtube_scraper: YoutubeScraper.new, music_recognizer: MusicRecognizer.new)
     @youtube_scraper = youtube_scraper
     @music_recognizer = music_recognizer
   end

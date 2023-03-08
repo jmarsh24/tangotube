@@ -6,7 +6,7 @@ class AudioTrimmer
     trimmed_file.binmode
     transcode_audio_file(audio_file, trimmed_file)
     trimmed_file.rewind
-    File.open(trimmed_file.path)
+    trimmed_file
   end
 
   private
