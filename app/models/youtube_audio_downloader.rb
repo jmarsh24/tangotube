@@ -6,7 +6,9 @@ class YoutubeAudioDownloader
 
   def download_file(slug)
     full_length_audio_file = Tempfile.new([slug.to_s, ".mp3"])
+    full_length_audio_file.binmode
     system(yt_dlp_command(full_length_audio_file, slug))
+    full_length_audio_file.rewind
     File.open(full_length_audio_file.path)
   end
 

@@ -12,14 +12,28 @@ RSpec.describe MusicRecognizer do
       allow(acr_cloud).to receive(:analyze).and_return JSON.parse file_fixture("acr_cloud_response.json").read, symbolize_names: true
 
       audio_trimmer = AudioTrimmer.new
-      allow(audio_trimmer).to receive(:trim).and_return file_fixture "audio_snippet.mp3"
+      trimmed_audio_file = Tempfile.new
+      trimmed_audio_file.binmode
+      trimmed_audio_file.write file_fixture("audio_snippet.mp3").read
+      trimmed_audio_file.rewind
+      allow(audio_trimmer).to receive(:trim).and_return trimmed_audio_file
 
       youtube_audio_downloader = YoutubeAudioDownloader.new
-      allow(youtube_audio_downloader).to receive(:with_download_file).and_return file_fixture "blank_audio.mp3"
+      audio_file = Tempfile.new
+      audio_file.binmode
+      audio_file.write file_fixture("audio_snippet.mp3").read
+      audio_file.rewind
+      allow(youtube_audio_downloader).to receive(:download_file).and_return(audio_file)
 
       music_recognizer = MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
 
+      expect(File.exist?(trimmed_audio_file.path)).to be true
+      expect(File.exist?(audio_file.path)).to be true
+
       metadata = music_recognizer.process_audio_snippet(slug)
+
+      expect(trimmed_audio_file.path).to be nil
+      expect(audio_file.path).to be nil
 
       expect(metadata.code).to eq 0
       expect(metadata.message).to eq "Success"

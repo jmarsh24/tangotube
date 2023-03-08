@@ -3,7 +3,9 @@
 class AudioTrimmer
   def trim(audio_file)
     trimmed_file = Tempfile.new(["#{File.basename(audio_file).to_s.split(".")[0]}_snippet", ".mp3"])
+    trimmed_file.binmode
     transcode_audio_file(audio_file, trimmed_file)
+    trimmed_file.rewind
     File.open(trimmed_file.path)
   end
 

@@ -7,7 +7,11 @@ RSpec.describe AudioTrimmer do
 
   describe "trim" do
     it "takes an audio file and creates a 15s snippet" do
-      audio_file = file_fixture("audio.mp3").open
+      audio_file = Tempfile.new
+      audio_file.binmode
+      audio_file.write file_fixture("audio.mp3").read
+      audio_file.rewind
+
       AudioTrimmer.new.trim(audio_file) do |trimmed_file|
         expect(trimmed_file.read).to eq file_fixture("audio_snippet.mp3").read
         expect(File.size(trimmed_file)).to eq 320926
