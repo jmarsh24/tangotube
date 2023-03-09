@@ -21,11 +21,9 @@ RSpec.describe YoutubeScraper do
     it "returns the video metadata from youtube" do
       stub_youtube_api
 
-      driver = Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
-      # I'm trying to figure out how to mock this part of the test
-      youtube_scraper = YoutubeScraper.new(driver:)
+      youtube_scraper = YoutubeScraper.new
       allow(youtube_scraper).to receive(:song).and_return(SongMetadata.new(titles: "Cuando El Amor Muere", artist: "Carlos Di Sarli y su Orquesta Típica"))
-      allow(youtube_scraper).to receive(:recommended_videos_ids).and_return(
+      allow(youtube_scraper).to receive(:recommended_videos).and_return(
         ["skypKrzXoMA",
           "Sn7vmyuvFbw",
           "SrZMf_yPI0M",
