@@ -15,14 +15,12 @@ RSpec.describe MusicRecognizer do
       trimmed_audio_file = Tempfile.new
       trimmed_audio_file.binmode
       trimmed_audio_file.write file_fixture("audio_snippet.mp3").read
-      trimmed_audio_file.rewind
       allow(audio_trimmer).to receive(:trim).and_return trimmed_audio_file
 
       youtube_audio_downloader = YoutubeAudioDownloader.new
       audio_file = Tempfile.new
       audio_file.binmode
       audio_file.write file_fixture("audio_snippet.mp3").read
-      audio_file.rewind
       allow(youtube_audio_downloader).to receive(:download_file).and_return audio_file
 
       music_recognizer = MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
