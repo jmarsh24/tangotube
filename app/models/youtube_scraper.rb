@@ -32,18 +32,22 @@ class YoutubeScraper
       comment_count: youtube_video.comment_count,
       like_count: youtube_video.like_count,
       song: song(slug),
-      thumbnail_url: ThumbnailUrl.new(
-        default: youtube_video.thumbnail_url(:default),
-        medium: youtube_video.thumbnail_url(:medium),
-        high: youtube_video.thumbnail_url(:high),
-        standard: youtube_video.thumbnail_url(:standard),
-        maxres: youtube_video.thumbnail_url(:maxres)
-      ),
+      thumbnail_url: thumbnail_url(youtube_video),
       recommended_video_ids: recommended_videos(slug)
     )
   end
 
   private
+
+  def thumbnail_url(youtube_video)
+    ThumbnailUrl.new(
+      default: youtube_video.thumbnail_url(:default),
+      medium: youtube_video.thumbnail_url(:medium),
+      high: youtube_video.thumbnail_url(:high),
+      standard: youtube_video.thumbnail_url(:standard),
+      maxres: youtube_video.thumbnail_url(:maxres)
+    )
+  end
 
   def recommended_videos(slug)
     navigate_to_video(slug)
@@ -65,14 +69,14 @@ class YoutubeScraper
 
     song_metadata = SongMetadata.new
 
-    music_multiple_result_html_nodes(slug).each do |row|
+    find_music_html_nodes(MUSIC_ROW_SELECTOR_MULTIPLE).each do |row|
       attribute_title = row.find(:css, MUSIC_ROW_MULTIPLE_DATA_SELECTOR)[0]&.all_text
 
       song_metadata.titles = []
       song_metadata.titles << attribute_title
     end
 
-    music_single_result_html_nodes(slug).each do |row|
+    find_music_html_nodes(MUSIC_ROW_SELECTOR_SINGLE).each do |row|
       attribute_name = row.find(:css, MUSIC_ROW_SINGLE_TITLE_SELECTOR)[0].all_text
       attribute_value = row.find(:css, MUSIC_ROW_SINGLE_DATA_SELECTOR)[0].all_text
       attribute_link = row.find(:css, MUSIC_ROW_SINGLE_DATA_SELECTOR)[0].find(:css, "a")[0]&.[]("href")
@@ -92,14 +96,6 @@ class YoutubeScraper
     end
 
     song_metadata
-  end
-
-  def music_single_result_html_nodes(slug)
-    find_music_html_nodes(MUSIC_ROW_SELECTOR_SINGLE)
-  end
-
-  def music_multiple_result_html_nodes(slug)
-    find_music_html_nodes(MUSIC_ROW_SELECTOR_MULTIPLE)
   end
 
   def find_music_html_nodes(selector)
