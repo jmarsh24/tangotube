@@ -65,7 +65,7 @@ RSpec.describe YoutubeScraper do
   def stub_music_row_selector_mutiple_parsing(driver)
     music_row_multiple_node = instance_double Capybara::Cuprite::Node
     music_row_item_node = instance_double Capybara::Cuprite::Node
-    allow(music_row_item_node).to receive(:all_text).with(no_args).and_return ["Cuando El Amor Muere"]
+    allow(music_row_item_node).to receive(:all_text).with(no_args).and_return nil
     allow(music_row_multiple_node).to receive(:find).with(:css, "#video-title").and_return [music_row_item_node]
     allow(driver).to receive(:find).with(:css, "#video-lockups").and_return [music_row_multiple_node]
   end
