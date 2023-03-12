@@ -7,7 +7,7 @@ RSpec.describe YoutubeScraper do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "video_metadata" do
-    fit "returns the video metadata from youtube" do
+    it "returns the video metadata from youtube" do
       stub_youtube_api
 
       driver = Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
