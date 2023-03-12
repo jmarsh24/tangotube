@@ -8,9 +8,9 @@ class YoutubeScraper
   MUSIC_ROW_SELECTOR_SINGLE = "#info-row-header"
   MUSIC_ROW_SINGLE_DATA_SELECTOR = "#default-metadata"
   MUSIC_ROW_SINGLE_TITLE_SELECTOR = "#title"
+  YOUTUBE_THUMBNAIL_SELECTOR = ".ytd-thumbnail"
   YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v="
   RETRY_COUNT = 100
-  attr_reader :driver
 
   def initialize(driver: Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true}))
     @driver = driver
@@ -54,7 +54,7 @@ class YoutubeScraper
 
     recommended_video_ids = []
 
-    recommended_videos = @driver.find(:css, ".ytd-thumbnail")
+    recommended_videos = @driver.find(:css, YOUTUBE_THUMBNAIL_SELECTOR)
 
     recommended_videos.map do |video|
       video&.[]("href")
@@ -106,7 +106,6 @@ class YoutubeScraper
       retries += 1
 
       sleep 0.1
-
       music_elements = @driver.find(:css, selector)
     end
     music_elements
