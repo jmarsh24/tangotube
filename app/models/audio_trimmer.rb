@@ -2,11 +2,9 @@
 
 class AudioTrimmer
   def trim(audio_file)
-    trimmed_file = Tempfile.new(["#{File.basename(audio_file).to_s.split(".")[0]}_snippet", ".mp3"])
-    trimmed_file.binmode
-    transcode_audio_file(audio_file, trimmed_file)
-    yield trimmed_file if block_given?
-    trimmed_file
+    Tempfile.create(["#{File.basename(audio_file).to_s.split(".")[0]}_snippet", ".mp3"]) do |trimmed_file|
+      transcode_audio_file(audio_file, trimmed_file)
+    end
   end
 
   private

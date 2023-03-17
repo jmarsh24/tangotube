@@ -5,11 +5,9 @@ class YoutubeAudioDownloader
   YT_DLP_COMMAND_DOWNLOAD_AUDIO = "-f 140 --force-overwrites -o "
 
   def download_file(slug)
-    full_length_audio_file = Tempfile.new([slug.to_s, ".mp3"])
-    full_length_audio_file.binmode
-    system(yt_dlp_command(full_length_audio_file, slug))
-    yield full_length_audio_file if block_given?
-    full_length_audio_file
+    Tempfile.create([slug.to_s, ".mp3"]) do |full_length_audio_file|
+      system(yt_dlp_command(full_length_audio_file, slug))
+    end
   end
 
   private

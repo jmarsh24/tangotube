@@ -8,15 +8,9 @@ class MusicRecognizer
   end
 
   def process_audio_snippet(slug)
-    begin
-      full_length_audio_file = @youtube_audio_downloader.download_file(slug)
-      trimmed_audio_file = @audio_trimmer.trim(full_length_audio_file)
-
-      @data = @acr_cloud.analyze(trimmed_audio_file)
-    ensure
-      [full_length_audio_file, trimmed_audio_file].map do |f|
-        f&.close
-        f&.unlink
+    @youtube_audio_downloader.download_file(slug) do |full_length_audio_file|
+      @audio_trimmer.trim(full_length_audio_file) do |trimmed_audio_file|
+        @data = @acr_cloud.analyze(trimmed_audio_file)
       end
     end
 
