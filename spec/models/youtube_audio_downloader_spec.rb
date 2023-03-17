@@ -13,8 +13,9 @@ RSpec.describe YoutubeAudioDownloader do
       audio_file.write file_fixture("blank_audio.mp3").read
       audio_file.rewind
 
-      downloaded_file = YoutubeAudioDownloader.new.download_file(slug)
-      expect(downloaded_file.read).to eq audio_file.read
+      YoutubeAudioDownloader.new.download_file(slug) do |downloaded_file|
+        expect(downloaded_file.read).to eq audio_file.read
+      end
     end
   end
 end

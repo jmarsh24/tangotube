@@ -17,10 +17,11 @@ RSpec.describe AudioTrimmer do
       expected_trimmed_file.write file_fixture("audio_snippet.mp3").read
       expected_trimmed_file.rewind
 
-      trimmed_file = AudioTrimmer.new.trim(audio_file)
-      expect(trimmed_file.read).to eq expected_trimmed_file.read
-      expect(File.size(trimmed_file)).to eq 320926
-      expect(File.extname(trimmed_file)).to eq ".mp3"
+      AudioTrimmer.new.trim(audio_file) do |trimmed_file|
+        expect(trimmed_file.read).to eq expected_trimmed_file.read
+        expect(File.size(trimmed_file)).to eq 320926
+        expect(File.extname(trimmed_file)).to eq ".mp3"
+      end
     end
   end
 end

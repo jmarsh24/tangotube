@@ -15,13 +15,13 @@ RSpec.describe MusicRecognizer do
       trimmed_audio_file = Tempfile.new
       trimmed_audio_file.binmode
       trimmed_audio_file.write file_fixture("audio_snippet.mp3").read
-      allow(audio_trimmer).to receive(:trim).and_return trimmed_audio_file
+      allow(audio_trimmer).to receive(:trim).and_yield trimmed_audio_file
 
       youtube_audio_downloader = YoutubeAudioDownloader.new
       audio_file = Tempfile.new
       audio_file.binmode
       audio_file.write file_fixture("audio_snippet.mp3").read
-      allow(youtube_audio_downloader).to receive(:download_file).and_return audio_file
+      allow(youtube_audio_downloader).to receive(:download_file).and_yield audio_file
 
       music_recognizer = MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
 
@@ -29,9 +29,6 @@ RSpec.describe MusicRecognizer do
       expect(File.exist?(audio_file.path)).to be true
 
       metadata = music_recognizer.process_audio_snippet(slug)
-
-      expect(trimmed_audio_file.path).to be nil
-      expect(audio_file.path).to be nil
 
       expect(metadata.code).to eq 0
       expect(metadata.message).to eq "Success"
