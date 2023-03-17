@@ -7,6 +7,7 @@ class YoutubeAudioDownloader
   def download_file(slug)
     Tempfile.create([slug.to_s, ".mp3"]) do |full_length_audio_file|
       system(yt_dlp_command(full_length_audio_file, slug))
+      yield full_length_audio_file
     end
   end
 
