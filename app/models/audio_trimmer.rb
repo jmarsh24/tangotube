@@ -4,6 +4,7 @@ class AudioTrimmer
   def trim(audio_file)
     Tempfile.create(["#{File.basename(audio_file).to_s.split(".")[0]}_snippet", ".mp3"]) do |trimmed_file|
       transcode_audio_file(audio_file, trimmed_file)
+      yield trimmed_file
     end
   end
 
