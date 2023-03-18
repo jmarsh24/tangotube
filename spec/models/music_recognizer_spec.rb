@@ -5,28 +5,20 @@ require "rails_helper"
 RSpec.describe MusicRecognizer do
   fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
+  let(:trimmed_audio) { file_fixture("audio_snippet.mp3").open }
+  let(:audio_file) { file_fixture("audio.mp3").open }
+  let(:acr_cloud_response) { JSON.parse file_fixture("acr_cloud_response.json").read, symbolize_names: true }
+  let(:acr_cloud) { AcrCloud.new }
+  let(:audio_trimmer) { AudioTrimmer.new }
+  let(:youtube_audio_downloader) { YoutubeAudioDownloader.new }
 
   describe "process_audio_snippet" do
     it "returns the music data from ACR Cloud and Spotify" do
-      acr_cloud = AcrCloud.new
-      allow(acr_cloud).to receive(:analyze).and_return JSON.parse file_fixture("acr_cloud_response.json").read, symbolize_names: true
-
-      audio_trimmer = AudioTrimmer.new
-      trimmed_audio_file = Tempfile.new
-      trimmed_audio_file.binmode
-      trimmed_audio_file.write file_fixture("audio_snippet.mp3").read
-      allow(audio_trimmer).to receive(:trim).and_yield trimmed_audio_file
-
-      youtube_audio_downloader = YoutubeAudioDownloader.new
-      audio_file = Tempfile.new
-      audio_file.binmode
-      audio_file.write file_fixture("audio_snippet.mp3").read
+      allow(acr_cloud).to receive(:analyze).and_return acr_cloud_response
+      allow(audio_trimmer).to receive(:trim).and_yield trimmed_audio
       allow(youtube_audio_downloader).to receive(:download_file).and_yield audio_file
 
       music_recognizer = MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
-
-      expect(File.exist?(trimmed_audio_file.path)).to be true
-      expect(File.exist?(audio_file.path)).to be true
 
       metadata = music_recognizer.process_audio_snippet(slug)
 
