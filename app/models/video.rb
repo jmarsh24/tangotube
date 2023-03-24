@@ -225,7 +225,7 @@ class Video < ApplicationRecord
 
   class << self
     def index_query
-      <<~SQL
+      <<~SQL.squish
         UPDATE videos
         SET index = query.index
         FROM (
@@ -312,7 +312,7 @@ class Video < ApplicationRecord
     dancer_matches = Dancer.all.select { |dancer| title.parameterize.match(dancer.name.parameterize) }
     dancer_matches.each do |dancer|
       role = dancer.male? ? :leader : :follower
-      dancer_videos << DancerVideo.new(dancer: dancer, role:) if !dancers.include?(dancer)
+      dancer_videos << DancerVideo.new(dancer: dancer, role:) if dancers.exclude?(dancer)
     end
   end
 

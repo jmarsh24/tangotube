@@ -49,7 +49,7 @@ class OrchestrasController < ApplicationController
     @orchestra = Orchestra.new(orchestra_params)
 
     if @orchestra.save
-      redirect_to @orchestra, notice: "Orchestra was successfully created."
+      redirect_to @orchestra
     else
       render :new, status: :unprocessable_entity
     end
@@ -58,7 +58,7 @@ class OrchestrasController < ApplicationController
   # PATCH/PUT /orchestras/1
   def update
     if @orchestra.update(orchestra_params)
-      redirect_to @orchestra, notice: "Orchestra was successfully updated."
+      redirect_to @orchestra
     else
       render :edit, status: :unprocessable_entity
     end
@@ -67,7 +67,7 @@ class OrchestrasController < ApplicationController
   # DELETE /orchestras/1
   def destroy
     @orchestra.destroy
-    redirect_to orchestras_url, notice: "Orchestra was successfully destroyed."
+    redirect_to orchestras_url
   end
 
   private

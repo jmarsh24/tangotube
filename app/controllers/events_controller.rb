@@ -47,20 +47,16 @@ class EventsController < ApplicationController
       country: params[:event][:country])
     if @event.save
       match_event(@event.id)
-      redirect_to root_path,
-        notice:
-        "Event Sucessfully Added"
+      redirect_to root_path
     else
-      redirect_to events_path,
-        notice:
-        "Event not saved."
+      redirect_to events_path
     end
   end
 
   # PATCH/PUT /events/1
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: "Event was successfully updated."
+      redirect_to @event
     else
       render :edit, status: :unprocessable_entity
     end
@@ -69,7 +65,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   def destroy
     @event.destroy
-    redirect_to events_url, notice: "Event was successfully destroyed."
+    redirect_to events_url
   end
 
   private

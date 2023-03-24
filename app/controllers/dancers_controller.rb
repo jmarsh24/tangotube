@@ -49,7 +49,7 @@ class DancersController < ApplicationController
     @dancer = Dancer.new(dancer_params)
 
     if @dancer.save
-      redirect_to @dancer, notice: "Dancer was successfully created."
+      redirect_to @dancer
     else
       render :new, status: :unprocessable_entity
     end
@@ -58,7 +58,7 @@ class DancersController < ApplicationController
   # PATCH/PUT /dancers/1
   def update
     if @dancer.update(dancer_params)
-      redirect_to @dancer, notice: "Dancer was successfully updated."
+      redirect_to @dancer
     else
       render :edit, status: :unprocessable_entity
     end
@@ -67,7 +67,7 @@ class DancersController < ApplicationController
   # DELETE /dancers/1
   def destroy
     @dancer.destroy
-    redirect_to dancers_url, notice: "Dancer was successfully destroyed."
+    redirect_to dancers_url
   end
 
   private

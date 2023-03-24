@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     elsif @comment.save && @comment.parent_id.present?
       render turbo_stream: turbo_stream.append("comment_#{@comment.parent_id}_comments", partial: "comments/comment", locals: {comment: @comment})
     else
-      redirect_to @commentable, alert: "Something went wrong"
+      redirect_to @commentable
     end
   end
 

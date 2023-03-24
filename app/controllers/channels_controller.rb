@@ -27,7 +27,7 @@ class ChannelsController < ApplicationController
 
     if @channel.save
       fetch_new_channel
-      redirect_to @channel, notice: "Channel was successfully created."
+      redirect_to @channel
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class ChannelsController < ApplicationController
   # PATCH/PUT /channels/1
   def update
     if @channel.update(channel_params)
-      redirect_to @channel, notice: "Channel was successfully updated."
+      redirect_to @channel
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,14 +45,14 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   def destroy
     @channel.destroy
-    redirect_to channels_url, notice: "Channel was successfully destroyed."
+    redirect_to channels_url
   end
 
   def deactivate
     @channel.active = false
     @channel.save
     DestroyAllChannelVideosJob.perform_later(@channel.channel_id)
-    redirect_to root_path(channel: @channel.channel_id), notice: "Channel has been inactivated"
+    redirect_to root_path(channel: @channel.channel_id)
   end
 
   private

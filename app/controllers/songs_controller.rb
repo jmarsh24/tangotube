@@ -35,7 +35,7 @@ class SongsController < ApplicationController
     @song = Song.new(song_params)
 
     if @song.save
-      redirect_to @song, notice: "Song was successfully created."
+      redirect_to @song
     else
       render :new, status: :unprocessable_entity
     end
@@ -44,7 +44,7 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1
   def update
     if @song.update(song_params)
-      redirect_to @song, notice: "Song was successfully updated."
+      redirect_to @song
     else
       render :edit, status: :unprocessable_entity
     end
@@ -53,7 +53,7 @@ class SongsController < ApplicationController
   # DELETE /songs/1
   def destroy
     @song.destroy
-    redirect_to songs_url, notice: "Song was successfully destroyed."
+    redirect_to songs_url
   end
 
   private

@@ -39,7 +39,7 @@ class CouplesController < ApplicationController
     @couple = Couple.new(couple_params)
 
     if @couple.save
-      redirect_to @couple, notice: "Couple was successfully created."
+      redirect_to @couple
     else
       render :new, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class CouplesController < ApplicationController
   # PATCH/PUT /couples/1
   def update
     if @couple.update(couple_params)
-      redirect_to @couple, notice: "Couple was successfully updated."
+      redirect_to @couple
     else
       render :edit, status: :unprocessable_entity
     end
@@ -57,7 +57,7 @@ class CouplesController < ApplicationController
   # DELETE /couples/1
   def destroy
     @couple.destroy
-    redirect_to couples_url, notice: "Couple was successfully destroyed."
+    redirect_to couples_url
   end
 
   private
