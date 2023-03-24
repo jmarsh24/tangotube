@@ -3,7 +3,8 @@
 class SongsController < ApplicationController
   before_action :set_song, only: %i[show edit update destroy]
 
-  # GET /songs
+  # @route POST /songs (songs)
+  # @route GET /songs (songs)
   def index
     @songs = Song.all.limit(10)
     respond_to do |format|
@@ -17,43 +18,45 @@ class SongsController < ApplicationController
     end
   end
 
-  # GET /songs/1
+  # @route POST /songs/:id (song)
+  # @route GET /songs/:id (song)
   def show
   end
 
-  # GET /songs/new
+  # @route GET /songs/new (new_song)
   def new
     @song = Song.new
   end
 
-  # GET /songs/1/edit
+  # @route GET /songs/:id/edit (edit_song)
   def edit
   end
 
-  # POST /songs
+  # @route POST /songs (songs)
   def create
     @song = Song.new(song_params)
 
     if @song.save
-      redirect_to @song, notice: "Song was successfully created."
+      redirect_to @song
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /songs/1
+  # @route PATCH /songs/:id (song)
+  # @route PUT /songs/:id (song)
   def update
     if @song.update(song_params)
-      redirect_to @song, notice: "Song was successfully updated."
+      redirect_to @song
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /songs/1
+  # @route DELETE /songs/:id (song)
   def destroy
     @song.destroy
-    redirect_to songs_url, notice: "Song was successfully destroyed."
+    redirect_to songs_url
   end
 
   private
