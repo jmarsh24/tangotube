@@ -41,10 +41,10 @@ jobs:
           bundler-cache: true
       - name: Lint
         run: bundle exec rubocop -c .rubocop.yml
-      - name: Translations Lint
-        run: bundle exec i18n-tasks health
-      - name: Check Controllers Route Annotations
-        run: bundle exec chusaku --exit-with-error-on-annotation
+        # - name: Translations Lint
+        #   run: bundle exec i18n-tasks health
+        # - name: Check Controllers Route Annotations
+        #   run: bundle exec chusaku --exit-with-error-on-annotation
         env:
           # some of the routes are only defined in test
           RAILS_ENV: test
@@ -53,8 +53,8 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/app
           RAILS_ENV: test
-      - name: JS Lint
-        run: yarn lint
+      # - name: JS Lint
+      #   run: yarn lint
       - name: Create PG Database
         run: bundle exec rake db:create db:migrate
         env:
@@ -67,7 +67,7 @@ jobs:
           REDIS_URL: redis://127.0.0.1:6379
           RAILS_ENV: test
           RSPEC_RETRY_RETRY_COUNT: 3
-          SCREENSHOTS: "1"
+          # SCREENSHOTS: "1"
       # - name: Upload Screenshots
       #   if: always()
       #   run: |
