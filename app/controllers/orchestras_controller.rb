@@ -4,7 +4,8 @@ class OrchestrasController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_orchestra, only: %i[show edit update destroy]
 
-  # GET /orchestras
+  # @route POST /orchestras (orchestras)
+  # @route GET /orchestras (orchestras)
   def index
     orchestras = if params[:query].present?
       Orchestra.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query]}%").order(:name).with_attached_profile_image
@@ -19,7 +20,8 @@ class OrchestrasController < ApplicationController
     end
   end
 
-  # GET /orchestras/1
+  # @route POST /orchestras/:id (orchestra)
+  # @route GET /orchestras/:id (orchestra)
   def show
     @dancers = @orchestra.dancers.distinct.includes(profile_image_attachment: :blob).order(videos_count: :desc)
     @couples = Couple.includes(partner: {profile_image_attachment: :blob}, dancer: {profile_image_attachment: :blob})
@@ -35,16 +37,16 @@ class OrchestrasController < ApplicationController
     end
   end
 
-  # GET /orchestras/new
+  # @route GET /orchestras/new (new_orchestra)
   def new
     @orchestra = Orchestra.new
   end
 
-  # GET /orchestras/1/edit
+  # @route GET /orchestras/:id/edit (edit_orchestra)
   def edit
   end
 
-  # POST /orchestras
+  # @route POST /orchestras (orchestras)
   def create
     @orchestra = Orchestra.new(orchestra_params)
 
@@ -55,7 +57,8 @@ class OrchestrasController < ApplicationController
     end
   end
 
-  # PATCH/PUT /orchestras/1
+  # @route PATCH /orchestras/:id (orchestra)
+  # @route PUT /orchestras/:id (orchestra)
   def update
     if @orchestra.update(orchestra_params)
       redirect_to @orchestra
@@ -64,7 +67,7 @@ class OrchestrasController < ApplicationController
     end
   end
 
-  # DELETE /orchestras/1
+  # @route DELETE /orchestras/:id (orchestra)
   def destroy
     @orchestra.destroy
     redirect_to orchestras_url

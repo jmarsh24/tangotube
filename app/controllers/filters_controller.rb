@@ -3,6 +3,7 @@
 class FiltersController < ApplicationController
   before_action :videos_search
 
+  # @route GET /videos/filters (filters_videos)
   def filters
     genres
     leaders

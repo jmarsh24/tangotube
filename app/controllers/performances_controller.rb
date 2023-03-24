@@ -3,7 +3,8 @@
 class PerformancesController < ApplicationController
   before_action :set_performance, only: %i[show edit update destroy]
 
-  # GET /performances
+  # @route POST /performances (performances)
+  # @route GET /performances (performances)
   def index
     performances = Performance.where("videos_count < 7").includes(:videos).order(videos_count: :desc)
     @pagy, @performances = pagy(performances, items: 12)
@@ -14,20 +15,20 @@ class PerformancesController < ApplicationController
     end
   end
 
-  # GET /performances/1
+  # @route GET /performances/:id (performance)
   def show
   end
 
-  # GET /performances/new
+  # @route GET /performances/new (new_performance)
   def new
     @performance = Performance.new
   end
 
-  # GET /performances/1/edit
+  # @route GET /performances/:id/edit (edit_performance)
   def edit
   end
 
-  # POST /performances
+  # @route POST /performances (performances)
   def create
     @performance = Performance.new(performance_params)
 
@@ -38,7 +39,8 @@ class PerformancesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /performances/1
+  # @route PATCH /performances/:id (performance)
+  # @route PUT /performances/:id (performance)
   def update
     if @performance.update(performance_params)
       redirect_to @performance
@@ -47,7 +49,7 @@ class PerformancesController < ApplicationController
     end
   end
 
-  # DELETE /performances/1
+  # @route DELETE /performances/:id (performance)
   def destroy
     @performance.destroy
     redirect_to performances_url
