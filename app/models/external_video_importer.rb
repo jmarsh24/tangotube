@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalVideoImporter
   class Video
     def call(video_metadata)
