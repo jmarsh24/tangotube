@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SearchSuggestionsController < ApplicationController
+  # @route POST /search_suggestions/search (search_search_suggestions)
   def search
     @dancers = Dancer.search_by_full_name(params[:query]).map(&:full_name)
     @songs = Song.where("title ILIKE ?", "%#{params[:query]}%").map(&:full_title)

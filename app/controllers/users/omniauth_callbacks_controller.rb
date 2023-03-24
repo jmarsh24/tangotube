@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  # @route GET /users/auth/google_oauth2/callback (user_google_oauth2_omniauth_callback)
+  # @route POST /users/auth/google_oauth2/callback (user_google_oauth2_omniauth_callback)
   def google_oauth2
     handle_auth "Google"
   end
 
+  # @route GET /users/auth/facebook/callback (user_facebook_omniauth_callback)
+  # @route POST /users/auth/facebook/callback (user_facebook_omniauth_callback)
   def facebook
     handle_auth "Facebook"
   end
