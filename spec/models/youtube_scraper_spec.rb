@@ -39,7 +39,7 @@ RSpec.describe YoutubeScraper do
       expect(metadata.song.titles).to include "Cuando El Amor Muere"
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
       expect(metadata.recommended_video_ids).to match_array ["0ZPR_DNTghE", "1weCIypdfkE", "34dYj80KLmU"]
-      expect(metadata.channel.id).to eq("UCvnY4F-CJVgYdQuIv8sqp-A")
+      expect(metadata.channel.id).to eq "UCvnY4F-CJVgYdQuIv8sqp-A"
       expect(metadata.channel.title).to eq "jkuklaVideo"
       expect(metadata.channel.description).to eq ""
       expect(metadata.channel.published_at).to eq "2012-05-21 12:31:41.000000000 +0000"

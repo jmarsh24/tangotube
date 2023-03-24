@@ -1109,4 +1109,56 @@ http_interactions:
       string: !binary |-
         ewogICJraW5kIjogInlvdXR1YmUjU3Vic2NyaXB0aW9uTGlzdFJlc3BvbnNlIiwKICAiZXRhZyI6ICJLdWR1d3FEY2VKMjV4WHNfOTZpb3ZoSi03dmciLAogICJwYWdlSW5mbyI6IHsKICAgICJ0b3RhbFJlc3VsdHMiOiAxLAogICAgInJlc3VsdHNQZXJQYWdlIjogNTAKICB9LAogICJpdGVtcyI6IFsKICAgIHsKICAgICAgImtpbmQiOiAieW91dHViZSNzdWJzY3JpcHRpb24iLAogICAgICAiZXRhZyI6ICJKMDlIdFdVc0NZTjAya1BteWp6ODBVcjRLM3ciLAogICAgICAiaWQiOiAiQVhSajF0VEZCbFJQNWJSa2wzcjM4RklKOE1JeTFBUk5vbE9OV3ozTDFacyIsCiAgICAgICJzbmlwcGV0IjogewogICAgICAgICJwdWJsaXNoZWRBdCI6ICIyMDIyLTExLTExVDE1OjU4OjI1LjU1NjM2MVoiLAogICAgICAgICJ0aXRsZSI6ICJUcmVuaW5nIEZpdG5lc3MiLAogICAgICAgICJkZXNjcmlwdGlvbiI6ICJXaXRhbSBDacSZIHNlcmRlY3puaWUgbmEgbW9pbSBrYW5hbGUg8J+ZglxuXG5OYXp5d2FtIHNpxJkgUGF1bGEgUGlvdHJ6a293c2thLCBvZCAyMDA1IHJva3UgamVzdGVtIGluc3RydWt0b3JrxIUgZml0bmVzcyBpIHRhxYRjYS4gVHJlbmluZ2ksIHpkcm93ZSBvZMW8eXdpYW5pZSBpIHdzenlzdGtvIGNvIGtyeWplIHNpxJkgcG9kIHN6ZXJva2ltIG9rcmXFm2xlbmllbSBGSVRORVNTIHRvIHfFgmHFm25pZSBtb2phIHdpZWxrYSDFvHljaW93YSBwYXNqYSwga3TDs3LEhSBkemllbMSZIHNpxJkgeiBXYW1pLiAgTWFtIG5hZHppZWrEmSwgxbxlIHpuYWpkemllc3ogdHUgd2llbGUgaW5zcGlyYWNqaSBkbGEgc2llYmllIDopXG5cbnd3dy50cmVuaW5nZml0bmVzcy5jb20iLAogICAgICAgICJyZXNvdXJjZUlkIjogewogICAgICAgICAgImtpbmQiOiAieW91dHViZSNjaGFubmVsIiwKICAgICAgICAgICJjaGFubmVsSWQiOiAiVUNiRnU5YkNuS1poQmVEVVlsQlZ0bmpRIgogICAgICAgIH0sCiAgICAgICAgImNoYW5uZWxJZCI6ICJVQ3ZuWTRGLUNKVmdZZFF1SXY4c3FwLUEiLAogICAgICAgICJ0aHVtYm5haWxzIjogewogICAgICAgICAgImRlZmF1bHQiOiB7CiAgICAgICAgICAgICJ1cmwiOiAiaHR0cHM6Ly95dDMuZ2dwaHQuY29tL0h4b2pnT0V6dFFqWGNvU0NMSmpRMER4cjFoWDVxWUtsV3BuaGZvNk9HNjh6TmRsRVVkSHFSX0xsUHJ5aUF5WlpxQzhaUGowdzl3PXM4OC1jLWstYzB4MDBmZmZmZmYtbm8tcmoiCiAgICAgICAgICB9LAogICAgICAgICAgIm1lZGl1bSI6IHsKICAgICAgICAgICAgInVybCI6ICJodHRwczovL3l0My5nZ3BodC5jb20vSHhvamdPRXp0UWpYY29TQ0xKalEwRHhyMWhYNXFZS2xXcG5oZm82T0c2OHpOZGxFVWRIcVJfTGxQcnlpQXlaWnFDOFpQajB3OXc9czI0MC1jLWstYzB4MDBmZmZmZmYtbm8tcmoiCiAgICAgICAgICB9LAogICAgICAgICAgImhpZ2giOiB7CiAgICAgICAgICAgICJ1cmwiOiAiaHR0cHM6Ly95dDMuZ2dwaHQuY29tL0h4b2pnT0V6dFFqWGNvU0NMSmpRMER4cjFoWDVxWUtsV3BuaGZvNk9HNjh6TmRsRVVkSHFSX0xsUHJ5aUF5WlpxQzhaUGowdzl3PXM4MDAtYy1rLWMweDAwZmZmZmZmLW5vLXJqIgogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgfQogIF0KfQo=
   recorded_at: Fri, 24 Mar 2023 16:17:08 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/channels?id=AQ9Ri3kWa_4&key=AIzaSyCEzH87Gq3bi6aflT2Jqeh1w1zcVU9Y6Hs&part=snippet
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Fri, 24 Mar 2023 16:21:54 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "kind": "youtube#channelListResponse",
+          "etag": "RuuXzTIr0OoDqI4S0RU6n4FqKEM",
+          "pageInfo": {
+            "totalResults": 0,
+            "resultsPerPage": 5
+          }
+        }
+  recorded_at: Fri, 24 Mar 2023 16:21:54 GMT
 recorded_with: VCR 6.1.0
