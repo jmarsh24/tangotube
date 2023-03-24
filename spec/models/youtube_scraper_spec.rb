@@ -7,7 +7,7 @@ RSpec.describe YoutubeScraper do
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "video_metadata" do
-    it "returns the video metadata from youtube", vcr: {record: :new_episodes} do
+    it "returns the video metadata from youtube", :vcr do
       driver = Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
 
       youtube_scraper = YoutubeScraper.new(driver:)
