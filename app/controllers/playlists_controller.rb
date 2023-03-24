@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class PlaylistsController < ApplicationController
+  # @route GET /playlists (playlists)
   def index
     @playlists = Playlist.all.order(:id)
   end
 
+  # @route POST /playlists (playlists)
   def create
     @playlist = Playlist.create(slug: params[:playlist][:slug])
     fetch_new_playlist

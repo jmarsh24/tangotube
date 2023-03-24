@@ -3,25 +3,25 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: %i[show edit update destroy deactivate]
 
-  # GET /channels
+  # @route GET /channels (channels)
   def index
     @channels = Channel.order(:id).all.limit(10)
   end
 
-  # GET /channels/1
+  # @route GET /channels/:id (channel)
   def show
   end
 
-  # GET /channels/new
+  # @route GET /channels/new (new_channel)
   def new
     @channel = Channel.new
   end
 
-  # GET /channels/1/edit
+  # @route GET /channels/:id/edit (edit_channel)
   def edit
   end
 
-  # POST /channels
+  # @route POST /channels (channels)
   def create
     @channel = Channel.new(channel_params)
 
@@ -33,7 +33,8 @@ class ChannelsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /channels/1
+  # @route PATCH /channels/:id (channel)
+  # @route PUT /channels/:id (channel)
   def update
     if @channel.update(channel_params)
       redirect_to @channel
@@ -42,12 +43,13 @@ class ChannelsController < ApplicationController
     end
   end
 
-  # DELETE /channels/1
+  # @route DELETE /channels/:id (channel)
   def destroy
     @channel.destroy
     redirect_to channels_url
   end
 
+  # @route POST /channels/:channel_id/deactivate (channel_deactivate)
   def deactivate
     @channel.active = false
     @channel.save

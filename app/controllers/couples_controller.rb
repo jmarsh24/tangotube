@@ -4,7 +4,8 @@ class CouplesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_couple, only: %i[show edit update destroy]
 
-  # GET /couples
+  # @route POST /couples (couples)
+  # @route GET /couples (couples)
   def index
     couples = if params[:query].present?
       Couple.where("unaccent(slug) ILIKE unaccent(?)", "%#{params[:query]}%").order(videos_count: :desc)
@@ -14,7 +15,8 @@ class CouplesController < ApplicationController
     @pagy, @couples = pagy(couples, items: 12)
   end
 
-  # GET /couples/1
+  # @route POST /couples/:id (couple)
+  # @route GET /couples/:id (couple)
   def show
     videos = @couple.videos
     @pagy, @videos = pagy(videos, items: 12)
@@ -25,16 +27,16 @@ class CouplesController < ApplicationController
     end
   end
 
-  # GET /couples/new
+  # @route GET /couples/new (new_couple)
   def new
     @couple = Couple.new
   end
 
-  # GET /couples/1/edit
+  # @route GET /couples/:id/edit (edit_couple)
   def edit
   end
 
-  # POST /couples
+  # @route POST /couples (couples)
   def create
     @couple = Couple.new(couple_params)
 
@@ -45,7 +47,8 @@ class CouplesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /couples/1
+  # @route PATCH /couples/:id (couple)
+  # @route PUT /couples/:id (couple)
   def update
     if @couple.update(couple_params)
       redirect_to @couple
@@ -54,7 +57,7 @@ class CouplesController < ApplicationController
     end
   end
 
-  # DELETE /couples/1
+  # @route DELETE /couples/:id (couple)
   def destroy
     @couple.destroy
     redirect_to couples_url

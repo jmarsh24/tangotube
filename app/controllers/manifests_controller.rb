@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ManifestsController < ApplicationController
-  # @route GET /:locale/manifest (manifest)
+  # @route GET /manifest (manifest)
   def show
     render json: {
       name: "tangotube",
