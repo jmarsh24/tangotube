@@ -33,11 +33,32 @@ class YoutubeScraper
       like_count: youtube_video.like_count,
       song: song(slug),
       thumbnail_url: thumbnail_url(youtube_video),
-      recommended_video_ids: recommended_videos(slug)
+      recommended_video_ids: recommended_videos(slug),
+      channel: channel_metadata(youtube_video.channel_id)
     )
   end
 
   private
+
+  def channel_metadata(slug)
+    youtube_channel = Yt::Channel.new id: slug
+
+    YoutubeChannelMetadata.new(
+      id: youtube_channel.id,
+      title: youtube_channel.title,
+      description: youtube_channel.description,
+      published_at: youtube_channel.published_at,
+      thumbnail_url: youtube_channel.thumbnail_url,
+      view_count: youtube_channel.view_count,
+      video_count: youtube_channel.video_count,
+      videos: youtube_channel.related_playlists.first.playlist_items.map(&:video_id) || youtube_channel.videos.map(&:id),
+      playlists: youtube_channel.playlists.map(&:id),
+      related_playlists: youtube_channel.related_playlists.map(&:id),
+      subscribed_channels: youtube_channel.subscribed_channels.map(&:id),
+      subscriber_count: youtube_channel.subscriber_count,
+      privacy_status: youtube_channel.privacy_status
+    )
+  end
 
   def thumbnail_url(youtube_video)
     ThumbnailUrl.new(
