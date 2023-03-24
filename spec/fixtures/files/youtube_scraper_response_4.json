@@ -1,0 +1,21 @@
+{
+  "kind": "youtube#channelListResponse",
+  "etag": "hLekXI5LsNzzm_9QiqxT7HPlbfM",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 50
+  },
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "az8VZkCX7MVDh45PepgJYNvIjGM",
+      "id": "UCvnY4F-CJVgYdQuIv8sqp-A",
+      "statistics": {
+        "viewCount": "304130",
+        "subscriberCount": "389",
+        "hiddenSubscriberCount": false,
+        "videoCount": "169"
+      }
+    }
+  ]
+}

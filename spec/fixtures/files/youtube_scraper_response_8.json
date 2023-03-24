@@ -1,0 +1,2512 @@
+{
+  "kind": "youtube#playlistItemListResponse",
+  "etag": "LzwJflPzVVC2MaKh9M2BcsMNZGk",
+  "nextPageToken": "EAAaBlBUOkNHUQ",
+  "prevPageToken": "EAEaBlBUOkNESQ",
+  "items": [
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "zp03eRodulch7euAtkpC5Lha1kI",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLm5HQTctaXc2UGFn",
+      "snippet": {
+        "publishedAt": "2014-10-26T18:08:26Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #5",
+        "description": "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/nGA7-iw6Pag/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/nGA7-iw6Pag/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/nGA7-iw6Pag/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/nGA7-iw6Pag/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/nGA7-iw6Pag/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 50,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "nGA7-iw6Pag"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "bLjEl2NxuWDDTV4vqXFMbsBcOHg",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLm1pSk84QkdxMFBn",
+      "snippet": {
+        "publishedAt": "2014-10-26T16:51:09Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #3",
+        "description": "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/miJO8BGq0Pg/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/miJO8BGq0Pg/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/miJO8BGq0Pg/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/miJO8BGq0Pg/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/miJO8BGq0Pg/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 51,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "miJO8BGq0Pg"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "1XViyYuZSt0xslRxhK9p3X5HH9Q",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLk1ROTZvTjRBbkt3",
+      "snippet": {
+        "publishedAt": "2014-10-26T15:21:39Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #2",
+        "description": "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/MQ96oN4AnKw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/MQ96oN4AnKw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/MQ96oN4AnKw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/MQ96oN4AnKw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/MQ96oN4AnKw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 52,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "MQ96oN4AnKw"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "0nhB6xXO8iUd12UyWYDRUOayFkE",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkFROVJpM2tXYV80",
+      "snippet": {
+        "publishedAt": "2014-10-26T15:21:29Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
+        "description": "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 53,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "AQ9Ri3kWa_4"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "YmGCL3KRP5pB-4Fi-1WKqApttk4",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLmZQcHhhZElwWm40",
+      "snippet": {
+        "publishedAt": "2014-09-30T13:20:46Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sebastian Achaval & Roxana Suarez #4, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n27.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/fPpxadIpZn4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/fPpxadIpZn4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/fPpxadIpZn4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/fPpxadIpZn4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/fPpxadIpZn4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 54,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "fPpxadIpZn4"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "KK0QrsKxpO-9oeiAagyaH0He5XQ",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnlRbHpTejhOeEJ3",
+      "snippet": {
+        "publishedAt": "2014-09-30T13:20:39Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sebastian Achaval & Roxana Suarez #3, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n27.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/yQlzSz8NxBw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/yQlzSz8NxBw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/yQlzSz8NxBw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/yQlzSz8NxBw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/yQlzSz8NxBw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 55,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "yQlzSz8NxBw"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "Z_pZFk0Fqsct4C2GEEwW8zQ-QGM",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLldqRHRzSGQxa1Fv",
+      "snippet": {
+        "publishedAt": "2014-09-30T13:20:33Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sebastian Achaval & Roxana Suarez #2, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n27.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/WjDtsHd1kQo/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/WjDtsHd1kQo/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/WjDtsHd1kQo/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/WjDtsHd1kQo/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/WjDtsHd1kQo/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 56,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "WjDtsHd1kQo"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "dfJYj_M_925j63BEWrI0j-EJhZg",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlNoMzN0UmRoWk1j",
+      "snippet": {
+        "publishedAt": "2014-09-30T13:20:27Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sebastian Achaval & Roxana Suarez #1, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n27.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Sh33tRdhZMc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Sh33tRdhZMc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Sh33tRdhZMc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Sh33tRdhZMc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Sh33tRdhZMc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 57,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Sh33tRdhZMc"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "2KAw9vd85ErG8_6VdPtJcarvgek",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLmQwZVRFSlN4VHlz",
+      "snippet": {
+        "publishedAt": "2014-09-30T13:17:56Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Fabián Peralta & Josefina Bermudez Avila #2, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n27.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/d0eTEJSxTys/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/d0eTEJSxTys/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/d0eTEJSxTys/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/d0eTEJSxTys/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/d0eTEJSxTys/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 58,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "d0eTEJSxTys"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "JgLFISSx1PHXN5mkpObowumTGd4",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnFFRWJ4Vi1FRjMw",
+      "snippet": {
+        "publishedAt": "2014-09-30T13:17:49Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Fabián Peralta & Josefina Bermudez Avila #1, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n27.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/qEEbxV-EF30/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/qEEbxV-EF30/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/qEEbxV-EF30/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/qEEbxV-EF30/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/qEEbxV-EF30/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 59,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "qEEbxV-EF30"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "4hfX-BrjZxwqr1mW90JMxtyXuu0",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjVmS0RFcGR0UzNn",
+      "snippet": {
+        "publishedAt": "2014-09-30T10:49:45Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Juan Martin Carrara & Stefania Colina #4, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n26.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/5fKDEpdtS3g/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/5fKDEpdtS3g/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/5fKDEpdtS3g/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/5fKDEpdtS3g/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/5fKDEpdtS3g/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 60,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "5fKDEpdtS3g"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "KqNLb2hmOCpuPb5JSFExVL4OPEQ",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjYtVWg1MXZZOE5z",
+      "snippet": {
+        "publishedAt": "2014-09-30T10:49:36Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Juan Martin Carrara & Stefania Colina #3, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n26.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/6-Uh51vY8Ns/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/6-Uh51vY8Ns/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/6-Uh51vY8Ns/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/6-Uh51vY8Ns/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/6-Uh51vY8Ns/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 61,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "6-Uh51vY8Ns"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "JDgLR3QoJFssJ-FszXSVCiEwqf0",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnRpYnBUVzZTNDVZ",
+      "snippet": {
+        "publishedAt": "2014-09-30T10:49:27Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Juan Martin Carrara & Stefania Colina #2, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n26.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/tibpTW6S45Y/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/tibpTW6S45Y/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/tibpTW6S45Y/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/tibpTW6S45Y/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/tibpTW6S45Y/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 62,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "tibpTW6S45Y"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "yWIkT5Dv21Kdag2MynMP-FKN608",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnRkdUE4TkRHaVFj",
+      "snippet": {
+        "publishedAt": "2014-09-30T10:49:10Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Juan Martin Carrara & Stefania Colina #1, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n26.09.2014 r., Łódź, Poland, Biała Fabryka",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/tduA8NDGiQc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/tduA8NDGiQc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/tduA8NDGiQc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/tduA8NDGiQc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/tduA8NDGiQc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 63,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "tduA8NDGiQc"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "J46qZDhogIkUSdLvgJ_pYLChYOE",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLmJ0dmdIUkhIVzNv",
+      "snippet": {
+        "publishedAt": "2014-09-30T08:34:15Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sebastiàn Jimenez & María Inés Bogado #4, ŁÓDŹ TANGO SALON FESTIVAL 2014 Bomboncito",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n25.09.2014 r., Łódź, Poland, Dom Towarzystwa Kredytowego\nMusic: Bomboncito",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/btvgHRHHW3o/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/btvgHRHHW3o/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/btvgHRHHW3o/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/btvgHRHHW3o/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/btvgHRHHW3o/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 64,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "btvgHRHHW3o"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "WxXdBJvrWewamnQ8vaduMe_QMN8",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLmhnOTJ4cDVaNy1z",
+      "snippet": {
+        "publishedAt": "2014-09-30T08:34:15Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sebastiàn Jimenez & María Inés Bogado #3, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n25.09.2014 r., Łódź, Poland, Dom Towarzystwa Kredytowego",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/hg92xp5Z7-s/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/hg92xp5Z7-s/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/hg92xp5Z7-s/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/hg92xp5Z7-s/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/hg92xp5Z7-s/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 65,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "hg92xp5Z7-s"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "OluVwOjeMJ49JSVqrcOEKfA97PY",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLm91ZjhpSHZnU0xN",
+      "snippet": {
+        "publishedAt": "2014-09-30T08:34:15Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sebastiàn Jimenez & María Inés Bogado #2, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n25.09.2014 r., Łódź, Poland, Dom Towarzystwa Kredytowego",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ouf8iHvgSLM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/ouf8iHvgSLM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/ouf8iHvgSLM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/ouf8iHvgSLM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/ouf8iHvgSLM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 66,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "ouf8iHvgSLM"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "2P3xt0jEOCjjZtlO7iTsjII2VIE",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlBpSk1SRTZrTFpv",
+      "snippet": {
+        "publishedAt": "2014-09-29T20:14:51Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sebastiàn Jimenez & María Inés Bogado #1, ŁÓDŹ TANGO SALON FESTIVAL 2014",
+        "description": "4th International Festival of Tango de Salon in Łódź,\n25.09.2014 r., Łódź, Poland, Dom Towarzystwa Kredytowego",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 67,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "PiJMRE6kLZo"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "qy-c3NMYm_7cwTulN4amhUIe1q8",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlpqd25GUTNfQVVF",
+      "snippet": {
+        "publishedAt": "2014-08-28T19:01:35Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Katarzyna Czech & Facundo Penalva #3, Feniks, Kraków 27.09.2014",
+        "description": "Kraków 27.09.2014,\nmilonga w Klubie Feniks",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ZjwnFQ3_AUE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/ZjwnFQ3_AUE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/ZjwnFQ3_AUE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/ZjwnFQ3_AUE/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/ZjwnFQ3_AUE/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 68,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "ZjwnFQ3_AUE"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "RUm8wQEhQ-1-Sga506041O6VqNk",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLm5IZXV2dnR3Qmlz",
+      "snippet": {
+        "publishedAt": "2014-08-28T19:01:31Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Katarzyna Czech & Facundo Penalva #2, Feniks, Kraków 27.09.2014",
+        "description": "Kraków 27.09.2014,\nmilonga w Klubie Feniks",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/nHeuvvtwBis/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/nHeuvvtwBis/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/nHeuvvtwBis/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/nHeuvvtwBis/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/nHeuvvtwBis/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 69,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "nHeuvvtwBis"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "bBic8SuJEcTvKS_ObnVwnphhzp4",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLks2Qi1uSktocHE4",
+      "snippet": {
+        "publishedAt": "2014-08-28T19:01:27Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Katarzyna Czech & Facundo Penalva #1, Feniks, Kraków 27.09.2014",
+        "description": "Kraków 27.09.2014,\nmilonga w Klubie Feniks",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/K6B-nJKhpq8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/K6B-nJKhpq8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/K6B-nJKhpq8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/K6B-nJKhpq8/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/K6B-nJKhpq8/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 70,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "K6B-nJKhpq8"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "9KVCaxMFtjTzTGn624osE1ZQhh0",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLklZSmJkTVhzWm9B",
+      "snippet": {
+        "publishedAt": "2014-08-17T13:50:12Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Beata Maia Gellert & Marek Matysiak #4, II Krakow Summer Tango Weekend 15-17 August 2014",
+        "description": "Kraków 16.08.2014 r.,\nKlub Kabaret",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/IYJbdMXsZoA/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/IYJbdMXsZoA/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/IYJbdMXsZoA/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/IYJbdMXsZoA/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/IYJbdMXsZoA/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 71,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "IYJbdMXsZoA"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "yOXEICeEmXpvx-FfGQO3x6FwJwA",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlpnZE5lMWtERHBN",
+      "snippet": {
+        "publishedAt": "2014-08-17T13:19:39Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Beata Maia Gellert & Marek Matysiak #3, II Krakow Summer Tango Weekend 15-17 August 2014",
+        "description": "Kraków 16.08.2014 r.,\nKlub Kabaret",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ZgdNe1kDDpM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/ZgdNe1kDDpM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/ZgdNe1kDDpM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/ZgdNe1kDDpM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/ZgdNe1kDDpM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 72,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "ZgdNe1kDDpM"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "z5M4H4mVMdTBXz6bFsS6f8HnfFw",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLk90dHFhNWxkaFZz",
+      "snippet": {
+        "publishedAt": "2014-08-17T12:56:19Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Beata Maia Gellert & Marek Matysiak #2, II Krakow Summer Tango Weekend 15-17 August 2014",
+        "description": "Kraków 16.08.2014 r.,\nKlub Kabaret",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Ottqa5ldhVs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Ottqa5ldhVs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Ottqa5ldhVs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Ottqa5ldhVs/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Ottqa5ldhVs/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 73,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Ottqa5ldhVs"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "rFUc3RbijKY4cz3gK0x-ZoTJAJ8",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkRhM09aM0trZm9F",
+      "snippet": {
+        "publishedAt": "2014-08-17T12:38:06Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Beata Maia Gellert & Marek Matysiak #1, II Krakow Summer Tango Weekend 15-17 August 2014",
+        "description": "Kraków 16.08.2014 r.,\nKlub Kabaret",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 74,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Da3OZ3KkfoE"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "pLrTuUbjWFnOs9P93kH7fJrClVw",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjdzTmR5OHJhOGhZ",
+      "snippet": {
+        "publishedAt": "2014-03-17T08:18:34Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Spring Festival in Qatar 20014 #2",
+        "description": "Doha, Qatar, 30.01.2014 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/7sNdy8ra8hY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/7sNdy8ra8hY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/7sNdy8ra8hY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/7sNdy8ra8hY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/7sNdy8ra8hY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 75,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "7sNdy8ra8hY"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "fP_OpsTefbwAvYF89Q1OZxjpfqU",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLmpuVlVFaXQtY0dJ",
+      "snippet": {
+        "publishedAt": "2014-02-20T18:45:22Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Ganga Puja - Varanasi, India",
+        "description": "Varanasi, India, 18.02.2014 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/jnVUEit-cGI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/jnVUEit-cGI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/jnVUEit-cGI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/jnVUEit-cGI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/jnVUEit-cGI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 76,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "jnVUEit-cGI"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "t7VWZxKw1BlAUg37YX6SBlOTpHo",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkk1NS1qczFKTWV3",
+      "snippet": {
+        "publishedAt": "2013-12-03T12:25:27Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Tango surgery, III Tangowy Odlot Południowy 2013 (Southern Tango Take-off)",
+        "description": "III Tangowy Odlot Południowy / III Southern Tango Take-off,\n29.11-01.12.2013 r., Kraków, Poland,\nHotel Europejski, 29.11.2013 r.,\n\nbirthday tango surprise for Katarzyna Czech, \nwith Tymoteusz Ley, Michał Zachariasiewicz, Ireneusz Michalewicz",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/I55-js1JMew/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/I55-js1JMew/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/I55-js1JMew/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/I55-js1JMew/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/I55-js1JMew/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 77,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "I55-js1JMew"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "mknDWxWiWW6TDU-Pr27FOqSQieo",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnJycnJ1d2s2aTNN",
+      "snippet": {
+        "publishedAt": "2013-12-03T12:14:17Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Ola Niesler & Michał Zachariasiewicz, III Tangowy Odlot Południowy 2013 (Southern Tango Take-off)",
+        "description": "III Tangowy Odlot Południowy / III Southern Tango Take-off,\n29.11-01.12.2013 r., Kraków, Poland,\nHotel Europejski, 29.11.2013 r.,\n\nOla Niesler i Michał Zachariasiewicz (Katowice)",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/rrrruwk6i3M/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/rrrruwk6i3M/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/rrrruwk6i3M/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/rrrruwk6i3M/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/rrrruwk6i3M/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 78,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "rrrruwk6i3M"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "tcgvmfjbUDOVbPBJRr_pye9A2jE",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjhlMnFMRmFaNjZB",
+      "snippet": {
+        "publishedAt": "2013-12-03T12:00:53Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Katarzyna Press & Ireneusz Michalewicz, III Tangowy Odlot Południowy 2013 (Southern Tango Take-off)",
+        "description": "III Tangowy Odlot Południowy / III Southern Tango Take-off,\n29.11-01.12.2013 r., Kraków, Poland,\nHotel Europejski, 29.11.2013 r.,\n\nKatarzyna Press i Ireneusz Michalewicz (Wrocław)",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/8e2qLFaZ66A/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/8e2qLFaZ66A/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/8e2qLFaZ66A/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/8e2qLFaZ66A/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/8e2qLFaZ66A/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 79,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "8e2qLFaZ66A"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "N-RIevX9YsMwU36aQbnhShfkzM4",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlN5UE5lemZLX1Zj",
+      "snippet": {
+        "publishedAt": "2013-12-03T11:43:05Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Katarzyna Czech & Tymoteusz Ley, III Tangowy Odlot Południowy 2013 (Southern Tango Take-off)",
+        "description": "III Tangowy Odlot Południowy / III Southern Tango Take-off,\n29.11-01.12.2013 r., Kraków, Poland,\nHotel Europejski, 29.11.2013 r.,\n\nKatarzyna Czech i Tymoteusz Ley (Kraków)",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/SyPNezfK_Vc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/SyPNezfK_Vc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/SyPNezfK_Vc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/SyPNezfK_Vc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/SyPNezfK_Vc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 80,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "SyPNezfK_Vc"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "5CGSB3fToXTmPBq6hR-RjE4aGdE",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkpBU3ZRaG5keTVr",
+      "snippet": {
+        "publishedAt": "2013-12-03T11:29:49Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "All Maestros - opening dance, III Tangowy Odlot Południowy 2013 (Southern Tango Take-off)",
+        "description": "III Tangowy Odlot Południowy / III Southern Tango Take-off,\n29.11-01.12.2013 r., Kraków, Poland,\nHotel Europejski, 29.11.2013 r.,\n\nKatarzyna Press i Ireneusz Michalewicz (Wrocław),\nOla Niesler i Michał Zachariasiewicz (Katowice),\nKatarzyna Czech i Tymoteusz Ley (Kraków)",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/JASvQhndy5k/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/JASvQhndy5k/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/JASvQhndy5k/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/JASvQhndy5k/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/JASvQhndy5k/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 81,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "JASvQhndy5k"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "pie4IEHrtdVv_XDzvVFYIHlZ8_8",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnVwT2JlOS1rbnFz",
+      "snippet": {
+        "publishedAt": "2013-12-03T11:15:11Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Partners exchange + closing dance, III Tangowy Odlot Południowy 2013 (Southern Tango Take-off)",
+        "description": "III Tangowy Odlot Południowy / III Southern Tango Take-off,\n29.11-01.12.2013 r., Kraków, Poland,\nDworek Białoprądnicki, 30.11.2013 r.,\n\nKatarzyna Press, Ireneusz Michalewicz, Ola Niesler, Michał Zachariasiewicz, Katarzyna Czech, Tymoteusz Ley",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/upObe9-knqs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/upObe9-knqs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/upObe9-knqs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/upObe9-knqs/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/upObe9-knqs/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 82,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "upObe9-knqs"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "jnDo9w7BBBQBWFkVguoVJN3Kij0",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnk5UFJjNGMtYjc0",
+      "snippet": {
+        "publishedAt": "2013-11-25T15:08:05Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza #4, II Warsaw Tango Weekend 2013",
+        "description": "II Warsaw Tango Weekend 22-24 November 2013,\nPałac Prymasowski, Warsaw, Poland, 23.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/y9PRc4c-b74/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/y9PRc4c-b74/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/y9PRc4c-b74/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/y9PRc4c-b74/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/y9PRc4c-b74/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 83,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "y9PRc4c-b74"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "nLYNOMh_s4atsEPe5woPR8BHpYw",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlVpYmZsd3Y1SHU4",
+      "snippet": {
+        "publishedAt": "2013-11-25T14:44:44Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza #3, II Warsaw Tango Weekend 2013",
+        "description": "II Warsaw Tango Weekend 22-24 November 2013,\nPałac Prymasowski, Warsaw, Poland, 23.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Uibflwv5Hu8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Uibflwv5Hu8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Uibflwv5Hu8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Uibflwv5Hu8/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Uibflwv5Hu8/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 84,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Uibflwv5Hu8"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "HHus_WWdZcg2V2ja8n6F6OMG-Es",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjVnUnR2Tjg2bE1Z",
+      "snippet": {
+        "publishedAt": "2013-11-25T14:33:21Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza #2, II Warsaw Tango Weekend 2013",
+        "description": "II Warsaw Tango Weekend 22-24 November 2013,\nPałac Prymasowski, Warsaw, Poland, 23.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/5gRtvN86lMY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/5gRtvN86lMY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/5gRtvN86lMY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/5gRtvN86lMY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/5gRtvN86lMY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 85,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "5gRtvN86lMY"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "uQ3uu27jSanZUyE8tOEnuzqcj_I",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnQzdmoxdFZaVEtZ",
+      "snippet": {
+        "publishedAt": "2013-11-25T14:19:56Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza #1, II Warsaw Tango Weekend 2013",
+        "description": "II Warsaw Tango Weekend 22-24 November 2013,\nPałac Prymasowski, Warsaw, Poland, 23.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/t3vj1tVZTKY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/t3vj1tVZTKY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/t3vj1tVZTKY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/t3vj1tVZTKY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/t3vj1tVZTKY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 86,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "t3vj1tVZTKY"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "K2afKZAmjPvc9AhKibBs8rh7W7s",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjdvNVE0Y2E0cFRR",
+      "snippet": {
+        "publishedAt": "2013-11-25T14:02:18Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Noelia Hurtado & Carlitos Espinoza #5, II Warsaw Tango Weekend 2013",
+        "description": "II Warsaw Tango Weekend 22-24 November 2013,\nPałac Prymasowski, Warsaw, Poland, 23.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/7o5Q4ca4pTQ/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/7o5Q4ca4pTQ/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/7o5Q4ca4pTQ/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/7o5Q4ca4pTQ/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/7o5Q4ca4pTQ/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 87,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "7o5Q4ca4pTQ"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "eMlRc-SQXw7qr6IjN0lGW2QpJWA",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkRtNmpTTlJCUWxR",
+      "snippet": {
+        "publishedAt": "2013-11-25T13:40:30Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Ola Niesler & Michał Zachariasiewicz #2, II Warsaw Tango Weekend 2013",
+        "description": "II Warsaw Tango Weekend 22-24 November 2013,\nPałac Prymasowski, Warsaw, Poland, 22.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Dm6jSNRBQlQ/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Dm6jSNRBQlQ/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Dm6jSNRBQlQ/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Dm6jSNRBQlQ/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Dm6jSNRBQlQ/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 88,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Dm6jSNRBQlQ"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "UfHEzG-a-PPJGZjWhuQ1LaT2reM",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLmN1NmxLcjMyN1k0",
+      "snippet": {
+        "publishedAt": "2013-11-25T13:29:15Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Ola Niesler & Michał Zachariasiewicz #1, II Warsaw Tango Weekend 2013",
+        "description": "II Warsaw Tango Weekend 22-24 November 2013,\nPałac Prymasowski, Warsaw, Poland, 22.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/cu6lKr327Y4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/cu6lKr327Y4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/cu6lKr327Y4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/cu6lKr327Y4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/cu6lKr327Y4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 89,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "cu6lKr327Y4"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "nlWrXBIxdFiUddpckIjfu65RUjU",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjlqVjdUM1FIcEx3",
+      "snippet": {
+        "publishedAt": "2013-11-25T13:17:30Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Ola Niesler & Michał Zachariasiewicz #3, II Warsaw Tango Weekend 2013",
+        "description": "II Warsaw Tango Weekend 22-24 November 2013,\nPałac Prymasowski, Warsaw, Poland, 22.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 90,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "9jV7T3QHpLw"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "KtDOItUHuk7_ct6tmOBqWM7A4ww",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLk80YmEtdjhhQzlN",
+      "snippet": {
+        "publishedAt": "2013-11-13T15:00:57Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "All Maestros #1 closing dance, 8th Istanbul Tango Ritual 2013 Godoy, Gutierrez, Muzzopappa, Sanchez,",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013,\nFarewell Milonga - ARMADA OTEL, Istanbul, Turkey, 10.11.2013 r.\nInés Muzzopappa & Dante Sanchez, Horacio Godoy & Magdelena Gutierrez, Christian Marquez & Anabela Brogioli, John Erban & Clarissa Sanchez, Facundo de la Cruz & Paola Sanz",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/O4ba-v8aC9M/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/O4ba-v8aC9M/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/O4ba-v8aC9M/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/O4ba-v8aC9M/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/O4ba-v8aC9M/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 91,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "O4ba-v8aC9M"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "uY7k-U49G8Zp6qqm-tru_cpjE-Q",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlNTQWdRd1dTdkpN",
+      "snippet": {
+        "publishedAt": "2013-11-13T14:50:08Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "All Maestros #2 incredible funny closing dance, 8th Istanbul Tango Ritual 2013 Godoy, Gutierrez, Muz",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013, \nFarewell Milonga - ARMADA OTEL, Istanbul, Turkey, 10.11.2013 r.\n       Inés Muzzopappa & Dante Sanchez, Horacio Godoy & Magdelena Gutierrez, Christian Marquez & Anabela Brogioli, John Erban & Clarissa Sanchez, Facundo de la Cruz & Paola Sanz",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/SSAgQwWSvJM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/SSAgQwWSvJM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/SSAgQwWSvJM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/SSAgQwWSvJM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/SSAgQwWSvJM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 92,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "SSAgQwWSvJM"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "ye2-UtTvsiCx6xdsx8VSg4RbfqA",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlJvYXg1My01Tmw0",
+      "snippet": {
+        "publishedAt": "2013-11-13T13:57:59Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Facundo de la Cruz & Paola Sanz #3, 8th Istanbul Tango Ritual 2013",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013,\nSUADA Milonga, Istanbul, Turkey, 09.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Roax53-5Nl4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Roax53-5Nl4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Roax53-5Nl4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Roax53-5Nl4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Roax53-5Nl4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 93,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Roax53-5Nl4"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "5mjlXtfpW82rBZ3oJpDIIwhWwmw",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkJ2ZW51MUJ0TFE4",
+      "snippet": {
+        "publishedAt": "2013-11-13T13:44:24Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Facundo de la Cruz & Paola Sanz #2, 8th Istanbul Tango Ritual 2013",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013,\nSUADA Milonga, Istanbul, Turkey, 09.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Bvenu1BtLQ8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Bvenu1BtLQ8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Bvenu1BtLQ8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Bvenu1BtLQ8/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Bvenu1BtLQ8/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 94,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Bvenu1BtLQ8"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "v4MCXgwywZQbWi_aFDioeboUL-4",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnkzbHI1TkJ4RW9V",
+      "snippet": {
+        "publishedAt": "2013-11-13T13:34:36Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Facundo de la Cruz & Paola Sanz #1, 8th Istanbul Tango Ritual 2013",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013,\nSUADA Milonga, Istanbul, Turkey, 09.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/y3lr5NBxEoU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/y3lr5NBxEoU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/y3lr5NBxEoU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/y3lr5NBxEoU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/y3lr5NBxEoU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 95,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "y3lr5NBxEoU"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "lkr_YoG59RnU7ORiNF-w7wnPbms",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlFDcXJXM2RjWk9V",
+      "snippet": {
+        "publishedAt": "2013-11-13T13:20:30Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Facundo de la Cruz & Paola Sanz #4, 8th Istanbul Tango Ritual 2013",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013,\nSUADA Milonga, Istanbul, Turkey, 09.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 96,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "QCqrW3dcZOU"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "mwXhOsIIVwh1k7ivbBMYHXBPAFE",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlZtdzVDcUxURDZn",
+      "snippet": {
+        "publishedAt": "2013-11-13T11:36:03Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "John Erban & Clarissa Sanchez #3, 8th Istanbul Tango Ritual 2013",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013,\nSUADA Milonga, Istanbul, Turkey, 09.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Vmw5CqLTD6g/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Vmw5CqLTD6g/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Vmw5CqLTD6g/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Vmw5CqLTD6g/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Vmw5CqLTD6g/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 97,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Vmw5CqLTD6g"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "fmk4aNDcKozdawKf6cnUYF4p3iQ",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlRMYjBXMUVURjlR",
+      "snippet": {
+        "publishedAt": "2013-11-13T11:24:24Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "John Erban & Clarissa Sanchez #2, 8th Istanbul Tango Ritual 2013",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013,\nSUADA Milonga, Istanbul, Turkey, 09.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/TLb0W1ETF9Q/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/TLb0W1ETF9Q/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/TLb0W1ETF9Q/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/TLb0W1ETF9Q/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/TLb0W1ETF9Q/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 98,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "TLb0W1ETF9Q"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "nGf93tfi_CVOf-DiulmBW1nDu6c",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlFYTGR6MFFMWVgw",
+      "snippet": {
+        "publishedAt": "2013-11-13T11:15:22Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "John Erban & Clarissa Sanchez #1, 8th Istanbul Tango Ritual 2013",
+        "description": "8th Istanbul Tango Ritual 6-10 November 2013,\nSUADA Milonga, Istanbul, Turkey, 09.11.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/QXLdz0QLYX0/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/QXLdz0QLYX0/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/QXLdz0QLYX0/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/QXLdz0QLYX0/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/QXLdz0QLYX0/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 99,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "QXLdz0QLYX0"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    }
+  ],
+  "pageInfo": {
+    "totalResults": 169,
+    "resultsPerPage": 50
+  }
+}

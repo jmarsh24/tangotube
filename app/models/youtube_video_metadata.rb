@@ -2,6 +2,7 @@
 
 YoutubeVideoMetadata =
   Struct.new(:slug,
+    :channel_slug,
     :title,
     :description,
     :upload_date,
@@ -15,4 +16,5 @@ YoutubeVideoMetadata =
     :song,
     :thumbnail_url,
     :recommended_video_ids,
+    :channel,
     keyword_init: true)
