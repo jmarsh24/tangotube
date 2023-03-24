@@ -8,6 +8,9 @@ class VideosController < ApplicationController
 
   helper_method :filtering_params, :sorting_params
 
+  # @route GET /videos (videos)
+  # @route POST /
+  # @route GET / (root)
   def index
     video_search = Video::Search.for(filtering_params:, sorting_params:, user: current_user)
     videos = video_search.videos
@@ -47,6 +50,8 @@ class VideosController < ApplicationController
     @videos = scope
   end
 
+  # @route GET /videos/:id (video)
+  # @route GET /watch (watch)
   def show
     if @video.nil?
       Video::YoutubeImport.from_video(video_params[:v])
@@ -74,20 +79,22 @@ class VideosController < ApplicationController
     end
   end
 
+  # @route GET /videos/:id/edit (edit_video)
   def edit
     @clip = Clip.new
     set_recommended_videos
   end
 
+  # @route POST /videos (videos)
   def create
     @video = Video.create(youtube_id: params[:video][:youtube_id])
     fetch_new_video
 
-    redirect_to root_path,
-      notice:
-        "Video Sucessfully Added: The video must be approved before the videos are added"
+    redirect_to root_path
   end
 
+  # @route PATCH /videos/:id (video)
+  # @route PUT /videos/:id (video)
   def update
     @clip = Clip.new
     respond_to do |format|
@@ -104,32 +111,39 @@ class VideosController < ApplicationController
     end
   end
 
+  # @route POST /videos/:id/hide (hide_video)
   def hide
     @video.hidden = true
     @video.save
     render turbo_stream: turbo_stream.remove("video_#{@video.youtube_id}")
   end
 
+  # @route PATCH /videos/:id/upvote (upvote_video)
   def upvote
     update_upvote "like"
   end
 
+  # @route PATCH /videos/:id/downvote (downvote_video)
   def downvote
     update_downvote "like"
   end
 
+  # @route PATCH /videos/:id/bookmark (bookmark_video)
   def bookmark
     update_upvote "bookmark"
   end
 
+  # @route PATCH /videos/:id/complete (complete_video)
   def complete
     update_upvote "watchlist"
   end
 
+  # @route PATCH /videos/:id/watchlist (watchlist_video)
   def watchlist
     update_downvote "watchlist"
   end
 
+  # @route PATCH /videos/:id/featured (featured_video)
   def featured
     @video.update!(featured: !@video.featured?)
     ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
