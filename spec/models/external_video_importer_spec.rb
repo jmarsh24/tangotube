@@ -6,7 +6,7 @@ RSpec.describe ExternalVideoImporter do
   fixtures :all
 
   describe "#Video" do
-    fit "creates a new video" do
+    it "creates a new video" do
       video = Video.find_by(youtube_id: video_metadata.youtube.slug)
       video.channel.destroy
       video.update!(song_id: nil)
