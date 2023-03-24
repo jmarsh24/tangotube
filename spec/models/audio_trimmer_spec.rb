@@ -10,7 +10,7 @@ RSpec.describe AudioTrimmer do
   describe "#trim" do
     it "takes an audio file and creates a 15s snippet" do
       AudioTrimmer.new.trim(audio_file) do |trimmed_file|
-        expect(File.size(trimmed_file)).to eq audio_snippet.size
+        expect(FFMPEG::Movie.new(trimmed_file.path).duration).to eq FFMPEG::Movie.new(audio_snippet.to_s).duration
         expect(File.extname(trimmed_file)).to eq ".mp3"
       end
     end
