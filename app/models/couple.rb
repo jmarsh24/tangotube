@@ -56,7 +56,7 @@ class Couple < ApplicationRecord
     "#{id}-#{slug}"
   end
 
-  def couple_names
+  def dancer_names
     "#{dancer.name} #{partner.name}"
   end
 
@@ -67,7 +67,7 @@ class Couple < ApplicationRecord
   end
 
   def set_slug
-    self.slug = couple_names.parameterize
+    self.slug = dancer_names.parameterize
   end
 
   def set_unique_couple_id
