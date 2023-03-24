@@ -52,9 +52,9 @@ class YoutubeScraper
       view_count: youtube_channel.view_count,
       video_count: youtube_channel.video_count,
       videos: youtube_channel.related_playlists.first.playlist_items.map(&:video_id) || youtube_channel.videos.map(&:id),
-      playlists: youtube_channel.playlists,
-      related_playlists: youtube_channel.related_playlists,
-      subscribed_channels: youtube_channel.subscribed_channels,
+      playlists: youtube_channel.playlists.map(&:id),
+      related_playlists: youtube_channel.related_playlists.map(&:id),
+      subscribed_channels: youtube_channel.subscribed_channels.map(&:id),
       subscriber_count: youtube_channel.subscriber_count,
       privacy_status: youtube_channel.privacy_status
     )
