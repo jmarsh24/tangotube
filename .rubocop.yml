@@ -6,6 +6,7 @@ AllCops:
     - "scratchpad.sql"
     - "db/schema.rb"
     - "bin/bundle"
+    - "vendor/bundle"
 
 inherit_gem:
   shimmer: config/rubocop_base.yml
