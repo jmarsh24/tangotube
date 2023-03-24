@@ -1,12 +1,5 @@
 AllCops:
   TargetRubyVersion: 3.1
-  NewCops: enable
-  Exclude:
-    - "scratchpad.rb"
-    - "scratchpad.sql"
-    - "db/schema.rb"
-    - "bin/bundle"
-    - "vendor/bundle"
 
 inherit_gem:
   shimmer: config/rubocop_base.yml
@@ -19,7 +12,7 @@ RSpec:
 
 # TODO: Move this to Shimmer
 Naming/MemoizedInstanceVariableName:
-  Enabled: true
+  Enabled: truex
 
 # TODO: Move this to Shimmer
 Performance/RedundantMerge:
