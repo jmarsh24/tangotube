@@ -4,7 +4,7 @@ class DancersController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_dancer, only: %i[show edit update destroy]
 
-  # GET /dancers
+  # @route GET /dancers (dancers)
   def index
     dancers = if params[:query].present?
       Dancer.search_by_full_name(params[:query]).order(:name)
@@ -22,7 +22,8 @@ class DancersController < ApplicationController
     end
   end
 
-  # GET /dancers/1
+  # @route POST /dancers/:id (dancer)
+  # @route GET /dancers/:id (dancer)
   def show
     @orchestras = @dancer.orchestras
       .distinct
@@ -35,39 +36,40 @@ class DancersController < ApplicationController
     end
   end
 
-  # GET /dancers/new
+  # @route GET /dancers/new (new_dancer)
   def new
     @dancer = Dancer.new
   end
 
-  # GET /dancers/1/edit
+  # @route GET /dancers/:id/edit (edit_dancer)
   def edit
   end
 
-  # POST /dancers
+  # @route POST /dancers (dancers)
   def create
     @dancer = Dancer.new(dancer_params)
 
     if @dancer.save
-      redirect_to @dancer, notice: "Dancer was successfully created."
+      redirect_to @dancer
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /dancers/1
+  # @route PATCH /dancers/:id (dancer)
+  # @route PUT /dancers/:id (dancer)
   def update
     if @dancer.update(dancer_params)
-      redirect_to @dancer, notice: "Dancer was successfully updated."
+      redirect_to @dancer
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /dancers/1
+  # @route DELETE /dancers/:id (dancer)
   def destroy
     @dancer.destroy
-    redirect_to dancers_url, notice: "Dancer was successfully destroyed."
+    redirect_to dancers_url
   end
 
   private

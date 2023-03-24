@@ -4,14 +4,17 @@ class CommentsController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :authenticate_user!
 
+  # @route GET /comments/:id (comment)
   def show
     @comment = Comment.find params[:id]
   end
 
+  # @route GET /comments/:id/edit (edit_comment)
   def edit
     @comment = Comment.find params[:id]
   end
 
+  # @route POST /comments (comments)
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
@@ -20,10 +23,12 @@ class CommentsController < ApplicationController
     elsif @comment.save && @comment.parent_id.present?
       render turbo_stream: turbo_stream.append("comment_#{@comment.parent_id}_comments", partial: "comments/comment", locals: {comment: @comment})
     else
-      redirect_to @commentable, alert: "Something went wrong"
+      redirect_to @commentable
     end
   end
 
+  # @route PATCH /comments/:id (comment)
+  # @route PUT /comments/:id (comment)
   def update
     @comment = Comment.find params[:id]
 
@@ -34,6 +39,7 @@ class CommentsController < ApplicationController
     end
   end
 
+  # @route DELETE /comments/:id (comment)
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
