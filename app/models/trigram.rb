@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Trigram
   class << self
     def similarity(text1, text2)
