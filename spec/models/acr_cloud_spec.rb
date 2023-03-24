@@ -7,12 +7,12 @@ RSpec.describe AcrCloud do
 
   let(:audio_file) { file_fixture("blank_audio.mp3").open }
 
-  describe "send" do
-    it "send a request to ACR Cloud" do
+  describe "#analyze" do
+    it "sends a request to ACR Cloud" do
       stub_request(:post, "http://identify-eu-west-1.acrcloud.com/v1/identify")
         .and_return(status: 200, body: file_fixture("acr_cloud_response.json").read)
 
-      data = AcrCloud.new.upload audio_file
+      data = AcrCloud.new.analyze audio_file
 
       status = data.dig :status
       metadata = data.dig :metadata

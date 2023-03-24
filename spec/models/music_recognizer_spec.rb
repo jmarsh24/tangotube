@@ -5,15 +5,19 @@ require "rails_helper"
 RSpec.describe MusicRecognizer do
   fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
+  let(:trimmed_audio) { file_fixture("audio_snippet.mp3").open }
+  let(:audio_file) { file_fixture("audio.mp3").open }
+  let(:acr_cloud_response) { JSON.parse file_fixture("acr_cloud_response.json").read, symbolize_names: true }
+  let(:acr_cloud) { AcrCloud.new }
+  let(:audio_trimmer) { AudioTrimmer.new }
+  let(:youtube_audio_downloader) { YoutubeAudioDownloader.new }
 
-  describe "recognize" do
+  describe "process_audio_snippet" do
     it "returns the music data from ACR Cloud and Spotify" do
-      acr_cloud = AcrCloud.new
-      allow(acr_cloud).to receive(:upload).and_return(file_fixture("acr_cloud_response.json").read)
-      audio_trimmer = AudioTrimmer.new
-      allow(audio_trimmer).to receive(:trim).and_return(file_fixture("audio_snippet.mp3"))
-      youtube_audio_downloader = YoutubeAudioDownloader.new
-      allow(youtube_audio_downloader).to receive(:with_download_file).and_return(file_fixture("blank_audio.mp3"))
+      allow(acr_cloud).to receive(:analyze).and_return acr_cloud_response
+      allow(audio_trimmer).to receive(:trim).and_yield trimmed_audio
+      allow(youtube_audio_downloader).to receive(:download_file).and_yield audio_file
+
       music_recognizer = MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:)
 
       metadata = music_recognizer.process_audio_snippet(slug)
