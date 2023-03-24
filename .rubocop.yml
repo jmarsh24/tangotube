@@ -1,0 +1,27 @@
+AllCops:
+  TargetRubyVersion: 3.1
+
+inherit_gem:
+  shimmer: config/rubocop_base.yml
+
+require:
+  - rubocop-rspec
+
+RSpec:
+  Enabled: false
+
+# TODO: Move this to Shimmer
+Naming/MemoizedInstanceVariableName:
+  Enabled: true
+
+# TODO: Move this to Shimmer
+Performance/RedundantMerge:
+  MaxKeyValuePairs: 1
+
+RSpec/ExpectChange:
+  Enabled: true
+  EnforcedStyle: block
+
+RSpec/Focus:
+  Enabled: true
+  AutoCorrect: false # you want to save your spec files with `f` prefixes while working with VSCode applying Rubocop on file save.
