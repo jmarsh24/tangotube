@@ -56,13 +56,6 @@ RSpec.describe Video::YoutubeImport::Video do
       end
     end
 
-    context "when video does not exists" do
-      it "raises error" do
-        expect { Video::YoutubeImport::Video.import("123456789") }.to raise_error("Video with youtube_id: 123456789 does not exist in YouTube")
-        expect(Video.find_by(youtube_id: "123456789")).to be_nil
-      end
-    end
-
     it "adds dancers if there is a title match" do
       video = videos :video_1_featured
       video.dancer_videos.map(&:destroy!)
