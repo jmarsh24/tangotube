@@ -1,17 +1,15 @@
 # frozen_string_literal: true
 
 class VideoCrawler
-  attr_reader :youtube_scraper, :music_recognizer
-
-  def initialize(youtube_scraper: YouTubeScraper.new, music_recognizer: MusicRecognizer.new)
+  def initialize(youtube_scraper: YoutubeScraper.new, music_recognizer: MusicRecognizer.new)
     @youtube_scraper = youtube_scraper
     @music_recognizer = music_recognizer
   end
 
-  def call(slug)
+  def video_metadata(slug)
     VideoMetadata.new(
-      youtube: youtube_scraper.video_metadata(slug),
-      acr_cloud: music_recognizer.process_audio_snippet(slug)
+      youtube: @youtube_scraper.video_metadata(slug),
+      acr_cloud: @music_recognizer.process_audio_snippet(slug)
     )
   end
 end

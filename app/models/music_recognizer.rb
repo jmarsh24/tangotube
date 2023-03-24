@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class MusicRecognizer
-  attr_reader :acr_cloud, :audio_trimmer, :youtube_audio_downloader
   def initialize(acr_cloud: AcrCloud.new, audio_trimmer: AudioTrimmer.new, youtube_audio_downloader: YoutubeAudioDownloader.new)
     @acr_cloud = acr_cloud
     @audio_trimmer = audio_trimmer
@@ -9,8 +8,11 @@ class MusicRecognizer
   end
 
   def process_audio_snippet(slug)
-    data = acr_cloud.upload(trimmed_audio_file(slug))
-    @data = JSON.parse(data, symbolize_names: true)
+    @youtube_audio_downloader.download_file(slug) do |full_length_audio_file|
+      @audio_trimmer.trim(full_length_audio_file) do |trimmed_audio_file|
+        @data = @acr_cloud.analyze(trimmed_audio_file)
+      end
+    end
 
     MusicRecognitionMetadata.new(
       code:,
@@ -31,14 +33,6 @@ class MusicRecognizer
   end
 
   private
-
-  def trimmed_audio_file(slug)
-    audio_trimmer.trim(audio_file(slug))
-  end
-
-  def audio_file(slug)
-    youtube_audio_downloader.with_download_file(slug)
-  end
 
   def status
     @data.dig :status
@@ -85,6 +79,7 @@ class MusicRecognizer
   end
 
   def spotify
+    return nil unless external_metadata
     external_metadata.dig(:spotify)
   end
 
