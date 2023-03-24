@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoupleResource < Avo::BaseResource
-  self.title = :couple_names
+  self.title = :dancer_names
   self.includes = []
   # self.search_query = -> do
   #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
