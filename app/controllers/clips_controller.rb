@@ -38,8 +38,7 @@ class ClipsController < ApplicationController
           redirect_to watch_path(v: @clip.video.youtube_id,
             start: @clip.start_seconds,
             end: @clip.end_seconds,
-            speed: @clip.playback_rate),
-            notice: "Clip was successfully created. Click #{view_context.link_to("Here", clips_path)} to view your clip."
+            speed: @clip.playback_rate)
         end
         format.turbo_stream do
           flash.now[:notice] = "Clip was successfully created. Click #{view_context.link_to("Here", clips_path)} to view your clip."
@@ -53,7 +52,7 @@ class ClipsController < ApplicationController
   # PATCH/PUT /clips/1
   def update
     if @clip.update(clip_params)
-      redirect_to clips_path(@clip), notice: "Clip was successfully updated."
+      redirect_to clips_path(@clip)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -63,7 +62,7 @@ class ClipsController < ApplicationController
   def destroy
     @clip.destroy
     respond_to do |format|
-      format.html { redirect_to clips_path, notice: "Clip was successfully destroyed." }
+      format.html { redirect_to clips_path }
       format.turbo_stream
     end
   end

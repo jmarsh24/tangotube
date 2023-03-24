@@ -32,7 +32,7 @@ class PerformancesController < ApplicationController
     @performance = Performance.new(performance_params)
 
     if @performance.save
-      redirect_to @performance, notice: "Performance was successfully created."
+      redirect_to @performance
     else
       render :new, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class PerformancesController < ApplicationController
   # PATCH/PUT /performances/1
   def update
     if @performance.update(performance_params)
-      redirect_to @performance, notice: "Performance was successfully updated."
+      redirect_to @performance
     else
       render :edit, status: :unprocessable_entity
     end
@@ -50,7 +50,7 @@ class PerformancesController < ApplicationController
   # DELETE /performances/1
   def destroy
     @performance.destroy
-    redirect_to performances_url, notice: "Performance was successfully destroyed."
+    redirect_to performances_url
   end
 
   private

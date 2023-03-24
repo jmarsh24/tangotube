@@ -83,9 +83,7 @@ class VideosController < ApplicationController
     @video = Video.create(youtube_id: params[:video][:youtube_id])
     fetch_new_video
 
-    redirect_to root_path,
-      notice:
-        "Video Sucessfully Added: The video must be approved before the videos are added"
+    redirect_to root_path
   end
 
   def update
