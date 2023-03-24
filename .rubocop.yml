@@ -12,7 +12,7 @@ RSpec:
 
 # TODO: Move this to Shimmer
 Naming/MemoizedInstanceVariableName:
-  Enabled: truex
+  Enabled: true
 
 # TODO: Move this to Shimmer
 Performance/RedundantMerge:
