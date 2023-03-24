@@ -1,0 +1,961 @@
+{
+  "kind": "youtube#playlistItemListResponse",
+  "etag": "w-rFdj1DkaGmX85FEC4ntbg_NpE",
+  "prevPageToken": "EAEaB1BUOkNKWUI",
+  "items": [
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "IQntL3UeexLt32ZtCvFeSWLWrkI",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjJpRENzQk94eW9n",
+      "snippet": {
+        "publishedAt": "2013-07-31T08:32:11Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Sabrina & Ruben Veliz - Istanbul 2013 #4, 10. International İstanbul Tango Festival",
+        "description": "10. International İstanbul Tango Festival,\nTurkiye, İstanbul, Bahcesehir Univ., 05.07.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/2iDCsBOxyog/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/2iDCsBOxyog/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/2iDCsBOxyog/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/2iDCsBOxyog/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/2iDCsBOxyog/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 150,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "2iDCsBOxyog"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "7Vyq_4JCM-m-5QIuhT70suk6xWM",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLnN2a28tSmZFYklJ",
+      "snippet": {
+        "publishedAt": "2013-06-17T17:40:42Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Daniela Pucci & Luis Bianchi - Kraków 2013 #4",
+        "description": "2013.06.14 Kraków,\nKlub Kabaret,\nMilonga NMK5",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/svko-JfEbII/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/svko-JfEbII/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/svko-JfEbII/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/svko-JfEbII/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/svko-JfEbII/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 151,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "svko-JfEbII"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "hLtIlZYSAYKTHUagYxUSaZRLC8Y",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkFELXRjNFZDekxr",
+      "snippet": {
+        "publishedAt": "2013-06-17T16:26:51Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Daniela Pucci & Luis Bianchi - Kraków 2013 #3",
+        "description": "2013.06.14 Kraków,\nKlub Kabaret,\nMilonga NMK5",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/AD-tc4VCzLk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/AD-tc4VCzLk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/AD-tc4VCzLk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/AD-tc4VCzLk/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/AD-tc4VCzLk/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 152,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "AD-tc4VCzLk"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "K4ygLKd39reb3gjLKyrOJv-vs-A",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjFTeElZX1lUSEcw",
+      "snippet": {
+        "publishedAt": "2013-06-17T15:17:02Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Daniela Pucci & Luis Bianchi - Kraków 2013 #2",
+        "description": "2013.06.14 Kraków,\nKlub Kabaret,\nMilonga NMK5",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/1SxIY_YTHG0/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/1SxIY_YTHG0/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/1SxIY_YTHG0/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/1SxIY_YTHG0/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/1SxIY_YTHG0/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 153,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "1SxIY_YTHG0"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "VA6FbxGsVX9r4RJe0Ov9Y5m39Zo",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlBhQllBZ0xSQzdF",
+      "snippet": {
+        "publishedAt": "2013-06-17T14:02:41Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Daniela Pucci & Luis Bianchi - Kraków 2013 #5",
+        "description": "2013.06.14 Kraków,\nKlub Kabaret,\nMilonga NMK5",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/PaBYAgLRC7E/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/PaBYAgLRC7E/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/PaBYAgLRC7E/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/PaBYAgLRC7E/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/PaBYAgLRC7E/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 154,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "PaBYAgLRC7E"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "7UFUZisH_DJ3qihGRI6XGeStKGM",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkF4S1lxZzRMTFFr",
+      "snippet": {
+        "publishedAt": "2013-06-17T12:29:24Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Daniela Pucci & Luis Bianchi - Kraków 2013 #1",
+        "description": "2013.06.14 Kraków,\nKlub Kabaret,\nMilonga NMK5",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/AxKYqg4LLQk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/AxKYqg4LLQk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/AxKYqg4LLQk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/AxKYqg4LLQk/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/AxKYqg4LLQk/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 155,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "AxKYqg4LLQk"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "b9L71dlwA_-q-zVOkzlPoTE43xU",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLi01UmlKRkxxblUw",
+      "snippet": {
+        "publishedAt": "2013-06-17T10:42:36Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Daniela Pucci & Luis Bianchi - Kraków 2013 #6 \"drunk\" vals",
+        "description": "2013.06.14 Kraków,\nKlub Kabaret,\nMilonga NMK5",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/-5RiJFLqnU0/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/-5RiJFLqnU0/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/-5RiJFLqnU0/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/-5RiJFLqnU0/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/-5RiJFLqnU0/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 156,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "-5RiJFLqnU0"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "ShtjBV3aCksOeJJq79qn5-57dUo",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlJOM05DYXR5Vmdv",
+      "snippet": {
+        "publishedAt": "2013-06-17T07:28:05Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Daniela Pucci & Luis Bianchi - the wave - Kraków 14.06.2013",
+        "description": "2013.06.14 Kraków,\nKlub Kabaret,\nmilonga NMK5",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/RN3NCatyVgo/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/RN3NCatyVgo/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/RN3NCatyVgo/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/RN3NCatyVgo/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/RN3NCatyVgo/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 157,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "RN3NCatyVgo"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "oNXWQxAsr4O__OHh3EUX0PboiZs",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLjJPMWFSNkFhRG1j",
+      "snippet": {
+        "publishedAt": "2013-05-11T16:25:54Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Burlesque Blush, Benefis Tomasza Gołębiowskiego - Kraków 2013",
+        "description": "Benefis 45-lecia pracy artystycznej Tomasza Gołębiowskiego\nTeatr Ludowy, Kraków 10.05.2013 r. \n\nBurlesque Blush, zespół pod kierownictwem Darii Dużyńskiej",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/2O1aR6AaDmc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/2O1aR6AaDmc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/2O1aR6AaDmc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/2O1aR6AaDmc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/2O1aR6AaDmc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 158,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "2O1aR6AaDmc"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "NjdYILekvFa3oJSKItIhcxrz3VE",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkIyendOcjdXOTlr",
+      "snippet": {
+        "publishedAt": "2013-04-08T20:22:49Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Pablo Rodriguez & Corina Herrera - Kraków 2013 # 5",
+        "description": "Milonga z pokazem P&C\nKlub Dziennikarzy pod Gruszką, Kraków 13.04.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/B2zwNr7W99k/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/B2zwNr7W99k/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/B2zwNr7W99k/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/B2zwNr7W99k/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/B2zwNr7W99k/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 159,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "B2zwNr7W99k"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "etyDfVEV4PEDPL7XGEdgn9xeCZ4",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLldhTDQ5dDdfdUpJ",
+      "snippet": {
+        "publishedAt": "2013-04-08T18:45:51Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Pablo Rodriguez & Corina Herrera - Kraków 2013 # 4",
+        "description": "Milonga z pokazem P&C\nKlub Dziennikarzy pod Gruszką, Kraków 13.04.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/WaL49t7_uJI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/WaL49t7_uJI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/WaL49t7_uJI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/WaL49t7_uJI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/WaL49t7_uJI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 160,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "WaL49t7_uJI"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "3EACCbWgrJ7uGuGFUKs980447gM",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlBmWV9OX1pUdVdN",
+      "snippet": {
+        "publishedAt": "2013-04-08T17:07:51Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Pablo Rodriguez & Corina Herrera - Kraków 2013 # 3",
+        "description": "Milonga z pokazem P&C\nKlub Dziennikarzy pod Gruszką, Kraków 13.04.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/PfY_N_ZTuWM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/PfY_N_ZTuWM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/PfY_N_ZTuWM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/PfY_N_ZTuWM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/PfY_N_ZTuWM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 161,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "PfY_N_ZTuWM"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "VIZJeaRtK6lh-CnfYM5X7YUsN8E",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkl3N2cwREJ2YTVn",
+      "snippet": {
+        "publishedAt": "2013-04-08T15:39:32Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Pablo Rodriguez & Corina Herrera - Kraków 2013 # 2",
+        "description": "Milonga z pokazem P&C\nKlub Dziennikarzy pod Gruszką, Kraków 13.04.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Iw7g0DBva5g/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Iw7g0DBva5g/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Iw7g0DBva5g/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Iw7g0DBva5g/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Iw7g0DBva5g/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 162,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Iw7g0DBva5g"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "SDWWEiB8BEb7ocV--BNUW4ebYfM",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLklpNXJkRzNxWllZ",
+      "snippet": {
+        "publishedAt": "2013-04-08T14:27:06Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Pablo Rodriguez & Corina Herrera - Kraków 2013 # 1",
+        "description": "Milonga z pokazem P&C\nKlub Dziennikarzy pod Gruszką, Kraków 13.04.2013 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 163,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "Ii5rdG3qZYY"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "pBm4rV3navXUAt9c47FhA3bDWJo",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkc5WGRZbExNa2dJ",
+      "snippet": {
+        "publishedAt": "2012-12-05T09:17:23Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Katarzyna Czech & Facundo Penalva - milonga Panta Rei, Kontakt, Kraków 2012",
+        "description": "Kraków 01.12.2012 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/G9XdYlLMkgI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/G9XdYlLMkgI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/G9XdYlLMkgI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/G9XdYlLMkgI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/G9XdYlLMkgI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 164,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "G9XdYlLMkgI"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "0teVIsu_ehH8genEHVQK1wCafnA",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLlRZMTlsdC0weTR3",
+      "snippet": {
+        "publishedAt": "2012-12-05T07:28:53Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Tymoteusz Ley & Facundo Penalva - milonga Panta Rei, Kontakt, Kraków 2012",
+        "description": "Kraków 01.12.2012 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/TY19lt-0y4w/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/TY19lt-0y4w/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/TY19lt-0y4w/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/TY19lt-0y4w/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/TY19lt-0y4w/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 165,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "TY19lt-0y4w"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "X624KNFet5-K7Qk94P6es5o_zNI",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLk1JN3NoNm5xbGdF",
+      "snippet": {
+        "publishedAt": "2012-12-04T16:28:22Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Julia Gajdarska & Facundo Peñalva cz. 3 - milonga Panta Rei, Kontakt, Kraków 2012",
+        "description": "Kraków 01.12.2012 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/MI7sh6nqlgE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/MI7sh6nqlgE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/MI7sh6nqlgE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/MI7sh6nqlgE/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/MI7sh6nqlgE/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 166,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "MI7sh6nqlgE"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "uvNVtdsuraMih0XyV1FtTSebhak",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLml3QUFtY0xkRGlJ",
+      "snippet": {
+        "publishedAt": "2012-12-04T14:01:37Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Julia Gajdarska & Facundo Peñalva cz. 2 - milonga Panta Rei, Kontakt, Kraków 2012",
+        "description": "Kraków 01.12.2012 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/iwAAmcLdDiI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/iwAAmcLdDiI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/iwAAmcLdDiI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/iwAAmcLdDiI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/iwAAmcLdDiI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 167,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "iwAAmcLdDiI"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "G3jQ_5vJriuK9hvZevJ_28IOHuQ",
+      "id": "VVV2blk0Ri1DSlZnWWRRdUl2OHNxcC1BLkd3VXk1bkFQSUlV",
+      "snippet": {
+        "publishedAt": "2012-12-04T05:09:30Z",
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "title": "Julia Gajdarska & Facundo Peñalva cz. 1 - milonga Panta Rei, Kontakt, Kraków 2012",
+        "description": "Kraków 01.12.2012 r.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/GwUy5nAPIIU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/GwUy5nAPIIU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/GwUy5nAPIIU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/GwUy5nAPIIU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/GwUy5nAPIIU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "jkuklaVideo",
+        "playlistId": "UUvnY4F-CJVgYdQuIv8sqp-A",
+        "position": 168,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "GwUy5nAPIIU"
+        },
+        "videoOwnerChannelTitle": "jkuklaVideo",
+        "videoOwnerChannelId": "UCvnY4F-CJVgYdQuIv8sqp-A"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    }
+  ],
+  "pageInfo": {
+    "totalResults": 169,
+    "resultsPerPage": 50
+  }
+}
