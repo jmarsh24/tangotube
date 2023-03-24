@@ -23,8 +23,11 @@ RSpec.describe VideoCrawler do
           maxres: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
         )
 
+      channel_metadata = ChannelMetadata.new
+
       video_metadata = YoutubeVideoMetadata.new(
         slug: "AQ9Ri3kWa_4",
+        channel_slug: "UCvnY4F-CJVgYdQuIv8sqp-A",
         title: "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
         description:
           "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
@@ -85,6 +88,7 @@ RSpec.describe VideoCrawler do
     it "returns the video data from youtube" do
       metadata = @metadata.youtube
       expect(metadata.slug).to eq "AQ9Ri3kWa_4"
+      expect(metadata.channel_slug).to eq "UCvnY4F-CJVgYdQuIv8sqp-A"
       expect(metadata.title).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
       expect(metadata.description).to eq "24-26.10.2014 r., Amsterdam, Netherlands,\nPerformance 25th Oct, \"Salon de los Sabados\" in Academia de Tango"
       expect(metadata.upload_date).to eq "2014-10-26 15:21:29 UTC"

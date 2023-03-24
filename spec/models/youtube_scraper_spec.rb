@@ -41,6 +41,20 @@ RSpec.describe YoutubeScraper do
       expect(metadata.song.titles).to include "Cuando El Amor Muere"
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
       expect(metadata.recommended_video_ids).to match_array ["0ZPR_DNTghE", "1weCIypdfkE", "34dYj80KLmU"]
+      expect(metadata.channel.id).to eq("UCvnY4F-CJVgYdQuIv8sqp-A")
+      expect(metadata.channel.title).to eq "jkuklaVideo"
+      expect(metadata.channel.description).to eq ""
+      expect(metadata.channel.published_at).to eq "2012-05-21 12:31:41.000000000 +0000"
+      expect(metadata.channel.thumbnail_url).to eq "https://yt3.ggpht.com/ytc/AL5GRJWaKWUq-2aJhzwmgH7VQ-mkxXcySvtGB7Oge3kh=s88-c-k-c0x00ffffff-no-rj"
+      expect(metadata.channel.view_count).to eq 304130
+      expect(metadata.channel.video_count).to eq 169
+      expect(metadata.channel.subscriber_count).to eq 389
+      expect(metadata.channel.videos).to match_array ["tVmD4x0NtsE", "l4gmmR6BGY4", "yHIcLs4U7ws", "_7mHTtKKvtw", "0ZPR_DNTghE", "iOieQi7iYwA", "vVz4dqCc2lc", "H2Q9jFGNC94", "NA-muRg2jyk", "rX7CsSnqAp4", "bnIG3wVZ52Q", "FnPa-M9Ezos", "fN4ThtBSiU8", "3O33gHJGibQ", "w_GxmSMfyvE", "LTptQYCisJk", "xzucEZx6c_E", "6cZR3kIpCu8", "BLMr09iTLjQ", "m8-A40Ka-6o", "45ewSNMOmgg", "3yqrzTc0Yks", "ZRtWN_ObKss", "vuMhamQnR7g", "smP1skkGaZ4", "f3W-6nZFdKI", "MrRps8_81zI", "ADoxqxI_1FE", "oq2idlPLbco", "Z3WH6bskQ5s", "pZWkNG3KNqU", "61XJi__UDRw", "6PS6iopv7aY", "icNgKwNvfpc", "Hx0iHLSyOx8", "R_55celtOVk", "iDs8BWLjayQ", "IS041D8_vEg", "Y5do7v2jfEk", "cnV_X9gpb7Y", "NAjXs-LbbQ8", "kf2LAC6l0Lc", "a9rYjjxTwVM", "Pc8P1OaBSuc", "2MMD1Nj7XC4", "hNljorURqk0", "om-RMGuLCII", "yCZbZU0SJaM", "iRTN5C4pxM0", "uYYP1UMKGbU", "nGA7-iw6Pag", "miJO8BGq0Pg", "MQ96oN4AnKw", "AQ9Ri3kWa_4", "fPpxadIpZn4", "yQlzSz8NxBw", "WjDtsHd1kQo", "Sh33tRdhZMc", "d0eTEJSxTys", "qEEbxV-EF30", "5fKDEpdtS3g", "6-Uh51vY8Ns", "tibpTW6S45Y", "tduA8NDGiQc", "btvgHRHHW3o", "hg92xp5Z7-s", "ouf8iHvgSLM", "PiJMRE6kLZo", "ZjwnFQ3_AUE", "nHeuvvtwBis", "K6B-nJKhpq8", "IYJbdMXsZoA", "ZgdNe1kDDpM", "Ottqa5ldhVs", "Da3OZ3KkfoE", "7sNdy8ra8hY", "jnVUEit-cGI", "I55-js1JMew", "rrrruwk6i3M", "8e2qLFaZ66A", "SyPNezfK_Vc", "JASvQhndy5k", "upObe9-knqs", "y9PRc4c-b74", "Uibflwv5Hu8", "5gRtvN86lMY", "t3vj1tVZTKY", "7o5Q4ca4pTQ", "Dm6jSNRBQlQ", "cu6lKr327Y4", "9jV7T3QHpLw", "O4ba-v8aC9M", "SSAgQwWSvJM", "Roax53-5Nl4", "Bvenu1BtLQ8", "y3lr5NBxEoU", "QCqrW3dcZOU", "Vmw5CqLTD6g", "TLb0W1ETF9Q", "QXLdz0QLYX0", "lOHWXsK61Xc", "exuiY-AKV8E", "59YdBBAMB7U", "WgsTkX6Pu8M", "ga7ZIlLEegc", "xkewduSP8JI", "imr97YXB0tc", "HI6ekleA9F4", "5jSZXhIcRWY", "R7K_b52gmZQ", "cpec_0AOgO8", "ii9P3T1H4QE", "uKD5z4RtF-M", "6fcXUa6F270", "SH9Lf0GUTEg", "sWsK_ayBQyo", "5zWDjyl2Kys", "Upuz-0L5MXo", "UdgVYNAcK20", "R9ohv5xZ6sk", "ciOvuBg5EYo", "py-KWtzv4W0", "yz5jLqtzL6A", "OGq7nXdeJc4", "9BJLqKhjqyc", "AqNEFw2fPDk", "P9kJmtknRhY", "p17JcmoNDqo", "LnuO70hYnjA", "K57o9q-awRs", "rnKtdlbFpqk", "ofywhpA8mb4", "9w6pOKKGNbk", "ActDtfycs2M", "VpP0v-r_Gsk", "YSvFSZq3wmA", "3IjygrbAgIY", "HYs6X7y5hII", "i93p4QEicds", "Paf3v1uX6rk", "57uMWB660JE", "g99OMLy4fNo", "ADjp1pEAAaQ", "hhPrkrRCdm4", "QcSdaKSytYM", "D2s4nTBZ7OE", "3aq9rojukCI", "lyDursWZcmc", "bR-38FZUhPE", "_OKnDDklseg", "2iDCsBOxyog", "svko-JfEbII", "AD-tc4VCzLk", "1SxIY_YTHG0", "PaBYAgLRC7E", "AxKYqg4LLQk", "-5RiJFLqnU0", "RN3NCatyVgo", "2O1aR6AaDmc", "B2zwNr7W99k", "WaL49t7_uJI", "PfY_N_ZTuWM", "Iw7g0DBva5g", "Ii5rdG3qZYY", "G9XdYlLMkgI", "TY19lt-0y4w", "MI7sh6nqlgE", "iwAAmcLdDiI", "GwUy5nAPIIU"]
+      # expect(metadata.channel.playlists).to eq "Noelia Hurtado"
+      # expect(metadata.channel.related_playlists).to eq "UCvnY4F-CJVgYdQuIv8sqp-A"
+      # expect(metadata.channel.subscribed_channels).to eq "Noelia Hurtado"
+      expect(metadata.channel.subscriber_count).to eq 389
+      expect(metadata.channel.privacy_status).to eq "public"
     end
   end
 
@@ -53,6 +67,33 @@ RSpec.describe YoutubeScraper do
 
     stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=AQ9Ri3kWa_4&key=YOUTUBE_API_KEY&maxResults=50&part=statistics")
       .to_return(status: 200, body: file_fixture("youtube_scraper_response_2.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/channels?id=UCvnY4F-CJVgYdQuIv8sqp-A&key=YOUTUBE_API_KEY&part=snippet")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_3.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/channels?id=UCvnY4F-CJVgYdQuIv8sqp-A&key=YOUTUBE_API_KEY&maxResults=50&part=statistics")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_4.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/channels?id=UCvnY4F-CJVgYdQuIv8sqp-A&key=YOUTUBE_API_KEY&part=contentDetails")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_5.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/playlists?id=,UUvnY4F-CJVgYdQuIv8sqp-A&key=YOUTUBE_API_KEY&maxResults=50&part=snippet,status")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_6.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/playlistItems?key=YOUTUBE_API_KEY&maxResults=50&part=snippet,status&playlistId=UUvnY4F-CJVgYdQuIv8sqp-A")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_7.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/playlistItems?key=YOUTUBE_API_KEY&maxResults=50&pageToken=EAAaBlBUOkNESQ&part=snippet,status&playlistId=UUvnY4F-CJVgYdQuIv8sqp-A")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_8.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/playlistItems?key=YOUTUBE_API_KEY&maxResults=50&pageToken=EAAaBlBUOkNHUQ&part=snippet,status&playlistId=UUvnY4F-CJVgYdQuIv8sqp-A")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_9.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/playlistItems?key=YOUTUBE_API_KEY&maxResults=50&pageToken=EAAaB1BUOkNKWUI&part=snippet,status&playlistId=UUvnY4F-CJVgYdQuIv8sqp-A")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_10.json").read)
+
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/channels?id=UCvnY4F-CJVgYdQuIv8sqp-A&key=YOUTUBE_API_KEY&part=status")
+      .to_return(status: 200, body: file_fixture("youtube_scraper_response_11.json").read)
   end
 
   def stub_page(driver)
