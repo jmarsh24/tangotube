@@ -5,6 +5,4 @@
       = f.hidden_field :reset_password_token
       = f.hidden_field :email
       = f.input :password, as: :password, autocomplete: "new-password", autofocus: true, class: "input input--text"
-      = f.submit "Change my password", class: "primary-button"
-
-
+      = f.submit t("change_my_password_button"), class: "primary-button"

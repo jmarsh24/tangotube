@@ -1,5 +1,5 @@
-h1.heading-1.heading-1--bold New dancer
+h1.heading-1.heading-1--bold = t(".new_dancer")
 = render "form", dancer: @dancer
 br
 div
-= link_to "Back to dancers", dancers_path
+= link_to t(".back_link"), dancers_path
