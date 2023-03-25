@@ -6,9 +6,7 @@
       .alert.alert-danger
         - f.object.errors.full_messages.each do |message|
           = message
-    = f.text_area :body, placeholder: "Add a comment", class: "form-control", required: true, style: "width: 100%; border-radius: 4px; border: 1px solid #c2c2c2; padding: 8px 12px; color: var(--color-gray-800); font-size: 16px; max-width: 100%;"
+    = f.text_area :body, placeholder: t(".add_a_comment"), class: "form-control", required: true, style: "width: 100%; border-radius: 4px; border: 1px solid #c2c2c2; padding: 8px 12px; color: var(--color-gray-800); font-size: 16px; max-width: 100%;"
   .form-group style="margin-top: 10px;"
     = f.hidden_field :parent_id, value: local_assigns[:parent_id]
     = f.submit class: "button button-primary", "data-action": "click->reply#closeForm"
-
-
