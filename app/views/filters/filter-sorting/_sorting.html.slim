@@ -1,13 +1,12 @@
 #menu-sorting-filters.stack.stack--zero data-toggle-target="sorting"
-  h4.heading-4.heading-4--bold.dropdown__label Sort By
+  h4.heading-4.heading-4--bold.dropdown__label = t("sort_by_heading")
   = sortable 'videos.upload_date', "desc", @sort_column, @sort_direction, "Recent First"
   = sortable 'videos.upload_date', "asc", @sort_column, @sort_direction, "Oldest First"
   = sortable "videos.view_count", "desc", @sort_column, @sort_direction, "Most Viewed"
   = sortable "videos.popularity", "desc", @sort_column, @sort_direction, "Trending"
   = sortable "videos.like_count", "desc", @sort_column, @sort_direction, "Most Liked"
-  h4.heading-4.heading-4--bold.dropdown__label Group By
+  h4.heading-4.heading-4--bold.dropdown__label = t("group_by_heading")
   = sortable 'song.title', "asc", @sort_column, @sort_direction, "Song"
   = sortable 'song.orchestra', "asc", @sort_column, @sort_direction, "Orchestra"
   = sortable 'channels.title', "asc", @sort_column, @sort_direction, "Channel"
   = sortable 'performance_videos.performance_id', "asc", @sort_column, @sort_direction, "Performance"
-

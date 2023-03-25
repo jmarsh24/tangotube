@@ -1,5 +1,5 @@
-p Welcome = @email !
+p = t(".welcome", email: @email)
 
-p You can confirm your account email through the link below:
+p = t("confirm_your_account_here")
 
-p = link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token)
+p = link_to t("confirm_link"), confirmation_url(@resource, confirmation_token: @token)

@@ -2,6 +2,6 @@ p style="color: green"
   notice
 = render @song
 div
-  = link_to "Edit this song", edit_song_path(@song)
-  = link_to "Back to songs", songs_path
-  = button_to "Destroy this song", @song, method: :delete
+  = link_to t(".edit_link"), edit_song_path(@song)
+  = link_to t(".back_link"), songs_path
+  = button_to t(".destroy_button"), @song, method: :delete

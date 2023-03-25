@@ -2,13 +2,13 @@
 = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
   .stack.stack--desktop-line
     div
-      = f.select :genre, options_for_select(@genres, params[:genre].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Genre...", "data-controller": "tom-select", class: "input input__input", style: "width: 160px", id: "genre-filter"
+      = f.select :genre, options_for_select(@genres, params[:genre].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".genre_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 160px", id: "genre-filter"
     div
-      = f.select :leader, options_for_select(@leaders, params[:leader].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Leader...", "data-controller": "tom-select", class: "input input__input", style: "width: 240px", id: "leader-filter"
+      = f.select :leader, options_for_select(@leaders, params[:leader].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t("leader_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 240px", id: "leader-filter"
     div
-      = f.select :follower, options_for_select(@followers, params[:follower].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Follower...", "data-controller": "tom-select", class: "input input__input", style: "width: 240px", id: "follower-filter"
+      = f.select :follower, options_for_select(@followers, params[:follower].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t("follow_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 240px", id: "follower-filter"
     div
-      = f.select :orchestra, options_for_select(@orchestras, params[:orchestra].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Orchestra...", "data-controller": "tom-select", class: "input input__input", style: "width: 200px", id: "orchestra-filter"
+      = f.select :orchestra, options_for_select(@orchestras, params[:orchestra].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t("orchestra_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 200px", id: "orchestra-filter"
     div
-      = f.select :year, options_for_select(@years, params[:year].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: "Any Year...", "data-controller": "tom-select" , class: "input input__input", style: "width: 140px", id: "year-filter"
+      = f.select :year, options_for_select(@years, params[:year].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t("year_filter_placeholder"), "data-controller": "tom-select" , class: "input input__input", style: "width: 140px", id: "year-filter"
     = f.hidden_field :filtering, value: "true"

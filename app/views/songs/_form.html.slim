@@ -1,24 +1,9 @@
 = form_with(model: song) do |form|
-  - if song.errors.any?
-    <div style="color: red">
-      h2.heading-2.heading-2--bold"#{pluralize(song.errors.count, "error")}  prohibited this song from being saved:"
-      ul
-        - song.errors.each do |error|
-          li
-            = error.full_message
-  = form.label "Title"
   = form.text_field :title, value: song.title
-  = form.label "Artist"
-  = form.text_field :artist, label: "Artist", value: song.artist
-  = form.label "Genre"
-  = form.text_field :genre, label: "genre", value: song.genre
-  = form.label "Date"
-  = form.date_field :date, label: "Recording Date", value: song.date
-  = form.label "Active"
-  = form.check_box :active, label: "Active", value: song.active
-  = form.label "Author"
-  = form.text_field :author, label: "Author", value: song.author
+  = form.text_field :artist, label: t(".artist_label"), value: song.artist
+  = form.text_field :genre, label: t(".genre_label"), value: song.genre
+  = form.date_field :date, label: t(".recording_date_label"), value: song.date
+  = form.check_box :active, label: t(".active_label"), value: song.active
+  = form.text_field :author, label: t("author_label"), value: song.author
   div
     = form.submit
-
-

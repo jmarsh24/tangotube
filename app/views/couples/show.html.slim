@@ -4,18 +4,16 @@ div style="max-width: 1660px; width: 100%;"
       = image_tag dancer_avatar(@couple.dancer), style: "border-radius: 50%; width: 250px; height: 250px;"
       = image_tag dancer_avatar(@couple.partner), style: "border-radius: 50%; width: 250px; height: 250px;"
     h1.heading-1.heading-1--bold style="font-size: 64px;"
-      = "#{@couple.dancer.name} & #{@couple.partner.name}"
+      = t(".dancer_names", dancer: @couple.dancer.name, partner: @couple.partner.name)
     div style="display: flex; justify-content: space-between; gap: 16px;"
-      = "#{@couple.videos_count} Total Videos"
+      = t(".videos_count", videos_count: @couple.videos_count)
       - if current_user&.admin?
         div
           = button_to "dropdown"
           div
             = link_to t(".edit"), edit_orchestra_path(@couple)
-            = button_to t(".delete"), @couple, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }
+            = button_to t(".delete"), @couple, method: :delete, form: { data: { turbo_confirm: t(".are_you_sure") } }
   .index-container
     #results.video-section__videos
       = render @videos
     = turbo_frame_tag :videos, src: videos_path(couples: @couple.slug)
-
-
