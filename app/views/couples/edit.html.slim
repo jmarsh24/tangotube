@@ -1,6 +1,6 @@
-h1.heading-1.heading-1--bold Editing couple
+h1.heading-1.heading-1--bold = t(".editing_couple")
 = render "form", couple: @couple
 br
 div
-  = link_to "Show this couple", @couple
-  = link_to "Back to couples", couples_path
+  = link_to t(".show_this_couple"), @couple
+  = link_to t(".back_to_couples"), couples_path

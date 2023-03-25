@@ -7,13 +7,13 @@
         h1
           = @dancer.name
         .dancer-show__admin
-          = "#{@dancer.videos_count} Videos"
+          = t(".videos_count", videos_count: @dancer.videos_count)
           - if current_user&.admin?
             div
               = t(".dropdown")
               div
                 = link_to t(".edit"), edit_dancer_path(@dancer)
-                = button_to t(".delete"), @dancer, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }
+                = button_to t(".delete"), @dancer, method: :delete, form: { data: { turbo_confirm: t("are_you_sure") } }
       / .dancer-show__facets
       /   .dancer-show__facets__facet
       /     h1.heading-1.heading-1--bold Dance Partners
@@ -33,6 +33,3 @@
                 = orchestra.name.titleize
       .index-container
         = turbo_frame_tag :videos, src: videos_path(dancer: @dancer.slug, orchestra: params[:orchestra])
-
-
-

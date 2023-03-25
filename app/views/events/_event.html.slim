@@ -4,6 +4,6 @@
   = link_to event do
     = event.title
   div
-    = "#{event.city}, #{event.country}"
+    = t("event_location", city: event.city, country: event.country)
   div
-    = "#{event.videos_count} Total Videos"
+    = t("event_videos_count", videos_count: event.videos_count)
