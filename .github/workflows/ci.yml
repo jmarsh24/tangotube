@@ -41,8 +41,8 @@ jobs:
           bundler-cache: true
       - name: Lint
         run: bundle exec rubocop -c .rubocop.yml
-        - name: Translations Lint
-          run: bundle exec i18n-tasks health
+      - name: Translations Lint
+        run: bundle exec i18n-tasks health
       - name: Check Controllers Route Annotations
         run: bundle exec chusaku --exit-with-error-on-annotation
         env:
