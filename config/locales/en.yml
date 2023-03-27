@@ -1,7 +1,6 @@
 ---
 en:
-  2_mb_file_size_maximum_allowed_file_types_png_jpg:
-    2 mb file size maximum allowed
+  2_mb_file_size_maximum_allowed_file_types_png_jpg: 2 mb file size maximum allowed
     file types png jpg
   404_icon: 404 icon
   404_not_found: 404 not found
@@ -55,12 +54,10 @@ en:
       banner_title: Privacy settings
       deny: Decline
       essential: Essential cookies
-      essential_description:
-        Allow essential cookies for basic website functions and
+      essential_description: Allow essential cookies for basic website functions and
         proper functioning.
       manage: Change settings
-      manage_description:
-        We use cookies and other analytics technologies to better
+      manage_description: We use cookies and other analytics technologies to better
         understand how you use our website. By anonymously analyzing the movement
         and search behavior of users on our website, we can optimize our website and
         further improve interaction with users.
@@ -68,14 +65,12 @@ en:
       privacy: Privacy statement
       save_preferences: Save preferences
       statistic: Analytics and statistics cookies
-      statistic_description:
-        We use cookies and other analytics technologies to better
+      statistic_description: We use cookies and other analytics technologies to better
         understand how you use our website. By anonymously analyzing the movement
         and search behavior of users on our website, we can optimize our website and
         further improve interaction with users.
       targeting: Targeting
-      targeting_description:
-        Our recommendation tool is based on your individual user
+      targeting_description: Our recommendation tool is based on your individual user
         behavior. We collect and analyze your user data to provide personalized recommendations.
         We use our own software for this service which works without a third-party
         tool.
@@ -136,19 +131,16 @@ en:
     confirmations:
       new:
         resend_confirmation_instructions: Resend confirmation instructions
-        resend_confirmation_instructions_button:
-          Resend confirmation instructions
+        resend_confirmation_instructions_button: Resend confirmation instructions
           button
     mailer:
       confirmation_instructions:
         confirm: Confirm
-        confirm_your_account_here:
-          "You can confirm your account email through the
-          link below:"
+        confirm_your_account_here: 'You can confirm your account email through the
+          link below:'
         welcome: Welcome
       email_changed:
-        email_changed:
-          We're contacting you to notify you that your email is being
+        email_changed: We're contacting you to notify you that your email is being
           changed to %{email}.
         greeting: Hello %{email}
       password_change:
@@ -158,8 +150,7 @@ en:
         change_my_password: Change my password
         greeting: Hello %{email}
         if_didnt_request: If didnt request
-        somebody_requested_to_change_your_password:
-          Someone has requested a link to
+        somebody_requested_to_change_your_password: Someone has requested a link to
           change your password. You can do this through the link below.
       unlock_instructions:
         click_link_to_unlock: Click link to unlock
@@ -186,8 +177,7 @@ en:
         log_in: Log in
         sign_in_with_google: Sign in with google
   drag_and_drop_here: Drag and drop here
-  drag_here_to_upload_or_click_here_to_browse:
-    Drag here to upload or click here to
+  drag_here_to_upload_or_click_here_to_browse: Drag here to upload or click here to
     browse
   dropzone_allowed_text: Dropzone allowed text
   edit: Edit
@@ -324,10 +314,9 @@ en:
       performers_heading: Performers
     index:
       featured_videos: Featured videos
-      meta_description:
-        This is a search engine for tango videos. Search for tango
+      meta_description: This is a search engine for tango videos. Search for tango
         videos by title, artist, orchestra, dancer, couple, or event.
-      meta_title: ""
+      meta_title: ''
       videos: Videos
     new:
       heading: Videos
@@ -351,8 +340,7 @@ en:
       recommended_videos_from_performers: Recommended videos from performers
       recommended_videos_same_channel: Recommended videos same channel
       recommended_videos_song: Recommended videos song
-      recommended_videos_videos_from_this_performance_header:
-        Recommended videos videos
+      recommended_videos_videos_from_this_performance_header: Recommended videos videos
         from this performance header
       upvote_link:
         like: Like
