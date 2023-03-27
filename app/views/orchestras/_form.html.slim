@@ -1,9 +1,4 @@
 = form_with(model: orchestra) do |form|
-  - if orchestra.errors.any?
-    div style="color: red"
-      h2.heading-2.heading-2--bold= "#{pluralize(orchestra.errors.count, "error")} prohibited this orchestra from being saved:"
-        - orchestra.errors.each do |error|
-           li = error.full_message
   div
     = form.label :name, style: "display: block"
     = form.text_field :name
@@ -16,18 +11,18 @@
       = form.file_field :profile_image, direct_upload: true, "data-dropzone-target": "input"
       div class="dropzone-msg dz-message needsclick text-gray-600"
         h3.heading-3.heading-3--boldclass="dropzone-msg-title">
-          "Drag here to upload or click here to browse"
+          = t("drag_here_to_upload_or_click_here_to_browse")
         span class="dropzone-msg-desc text-sm"
-          "2 MB file size maximum. Allowed file types png, jpg."
+          = t("2_mb_file_size_maximum_allowed_file_types_png_jpg")
   div
     = form.label :cover_image, class: "label"
     .dropzone.dropzone-default.dz-clickable data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1"
       = form.file_field :cover_image, direct_upload: true, "data-dropzone-target": "input"
       div class="dropzone-msg dz-message needsclick text-gray-600"
         h3.heading-3.heading-3--boldclass="dropzone-msg-title"
-          "Drag here to upload or click here to browse"
+          = t("drag_here_to_upload_or_click_here_to_browse")
         span class="dropzone-msg-desc text-sm"
-          "2 MB file size maximum. Allowed file types png, jpg.""
+          = t("2_mb_file_size_maximum_allowed_file_types_png_jpg")
   div
     div
       = form.submit

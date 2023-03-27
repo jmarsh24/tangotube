@@ -11,8 +11,8 @@ div style="max-width: 1660px; width: 100%;"
           = button_to "dropdown"
           div
             = link_to edit_orchestra_path(@orchestra) do
-              "Edit"
-            = button_to t(".delete"), @orchestra, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }
+              = t("edit")
+            = button_to t("destroy"), @orchestra, method: :delete, form: { data: { turbo_confirm: t("are_you_sure")} }
   div style="display: flex; gap: 16px;"
     div style="padding: 32px; 16px; max-width: 1660px;"
       h1.heading-1.heading-1--bold Dancers
@@ -21,7 +21,7 @@ div style="max-width: 1660px; width: 100%;"
           = link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do
             = image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;"
             = dancer.name
-            = "(#{dancer.videos_count})"
+            = t(".video_count", count: dancer.videos_count)
     div style="padding: 32px; 16px; max-width: 1660px;"
       h1
         Couples
@@ -32,8 +32,8 @@ div style="max-width: 1660px; width: 100%;"
           = link_to couple, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do
             = image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;"
             = image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;"
-            = "#{dancer.name} & #{partner.name}"
-            = "(#{couple.videos_count})"
+            = t(".dancers_and_partner", dancer: dancer.name, partner: partner.name)
+            = t(".video_count", count: couple.videos_count)
   .index-container
     = turbo_frame_tag :videos, src: videos_path(orchestra: @orchestra.name)
   #next_link style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;"
@@ -41,6 +41,3 @@ div style="max-width: 1660px; width: 100%;"
       form action="= pagy_url_for(@pagy, @pagy.next) " method="post"
         button type="submit" data-controller="autoclick"
       = t(".loading_spinner")
-
-
-

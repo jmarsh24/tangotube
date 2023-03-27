@@ -1,10 +1,10 @@
 = form_with(url: events_path, method: :get) do |f|
-  = f.label :q, "Search by event title:"
+= f.label :q, t(".search_label")
   div
     = f.text_field :q
-    = f.submit 'Search'
+    = f.submit t(".search_button")
 = link_to "New event", new_event_path
-h1.heading-1.heading-1--bold Events
+h1.heading-1.heading-1--bold = t(".heading")
 #events
   - @events.each do |event|
     = render event
@@ -13,5 +13,3 @@ h1.heading-1.heading-1--bold Events
     form action="=pagy_url_for(@pagy, @pagy.next) " method="post"
       button type="submit" data-controller="autoclick"
     = t(".loading_spinner")
-
-
