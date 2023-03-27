@@ -4,4 +4,4 @@
   .orchestra__card__body
     = link_to orchestra do
       = orchestra.name.titleize
-    = "#{orchestra.videos_count} total videos"
+    = t("orchestra_videos_count", count: orchestra.videos_count)

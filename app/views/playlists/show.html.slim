@@ -1,12 +1,12 @@
 h1.heading-1.heading-1--bold #{@playlist.title}
 br
-"Playlist ID:" #{@playlist.slug}
+= t(".playlist_id") + @playlist.slug
 br
-"channel_title:" #{@playlist.channel_title}
+= t(".playlist_channel_title") + @playlist.channel_title
 br
-"Playlist ID:" #{@playlist.channel_id}
+= t(".playlist_channel_id") + @playlist.channel_id
 br
-"Playlist Video Count:" #{@playlist.video_count}
+= t(".playlist_video_count") + @playlist.video_count.to_s
 br
-"Imported:" #{@playlist.imported}
+= t(".playlist_imported") + @playlist.imported.to_s
 br

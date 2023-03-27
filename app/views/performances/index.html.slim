@@ -1,4 +1,4 @@
-h1.heading-1.heading-1--bold Performances
+h1.heading-1.heading-1--bold = t(".heading")
 = link_to "New performance", new_performance_path
 #performances.performances
   - @performances.includes(:videos).each do |performance|
@@ -8,5 +8,3 @@ h1.heading-1.heading-1--bold Performances
     form action="= pagy_url_for(@pagy, @pagy.next) " method="post"
       button type="submit" data-controller="autoclick"
     = t(".loading_spinner")
-
-

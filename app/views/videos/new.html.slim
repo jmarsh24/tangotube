@@ -1,7 +1,7 @@
 div class="videos-new-container">
 div class="videos-new-form-container">
-  h4.heading-4.heading-4--bold Add Video
+  h4.heading-4.heading-4--bold = t(".heading")
     = form_with model: Video.new, local: true, class: 'video-form' do |f|
-      "youtube.com/watch?v=""
-      = f.text_field :youtube_id, placeholder: 'insert video id here...'
+      = t(".youtube_uri_placeholder")
+      = f.text_field :youtube_id, placeholder: t(".youtube_id_placeholder")
       = f.submit "Add New Video"

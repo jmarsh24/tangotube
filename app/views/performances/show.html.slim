@@ -2,6 +2,6 @@
   = link_to watch_path(v: video.youtube_id) do
     = image_tag("https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg", "data-controller": "thumbnail", "data-action": "load->thumbnail#check", "data-thumbnail-target": "image", "data-thumbnail-url-value": "https://i3.ytimg.com/vi/#{video.youtube_id}/maxresdefault.jpg")
 div
-  = link_to "Edit this performance", edit_performance_path(@performance)
-  = link_to "Back to performances", performances_path
-  = button_to "Destroy this performance", @performance, method: :delete
+  = link_to t("edit"), edit_performance_path(@performance)
+  = link_to t("back"), performances_path
+  = button_to t("destroy"), @performance, method: :delete

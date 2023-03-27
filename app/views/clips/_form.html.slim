@@ -12,10 +12,10 @@
           Tags
         = f.select :tag_list, [], {}, { style: "width: 100%;", data: {controller: "tom-select","tom-select-create-value": "true"}}
       .row style="align-items: center; gap: 10px;"
-        = f.text_field :start_seconds, label: "Start Time", value: clip.start_seconds || start_seconds, placeholder: "0s", style: "width: 100px;", data: { action: "sl-input->clipboard#changeValue sl-input->youtube#updateStartTime", "clipboard-target": "startTime", "youtube-target": "startTime" }
+        = f.text_field :start_seconds, label: t(".start_time"), value: clip.start_seconds || start_seconds, placeholder: "0s", style: "width: 100px;", data: { action: "sl-input->clipboard#changeValue sl-input->youtube#updateStartTime", "clipboard-target": "startTime", "youtube-target": "startTime" }
         span class="spacer"
           -
-        = f.text_field :end_seconds, label: "Start Time", value: clip.end_seconds || end_seconds, placeholder: "0s", style: "width: 100px;", data: { action: "sl-input->clipboard#changeValue sl-input->youtube#updateEndTime", "clipboard-target": "endTime", "youtube-target": "endTime" }
+        = f.text_field :end_seconds, label: t(".end_time"), value: clip.end_seconds || end_seconds, placeholder: "0s", style: "width: 100px;", data: { action: "sl-input->clipboard#changeValue sl-input->youtube#updateEndTime", "clipboard-target": "endTime", "youtube-target": "endTime" }
         span class="spacer"
         = f.select :playback_rate, {  ".25x" => "0.25", ".5x" => "0.50", ".75x" => "0.75", "1x" => "1.0", "1.25x" => "1.25", "1.5x" => "1.50", "1.75x" => "1.75", "2x" => "2.0" }, {}, { value: printf("%.2f", clip.playback_rate.to_i || playback_rate ), label: "Rate", hoist: "", data: { action: "sl-change->clipboard#changeValue sl-change->youtube#updatePlaybackRate", "clipboard-target": "playbackRate", "youtube-target": "playbackRate" }}
       - if user_signed_in?

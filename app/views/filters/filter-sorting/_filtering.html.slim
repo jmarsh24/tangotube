@@ -1,4 +1,4 @@
-h4.heading-4.heading-4--bold.dropdown__label Addition Filters
+h4.heading-4.heading-4--bold.dropdown__label = t(".additional_filters_heading")
 - if current_user
   - path = request.query_parameters[:watched] == "true" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: true))
   = link_to path, class: "menu-item" do
