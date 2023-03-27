@@ -1,10 +1,4 @@
 = form_with(model: dancer) do |f|
-  - if dancer.errors.any?
-    div style="color: red"
-      h2.heading-2.heading-2--bold= "#{pluralize(dancer.errors.count, "error")} prohibited this dancer from being saved:"
-      ul
-        - dancer.errors.each do |error|
-          li = error.full_message
   div
     = f.label :first_name, style: "display: block"
     = f.text_field :first_name
@@ -35,17 +29,15 @@
       = f.file_field :profile_image, direct_upload: true, "data-dropzone-target": "input"
       div class="dropzone-msg dz-message needsclick text-gray-600"
         h3.heading-3.heading-3--boldclass="dropzone-msg-title"Drag here to upload or click here to browse
-        span class="dropzone-msg-desc text-sm"2 MB file size maximum. Allowed file types png, jpg.
+        span class="dropzone-msg-desc text-sm" = t("dropzone_allowed_text")
   div
     = f.label :cover_image, class: "label"
     div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1"
       = f.file_field :cover_image, direct_upload: true, "data-dropzone-target": "input"
       div class="dropzone-msg dz-message needsclick text-gray-600"
         h3.heading-3.heading-3--boldclass="dropzone-msg-title"
-          Drag here to upload or click here to browse
+          = t("drag_and_drop_here")
         span class="dropzone-msg-desc text-sm"
-          2 MB file size maximum. Allowed file types png, jpg.
+          = t("dropzone_allowed_text")
   div
     = f.submit
-
-

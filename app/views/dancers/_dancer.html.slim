@@ -5,5 +5,4 @@
     div
       = link_to dancer do
         = dancer.name
-      = "#{dancer.videos_count} videos"
-
+      = t(".videos_count", count: dancer.videos_count)
