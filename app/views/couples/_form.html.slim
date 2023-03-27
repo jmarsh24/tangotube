@@ -1,12 +1,4 @@
 = form_with(model: couple) do |f|
-  - if couple.errors.any?
-    div style="color: red"
-      h2
-        = "#{pluralize(couple.errors.count, "error")} prohibited this couple from being saved:"
-      ul
-        - couple.errors.each do |error|
-          li
-            = error.full_message
   div
     = f.label :dancer_id, style: "display: block"
     = f.text_field :dancer_id
@@ -30,5 +22,3 @@
           2 MB file size maximum. Allowed file types png, jpg.
   div
     = f.submit
-
-

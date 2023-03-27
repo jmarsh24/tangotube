@@ -1,8 +1,8 @@
 .playlists-index-container
-  h2.heading-2.heading-2--boldAll playlists
+  h2.heading-2.heading-2--bold = t(".heading")
   = form_with model: Playlist.new, local: true, class: 'playlist-form' do |f|
-    "youtube.com/playlist/"
-    = f.text_field :slug, placeholder: 'insert playlist id here...'
+    = t(".add_new_playlist")
+    = f.text_field :slug, placeholder: t(".insert_playlist_id_here")
     = f.submit "Add New Playlist"
   - @playlists.each do |playlist|
     .playlists-index-row"
@@ -10,7 +10,3 @@
         = playlist.slug
       #title.playlists-index-item
         = playlist.title
-
-
-
-
