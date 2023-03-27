@@ -21,7 +21,7 @@ div style="max-width: 1660px; width: 100%;"
           = link_to dancer, style: "display: flex; gap: 16px; align-items: center; padding: 8px 0px;" do
             = image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;"
             = dancer.name
-            = t(".video_count", videos_count: dancer.videos_count)
+            = t(".video_count", count: dancer.videos_count)
     div style="padding: 32px; 16px; max-width: 1660px;"
       h1
         Couples
@@ -33,7 +33,7 @@ div style="max-width: 1660px; width: 100%;"
             = image_tag dancer_avatar(dancer), style: "border-radius: 50%; width: 32px;"
             = image_tag dancer_avatar(partner), style: "border-radius: 50%; width: 32px;"
             = t(".dancers_and_partner", dancer: dancer.name, partner: partner.name)
-            = t(".video_count", videos_count: couple.videos_count)
+            = t(".video_count", count: couple.videos_count)
   .index-container
     = turbo_frame_tag :videos, src: videos_path(orchestra: @orchestra.name)
   #next_link style="display: flex; align-items: center; flex-direction: column; padding: 30px 0px;"

@@ -6,13 +6,13 @@ div style="max-width: 1660px; width: 100%;"
     h1.heading-1.heading-1--bold style="font-size: 64px;"
       = t(".dancer_names", dancer: @couple.dancer.name, partner: @couple.partner.name)
     div style="display: flex; justify-content: space-between; gap: 16px;"
-      = t(".videos_count", videos_count: @couple.videos_count)
+      = t(".videos_count", count: @couple.videos_count)
       - if current_user&.admin?
         div
           = button_to "dropdown"
           div
             = link_to t("edit"), edit_orchestra_path(@couple)
-            = button_to t("destroy"), @couple, method: :delete, form: { data: { turbo_confirm: t(".are_you_sure") } }
+            = button_to t("destroy"), @couple, method: :delete, form: { data: { turbo_confirm: t("are_you_sure") } }
   .index-container
     #results.video-section__videos
       = render @videos
