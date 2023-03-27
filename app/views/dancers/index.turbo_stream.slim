@@ -7,4 +7,4 @@ form action="= pagy_url_for(@pagy, @pagy.next)" method="post"
   = t(".loading_spinner")
   - else
   span
-  "Displaying #{@pagy.count} Results"
+    = t(".results", count: @pagy.count)

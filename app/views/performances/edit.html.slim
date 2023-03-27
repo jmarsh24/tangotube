@@ -1,6 +1,6 @@
-h1.heading-1.heading-1--bold Editing performance
+h1.heading-1.heading-1--bold = t(".heading")
 = render "form", performance: @performance
 br
 div
-  = link_to "Show this performance", @performance
-  = link_to "Back to performances", performances_path
+  = link_to t(".show_link"), @performance
+  = link_to t("back"), performances_path

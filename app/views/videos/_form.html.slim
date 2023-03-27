@@ -1,28 +1,28 @@
 = form_with model: @video, url: video_path(video.youtube_id), method: :patch do |f|
   .video-info-details-main
     .detail-section-label
-      h4.heading-4.heading-4--bold Performers
+      h4.heading-4.heading-4--bold = t(".performers_heading")
     .detail-section-label
-      h4.heading-4.heading-4--bold Event Info
+      h4.heading-4.heading-4--bold = t(".event_info_heading")
     .attribute_row
       .attribute-label
-        label Performance Date
+        label = t("performance_date_label")
       .attribute-value style="display: flex; flex-direction: column; gap: 10px;"
         = f.date_field(:performance_date, selected: video.performance_date )
     .attribute-row
       .attribute-label
-        label Performance Number
+        label = t(".performance_number_label")
       .attribute-value
         = f.select(:performance_number, (1..8), { value: video.performance_number, prompt: "Select Performance Number" }, "data-controller": "tom-select")
     .attribute-row
       .attribute-label
-        label Total Number
+        label = t(".performance_total_number_label")
       .attribute-value
         = f.select(:performance_total_number, (1..8), { value: video.performance_total_number, prompt: "Select Total Number of Performance" }, "data-controller": "tom-select")
-    h4.heading-4.heading-4--bold Music
+    h4.heading-4.heading-4--bold = t(".music_heading")
   div
     = f.label "hidden?"
     = f.check_box :hidden, {}, "true", "false"
   div style="display: flex; gap: 10px; align-items: center; margin: 10px 0; font-size: 14px;"
     = f.submit "Update Video"
-    = link_to "Back", watch_path(v: video.youtube_id), style: "font-size: 14px;"
+    = link_to t("back"), watch_path(v: video.youtube_id), style: "font-size: 14px;"

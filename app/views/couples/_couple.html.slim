@@ -4,6 +4,5 @@
       = image_tag dancer_avatar(couple.dancer), style: "position: absolute; top: 0; left: 0;"
       = image_tag dancer_avatar(couple.partner), style: "position: absolute; top: 0; left: 200px;"
   .couple__body
-    = "#{couple.dancer.name} & #{couple.partner.name}"
-  = "#{couple.videos_count} Videos"
-
+    = t(".dancer_names", dancer: couple.dancer.name, partner: couple.partner.name)
+  = t(".videos_count", count: couple.videos_count)
