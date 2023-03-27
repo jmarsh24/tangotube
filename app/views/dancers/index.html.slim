@@ -1,11 +1,11 @@
 .container
   = form_with(url: dancers_path, method: :get) do |f|
-    = f.label :query, "Search by dancer name:"
+    = f.label :query, t(".search_dancer")
     div
       = f.text_field :query
       = f.submit 'Search'
   = link_to "New dancer", new_dancer_path
-  h1.heading-1.heading-1--bold Dancers
+  h1.heading-1.heading-1--bold = t(."heading")
   div id="dancers" class="dancers"
     - @dancers.each do |dancer|
       = render dancer
@@ -14,5 +14,3 @@
       form action="= pagy_url_for(@pagy, @pagy.next) " method="post"
         button type="submit" data-controller="autoclick"
       = t("loading_spinner")
-
-

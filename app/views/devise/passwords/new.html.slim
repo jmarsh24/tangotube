@@ -1,10 +1,8 @@
 .container.devise
-  h4.heading-4.heading-4--boldForgot your password?
-  p We will send you an email with link to reset your password.
+  h4.heading-4.heading-4--bold = t(".forgot_your_password_heading")
+  p = t(".sub_heading")
   = form_for resource, as: resource_name, url: password_path(resource_name), data: { turbo: false }, class: "stack"  do |f|
     .stack.stack--xs.stack--tablet-xs
       = render "devise/shared/error_messages", resource: resource
       = f.input :email, as: :email, autofocus: true, class: "input input--text"
-      = f.submit "Send", class: "primary-button"
-
-
+      = f.submit t(".send"), class: "primary-button"
