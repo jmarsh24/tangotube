@@ -1,13 +1,8 @@
 .performance id=#{dom_id(performance)}
   div
-    strong Date:
-    = performance.date
+    strong = l(performance.date)
   div
-    strong Videos count:
-    = performance.videos_count
+    strong = t("performance_videos_count", count: performance.videos_count)
   .performance__videos
     - performance.videos.each do |video|
       = render partial: "videos/video", locals: { video: video }
-
-
-

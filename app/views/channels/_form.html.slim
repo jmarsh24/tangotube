@@ -1,11 +1,4 @@
 = form_with(model: channel, id: "channel_#{channel.channel_id}_form") do |f|
-  - if channel.errors.any?
-    div style="color: red"
-      h2.heading-2.heading-2--bold="#{pluralize(channel.errors.count, "error")} prohibited this channel from being saved:"
-        ul
-          - channel.errors.each do |error|
-            li
-              = error.full_message
   .row
     .row style="align-items:center; gap: 10px;"
       channel_id
