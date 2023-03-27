@@ -2,5 +2,5 @@ p id="noticed" #{notice}
 p
   = @post.title
   = @post.content
-= link_to t("edit_link"), edit_post_path(@post)
+= link_to t("edit"), edit_post_path(@post)
 = link_to t("back"), posts_path
