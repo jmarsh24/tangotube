@@ -24,7 +24,7 @@
           <div style="margin-bottom: 16px; font-size: 12px;">
             = link_to t("sign_up"), new_user_registration_path, style: "font-size: 0.8rem", 'data-turbo-frame': "_top"
             = t(".or")
-            = link_to t("login_link"), new_user_session_path, style: "font-size: 12px;", 'data-turbo-frame': "_top"
+            = link_to t("login"), new_user_session_path, style: "font-size: 12px;", 'data-turbo-frame': "_top"
             = t(".to_reply")
         - if comment.user == current_user
           = button_to "Delete", comment, method: :delete, form: { data: { turbo_confirm: t(".are_you_sure") } }, style: "background: none; border: none; color: red; font-size: 0.8rem; cursor: pointer; padding: 0; margin: 0;"

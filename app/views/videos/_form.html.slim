@@ -25,4 +25,4 @@
     = f.check_box :hidden, {}, "true", "false"
   div style="display: flex; gap: 10px; align-items: center; margin: 10px 0; font-size: 14px;"
     = f.submit "Update Video"
-    = link_to "Back", watch_path(v: video.youtube_id), style: "font-size: 14px;"
+    = link_to t("back"), watch_path(v: video.youtube_id), style: "font-size: 14px;"
