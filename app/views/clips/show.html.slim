@@ -1,6 +1,6 @@
 = render @clip
 div
-  = link_to t(".edit-link"), edit_video_clip_path([@video, @clip]), class: "link"
-  = link_to t(".back-link"), video_clips_path(@video), class: "link"
+  = link_to t("edit_link"), edit_video_clip_path([@video, @clip]), class: "link"
+  = link_to t("back"), video_clips_path(@video), class: "link"
   - if current_user = @clip.user
-    = button_to t(".destroy-button"), [@video, @clip], method: :delete, class: "button button--danger"
+    = button_to t("destroy_button"), [@video, @clip], method: :delete, class: "button button--danger"

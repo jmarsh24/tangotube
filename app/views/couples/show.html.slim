@@ -11,8 +11,8 @@ div style="max-width: 1660px; width: 100%;"
         div
           = button_to "dropdown"
           div
-            = link_to t(".edit"), edit_orchestra_path(@couple)
-            = button_to t(".delete"), @couple, method: :delete, form: { data: { turbo_confirm: t(".are_you_sure") } }
+            = link_to t("edit"), edit_orchestra_path(@couple)
+            = button_to t("destroy"), @couple, method: :delete, form: { data: { turbo_confirm: t(".are_you_sure") } }
   .index-container
     #results.video-section__videos
       = render @videos
