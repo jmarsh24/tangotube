@@ -7,6 +7,4 @@
     = t("loading_spinner")
   - else
     span
-      = "Displaying #{@pagy.count} Results"
-
-
+      = t("results", count: @pagy.count)

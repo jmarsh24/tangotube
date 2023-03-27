@@ -1,15 +1,13 @@
 div id="#{dom_id(song)}"
   div
-    "Title: #{song.title}"
+    = t("song_title", title: song.title)
   div
-    "Artist: #{song.artist}"
+    = t("song_artist", artist: song.artist)
   div
-    "Genre: #{song.genre}"
+    = t("song_genre", genre: song.genre)
   div
-    "Recording Date: #{song.date}"
+    = t("song_date", date: song.date)
   div
-    "Active: #{song.active}"
+    = t("song_active", active: song.active)
   div
-    "Author: #{song.author}"
-
-
+    = t("song_author", author: song.author)
