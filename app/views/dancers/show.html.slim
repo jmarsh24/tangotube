@@ -12,8 +12,8 @@
             div
               = t(".dropdown")
               div
-                = link_to t(".edit"), edit_dancer_path(@dancer)
-                = button_to t(".delete"), @dancer, method: :delete, form: { data: { turbo_confirm: t("are_you_sure") } }
+                = link_to t("edit"), edit_dancer_path(@dancer)
+                = button_to t("destroy"), @dancer, method: :delete, form: { data: { turbo_confirm: t("are_you_sure") } }
       / .dancer-show__facets
       /   .dancer-show__facets__facet
       /     h1.heading-1.heading-1--bold Dance Partners

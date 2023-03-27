@@ -6,6 +6,6 @@
         = f.input :password, as: :password, autocomplete: "current-password", class: "input input__input input--text"
         - if devise_mapping.rememberable?
           = f.input :remember_me, as: :checkbox, class: "input input__input input--checkbox"
-        = f.submit t(".login"), class: "button button--primary button--block"
+        = f.submit t("login"), class: "button button--primary button--block"
         a.link href=edit_user_registration_path
     = render "devise/shared/links"

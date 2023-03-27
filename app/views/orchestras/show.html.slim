@@ -11,8 +11,8 @@ div style="max-width: 1660px; width: 100%;"
           = button_to "dropdown"
           div
             = link_to edit_orchestra_path(@orchestra) do
-              = t(".edit")
-            = button_to t(".delete"), @orchestra, method: :delete, form: { data: { turbo_confirm: t("are_you_sure")} }
+              = t("edit")
+            = button_to t("destroy"), @orchestra, method: :delete, form: { data: { turbo_confirm: t("are_you_sure")} }
   div style="display: flex; gap: 16px;"
     div style="padding: 32px; 16px; max-width: 1660px;"
       h1.heading-1.heading-1--bold Dancers

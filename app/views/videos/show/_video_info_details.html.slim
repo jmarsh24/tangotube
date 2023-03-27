@@ -20,7 +20,7 @@
       - if user_signed_in?
         = button_to edit_video_path(@video.youtube_id), method: :get do
           button
-            = t(".edit")
+            = t("edit")
   .tabs__panel data={ "tabs-target": "tabPanel"}
     h4.heading-4.heading-4--bold = t(".youtube_info_heading")
     = render partial: "videos/show/video_info_item", locals: { header: t(".video_title_heading"), value:  @video.title }
