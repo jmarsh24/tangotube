@@ -7,6 +7,7 @@ en:
   all_clips: All clips
   are_you_sure: Are you sure?
   author_label: Author label
+  back: Back
   banner:
     index:
       heading_1: The new way to watch Tango
@@ -18,7 +19,6 @@ en:
     channel:
       pencil_square_icon: Pencil square icon
       trash_icon: Trash icon
-  click_link_to_unlock: Click link to unlock
   clips:
     edit:
       destroy: Destroy
@@ -29,16 +29,15 @@ en:
       start_time: Start time
     index:
       loading_spinner: Loading spinner
-      results: Results
+      results: "%{count} Results"
     new:
-      heading: Heading
+      heading: Clip
   comments:
     comment:
-      are_you_sure: Are you sure?
-      comment_age: Comment age
+      comment_age: "%{updated_at} ago..."
       continue_this_thread: Continue this thread
-      deleted_header: Deleted header
-      deleted_paragraph: Deleted paragraph
+      deleted_header: deleted
+      deleted_paragraph: deleted
       or: or
       to_reply: To reply
     edit:
@@ -84,7 +83,7 @@ en:
     footer:
       about: About
       contact: Contact
-      google_privacy_policy: Google privacy policy
+      google_privacy_policy: Google Privacy Policy
       privacy: Privacy
       terms: Terms
     navbar:
@@ -94,31 +93,27 @@ en:
       search:
         search:
           placeholder: Search 300,000+ videos
-  confirm_link: Confirm link
-  confirm_your_account_here: Confirm your account here
   couples:
     couple:
       dancer_names: Dancer names
-      videos_count: Videos count
+      videos_count: "%{count} videos"
+    edit:
+      edit: Edit
     index:
       heading: Heading
       new_couple: New couple
       search: Search
       search_dancer: Search dancer
     new:
-      heading: Heading
+      heading: Couple
     show:
-      are_you_sure: Are you sure
       dancer_names: Dancer names
-      videos_count: Videos count
+      videos_count: "%{count} videos"
   dancers:
     dancer:
-      videos_count: Videos count
+      videos_count: "%{count} videos"
     edit:
-      edit_dancer: Edit dancer
-    form:
-      drag_and_drop_here: Drag and drop here
-      dropzone_allowed_text: Dropzone allowed text
+      edit_dancer: Editing dancer
     index:
       ":": ":"
       loading_spinner: Loading spinner
@@ -130,8 +125,8 @@ en:
       dropdown: Dropdown
       loading_spinner: Loading spinner
       results: Results
-      videos_count: Videos count
-  destroy_button: Destroy
+      videos_count: "%{count} videos"
+  destroy: Destroy
   devise:
     confirmations:
       new:
@@ -140,24 +135,31 @@ en:
           button
     mailer:
       confirmation_instructions:
+        confirm: Confirm
+        confirm_your_account_here: 'You can confirm your account email through the
+          link below:'
         welcome: Welcome
       email_changed:
-        email_changed: Email changed
-        greeting: Greeting
+        email_changed: We're contacting you to notify you that your email is being
+          changed to %{email}.
+        greeting: Hello %{email}
       password_change:
-        greeting: Greeting
+        greeting: Hello %{email}
         password_changed: Password changed
       reset_password_instructions:
         change_my_password: Change my password
-        greeting: Greeting
-        somebody_requested_to_change_your_password: Somebody requested to change your
-          password
-        your_password_wont_be_changed: Your password wont be changed
+        greeting: Hello %{email}
+        if_didnt_request: If didnt request
+        somebody_requested_to_change_your_password: Someone has requested a link to
+          change your password. You can do this through the link below.
       unlock_instructions:
-        greeting: Greeting
+        click_link_to_unlock: Click link to unlock
+        greeting: Hello %{email}
+        unlock_my_account_link: Unlock my account link
+        your_account_has_been_locked: Your account has been locked
     passwords:
       edit:
-        change_my_password_button: Change my password button
+        change_my_password: Change my password
       new:
         forgot_your_password_heading: Forgot your password heading
         send: Send
@@ -174,9 +176,11 @@ en:
         forgot_password: Forgot password
         log_in: Log in
         sign_in_with_google: Sign in with google
+  drag_and_drop_here: Drag and drop here
   drag_here_to_upload_or_click_here_to_browse: Drag here to upload or click here to
     browse
-  edit_link: Edit
+  dropzone_allowed_text: Dropzone allowed text
+  edit: Edit
   edit_profile: Edit profile
   errors:
     button: Button
@@ -246,27 +250,26 @@ en:
       video_count: Video count
   pages:
     contact:
-      contact_me: Contact me
-  performance_date: Performance date
-  performance_date_heading: Performance date heading
-  performance_date_label: Performance date label
-  performance_number_headiing: Performance number headiing
-  performance_total_number_heading: Performance total number heading
-  performance_videos_count: Performance videos count
+      contact_me: Contact Me
+  performance_date_heading: Performance Date
+  performance_date_label: Performance Date
+  performance_number_headiing: Performance Position
+  performance_total_number_heading: Performance Total
+  performance_videos_count: "%{count} videos"
   performances:
     edit:
-      heading: Heading
-      show_link: Show link
+      heading: Performance
+      show_link: Show
     index:
-      heading: Heading
+      heading: Performances
       loading_spinner: Loading spinner
       results: Results
     new:
-      heading: Heading
+      heading: Performance
   playlists:
     index:
       add_new_playlist: Add new playlist
-      heading: Heading
+      heading: Playlists
       insert_playlist_id_here: Insert playlist id here
     show:
       playlist_channel_id: Playlist channel
@@ -277,6 +280,7 @@ en:
   posted_time_ago: Posted time ago
   results: Results
   search: Search
+  show: Show
   show_link: Show link
   sign_out: Sign out
   sign_up: Sign up
@@ -288,27 +292,26 @@ en:
   song_title: Song title
   songs:
     edit:
-      heading: Heading
+      heading: Song
     form:
       active_label: Active label
       artist_label: Artist label
       genre_label: Genre label
       recording_date_label: Recording date label
     index:
-      heading: Heading
-      new_link: New link
-      show_link: Show link
+      heading: Songs
+      new_link: New
+      show_link: Show
     new:
-      heading: Heading
+      heading: Song
   sort_by_heading: Sort by heading
-  unlock_my_account_link: Unlock my account link
   videos:
     form:
-      event_info_heading: Event info heading
-      music_heading: Music heading
-      performance_number_label: Performance number label
-      performance_total_number_label: Performance total number label
-      performers_heading: Performers heading
+      event_info_heading: Event Info
+      music_heading: Music
+      performance_number_label: Performance Positio
+      performance_total_number_label: Performance Total
+      performers_heading: Performers
     index:
       featured_videos: Featured videos
       meta_description: This is a search engine for tango videos. Search for tango
@@ -316,7 +319,7 @@ en:
       meta_title: ''
       videos: Videos
     new:
-      heading: Heading
+      heading: Videos
       youtube_id_placeholder: Youtube id placeholder
       youtube_uri_placeholder: Youtube uri placeholder
     show:
@@ -324,7 +327,7 @@ en:
         bookmark: Bookmark
       complete_link:
         complete: Complete
-        complete_tooltip: Complete tooltip
+        complete_tooltip: Complete
       downvote_link:
         dislike: Dislike
       featured_link:
@@ -367,7 +370,6 @@ en:
         share_button: Share
       watchlist_link:
         watch_later: Watch later
-  your_account_has_been_locked: Your account has been locked
   yt_comments:
     comment:
       like_count: Like count

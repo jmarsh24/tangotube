@@ -29,15 +29,15 @@
       = f.file_field :profile_image, direct_upload: true, "data-dropzone-target": "input"
       div class="dropzone-msg dz-message needsclick text-gray-600"
         h3.heading-3.heading-3--boldclass="dropzone-msg-title"Drag here to upload or click here to browse
-        span class="dropzone-msg-desc text-sm" = t(".dropzone_allowed_text")
+        span class="dropzone-msg-desc text-sm" = t("dropzone_allowed_text")
   div
     = f.label :cover_image, class: "label"
     div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1"
       = f.file_field :cover_image, direct_upload: true, "data-dropzone-target": "input"
       div class="dropzone-msg dz-message needsclick text-gray-600"
         h3.heading-3.heading-3--boldclass="dropzone-msg-title"
-          = t(".drag_and_drop_here")
+          = t("drag_and_drop_here")
         span class="dropzone-msg-desc text-sm"
-          = t(".dropzone_allowed_text")
+          = t("dropzone_allowed_text")
   div
     = f.submit

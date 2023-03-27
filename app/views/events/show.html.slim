@@ -7,7 +7,7 @@
         h1
           = @event.title
         div class="event-show__admin"
-          = t(".event_video_count", videos_count: @event.videos_count)
+          = t(".event_video_count", count: @event.videos_count)
           - if current_user&.admin?
             div
               = button_to t(".dropdown_button")
