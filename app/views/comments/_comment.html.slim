@@ -27,7 +27,7 @@
             = link_to t("login"), new_user_session_path, style: "font-size: 12px;", 'data-turbo-frame': "_top"
             = t(".to_reply")
         - if comment.user == current_user
-          = button_to "Delete", comment, method: :delete, form: { data: { turbo_confirm: t(".are_you_sure") } }, style: "background: none; border: none; color: red; font-size: 0.8rem; cursor: pointer; padding: 0; margin: 0;"
+          = button_to "Delete", comment, method: :delete, form: { data: { turbo_confirm: t("are_you_sure") } }, style: "background: none; border: none; color: red; font-size: 0.8rem; cursor: pointer; padding: 0; margin: 0;"
       = render partial: "comments/form", locals: { commentable: comment.commentable, parent_id: reply_to_comment_id(comment, nesting, max_nesting), class: "mt-4 isHidden", style: "margin-top: 16px;", target: "reply.form"}
   = tag.div id: "#{dom_id(comment)}_comments", style:"margin-left: 16px; border-left: 2px solid #f2f2f2;" do
     - if continue_thread.present? && nesting >= continue_thread && comment.comments.any?
