@@ -3,7 +3,5 @@
     link = link_to t(".forgot_password"), new_password_path(resource_name), class: "link"
   - if controller_name != 'sessions'
     link = link_to t(".log_in"), new_session_path(resource_name), class: "link"
-  = button_to user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, class: "button button--secondary button--block button--icon-google button--icon-left" do
-    = t(".sign_in_with_google")
-
-
+  = form_with url: user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, class: "stack stack--line stack--justify-center" do |f|
+    = image_tag "btn_google_signin_dark_normal_web@2x.png", class: "button button--google"
