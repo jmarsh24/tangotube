@@ -6,7 +6,7 @@ MusicMetadata =
     :msg,
     :title,
     :artist,
-    :acrid,
+    :acr_id,
     :isrc,
     :acr_artist_names,
     :acr_album_name,

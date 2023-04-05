@@ -79,7 +79,7 @@ RSpec.describe VideoCrawler do
         acr_song_title: "Cuando El Amor Muere",
         acr_artist_names: ["Carlos Di Sarli y su Orquesta Típica"],
         acr_album_name: "Serie 78 RPM : Carlos Di Sarli Vol.2",
-        acrid: "a8d9899317fd427b6741b739de8ded15",
+        acr_id: "a8d9899317fd427b6741b739de8ded15",
         isrc: "ARF034100046",
         genre: "Tango",
         spotify_artist_names: ["Carlos Acuña", "Carlos Di Sarli"],
@@ -141,7 +141,7 @@ RSpec.describe VideoCrawler do
       expect(metadata.message).to eq "Success"
       expect(metadata.acr_song_title).to eq "Cuando El Amor Muere"
       expect(metadata.acr_album_name).to eq "Serie 78 RPM : Carlos Di Sarli Vol.2"
-      expect(metadata.acrid).to eq "a8d9899317fd427b6741b739de8ded15"
+      expect(metadata.acr_id).to eq "a8d9899317fd427b6741b739de8ded15"
       expect(metadata.isrc).to eq "ARF034100046"
       expect(metadata.acr_artist_names).to eq ["Carlos Di Sarli y su Orquesta Típica"]
       expect(metadata.acr_album_name).to eq "Serie 78 RPM : Carlos Di Sarli Vol.2"
