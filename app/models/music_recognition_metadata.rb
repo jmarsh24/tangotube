@@ -7,7 +7,7 @@ MusicRecognitionMetadata =
     :acr_song_title,
     :acr_artist_names,
     :acr_album_name,
-    :acrid,
+    :acr_id,
     :isrc,
     :genre,
     :spotify_artist_names,
