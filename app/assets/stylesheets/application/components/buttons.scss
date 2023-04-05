@@ -108,6 +108,11 @@
     }
   }
 
+  &--google {
+    padding: 0px;
+    height: 42px;
+  }
+
   &.hidden {
     display: none;
   }
