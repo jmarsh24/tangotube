@@ -38,7 +38,7 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -48,7 +48,6 @@ class User < ApplicationRecord
     :recoverable,
     :rememberable,
     :timeoutable,
-    :validatable,
     :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
   enum role: {user: 0, admin: 1}
@@ -63,19 +62,17 @@ class User < ApplicationRecord
   end
 
   class << self
-    def from_omniauth(access_token)
-      user = User.where(email: access_token.info.email).first
-      user ||= User.create(
-        email: access_token.info.email,
-        password: Devise.friendly_token[0, 20],
-        name: access_token.info.name,
-        first_name: access_token.info.first_name,
-        last_name: access_token.info.last_name,
-        image: access_token.info.image,
-        uid: access_token.uid,
-        provider: access_token.info.provider
-      )
-      user
+    def from_omniauth(auth)
+      binding.pry
+      where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0, 20]
+        user.name = auth.info.name
+        user.first_name = auth.info.first_name
+        user.last_name = auth.info.last_name
+        user.image = auth.info.image
+        user.provider = auth.info.provider
+      end
     end
   end
 end

@@ -15,9 +15,11 @@ Rails.application.routes.draw do
   get "banner", to: "banner#index"
   post "banner", to: "banner#index"
 
-  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks",
-                                   confirmations: "users/confirmations",
-                                   registrations: "users/registrations"}
+  devise_for :users, controllers: {
+    omniauth_callbacks: "users/omniauth_callbacks",
+    sessions: "users/sessions",
+    registrations: "users/registrations"
+  }
 
   resources :deletion_requests, only: [:show] do
     collection do
