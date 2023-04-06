@@ -1,26 +1,32 @@
-# frozen_string_literal: true
-
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # @route GET /users/auth/google_oauth2/callback (user_google_oauth2_omniauth_callback)
-  # @route POST /users/auth/google_oauth2/callback (user_google_oauth2_omniauth_callback)
+  skip_before_action :authenticate_user!
+
   def google_oauth2
-    handle_auth "Google"
-  end
-
-  # @route GET /users/auth/facebook/callback (user_facebook_omniauth_callback)
-  # @route POST /users/auth/facebook/callback (user_facebook_omniauth_callback)
-  def facebook
-    handle_auth "Facebook"
-  end
-
-  def handle_auth(kind)
-    @user = User.from_omniauth(request.env["omniauth.auth"])
-    if @user.persisted?
-      sign_in_and_redirect @user
-      set_flash_message(:notice, :success, kind:) if is_navigational_format?
+    user = User.from_omniauth(auth)
+    if user.present?
+      sign_out_all_scopes
+      flash[:success] = t "devise.omniauth_callbacks.success", kind: "Google"
+      sign_in_and_redirect user, event: :authentication
     else
-      flash[:error] = "There was a problem signing you in through #{kind}. Please register or try signing in later."
-      redirect_to new_user_registration_url
+      flash[:alert] =
+        t "devise.omniauth_callbacks.failure", kind: "Google", reason: "#{auth.info.email} is not authorized."
+      redirect_to new_user_session_path
     end
+  end
+
+  protected
+
+  def after_omniauth_failure_path_for(_scope)
+    new_user_session_path
+  end
+
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || root_path
+  end
+
+  private
+
+  def auth
+    @auth ||= request.env["omniauth.auth"]
   end
 end
