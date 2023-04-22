@@ -30,7 +30,7 @@ class VideoResource < Avo::BaseResource
   # field :song_id, as: :number
   # field :youtube_song, as: :text
   # field :youtube_artist, as: :text
-  # field :acrid, as: :text
+  # field :acr_id, as: :text
   # field :spotify_album_id, as: :text
   # field :spotify_album_name, as: :text
   # field :spotify_artist_id, as: :text
