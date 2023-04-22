@@ -28,4 +28,8 @@ $icon-sizes: (
   &--white {
     color: white;
   }
+
+  &--neutral {
+    background-color: unset;
+  }
 }
