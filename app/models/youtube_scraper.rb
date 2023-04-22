@@ -16,8 +16,10 @@ class YoutubeScraper
     @driver = driver
   end
 
-  def video_metadata(slug)
+  def video_metadata(slug:)
     youtube_video = Yt::Video.new id: slug
+
+    html = Nokogiri.HTML5 retrieve_html(slug)
 
     YoutubeVideoMetadata.new(
       slug: youtube_video.id,
@@ -31,9 +33,9 @@ class YoutubeScraper
       favorite_count: youtube_video.favorite_count,
       comment_count: youtube_video.comment_count,
       like_count: youtube_video.like_count,
-      song: song(slug),
+      song: song(html:),
       thumbnail_url: thumbnail_url(youtube_video),
-      recommended_video_ids: recommended_videos(slug),
+      recommended_video_ids: recommended_videos(html:),
       channel: channel_metadata(youtube_video.channel_id)
     )
   end
@@ -70,37 +72,28 @@ class YoutubeScraper
     )
   end
 
-  def recommended_videos(slug)
-    navigate_to_video(slug)
-
-    recommended_video_ids = []
-
-    recommended_videos = @driver.find(:css, YOUTUBE_THUMBNAIL_SELECTOR)
+  def recommended_videos(html:)
+    recommended_videos = html.css(YOUTUBE_THUMBNAIL_SELECTOR)
 
     recommended_videos.map do |video|
-      video&.[]("href")
+      video["href"]
     end.compact.map do |video_url|
-      recommended_video_ids << video_url.split("v=")[1]
+      video_url.split("v=")[1]
     end
-    recommended_video_ids
   end
 
-  def song(slug)
-    navigate_to_video(slug)
-
+  def song(html:)
     song_metadata = SongMetadata.new
 
-    find_music_html_nodes(MUSIC_ROW_SELECTOR_MULTIPLE).each do |row|
-      attribute_title = row.find(:css, MUSIC_ROW_MULTIPLE_DATA_SELECTOR)[0]&.all_text
-
-      song_metadata.titles = []
-      song_metadata.titles << attribute_title
+    html.css(MUSIC_ROW_SELECTOR_MULTIPLE).each do |row|
+      song_metadata.titles = row.css(MUSIC_ROW_MULTIPLE_DATA_SELECTOR).map(&:text).compact
     end
 
-    find_music_html_nodes(MUSIC_ROW_SELECTOR_SINGLE).each do |row|
-      attribute_name = row.find(:css, MUSIC_ROW_SINGLE_TITLE_SELECTOR)[0].all_text
-      attribute_value = row.find(:css, MUSIC_ROW_SINGLE_DATA_SELECTOR)[0].all_text
-      attribute_link = row.find(:css, MUSIC_ROW_SINGLE_DATA_SELECTOR)[0].find(:css, "a")[0]&.[]("href")
+    html.css(MUSIC_ROW_SELECTOR_SINGLE).each do |row|
+      attribute_name = row.css(MUSIC_ROW_SINGLE_TITLE_SELECTOR).text
+      attribute_value = row.css(MUSIC_ROW_SINGLE_DATA_SELECTOR).text
+
+      attribute_link = row.css(MUSIC_ROW_SINGLE_DATA_SELECTOR, "a").map { |a| a["href"] }.first
 
       case attribute_name.downcase
       when "album"
@@ -119,31 +112,20 @@ class YoutubeScraper
     song_metadata
   end
 
-  def find_music_html_nodes(selector)
-    music_elements = []
-    retries = 0
-
-    while retries < RETRY_COUNT || music_elements.empty?
-      retries += 1
-
-      sleep 0.1
-      music_elements = @driver.find(:css, selector)
-    end
-    music_elements
-  end
-
-  def navigate_to_video(slug)
+  def retrieve_html(slug)
     @driver.headers = {"Accept-Language": "en"}
     @driver.visit url(slug)
 
     retries = 0
 
-    while retries < RETRY_COUNT || @driver.find(:css, "#related")[0].find(:css, "#spinner").any?
+    while retries < RETRY_COUNT || @driver.css("#related")[0].css("#spinner").any?
       retries += 1
 
       @driver.evaluate_script("window.scrollTo(0,100000)")
       sleep 0.1
     end
+
+    @driver.body
   end
 
   def url(slug)

@@ -8,17 +8,9 @@ RSpec.describe YoutubeScraper do
 
   describe "video_metadata" do
     it "returns the video metadata from youtube", :vcr do
-      driver = Capybara::Cuprite::Driver.new(app: nil, browser_options: {headless: true})
+      allow_any_instance_of(YoutubeScraper).to receive(:retrieve_html).and_return(File.read("spec/fixtures/files/youtube_video.html"))
 
-      youtube_scraper = YoutubeScraper.new(driver:)
-
-      stub_const("YoutubeScraper::RETRY_COUNT", 0)
-      stub_page(driver)
-      stub_music_row_selector_mutiple_parsing(driver)
-      stub_recommended_videos_selector_parsing(driver)
-      stub_music_row_selector_single_parsing(driver)
-
-      metadata = youtube_scraper.video_metadata slug
+      metadata = YoutubeScraper.new.video_metadata slug: slug
 
       expect(metadata.slug).to eq slug
       expect(metadata.title).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
@@ -38,7 +30,7 @@ RSpec.describe YoutubeScraper do
       expect(metadata.thumbnail_url.maxres).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
       expect(metadata.song.titles).to include "Cuando El Amor Muere"
       expect(metadata.song.artist).to eq "Carlos Di Sarli y su Orquesta Típica"
-      expect(metadata.recommended_video_ids).to match_array ["0ZPR_DNTghE", "1weCIypdfkE", "34dYj80KLmU"]
+      expect(metadata.recommended_video_ids).to match_array ["MQ96oN4AnKw", "fN4ThtBSiU8", "LTptQYCisJk", "m8-A40Ka-6o", "cN34evcqEs0", "xzucEZx6c_E", "6cZR3kIpCu8", "BLMr09iTLjQ", "3O33gHJGibQ", "NA-muRg2jyk", "l4gmmR6BGY4", "bnIG3wVZ52Q", "vVz4dqCc2lc", "yHIcLs4U7ws", "rX7CsSnqAp4", "FnPa-M9Ezos", "zhRC1KsvQRE", "H2Q9jFGNC94", "BLtBiAXVsaM", "Eu6FknOsobQ", "w_GxmSMfyvE", "tVmD4x0NtsE", "1Gd1tHNdOjI", "kUnnJX79HBI", "3SVER-bHVgU", "XMzG-wZlkfs", "QbYu0GQSD7s", "fOYQ4dvW1vA", "_7mHTtKKvtw", "GqiLQ3VMwYo", "iOieQi7iYwA", "cythVHoNxbA", "IPb60Xi8TG0", "8wCNgAJE7Hs", "oMXN3sWVEvg", "WzgVEKe0e-I", "qSToBgeNilw", "3ZJsUlpabk8", "haB_VZX-dFY", "FfPJ1Db2WW8", "U2Sc2UQmyq0", "KOnjYgmiACQ", "bT-grjvr_-E", "7DvJ982ePjQ", "M3CJS8Urojs", "eLZ-qxhOB5o", "KlyEvwhJqQQ", "0ZPR_DNTghE", "eJV_BndWD9U", "SoeK7Pw4ESQ", "aZ-h6nKMAaw", "DHSk6_mnRIs", "6OEO-9xEHtw", "Su4DEi4VpMQ", "ahnzHMufnTE", "nhBkMugKLkI", "uy_3J99ELp4", "Vzv_FDh4N2o", "acb9It00Pio", "RpEimFXYqTs", "NNPnLBPt39g", "h1CVn_vozzk", "I8Ow_1eg8fg", "mUJ-U9KA970", "LIw7BYz1nkU", "bEzw8JMambs", "Csz5HsEZSDI", "b7jJ8EjGW-M", "k2IvpmF8jLs", "WGR6H1W-jsQ"]
       expect(metadata.channel.id).to eq "UCvnY4F-CJVgYdQuIv8sqp-A"
       expect(metadata.channel.title).to eq "jkuklaVideo"
       expect(metadata.channel.description).to eq ""
@@ -54,87 +46,5 @@ RSpec.describe YoutubeScraper do
       expect(metadata.channel.subscriber_count).to eq 389
       expect(metadata.channel.privacy_status).to eq "public"
     end
-  end
-
-  def stub_page(driver)
-    related_node = instance_double Capybara::Cuprite::Node
-    allow(driver).to receive(:visit).and_return(nil)
-    allow(related_node).to receive(:find).with(:css, "#spinner").and_return [nil]
-    allow(driver).to receive(:find).with(:css, "#related").and_return [related_node]
-  end
-
-  def stub_music_row_selector_mutiple_parsing(driver)
-    music_row_multiple_node = instance_double Capybara::Cuprite::Node
-    music_row_item_node = instance_double Capybara::Cuprite::Node
-    allow(music_row_item_node).to receive(:all_text).with(no_args).and_return nil
-    allow(music_row_multiple_node).to receive(:find).with(:css, "#video-title").and_return [music_row_item_node]
-    allow(driver).to receive(:find).with(:css, "#video-lockups").and_return [music_row_multiple_node]
-  end
-
-  def stub_recommended_videos_selector_parsing(driver)
-    recommended_videos_node_1 = instance_double Capybara::Cuprite::Node
-    recommended_videos_node_2 = instance_double Capybara::Cuprite::Node
-    recommended_videos_node_3 = instance_double Capybara::Cuprite::Node
-    allow(recommended_videos_node_1).to receive(:[]).with("href").and_return "https://www.youtube.com/watch?v=0ZPR_DNTghE"
-    allow(recommended_videos_node_2).to receive(:[]).with("href").and_return "https://www.youtube.com/watch?v=1weCIypdfkE"
-    allow(recommended_videos_node_3).to receive(:[]).with("href").and_return "https://www.youtube.com/watch?v=34dYj80KLmU"
-    allow(driver).to receive(:find).with(:css, ".ytd-thumbnail").and_return [recommended_videos_node_1, recommended_videos_node_2, recommended_videos_node_3]
-  end
-
-  def stub_music_row_selector_single_parsing(driver)
-    music_album_row_node = instance_double Capybara::Cuprite::Node
-    music_album_attribute_node = instance_double Capybara::Cuprite::Node
-    music_album_value_node = instance_double Capybara::Cuprite::Node
-    music_artist_row_node = instance_double Capybara::Cuprite::Node
-    music_artist_attribute_node = instance_double Capybara::Cuprite::Node
-    music_artist_value_node = instance_double Capybara::Cuprite::Node
-    music_song_row_node = instance_double Capybara::Cuprite::Node
-    music_song_attribute_node = instance_double Capybara::Cuprite::Node
-    music_song_value_node = instance_double Capybara::Cuprite::Node
-    music_writers_row_node = instance_double Capybara::Cuprite::Node
-    music_writers_attribute_node = instance_double Capybara::Cuprite::Node
-    music_writers_value_node = instance_double Capybara::Cuprite::Node
-
-    allow(music_album_value_node).to receive(:all_text).with(no_args).and_return "Cuando El Amor Muere"
-    allow(music_album_attribute_node).to receive(:all_text).with(no_args).and_return "album"
-    allow(music_album_value_node).to receive(:find).with(:css, "a").and_return "https://www.youtube.com/watch?v=AQ9Ri3kWa_4"
-    allow(music_album_row_node).to receive(:find).with(:css, "a").and_return [music_album_attribute_node]
-    allow(music_album_row_node).to receive(:find).with(:css, "#title").and_return [music_album_attribute_node]
-    allow(music_album_row_node).to receive(:[]).with("href").and_return "https://www.youtube.com/watch?v=AQ9Ri3kWa_4"
-    allow(music_album_row_node).to receive(:find).with(:css, "a").and_return [music_album_attribute_node]
-    allow(music_album_row_node).to receive(:find).with(:css, "#title").and_return [music_album_attribute_node]
-    allow(music_album_row_node).to receive(:find).with(:css, "#default-metadata").and_return [music_album_value_node]
-
-    allow(music_artist_value_node).to receive(:all_text).with(no_args).and_return "Carlos Di Sarli y su Orquesta Típica"
-    allow(music_artist_attribute_node).to receive(:all_text).with(no_args).and_return "artist"
-    allow(music_artist_value_node).to receive(:find).with(:css, "a").and_return "https://www.youtube.com/watch?v=AQ9Ri3kWa_4"
-    allow(music_artist_row_node).to receive(:find).with(:css, "a").and_return [music_artist_attribute_node]
-    allow(music_artist_row_node).to receive(:find).with(:css, "#title").and_return [music_artist_attribute_node]
-    allow(music_artist_row_node).to receive(:[]).with("href").and_return "https://www.youtube.com/watch?v=AQ9Ri3kWa_4"
-    allow(music_artist_row_node).to receive(:find).with(:css, "a").and_return [music_artist_attribute_node]
-    allow(music_artist_row_node).to receive(:find).with(:css, "#title").and_return [music_artist_attribute_node]
-    allow(music_artist_row_node).to receive(:find).with(:css, "#default-metadata").and_return [music_artist_value_node]
-
-    allow(music_song_value_node).to receive(:all_text).with(no_args).and_return "Cuando El Amor Muere"
-    allow(music_song_attribute_node).to receive(:all_text).with(no_args).and_return "song"
-    allow(music_song_value_node).to receive(:find).with(:css, "a").and_return "https://www.youtube.com/watch?v=AQ9Ri3kWa_4"
-    allow(music_song_row_node).to receive(:find).with(:css, "a").and_return [music_song_attribute_node]
-    allow(music_song_row_node).to receive(:find).with(:css, "#title").and_return [music_song_attribute_node]
-    allow(music_song_row_node).to receive(:[]).with("href").and_return "https://www.youtube.com/watch?v=AQ9Ri3kWa_4"
-    allow(music_song_row_node).to receive(:find).with(:css, "a").and_return [music_song_attribute_node]
-    allow(music_song_row_node).to receive(:find).with(:css, "#title").and_return [music_song_attribute_node]
-    allow(music_song_row_node).to receive(:find).with(:css, "#default-metadata").and_return [music_song_value_node]
-
-    allow(music_writers_value_node).to receive(:all_text).with(no_args).and_return "Cuando El Amor Muere"
-    allow(music_writers_attribute_node).to receive(:all_text).with(no_args).and_return "writers"
-    allow(music_writers_value_node).to receive(:find).with(:css, "a").and_return "https://www.youtube.com/watch?v=AQ9Ri3kWa_4"
-    allow(music_writers_row_node).to receive(:find).with(:css, "a").and_return [music_writers_attribute_node]
-    allow(music_writers_row_node).to receive(:find).with(:css, "#title").and_return [music_writers_attribute_node]
-    allow(music_writers_row_node).to receive(:[]).with("href").and_return "https://www.youtube.com/watch?v=AQ9Ri3kWa_4"
-    allow(music_writers_row_node).to receive(:find).with(:css, "a").and_return [music_writers_attribute_node]
-    allow(music_writers_row_node).to receive(:find).with(:css, "#title").and_return [music_writers_attribute_node]
-    allow(music_writers_row_node).to receive(:find).with(:css, "#default-metadata").and_return [music_writers_value_node]
-
-    allow(driver).to receive(:find).with(:css, "#info-row-header").and_return [music_album_row_node, music_song_row_node, music_artist_row_node, music_writers_row_node]
   end
 end
