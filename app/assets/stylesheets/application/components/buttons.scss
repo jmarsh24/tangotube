@@ -4,7 +4,6 @@
   font-size: var(--font-size-md);
   line-height: var(--spacing-md);
   text-align: center;
-  text-transform: uppercase;
   border-radius: var(--border-radius-md);
   padding: var(--spacing-xxs) var(--spacing-xs);
   border: 1px solid transparent;
@@ -52,6 +51,26 @@
     }
   }
 
+  &--neutral {
+    display: inline-flex;
+    flex-direction: row;
+    gap: var(--spacing-xxs);
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-neutral-200);
+    color: var(--color-neutral-1000);
+
+
+    &:hover {
+      background-color: var(--color-neutral-300);
+    }
+
+    &:disabled {
+      background-color: var(--color-neutral-100);
+    }
+  }
+
+
   &--block {
     width: 100%;
   }
@@ -67,7 +86,6 @@
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-lg);
     line-height: var(--line-height-loose);
-    // text-transform: uppercase;
 
     &.button--sm {
       font-size: var(--font-size-sm);
@@ -106,11 +124,6 @@
     &:hover {
       color: var(--color-primary-200);
     }
-  }
-
-  &--google {
-    padding: 0px;
-    height: 42px;
   }
 
   &.hidden {
