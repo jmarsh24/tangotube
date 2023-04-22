@@ -157,6 +157,9 @@ en:
         greeting: Hello %{email}
         unlock_my_account_link: Unlock my account link
         your_account_has_been_locked: Your account has been locked
+    omniauth_callbacks:
+      failure: Failure
+      success: Success
     passwords:
       edit:
         change_my_password: Change my password
