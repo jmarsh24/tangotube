@@ -15,7 +15,7 @@ RSpec.describe ExternalVideoImport::VideoCrawl do
       )
 
       thumbnail_url =
-        ExternalVideoImport::VideoCrawl::Youtube::ThumbnailUrl.new(
+        ExternalVideoImport::VideoCrawl::Youtube::VideoThumbnailUrl.new(
           default: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg",
           medium: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg",
           high: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg",
