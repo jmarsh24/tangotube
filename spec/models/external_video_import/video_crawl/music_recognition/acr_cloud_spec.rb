@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe MusicRecognizer::AcrCloud do
+RSpec.describe ExternalVideoImport::VideoCrawl::MusicRecognition::AcrCloud do
   fixtures :all
 
   let(:audio_file) { file_fixture("blank_audio.mp3").open }
@@ -12,7 +12,7 @@ RSpec.describe MusicRecognizer::AcrCloud do
       stub_request(:post, "http://identify-eu-west-1.acrcloud.com/v1/identify")
         .and_return(status: 200, body: file_fixture("acr_cloud_response.json").read)
 
-      metadata = MusicRecognizer::AcrCloud.new.analyze file: audio_file
+      metadata = ExternalVideoImport::VideoCrawl::MusicRecognition::AcrCloud.new.analyze file: audio_file
       expect(metadata.code).to eq 0
       expect(metadata.message).to eq "Success"
       expect(metadata.acr_song_title).to eq "Cuando El Amor Muere"

@@ -2,20 +2,20 @@
 
 require "rails_helper"
 
-RSpec.describe VideoCrawler do
+RSpec.describe ExternalVideoImport::VideoCrawl do
   fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "#video_metadata" do
     before :each do
-      song = SongMetadata.new(
+      song = ExternalVideoImport::VideoCrawl::Youtube::SongMetadata.new(
         titles: ["Cuando El Amor Muere"],
         artist: "Carlos Di Sarli y su Orquesta Típica",
         album: nil
       )
 
       thumbnail_url =
-        ThumbnailUrl.new(
+        ExternalVideoImport::VideoCrawl::Youtube::ThumbnailUrl.new(
           default: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/default.jpg",
           medium: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/mqdefault.jpg",
           high: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg",
@@ -23,7 +23,7 @@ RSpec.describe VideoCrawler do
           maxres: "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
         )
 
-      channel_metadata = YoutubeChannelMetadata.new(
+      channel_metadata = ExternalVideoImport::VideoCrawl::Youtube::YoutubeChannelMetadata.new(
         id: "UCvnY4F-CJVgYdQuIv8sqp-A",
         title: "jkuklaVideo",
         description: "",
@@ -39,7 +39,7 @@ RSpec.describe VideoCrawler do
         privacy_status: "public"
       )
 
-      video_metadata = YoutubeVideoMetadata.new(
+      video_metadata = ExternalVideoImport::VideoCrawl::Youtube::YoutubeVideoMetadata.new(
         slug: "AQ9Ri3kWa_4",
         title: "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
         description:
@@ -73,7 +73,7 @@ RSpec.describe VideoCrawler do
         channel: channel_metadata
       )
 
-      music_metadata = MusicRecognizer::MusicRecognitionMetadata.new(
+      music_metadata = ExternalVideoImport::VideoCrawl::MusicRecognition::MusicRecognitionMetadata.new(
         code: 0,
         message: "Success",
         acr_song_title: "Cuando El Amor Muere",
@@ -90,12 +90,12 @@ RSpec.describe VideoCrawler do
         youtube_vid: "p0AQ3gx3eo8"
       )
 
-      youtube_scraper = YoutubeScraper.new
+      youtube_scraper = ExternalVideoImport::VideoCrawl::Youtube::YoutubeScraper.new
       allow(youtube_scraper).to receive(:video_metadata).and_return video_metadata
-      music_recognizer = MusicRecognizer.new
+      music_recognizer = ExternalVideoImport::VideoCrawl::MusicRecognition::MusicRecognizer.new
       allow(music_recognizer).to receive(:process_audio_snippet).and_return music_metadata
 
-      video_crawler = VideoCrawler.new(youtube_scraper:, music_recognizer:)
+      video_crawler = ExternalVideoImport::VideoCrawl::VideoCrawler.new(youtube_scraper:, music_recognizer:)
       @metadata = video_crawler.video_metadata(slug)
     end
 
