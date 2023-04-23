@@ -73,7 +73,7 @@ RSpec.describe VideoCrawler do
         channel: channel_metadata
       )
 
-      music_metadata = MusicRecognitionMetadata.new(
+      music_metadata = MusicRecognizer::MusicRecognitionMetadata.new(
         code: 0,
         message: "Success",
         acr_song_title: "Cuando El Amor Muere",
