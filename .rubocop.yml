@@ -1,5 +1,14 @@
 AllCops:
   TargetRubyVersion: 3.1
+  Exclude:
+    - "storage/**/*"
+    - "tmp/**/*"
+    - "lib/**/*"
+    - "vendor/bundle/**/*"
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "scratchpad.rb"
 
 inherit_gem:
   shimmer: config/rubocop_base.yml
