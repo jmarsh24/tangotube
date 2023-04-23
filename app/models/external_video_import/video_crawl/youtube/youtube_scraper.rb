@@ -66,7 +66,7 @@ module ExternalVideoImport
         end
 
         def thumbnail_url(youtube_video)
-          ThumbnailUrl.new(
+          VideoThumbnailUrl.new(
             default: youtube_video.thumbnail_url(:default),
             medium: youtube_video.thumbnail_url(:medium),
             high: youtube_video.thumbnail_url(:high),
