@@ -53,7 +53,7 @@ gem "net-ssh"
 gem "yael"
 gem "capybara"
 gem "cuprite"
-gem "vcr"
+# gem "vcr"
 
 # Assets
 gem "vite_rails"

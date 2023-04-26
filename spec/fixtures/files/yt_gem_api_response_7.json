@@ -1,0 +1,15 @@
+{
+  "error": {
+    "code": 404,
+    "message": "The playlist identified with the request's <code>playlistId</code> parameter cannot be found.",
+    "errors": [
+      {
+        "message": "The playlist identified with the request's <code>playlistId</code> parameter cannot be found.",
+        "domain": "youtube.playlistItem",
+        "reason": "playlistNotFound",
+        "location": "playlistId",
+        "locationType": "parameter"
+      }
+    ]
+  }
+}

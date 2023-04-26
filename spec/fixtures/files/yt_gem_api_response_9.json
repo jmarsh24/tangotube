@@ -1,0 +1,36 @@
+{
+  "kind": "youtube#SubscriptionListResponse",
+  "etag": "KuduwqDceJ25xXs_96iovhJ-7vg",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 50
+  },
+  "items": [
+    {
+      "kind": "youtube#subscription",
+      "etag": "J09HtWUsCYN02kPmyjz80Ur4K3w",
+      "id": "AXRj1tTFBlRP5bRkl3r38FIJ8MIy1ARNolONWz3L1Zs",
+      "snippet": {
+        "publishedAt": "2022-11-11T15:58:25.556361Z",
+        "title": "Trening Fitness",
+        "description": "Witam Cię serdecznie na moim kanale 🙂\n\nNazywam się Paula Piotrzkowska, od 2005 roku jestem instruktorką fitness i tańca. Treningi, zdrowe odżywianie i wszystko co kryje się pod szerokim określeniem FITNESS to właśnie moja wielka życiowa pasja, którą dzielę się z Wami.  Mam nadzieję, że znajdziesz tu wiele inspiracji dla siebie :)\n\nwww.treningfitness.com",
+        "resourceId": {
+          "kind": "youtube#channel",
+          "channelId": "UCbFu9bCnKZhBeDUYlBVtnjQ"
+        },
+        "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/HxojgOEztQjXcoSCLJjQ0Dxr1hX5qYKlWpnhfo6OG68zNdlEUdHqR_LlPryiAyZZqC8ZPj0w9w=s88-c-k-c0x00ffffff-no-rj"
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/HxojgOEztQjXcoSCLJjQ0Dxr1hX5qYKlWpnhfo6OG68zNdlEUdHqR_LlPryiAyZZqC8ZPj0w9w=s240-c-k-c0x00ffffff-no-rj"
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/HxojgOEztQjXcoSCLJjQ0Dxr1hX5qYKlWpnhfo6OG68zNdlEUdHqR_LlPryiAyZZqC8ZPj0w9w=s800-c-k-c0x00ffffff-no-rj"
+          }
+        }
+      }
+    }
+  ]
+}
