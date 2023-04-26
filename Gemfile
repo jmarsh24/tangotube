@@ -30,9 +30,8 @@ gem "dalli"
 gem "devise", github: "heartcombo/devise", branch: "main"
 gem "document_serializable"
 gem "dotenv-rails"
-gem "faraday"
-gem "faraday-multipart"
 gem "hashie"
+gem "httparty"
 gem "image_processing"
 gem "mini_magick"
 gem "omniauth-facebook"
@@ -52,6 +51,8 @@ gem "streamio-ffmpeg"
 gem "translate_client"
 gem "net-ssh"
 gem "yael"
+gem "capybara"
+gem "cuprite"
 
 # Assets
 gem "vite_rails"
@@ -84,7 +85,6 @@ group :development, :test do
   gem "rspec-retry"
   gem "webmock", require: false
   gem "capybara-screenshot-diff"
-  gem "vcr"
 end
 
 group :development do
@@ -101,9 +101,4 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rspec"
   gem "rubocop-rake"
-end
-
-group :test do
-  gem "capybara"
-  gem "cuprite"
 end
