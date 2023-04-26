@@ -12,7 +12,7 @@ RSpec.describe ExternalVideoImport::MusicRecognition::MusicRecognizer do
   describe "process_audio_snippet" do
     let(:acr_cloud) do
       acr_cloud = ExternalVideoImport::MusicRecognition::AcrCloud.new
-      allow(acr_cloud).to receive(:analyze).and_return ExternalVideoImport::MusicRecognition::MusicRecognizer::Metadata.new(code: 0)
+      allow(acr_cloud).to receive(:analyze).and_return ExternalVideoImport::MusicRecognition::MusicRecognizer::Metadata.new code: 0
       acr_cloud
     end
 
@@ -29,7 +29,7 @@ RSpec.describe ExternalVideoImport::MusicRecognition::MusicRecognizer do
     end
 
     it "returns the music data from ACR Cloud and Spotify" do
-      metadata = ExternalVideoImport::MusicRecognition::MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:).process_audio_snippet(slug)
+      metadata = ExternalVideoImport::MusicRecognition::MusicRecognizer.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:).process_audio_snippet slug
 
       expect(metadata.code).to eq 0
     end
