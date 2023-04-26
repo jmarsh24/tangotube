@@ -12,6 +12,24 @@ module ExternalVideoImport
 
         def analyze(file:)
           data = JSON.parse(HTTParty.post(REQ_URL, body: body(file)), symbolize_names: true)
+          map_metadata(data)
+        end
+
+        private
+
+        def body(file)
+          {
+            sample: file,
+            access_key: Config.acr_cloud_access_key!,
+            data_type: DATA_TYPE,
+            signature_version: SIGNATURE_VERSION,
+            signature:,
+            sample_bytes: file.size,
+            timestamp:
+          }
+        end
+
+        def map_metadata(data)
           ExternalVideoImport::VideoCrawl::MusicRecognition::MusicRecognitionMetadata.new(
             code: data.dig(:status, :code),
             message: data.dig(:status, :msg),
@@ -30,22 +48,8 @@ module ExternalVideoImport
           )
         end
 
-        private
-
-        def body(file)
-          {
-            sample: file,
-            access_key: Config.acr_cloud_access_key!,
-            data_type: DATA_TYPE,
-            signature_version: SIGNATURE_VERSION,
-            signature:,
-            sample_bytes: sample_bytes(file),
-            timestamp:
-          }
-        end
-
-        def sample_bytes(file)
-          file.size
+        def signature
+          Base64.encode64(OpenSSL::HMAC.digest(digest, Config.acr_cloud_secret_key!, unsigned_string)).strip
         end
 
         def unsigned_string
@@ -54,10 +58,6 @@ module ExternalVideoImport
 
         def digest
           OpenSSL::Digest.new("sha1")
-        end
-
-        def signature
-          Base64.encode64(OpenSSL::HMAC.digest(digest, Config.acr_cloud_secret_key!, unsigned_string)).strip
         end
 
         def timestamp
