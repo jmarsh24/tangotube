@@ -598,7 +598,6 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
-    vcr (6.1.0)
     version_gem (1.1.2)
     view_component (2.82.0)
       activesupport (>= 5.2.0, < 8.0)
@@ -722,7 +721,6 @@ DEPENDENCIES
   streamio-ffmpeg
   translate_client
   turbo-rails
-  vcr
   vite_rails
   web-console
   webmock
