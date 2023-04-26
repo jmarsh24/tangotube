@@ -1,0 +1,1661 @@
+{
+    "kind": "youtube#playlistListResponse",
+    "etag": "E9GE-sCJtE0qtQzVe1e7b7saxvU",
+    "pageInfo": {
+        "totalResults": 36,
+        "resultsPerPage": 50
+    },
+    "items": [
+        {
+            "kind": "youtube#playlist",
+            "etag": "YIyzyv5tV5Jv-WlSejRE2wtdcoY",
+            "id": "PLRD0WLQrCTH6vNFIFqgvOgawZQhJYkPQJ",
+            "snippet": {
+                "publishedAt": "2022-10-27T15:02:45Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Magda Bochińska & Tomasz Bossi - Kielce, Poland",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/WQtKhc5Kx1w/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/WQtKhc5Kx1w/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/WQtKhc5Kx1w/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/WQtKhc5Kx1w/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/WQtKhc5Kx1w/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Magda Bochińska & Tomasz Bossi - Kielce, Poland",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "BOJeJWmnIdWOIyODS3jrBsJUe5I",
+            "id": "PLRD0WLQrCTH660DN4kTqOR0uSSYWa9wfq",
+            "snippet": {
+                "publishedAt": "2022-04-02T21:36:01Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Milonga o zachodzie słońca | Milonga at sunset | el Viento 2022",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/0ZPR_DNTghE/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/0ZPR_DNTghE/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/0ZPR_DNTghE/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/0ZPR_DNTghE/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/0ZPR_DNTghE/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Milonga o zachodzie słońca | Milonga at sunset | el Viento 2022",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "gsH6xp3L2N0QIHDOyaEeD9Osrg0",
+            "id": "PLRD0WLQrCTH78YBEKYbodQByZoirUPfrD",
+            "snippet": {
+                "publishedAt": "2022-01-30T15:59:31Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "El Viento, Kielce, Poland",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/bnIG3wVZ52Q/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/bnIG3wVZ52Q/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/bnIG3wVZ52Q/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/bnIG3wVZ52Q/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "El Viento, Kielce, Poland",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "yzHo-FlFJLlq_QAN8VO69EuFpiA",
+            "id": "PLRD0WLQrCTH4QIJfHBuCBzi7Ia_CPQazq",
+            "snippet": {
+                "publishedAt": "2017-01-25T21:23:39Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Fabian Salas & Lola Diaz",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/FnPa-M9Ezos/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/FnPa-M9Ezos/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/FnPa-M9Ezos/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/FnPa-M9Ezos/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/FnPa-M9Ezos/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Fabian Salas & Lola Diaz",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "ptM7TU_kUakFo9Kyr9aKr8PAwhA",
+            "id": "PLRD0WLQrCTH6g2iyoGDvbnrLy6G0N5wjS",
+            "snippet": {
+                "publishedAt": "2015-09-29T22:47:34Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Elise Roulin & Toni Kastelan",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/3O33gHJGibQ/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/3O33gHJGibQ/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/3O33gHJGibQ/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/3O33gHJGibQ/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/3O33gHJGibQ/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Elise Roulin & Toni Kastelan",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "xTbtghcFhiRd8lWBiwQV7KXehGM",
+            "id": "PLRD0WLQrCTH7ck5q9m8o-YoS6VdBZGjkG",
+            "snippet": {
+                "publishedAt": "2015-09-27T16:24:55Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Maximiliano Cristiani & Karina Colmeiro",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/pZWkNG3KNqU/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/pZWkNG3KNqU/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/pZWkNG3KNqU/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/pZWkNG3KNqU/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/pZWkNG3KNqU/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Maximiliano Cristiani & Karina Colmeiro",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "cSxiESti6R9c8QHHL3o6DmolU5A",
+            "id": "PLRD0WLQrCTH5iyqTONvJIwxgHaNpif0Qa",
+            "snippet": {
+                "publishedAt": "2014-11-15T12:42:13Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Mariela Sametband & Guillermo \"El Peque\" Barrionuevo",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/iRTN5C4pxM0/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/iRTN5C4pxM0/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/iRTN5C4pxM0/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/iRTN5C4pxM0/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/iRTN5C4pxM0/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Mariela Sametband & Guillermo \"El Peque\" Barrionuevo",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "-X6oVnAUWQ6uIwuPi-DW9I6E8ng",
+            "id": "PLRD0WLQrCTH4EsMsS1XRjMOjRqpPBitrJ",
+            "snippet": {
+                "publishedAt": "2014-09-30T10:55:21Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Fabián Peralta & Josefina Bermudez Avila",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/qEEbxV-EF30/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/qEEbxV-EF30/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/qEEbxV-EF30/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/qEEbxV-EF30/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/qEEbxV-EF30/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Fabián Peralta & Josefina Bermudez Avila",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "REATrpBVsWyt91mq4Orkg3Axid4",
+            "id": "PLRD0WLQrCTH4InlDZGtGwKkKv9L4LcHAL",
+            "snippet": {
+                "publishedAt": "2014-09-29T19:37:51Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Sebastiàn Jimenez & María Inés Bogado",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/PiJMRE6kLZo/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Sebastiàn Jimenez & María Inés Bogado",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "rpyxHrYQAOXD45JoPTBX3pSpYRU",
+            "id": "PLRD0WLQrCTH6Tk8oSu2jPQhbAwxbMbFH4",
+            "snippet": {
+                "publishedAt": "2014-08-17T12:23:18Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Kraków Tango Weekend",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Kraków Tango Weekend",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "REb_Ws87EnBQKNDiSgE9yGUMOIM",
+            "id": "PLRD0WLQrCTH403nA7DinafFp-wDebfp3b",
+            "snippet": {
+                "publishedAt": "2014-08-17T12:22:52Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Beata Maia Gellert & Marek Matysiak",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/Da3OZ3KkfoE/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Beata Maia Gellert & Marek Matysiak",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "iDSnZ5Pb4lT8Zh1-ZNfudU87rts",
+            "id": "PLRD0WLQrCTH6Z8evcxrR1YFXqVeXFIInx",
+            "snippet": {
+                "publishedAt": "2013-12-03T10:52:23Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Tangowy Odlot Południowy / Southern Tango Take-off",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/upObe9-knqs/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/upObe9-knqs/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/upObe9-knqs/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/upObe9-knqs/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/upObe9-knqs/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Tangowy Odlot Południowy / Southern Tango Take-off",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "9FlSV1eWgA_g9gx2VGMBqp9GB3I",
+            "id": "PLRD0WLQrCTH71poYcbor-C0v2T3Ss5RMy",
+            "snippet": {
+                "publishedAt": "2013-11-25T13:33:05Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "TANGO in Poland",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/cu6lKr327Y4/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/cu6lKr327Y4/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/cu6lKr327Y4/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/cu6lKr327Y4/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/cu6lKr327Y4/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "TANGO in Poland",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "35zN9xgdcPfrhDEOR42-SVrREqI",
+            "id": "PLRD0WLQrCTH7PMx0jIqceeFDz7nUQC-zY",
+            "snippet": {
+                "publishedAt": "2013-11-25T13:15:03Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Warsaw Tango Weekend",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/9jV7T3QHpLw/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Warsaw Tango Weekend",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "-FIDX_2MlZJ8xjxuhTRLFd1Nlds",
+            "id": "PLRD0WLQrCTH4tBOPno_kCnAHAru9ks_IT",
+            "snippet": {
+                "publishedAt": "2013-11-25T13:08:38Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Noelia Hurtado & Carlitos Espinoza",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/iEJs5WHF-G4/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/iEJs5WHF-G4/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/iEJs5WHF-G4/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/iEJs5WHF-G4/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/iEJs5WHF-G4/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Noelia Hurtado & Carlitos Espinoza",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "7uenIiUcjusv_uzthL2TSsdEue0",
+            "id": "PLRD0WLQrCTH4Xqx5-Jh72D9ZrI62vp3KD",
+            "snippet": {
+                "publishedAt": "2013-11-13T13:25:16Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Facundo de la Cruz & Paola Sanz",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/QCqrW3dcZOU/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Facundo de la Cruz & Paola Sanz",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "_MUdHKEor46-eRo0zoEqy3rCoLM",
+            "id": "PLRD0WLQrCTH6BUwoOVWE-U4urnbKM4vxU",
+            "snippet": {
+                "publishedAt": "2013-11-13T10:49:47Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "John Erban & Clarissa Sanchez",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/lOHWXsK61Xc/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/lOHWXsK61Xc/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/lOHWXsK61Xc/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/lOHWXsK61Xc/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/lOHWXsK61Xc/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "John Erban & Clarissa Sanchez",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "DhO84EBRLeC1Tsu3wdW31SaS-9c",
+            "id": "PLRD0WLQrCTH6K7E2hLPHO1m4jNnu29cS1",
+            "snippet": {
+                "publishedAt": "2013-11-12T10:04:46Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Inés Muzzopappa & Dante Sanchez",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/ga7ZIlLEegc/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/ga7ZIlLEegc/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/ga7ZIlLEegc/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/ga7ZIlLEegc/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/ga7ZIlLEegc/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Inés Muzzopappa & Dante Sanchez",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "B5inuWHFVQidMVgvwY4W2MzCdOw",
+            "id": "PLRD0WLQrCTH4Bfh4nooISrnSQff_iJl6A",
+            "snippet": {
+                "publishedAt": "2013-11-12T08:27:41Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Istanbul Tango Ritual",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Istanbul Tango Ritual",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "WdZH7hI99QgTecH43RO_W7H0vgI",
+            "id": "PLRD0WLQrCTH5shZ8vQjl22v3STOclCqk3",
+            "snippet": {
+                "publishedAt": "2013-11-12T08:27:14Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Horacio Godoy & Magdelena Gutierrez",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/5jSZXhIcRWY/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Horacio Godoy & Magdelena Gutierrez",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "of0Af4cruVBSZj9VA4q_V0oMQjg",
+            "id": "PLRD0WLQrCTH7TVYzmwRS7ZFnerhPF4ier",
+            "snippet": {
+                "publishedAt": "2013-10-28T13:24:07Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Tango in Kraków, Poland",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/TY19lt-0y4w/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/TY19lt-0y4w/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/TY19lt-0y4w/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/TY19lt-0y4w/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/TY19lt-0y4w/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Tango in Kraków, Poland",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "XXGCsFTFORk6l5s47IuLBLCLuLw",
+            "id": "PLRD0WLQrCTH4Rr8LwSe3BPN4Mo4HRO7XG",
+            "snippet": {
+                "publishedAt": "2013-10-28T13:23:12Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Ola Niesler & Michał Zachariasiewicz",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/R7K_b52gmZQ/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/R7K_b52gmZQ/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/R7K_b52gmZQ/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/R7K_b52gmZQ/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/R7K_b52gmZQ/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Ola Niesler & Michał Zachariasiewicz",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "mWVEE67NiAa-LBpPtYsYoIAN_E4",
+            "id": "PLRD0WLQrCTH77l3JN7Qw4j5ECbZGpFp16",
+            "snippet": {
+                "publishedAt": "2013-10-02T09:04:49Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Javier Rodriguez & Noelia Barsi",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/sWsK_ayBQyo/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/sWsK_ayBQyo/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/sWsK_ayBQyo/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/sWsK_ayBQyo/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/sWsK_ayBQyo/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Javier Rodriguez & Noelia Barsi",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "VhOuhgzY8pYskP2CaigLlPO_YBM",
+            "id": "PLRD0WLQrCTH6W_u2qdH-3AgV2itgIfKNC",
+            "snippet": {
+                "publishedAt": "2013-09-30T12:11:58Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Sebastian Achaval & Roxana Suarez",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/ciOvuBg5EYo/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/ciOvuBg5EYo/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/ciOvuBg5EYo/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/ciOvuBg5EYo/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/ciOvuBg5EYo/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Sebastian Achaval & Roxana Suarez",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "qRAUL6N6SAdSY5Qrwv3olLtw6Ag",
+            "id": "PLRD0WLQrCTH4cfarv1DGqXZ05xrcC4v0O",
+            "snippet": {
+                "publishedAt": "2013-09-30T09:30:59Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "ŁÓDŹ TANGO SALON FESTIVAL",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "ŁÓDŹ TANGO SALON FESTIVAL",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "7I7gqWesCPGWfJ0xCubQwT7Zhbk",
+            "id": "PLRD0WLQrCTH7nZqmBPryLE0tabMTwOGth",
+            "snippet": {
+                "publishedAt": "2013-09-30T09:30:40Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Juan Martin Carrara & Stefania Colina",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/AqNEFw2fPDk/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Juan Martin Carrara & Stefania Colina",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "KN9J-a-q97v4lxyxaxJAzwc06sY",
+            "id": "PLRD0WLQrCTH5BEvfSa12x4U60d3GDhdkB",
+            "snippet": {
+                "publishedAt": "2013-09-24T12:23:42Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Analía Vega & Marcelo Varela",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/P9kJmtknRhY/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/P9kJmtknRhY/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/P9kJmtknRhY/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/P9kJmtknRhY/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/P9kJmtknRhY/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Analía Vega & Marcelo Varela",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "ZaW249-Bzobu6pvq3TfYYkUooaA",
+            "id": "PLRD0WLQrCTH4ctWc3hshxhv0s0I_2zU8f",
+            "snippet": {
+                "publishedAt": "2013-08-20T07:16:52Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Luiza & Marcelo Almiron",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/rnKtdlbFpqk/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/rnKtdlbFpqk/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/rnKtdlbFpqk/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/rnKtdlbFpqk/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/rnKtdlbFpqk/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Luiza & Marcelo Almiron",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "6FTWrE9P-qSZoHwccJ1qiHwdk78",
+            "id": "PLRD0WLQrCTH7Lr3YDga0Z8LeCicHwDDYg",
+            "snippet": {
+                "publishedAt": "2013-08-19T11:29:52Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Serkan Gokcesu & Cecilia Garcia",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/VpP0v-r_Gsk/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/VpP0v-r_Gsk/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/VpP0v-r_Gsk/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/VpP0v-r_Gsk/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/VpP0v-r_Gsk/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Serkan Gokcesu & Cecilia Garcia",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "SOxjrBD_p5oYMyrQarQHUavPuWw",
+            "id": "PLRD0WLQrCTH7hU_QjX_GMfhUXUQ4OLka0",
+            "snippet": {
+                "publishedAt": "2013-08-07T13:03:57Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Mariano 'Chicho' Frumboli & Juana Sepulveda",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/3IjygrbAgIY/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/3IjygrbAgIY/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/3IjygrbAgIY/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/3IjygrbAgIY/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/3IjygrbAgIY/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Mariano 'Chicho' Frumboli & Juana Sepulveda",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "vvHzaXWlTtde0How6KQ6YbffKeU",
+            "id": "PLRD0WLQrCTH6To1XS3EFEmgyECeO9dSV7",
+            "snippet": {
+                "publishedAt": "2013-08-07T12:00:20Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "International Istanbul Tango Festival",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/Paf3v1uX6rk/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/Paf3v1uX6rk/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/Paf3v1uX6rk/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/Paf3v1uX6rk/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/Paf3v1uX6rk/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "International Istanbul Tango Festival",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "azgNdZ6QanxSbblN5rVzmA8ZvGs",
+            "id": "PLRD0WLQrCTH7EK9MC_APrlocgx51EAA6L",
+            "snippet": {
+                "publishedAt": "2013-08-06T10:32:02Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Miguel Angel Zotto & Daiana Guspero",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/hhPrkrRCdm4/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/hhPrkrRCdm4/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/hhPrkrRCdm4/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/hhPrkrRCdm4/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/hhPrkrRCdm4/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Miguel Angel Zotto & Daiana Guspero",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "2aZfoRaRfPQnV4aj1aPVjDw1Wqc",
+            "id": "PLRD0WLQrCTH7rnaA8eNL7FYh5E6LbgFcF",
+            "snippet": {
+                "publishedAt": "2013-08-06T08:48:11Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Lucila Cionci & Rodrigo 'Joe' Corbata",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/3aq9rojukCI/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/3aq9rojukCI/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/3aq9rojukCI/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/3aq9rojukCI/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/3aq9rojukCI/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Lucila Cionci & Rodrigo 'Joe' Corbata",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "1nH7oZHQ8_AzLYiuw7FFONIYcEo",
+            "id": "PLRD0WLQrCTH73gquO5ZdDLKYv58Q5mfLH",
+            "snippet": {
+                "publishedAt": "2013-07-31T08:30:38Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Sabrina & Ruben Veliz",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/2iDCsBOxyog/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/2iDCsBOxyog/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/2iDCsBOxyog/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/2iDCsBOxyog/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/2iDCsBOxyog/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Sabrina & Ruben Veliz",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "16ID4uQPvs1pKkHDIL1ZaS9L5ts",
+            "id": "PLRD0WLQrCTH6rerU2Ox38Ltf3P6Tg9ToP",
+            "snippet": {
+                "publishedAt": "2013-06-17T07:12:31Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Daniela Pucci & Luis Bianchi",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/RN3NCatyVgo/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/RN3NCatyVgo/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/RN3NCatyVgo/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/RN3NCatyVgo/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/RN3NCatyVgo/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Daniela Pucci & Luis Bianchi",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        },
+        {
+            "kind": "youtube#playlist",
+            "etag": "TPRLv6BNq1qMtEkW00ViMNLMwTQ",
+            "id": "PLRD0WLQrCTH6AS-X1gT-PttyakusdgvCg",
+            "snippet": {
+                "publishedAt": "2013-04-09T06:28:55Z",
+                "channelId": "UCvnY4F-CJVgYdQuIv8sqp-A",
+                "title": "Pablo Rodriguez & Corina Herrera",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/Ii5rdG3qZYY/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "jkuklaVideo",
+                "localized": {
+                    "title": "Pablo Rodriguez & Corina Herrera",
+                    "description": ""
+                }
+            },
+            "status": {
+                "privacyStatus": "public"
+            }
+        }
+    ]
+}

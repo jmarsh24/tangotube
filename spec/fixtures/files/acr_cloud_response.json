@@ -1,0 +1,47 @@
+{
+  "result_type": 0,
+  "cost_time": 0.67199993133545,
+  "status": { "msg": "Success", "code": 0, "version": "1.0" },
+  "metadata": {
+    "timestamp_utc": "2023-03-05 18:08:53",
+    "music": [
+      {
+        "artists": [
+          {
+            "name": "Carlos Di Sarli y su Orquesta Típica",
+            "roles": ["AssociatedPerformer", "MainArtist"]
+          }
+        ],
+        "score": 82,
+        "external_ids": { "isrc": "ARF034100046" },
+        "external_metadata": {
+          "spotify": {
+            "album": { "name": "Classics (1940-1943)" },
+            "artists": [
+              { "name": "Carlos Acuña" },
+              { "name": "Carlos Di Sarli" }
+            ],
+            "track": {
+              "name": "Cuando El Amor Muere",
+              "id": "66jpnblQkPOngiFwEEyUW3"
+            }
+          },
+          "youtube": { "vid": "p0AQ3gx3eo8" }
+        },
+        "result_from": 1,
+        "genres": [{ "name": "Tango" }],
+        "duration_ms": 167000,
+        "db_begin_time_offset_ms": 88540,
+        "db_end_time_offset_ms": 96760,
+        "sample_begin_time_offset_ms": 1060,
+        "sample_end_time_offset_ms": 9280,
+        "play_offset_ms": 99480,
+        "label": "SME - RCA Victor",
+        "release_date": "2004-07-15",
+        "title": "Cuando El Amor Muere",
+        "album": { "name": "Serie 78 RPM : Carlos Di Sarli Vol.2" },
+        "acrid": "a8d9899317fd427b6741b739de8ded15"
+      }
+    ]
+  }
+}
