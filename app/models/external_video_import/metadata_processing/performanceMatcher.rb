@@ -13,7 +13,7 @@ module ExternalVideoImport
         performance_array = text.match(PERFORMANCE_REGEX)[0].tr("^0-9", " ").split.map(&:to_i)
         return if performance_array.empty? || performance_array.first > performance_array.second || performance_array.second == 1
 
-        Performance.new(performance_array.first, performance_array.second)
+        Performance.new(position: performance_array.first, total: performance_array.second)
       end
     end
   end
