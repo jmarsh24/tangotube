@@ -13,7 +13,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
       expect(couple_matcher.match_or_create(dancers:)).to eq(couples(:carlitos_noelia))
     end
 
-    fit "creates a new couple when unmatched dancers are provided" do
+    it "creates a new couple when unmatched dancers are provided" do
       dancers = [dancers(:unreviewed_dancer), dancers(:corina)]
 
       new_couple = couple_matcher.match_or_create(dancers:)
@@ -25,10 +25,10 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
 
     it "returns nil when more or less than 2 dancers are provided" do
       dancers = [dancers(:carlitos)]
-      expect(couple_matcher.match_or_create(dancers)).to be_nil
+      expect(couple_matcher.match_or_create(dancers:)).to be_nil
 
       dancers = [dancers(:carlitos), dancers(:noelia), dancers(:jonathan)]
-      expect(couple_matcher.match_or_create(dancers)).to be_nil
+      expect(couple_matcher.match_or_create(dancers:)).to be_nil
     end
   end
 end
