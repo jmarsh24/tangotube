@@ -3,11 +3,16 @@ module ExternalVideoImport
     class Trigram
       class << self
         def best_matches(list:, text:, threshold: 0.6, &block)
-          list.map do |item|
+          matches = list.map do |item|
             query = block.call(item)
             similarity_ratio = inclusion_similarity(query, text)
             [item, similarity_ratio]
-          end.select { |_, similarity| similarity >= threshold }
+          end
+
+          matches.select! { |_, similarity| similarity >= threshold }
+          matches.sort_by! { |_, similarity| -similarity }
+
+          matches
         end
 
         private
