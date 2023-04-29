@@ -5,7 +5,7 @@ module ExternalVideoImport
     class PerformanceMatcher
       PERFORMANCE_REGEX = /(?<=\s|^|#)[1-8]\s?(of|de|\/|-|\|)\s?[1-8](\s+$|)/
 
-      Performance = Struct.new(:position, :total)
+      Performance = Struct.new(:position, :total, keyword_init: true)
 
       def parse(text:)
         return unless text.match?(PERFORMANCE_REGEX)
