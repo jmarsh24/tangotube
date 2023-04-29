@@ -7,7 +7,7 @@ module ExternalVideoImport
             query = block.call(item)
             similarity_ratio = inclusion_similarity(query, text)
             [item, similarity_ratio]
-          end.select { |_, similarity| similarity >= threshold }.max_by { |_, similarity| similarity }
+          end.select { |_, similarity| similarity >= threshold }
         end
 
         private

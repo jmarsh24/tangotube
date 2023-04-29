@@ -61,6 +61,6 @@ class Dancer < ApplicationRecord
   private
 
   def set_slug
-    self.slug = name.parameterize
+    self.slug = full_name.parameterize
   end
 end
