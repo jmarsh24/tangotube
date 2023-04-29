@@ -16,18 +16,21 @@ d_arienzo:
   slug: "juan-darienzo"
 
 di_sarli:
-  name: 'Carlos Di Sarli'
-  slug: 'carlos-di-sarli'
+  name: "Carlos Di Sarli"
+  slug: "carlos-di-sarli"
 
 pugliese:
-  name: 'Osvaldo Pugliese'
-  slug: 'osvaldo-pugliese'
+  name: "Osvaldo Pugliese"
+  slug: "osvaldo-pugliese"
 
 troilo:
-  name: 'Anibal Troilo'
-  slug: 'anibal-troilo'
+  name: "Anibal Troilo"
+  slug: "anibal-troilo"
 
 castillo:
-  name: 'Alberto Castillo'
-  slug: 'alberto-castillo'
+  name: "Alberto Castillo"
+  slug: "alberto-castillo"
 
+garcia:
+  name: "José García"
+  slug: "jose-garcia"

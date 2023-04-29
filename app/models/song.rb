@@ -30,7 +30,7 @@ class Song < ApplicationRecord
   validates :title, presence: true
   validates :artist, presence: true
 
-  belongs_to :orchestra
+  belongs_to :orchestra, optional: true
   has_many :videos, dependent: :nullify
   has_many :leaders, through: :videos
   has_many :followers, through: :videos

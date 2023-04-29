@@ -2,7 +2,7 @@
 
 module ExternalVideoImport
   class Importer
-    def initialize(song_matcher: SongMatcher.new, video_crawler: VideoCrawler.new)
+    def initialize(song_matcher: SongMatcher.new, crawler: Crawler.new)
       @song_matcher = song_matcher
       @video_crawler = video_crawler
     end
