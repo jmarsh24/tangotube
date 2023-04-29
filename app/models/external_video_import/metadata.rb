@@ -25,13 +25,13 @@ module ExternalVideoImport
         [
           music.acr_album_name,
           music.spotify_album_name,
-          youtube.song.album,
-          youtube.writers
+          youtube.song&.album,
+          youtube.song&.writers
         ]
       end
 
       def genre_fields
-        external_genres = RSpotify::Track.find(music.spotify_track_id).genres
+        external_genres = RSpotify::Track.find(music.spotify_track_id).artists.first.genres
         [music.genre, external_genres]
       end
     end
