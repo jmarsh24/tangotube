@@ -15,15 +15,16 @@ RSpec.describe ExternalVideoImport do
     end
 
     let(:youtube_scraper) do
-      metadata = ExternalVideoImport::Youtube::VideoMetadata.new(slug: "AQ9Ri3kWa_4")
+      metadata = ExternalVideoImport::Youtube::VideoMetadata.new(slug: slug)
       youtube_scraper = ExternalVideoImport::Youtube::Scraper.new
-      allow(youtube_scraper).to receive(:metadata).and_return metadata
+      allow(youtube_scraper).to receive(:video_metadata).and_return metadata
       youtube_scraper
     end
 
     it "returns the video data from youtube" do
       video_crawler = ExternalVideoImport::Crawler.new(youtube_scraper:, music_recognizer:)
-      metadata = video_crawler.metadata(slug)
+
+      metadata = video_crawler.metadata(slug: slug)
       expect(metadata.youtube.slug).to eq "AQ9Ri3kWa_4"
       expect(metadata.music.acr_id).to eq "a8d9899317fd427b6741b739de8ded15"
     end

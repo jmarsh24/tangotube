@@ -24,7 +24,7 @@ module ExternalVideoImport
         html = Nokogiri.HTML5 retrieve_html(slug)
 
         VideoMetadata.new(
-          slug: youtube_video.id,
+          slug:,
           title: youtube_video.title,
           description: youtube_video.description,
           upload_date: youtube_video.published_at,

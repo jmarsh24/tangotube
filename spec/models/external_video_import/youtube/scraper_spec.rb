@@ -10,9 +10,10 @@ RSpec.describe ExternalVideoImport::Youtube::Scraper do
     it "returns the video metadata from youtube" do
       stub_yt_gem
 
-      allow_any_instance_of(ExternalVideoImport::Youtube::Scraper).to receive(:retrieve_html).and_return(File.read("spec/fixtures/files/youtube_video.html"))
+      youtube_scraper = ExternalVideoImport::Youtube::Scraper.new
+      allow(youtube_scraper).to receive(:retrieve_html).and_return(File.read("spec/fixtures/files/youtube_video.html"))
 
-      metadata = ExternalVideoImport::Youtube::Scraper.new.video_metadata slug: slug
+      metadata = youtube_scraper.video_metadata slug: slug
 
       expect(metadata.slug).to eq slug
       expect(metadata.title).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
