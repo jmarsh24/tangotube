@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module ExternalVideoImport
-  require_relative "metadata"
-
   class Crawler
     def initialize(youtube_scraper: Youtube::Scraper.new, music_recognizer: MusicRecognition::MusicRecognizer.new)
       @youtube_scraper = youtube_scraper
