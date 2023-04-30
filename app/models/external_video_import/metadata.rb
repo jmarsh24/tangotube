@@ -1,10 +1,11 @@
 module ExternalVideoImport
   class Crawler
-    Metadata = Struct.new(
-      :youtube,
-      :music,
-      keyword_init: true
-    ) do
+    class Metadata
+      include StoreModel::Model
+
+      attribute :youtube, Youtube::VideoMetadata.to_type
+      attribute :music, MusicRecognition::MusicRecognizer::Metadata.to_type
+
       def searchable_song_titles
         [
           music.acr_song_title,

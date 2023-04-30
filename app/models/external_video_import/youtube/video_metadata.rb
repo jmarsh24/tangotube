@@ -2,23 +2,24 @@
 
 module ExternalVideoImport
   module Youtube
-    VideoMetadata = Struct.new(
-      :slug,
-      :title,
-      :description,
-      :upload_date,
-      :duration,
-      :tags,
-      :hd,
-      :view_count,
-      :favorite_count,
-      :comment_count,
-      :like_count,
-      :song,
-      :thumbnail_url,
-      :recommended_video_ids,
-      :channel,
-      keyword_init: true
-    )
+    class VideoMetadata
+      include StoreModel::Model
+
+      attribute :slug, :string
+      attribute :title, :string
+      attribute :description, :string
+      attribute :upload_date, :datetime
+      attribute :duration, :integer
+      attribute :tags, :array_of_strings, default: -> { [] }
+      attribute :hd, :boolean
+      attribute :view_count, :integer
+      attribute :favorite_count, :integer
+      attribute :comment_count, :integer
+      attribute :like_count, :integer
+      attribute :song, SongMetadata.to_type
+      attribute :thumbnail_url, ThumbnailUrl.to_type
+      attribute :recommended_video_ids, :array_of_strings, default: -> { [] }
+      attribute :channel, ChannelMetadata.to_type
+    end
   end
 end

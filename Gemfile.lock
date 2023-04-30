@@ -197,6 +197,8 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    down (5.4.0)
+      addressable (~> 2.8)
     dry-cli (1.0.0)
     dry-initializer (3.1.1)
     e2mmap (0.1.0)
@@ -587,6 +589,8 @@ GEM
     statsd-ruby (1.5.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    store_model (1.6.2)
+      activerecord (>= 5.2)
     streamio-ffmpeg (3.0.2)
       multi_json (~> 1.8)
     temple (0.10.0)
@@ -675,6 +679,7 @@ DEPENDENCIES
   devise!
   document_serializable
   dotenv-rails
+  down
   friendly_id
   groupdate
   guard
@@ -727,6 +732,7 @@ DEPENDENCIES
   solargraph-standardrb
   standard
   stimulus-rails
+  store_model
   streamio-ffmpeg
   translate_client
   turbo-rails

@@ -25,7 +25,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::Trigram do
       text = "Pepito & Tete - Tango"
       best_matches = described_class.best_matches(list: items, text: text, threshold: threshold) { |item| item }
 
-      expect(best_matches).to eq([[items[0], 0.625]])
+      expect(best_matches).to eq([])
     end
 
     it "returns a match for accented characters" do

@@ -100,18 +100,26 @@ RSpec.describe ExternalVideoImport::Importer do
 
     it "imports a video with the correct attributes" do
       dancers = [carlitos, noelia]
-      expect { importer.import(youtube_slug) }.to change(Video, :count).by(1)
+      expect { importer.import(youtube_slug) }.to change { Video.count }.by(1)
 
       video = Video.last
       expect(video.youtube_id).to eq(metadata.youtube.slug)
       expect(video.title).to eq(metadata.youtube.title)
-      # ... test all other video attributes
-      # expect(video.song).to eq(song)
+      expect(video.description).to eq(metadata.youtube.description)
+      expect(video.upload_date).to eq(Date.parse("2022-01-01"))
+      expect(video.duration).to eq(180)
+      expect(video.tags).to match_array(["tag1", "tag2"])
+      expect(video.hd).to eq(true)
+      expect(video.view_count).to eq(1000)
+      expect(video.favorite_count).to eq(100)
+      expect(video.comment_count).to eq(50)
+      expect(video.like_count).to eq(200)
+      expect(video.song).to eq(song)
       expect(video.channel).to eq(channel)
       expect(video.dancers).to match_array(dancers)
       expect(video.couples).to match_array([couple])
-      # expect(video.performance_number).to eq(performance.position)
-      # expect(video.performance_total_number).to eq(performance.total)
+      expect(video.performance_number).to eq(performance.position)
+      expect(video.performance_total_number).to eq(performance.total)
     end
   end
 end
