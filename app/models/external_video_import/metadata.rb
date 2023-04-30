@@ -4,7 +4,7 @@ module ExternalVideoImport
       include StoreModel::Model
 
       attribute :youtube, Youtube::VideoMetadata.to_type
-      attribute :music, MusicRecognition::MusicRecognizer::Metadata.to_type
+      attribute :music, MusicRecognition::Metadata.to_type
 
       def searchable_song_titles
         [

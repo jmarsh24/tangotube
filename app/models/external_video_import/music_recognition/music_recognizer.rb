@@ -9,9 +9,9 @@ module ExternalVideoImport
         @youtube_audio_downloader = youtube_audio_downloader
       end
 
-      def process_audio_snippet(slug)
+      def process_audio_snippet(slug:)
         music_recognition_metadata = nil
-        @youtube_audio_downloader.download_file(slug) do |full_length_audio_file|
+        @youtube_audio_downloader.download_file(slug:) do |full_length_audio_file|
           @audio_trimmer.trim(full_length_audio_file) do |trimmed_audio_file|
             music_recognition_metadata = @acr_cloud.analyze(file: trimmed_audio_file)
           end

@@ -8,7 +8,7 @@ RSpec.describe ExternalVideoImport do
 
   describe "#metadata" do
     let(:music_recognizer) do
-      music_metadata = ExternalVideoImport::MusicRecognition::MusicRecognizer::Metadata.new(acr_id: "a8d9899317fd427b6741b739de8ded15")
+      music_metadata = ExternalVideoImport::MusicRecognition::Metadata.new(acr_id: "a8d9899317fd427b6741b739de8ded15")
       music_recognizer = ExternalVideoImport::MusicRecognition::MusicRecognizer.new
       allow(music_recognizer).to receive(:process_audio_snippet).and_return music_metadata
       music_recognizer
