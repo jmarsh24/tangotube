@@ -11,7 +11,7 @@ module ExternalVideoImport
 
       def process(metadata)
         dancers = @dancer_matcher.match(metadata_fields: metadata.youtube.title)
-        couple = @couple_matcher.match_or_create(dancers: dancers)
+        couples = @couple_matcher.match_or_create(dancers: dancers)
         performance = @performance_matcher.parse(text: "#{metadata.youtube.title} #{metadata.youtube.description}")
 
         {
@@ -29,7 +29,7 @@ module ExternalVideoImport
           channel: @channel_matcher.match_or_create(channel_metadata: metadata.youtube.channel),
           song: @song_matcher.match_or_create(metadata_fields: metadata.searchable_music_fields, artist_fields: metadata.searchable_artist_names, title_fields: metadata.searchable_song_titles, genre_fields: metadata.genre_fields).first,
           dancers: dancers,
-          couples: [couple],
+          couples: couples,
           performance_number: performance&.position,
           performance_total_number: performance&.total
         }

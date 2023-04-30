@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
@@ -8,27 +6,30 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
   describe "#match_or_create" do
     let(:couple_matcher) { described_class.new }
 
-    it "returns an existing couple when matched dancers are provided" do
+    it "returns an array of existing or newly created couples for matched dancers" do
       dancers = [dancers(:carlitos), dancers(:noelia)]
-      expect(couple_matcher.match_or_create(dancers:)).to eq(couples(:carlitos_noelia))
+      existing_couple = couples(:carlitos_noelia)
+
+      result = couple_matcher.match_or_create(dancers: dancers)
+
+      expect(result).to contain_exactly(existing_couple)
     end
 
-    it "creates a new couple when unmatched dancers are provided" do
+    it "creates new couples when unmatched dancers are provided" do
       dancers = [dancers(:unreviewed_dancer), dancers(:corina)]
 
-      new_couple = couple_matcher.match_or_create(dancers:)
+      result = couple_matcher.match_or_create(dancers: dancers)
 
-      expect(new_couple).to be_a(Couple)
-      expect(new_couple.dancer).to eq(dancers.first)
-      expect(new_couple.partner).to eq(dancers.second)
+      expect(result).to all(be_a(Couple))
+      expect(result.size).to eq(1)
+      expect(result.first.dancer).to eq(dancers.first)
+      expect(result.first.partner).to eq(dancers.second)
     end
 
-    it "returns nil when more or less than 2 dancers are provided" do
-      dancers = [dancers(:carlitos)]
-      expect(couple_matcher.match_or_create(dancers:)).to be_nil
-
+    it "returns an empty array when more than 2 dancers are provided" do
       dancers = [dancers(:carlitos), dancers(:noelia), dancers(:jonathan)]
-      expect(couple_matcher.match_or_create(dancers:)).to be_nil
+      result = couple_matcher.match_or_create(dancers: dancers)
+      expect(result).to eq([])
     end
   end
 end
