@@ -4,15 +4,17 @@ module ExternalVideoImport
   module MetadataProcessing
     class CoupleMatcher
       def match_or_create(dancers:)
-        return if dancers.size != 2
+        return [] if dancers.size > 2
 
-        couple = Couple.find_by(dancer: dancers.first, partner: dancers.second)
+        dancers.combination(2).map do |dancer_pair|
+          find_or_create_couple(dancer_pair)
+        end.compact
+      end
 
-        if couple.nil?
-          couple = ::Couple.create!(dancer: dancers.first, partner: dancers.second)
-        end
+      private
 
-        couple
+      def find_or_create_couple(dancer_pair)
+        Couple.find_or_create_by(dancer: dancer_pair.first, partner: dancer_pair.second)
       end
     end
   end
