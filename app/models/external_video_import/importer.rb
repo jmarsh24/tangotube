@@ -23,6 +23,9 @@ module ExternalVideoImport
         video.save!
         video
       end
+    rescue => e
+      Rails.logger.error("Error importing video with slug '#{youtube_slug}': #{e.message}")
+      Rails.logger.error(e.backtrace.join("\n"))
     end
   end
 end

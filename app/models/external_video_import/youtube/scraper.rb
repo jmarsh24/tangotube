@@ -22,7 +22,7 @@ module ExternalVideoImport
         youtube_video = Yt::Video.new(id: slug)
 
         html = Nokogiri.HTML5(retrieve_html(slug))
-        # binding.pry
+
         VideoMetadata.new(
           slug: slug,
           title: youtube_video.title,
@@ -87,12 +87,12 @@ module ExternalVideoImport
         song_metadata = ExternalVideoImport::Youtube::SongMetadata.new
 
         html.css(MUSIC_ROW_SELECTOR_MULTIPLE).each do |row|
-          song_metadata.titles = row.css(MUSIC_ROW_MULTIPLE_DATA_SELECTOR).map(&:text).compact
+          song_metadata.titles = row.css(MUSIC_ROW_MULTIPLE_DATA_SELECTOR).map { |title| title.text.strip }.compact
         end
 
         html.css(MUSIC_ROW_SELECTOR_SINGLE).each do |row|
           attribute_name = row.css(MUSIC_ROW_SINGLE_TITLE_SELECTOR).text
-          attribute_value = row.css(MUSIC_ROW_SINGLE_DATA_SELECTOR).text
+          attribute_value = row.css(MUSIC_ROW_SINGLE_DATA_SELECTOR).text.strip
           attribute_link = row.css(MUSIC_ROW_SINGLE_DATA_SELECTOR).css("a").map { |a| a["href"] }.first
 
           case attribute_name.downcase
