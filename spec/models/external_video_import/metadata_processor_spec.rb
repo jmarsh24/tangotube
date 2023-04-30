@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
+  fixtures :all
+
   let(:song_matcher) { instance_double("SongMatcher") }
   let(:channel_matcher) { instance_double("ChannelMatcher") }
   let(:dancer_matcher) { instance_double("DancerMatcher") }
@@ -22,10 +24,9 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
   describe "#process" do
     let(:youtube_metadata) { double("youtube_metadata") }
     let(:channel_metadata) { double("channel_metadata") }
-    let(:dancer_metadata) { double("dancer_metadata") }
-    let(:couple_metadata) { double("couple_metadata") }
     let(:performance_metadata) { double("performance_metadata") }
     let(:song_metadata) { double("song_metadata") }
+    let(:couple) { couples(:carlitos_noelia) }
 
     before do
       allow(metadata).to receive(:youtube).and_return(youtube_metadata)
@@ -50,8 +51,8 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
       allow(youtube_metadata).to receive(:channel).and_return(channel_metadata)
 
       allow(channel_matcher).to receive(:match_or_create).with(channel_metadata: channel_metadata).and_return("matched_channel")
-      allow(dancer_matcher).to receive(:match).with(metadata_fields: youtube_metadata.title).and_return([dancer_metadata])
-      allow(couple_matcher).to receive(:match_or_create).with(dancers: [dancer_metadata]).and_return(couple_metadata)
+      allow(dancer_matcher).to receive(:match).with(metadata_fields: youtube_metadata.title).and_return(couple.dancers)
+      allow(couple_matcher).to receive(:match_or_create).with(dancers: couple.dancers).and_return(couple)
       allow(performance_matcher).to receive(:parse).with(text: "#{youtube_metadata.title} #{youtube_metadata.description}").and_return(performance_metadata)
       allow(song_matcher).to receive(:match_or_create).with(
         metadata_fields: [],
@@ -63,8 +64,8 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
 
     it "processes the metadata and returns the video attributes" do
       expect(channel_matcher).to receive(:match_or_create).with(channel_metadata: channel_metadata).and_return("matched_channel")
-      expect(dancer_matcher).to receive(:match).with(metadata_fields: youtube_metadata.title).and_return([dancer_metadata])
-      expect(couple_matcher).to receive(:match_or_create).with(dancers: [dancer_metadata]).and_return(couple_metadata)
+      expect(dancer_matcher).to receive(:match).with(metadata_fields: youtube_metadata.title).and_return(dancers)
+      expect(couple_matcher).to receive(:match_or_create).with(dancers: dancers).and_return(couple)
       expect(performance_matcher).to receive(:parse).with(text: "#{youtube_metadata.title} #{youtube_metadata.description}").and_return(performance_metadata)
       expect(song_matcher).to receive(:match_or_create).with(
         metadata_fields: [],
@@ -89,8 +90,8 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
         like_count: 200,
         channel: "matched_channel",
         song: song_metadata,
-        dancers: [dancer_metadata],
-        couples: [couple_metadata],
+        dancers: dancers,
+        couples: couple,
         performance_number: performance_metadata&.position,
         performance_total_number: performance_metadata&.total
       )
