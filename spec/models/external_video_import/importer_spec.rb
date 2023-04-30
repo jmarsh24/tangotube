@@ -62,7 +62,7 @@ RSpec.describe ExternalVideoImport::Importer do
           title: "030Tango"
         }
       ),
-      music: ExternalVideoImport::MusicRecognition::MusicRecognizer::Metadata.new(
+      music: ExternalVideoImport::MusicRecognition::Metadata.new(
         acr_song_title: "Nueve de Julio",
         acr_artist_names: ["Juan D'Arienzo", "Artist 2"],
         acr_album_name: "Album 1",

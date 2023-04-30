@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "capybara/cuprite"
 
 module ExternalVideoImport
@@ -19,12 +17,12 @@ module ExternalVideoImport
       end
 
       def video_metadata(slug:)
-        youtube_video = Yt::Video.new id: slug
+        youtube_video = Yt::Video.new(id: slug)
 
-        html = Nokogiri.HTML5 retrieve_html(slug)
-
+        html = Nokogiri.HTML5(retrieve_html(slug))
+        # binding.pry
         VideoMetadata.new(
-          slug:,
+          slug: slug,
           title: youtube_video.title,
           description: youtube_video.description,
           upload_date: youtube_video.published_at,
@@ -35,17 +33,17 @@ module ExternalVideoImport
           favorite_count: youtube_video.favorite_count,
           comment_count: youtube_video.comment_count,
           like_count: youtube_video.like_count,
-          song: song(html:),
-          thumbnail_url: thumbnail_url(youtube_video),
-          recommended_video_ids: recommended_videos(html:),
-          channel: channel_metadata(youtube_video.channel_id)
+          song: extract_song_metadata(html),
+          thumbnail_url: extract_thumbnail_url(youtube_video),
+          recommended_video_ids: extract_recommended_video_ids(html),
+          channel: extract_channel_metadata(youtube_video.channel_id)
         )
       end
 
       private
 
-      def channel_metadata(slug)
-        youtube_channel = Yt::Channel.new id: slug
+      def extract_channel_metadata(slug)
+        youtube_channel = Yt::Channel.new(id: slug)
 
         ChannelMetadata.new(
           id: youtube_channel.id,
@@ -55,7 +53,7 @@ module ExternalVideoImport
           thumbnail_url: youtube_channel.thumbnail_url,
           view_count: youtube_channel.view_count,
           video_count: youtube_channel.video_count,
-          videos: youtube_channel.related_playlists.first.playlist_items.map(&:video_id) || youtube_channel.videos.map(&:id),
+          videos: youtube_channel.related_playlists.first&.playlist_items&.map(&:video_id) || youtube_channel.videos.map(&:id),
           playlists: youtube_channel.playlists.map(&:id),
           related_playlists: youtube_channel.related_playlists.map(&:id),
           subscribed_channels: youtube_channel.subscribed_channels.map(&:id),
@@ -64,7 +62,7 @@ module ExternalVideoImport
         )
       end
 
-      def thumbnail_url(youtube_video)
+      def extract_thumbnail_url(youtube_video)
         ThumbnailUrl.new(
           default: youtube_video.thumbnail_url(:default),
           medium: youtube_video.thumbnail_url(:medium),
@@ -74,17 +72,17 @@ module ExternalVideoImport
         )
       end
 
-      def recommended_videos(html:)
+      def extract_recommended_video_ids(html)
         recommended_videos = html.css(YOUTUBE_THUMBNAIL_SELECTOR)
 
         recommended_videos.map do |video|
           video["href"]
         end.compact.map do |video_url|
           video_url.split("v=")[1]
-        end
+        end.compact
       end
 
-      def song(html:)
+      def extract_song_metadata(html)
         song_metadata = ExternalVideoImport::Youtube::SongMetadata.new
 
         html.css(MUSIC_ROW_SELECTOR_MULTIPLE).each do |row|
@@ -94,8 +92,7 @@ module ExternalVideoImport
         html.css(MUSIC_ROW_SELECTOR_SINGLE).each do |row|
           attribute_name = row.css(MUSIC_ROW_SINGLE_TITLE_SELECTOR).text
           attribute_value = row.css(MUSIC_ROW_SINGLE_DATA_SELECTOR).text
-
-          attribute_link = row.css(MUSIC_ROW_SINGLE_DATA_SELECTOR, "a").map { |a| a["href"] }.first
+          attribute_link = row.css(MUSIC_ROW_SINGLE_DATA_SELECTOR).css("a").map { |a| a["href"] }.first
 
           case attribute_name.downcase
           when "album"
@@ -116,14 +113,14 @@ module ExternalVideoImport
 
       def retrieve_html(slug)
         @driver.headers = {"Accept-Language": "en"}
-        @driver.visit url(slug)
+        @driver.visit(url(slug))
 
         retries = 0
 
-        while retries < RETRY_COUNT || @driver.css("#related")[0].css("#spinner").any?
+        while retries < RETRY_COUNT || !@driver.find_css("#related #spinner").empty?
           retries += 1
 
-          @driver.evaluate_script("window.scrollTo(0,100000)")
+          @driver.evaluate_script("window.scrollTo(0, 100000)")
           sleep 0.1
         end
 
@@ -131,7 +128,7 @@ module ExternalVideoImport
       end
 
       def url(slug)
-        (YOUTUBE_URL_PREFIX + slug).to_s
+        "#{YOUTUBE_URL_PREFIX}#{slug}"
       end
     end
   end

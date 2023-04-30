@@ -16,7 +16,7 @@ module ExternalVideoImport
       private
 
       def yt_dlp_command(file, slug)
-        "#{ENV["YT_DLP_BIN"]} '#{YT_DLP_COMMAND_PREFIX + slug}' #{YT_DLP_COMMAND_DOWNLOAD_AUDIO} #{file.path}"
+        "#{ENV["YT_DLP_BIN"]} '#{YT_DLP_COMMAND_PREFIX + slug}' #{YT_DLP_COMMAND_DOWNLOAD_AUDIO}'#{file.path}'"
       end
     end
   end
