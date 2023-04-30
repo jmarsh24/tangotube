@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::VideoCreator do
@@ -8,7 +10,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::VideoCreator do
         duration: 120,
         youtube_id: "abc123",
         description: "This is a test video",
-        published_at: Time.now
+        published_at: Time.zone.now
       }
     end
 

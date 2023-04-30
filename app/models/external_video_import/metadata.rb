@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalVideoImport
   class Crawler
     class Metadata
