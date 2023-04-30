@@ -17,7 +17,6 @@ module ExternalVideoImport
       attribute :videos, :array_of_strings, default: -> { [] }
       attribute :playlists, :array_of_strings, default: -> { [] }
       attribute :related_playlists, :array_of_strings, default: -> { [] }
-      attribute :subscribed_channels, :array_of_strings, default: -> { [] }
       attribute :privacy_status, :string
     end
   end
