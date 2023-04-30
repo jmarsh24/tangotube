@@ -17,7 +17,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
       let(:genre_fields) { ["Tango"] }
 
       it "returns the best match" do
-        expect(song_matcher.match(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to contain_exactly(song)
+        expect(song_matcher.match_or_create(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to contain_exactly(song)
       end
     end
 
@@ -28,7 +28,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
       let(:genre_fields) { ["Tango"] }
 
       it "returns a newly created song" do
-        expect(song_matcher.match(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to include(::Song.last)
+        expect(song_matcher.match_or_create(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to include(::Song.last)
       end
     end
 
@@ -39,7 +39,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
       let(:genre_fields) { ["undefined"] }
 
       it "returns the best match" do
-        expect(song_matcher.match(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to contain_exactly(song)
+        expect(song_matcher.match_or_create(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to contain_exactly(song)
       end
     end
 
@@ -50,7 +50,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
       let(:genre_fields) { ["undefined"] }
 
       it "returns a newly created song" do
-        expect(song_matcher.match(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to include(::Song.last)
+        expect(song_matcher.match_or_create(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to include(::Song.last)
       end
     end
 
@@ -61,7 +61,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
       let(:genre_fields) { ["undefined"] }
 
       it "returns the best match" do
-        expect(song_matcher.match(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to contain_exactly(accented_song)
+        expect(song_matcher.match_or_create(metadata_fields: metadata_fields, artist_fields: artist_fields, title_fields: title_fields, genre_fields: genre_fields)).to contain_exactly(accented_song)
       end
     end
   end
