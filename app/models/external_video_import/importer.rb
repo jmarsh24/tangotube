@@ -15,11 +15,29 @@ module ExternalVideoImport
 
       Video.transaction do
         video = ::Video.create!(video_attributes)
+        attach_thumbnail_to_video(video, metadata.youtube.thumbnail_url.highest_resolution)
         video
       end
     end
 
     private
+
+    def attach_thumbnail_to_video(video, thumbnail_url)
+      return if thumbnail_url.blank?
+
+      begin
+        Tempfile.open(["thumbnail", ".jpg"]) do |tempfile|
+          Down.download(thumbnail_url, destination: tempfile.path)
+          video.thumbnail.attach(io: tempfile, filename: "#{video.youtube_id}.jpg")
+        end
+      rescue Down::Error => e
+        Rails.logger.warn("Failed to download thumbnail from #{thumbnail_url}: #{e.message}")
+      rescue Errno::ENOENT => e
+        Rails.logger.warn("Thumbnail file not found: #{e.message}")
+      rescue => e
+        Rails.logger.error("Error attaching thumbnail: #{e.message}")
+      end
+    end
 
     def build_video_attributes(metadata)
       dancers = @dancer_matcher.match(metadata_fields: metadata.youtube.title)
@@ -38,8 +56,6 @@ module ExternalVideoImport
         favorite_count: metadata.youtube.favorite_count,
         comment_count: metadata.youtube.comment_count,
         like_count: metadata.youtube.like_count,
-        # thumbnail: metadata.youtube.thumbnail_url.maxres,
-        # recommended_video_ids: metadata.youtube.recommended_video_ids,
         channel: @channel_matcher.match(channel_metadata: metadata.youtube.channel),
         song: @song_matcher.match(metadata_fields: metadata.searchable_music_fields, artist_fields: metadata.searchable_artist_names, title_fields: metadata.searchable_song_titles, genre_fields: metadata.genre_fields).first,
         dancers: dancers,

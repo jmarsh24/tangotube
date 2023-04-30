@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_225629) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_30_091038) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -305,7 +305,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_225629) do
     t.integer "duration"
     t.date "upload_date"
     t.integer "view_count"
-    t.string "tags"
     t.bigint "song_id"
     t.string "youtube_song"
     t.string "youtube_artist"
@@ -344,6 +343,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_225629) do
     t.integer "performance_total_number"
     t.boolean "featured", default: false
     t.text "index"
+    t.jsonb "metadata"
+    t.text "tags", default: [], array: true
     t.index ["acr_cloud_artist_name"], name: "index_videos_on_acr_cloud_artist_name"
     t.index ["acr_cloud_track_name"], name: "index_videos_on_acr_cloud_track_name"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
@@ -357,7 +358,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_225629) do
     t.index ["song_id"], name: "index_videos_on_song_id"
     t.index ["spotify_artist_name"], name: "index_videos_on_spotify_artist_name"
     t.index ["spotify_track_name"], name: "index_videos_on_spotify_track_name"
-    t.index ["tags"], name: "index_videos_on_tags"
     t.index ["upload_date"], name: "index_videos_on_upload_date"
     t.index ["view_count"], name: "index_videos_on_view_count"
     t.index ["youtube_artist"], name: "index_videos_on_youtube_artist"

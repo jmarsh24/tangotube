@@ -29,7 +29,7 @@ module ExternalVideoImport
       end
 
       def map_metadata(data)
-        MusicRecognizer::Metadata.new(
+        MusicMetadata.new(
           code: data.dig(:status, :code),
           message: data.dig(:status, :msg),
           acr_song_title: data.dig(:metadata, :music, 0, :title),
