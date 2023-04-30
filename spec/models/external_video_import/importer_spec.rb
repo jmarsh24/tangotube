@@ -9,14 +9,12 @@ RSpec.describe ExternalVideoImport::Importer do
   let(:dancer_matcher) { instance_double("DancerMatcher") }
   let(:couple_matcher) { instance_double("CoupleMatcher") }
   let(:performance_matcher) { instance_double("PerformanceMatcher") }
-  let(:video_creator) { class_double("VideoCreator") }
   let(:thumbnail_attacher) { class_double("ThumbnailAttacher") }
 
   let(:importer) do
     described_class.new(
       video_crawler: video_crawler,
       metadata_processor: ExternalVideoImport::MetadataProcessing::MetadataProcessor.new,
-      video_creator: video_creator,
       thumbnail_attacher: thumbnail_attacher
     )
   end
@@ -33,7 +31,7 @@ RSpec.describe ExternalVideoImport::Importer do
     ExternalVideoImport::Crawler::Metadata.new(
       youtube: ExternalVideoImport::Youtube::VideoMetadata.new(
         slug: "test_video_slug",
-        title: "Test Video Title",
+        title: "Carlitos Espinoza & Noelia Hurtado - Nueve de Julio - Tango 3 / 5",
         description: "Test video description featuring amazing dancers and great music.",
         upload_date: "2022-01-01",
         duration: 180,
@@ -60,13 +58,13 @@ RSpec.describe ExternalVideoImport::Importer do
         ),
         recommended_video_ids: ["video_id_1", "video_id_2"],
         channel: {
-          id: "test_channel_id",
-          title: "Test Channel"
+          id: "UCtdgMR0bmogczrZNpPaO66Q",
+          title: "030Tango"
         }
       ),
       music: ExternalVideoImport::MusicRecognition::MusicRecognizer::Metadata.new(
-        acr_song_title: "Song 1",
-        acr_artist_names: ["Artist 1", "Artist 2"],
+        acr_song_title: "Nueve de Julio",
+        acr_artist_names: ["Juan D'Arienzo", "Artist 2"],
         acr_album_name: "Album 1",
         acr_id: "acr_id_1",
         isrc: "isrc_1",
@@ -87,7 +85,6 @@ RSpec.describe ExternalVideoImport::Importer do
     stub_request(:get, "https://api.spotify.com/v1/artists/649cpnHPJs3XtCIa3XUfq3")
       .to_return(body: file_fixture("spotify_response_1.json").read)
     allow(video_crawler).to receive(:metadata).with(slug: youtube_slug).and_return(metadata)
-    allow(video_creator).to receive(:create_video).and_return(Video.new)
     allow(thumbnail_attacher).to receive(:attach_thumbnail)
   end
 
@@ -101,7 +98,6 @@ RSpec.describe ExternalVideoImport::Importer do
     end
 
     it "imports a video with the correct attributes" do
-      dancers = [carlitos, noelia]
       expect { importer.import(youtube_slug) }.to change { Video.count }.by(1)
 
       video = Video.last
@@ -118,10 +114,11 @@ RSpec.describe ExternalVideoImport::Importer do
       expect(video.like_count).to eq(200)
       expect(video.song).to eq(song)
       expect(video.channel).to eq(channel)
-      expect(video.dancers).to match_array(dancers)
-      expect(video.couples).to match_array([couple])
+      expect(video.dancers).to match_array(couple.dancers)
+      expect(video.couples).to match_array(couple)
       expect(video.performance_number).to eq(performance.position)
       expect(video.performance_total_number).to eq(performance.total)
+      expect(video.metadata).to eq(metadata.as_json)
     end
   end
 end
