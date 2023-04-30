@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateTagsInVideos < ActiveRecord::Migration[6.1]
   def up
     # Add a temporary column to store the new tags data
