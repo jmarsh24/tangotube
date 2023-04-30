@@ -33,7 +33,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::ChannelMatcher do
       end
 
       it "creates a new channel" do
-        expect(::Channel).to receive(:create!).with(channel_id: "new_slug").and_return(new_channel)
+        expect(::Channel).to receive(:create!).and_return(new_channel)
         channel_matcher.match_or_create(channel_metadata: channel_metadata)
       end
 
