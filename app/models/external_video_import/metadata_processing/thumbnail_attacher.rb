@@ -1,19 +1,35 @@
 module ExternalVideoImport
   module MetadataProcessing
     class ThumbnailAttacher
-      def self.attach_thumbnail(video, thumbnail_url)
+      def attach_thumbnail(object, thumbnail_url)
         return if thumbnail_url.blank?
 
-        Tempfile.open(["thumbnail", ".jpg"]) do |tempfile|
-          Down.download(thumbnail_url, destination: tempfile.path)
-          video.thumbnail.attach(io: tempfile, filename: "#{video.youtube_id}.jpg")
+        download_thumbnail(thumbnail_url) do |tempfile|
+          object.thumbnail.attach(io: tempfile, filename: "#{object.class.name.downcase}_#{thumbnail_url}.jpg")
         end
       rescue Down::Error => e
-        Rails.logger.warn("Failed to download thumbnail from #{thumbnail_url}: #{e.message}")
+        log_warning("Failed to download thumbnail from #{thumbnail_url}: #{e.message}")
       rescue Errno::ENOENT => e
-        Rails.logger.warn("Thumbnail file not found: #{e.message}")
+        log_warning("Thumbnail file not found: #{e.message}")
       rescue => e
-        Rails.logger.error("Error attaching thumbnail: #{e.message}")
+        log_error("Error attaching thumbnail: #{e.message}")
+      end
+
+      private
+
+      def download_thumbnail(thumbnail_url)
+        Tempfile.open(["thumbnail", ".jpg"]) do |tempfile|
+          Down.download(thumbnail_url, destination: tempfile.path)
+          yield tempfile
+        end
+      end
+
+      def log_warning(message)
+        Rails.logger.warn(message)
+      end
+
+      def log_error(message)
+        Rails.logger.error(message)
       end
     end
   end

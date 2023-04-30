@@ -26,5 +26,3 @@
         = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id), { "data-turbo-frame": "_top" }
         = link_to channel_title(video), root_path(channel: video.channel.channel_id), "data-turbo-frame": "_top" if video.channel.title.present?
       = formatted_metadata(video)
-
-
