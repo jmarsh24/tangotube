@@ -5,33 +5,14 @@ module ExternalVideoImport
     class ThumbnailAttacher
       def attach_thumbnail(object, thumbnail_url)
         return if thumbnail_url.blank?
-
-        download_thumbnail(thumbnail_url) do |tempfile|
-          object.thumbnail.attach(io: tempfile, filename: "#{object.class.name.downcase}_#{thumbnail_url}.jpg")
-        end
+        downloaded_image = Down.download(thumbnail_url)
+        object.thumbnail.attach(io: downloaded_image, filename: File.basename(downloaded_image.path), content_type: downloaded_image.content_type)
       rescue Down::Error => e
         log_warning("Failed to download thumbnail from #{thumbnail_url}: #{e.message}")
       rescue Errno::ENOENT => e
-        log_warning("Thumbnail file not found: #{e.message}")
+        Rails.logger.warn("Thumbnail file not found: #{e.message}")
       rescue => e
-        log_error("Error attaching thumbnail: #{e.message}")
-      end
-
-      private
-
-      def download_thumbnail(thumbnail_url)
-        Tempfile.open(["thumbnail", ".jpg"]) do |tempfile|
-          Down.download(thumbnail_url, destination: tempfile.path)
-          yield tempfile
-        end
-      end
-
-      def log_warning(message)
-        Rails.logger.warn(message)
-      end
-
-      def log_error(message)
-        Rails.logger.error(message)
+        Rails.logger.error("Error attaching thumbnail: #{e.message}")
       end
     end
   end

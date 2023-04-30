@@ -33,7 +33,8 @@ module ExternalVideoImport
     end
 
     def genre_fields
-      external_genres = RSpotify::Track.find(music.spotify_track_id).artists.first.genres
+      track = RSpotify::Track.find(music.spotify_track_id)
+      external_genres = track.artists.first.genres if track.present?
       [music.genre, external_genres].flatten.compact
     end
   end

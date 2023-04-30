@@ -3,7 +3,7 @@
 module ExternalVideoImport
   module MetadataProcessing
     class ChannelMatcher
-      def initialize(thumbnail_attacher = ThumbnailAttacher)
+      def initialize(thumbnail_attacher = ThumbnailAttacher.new)
         @thumbnail_attacher = thumbnail_attacher
       end
 
@@ -23,7 +23,7 @@ module ExternalVideoImport
           title: channel_metadata.title,
           description: channel_metadata.description,
           thumbnail_url: channel_metadata.thumbnail_url,
-          video_count: channel_metadata.video_count
+          videos_count: channel_metadata.video_count
         )
         attach_avatar_thumbnail(channel, channel_metadata.thumbnail_url)
         channel

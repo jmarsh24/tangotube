@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_091038) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_30_164249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_091038) do
     t.boolean "reviewed", default: false
     t.integer "videos_count", default: 0, null: false
     t.boolean "active", default: true
+    t.text "description"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
     t.index ["title"], name: "index_channels_on_title"
   end
