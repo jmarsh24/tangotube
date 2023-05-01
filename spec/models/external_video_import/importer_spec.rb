@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::Importer do
-  fixtures :songs, :channels, :dancers, :couples, :performances, :videos
+  fixtures :all
 
   let(:song_matcher) { instance_double("SongMatcher") }
   let(:video_crawler) { instance_double("Crawler") }
