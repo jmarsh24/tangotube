@@ -11,13 +11,12 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::ThumbnailAttacher do
       it "attaches the thumbnail to the object" do
         allow(object).to receive(:class).and_return(Object)
 
-        tempfile = Tempfile.new(["thumbnail", ".jpg"])
-        expect(Tempfile).to receive(:open).and_yield(tempfile)
-
-        expect(Down).to receive(:download).with(thumbnail_url, destination: anything).and_return(true)
+        downloaded_image = double("DownloadedImage", path: "image_path", content_type: "image/jpeg")
+        expect(Down).to receive(:download).with(thumbnail_url).and_return(downloaded_image)
         expect(object.thumbnail).to receive(:attach).with(
-          io: tempfile,
-          filename: "object_#{thumbnail_url}.jpg"
+          io: downloaded_image,
+          filename: File.basename(downloaded_image.path),
+          content_type: downloaded_image.content_type
         )
 
         described_class.new.attach_thumbnail(object, thumbnail_url)
@@ -38,19 +37,17 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::ThumbnailAttacher do
 
       before do
         allow(Down).to receive(:download).and_raise(Down::Error, error_message)
+        allow(Rails.logger).to receive(:warn)
       end
 
       it "logs a warning and does not attach the thumbnail" do
-        allow(Down).to receive(:download).with(thumbnail_url, destination: anything).and_raise(Down::Error, "Failed to download thumbnail")
-        allow(Rails.logger).to receive(:warn)
+        expect(Rails.logger).to receive(:warn).with(/Failed to download thumbnail/)
 
         expect(object.thumbnail).not_to receive(:attach)
 
         expect do
           described_class.new.attach_thumbnail(object, thumbnail_url)
         end.not_to change { object.thumbnail }
-
-        expect(Rails.logger).to have_received(:warn).with(/Failed to download thumbnail/)
       end
     end
   end
