@@ -70,7 +70,6 @@ gem "yt"
 gem "rspotify"
 gem "newrelic_rpm"
 gem "barnes" # enables detailed metrics within heroku
-gem "skylight"
 gem "sentry-ruby"
 gem "sentry-rails"
 
