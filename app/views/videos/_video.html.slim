@@ -1,14 +1,11 @@
 - cache_if !video.hidden?, ["video", video.youtube_id] do
   .video-card.stack.stack--xxxs id="video_#{video.youtube_id}"
-    / - if current_user.try(:admin?) && !video.hidden?
-    /   .button.button--secondary
-    /     = button_to t(".hide"), hide_video_path(video.youtube_id)
     = link_to watch_path(v: video.youtube_id), { "data-turbo-frame": "_top" } do
       .video-card__image data-duration="#{hd_duration_data(video)}"
         - if video.performance.present?
           .card__performance-number
             = performance_number video
-        = image_tag video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 385, height: 216
+        = image_tag(video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 385, height: 216)
     .stack.stack--xxxs
       .stack.stack--line.stack--xxxs
         - video.dancer_videos.each do |dv|
@@ -20,11 +17,11 @@
           = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)
       - if video.event.present?
         .stack.stack--line.stack--xxxs
-          = link_to video.event, class: "tag tag--sm", "data-turbo-frame": "_top" do
-            = video.event.title.titleize
+          - if video.event.title.present?
+            = link_to video.event.title.titleize, video.event, class: "tag tag--sm", "data-turbo-frame": "_top"
       .stack.stack--line.stack--xxs
-        = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id), { "data-turbo-frame": "_top" }
-        = link_to channel_title(video), root_path(channel: video.channel.channel_id), "data-turbo-frame": "_top" if video.channel.title.present?
+        - if video.channel.thumbnail.present? || video.channel.thumbnail_url.present?
+          = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), video.channel.title.present? ? root_path(channel: video.channel.channel_id) : "#", { "data-turbo-frame": "_top" }
+        - if video.channel.title.present?
+          = link_to channel_title(video), root_path(channel: video.channel.channel_id), "data-turbo-frame": "_top"
       = formatted_metadata(video)
-
-

@@ -2,14 +2,18 @@
 
 module ExternalVideoImport
   module Youtube
-    ThumbnailUrl =
-      Struct.new(
-        :default,
-        :medium,
-        :high,
-        :standard,
-        :maxres,
-        keyword_init: true
-      )
+    class ThumbnailUrl
+      include StoreModel::Model
+
+      attribute :default, :string
+      attribute :medium, :string
+      attribute :high, :string
+      attribute :standard, :string
+      attribute :maxres, :string
+
+      def highest_resolution
+        maxres || standard || high || medium || default
+      end
+    end
   end
 end
