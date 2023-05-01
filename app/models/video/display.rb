@@ -20,30 +20,22 @@ class Video::Display
 
   def el_recodo_attributes
     return if @video.song.blank?
-
-    "#{@video.song.title.titleize} - #{titleize_artist_name(@video.song.artist)} - #{@video.song.genre.titleize}"
+    format_song_attributes(@video.song.title, @video.song.artist, @video.song.genre)
   end
 
   def spotify_attributes
-    if @video.spotify_track_name.blank? || @video.spotify_artist_name.blank?
-      return
-    end
-
-    "#{@video.spotify_track_name.titleize} - #{titleize_artist_name(@video.spotify_artist_name)}"
+    return if @video.spotify_track_name.blank? || @video.spotify_artist_name.blank?
+    format_song_attributes(@video.spotify_track_name, @video.spotify_artist_name)
   end
 
   def youtube_attributes
     return if @video.youtube_song.blank? || @video.youtube_artist.blank?
-
-    "#{@video.youtube_song.titleize} - #{titleize_artist_name(@video.youtube_artist)}"
+    format_song_attributes(@video.youtube_song, @video.youtube_artist)
   end
 
   def acr_cloud_attributes
-    if @video.acr_cloud_track_name.blank? || @video.acr_cloud_artist_name.blank?
-      return
-    end
-
-    "#{@video.acr_cloud_track_name.titleize} - #{titleize_artist_name(@video.acr_cloud_artist_name)}"
+    return if @video.acr_cloud_track_name.blank? || @video.acr_cloud_artist_name.blank?
+    format_song_attributes(@video.acr_cloud_track_name, @video.acr_cloud_artist_name)
   end
 
   def dancer_names
@@ -53,6 +45,16 @@ class Video::Display
   end
 
   private
+
+  def format_song_attributes(title, artist, genre = nil)
+    formatted_title = title.titleize
+    formatted_artist = titleize_artist_name(artist)
+    if genre.nil?
+      "#{formatted_title} - #{formatted_artist}"
+    else
+      "#{formatted_title} - #{formatted_artist} - #{genre.titleize}"
+    end
+  end
 
   def titleize_artist_name(artist_name)
     artist_name.split("'").map(&:titleize).join("'")
