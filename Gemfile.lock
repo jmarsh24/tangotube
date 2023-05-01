@@ -543,8 +543,6 @@ GEM
       tilt (>= 1.4.0)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
-    skylight (5.3.4)
-      activesupport (>= 5.2.0)
     slim (5.1.0)
       temple (~> 0.10.0)
       tilt (>= 2.0.6, < 2.2)
@@ -726,7 +724,6 @@ DEPENDENCIES
   sidekiq
   sidekiq-scheduler
   sitemap_generator
-  skylight
   slim-rails
   solargraph
   solargraph-standardrb
