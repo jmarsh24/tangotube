@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::ChannelMatcher do
-  fixtures :all
+  fixtures :channels
 
   let(:thumbnail_attacher) { instance_double(ExternalVideoImport::MetadataProcessing::ThumbnailAttacher) }
   let(:channel_matcher) { described_class.new(thumbnail_attacher) }

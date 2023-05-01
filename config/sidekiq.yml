@@ -6,4 +6,7 @@
   - low_priority
   - active_storage_analysis
   - active_storage_purge
-  - high
+  - import
+
+:scheduler:
+  - ./config/sidekiq_schedule.yml

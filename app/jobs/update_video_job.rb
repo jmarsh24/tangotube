@@ -4,7 +4,8 @@ class UpdateVideoJob < ApplicationJob
   queue_as :low_priority
   sidekiq_options queue: :default, retry: 3
 
-  def perform(youtube_id)
-    Video::YoutubeImport::Video.update(youtube_id)
+  def perform(video)
+    importer = ExternalVideoImport::Importer.new
+    importer.update(video)
   end
 end

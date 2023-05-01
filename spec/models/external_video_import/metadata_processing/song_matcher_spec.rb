@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
-  fixtures :all
+  fixtures :songs
 
   let(:song) { songs(:nueve_de_julio) }
   let(:accented_song) { songs(:cafe_dominguez) }

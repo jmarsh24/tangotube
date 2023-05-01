@@ -3,7 +3,8 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MusicRecognition::YoutubeAudioDownloader do
-  fixtures :all
+  fixtures :videos
+
   let(:slug) { videos(:video_1_featured).youtube_id }
   let(:audio_file) { file_fixture("blank_audio.mp3") }
 

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::EventMatcher do
-  fixtures :all
+  fixtures :events
   let(:event_matcher) { described_class.new }
 
   describe "#match" do
