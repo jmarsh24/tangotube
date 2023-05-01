@@ -23,10 +23,6 @@ RSpec:
 Naming/MemoizedInstanceVariableName:
   Enabled: true
 
-# TODO: Move this to Shimmer
-Performance/RedundantMerge:
-  MaxKeyValuePairs: 1
-
 RSpec/ExpectChange:
   Enabled: true
   EnforcedStyle: block

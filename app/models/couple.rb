@@ -60,6 +60,10 @@ class Couple < ApplicationRecord
     "#{dancer.name} #{partner.name}"
   end
 
+  def dancers
+    [dancer, partner]
+  end
+
   private
 
   def set_videos_count

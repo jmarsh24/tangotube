@@ -53,6 +53,10 @@ class VideosController < ApplicationController
   # @route GET /videos/:id (video)
   # @route GET /watch (watch)
   def show
+    if @video.nil?
+      ExternalVideoImport::Importer.new.import(video_params[:v])
+      @video = Video.find_by(youtube_id: video_params[:v])
+    end
     set_recommended_videos
     @start_value = params[:start]
     @end_value = params[:end]

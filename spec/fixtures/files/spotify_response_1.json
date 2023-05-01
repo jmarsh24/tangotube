@@ -1,0 +1,33 @@
+{
+  "external_urls": {
+    "spotify": "https://open.spotify.com/artist/649cpnHPJs3XtCIa3XUfq3"
+  },
+  "followers": {
+    "href": null,
+    "total": 1037
+  },
+  "genres": [],
+  "href": "https://api.spotify.com/v1/artists/649cpnHPJs3XtCIa3XUfq3",
+  "id": "649cpnHPJs3XtCIa3XUfq3",
+  "images": [
+    {
+      "height": 640,
+      "url": "https://i.scdn.co/image/ab67616d0000b273124e5edaf683e43cca549c78",
+      "width": 640
+    },
+    {
+      "height": 300,
+      "url": "https://i.scdn.co/image/ab67616d00001e02124e5edaf683e43cca549c78",
+      "width": 300
+    },
+    {
+      "height": 64,
+      "url": "https://i.scdn.co/image/ab67616d00004851124e5edaf683e43cca549c78",
+      "width": 64
+    }
+  ],
+  "name": "Sineterra",
+  "popularity": 21,
+  "type": "artist",
+  "uri": "spotify:artist:649cpnHPJs3XtCIa3XUfq3"
+}
