@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::DancerMatcher do
-  fixtures :all
+  fixtures :dancers
 
   describe "#match" do
     let(:metadata_fields) { ["Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"] }
