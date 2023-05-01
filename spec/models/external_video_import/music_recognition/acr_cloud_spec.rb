@@ -3,8 +3,6 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MusicRecognition::AcrCloud do
-  fixtures :all
-
   let(:audio_file) { file_fixture("blank_audio.mp3").open }
 
   describe "#analyze" do

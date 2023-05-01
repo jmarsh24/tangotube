@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MusicRecognition::MusicRecognizer do
   fixtures :all
+
   let(:slug) { videos(:video_1_featured).youtube_id }
   let(:trimmed_audio) { file_fixture("audio_snippet.mp3").open }
   let(:audio_file) { file_fixture("audio.mp3").open }

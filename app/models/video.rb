@@ -13,7 +13,6 @@
 #  duration                 :integer
 #  upload_date              :date
 #  view_count               :integer
-#  tags                     :string
 #  song_id                  :bigint
 #  youtube_song             :string
 #  youtube_artist           :string
@@ -52,6 +51,8 @@
 #  performance_total_number :integer
 #  featured                 :boolean          default(FALSE)
 #  index                    :text
+#  metadata                 :jsonb
+#  tags                     :text             default([]), is an Array
 #
 class Video < ApplicationRecord
   acts_as_votable

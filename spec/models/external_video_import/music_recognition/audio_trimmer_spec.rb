@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MusicRecognition::AudioTrimmer do
-  fixtures :all
   let(:audio_file) { file_fixture("audio.mp3").open }
 
   describe "#trim" do
