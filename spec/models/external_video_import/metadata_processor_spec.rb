@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
-  fixtures :couples, :dancers
+  fixtures :all
 
   let(:song_matcher) { instance_double("SongMatcher") }
   let(:channel_matcher) { instance_double("ChannelMatcher") }

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::Youtube::Scraper do
-  fixtures :videos
+  fixtures :all
   let(:slug) { videos(:video_1_featured).youtube_id }
 
   describe "video_metadata" do

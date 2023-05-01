@@ -3,7 +3,8 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::VideoUpdater, type: :model do
-  fixtures :videos
+  fixtures :all
+
   let(:video) { videos(:video_1_featured) }
   let(:metadata) do
     ExternalVideoImport::Metadata.new(

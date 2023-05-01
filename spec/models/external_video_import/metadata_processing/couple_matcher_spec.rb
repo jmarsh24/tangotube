@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
-  fixtures :dancers, :couples
+  fixtures :all
 
   describe "#match_or_create" do
     let(:couple_matcher) { described_class.new }
