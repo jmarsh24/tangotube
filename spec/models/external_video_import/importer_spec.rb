@@ -26,7 +26,6 @@ RSpec.describe ExternalVideoImport::Importer do
   let(:couple) { couples(:carlitos_noelia) }
   let(:performance) { ExternalVideoImport::MetadataProcessing::PerformanceMatcher::Performance.new(position: 3, total: 5) }
   let(:youtube_slug) { "test_video_slug" }
-  let(:metadata_yaml) { YAML.load_file(Rails.root.join("spec/fixtures/metadata.yml")) }
   let(:metadata) do
     ExternalVideoImport::Metadata.new(
       youtube: ExternalVideoImport::Youtube::VideoMetadata.new(
