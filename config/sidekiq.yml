@@ -1,4 +1,5 @@
-:concurrency: 3
+---
+:concurrency: 1
 :queues:
   - dispatch
   - default
@@ -6,4 +7,4 @@
   - low_priority
   - active_storage_analysis
   - active_storage_purge
-  - high
+  - import

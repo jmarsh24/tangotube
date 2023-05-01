@@ -1,0 +1,8 @@
+---
+:schedule:
+  update_enqueue_batches_daily:
+    cron: "0 0 * * *"
+    class: "Video::Update"
+    queue: "default"
+    args:
+      start_id: 0

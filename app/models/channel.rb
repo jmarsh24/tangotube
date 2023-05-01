@@ -17,6 +17,7 @@
 #  reviewed              :boolean          default(FALSE)
 #  videos_count          :integer          default(0), not null
 #  active                :boolean          default(TRUE)
+#  description           :text
 #
 class Channel < ApplicationRecord
   include Reviewable
