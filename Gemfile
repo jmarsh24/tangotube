@@ -55,7 +55,6 @@ gem "capybara"
 gem "cuprite"
 gem "store_model"
 gem "down"
-gem "awesome_print"
 
 # Assets
 gem "vite_rails"
