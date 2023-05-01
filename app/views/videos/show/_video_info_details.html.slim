@@ -35,7 +35,7 @@
           - if @video.song.present?
             = render partial: "videos/show/video_info_item", locals: { header: t(".song_title_heading"), value: link_to(@video.song.try(:title).to_s.titleize, root_path(song_id: @video.song.id), {"data-turbo-frame": "_top"}) }
             = render partial: "videos/show/video_info_item", locals: { header: t(".song_genre_heading"), value: @video.song.try(:genre).to_s.titleize }
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_orchestra_heading"), value: link_to(@video.song.try(:artist).to_s.split(""").map(&:titleize).join("""), root_path(orchestra: @video.song.artist.downcase), {"data-turbo-frame": "_top"}) }
+            = render partial: "videos/show/video_info_item", locals: { header: t(".song_orchestra_heading"), value: link_to(@video.song&.artist_name.split("'").map(&:titleize).join("'"), root_path(orchestra: @video.song.artist.downcase), {"data-turbo-frame": "_top"}) }
             = render partial: "videos/show/video_info_item", locals: { header: t(".song_singer_heading"), value: @video.song.try(:artist_2).to_s.titleize } if @video.song.artist_2.present?
             = render partial: "videos/show/video_info_item", locals: { header: t(".song_recording_date_heading"), value: @video.song.date.strftime("%B %d, %Y") } if @video.song.date.present?
             = render partial: "videos/show/video_info_item", locals: { header: t(".song_composer_heading"), value: @video.song.composer.to_s.titleize } if @video.song.composer.present?
