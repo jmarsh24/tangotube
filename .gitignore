@@ -46,3 +46,4 @@ node_modules
 scratchpad.*
 
 /.vscode/rdbg_autoattach.json
+.env
