@@ -14,8 +14,8 @@ module ExternalVideoImport
       YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v="
       RETRY_COUNT = 100
 
-      def initialize
-        @browser = Puppeteer.launch(headless: true)
+      def initialize(driver: Capybara::Cuprite::Driver.new(nil, {headless: true, timeout: 5.minutes, browser: :chrome}))
+        @driver = driver
       end
 
       def video_metadata(slug:)
@@ -113,23 +113,19 @@ module ExternalVideoImport
       end
 
       def retrieve_html(slug)
+        @driver.headers = {"Accept-Language": "en"}
+        @driver.visit(url(slug))
+
         retries = 0
 
-        begin
-          page = @browser.pages.first || @browser.new_page
-          page.goto(url(slug))
+        while retries < RETRY_COUNT || !@driver.find_css("#related #spinner").empty?
+          retries += 1
 
-          while retries < RETRY_COUNT || page.query_selector("#related #spinner").nil?
-            retries += 1
-
-            page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-            sleep(0.1)
-          end
-
-          page.content
-        ensure
-          page&.close
+          @driver.evaluate_script("window.scrollTo(0, 100000)")
+          sleep 0.1
         end
+
+        @driver.body
       end
 
       def url(slug)
