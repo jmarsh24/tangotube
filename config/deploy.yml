@@ -7,9 +7,9 @@ servers:
 registry:
   server: registry.digitalocean.com
   username:
-    - MRSK_REGISTRY_PASSWORD
+    - MRSK_REGISTRY_TOKEN
   password:
-    - MRSK_REGISTRY_PASSWORD
+    - MRSK_REGISTRY_TOKEN
 
 env:
   secret:
