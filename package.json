@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "heroku-postbuild": "bash -c \"$(curl -sL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp)\" -o /app/.heroku/bin/yt-dlp && chmod +x /app/.heroku/bin/yt-dlp",
     "format": "prettier --write \"app/**/*.{tsx,ts,scss,json}\"",
     "lint": "yarn lint:types && yarn lint:style && yarn lint:format",
     "lint:types": "tsc --noEmit",
