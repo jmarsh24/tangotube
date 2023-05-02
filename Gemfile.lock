@@ -1,4 +1,16 @@
 GIT
+  remote: https://github.com/heartcombo/devise.git
+  revision: 4b72064bfcf076478c5c87818b9536b203f6584f
+  branch: main
+  specs:
+    devise (4.9.2)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
+
+GIT
   remote: https://github.com/rails/rails.git
   revision: 580ad7e0637858caf00f52fd2257c8aaf2e19f84
   branch: main
@@ -206,12 +218,6 @@ GEM
     deepl-rb (2.5.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.9.2)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 4.1.0)
-      responders
-      warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
     document_serializable (0.1.0)
@@ -702,7 +708,7 @@ DEPENDENCIES
   dalli
   debug
   deepl-rb
-  devise
+  devise!
   document_serializable
   dotenv-rails
   down
