@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "puppeteer-ruby"
+require "capybara/cuprite"
 
 module ExternalVideoImport
   module Youtube

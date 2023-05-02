@@ -53,7 +53,8 @@ gem "net-ssh"
 gem "yael"
 gem "store_model"
 gem "down"
-gem "puppeteer-ruby"
+gem "capybara"
+gem "cuprite"
 
 # Assets
 gem "vite_rails"
@@ -85,8 +86,6 @@ group :development, :test do
   gem "rspec-retry"
   gem "webmock", require: false
   gem "capybara-screenshot-diff"
-  gem "capybara"
-  gem "cuprite"
 end
 
 group :development do
