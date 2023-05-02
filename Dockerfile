@@ -20,7 +20,7 @@ FROM base as build
 
 # Install packages need to build gems and node modules
 RUN apt-get update -qq && \
-  apt-get install -y build-essential curl default-libmysqlclient-dev git libpq-dev libvips node-gyp pkg-config python-is-python3 ffmpeg && \
+  apt-get install -y build-essential curl default-libmysqlclient-dev git libpq-dev libvips node-gyp pkg-config python-is-python3 ffmpeg wget && \
   curl -sL https://yt-dlp.org/downloads/latest/yt-dlp -o /usr/local/bin/yt-dlp && \
   chmod a+rx /usr/local/bin/yt-dlp
 
