@@ -14,7 +14,7 @@ module ExternalVideoImport
       YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v="
       RETRY_COUNT = 100
 
-      def initialize(driver: Capybara::Cuprite::Driver.new(nil, {headless: true, timeout: 5.minutes}))
+      def initialize(driver: Capybara::Cuprite::Driver.new(nil, {headless: true, timeout: 5.minutes, browser: :chrome}))
         @driver = driver
       end
 
