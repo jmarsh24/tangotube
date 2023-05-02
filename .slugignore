@@ -14,9 +14,6 @@
 /doc
 /README*
 
-# Ignore uncompiled assets
-/app/assets/*/*.{scss,sass,less,coffee}
-
 # Ignore unnecessary files
 *.swp
 *.swo
