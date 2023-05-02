@@ -57,7 +57,7 @@ Rails.application.configure do
   config.log_tags = [:request_id]
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store, ENV.fetch("MEMCACHED_HOST", "localhost"), {namespace: "tangotube", expires_in: 1.day, compress: true}
+  config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"], {username: ENV["MEMCACHIER_USERNAME"], password: ENV["MEMCACHIER_PASSWORD"]}
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter = :sidekiq
