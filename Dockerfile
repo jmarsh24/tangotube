@@ -24,11 +24,9 @@ RUN apt-get update -qq && \
   curl -sL https://yt-dlp.org/downloads/latest/yt-dlp -o /usr/local/bin/yt-dlp && \
   chmod a+rx /usr/local/bin/yt-dlp
 
-# Add Google Chrome repository and install it
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-archive-keyring.gpg && \
-  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
-  apt-get update -qq && \
-  apt-get install -y google-chrome-stable
+# Install Chromium
+RUN apt-get update -qq && \
+  apt-get install -y chromium
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=19.7.0
