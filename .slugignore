@@ -1,0 +1,25 @@
+# Ignore test and spec directories
+/test
+/spec
+
+# Ignore log files
+/log
+*.log
+
+# Ignore temporary files and directories
+/tmp
+.cache
+
+# Ignore documentation
+/doc
+/README*
+
+# Ignore uncompiled assets
+/app/assets/*/*.{scss,sass,less,coffee}
+
+# Ignore unnecessary files
+*.swp
+*.swo
+*.bak
+*~
+.DS_Store
