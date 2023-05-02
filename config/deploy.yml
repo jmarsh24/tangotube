@@ -6,15 +6,11 @@ servers:
 
 registry:
   server: registry.digitalocean.com
+  username:
+    - MRSK_REGISTRY_PASSWORD
+  password:
+    - MRSK_REGISTRY_PASSWORD
 
 env:
   secret:
     - RAILS_MASTER_KEY
-  clear:
-    MEMCACHED_HOST: 192.168.0.3
-
-accessories:
-  memcached:
-    image: memcached:latest
-    host: 192.168.0.3
-    port: 11211
