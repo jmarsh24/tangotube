@@ -14,7 +14,6 @@ ENV RAILS_ENV="production" \
   BUNDLE_PATH="/usr/local/bundle" \
   BUNDLE_WITHOUT="development"
 
-
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
@@ -23,10 +22,6 @@ RUN apt-get update -qq && \
   apt-get install -y build-essential curl default-libmysqlclient-dev git libpq-dev libvips node-gyp pkg-config python-is-python3 ffmpeg wget && \
   curl -sL https://yt-dlp.org/downloads/latest/yt-dlp -o /usr/local/bin/yt-dlp && \
   chmod a+rx /usr/local/bin/yt-dlp
-
-# Install Memcached in the base image
-RUN apt-get update -qq && \
-  apt-get install -y memcached
 
 # Install Chromium
 RUN apt-get update -qq && \
@@ -44,10 +39,9 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
 
 # Install application gems
 COPY . ./
-RUN bundle install && \
+RUN bundle install --without development test && \
   rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
   bundle exec bootsnap precompile --gemfile
-
 
 # Install node modules
 COPY package.json yarn.lock ./
@@ -59,9 +53,8 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 MEMCACHIER_SERVERS_DUMMY="dummy:11211" ./bin/rails assets:precompile
-
+# Precompiling assets for production
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Final stage for app image
 FROM base
@@ -69,10 +62,6 @@ FROM base
 RUN apt-get update -qq && \
   apt-get install --no-install-recommends -y default-mysql-client libsqlite3-0 libvips postgresql-client && \
   rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Install Memcached in the final stage
-RUN apt-get update -qq && \
-  apt-get install -y memcached
 
 # Run and own the application files as a non-root user for security
 RUN useradd rails
@@ -82,7 +71,7 @@ USER rails:rails
 COPY --from=build --chown=rails:rails /usr/local/bundle /usr/local/bundle
 COPY --from=build --chown=rails:rails /rails /rails
 
-# Entrypoint prepares the database.
+# Entrypoint prepares the database
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
