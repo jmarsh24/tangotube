@@ -51,10 +51,9 @@ gem "streamio-ffmpeg"
 gem "translate_client"
 gem "net-ssh"
 gem "yael"
-gem "capybara"
-gem "cuprite"
 gem "store_model"
 gem "down"
+gem "puppeteer-ruby"
 
 # Assets
 gem "vite_rails"
@@ -86,6 +85,8 @@ group :development, :test do
   gem "rspec-retry"
   gem "webmock", require: false
   gem "capybara-screenshot-diff"
+  gem "capybara"
+  gem "cuprite"
 end
 
 group :development do
