@@ -26,7 +26,7 @@ Config = Shimmer::Config.instance.freeze
 module TangoTube
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
     config.exceptions_app = routes
     config.time_zone = "Berlin"
     config.require_master_key = true

@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby "3.1.4"
 
-gem "rails", "~> 7.0.4"
+gem "rails", github: "rails/rails", branch: "main"
 gem "puma"
 
 # databases
@@ -55,6 +55,7 @@ gem "store_model"
 gem "down"
 gem "capybara"
 gem "cuprite"
+gem "mrsk"
 
 # Assets
 gem "vite_rails"

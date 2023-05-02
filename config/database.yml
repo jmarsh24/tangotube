@@ -11,7 +11,7 @@ default: &default
 development:
   <<: *default
   database: tangotube_development
-  schema_search_path: 'heroku_ext,public'
+  schema_search_path: "heroku_ext,public"
 
 test:
   <<: *default
@@ -19,5 +19,4 @@ test:
 
 production:
   <<: *default
-  database: tangotube_production
-  port: 5432
+  url: <%= Rails.application.credentials.database_url %>
