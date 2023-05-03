@@ -1,15 +1,13 @@
 service: tangotube
 image: jmarsh24/tangotube
 servers:
-  - 167.172.106.219
-  - 64.225.107.163
+  - 202.61.197.241
 
 registry:
-  server: registry.digitalocean.com
   username:
-    - MRSK_REGISTRY_TOKEN
+    - DOCKER_HUB_USERNAME
   password:
-    - MRSK_REGISTRY_TOKEN
+    - DOCKER_HUB_TOKEN
 
 env:
   secret:
