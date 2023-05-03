@@ -2,28 +2,33 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.2.1
-FROM ruby:$RUBY_VERSION-slim as base
+FROM ruby:$RUBY_VERSION-slim as app
 
 # Rails app lives here
 WORKDIR /rails
 
 # imagemagick AND vips, usually only one is needed.
-ENV RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-dev libmagickwand-dev postgresql-client ffmpeg python3-pip" \
-  BUILD_DEPS="build-essential libpq-dev git less pkg-config python-is-python3 node-gyp vim rsync"
+ENV BUILD_DEPS="build-essential libpq-dev git less pkg-config python-is-python3 node-gyp vim rsync" \
+  TZ="Etc/UTC"
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+# Define ARG for runtime dependencies
+ARG RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-dev libmagickwand-dev postgresql-client ffmpeg python3-pip"
 
-RUN pip3 install yt-dlp
-
-# Common dependencies
+# Install tzdata early to avoid prompting during installation
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
   --mount=type=tmpfs,target=/var/log \
-  rm -f /etc/apt/apt.conf.d/docker-clean; \
-  echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache; \
-  apt-get update -qq \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends $BUILD_DEPS $RUNTIME_DEPS
+  apt-get update -qq && \
+  apt-get install -yq --no-install-recommends tzdata
+
+# Install additional packages if specified
+ARG INSTALL_YT_DLP=false
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  --mount=type=tmpfs,target=/var/log \
+  apt-get update -qq && \
+  apt-get install -yq --no-install-recommends $RUNTIME_DEPS wget gnupg google-chrome-stable cron && \
+  if [ "$INSTALL_YT_DLP" = "true" ]; then pip3 install yt-dlp; fi
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=14.21.3
@@ -33,13 +38,6 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
   /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
   npm install -g yarn@$YARN_VERSION && \
   rm -rf /tmp/node-build-master
-
-# Install additional packages (yt-dlp, ffmpeg, google-chrome)
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-  --mount=type=cache,target=/var/lib/apt,sharing=locked \
-  --mount=type=tmpfs,target=/var/log \
-  apt-get update -qq && \
-  apt-get install -yq --no-install-recommends yt-dlp ffmpeg google-chrome-stable
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -70,7 +68,6 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-
 # reduce node memory usage:
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 ARG DATABASE_URL="postgres://postgres:postgres@db:5432/postgres"
@@ -87,9 +84,8 @@ RUN --mount=type=cache,target=/rails/node_modules \
   rsync -a /rails/public/vite/. /rails/tmp/assets_between_runs/vite/. && \
   rsync -a /rails/public/assets/. /rails/tmp/assets_between_runs/assets/.
 
-
 # Final stage for app image
-FROM base as app
+FROM app as final
 
 # Install packages needed for deployment
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -98,28 +94,18 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   apt-get update -qq && \
   apt-get install --no-install-recommends -y $RUNTIME_DEPS cron
 
-# This maybe not needed for normal apps: I need Google Chrome for some scraping stuff.
-#RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-#   --mount=type=cache,target=/var/lib/apt,sharing=locked \
-#   --mount=type=tmpfs,target=/var/log \
-#    curl -sL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-#    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-#    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-#   apt-get update -qq && \
-#   apt-get install --no-install-recommends -y google-chrome-stable
-
 # Install Google Chrome for web scraping
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
   --mount=type=tmpfs,target=/var/log \
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-  echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
+  curl -sSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google.gpg && \
+  echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
   apt-get update -qq && \
   apt-get install --no-install-recommends -y google-chrome-stable
 
 # Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
+COPY --from=app /usr/local/bundle /usr/local/bundle
+COPY --from=app /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --home /rails --shell /bin/bash && \
