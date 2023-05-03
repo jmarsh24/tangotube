@@ -71,27 +71,6 @@ accessories:
     directories:
       - data:/data
 
-accessories:
-  db:
-    image: groonga/pgroonga:2.4.5-alpine-12
-    hosts:
-      - 202.61.197.241
-    env: {}
-    # you can also just use :5432 BUT then the host is reachable via public internet if NO FIREWALL ENABLED!
-    # I just use the docker main ip here.
-    port: "172.17.0.1:5432:5432"
-    directories:
-      - data:/var/lib/postgresql/data
-    env:
-      POSTGRES_HOST_AUTH_METHOD: trust
-  redis:
-    image: redis:7.0
-    hosts:
-      - 202.61.197.241
-    port: "172.17.0.1:6379:6379"
-    directories:
-      - data:/data
-
 traefik:
   # I also don't want to bind to 0.0.0.0
   # but just bind to the vpn which Hetzner provided me with
