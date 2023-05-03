@@ -4,6 +4,13 @@
 ARG RUBY_VERSION=3.2.1
 FROM ruby:$RUBY_VERSION-slim as app
 
+# Install the wget package
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  --mount=type=tmpfs,target=/var/log \
+  apt-get update -qq && \
+  apt-get install -yq --no-install-recommends wget
+
 # Rails app lives here
 WORKDIR /rails
 
