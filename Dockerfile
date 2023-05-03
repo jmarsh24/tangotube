@@ -8,12 +8,13 @@ FROM ruby:$RUBY_VERSION-slim as base
 WORKDIR /rails
 
 # imagemagick AND vips, usually only one is needed.
-ENV RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-dev libmagickwand-dev postgresql-client" \
+ENV RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-dev libmagickwand-dev postgresql-client ffmpeg python3-pip" \
   BUILD_DEPS="build-essential libpq-dev git less pkg-config python-is-python3 node-gyp vim rsync"
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
+RUN pip3 install yt-dlp
 
 # Common dependencies
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -33,13 +34,12 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
   npm install -g yarn@$YARN_VERSION && \
   rm -rf /tmp/node-build-master
 
-# COPY Aptfile /tmp/Aptfile
-# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-#   --mount=type=cache,target=/var/lib/apt,sharing=locked \
-#   --mount=type=tmpfs,target=/var/log \
-#   apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
-#   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-#     $(grep -Ev '^\s*#' /tmp/Aptfile | xargs)
+# Install additional packages (yt-dlp, ffmpeg, google-chrome)
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  --mount=type=tmpfs,target=/var/log \
+  apt-get update -qq && \
+  apt-get install -yq --no-install-recommends yt-dlp ffmpeg google-chrome-stable
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -51,6 +51,7 @@ ENV RAILS_ENV="production" \
   GEM_HOME="/usr/local/bundle"
 
 # Install application gems
+COPY .ruby-version ./
 COPY Gemfile Gemfile.lock ./
 RUN --mount=type=cache,target=~/.bundle/cache \
   bundle config --local deployment 'true' \
@@ -106,6 +107,15 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 #    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
 #   apt-get update -qq && \
 #   apt-get install --no-install-recommends -y google-chrome-stable
+
+# Install Google Chrome for web scraping
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  --mount=type=tmpfs,target=/var/log \
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
+  apt-get update -qq && \
+  apt-get install --no-install-recommends -y google-chrome-stable
 
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
