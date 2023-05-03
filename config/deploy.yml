@@ -19,7 +19,7 @@ env:
 accessories:
   db:
     image: postgres:latest
-    host: 192.168.1.93
+    host: 202.61.197.241
     port: 172.17.0.1:5432:5432
     env:
       secret:
@@ -28,3 +28,10 @@ accessories:
         - POSTGRES_DB
     directories:
       - data:/var/lib/postgresql/data
+  redis:
+    image: redis:7.0.3
+    hosts:
+      - 202.61.197.241
+    port: 172.17.0.1:6379:6379
+    directories:
+      - data:/data
