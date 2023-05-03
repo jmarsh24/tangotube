@@ -27,8 +27,14 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
   --mount=type=tmpfs,target=/var/log \
   apt-get update -qq && \
-  apt-get install -yq --no-install-recommends $RUNTIME_DEPS wget gnupg google-chrome-stable cron && \
+  apt-get install -yq --no-install-recommends $RUNTIME_DEPS cron && \
   if [ "$INSTALL_YT_DLP" = "true" ]; then pip3 install yt-dlp; fi
+
+# Download and install Google Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+  dpkg -i google-chrome-stable_current_amd64.deb && \
+  apt-get install -f -y && \
+  rm google-chrome-stable_current_amd64.deb
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=14.21.3
@@ -94,14 +100,11 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   apt-get update -qq && \
   apt-get install --no-install-recommends -y $RUNTIME_DEPS cron
 
-# Install Google Chrome for web scraping
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-  --mount=type=cache,target=/var/lib/apt,sharing=locked \
-  --mount=type=tmpfs,target=/var/log \
-  curl -sSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google.gpg && \
-  echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
-  apt-get update -qq && \
-  apt-get install --no-install-recommends -y google-chrome-stable
+# Download and install Google Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+  dpkg -i google-chrome-stable_current_amd64.deb && \
+  apt-get install -f -y && \
+  rm google-chrome-stable_current_amd64.deb
 
 # Copy built artifacts: gems, application
 COPY --from=app /usr/local/bundle /usr/local/bundle
