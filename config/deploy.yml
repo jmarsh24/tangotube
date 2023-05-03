@@ -58,18 +58,18 @@ accessories:
     env: {}
     # you can also just use :5432 BUT then the host is reachable via public internet if NO FIREWALL ENABLED!
     # I just use the docker main ip here.
-    port: "172.17.0.1:5432:5432"
+    port: 5432
     directories:
-      - data:/var/lib/postgresql/data
+      - /var/lib/postgres:/var/lib/postgres
     env:
       POSTGRES_HOST_AUTH_METHOD: trust
   redis:
-    image: redis:7.0
+    image: redis:7.0.3
     hosts:
       - 202.61.197.241
-    port: "172.17.0.1:6379:6379"
+    port: 6379
     directories:
-      - data:/data
+      - /var/lib/redis:/data
 
 traefik:
   # I also don't want to bind to 0.0.0.0
