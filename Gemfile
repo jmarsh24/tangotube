@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby File.read(".ruby-version").strip
+ruby "3.2.1"
 
 gem "rails", github: "rails/rails", branch: "main"
 gem "puma"
