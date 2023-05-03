@@ -19,4 +19,4 @@ test:
 
 production:
   <<: *default
-  url: <%= Rails.application.credentials.database_url %>
+  url: <%= ["DATABASE_URL"] %>

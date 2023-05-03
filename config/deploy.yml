@@ -1,7 +1,19 @@
 service: tangotube
 image: jmarsh24/tangotube
 servers:
-  - 202.61.197.241
+  web:
+    hosts:
+      - 202.61.197.241
+    options:
+      add-host: host.docker.internal:host-gateway
+  job:
+    hosts:
+      - 202.61.197.241
+    cmd: >
+      /bin/bash -l -c 'bundle exec whenever --update-crontab && bundle exec sidekiq -C config/sidekiq.yml'
+    port: false
+    options:
+      add-host: host.docker.internal:host-gateway
 
 registry:
   username:
@@ -10,5 +22,77 @@ registry:
     - DOCKER_HUB_TOKEN
 
 env:
+  clear:
+    DATABASE_URL: postgres://postgres@host.docker.internal:5432/app
+    REDIS_URL: redis://host.docker.internal:6379/0
+    RAILS_SERVE_STATIC_FILES: "true"
+    RAILS_LOG_TO_STDOUT: "true"
+    RAILS_ENV: production
   secret:
     - RAILS_MASTER_KEY
+    - SECRET_KEY_BASE
+
+volumes:
+  - "/opt/app_system:/rails/public/system"
+  # also mount /backup, so we can easily dump/import pg stuff etc.
+  - "/backup:/backup"
+
+builder:
+  args:
+    RUBY_VERSION: 3.2.1
+    UID: 1000
+    GID: 1000
+    RAILS_ENV: production
+  #secrets:
+  #  - GITHUB_TOKEN
+  remote:
+    arch: amd64
+    # set this or DOCKER_HOST env:
+    host: ssh://root@202.61.197.241
+
+accessories:
+  db:
+    image: groonga/pgroonga:2.4.5-alpine-12
+    hosts:
+      - 202.61.197.241
+    env: {}
+    # you can also just use :5432 BUT then the host is reachable via public internet if NO FIREWALL ENABLED!
+    # I just use the docker main ip here.
+    port: "172.17.0.1:5432:5432"
+    directories:
+      - data:/var/lib/postgresql/data
+    env:
+      POSTGRES_HOST_AUTH_METHOD: trust
+  redis:
+    image: redis:7.0
+    hosts:
+      - 202.61.197.241
+    port: "172.17.0.1:6379:6379"
+    directories:
+      - data:/data
+
+accessories:
+  db:
+    image: groonga/pgroonga:2.4.5-alpine-12
+    hosts:
+      - 202.61.197.241
+    env: {}
+    # you can also just use :5432 BUT then the host is reachable via public internet if NO FIREWALL ENABLED!
+    # I just use the docker main ip here.
+    port: "172.17.0.1:5432:5432"
+    directories:
+      - data:/var/lib/postgresql/data
+    env:
+      POSTGRES_HOST_AUTH_METHOD: trust
+  redis:
+    image: redis:7.0
+    hosts:
+      - 202.61.197.241
+    port: "172.17.0.1:6379:6379"
+    directories:
+      - data:/data
+
+traefik:
+  # I also don't want to bind to 0.0.0.0
+  # but just bind to the vpn which Hetzner provided me with
+  host_port: "10.90.90.10:80"
