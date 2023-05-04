@@ -11,9 +11,7 @@ servers:
   job:
     hosts:
       - 202.61.197.241
-    cmd: >
-      /bin/bash -l -c 'bundle exec sidekiq -C config/sidekiq.yml'
-    port: false
+    cmd: bundle exec sidekiq -C config/sidekiq.yml
     options:
       add-host: host.docker.internal:host-gateway
 
@@ -25,7 +23,7 @@ registry:
 
 env:
   clear:
-    DATABASE_URL: postgres://postgres:postgres@202.61.197.241:5432/postgres
+    DATABASE_URL: postgres://postgres@host.docker.internal:5432/app
     REDIS_URL: redis://host.docker.internal:6379/0
     RAILS_SERVE_STATIC_FILES: "true"
     RAILS_LOG_TO_STDOUT: "true"
@@ -50,8 +48,8 @@ accessories:
     env:
       secret:
         - DATABASE_URL
-  directories:
-    - data:/var/lib/postgresql/data
+    volumes:
+      - data:/var/lib/postgresql/data
   redis:
     image: redis:latest
     role:
