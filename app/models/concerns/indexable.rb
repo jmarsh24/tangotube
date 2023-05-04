@@ -36,7 +36,7 @@ module Indexable
         end
     end
     def index!(now: false)
-      self.class.index! id, now: now
+      self.class.index! id, now:
     end
   end
 end

@@ -29,7 +29,7 @@ module TangoTube
     config.load_defaults 7.1
     config.exceptions_app = routes
     config.time_zone = "Berlin"
-    # config.require_master_key = true
+    config.require_master_key = true
 
     config.autoload_paths << "#{root}/app/avo/actions"
     config.autoload_paths << "#{root}/app/policies/concerns"

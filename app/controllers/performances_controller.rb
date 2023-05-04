@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PerformancesController < ApplicationController
-  before_action :set_performance, only: %i[show edit update destroy]
+  before_action :set_performance, only: [:show, :edit, :update, :destroy]
 
   # @route POST /performances (performances)
   # @route GET /performances (performances)

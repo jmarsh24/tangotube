@@ -267,14 +267,14 @@ class Video < ApplicationRecord
     end
 
     def search_includes
-      %i[
-        dancer_videos
-        song
-        event
-        channel
-        dancers
-        performance_video
-        performance
+      [
+        :dancer_videos,
+        :song,
+        :event,
+        :channel,
+        :dancers,
+        :performance_video,
+        :performance
       ]
     end
 
@@ -313,7 +313,7 @@ class Video < ApplicationRecord
     dancer_matches = Dancer.all.select { |dancer| title.parameterize.match(dancer.name.parameterize) }
     dancer_matches.each do |dancer|
       role = dancer.male? ? :leader : :follower
-      dancer_videos << DancerVideo.new(dancer: dancer, role:) if dancers.exclude?(dancer)
+      dancer_videos << DancerVideo.new(dancer:, role:) if dancers.exclude?(dancer)
     end
   end
 

@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 class Video::Search
-  SEARCHABLE_COLUMNS = %w[
-    songs.title
-    songs.last_name_search
-    channels.title
-    performance_videos.performance_id
-    videos.channel_title
-    videos.performance_date
-    videos.view_count
-    videos.updated_at
-    videos.popularity
-    videos.like_count
-    videos.upload_date
+  SEARCHABLE_COLUMNS = [
+    "songs.title",
+    "songs.last_name_search",
+    "channels.title",
+    "performance_videos.performance_id",
+    "videos.channel_title",
+    "videos.performance_date",
+    "videos.view_count",
+    "videos.updated_at",
+    "videos.popularity",
+    "videos.like_count",
+    "videos.upload_date"
   ].freeze
 
   def initialize(filtering_params: {}, sorting_params: {}, user: nil)
@@ -64,7 +64,7 @@ class Video::Search
   end
 
   def sort_direction
-    %w[asc desc].include?(@sorting_params[:direction]) ? @sorting_params[:direction] : "desc"
+    ["asc", "desc"].include?(@sorting_params[:direction]) ? @sorting_params[:direction] : "desc"
   end
 
   def filter_column

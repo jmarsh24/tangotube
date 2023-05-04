@@ -5,12 +5,13 @@ module ExternalVideoImport
 
   module MetadataProcessing
     class VideoUpdater
-      def initialize(video)
+      def initialize(video, thumbnail_attacher: ThumbnailAttacher.new)
         @video = video
+        @thumbnail_attacher = thumbnail_attacher
       end
 
       def update(metadata, timeout: 2.minutes)
-        @video.update!(metadata: metadata)
+        @video.update!(metadata:)
         attach_thumbnail(metadata.youtube.thumbnail_url.highest_resolution)
         @video
       rescue ActiveRecord::RecordInvalid => e
@@ -21,7 +22,7 @@ module ExternalVideoImport
       private
 
       def attach_thumbnail(url)
-        ThumbnailAttacher.new.attach_thumbnail(@video, url)
+        @thumbnail_attacher.attach_thumbnail(@video, url)
       end
 
       def log_error(message)

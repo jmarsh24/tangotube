@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resources :comments, module: :comments
   end
 
-  resources :playlists, only: %i[index create]
+  resources :playlists, only: [:index, :create]
   resources :clips do
     collection do
       post :index

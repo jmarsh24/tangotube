@@ -14,7 +14,7 @@ RSpec.describe ExternalVideoImport::Importer do
 
   let(:importer) do
     described_class.new(
-      video_crawler: video_crawler,
+      video_crawler:,
       metadata_processor: ExternalVideoImport::MetadataProcessing::MetadataProcessor.new
     )
   end
@@ -105,7 +105,7 @@ RSpec.describe ExternalVideoImport::Importer do
       expect(video.upload_date).to eq(Date.parse("2022-01-01"))
       expect(video.duration).to eq(180)
       expect(video.tags).to match_array(["tag1", "tag2"])
-      expect(video.hd).to eq(true)
+      expect(video.hd).to be(true)
       expect(video.view_count).to eq(1000)
       expect(video.favorite_count).to eq(100)
       expect(video.comment_count).to eq(50)
@@ -135,7 +135,7 @@ RSpec.describe ExternalVideoImport::Importer do
       expect(video.upload_date).to eq(Date.parse("2022-01-01"))
       expect(video.duration).to eq(180)
       expect(video.tags).to match_array(["tag1", "tag2"])
-      expect(video.hd).to eq(true)
+      expect(video.hd).to be(true)
       expect(video.view_count).to eq(1000)
       expect(video.favorite_count).to eq(100)
       expect(video.comment_count).to eq(50)

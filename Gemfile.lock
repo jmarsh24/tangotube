@@ -11,6 +11,13 @@ GIT
       warden (~> 1.2.3)
 
 GIT
+  remote: https://github.com/nerdgeschoss/shimmer.git
+  revision: 3f0dbd6710d6816512fb9c380e9d85f33627b9d7
+  branch: feature/styling_suggestions
+  specs:
+    shimmer (0.0.1)
+
+GIT
   remote: https://github.com/rails/rails.git
   revision: 580ad7e0637858caf00f52fd2257c8aaf2e19f84
   branch: main
@@ -561,7 +568,6 @@ GEM
     serviceworker-rails (0.6.0)
       railties (>= 3.1)
     shellany (0.0.1)
-    shimmer (0.0.28)
     sidekiq (7.0.9)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -747,6 +753,7 @@ DEPENDENCIES
   rspec-rails
   rspec-retry
   rspotify
+  rubocop-capybara
   rubocop-performance
   rubocop-rails
   rubocop-rake
@@ -755,7 +762,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   serviceworker-rails
-  shimmer
+  shimmer!
   sidekiq
   sidekiq-scheduler
   sitemap_generator

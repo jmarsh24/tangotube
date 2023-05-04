@@ -13,7 +13,7 @@ RSpec.describe ExternalVideoImport::Youtube::Scraper do
       youtube_scraper = ExternalVideoImport::Youtube::Scraper.new
       allow(youtube_scraper).to receive(:retrieve_html).and_return(File.read("spec/fixtures/files/youtube_video.html"))
 
-      metadata = youtube_scraper.video_metadata slug: slug
+      metadata = youtube_scraper.video_metadata(slug:)
 
       expect(metadata.slug).to eq slug
       expect(metadata.title).to eq "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
@@ -21,7 +21,7 @@ RSpec.describe ExternalVideoImport::Youtube::Scraper do
       expect(metadata.upload_date).to eq "2014-10-26 15:21:29 UTC"
       expect(metadata.tags).to match_array ["Academia de Tango", "Amsterdam", "Nederland", "Netherlands", "Salon de los Sabados", "espinoza", "hurtado", "hurtado espinoza", "milonga", "noelia", "noelia hurtado", "tango", "argentinian tango", "carlitos espinoza", "carlos espinoza"]
       expect(metadata.duration).to eq 167
-      expect(metadata.hd).to eq true
+      expect(metadata.hd).to be true
       expect(metadata.view_count).to eq 1051
       expect(metadata.favorite_count).to eq 0
       expect(metadata.comment_count).to eq 0

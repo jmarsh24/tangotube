@@ -19,7 +19,7 @@ module ExternalVideoImport
       private
 
       def find_best_matches(dancers, text, threshold:)
-        Trigram.best_matches(list: dancers, text: text, threshold: threshold) do |dancer|
+        Trigram.best_matches(list: dancers, text:, threshold:) do |dancer|
           [dancer[1], dancer[2], dancer[3]].join(" ")
         end.map { |match| match.first.first }
       end
