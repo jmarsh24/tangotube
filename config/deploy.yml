@@ -1,10 +1,19 @@
 service: tangotube
+
 image: jmarsh24/tangotube
 
 servers:
   web:
     hosts:
       - 202.61.197.241
+    options:
+      add-host: host.docker.internal:host-gateway
+  job:
+    hosts:
+      - 123.123.123.123
+    cmd: >
+      /bin/bash -l -c 'bundle exec whenever --update-crontab && bundle exec sidekiq -C config/sidekiq.yml'
+    port: false
     options:
       add-host: host.docker.internal:host-gateway
 
@@ -17,8 +26,21 @@ registry:
 env:
   clear:
     DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+    REDIS_URL: redis://host.docker.internal:6379/0
+    RAILS_SERVE_STATIC_FILES: "true"
+    RAILS_LOG_TO_STDOUT: "true"
+    RAILS_ENV: production
   secret:
     - RAILS_MASTER_KEY
+
+volumes:
+  - "/opt/app_system:/rails/public/system"
+  - "/backup:/backup"
+
+builder:
+  remote:
+    arch: amd64
+    host: ssh://root@202.61.197.241
 
 accessories:
   postgres:
