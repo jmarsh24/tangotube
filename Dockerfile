@@ -64,14 +64,14 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   apt-get install --no-install-recommends -y $RUNTIME_DEPS cron
 
 # Install Google Chrome for some scraping stuff.
-# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-#   --mount=type=cache,target=/var/lib/apt,sharing=locked \
-#   --mount=type=tmpfs,target=/var/log \
-#   curl -sL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-#   echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-#   echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-#   apt-get update -qq && \
-#   apt-get install --no-install-recommends -y google-chrome-stable
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  --mount=type=tmpfs,target=/var/log \
+  curl -sL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
+  echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
+  apt-get update -qq && \
+  apt-get install --no-install-recommends -y google-chrome-stable
 
 # Copy built artifacts: gems, application
 COPY --from=base /usr/local/bundle /usr/local/bundle
