@@ -1,7 +1,13 @@
 service: tangotube
 image: jmarsh24/tangotube
+
 servers:
-  - 202.61.197.241
+  web:
+    hosts:
+      - 202.61.197.241
+    options:
+      add-host: host.docker.internal:host-gateway
+
 registry:
   username:
     - DOCKER_HUB_USERNAME
@@ -9,5 +15,27 @@ registry:
     - DOCKER_HUB_TOKEN
 
 env:
+  clear:
+    DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
   secret:
     - RAILS_MASTER_KEY
+
+accessories:
+  postgres:
+    image: postgres:latest
+    host: 202.61.197.241
+    port: 5432
+    env:
+      secret:
+        - DATABASE_URL
+    directories:
+      - data:/var/lib/postgresql/data
+  redis:
+    image: redis:latest
+    role:
+      - web
+    hosts:
+      - 202.61.197.241
+    port: 6379
+    volumes:
+      - /var/lib/redis:/data
