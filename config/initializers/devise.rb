@@ -268,8 +268,8 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :google_oauth2, Config.google_client_id!, Config.google_client_secret!
-  config.omniauth :facebook, Config.facebook_app_id!, Config.facebook_app_secret!
+  # config.omniauth :google_oauth2, Config.google_client_id!, Config.google_client_secret!
+  # config.omniauth :facebook, Config.facebook_app_id!, Config.facebook_app_secret!
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
