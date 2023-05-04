@@ -11,7 +11,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::EventMatcher do
       let(:metadata_fields) { ["Nonexistent Event"] }
 
       it "returns an empty array" do
-        expect(event_matcher.match(metadata_fields: metadata_fields)).to be_nil
+        expect(event_matcher.match(metadata_fields:)).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::EventMatcher do
       let(:expected_event) { events(:bailemos_tango_festival) }
 
       it "returns the best match with the highest similarity ratio" do
-        expect(event_matcher.match(metadata_fields: metadata_fields)).to eq(expected_event)
+        expect(event_matcher.match(metadata_fields:)).to eq(expected_event)
       end
     end
 
@@ -29,7 +29,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::EventMatcher do
       let(:expected_event) { events(:krakus_aires_tango_festival) }
 
       it "returns the best match" do
-        expect(event_matcher.match(metadata_fields: metadata_fields)).to eq(expected_event)
+        expect(event_matcher.match(metadata_fields:)).to eq(expected_event)
       end
     end
   end

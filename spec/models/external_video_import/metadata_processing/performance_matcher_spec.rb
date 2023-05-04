@@ -27,18 +27,18 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::PerformanceMatcher do
     context "when performance information is not present" do
       it "returns nil" do
         text = "Amazing performance by the great dancers"
-        result = matcher.parse(text: text)
+        result = matcher.parse(text:)
 
-        expect(result).to eq(nil)
+        expect(result).to be_nil
       end
     end
 
     context "when performance information is invalid" do
       it "returns nil" do
         text = "Amazing performance 6 of 3 by the great dancers"
-        result = matcher.parse(text: text)
+        result = matcher.parse(text:)
 
-        expect(result).to eq(nil)
+        expect(result).to be_nil
       end
     end
   end

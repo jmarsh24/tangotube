@@ -2,7 +2,7 @@
 
 class DancersController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_dancer, only: %i[show edit update destroy]
+  before_action :set_dancer, only: [:show, :edit, :update, :destroy]
 
   # @route GET /dancers (dancers)
   def index

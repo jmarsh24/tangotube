@@ -2,7 +2,7 @@
 
 class CouplesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_couple, only: %i[show edit update destroy]
+  before_action :set_couple, only: [:show, :edit, :update, :destroy]
 
   # @route POST /couples (couples)
   # @route GET /couples (couples)

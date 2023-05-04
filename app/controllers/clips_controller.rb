@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class ClipsController < ApplicationController
-  before_action :set_clip, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[new edit update destroy]
-  before_action :set_video, only: %i[create show edit update destroy]
+  before_action :set_clip, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :set_video, only: [:create, :show, :edit, :update, :destroy]
 
   # @route POST /clips (clips)
   # @route GET /clips (clips)

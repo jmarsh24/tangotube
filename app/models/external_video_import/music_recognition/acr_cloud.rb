@@ -22,9 +22,9 @@ module ExternalVideoImport
           access_key: Config.acr_cloud_access_key!,
           data_type: DATA_TYPE,
           signature_version: SIGNATURE_VERSION,
-          signature: signature,
+          signature:,
           sample_bytes: file.size,
-          timestamp: timestamp
+          timestamp:
         }
       end
 

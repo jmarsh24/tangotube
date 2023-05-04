@@ -23,7 +23,7 @@ RSpec.describe ExternalVideoImport::MusicRecognition::AcrCloud do
       expect(metadata.spotify_artist_names).to eq ["Carlos Acuña", "Carlos Di Sarli"]
       expect(metadata.spotify_track_name).to eq "Cuando El Amor Muere"
       expect(metadata.spotify_track_id).to eq "66jpnblQkPOngiFwEEyUW3"
-      expect(metadata.spotify_album_id).to eq nil
+      expect(metadata.spotify_album_id).to be_nil
       expect(metadata.youtube_vid).to eq "p0AQ3gx3eo8"
     end
   end

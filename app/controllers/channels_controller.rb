@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: %i[show edit update destroy deactivate]
+  before_action :set_channel, only: [:show, :edit, :update, :destroy, :deactivate]
 
   # @route GET /channels (channels)
   def index

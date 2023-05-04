@@ -2,7 +2,7 @@
 
 class OrchestrasController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_orchestra, only: %i[show edit update destroy]
+  before_action :set_orchestra, only: [:show, :edit, :update, :destroy]
 
   # @route POST /orchestras (orchestras)
   # @route GET /orchestras (orchestras)

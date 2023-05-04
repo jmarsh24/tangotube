@@ -12,7 +12,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
       dancers = [dancers(:carlitos), dancers(:noelia)]
       existing_couple = couples(:carlitos_noelia)
 
-      result = couple_matcher.match_or_create(dancers: dancers)
+      result = couple_matcher.match_or_create(dancers:)
 
       expect(result).to contain_exactly(existing_couple)
     end
@@ -20,7 +20,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
     it "creates new couples when unmatched dancers are provided" do
       dancers = [dancers(:unreviewed_dancer), dancers(:corina)]
 
-      result = couple_matcher.match_or_create(dancers: dancers)
+      result = couple_matcher.match_or_create(dancers:)
 
       expect(result).to all(be_a(Couple))
       expect(result.size).to eq(1)
@@ -30,7 +30,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
 
     it "returns an empty array when more than 2 dancers are provided" do
       dancers = [dancers(:carlitos), dancers(:noelia), dancers(:jonathan)]
-      result = couple_matcher.match_or_create(dancers: dancers)
+      result = couple_matcher.match_or_create(dancers:)
       expect(result).to eq([])
     end
   end

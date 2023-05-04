@@ -5,7 +5,7 @@ module ExternalVideoImport
     class SongMatcher
       def match_or_create(metadata_fields:, artist_fields: nil, title_fields: nil, genre_fields: ["undefined"])
         text = [metadata_fields, artist_fields, title_fields].join(" ")
-        best_matches = Trigram.best_matches(list: all_songs, text: text, &song_match_block)
+        best_matches = Trigram.best_matches(list: all_songs, text:, &song_match_block)
 
         find_or_create_songs(best_matches, title_fields, artist_fields, genre_fields)
       end

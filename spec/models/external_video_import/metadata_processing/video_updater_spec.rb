@@ -5,6 +5,8 @@ require "rails_helper"
 RSpec.describe ExternalVideoImport::MetadataProcessing::VideoUpdater, type: :model do
   fixtures :all
 
+  subject { described_class.new(video) }
+
   let(:video) { videos(:video_1_featured) }
   let(:metadata) do
     ExternalVideoImport::Metadata.new(
@@ -57,12 +59,13 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::VideoUpdater, type: :mod
       )
     )
   end
-  subject { described_class.new(video) }
 
   describe "#update" do
-    it "updates the video with the provided metadata" do
-      expect(video).to receive(:update!).with(metadata: metadata)
-      expect_any_instance_of(ExternalVideoImport::MetadataProcessing::ThumbnailAttacher).to receive(:attach_thumbnail)
+    it "updates the video with the provided metadata and attaches the thumbnail" do
+      thumbnail_attacher = instance_double(ExternalVideoImport::MetadataProcessing::ThumbnailAttacher)
+      allow(ExternalVideoImport::MetadataProcessing::ThumbnailAttacher).to receive(:new).and_return(thumbnail_attacher)
+      allow(video).to receive(:update!).with(metadata:)
+      expect(thumbnail_attacher).to receive(:attach_thumbnail).with("maxres_url")
 
       subject.update(metadata)
     end

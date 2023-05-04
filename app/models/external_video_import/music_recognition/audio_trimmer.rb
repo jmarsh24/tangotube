@@ -16,7 +16,7 @@ module ExternalVideoImport
         audio_file = FFMPEG::Movie.new(input_file.path)
         start_time = audio_file.duration / 2
         end_time = start_time + 20
-        audio_file.transcode(output_file.path, {custom: %W[-y -ss #{start_time} -to #{end_time}]})
+        audio_file.transcode(output_file.path, {custom: ["-y", "-ss", start_time.to_s, "-to", end_time.to_s]})
       end
     end
   end
