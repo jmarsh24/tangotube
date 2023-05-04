@@ -23,7 +23,7 @@ registry:
 
 env:
   clear:
-    DATABASE_URL: postgres://postgres@host.docker.internal:5432/app
+    DATABASE_URL: postgres://postgres@202.61.197.241:5432/app
     REDIS_URL: redis://host.docker.internal:6379/0
     RAILS_SERVE_STATIC_FILES: "true"
     RAILS_LOG_TO_STDOUT: "true"
@@ -36,7 +36,7 @@ volumes:
   - "/backup:/backup"
 
 builder:
-  remote:
+  remote:gc
     arch: amd64
     host: ssh://root@202.61.197.241
 
