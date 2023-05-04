@@ -8,7 +8,7 @@ FROM ruby:$RUBY_VERSION-slim as base
 WORKDIR /rails
 
 # imagemagick AND vips, usually only one is needed.
-ENV RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-dev libmagickwand-dev postgresql-client" \
+ENV RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-dev libmagickwand-dev postgresql-client yt-dlp ffmpeg" \
   BUILD_DEPS="build-essential libpq-dev git less pkg-config python-is-python3 node-gyp vim rsync"
 
 # Common dependencies
@@ -64,7 +64,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
   --mount=type=tmpfs,target=/var/log \
   apt-get update -qq && \
-  apt-get install --no-install-recommends -y $RUNTIME_DEPS cron
+  apt-get install --no-install-recommends -y $RUNTIME_DEPS
 
 # This maybe not needed for normal apps: I need Google Chrome for some scraping stuff.
 #RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
