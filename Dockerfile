@@ -8,8 +8,8 @@ FROM ruby:$RUBY_VERSION-slim as base
 WORKDIR /rails
 
 # imagemagick AND vips, usually only one is needed.
-ENV RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-dev libmagickwand-dev postgresql-client" \
-  BUILD_DEPS="build-essential libpq-dev git less pkg-config python-is-python3 node-gyp vim rsync"
+ENV RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-dev libmagickwand-dev postgresql-client ffmpeg" \
+  BUILD_DEPS="build-essential libpq-dev git less pkg-config python-is-python3 node-gyp vim rsync python3-pip"
 
 # Common dependencies
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -18,7 +18,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   rm -f /etc/apt/apt.conf.d/docker-clean; \
   echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache; \
   apt-get update -qq \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends $RUNTIME_DEPS $BUILD_DEPS
+  && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends $RUNTIME_DEPS $BUILD_DEPS && \
+  pip3 install yt-dlp
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=14.21.3
