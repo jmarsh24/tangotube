@@ -13,112 +13,114 @@ ENV RUNTIME_DEPS="curl gnupg2 libvips libvips-dev tzdata imagemagick librsvg2-de
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
+# RUN --mount=type=secret,id=RAILS_MASTER_KEY RAILS_MASTER_KEY=$(cat /run/secrets/RAILS_MASTER_KEY)
+RUN echo RAILS_MASTER_KEY
+RUN echo $RAILS_MASTER_KEY
 
-
-# Common dependencies
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-  --mount=type=cache,target=/var/lib/apt,sharing=locked \
-  --mount=type=tmpfs,target=/var/log \
-  rm -f /etc/apt/apt.conf.d/docker-clean; \
-  echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache; \
-  apt-get update -qq \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends $BUILD_DEPS $RUNTIME_DEPS
-
-# Install JavaScript dependencies
-ARG NODE_VERSION=14.21.3
-ARG YARN_VERSION="^1.22.19"
-ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-  /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-  npm install -g yarn@$YARN_VERSION && \
-  rm -rf /tmp/node-build-master
-
-# COPY Aptfile /tmp/Aptfile
+# # Common dependencies
 # RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 #   --mount=type=cache,target=/var/lib/apt,sharing=locked \
 #   --mount=type=tmpfs,target=/var/log \
-#   apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
-#   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-#     $(grep -Ev '^\s*#' /tmp/Aptfile | xargs)
+#   rm -f /etc/apt/apt.conf.d/docker-clean; \
+#   echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache; \
+#   apt-get update -qq \
+#   && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends $BUILD_DEPS $RUNTIME_DEPS
 
-# Set production environment
-ENV RAILS_ENV="production" \
-  BUNDLE_DEPLOYMENT="1" \
-  BUNDLE_PATH="/usr/local/bundle" \
-  BUNDLE_JOBS="4" \
-  BUNDLE_NO_CACHE="true" \
-  BUNDLE_WITHOUT="development,test" \
-  GEM_HOME="/usr/local/bundle"
+# # Install JavaScript dependencies
+# ARG NODE_VERSION=14.21.3
+# ARG YARN_VERSION="^1.22.19"
+# ENV PATH=/usr/local/node/bin:$PATH
+# RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+#   /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+#   npm install -g yarn@$YARN_VERSION && \
+#   rm -rf /tmp/node-build-master
 
-# Install application gems
-COPY Gemfile Gemfile.lock ./
-RUN --mount=type=cache,target=~/.bundle/cache \
-  bundle config --local deployment 'true' \
-  && bundle config --local path "${BUNDLE_PATH}" \
-  && bundle install \
-  && rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git \
-  && bundle exec bootsnap precompile --gemfile
+# # COPY Aptfile /tmp/Aptfile
+# # RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+# #   --mount=type=cache,target=/var/lib/apt,sharing=locked \
+# #   --mount=type=tmpfs,target=/var/log \
+# #   apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
+# #   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+# #     $(grep -Ev '^\s*#' /tmp/Aptfile | xargs)
 
-# Install node modules
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+# # Set production environment
+# ENV RAILS_ENV="production" \
+#   BUNDLE_DEPLOYMENT="1" \
+#   BUNDLE_PATH="/usr/local/bundle" \
+#   BUNDLE_JOBS="4" \
+#   BUNDLE_NO_CACHE="true" \
+#   BUNDLE_WITHOUT="development,test" \
+#   GEM_HOME="/usr/local/bundle"
 
-# Copy application code
-COPY . .
+# # Install application gems
+# COPY Gemfile Gemfile.lock ./
+# RUN --mount=type=cache,target=~/.bundle/cache \
+#   bundle config --local deployment 'true' \
+#   && bundle config --local path "${BUNDLE_PATH}" \
+#   && bundle install \
+#   && rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git \
+#   && bundle exec bootsnap precompile --gemfile
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+# # Install node modules
+# COPY package.json yarn.lock ./
+# RUN yarn install --frozen-lockfile
 
+# # Copy application code
+# COPY . .
 
-# reduce node memory usage:
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-ARG DATABASE_URL="postgres://postgres:postgres@db:5432/postgres"
-
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-# Mount node_modules and tmp/cache/vite as cache volume:
-RUN --mount=type=cache,target=/rails/node_modules \
-  --mount=type=cache,target=/rails/tmp/cache/vite \
-  --mount=type=cache,target=/rails/tmp/cache/assets \
-  --mount=type=cache,target=/rails/tmp/assets_between_runs \
-  mkdir -p /rails/tmp/assets_between_runs/vite /rails/public/vite && rsync -a /rails/tmp/assets_between_runs/vite/. /rails/public/vite/. && \
-  mkdir -p /rails/tmp/assets_between_runs/assets /rails/public/assets && rsync -a /rails/tmp/assets_between_runs/assets/. /rails/public/assets/. && \
-  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile && \
-  rsync -a /rails/public/vite/. /rails/tmp/assets_between_runs/vite/. && \
-  rsync -a /rails/public/assets/. /rails/tmp/assets_between_runs/assets/.
+# # Precompile bootsnap code for faster boot times
+# RUN bundle exec bootsnap precompile app/ lib/
 
 
-# Final stage for app image
-FROM base as app
+# # reduce node memory usage:
+# ENV NODE_OPTIONS="--max-old-space-size=4096"
+# ARG DATABASE_URL="postgres://postgres:postgres@db:5432/postgres"
 
-# Install packages needed for deployment
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-  --mount=type=cache,target=/var/lib/apt,sharing=locked \
-  --mount=type=tmpfs,target=/var/log \
-  apt-get update -qq && \
-  apt-get install --no-install-recommends -y $RUNTIME_DEPS cron
+# # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+# # Mount node_modules and tmp/cache/vite as cache volume:
+# RUN --mount=type=cache,target=/rails/node_modules \
+#   --mount=type=cache,target=/rails/tmp/cache/vite \
+#   --mount=type=cache,target=/rails/tmp/cache/assets \
+#   --mount=type=cache,target=/rails/tmp/assets_between_runs \
+#   mkdir -p /rails/tmp/assets_between_runs/vite /rails/public/vite && rsync -a /rails/tmp/assets_between_runs/vite/. /rails/public/vite/. && \
+#   mkdir -p /rails/tmp/assets_between_runs/assets /rails/public/assets && rsync -a /rails/tmp/assets_between_runs/assets/. /rails/public/assets/. && \
+#   SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile && \
+#   rsync -a /rails/public/vite/. /rails/tmp/assets_between_runs/vite/. && \
+#   rsync -a /rails/public/assets/. /rails/tmp/assets_between_runs/assets/.
 
-# Install Google Chrome for some scraping stuff.
+
+# # Final stage for app image
+# FROM base as app
+
+# # Install packages needed for deployment
 # RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 #   --mount=type=cache,target=/var/lib/apt,sharing=locked \
 #   --mount=type=tmpfs,target=/var/log \
-#   curl -sL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-#   echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-#   echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
 #   apt-get update -qq && \
-#   apt-get install --no-install-recommends -y google-chrome-stable
+#   apt-get install --no-install-recommends -y $RUNTIME_DEPS cron
 
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
+# # Install Google Chrome for some scraping stuff.
+# # RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+# #   --mount=type=cache,target=/var/lib/apt,sharing=locked \
+# #   --mount=type=tmpfs,target=/var/log \
+# #   curl -sL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+# #   echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
+# #   echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
+# #   apt-get update -qq && \
+# #   apt-get install --no-install-recommends -y google-chrome-stable
 
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --home /rails --shell /bin/bash && \
-  chown -R rails:rails db log tmp
-USER rails:rails
+# # Copy built artifacts: gems, application
+# COPY --from=build /usr/local/bundle /usr/local/bundle
+# COPY --from=build /rails /rails
 
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+# # Run and own only the runtime files as a non-root user for security
+# RUN useradd rails --home /rails --shell /bin/bash && \
+#   chown -R rails:rails db log tmp
+# USER rails:rails
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+# # Entrypoint prepares the database.
+# ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# # Start the server by default, this can be overwritten at runtime
+# EXPOSE 3000
+# CMD ["./bin/rails", "server"]
