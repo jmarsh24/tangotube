@@ -30,14 +30,6 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
   npm install -g yarn@$YARN_VERSION && \
   rm -rf /tmp/node-build-master
 
-# COPY Aptfile /tmp/Aptfile
-# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-#   --mount=type=cache,target=/var/lib/apt,sharing=locked \
-#   --mount=type=tmpfs,target=/var/log \
-#   apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
-#   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-#     $(grep -Ev '^\s*#' /tmp/Aptfile | xargs)
-
 # Set production environment
 ENV RAILS_ENV="production" \
   BUNDLE_DEPLOYMENT="1" \
