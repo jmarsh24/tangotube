@@ -10,7 +10,7 @@ servers:
       add-host: host.docker.internal:host-gateway
   job:
     hosts:
-      - 123.123.123.123
+      - 202.61.197.241
     cmd: >
       /bin/bash -l -c 'bundle exec sidekiq -C config/sidekiq.yml'
     port: false
