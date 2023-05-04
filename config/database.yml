@@ -19,4 +19,5 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  database: tangotube_production
+  port: 5432
