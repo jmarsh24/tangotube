@@ -13,10 +13,6 @@ registry:
   password:
     - DOCKER_HUB_TOKEN
 
-builder:
-  secrets:
-    - RAILS_MASTER_KEY
-
 env:
   secret:
     - RAILS_MASTER_KEY
