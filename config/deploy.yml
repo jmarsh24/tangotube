@@ -50,8 +50,8 @@ accessories:
     env:
       secret:
         - DATABASE_URL
-    directories:
-      - data:/var/lib/postgresql/data
+  directories:
+    - data:/var/lib/postgresql/data
   redis:
     image: redis:latest
     role:
