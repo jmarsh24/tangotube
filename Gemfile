@@ -5,6 +5,7 @@ source "https://rubygems.org"
 ruby "3.2.1"
 
 gem "rails", github: "rails/rails", branch: "main"
+gem "rack", "2.2.7"
 gem "puma"
 
 # databases
