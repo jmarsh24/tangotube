@@ -12,7 +12,7 @@ servers:
     hosts:
       - 123.123.123.123
     cmd: >
-      /bin/bash -l -c 'bundle exec whenever --update-crontab && bundle exec sidekiq -C config/sidekiq.yml'
+      /bin/bash -l -c 'bundle exec sidekiq -C config/sidekiq.yml'
     port: false
     options:
       add-host: host.docker.internal:host-gateway
