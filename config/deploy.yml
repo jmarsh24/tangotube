@@ -25,7 +25,7 @@ registry:
 
 env:
   clear:
-    DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+    DATABASE_URL: postgres://postgres:postgres@202.61.197.241:5432/postgres
     REDIS_URL: redis://host.docker.internal:6379/0
     RAILS_SERVE_STATIC_FILES: "true"
     RAILS_LOG_TO_STDOUT: "true"
