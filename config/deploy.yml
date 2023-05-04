@@ -36,7 +36,7 @@ volumes:
   - "/backup:/backup"
 
 builder:
-  remote:gc
+  remote:
     arch: amd64
     host: ssh://root@202.61.197.241
 
