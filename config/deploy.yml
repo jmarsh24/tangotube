@@ -42,7 +42,7 @@ builder:
 
 accessories:
   postgres:
-    image: postgres:latest
+    image: postgres:15
     host: 202.61.197.241
     port: 5432
     env:
@@ -51,7 +51,7 @@ accessories:
     volumes:
       - data:/var/lib/postgresql/data
   redis:
-    image: redis:latest
+    image: redis:7.0.3
     role:
       - web
     hosts:
