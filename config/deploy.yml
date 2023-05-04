@@ -38,12 +38,3 @@ accessories:
     port: "36379:6379"
     volumes:
       - /var/lib/redis:/data
-  redis:
-    image: redis:latest
-    role:
-      - worker
-    hosts:
-      - 202.61.197.241
-    port: "36379:6379"
-    volumes:
-      - /var/lib/redis:/data
