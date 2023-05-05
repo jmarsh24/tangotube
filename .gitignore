@@ -48,3 +48,4 @@ scratchpad.*
 /.vscode/rdbg_autoattach.json
 .env
 docker-config.json
+latest.dump
