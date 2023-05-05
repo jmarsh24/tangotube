@@ -8,11 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
-    needs: ruby # This job needs to wait for the `ruby` job to finish first
-
-    if: ${{ success() }} # Only run this job if the previous job was successful
-
+    needs: ruby
+    if: ${{ success() }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
