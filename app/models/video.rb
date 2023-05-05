@@ -59,8 +59,6 @@ class Video < ApplicationRecord
   include Filterable
   include Indexable
 
-  PERFORMANCE_REGEX = /(?<=\s|^|#)[1-8]\s?(of|de|\/|-)\s?[1-8](\s+$|)/
-
   validates :youtube_id, presence: true, uniqueness: true
 
   belongs_to :song, optional: true
@@ -82,10 +80,6 @@ class Video < ApplicationRecord
   has_one :performance, through: :performance_video
 
   has_one_attached :thumbnail
-
-  counter_culture :song
-  counter_culture [:song, :orchestra]
-  counter_culture :event
 
   scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist) }
   scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
@@ -122,52 +116,6 @@ class Video < ApplicationRecord
   scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :follower}) }
   scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :leader}) }
   scope :missing_song, -> { where(song_id: nil) }
-
-  # Youtube Music Scopes
-  scope :scanned_youtube_music, -> { where(scanned_youtube_music: true) }
-  scope :not_scanned_youtube_music, -> { where(scanned_youtube_music: false) }
-  scope :has_youtube_song, -> { where.not(youtube_song: nil) }
-
-  # AcrCloud Response scopes
-  scope :successful_acrcloud, -> { where(acr_response_code: 0) }
-  scope :not_successful_acrcloud, -> { where(acr_response_code: 1001) }
-  scope :scanned_acrcloud, -> { where(acr_response_code: [0, 1001]) }
-  scope :not_scanned_acrcloud,
-    -> {
-      where
-        .not(acr_response_code: [0, 1001])
-    }
-
-  # Attribute Matching Scopes
-  scope :with_song_title,
-    lambda { |song_title|
-      where(
-        'unaccent(spotify_track_name) ILIKE unaccent(:song_title)
-                                    OR unaccent(youtube_song) ILIKE unaccent(:song_title)
-                                    OR unaccent(title) ILIKE unaccent(:song_title)
-                                    OR unaccent(description) ILIKE unaccent(:song_title)
-                                    OR unaccent(tags) ILIKE unaccent(:song_title)
-                                    OR unaccent(acr_cloud_track_name) ILIKE unaccent(:song_title)',
-        song_title: "%#{song_title}%"
-      )
-    }
-
-  scope :with_song_artist_keyword,
-    lambda { |song_artist_keyword|
-      where(
-        'spotify_artist_name ILIKE :song_artist_keyword
-                                            OR unaccent(spotify_artist_name_2) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(youtube_artist) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(description) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(title) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(tags) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(spotify_album_name) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(acr_cloud_album_name) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(acr_cloud_artist_name) ILIKE unaccent(:song_artist_keyword)
-                                            OR unaccent(acr_cloud_artist_name_1) ILIKE unaccent(:song_artist_keyword)',
-        song_artist_keyword: "%#{song_artist_keyword}%"
-      )
-    }
 
   scope :with_same_performance, ->(video) {
                                   includes(Video.search_includes)
@@ -309,48 +257,6 @@ class Video < ApplicationRecord
     end
   end
 
-  def grep_title_for_dancer
-    dancer_matches = Dancer.all.select { |dancer| title.parameterize.match(dancer.name.parameterize) }
-    dancer_matches.each do |dancer|
-      role = dancer.male? ? :leader : :follower
-      dancer_videos << DancerVideo.new(dancer:, role:) if dancers.exclude?(dancer)
-    end
-  end
-
-  def grep_performance_number
-    array = []
-    array << title if title.present?
-    array << description if description.present?
-    search_string = array.join(" ")
-    return unless search_string.match?(PERFORMANCE_REGEX)
-    performance_array = search_string.match(PERFORMANCE_REGEX)[0].tr("^0-9", " ").split.map(&:to_i)
-    return if performance_array.empty?
-    return if performance_array.first > performance_array.second || performance_array.second == 1
-    self.performance_number = performance_array.first
-    self.performance_total_number = performance_array.second
-  end
-
-  def grep_title_description_acr_cloud_song
-    array = []
-    array << title if title.present?
-    array << description if description.present?
-    array << spotify_artist_name if spotify_artist_name.present?
-    array << spotify_artist_name_2 if spotify_artist_name_2.present?
-    array << spotify_track_name if spotify_track_name.present?
-    array << spotify_album_name if spotify_album_name.present?
-    array << acr_cloud_artist_name if acr_cloud_artist_name.present?
-    array << acr_cloud_artist_name_1 if acr_cloud_artist_name_1.present?
-    array << acr_cloud_track_name if acr_cloud_track_name.present?
-    array << acr_cloud_album_name if acr_cloud_album_name.present?
-    array << youtube_song if youtube_song.present?
-    array << youtube_artist if youtube_artist.present?
-    search_string = array.join(" ")
-
-    self.song = Song.filter_by_active
-      .select { |song| search_string.parameterize.match(song.title.parameterize) }
-      .find { |song| search_string.parameterize.match(song.last_name_search.parameterize) }
-  end
-
   def display
     @display ||= Video::Display.new(self)
   end
@@ -387,41 +293,5 @@ class Video < ApplicationRecord
 
   def featured?
     featured
-  end
-
-  def dancer?
-    leader.present? || follower.present?
-  end
-
-  def dancers_names
-    dancer&.map(&:name)
-  end
-
-  def song_title
-    song&.title
-  end
-
-  def song_artist
-    song&.artist
-  end
-
-  def thumbnail_url
-    "https://i.ytimg.com/vi/#{youtube_id}/hq720.jpg"
-  end
-
-  def backup_thumbnail_url
-    "https://i.ytimg.com/vi/#{youtube_id}/hqdefault.jpg"
-  end
-
-  def grab_thumbnail
-    yt_thumbnail = URI.parse(thumbnail_url).open
-  rescue OpenURI::HTTPError
-    yt_thumbnail = URI.parse(backup_thumbnail_url).open
-  ensure
-    thumbnail.attach(io: yt_thumbnail, filename: "#{youtube_id}.jpg")
-  end
-
-  def grab_thumbnail_later
-    GrabVideoThumbnailJob.perform_later(self)
   end
 end
