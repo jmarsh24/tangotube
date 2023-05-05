@@ -56,7 +56,6 @@ gem "store_model"
 gem "down"
 gem "capybara"
 gem "cuprite"
-gem "mrsk"
 
 # Assets
 gem "vite_rails"
@@ -104,4 +103,6 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rspec"
   gem "rubocop-rake"
+
+  gem "mrsk"
 end
