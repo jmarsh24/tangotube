@@ -12,8 +12,8 @@ GIT
 
 GIT
   remote: https://github.com/nerdgeschoss/shimmer.git
-  revision: 2905a2aef4014dde322d4b3b22af2160cb359a3e
-  branch: feature/secret_key_base_dummy
+  revision: 3f0dbd6710d6816512fb9c380e9d85f33627b9d7
+  branch: feature/styling_suggestions
   specs:
     shimmer (0.0.1)
 
