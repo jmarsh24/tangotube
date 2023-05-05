@@ -9,7 +9,7 @@
 #  youtube_id               :string           not null
 #  description              :string
 #  duration                 :integer
-#  upload_date              :date
+#  upload_date              :datetime
 #  view_count               :integer
 #  song_id                  :bigint
 #  youtube_song             :string
