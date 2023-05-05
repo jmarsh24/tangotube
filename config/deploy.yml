@@ -40,7 +40,7 @@ builder:
     host: ssh://root@202.61.197.241
 
 accessories:
-  db:
+db:
     image: postgres:latest
     host: 202.61.197.241
     port: 5432
@@ -55,7 +55,6 @@ accessories:
       - dataPg:/var/lib/postgresql/data
   redis:
     image: redis:latest
-    cmd: redis-server --requirepass <%= ENV['REDIS_PASSWORD'] %>
     host: 202.61.197.241
     port: 6379
     directories:
