@@ -1,0 +1,75 @@
+# frozen_string_literal: true
+
+require "system_helper"
+
+RSpec.describe "homepage", type: :system do
+  fixtures :all
+
+  before { visit root_path }
+
+  context "banner" do
+    it "displays the banner" do
+      expect(page).to have_content("The new way to watch Tango")
+
+      screenshot "homepage_banner_present"
+    end
+
+    it "closes the banner" do
+      find(".banner__card .icon.icon--close").click
+
+      expect(page).not_to have_css("#banner.banner")
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content("Login")
+
+      screenshot "homepage_banner_closed"
+    end
+  end
+
+  context "cookies banner" do
+    it "accepts all cookies" do
+      accept_all_button = find(".personalization-request__content a.button.button--primary", text: "Accept all", wait: 10)
+      accept_all_button.click
+
+      expect(page).not_to have_css(".personalization-request")
+
+      screenshot "homepage_cookies_accepted"
+    end
+  end
+
+  context "videos" do
+    before do
+      find(".banner__card .icon.icon--close").click
+      accept_all_button = find(".personalization-request__content a.button.button--primary", text: "Accept all")
+      accept_all_button.click
+      page.evaluate_script("document.cookie = 'banner_closed=true; path=/;'")
+    end
+
+    it "displays featured videos" do
+      featured_videos = [videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)]
+
+      screenshot "homepage_featured_videos_present"
+
+      expect(page).to have_content("Featured videos")
+      featured_videos.each do |video|
+        expect(page).to have_content(video.song.full_title)
+        video.dancers.each do |dancer|
+          expect(page).to have_content(dancer.name)
+        end
+      end
+    end
+
+    it "displays videos" do
+      videos = [videos(:video_5), videos(:video_6)]
+
+      screenshot "homepage_videos_present"
+
+      expect(page).to have_content("Videos")
+      videos.each do |video|
+        expect(page).to have_content(video.song.full_title)
+        video.dancers.each do |dancer|
+          expect(page).to have_content(dancer.name)
+        end
+      end
+    end
+  end
+end
