@@ -9,6 +9,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    needs: ruby # This job needs to wait for the `ruby` job to finish first
+
+    if: ${{ success() }} # Only run this job if the previous job was successful
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -17,9 +21,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-
-      - name: Run tests
-        run: bundle exec rspec
 
       - name: Install SSH Key
         uses: webfactory/ssh-agent@v0.5.3
