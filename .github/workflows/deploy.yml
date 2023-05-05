@@ -1,0 +1,35 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run tests
+        run: bundle exec rspec
+
+      - name: Install SSH Key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.TANGOTUBE_SSH_PRIVATE_KEY }}
+
+      - name: Deploy with MRSK
+        run: |
+          # Install MRSK if necessary
+          gem install mrsk
+
+          # Deploy using MRSK
+          mrsk deploy --host 202.61.197.241 --user root
