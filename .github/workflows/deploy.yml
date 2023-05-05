@@ -32,9 +32,4 @@ jobs:
           ssh-private-key: ${{ secrets.TANGOTUBE_SSH_PRIVATE_KEY }}
 
       - name: Deploy with MRSK
-        run: |
-          # Install MRSK if necessary
-          gem install mrsk
-
-          # Deploy using MRSK
-          mrsk deploy --host 202.61.197.241 --user root
+        run: mrsk deploy --host 202.61.197.241 --user root
