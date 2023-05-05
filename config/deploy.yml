@@ -6,14 +6,13 @@ servers:
   web:
     hosts:
       - 202.61.197.241
-    options:
-      add-host: host.docker.internal:host-gateway
+    # labels:
+    #   traefik.http.routers.tangotube-web.rule: Host(`domain.com`)
+    #   traefik.http.services.tangotube-web.loadbalancer.healthcheck.interval: 45s
   job:
     hosts:
       - 202.61.197.241
     cmd: bundle exec sidekiq -C config/sidekiq.yml
-    options:
-      add-host: host.docker.internal:host-gateway
 
 registry:
   username:
@@ -23,36 +22,47 @@ registry:
 
 env:
   clear:
-    DATABASE_URL: postgres://postgres@host.docker.internal:5432/app
-    REDIS_URL: redis://host.docker.internal:6379/0
-    RAILS_SERVE_STATIC_FILES: "true"
-    RAILS_LOG_TO_STDOUT: "true"
+    RAILS_SERVE_STATIC_FILES: true
     RAILS_ENV: production
+    YT_DLP_BIN: yt-dlp
   secret:
     - RAILS_MASTER_KEY
+    - REDIS_URL
+    - DATABASE_URL
 
 volumes:
   - "/opt/app_system:/rails/public/system"
   - "/backup:/backup"
 
 builder:
-  remote:
-    arch: amd64
-    host: ssh://root@202.61.197.241
+  dockerfile: Dockerfile
+  multiarch: false
+  # remote:
+  #   arch: amd64
+  #   host: ssh://root@202.61.197.241
 
 accessories:
-  postgres:
-    image: postgres:latest
+  db:
+    image: postgres:15
     host: 202.61.197.241
-    port: 5432
-    directories:
-      - data:/var/lib/postgresql/data
+    port: "5432:5432"
     env:
-      POSTGRES_HOST_AUTH_METHOD: trust
-  redis:
-    image: redis:latest
-    hosts:
-      - 202.61.197.241
-    port: 6379
+      secret:
+        - POSTGRES_USER
+        - POSTGRES_PASSWORD
+        - POSTGRES_DB
+    files:
+      - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
     directories:
-      - /var/lib/redis:/data
+      - dataPg:/var/lib/postgresql/data
+  redis:
+    image: redis:7.0
+    cmd: redis-server --requirepass <%= ENV['REDIS_PASSWORD'] %>
+    host: 202.61.197.241
+    port: "6379:6379"
+    directories:
+      - dataRedis:/data
+
+healthcheck:
+  path: /up
+  port: 3000
