@@ -67,9 +67,3 @@ jobs:
           REDIS_URL: redis://127.0.0.1:6379
           RAILS_ENV: test
           RSPEC_RETRY_RETRY_COUNT: 3
-          # SCREENSHOTS: "1"
-      # - name: Upload Screenshots
-      #   if: always()
-      #   run: |
-      #     (cd doc/screenshots; zip -r ../../screenshots.zip .)
-      #     curl -X POST "https://screamshot.nerdgeschoss.de/projects/CudQikvvkmY2SD7w4gyzdaav/versions" -F "name=\"$GITHUB_REF\"" -F "file=@screenshots.zip" -F "iteration=\"$GITHUB_SHA\""
