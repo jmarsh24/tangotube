@@ -6,9 +6,6 @@ servers:
   web:
     hosts:
       - 202.61.197.241
-    # labels:
-    #   traefik.http.routers.tangotube-web.rule: Host(`domain.com`)
-    #   traefik.http.services.tangotube-web.loadbalancer.healthcheck.interval: 45s
   job:
     hosts:
       - 202.61.197.241
@@ -24,14 +21,16 @@ env:
     RAILS_SERVE_STATIC_FILES: true
     RAILS_ENV: production
     YT_DLP_BIN: yt-dlp
+    REDIS_URL: redis://202.61.197.241:6379
+    REDIS_CACHE_URL: redis://202.61.197.241:6380
   secret:
     - RAILS_MASTER_KEY
-    - REDIS_URL
     - DATABASE_URL
 
 volumes:
   - "/opt/app_system:/rails/public/system"
   - "/backup:/backup"
+  - ./log:/app/log
 
 builder:
   dockerfile: Dockerfile
@@ -53,12 +52,18 @@ accessories:
       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
     directories:
       - dataPg:/var/lib/postgresql/data
-  redis:
+  redis_sidekiq:
     image: redis:latest
     host: 202.61.197.241
     port: 6379
     directories:
-      - dataRedis:/data
+      - sidekiqData:/data
+  redis_cache:
+    image: redis:latest
+    host: 202.61.197.241
+    port: 6380
+    directories:
+      - cacheData:/data
 
 healthcheck:
   path: /up
