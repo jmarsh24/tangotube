@@ -64,7 +64,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::VideoUpdater, type: :mod
     it "updates the video with the provided metadata and attaches the thumbnail" do
       thumbnail_attacher = instance_double(ExternalVideoImport::MetadataProcessing::ThumbnailAttacher)
       allow(ExternalVideoImport::MetadataProcessing::ThumbnailAttacher).to receive(:new).and_return(thumbnail_attacher)
-      allow(video).to receive(:update!).with(metadata: metadata)
+      allow(video).to receive(:update!).with(metadata:)
       expect(thumbnail_attacher).to receive(:attach_thumbnail).with(video, "maxres_url")
 
       subject.update(metadata)

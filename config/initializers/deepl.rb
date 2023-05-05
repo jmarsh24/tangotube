@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 if Config.deepl_auth_key?
   DeepL.configure do |config|
     config.auth_key = Config.deepl_auth_key!
