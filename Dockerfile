@@ -23,6 +23,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 # Install yt-dlp
 RUN pip3 install --upgrade pip && pip3 install yt-dlp
 
+# Add yt-dlp to PATH
+ENV PATH="/usr/local/lib/python3.9/dist-packages/yt_dlp:$PATH"
+
 # Install JavaScript dependencies
 ARG NODE_VERSION=14.21.3
 ARG YARN_VERSION="^1.22.19"
