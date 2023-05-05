@@ -32,7 +32,6 @@ volumes:
 
 builder:
   dockerfile: Dockerfile
-  multiarch: false
   remote:
     arch: amd64
     host: ssh://root@202.61.197.241
