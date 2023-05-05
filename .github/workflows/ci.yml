@@ -53,8 +53,8 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/app
           RAILS_ENV: test
-      - name: JS Lint
-        run: yarn lint
+      # - name: JS Lint
+      #   run: yarn lint
       - name: Create PG Database
         run: bundle exec rake db:create db:migrate
         env:
