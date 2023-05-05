@@ -56,7 +56,6 @@ gem "store_model"
 gem "down"
 gem "capybara"
 gem "cuprite"
-gem "mrsk"
 
 # Assets
 gem "vite_rails"
