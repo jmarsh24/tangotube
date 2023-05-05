@@ -104,4 +104,5 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rspec"
   gem "rubocop-rake"
+  gem "mrsk"
 end
