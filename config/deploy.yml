@@ -9,7 +9,10 @@ servers:
     # labels:
     #   traefik.http.routers.tangotube-web.rule: Host(`domain.com`)
     #   traefik.http.services.tangotube-web.loadbalancer.healthcheck.interval: 45s
-
+  job:
+    hosts:
+      - 202.61.197.241
+    cmd: bundle exec sidekiq -C config/sidekiq.yml
 registry:
   username:
     - DOCKER_HUB_USERNAME
