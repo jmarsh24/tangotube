@@ -49,13 +49,6 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  # Include generic and useful information about system operation, but avoid logging too much
-  # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :info
-
-  # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
-
   # Use a different cache store in production.
   config.cache_store = :null_store
 
@@ -88,13 +81,12 @@ Rails.application.configure do
     .tap { |logger| logger.formatter = ::Logger::Formatter.new }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
+  # Include generic and useful information about system operation, but avoid logging too much
+  # information to avoid inadvertent exposure of personally identifiable information (PII).
+  config.log_level = :info
+
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
-
-  # Info include generic and useful information about system operation, but avoids logging too much
-  # information to avoid inadvertent exposure of personally identifiable information (PII). Use "debug"
-  # for everything.
-  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
