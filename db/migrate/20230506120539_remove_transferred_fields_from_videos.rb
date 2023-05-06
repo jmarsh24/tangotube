@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "../../lib/metadata_migration"
 
 class RemoveTransferredFieldsFromVideos < ActiveRecord::Migration[7.1]
