@@ -18,6 +18,7 @@
 #  featured    :boolean          default(FALSE)
 #  index       :text
 #  metadata    :jsonb
+#  imported_at :datetime
 #
 class Video < ApplicationRecord
   acts_as_votable
