@@ -8,6 +8,11 @@ on:
 env:
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+  DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
 
 jobs:
   deploy:
