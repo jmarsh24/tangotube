@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_05_06_120539) do
+ActiveRecord::Schema[7.1].define(version: 2023_05_06_184424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_stat_statements"
@@ -313,6 +313,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_06_120539) do
     t.boolean "featured", default: false
     t.text "index"
     t.jsonb "metadata"
+    t.datetime "imported_at"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"

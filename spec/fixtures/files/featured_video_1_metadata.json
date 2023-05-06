@@ -1,0 +1,72 @@
+{
+  "music": {
+    "code": 1001,
+    "isrc": null,
+    "genre": null,
+    "acr_id": null,
+    "message": null,
+    "youtube_vid": null,
+    "acr_album_name": null,
+    "acr_song_title": null,
+    "acr_artist_names": [null, null],
+    "spotify_album_id": null,
+    "spotify_track_id": null,
+    "spotify_album_name": null,
+    "spotify_track_name": null,
+    "spotify_artist_names": [null, null, null]
+  },
+  "youtube": {
+    "hd": true,
+    "slug": "AQ9Ri3kWa_4",
+    "song": {
+      "album": null,
+      "artist": "Orquesta Carlos di Sarli, Carlos Acuña",
+      "titles": ["Quando el amor muere"],
+      "writers": [],
+      "song_url": null,
+      "artist_url": null
+    },
+    "tags": [
+      "Amsterdam",
+      "Netherlands",
+      "tango",
+      "argentinian tango",
+      "milonga",
+      "noelia hurtado",
+      "carlitos espinoza",
+      "carlos espinoza",
+      "espinoza",
+      "hurtado",
+      "noelia",
+      "hurtado espinoza",
+      "Salon de los Sabados",
+      "Academia de Tango",
+      "Nederland"
+    ],
+    "title": "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1",
+    "channel": {
+      "id": "699098988",
+      "title": null,
+      "videos": [],
+      "playlists": [],
+      "view_count": null,
+      "description": null,
+      "video_count": null,
+      "published_at": null,
+      "content_owner": null,
+      "thumbnail_url": null,
+      "privacy_status": null,
+      "subscriber_count": null,
+      "related_playlists": []
+    },
+    "duration": 167,
+    "like_count": 3,
+    "view_count": 1042,
+    "description": "24-26.10.2014 r., Amsterdam, Netherlands, Performance 25th Oct, \"Salon de los Sabados\" in Academia de Tango",
+    "upload_date": "2014-10-26",
+    "comment_count": 0,
+    "thumbnail_url": null,
+    "favorite_count": 0,
+    "recommended_video_ids": []
+  }
+}

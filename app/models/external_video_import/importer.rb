@@ -17,6 +17,7 @@ module ExternalVideoImport
       Video.transaction do
         video = MetadataProcessing::VideoCreator.create_video(video_attributes)
         MetadataProcessing::VideoUpdater.new(video).update(metadata)
+        video.update(import_at: Time.current)
       end
 
       video

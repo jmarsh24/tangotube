@@ -100,8 +100,8 @@ RSpec.describe ExternalVideoImport::Importer do
 
       video = Video.last
       expect(video.youtube_id).to eq(metadata.youtube.slug)
-      expect(video.title).to eq(metadata.youtube.title)
-      expect(video.description).to eq(metadata.youtube.description)
+      expect(video.metadata.youtube.title).to eq(metadata.youtube.title)
+      expect(video.metadata.youtube.description).to eq(metadata.youtube.description)
       expect(video.upload_date).to eq(Date.parse("2022-01-01"))
       expect(video.duration).to eq(180)
       expect(video.tags).to match_array(["tag1", "tag2"])

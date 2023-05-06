@@ -1,7 +1,7 @@
 .stack.stack--desktop-line
   .stack.stack--xxs
-    h1.heading-3.heading-3--bold= primary_title(@video.display.dancer_names, @video.metadata.youtube.title, @video.display.any_song_attributes, @video.youtube_id)
-    h2.heading-4= link_to_song( @video.display.el_recodo_attributes, @video.display.external_song_attributes, @video)
+    h1.heading-3.heading-3--bold= primary_title(@video)
+    h2.heading-4= link_to_song(@video)
     = link_to @video.event.title.titleize, root_path(event_id: @video.event.id), { "data-turbo-frame": "_top" } if @video.event.present?
     .stack.stack--line.stack--xxs
       = link_to image_tag(@video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: @video.channel.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?

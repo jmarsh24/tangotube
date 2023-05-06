@@ -1,4 +1,4 @@
-require "metadata_migration"
+require_relative "../../lib/metadata_migration"
 
 class RemoveTransferredFieldsFromVideos < ActiveRecord::Migration[7.1]
   def up
@@ -64,6 +64,7 @@ class RemoveTransferredFieldsFromVideos < ActiveRecord::Migration[7.1]
     add_column :videos, :scanned_song, :string
     add_column :videos, :acr_response_code, :string
     add_column :videos, :spotify_artist_id, :string
+    add_column :videos, :spotify_artist_id_1, :string
     add_column :videos, :spotify_artist_id_2, :string
     add_column :videos, :title, :string
     add_column :videos, :description, :string

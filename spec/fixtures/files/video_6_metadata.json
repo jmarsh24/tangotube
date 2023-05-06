@@ -1,0 +1,69 @@
+{
+  "music": {
+    "code": 0,
+    "isrc": "QMBZ91522089",
+    "genre": null,
+    "acr_id": "f0824b621814b3495ec6347b166ce81a",
+    "message": null,
+    "youtube_vid": "y8foZLEUqRQ",
+    "acr_album_name": "Fadisia",
+    "acr_song_title": "Nueve De Julio",
+    "acr_artist_names": ["Sineterra", null],
+    "spotify_album_id": null,
+    "spotify_track_id": "6wcryUdE3GbVVnuBFE6Zmv",
+    "spotify_album_name": null,
+    "spotify_track_name": "Ariele e Calibano",
+    "spotify_artist_names": [null, null, null]
+  },
+  "youtube": {
+    "hd": true,
+    "slug": "JaEsttvrXkY",
+    "song": {
+      "album": "Fadisia",
+      "artist": "Sineterra",
+      "titles": ["Ariele e Calibano"],
+      "writers": [],
+      "song_url": null,
+      "artist_url": null
+    },
+    "tags": [
+      "tango",
+      "nuevo",
+      "lorena tarantino",
+      "kraków",
+      "gianpiero galdi",
+      "krakus aires",
+      "tango festival",
+      "cracow",
+      "theatre",
+      "alternative",
+      "Ariele e Calibano",
+      "Sineterra"
+    ],
+    "title": "Gianpiero Galdi & Lorena Tarantino - Krakus Aires Tango Festival 2019 4/5",
+    "channel": {
+      "id": "664570646",
+      "title": null,
+      "videos": [],
+      "playlists": [],
+      "view_count": null,
+      "description": null,
+      "video_count": null,
+      "published_at": null,
+      "content_owner": null,
+      "thumbnail_url": null,
+      "privacy_status": null,
+      "subscriber_count": null,
+      "related_playlists": []
+    },
+    "duration": 313,
+    "like_count": 39610,
+    "view_count": 3795277,
+    "description": "Gianpiero Galdi and Lorena Tarantino performing to \"Ariele e Calibano\" by Sineterra, at Krakus Aires Tango Festival, on the Sunday Night Milonga in Juliusz Słowacki Theatre In Kraków, Poland. 5.05.2019",
+    "upload_date": "2020-07-24",
+    "comment_count": 884,
+    "thumbnail_url": null,
+    "favorite_count": 0,
+    "recommended_video_ids": []
+  }
+}

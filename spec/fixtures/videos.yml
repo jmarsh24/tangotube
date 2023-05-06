@@ -56,219 +56,64 @@
 video_1_featured:
   event: academia_de_tango
   channel: jkukla_video
-  title: "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
   youtube_id: "AQ9Ri3kWa_4"
-  description: '24-26.10.2014 r., Amsterdam, Netherlands, Performance 25th Oct, "Salon de los Sabados" in Academia de Tango'
-  duration: 167
+  song: "cuando_el_amor_muere"
   upload_date: "2014-10-26 15:21:29"
-  performance_date: "2014-10-26 15:21:29"
-  view_count: 1042
-  tags:
-    [
-      "Amsterdam",
-      "Netherlands",
-      "tango",
-      "argentinian tango",
-      "milonga",
-      "noelia hurtado",
-      "carlitos espinoza",
-      "carlos espinoza",
-      "espinoza",
-      "hurtado",
-      "noelia",
-      "hurtado espinoza",
-      "Salon de los Sabados",
-      "Academia de Tango",
-      "Nederland",
-    ]
-  song: cuando_el_amor_muere
-  youtube_song: "Quando el amor muere"
-  youtube_artist: "Orquesta Carlos di Sarli, Carlos Acuña"
   featured: true
-  acr_response_code: 1001
-  scanned_song: true
   hidden: false
-  hd: true
-  popularity:
-  like_count: 3
-  favorite_count: 0
-  comment_count: 0
-  scanned_youtube_music: true
+  popularity: 162
   click_count: 317
+  metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_1_metadata.json")) %>
 
 video_2_featured:
   event: krakus_aires_tango_festival
   channel: tango_nuevo_tv
-  title: "Gianpiero Galdi & Lorena Tarantino - Krakus Aires Tango Festival 2019 4/5"
   youtube_id: "JaEsttvrXkY"
-  description: 'Gianpiero Galdi and Lorena Tarantino performing to "Ariele e Calibano" by Sineterra, at Krakus Aires Tango Festival, on the Sunday Night Milonga in Juliusz Słowacki Theatre In Kraków, Poland. 5.05.2019'
-  duration: 313
   upload_date: "2020-07-24 15:35:11"
-  performance_date: "2020-07-24 15:35:11"
-  view_count: 3795277
-  tags:
-    [
-      "tango",
-      "nuevo",
-      "lorena tarantino",
-      "kraków",
-      "gianpiero galdi",
-      "krakus aires",
-      "tango festival",
-      "cracow",
-      "theatre",
-      "alternative",
-      "Ariele e Calibano",
-      "Sineterra",
-    ]
-  youtube_song: "Ariele e Calibano"
-  youtube_artist: "Sineterra"
-  acrid: "f0824b621814b3495ec6347b166ce81a"
-  spotify_track_id: "6wcryUdE3GbVVnuBFE6Zmv"
-  spotify_track_name: "Ariele e Calibano"
-  youtube_song_id: "y8foZLEUqRQ"
-  isrc: "QMBZ91522089"
-  acr_response_code: 0
   song: nueve_de_julio
   featured: true
-  scanned_song: true
   hidden: false
-  hd: true
   popularity: 162
-  like_count: 39610
-  favorite_count: 0
-  comment_count: 884
-  scanned_youtube_music: true
   click_count: 261
-  acr_cloud_artist_name: "Sineterra"
-  acr_cloud_album_name: "Fadisia"
-  acr_cloud_track_name: "Nueve De Julio"
-  performance_number: "4"
-  performance_total_number: "5"
+  metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_2_metadata.json")) %>
 
 video_3_featured:
   event: bailemos_tango_festival
   channel: 030tango
   song: nueve_de_julio
-  title: "Clarisa Aragon and Jonathan Saavedra – Nueve de julio #clarisayjonathan"
   youtube_id: "9dVXhctAOnk"
-  description: "Clarisa Aragon and Jonathan Saavedra dance “Nueve de julio” by Juan D'Arienzo at the 1st Bailemos Tango Festival 2021 in Kyiv, Ukraine. If you love Tango videos, support 030tango on https://www.patreon.com/030tango Brought to you with the support o Bailemos Tango Festiva https://www.bailemostangofestival.com/english/ Visit 030tango for more video https://www.030tango.com Recorded on 2021/10/2 #030tango #tango #bailemostangofestival #clarisayjonathan"
-  duration: 205
   upload_date: "2021-10-31 08:00:02"
-  performance_date: "2021-10-31 08:00:02"
-  view_count: 44171
-  tags:
-    [
-      "Tango",
-      "Argentine Tango",
-      "030tango",
-      "030 tango",
-      "Tango video",
-      "#030tango",
-      "#tango",
-      "танго",
-      "探戈舞",
-      "탱고",
-      "タンゴ",
-      "טנגו",
-      "ταγκό",
-      "Bailemos Tango Festival",
-      "Kyiv Tango Festival",
-      "Clarisa Aragon",
-      "Jonathan Saavedra",
-      "Clarisa y Jonathan",
-      "Jonathan y Clarisa",
-      "Nueve de julio",
-      "Juan D'Arienzo",
-    ]
-  youtube_song: "Nueve del Julio"
-  youtube_artist: "Juan d'Arienzo"
-  acrid: "65192d00871017831c4b559bb9a03ef1"
-  spotify_track_id: "2D3AVpuquhk77SoGPUCl3a"
-  spotify_track_name: "Nueve de Julio"
-  youtube_song_id: "y8foZLEUqRQ"
-  isrc: "DEKB71688639"
-  acr_response_code: 0
   featured: true
-  scanned_song: true
   hidden: false
-  hd: true
-  popularity: 261
-  like_count: 530
-  favorite_count: 0
-  comment_count: 0
-  scanned_youtube_music: true
+  popularity: 262
   click_count: 261
-  acr_cloud_artist_name: Juan D'Arienzo
-  acr_cloud_track_name: Nueve De Julio
+  metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_3_metadata.json")) %>
 
 video_4_featured:
   event: laquila_tango_festival
   channel: giorgio_scattolini
   song: violetas
-  title: "Noelia y Carlitos Violetas - Alberto Castillo"
   youtube_id: "xW8prLq6awc"
-  description: "Show Noelia Hurtado y Carlitos Espinoza a L'Aquila Tango Festival 25-mag-2013"
-  duration: 169
   upload_date: "2013-06-05 23:04:15"
-  performance_date: "2013-06-05 23:04:15"
-  view_count: 13569
-  tags:
-    [
-      "Noelia Hurtado",
-      "Carlitos Espinoza",
-      "Violetas",
-      "Alberto Castillo",
-      "L'Aquila Tango Festival",
-    ]
-  youtube_song: "Violetas (Remastered)"
-  youtube_artist: "Alberto Castillo"
-  acrid: "65192d00871017831c4b559bb9a03ef1"
-  spotify_album_id: "1fFBzmIUSdNaejKSM44y5l"
-  spotify_album_name: "Alberto Castillo"
-  spotify_artist_id: "14KUc7zg3OndrAMbCNxPBD"
-  spotify_track_id: "737PVCYld2vO0jnFGOeL8U"
-  spotify_track_name: "Violetas"
-  isrc: "ARG991005408"
-  acr_response_code: 0
   featured: true
-  scanned_song: true
   hidden: false
-  hd: true
   popularity: 181
-  like_count: 77
-  comment_count: 1
-  scanned_youtube_music: true
   click_count: 261
+  metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_4_metadata.json")) %>
 
 video_5:
   event: ladys_tango_festival
   channel: peppa_palazon
   song: milonga_querida
-  title: "CORINA HERRERA e INES MUZZOPAPPA en Viva La Pepa Milonga dentro del LADY'S Tango (1/2)"
   youtube_id: "zlySAXbGeNY"
-  description: "CORINA HERRERA e INES MUZZOPAPPA en Viva La Pepa Milonga (Av Córdoba 5064), dentro del marco del Lady's Tango Festival/ Domingo 8 de marzo de 2020. Buenos Aires. Argentina Encontrá toda la data de Viva la Pepa! milonga en Facebook: https://www.facebook.com/VIVALAPEPA.Domingos.en.Malcolm/ o acá https://www.facebook.com/profile.php?id=100010200420828"
-  duration: 148
   upload_date: "2020-03-09 14:28:44"
-  performance_date: "2020-03-09 14:28:44"
-  view_count: "3519"
-  youtube_song: "Milonga Querida"
-  youtube_artist: "Juan d'Arienzo con Alberto Echagüe"
-  isrc: "DEKB71688129"
+  metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "video_5_metadata.json")) %>
 
 video_6:
   event: el_garron_la_grande_tutti
   channel: armelle_tango
   song: malandraca
   youtube_id: "F_zatafpBfE"
-  title: "Octavio Fernandez & Corina Herrera ❤@ La Grande Tutti + El Garon union - Paris - Malandraca"
-  description: "Démo 3/5 : Malandraca - Osvaldo Pugliese La Grande Tutti + El Garrón union: Corina & Octavio rock the floor!!! @ Tanguedia de Paris Samedi 21 juillet 2018"
-  duration: 229
-  view_count: 13171
-  youtube_artist: "Jorge Vidal"
-  isrc: "ARF044900013"
   click_count: "303"
-  performance_number: 3
-  performance_total_number: 5
   upload_date: "2018-07-22 00:18:05"
-  performance_date: "2018-07-22 00:18:05"
+  metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "video_6_metadata.json")) %>

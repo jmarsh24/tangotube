@@ -14,7 +14,7 @@
             = dv.dancer.name
       - if video.display.any_song_attributes.present?
         .stack.stack--line.stack--xxxs
-          = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)
+          = link_to_song(video)
       - if video.event.present?
         .stack.stack--line.stack--xxxs
           - if video.event.title.present?

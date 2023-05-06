@@ -1,5 +1,5 @@
 - cache ["video_show", @video.youtube_id] do
-  - content_for :meta_title, primary_title(@video.display.dancer_names, @video.metadata.youtube.title, @video.display.any_song_attributes, @video.youtube_id)
+  - content_for :meta_title, primary_title(@video)
   - content_for :meta_description, @video.display.any_song_attributes
   - content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
   .container

@@ -1,0 +1,62 @@
+{
+  "music": {
+    "code": 0,
+    "isrc": "ARG991005408",
+    "genre": null,
+    "acr_id": "65192d00871017831c4b559bb9a03ef1",
+    "message": null,
+    "youtube_vid": null,
+    "acr_album_name": null,
+    "acr_song_title": null,
+    "acr_artist_names": [null, null],
+    "spotify_album_id": "1fFBzmIUSdNaejKSM44y5l",
+    "spotify_track_id": "737PVCYld2vO0jnFGOeL8U",
+    "spotify_album_name": "Alberto Castillo",
+    "spotify_track_name": "Violetas",
+    "spotify_artist_names": [null, null, null]
+  },
+  "youtube": {
+    "hd": true,
+    "slug": "xW8prLq6awc",
+    "song": {
+      "album": null,
+      "artist": "Alberto Castillo",
+      "titles": ["Violetas (Remastered)"],
+      "writers": [],
+      "song_url": null,
+      "artist_url": null
+    },
+    "tags": [
+      "Noelia Hurtado",
+      "Carlitos Espinoza",
+      "Violetas",
+      "Alberto Castillo",
+      "L'Aquila Tango Festival"
+    ],
+    "title": "Noelia y Carlitos Violetas - Alberto Castillo",
+    "channel": {
+      "id": "904605573",
+      "title": null,
+      "videos": [],
+      "playlists": [],
+      "view_count": null,
+      "description": null,
+      "video_count": null,
+      "published_at": null,
+      "content_owner": null,
+      "thumbnail_url": null,
+      "privacy_status": null,
+      "subscriber_count": null,
+      "related_playlists": []
+    },
+    "duration": 169,
+    "like_count": 77,
+    "view_count": 13569,
+    "description": "Show Noelia Hurtado y Carlitos Espinoza a L'Aquila Tango Festival 25-mag-2013",
+    "upload_date": "2013-06-05",
+    "comment_count": 1,
+    "thumbnail_url": null,
+    "favorite_count": null,
+    "recommended_video_ids": []
+  }
+}
