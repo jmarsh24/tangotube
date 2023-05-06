@@ -24,4 +24,4 @@ jobs:
           ssh-private-key: ${{ secrets.TANGOTUBE_SSH_PRIVATE_KEY }}
 
       - name: Deploy with MRSK
-        run: bundle exec mrsk deploy --host 202.61.197.241 --user root
+        run: bundle exec mrsk deploy
