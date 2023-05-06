@@ -10,7 +10,6 @@ RSpec.describe ExternalVideoImport::Importer do
   let(:channel_matcher) { instance_double("ChannelMatcher") }
   let(:dancer_matcher) { instance_double("DancerMatcher") }
   let(:couple_matcher) { instance_double("CoupleMatcher") }
-  let(:performance_matcher) { instance_double("PerformanceMatcher") }
 
   let(:importer) do
     described_class.new(
@@ -24,7 +23,6 @@ RSpec.describe ExternalVideoImport::Importer do
   let(:carlitos) { dancers(:carlitos) }
   let(:noelia) { dancers(:noelia) }
   let(:couple) { couples(:carlitos_noelia) }
-  let(:performance) { ExternalVideoImport::MetadataProcessing::PerformanceMatcher::Performance.new(position: 3, total: 5) }
   let(:youtube_slug) { "test_video_slug" }
   let(:metadata) do
     ExternalVideoImport::Metadata.new(
@@ -88,11 +86,10 @@ RSpec.describe ExternalVideoImport::Importer do
 
   describe "#import" do
     before do
-      allow(song_matcher).to receive(:match_or_create).and_return([song])
+      allow(song_matcher).to receive(:match_or_create).and_return(song)
       allow(channel_matcher).to receive(:match_or_create).and_return(channel)
       allow(dancer_matcher).to receive(:match).and_return([carlitos, noelia])
       allow(couple_matcher).to receive(:match_or_create).and_return(couple)
-      allow(performance_matcher).to receive(:parse).and_return(performance)
     end
 
     it "imports a video with the correct attributes" do
@@ -103,50 +100,30 @@ RSpec.describe ExternalVideoImport::Importer do
       expect(video.metadata.youtube.title).to eq(metadata.youtube.title)
       expect(video.metadata.youtube.description).to eq(metadata.youtube.description)
       expect(video.upload_date).to eq(Date.parse("2022-01-01"))
-      expect(video.duration).to eq(180)
-      expect(video.tags).to match_array(["tag1", "tag2"])
-      expect(video.hd).to be(true)
-      expect(video.view_count).to eq(1000)
-      expect(video.favorite_count).to eq(100)
-      expect(video.comment_count).to eq(50)
-      expect(video.like_count).to eq(200)
+      expect(video.metadata.youtube.duration).to eq(180)
+      expect(video.metadata.youtube.tags).to match_array(["tag1", "tag2"])
+      expect(video.metadata.youtube.hd).to be(true)
+      expect(video.metadata.youtube.view_count).to eq(1000)
+      expect(video.metadata.youtube.favorite_count).to eq(100)
+      expect(video.metadata.youtube.comment_count).to eq(50)
+      expect(video.metadata.youtube.like_count).to eq(200)
       expect(video.song).to eq(song)
       expect(video.channel).to eq(channel)
       expect(video.dancers).to match_array(couple.dancers)
       expect(video.couples).to match_array(couple)
-      expect(video.performance_number).to eq(performance.position)
-      expect(video.performance_total_number).to eq(performance.total)
-      expect(video.metadata).to eq(metadata.as_json)
+      expect(video.metadata).to eq(metadata)
     end
   end
 
   describe "#update" do
     before do
       allow(video_crawler).to receive(:metadata).with(slug: video.youtube_id).and_return(metadata)
-      video.assign_attributes(title: "Old Title", description: "Old Description")
+      video.assign_attributes(metadata: nil)
     end
 
     it "updates a video with the correct attributes" do
       expect(importer.update(video)).to eq(video)
-
-      expect(video.youtube_id).to eq(metadata.youtube.slug)
-      expect(video.title).to eq(metadata.youtube.title)
-      expect(video.description).to eq(metadata.youtube.description)
-      expect(video.upload_date).to eq(Date.parse("2022-01-01"))
-      expect(video.duration).to eq(180)
-      expect(video.tags).to match_array(["tag1", "tag2"])
-      expect(video.hd).to be(true)
-      expect(video.view_count).to eq(1000)
-      expect(video.favorite_count).to eq(100)
-      expect(video.comment_count).to eq(50)
-      expect(video.like_count).to eq(200)
-      expect(video.song).to eq(song)
-      expect(video.channel).to eq(channel)
-      expect(video.dancers).to match_array(couple.dancers)
-      expect(video.couples).to match_array(couple)
-      expect(video.performance_number).to eq(performance.position)
-      expect(video.performance_total_number).to eq(performance.total)
-      expect(video.metadata).to eq(metadata.as_json)
+      expect(video.metadata).to eq(metadata)
     end
   end
 end

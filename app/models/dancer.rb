@@ -34,21 +34,8 @@ class Dancer < ApplicationRecord
   enum gender: {male: 0, female: 1}
 
   after_validation :set_slug, only: [:create, :update]
-  after_save :find_videos
 
   scope :search_by_full_name, ->(query) { where("CONCAT_WS(' ', unaccent(first_name), unaccent(last_name)) ILIKE unaccent(?)", "%#{query}%") }
-
-  def find_videos
-    Video.with_dancer_name_in_title(full_name).each do |video|
-      dancer_gender = gender
-      role = if dancer_gender == :male
-        :leader
-      else
-        :follower
-      end
-      DancerVideo.create(video:, role:, dancer: self)
-    end
-  end
 
   def full_name
     "#{first_name} #{last_name}"
