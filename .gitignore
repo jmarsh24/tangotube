@@ -36,7 +36,6 @@ node_modules
 .byebug_history
 /doc
 
-
 # Vite Ruby
 /public/vite*
 node_modules
@@ -46,6 +45,10 @@ node_modules
 scratchpad.*
 
 /.vscode/rdbg_autoattach.json
+
+# Ignore .env files
 .env
+.env.production
+
 docker-config.json
 latest.dump
