@@ -84,15 +84,6 @@ class Video < ApplicationRecord
   scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :leader}) }
   scope :missing_song, -> { where(song_id: nil) }
 
-  scope :with_same_performance, ->(video) {
-                                  includes(Video.search_includes)
-                                    .where(channel_id: video.channel_id)
-                                    .has_leader_and_follower
-                                    .where(hidden: false)
-                                    .where.not(youtube_id: video.youtube_id)
-                                    .where(upload_date: (video.upload_date - 7.days)..(video.upload_date + 7.days))
-                                }
-
   scope :with_same_dancers, ->(video) {
     includes(Video.search_includes)
       .with_leader(video.leaders.first)
@@ -222,6 +213,16 @@ class Video < ApplicationRecord
         where(id: user.find_up_downsvoted_items.pluck(:id))
       end
     end
+  end
+
+  def with_same_performance
+    Video
+      .includes(Video.search_includes)
+      .where(channel_id:)
+      .has_leader_and_follower
+      .where(hidden: false)
+      .where.not(youtube_id:)
+      .where(upload_date: (upload_date - 7.days)..(upload_date + 7.days))
   end
 
   def display
