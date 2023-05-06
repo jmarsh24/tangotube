@@ -14,9 +14,9 @@
           .stack.stack--xxxs
             .stack.stack--line
               - if video.youtube_id == @video.youtube_id
-                = primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
+                = primary_title(video.display.dancer_names, video.metadata.youtube.title, video.display.any_song_attributes, video.youtube_id)
               - else
-                = link_to_primary_title(video.display.dancer_names, video.title, video.display.any_song_attributes, video.youtube_id)
+                = link_to_primary_title(video.display.dancer_names, video.metadata.youtube.title, video.display.any_song_attributes, video.youtube_id)
             div
               - if video.display.any_song_attributes.present?
                 = link_to_song(video.display.el_recodo_attributes, video.display.external_song_attributes, video)
@@ -29,8 +29,3 @@
     - if videos.size > 3
       button.button.button--secondary.stack.stack--justify-center data-action="click->reveal#toggle"
         .recommended-videos-card__icon.icon
-
-
-
-
-

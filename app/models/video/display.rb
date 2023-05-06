@@ -19,27 +19,44 @@ class Video::Display
   end
 
   def el_recodo_attributes
-    return if @video.song.blank?
-    format_song_attributes(@video.song.title, @video.song.artist, @video.song.genre)
+    return if @video.metadata.youtube.song.titles.blank?
+
+    format_song_attributes(
+      @video.metadata.youtube.song.titles.first,
+      @video.metadata.youtube.song.artist
+    )
   end
 
   def spotify_attributes
-    return if @video.spotify_track_name.blank? || @video.spotify_artist_name.blank?
-    format_song_attributes(@video.spotify_track_name, @video.spotify_artist_name)
+    return if @video.metadata.music.spotify_track_name.blank? || @video.metadata.music.spotify_artist_names.blank?
+
+    format_song_attributes(
+      @video.metadata.music.spotify_track_name,
+      @video.metadata.music.spotify_artist_names.first
+    )
   end
 
   def youtube_attributes
-    return if @video.youtube_song.blank? || @video.youtube_artist.blank?
-    format_song_attributes(@video.youtube_song, @video.youtube_artist)
+    return if @video.metadata.youtube.song.titles.blank? || @video.metadata.youtube.song.artist.blank?
+
+    format_song_attributes(
+      @video.metadata.youtube.song.titles.first,
+      @video.metadata.youtube.song.artist
+    )
   end
 
   def acr_cloud_attributes
-    return if @video.acr_cloud_track_name.blank? || @video.acr_cloud_artist_name.blank?
-    format_song_attributes(@video.acr_cloud_track_name, @video.acr_cloud_artist_name)
+    return if @video.metadata.music.acr_song_title.blank? || @video.metadata.music.acr_artist_names.blank?
+
+    format_song_attributes(
+      @video.metadata.music.acr_song_title,
+      @video.metadata.music.acr_artist_names.first
+    )
   end
 
   def dancer_names
     return if @video.dancers.empty?
+
     dancer_names_array = @video.dancers.map(&:name)
     dancer_names_array.join(" & ")
   end
@@ -47,7 +64,7 @@ class Video::Display
   private
 
   def format_song_attributes(title, artist, genre = nil)
-    formatted_title = title.titleize
+    formatted_title = title&.titleize
     formatted_artist = titleize_artist_name(artist)
     if genre.nil?
       "#{formatted_title} - #{formatted_artist}"
@@ -57,6 +74,8 @@ class Video::Display
   end
 
   def titleize_artist_name(artist_name)
+    return "" if artist_name.nil?
+
     artist_name.split("'").map(&:titleize).join("'")
   end
 end

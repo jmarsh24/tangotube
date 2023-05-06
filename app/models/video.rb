@@ -59,6 +59,8 @@ class Video < ApplicationRecord
   include Filterable
   include Indexable
 
+  attribute :metadata, ExternalVideoImport::Metadata.to_type
+
   validates :youtube_id, presence: true, uniqueness: true
 
   belongs_to :song, optional: true

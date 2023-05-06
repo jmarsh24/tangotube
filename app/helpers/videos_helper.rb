@@ -62,7 +62,7 @@ module VideosHelper
   end
 
   def formatted_metadata(video)
-    "#{formatted_performance_date(video.performance_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes"
+    "#{formatted_performance_date(video.metadata.youtube.upload_date)} • #{formatted_view_count(video.metadata.youtube.view_count)} views • #{formatted_view_count(video.metadata.youtube.like_count)} likes"
   end
 
   def performance_number(video)
@@ -72,11 +72,11 @@ module VideosHelper
   end
 
   def hd_duration_data(video)
-    return if video.duration.blank?
-    if video.hd?
-      "HD #{Time.at(video&.duration).utc.strftime("%M:%S")}"
+    return if video.metadata.youtube.duration.blank?
+    if video.metadata.youtube.hd?
+      "HD #{Time.at(video&.metadata&.youtube&.duration).utc.strftime("%M:%S")}"
     else
-      Time.at(video&.duration).utc.strftime("%M:%S")
+      Time.at(video&.metadata&.youtube&.duration).utc.strftime("%M:%S")
     end
   end
 
