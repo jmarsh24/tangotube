@@ -3,7 +3,7 @@
   .tabs.stack.stack--line.stack--justify-center.stack--zero
     .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t ".Spanish"
     .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t ".English"
-  .tabs__panel.tabs__panel--lyrics.stack data={ "tabs-target": "tabPanel" }
-     = simple_format(@video.song.lyrics)
-  .tabs__panel.tabs__panel--lyrics.stack data={ "tabs-target": "tabPanel" }
-     = simple_format(@video.song.lyrics_en)
+  .tabs__panel.tabs__panel--lyrics.stack[data-tabs-target="tabPanel"] class=tabs__panel.class.concat(" your_additional_class_here")
+    = simple_format(@video.song.lyrics)
+  .tabs__panel.tabs__panel--lyrics.stack[data-tabs-target="tabPanel"]
+    = simple_format(@video.song.lyrics_en)
