@@ -4,60 +4,28 @@
 #
 # Table name: videos
 #
-#  id                       :bigint           not null, primary key
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
-#  title                    :text
-#  youtube_id               :string           not null
-#  description              :string
-#  duration                 :integer
-#  upload_date              :datetime
-#  view_count               :integer
-#  song_id                  :bigint
-#  youtube_song             :string
-#  youtube_artist           :string
-#  acrid                    :string
-#  spotify_album_id         :string
-#  spotify_album_name       :string
-#  spotify_artist_id        :string
-#  spotify_artist_id_2      :string
-#  spotify_artist_name      :string
-#  spotify_artist_name_2    :string
-#  spotify_track_id         :string
-#  spotify_track_name       :string
-#  youtube_song_id          :string
-#  isrc                     :string
-#  acr_response_code        :integer
-#  channel_id               :bigint
-#  scanned_song             :boolean          default(FALSE)
-#  hidden                   :boolean          default(FALSE)
-#  hd                       :boolean          default(FALSE)
-#  popularity               :integer          default(0)
-#  like_count               :integer          default(0)
-#  dislike_count            :integer          default(0)
-#  favorite_count           :integer          default(0)
-#  comment_count            :integer          default(0)
-#  event_id                 :bigint
-#  scanned_youtube_music    :boolean          default(FALSE)
-#  click_count              :integer          default(0)
-#  acr_cloud_artist_name    :string
-#  acr_cloud_artist_name_1  :string
-#  acr_cloud_album_name     :string
-#  acr_cloud_track_name     :string
-#  performance_date         :datetime
-#  spotify_artist_id_1      :string
-#  spotify_artist_name_1    :string
-#  performance_number       :integer
-#  performance_total_number :integer
-#  featured                 :boolean          default(FALSE)
-#  index                    :text
-#  metadata                 :jsonb
-#  tags                     :text             default([]), is an Array
+#  id          :bigint           not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  youtube_id  :string
+#  upload_date :date
+#  song_id     :bigint
+#  channel_id  :bigint
+#  hidden      :boolean          default(FALSE)
+#  popularity  :integer          default(0)
+#  event_id    :bigint
+#  click_count :integer          default(0)
+#  featured    :boolean          default(FALSE)
+#  index       :text
+#  metadata    :jsonb
+#  imported_at :datetime
 #
 class Video < ApplicationRecord
   acts_as_votable
   include Filterable
   include Indexable
+
+  attribute :metadata, ExternalVideoImport::Metadata.to_type
 
   validates :youtube_id, presence: true, uniqueness: true
 
@@ -116,15 +84,6 @@ class Video < ApplicationRecord
   scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :follower}) }
   scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :leader}) }
   scope :missing_song, -> { where(song_id: nil) }
-
-  scope :with_same_performance, ->(video) {
-                                  includes(Video.search_includes)
-                                    .where(channel_id: video.channel_id)
-                                    .has_leader_and_follower
-                                    .where(hidden: false)
-                                    .where.not(youtube_id: video.youtube_id)
-                                    .where(upload_date: (video.upload_date - 7.days)..(video.upload_date + 7.days))
-                                }
 
   scope :with_same_dancers, ->(video) {
     includes(Video.search_includes)
@@ -255,6 +214,16 @@ class Video < ApplicationRecord
         where(id: user.find_up_downsvoted_items.pluck(:id))
       end
     end
+  end
+
+  def with_same_performance
+    Video
+      .includes(Video.search_includes)
+      .where(channel_id:)
+      .has_leader_and_follower
+      .where(hidden: false)
+      .where.not(youtube_id:)
+      .where(upload_date: (upload_date - 7.days)..(upload_date + 7.days))
   end
 
   def display

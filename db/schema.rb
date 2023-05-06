@@ -10,8 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_164249) do
+ActiveRecord::Schema[7.1].define(version: 2023_05_06_184424) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "btree_gin"
+  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -41,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_164249) do
   create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
@@ -147,7 +151,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_164249) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["pid"], name: "index_deletion_requests_on_pid"
-    t.index ["uid", "provider"], name: "index_deletion_requests_on_uid_and_provider", unique: true
   end
 
   create_table "events", force: :cascade do |t|
@@ -210,7 +213,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_164249) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "reviewed", default: false
-    t.index ["slug"], name: "index_playlists_on_slug", unique: true
     t.index ["user_id"], name: "index_playlists_on_user_id"
     t.index ["videos_id"], name: "index_playlists_on_videos_id"
   end
@@ -300,70 +302,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_164249) do
   create_table "videos", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.text "title"
-    t.string "youtube_id", null: false
-    t.string "description"
-    t.integer "duration"
+    t.string "youtube_id"
     t.date "upload_date"
-    t.integer "view_count"
     t.bigint "song_id"
-    t.string "youtube_song"
-    t.string "youtube_artist"
-    t.string "acrid"
-    t.string "spotify_album_id"
-    t.string "spotify_album_name"
-    t.string "spotify_artist_id"
-    t.string "spotify_artist_id_2"
-    t.string "spotify_artist_name"
-    t.string "spotify_artist_name_2"
-    t.string "spotify_track_id"
-    t.string "spotify_track_name"
-    t.string "youtube_song_id"
-    t.string "isrc"
-    t.integer "acr_response_code"
     t.bigint "channel_id"
-    t.boolean "scanned_song", default: false
     t.boolean "hidden", default: false
-    t.boolean "hd", default: false
     t.integer "popularity", default: 0
-    t.integer "like_count", default: 0
-    t.integer "dislike_count", default: 0
-    t.integer "favorite_count", default: 0
-    t.integer "comment_count", default: 0
     t.bigint "event_id"
-    t.boolean "scanned_youtube_music", default: false
     t.integer "click_count", default: 0
-    t.string "acr_cloud_artist_name"
-    t.string "acr_cloud_artist_name_1"
-    t.string "acr_cloud_album_name"
-    t.string "acr_cloud_track_name"
-    t.datetime "performance_date", precision: nil
-    t.string "spotify_artist_id_1"
-    t.string "spotify_artist_name_1"
-    t.integer "performance_number"
-    t.integer "performance_total_number"
     t.boolean "featured", default: false
     t.text "index"
     t.jsonb "metadata"
-    t.text "tags", default: [], array: true
-    t.index ["acr_cloud_artist_name"], name: "index_videos_on_acr_cloud_artist_name"
-    t.index ["acr_cloud_track_name"], name: "index_videos_on_acr_cloud_track_name"
+    t.datetime "imported_at"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"
-    t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
     t.index ["index"], name: "index_videos_on_index", opclass: :gin_trgm_ops, using: :gin
-    t.index ["performance_date"], name: "index_videos_on_performance_date"
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
-    t.index ["spotify_artist_name"], name: "index_videos_on_spotify_artist_name"
-    t.index ["spotify_track_name"], name: "index_videos_on_spotify_track_name"
     t.index ["upload_date"], name: "index_videos_on_upload_date"
-    t.index ["view_count"], name: "index_videos_on_view_count"
-    t.index ["youtube_artist"], name: "index_videos_on_youtube_artist"
-    t.index ["youtube_id"], name: "index_videos_on_youtube_id", unique: true
-    t.index ["youtube_song"], name: "index_videos_on_youtube_song"
+    t.index ["youtube_id"], name: "index_videos_on_youtube_id"
   end
 
   create_table "votes", force: :cascade do |t|

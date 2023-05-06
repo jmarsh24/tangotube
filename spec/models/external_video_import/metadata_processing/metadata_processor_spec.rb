@@ -10,22 +10,19 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
   let(:channel_matcher) { instance_double("ChannelMatcher") }
   let(:dancer_matcher) { instance_double("DancerMatcher") }
   let(:couple_matcher) { instance_double("CoupleMatcher") }
-  let(:performance_matcher) { instance_double("PerformanceMatcher") }
 
   subject(:metadata_processor) do
     described_class.new(
       song_matcher:,
       channel_matcher:,
       dancer_matcher:,
-      couple_matcher:,
-      performance_matcher:
+      couple_matcher:
     )
   end
 
   describe "#process" do
     let(:youtube_metadata) { double("youtube_metadata") }
     let(:channel_metadata) { double("channel_metadata") }
-    let(:performance_metadata) { double("performance_metadata") }
     let(:song_metadata) { double("song_metadata") }
     let(:couple) { couples(:carlitos_noelia) }
 
@@ -35,8 +32,6 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
       allow(metadata).to receive(:searchable_artist_names).and_return([])
       allow(metadata).to receive(:searchable_song_titles).and_return([])
       allow(metadata).to receive(:genre_fields).and_return([])
-      allow(performance_metadata).to receive(:position).and_return(3)
-      allow(performance_metadata).to receive(:total).and_return(5)
 
       allow(youtube_metadata).to receive(:title).and_return("Test Video Title")
       allow(youtube_metadata).to receive(:description).and_return("Test video description")
@@ -54,7 +49,6 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
       allow(channel_matcher).to receive(:match_or_create).with(channel_metadata:).and_return("matched_channel")
       allow(dancer_matcher).to receive(:match).with(metadata_fields: youtube_metadata.title).and_return(couple.dancers)
       allow(couple_matcher).to receive(:match_or_create).with(dancers: couple.dancers).and_return(couple)
-      allow(performance_matcher).to receive(:parse).with(text: "#{youtube_metadata.title} #{youtube_metadata.description}").and_return(performance_metadata)
       allow(song_matcher).to receive(:match_or_create).with(
         metadata_fields: [],
         artist_fields: [],
@@ -67,7 +61,6 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
       expect(channel_matcher).to receive(:match_or_create).with(channel_metadata:).and_return("matched_channel")
       expect(dancer_matcher).to receive(:match).with(metadata_fields: youtube_metadata.title).and_return(dancers)
       expect(couple_matcher).to receive(:match_or_create).with(dancers:).and_return(couple)
-      expect(performance_matcher).to receive(:parse).with(text: "#{youtube_metadata.title} #{youtube_metadata.description}").and_return(performance_metadata)
       expect(song_matcher).to receive(:match_or_create).with(
         metadata_fields: [],
         artist_fields: [],
@@ -79,22 +72,11 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
 
       expect(attributes).to eq(
         youtube_id: "test_video_slug",
-        title: "Test Video Title",
-        description: "Test video description",
         upload_date: "2022-01-01",
-        duration: 180,
-        tags: ["tag1", "tag2"],
-        hd: true,
-        view_count: 1000,
-        favorite_count: 100,
-        comment_count: 50,
-        like_count: 200,
         channel: "matched_channel",
         song: song_metadata,
         dancers:,
-        couples: couple,
-        performance_number: performance_metadata&.position,
-        performance_total_number: performance_metadata&.total
+        couples: couple
       )
     end
   end

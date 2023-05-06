@@ -9,6 +9,6 @@ RSpec.describe "watch_video", type: :system do
     video = videos(:video_1_featured)
     visit watch_path(v: video.youtube_id)
     expect(page).to have_content(video.display.dancer_names)
-    expect(page).to have_content(video.display.any_song_attributes)
+    expect(page).to have_content(video.song.full_title)
   end
 end

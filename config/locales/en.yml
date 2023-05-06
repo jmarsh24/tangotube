@@ -255,8 +255,6 @@ en:
       contact_me: Contact Me
   performance_date_heading: Performance Date
   performance_date_label: Performance Date
-  performance_number_headiing: Performance Position
-  performance_total_number_heading: Performance Total
   performance_videos_count: "%{count} videos"
   performances:
     edit:

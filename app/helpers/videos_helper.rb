@@ -16,53 +16,48 @@ module VideosHelper
 
   def formatted_performance_date(performance_date)
     return if performance_date.blank?
+
     performance_date.strftime("%B %Y")
   end
 
   def link_to_query(external_song_attributes)
-    link_to external_song_attributes,
-      root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
-      "data-turbo-frame": "_top",
-      class: "tag tag--sm"
+    link_to external_song_attributes, root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
+      "data-turbo-frame": "_top", class: "tag tag--sm"
   end
 
-  def link_to_song_slug(song_attributes, video)
-    link_to song_attributes,
-      root_path(song: video.song.slug),
-      "data-turbo-frame": "_top",
-      class: "tag tag--sm"
+  def link_to_song_slug(video)
+    link_to video.song.full_title, root_path(song: video.song.slug),
+      "data-turbo-frame": "_top", class: "tag tag--sm"
   end
 
-  def link_to_song(el_recodo_attributes, external_song_attributes, video)
-    if el_recodo_attributes.present?
-      link_to_song_slug(el_recodo_attributes, video)
-    elsif external_song_attributes.present?
-      link_to_query(external_song_attributes)
+  def link_to_song(video)
+    if video.song.present?
+      link_to_song_slug(video)
+    elsif video.display.external_song_attributes.present?
+      link_to_query(video.display.external_song_attributes)
     end
   end
 
-  def link_to_primary_title(dancer_names, title, song_attributes, youtube_id)
-    if dancer_names.present? && song_attributes.present?
-      link_to dancer_names,
-        watch_path(v: youtube_id),
-        {"data-turbo-frame": "_top"}
+  def link_to_primary_title(video)
+    if video.dancers.present? && video.song.present?
+      link_to video.dancers.map(&:name).join(" & "), watch_path(v: video.youtube_id),
+        "data-turbo-frame": "_top"
     else
-      link_to truncate(title, length: 85),
-        watch_path(v: youtube_id),
-        {"data-turbo-frame": "_top"}
+      link_to truncate(video.metadata.youtube.title, length: 85), watch_path(v: video.youtube_id),
+        "data-turbo-frame": "_top"
     end
   end
 
-  def primary_title(dancer_names, title, song_attributes, _youtube_id)
-    if dancer_names.present? && song_attributes.present?
-      dancer_names
+  def primary_title(video)
+    if video.dancers.present? && video.song.present?
+      video.display.dancer_names
     else
-      title
+      video.metatdata.youtube.title
     end
   end
 
   def formatted_metadata(video)
-    "#{formatted_performance_date(video.performance_date)} • #{formatted_view_count(video.view_count)} views • #{formatted_view_count(video.like_count)} likes"
+    "#{formatted_performance_date(video.metadata.youtube.upload_date)} • #{formatted_view_count(video.metadata.youtube.view_count)} views • #{formatted_view_count(video.metadata.youtube.like_count)} likes"
   end
 
   def performance_number(video)
@@ -72,11 +67,12 @@ module VideosHelper
   end
 
   def hd_duration_data(video)
-    return if video.duration.blank?
-    if video.hd?
-      "HD #{Time.at(video&.duration).utc.strftime("%M:%S")}"
+    return if video.metadata.youtube.duration.blank?
+
+    if video.metadata.youtube.hd?
+      "HD #{Time.at(video&.metadata&.youtube&.duration).utc.strftime("%M:%S")}"
     else
-      Time.at(video&.duration).utc.strftime("%M:%S")
+      Time.at(video&.metadata&.youtube&.duration).utc.strftime("%M:%S")
     end
   end
 
@@ -86,7 +82,11 @@ module VideosHelper
 
   def sortable(column, direction, sort_column, sort_direction, title = "")
     title ||= column.titleize
-    (column == sort_column) ? "current #{sort_direction}" : nil
+
+    if column == sort_column
+      "current #{sort_direction}"
+    end
+
     link_to root_path(request.query_parameters.merge(sort: column, direction:)), class: "menu-item" do
       if link_active?(column, direction, sort_column, sort_direction)
         content_tag(:span, title.to_s)
@@ -104,82 +104,48 @@ module VideosHelper
   def videos_header(filtering_params, sorting_params)
     words_array = []
 
-    dancer_array = []
-    orchestra_array = []
-    year_array = []
-    user_attribute_array = []
-    sorting_array = []
-    genre_array = []
-
     filtering_params.each do |key, value|
-      if key == "query"
+      case key
+      when "query"
         words_array << "\"#{value}\""
-      end
-      if key == "liked" && value == "true"
-        user_attribute_array << "Most Liked"
-      end
-      if key == "watched" && value == "true"
-        user_attribute_array << "Watched"
-      end
-      if key == "watched" && value == "false"
-        user_attribute_array << "New to You"
-      end
-      if key == "hd" && value == "1"
-        user_attribute_array << "HD"
-      end
-      if key == "genre"
-        genre_array << value
-      end
-      if key == "leader"
-        dancer_array << value
-      end
-      if key == "follower"
-        dancer_array << value
-      end
-      if key == "orchestra"
-        orchestra_array << value
-      end
-      if key == "year"
-        year_array << value
+      when "liked"
+        words_array << "Most Liked" if value == "true"
+      when "watched"
+        words_array << ((value == "true") ? "Watched" : "New to You")
+      when "hd"
+        words_array << "HD" if value == "1"
+      when "genre"
+        words_array << value
+      when "leader", "follower"
+        words_array << value
+      when "orchestra"
+        words_array << value
+      when "year"
+        words_array << value
       end
     end
 
-    if sorting_params["sort"] == "song_titile" && sorting_params["direction"] == "asc"
-      sorting_array << "Grouped By Song Title"
-    end
-    if sorting_params["sort"] == "orchestra" && sorting_params["direction"] == "asc"
-      sorting_array << "Grouped By Orchestra"
-    end
-    if sorting_params["sort"] == "channel" && sorting_params["direction"] == "asc"
-      sorting_array << "Grouped By Channel"
-    end
-    if sorting_params["sort"] == "like_count" && sorting_params["direction"] == "desc"
-      sorting_array << "Most Liked"
-    end
-    if sorting_params["sort"] == "view_count" && sorting_params["direction"] == "desc"
-      sorting_array << "Most Viewed"
-    end
-    if sorting_params["sort"] == "popularity" && sorting_params["direction"] == "desc"
-      sorting_array << "Most Popular"
-    end
-    if sorting_params["sort"] == "year" && sorting_params["direction"] == "desc"
-      sorting_array << "Most Recent"
-    end
-    if sorting_params["sort"] == "year" && sorting_params["direction"] == "asc"
-      sorting_array << "Oldest"
+    case sorting_params["sort"]
+    when "song_titile"
+      words_array << "Grouped By Song Title" if sorting_params["direction"] == "asc"
+    when "orchestra"
+      words_array << "Grouped By Orchestra" if sorting_params["direction"] == "asc"
+    when "channel"
+      words_array << "Grouped By Channel" if sorting_params["direction"] == "asc"
+    when "like_count"
+      words_array << "Most Liked" if sorting_params["direction"] == "desc"
+    when "view_count"
+      words_array << "Most Viewed" if sorting_params["direction"] == "desc"
+    when "popularity"
+      words_array << "Most Popular" if sorting_params["direction"] == "desc"
+    when "year"
+      words_array << ((sorting_params["direction"] == "desc") ? "Most Recent" : "Oldest")
     end
 
-    words_array << dancer_array.join(" & ")
-    words_array << orchestra_array.join(": ")
-    words_array << year_array.join(": ")
-    words_array << user_attribute_array.join(": ")
-    words_array << sorting_array.join(": ")
-    words_array << genre_array.join(":")
-
-    words_array.flatten.compact_blank.map(&:titleize).join(" - ")
+    words_array.compact_blank.map(&:titleize).join(" - ")
   end
 
   def filtering_for_dancer?
-    return true if filtering_params.include?(:dancer) || filtering_params.include?(:follower)
+    filtering_params.include?(:dancer) || filtering_params.include?(:follower)
   end
 end
