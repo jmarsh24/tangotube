@@ -16,6 +16,7 @@ module ExternalVideoImport
 
         {
           youtube_id: metadata.youtube.slug,
+          upload_date: metadata.youtube.upload_date,
           channel: @channel_matcher.match_or_create(channel_metadata: metadata.youtube.channel),
           song: @song_matcher.match_or_create(metadata_fields: metadata.searchable_music_fields, artist_fields: metadata.searchable_artist_names, title_fields: metadata.searchable_song_titles, genre_fields: metadata.genre_fields).first,
           dancers:,
