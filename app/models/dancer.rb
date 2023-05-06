@@ -28,6 +28,7 @@ class Dancer < ApplicationRecord
 
   has_many :couples, dependent: :destroy
   has_many :partners, through: :couples
+  has_many :performances, through: :videos
 
   has_one_attached :profile_image
   has_one_attached :cover_image
