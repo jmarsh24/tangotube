@@ -12,7 +12,7 @@
 #  updated_at   :datetime         not null
 #
 class Performance < ApplicationRecord
-  has_many :performance_videos, dependent: :destroy
+  has_many :performance_videos, dependent: :destroy, counter_cache: true
   has_many :videos, through: :performance_videos
   has_many :dancers, through: :videos
   has_many :channels, through: :videos

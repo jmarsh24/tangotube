@@ -33,8 +33,8 @@ module VideosHelper
   def link_to_song(video)
     if video.song.present?
       link_to_song_slug(video)
-    elsif video.display.external_song_attributes.present?
-      link_to_query(video.display.external_song_attributes)
+    elsif video.display.any_song_attributes.present?
+      link_to_query(video.display.any_song_attributes)
     end
   end
 
