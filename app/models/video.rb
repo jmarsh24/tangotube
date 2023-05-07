@@ -227,10 +227,6 @@ class Video < ApplicationRecord
       .where(upload_date: (upload_date - 7.days)..(upload_date + 7.days))
   end
 
-  def display
-    @display ||= Video::Display.new(self)
-  end
-
   def clicked!
     increment(:click_count)
     increment(:popularity)
