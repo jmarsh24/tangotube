@@ -182,7 +182,8 @@ class Video < ApplicationRecord
         :channel,
         :dancers,
         :performance_video,
-        :performance
+        :performance,
+        thumbnail_attachment: :blob
       ]
     end
 
