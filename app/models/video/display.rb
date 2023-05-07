@@ -19,11 +19,11 @@ class Video::Display
   end
 
   def el_recodo_attributes
-    return if @video.metadata.youtube.song.titles.blank?
+    return if @video.metadata.youtube.song.titles.first.blank?
 
     format_song_attributes(
-      @video.metadata.youtube.song.titles.first,
-      @video.metadata.youtube.song.artist
+      @video.metadata.youtube.song.titles.first.first,
+      @video.metadata.youtube.song.titles.first
     )
   end
 
@@ -37,11 +37,11 @@ class Video::Display
   end
 
   def youtube_attributes
-    return if @video.metadata.youtube.song.titles.blank? || @video.metadata.youtube.song.artist.blank?
+    return if @video.metadata.youtube.song.titles.first.blank? || @video.metadata.youtube.song.titles.first.blank?
 
     format_song_attributes(
-      @video.metadata.youtube.song.titles.first,
-      @video.metadata.youtube.song.artist
+      @video.metadata.youtube.song.titles.first.first,
+      @video.metadata.youtube.song.titles.first
     )
   end
 

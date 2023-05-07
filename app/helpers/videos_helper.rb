@@ -52,7 +52,7 @@ module VideosHelper
     if video.dancers.present? && video.song.present?
       video.display.dancer_names
     else
-      video.metatdata.youtube.title
+      video.metadata.youtube.title
     end
   end
 
