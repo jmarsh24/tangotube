@@ -57,6 +57,10 @@ class Song < ApplicationRecord
     self.slug = "#{title}-#{artist}".parameterize
   end
 
+  def to_param
+    slug
+  end
+
   class << self
     def full_title_search(query)
       words = query.to_s.strip.split

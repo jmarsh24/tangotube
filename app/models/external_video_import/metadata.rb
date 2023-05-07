@@ -27,8 +27,8 @@ module ExternalVideoImport
       [
         music.acr_album_name,
         music.spotify_album_name,
-        youtube.song.titles.first&.album,
-        youtube.song.titles.first&.writers
+        youtube.song.album,
+        youtube.song.writers
       ].flatten.compact
     end
 

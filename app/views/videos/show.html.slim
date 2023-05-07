@@ -1,6 +1,6 @@
 - cache ["video_show", @video.youtube_id] do
-  - content_for :meta_title, primary_title(@video)
-  - content_for :meta_description, @video.display.any_song_attributes
+  - content_for :meta_title, @video.decorate.meta_title
+  - content_for :meta_description, @video.decorate.meta_description
   - content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
   .container
     .stack

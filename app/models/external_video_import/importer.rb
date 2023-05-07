@@ -28,11 +28,12 @@ module ExternalVideoImport
     def update(video)
       metadata = fetch_metadata(video.youtube_id)
       video_attributes = process_metadata(metadata)
-
       Video.transaction do
         video.assign_attributes(video_attributes)
         MetadataProcessing::VideoUpdater.new(video).update(metadata)
       end
+
+      video
     rescue => e
       handle_error("updating", video.youtube_id, e)
     end

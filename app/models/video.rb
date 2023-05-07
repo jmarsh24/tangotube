@@ -24,6 +24,7 @@ class Video < ApplicationRecord
   acts_as_votable
   include Filterable
   include Indexable
+  include Presentable
 
   attribute :metadata, ExternalVideoImport::Metadata.to_type
 
@@ -226,10 +227,6 @@ class Video < ApplicationRecord
       .where(upload_date: (upload_date - 7.days)..(upload_date + 7.days))
   end
 
-  def display
-    @display ||= Video::Display.new(self)
-  end
-
   def clicked!
     increment(:click_count)
     increment(:popularity)
@@ -270,5 +267,9 @@ class Video < ApplicationRecord
     else
       "https://i.ytimg.com/vi/#{youtube_id}/hqdefault.jpg"
     end
+  end
+
+  def to_param
+    youtube_id
   end
 end
