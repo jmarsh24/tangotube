@@ -18,53 +18,59 @@
 #
 
 academia_de_tango:
-  title: 'Academia de Tango'
-  city: 'Brussels'
-  country: 'Netherlands'
-  category: 'Milonga'
-  start_date: '2014-10-25'
-  end_date: '2014-26-25'
+  title: "Academia de Tango"
+  city: "Brussels"
+  country: "Netherlands"
+  category: "Milonga"
+  start_date: "2014-10-25"
+  end_date: "2014-26-25"
   active: true
   reviewed: true
+  slug: "academia-de-tango"
 
 krakus_aires_tango_festival:
-  title: 'Krakus Aires Tango Festival'
-  city: 'Krakow'
-  country: 'Poland'
-  category: 'Festival'
-  start_date: '2019-05-05'
-  end_date: '2019-05-05'
+  title: "Krakus Aires Tango Festival"
+  city: "Krakow"
+  country: "Poland"
+  category: "Festival"
+  start_date: "2019-05-05"
+  end_date: "2019-05-05"
   active: true
   reviewed: true
+  slug: "krakus-aires-tango-festival"
 
 bailemos_tango_festival:
-  title: 'Bailemos Tango Festival'
-  city: 'Kyiv'
-  country: 'Ukraine'
-  category: 'Festival'
-  start_date: '2021-11-31'
-  end_date: '2021-11-31'
+  title: "Bailemos Tango Festival"
+  city: "Kyiv"
+  country: "Ukraine"
+  category: "Festival"
+  start_date: "2021-11-31"
+  end_date: "2021-11-31"
+  slug: "bailemos-tango-festival"
 
 laquila_tango_festival:
-  title: 'Laquila Tango Festival'
+  title: "Laquila Tango Festival"
   city: "L'Aquila"
-  country: 'Italy'
-  category: 'Festival'
-  start_date: '2013-25-05'
-  end_date: '2013-25-05'
+  country: "Italy"
+  category: "Festival"
+  start_date: "2013-25-05"
+  end_date: "2013-25-05"
+  slug: "laquila-tango-festival"
 
 el_garron_la_grande_tutti:
-  title: 'La Grande Tutti + El Garon union'
-  city: 'Paris'
-  country: 'France'
-  category: 'Milonga'
-  start_date: '2018-21-07'
-  end_date: '2018-21-07'
+  title: "La Grande Tutti + El Garon union"
+  city: "Paris"
+  country: "France"
+  category: "Milonga"
+  start_date: "2018-21-07"
+  end_date: "2018-21-07"
+  slug: "el-garron-la-grande-tutti"
 
 ladys_tango_festival:
   title: "Lady's Tango Festival"
-  city: 'Buenos Aires'
-  country: 'Argentina'
-  category: 'Festival'
-  start_date: '2020-08-03'
-  end_date: '2020-08-03'
+  city: "Buenos Aires"
+  country: "Argentina"
+  category: "Festival"
+  start_date: "2020-08-03"
+  end_date: "2020-08-03"
+  slug: "ladys-tango-festival"

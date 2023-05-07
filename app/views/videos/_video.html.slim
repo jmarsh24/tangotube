@@ -18,7 +18,7 @@
       - if video.event.present?
         .stack.stack--line.stack--xxxs
           - if video.event.title.present?
-            = link_to video.event.title.titleize, video.event, class: "tag tag--sm", "data-turbo-frame": "_top"
+            = link_to video.event.title.titleize, root_path(event: video.event.slug), class: "tag tag--sm", "data-turbo-frame": "_top"
       .stack.stack--line.stack--xxs
         - if video.channel.thumbnail.present? || video.channel.thumbnail_url.present?
           = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), video.channel.title.present? ? root_path(channel: video.channel.channel_id) : "#", { "data-turbo-frame": "_top" }

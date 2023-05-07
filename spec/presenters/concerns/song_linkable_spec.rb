@@ -29,7 +29,7 @@ RSpec.describe SongLinkable, type: :concern do
 
   context "when the video has a song" do
     it "renders a link to the song" do
-      expect(subject).to eq(link_to(song.full_title, root_path(song:)))
+      expect(subject).to eq(link_to(song.full_title, root_path(song: song.slug), "data-turbo-frame": "_top"))
     end
   end
 end
