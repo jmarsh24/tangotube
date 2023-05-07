@@ -23,7 +23,7 @@
             = link_to video.event.title.titleize, root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } if video.event.present?
             .stack.stack--line.stack--xxxs
               = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id), { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present?
-              = link_to channel_title(video), root_path(channel: video.channel.channel_id), { class: "video-card__channel__title", 'data-turbo-frame': "_top" } if video.channel.title.present?
+              = link_to video.channel.title, root_path(channel: video.channel.channel_id), { class: "video-card__channel__title", 'data-turbo-frame': "_top" } if video.channel.title.present?
             .stack.stack--line
               = video.decorate.display_metadata
     - if videos.size > 3

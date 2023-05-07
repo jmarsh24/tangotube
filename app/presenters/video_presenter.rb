@@ -7,7 +7,7 @@ class VideoPresenter < SimpleDelegator
     if dancers.present?
       link_to dancer_names, watch_path(v: youtube_id)
     else
-      link_to metadata.title, watch_path(v: youtube_id)
+      link_to metadata.youtube.title, watch_path(v: youtube_id)
     end
   end
 
