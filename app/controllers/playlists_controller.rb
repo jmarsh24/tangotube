@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class PlaylistsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authorize_admin!, only: [:create]
+
   # @route GET /playlists (playlists)
   def index
     @playlists = Playlist.all.order(:id)
@@ -18,5 +21,12 @@ class PlaylistsController < ApplicationController
 
   def fetch_new_playlist
     ImportPlaylistJob.perform_later(@playlist.slug)
+  end
+
+  def authorize_admin!
+    unless current_user&.admin?
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to root_path
+    end
   end
 end

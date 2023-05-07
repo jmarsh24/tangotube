@@ -1,7 +1,4 @@
-# frozen_string_literal: true
-
 class ApplicationController < ActionController::Base
-  newrelic_ignore_enduser
   include Pundit::Authorization
   include Shimmer::Consent
   include Shimmer::RemoteNavigation
@@ -31,5 +28,13 @@ class ApplicationController < ActionController::Base
       ui.append "pagination-frame", with: "components/pagination", items: scope, partial: params[:partial]
     end
     scope
+  end
+
+  def authenticate_admin!
+    authenticate_user!
+    unless current_user.admin?
+      flash[:alert] = "You do not have permission to access this page."
+      redirect_to root_path
+    end
   end
 end

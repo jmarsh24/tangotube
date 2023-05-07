@@ -5,6 +5,7 @@ class VideosController < ApplicationController
   before_action :current_search, only: [:index]
   before_action :set_video, except: [:index]
   before_action :check_for_clear, only: [:index]
+  before_action :authorize_admin!, except: [:index, :show]
 
   helper_method :filtering_params, :sorting_params
 
@@ -84,8 +85,8 @@ class VideosController < ApplicationController
     set_recommended_videos
   end
 
-  # @route POST /videos (videos)
   def create
+    authorize Video
     @video = Video.create(youtube_id: params[:video][:youtube_id])
     fetch_new_video
 
@@ -95,6 +96,7 @@ class VideosController < ApplicationController
   # @route PATCH /videos/:id (video)
   # @route PUT /videos/:id (video)
   def update
+    authorize @video
     @clip = Clip.new
     respond_to do |format|
       if @video.update(video_params)
@@ -108,6 +110,12 @@ class VideosController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy
+    authorize @video
+    @video.destroy
+    redirect_to root_path
   end
 
   # @route POST /videos/:id/hide (hide_video)
@@ -149,6 +157,10 @@ class VideosController < ApplicationController
   end
 
   private
+
+  def authorize_admin!
+    authorize :admin, :access?
+  end
 
   def check_for_clear
     if video_params[:commit] == "Clear"

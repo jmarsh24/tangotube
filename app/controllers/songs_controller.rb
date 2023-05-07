@@ -1,73 +1,62 @@
 # frozen_string_literal: true
 
 class SongsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
-  # @route POST /songs (songs)
-  # @route GET /songs (songs)
   def index
-    @songs = Song.all.limit(10)
-    respond_to do |format|
-      format.html
-      format.json do
-        render json:
-        Song.search(params[:q],
-          match: :word_middle,
-          sort: :title).map { |song| {text: song.full_title, value: song.id} }
-      end
-    end
+    @songs = Song.all
+    authorize @songs
   end
 
-  # @route POST /songs/:id (song)
-  # @route GET /songs/:id (song)
   def show
+    authorize @song
   end
 
-  # @route GET /songs/new (new_song)
   def new
     @song = Song.new
+    authorize @song
   end
 
-  # @route GET /songs/:id/edit (edit_song)
-  def edit
-  end
-
-  # @route POST /songs (songs)
   def create
     @song = Song.new(song_params)
+    authorize @song
 
     if @song.save
-      redirect_to @song
+      redirect_to @song, notice: "Song was successfully created."
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
-  # @route PATCH /songs/:id (song)
-  # @route PUT /songs/:id (song)
+  def edit
+    authorize @song
+  end
+
   def update
+    authorize @song
+
     if @song.update(song_params)
-      redirect_to @song
+      redirect_to @song, notice: "Song was successfully updated."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
-  # @route DELETE /songs/:id (song)
   def destroy
+    authorize @song
     @song.destroy
-    redirect_to songs_url
+
+    redirect_to songs_url, notice: "Song was successfully destroyed."
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_song
     @song = Song.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def song_params
-    params.fetch(:song, {})
+    params.require(:song).permit(:title, :artist)
   end
 end

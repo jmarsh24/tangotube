@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class PerformancesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_performance, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_admin!, except: [:index, :show]
 
   # @route POST /performances (performances)
   # @route GET /performances (performances)
@@ -65,5 +67,12 @@ class PerformancesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def performance_params
     params.require(:performance).permit(:event_id, :date, :video_id, :videos_count, :position, :slug)
+  end
+
+  def authorize_admin!
+    unless current_user&.admin?
+      flash[:alert] = "You do not have permission to perform this action."
+      redirect_to root_path
+    end
   end
 end

@@ -51,4 +51,4 @@ scratchpad.*
 .env.production
 
 docker-config.json
-latest.dump
+*.dump

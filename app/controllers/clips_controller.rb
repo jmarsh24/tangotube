@@ -5,38 +5,31 @@ class ClipsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_video, only: [:create, :show, :edit, :update, :destroy]
 
-  # @route POST /clips (clips)
-  # @route GET /clips (clips)
-  # @route GET /videos/:video_id/clips (video_clips)
   def index
-    clips = Clip.all.includes(:video)
-    clips = clips.tagged_with(params[:tag]) if params[:tag].present?
-    clips = clips.order(created_at: :desc)
-    @clips = paginated(clips)
+    @clips = Clip.all.includes(:video).order(created_at: :desc)
+    @clips = @clips.tagged_with(params[:tag]) if params[:tag].present?
+    authorize @clips
+    @clips = paginated(@clips)
   end
 
-  # @route GET /clips/:id (clip)
-  # @route GET /videos/:video_id/clips/:id (video_clip)
   def show
+    authorize @clip
   end
 
-  # @route GET /clips/new (new_clip)
-  # @route GET /videos/:video_id/clips/new (new_video_clip)
   def new
     @clip = Clip.new
+    authorize @clip
   end
 
-  # @route GET /clips/:id/edit (edit_clip)
-  # @route GET /videos/:video_id/clips/:id/edit (edit_video_clip)
   def edit
+    authorize @clip
   end
 
-  # @route POST /clips (clips)
-  # @route POST /videos/:video_id/clips (video_clips)
   def create
     @clip = Clip.new(clip_params)
     @clip.user = current_user
     @clip.video = @video
+    authorize @clip
 
     if @clip.save
       respond_to do |format|
@@ -55,11 +48,9 @@ class ClipsController < ApplicationController
     end
   end
 
-  # @route PATCH /clips/:id (clip)
-  # @route PUT /clips/:id (clip)
-  # @route PATCH /videos/:video_id/clips/:id (video_clip)
-  # @route PUT /videos/:video_id/clips/:id (video_clip)
   def update
+    authorize @clip
+
     if @clip.update(clip_params)
       redirect_to clips_path(@clip)
     else
@@ -67,9 +58,8 @@ class ClipsController < ApplicationController
     end
   end
 
-  # @route DELETE /clips/:id (clip)
-  # @route DELETE /videos/:video_id/clips/:id (video_clip)
   def destroy
+    authorize @clip
     @clip.destroy
     respond_to do |format|
       format.html { redirect_to clips_path }
@@ -83,12 +73,10 @@ class ClipsController < ApplicationController
     @video = Video.find(params[:video_id]) if params[:video_id].present?
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_clip
     @clip = Clip.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def clip_params
     params.require(:clip).permit(:start_seconds, :end_seconds, :title, :playback_rate, :user_id, :video_id, :tag_list)
   end
