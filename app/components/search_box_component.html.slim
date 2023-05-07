@@ -1,0 +1,7 @@
+= form_with url: @form_url, local: true, method: :get, class: "stack", data: { turbo: false, controller: "form combobox", "form-url": search_search_suggestions_path, action: "invalid->form#hideValidationMessage:capture" } do |f|
+  .search_bar
+    = f.search_field :query, class: "input input__input input--search", value: @query_params[:query], placeholder: t(".search.placeholder", total_videos_count: number_with_delimiter(@total_videos_count)), autocomplete: "off", spellcheck: "false", required: true, data: { action: "focus->combobox#start input->form#submit", "combobox-target": "input", "form-target": "input" }
+    = f.button name: "", class: "button button--secondary button--search" do
+      .icon.icon--magnifying-glass
+    div id="search_results" class="search_results" target="_top" data-combobox-target="window" class="hidden" data-action="click@window->combobox#stop"
+      ul role="listbox" data-combobox-target="list"

@@ -1,0 +1,31 @@
+header.navbar.stack.stack--line.stack--justify-space-between.stack--md[data-controller="toggle"]
+  .stack.stack--inline
+    .stack.stack--line.stack--md
+      .button.icon.icon--burger.icon--md[data-action="click->navbar#toggle"]
+      a.navbar__logo href=root_path
+  .navbar__search.stack.stack--line
+    = render SearchBoxComponent.new form_url: root_path, total_videos_count: @videos_total, query_params: params.permit(:query)
+  .stack.stack--inline.stack--md.stack--justify-right
+    .navbar__item.navbar__item--links
+      .dropdown[data-controller="dropdown dark"]
+        button.button.icon.theme-icon[data-action="dropdown#toggle click@window->dropdown#hide"]
+        .menu.menu--right[data-dropdown-target="menu"]
+          .menu-item.theme-menu-item--light[data-action="click->dark#light"]
+            = t(".light_mode_link")
+          .menu-item.theme-menu-item--dark[data-action="click->dark#dark"]
+            = t(".dark_mode_link")
+          .menu-item.theme-menu-item--auto[data-action="click->dark#auto"]
+            = t(".auto_mode_link")
+      - if @current_user
+        .dropdown[data-controller="dropdown"]
+          button.button[data-action="dropdown#toggle click@window->dropdown#hide"]
+            = image_tag(avatar_url_for(@current_user), class: "avatar")
+          .menu.menu--right.hidden[data-dropdown-target="menu"]
+            .menu-item
+              = link_to edit_user_registration_path do
+                = t("edit_profile")
+            .menu-item
+              = link_to destroy_user_session_path, data: {turbo_method: :delete} do
+                = t("sign_out")
+      - else
+        = link_to t("login"), new_user_session_path, class: "button button--primary"

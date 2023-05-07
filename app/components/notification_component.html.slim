@@ -1,0 +1,4 @@
+- notifications.each do |notification|
+  .notification data-controller="dismissable"
+    .notification__message = notification[:message]
+    button.notification__close data-action="click->dismissable#hide" X

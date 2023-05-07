@@ -1,6 +1,9 @@
 search:
+  relative_roots:
+    - app/views
+    - app/components
   exclude:
     - app/assets
 ignore_unused:
-  - '*_mailer.*.subject'
+  - "*_mailer.*.subject"
   - activerecord.attributes.*

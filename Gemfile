@@ -56,6 +56,7 @@ gem "store_model"
 gem "down"
 gem "capybara"
 gem "cuprite"
+gem "view_component", require: "view_component/engine"
 
 # Assets
 gem "vite_rails"

@@ -74,22 +74,7 @@ en:
         behavior. We collect and analyze your user data to provide personalized recommendations.
         We use our own software for this service which works without a third-party
         tool.
-    drawer:
-      clips: Clips
-      explore: Explore
-      history: History
-      home: Home
-      liked: Liked
-    footer:
-      about: About
-      contact: Contact
-      google_privacy_policy: Google Privacy Policy
-      privacy: Privacy
-      terms: Terms
     navbar:
-      auto_mode_link: Auto
-      dark_mode_link: Dark
-      light_mode_link: Light
       search:
         search:
           placeholder: Search 300,000+ videos
@@ -181,6 +166,12 @@ en:
   drag_and_drop_here: Drag and drop here
   drag_here_to_upload_or_click_here_to_browse: Drag here to upload or click here to
     browse
+  drawer_component:
+    clips: Clips
+    explore: Explore
+    history: History
+    home: Home
+    liked: Liked
   dropzone_allowed_text: Dropzone allowed text
   edit: Edit
   edit_profile: Edit profile
@@ -231,9 +222,19 @@ en:
       leader_filter_placeholder: Any Leader...
       orchestra_filter_placeholder: Any orchestra...
       year_filter_placeholder: Any Year...
+  footer_component:
+    about: About
+    contact: Contact
+    google_privacy_policy: Google privacy policy
+    privacy: Privacy
+    terms: Terms
   group_by_heading: Group by
   loading_spinner: Loading spinner
   login: Login
+  navigation_bar_component:
+    auto_mode_link: Auto mode link
+    dark_mode_link: Dark mode link
+    light_mode_link: Light mode link
   orchestra_videos_count: Orchestra videos count
   orchestras:
     edit:
@@ -280,6 +281,9 @@ en:
   posted_time_ago: Posted time ago
   results: Results
   search: Search
+  search_box_component:
+    search:
+      placeholder: Search 300,000+ videos
   show: Show
   show_link: Show link
   sign_out: Sign out

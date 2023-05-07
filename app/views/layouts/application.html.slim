@@ -2,9 +2,10 @@ doctype html
 html lang=I18n.locale
   = render "components/head"
   body.grid.grid--holy-grail data-controller="navbar" data-theme="dark" class=Rails.env
-    = render "components/navbar"
-    = render "components/drawer"
+    = render NavigationBarComponent.new current_user
+    = render DrawerComponent.new user_signed_in: user_signed_in?
     main.grid.grid--main
+      = render NotificationComponent.new flash: 
       = yield
-    = render "components/footer"
+    = render FooterComponent.new
     = render "components/cookie_consent"

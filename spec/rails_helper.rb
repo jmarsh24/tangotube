@@ -23,6 +23,8 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Warden::Test::Helpers
+  config.include ViewComponent::TestHelpers, type: :component
+  config.include Rails.application.routes.url_helpers
 
   config.fixture_path = Rails.root.join("spec/fixtures")
   config.use_transactional_fixtures = true

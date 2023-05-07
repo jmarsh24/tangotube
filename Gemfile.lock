@@ -775,6 +775,7 @@ DEPENDENCIES
   streamio-ffmpeg
   translate_client
   turbo-rails
+  view_component
   vite_rails
   web-console
   webmock
