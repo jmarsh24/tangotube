@@ -25,11 +25,20 @@ export default class extends Controller {
   }
 
   private onChange(event: InputEvent): void {
+    const filteringField = event.target.form.querySelector(
+      'input[name="filtering"]'
+    );
+
+    if (filteringField.value == 'true') {
+      filteringField.disabled = true;
+    }
+
     Array.from(event.target.form.elements).forEach((element) => {
       if (element.value == '') {
         element.disabled = true;
       }
     });
+
     (event.target as HTMLInputElement).form.requestSubmit();
   }
 }

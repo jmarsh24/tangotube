@@ -263,4 +263,12 @@ class Video < ApplicationRecord
   def featured?
     featured
   end
+
+  def thumbnail_url
+    if thumbnail.present?
+      thumbnail
+    else
+      "https://i.ytimg.com/vi/#{youtube_id}/hqdefault.jpg"
+    end
+  end
 end
