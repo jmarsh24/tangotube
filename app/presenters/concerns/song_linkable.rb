@@ -34,7 +34,7 @@ module SongLinkable
 
     format_song_attributes(
       metadata.music.acr_song_title,
-      titleize_artist_name(metadata.music.acr_artist_names),
+      titleize_artist_name(metadata.music.acr_artist_names.first),
       metadata.music.genre&.titleize
     )
   end
@@ -50,11 +50,11 @@ module SongLinkable
   end
 
   def youtube_song_attributes
-    return if metadata.music.youtube.song.titles.blank? || metadata.music.youtube.song.artist.blank?
+    return if metadata.youtube.song.titles.blank? || metadata.youtube.song.artist.blank?
 
     format_song_attributes(
-      metadata.music.youtube.song.titles.first,
-      titleize_artist_name(metadata.music.youtube.song.artist),
+      metadata.youtube.song.titles.first,
+      titleize_artist_name(metadata.youtube.song.artist),
       metadata.music.genre&.titleize
     )
   end
