@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CouplesPolicy < ApplicationPolicy
+class CouplePolicy < ApplicationPolicy
   def index?
     true
   end

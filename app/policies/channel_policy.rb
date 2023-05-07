@@ -1,86 +1,33 @@
 # frozen_string_literal: true
 
-class ChannelsController < ApplicationController
-  before_action :set_channel, only: [:show, :edit, :update, :destroy, :deactivate]
-  before_action :authenticate_user!, except: [:index, :show]
-
-  # @route GET /channels (channels)
-  def index
-    @channels = Channel.order(:id).all.limit(10)
-    authorize @channels
+class ChannelPolicy < ApplicationPolicy
+  def index?
+    true
   end
 
-  # @route GET /channels/:id (channel)
-  def show
-    authorize @channel
+  def show?
+    true
   end
 
-  # @route GET /channels/new (new_channel)
-  def new
-    @channel = Channel.new
-    authorize @channel
+  def create?
+    user_signed_in?
   end
 
-  # @route GET /channels/:id/edit (edit_channel)
-  def edit
-    authorize @channel
+  def update?
+    user_signed_in? && @record.user == current_user
   end
 
-  # @route POST /channels (channels)
-  def create
-    @channel = Channel.new(channel_params)
-    @channel.user = current_user
-    authorize @channel
+  def destroy?
+    user_signed_in? && @record.user == current_user
+  end
 
-    if @channel.save
-      fetch_new_channel
-      redirect_to @channel
-    else
-      render :new, status: :unprocessable_entity
+  def deactivate?
+    user_signed_in? && @record.user == current_user
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
     end
-  end
-
-  # @route PATCH /channels/:id (channel)
-  # @route PUT /channels/:id (channel)
-  def update
-    authorize @channel
-
-    if @channel.update(channel_params)
-      redirect_to @channel
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  # @route DELETE /channels/:id (channel)
-  def destroy
-    authorize @channel
-    @channel.destroy
-    redirect_to channels_url
-  end
-
-  # @route POST /channels/:channel_id/deactivate (channel_deactivate)
-  def deactivate
-    authorize @channel
-    @channel.active = false
-    @channel.save
-    DestroyAllChannelVideosJob.perform_later(@channel.channel_id)
-    redirect_to root_path(channel: @channel.channel_id)
-  end
-
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_channel
-    @channel = Channel.find_by(channel_id: channel_params[:channel_id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def channel_params
-    params.require(:channel).permit(:channel_id, :channel, :id)
-  end
-
-  def fetch_new_channel
-    ImportChannelJob.perform_later(@channel.channel_id)
   end
 end
