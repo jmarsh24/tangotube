@@ -50,7 +50,7 @@ module SongLinkable
   end
 
   def youtube_song_attributes
-    return if metadata.youtube.song.titles.blank? || metadata.youtube.song.artist.blank?
+    return if metadata.music.youtube.song.titles.blank? || metadata.music.youtube.song.artist.blank?
 
     format_song_attributes(
       metadata.music.youtube.song.titles.first,
