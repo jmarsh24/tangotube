@@ -9,7 +9,7 @@
               = image_tag video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 178, height: 100
           - else
             .video-card__image.video-card--compact__image data-duration="#{video.decorate.hd_duration_data}"
-              = link_to watch_path(v: video.youtube_id), { 'data-turbo-frame': "_top" } do
+              = link_to watch_path(v: video.youtube_id) do
                 = image_tag video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 178, height: 100
           .stack.stack--xxxs
             .stack.stack--line
@@ -20,10 +20,10 @@
             div
               - if video.decorate.song_link.present?
                 = video.decorate.song_link
-            = link_to video.event.title.titleize, root_path(event_id: video.event.id), { 'data-turbo-frame': "_top" } if video.event.present?
+            = link_to video.event.title.titleize, root_path(event_id: video.event.id) if video.event.present?
             .stack.stack--line.stack--xxxs
               = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id), { 'data-turbo-frame': "_top" } if video.channel.thumbnail_url.present?
-              = link_to video.channel.title, root_path(channel: video.channel.channel_id), { class: "video-card__channel__title", 'data-turbo-frame': "_top" } if video.channel.title.present?
+              = link_to video.channel.title, root_path(channel: video.channel.channel_id), { class: "video-card__channel__title" } if video.channel.title.present?
             .stack.stack--line
               = video.decorate.display_metadata
     - if videos.size > 3

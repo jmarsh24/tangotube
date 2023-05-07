@@ -3,9 +3,9 @@
 module SongLinkable
   def song_link
     if song.present?
-      link_to song.full_title, root_path(song: song.slug), "data-turbo-frame": "_top"
+      link_to song.full_title, root_path(song: song.slug)
     elsif external_song_attributes.present?
-      link_to external_song_attributes, root_path(query: song_query_param), "data-turbo-frame": "_top"
+      link_to external_song_attributes, root_path(query: song_query_param)
     end
   end
 

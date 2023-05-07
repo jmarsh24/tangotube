@@ -1,6 +1,6 @@
 - cache_if !video.hidden?, ["video", video.youtube_id] do
   .video-card.stack.stack--xxxs id="video_#{video.youtube_id}"
-    = link_to watch_path(v: video.youtube_id), { "data-turbo-frame": "_top" } do
+    = link_to watch_path(v: video.youtube_id) do
       .video-card__image data-duration="#{video.decorate.hd_duration_data}"
         - if video.performance.present?
           .card__performance-number
@@ -10,7 +10,7 @@
       .stack.stack--line.stack--xxxs
         - video.dancer_videos.each do |dv|
           - link = dv.role == "leader" ? root_path(leader: dv.dancer.name.to_param) : root_path(follower: dv.dancer.name.to_param)
-          = link_to link, class: "tag tag--sm", "data-turbo-frame": "_top" do
+          = link_to link, class: "tag tag--sm" do
             = dv.dancer.name
       - if video.decorate.song_link.present?
         .stack.stack--line.stack--xxxs
@@ -18,10 +18,10 @@
       - if video.event.present?
         .stack.stack--line.stack--xxxs
           - if video.event.title.present?
-            = link_to video.event.title.titleize, root_path(event: video.event.slug), class: "tag tag--sm", "data-turbo-frame": "_top"
+            = link_to video.event.title.titleize, root_path(event: video.event.slug), class: "tag tag--sm"
       .stack.stack--line.stack--xxs
         - if video.channel.thumbnail.present? || video.channel.thumbnail_url.present?
           = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), video.channel.title.present? ? root_path(channel: video.channel.channel_id) : "#", { "data-turbo-frame": "_top" }
         - if video.channel.title.present?
-          = link_to video.channel.title, root_path(channel: video.channel.channel_id), "data-turbo-frame": "_top"
+          = link_to video.channel.title, root_path(channel: video.channel.channel_id)
       = video.decorate.display_metadata
