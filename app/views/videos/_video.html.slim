@@ -12,7 +12,7 @@
           - link = dv.role == "leader" ? root_path(leader: dv.dancer.name.to_param) : root_path(follower: dv.dancer.name.to_param)
           = link_to link, class: "tag tag--sm", "data-turbo-frame": "_top" do
             = dv.dancer.name
-      - if video.display.any_song_attributes.present?
+      - if video.decorate.song_link.present?
         .stack.stack--line.stack--xxxs
           = video.decorate.song_link
       - if video.event.present?
