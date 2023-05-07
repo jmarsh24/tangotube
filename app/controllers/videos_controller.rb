@@ -85,6 +85,7 @@ class VideosController < ApplicationController
     set_recommended_videos
   end
 
+  # @route POST /videos (videos)
   def create
     authorize Video
     @video = Video.create(youtube_id: params[:video][:youtube_id])
@@ -112,6 +113,7 @@ class VideosController < ApplicationController
     end
   end
 
+  # @route DELETE /videos/:id (video)
   def destroy
     authorize @video
     @video.destroy

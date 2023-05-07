@@ -5,16 +5,19 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_commentable
 
+  # @route GET /comments/:id (comment)
   def show
     @comment = Comment.find(params[:id])
     authorize @comment
   end
 
+  # @route GET /comments/:id/edit (edit_comment)
   def edit
     @comment = Comment.find(params[:id])
     authorize @comment
   end
 
+  # @route POST /comments (comments)
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
@@ -29,6 +32,8 @@ class CommentsController < ApplicationController
     end
   end
 
+  # @route PATCH /comments/:id (comment)
+  # @route PUT /comments/:id (comment)
   def update
     @comment = Comment.find(params[:id])
     authorize @comment
@@ -40,6 +45,7 @@ class CommentsController < ApplicationController
     end
   end
 
+  # @route DELETE /comments/:id (comment)
   def destroy
     @comment = Comment.find(params[:id])
     authorize @comment

@@ -4,6 +4,8 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authorize_event, only: [:new, :create, :edit, :update, :destroy]
 
+  # @route POST /events (events)
+  # @route GET /events (events)
   def index
     events = Event.all.order(videos_count: :desc)
     events = if params[:q].present?
@@ -21,6 +23,8 @@ class EventsController < ApplicationController
     end
   end
 
+  # @route POST /events/:id (event)
+  # @route GET /events/:id (event)
   def show
     videos = @event.videos
     @pagy, @videos = pagy(videos, items: 12)
@@ -30,13 +34,16 @@ class EventsController < ApplicationController
     end
   end
 
+  # @route GET /events/new (new_event)
   def new
     @event = Event.new
   end
 
+  # @route GET /events/:id/edit (edit_event)
   def edit
   end
 
+  # @route POST /events (events)
   def create
     @event = Event.create(event_params)
 
@@ -48,6 +55,8 @@ class EventsController < ApplicationController
     end
   end
 
+  # @route PATCH /events/:id (event)
+  # @route PUT /events/:id (event)
   def update
     if @event.update(event_params)
       redirect_to @event
@@ -56,6 +65,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # @route DELETE /events/:id (event)
   def destroy
     @event.destroy
     redirect_to events_url
