@@ -1,25 +1,6 @@
 # frozen_string_literal: true
 
 module VideosHelper
-  def formatted_view_count(view_count)
-    number_to_human(
-      view_count,
-      format: "%n%u",
-      precision: 2,
-      units: {
-        thousand: "K",
-        million: "M",
-        billion: "B"
-      }
-    )
-  end
-
-  def formatted_performance_date(performance_date)
-    return if performance_date.blank?
-
-    performance_date.strftime("%B %Y")
-  end
-
   def link_to_query(external_song_attributes)
     link_to external_song_attributes, root_path(query: external_song_attributes.gsub(/\s-\s/, " ")),
       "data-turbo-frame": "_top", class: "tag tag--sm"
@@ -58,22 +39,6 @@ module VideosHelper
 
   def formatted_metadata(video)
     "#{formatted_performance_date(video.metadata.youtube.upload_date)} • #{formatted_view_count(video.metadata.youtube.view_count)} views • #{formatted_view_count(video.metadata.youtube.like_count)} likes"
-  end
-
-  def performance_number(video)
-    if video.performance.present?
-      "#{video.performance_video.position} / #{video.performance.videos_count}"
-    end
-  end
-
-  def hd_duration_data(video)
-    return if video.metadata.youtube.duration.blank?
-
-    if video.metadata.youtube.hd?
-      "HD #{Time.at(video&.metadata&.youtube&.duration).utc.strftime("%M:%S")}"
-    else
-      Time.at(video&.metadata&.youtube&.duration).utc.strftime("%M:%S")
-    end
   end
 
   def channel_title(video)

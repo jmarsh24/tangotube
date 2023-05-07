@@ -1,10 +1,10 @@
 - cache_if !video.hidden?, ["video", video.youtube_id] do
   .video-card.stack.stack--xxxs id="video_#{video.youtube_id}"
     = link_to watch_path(v: video.youtube_id), { "data-turbo-frame": "_top" } do
-      .video-card__image data-duration="#{hd_duration_data(video)}"
+      .video-card__image data-duration="#{video.decorate.hd_duration_data}"
         - if video.performance.present?
           .card__performance-number
-            = performance_number video
+            = video.decorate.performance_number
         = image_tag(video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 385, height: 216)
     .stack.stack--xxxs
       .stack.stack--line.stack--xxxs
@@ -14,7 +14,7 @@
             = dv.dancer.name
       - if video.display.any_song_attributes.present?
         .stack.stack--line.stack--xxxs
-          = link_to_song(video)
+          = video.decorate.song_link
       - if video.event.present?
         .stack.stack--line.stack--xxxs
           - if video.event.title.present?
@@ -24,4 +24,4 @@
           = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), video.channel.title.present? ? root_path(channel: video.channel.channel_id) : "#", { "data-turbo-frame": "_top" }
         - if video.channel.title.present?
           = link_to channel_title(video), root_path(channel: video.channel.channel_id), "data-turbo-frame": "_top"
-      = formatted_metadata(video)
+      = video.decorate.display_metadata
