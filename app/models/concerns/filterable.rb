@@ -4,10 +4,10 @@ module Filterable
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def filter_by(filtering_params, user)
+    def filter_by(filtering_params)
       results = where(nil)
       filtering_params.each do |key, value|
-        results = results.public_send("filter_by_#{key}", value, user)
+        results = results.public_send("filter_by_#{key}", value)
       end
       results
     end
