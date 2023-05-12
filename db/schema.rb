@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_05_07_154044) do
+ActiveRecord::Schema[7.1].define(version: 2023_05_07_172355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_trgm"
@@ -301,7 +301,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_07_154044) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "youtube_id", null: false
-    t.date "upload_date"
     t.bigint "song_id"
     t.bigint "channel_id"
     t.boolean "hidden", default: false
@@ -312,13 +311,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_07_154044) do
     t.text "index"
     t.jsonb "metadata"
     t.datetime "imported_at"
+    t.date "upload_date"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"
     t.index ["hidden"], name: "index_videos_on_hidden"
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
-    t.index ["upload_date"], name: "index_videos_on_upload_date"
     t.index ["youtube_id"], name: "index_videos_on_youtube_id", unique: true
   end
 

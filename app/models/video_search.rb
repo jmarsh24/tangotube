@@ -44,6 +44,32 @@ class VideoSearch
     @songs ||= facet("songs.title", :song)
   end
 
+  def paginated_videos(page, per_page:)
+    videos.page(page).without_count.per(per_page)
+  end
+
+  def has_more_pages?(videos)
+    !videos.next_page.nil?
+  end
+
+  def next_page(videos)
+    videos.next_page
+  end
+
+  def featured_videos(limit)
+    Video.includes(Video.search_includes)
+      .featured
+      .limit(limit)
+      .order("random()")
+  end
+
+  def paginated_videos(page, per_page)
+    Video.includes(Video.search_includes)
+      .order(ordering_params)
+      .page(page)
+      .per(per_page)
+  end
+
   private
 
   def ordering_params

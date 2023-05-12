@@ -7,6 +7,9 @@ class VideosController < ApplicationController
   before_action :check_for_clear, only: [:index]
   before_action :authorize_admin!, except: [:index, :show]
 
+  before_action :set_video, except: [:index, :create, :destroy]
+  before_action :authorize_admin!, except: [:index, :show, :create, :destroy]
+
   helper_method :filtering_params, :sorting_params
 
   # @route GET /videos (videos)
@@ -14,41 +17,17 @@ class VideosController < ApplicationController
   # @route GET / (root)
   def index
     video_search = VideoSearch.new(filtering_params:, sorting_params:)
-    videos = video_search.videos
+    @current_page = video_params[:page]&.to_i || 1
+    @videos = video_search.paginated_videos(@current_page, 12)
+    @has_more_pages = video_search.has_more_pages?(@videos)
+
+    load_facets(video_search) if @current_page == 1
 
     if filtering_params.empty? && sorting_params.empty?
-      @featured_videos =
-        video_search.videos
-          .featured
-          .limit(24)
-          .order("random()")
+      @featured_videos = video_search.featured_videos(24)
     end
 
-    @current_page = video_params[:page]&.to_i || 1
-    scope = videos.page(@current_page).without_count.per(12)
-    @has_more_pages = !scope.next_page.nil? unless @has_more_pages == true
-
-    if @current_page == 1
-      @genres = video_search.genres
-      @leaders = video_search.leaders
-      @followers = video_search.followers
-      @orchestras = video_search.orchestras
-      @years = video_search.years
-    end
-
-    if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
-      url = request.fullpath.gsub("&filtering=true", "").gsub("&pagination=true", "").gsub("filtering=true", "")
-      ui.replace "filters-bar", with: "filters/filters", genres: @genres, leaders: @leaders, followers: @followers, orchestras: @orchestras, years: @years
-      ui.run_javascript "Turbo.navigator.history.push('#{url}')"
-      ui.run_javascript "history.pushState({}, '', '#{url}')"
-      ui.run_javascript "window.onpopstate = function () {Turbo.visit(document.location)}"
-      ui.replace "videos", with: "videos/videos", items: scope, partial: params[:partial]
-    end
-    if @current_page > 1 && video_params[:pagination] == "true"
-      ui.remove "next-page-link"
-      ui.append "pagination-frame", with: "components/pagination", items: scope, partial: params[:partial]
-    end
-    @videos = scope
+    handle_filtering_and_pagination(video_search) if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
   end
 
   # @route GET /videos/:id (video)
@@ -99,14 +78,11 @@ class VideosController < ApplicationController
   def update
     authorize @video
     @clip = Clip.new
+
     respond_to do |format|
       if @video.update(video_params)
-        format.turbo_stream do
-          render "videos/show", video: @video
-        end
-        format.html do
-          render partial: "videos/show/video_info_details", video: @video
-        end
+        format.turbo_stream { render "videos/show", video: @video }
+        format.html { render partial: "videos/show/video_info_details", video: @video }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -160,6 +136,32 @@ class VideosController < ApplicationController
 
   private
 
+  def load_facets(video_search)
+    @genres = video_search.genres
+    @leaders = video_search.leaders
+    @followers = video_search.followers
+    @orchestras = video_search.orchestras
+    @years = video_search.years
+  end
+
+  def handle_filtering_and_pagination(video_search)
+    url = request.fullpath.gsub(/&?(filtering|pagination)=true/, "")
+    replace_filters_bar(url)
+    update_video_list(video_search, url)
+    append_pagination(video_search, url) if @current_page > 1 && video_params[:pagination] == "true"
+  end
+
+  def update_video_list(video_search, url)
+    @videos = video_search.paginated_videos(@current_page, per_page: 12)
+    ui.replace "videos", with: "videos/videos", items: @videos, partial: params[:partial]
+    ui.remove "next-page-link" if @current_page > 1 && video_params[:pagination] == "true"
+  end
+
+  def append_pagination(video_search, url)
+    next_page = video_search.next_page(@videos)
+    ui.append "pagination-frame", with: "components/pagination", items: @videos, partial: params[:partial], next_page:
+  end
+
   def authorize_admin!
     authorize :admin, :access?
   end
@@ -174,6 +176,13 @@ class VideosController < ApplicationController
     @video = Video.includes(Video.search_includes).find_by(youtube_id: video_params[:v]) if video_params[:v]
     @video = Video.includes(Video.search_includes).find_by(youtube_id: video_params[:id]) if video_params[:id]
     @video = Video.find_by(youtube_id: video_params[:video_id]) if video_params[:video_id]
+  end
+
+  def fetch_video_if_nil
+    return unless @video.nil?
+
+    ExternalVideoImport::Importer.new.import(video_params[:v])
+    @video = Video.find_by(youtube_id: video_params[:v])
   end
 
   def set_recommended_videos
