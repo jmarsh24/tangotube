@@ -5,7 +5,7 @@ RSpec.describe VideoSearch do
 
   let(:filtering_params) { {genre: "tango"} }
 
-  let(:sorting_params) { {sort: "popularity", direction: "desc"} }
+  let(:sorting_params) { {sort: "videos.popularity", direction: "desc"} }
 
   describe "#videos" do
     it "returns filtered and sorted videos" do

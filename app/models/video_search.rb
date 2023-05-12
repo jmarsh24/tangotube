@@ -9,7 +9,7 @@ class VideoSearch
     "videos.upload_date"
   ].freeze
 
-  def initialize(filtering_params:, sorting_params:)
+  def initialize(filtering_params: nil, sorting_params: {sort: "videos.popularity", direction: "desc"})
     @filtering_params = filtering_params
     @sorting_params = sorting_params
   end
@@ -73,13 +73,7 @@ class VideoSearch
   private
 
   def ordering_params
-    if filtering_params.empty? && sorting_params.empty?
-      "RANDOM()"
-    else
-      sort_column = SEARCHABLE_COLUMNS.include?(sorting_params[:sort]) ? sorting_params[:sort] : "videos.popularity"
-      sort_direction = ["asc", "desc"].include?(sorting_params[:direction]) ? sorting_params[:direction] : "desc"
-      "#{sort_column} #{sort_direction}"
-    end
+    "#{sorting_params[:sort]} #{sorting_params[:direction]}"
   end
 
   def filtered_videos
