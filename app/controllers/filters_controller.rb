@@ -16,10 +16,9 @@ class FiltersController < ApplicationController
 
   def videos_search
     @videos_search ||=
-      Video::Search.for(filtering_params:,
+      VideoSearch.for(filtering_params:,
         sorting_params: nil,
-        page: nil,
-        user: current_user)
+        page: nil)
   end
 
   def genres
