@@ -9,38 +9,21 @@ class VideoSearch
     "videos.upload_date"
   ].freeze
 
+  FACETS = [:leaders, :followers, :orchestras, :genres, :years, :songs].freeze
+
   def initialize(filtering_params: {}, sorting_params: {sort: "videos.popularity", direction: "desc"})
     @filtering_params = filtering_params
     @sorting_params = sorting_params
   end
 
+  FACETS.each do |facet|
+    define_method(facet) do
+      instance_variable_get("@#{facet}") || instance_variable_set("@#{facet}", send("facet_#{facet}"))
+    end
+  end
+
   def videos
-    filtered_videos
-      .order(ordering_params)
-  end
-
-  def leaders
-    @leaders ||= facet("dancers.name", {dancer_videos: :dancer}, role: :leader)
-  end
-
-  def followers
-    @followers ||= facet("dancers.name", {dancer_videos: :dancer}, role: :follower)
-  end
-
-  def orchestras
-    @orchestras ||= facet("songs.artist", :song)
-  end
-
-  def genres
-    @genres ||= facet("songs.genre", :song)
-  end
-
-  def years
-    @years ||= facet_on_column("upload_date", "year")
-  end
-
-  def songs
-    @songs ||= facet("songs.title", :song)
+    filtered_videos.order(ordering_params)
   end
 
   def paginated_videos(page, per_page:)
@@ -56,10 +39,7 @@ class VideoSearch
   end
 
   def featured_videos(limit)
-    Video.includes(Video.search_includes)
-      .featured
-      .limit(limit)
-      .order("random()")
+    Video.includes(Video.search_includes).featured.limit(limit).order("random()")
   end
 
   private
@@ -70,72 +50,32 @@ class VideoSearch
 
   def filtered_videos
     videos = Video.joins(Video.search_includes)
-
-    videos = filter_by_channel(videos)
-    videos = filter_by_event_id(videos)
-    videos = filter_by_leader(videos)
-    videos = filter_by_follower(videos)
-    videos = filter_by_song_id(videos)
-    videos = filter_by_song(videos)
-    videos = filter_by_genre(videos)
-    videos = filter_by_upload_year(videos)
+    filtering_params.each do |key, value|
+      videos = send("filter_by_#{key}", videos, value) if value.present?
+    end
     videos.distinct
   end
 
-  def filter_by_genre(videos)
-    genre = filtering_params[:genre]
-    return videos unless genre.present?
-
-    videos.where("songs.genre ILIKE ?", genre)
+  [:channel, :event_id, :song_id].each do |method|
+    define_method("filter_by_#{method}") do |videos, value|
+      videos.where(method => value)
+    end
   end
 
-  def filter_by_channel(videos)
-    channel_id = filtering_params[:channel_id]
-    return videos unless channel_id.present?
-
-    videos.where(channel_id:)
+  [:leader, :follower].each do |method|
+    define_method("filter_by_#{method}") do |videos, value|
+      videos.where(dancer_videos: {role: DancerVideo.roles[method]}).where("dancers.name ILIKE ?", value)
+    end
   end
 
-  def filter_by_event_id(videos)
-    event_id = filtering_params[:event_id]
-    return videos unless event_id.present?
-
-    videos.where(event_id:)
+  [:genre, :song].each do |method|
+    define_method("filter_by_#{method}") do |videos, value|
+      videos.where("songs.#{method} ILIKE ?", value)
+    end
   end
 
-  def filter_by_leader(videos)
-    leader_name = filtering_params[:leader]
-    return videos unless leader_name.present?
-
-    videos.where(dancer_videos: {role: DancerVideo.roles[:leader]}).where("dancers.name ILIKE ?", leader_name)
-  end
-
-  def filter_by_follower(videos)
-    follower_name = filtering_params[:follower]
-    return videos unless follower_name.present?
-
-    videos.where(dancer_videos: {role: DancerVideo.roles[:follower]}).where("dancers.name ILIKE ?", follower_name)
-  end
-
-  def filter_by_song_id(videos)
-    song_id = filtering_params[:song_id]
-    return videos unless song_id.present?
-
-    videos.where(song_id:)
-  end
-
-  def filter_by_song(videos)
-    song_name = filtering_params[:song]
-    return videos unless song_name.present?
-
-    videos.where("songs.title ILIKE ?", song_name)
-  end
-
-  def filter_by_upload_year(videos)
-    year = filtering_params[:year]
-    return videos unless year.present?
-
-    videos.where("extract(year from upload_date) = ?", year.to_i)
+  def filter_by_year(videos, value)
+    videos.where("extract(year from upload_date) = ?", value.to_i)
   end
 
   def select_facet_counts(query, videos, table_column)
@@ -145,10 +85,34 @@ class VideoSearch
       .load_async
   end
 
+  def facet_leaders
+    facet("dancers.name", {dancer_videos: :dancer}, role: :leader)
+  end
+
+  def facet_followers
+    facet("dancers.name", {dancer_videos: :dancer}, role: :follower)
+  end
+
+  def facet_orchestras
+    facet("songs.artist", :song)
+  end
+
+  def facet_genres
+    facet("songs.genre", :song)
+  end
+
+  def facet_years
+    facet_on_column("upload_date", "year")
+  end
+
+  def facet_songs
+    facet("songs.title", :song)
+  end
+
   def facet(table_column, model, role: nil)
     query = "#{table_column} AS facet_value, COUNT(DISTINCT videos.id) AS occurrences"
     videos = filtered_videos.joins(model)
-    videos = videos.merge(Video.where(dancer_videos: {role:})) if role.present?
+    videos = videos.where(dancer_videos: {role:}) if role.present?
     counts = select_facet_counts(query, videos, table_column)
     format_facet_counts(counts, table_column)
   end
