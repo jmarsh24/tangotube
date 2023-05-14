@@ -18,7 +18,7 @@ class VideosController < ApplicationController
   def index
     video_search = VideoSearch.new(filtering_params:, sorting_params:)
     @current_page = video_params[:page]&.to_i || 1
-    @videos = video_search.paginated_videos(@current_page, 12)
+    @videos = video_search.paginated_videos(@current_page, per_page: 12)
     @has_more_pages = video_search.has_more_pages?(@videos)
 
     load_facets(video_search) if @current_page == 1

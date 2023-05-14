@@ -96,17 +96,6 @@ class Video < ApplicationRecord
       .where.not(youtube_id: video.youtube_id)
   }
 
-  # Combined Scopes
-
-  scope :title_match_missing_leader,
-    ->(leader_name) {
-      missing_leader.with_dancer_name_in_title(leader_name)
-    }
-  scope :title_match_missing_follower,
-    ->(follower_name) {
-      missing_follower.with_dancer_name_in_title(follower_name)
-    }
-
   class << self
     def index_query
       <<~SQL.squish
@@ -160,18 +149,6 @@ class Video < ApplicationRecord
         :performance,
         thumbnail_attachment: :blob
       ]
-    end
-
-    def with_dancer_name_in_title(name)
-      where("unaccent(title) ILIKE unaccent(?)", "%#{name}%")
-    end
-
-    def filter_by_dancer(name, _user)
-      if name == "true"
-        joins(:dancers)
-      else
-        joins(:dancers).where("dancers.slug ILIKE ?", name)
-      end
     end
 
     def filter_by_watched(boolean, user)

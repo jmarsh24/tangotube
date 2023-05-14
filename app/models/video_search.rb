@@ -107,14 +107,18 @@ class VideoSearch
     leader_name = filtering_params[:leader]
     return videos unless leader_name.present?
 
-    videos.joins(:dancer).where(id: DancerVideo.with_role(:leader).joins(:dancer).where("dancers.name ILIKE ?", leader_name).select(:video_id))
+    videos.joins(dancer_videos: :dancer)
+      .where(dancer_videos: {role: DancerVideo.roles[:leader]})
+      .where("dancers.name ILIKE ?", leader_name)
   end
 
   def filter_by_follower(videos)
     follower_name = filtering_params[:follower]
     return videos unless follower_name.present?
 
-    videos.join(:dancers).where(id: DancerVideo.with_role(:follower).joins(:dancer).where("dancers.name ILIKE ?", leader_name).select(:video_id))
+    videos.joins(dancer_videos: :dancer)
+      .where(dancer_videos: {role: DancerVideo.roles[:follower]})
+      .where("dancers.name ILIKE ?", follower_name)
   end
 
   def filter_by_song_id(videos)
@@ -160,7 +164,7 @@ class VideoSearch
   end
 
   def format_facet_counts(counts, table_column)
-    counts.map do |c|
+    counts.order("occurrences DESC").map do |c|
       facet_value = c.facet_value.to_s.downcase.tr(" ", "-")
       [format_facet_value(c.facet_value, c.occurrences).to_s, facet_value]
     end
