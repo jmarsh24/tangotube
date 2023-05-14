@@ -46,11 +46,11 @@ RSpec.describe VideoSearch do
           ["Vals (1)", "vals"]
         ],
         years: [
-          ["2013 (4)", "2013"],
-          ["2014 (4)", "2014"],
-          ["2018 (4)", "2018"],
-          ["2020 (8)", "2020"],
-          ["2021 (4)", "2021"]
+          ["2013 (1)", "2013"],
+          ["2014 (1)", "2014"],
+          ["2018 (1)", "2018"],
+          ["2020 (2)", "2020"],
+          ["2021 (1)", "2021"]
         ],
         songs: [
           ["Cuando El Amor Muere (1)", "cuando-el-amor-muere"],
@@ -70,6 +70,19 @@ RSpec.describe VideoSearch do
 
         expect(result).to contain_exactly(*expected_values)
       end
+    end
+
+    it "returns facet values when filtering for a year" do
+      filtering_params = {year: "2020"}
+
+      result = VideoSearch.new(filtering_params:, sorting_params:)
+
+      expect(result.years).to contain_exactly(["2020 (2)", "2020"])
+      expect(result.leaders).to contain_exactly(["Corina Herrera (1)", "corina-herrera"], ["Gianpiero Ya Galdi (1)", "gianpiero-ya-galdi"])
+      expect(result.followers).to contain_exactly(["Inez Muzzopapa (1)", "inez-muzzopapa"], ["Lorena Tarrantino (1)", "lorena-tarrantino"])
+      expect(result.orchestras).to contain_exactly(["Juan D'Arienzo (2)", "juan-d'arienzo"])
+      expect(result.songs).to contain_exactly(["Milonga Querida (1)", "milonga-querida"], ["Nueve De Julio (1)", "nueve-de-julio"])
+      expect(result.genres).to contain_exactly(["Milonga (1)", "milonga"], ["Tango (1)", "tango"])
     end
   end
 end

@@ -50,30 +50,6 @@ class Video < ApplicationRecord
 
   has_one_attached :thumbnail
 
-  scope :filter_by_orchestra, ->(song_artist) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist) }
-  scope :filter_by_genre, ->(song_genre) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
-  scope :with_leader, ->(dancer) {
-    where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id))
-  }
-  scope :with_follower, ->(dancer) {
-  }
-  scope :filter_by_leader, ->(dancer_name) {
-    with_leader(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
-  }
-  scope :filter_by_follower, ->(dancer_name) {
-    with_follower(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
-  }
-  scope :filter_by_couples, ->(couple_name) {
-    where(id: CoupleVideo.joins(:couple).where(couple: {slug: couple_name}).select(:video_id))
-  }
-  scope :filter_by_channel, ->(channel_id) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
-  scope :filter_by_event_id, ->(event_id) { where(event_id:) }
-  scope :filter_by_event, ->(event_slug) { joins(:event).where("events.slug ILIKE ?", event_slug) }
-  scope :filter_by_song_id, ->(song_id) { where(song_id:) }
-  scope :filter_by_song, ->(song_slug) { joins(:song).where("songs.slug ILIKE ?", song_slug) }
-  scope :filter_by_hd, ->(boolean) { where(hd: boolean) }
-  scope :filter_by_year, ->(year) { where("extract(year from performance_date) = ?", year) }
-  scope :filter_by_upload_year, ->(year) { where("extract(year from upload_date) = ?", year) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :featured, -> { where(featured: true) }

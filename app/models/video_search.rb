@@ -78,8 +78,8 @@ class VideoSearch
     videos = filter_by_song_id(videos)
     videos = filter_by_song(videos)
     videos = filter_by_genre(videos)
+    videos = filter_by_upload_year(videos)
     videos.distinct
-    # filter_by_upload_year(videos)
   end
 
   def filter_by_genre(videos)
@@ -154,7 +154,7 @@ class VideoSearch
   end
 
   def facet_on_column(table_column, facet_column)
-    query = "extract(#{facet_column} from #{table_column})::int AS facet_value, count(#{table_column}) AS occurrences"
+    query = "extract(#{facet_column} from #{table_column})::int AS facet_value, count(DISTINCT videos.id) AS occurrences"
     counts = filtered_videos.select(query).group("facet_value").having("count(#{table_column}) > 0").load_async
     format_facet_counts(counts, "facet_value")
   end
