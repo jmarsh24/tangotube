@@ -56,7 +56,6 @@ class Video < ApplicationRecord
     where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id))
   }
   scope :with_follower, ->(dancer) {
-    where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id))
   }
   scope :filter_by_leader, ->(dancer_name) {
     with_leader(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
