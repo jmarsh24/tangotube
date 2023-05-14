@@ -69,7 +69,7 @@ class VideoSearch
   end
 
   def filtered_videos
-    videos = Video.joins(Video.search_includes).distinct
+    videos = Video.joins(Video.search_includes)
 
     videos = filter_by_channel(videos)
     videos = filter_by_event_id(videos)
@@ -86,39 +86,35 @@ class VideoSearch
     genre = filtering_params[:genre]
     return videos unless genre.present?
 
-    videos.joins(:song).where("songs.genre ILIKE ?", genre)
+    videos.where("songs.genre ILIKE ?", genre)
   end
 
   def filter_by_channel(videos)
     channel_id = filtering_params[:channel_id]
     return videos unless channel_id.present?
 
-    videos.joins(:channel).where(channel_id:)
+    videos.where(channel_id:)
   end
 
   def filter_by_event_id(videos)
     event_id = filtering_params[:event_id]
     return videos unless event_id.present?
 
-    videos.joins(:event).where(event_id:)
+    videos.where(event_id:)
   end
 
   def filter_by_leader(videos)
     leader_name = filtering_params[:leader]
     return videos unless leader_name.present?
 
-    videos.joins(dancer_videos: :dancer)
-      .where(dancer_videos: {role: DancerVideo.roles[:leader]})
-      .where("dancers.name ILIKE ?", leader_name)
+    videos.where(dancer_videos: {role: DancerVideo.roles[:leader]}).where("dancers.name ILIKE ?", leader_name)
   end
 
   def filter_by_follower(videos)
     follower_name = filtering_params[:follower]
     return videos unless follower_name.present?
 
-    videos.joins(dancer_videos: :dancer)
-      .where(dancer_videos: {role: DancerVideo.roles[:follower]})
-      .where("dancers.name ILIKE ?", follower_name)
+    videos.where(dancer_videos: {role: DancerVideo.roles[:follower]}).where("dancers.name ILIKE ?", follower_name)
   end
 
   def filter_by_song_id(videos)
@@ -132,7 +128,7 @@ class VideoSearch
     song_name = filtering_params[:song]
     return videos unless song_name.present?
 
-    videos.joins(:song).where("unaccent(songs.title) ILIKE unaccent(?)", song_name)
+    videos.where("songs.title ILIKE ?", song_name)
   end
 
   def filter_by_upload_year(videos)
