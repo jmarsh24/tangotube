@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema[7.1].define(version: 2023_05_15_081941) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "btree_gin"
   enable_extension "plpgsql"
 
   create_enum :gender_new, [
