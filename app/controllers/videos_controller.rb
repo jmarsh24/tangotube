@@ -16,18 +16,16 @@ class VideosController < ApplicationController
   # @route POST /
   # @route GET / (root)
   def index
-    video_search = VideoSearch.new(filtering_params:, sorting_params:)
+    @search = VideoSearch.new(filtering_params:, sorting_params:)
     @current_page = video_params[:page]&.to_i || 1
-    @videos = video_search.paginated_videos(@current_page, per_page: 12)
-    @has_more_pages = video_search.has_more_pages?(@videos)
-
-    load_facets(video_search) if @current_page == 1
+    @videos = @search.paginated_videos(@current_page, per_page: 12)
+    @has_more_pages = @search.has_more_pages?(@videos)
 
     if filtering_params.empty? && sorting_params.empty?
-      @featured_videos = video_search.featured_videos(24)
+      @featured_videos = @search.featured_videos(24)
     end
 
-    handle_filtering_and_pagination(video_search) if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
+    handle_filtering_and_pagination(@search) if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
   end
 
   # @route GET /videos/:id (video)
@@ -135,14 +133,6 @@ class VideosController < ApplicationController
   end
 
   private
-
-  def load_facets(video_search)
-    @genres = video_search.genres
-    @leaders = video_search.leaders
-    @followers = video_search.followers
-    @orchestras = video_search.orchestras
-    @years = video_search.years
-  end
 
   def handle_filtering_and_pagination(video_search)
     url = request.fullpath.gsub(/&?(filtering|pagination)=true/, "")
