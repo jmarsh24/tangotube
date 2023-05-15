@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveDateTimeFromVideo < ActiveRecord::Migration[7.1]
   def change
     remove_column :videos, :upload_date
