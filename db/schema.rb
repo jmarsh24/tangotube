@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_05_07_172355) do
+ActiveRecord::Schema[7.1].define(version: 2023_05_15_081941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
-  enable_extension "pg_trgm"
   enable_extension "plpgsql"
-  enable_extension "unaccent"
+
+  create_enum :gender_new, [
+    "male",
+    "female",
+  ], force: :cascade
+
+  create_enum :role_new, [
+    "neither",
+    "leader",
+    "follower",
+    "both",
+  ], force: :cascade
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -116,9 +126,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_07_172355) do
   create_table "dancer_videos", force: :cascade do |t|
     t.bigint "dancer_id"
     t.bigint "video_id"
-    t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.enum "role", enum_type: "role_new"
     t.index ["dancer_id", "video_id"], name: "index_dancer_videos_on_dancer_id_and_video_id", unique: true
     t.index ["dancer_id"], name: "index_dancer_videos_on_dancer_id"
     t.index ["video_id"], name: "index_dancer_videos_on_video_id"
@@ -137,7 +147,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_07_172355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "videos_count", default: 0, null: false
-    t.integer "gender"
+    t.enum "gender", enum_type: "gender_new"
     t.index ["user_id"], name: "index_dancers_on_user_id"
   end
 

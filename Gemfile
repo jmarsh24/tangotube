@@ -56,6 +56,7 @@ gem "store_model"
 gem "down"
 gem "capybara"
 gem "cuprite"
+gem "activerecord-postgres_enum"
 
 # Assets
 gem "vite_rails"

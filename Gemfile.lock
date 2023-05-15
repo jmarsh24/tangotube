@@ -119,6 +119,9 @@ GEM
     active_link_to (1.0.5)
       actionpack
       addressable
+    activerecord-postgres_enum (2.0.1)
+      activerecord (>= 5.2)
+      pg
     acts-as-taggable-on (9.0.1)
       activerecord (>= 6.0, < 7.1)
     acts_as_list (1.1.0)
@@ -694,6 +697,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-postgres_enum
   acts-as-taggable-on
   acts_as_list
   acts_as_votable

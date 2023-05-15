@@ -85,6 +85,14 @@ RSpec.describe VideoSearch do
       expect(result.genres).to eq([["Milonga (1)", "milonga"], ["Tango (1)", "tango"]])
     end
 
+    xit "returns facet values when filtering for a leader" do
+      filtering_params = {leader: "carlitos-espinoza"}
+
+      result = VideoSearch.new(filtering_params:, sorting_params:)
+
+      expect(result.videos).to eq([videos(:video_1_featured), videos(:video_4_featured)])
+    end
+
     describe "#paginated_videos" do
       it "returns paginated videos" do
         search = VideoSearch.new(filtering_params:, sorting_params:)

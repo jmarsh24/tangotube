@@ -17,5 +17,5 @@ class DancerVideo < ApplicationRecord
   counter_culture :dancer, column_name: "videos_count"
 
   validates :dancer, uniqueness: {scope: :video}
-  enum role: {neither: 0, leader: 1, follower: 2, both: 3}
+  enum role: {neither: "neither", leader: "leader", follower: "follower", both: "both"}
 end

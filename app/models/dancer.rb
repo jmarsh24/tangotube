@@ -32,7 +32,7 @@ class Dancer < ApplicationRecord
 
   has_one_attached :profile_image
   has_one_attached :cover_image
-  enum gender: {male: 0, female: 1}
+  enum gender: {male: "male", female: "female"}
 
   after_validation :set_slug, only: [:create, :update]
 
