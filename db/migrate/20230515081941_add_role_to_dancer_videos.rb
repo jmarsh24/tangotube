@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddRoleToDancerVideos < ActiveRecord::Migration[7.1]
   def up
     create_enum "role_new", ["neither", "leader", "follower", "both"]

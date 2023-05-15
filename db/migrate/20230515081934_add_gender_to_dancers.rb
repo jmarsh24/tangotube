@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddGenderToDancers < ActiveRecord::Migration[7.1]
   def up
     create_enum "gender_new", ["male", "female"]
