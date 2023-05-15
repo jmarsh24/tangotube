@@ -3,14 +3,6 @@
 class VideoSearch
   attr_reader :filtering_params, :sorting_params
 
-  SEARCHABLE_COLUMNS = [
-    "songs.title",
-    "songs.last_name_search",
-    "videos.updated_at",
-    "videos.popularity",
-    "videos.upload_date"
-  ].freeze
-
   FACETS = [:leaders, :followers, :orchestras, :genres, :years, :songs].freeze
 
   def initialize(filtering_params: {}, sorting_params: {sort: "videos.popularity", direction: "desc"})
