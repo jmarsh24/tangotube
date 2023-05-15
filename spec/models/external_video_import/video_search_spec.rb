@@ -84,5 +84,49 @@ RSpec.describe VideoSearch do
       expect(result.songs).to eq([["Milonga Querida (1)", "milonga-querida"], ["Nueve De Julio (1)", "nueve-de-julio"]])
       expect(result.genres).to eq([["Milonga (1)", "milonga"], ["Tango (1)", "tango"]])
     end
+
+    describe "#paginated_videos" do
+      it "returns paginated videos" do
+        search = VideoSearch.new(filtering_params:, sorting_params:)
+
+        actual_ids = search.paginated_videos(1, per_page: 2).map(&:youtube_id)
+        expected_ids = [videos(:video_3_featured), videos(:video_1_featured)].map(&:youtube_id)
+
+        expect(actual_ids).to eq(expected_ids)
+      end
+    end
+
+    describe "#has_more_pages?" do
+      it "returns true if there are more pages" do
+        search = VideoSearch.new(filtering_params:, sorting_params:)
+
+        expect(search.has_more_pages?(search.paginated_videos(1, per_page: 1))).to be true
+      end
+
+      it "returns false if there are no more pages" do
+        search = VideoSearch.new(filtering_params:, sorting_params:)
+
+        expect(search.has_more_pages?(search.paginated_videos(1, per_page: 5))).to be false
+      end
+    end
+
+    describe "#next_page" do
+      it "returns the next page number" do
+        search = VideoSearch.new(filtering_params:, sorting_params:)
+
+        expect(search.next_page(search.paginated_videos(1, per_page: 1))).to eq(2)
+      end
+    end
+
+    describe "#featured_videos" do
+      it "returns featured videos" do
+        search = VideoSearch.new(filtering_params:, sorting_params:)
+
+        actual_ids = search.featured_videos(2).map(&:youtube_id)
+        expected_ids = [videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)].map(&:youtube_id)
+
+        expect(actual_ids).to all(be_in(expected_ids))
+      end
+    end
   end
 end

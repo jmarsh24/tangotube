@@ -39,7 +39,7 @@ video_2_featured:
   song: nueve_de_julio
   featured: true
   hidden: false
-  popularity: 162
+  popularity: 161
   click_count: 261
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_2_metadata.json")) %>
 
@@ -72,6 +72,7 @@ video_5:
   channel: peppa_palazon
   song: milonga_querida
   youtube_id: "zlySAXbGeNY"
+  popularity: 0
   upload_date: "2020-03-09 14:28:44"
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "video_5_metadata.json")) %>
 
@@ -80,6 +81,7 @@ video_6:
   channel: armelle_tango
   song: malandraca
   youtube_id: "F_zatafpBfE"
-  click_count: "303"
+  popularity: 0
+  click_count: 303
   upload_date: "2018-07-22 00:18:05"
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "video_6_metadata.json")) %>
