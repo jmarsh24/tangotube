@@ -63,8 +63,8 @@ class Video < ApplicationRecord
 
   scope :with_same_dancers, ->(video) {
     includes(Video.search_includes)
-      .with_leader(video.leaders.first)
-      .with_follower(video.followers.first)
+      .where(id: DancerVideo.where(role: :leader, dancer: video.leaders.first).select(:video_id))
+      .where(id: DancerVideo.where(role: :leader, dancer: video.followers.first).select(:video_id))
       .where(hidden: false)
       .where.not(youtube_id: video.youtube_id)
   }
