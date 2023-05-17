@@ -29,23 +29,16 @@ class VideoSearch
   end
 
   def videos
-    filtered_videos.order(ordering_params)
+    filtered_videos.order(ordering_params).distinct
   end
 
-  def paginated_videos(page, per_page:)
-    videos.page(page).without_count.per(per_page)
+  def not_featured_videos
+    filtered_videos.where(featured: false).order(ordering_params).distinct
   end
 
-  def has_more_pages?(videos)
-    videos.next_page.present?
-  end
-
-  def next_page(videos)
-    videos.next_page
-  end
-
-  def featured_videos(limit)
-    Video.includes(SEARCH_INCLUDES).featured.limit(limit).order("random()")
+  def featured_videos
+    subquery = filtered_videos.where(featured: true).select(:id).distinct
+    Video.where(id: subquery).order("random()")
   end
 
   private
@@ -56,16 +49,12 @@ class VideoSearch
 
   def filtered_videos
     videos = Video.joins(SEARCH_INCLUDES)
+    return videos if filtering_params.blank?
+
     filtering_params.each do |key, value|
       videos = send("filter_by_#{key}", videos, value) if value.present?
     end
-    videos.distinct
-  end
-
-  [:channel, :event_id, :song_id].each do |method|
-    define_method("filter_by_#{method}") do |videos, value|
-      videos.where(method => value)
-    end
+    videos
   end
 
   [:leader, :follower].each do |method|
@@ -74,10 +63,12 @@ class VideoSearch
     end
   end
 
-  [:genre, :song].each do |method|
-    define_method("filter_by_#{method}") do |videos, value|
-      videos.where("songs.#{method} ILIKE ?", value)
-    end
+  def filter_by_song(videos, value)
+    videos.where("songs.slug LIKE ?", value)
+  end
+
+  def filter_by_genre(videos, value)
+    videos.where("songs.genre ILIKE ?", value)
   end
 
   def filter_by_orchestra(videos, value)

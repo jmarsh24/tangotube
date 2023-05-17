@@ -103,44 +103,21 @@ RSpec.describe VideoSearch do
       expect(result.videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
     end
 
-    describe "#paginated_videos" do
-      it "returns paginated videos" do
-        search = VideoSearch.new(filtering_params:, sorting_params:)
-
-        actual_ids = search.paginated_videos(1, per_page: 2).map(&:youtube_id)
-        expected_ids = [videos(:video_3_featured), videos(:video_1_featured)].map(&:youtube_id)
-
-        expect(actual_ids).to match_array(expected_ids)
-      end
-    end
-
-    describe "#has_more_pages?" do
-      it "returns true if there are more pages" do
-        search = VideoSearch.new(filtering_params:, sorting_params:)
-
-        expect(search.has_more_pages?(search.paginated_videos(1, per_page: 1))).to be true
-      end
-
-      it "returns false if there are no more pages" do
-        search = VideoSearch.new(filtering_params:, sorting_params:)
-
-        expect(search.has_more_pages?(search.paginated_videos(1, per_page: 5))).to be false
-      end
-    end
-
-    describe "#next_page" do
-      it "returns the next page number" do
-        search = VideoSearch.new(filtering_params:, sorting_params:)
-
-        expect(search.next_page(search.paginated_videos(1, per_page: 1))).to eq(2)
-      end
-    end
-
     describe "#featured_videos" do
       it "returns featured videos" do
+        filtering_params = {}
         search = VideoSearch.new(filtering_params:, sorting_params:)
 
-        expect(search.featured_videos(4)).to match_array([videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)])
+        expect(search.featured_videos).to match_array([videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)])
+      end
+    end
+
+    describe "#not_featured_videos" do
+      it "returns not featured videos" do
+        filtering_params = {}
+        search = VideoSearch.new(filtering_params:, sorting_params:)
+
+        expect(search.not_featured_videos).to match_array([videos(:video_5), videos(:video_6)])
       end
     end
   end
