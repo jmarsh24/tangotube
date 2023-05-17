@@ -10,12 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_05_15_081941) do
+ActiveRecord::Schema[7.1].define(version: 2023_05_17_215857) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
-  enable_extension "pg_trgm"
   enable_extension "plpgsql"
-  enable_extension "unaccent"
 
   create_enum :gender_new, [
     "male",
@@ -150,6 +148,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_15_081941) do
     t.datetime "updated_at", null: false
     t.integer "videos_count", default: 0, null: false
     t.enum "gender", enum_type: "gender_new"
+    t.index ["slug"], name: "index_dancers_on_slug"
     t.index ["user_id"], name: "index_dancers_on_user_id"
   end
 
@@ -189,6 +188,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_15_081941) do
     t.integer "videos_count", default: 0, null: false
     t.integer "songs_count", default: 0, null: false
     t.index ["name"], name: "index_orchestras_on_name", unique: true
+    t.index ["slug"], name: "index_orchestras_on_slug"
   end
 
   create_table "performance_videos", force: :cascade do |t|
@@ -325,11 +325,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_15_081941) do
     t.datetime "imported_at"
     t.date "upload_date"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
+    t.index ["click_count"], name: "index_videos_on_click_count"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"
     t.index ["hidden"], name: "index_videos_on_hidden"
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
+    t.index ["upload_date"], name: "index_videos_on_upload_date"
     t.index ["youtube_id"], name: "index_videos_on_youtube_id", unique: true
   end
 
