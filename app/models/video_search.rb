@@ -57,10 +57,14 @@ class VideoSearch
     videos
   end
 
-  [:leader, :follower].each do |method|
-    define_method("filter_by_#{method}") do |videos, value|
-      videos.where(dancer_videos: {role: DancerVideo.roles[method]}).where("dancers.slug LIKE ?", value)
-    end
+  def filter_by_leader(videos, value)
+    leader_id = Dancer.where("slug LIKE ?", value).pluck(:id)
+    videos.where(id: DancerVideo.where(role: :leader, dancer_id: leader_id).select(:video_id))
+  end
+
+  def filter_by_follower(videos, value)
+    follower_id = Dancer.where("slug LIKE ?", value).pluck(:id)
+    videos.where(id: DancerVideo.where(role: :follower, dancer_id: follower_id).select(:video_id))
   end
 
   def filter_by_song(videos, value)

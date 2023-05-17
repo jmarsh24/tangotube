@@ -87,6 +87,14 @@ RSpec.describe VideoSearch do
       expect(result.genres).to match_array([["Milonga (1)", "milonga"], ["Tango (1)", "tango"]])
     end
 
+    it "return facet values when filtering for a leader" do
+      filtering_params = {leader: "carlitos-espinoza"}
+
+      result = VideoSearch.new(filtering_params:, sorting_params:)
+
+      expect(result.followers).to match_array([["Noelia Hurtado (2)", "noelia-hurtado"]])
+    end
+
     it "returns videos when filtering for a leader" do
       filtering_params = {leader: "carlitos-espinoza"}
 
