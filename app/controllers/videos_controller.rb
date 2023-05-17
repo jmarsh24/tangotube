@@ -18,10 +18,9 @@ class VideosController < ApplicationController
   def index
     @search = VideoSearch.new(filtering_params:, sorting_params:)
     @current_page = video_params[:page]&.to_i || 1
-    @videos = @search.videos.page(@current_page).per(12)
-
+    @videos = paginated(@search.videos, per: 12)
     if filtering_params.empty? && sorting_params.empty?
-      @featured_videos = @search.featured_videos
+      @featured_videos = paginated(@search.featured_videos, per: 12)
     end
 
     handle_filtering_and_pagination(@search) if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
