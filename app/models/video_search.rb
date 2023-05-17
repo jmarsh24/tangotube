@@ -8,6 +8,7 @@ class VideoSearch
   SEARCH_INCLUDES = [
     :dancer_videos,
     :song,
+    :orchestra,
     :event,
     :channel,
     :dancers,
@@ -79,6 +80,10 @@ class VideoSearch
     end
   end
 
+  def filter_by_orchestra(videos, value)
+    videos.where("orchestras.slug LIKE ?", value)
+  end
+
   def filter_by_year(videos, value)
     videos.where("extract(year from upload_date) = ?", value.to_i)
   end
@@ -130,7 +135,7 @@ class VideoSearch
 
   def format_facet_counts(counts, table_column)
     counts.order("occurrences DESC").map do |c|
-      facet_value = c.facet_value.to_s.downcase.tr(" ", "-")
+      facet_value = c.facet_value.to_s.downcase.tr(" ", "-").delete("'")
       [format_facet_value(c.facet_value, c.occurrences).to_s, facet_value]
     end
   end

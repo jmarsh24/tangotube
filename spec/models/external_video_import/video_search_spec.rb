@@ -37,7 +37,7 @@ RSpec.describe VideoSearch do
           ["Lorena Tarrantino (1)", "lorena-tarrantino"]
         ],
         orchestras: [
-          ["Juan D'Arienzo (3)", "juan-d'arienzo"],
+          ["Juan D'Arienzo (3)", "juan-darienzo"],
           ["Alberto Castillo (1)", "alberto-castillo"],
           ["Carlos Di Sarli (1)", "carlos-di-sarli"],
           ["Osvaldo Pugliese (1)", "osvaldo-pugliese"]
@@ -82,17 +82,25 @@ RSpec.describe VideoSearch do
       expect(result.years).to match_array([["2020 (2)", "2020"]])
       expect(result.leaders).to match_array([["Corina Herrera (1)", "corina-herrera"], ["Gianpiero Ya Galdi (1)", "gianpiero-ya-galdi"]])
       expect(result.followers).to match_array([["Inez Muzzopapa (1)", "inez-muzzopapa"], ["Lorena Tarrantino (1)", "lorena-tarrantino"]])
-      expect(result.orchestras).to match_array([["Juan D'Arienzo (2)", "juan-d'arienzo"]])
+      expect(result.orchestras).to match_array([["Juan D'Arienzo (2)", "juan-darienzo"]])
       expect(result.songs).to match_array([["Milonga Querida (1)", "milonga-querida"], ["Nueve De Julio (1)", "nueve-de-julio"]])
       expect(result.genres).to match_array([["Milonga (1)", "milonga"], ["Tango (1)", "tango"]])
     end
 
-    it "returns facet values when filtering for a leader" do
+    it "returns videos when filtering for a leader" do
       filtering_params = {leader: "carlitos-espinoza"}
 
       result = VideoSearch.new(filtering_params:, sorting_params:)
 
       expect(result.videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
+    end
+
+    it "returns videos when filtering for an orchestra" do
+      filtering_params = {orchestra: "juan-darienzo"}
+
+      result = VideoSearch.new(filtering_params:, sorting_params:)
+
+      expect(result.videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
     end
 
     describe "#paginated_videos" do
