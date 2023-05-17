@@ -2,7 +2,14 @@
 
 class AddRoleToDancerVideos < ActiveRecord::Migration[7.1]
   def up
-    create_enum "role_new", ["neither", "leader", "follower", "both"]
+    execute <<-SQL
+      DO $$ BEGIN
+        CREATE TYPE role_new AS ENUM ('neither', 'leader', 'follower', 'both');
+      EXCEPTION
+        WHEN duplicate_object THEN null;
+      END $$;
+    SQL
+
     add_column :dancer_videos, :role_new, :role_new
 
     execute <<-SQL

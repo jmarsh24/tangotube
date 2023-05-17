@@ -2,7 +2,14 @@
 
 class AddGenderToDancers < ActiveRecord::Migration[7.1]
   def up
-    create_enum "gender_new", ["male", "female"]
+    execute <<-SQL
+      DO $$ BEGIN
+        CREATE TYPE gender_new AS ENUM ('male', 'female');
+      EXCEPTION
+        WHEN duplicate_object THEN null;
+      END $$;
+    SQL
+
     add_column :dancers, :gender_new, :gender_new
     execute <<-SQL
       UPDATE dancers
