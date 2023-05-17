@@ -106,17 +106,7 @@ class Video < ApplicationRecord
             videos.id,
             LOWER(
               CONCAT_WS(' ',
-                videos.title,
-                videos.acr_cloud_track_name,
-                videos.acr_cloud_artist_name,
-                videos.description,
-                videos.youtube_artist,
-                videos.youtube_id,
-                videos.youtube_song,
-                videos.spotify_artist_name,
-                videos.spotify_track_name,
-                ARRAY_TO_STRING(array_agg(videos.tags), ' '),
-                MIN(dancers.first_name), MIN(dancers.last_name), MIN(dancers.nick_name),
+                MIN(dancers.first_name), MIN(dancers.last_name),
                 MIN(channels.channel_id), MIN(channels.title),
                 STRING_AGG(songs.title, ' '), STRING_AGG(songs.genre, ' '), STRING_AGG(songs.artist, ' '),
                 STRING_AGG(events.city, ' '), STRING_AGG(events.title, ' '), STRING_AGG(events.country, ' ')
@@ -132,10 +122,6 @@ class Video < ApplicationRecord
         ) AS query
         WHERE videos.id IN (?) and query.id = videos.id
       SQL
-    end
-
-    def filter_by_query(query)
-      search(query)
     end
 
     def search_includes

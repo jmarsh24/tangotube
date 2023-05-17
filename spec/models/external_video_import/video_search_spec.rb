@@ -111,6 +111,15 @@ RSpec.describe VideoSearch do
       expect(result.videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
     end
 
+    it "returns videos when filtering for a query" do
+      filtering_params = {query: "cuando el amor muere"}
+      Video.index!(Video.all.map(&:id), now: true)
+
+      result = VideoSearch.new(filtering_params:, sorting_params:)
+
+      expect(result.videos).to match_array([videos(:video_1_featured)])
+    end
+
     describe "#featured_videos" do
       it "returns featured videos" do
         filtering_params = {}

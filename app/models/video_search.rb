@@ -57,6 +57,18 @@ class VideoSearch
     videos
   end
 
+  def filter_by_query(videos, value)
+    videos.search(value)
+  end
+
+  def search(terms)
+    Array.wrap(terms)
+      .map { |e| e.tr("*", "").downcase }
+      .reduce(self) do |scope, term|
+        scope.where("index LIKE ?", "%#{term}%")
+      end
+  end
+
   def filter_by_leader(videos, value)
     leader_id = Dancer.where("slug LIKE ?", value).pluck(:id)
     videos.where(id: DancerVideo.where(role: :leader, dancer_id: leader_id).select(:video_id))
