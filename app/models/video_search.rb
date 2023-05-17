@@ -48,7 +48,7 @@ class VideoSearch
   end
 
   def filtered_videos
-    videos = Video.joins(SEARCH_INCLUDES)
+    videos = Video.left_joins(SEARCH_INCLUDES)
     return videos if filtering_params.blank?
 
     filtering_params.each do |key, value|
