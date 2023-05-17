@@ -5,6 +5,17 @@ class VideoSearch
 
   FACETS = [:leaders, :followers, :orchestras, :genres, :years, :songs].freeze
 
+  SEARCH_INCLUDES = [
+    :dancer_videos,
+    :song,
+    :event,
+    :channel,
+    :dancers,
+    :performance_video,
+    :performance,
+    thumbnail_attachment: :blob
+  ].freeze
+
   def initialize(filtering_params: {}, sorting_params: {sort: "videos.popularity", direction: "desc"})
     @filtering_params = filtering_params
     @sorting_params = sorting_params
@@ -33,7 +44,7 @@ class VideoSearch
   end
 
   def featured_videos(limit)
-    Video.includes(Video.search_includes).featured.limit(limit).order("random()")
+    Video.includes(SEARCH_INCLUDES).featured.limit(limit).order("random()")
   end
 
   private
@@ -43,7 +54,7 @@ class VideoSearch
   end
 
   def filtered_videos
-    videos = Video.joins(Video.search_includes)
+    videos = Video.joins(SEARCH_INCLUDES)
     filtering_params.each do |key, value|
       videos = send("filter_by_#{key}", videos, value) if value.present?
     end
@@ -58,7 +69,7 @@ class VideoSearch
 
   [:leader, :follower].each do |method|
     define_method("filter_by_#{method}") do |videos, value|
-      videos.where(dancer_videos: {role: DancerVideo.roles[method]}).where("dancers.name ILIKE ?", value)
+      videos.where(dancer_videos: {role: DancerVideo.roles[method]}).where("dancers.slug LIKE ?", value)
     end
   end
 

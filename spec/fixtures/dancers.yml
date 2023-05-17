@@ -24,6 +24,7 @@ unreviewed_dancer:
   last_name: "Doe"
   reviewed: false
   gender: "male"
+  slug: "john-doe"
 
 carlitos:
   name: "Carlitos Espinoza"
@@ -32,6 +33,7 @@ carlitos:
   nick_name: "Carlitos"
   reviewed: true
   gender: "male"
+  slug: "carlitos-espinoza"
 
 noelia:
   name: "Noelia Hurtado"
@@ -39,6 +41,7 @@ noelia:
   last_name: "Hurtado"
   reviewed: true
   gender: "female"
+  slug: "noelia-hurtado"
 
 jonathan:
   name: "Jonathan Saavedra"
@@ -46,6 +49,7 @@ jonathan:
   last_name: "Saavedra"
   reviewed: true
   gender: "male"
+  slug: "jonathan-saavedra"
 
 clarisa:
   name: "Clarisa Aragon"
@@ -53,6 +57,7 @@ clarisa:
   last_name: "Aragon"
   reviewed: true
   gender: "female"
+  slug: "clarisa-aragon"
 
 gianpiero:
   name: "Gianpiero Ya Galdi"
@@ -60,6 +65,7 @@ gianpiero:
   last_name: "Galdi"
   reviewed: true
   gender: "female"
+  slug: "gianpiero-ya-galdi"
 
 lorena:
   name: "Lorena Tarrantino"
@@ -67,21 +73,25 @@ lorena:
   last_name: "Tarrantino"
   reviewed: true
   gender: "female"
+  slug: "lorena-tarrantino"
 
 corina:
   name: "Corina Herrera"
   first_name: "Corina"
   last_name: "Herrera"
   gender: "male"
+  slug: "corina-herrera"
 
 inez:
   name: "Inez Muzzopapa"
   first_name: "Inez"
   last_name: "Muzzopapa"
   gender: "male"
+  slug: "inez-muzzopapa"
 
 octavio:
   name: "Octavio Fernandez"
   first_name: "Octavio"
   last_name: "Fernandez"
   gender: "male"
+  slug: "octavio-fernandez"
