@@ -46,6 +46,6 @@
             = render partial: "videos/show/video_info_item", locals: { header: t(".song_artist_heading"), value: link_to(@video.metadata.music.spotify_artist_name_2.titleize, root_path(query: @video.metadata.music.spotify_artist_name_2.titleize), {"data-turbo-frame": "_top"}) } if @video.metadata.music.spotify_artist_name_2.present?
           - if @video.song.blank? && @video.metadata.music.spotify_track_name.blank? && @video.metadata.youtube.song.titles.first.present?
             = render partial: "videos/show/video_info_item", locals: { header: t(".song_title_heading"), value: link_to(@video.metadata.youtube.song.titles.first.titleize, root_path(query: @video.metadata.youtube.song.titles.first.titleize), {"data-turbo-frame": "_top"}) }
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_artist_heading"), value: link_to(@video.metadata.youtube.artist.titleize, root_path(query: @video.metadata.youtube.artist.titleize), {"data-turbo-frame": "_top"}) }
+            = render partial: "videos/show/video_info_item", locals: { header: t(".song_artist_heading"), value: link_to(@video.metadata.youtube.song.artist.titleize, root_path(query: @video.metadata.youtube.song.artist.titleize), {"data-turbo-frame": "_top"}) }
         - if @video.song.present? && @video.song.lyrics.present?
           = render partial: "videos/show/lyrics"
