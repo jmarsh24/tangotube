@@ -1,16 +1,16 @@
 class Video::Search
   attr_reader :filtering_params, :sorting_params
 
-  def initialize(filtering_params: {}, sorting_params: [{column: "videos.popularity", direction: "desc"}])
+  def initialize(filtering_params: {}, sorting_params: {column: "videos.popularity", direction: "desc"})
     @filtering_params = filtering_params
     @sorting_params = sorting_params
   end
 
   def perform_search
     filtered_videos = Video::Filter.new(Video.all, filtering_params:).apply_filter
-    sorted_videos = Video::Sort.new(filtered_videos, sorting_params:).apply_sort
+    sorted_videos = Video::Sort.new(filtered_videos, sorting_params: @sorting_params).apply_sort
 
-    facets = generate_facets(sorted_videos)
+    facets = generate_facets(filtered_videos)
 
     [sorted_videos, facets]
   end
