@@ -38,7 +38,7 @@ class Video::Filter
       .where(dancer_videos: {role: "follower"})
   end
 
-  def apply_orchestras_filter(videos, value)
+  def apply_orchestra_filter(videos, value)
     videos.joins(:song, :orchestra).where(orchestras: {slug: value})
   end
 

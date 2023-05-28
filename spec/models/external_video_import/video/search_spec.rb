@@ -64,6 +64,46 @@ RSpec.describe Video::Search do
           songs: song_facet
         }])
       end
+
+      it "returns all videos when filtering with leader and sorting" do 
+        leader_facet = [
+          Video::FacetBuilder::Facet.new(name: "Corina Herrera", count: 1, param: "leader", value: "corina-herrera"),
+        ]
+
+        follower_facet = [
+          Video::FacetBuilder::Facet.new(name: "Inez Muzzopapa", count: 1, param: "follower", value: "inez-muzzopapa"),
+        ]
+
+        orchestra_facet = [
+          Video::FacetBuilder::Facet.new(name: "Juan D'Arienzo", count: 1, param: "orchestra", value: "juan-darienzo"),
+        ]
+
+        genre_facet = [
+          Video::FacetBuilder::Facet.new(name: "Milonga", count: 1, param: "genre", value: "milonga"),
+        ]
+
+        year_facet = [
+          Video::FacetBuilder::Facet.new(name: 2020, count: 1, param: "year", value: 2020),
+        ]
+
+        song_facet = [
+          Video::FacetBuilder::Facet.new(name: "Milonga Querida", count: 1, param: "song", value: "milonga-querida-juan-darienzo"),
+        ]
+
+        result = Video::Search.new(filtering_params: {leader: "corina-herrera"}).perform_search
+        expected_videos = Video::Filter.new(Video.all, filtering_params: {leader: "corina-herrera"}).apply_filter
+
+        expect(result.first).to match_array(expected_videos)
+
+        expect(result.last).to eq({
+          leaders: leader_facet,
+          followers: follower_facet,
+          orchestras: orchestra_facet,
+          genres: genre_facet,
+          years: year_facet,
+          songs: song_facet
+        })
+      end
     end
   end
 end

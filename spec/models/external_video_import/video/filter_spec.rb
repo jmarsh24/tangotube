@@ -32,7 +32,7 @@ RSpec.describe Video::Filter do
 
     context "when filtering by orchestra" do
       it "returns videos with orchestra" do
-        filtered_videos = described_class.new(Video.all, filtering_params: {orchestras: "juan-darienzo"}).apply_filter
+        filtered_videos = described_class.new(Video.all, filtering_params: {orchestra: "juan-darienzo"}).apply_filter
 
         expect(filtered_videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
       end
@@ -64,8 +64,8 @@ RSpec.describe Video::Filter do
 
     context "when filtering by follower, orchestra, and year" do
       it "returns videos with specified follower, orchestra, and year" do
-        filtering_params = {follower: "corina-herrera", orchestras: "osvaldo-pugliese", year: "2018"}
-        filtered_videos = described_class.new(Video.all, filtering_params: ).apply_filter
+        filtering_params = {follower: "corina-herrera", orchestra: "osvaldo-pugliese", year: "2018"}
+        filtered_videos = described_class.new(Video.all, filtering_params:).apply_filter
 
         expect(filtered_videos).to match_array([videos(:video_6)])
       end
@@ -73,8 +73,8 @@ RSpec.describe Video::Filter do
 
     context "when filtering by leader, orchestra, genre, and year" do
       it "returns videos with specified leader, orchestra, genre, and year" do
-        filtering_params = { leader: "corina-herrera", orchestras: "osvaldo-pugliese", genre: "tango", year: "2018" }
-        filtered_videos = described_class.new(Video.all, filtering_params: ).apply_filter
+        filtering_params = {leader: "corina-herrera", orchestra: "osvaldo-pugliese", genre: "tango", year: "2018"}
+        filtered_videos = described_class.new(Video.all, filtering_params:).apply_filter
 
         expect(filtered_videos).to be_empty
       end
@@ -82,8 +82,8 @@ RSpec.describe Video::Filter do
 
     context "when filtering by leader, follower, orchestra, genre, year, and song" do
       it "returns videos with specified leader, follower, orchestra, genre, year, and song" do
-        filtering_params = { leader: "octavio-fernandez", follower: "corina-herrera", orchestras: "osvaldo-pugliese", genre: "tango", year: "2018", song: "malandraca-osvaldo-pugliese" }
-        filtered_videos = described_class.new(Video.all, filtering_params: ).apply_filter
+        filtering_params = { leader: "octavio-fernandez", follower: "corina-herrera", orchestra: "osvaldo-pugliese", genre: "tango", year: "2018", song: "malandraca-osvaldo-pugliese" }
+        filtered_videos = described_class.new(Video.all, filtering_params:).apply_filter
 
         expect(filtered_videos).to be_empty
       end
