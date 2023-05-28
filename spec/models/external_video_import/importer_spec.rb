@@ -92,7 +92,7 @@ RSpec.describe ExternalVideoImport::Importer do
       allow(couple_matcher).to receive(:match_or_create).and_return(couple)
     end
 
-    it "imports a video with the correct attributes" do
+    fit "imports a video with the correct attributes" do
       expect { importer.import(youtube_slug) }.to change { Video.count }.by(1)
 
       video = Video.last
