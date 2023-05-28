@@ -17,7 +17,7 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  videos_count :integer          default(0), not null
-#  gender       :integer
+#  gender       :enum
 #
 class Dancer < ApplicationRecord
   belongs_to :user, optional: true
