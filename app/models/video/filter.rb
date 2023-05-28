@@ -1,9 +1,10 @@
 class Video::Filter
   attr_reader :video_relation, :filtering_params
 
-  def initialize(video_relation, filtering_params: {})
+  def initialize(video_relation, filtering_params: {}, current_user: nil)
     @video_relation = video_relation
     @filtering_params = filtering_params
+    @current_user = current_user
   end
 
   def apply_filter
@@ -17,9 +18,18 @@ class Video::Filter
 
     filtered = video_relation
     filtering_params.each do |key, value|
-      filtered = send("apply_#{key}_filter", filtered, value) if value.present?
+      if value.present?
+        filtered = send("apply_#{key}_filter", filtered, value)
+        filtered = apply_user_filter(filtered, current_user) if key == 'user'
+      end
     end
     filtered
+  end
+
+  def apply_user_filter(videos, current_user)
+    return videos unless current_user
+
+    videos.where(user_id: current_user.id)
   end
 
   def apply_leader_filter(videos, value)
