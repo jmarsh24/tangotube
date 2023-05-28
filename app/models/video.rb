@@ -136,24 +136,6 @@ class Video < ApplicationRecord
         thumbnail_attachment: :blob
       ]
     end
-
-    def filter_by_watched(boolean, user)
-      case boolean
-      when "true"
-        where(id: user.votes.where(vote_scope: "watchlist").pluck(:id))
-      when "false"
-        where.not(id: user.votes.where(vote_scope: "watchlist").pluck(:id))
-      end
-    end
-
-    def filter_by_liked(boolean, user)
-      case boolean
-      when "true"
-        where(id: user.find_up_voted_items.pluck(:id))
-      when "false"
-        where(id: user.find_up_downsvoted_items.pluck(:id))
-      end
-    end
   end
 
   def with_same_performance

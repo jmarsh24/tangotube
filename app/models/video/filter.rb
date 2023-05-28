@@ -1,5 +1,16 @@
 class Video::Filter
-  attr_reader :video_relation, :filtering_params
+  attr_reader :video_relation, :filtering_params, :current_user
+
+  FILTER_METHODS = {
+    liked_by_user: :apply_liked_by_user_filter,
+    watched_by_user: :apply_watched_by_user_filter,
+    leader: :apply_leader_filter,
+    follower: :apply_follower_filter,
+    orchestra: :apply_orchestra_filter,
+    genre: :apply_genre_filter,
+    year: :apply_year_filter,
+    song: :apply_song_filter
+  }.freeze
 
   def initialize(video_relation, filtering_params: {}, current_user: nil)
     @video_relation = video_relation
@@ -18,23 +29,36 @@ class Video::Filter
 
     filtered = video_relation
     filtering_params.each do |key, value|
-      if value.present?
-        filtered = send("apply_#{key}_filter", filtered, value)
-        filtered = apply_user_filter(filtered, current_user) if key == 'user'
+      next unless value.present?
+
+      filtered = if key == :liked_by_user
+        apply_liked_by_user_filter(filtered, current_user)
+      elsif key == :watched_by_user
+        apply_watched_by_user_filter(filtered, current_user)
+      else
+        send("apply_#{key}_filter", filtered, value)
       end
-    end
+  end
     filtered
   end
 
-  def apply_user_filter(videos, current_user)
-    return videos unless current_user
+  def apply_liked_by_user_filter(videos, user)
+    return videos unless user
 
-    videos.where(user_id: current_user.id)
+    videos.where(id: user.find_up_voted_items.pluck(:id))
+  end
+
+  def apply_watched_by_user_filter(videos, user)
+    return videos unless user
+
+    watched_video_ids = user.votes.where(vote_scope: "watchlist", vote_flag: true).pluck(:votable_id)
+
+    videos.where(id: watched_video_ids)
   end
 
   def apply_leader_filter(videos, value)
     videos
-      .joins(:dancer_videos)
+      .joins(dancer_videos: :dancer)
       .joins("JOIN dancers ON dancers.id = dancer_videos.dancer_id")
       .where(dancers: {slug: value})
       .where(dancer_videos: {role: "leader"})
@@ -42,7 +66,7 @@ class Video::Filter
 
   def apply_follower_filter(videos, value)
     videos
-      .joins(:dancer_videos)
+      .joins(dancer_videos: :dancer)
       .joins("JOIN dancers ON dancers.id = dancer_videos.dancer_id")
       .where(dancers: {slug: value})
       .where(dancer_videos: {role: "follower"})
