@@ -1,7 +1,7 @@
 class Video::Search
   attr_reader :filtering_params, :sorting_params
 
-  def initialize(filtering_params: {}, sorting_params: {column: "videos.popularity", direction: "desc"})
+  def initialize(filtering_params: {}, sorting_params: {column: "popularity", direction: "desc"})
     @filtering_params = filtering_params
     @sorting_params = sorting_params
   end

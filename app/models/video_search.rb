@@ -17,7 +17,7 @@ class VideoSearch
     thumbnail_attachment: :blob
   ].freeze
 
-  def initialize(filtering_params: {}, sorting_params: {sort: "videos.popularity", direction: "desc"})
+  def initialize(filtering_params: {}, sorting_params: {sort: "popularity", direction: "desc"})
     @filtering_params = filtering_params
     @sorting_params = sorting_params
   end
