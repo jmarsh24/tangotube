@@ -174,11 +174,13 @@ class VideosController < ApplicationController
   end
 
   def set_recommended_videos
-    @videos_from_this_performance = @video.with_same_performance.limit(8).includes(:thumbnail_attachment)
-    @videos_with_same_dancers = Video.with_same_dancers(@video).limit(8).includes(:thumbnail_attachment)
-    @videos_with_same_event = (Video.with_same_event(@video).limit(16).includes(:thumbnail_attachment) - @video.with_same_performance.limit(16).includes(:thumbnail_attachment))
-    @videos_with_same_song = Video.with_same_song(@video).limit(8).includes(:thumbnail_attachment)
-    @videos_with_same_channel = Video.with_same_channel(@video).limit(8).includes(:thumbnail_attachment)
+    related_videos = Video::RelatedVideos.new(@video)
+
+    @videos_from_this_performance = related_videos.with_same_performance.limit(8).includes(:thumbnail_attachment)
+    @videos_with_same_dancers = related_videos.with_same_dancers.limit(8).includes(:thumbnail_attachment)
+    @videos_with_same_event = (related_videos.with_same_event.limit(16).includes(:thumbnail_attachment) - related_videos.with_same_performance.limit(16).includes(:thumbnail_attachment))
+    @videos_with_same_song = related_videos.with_same_song.limit(8).includes(:thumbnail_attachment)
+    @videos_with_same_channel = related_videos.with_same_channel.limit(8).includes(:thumbnail_attachment)
   end
 
   def current_search

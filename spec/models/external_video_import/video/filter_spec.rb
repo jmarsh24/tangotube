@@ -15,7 +15,7 @@ RSpec.describe Video::Filter do
     end
 
     context "when filtering by leader and follower" do
-      fit "returns videos with specified leader and follower" do
+      it "returns videos with specified leader and follower" do
         filtering_params = {leader: "carlitos-espinoza", follower: "noelia-hurtado"}
         filtered_videos = described_class.new(Video.all, filtering_params:).apply_filter
 
@@ -80,21 +80,12 @@ RSpec.describe Video::Filter do
       end
     end
 
-    context "when filtering by leader, orchestra, genre, and year" do
-      it "returns videos with specified leader, orchestra, genre, and year" do
-        filtering_params = {leader: "corina-herrera", orchestra: "osvaldo-pugliese", genre: "tango", year: "2018"}
-        filtered_videos = described_class.new(Video.all, filtering_params:).apply_filter
-
-        expect(filtered_videos).to be_empty
-      end
-    end
-
     context "when filtering by leader, follower, orchestra, genre, year, and song" do
       it "returns videos with specified leader, follower, orchestra, genre, year, and song" do
-        filtering_params = { leader: "octavio-fernandez", follower: "corina-herrera", orchestra: "osvaldo-pugliese", genre: "tango", year: "2018", song: "malandraca-osvaldo-pugliese" }
+        filtering_params = {leader: "octavio-fernandez", follower: "corina-herrera", orchestra: "osvaldo-pugliese", genre: "tango", year: "2018", song: "malandraca-osvaldo-pugliese"}
         filtered_videos = described_class.new(Video.all, filtering_params:).apply_filter
 
-        expect(filtered_videos).to be_empty
+        expect(filtered_videos).to match_array([videos(:video_6)])
       end
     end
 

@@ -9,10 +9,14 @@ class Video::Filter
     orchestra: :apply_orchestra_filter,
     genre: :apply_genre_filter,
     year: :apply_year_filter,
-    song: :apply_song_filter
+    song: :apply_song_filter,
+    event: :apply_event_filter,
+    hidden: :apply_hidden_filter,
+    channel: :apply_channel_filter,
+    exclude_youtube_id: :apply_exclude_youtube_id_filter,
   }.freeze
 
-  def initialize(video_relation, filtering_params: {}, current_user: nil)
+  def initialize(video_relation, filtering_params: {}, current_user: nil, hidden: false)
     @video_relation = video_relation
     @filtering_params = filtering_params
     @current_user = current_user
@@ -74,8 +78,16 @@ class Video::Filter
     videos.joins(:song, :orchestra).where(orchestras: {slug: value})
   end
 
+  def apply_event_filter(videos, value)
+    videos.joins(:event).where(events: {slug: value})
+  end
+
   def apply_genre_filter(videos, value)
     videos.joins(:song).where("LOWER(songs.genre) = ?", value.downcase)
+  end
+
+  def apply_channel_filter(videos, value)
+    videos.joins(:channel).where(channels: {channel_id: value})
   end
 
   def apply_year_filter(videos, value)
@@ -84,5 +96,14 @@ class Video::Filter
 
   def apply_song_filter(videos, value)
     videos.joins(:song).where(songs: {slug: value})
+  end
+
+  def apply_hidden_filter(videos, value)
+    return videos if value == false
+    videos.where(hidden: value)
+  end
+
+  def apply_exclude_youtube_id_filter(videos, value)
+    videos.where.not(youtube_id: value)
   end
 end
