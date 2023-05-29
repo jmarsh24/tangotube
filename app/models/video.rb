@@ -64,11 +64,9 @@ class Video < ApplicationRecord
   scope :has_song, -> { where.not(song_id: nil) }
   scope :missing_song, -> { where(song_id: nil) }
 
-  scope :has_leader, -> { where(DancerVideo.where("dancer_videos.video_id = videos.id").where(role: :leader).exists) }
-  scope :has_follower, -> { where(DancerVideo.where("dancer_videos.video_id = videos.id").where(role: :follower).exists) }
+  scope :has_leader, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'leader')") }
+  scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }
   scope :has_leader_and_follower, -> { has_leader.has_follower }
-  scope :missing_leader, -> { where.not(DancerVideo.where("dancer_videos.video_id = videos.id").where(role: :leader).exists) }
-  scope :missing_follower, -> { where.not(DancerVideo.where("dancer_videos.video_id = videos.id").where(role: :follower).exists) }
 
   class << self
     def index_query
