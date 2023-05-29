@@ -32,7 +32,7 @@ video_1_featured:
   channel: jkukla_video
   youtube_id: "AQ9Ri3kWa_4"
   song: "cuando_el_amor_muere"
-  upload_date: "2014-10-26 15:21:29"
+  upload_date: <%= Date.parse("2014-10-26 15:21:29") %>
   featured: true
   hidden: false
   popularity: 162
@@ -51,7 +51,7 @@ video_2_featured:
   event: krakus_aires_tango_festival
   channel: tango_nuevo_tv
   youtube_id: "JaEsttvrXkY"
-  upload_date: "2020-07-24 15:35:11"
+  upload_date: <%= Date.parse("2020-07-24 15:35:11") %>
   song: nueve_de_julio
   featured: true
   hidden: false
@@ -86,7 +86,7 @@ video_3_featured:
   channel: 030tango
   song: nueve_de_julio
   youtube_id: "9dVXhctAOnk"
-  upload_date: "2021-10-31 08:00:02"
+  upload_date: <%= Date.parse("2021-10-31 08:00:02") %>
   featured: true
   hidden: false
   popularity: 262
@@ -129,7 +129,7 @@ video_4_featured:
   channel: giorgio_scattolini
   song: violetas
   youtube_id: "xW8prLq6awc"
-  upload_date: "2013-06-05 23:04:15"
+  upload_date: <%= Date.parse("2013-06-05 23:04:15") %>
   featured: true
   hidden: false
   popularity: 181
@@ -157,7 +157,7 @@ video_5:
   song: milonga_querida
   youtube_id: "zlySAXbGeNY"
   popularity: 0
-  upload_date: "2020-03-09 14:28:44"
+  upload_date: <%= Date.parse("2020-03-09 14:28:44") %>
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "video_5_metadata.json")) %>
   youtube_like_count: 77
   youtube_view_count: 13569
@@ -175,7 +175,7 @@ video_6:
   youtube_id: "F_zatafpBfE"
   popularity: 0
   click_count: 303
-  upload_date: "2018-07-22 00:18:05"
+  upload_date: <%= Date.parse("2018-07-22 00:18:05") %>
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "video_6_metadata.json")) %>
   youtube_like_count: 39610
   youtube_view_count: 3795277
