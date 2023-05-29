@@ -67,6 +67,40 @@ video_2_featured:
   duration: 205
   youtube_tags:
     [
+      "tango",
+      "nuevo",
+      "lorena tarantino",
+      "kraków",
+      "gianpiero galdi",
+      "krakus aires",
+      "tango festival",
+      "cracow",
+      "theatre",
+      "alternative",
+      "Ariele e Calibano",
+      "Sineterra",
+    ]
+
+video_3_featured:
+  event: bailemos_tango_festival
+  channel: 030tango
+  song: nueve_de_julio
+  youtube_id: "9dVXhctAOnk"
+  upload_date: "2021-10-31 08:00:02"
+  featured: true
+  hidden: false
+  popularity: 262
+  click_count: 261
+  metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_3_metadata.json")) %>
+  youtube_like_count: 0
+  youtube_view_count: 13171
+  upload_date_year: 2021
+  hd: true
+  title: "Clarisa Aragon and Jonathan Saavedra - Nueve de julio #clarisayjonathan"
+  description: "Clarisa Aragon and Jonathan Saavedra dance “Nueve de julio” by Juan D'Arienzo at the 1st Bailemos Tango Festival 2021 in Kyiv, Ukraine. If you love Tango videos, support 030tango on https://www.patreon.com/030tango Brought to you with the support o Bailemos Tango Festiva https://www.bailemostangofestival.com/english/ Visit 030tango for more video https://www.030tango.com Recorded on 2021/10/2 #030tango #tango #bailemostangofestival #clarisayjonathan"
+  duration: 229
+  youtube_tags:
+    [
       "Tango",
       "Argentine Tango",
       "030tango",
@@ -90,26 +124,6 @@ video_2_featured:
       "Juan D'Arienzo",
     ]
 
-video_3_featured:
-  event: bailemos_tango_festival
-  channel: 030tango
-  song: nueve_de_julio
-  youtube_id: "9dVXhctAOnk"
-  upload_date: "2021-10-31 08:00:02"
-  featured: true
-  hidden: false
-  popularity: 262
-  click_count: 261
-  metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_3_metadata.json")) %>
-  youtube_like_count: 0
-  youtube_view_count: 13171
-  upload_date_year: 2021
-  hd: true
-  title: "Clarisa Aragon and Jonathan Saavedra - Nueve de julio #clarisayjonathan"
-  description: "Clarisa Aragon and Jonathan Saavedra dance “Nueve de julio” by Juan D'Arienzo at the 1st Bailemos Tango Festival 2021 in Kyiv, Ukraine. If you love Tango videos, support 030tango on https://www.patreon.com/030tango Brought to you with the support o Bailemos Tango Festiva https://www.bailemostangofestival.com/english/ Visit 030tango for more video https://www.030tango.com Recorded on 2021/10/2 #030tango #tango #bailemostangofestival #clarisayjonathan"
-  duration: 229
-  youtube_tags: []
-
 video_4_featured:
   event: laquila_tango_festival
   channel: giorgio_scattolini
@@ -128,7 +142,14 @@ video_4_featured:
   title: "Noelia y Carlitos Violetas - Alberto Castillo"
   description: "Show Noelia Hurtado y Carlitos Espinoza a L'Aquila Tango Festival 25-mag-2013"
   duration: 148
-  youtube_tags: []
+  youtube_tags:
+    [
+      "Noelia Hurtado",
+      "Carlitos Espinoza",
+      "Violetas",
+      "Alberto Castillo",
+      "L'Aquila Tango Festival",
+    ]
 
 video_5:
   event: ladys_tango_festival
@@ -145,14 +166,7 @@ video_5:
   title: "CORINA HERRERA e INES MUZZOPAPPA en Viva La Pepa Milonga dentro del LADY'S Tango (1/2)"
   description: "CORINA HERRERA e INES MUZZOPAPPA en Viva La Pepa Milonga (Av Córdoba 5064), dentro del marco del Lady's Tango Festival/ Domingo 8 de marzo de 2020. Buenos Aires. Argentina Encontrá toda la data de Viva la Pepa! milonga en Facebook: https://www.facebook.com/VIVALAPEPA.Domingos.en.Malcolm/ o acá https://www.facebook.com/profile.php?id=100010200420828"
   duration: 169
-  youtube_tags:
-    [
-      "Noelia Hurtado",
-      "Carlitos Espinoza",
-      "Violetas",
-      "Alberto Castillo",
-      "L'Aquila Tango Festival",
-    ]
+  youtube_tags: []
 
 video_6:
   event: el_garron_la_grande_tutti
@@ -170,18 +184,4 @@ video_6:
   title: "Octavio Fernandez & Corina Herrera ❤@ La Grande Tutti + El Garon union - Paris - Malandraca"
   description: "Démo 3/5 : Malandraca - Osvaldo Pugliese La Grande Tutti + El Garrón union: Corina & Octavio rock the floor!!! @ Tanguedia de Paris Samedi 21 juillet 2018"
   duration: 313
-  youtube_tags:
-    [
-      "tango",
-      "nuevo",
-      "lorena tarantino",
-      "kraków",
-      "gianpiero galdi",
-      "krakus aires",
-      "tango festival",
-      "cracow",
-      "theatre",
-      "alternative",
-      "Ariele e Calibano",
-      "Sineterra",
-    ]
+  youtube_tags: []

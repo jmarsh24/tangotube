@@ -53,19 +53,16 @@ RSpec.describe Video::Search do
           Video::FacetBuilder::Facet.new(name: "Violetas", count: 1, param: "song", value: "violetas-aberto-castillo")
         ]
 
-        result = Video::Search.new.perform_search
+        facets = Video::Search::Facets.new(leaders: leader_facet, followers: follower_facet, orchestras: orchestra_facet, genres: genre_facet, years: year_facet, songs: song_facet)
 
-        expect(result).to match_array([Video.all.order(popularity: :desc), {
-          leaders: leader_facet,
-          followers: follower_facet,
-          orchestras: orchestra_facet,
-          genres: genre_facet,
-          years: year_facet,
-          songs: song_facet
-        }])
+        search = Video::Search.new
+
+        expect(search.perform_search).to match_array(Video.all.order(popularity: :desc))
+
+        expect(search.facets).to eq(facets)
       end
 
-      it "returns all videos when filtering with leader and sorting" do 
+      it "returns all videos when filtering with leader and sorting" do
         leader_facet = [
           Video::FacetBuilder::Facet.new(name: "Corina Herrera", count: 1, param: "leader", value: "corina-herrera"),
         ]
@@ -90,19 +87,14 @@ RSpec.describe Video::Search do
           Video::FacetBuilder::Facet.new(name: "Milonga Querida", count: 1, param: "song", value: "milonga-querida-juan-darienzo"),
         ]
 
-        result = Video::Search.new(filtering_params: {leader: "corina-herrera"}).perform_search
+        facets = Video::Search::Facets.new(leaders: leader_facet, followers: follower_facet, orchestras: orchestra_facet, genres: genre_facet, years: year_facet, songs: song_facet)
+
+        search = Video::Search.new(filtering_params: {leader: "corina-herrera"})
         expected_videos = Video::Filter.new(Video.all, filtering_params: {leader: "corina-herrera"}).apply_filter
 
-        expect(result.first).to match_array(expected_videos)
+        expect(search.perform_search).to match_array(expected_videos)
 
-        expect(result.last).to eq({
-          leaders: leader_facet,
-          followers: follower_facet,
-          orchestras: orchestra_facet,
-          genres: genre_facet,
-          years: year_facet,
-          songs: song_facet
-        })
+        expect(search.facets).to eq(facets)
       end
     end
   end

@@ -58,18 +58,16 @@ class Video::Filter
 
   def apply_leader_filter(videos, value)
     videos
-      .joins(dancer_videos: :dancer)
-      .joins("JOIN dancers ON dancers.id = dancer_videos.dancer_id")
-      .where(dancers: {slug: value})
-      .where(dancer_videos: {role: "leader"})
+      .joins("JOIN dancer_videos AS leader_dancer_videos ON leader_dancer_videos.video_id = videos.id")
+      .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
+      .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
   end
 
   def apply_follower_filter(videos, value)
     videos
-      .joins(dancer_videos: :dancer)
-      .joins("JOIN dancers ON dancers.id = dancer_videos.dancer_id")
-      .where(dancers: {slug: value})
-      .where(dancer_videos: {role: "follower"})
+      .joins("JOIN dancer_videos AS follower_dancer_videos ON follower_dancer_videos.video_id = videos.id")
+      .joins("JOIN dancers AS follower_dancers ON follower_dancers.id = follower_dancer_videos.dancer_id")
+      .where(follower_dancers: {slug: value}, follower_dancer_videos: {role: "follower"})
   end
 
   def apply_orchestra_filter(videos, value)

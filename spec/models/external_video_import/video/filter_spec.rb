@@ -14,6 +14,15 @@ RSpec.describe Video::Filter do
       end
     end
 
+    context "when filtering by leader and follower" do
+      fit "returns videos with specified leader and follower" do
+        filtering_params = {leader: "carlitos-espinoza", follower: "noelia-hurtado"}
+        filtered_videos = described_class.new(Video.all, filtering_params:).apply_filter
+
+        expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
+      end
+    end
+
     context "when filtering by leader" do
       it "returns videos with leader" do
         filtered_videos = described_class.new(Video.all, filtering_params: {leader: "corina-herrera"}).apply_filter

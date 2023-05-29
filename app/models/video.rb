@@ -45,9 +45,9 @@ class Video < ApplicationRecord
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
-  has_many :follower_roles, ->(_role) { where(role: :follower) }, class_name: "DancerVideo", inverse_of: :dancer, dependent: :destroy
-  has_many :leader_roles, ->(_role) { where(role: :leader) }, class_name: "DancerVideo", inverse_of: :dancer, dependent: :destroy
+  has_many :leader_roles, -> { where(role: :leader) }, class_name: "DancerVideo", inverse_of: :video, dependent: :destroy
   has_many :leaders, through: :leader_roles, source: :dancer
+  has_many :follower_roles, -> { where(role: :follower) }, class_name: "DancerVideo", inverse_of: :video, dependent: :destroy
   has_many :followers, through: :follower_roles, source: :dancer
 
   has_many :couple_videos, dependent: :destroy
@@ -68,41 +68,6 @@ class Video < ApplicationRecord
   scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :follower}) }
   scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :leader}) }
   scope :missing_song, -> { where(song_id: nil) }
-
-  scope :with_same_dancers, ->(video) {
-    includes(Video.search_includes)
-      .where(id: DancerVideo.where(role: :leader, dancer: video.leaders.first).select(:video_id))
-      .where(id: DancerVideo.where(role: :leader, dancer: video.followers.first).select(:video_id))
-      .where(hidden: false)
-      .where.not(youtube_id: video.youtube_id)
-  }
-
-  scope :with_same_event, ->(video) {
-    includes(Video.search_includes)
-      .where(event_id: video.event_id)
-      .where.not(event: nil)
-      .where("upload_date <= ?", video.upload_date + 7.days)
-      .where("upload_date >= ?", video.upload_date - 7.days)
-      .where(hidden: false)
-      .where.not(youtube_id: video.youtube_id)
-  }
-
-  scope :with_same_song, ->(video) {
-    includes(Video.search_includes)
-      .where(song_id: video.song_id)
-      .has_leader_and_follower
-      .where(hidden: false)
-      .where.not(song_id: nil)
-      .where.not(youtube_id: video.youtube_id)
-  }
-
-  scope :with_same_channel, ->(video) {
-    includes(Video.search_includes)
-      .where(channel_id: video.channel_id)
-      .has_leader_and_follower
-      .where(hidden: false)
-      .where.not(youtube_id: video.youtube_id)
-  }
 
   class << self
     def index_query
@@ -144,16 +109,6 @@ class Video < ApplicationRecord
         thumbnail_attachment: :blob
       ]
     end
-  end
-
-  def with_same_performance
-    Video
-      .includes(Video.search_includes)
-      .where(channel_id:)
-      .has_leader_and_follower
-      .where(hidden: false)
-      .where.not(youtube_id:)
-      .where(upload_date: (upload_date - 7.days)..(upload_date + 7.days))
   end
 
   def clicked!
