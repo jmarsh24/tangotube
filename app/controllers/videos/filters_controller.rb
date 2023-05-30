@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FiltersController < ApplicationController
+class Videos::FiltersController < ApplicationController
   before_action :videos_search
 
   # @route GET /videos/filters (filters_videos)

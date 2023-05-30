@@ -70,7 +70,8 @@ Rails.application.routes.draw do
     end
   end
   resource :manifest, only: :show
-  resources :videos do
+  resources :videos 
+    resource :filters, only: [:show]
     resources :clips
     collection do
       get "filters", to: "filters#filters"
