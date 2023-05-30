@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Video::Search do
   fixtures :all
 
-  describe "#perform_search" do
+  describe "#videos" do
     context "when not searching for anything" do
       it "returns all videos with facets" do
         leader_facet = [
@@ -57,7 +57,7 @@ RSpec.describe Video::Search do
 
         search = Video::Search.new
 
-        expect(search.perform_search).to match_array(Video.all.order(popularity: :desc))
+        expect(search.videos).to match_array(Video.all.order(popularity: :desc))
 
         expect(search.facets).to eq(facets)
       end
@@ -92,7 +92,7 @@ RSpec.describe Video::Search do
         search = Video::Search.new(filtering_params: {leader: "corina-herrera"})
         expected_videos = Video::Filter.new(Video.all, filtering_params: {leader: "corina-herrera"}).apply_filter
 
-        expect(search.perform_search).to match_array(expected_videos)
+        expect(search.videos).to match_array(expected_videos)
 
         expect(search.facets).to eq(facets)
       end

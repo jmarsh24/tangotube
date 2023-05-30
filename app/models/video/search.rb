@@ -9,9 +9,13 @@ class Video::Search
     @current_user = current_user
   end
 
-  def perform_search
+  def videos
     filtered_videos = Video::Filter.new(Video.all, filtering_params:, current_user:).apply_filter
     Video::Sort.new(filtered_videos, sorting_params:).apply_sort
+  end
+
+  def featured_videos
+    Video.where(featured: true).order("RANDOM()")
   end
 
   def facets

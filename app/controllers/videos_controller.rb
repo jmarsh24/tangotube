@@ -16,14 +16,14 @@ class VideosController < ApplicationController
   # @route POST /
   # @route GET / (root)
   def index
-    @search = VideoSearch.new(filtering_params:, sorting_params:)
-    @current_page = video_params[:page]&.to_i || 1
+    @search = Video::Search.new(filtering_params:, sorting_params:, hidden: false, current_user:)
+    @current_page = params[:page]&.to_i || 1
     @videos = paginated(@search.videos, per: 12)
     if filtering_params.empty? && sorting_params.empty?
       @featured_videos = paginated(@search.featured_videos, per: 12)
     end
 
-    handle_filtering_and_pagination(@search) if video_params[:filtering] == "true" && video_params[:pagination].nil? && filtering_params.present?
+    handle_filtering_and_pagination(@search) if params[:filtering] == "true" && params[:pagination].nil? && filtering_params.present?
   end
 
   # @route GET /videos/:id (video)
