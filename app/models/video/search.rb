@@ -1,16 +1,17 @@
 class Video::Search
-  attr_reader :filtering_params, :sorting_params, :current_user
+  attr_reader :filtering_params, :sorting_params, :current_user, :hidden
 
   Facets = Struct.new(:leaders, :followers, :orchestras, :genres, :years, :songs, keyword_init: true)
 
-  def initialize(filtering_params: {}, sorting_params: {column: "popularity", direction: "desc"}, current_user: nil)
+  def initialize(filtering_params: {}, sorting_params: {column: "popularity", direction: "desc"}, hidden: false, current_user: nil)
     @filtering_params = filtering_params
     @sorting_params = sorting_params
     @current_user = current_user
+    @hidden = hidden
   end
 
   def videos
-    filtered_videos = Video::Filter.new(Video.all, filtering_params:, current_user:).apply_filter
+    filtered_videos = Video::Filter.new(Video.all, filtering_params:, current_user:, hidden:).apply_filter
     Video::Sort.new(filtered_videos, sorting_params:).apply_sort
   end
 
@@ -19,7 +20,7 @@ class Video::Search
   end
 
   def facets
-    videos = Video::Filter.new(Video.all, filtering_params:, current_user:).apply_filter
+    videos = Video::Filter.new(Video.all, filtering_params:, current_user:, hidden:).apply_filter
     facet_builder = Video::FacetBuilder.new(videos)
 
     Facets.new(

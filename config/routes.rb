@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+require "sidekiq/web"
+require "sidekiq-scheduler/web"
+
 Rails.application.routes.draw do
   # Health checks
   get "up" => "rails/health#show", :as => :rails_health_check
@@ -39,9 +44,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :manifest, only: :show
+
   resources :videos do
-    resource :filter, only: [:show], controller: 'videos/filters' 
     resources :clips, :comments, module: :videos
+    get 'filters', to: 'videos/filters#index', on: :collection
     member do
       patch "upvote", to: "videos#upvote"
       patch "downvote", to: "videos#downvote"

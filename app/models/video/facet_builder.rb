@@ -1,5 +1,9 @@
 class Video::FacetBuilder
-  Facet = Struct.new(:name, :count, :param, :value, keyword_init: true)
+  Facet = Struct.new(:name, :count, :param, :value, keyword_init: true) do
+    def formatted
+      ["#{name} (#{count})", value]
+    end
+  end
 
   def initialize(video_relation)
     @video_relation = video_relation
