@@ -1,5 +1,6 @@
+
 = turbo_frame_tag :filters, "target": "_top" do
-  #filters-bar.filter-bar.stack.stack--line.stack--wrap.stack--justify-left
+  .filter-bar.stack.stack--line.stack--wrap.stack--justify-left
     .dropdown data-controller="dropdown"
       button data-action="dropdown#toggle click@window->dropdown#hide" class="button button--secondary" id="mobile-button" class=(filtering_params.present? ? "active" : "")
         = t(".filters")

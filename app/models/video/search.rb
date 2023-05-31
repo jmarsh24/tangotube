@@ -3,7 +3,7 @@ class Video::Search
 
   Facets = Struct.new(:leaders, :followers, :orchestras, :genres, :years, :songs, keyword_init: true)
 
-  def initialize(filtering_params: {}, sorting_params: {column: "popularity", direction: "desc"}, hidden: false, current_user: nil)
+  def initialize(filtering_params: {}, sorting_params: {sort: "popularity", direction: "desc"}, hidden: false, current_user: nil)
     @filtering_params = filtering_params
     @sorting_params = sorting_params
     @current_user = current_user

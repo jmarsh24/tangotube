@@ -9,13 +9,13 @@ class Video::Sort
     "channel" => "channels.title",
     "performance" => "performance_videos.performance_id",
     "popularity" => "videos.popularity",
-    "view_count" => "videos.view_count",
-    "like_count" => "videos.like_count"
+    "view_count" => "videos.youtube_view_count",
+    "like_count" => "videos.youtube_like_count"
   }.freeze
 
   attr_reader :video_relation, :sorting_params
 
-  def initialize(video_relation, sorting_params: {column: "popularity", direction: "desc"})
+  def initialize(video_relation, sorting_params: {sort: "popularity", direction: "desc"})
     @video_relation = video_relation
     @sorting_params = sorting_params
   end
@@ -23,11 +23,11 @@ class Video::Sort
   def apply_sort
     return video_relation if sorting_params.blank?
 
-    column = translate_column(sorting_params[:column])
+    column = translate_column(sorting_params[:sort])
     direction = sorting_params[:direction]
 
-    if requires_join?(sorting_params[:column])
-      join_association(sorting_params[:column])
+    if requires_join?(sorting_params[:sort])
+      join_association(sorting_params[:sort])
     end
 
     self.video_relation = video_relation.order(column => direction)

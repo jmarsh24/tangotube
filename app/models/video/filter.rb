@@ -14,6 +14,8 @@ class Video::Filter
     hidden: :apply_hidden_filter,
     channel: :apply_channel_filter,
     exclude_youtube_id: :apply_exclude_youtube_id_filter,
+    hd: :apply_hd_filter,
+    dancer: :apply_dancer_filter
   }.freeze
 
   def initialize(video_relation, filtering_params: {}, current_user: nil, hidden: false)
@@ -44,6 +46,18 @@ class Video::Filter
       end
   end
     filtered
+  end
+
+  def apply_hd_filter(videos, value)
+    videos.where("hd = ?", value)
+  end
+
+  def apply_dancer_filter(videos, value)
+    if value
+      videos.joins(:dancer_videos, :dancers)
+    else
+      videos.where.not(id: DancerVideo.select(:video_id))
+    end
   end
 
   def apply_liked_by_user_filter(videos, user)

@@ -227,7 +227,7 @@ class VideosController < ApplicationController
   end
 
   def filtering_params
-    video_params.permit(
+    video_params.slice(
       :leader,
       :follower,
       :channel,
