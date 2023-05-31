@@ -12,7 +12,7 @@ RSpec.describe MetaDataDisplayable, type: :module do
         youtube: {
           like_count: 1234,
           view_count: 56789,
-          upload_date: Time.zone.now
+          upload_date: "May 2023".to_date
         }
       }
     )

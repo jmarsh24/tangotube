@@ -1,10 +1,9 @@
 class Video::Filter
-  attr_reader :video_relation, :filtering_params, :current_user
+  attr_reader :video_relation, :filtering_params
 
-  def initialize(video_relation, filtering_params: {}, current_user: nil)
+  def initialize(video_relation, filtering_params: {})
     @video_relation = video_relation
     @filtering_params = filtering_params
-    @current_user = current_user
   end
 
   def apply_filter

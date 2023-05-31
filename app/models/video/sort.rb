@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class Video::Sort
   COLUMN_ASSOCIATIONS = [:channel, :orchestra, :performance, :song].freeze
 
   COLUMN_TRANSLATIONS = {
-    "year" => "videos.upload_date_year",
-    "upload_date" => "videos.upload_date",
-    "song" => "songs.title",
-    "orchestra" => "orchestras.name",
-    "channel" => "channels.title",
-    "performance" => "performance_videos.performance_id",
-    "popularity" => "videos.popularity",
-    "view_count" => "videos.youtube_view_count",
-    "like_count" => "videos.youtube_like_count"
+    year: "videos.upload_date_year",
+    upload_date: "videos.upload_date",
+    song: "songs.title",
+    orchestra: "orchestras.name",
+    channel: "channels.title",
+    performance: "performance_videos.performance_id",
+    popularity: "videos.popularity",
+    view_count: "videos.youtube_view_count",
+    like_count: "videos.youtube_like_count"
   }.freeze
 
   attr_reader :video_relation, :sorting_params
@@ -26,9 +28,10 @@ class Video::Sort
     column = translate_column(sorting_params[:sort])
     direction = sorting_params[:direction]
 
-    if requires_join?(sorting_params[:sort])
-      join_association(sorting_params[:sort])
-    end
+    raise ArgumentError, "Invalid sort column" unless COLUMN_TRANSLATIONS.has_key?(column.to_sym)
+    raise ArgumentError, "Invalid sort direction" unless [:asc, :desc].include?(direction.to_sym)
+
+    video_relation = join_association(column) if requires_join?(column)
 
     self.video_relation = video_relation.order(column => direction)
 
@@ -37,27 +40,30 @@ class Video::Sort
 
   private
 
-  def requires_join?(column) 
-    COLUMN_ASSOCIATIONS.include?(column.to_sym)
+  def requires_join?(column)
+    COLUMN_ASSOCIATIONS.include?(column.to_sym) || column
   end
 
   def join_association(column)
     case column
     when "song"
-      video_relation = self.video_relation.joins(:song)
+      video_relation.joins(:song)
     when "performance"
-      video_relation = self.video_relation.joins(:performance_video)
+      video_relation.joins(:performance_video)
     when "channel"
-      video_relation = self.video_relation.joins(:channel)
+      video_relation.joins(:channel)
     when "orchestra"
-      video_relation = self.video_relation.joins(song: :orchestra)
+      video_relation.joins(song: :orchestra)
+    else
+      video_relation
     end
-    self.video_relation = video_relation
   end
 
   def translate_column(column)
     COLUMN_TRANSLATIONS[column] || column
   end
 
-  attr_writer :video_relation
+  def video_relation=(value)
+    @video_relation = value
+  end
 end

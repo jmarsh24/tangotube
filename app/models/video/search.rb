@@ -11,7 +11,7 @@ class Video::Search
   end
 
   def videos
-    filtered_videos = Video::Filter.new(Video.all, filtering_params:, current_user:, hidden:).apply_filter
+    filtered_videos = Video::Filter.new(Video.all, filtering_params:).apply_filter
     Video::Sort.new(filtered_videos, sorting_params:).apply_sort
   end
 
@@ -20,7 +20,7 @@ class Video::Search
   end
 
   def facets
-    videos = Video::Filter.new(Video.all, filtering_params:, current_user:, hidden:).apply_filter
+    videos = Video::Filter.new(Video.all, filtering_params:).apply_filter
     facet_builder = Video::FacetBuilder.new(videos)
 
     Facets.new(
