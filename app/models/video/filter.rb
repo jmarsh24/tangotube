@@ -15,7 +15,8 @@ class Video::Filter
     channel: :apply_channel_filter,
     exclude_youtube_id: :apply_exclude_youtube_id_filter,
     hd: :apply_hd_filter,
-    dancer: :apply_dancer_filter
+    dancer: :apply_dancer_filter,
+    query: :filter_by_query
   }.freeze
 
   def initialize(video_relation, filtering_params: {}, current_user: nil, hidden: false)
@@ -44,8 +45,12 @@ class Video::Filter
       else
         send("apply_#{key}_filter", filtered, value)
       end
-  end
+    end
     filtered
+  end
+
+  def apply_query_filter(videos, value)
+    videos.search(value)
   end
 
   def apply_hd_filter(videos, value)

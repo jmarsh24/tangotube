@@ -112,5 +112,30 @@ RSpec.describe Video::Filter do
         expect(filtered_videos).to match_array([videos(:video_1_featured)])
       end
     end
+
+    context "when filtering by query" do
+      it "returns videos matching query" do
+        Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
+
+        filtered_videos = described_class.new(Video.all, filtering_params: {query: "carlitoss"}).apply_filter
+
+        expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
+      end
+
+      it "returns videos matching query with accents" do
+        Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
+
+        filtered_videos = described_class.new(Video.all, filtering_params: {query: "carlíitos"}).apply_filter
+
+        expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
+      end
+
+      it "returns videos matching query with a \' character" do
+        Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
+        
+        filtered_videos = described_class.new(Video.all, filtering_params: {query: "darienzo"}).apply_filter
+        expect(filtered_videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
+      end
+    end
   end
 end
