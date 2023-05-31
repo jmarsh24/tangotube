@@ -68,6 +68,30 @@ class Video < ApplicationRecord
   scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }
   scope :has_leader_and_follower, -> { has_leader.has_follower }
 
+  scope :query, ->(value) { search(value) }
+  scope :hd, ->(value) { where(hd: value) }
+  scope :dancer, ->(value) { value ? joins(:dancer_videos, :dancers) : where.not(id: DancerVideo.select(:video_id)) }
+  scope :liked_by_user, ->(user) { where(id: user.find_up_voted_items.pluck(:id)) }
+  scope :watched_by_user, ->(user) { where(id: user.votes.where(vote_scope: "watchlist", vote_flag: true).pluck(:votable_id)) }
+  scope :leader, ->(value) {
+                   joins("JOIN dancer_videos AS leader_dancer_videos ON leader_dancer_videos.video_id = videos.id")
+                     .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
+                     .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
+                 }
+  scope :follower, ->(value) {
+                     joins("JOIN dancer_videos AS follower_dancer_videos ON follower_dancer_videos.video_id = videos.id")
+                       .joins("JOIN dancers AS follower_dancers ON follower_dancers.id = follower_dancer_videos.dancer_id")
+                       .where(follower_dancers: {slug: value}, follower_dancer_videos: {role: "follower"})
+                   }
+  scope :orchestra, ->(value) { joins(:song, :orchestra).where(orchestras: {slug: value}) }
+  scope :genre, ->(value) { joins(:song).where("LOWER(songs.genre) = ?", value.downcase) }
+  scope :year, ->(value) { where(upload_date_year: value) }
+  scope :song, ->(value) { joins(:song).where(songs: {slug: value}) }
+  scope :event, ->(value) { joins(:event).where(events: {slug: value}) }
+  scope :hidden, ->(value) { where(hidden: value) }
+  scope :channel, ->(value) { joins(:channel).where(channels: {channel_id: value}) }
+  scope :exclude_youtube_id, ->(value) { where.not(youtube_id: value) }
+
   class << self
     def index_query
       <<~SQL.squish
