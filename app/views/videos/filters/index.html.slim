@@ -1,0 +1,40 @@
+= turbo_frame_tag :filters, "target": "_top" do
+  #filters-bar.filter-bar.stack.stack--line.stack--wrap.stack--justify-left
+    .dropdown data-controller="dropdown"
+      button data-action="dropdown#toggle click@window->dropdown#hide" class="button button--secondary" id="mobile-button" class=(filtering_params.present? ? "active" : "")
+        = t(".filters")
+      #filters.menu.menu--left data-dropdown-target="menu"
+        - cache [params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year], params[:filtering], params[:query], params[:dancer], params[:hd]], expires_in: 12.hours do
+        = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
+          .stack.stack--desktop-line
+            div
+              = f.select :genre, options_for_select(@search_facets.genres.map(&:formatted), params[:genre].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".genre_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 160px", id: "genre-filter"
+            div
+              = f.select :leader, options_for_select(@search_facets.leaders.map(&:formatted), params[:leader].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".leader_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 240px", id: "leader-filter"
+            div
+              = f.select :follower, options_for_select(@search_facets.followers.map(&:formatted), params[:follower].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".follow_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 240px", id: "follower-filter"
+            div
+              = f.select :orchestra, options_for_select(@search_facets.orchestras.map(&:formatted), params[:orchestra].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".orchestra_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 200px", id: "orchestra-filter"
+            div
+              = f.select :year, options_for_select(@search_facets.years.map(&:formatted), params[:year].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".year_filter_placeholder"), "data-controller": "tom-select" , class: "input input__input", style: "width: 140px", id: "year-filter"
+
+            = f.hidden_field :filtering, value: "true"
+        #menu-additional-filters
+          = render partial: "videos/filters/filter-sorting/filtering"
+    #desktop-filters.dropdown data-controller="dropdown"
+      button data-action="dropdown#toggle click@window->dropdown#hide" class="button button--secondary" class=(filtering_params.present? ? "active" : "")
+        = t(".filters")
+      .menu.menu--left data-dropdown-target="menu"
+        = render partial: "videos/filters/filter-sorting/filtering"
+    .dropdown data-controller="dropdown"
+      button data-action="dropdown#toggle click@window->dropdown#hide" id="button-sorting" class="button button--secondary" class=(sorting_params.present? ? "active" : "")
+        = t(".sorting")
+      .menu data-dropdown-target="menu"
+        = render partial: "videos/filters/filter-sorting/sorting"
+    - if filtering_params.present? || sorting_params.present?
+      = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
+        = f.submit "Clear All", name: "clear", type: "button", class: "button button--secondary", "data-action": "click->autosubmit#clear"
+    - if current_user.try(:admin?) && filtering_params.has_key?(:channel) && Channel.find_by(channel_id: filtering_params[:channel]).active?
+      form action="#{channel_deactivate_path(filtering_params[:channel])}" method="post" data-turbo="false"
+        button.button.button--secondary type="submit"
+          = t(".deactivate")
