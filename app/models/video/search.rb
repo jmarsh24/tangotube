@@ -20,7 +20,7 @@ class Video::Search
   end
 
   def facets
-    videos = Video::Filter.new(Video.all, filtering_params:).apply_filter
+    videos = Video::Filter.new(Video.all, filtering_params:, current_user:).apply_filter
     facet_builder = Video::FacetBuilder.new(videos)
 
     Facets.new(

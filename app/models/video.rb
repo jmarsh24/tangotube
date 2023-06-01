@@ -115,14 +115,15 @@ class Video < ApplicationRecord
                      .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
                      .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
                  }
-  scope :liked_by_user, ->(user) { where(id: user.get_voted(Video).pluck(:id)) }
+  scope :liked, ->(user) { where(id: user.get_voted(Video).pluck(:id)) }
   scope :missing_song, -> { where(song_id: nil) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :orchestra, ->(value) { joins(:song, :orchestra).where(orchestras: {slug: value}) }
   scope :query, ->(value) { search(value) }
   scope :song, ->(value) { joins(:song).where(songs: {slug: value}) }
   scope :event, ->(value) { joins(:event).where(events: {slug: value}) }
-  scope :watched_by_user, ->(user) { where(id: user.votes.where(vote_scope: "watchlist", vote_flag: true).pluck(:votable_id)) }
+  scope :watched, ->(user) { where(id: user.votes.where(vote_scope: "watchlist", vote_flag: true).pluck(:votable_id)) }
+  scope :not_watched, ->(user) { where.not(id: user.votes.where(vote_scope: "watchlist", vote_flag: true).pluck(:votable_id)) }
   scope :year, ->(value) { where(upload_date_year: value) }
 
   class << self

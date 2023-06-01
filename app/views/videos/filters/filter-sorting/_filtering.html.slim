@@ -28,10 +28,3 @@ h4.heading-4.heading-4--bold.dropdown__label = t(".additional_filters_heading")
     .icon.icon--close.icon--xs
   - else
     = t(".hd")
-- path = request.query_parameters[:dancer] == "true" ? root_path(request.query_parameters.except(:dancer)) : root_path(request.query_parameters.merge(dancer: true))
-= link_to path, class: "menu-item" do
-  - if request.query_parameters[:dancer] == "true"
-    span = t ".with_dancer"
-    .icon.icon--close.icon--xs
-  - else
-    = t(".with_dancer")
