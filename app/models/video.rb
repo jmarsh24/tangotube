@@ -96,6 +96,7 @@ class Video < ApplicationRecord
   scope :dancer, ->(value) { value ? joins(:dancer_videos, :dancers) : where.not(id: DancerVideo.select(:video_id)) }
   scope :exclude_youtube_id, ->(value) { where.not(youtube_id: value) }
   scope :featured, -> { where(featured: true) }
+  scope :not_featured, -> { where(featured: false) }
   scope :follower, ->(value) {
                      joins("JOIN dancer_videos AS follower_dancer_videos ON follower_dancer_videos.video_id = videos.id")
                        .joins("JOIN dancers AS follower_dancers ON follower_dancers.id = follower_dancer_videos.dancer_id")
