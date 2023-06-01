@@ -6,11 +6,7 @@ class Videos::FiltersController < ApplicationController
   
   # @route GET /videos/filters (filters_videos)
   def index
-     @search_facets = Video::Search.new(filtering_params:, current_user:).facets
-     respond_to do |format|
-      format.turbo_stream
-      format.html
-    end
+    @search_facets = Video::Search.new(filtering_params:, current_user:).facets
   end
 
   private
