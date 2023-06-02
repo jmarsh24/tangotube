@@ -24,6 +24,8 @@ class Videos::FiltersController < ApplicationController
       :year,
       :id,
       :dancer,
-      :query)
+      :query,
+      :watched,
+      :liked)
   end
 end
