@@ -1,36 +1,36 @@
-name: Deploy
+# name: Deploy
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-env:
-  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-  DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-  POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+# env:
+#   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+#   DATABASE_URL: ${{ secrets.DATABASE_URL }}
+#   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+#   DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+#   POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+#   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+#   POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+#       - name: Set up Ruby
+#         uses: ruby/setup-ruby@v1
+#         with:
+#           bundler-cache: true
 
-      - name: Install SSH Key
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.TANGOTUBE_SSH_PRIVATE_KEY }}
+#       - name: Install SSH Key
+#         uses: webfactory/ssh-agent@v0.5.3
+#         with:
+#           ssh-private-key: ${{ secrets.TANGOTUBE_SSH_PRIVATE_KEY }}
 
-      - name: Deploy with MRSK
-        run: bundle exec mrsk deploy
+#       - name: Deploy with MRSK
+#         run: bundle exec mrsk deploy
