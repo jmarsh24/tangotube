@@ -2,8 +2,9 @@ class Video::Filter
   attr_reader :video_relation, :filtering_params
   attr_accessor :current_user
 
-  def initialize(video_relation, filtering_params: {}, current_user: nil)
+  def initialize(video_relation, filtering_params: {}, excluded_youtube_id: nil, current_user: nil)
     @video_relation = video_relation
+    @video_relation = @video_relation.exclude_youtube_id(excluded_youtube_id) if excluded_youtube_id.present?
     @filtering_params = filtering_params
     @current_user = current_user
   end
