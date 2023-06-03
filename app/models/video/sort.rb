@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Video::Sort
+  attr_writer :video_relation
+  
   COLUMN_ASSOCIATIONS = [:channel, :orchestra, :performance, :song].freeze
 
   COLUMN_TRANSLATIONS = {
@@ -61,9 +63,5 @@ class Video::Sort
 
   def translate_column(column)
     COLUMN_TRANSLATIONS[column] || column
-  end
-
-  def video_relation=(value)
-    @video_relation = value
   end
 end

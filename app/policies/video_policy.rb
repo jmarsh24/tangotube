@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class VideoPolicy < ApplicationPolicy
   def index?
     true
@@ -19,6 +17,10 @@ class VideoPolicy < ApplicationPolicy
 
   def destroy?
     user&.admin?
+  end
+
+  def like?
+    user.present? 
   end
 
   class Scope < Scope

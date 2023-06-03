@@ -95,7 +95,7 @@ RSpec.describe Video::Filter do
         video = videos(:video_1_featured)
         video.upvote_by current_user, vote_scope: "like"
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {liked_by_user: current_user}).apply_filter
+        filtered_videos = described_class.new(Video.all, filtering_params: {liked: true}, current_user:).apply_filter
 
         expect(filtered_videos).to match_array([videos(:video_1_featured)])
       end
@@ -107,7 +107,7 @@ RSpec.describe Video::Filter do
         video = videos(:video_1_featured)
         video.upvote_by current_user, vote_scope: "watchlist"
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {watched_by_user: current_user}).apply_filter
+        filtered_videos = described_class.new(Video.all, filtering_params: {watched: true}, current_user:).apply_filter
 
         expect(filtered_videos).to match_array([videos(:video_1_featured)])
       end

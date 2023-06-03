@@ -1,5 +1,6 @@
 class Video::Search
-  attr_reader :filtering_params, :sorting_params, :current_user
+  attr_reader :filtering_params, :sorting_params
+  attr_accessor :current_user
 
   Facets = Struct.new(:leaders, :followers, :orchestras, :genres, :years, :songs, keyword_init: true)
 

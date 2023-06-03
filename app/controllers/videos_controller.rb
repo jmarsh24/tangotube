@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:upvote, :downvote, :bookmark, :complete, :watchlist]
+  before_action :authorize_admin!, only: [:featured]
   before_action :current_search, only: [:index]
-  before_action :set_video, except: [:index]
   before_action :check_for_clear, only: [:index]
-  before_action :authorize_admin!, except: [:index, :show]
-
   before_action :set_video, except: [:index, :create, :destroy]
-  before_action :authorize_admin!, except: [:index, :show, :create, :destroy]
-
   helper_method :filtering_params, :sorting_params
 
   # @route GET /videos (videos)

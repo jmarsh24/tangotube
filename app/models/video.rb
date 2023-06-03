@@ -115,7 +115,7 @@ class Video < ApplicationRecord
                      .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
                      .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
                  }
-  scope :liked, ->(user) { where(id: user.get_voted(Video).pluck(:id)) }
+  scope :liked, ->(user) { where(id: user.votes.where(vote_scope: "like", vote_flag: true).select(:votable_id)) }
   scope :missing_song, -> { where(song_id: nil) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :orchestra, ->(value) { joins(:song, :orchestra).where(orchestras: {slug: value}) }

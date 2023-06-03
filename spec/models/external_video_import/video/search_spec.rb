@@ -96,6 +96,47 @@ RSpec.describe Video::Search do
 
         expect(search.facets).to eq(facets)
       end
+
+      it "returns all videos when filtering with liked" do
+        leader_facet = [
+          Video::FacetBuilder::Facet.new(name: "Carlitos Espinoza", count: 1, param: "leader", value: "carlitos-espinoza")
+        ]
+
+        follower_facet = [
+          Video::FacetBuilder::Facet.new(name: "Noelia Hurtado", count: 1, param: "follower", value: "noelia-hurtado")
+        ]
+
+        orchestra_facet = [
+          Video::FacetBuilder::Facet.new(name: "Carlos Di Sarli", count: 1, param: "orchestra", value: "carlos-di-sarli")
+        ]
+
+        genre_facet = [
+          Video::FacetBuilder::Facet.new(name: "Tango", count: 1, param: "genre", value: "tango")
+        ]
+
+        year_facet = [
+          Video::FacetBuilder::Facet.new(name: 2014, count: 1, param: "year", value: 2014)
+        ]
+
+        song_facet = [
+          Video::FacetBuilder::Facet.new(name: "Cuando El Amor Muere", count: 1, param: "song", value: "cuando-el-amor-muere-carlos-di-sarli"),
+        ]
+
+        current_user = users(:regular)
+        video = videos(:video_1_featured)
+        video.upvote_by current_user, vote_scope: "like"
+
+        search = Video::Search.new(filtering_params: {liked: "true"}, current_user:)
+
+        expect(search.videos).to match_array([videos(:video_1_featured)])
+
+        expect(search.facets.leaders).to eq(leader_facet)
+        expect(search.facets.followers).to eq(follower_facet)
+        expect(search.facets.orchestras).to eq(orchestra_facet)
+        expect(search.facets.genres).to eq(genre_facet)
+        expect(search.facets.years).to eq(year_facet)
+        expect(search.facets.songs).to eq(song_facet)
+      end
     end
   end
 end
