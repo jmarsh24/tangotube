@@ -142,10 +142,6 @@ class Video < ApplicationRecord
     end
   end
 
-  def votes
-    votes_for || []
-  end
-
   ["like", "watchlist", "bookmark"].each do |vote_scope|
     define_method "#{vote_scope}_by" do |vote_flag = true|
       votes.where(vote_scope:, vote_flag:).map(&:voter_id)
@@ -158,20 +154,8 @@ class Video < ApplicationRecord
     save!
   end
 
-  def disliked_by
-    votes.where(vote_scope: "like", vote_flag: false).map(&:voter_id)
-  end
-
-  def not_watched_by
-    User.all.pluck(:id) - votes.where(vote_scope: "watchlist", vote_flag: true).map(&:voter_id)
-  end
-
   def featured?
     featured
-  end
-
-  def thumbnail_url
-    thumbnail.presence || "https://i.ytimg.com/vi/#{youtube_id}/hqdefault.jpg"
   end
 
   def to_param
