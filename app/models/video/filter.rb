@@ -23,4 +23,8 @@ class Video::Filter
 
     video_relation
   end
+
+  def videos
+    apply_filter
+  end
 end

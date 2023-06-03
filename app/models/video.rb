@@ -121,6 +121,7 @@ class Video < ApplicationRecord
   scope :watched, ->(user) { where(id: user.votes.where(vote_scope: "watchlist", vote_flag: true).pluck(:votable_id)) }
   scope :not_watched, ->(user) { where.not(id: user.votes.where(vote_scope: "watchlist", vote_flag: true).pluck(:votable_id)) }
   scope :year, ->(value) { where(upload_date_year: value) }
+  scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
 
   class << self
     def index_query
