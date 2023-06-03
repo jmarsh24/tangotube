@@ -19,14 +19,14 @@ class Video::RelatedVideos
 
   def with_same_song
     Video::Search.new(filtering_params: {song: @video.song.slug, hidden: false}).videos
-      .has_leader_and_follower
+      .has_leader.has_follower
       .where.not(youtube_id: @video.youtube_id)
       .distinct
   end
 
   def with_same_channel
     Video::Search.new(filtering_params: {channel: @video.channel.channel_id, hidden: false}).videos
-      .has_leader_and_follower
+      .has_leader.has_follower
       .where.not(youtube_id: @video.youtube_id)
       .distinct
   end

@@ -93,7 +93,6 @@ class Video < ApplicationRecord
   validates :youtube_id, presence: true, uniqueness: true
 
   scope :channel, ->(value) { joins(:channel).where(channels: {channel_id: value}) }
-  scope :dancer, ->(value) { value ? joins(:dancer_videos, :dancers) : where.not(id: DancerVideo.select(:video_id)) }
   scope :exclude_youtube_id, ->(value) { where.not(youtube_id: value) }
   scope :featured, -> { where(featured: true) }
   scope :not_featured, -> { where(featured: false) }
@@ -102,22 +101,19 @@ class Video < ApplicationRecord
                        .joins("JOIN dancers AS follower_dancers ON follower_dancers.id = follower_dancer_videos.dancer_id")
                        .where(follower_dancers: {slug: value}, follower_dancer_videos: {role: "follower"})
                    }
+  scope :leader, ->(value) {
+                    joins("JOIN dancer_videos AS leader_dancer_videos ON leader_dancer_videos.video_id = videos.id")
+                      .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
+                      .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
+                    }
   scope :genre, ->(value) { joins(:song).where("LOWER(songs.genre) = ?", value.downcase) }
   scope :has_leader, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'leader')") }
   scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }
-  scope :has_leader_and_follower, -> { has_leader.has_follower }
-  scope :has_song, -> { where.not(song_id: nil) }
   scope :hd, ->(value) { where(hd: value) }
   scope :hidden, -> { where(hidden: true) }
-  scope :hidden, ->(value) { where(hidden: value) }
-  scope :leader, ->(value) {
-                   joins("JOIN dancer_videos AS leader_dancer_videos ON leader_dancer_videos.video_id = videos.id")
-                     .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
-                     .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
-                 }
+  scope :not_hidden, -> { where(hidden: false) }
   scope :liked, ->(user) { where(id: user.votes.where(vote_scope: "like", vote_flag: true).select(:votable_id)) }
   scope :missing_song, -> { where(song_id: nil) }
-  scope :not_hidden, -> { where(hidden: false) }
   scope :orchestra, ->(value) { joins(:song, :orchestra).where(orchestras: {slug: value}) }
   scope :query, ->(value) { search(value) }
   scope :song, ->(value) { joins(:song).where(songs: {slug: value}) }
