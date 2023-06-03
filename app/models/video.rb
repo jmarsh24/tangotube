@@ -150,7 +150,6 @@ class Video < ApplicationRecord
 
   def clicked!
     increment(:click_count)
-    increment(:popularity)
     save!
   end
 
