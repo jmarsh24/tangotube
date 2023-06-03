@@ -5,7 +5,7 @@ module SongLinkable
     if song.present?
       link_to song.full_title, root_path(song: song.slug)
     elsif external_song_attributes.present?
-      link_to external_song_attributes, root_path(query: song_query_param)
+      link_to external_song_attributes, root_path(search: song_query_param)
     end
   end
 

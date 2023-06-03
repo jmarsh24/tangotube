@@ -23,7 +23,7 @@ RSpec.describe SongLinkable, type: :concern do
     end
 
     it "renders a link to the song search page with external song attributes" do
-      expect(subject).to eq(link_to("Song Title - Artist Name - Tango", root_path(query: "Song Title Artist Name Tango")))
+      expect(subject).to eq(link_to("Song Title - Artist Name - Tango", root_path(search: "Song Title Artist Name Tango")))
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_05_26_162915) do
+ActiveRecord::Schema[7.1].define(version: 2023_06_03_113237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_stat_statements"
@@ -328,14 +328,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_26_162915) do
     t.jsonb "metadata"
     t.datetime "imported_at"
     t.date "upload_date"
-    t.integer "upload_date_year", default: 0
-    t.string "title", null: false
-    t.text "description", null: false
-    t.boolean "hd", default: false, null: false
-    t.integer "youtube_view_count", default: 0, null: false
-    t.integer "youtube_like_count", default: 0, null: false
-    t.string "youtube_tags", default: [], array: true
-    t.integer "duration", default: 0, null: false
+    t.integer "upload_date_year"
+    t.text "title"
+    t.text "description"
+    t.boolean "hd"
+    t.integer "youtube_view_count"
+    t.integer "youtube_like_count"
+    t.text "youtube_tags", array: true
+    t.integer "duration"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["click_count"], name: "index_videos_on_click_count"
     t.index ["event_id"], name: "index_videos_on_event_id"
@@ -364,6 +364,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_26_162915) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
   end
 
+  create_table "watches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "video_id", null: false
+    t.datetime "watched_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_watches_on_user_id"
+    t.index ["video_id"], name: "index_watches_on_video_id"
+  end
+
   create_table "youtube_events", force: :cascade do |t|
     t.jsonb "data"
     t.integer "status", default: 0
@@ -386,4 +396,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_26_162915) do
   add_foreign_key "playlists", "videos", column: "videos_id"
   add_foreign_key "taggings", "tags"
   add_foreign_key "videos", "events"
+  add_foreign_key "watches", "users"
+  add_foreign_key "watches", "videos"
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
-  before_action :authenticate_user!, except: [:upvote, :downvote, :bookmark, :complete, :watchlist]
+  before_action :authenticate_user!, only: [:upvote, :downvote, :bookmark, :complete, :watchlist]
   before_action :authorize_admin!, only: [:featured]
   before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
@@ -31,47 +31,22 @@ class VideosController < ApplicationController
       ExternalVideoImport::Importer.new.import(video_params[:v])
       @video = Video.find_by(youtube_id: video_params[:v])
     end
-    set_recommended_videos
-    @start_value = params[:start]
-    @end_value = params[:end]
-    @root_url = root_url
-    @playback_rate = params[:speed] || "1"
-    @clip = Clip.new
 
-    @comments =
-      if params[:comment]
-        @video.comments.includes([:commentable]).where(id: params[:comment])
-      else
-        @video.comments.includes([:commentable]).where(parent_id: nil)
-      end
+    @related_videos = Video::RelatedVideos.new(@video)
 
     @video.clicked!
 
-    if user_signed_in?
-      MarkVideoAsWatchedJob.perform_later(video_params[:v], current_user.id)
-    end
+    current_user&.watches&.create(video: @video, watched_at: Time.now)
   end
 
   # @route GET /videos/:id/edit (edit_video)
   def edit
-    @clip = Clip.new
-    set_recommended_videos
-  end
-
-  # @route POST /videos (videos)
-  def create
-    authorize Video
-    @video = Video.create(youtube_id: params[:video][:youtube_id])
-    fetch_new_video
-
-    redirect_to root_path
   end
 
   # @route PATCH /videos/:id (video)
   # @route PUT /videos/:id (video)
   def update
     authorize @video
-    @clip = Clip.new
 
     respond_to do |format|
       if @video.update(video_params)
@@ -105,21 +80,6 @@ class VideosController < ApplicationController
   # @route PATCH /videos/:id/downvote (downvote_video)
   def downvote
     update_downvote "like"
-  end
-
-  # @route PATCH /videos/:id/bookmark (bookmark_video)
-  def bookmark
-    update_upvote "bookmark"
-  end
-
-  # @route PATCH /videos/:id/complete (complete_video)
-  def complete
-    update_upvote "watchlist"
-  end
-
-  # @route PATCH /videos/:id/watchlist (watchlist_video)
-  def watchlist
-    update_downvote "watchlist"
   end
 
   # @route PATCH /videos/:id/featured (featured_video)
@@ -159,9 +119,7 @@ class VideosController < ApplicationController
   end
 
   def set_video
-    @video = Video.includes(Video.search_includes).find_by(youtube_id: video_params[:v]) if video_params[:v]
-    @video = Video.includes(Video.search_includes).find_by(youtube_id: video_params[:id]) if video_params[:id]
-    @video = Video.find_by(youtube_id: video_params[:video_id]) if video_params[:video_id]
+    @video = Video.find_by(youtube_id: video_params[:v]) if video_params[:v]
   end
 
   def fetch_video_if_nil
@@ -169,16 +127,6 @@ class VideosController < ApplicationController
 
     ExternalVideoImport::Importer.new.import(video_params[:v])
     @video = Video.find_by(youtube_id: video_params[:v])
-  end
-
-  def set_recommended_videos
-    related_videos = Video::RelatedVideos.new(@video)
-
-    @videos_from_this_performance = related_videos.with_same_performance.limit(8).includes(:thumbnail_attachment)
-    @videos_with_same_dancers = related_videos.with_same_dancers.limit(8).includes(:thumbnail_attachment)
-    @videos_with_same_event = (related_videos.with_same_event.limit(16).includes(:thumbnail_attachment) - related_videos.with_same_performance.limit(16).includes(:thumbnail_attachment))
-    @videos_with_same_song = related_videos.with_same_song.limit(8).includes(:thumbnail_attachment)
-    @videos_with_same_channel = related_videos.with_same_channel.limit(8).includes(:thumbnail_attachment)
   end
 
   def current_search
@@ -250,10 +198,6 @@ class VideosController < ApplicationController
       :direction,
       :sort
     )
-  end
-
-  def page
-    video_params[:page]
   end
 
   def update_upvote(scope)

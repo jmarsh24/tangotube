@@ -103,11 +103,12 @@ RSpec.describe Video::Filter do
 
     context "when filtering by watched_by_user" do
       it "returns videos watched by user" do
-        current_user = users(:regular)
+        user = users(:regular)
         video = videos(:video_1_featured)
-        video.upvote_by current_user, vote_scope: "watchlist"
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {watched: true}, current_user:).apply_filter
+        Watch.create(user:, video:)
+
+        filtered_videos = described_class.new(Video.all, filtering_params: {watched: true}, current_user: user).apply_filter
 
         expect(filtered_videos).to match_array([videos(:video_1_featured)])
       end
@@ -117,7 +118,7 @@ RSpec.describe Video::Filter do
       it "returns videos matching query" do
         Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {query: "carlitoss"}).apply_filter
+        filtered_videos = described_class.new(Video.all, filtering_params: {search: "carlitoss"}).apply_filter
 
         expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
       end
@@ -125,15 +126,15 @@ RSpec.describe Video::Filter do
       it "returns videos matching query with accents" do
         Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {query: "carlíitos"}).apply_filter
+        filtered_videos = described_class.new(Video.all, filtering_params: {search: "carlíitos"}).apply_filter
 
         expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
       end
 
-      it "returns videos matching query with a \' character" do
+      it "returns videos matching query with a ' character" do
         Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
-        
-        filtered_videos = described_class.new(Video.all, filtering_params: {query: "darienzo"}).apply_filter
+
+        filtered_videos = described_class.new(Video.all, filtering_params: {search: "darienzo"}).apply_filter
         expect(filtered_videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
       end
     end
