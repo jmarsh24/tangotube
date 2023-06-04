@@ -4,12 +4,13 @@
   right: 0;
   pointer-events: none;
   z-index: var(--z-modal);
-  // overflow: scroll;
   top: var(--navbar-height);
+  background-color: var(--color-gray-100);
+  display: flex;
+  justify-content: center;
 
   &__content {
     position: relative;
-    background-color: var(--color-gray-100);
     transition: opacity 0.5s, transform 0.5s;
     opacity: 0;
     transform: translate(0, -80px);
@@ -20,6 +21,7 @@
     gap: var(--spacing-xs);
     height: fit-content;
     width: 100%;
+    max-width: 1600px;
   }
 
   &__title {

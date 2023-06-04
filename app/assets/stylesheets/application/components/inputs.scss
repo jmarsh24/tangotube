@@ -29,8 +29,13 @@
     &:focus {
       border-color: var(--color-neutral-250);
     }
-  }
 
+    &.selected {
+      border: 2px solid var(--color-primary-500);
+      font-weight: bold;
+    }
+  }
+  
   textarea.input__input {
     border-radius: var(--border-radius-input-sm);
   }

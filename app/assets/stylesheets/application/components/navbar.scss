@@ -3,6 +3,7 @@
   z-index: var(--z-navbar);
   padding: var(--spacing-xxs) var(--spacing-sm);
   background-color: var(--color-neutral-100);
+  height: var(--navbar-height);
 
   &__item {
     position: relative;

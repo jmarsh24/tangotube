@@ -1,68 +1,25 @@
-= turbo_frame_tag :filters, "target": "_top" do
-  - cache [params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year], params[:filtering], params[:query], params[:dancer], params[:hd]], expires_in: 12.hours do
+- cache [params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year], params[:filtering], params[:query], params[:dancer], params[:hd]], expires_in: 12.hours do
+  = turbo_frame_tag :filters, "target": "_top" do
     = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
       .stack
         - if filtering_params.present? || sorting_params.present?
           = link_to "Clear All", root_path, method: :get, class: "button button--secondary"
         .stack.stack--desktop-line
           .stack.stack--zero
-            = f.label :genre
-            = f.collection_select :genre, @search_facets.genres, :id, :name, {include_blank: true, selected: params[:genre].presence}, class: "input input__input"
-          .stack.stack--zero
-            = f.label :leader
-            = f.collection_select :leader, @search_facets.leaders, :id, :name, {include_blank: true, selected: params[:leader].presence}, class: "input input__input"
-          .stack.stack--zero
-            = f.label :follower
-            = f.collection_select :follower, @search_facets.followers, :id, :name, {include_blank: true, selected: params[:follower].presence}, class: "input input__input"
-          .stack.stack--zero
-            = f.label :orchestra
-            = f.collection_select :orchestra, @search_facets.orchestras, :id, :name, {include_blank: true, selected: params[:orchestra].presence}, class: "input input__input"
-          .stack.stack--zero
-            = f.label :year
-            = f.collection_select :year, @search_facets.years, :id, :name, {include_blank: true, selected: params[:year].presence}, class: "input input__input"
+            .stack.stack--line
+              = f.collection_radio_buttons :genre, @search_facets.genres, :id, :name do |b|
+                label
+                  = b.radio_button
+                .genre-option class="#{"genre-option--selected" if params[:genre] == b.value}"
+                  .genre-label = b.text
+            - attributes = [\
+              { label: :leader, collection: @search_facets.leaders, placeholder: "All Leaders", param: :leader },
+              { label: :follower, collection: @search_facets.followers, placeholder: "All Followers", param: :follower },
+              { label: :orchestra, collection: @search_facets.orchestras, placeholder: "All Orchestras", param: :orchestra },
+              { label: :year, collection: @search_facets.years, placeholder: "All Years", param: :year }\
+              ]
+            - attributes.each do |attr|
+              .stack.stack--zero
+                = f.label attr[:label]
+                = f.collection_select attr[:label], attr[:collection], :id, :name, { include_blank: attr[:placeholder], selected: params[attr[:param]].presence }, class: "input input__input #{'selected' if params[attr[:param]].presence}"
           = f.hidden_field :filtering, value: "true"
-        .stack.stack--zero.stack--desktop-line.stack--desktop-align-top
-          .stack.stack--zero
-            h4.heading-4.heading-4--bold = t("sort_by_heading")
-            = sortable 'upload_date', "desc", @sort_column, @sort_direction, "Recent First"
-            = sortable 'upload_date', "asc", @sort_column, @sort_direction, "Oldest First"
-            = sortable "view_count", "desc", @sort_column, @sort_direction, "Most Viewed"
-            = sortable "popularity", "desc", @sort_column, @sort_direction, "Trending"
-            = sortable "like_count", "desc", @sort_column, @sort_direction, "Most Liked"
-          .stack.stack--zero
-            h4.heading-4.heading-4--bold = t("group_by_heading")
-            = sortable 'song', "asc", @sort_column, @sort_direction, "Song"
-            = sortable 'orchestra', "asc", @sort_column, @sort_direction, "Orchestra"
-            = sortable 'channel', "asc", @sort_column, @sort_direction, "Channel"
-            = sortable 'performance', "asc", @sort_column, @sort_direction, "Performance"
-          .stack--zero
-            h4.heading-4.heading-4--bold.dropdown__label = t(".additional_filters_heading")
-            - if current_user
-              - path = request.query_parameters[:watched] == "true" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: true))
-              = link_to path, class: "menu-item" do
-                - if request.params["watched"] == "true"
-                  span = t ".watched"
-                  .icon.icon--close.icon--xs
-                - else
-                  = t(".watched")
-              - path = request.query_parameters[:liked] == "true" ? root_path(request.query_parameters.except(:liked)) : root_path(request.query_parameters.merge(liked: true))
-              = link_to path, class: "menu-item" do
-                - if request.query_parameters[:liked] == "true"
-                  span = t ".liked"
-                  .icon.icon--close.icon--xs
-                - else
-                  = t(".liked")
-              - path = request.query_parameters[:watched] == "false" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: false))
-              = link_to path, class: "menu-item" do
-                - if request.query_parameters[:watched] == "false"
-                  span = t ".new_to_you"
-                  .icon.icon--close.icon--xs
-                - else
-                  = t(".new_to_you")
-            - path = request.query_parameters[:hd] == "true" ? root_path(request.query_parameters.except(:hd)) : root_path(request.query_parameters.merge(hd: true))
-            = link_to path, class: "menu-item" do
-              - if request.query_parameters[:hd] == "true"
-                span = t ".hd"
-                .icon.icon--close.icon--xs
-              - else
-                = t(".hd")

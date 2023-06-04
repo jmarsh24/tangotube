@@ -1,0 +1,18 @@
+.stack.stack--desktop-line.stack--desktop-align-top
+  .scrollable-bar
+    = render "components/sort_chip", label: "All", selected: (params[:sort].blank? && params[:direction].blank?), column: nil, direction: nil
+    = render "components/sort_chip", label: "Recent", selected: (params[:sort] == "upload_date" && params[:direction] == "desc"), column: "upload_date", direction: "desc"
+    = render "components/sort_chip", label: "Oldest", selected: (params[:sort] == "upload_date" && params[:direction] == "asc"), column: "upload_date", direction: "asc"
+    = render "components/sort_chip", label: "Most Viewed", selected: (params[:sort] == "view_count" && params[:direction] == "desc"), column: "view_count", direction: "desc"
+    = render "components/sort_chip", label: "Tending", selected: (params[:sort] == "popularity" && params[:direction] == "desc"), column: "popularity", direction: "desc"
+    = render "components/sort_chip", label: "Most Liked", selected: (params[:sort] == "like_count" && params[:direction] == "desc"), column: "like_count", direction: "desc"
+  .scrollable-bar
+    = render "components/sort_chip", label: "Performances", selected: (params[:sort] == "performance" && params[:direction] == "desc"), column: "performance", direction: "desc"
+    = render "components/sort_chip", label: "Songs", selected: (params[:sort] == "song" && params[:direction] == "asc"), column: "song", direction: "asc"
+    = render "components/sort_chip", label: "Orchestras", selected: (params[:sort] == "orchestra" && params[:direction] == "asc"), column: "orchestra", direction: "asc"
+    = render "components/sort_chip", label: "Channels", selected: (params[:sort] == "channel" && params[:direction] == "asc"), column: "channel", direction: "asc"
+  .scrollable-bar
+    = render "components/filter_chip", label: "HD", selected: params[:hd] == "true", key: "hd", value: "true"
+    = render "components/filter_chip", label: "Watched", selected: params[:watched] == "true", key: "watched", value: "true"
+    = render "components/filter_chip", label: "Liked", selected: params[:liked] == "true", key: "liked", value: "true"
+    = render "components/filter_chip", label: "New to You", selected: params[:watched] == "false", key: "watched", value: "false"

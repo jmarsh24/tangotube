@@ -4,6 +4,7 @@
 = render "banner/index"
 .container
   = link_to "Filters", modal_path(filters_videos_path(filtering_params)), class: "button button--secondary"
+  = render partial: "videos/index/video_sorting_filters"
   #videos.stack
     = render "videos/index/videos/header"
     - if @featured_videos.present?

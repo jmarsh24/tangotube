@@ -1,0 +1,20 @@
+.genre-option {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-gray-200);
+  border: 2px solid var(--color-gray-300);
+  border-radius: var(--border-radius-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+
+  &--selected {
+    background-color: var(--color-gray-400);
+    color: var(--color-neutral-0);
+  }
+}
+
+.genre-label {
+  // Add any additional styles for the genre label here
+}

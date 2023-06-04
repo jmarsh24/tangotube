@@ -1,0 +1,19 @@
+.sort-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  background-color: var(--color-gray-500);
+  border-radius: var(--border-radius-lg);
+  color: var(--color-neutral-0);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &--selected {
+    background-color: var(--color-gray-800);
+    color: var(--color-neutral-0);
+  }
+
+  &:hover {
+    background-color: var(--color-gray-400);
+  }
+}
