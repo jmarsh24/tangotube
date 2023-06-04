@@ -1,40 +1,68 @@
 = turbo_frame_tag :filters, "target": "_top" do
-  .filter-bar.stack.stack--line.stack--wrap.stack--justify-left
-    .dropdown data-controller="dropdown"
-      button data-action="dropdown#toggle click@window->dropdown#hide" class="button button--secondary" id="mobile-button" class=(filtering_params.present? ? "active" : "")
-        = t(".filters")
-      #filters.menu.menu--left data-dropdown-target="menu"
-        - cache [params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year], params[:filtering], params[:query], params[:dancer], params[:hd]], expires_in: 12.hours do
-        = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
-          .stack.stack--desktop-line
-            div
-              = f.select :genre, options_for_select(@search_facets.genres.map(&:formatted), params[:genre].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".genre_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 160px", id: "genre-filter"
-            div
-              = f.select :leader, options_for_select(@search_facets.leaders.map(&:formatted), params[:leader].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".leader_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 240px", id: "leader-filter"
-            div
-              = f.select :follower, options_for_select(@search_facets.followers.map(&:formatted), params[:follower].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".follow_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 240px", id: "follower-filter"
-            div
-              = f.select :orchestra, options_for_select(@search_facets.orchestras.map(&:formatted), params[:orchestra].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".orchestra_filter_placeholder"), "data-controller": "tom-select", class: "input input__input", style: "width: 200px", id: "orchestra-filter"
-            div
-              = f.select :year, options_for_select(@search_facets.years.map(&:formatted), params[:year].presence), { include_blank: true, multiple: false, autocomplete: "off" }, placeholder: t(".year_filter_placeholder"), "data-controller": "tom-select" , class: "input input__input", style: "width: 140px", id: "year-filter"
-
-            = f.hidden_field :filtering, value: "true"
-        #menu-additional-filters
-          = render partial: "videos/filters/filter-sorting/filtering"
-    #desktop-filters.dropdown data-controller="dropdown"
-      button data-action="dropdown#toggle click@window->dropdown#hide" class="button button--secondary" class=(filtering_params.present? ? "active" : "")
-        = t(".filters")
-      .menu.menu--left data-dropdown-target="menu"
-        = render partial: "videos/filters/filter-sorting/filtering"
-    .dropdown data-controller="dropdown"
-      button data-action="dropdown#toggle click@window->dropdown#hide" id="button-sorting" class="button button--secondary" class=(sorting_params.present? ? "active" : "")
-        = t(".sorting")
-      .menu data-dropdown-target="menu"
-        = render partial: "videos/filters/filter-sorting/sorting"
-    - if filtering_params.present? || sorting_params.present?
-      = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
-        = f.submit "Clear All", name: "clear", type: "button", class: "button button--secondary", "data-action": "click->autosubmit#clear"
-    - if current_user.try(:admin?) && filtering_params.has_key?(:channel) && Channel.find_by(channel_id: filtering_params[:channel]).active?
-      form action="#{channel_deactivate_path(filtering_params[:channel])}" method="post" data-turbo="false"
-        button.button.button--secondary type="submit"
-          = t(".deactivate")
+  - cache [params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year], params[:filtering], params[:query], params[:dancer], params[:hd]], expires_in: 12.hours do
+    = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
+      .stack
+        - if filtering_params.present? || sorting_params.present?
+          = link_to "Clear All", root_path, method: :get, class: "button button--secondary"
+        .stack.stack--desktop-line
+          .stack.stack--zero
+            = f.label :genre
+            = f.collection_select :genre, @search_facets.genres, :id, :name, {include_blank: true, selected: params[:genre].presence}, class: "input input__input"
+          .stack.stack--zero
+            = f.label :leader
+            = f.collection_select :leader, @search_facets.leaders, :id, :name, {include_blank: true, selected: params[:leader].presence}, class: "input input__input"
+          .stack.stack--zero
+            = f.label :follower
+            = f.collection_select :follower, @search_facets.followers, :id, :name, {include_blank: true, selected: params[:follower].presence}, class: "input input__input"
+          .stack.stack--zero
+            = f.label :orchestra
+            = f.collection_select :orchestra, @search_facets.orchestras, :id, :name, {include_blank: true, selected: params[:orchestra].presence}, class: "input input__input"
+          .stack.stack--zero
+            = f.label :year
+            = f.collection_select :year, @search_facets.years, :id, :name, {include_blank: true, selected: params[:year].presence}, class: "input input__input"
+          = f.hidden_field :filtering, value: "true"
+        .stack.stack--zero.stack--desktop-line.stack--desktop-align-top
+          .stack.stack--zero
+            h4.heading-4.heading-4--bold = t("sort_by_heading")
+            = sortable 'upload_date', "desc", @sort_column, @sort_direction, "Recent First"
+            = sortable 'upload_date', "asc", @sort_column, @sort_direction, "Oldest First"
+            = sortable "view_count", "desc", @sort_column, @sort_direction, "Most Viewed"
+            = sortable "popularity", "desc", @sort_column, @sort_direction, "Trending"
+            = sortable "like_count", "desc", @sort_column, @sort_direction, "Most Liked"
+          .stack.stack--zero
+            h4.heading-4.heading-4--bold = t("group_by_heading")
+            = sortable 'song', "asc", @sort_column, @sort_direction, "Song"
+            = sortable 'orchestra', "asc", @sort_column, @sort_direction, "Orchestra"
+            = sortable 'channel', "asc", @sort_column, @sort_direction, "Channel"
+            = sortable 'performance', "asc", @sort_column, @sort_direction, "Performance"
+          .stack--zero
+            h4.heading-4.heading-4--bold.dropdown__label = t(".additional_filters_heading")
+            - if current_user
+              - path = request.query_parameters[:watched] == "true" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: true))
+              = link_to path, class: "menu-item" do
+                - if request.params["watched"] == "true"
+                  span = t ".watched"
+                  .icon.icon--close.icon--xs
+                - else
+                  = t(".watched")
+              - path = request.query_parameters[:liked] == "true" ? root_path(request.query_parameters.except(:liked)) : root_path(request.query_parameters.merge(liked: true))
+              = link_to path, class: "menu-item" do
+                - if request.query_parameters[:liked] == "true"
+                  span = t ".liked"
+                  .icon.icon--close.icon--xs
+                - else
+                  = t(".liked")
+              - path = request.query_parameters[:watched] == "false" ? root_path(request.query_parameters.except(:watched)) : root_path(request.query_parameters.merge(watched: false))
+              = link_to path, class: "menu-item" do
+                - if request.query_parameters[:watched] == "false"
+                  span = t ".new_to_you"
+                  .icon.icon--close.icon--xs
+                - else
+                  = t(".new_to_you")
+            - path = request.query_parameters[:hd] == "true" ? root_path(request.query_parameters.except(:hd)) : root_path(request.query_parameters.merge(hd: true))
+            = link_to path, class: "menu-item" do
+              - if request.query_parameters[:hd] == "true"
+                span = t ".hd"
+                .icon.icon--close.icon--xs
+              - else
+                = t(".hd")

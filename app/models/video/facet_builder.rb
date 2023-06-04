@@ -1,9 +1,5 @@
 class Video::FacetBuilder
-  Facet = Struct.new(:name, :count, :param, :value, keyword_init: true) do
-    def formatted
-      ["#{name} (#{count})", value]
-    end
-  end
+  Facet = Struct.new(:name, :id, :count, keyword_init: true)
 
   def initialize(video_relation)
     @video_relation = video_relation
@@ -14,8 +10,8 @@ class Video::FacetBuilder
       .where(dancer_videos: {role: "leader", video_id: @video_relation.pluck(:id)})
       .pluck("dancers.name, dancers.slug")
 
-    facet_data.tally.map do |(name, slug), count|
-      Facet.new(name:, count:, param: "leader", value: slug)
+    facet_data.tally.map do |(name, id), count|
+      Facet.new(name: "#{name} (#{count})", id:, count:)
     end.sort_by { |facet| [-facet.count, facet.name] }
   end
 
@@ -24,8 +20,8 @@ class Video::FacetBuilder
       .where(dancer_videos: {role: "follower", video_id: @video_relation.pluck(:id)})
       .pluck("dancers.name, dancers.slug")
 
-    facet_data.tally.map do |(name, slug), count|
-      Facet.new(name:, count:, param: "follower", value: slug)
+    facet_data.tally.map do |(name, id), count|
+      Facet.new(name: "#{name} (#{count})", id:, count:)
     end.sort_by { |facet| [-facet.count, facet.name] }
   end
 
@@ -34,8 +30,8 @@ class Video::FacetBuilder
       .joins(song: :orchestra)
       .pluck("orchestras.name, orchestras.slug")
 
-    facet_data.tally.map do |(name, slug), count|
-      Facet.new(name:, count:, param: "orchestra", value: slug)
+    facet_data.tally.map do |(name, id), count|
+      Facet.new(name: "#{name} (#{count})", id:, count:)
     end.sort_by { |facet| [-facet.count, facet.name] }
   end
 
@@ -45,7 +41,7 @@ class Video::FacetBuilder
       .pluck("songs.genre")
 
     facet_data.tally.map do |genre, count|
-      Facet.new(name: genre, count:, param: "genre", value: genre.downcase)
+      Facet.new(name: "#{genre} (#{count})", id: genre.downcase, count:)
     end.sort_by { |facet| [-facet.count, facet.name] }
   end
 
@@ -53,7 +49,7 @@ class Video::FacetBuilder
     facet_data = @video_relation.pluck(:upload_date_year)
 
     facet_data.tally.map do |year, count|
-      Facet.new(name: year.to_i, count:, param: "year", value: year)
+      Facet.new(name: "#{year} (#{count})", id: year, count:)
     end.sort_by { |facet| [-facet.count, -facet.name] }
   end
 
@@ -62,8 +58,8 @@ class Video::FacetBuilder
       .joins(:song)
       .pluck("songs.title, songs.slug")
 
-    facet_data.tally.map do |(name, slug), count|
-      Facet.new(name:, count:, param: "song", value: slug)
+    facet_data.tally.map do |(name, id), count|
+      Facet.new(name: "#{name} (#{count})", id:, count:)
     end.sort_by { |facet| [-facet.count, facet.name] }
   end
 end

@@ -3,7 +3,7 @@
 - meta.image = image_url("app_icon.png")
 = render "banner/index"
 .container
-  = turbo_frame_tag "filters", src: filters_videos_path(filtering_params), "target": "_top"
+  = link_to "Filters", modal_path(filters_videos_path(filtering_params)), class: "button button--secondary"
   #videos.stack
     = render "videos/index/videos/header"
     - if @featured_videos.present?

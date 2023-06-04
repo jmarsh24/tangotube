@@ -10,16 +10,16 @@
 
   &__content {
     position: relative;
-    background-color: white;
-    border-radius: 16px 16px 0 0;
+    background-color: var(--color-gray-100);
     transition: opacity 0.5s, transform 0.5s;
     opacity: 0;
-    transform: translate(0, 80px);
-    padding: var(--spacing-md);
+    transform: translate(0, -80px);
+    padding: var(--spacing-xs);
     margin: 5vh auto 0;
     display: flex;
     flex-direction: column;
     min-height: 95vh;
+    gap: var(--spacing-xs);
   }
 
   &__title {
@@ -33,15 +33,15 @@
   }
 
   &__close {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
+    width: 32px;
+    height: 32px;
     background-image: url('@assets/images/icons/close.svg');
-    background-size: 14px;
+    background-size: 12px;
     background-repeat: no-repeat;
     background-position: center;
+    border: 1px solid var(--color-gray-500);
+    border-radius: 50%;
+    color: var(--color-gray-500);
     cursor: pointer;
     z-index: var(--z-modal-close);
   }
@@ -68,17 +68,10 @@
 
   @include breakpoint-tablet {
     &__content {
-      max-width: 550px;
-      border-radius: var(--border-radius-card-sm);
-      margin: 5vh auto;
+      margin: 58px auto;
       height: auto;
       min-height: unset;
-      padding: var(--spacing-xl);
-    }
-
-    &__close {
-      top: var(--spacing-xl);
-      right: var(--spacing-xl);
+      padding: var(--spacing-lg);
     }
   }
 }

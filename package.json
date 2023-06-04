@@ -24,7 +24,6 @@
     "stimulus-hotkeys": "^1.0.5",
     "stimulus-use": "^0.51.2",
     "stimulus-vite-helpers": "^3.0.1",
-    "tom-select": "^2.0.3",
     "typescript": "^4.9.4",
     "youtube-player": "^5.5.2"
   },
