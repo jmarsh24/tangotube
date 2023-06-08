@@ -1,6 +1,8 @@
-class CopyMetadataAttributesToVideo < ActiveRecord::Migration[7.1]
-  def up
-    execute <<-SQL
+class UpdateVideoMetadataJob < ApplicationJob
+  queue_as :default
+
+  def perform(ids)
+    ActiveRecord::Base.connection.execute <<-SQL
       UPDATE videos 
       SET 
         upload_date_year = EXTRACT(YEAR FROM (metadata->'youtube'->>'upload_date')::timestamp),
@@ -13,7 +15,7 @@ class CopyMetadataAttributesToVideo < ActiveRecord::Migration[7.1]
           SELECT jsonb_array_elements_text(metadata->'youtube'->'tags')
         ),
         duration = (metadata->'youtube'->>'duration')::integer
-      WHERE metadata IS NOT NULL AND (metadata->'youtube') IS NOT NULL AND (metadata->'youtube'->'tags') IS NOT NULL;
+      WHERE id IN (#{ids.join(", ")});
     SQL
   end
 end
