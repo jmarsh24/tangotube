@@ -14,15 +14,13 @@ module ExternalVideoImport
       metadata = fetch_metadata(youtube_slug)
 
       video_attributes = process_metadata(metadata)
-      
-      video = Video.transaction do
+
+      Video.transaction do
         video = MetadataProcessing::VideoCreator.create_video(video_attributes)
         MetadataProcessing::VideoUpdater.new(video).update(metadata)
         video.update(imported_at: Time.current)
         video
       end
-
-      video
     rescue => e
       handle_error("importing", youtube_slug, e)
     end

@@ -67,7 +67,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
 
     context "when artist_fields and title_fields are nil" do
       let(:metadata_fields) { ["Some unrelated metadata"] }
-      let(:artist_fields) { [nil] } 
+      let(:artist_fields) { [nil] }
       let(:title_fields) { [nil] }
       let(:genre_fields) { ["undefined"] }
 
@@ -78,7 +78,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
 
     context "when artist_fields and title_fields are empty" do
       let(:metadata_fields) { ["Some unrelated metadata"] }
-      let(:artist_fields) { [] } 
+      let(:artist_fields) { [] }
       let(:title_fields) { [] }
       let(:genre_fields) { ["undefined"] }
 
