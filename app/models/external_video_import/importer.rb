@@ -12,8 +12,9 @@ module ExternalVideoImport
 
     def import(youtube_slug)
       metadata = fetch_metadata(youtube_slug)
-      video_attributes = process_metadata(metadata)
 
+      video_attributes = process_metadata(metadata)
+      
       Video.transaction do
         video = MetadataProcessing::VideoCreator.create_video(video_attributes)
         MetadataProcessing::VideoUpdater.new(video).update(metadata)

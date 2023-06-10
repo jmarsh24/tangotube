@@ -21,17 +21,24 @@ module ExternalVideoImport
       end
 
       def find_or_create_songs(matches, title_fields, artist_fields, genre_fields)
-        songs = []
-        matches.each do |match|
-          song_id = match.first[0]
-          songs << ::Song.find(song_id)
-        end
+        songs = find_songs(matches)
 
-        if songs.empty?
+        if songs.empty? && valid_fields?(title_fields, artist_fields)
           songs << ::Song.create!(title: title_fields.first, artist: artist_fields.first, genre: genre_fields.first)
         end
 
         songs
+      end
+
+      def find_songs(matches)
+        matches.map do |match|
+          song_id = match.first[0]
+          ::Song.find(song_id)
+        end
+      end
+
+      def valid_fields?(*fields)
+        fields.all? { |field| field&.any? }
       end
     end
   end

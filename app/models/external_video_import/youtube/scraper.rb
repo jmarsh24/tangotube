@@ -22,7 +22,7 @@ module ExternalVideoImport
         youtube_video = Yt::Video.new(id: slug)
 
         html = Nokogiri.HTML5(retrieve_html(slug))
-
+        binding.pry
         VideoMetadata.new(
           slug:,
           title: youtube_video.title,
