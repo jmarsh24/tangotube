@@ -4,10 +4,10 @@ module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
       def match(metadata_fields:)
-        dancers = ::Dancer.all.pluck(:id, :first_name, :last_name)
+        dancers = ::Dancer.all.pluck(:id, :first_name, :last_name, :nick_name)
         metadata_fields = Array(metadata_fields) # Ensure metadata_fields is an array
         text = metadata_fields.join(" ")
-        dancer_ids = find_best_matches(dancers, text, threshold: 0.4)
+        dancer_ids = find_best_matches(dancers, text, threshold: 0.7)
 
         if dancer_ids.any?
           ::Dancer.find(dancer_ids)
