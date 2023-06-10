@@ -24,7 +24,7 @@ export default class extends Controller {
   }
 
   get theme(): theme {
-    return (localStorage.getItem('theme') as theme) || 'auto';
+    return (localStorage.getItem('theme') as theme) || 'dark';
   }
 
   set theme(value: theme) {
