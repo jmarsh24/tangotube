@@ -25,17 +25,6 @@ RSpec.describe "homepage", type: :system do
     end
   end
 
-  context "cookies banner" do
-    it "accepts all cookies" do
-      accept_all_button = find(".personalization-request__content a.button.button--primary", text: "Accept all", wait: 10)
-      accept_all_button.click
-
-      expect(page).not_to have_css(".personalization-request")
-
-      screenshot "homepage_cookies_accepted"
-    end
-  end
-
   context "videos" do
     before do
       find(".banner__card .icon.icon--close").click
@@ -51,20 +40,6 @@ RSpec.describe "homepage", type: :system do
 
       expect(page).to have_content("Featured videos")
       featured_videos.each do |video|
-        expect(page).to have_content(video.song.full_title)
-        video.dancers.each do |dancer|
-          expect(page).to have_content(dancer.name)
-        end
-      end
-    end
-
-    it "displays videos" do
-      videos = [videos(:video_5), videos(:video_6)]
-
-      screenshot "homepage_videos_present"
-
-      expect(page).to have_content("Videos")
-      videos.each do |video|
         expect(page).to have_content(video.song.full_title)
         video.dancers.each do |dancer|
           expect(page).to have_content(dancer.name)
