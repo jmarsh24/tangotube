@@ -27,7 +27,10 @@ jobs:
 
     steps:
       - name: Install OS packages
-        run: sudo apt install -y ffmpeg
+        run: |
+          sudo add-apt-repository universe
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
