@@ -1,0 +1,6 @@
+.scrollable-tags {
+  display: flex;
+  gap: var(--spacing-xxxs);
+  overflow-x: auto;
+  white-space: nowrap;
+}

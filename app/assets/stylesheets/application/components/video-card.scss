@@ -1,5 +1,6 @@
 .video-card {
   font-size: var(--font-size-sm);
+  max-width: 568px;
 
   &--compact {
     display: flex;
