@@ -1,8 +1,8 @@
-- cache ["video_show", @video.youtube_id] do
+- cache ["video_show", @video.youtube_id, @video.updated_at] do
   - content_for :meta_title, @video.decorate.meta_title
   - content_for :meta_description, @video.decorate.meta_description
   - content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
-  .container
+  .container.container--video
     .stack
       .video data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
         div data-youtube-target="frame"
