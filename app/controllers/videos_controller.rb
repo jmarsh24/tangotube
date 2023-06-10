@@ -5,7 +5,6 @@ class VideosController < ApplicationController
   before_action :current_search, only: [:index]
   before_action :set_video, except: [:index]
   before_action :check_for_clear, only: [:index]
-  before_action :authorize_admin!, except: [:index, :show]
 
   helper_method :filtering_params, :sorting_params
 
@@ -162,10 +161,6 @@ class VideosController < ApplicationController
   end
 
   private
-
-  def authorize_admin!
-    authorize :admin, :access?
-  end
 
   def check_for_clear
     if video_params[:commit] == "Clear"
