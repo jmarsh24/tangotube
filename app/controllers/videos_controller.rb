@@ -43,12 +43,15 @@ class VideosController < ApplicationController
       ui.run_javascript "history.pushState({}, '', '#{url}')"
       ui.run_javascript "window.onpopstate = function () {Turbo.visit(document.location)}"
       ui.replace "videos", with: "videos/videos", items: scope, partial: params[:partial]
+      @videos = scope # Show @videos when filtering_params are present
+    elsif filtering_params.present? || sorting_params.present?
+      @videos = scope # Show @videos when either filtering_params or sorting_params are present
     end
+
     if @current_page > 1 && video_params[:pagination] == "true"
       ui.remove "next-page-link"
       ui.append "pagination-frame", with: "components/pagination", items: scope, partial: params[:partial]
     end
-    @videos = scope
   end
 
   # @route GET /videos/:id (video)

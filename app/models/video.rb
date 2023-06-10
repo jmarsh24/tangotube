@@ -7,8 +7,7 @@
 #  id          :bigint           not null, primary key
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  youtube_id  :string
-#  upload_date :date
+#  youtube_id  :string           not null
 #  song_id     :bigint
 #  channel_id  :bigint
 #  hidden      :boolean          default(FALSE)
@@ -19,6 +18,7 @@
 #  index       :text
 #  metadata    :jsonb
 #  imported_at :datetime
+#  upload_date :date
 #
 class Video < ApplicationRecord
   acts_as_votable
