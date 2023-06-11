@@ -26,7 +26,6 @@ module ExternalVideoImport
     end
 
     def update(video, use_scraper: true)
-
       metadata = fetch_metadata(video.youtube_id, use_scraper:)
       video_attributes = process_metadata(metadata)
       Video.transaction do
