@@ -2,15 +2,15 @@
 
 module ExternalVideoImport
   class Crawler
-    def initialize(youtube_scraper: Youtube::Scraper.new, music_recognizer: MusicRecognition::MusicRecognizer.new)
-      @youtube_scraper = youtube_scraper
+    def initialize(metadata_provider: Youtube::MetadataProvider.new, music_recognizer: MusicRecognition::MusicRecognizer.new)
+      @metadata_provider = metadata_provider
       @music_recognizer = music_recognizer
     end
 
-    def metadata(slug:)
+    def metadata(slug, use_scraper: true)
       Metadata.new(
-        youtube: @youtube_scraper.video_metadata(slug:),
-        music: @music_recognizer.process_audio_snippet(slug:)
+        youtube: @metadata_provider.video_metadata(slug),
+        music: @music_recognizer.process_audio_snippet(slug)
       )
     end
   end

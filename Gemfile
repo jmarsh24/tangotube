@@ -82,11 +82,15 @@ group :development, :test do
   gem "pry-doc"
   gem "debug"
   gem "i18n-tasks"
-  gem "rack_session_access"
   gem "chusaku", require: false
-  gem "rspec-retry"
-  gem "webmock", require: false
   gem "capybara-screenshot-diff"
+end
+
+group :test do
+  gem "vcr"
+  gem "webmock", require: false
+  gem "rack_session_access"
+  gem "rspec-retry"
 end
 
 group :development do

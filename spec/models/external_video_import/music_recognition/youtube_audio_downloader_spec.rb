@@ -10,7 +10,7 @@ RSpec.describe ExternalVideoImport::MusicRecognition::YoutubeAudioDownloader do
 
   describe "#download_file" do
     it "returns the video data from youtube and acrcloud" do
-      ExternalVideoImport::MusicRecognition::YoutubeAudioDownloader.new.download_file(slug:) do |downloaded_file|
+      ExternalVideoImport::MusicRecognition::YoutubeAudioDownloader.new.download_file(slug) do |downloaded_file|
         expect(downloaded_file.read).to eq audio_file.read
       end
     end
