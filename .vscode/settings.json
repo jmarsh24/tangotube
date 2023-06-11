@@ -13,7 +13,7 @@
   "ruby.format": "rubocop",
   "[ruby]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "rebornix.ruby"
+    "editor.defaultFormatter": "castwide.solargraph"
   },
   "solargraph.formatting": true
 }
