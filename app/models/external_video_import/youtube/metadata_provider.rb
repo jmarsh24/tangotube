@@ -3,16 +3,15 @@
 module ExternalVideoImport
   module Youtube
     class MetadataProvider
-      def initialize(api_client: ApiClient.new, scraper: nil)
+      def initialize(api_client: ApiClient.new, scraper: Scraper.new)
         @api_client = api_client
-        @scraper = scraper if scraper
+        @scraper = scraper
       end
 
       def video_metadata(slug, use_scraper: true)
         api_client_metadata = @api_client.metadata(slug)
 
-        scraped_data = (use_scraper && @scraper) ? @scraper.data(slug) : nil
-
+        scraped_data = use_scraper ? @scraper.data(slug) : nil
         if use_scraper && scraped_data
 
           VideoMetadata.new(

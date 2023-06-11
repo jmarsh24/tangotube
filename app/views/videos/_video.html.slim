@@ -25,5 +25,3 @@
         - if video.channel.title.present?
           = link_to video.channel.title, root_path(channel: video.channel.channel_id)
       = video.decorate.display_metadata
-- rescue => e
-  - binding.pry
