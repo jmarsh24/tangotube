@@ -1,8 +1,7 @@
 ---
 :schedule:
-  # update_enqueue_batches_daily:
-  #   cron: "0 0 * * *"
-  #   class: "Video::Update"
-  #   queue: "default"
-  #   args:
-  #     start_id: 0
+  enqueue_channel_video_fetcher_for_all_channels:
+  cron: "0 0 * * 1" # Runs every Monday at 00:00
+  class: EnqueueChannelVideoFetcherForAllChannelsJob
+  queue: default
+  description: "This job enqueues a ChannelVideoFetcherJob for every channel."
