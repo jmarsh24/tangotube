@@ -7,7 +7,7 @@ RSpec.describe ChannelVideoFetcher do
 
   describe "#fetch_new_videos" do
     it "fetches new videos for all channels", vcr: true do
-      fetcher = ChannelVideoFetcher.new(channels(:"030tango").channel_id, use_scraper: false)
+      fetcher = ChannelVideoFetcher.new(channels(:"030tango").channel_id, use_scraper: false, use_music_recognizer: false)
       expect { fetcher.fetch_new_videos }.to have_enqueued_job(ImportVideoJob).exactly(2424).times
     end
   end

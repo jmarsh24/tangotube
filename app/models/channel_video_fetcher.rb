@@ -2,9 +2,10 @@
 
 class ChannelVideoFetcher
 
-  def initialize(channel_id, use_scraper: true)
+  def initialize(channel_id, use_scraper: true, use_music_recognizer: true)
     @channel_id = channel_id
     @use_scraper = use_scraper
+    @use_music_recognizer = use_music_recognizer
   end
 
   def fetch_new_videos
@@ -34,7 +35,7 @@ class ChannelVideoFetcher
 
   def import_new_videos(new_video_ids)
     new_video_ids.each do |video_id|
-      ImportVideoJob.perform_later(video_id, use_scraper: @use_scraper)
+      ImportVideoJob.perform_later(video_id, use_scraper: @use_scraper, use_music_recognizer: @use_music_recognizer)
     end
   end
 end
