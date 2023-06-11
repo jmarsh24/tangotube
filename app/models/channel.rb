@@ -33,38 +33,35 @@ class Channel < ApplicationRecord
 
   validates :channel_id, presence: true, uniqueness: true
 
-  before_save :update_imported, if: :count_changed?
-  after_save :destroy_all_videos, unless: :active?
-
   scope :title_search,
     lambda { |query|
       where("unaccent(title) ILIKE unaccent(?)", "%#{query}%")
     }
 
-  def destroy_all_videos
-    return "This Channel doesn't have any videos" if videos.nil?
-    videos.find_each(&:destroy)
-  end
+  def update_from_youtube!
+    channel = Yt::Channel.new(id: channel_id) || nil
 
-  def grab_thumbnail
-    yt_thumbnail = URI.parse(thumbnail_url).open
-  rescue OpenURI::HTTPError
-    yt_thumbnail = URI.parse(backup_thumbnail_url).open
-  ensure
-    thumbnail.attach(io: yt_thumbnail, filename: "#{youtube_id}.jpg")
-  end
+    if channel.present?
+      update!(
+        title: channel.title,
+        description: channel.description,
+        thumbnail_url: channel.thumbnail_url,
+        videos_count: channel.video_count
+      )
 
-  def grab_thumbnail_later
-    GrabChannelThumbnailJob.perform_later(self)
+      attach_avatar_thumbnail(channel.thumbnail_url)
+    else
+      destroy
+    end
+  rescue Yt::Errors::NoItems
+    destroy
   end
 
   private
 
-  def update_imported
-    self.imported = videos_count >= total_videos_count
-  end
+  def attach_avatar_thumbnail(thumbnail_url)
+    return if thumbnail_url.blank?
 
-  def count_changed?
-    total_videos_count_changed? || videos_count_changed?
+    thumbnail.attach(io: URI.parse(thumbnail_url).open, filename: "#{channel_id}.jpg")
   end
 end
