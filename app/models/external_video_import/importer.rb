@@ -2,16 +2,13 @@
 
 module ExternalVideoImport
   class Importer
-    def initialize(
-      video_crawler: Crawler.new,
-      metadata_processor: MetadataProcessing::MetadataProcessor.new
-    )
+    def initialize(video_crawler: Crawler.new, metadata_processor: MetadataProcessing::MetadataProcessor.new)
       @video_crawler = video_crawler
       @metadata_processor = metadata_processor
     end
 
-    def import(youtube_slug, use_scraper: true)
-      metadata = fetch_metadata(youtube_slug, use_scraper:)
+    def import(youtube_slug, use_scraper: true, use_music_recognizer: true)
+      metadata = fetch_metadata(youtube_slug, use_scraper:, use_music_recognizer:)
 
       video_attributes = process_metadata(metadata)
 
@@ -25,8 +22,8 @@ module ExternalVideoImport
       handle_error("importing", youtube_slug, e)
     end
 
-    def update(video, use_scraper: true)
-      metadata = fetch_metadata(video.youtube_id, use_scraper:)
+    def update(video, use_scraper: true, use_music_recognizer: true)
+      metadata = fetch_metadata(video.youtube_id, use_scraper:, use_music_recognizer:)
       video_attributes = process_metadata(metadata)
       Video.transaction do
         video.assign_attributes(video_attributes)
@@ -40,8 +37,8 @@ module ExternalVideoImport
 
     private
 
-    def fetch_metadata(slug, use_scraper:)
-      @video_crawler.metadata(slug, use_scraper:)
+    def fetch_metadata(slug, use_scraper:, use_music_recognizer:)
+      @video_crawler.metadata(slug, use_scraper:, use_music_recognizer:)
     end
 
     def process_metadata(metadata)

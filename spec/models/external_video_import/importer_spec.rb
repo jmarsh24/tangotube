@@ -81,7 +81,7 @@ RSpec.describe ExternalVideoImport::Importer do
       .to_return(body: file_fixture("spotify_response.json").read)
     stub_request(:get, "https://api.spotify.com/v1/artists/649cpnHPJs3XtCIa3XUfq3")
       .to_return(body: file_fixture("spotify_response_1.json").read)
-    allow(video_crawler).to receive(:metadata).with(youtube_slug, {use_scraper: true}).and_return(metadata)
+    allow(video_crawler).to receive(:metadata).with(youtube_slug, {use_scraper: true, use_music_recognizer: true}).and_return(metadata)
   end
 
   describe "#import" do
@@ -117,7 +117,7 @@ RSpec.describe ExternalVideoImport::Importer do
 
   describe "#update" do
     before do
-      allow(video_crawler).to receive(:metadata).with(video.youtube_id, {use_scraper: true}).and_return(metadata)
+      allow(video_crawler).to receive(:metadata).with(video.youtube_id, {use_scraper: true, use_music_recognizer: true}).and_return(metadata)
       video.assign_attributes(metadata: nil)
     end
 

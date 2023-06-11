@@ -24,9 +24,18 @@ RSpec.describe ExternalVideoImport::Crawler do
     it "returns the video data from youtube" do
       video_crawler = ExternalVideoImport::Crawler.new(metadata_provider:, music_recognizer:)
 
-      metadata = video_crawler.metadata(slug)
+      metadata = video_crawler.metadata(slug, use_scraper: true, use_music_recognizer: true)
       expect(metadata.youtube.slug).to eq "AQ9Ri3kWa_4"
       expect(metadata.music.acr_id).to eq "a8d9899317fd427b6741b739de8ded15"
+    end
+
+    it "returns the video data from youtube without music recognition" do
+      video_crawler = ExternalVideoImport::Crawler.new(metadata_provider:, music_recognizer:)
+
+      metadata = video_crawler.metadata(slug, use_scraper: true, use_music_recognizer: false)
+      expect(metadata.youtube.slug).to eq "AQ9Ri3kWa_4"
+      expect(metadata.music).to be_a(ExternalVideoImport::MusicRecognition::Metadata)
+      expect(metadata.music.code).to be_nil
     end
   end
 end

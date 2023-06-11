@@ -7,3 +7,4 @@
     description: "This job enqueues a ChannelVideoFetcherJob for every channel."
     args:
       use_scraper: false
+      use_music_recognizer: false

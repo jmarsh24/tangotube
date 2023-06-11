@@ -4,7 +4,7 @@ class ImportVideoJob < ApplicationJob
   queue_as :low_priority
   sidekiq_options queue: :default, retry: 3
 
-  def perform(youtube_slug, use_scraper: true)
-    ExternalVideoImport::Importer.new.import(youtube_slug, use_scraper:)
+  def perform(youtube_slug, use_scraper: true, use_music_recognition: true)
+    ExternalVideoImport::Importer.new.import(youtube_slug, use_scraper:, use_music_recognizer:)
   end
 end
