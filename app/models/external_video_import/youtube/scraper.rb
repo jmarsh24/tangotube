@@ -19,13 +19,9 @@ module ExternalVideoImport
       end
 
       def data(slug)
-        return nil unless @driver
-
         html = Nokogiri.HTML5(retrieve_html(slug))
 
-        return [z] if song_metadata.empty? && recommended_video_ids.empty?
-
-        SongMetadata.new(
+        ScrapedData.new(
           song: extract_song_metadata(html),
           recommended_video_ids: extract_recommended_video_ids(html)
         )
