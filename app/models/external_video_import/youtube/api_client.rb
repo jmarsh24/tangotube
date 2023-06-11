@@ -27,7 +27,7 @@ module ExternalVideoImport
 
       def extract_channel_metadata(slug)
         youtube_channel = Yt::Channel.new(id: slug)
-        
+
         ChannelMetadata.new(
           id: youtube_channel.id,
           title: youtube_channel.title,

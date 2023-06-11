@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ChannelVideoFetcher
-
   def initialize(channel_id, use_scraper: true, use_music_recognizer: true)
     @channel_id = channel_id
     @use_scraper = use_scraper
