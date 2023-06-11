@@ -14,6 +14,7 @@ module ExternalVideoImport
         scraped_data = (use_scraper && @scraper) ? @scraper.data(slug) : nil
 
         if use_scraper && scraped_data
+
           VideoMetadata.new(
             slug:,
             title: api_client_metadata.title,
@@ -32,7 +33,6 @@ module ExternalVideoImport
             channel: api_client_metadata.channel
           )
         else
-          song_metadata = SongMetadata.new
           VideoMetadata.new(
             slug:,
             title: api_client_metadata.title,
@@ -45,9 +45,9 @@ module ExternalVideoImport
             favorite_count: api_client_metadata.favorite_count,
             comment_count: api_client_metadata.comment_count,
             like_count: api_client_metadata.like_count,
-            song: song_metadata,
+            song: SongMetadata.new,
             thumbnail_url: api_client_metadata.thumbnail_url,
-            recommended_video_ids: scraped_data.recommended_video_ids,
+            recommended_video_ids: [],
             channel: api_client_metadata.channel
           )
         end
