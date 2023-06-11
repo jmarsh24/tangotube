@@ -10,8 +10,8 @@ module ExternalVideoImport
       @metadata_processor = metadata_processor
     end
 
-    def import(youtube_slug)
-      metadata = fetch_metadata(youtube_slug)
+    def import(youtube_slug, use_scraper: true)
+      metadata = fetch_metadata(youtube_slug, use_scraper:)
 
       video_attributes = process_metadata(metadata)
 
@@ -25,7 +25,7 @@ module ExternalVideoImport
       handle_error("importing", youtube_slug, e)
     end
 
-    def update(video)
+    def update(video, use_scraper: true)
       metadata = fetch_metadata(video.youtube_id)
       video_attributes = process_metadata(metadata)
       Video.transaction do
@@ -40,8 +40,8 @@ module ExternalVideoImport
 
     private
 
-    def fetch_metadata(youtube_slug)
-      @video_crawler.metadata(slug: youtube_slug)
+    def fetch_metadata(slug, use_scraper:)
+      @video_crawler.metadata(slug, use_scraper:)
     end
 
     def process_metadata(metadata)

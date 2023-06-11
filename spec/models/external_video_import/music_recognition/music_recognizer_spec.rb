@@ -30,7 +30,7 @@ RSpec.describe ExternalVideoImport::MusicRecognition::MusicRecognizer do
     end
 
     it "returns the music data from ACR Cloud and Spotify" do
-      metadata = described_class.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:).process_audio_snippet(slug:)
+      metadata = described_class.new(acr_cloud:, audio_trimmer:, youtube_audio_downloader:).process_audio_snippet(slug)
 
       expect(metadata.code).to eq 0
     end
