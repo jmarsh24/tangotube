@@ -8,9 +8,8 @@ module ExternalVideoImport
     end
 
     def metadata(slug, use_scraper: true)
-      binding.pry
       Metadata.new(
-        youtube: @metadata_provider.video_metadata(slug, use_scraper:),
+        youtube: @metadata_provider.video_metadata(slug),
         music: @music_recognizer.process_audio_snippet(slug)
       )
     end

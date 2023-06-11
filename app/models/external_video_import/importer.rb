@@ -20,7 +20,7 @@ module ExternalVideoImport
         MetadataProcessing::VideoUpdater.new(video).update(metadata)
         video.update(imported_at: Time.current)
         video
-      end
+      end 
     rescue => e
       handle_error("importing", youtube_slug, e)
     end

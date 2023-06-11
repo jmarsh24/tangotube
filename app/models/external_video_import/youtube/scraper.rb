@@ -5,8 +5,6 @@ require "capybara/cuprite"
 module ExternalVideoImport
   module Youtube
     class Scraper
-      ScrapedData = Data.define(:song, :recommended_video_ids).freeze
-
       MUSIC_ROW_SELECTOR_MULTIPLE = "#video-lockups"
       MUSIC_ROW_MULTIPLE_DATA_SELECTOR = "#video-title"
       MUSIC_ROW_SELECTOR_SINGLE = "#info-row-header"
@@ -21,11 +19,13 @@ module ExternalVideoImport
       end
 
       def data(slug)
+        return nil unless @driver
+
         html = Nokogiri.HTML5(retrieve_html(slug))
 
-        return nil if song_metadata.empty? && recommended_video_ids.empty?
+        return [z] if song_metadata.empty? && recommended_video_ids.empty?
 
-        ScrapedData.new(
+        SongMetadata.new(
           song: extract_song_metadata(html),
           recommended_video_ids: extract_recommended_video_ids(html)
         )

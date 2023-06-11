@@ -3,14 +3,10 @@
 module ExternalVideoImport
   module Youtube
     class ApiClient
-      Metadata = Data.define(:slug, :title, :description, :upload_date, :duration, :tags,
-        :hd, :view_count, :favorite_count, :comment_count,
-        :like_count, :thumbnail_url, :channel).freeze
-
       def metadata(slug)
         youtube_video = Yt::Video.new(id: slug)
 
-        Metadata.new(
+        ApiMetadata.new(
           slug:,
           title: youtube_video.title,
           description: youtube_video.description,
