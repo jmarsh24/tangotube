@@ -19,7 +19,7 @@ module ExternalVideoImport
       attribute :song, SongMetadata.to_type
       attribute :thumbnail_url, ThumbnailUrl.to_type
       attribute :recommended_video_ids, :array_of_strings, default: -> { [] }
-      attribute :channel, ChannelMetadata.to_type
+      attribute :channel_id, :string
     end
   end
 end
