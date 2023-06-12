@@ -19,7 +19,8 @@ module ExternalVideoImport
           comment_count: youtube_video.comment_count,
           like_count: youtube_video.like_count,
           thumbnail_url: extract_thumbnail_url(youtube_video),
-          channel_id: youtube_video.channel_id
+          channel_id: youtube_video.channel_id,
+          channel_title: youtube_video.channel_title
         )
       end
 
