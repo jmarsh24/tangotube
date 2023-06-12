@@ -21,9 +21,7 @@ module ExternalVideoImport
         channel = ::Channel.create!(
           channel_id: channel_metadata.id,
           title: channel_metadata.title,
-          description: channel_metadata.description,
-          thumbnail_url: channel_metadata.thumbnail_url,
-          videos_count: channel_metadata.video_count
+          thumbnail_url: channel_metadata.thumbnail_url
         )
         attach_avatar_thumbnail(channel, channel_metadata.thumbnail_url)
         channel

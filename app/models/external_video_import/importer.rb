@@ -11,11 +11,10 @@ module ExternalVideoImport
       metadata = fetch_metadata(youtube_slug, use_scraper:, use_music_recognizer:)
 
       video_attributes = process_metadata(metadata)
-
       Video.transaction do
-        video = MetadataProcessing::VideoCreator.create_video(video_attributes)
+        video = Video.create!(video_attributes)
         MetadataProcessing::VideoUpdater.new(video).update(metadata)
-        video.update(imported_at: Time.current)
+        video.update!(metadata_updated_at: Time.current)
         video
       end
     rescue => e
@@ -28,6 +27,7 @@ module ExternalVideoImport
       Video.transaction do
         video.assign_attributes(video_attributes)
         MetadataProcessing::VideoUpdater.new(video).update(metadata)
+        video.update!(metadata_updated_at: Time.current)
       end
 
       video
@@ -48,6 +48,7 @@ module ExternalVideoImport
     def handle_error(action, youtube_slug, error)
       Rails.logger.error("Error #{action} video with slug '#{youtube_slug}': #{error.message}")
       Rails.logger.error(error.backtrace.join("\n"))
+      raise error
     end
   end
 end

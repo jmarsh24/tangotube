@@ -4,21 +4,22 @@
 #
 # Table name: videos
 #
-#  id          :bigint           not null, primary key
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  youtube_id  :string           not null
-#  song_id     :bigint
-#  channel_id  :bigint
-#  hidden      :boolean          default(FALSE)
-#  popularity  :integer          default(0)
-#  event_id    :bigint
-#  click_count :integer          default(0)
-#  featured    :boolean          default(FALSE)
-#  index       :text
-#  metadata    :jsonb
-#  imported_at :datetime
-#  upload_date :date
+#  id                  :bigint           not null, primary key
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  youtube_id          :string           not null
+#  song_id             :bigint
+#  channel_id          :bigint
+#  hidden              :boolean          default(FALSE)
+#  popularity          :integer          default(0)
+#  event_id            :bigint
+#  click_count         :integer          default(0)
+#  featured            :boolean          default(FALSE)
+#  index               :text
+#  metadata            :jsonb
+#  imported_at         :datetime
+#  upload_date         :date
+#  metadata_updated_at :datetime
 #
 class Video < ApplicationRecord
   acts_as_votable
@@ -31,8 +32,8 @@ class Video < ApplicationRecord
   validates :youtube_id, presence: true, uniqueness: true
 
   belongs_to :song, optional: true
-  belongs_to :channel, optional: false, counter_cache: true
-  belongs_to :event, optional: true, counter_cache: true
+  belongs_to :channel, optional: false
+  belongs_to :event, optional: true
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy

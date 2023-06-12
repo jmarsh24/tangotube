@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_10_171429) do
+ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -51,14 +51,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_10_171429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "thumbnail_url"
-    t.boolean "imported", default: false
-    t.integer "imported_videos_count", default: 0
-    t.integer "total_videos_count", default: 0
-    t.integer "yt_api_pull_count", default: 0
     t.boolean "reviewed", default: false
-    t.integer "videos_count", default: 0, null: false
     t.boolean "active", default: true
     t.text "description"
+    t.jsonb "metadata"
+    t.datetime "metadata_updated_at"
+    t.datetime "imported_at"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
     t.index ["title"], name: "index_channels_on_title"
   end
@@ -313,6 +311,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_10_171429) do
     t.jsonb "metadata"
     t.datetime "imported_at"
     t.date "upload_date"
+    t.datetime "metadata_updated_at"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"

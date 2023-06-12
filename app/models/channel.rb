@@ -4,24 +4,24 @@
 #
 # Table name: channels
 #
-#  id                    :bigint           not null, primary key
-#  title                 :string
-#  channel_id            :string           not null
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  thumbnail_url         :string
-#  imported              :boolean          default(FALSE)
-#  imported_videos_count :integer          default(0)
-#  total_videos_count    :integer          default(0)
-#  yt_api_pull_count     :integer          default(0)
-#  reviewed              :boolean          default(FALSE)
-#  videos_count          :integer          default(0), not null
-#  active                :boolean          default(TRUE)
-#  description           :text
+#  id                  :bigint           not null, primary key
+#  title               :string
+#  channel_id          :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  thumbnail_url       :string
+#  reviewed            :boolean          default(FALSE)
+#  active              :boolean          default(TRUE)
+#  description         :text
+#  metadata            :jsonb
+#  metadata_updated_at :datetime
+#  imported_at         :datetime
 #
 class Channel < ApplicationRecord
   include Reviewable
   include Importable
+
+  attribute :metadata, ChannelMetadata.to_type
 
   has_many :videos, dependent: :destroy
   has_many :performance_videos, through: :videos
@@ -46,8 +46,7 @@ class Channel < ApplicationRecord
       update!(
         title: channel.title,
         description: channel.description,
-        thumbnail_url: channel.thumbnail_url,
-        videos_count: channel.video_count
+        thumbnail_url: channel.thumbnail_url
       )
 
       attach_avatar_thumbnail(channel.thumbnail_url)
@@ -60,7 +59,7 @@ class Channel < ApplicationRecord
 
   def import_new_videos(use_scraper: true, use_music_recognizer: true)
     return if !active?
-    
+
     ChannelVideoFetcherJob.perform_later(channel_id, use_scraper:, use_music_recognizer:)
   end
 
@@ -70,6 +69,16 @@ class Channel < ApplicationRecord
     videos.find_each do |video|
       UpdateVideoJob.perform_later(video, use_scraper:, use_music_recognizer:)
     end
+  end
+
+  def fetch_and_save_metadata!
+    ExternalChannelImporter.new.fetch_metadata(channel_id).tap do |metadata|
+      update!(metadata:, metadata_updated_at: Time.current)
+    end
+  end
+
+  def fetch_and_save_metadata_later!
+    ImportChannelMetadataJob.perform_later(self)
   end
 
   private
