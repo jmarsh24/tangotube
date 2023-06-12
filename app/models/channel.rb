@@ -34,37 +34,24 @@ class Channel < ApplicationRecord
   validates :channel_id, presence: true, uniqueness: true
 
   scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
   scope :title_search,
     lambda { |query|
       where("unaccent(title) ILIKE unaccent(?)", "%#{query}%")
     }
 
-  def update_from_youtube!
-    channel = Yt::Channel.new(id: channel_id) || nil
-
-    if channel.present?
-      update!(
-        title: channel.title,
-        description: channel.description,
-        thumbnail_url: channel.thumbnail_url
-      )
-
-      attach_avatar_thumbnail(channel.thumbnail_url)
-    else
-      destroy
-    end
-  rescue Yt::Errors::NoItems
-    destroy
-  end
-
   def import_new_videos(use_scraper: true, use_music_recognizer: true)
-    return if !active?
+    return if inactive?
 
-    ChannelVideoFetcherJob.perform_later(channel_id, use_scraper:, use_music_recognizer:)
+    new_video_ids = videos.map(&:id) - metadata.video_ids
+
+    new_video_ids.each do |video_id|
+      ImportVideoJob.perform_later(video_id, use_scraper:, use_music_recognizer:)
+    end
   end
 
   def update_videos(use_scraper: true, use_music_recognizer: true)
-    return if !active?
+    return if inactive?
 
     videos.find_each do |video|
       UpdateVideoJob.perform_later(video, use_scraper:, use_music_recognizer:)
