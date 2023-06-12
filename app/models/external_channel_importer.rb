@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExternalChannelImporter
   def import(slug)
     Rails.logger.info("Starting import for channel: #{slug}")
@@ -12,7 +14,6 @@ class ExternalChannelImporter
       metadata: channel_metadata,
       metadata_updated_at: Time.current
     )
-    
   rescue => e
     Rails.logger.info("Error while processing channel with slug: #{slug}. Error: #{e.message}")
     raise e

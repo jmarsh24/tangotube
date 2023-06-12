@@ -19,12 +19,21 @@ module ExternalVideoImport
           comment_count: youtube_video.comment_count,
           like_count: youtube_video.like_count,
           thumbnail_url: extract_thumbnail_url(youtube_video),
-          channel_id: youtube_video.channel_id,
-          channel_title: youtube_video.channel_title
+          channel: fetch_channel_metadata(youtube_video.channel_id)
         )
       end
 
       private
+
+      def fetch_channel_metadata(slug)
+        youtube_channel = Yt::Channel.new(id: slug)
+
+        ChannelMetadata.new(
+          id: youtube_channel.id,
+          title: youtube_channel.title,
+          thumbnail_url: youtube_channel.thumbnail_url
+        )
+      end
 
       def extract_thumbnail_url(youtube_video)
         ThumbnailUrl.new(

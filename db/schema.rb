@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_12_191813) do
+ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -311,6 +311,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_12_191813) do
     t.jsonb "metadata"
     t.datetime "imported_at"
     t.date "upload_date"
+    t.datetime "metadata_updated_at"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"

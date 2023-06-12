@@ -30,8 +30,9 @@ RSpec.describe ExternalVideoImport::Youtube::ApiClient do
       expect(metadata.thumbnail_url.high).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/hqdefault.jpg"
       expect(metadata.thumbnail_url.standard).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/sddefault.jpg"
       expect(metadata.thumbnail_url.maxres).to eq "https://i.ytimg.com/vi/AQ9Ri3kWa_4/maxresdefault.jpg"
-      expect(metadata.channel_id).to eq "UCvnY4F-CJVgYdQuIv8sqp-A"
-      expect(metadata.channel_title).to eq "jkuklaVideo"
+      expect(metadata.channel.id).to eq "UCvnY4F-CJVgYdQuIv8sqp-A"
+      expect(metadata.channel.title).to eq "jkuklaVideo"
+      expect(metadata.channel.thumbnail_url).to eq "https://yt3.ggpht.com/ytc/AGIKgqNvE9cMPwoXCaUyjV4oJehuFDIgVn9hstLYDHgL=s88-c-k-c0x00ffffff-no-rj"
     end
   end
 

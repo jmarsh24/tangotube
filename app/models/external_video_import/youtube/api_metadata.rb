@@ -19,8 +19,7 @@ module ExternalVideoImport
       attribute :comment_count, :integer
       attribute :like_count, :integer
       attribute :thumbnail_url, ThumbnailUrl.to_type
-      attribute :channel_id, :string
-      attribute :channel_title, :string
+      attribute :channel, ChannelMetadata.to_type
     end
   end
 end
