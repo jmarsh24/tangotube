@@ -4,16 +4,17 @@
 #
 # Table name: channels
 #
-#  id            :bigint           not null, primary key
-#  title         :string
-#  channel_id    :string           not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  thumbnail_url :string
-#  reviewed      :boolean          default(FALSE)
-#  active        :boolean          default(TRUE)
-#  description   :text
-#  metadata      :jsonb
+#  id                  :bigint           not null, primary key
+#  title               :string
+#  channel_id          :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  thumbnail_url       :string
+#  reviewed            :boolean          default(FALSE)
+#  active              :boolean          default(TRUE)
+#  description         :text
+#  metadata            :jsonb
+#  metadata_updated_at :datetime
 #
 class Channel < ApplicationRecord
   include Reviewable
@@ -70,8 +71,8 @@ class Channel < ApplicationRecord
   end
 
   def fetch_and_save_metadata!
-    ExternalChannelImporter.new.import(channel_id).tap do |metadata|
-      update!(metadata:, imported_at: Time.current)
+    ExternalChannelImporter.new.fetch_metadata(channel_id).tap do |metadata|
+      update!(metadata:, metadata_updated_at: Time.current)
     end
   end
 

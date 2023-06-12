@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_12_191813) do
     t.boolean "active", default: true
     t.text "description"
     t.jsonb "metadata"
+    t.datetime "metadata_updated_at"
     t.datetime "imported_at"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
     t.index ["title"], name: "index_channels_on_title"

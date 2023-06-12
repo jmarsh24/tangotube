@@ -3,8 +3,8 @@ class ImportChannelMetadataJob < ApplicationJob
 
   def perform(channel)
     channel.update!(
-      metadata: ExternalChannelImporter.new.import(channel.channel_id),
-      imported_at: Time.current
+      metadata: ExternalChannelImporter.new.fetch_metadata(channel.channel_id),
+      metadata_updated_at: Time.current
     )
   end
 end

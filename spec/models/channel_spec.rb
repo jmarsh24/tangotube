@@ -4,16 +4,17 @@
 #
 # Table name: channels
 #
-#  id            :bigint           not null, primary key
-#  title         :string
-#  channel_id    :string           not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  thumbnail_url :string
-#  reviewed      :boolean          default(FALSE)
-#  active        :boolean          default(TRUE)
-#  description   :text
-#  metadata      :jsonb
+#  id                  :bigint           not null, primary key
+#  title               :string
+#  channel_id          :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  thumbnail_url       :string
+#  reviewed            :boolean          default(FALSE)
+#  active              :boolean          default(TRUE)
+#  description         :text
+#  metadata            :jsonb
+#  metadata_updated_at :datetime
 #
 require "rails_helper"
 
@@ -51,7 +52,7 @@ RSpec.describe Channel do
 
         expect(channel.metadata.title).to eq("030tango")
         expect(channel.metadata.id).to eq("UCtdgMR0bmogczrZNpPaO66Q")
-        expect(channel.imported_at).to eq(Time.current)
+        expect(channel.metadata_updated_at).to eq(Time.current)
       end
     end
   end
@@ -71,7 +72,7 @@ RSpec.describe Channel do
 
         expect(channel.metadata.title).to eq("030tango")
         expect(channel.metadata.id).to eq("UCtdgMR0bmogczrZNpPaO66Q")
-        expect(channel.imported_at).to eq(Time.current)
+        expect(channel.metadata_updated_at).to eq(Time.current)
       end
     end
   end

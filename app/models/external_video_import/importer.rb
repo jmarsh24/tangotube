@@ -48,6 +48,7 @@ module ExternalVideoImport
     def handle_error(action, youtube_slug, error)
       Rails.logger.error("Error #{action} video with slug '#{youtube_slug}': #{error.message}")
       Rails.logger.error(error.backtrace.join("\n"))
+      raise error
     end
   end
 end
