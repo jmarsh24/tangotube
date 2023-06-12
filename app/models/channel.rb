@@ -58,18 +58,17 @@ class Channel < ApplicationRecord
     destroy
   end
 
-  def import_videos
-    return if inactive?
+  def import_new_videos(use_scraper: true, use_music_recognizer: true)
+    return if !active?
+    
+    ChannelVideoFetcherJob.perform_later(channel_id, use_scraper:, use_music_recognizer:)
+  end
 
-    if videos.empty?
-      ExternalVideoImporter::Importer.new.import(channel_id)
-    else
-      videos.each do |video|
-        next if video.exist?
+  def update_videos(use_scraper: true, use_music_recognizer: true)
+    return if !active?
 
-        ExternalVideoImporter::Importer.new.import(channel_id)
-        break
-      end
+    videos.find_each do |video|
+      UpdateVideoJob.perform_later(video, use_scraper:, use_music_recognizer:)
     end
   end
 

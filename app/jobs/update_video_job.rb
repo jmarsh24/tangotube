@@ -5,7 +5,6 @@ class UpdateVideoJob < ApplicationJob
   sidekiq_options queue: :default, retry: 3
 
   def perform(video)
-    importer = ExternalVideoImport::Importer.new
-    importer.update(video)
+    ExternalVideoImport::Importer.new.update(video)
   end
 end

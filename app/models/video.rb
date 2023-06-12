@@ -270,4 +270,8 @@ class Video < ApplicationRecord
   def to_param
     youtube_id
   end
+
+  def update_from_youtube
+    ExternalVideoImport::Importer.new.update(self)
+  end
 end
