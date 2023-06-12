@@ -3,12 +3,13 @@ class ExternalChannelImporter
     Rails.logger.info("Starting import for channel: #{slug}")
 
     channel_metadata = create_metadata(slug)
+
     Channel.create!(
       title: channel_metadata.title,
       channel_id: channel_metadata.id,
       description: channel_metadata.description,
       thumbnail_url: channel_metadata.thumbnail_url,
-      metadata: channel_metadata.to_json,
+      metadata: channel_metadata,
       metadata_updated_at: Time.current
     )
     

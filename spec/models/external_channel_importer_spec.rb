@@ -10,8 +10,8 @@ RSpec.describe ExternalChannelImporter do
   before do
     allow(Yt::Channel).to receive(:new).and_return(yt_channel)
     allow(yt_channel).to receive_messages(
-      id: "UCtdgMR0bmogczrZNpPaO66Q",
-      title: "030tango",
+      id: "new_channel_slug",
+      title: "youtube channel",
       description: "Some description",
       published_at: Time.current,
       thumbnail_url: "https://example.com/thumbnail",
