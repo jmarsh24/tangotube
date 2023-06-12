@@ -43,7 +43,7 @@ class Channel < ApplicationRecord
   def import_new_videos(use_scraper: true, use_music_recognizer: true)
     return unless active
 
-    new_video_ids = videos.map(&:id) - metadata.video_ids
+    new_video_ids = videos.map(&:youtube_id) - metadata.video_ids
 
     new_video_ids.each do |video_id|
       ImportVideoJob.perform_later(video_id, use_scraper:, use_music_recognizer:)
