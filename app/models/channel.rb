@@ -72,12 +72,10 @@ class Channel < ApplicationRecord
   end
 
   def fetch_and_save_metadata!
-    ExternalChannelImporter.new.fetch_metadata(channel_id).tap do |metadata|
-      update!(metadata:, metadata_updated_at: Time.current)
-    end
-    rescue Yt::Errors::NoItems
-      destroy!
-    end
+    metadata = ExternalChannelImporter.new.fetch_metadata(channel_id)
+    update!(metadata:, metadata_updated_at: Time.current)
+  rescue Yt::Errors::NoItems
+    destroy!
   end
 
   def fetch_and_save_metadata_later!

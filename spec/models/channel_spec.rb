@@ -56,6 +56,15 @@ RSpec.describe Channel do
         expect(channel.metadata_updated_at).to eq(Time.current)
       end
     end
+
+    it "destroys the channel if it doesn't exist on YouTube" do
+      channel = channels(:"030tango")
+      channel.update!(channel_id: "invalid")
+
+      channel.fetch_and_save_metadata!
+
+      expect(channel).to be_destroyed
+    end
   end
 
   describe "#fetch_and_save_metadata_later!", :vcr do
