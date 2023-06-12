@@ -15,6 +15,7 @@
 #  description         :text
 #  metadata            :jsonb
 #  metadata_updated_at :datetime
+#  imported_at         :datetime
 #
 require "rails_helper"
 

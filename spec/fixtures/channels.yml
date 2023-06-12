@@ -13,6 +13,7 @@
 #  description         :text
 #  metadata            :jsonb
 #  metadata_updated_at :datetime
+#  imported_at         :datetime
 #
 
 030tango:
