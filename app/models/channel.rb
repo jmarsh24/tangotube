@@ -57,6 +57,21 @@ class Channel < ApplicationRecord
     destroy
   end
 
+  def import_videos
+    return if inactive?
+
+    if videos.empty?
+      ExternalVideoImporter::Importer.new.import(channel_id)
+    else
+      videos.each do |video|
+        next if video.exist?
+
+        ExternalVideoImporter::Importer.new.import(channel_id)
+        break
+      end
+    end
+  end
+
   private
 
   def attach_avatar_thumbnail(thumbnail_url)

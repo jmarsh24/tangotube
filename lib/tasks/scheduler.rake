@@ -22,7 +22,7 @@ end
 
 desc "This task updates videos"
 task update_all_videos: :environment do
-  Video.not_hidden.find_each do |video|
+  Video.active_and_visible.find_each do |video|
     UpdateVideoJob.perform_later(video.youtube_id)
   end
   puts "done."
@@ -30,7 +30,7 @@ end
 
 desc "This task updates videos"
 task update_all_videos_missing_acr_response_code: :environment do
-  Video.not_hidden.not_scanned_acrcloud.limit(10000).find_each do |video|
+  Video.active_and_visible.not_scanned_acrcloud.limit(10000).find_each do |video|
     UpdateVideoJob.perform_later(video.youtube_id)
   end
   puts "done."
@@ -38,7 +38,7 @@ end
 
 desc "This task recognizes audio from acrcloud"
 task batch_acrcloud_update: :environment do
-  Video.not_hidden.not_scanned_acrcloud.limit(10000).find_each do |video|
+  Video.active_and_visible.not_scanned_acrcloud.limit(10000).find_each do |video|
     AcrMusicMatchJob.perform_later(video.youtube_id)
   end
   puts "done."

@@ -83,7 +83,7 @@ class Video::Search
     counts =
       Video
         .filter_by(@filtering_params, @user)
-        .not_hidden
+        .active_and_visible
         .select(query)
         .group("facet_value")
         .order("facet_value DESC")
@@ -95,7 +95,7 @@ class Video::Search
   def facet(table_column, model, role: nil)
     query = "#{table_column} AS facet_value, count(#{table_column}) AS occurrences"
     videos = Video.filter_by(@filtering_params, @user)
-      .not_hidden
+      .active_and_visible
       .joins(model)
     videos = videos.merge(Video.where(dancer_videos: {role:})) if role.present?
     counts = videos
@@ -115,7 +115,7 @@ class Video::Search
     counts =
       Video
         .filter_by(@filtering_params, @user)
-        .not_hidden
+        .active_and_visible
         .joins(model)
         .select(query)
         .group(table_column, table_column_id)

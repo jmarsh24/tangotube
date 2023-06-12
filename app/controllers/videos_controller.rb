@@ -13,7 +13,7 @@ class VideosController < ApplicationController
   # @route GET / (root)
   def index
     video_search = Video::Search.for(filtering_params:, sorting_params:, user: current_user)
-    videos = video_search.videos
+    videos = video_search.videos.active_and_visible
 
     if filtering_params.empty? && sorting_params.empty?
       @featured_videos =
