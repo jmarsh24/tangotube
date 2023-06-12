@@ -33,6 +33,7 @@ class Channel < ApplicationRecord
 
   validates :channel_id, presence: true, uniqueness: true
 
+  scope :active, -> { where(active: true) }
   scope :title_search,
     lambda { |query|
       where("unaccent(title) ILIKE unaccent(?)", "%#{query}%")
