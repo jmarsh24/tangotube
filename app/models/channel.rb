@@ -41,7 +41,7 @@ class Channel < ApplicationRecord
     }
 
   def import_new_videos(use_scraper: true, use_music_recognizer: true)
-    return if inactive?
+    return unless active
 
     new_video_ids = videos.map(&:id) - metadata.video_ids
 
@@ -51,7 +51,7 @@ class Channel < ApplicationRecord
   end
 
   def update_videos(use_scraper: true, use_music_recognizer: true)
-    return if inactive?
+    return unless active
 
     videos.find_each do |video|
       UpdateVideoJob.perform_later(video, use_scraper:, use_music_recognizer:)
