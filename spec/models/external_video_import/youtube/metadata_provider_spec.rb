@@ -5,12 +5,6 @@ require "rails_helper"
 RSpec.describe ExternalVideoImport::Youtube::MetadataProvider do
   let(:thumbnail_url) { ExternalVideoImport::Youtube::ThumbnailUrl.new(standard: "thumbnail_url") }
 
-  let(:channel_metadata) do
-    ExternalVideoImport::Youtube::ChannelMetadata.new(
-      title: "channel"
-    )
-  end
-
   let(:api_client_metadata) do
     ExternalVideoImport::Youtube::ApiMetadata.new(
       slug: "video_slug",
@@ -25,7 +19,8 @@ RSpec.describe ExternalVideoImport::Youtube::MetadataProvider do
       comment_count: 20,
       like_count: 70,
       thumbnail_url:,
-      channel: channel_metadata
+      channel_id: "channel_id",
+      channel_title: "channel title"
     )
   end
 
@@ -79,7 +74,8 @@ RSpec.describe ExternalVideoImport::Youtube::MetadataProvider do
         expect(video_metadata.song.album).to eq("album")
         expect(video_metadata.thumbnail_url.standard).to eq("thumbnail_url")
         expect(video_metadata.recommended_video_ids).to eq(["recommended_video_ids"])
-        expect(video_metadata.channel.title).to eq("channel")
+        expect(video_metadata.channel_id).to eq("channel_id")
+        expect(video_metadata.channel_title).to eq("channel title")
       end
     end
 
