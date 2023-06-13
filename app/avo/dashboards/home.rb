@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Home < Avo::Dashboards::BaseDashboard
   self.id = "Home"
   self.name = "Home"

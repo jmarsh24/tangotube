@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DailyImportedVideos < Avo::Dashboards::ChartkickCard
   self.id = "line_chart"
   self.label = "Daily Imported Videos"

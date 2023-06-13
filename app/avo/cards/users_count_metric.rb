@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersCountMetric < Avo::Dashboards::MetricCard
   self.id = "users_metric"
   self.label = "Users count"
@@ -6,7 +8,6 @@ class UsersCountMetric < Avo::Dashboards::MetricCard
   self.initial_range = 30
   self.ranges = [7, 30, 60, 365, "TODAY", "MTD", "QTD", "YTD", "ALL"]
   self.refresh_every = 10.minutes
-
 
   def query
     from = Date.today.midnight - 1.week
@@ -32,7 +33,7 @@ class UsersCountMetric < Avo::Dashboards::MetricCard
     end
 
     scope = User
-    
+
     result scope.where(created_at: from..to).count
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VideosCountMetric < Avo::Dashboards::MetricCard
   self.id = "users_metric"
   self.label = "Users count"
