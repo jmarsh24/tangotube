@@ -18,6 +18,10 @@ class EventResource < Avo::BaseResource
 
   field :id, as: :id
   field :title, as: :text, required: true
+  field :videos_count, as: :number do
+    model.videos.length
+  end
+  field :dancers, as: :has_many
   field :city, as: :text, required: true
   field :country, as: :text, required: true
   field :category, as: :text
@@ -25,10 +29,9 @@ class EventResource < Avo::BaseResource
   field :end_date, as: :date
   field :active, as: :boolean
   field :reviewed, as: :boolean
-  field :videos_count, as: :number
   field :slug, as: :text
-  field :profile_image, as: :attachment
-  field :cover_image, as: :attachment
+  field :profile_image, as: :file, is_image: true, is_avatar: true
+  field :cover_image, as: :file, is_image: true, is_avatar: true
   field :videos, as: :has_many
   field :created_at, as: :date_time
   field :updated_at, as: :date_time

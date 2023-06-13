@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Avo::Scopes::NonAdmins < AvoPro::Scopes::BaseScope
   self.name = "Non admins"
   self.description = "Non admins"

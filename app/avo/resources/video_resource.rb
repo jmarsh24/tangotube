@@ -2,7 +2,7 @@
 
 class VideoResource < Avo::BaseResource
   self.title = :youtube_id
-  self.includes = [:channel, :song, :event, :comments, :dancer_videos, :dancers, :thumbnail_attachment, :thumbnail_blob, :performance_video, :performance]
+  self.includes = [:channel, :song, :event, :comments, :dancer_videos, :dancers, :performance_video, :performance]
   self.search_query = -> {
     scope.ransack(
       title_cont: params[:q],
@@ -27,7 +27,7 @@ class VideoResource < Avo::BaseResource
   end
 
   field :id, as: :id
-  field :thumbnail, as: :image
+  field :thumbnail, as: :file, is_image: true
   field :youtube_id, as: :text
   field :song, as: :belongs_to
   field :channel, as: :belongs_to

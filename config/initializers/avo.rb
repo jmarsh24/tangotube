@@ -125,7 +125,6 @@ Avo.configure do |config|
     end
 
     section "Resources", collapsable: true, collapsed: false do
-    
       group "Videos", collapsable: true do
         resource :channels
         resource :videos
@@ -145,6 +144,11 @@ Avo.configure do |config|
       group "Songs", collapsable: true do
         resource :songs
         resource :orchestras
+      end
+
+      group "Playlists", collapsable: true do
+        resource :playlists
+        resource :playlist_videos
       end
 
       group "Events", collapsable: true do

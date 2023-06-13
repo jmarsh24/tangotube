@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
+ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -196,6 +196,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "playlist_videos", force: :cascade do |t|
+    t.bigint "playlist_id", null: false
+    t.bigint "video_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id", "video_id"], name: "index_playlist_videos_on_playlist_id_and_video_id", unique: true
+    t.index ["playlist_id"], name: "index_playlist_videos_on_playlist_id"
+    t.index ["video_id"], name: "index_playlist_videos_on_video_id"
+  end
+
   create_table "playlists", force: :cascade do |t|
     t.string "slug"
     t.string "title"
@@ -356,6 +367,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
   add_foreign_key "couples", "dancers"
   add_foreign_key "couples", "dancers", column: "partner_id"
   add_foreign_key "dancers", "users"
+  add_foreign_key "playlist_videos", "playlists"
+  add_foreign_key "playlist_videos", "videos"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists", "videos", column: "videos_id"
   add_foreign_key "taggings", "tags"

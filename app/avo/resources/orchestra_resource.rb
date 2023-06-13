@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class OrchestraResource < Avo::BaseResource
-  self.title = :id
+  self.title = :name
   self.includes = []
-  # self.search_query = -> do
-  #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-  # end
+  self.search_query = -> do
+    scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
+  end
 
   field :id, as: :id
-  # Fields generated from the model
+
   field :name, as: :text
   field :bio, as: :textarea
   field :slug, as: :text
@@ -20,5 +20,4 @@ class OrchestraResource < Avo::BaseResource
   field :videos, as: :has_many, through: :songs
   field :dancers, as: :has_many, through: :videos
   field :couples, as: :has_many, through: :videos
-  # add fields here
 end

@@ -20,6 +20,9 @@ class PerformanceResource < Avo::BaseResource
     model.dancers.length
   end
   field :dancers, as: :text do |model|
+    model.dancers.map(&:name).join(", ")
+  end
+  field :couples, as: :text do |model|
     model.dancers.map(&:name).join(" & ")
   end
 end
