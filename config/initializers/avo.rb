@@ -131,6 +131,7 @@ Avo.configure do |config|
       end
 
       group "People", collapsable: true do
+        resource :users
         resource :dancers
         resource :couples
         resource :performances

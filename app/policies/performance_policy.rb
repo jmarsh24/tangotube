@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 class PerformancePolicy < ApplicationPolicy
+  def index?
+    true
+  end
+
+  def show?
+    true
+  end
+
   def create?
     user&.admin?
   end
@@ -11,5 +19,15 @@ class PerformancePolicy < ApplicationPolicy
 
   def destroy?
     user&.admin?
+  end
+
+  def act_on?
+    user&.admin?
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

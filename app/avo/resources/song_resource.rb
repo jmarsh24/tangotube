@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class SongResource < Avo::BaseResource
-  self.title = :id
+  self.title = :full_title
   self.includes = []
-  # self.search_query = -> do
-  #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-  # end
+  self.search_query = -> do
+    scope.ransack(full_title_eq: params[:q], m: "or").result(distinct: false)
+  end
 
   field :id, as: :id
   # Fields generated from the model

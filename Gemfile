@@ -19,6 +19,7 @@ gem "bootsnap", require: false
 gem "acts-as-taggable-on"
 gem "acts_as_votable"
 gem "acts_as_list"
+gem "activestorage"
 gem "amazing_print"
 gem "avo"
 gem "bcrypt"

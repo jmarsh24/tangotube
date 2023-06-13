@@ -10,20 +10,24 @@ class CouplePolicy < ApplicationPolicy
   end
 
   def create?
-    user.present?
+    user&.admin?
   end
 
   def update?
-    user.present? && user == couple.dancer.user
+    user&.admin?
   end
 
   def destroy?
-    user.present? && user == couple.dancer.user
+    user&.admin?
   end
 
-  private
+  def act_on?
+    user&.admin?
+  end
 
-  def couple
-    record
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

@@ -10,19 +10,23 @@ class ChannelPolicy < ApplicationPolicy
   end
 
   def create?
-    user_signed_in?
+    user&.admin?
   end
 
   def update?
-    user_signed_in? && @record.user == current_user
+    user&.admin?
   end
 
   def destroy?
-    user_signed_in? && @record.user == current_user
+    user&.admin?
+  end
+
+  def act_on?
+    user&.admin?
   end
 
   def deactivate?
-    user_signed_in? && @record.user == current_user
+    user&.admin?
   end
 
   class Scope < Scope

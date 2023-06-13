@@ -52,6 +52,9 @@ class User < ApplicationRecord
 
   enum role: {user: 0, admin: 1}
 
+  scope :admins, -> { where(role: :admin) }
+  scope :non_admins, -> { where(role: :user) }
+
   def remember_me
     true
   end

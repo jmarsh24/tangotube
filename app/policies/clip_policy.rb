@@ -9,23 +9,25 @@ class ClipPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    create?
-  end
-
   def create?
-    user.present?
-  end
-
-  def edit?
-    update?
+    user&.admin?
   end
 
   def update?
-    user.present? && user == record.user
+    user&.admin?
   end
 
   def destroy?
-    user.present? && user == record.user
+    user&.admin?
+  end
+
+  def act_on?
+    user&.admin?
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

@@ -17,8 +17,8 @@ class VideoResource < Avo::BaseResource
   }
 
   grid do
-    cover :thumbnail, as: :file, is_image: true, link_to_resource: true
-    title :title, as: :text, required: true, link_to_resource: true
+    cover :thumbnail, as: :file, is_image: true
+    title :title, as: :text
     body :description, as: :text
   end
 
