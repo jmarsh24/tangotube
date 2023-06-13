@@ -52,6 +52,10 @@ class User < ApplicationRecord
 
   enum role: {user: 0, admin: 1}
 
+  def remember_me
+    true
+  end
+
   def set_default_role
     self.role ||= :user
   end
