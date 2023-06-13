@@ -115,7 +115,43 @@ Avo.configure do |config|
       all_tools
     end
   }
-  # config.profile_menu = -> {
-  #   link "Profile", path: "/avo/profile", icon: "user-circle"
-  # }
+
+  # == Menus ==
+  config.main_menu = -> {
+    section "Dashboard", collapsable: true do
+      group "Home" do
+        dashboard :home, visible: -> { true }
+      end
+    end
+
+    section "Resources", collapsable: true, collapsed: false do
+      group "Videos", collapsable: true do
+        resource :channels
+        resource :videos
+      end
+
+      group "People", collapsable: true do
+        resource :dancers
+        resource :couples
+        resource :performances
+      end
+
+      group "Songs", collapsable: true do
+        resource :songs
+        resource :orchestras
+      end
+
+      group "Events", collapsable: true do
+        resource :events
+      end
+    end
+
+    group do
+      link "Patreon", path: "https://www.patreon.com/tangotube", target: :_blank
+    end
+  }
+
+  config.profile_menu = -> {
+    link "Dashboard", path: "/avo/dashboards/home", icon: "user-circle"
+  }
 end

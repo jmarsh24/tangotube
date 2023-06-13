@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Home < Avo::Dashboards::BaseDashboard
-  self.id = "Home"
+  self.id = "home"
   self.name = "Home"
   self.grid_cols = 3
   # self.visible = -> do
