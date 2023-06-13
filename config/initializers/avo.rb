@@ -125,16 +125,21 @@ Avo.configure do |config|
     end
 
     section "Resources", collapsable: true, collapsed: false do
+    
       group "Videos", collapsable: true do
         resource :channels
         resource :videos
+      end
+
+      group "Performances", collapsable: true do
+        resource :performances
+        resource :performance_videos
       end
 
       group "People", collapsable: true do
         resource :users
         resource :dancers
         resource :couples
-        resource :performances
       end
 
       group "Songs", collapsable: true do

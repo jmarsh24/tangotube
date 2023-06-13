@@ -9,11 +9,7 @@ class CoupleResource < Avo::BaseResource
 
   field :id, as: :id
   field :dancer, as: :belongs_to
-  field :dancer_image, as: :file, is_image: true, is_avatar: true do
-    model.dancer.profile_image
-  end
   field :partner, as: :belongs_to
-  field :partner_image, as: :file, is_image: true, is_avatar: true, format_using: ->(model) { model.partner.profile_image }
   field :videos_count, as: :number do
     model.videos.length
   end

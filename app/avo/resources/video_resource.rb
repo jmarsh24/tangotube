@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VideoResource < Avo::BaseResource
-  self.title = :title
+  self.title = :youtube_id
   self.includes = [:channel, :song, :event, :comments, :dancer_videos, :dancers, :thumbnail_attachment, :thumbnail_blob, :performance_video, :performance]
   self.search_query = -> {
     scope.ransack(
@@ -18,8 +18,12 @@ class VideoResource < Avo::BaseResource
 
   grid do
     cover :thumbnail, as: :file, is_image: true
-    title :title, as: :text
-    body :description, as: :text
+    title :youtube_id, as: :text do
+      model.metadata.youtube.title
+    end
+    body :description, as: :text do
+      model.metadata.youtube.description
+    end
   end
 
   field :id, as: :id

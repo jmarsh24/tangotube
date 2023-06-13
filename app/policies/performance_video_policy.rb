@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ClipPolicy < ApplicationPolicy
+class PerformanceVideoPolicy < ApplicationPolicy
   def index?
     true
   end
@@ -9,15 +9,7 @@ class ClipPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    user&.admin?
-  end
-
   def create?
-    user&.admin?
-  end
-
-  def edit?
     user&.admin?
   end
 
@@ -26,6 +18,10 @@ class ClipPolicy < ApplicationPolicy
   end
 
   def destroy?
+    user&.admin?
+  end
+
+  def act_on?
     user&.admin?
   end
 
