@@ -80,6 +80,7 @@ class Video < ApplicationRecord
   scope :active_and_visible, -> { joins(:channel).merge(Channel.active).visible }
   scope :visible, -> { where(hidden: false) }
   scope :featured, -> { where(featured: true) }
+  scope :unfeatured, -> { where(featured: false) }
   scope :has_song, -> { where.not(song_id: nil) }
   scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id)) }
   scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id)) }
@@ -268,8 +269,12 @@ class Video < ApplicationRecord
     thumbnail.presence || "https://i.ytimg.com/vi/#{youtube_id}/hqdefault.jpg"
   end
 
+  def hidden?
+    hidden
+  end
+
   def to_param
-    youtube_id
+    youtube_id || id
   end
 
   def update_from_youtube

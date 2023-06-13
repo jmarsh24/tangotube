@@ -2,91 +2,53 @@
 
 class VideoResource < Avo::BaseResource
   self.title = :title
-  self.includes = [Video.search_includes]
-  self.search_query = -> do
-    scope.ransack(title_eq: params[:q], m: "or").result(distinct: false)
-  end
+  self.includes = [:channel, :song, :event, :comments, :dancer_videos, :dancers, :thumbnail_attachment, :thumbnail_blob, :performance_video, :performance]
+  self.search_query = -> {
+    scope.ransack(
+      title_cont: params[:q],
+      description_cont: params[:q],
+      youtube_id_cont: params[:q],
+      m: "or"
+    ).result(distinct: true)
+  }
+
+  self.find_record_method = ->(model_class:, id:, params:) {
+    (!id.is_a?(Array) && id.to_i == 0) ? model_class.find_by(youtube_id: id) : model_class.find(id)
+  }
 
   grid do
-    title :title, as: :text, link_to_resource: true
-    body :description, as: :textarea
-    cover :thumbnail_url, as: :external_image, link_to_resource: true
+    cover :thumbnail, as: :file, is_image: true, link_to_resource: true
+    title :title, as: :text, required: true, link_to_resource: true
+    body :description, as: :text
   end
 
-  field :youtube_id, as: :text, link_to_resource: true
-  field :thumbnail_url, as: :external_image
-  field :title, as: :text
-  field :description, as: :text, hide_on: [:index]
+  field :id, as: :id
+  field :thumbnail, as: :image
+  field :youtube_id, as: :text
+  field :song, as: :belongs_to
+  field :channel, as: :belongs_to
   field :hidden, as: :boolean
   field :featured, as: :boolean
-  field :channel, as: :belongs_to, required: true, searchable: true
-  # field :leader_id, as: :number
-  # field :follower_id, as: :number
-  # field :description, as: :textarea
-  # field :duration, as: :number
-  # field :upload_date, as: :datetime
-  # field :view_count, as: :number
-  field :tags, as: :text, hide_on: :index
-  # field :song_id, as: :number
-  # field :youtube_song, as: :text
-  # field :youtube_artist, as: :text
-  # field :acrid, as: :text
-  # field :spotify_album_id, as: :text
-  # field :spotify_album_name, as: :text
-  # field :spotify_artist_id, as: :text
-  # field :spotify_artist_id_2, as: :text
-  # field :spotify_artist_name, as: :text
-  # field :spotify_artist_name_2, as: :text
-  # field :spotify_track_id, as: :text
-  # field :spotify_track_name, as: :text
-  # field :youtube_song_id, as: :text
-  # field :isrc, as: :text
-  # field :acr_response_code, as: :number
-  # field :channel_id, as: :number
-  # field :scanned_song, as: :boolean
-  # field :hidden, as: :boolean
-  # field :hd, as: :boolean
-  # field :popularity, as: :number
-  # field :like_count, as: :number
-  # field :dislike_count, as: :number
-  # field :favorite_count, as: :number
-  # field :comment_count, as: :number
-  # field :event_id, as: :number
-  # field :scanned_youtube_music, as: :boolean
-  # field :click_count, as: :number
-  # field :acr_cloud_artist_name, as: :text
-  # field :acr_cloud_artist_name_1, as: :text
-  # field :acr_cloud_album_name, as: :text
-  # field :acr_cloud_track_name, as: :text
-  # field :performance_date, as: :datetime
-  # field :spotify_artist_id_1, as: :text
-  # field :spotify_artist_name_1, as: :text
-  # field :performance_number, as: :number
-  # field :performance_total_number, as: :number
-  # field :cached_scoped_like_votes_total, as: :number
-  # field :cached_scoped_like_votes_score, as: :number
-  # field :cached_scoped_like_votes_up, as: :number
-  # field :cached_scoped_like_votes_down, as: :number
-  # field :cached_weighted_like_score, as: :number
-  # field :cached_weighted_like_total, as: :number
-  # field :cached_weighted_like_average, as: :number
-  # field :featured, as: :boolean
-  # field :votes_for, as: :has_many
-  # field :song, as: :belongs_to
-  # field :channel, as: :belongs_to
-  # field :event, as: :belongs_to
-  # field :comments, as: :has_many
-  # field :clips, as: :has_many
-  # field :dancer_videos, as: :has_many
-  # field :dancers, as: :has_many, through: :dancer_videos
-  # field :follower_roles, as: :has_many
-  # field :leader_roles, as: :has_many
-  # field :leaders, as: :has_many, through: :leader_roles
-  # field :followers, as: :has_many, through: :follower_roles
-  # field :couple_videos, as: :has_many
-  # field :couples, as: :has_many, through: :couple_videos
-  # field :orchestra, as: :has_many, through: :song
-  # field :performance_video, as: :has_one
-  # field :performance, as: :has_many, through: :performance_video
-  # add fields here
+  field :popularity, as: :number
+  field :event, as: :belongs_to
+  field :click_count, as: :number
+  field :metadata, as: :code, language: "javascript", only_on: :edit
+  field :metadata, as: :code, language: "javascript" do |model|
+    if model.metadata.present?
+      JSON.pretty_generate(model.metadata.as_json)
+    end
+  end
+  field :imported_at, as: :date_time
+  field :upload_date, as: :date
+  field :metadata_updated_at, as: :date_time
+  field :dancer_videos, as: :has_many
+  field :dancers, as: :has_many
+  field :created_at, as: :date_time
+  field :updated_at, as: :date_time
+
+  action ToggleHidden
+  action ToggleFeatured
+
+  filter FeaturedFilter
+  filter HiddenFilter
 end

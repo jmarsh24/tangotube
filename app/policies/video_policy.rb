@@ -21,6 +21,10 @@ class VideoPolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def act_on?
+    user&.admin?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

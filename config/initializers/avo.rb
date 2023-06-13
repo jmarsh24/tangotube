@@ -39,7 +39,7 @@ Avo.configure do |config|
   #   create: 'create?',
   #   destroy: 'destroy?',
   # }
-  # config.raise_error_on_missing_policy = !Rails.env.production?
+  config.raise_error_on_missing_policy = !Rails.env.production?
 
   ## == Localization ==
   # config.locale = 'en-US'
@@ -80,20 +80,20 @@ Avo.configure do |config|
   # config.buttons_on_form_footers = true
   # config.field_wrapper_layout = true
 
-  ## == Branding ==
-  # config.branding = {
-  #   colors: {
-  #     background: "248 246 242",
-  #     100 => "#CEE7F8",
-  #     400 => "#399EE5",
-  #     500 => "#0886DE",
-  #     600 => "#066BB2",
-  #   },
-  #   chart_colors: ["#0B8AE2", "#34C683", "#2AB1EE", "#34C6A8"],
-  #   logo: "/avo-assets/logo.png",
-  #   logomark: "/avo-assets/logomark.png"
-  #   placeholder: "/avo-assets/placeholder.svg"
-  # }
+  # == Branding ==
+  config.branding = {
+    colors: {
+      background: "248 246 242",
+      100 => "#CEE7F8",
+      400 => "#399EE5",
+      500 => "#0886DE",
+      600 => "#066BB2",
+    },
+    chart_colors: ["#0B8AE2", "#34C683", "#2AB1EE", "#34C6A8"],
+    logo: "/avo-assets/logo.png",
+    logomark: "/avo-assets/logomark.png",
+    placeholder: "/avo-assets/placeholder.svg"
+  }
 
   ## == Breadcrumbs ==
   # config.display_breadcrumbs = true
@@ -101,20 +101,20 @@ Avo.configure do |config|
   #   add_breadcrumb "Home", '/avo'
   # end
 
-  ## == Menus ==
-  # config.main_menu = -> {
-  #   section "Dashboards", icon: "dashboards" do
-  #     all_dashboards
-  #   end
+  # == Menus ==
+  config.main_menu = -> {
+    section "Dashboards", icon: "dashboards" do
+      all_dashboards
+    end
 
-  #   section "Resources", icon: "resources" do
-  #     all_resources
-  #   end
+    section "Resources", icon: "resources" do
+      all_resources
+    end
 
-  #   section "Tools", icon: "tools" do
-  #     all_tools
-  #   end
-  # }
+    section "Tools", icon: "tools" do
+      all_tools
+    end
+  }
   # config.profile_menu = -> {
   #   link "Profile", path: "/avo/profile", icon: "user-circle"
   # }
