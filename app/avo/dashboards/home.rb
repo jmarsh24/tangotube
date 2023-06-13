@@ -11,4 +11,20 @@ class Home < Avo::Dashboards::BaseDashboard
   end
 
   card DailyImportedVideos
+  card DailyImportedChannels
+  card UsersCountMetric,
+    label: "Users metric",
+    description: "Count of the users."
+  card VideosCountMetric,
+    label: "Active videos metric",
+    description: "Count of the featured videos.",
+    options: {
+      featured_videos: true
+    }
+  card VideosCountMetric,
+    label: "Visible videos metric",
+    description: "Count of the visible videos.",
+    options: {
+      visible_videos: true
+    }
 end
