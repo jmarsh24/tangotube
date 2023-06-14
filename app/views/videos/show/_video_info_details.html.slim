@@ -17,10 +17,6 @@
         = render partial: "videos/show/video_info_item", locals: { header: t("performance_date_heading"), value: @video.upload_date.strftime("%B %d, %Y") }if @video.upload_date.present?
         / = render partial: "videos/show/video_info_item", locals: { header: t("performance_number_headiing"), value: @video.performance_video.position } if @video.performance_video.present?
         / = render partial: "videos/show/video_info_item", locals: { header: t("performance_total_number_heading"), value: @video.performance_video&.videos_count } if @video.performance_video.present?
-      - if user_signed_in?
-        = button_to edit_video_path(@video.youtube_id), method: :get do
-          button
-            = t("edit")
   .tabs__panel data={ "tabs-target": "tabPanel"}
     h4.heading-4.heading-4--bold = t(".youtube_info_heading")
     = render partial: "videos/show/video_info_item", locals: { header: t(".video_title_heading"), value:  @video.metadata.youtube.title }
