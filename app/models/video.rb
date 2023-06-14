@@ -88,6 +88,10 @@ class Video < ApplicationRecord
   scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :follower}) }
   scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :leader}) }
   scope :missing_song, -> { where(song_id: nil) }
+  scope :unrecognized_music, -> {
+    where.not(metadata: {music: {code: [0, 1001]}})
+      .or(where(metadata: nil))
+  }
 
   scope :with_same_dancers, ->(video) {
     includes(Video.search_includes)
