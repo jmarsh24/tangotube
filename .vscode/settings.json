@@ -13,7 +13,7 @@
   "ruby.format": "rubocop",
   "[ruby]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "castwide.solargraph"
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
   },
   "solargraph.formatting": true
 }

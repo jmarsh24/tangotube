@@ -102,8 +102,7 @@ group :development do
   gem "letter_opener"
   gem "guard"
   gem "guard-rspec"
-  gem "solargraph"
-  gem "solargraph-standardrb"
+  gem "ruby-lsp", require: false
   gem "rubocop-rails"
   gem "rubocop-performance"
   gem "rubocop-rspec"
