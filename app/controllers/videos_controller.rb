@@ -75,10 +75,7 @@ class VideosController < ApplicationController
       end
 
     @video.clicked!
-
-    if user_signed_in?
-      MarkVideoAsWatchedJob.perform_later(video_params[:v], current_user.id)
-    end
+    @video.upvote_by(User.find(current_user.id), vote_scope: "watchlist") if user_signed_in?
   end
 
   # @route GET /videos/:id/edit (edit_video)
