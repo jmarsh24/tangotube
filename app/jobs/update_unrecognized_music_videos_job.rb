@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateUnrecognizedMusicVideosJob < ApplicationJob
   queue_as :default
 

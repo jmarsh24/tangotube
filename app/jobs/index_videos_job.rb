@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IndexVideosJob < ApplicationJob
   queue_as :default
 
