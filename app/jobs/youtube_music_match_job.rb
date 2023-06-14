@@ -2,7 +2,7 @@
 
 class YoutubeMusicMatchJob < ApplicationJob
   queue_as :low_priority
-  sidekiq_options queue: :default, retry: false
+  sidekiq_options queue: :default
 
   def perform(youtube_id)
     Video::MusicRecognition::Youtube.fetch(youtube_id)

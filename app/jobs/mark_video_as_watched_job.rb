@@ -2,7 +2,7 @@
 
 class MarkVideoAsWatchedJob < ApplicationJob
   queue_as :low_priority
-  sidekiq_options queue: :high, retry: true
+  sidekiq_options queue: :high
 
   def perform(youtube_id, user_id)
     # set video as watched

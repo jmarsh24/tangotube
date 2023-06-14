@@ -25,8 +25,8 @@ class UserResource < Avo::BaseResource
   field :avatar, as: :file, is_image: true, is_avatar: true
   field :comments, as: :has_many
 
-  def scopes
-    scope Avo::Scopes::Admins
-    scope Avo::Scopes::NonAdmins
-  end
+  # def scopes
+  #   scope Avo::Scopes::Admins
+  #   scope Avo::Scopes::NonAdmins
+  # end
 end
