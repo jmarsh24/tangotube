@@ -7,8 +7,10 @@ module ExternalVideoImport
       @metadata_processor = metadata_processor
     end
 
-    def import(youtube_slug, use_scraper: true, use_music_recognizer: true)
-      metadata = fetch_metadata(youtube_slug, use_scraper:, use_music_recognizer:)
+    def import(youtube_id, use_scraper: true, use_music_recognizer: true)
+      return if Video.exists?(youtube_id:)
+
+      metadata = fetch_metadata(youtube_id, use_scraper:, use_music_recognizer:)
 
       video_attributes = process_metadata(metadata)
       Video.transaction do
@@ -24,13 +26,13 @@ module ExternalVideoImport
     def update(video, use_scraper: true, use_music_recognizer: true)
       metadata = fetch_metadata(video.youtube_id, use_scraper:, use_music_recognizer:)
       video_attributes = process_metadata(metadata)
+
       Video.transaction do
         video.assign_attributes(video_attributes)
         MetadataProcessing::VideoUpdater.new(video).update(metadata)
         video.update!(metadata_updated_at: Time.current)
+        video
       end
-
-      video
     rescue => e
       handle_error("updating", video.youtube_id, e)
     end
@@ -46,9 +48,15 @@ module ExternalVideoImport
     end
 
     def handle_error(action, youtube_slug, error)
-      Rails.logger.error("Error #{action} video with slug '#{youtube_slug}': #{error.message}")
-      Rails.logger.error(error.backtrace.join("\n"))
-      raise error
+      case error
+      when Yt::Errors::NoItems
+        Rails.logger.warn("No items returned from YouTube API while #{action} video with slug '#{youtube_slug}': #{error.message}")
+        nil
+      else
+        Rails.logger.error("Error #{action} video with slug '#{youtube_slug}': #{error.message}")
+        Rails.logger.error(error.backtrace.join("\n"))
+        raise error
+      end
     end
   end
 end
