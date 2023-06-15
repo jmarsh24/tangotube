@@ -1,24 +1,26 @@
 # frozen_string_literal: true
 
 class ChannelResource < Avo::BaseResource
-  self.title = :id
-  self.includes = []
-  # self.search_query = -> do
-  #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-  # end
+  self.title = :title
+  self.includes = [:videos]
+  self.search_query = -> do
+    scope.ransack(channel_id_eq: params[:q], m: "or").result(distinct: false)
+  end
+
+  grid do
+    cover :thumbnail_url, as: :url
+    title :title, as: :text
+    body :description, as: :text
+  end
 
   field :id, as: :id
-  # Fields generated from the model
+  field :thumbnail_url, as: :external_image, hide_on: :show, as_avatar: :rounded
   field :title, as: :text
   field :channel_id, as: :text
-  field :thumbnail_url, as: :text
-  field :imported, as: :boolean
-  field :imported_videos_count, as: :number
-  field :total_videos_count, as: :number
-  field :yt_api_pull_count, as: :number
+  field :imported_at, as: :date_time
   field :reviewed, as: :boolean
-  field :videos_count, as: :number
   field :active, as: :boolean
-  field :videos, as: :has_many
-  # add fields here
+  field :videos_count, as: :number do
+    model.videos.length
+  end
 end

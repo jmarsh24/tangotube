@@ -2,18 +2,32 @@
 
 class PlaylistPolicy < ApplicationPolicy
   def index?
-    admin?
+    true
+  end
+
+  def show?
+    true
   end
 
   def create?
-    admin?
+    user&.admin?
   end
 
   def update?
-    admin?
+    user&.admin?
   end
 
   def destroy?
-    admin?
+    user&.admin?
+  end
+
+  def act_on?
+    user&.admin?
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

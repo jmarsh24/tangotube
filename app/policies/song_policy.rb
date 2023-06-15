@@ -10,28 +10,32 @@ class SongPolicy < ApplicationPolicy
   end
 
   def new?
-    admin?
+    user&.admin?
   end
 
   def create?
-    admin?
+    user&.admin?
   end
 
   def edit?
-    admin?
+    user&.admin?
   end
 
   def update?
-    admin?
+    user&.admin?
   end
 
   def destroy?
-    admin?
+    user&.admin?
   end
 
-  private
-
-  def admin?
+  def act_on?
     user&.admin?
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

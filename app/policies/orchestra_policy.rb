@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 class OrchestraPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
-  end
-
   def index?
     true
   end
@@ -16,14 +10,24 @@ class OrchestraPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    user&.admin?
   end
 
   def update?
-    user.admin?
+    user&.admin?
   end
 
   def destroy?
-    user.admin?
+    user&.admin?
+  end
+
+  def act_on?
+    user&.admin?
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

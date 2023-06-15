@@ -29,7 +29,6 @@
 /storage/*
 !/storage/.keep
 /tmp/storage/*
-!/tmp/storage/
 !/tmp/storage/.keep
 
 spec

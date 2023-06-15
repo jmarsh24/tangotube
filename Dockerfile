@@ -21,10 +21,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends $RUNTIME_DEPS $BUILD_DEPS -qq
 
 # Install yt-dlp
-RUN pip3 install --upgrade pip && pip3 install yt-dlp
-
-# Add yt-dlp to PATH
-ENV PATH="/usr/local/lib/python3.9/dist-packages/yt_dlp:$PATH"
+RUN set -x && \
+    python3 -m pip --no-cache-dir install yt-dlp
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=14.21.3

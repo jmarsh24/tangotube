@@ -374,8 +374,7 @@ en:
         video_title_heading: Video title
         video_upload_date_heading: Video upload date
         youtube_info_heading: Youtube info
-      video_info_primary:
-        clip: Clip
+      vote:
         share_button: Share
       watchlist_link:
         watch_later: Watch later

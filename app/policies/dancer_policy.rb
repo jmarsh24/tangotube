@@ -10,15 +10,43 @@ class DancerPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present? && user.admin?
+    user&.admin?
   end
 
   def update?
-    user.present? && (user.admin? || record.user_id == user.id)
+    user&.admin?
   end
 
   def destroy?
-    user.present? && (user.admin? || record.user_id == user.id)
+    user&.admin?
+  end
+
+  def act_on?
+    user&.admin?
+  end
+
+  def upload_profile_image?
+    user&.admin?
+  end
+
+  def delete_profile_image?
+    user&.admin?
+  end
+
+  def download_profile_image?
+    true
+  end
+
+  def upload_cover_image?
+    user&.admin?
+  end
+
+  def delete_cover_image?
+    user&.admin?
+  end
+
+  def download_cover_image?
+    true
   end
 
   class Scope < Scope

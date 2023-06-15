@@ -7,7 +7,7 @@
             = video.decorate.performance_number
         = image_tag(video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 385, height: 216)
     .stack.stack--xxxs
-      .stack.stack--line.stack--xxxs
+      .scrollable-tags
         - video.dancer_videos.each do |dv|
           - link = dv.role == "leader" ? root_path(leader: dv.dancer.name.to_param) : root_path(follower: dv.dancer.name.to_param)
           = link_to link, class: "tag tag--sm" do

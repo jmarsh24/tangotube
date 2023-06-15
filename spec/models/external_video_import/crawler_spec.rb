@@ -14,19 +14,28 @@ RSpec.describe ExternalVideoImport::Crawler do
       music_recognizer
     end
 
-    let(:youtube_scraper) do
+    let(:metadata_provider) do
       metadata = ExternalVideoImport::Youtube::VideoMetadata.new(slug:)
-      youtube_scraper = ExternalVideoImport::Youtube::Scraper.new
-      allow(youtube_scraper).to receive(:video_metadata).and_return metadata
-      youtube_scraper
+      metadata_provider = ExternalVideoImport::Youtube::MetadataProvider.new
+      allow(metadata_provider).to receive(:video_metadata).and_return metadata
+      metadata_provider
     end
 
     it "returns the video data from youtube" do
-      video_crawler = ExternalVideoImport::Crawler.new(youtube_scraper:, music_recognizer:)
+      video_crawler = ExternalVideoImport::Crawler.new(metadata_provider:, music_recognizer:)
 
-      metadata = video_crawler.metadata(slug:)
+      metadata = video_crawler.metadata(slug, use_scraper: true, use_music_recognizer: true)
       expect(metadata.youtube.slug).to eq "AQ9Ri3kWa_4"
       expect(metadata.music.acr_id).to eq "a8d9899317fd427b6741b739de8ded15"
+    end
+
+    it "returns the video data from youtube without music recognition" do
+      video_crawler = ExternalVideoImport::Crawler.new(metadata_provider:, music_recognizer:)
+
+      metadata = video_crawler.metadata(slug, use_scraper: true, use_music_recognizer: false)
+      expect(metadata.youtube.slug).to eq "AQ9Ri3kWa_4"
+      expect(metadata.music).to be_a(ExternalVideoImport::MusicRecognition::Metadata)
+      expect(metadata.music.code).to be_nil
     end
   end
 end

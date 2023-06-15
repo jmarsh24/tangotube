@@ -45,7 +45,11 @@ class Song < ApplicationRecord
     ->(query) { where("unaccent(title) ILIKE unaccent(?)", "%#{query}%") }
 
   def full_title
-    "#{title.titleize} - #{artist.split("'").map(&:titleize).join("'")} - #{genre.titleize}"
+    title_part = title&.titleize
+    artist_part = artist&.split("'")&.map(&:titleize)&.join("'")
+    genre_part = genre&.titleize
+
+    [title_part, artist_part, genre_part].compact.join(" - ")
   end
 
   def translate_to_english

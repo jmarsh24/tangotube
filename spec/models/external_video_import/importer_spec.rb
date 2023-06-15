@@ -81,7 +81,7 @@ RSpec.describe ExternalVideoImport::Importer do
       .to_return(body: file_fixture("spotify_response.json").read)
     stub_request(:get, "https://api.spotify.com/v1/artists/649cpnHPJs3XtCIa3XUfq3")
       .to_return(body: file_fixture("spotify_response_1.json").read)
-    allow(video_crawler).to receive(:metadata).with(slug: youtube_slug).and_return(metadata)
+    allow(video_crawler).to receive(:metadata).with(youtube_slug, {use_scraper: true, use_music_recognizer: true}).and_return(metadata)
   end
 
   describe "#import" do
@@ -92,32 +92,44 @@ RSpec.describe ExternalVideoImport::Importer do
       allow(couple_matcher).to receive(:match_or_create).and_return(couple)
     end
 
-    it "imports a video with the correct attributes" do
-      expect { importer.import(youtube_slug) }.to change { Video.count }.by(1)
+    context "when a video with the same youtube slug does not exist" do
+      it "imports a video with the correct attributes" do
+        expect { importer.import(youtube_slug) }.to change { Video.count }.by(1)
 
-      video = Video.last
-      expect(video.youtube_id).to eq(metadata.youtube.slug)
-      expect(video.metadata.youtube.title).to eq(metadata.youtube.title)
-      expect(video.metadata.youtube.description).to eq(metadata.youtube.description)
-      expect(video.upload_date).to eq(Date.parse("2022-01-01"))
-      expect(video.metadata.youtube.duration).to eq(180)
-      expect(video.metadata.youtube.tags).to match_array(["tag1", "tag2"])
-      expect(video.metadata.youtube.hd).to be(true)
-      expect(video.metadata.youtube.view_count).to eq(1000)
-      expect(video.metadata.youtube.favorite_count).to eq(100)
-      expect(video.metadata.youtube.comment_count).to eq(50)
-      expect(video.metadata.youtube.like_count).to eq(200)
-      expect(video.song).to eq(song)
-      expect(video.channel).to eq(channel)
-      expect(video.dancers).to match_array(couple.dancers)
-      expect(video.couples).to match_array(couple)
-      expect(video.metadata).to eq(metadata)
+        video = Video.last
+        expect(video.youtube_id).to eq(metadata.youtube.slug)
+        expect(video.metadata.youtube.title).to eq(metadata.youtube.title)
+        expect(video.metadata.youtube.description).to eq(metadata.youtube.description)
+        expect(video.upload_date).to eq(Date.parse("2022-01-01"))
+        expect(video.metadata.youtube.duration).to eq(180)
+        expect(video.metadata.youtube.tags).to match_array(["tag1", "tag2"])
+        expect(video.metadata.youtube.hd).to be(true)
+        expect(video.metadata.youtube.view_count).to eq(1000)
+        expect(video.metadata.youtube.favorite_count).to eq(100)
+        expect(video.metadata.youtube.comment_count).to eq(50)
+        expect(video.metadata.youtube.like_count).to eq(200)
+        expect(video.song).to eq(song)
+        expect(video.channel).to eq(channel)
+        expect(video.dancers).to match_array(couple.dancers)
+        expect(video.couples).to match_array(couple)
+        expect(video.metadata).to eq(metadata)
+      end
+    end
+
+    context "when a video with the same youtube slug already exists" do
+      let(:existing_video) { videos(:video_1_featured) }
+
+      it "updates the existing video" do
+        expect { importer.import(videos(:video_1_featured).youtube_id) }.not_to change { Video.count }
+
+        existing_video.reload
+      end
     end
   end
 
   describe "#update" do
     before do
-      allow(video_crawler).to receive(:metadata).with(slug: video.youtube_id).and_return(metadata)
+      allow(video_crawler).to receive(:metadata).with(video.youtube_id, {use_scraper: true, use_music_recognizer: true}).and_return(metadata)
       video.assign_attributes(metadata: nil)
     end
 

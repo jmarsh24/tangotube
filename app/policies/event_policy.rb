@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 class EventPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
-  end
-
   def index?
     true
   end
@@ -16,20 +10,48 @@ class EventPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    user&.admin?
   end
 
   def update?
-    user.admin?
+    user&.admin?
   end
 
   def destroy?
-    user.admin?
+    user&.admin?
   end
 
-  private
+  def act_on?
+    user&.admin?
+  end
 
-  def event
-    record
+  def upload_profile_image?
+    user&.admin?
+  end
+
+  def delete_profile_image?
+    user&.admin?
+  end
+
+  def download_profile_image?
+    true
+  end
+
+  def upload_cover_image?
+    user&.admin?
+  end
+
+  def delete_cover_image?
+    user&.admin?
+  end
+
+  def download_cover_image?
+    true
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

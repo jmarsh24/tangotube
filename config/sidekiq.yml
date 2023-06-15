@@ -7,4 +7,52 @@
   - low_priority
   - active_storage_analysis
   - active_storage_purge
-  - import
+:scheduler:
+  :schedule:
+    enqueue_channel_video_fetcher_for_all_channels_with_scraper:
+      cron: "0 0 * * 1" # Runs every Monday at 00:00
+      class: ImportNewVideosForAllChannelsJob
+      queue: default
+      enabled: true
+      args:
+        use_scraper: true
+        use_music_recognizer: false
+    enqueue_channel_video_fetcher_for_all_channels_with_music_recognizer:
+      cron: "0 0 * * 1" # Runs every Monday at 00:00
+      class: ImportNewVideosForAllChannelsJob
+      queue: default
+      enabled: true
+      args:
+        use_scraper: false
+        use_music_recognizer: true
+    enqueue_channel_video_fetcher_for_all_channels_with_both:
+      cron: "0 0 * * 1" # Runs every Monday at 00:00
+      class: ImportNewVideosForAllChannelsJob
+      queue: default
+      enabled: true
+      args:
+        use_scraper: true
+        use_music_recognizer: true
+    enqueue_channel_video_fetcher_for_all_channels_without_both:
+      cron: "0 0 * * 1" # Runs every Monday at 00:00
+      class: ImportNewVideosForAllChannelsJob
+      queue: default
+      enabled: true
+      args:
+        use_scraper: false
+        use_music_recognizer: false
+    enqueue_update_unrecognized_music_videos_job:
+      cron: "0 0 * * *" # Runs daily at 00:00
+      class: UpdateUnrecognizedMusicVideosJob
+      queue: default
+      enabled: low_priority
+    enqueue_update_active_channels_job:
+      cron: "0 0 * * *" # Runs daily at 00:00
+      class: UpdateActiveChannelsJob
+      queue: default
+      enabled: low_priority
+    index_videos:
+      every: ["2h"]
+      class: IndexVideosJob
+      queue: default
+      enabled: low_priority

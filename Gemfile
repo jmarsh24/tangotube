@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.2.1"
+ruby "3.2.2"
 
 gem "rails", github: "rails/rails", branch: "main"
 gem "rack", "2.2.7"
@@ -19,6 +19,7 @@ gem "bootsnap", require: false
 gem "acts-as-taggable-on"
 gem "acts_as_votable"
 gem "acts_as_list"
+gem "activestorage"
 gem "amazing_print"
 gem "avo"
 gem "bcrypt"
@@ -83,11 +84,15 @@ group :development, :test do
   gem "pry-doc"
   gem "debug"
   gem "i18n-tasks"
-  gem "rack_session_access"
   gem "chusaku", require: false
-  gem "rspec-retry"
-  gem "webmock", require: false
   gem "capybara-screenshot-diff"
+end
+
+group :test do
+  gem "vcr"
+  gem "webmock", require: false
+  gem "rack_session_access"
+  gem "rspec-retry"
 end
 
 group :development do
@@ -98,8 +103,7 @@ group :development do
   gem "letter_opener"
   gem "guard"
   gem "guard-rspec"
-  gem "solargraph"
-  gem "solargraph-standardrb"
+  gem "ruby-lsp", require: false
   gem "rubocop-rails"
   gem "rubocop-performance"
   gem "rubocop-rspec"

@@ -1,0 +1,31 @@
+.your-component {
+  &__close {
+    display: none
+  }
+
+    .collapse-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 0.3s;
+    transition-timing-function: ease-in-out;
+    flex-shrink: 0;
+
+    &__content {
+      min-height: 0;
+    }
+  }
+}
+
+.your-component.open {
+  .your-component__open {
+    display: none
+  }
+  .your-component__close {
+    display: unset
+  }
+  .collapse-panel {
+
+    grid-template-rows: 1fr;
+  }
+}

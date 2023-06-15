@@ -2,27 +2,24 @@
 #
 # Table name: channels
 #
-#  id                    :bigint           not null, primary key
-#  title                 :string
-#  channel_id            :string           not null
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  thumbnail_url         :string
-#  imported              :boolean          default(FALSE)
-#  imported_videos_count :integer          default(0)
-#  total_videos_count    :integer          default(0)
-#  yt_api_pull_count     :integer          default(0)
-#  reviewed              :boolean          default(FALSE)
-#  videos_count          :integer          default(0), not null
-#  active                :boolean          default(TRUE)
-#  description           :text
+#  id                  :bigint           not null, primary key
+#  title               :string
+#  channel_id          :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  thumbnail_url       :string
+#  reviewed            :boolean          default(FALSE)
+#  active              :boolean          default(TRUE)
+#  description         :text
+#  metadata            :jsonb
+#  metadata_updated_at :datetime
+#  imported_at         :datetime
 #
 
 030tango:
-  title: '030tango'
-  channel_id: 'UCtdgMR0bmogczrZNpPaO66Q'
-  thumbnail_url: 'https://yt3.ggpht.com/ytc/AL5GRJVepNM3-zJP50OTXSq6fXyvHB3F9nzST-3sJ2P5=s68-c-k-c0x00ffffff-no-rj'
-  imported: true
+  title: "030tango"
+  channel_id: "UCtdgMR0bmogczrZNpPaO66Q"
+  thumbnail_url: "https://yt3.ggpht.com/ytc/AL5GRJVepNM3-zJP50OTXSq6fXyvHB3F9nzST-3sJ2P5=s68-c-k-c0x00ffffff-no-rj"
   reviewed: true
   active: true
 
@@ -30,38 +27,33 @@ giorgio_scattolini:
   title: "Giorgio Scattolini"
   channel_id: "UC-v2IECxsVoaKZYwDskR1Gg"
   thumbnail_url: "https://yt3.googleusercontent.com/ytc/AL5GRJX7NWImZoibia3h3gwF5o5o-mmDu1WmF_CN7uMyMg=s176-c-k-c0x00ffffff-no-rj"
-  imported: true
   reviewed: true
   active: true
 
 peppa_palazon:
-  title: 'Peppa Palazon'
-  channel_id: 'UCV6aDwqqS7yTDsp0v_gUkPA'
-  thumbnail_url: 'https://yt3.ggpht.com/ytc/AL5GRJXfnCH0729Lzvv7Nw6fqicsejkbwnXXo82O5jZPHw=s88-c-k-c0x00ffffff-no-rj'
-  imported: true
+  title: "Peppa Palazon"
+  channel_id: "UCV6aDwqqS7yTDsp0v_gUkPA"
+  thumbnail_url: "https://yt3.ggpht.com/ytc/AL5GRJXfnCH0729Lzvv7Nw6fqicsejkbwnXXo82O5jZPHw=s88-c-k-c0x00ffffff-no-rj"
   reviewed: true
   active: true
 
 tango_nuevo_tv:
-  title: 'Tango Nuevo TV'
-  channel_id: 'UCUKptFgKHVYM1GoQvgeDU_A'
-  thumbnail_url: 'https://yt3.googleusercontent.com/ytc/AL5GRJUp_5wrlatwXPgwdKFPsBR-zV-8vhk7_Mw7wrpXUQ=s176-c-k-c0x00ffffff-no-rj'
-  imported: true
+  title: "Tango Nuevo TV"
+  channel_id: "UCUKptFgKHVYM1GoQvgeDU_A"
+  thumbnail_url: "https://yt3.googleusercontent.com/ytc/AL5GRJUp_5wrlatwXPgwdKFPsBR-zV-8vhk7_Mw7wrpXUQ=s176-c-k-c0x00ffffff-no-rj"
   reviewed: true
   active: true
 
 armelle_tango:
-  title: 'Armelle Tango'
-  channel_id: 'UClmH-sr3jJH1i8tE6odtONQ'
-  thumbnail_url: 'https://yt3.ggpht.com/ytc/AL5GRJVsBCitOYJ7dt-GFyB4-GMc7op5rRSfv03iELlyFEU=s88-c-k-c0x00ffffff-no-rpoj'
-  imported: true
+  title: "Armelle Tango"
+  channel_id: "UClmH-sr3jJH1i8tE6odtONQ"
+  thumbnail_url: "https://yt3.ggpht.com/ytc/AL5GRJVsBCitOYJ7dt-GFyB4-GMc7op5rRSfv03iELlyFEU=s88-c-k-c0x00ffffff-no-rpoj"
   reviewed: true
   active: true
 
 jkukla_video:
-  title: 'JKukla Video'
-  channel_id: 'UCvnY4F-CJVgYdQuIv8sqp-A'
-  thumbnail_url: 'https://yt3.googleusercontent.com/ytc/AL5GRJWaKWUq-2aJhzwmgH7VQ-mkxXcySvtGB7Oge3kh=s176-c-k-c0x00ffffff-no-rj'
-  imported: true
+  title: "JKukla Video"
+  channel_id: "UCvnY4F-CJVgYdQuIv8sqp-A"
+  thumbnail_url: "https://yt3.googleusercontent.com/ytc/AL5GRJWaKWUq-2aJhzwmgH7VQ-mkxXcySvtGB7Oge3kh=s176-c-k-c0x00ffffff-no-rj"
   reviewed: true
   active: true

@@ -17,6 +17,10 @@
     width: min(100% - var(--spacing-md), 500px);
   }
 
+  &--video {
+    padding-bottom: var(--spacing-mega-2)
+  }
+
   @include breakpoint-tablet {
   grid-template-columns:
     minmax(var(--container-gap), 1fr)

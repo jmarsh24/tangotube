@@ -11,11 +11,4 @@
   .stack data-controller="clipboard" data-clipboard-success-content="Copied!" data-clipboard-video-id="#{@video.youtube_id}" data-clipboard-root-url="#{@root_url}"
     .stack
       = render "videos/show/vote"
-        button class="button button--seconday button--icon--scissors"
-          = t(".clip")
-        = turbo_frame_tag "new_clip" do
-          = render partial: "clips/form", clip: Clip.new, start_seconds: params[:start], end_seconds: params[:end], playback_rate: params[:speed]
-    .search_bar
-      = text_field_tag :url, "tangotube.tv/watch?v#{@video.youtube_id}", readonly: "readonly", class: "input input__input input--share", data: { "clipboard-target": "source" }
-      button class="button button--secondary button--icon-square-and-arrow-up button--icon-left button--share" data-clipboard-target="button" data-action="click->clipboard#copy"
-        = t(".share_button")
+      

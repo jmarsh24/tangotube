@@ -81,6 +81,7 @@ corina:
   last_name: "Herrera"
   gender: "male"
   slug: "corina-herrera"
+  reviewed: true
 
 inez:
   name: "Inez Muzzopapa"
@@ -88,6 +89,7 @@ inez:
   last_name: "Muzzopapa"
   gender: "male"
   slug: "inez-muzzopapa"
+  reviewed: true
 
 octavio:
   name: "Octavio Fernandez"
@@ -95,3 +97,22 @@ octavio:
   last_name: "Fernandez"
   gender: "male"
   slug: "octavio-fernandez"
+  reviewed: true
+
+facundo:
+  name: "Facundo Pinero"
+  first_name: "Facundo"
+  last_name: "Pinero"
+  reviewed: true
+
+vanessa:
+  name: "Vanessa Villalba"
+  first_name: "Vanessa"
+  last_name: "Villalba"
+  reviewed: true
+
+facundo_gil:
+  name: "Facundo Gil"
+  first_name: "Facundo"
+  last_name: "Gil"
+  reviewed: "true"

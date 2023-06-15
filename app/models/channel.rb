@@ -4,24 +4,24 @@
 #
 # Table name: channels
 #
-#  id                    :bigint           not null, primary key
-#  title                 :string
-#  channel_id            :string           not null
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  thumbnail_url         :string
-#  imported              :boolean          default(FALSE)
-#  imported_videos_count :integer          default(0)
-#  total_videos_count    :integer          default(0)
-#  yt_api_pull_count     :integer          default(0)
-#  reviewed              :boolean          default(FALSE)
-#  videos_count          :integer          default(0), not null
-#  active                :boolean          default(TRUE)
-#  description           :text
+#  id                  :bigint           not null, primary key
+#  title               :string
+#  channel_id          :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  thumbnail_url       :string
+#  reviewed            :boolean          default(FALSE)
+#  active              :boolean          default(TRUE)
+#  description         :text
+#  metadata            :jsonb
+#  metadata_updated_at :datetime
+#  imported_at         :datetime
 #
 class Channel < ApplicationRecord
   include Reviewable
   include Importable
+
+  attribute :metadata, ChannelMetadata.to_type
 
   has_many :videos, dependent: :destroy
   has_many :performance_videos, through: :videos
@@ -33,38 +33,47 @@ class Channel < ApplicationRecord
 
   validates :channel_id, presence: true, uniqueness: true
 
-  before_save :update_imported, if: :count_changed?
-  after_save :destroy_all_videos, unless: :active?
-
+  scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
   scope :title_search,
     lambda { |query|
       where("unaccent(title) ILIKE unaccent(?)", "%#{query}%")
     }
 
-  def destroy_all_videos
-    return "This Channel doesn't have any videos" if videos.nil?
-    videos.find_each(&:destroy)
+  def import_new_videos(use_scraper: true, use_music_recognizer: true)
+    return unless active
+
+    new_video_ids = videos.map(&:youtube_id) - metadata.video_ids
+
+    new_video_ids.each do |video_id|
+      ImportVideoJob.perform_later(video_id, use_scraper:, use_music_recognizer:)
+    end
   end
 
-  def grab_thumbnail
-    yt_thumbnail = URI.parse(thumbnail_url).open
-  rescue OpenURI::HTTPError
-    yt_thumbnail = URI.parse(backup_thumbnail_url).open
-  ensure
-    thumbnail.attach(io: yt_thumbnail, filename: "#{youtube_id}.jpg")
+  def update_videos(use_scraper: true, use_music_recognizer: true)
+    return unless active
+
+    videos.find_each do |video|
+      UpdateVideoJob.perform_later(video, use_scraper:, use_music_recognizer:)
+    end
   end
 
-  def grab_thumbnail_later
-    GrabChannelThumbnailJob.perform_later(self)
+  def fetch_and_save_metadata!
+    metadata = ExternalChannelImporter.new.fetch_metadata(channel_id)
+    update!(metadata:, metadata_updated_at: Time.current)
+  rescue Yt::Errors::NoItems
+    destroy!
+  end
+
+  def fetch_and_save_metadata_later!
+    ImportChannelMetadataJob.perform_later(self)
   end
 
   private
 
-  def update_imported
-    self.imported = videos_count >= total_videos_count
-  end
+  def attach_avatar_thumbnail(thumbnail_url)
+    return if thumbnail_url.blank?
 
-  def count_changed?
-    total_videos_count_changed? || videos_count_changed?
+    thumbnail.attach(io: URI.parse(thumbnail_url).open, filename: "#{channel_id}.jpg")
   end
 end

@@ -19,8 +19,8 @@ class VideoPolicy < ApplicationPolicy
     user&.admin?
   end
 
-  def like?
-    user.present? 
+  def act_on?
+    user&.admin?
   end
 
   class Scope < Scope

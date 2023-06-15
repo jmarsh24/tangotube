@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/channels?id=invalid&key=<YOUTUBE_API_KEY>&part=snippet
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Sun, 11 Jun 2023 22:49:56 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "kind": "youtube#channelListResponse",
+          "etag": "RuuXzTIr0OoDqI4S0RU6n4FqKEM",
+          "pageInfo": {
+            "totalResults": 0,
+            "resultsPerPage": 5
+          }
+        }
+  recorded_at: Sun, 11 Jun 2023 22:49:56 GMT
+recorded_with: VCR 6.1.0

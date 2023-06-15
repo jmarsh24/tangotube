@@ -64,5 +64,27 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:)).to contain_exactly(accented_song)
       end
     end
+
+    context "when artist_fields and title_fields are nil" do
+      let(:metadata_fields) { ["Some unrelated metadata"] }
+      let(:artist_fields) { [nil] }
+      let(:title_fields) { [nil] }
+      let(:genre_fields) { ["undefined"] }
+
+      it "does not create a new song" do
+        expect { song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:) }.not_to change(::Song, :count)
+      end
+    end
+
+    context "when artist_fields and title_fields are empty" do
+      let(:metadata_fields) { ["Some unrelated metadata"] }
+      let(:artist_fields) { [] }
+      let(:title_fields) { [] }
+      let(:genre_fields) { ["undefined"] }
+
+      it "does not create a new song" do
+        expect { song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:) }.not_to change(::Song, :count)
+      end
+    end
   end
 end

@@ -1,0 +1,168 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/channels?id=UCtdgMR0bmogczrZNpPaO66Q&key=<YOUTUBE_API_KEY>&part=snippet
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Sun, 11 Jun 2023 22:47:50 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJraW5kIjogInlvdXR1YmUjY2hhbm5lbExpc3RSZXNwb25zZSIsCiAgImV0YWciOiAiQlBmaWU1bTdYU0pFNnBjZlN6QmdTRklRZUxVIiwKICAicGFnZUluZm8iOiB7CiAgICAidG90YWxSZXN1bHRzIjogMSwKICAgICJyZXN1bHRzUGVyUGFnZSI6IDUKICB9LAogICJpdGVtcyI6IFsKICAgIHsKICAgICAgImtpbmQiOiAieW91dHViZSNjaGFubmVsIiwKICAgICAgImV0YWciOiAiOUNGQXdQdDZpMllXNDZBT3BleXBLZjBZNnNFIiwKICAgICAgImlkIjogIlVDdGRnTVIwYm1vZ2N6clpOcFBhTzY2USIsCiAgICAgICJzbmlwcGV0IjogewogICAgICAgICJ0aXRsZSI6ICIwMzB0YW5nbyIsCiAgICAgICAgImRlc2NyaXB0aW9uIjogIjAzMHRhbmdvIGlzIGEgY2hhbm5lbCBhbGwgYWJvdXQgYXJnZW50aW5lIHRhbmdvIVxuUGVyZm9ybWFuY2VzLCBzaG9ydHMgYW5kIG11c2ljLCBhbGwgaW4gb25lIHBsYWNlIVxuXG5QbGVhc2UgYmUgYXdhcmUsIHRoYXQgaWYgeW91IGxlYXZlIGNvbW1lbnRzIGFib3V0IHRoZSBib2R5IHR5cGUsIHdlaWdodCwgb3IgYW55dGhpbmcgZWxzZSBvZiBvbmUgb2YgdGhlIGRhbmNlcnMsIHlvdSB3aWxsIGJlIGJhbm5lZCBmcm9tIHRoaXMgY2hhbm5lbC4gSXQncyByZWFsbHkgbm90IHVwIHRvIHlvdSB0byBqdWRnZS5cblxuXG5Gw7xyIGRhcyBJbXByZXNzdW0gYmVzdWNoZW4gU2llOlxuaHR0cDovL3d3dy4wMzB0YW5nby5jb20vaW1wcmVzc3VtL2ltcHJlc3N1bS15b3V0dWJlLyIsCiAgICAgICAgImN1c3RvbVVybCI6ICJAMDMwdGFuZ28iLAogICAgICAgICJwdWJsaXNoZWRBdCI6ICIyMDE4LTAzLTAxVDA4OjEyOjUzWiIsCiAgICAgICAgInRodW1ibmFpbHMiOiB7CiAgICAgICAgICAiZGVmYXVsdCI6IHsKICAgICAgICAgICAgInVybCI6ICJodHRwczovL3l0My5nZ3BodC5jb20veXRjL0FHSUtncVBvd1JYLWcyNHg5ak53U19nd2Z0S0xUdS1VdVNPNEtQYXdNRXItPXM4OC1jLWstYzB4MDBmZmZmZmYtbm8tcmoiLAogICAgICAgICAgICAid2lkdGgiOiA4OCwKICAgICAgICAgICAgImhlaWdodCI6IDg4CiAgICAgICAgICB9LAogICAgICAgICAgIm1lZGl1bSI6IHsKICAgICAgICAgICAgInVybCI6ICJodHRwczovL3l0My5nZ3BodC5jb20veXRjL0FHSUtncVBvd1JYLWcyNHg5ak53U19nd2Z0S0xUdS1VdVNPNEtQYXdNRXItPXMyNDAtYy1rLWMweDAwZmZmZmZmLW5vLXJqIiwKICAgICAgICAgICAgIndpZHRoIjogMjQwLAogICAgICAgICAgICAiaGVpZ2h0IjogMjQwCiAgICAgICAgICB9LAogICAgICAgICAgImhpZ2giOiB7CiAgICAgICAgICAgICJ1cmwiOiAiaHR0cHM6Ly95dDMuZ2dwaHQuY29tL3l0Yy9BR0lLZ3FQb3dSWC1nMjR4OWpOd1NfZ3dmdEtMVHUtVXVTTzRLUGF3TUVyLT1zODAwLWMtay1jMHgwMGZmZmZmZi1uby1yaiIsCiAgICAgICAgICAgICJ3aWR0aCI6IDgwMCwKICAgICAgICAgICAgImhlaWdodCI6IDgwMAogICAgICAgICAgfQogICAgICAgIH0sCiAgICAgICAgImxvY2FsaXplZCI6IHsKICAgICAgICAgICJ0aXRsZSI6ICIwMzB0YW5nbyIsCiAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiMDMwdGFuZ28gaXMgYSBjaGFubmVsIGFsbCBhYm91dCBhcmdlbnRpbmUgdGFuZ28hXG5QZXJmb3JtYW5jZXMsIHNob3J0cyBhbmQgbXVzaWMsIGFsbCBpbiBvbmUgcGxhY2UhXG5cblBsZWFzZSBiZSBhd2FyZSwgdGhhdCBpZiB5b3UgbGVhdmUgY29tbWVudHMgYWJvdXQgdGhlIGJvZHkgdHlwZSwgd2VpZ2h0LCBvciBhbnl0aGluZyBlbHNlIG9mIG9uZSBvZiB0aGUgZGFuY2VycywgeW91IHdpbGwgYmUgYmFubmVkIGZyb20gdGhpcyBjaGFubmVsLiBJdCdzIHJlYWxseSBub3QgdXAgdG8geW91IHRvIGp1ZGdlLlxuXG5cbkbDvHIgZGFzIEltcHJlc3N1bSBiZXN1Y2hlbiBTaWU6XG5odHRwOi8vd3d3LjAzMHRhbmdvLmNvbS9pbXByZXNzdW0vaW1wcmVzc3VtLXlvdXR1YmUvIgogICAgICAgIH0sCiAgICAgICAgImNvdW50cnkiOiAiREUiCiAgICAgIH0KICAgIH0KICBdCn0K
+  recorded_at: Sun, 11 Jun 2023 22:47:50 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/channels?id=UCtdgMR0bmogczrZNpPaO66Q&key=<YOUTUBE_API_KEY>&maxResults=50&part=statistics
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Sun, 11 Jun 2023 22:47:51 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "kind": "youtube#channelListResponse",
+          "etag": "n5SjMKuMKyOstPIPp2UHakQSMyE",
+          "pageInfo": {
+            "totalResults": 1,
+            "resultsPerPage": 50
+          },
+          "items": [
+            {
+              "kind": "youtube#channel",
+              "etag": "VZJhC8Bz4yNKhc42_rDVS-ZHM3U",
+              "id": "UCtdgMR0bmogczrZNpPaO66Q",
+              "statistics": {
+                "viewCount": "41233416",
+                "subscriberCount": "60700",
+                "hiddenSubscriberCount": false,
+                "videoCount": "2421"
+              }
+            }
+          ]
+        }
+  recorded_at: Sun, 11 Jun 2023 22:47:51 GMT
+- request:
+    method: get
+    uri: https://yt3.ggpht.com/ytc/AGIKgqPowRX-g24x9jNwS_gwftKLTu-UuSO4KPawMEr-=s88-c-k-c0x00ffffff-no-rj
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Timing-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Content-Length
+      Content-Disposition:
+      - inline;filename="unnamed.jpg"
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - fife
+      Content-Length:
+      - '5730'
+      X-Xss-Protection:
+      - '0'
+      Date:
+      - Sun, 11 Jun 2023 21:17:26 GMT
+      Expires:
+      - Mon, 12 Jun 2023 21:17:26 GMT
+      Cache-Control:
+      - public, max-age=86400, no-transform
+      Age:
+      - '5425'
+      Etag:
+      - '"v8"'
+      Content-Type:
+      - image/jpeg
+      Vary:
+      - Origin
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+  recorded_at: Sun, 11 Jun 2023 22:47:51 GMT
+recorded_with: VCR 6.1.0

@@ -22,5 +22,9 @@ class Playlist < ApplicationRecord
   include Importable
   include Reviewable
 
+  has_many :videos, dependent: :nullify
+  belongs_to :user, optional: true
+  has_many :playlist_videos, dependent: :destroy
+
   validates :slug, presence: true, uniqueness: true
 end

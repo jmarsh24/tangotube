@@ -2,10 +2,8 @@
 
 class UpdateVideoJob < ApplicationJob
   queue_as :low_priority
-  sidekiq_options queue: :default, retry: 3
 
-  def perform(video)
-    importer = ExternalVideoImport::Importer.new
-    importer.update(video)
+  def perform(video, use_scraper: true, use_music_recognizer: true)
+    ExternalVideoImport::Importer.new.update(video, use_scraper:, use_music_recognizer:)
   end
 end

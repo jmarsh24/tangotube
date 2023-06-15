@@ -24,16 +24,28 @@
 #
 
 admin:
-  email: 'admin@example.com'
+  email: "admin@example.com"
+  first_name: "Admin"
+  last_name: "User"
+  name: "Admin User"
+  role: "admin"
+  confirmed_at: <%= Time.now %>
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
 regular:
-  email: 'user@example.com'
+  email: "user@example.com"
+  first_name: "Regular"
+  last_name: "User"
+  name: "Regular User"
+  role: "user"
+  confirmed_at: <%= Time.now %>
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
 dancer:
-  email: 'carlitos@tango.com'
+  email: "carlitos@tango.com"
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  name: 'Carlitos Espinoza'
-  first_name: 'Carlitos'
-  last_name: 'Espinoza'
+  name: "Carlitos Espinoza"
+  role: "user"
+  confirmed_at: <%= Time.now %>
+  first_name: "Carlitos"
+  last_name: "Espinoza"

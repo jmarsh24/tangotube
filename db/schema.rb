@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_03_113237) do
+ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -63,14 +63,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_03_113237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "thumbnail_url"
-    t.boolean "imported", default: false
-    t.integer "imported_videos_count", default: 0
-    t.integer "total_videos_count", default: 0
-    t.integer "yt_api_pull_count", default: 0
     t.boolean "reviewed", default: false
-    t.integer "videos_count", default: 0, null: false
     t.boolean "active", default: true
     t.text "description"
+    t.jsonb "metadata"
+    t.datetime "metadata_updated_at"
+    t.datetime "imported_at"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
     t.index ["title"], name: "index_channels_on_title"
   end
@@ -212,6 +210,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_03_113237) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "playlist_videos", force: :cascade do |t|
+    t.bigint "playlist_id", null: false
+    t.bigint "video_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id", "video_id"], name: "index_playlist_videos_on_playlist_id_and_video_id", unique: true
+    t.index ["playlist_id"], name: "index_playlist_videos_on_playlist_id"
+    t.index ["video_id"], name: "index_playlist_videos_on_video_id"
+  end
+
   create_table "playlists", force: :cascade do |t|
     t.string "slug"
     t.string "title"
@@ -309,6 +318,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_03_113237) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
   create_table "videos", force: :cascade do |t|
@@ -334,6 +344,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_03_113237) do
     t.integer "youtube_like_count"
     t.text "youtube_tags", default: [], array: true
     t.integer "duration"
+    t.datetime "metadata_updated_at"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["click_count"], name: "index_videos_on_click_count"
     t.index ["event_id"], name: "index_videos_on_event_id"
@@ -342,7 +353,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_03_113237) do
     t.index ["index"], name: "index_videos_on_index", opclass: :gin_trgm_ops, using: :gin
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
-    t.index ["upload_date"], name: "index_videos_on_upload_date"
     t.index ["youtube_id"], name: "index_videos_on_youtube_id", unique: true
   end
 
@@ -390,6 +400,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_03_113237) do
   add_foreign_key "couples", "dancers"
   add_foreign_key "couples", "dancers", column: "partner_id"
   add_foreign_key "dancers", "users"
+  add_foreign_key "playlist_videos", "playlists"
+  add_foreign_key "playlist_videos", "videos"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists", "videos", column: "videos_id"
   add_foreign_key "taggings", "tags"
