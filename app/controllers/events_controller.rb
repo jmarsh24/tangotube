@@ -34,16 +34,13 @@ class EventsController < ApplicationController
     end
   end
 
-  # @route GET /events/new (new_event)
   def new
     @event = Event.new
   end
 
-  # @route GET /events/:id/edit (edit_event)
   def edit
   end
 
-  # @route POST /events (events)
   def create
     @event = Event.create(event_params)
 
@@ -55,8 +52,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # @route PATCH /events/:id (event)
-  # @route PUT /events/:id (event)
   def update
     if @event.update(event_params)
       redirect_to @event
@@ -65,7 +60,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # @route DELETE /events/:id (event)
   def destroy
     @event.destroy
     redirect_to events_url

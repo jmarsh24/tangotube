@@ -5,6 +5,7 @@ class DancersController < ApplicationController
   before_action :set_dancer, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized, except: [:index, :new, :create]
 
+  # @route POST /dancers (dancers)
   # @route GET /dancers (dancers)
   def index
     dancers = Dancer.all.order(videos_count: :desc)
@@ -32,18 +33,15 @@ class DancersController < ApplicationController
     end
   end
 
-  # @route GET /dancers/new (new_dancer)
   def new
     @dancer = Dancer.new
     authorize @dancer
   end
 
-  # @route GET /dancers/:id/edit (edit_dancer)
   def edit
     authorize @dancer
   end
 
-  # @route POST /dancers (dancers)
   def create
     @dancer = Dancer.new(dancer_params)
     authorize @dancer
@@ -55,8 +53,6 @@ class DancersController < ApplicationController
     end
   end
 
-  # @route PATCH /dancers/:id (dancer)
-  # @route PUT /dancers/:id (dancer)
   def update
     authorize @dancer
     if @dancer.update(dancer_params)
@@ -66,7 +62,6 @@ class DancersController < ApplicationController
     end
   end
 
-  # @route DELETE /dancers/:id (dancer)
   def destroy
     authorize @dancer
     @dancer.destroy

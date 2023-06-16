@@ -17,16 +17,15 @@ class PerformancesController < ApplicationController
     end
   end
 
+  # @route POST /performances/:id (performance)
   # @route GET /performances/:id (performance)
   def show
   end
 
-  # @route GET /performances/new (new_performance)
   def new
     @performance = Performance.new
   end
 
-  # @route GET /performances/:id/edit (edit_performance)
   def edit
   end
 
@@ -41,8 +40,6 @@ class PerformancesController < ApplicationController
     end
   end
 
-  # @route PATCH /performances/:id (performance)
-  # @route PUT /performances/:id (performance)
   def update
     if @performance.update(performance_params)
       redirect_to @performance
@@ -51,7 +48,6 @@ class PerformancesController < ApplicationController
     end
   end
 
-  # @route DELETE /performances/:id (performance)
   def destroy
     @performance.destroy
     redirect_to performances_url

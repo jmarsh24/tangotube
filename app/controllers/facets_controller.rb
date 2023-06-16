@@ -3,6 +3,7 @@
 class FacetsController < ApplicationController
   helper_method :filtering_params
 
+  # @route GET /facets/:id (facet)
   def show
     @facet = Video::Search.new(filtering_params:, user: current_user).facet(name: params[:id])
   end

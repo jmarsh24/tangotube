@@ -4,6 +4,7 @@ class PlaylistsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin!, only: [:create]
 
+  # @route POST /playlists (playlists)
   # @route GET /playlists (playlists)
   def index
     @playlists = Playlist.all.order(:id)
