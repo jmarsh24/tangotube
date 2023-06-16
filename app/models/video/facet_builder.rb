@@ -12,7 +12,7 @@ class Video::FacetBuilder
       .group("dancers.name", "dancers.slug")
       .order("count_all DESC", "dancers.name")
       .count
-    facet = Facet.new(name: "Leaders", options: [])
+    facet = Facet.new(name: "leader", options: [])
     facet.options = facet_data.map do |(name, value), count|
       Option.new(label: "#{name} (#{count})", value:)
     end
@@ -27,7 +27,7 @@ class Video::FacetBuilder
       .order("count_all DESC", "dancers.name")
       .count
 
-    facet = Facet.new(name: "Followers", options: [])
+    facet = Facet.new(name: "follower", options: [])
     facet.options = facet_data.map do |(name, value), count|
       Option.new(label: "#{name} (#{count})", value:)
     end
@@ -42,7 +42,7 @@ class Video::FacetBuilder
       .order("count_all DESC", "orchestras.name")
       .count
 
-    facet = Facet.new(name: "Orchestras", options: [])
+    facet = Facet.new(name: "orchestra", options: [])
     facet.options = facet_data.map do |(name, value), count|
       Option.new(label: "#{custom_titleize(name)} (#{count})", value:)
     end
@@ -57,7 +57,7 @@ class Video::FacetBuilder
       .order("count_all DESC", "LOWER(songs.genre)")
       .count
 
-    facet = Facet.new(name: "Genres", options: [])
+    facet = Facet.new(name: "genre", options: [])
     facet.options = facet_data.map do |value, count|
       Option.new(label: "#{value&.titleize} (#{count})", value:)
     end
@@ -71,7 +71,7 @@ class Video::FacetBuilder
       .order("count_all DESC", upload_date_year: :desc)
       .count
 
-    facet = Facet.new(name: "Years", options: [])
+    facet = Facet.new(name: "year", options: [])
 
     facet.options = facet_data.map do |value, count|
       Option.new(label: "#{value} (#{count})", value:)
@@ -87,7 +87,7 @@ class Video::FacetBuilder
       .order("count_all DESC", "songs.title")
       .count
 
-    facet = Facet.new(name: "Songs", options: [])
+    facet = Facet.new(name: "song", options: [])
     facet.options = facet_data.map do |(name, value), count|
       Option.new(label: "#{name} (#{count})", value:)
     end
