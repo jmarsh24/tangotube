@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class Videos::FiltersController < ApplicationController
-  
   helper_method :filtering_params
-  
+
   # @route GET /videos/filters (filters_videos)
   def index
-    @search_facets = Video::Search.new(filtering_params:, current_user:).facets
   end
 
   private
@@ -26,6 +24,7 @@ class Videos::FiltersController < ApplicationController
       :dancer,
       :query,
       :watched,
-      :liked)
+      :liked
+    )
   end
 end
