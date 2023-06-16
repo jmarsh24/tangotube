@@ -9,7 +9,7 @@ RSpec.describe Video::FacetBuilder do
     it "returns a leader facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).leaders
       expected_output = Video::FacetBuilder::Facet.new(
-        name: "Leaders",
+        name: "leader",
         options: [
           Video::FacetBuilder::Option.new(value: "carlitos-espinoza", label: "Carlitos Espinoza (2)"),
           Video::FacetBuilder::Option.new(value: "corina-herrera", label: "Corina Herrera (1)"),
@@ -27,7 +27,7 @@ RSpec.describe Video::FacetBuilder do
     it "returns a follower facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).followers
       expected_output = Video::FacetBuilder::Facet.new(
-        name: "Followers",
+        name: "follower",
         options: [
           Video::FacetBuilder::Option.new(value: "noelia-hurtado", label: "Noelia Hurtado (2)"),
           Video::FacetBuilder::Option.new(value: "clarisa-aragon", label: "Clarisa Aragon (1)"),
@@ -45,7 +45,7 @@ RSpec.describe Video::FacetBuilder do
     it "returns an orchestra facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).orchestras
       expected_output = Video::FacetBuilder::Facet.new(
-        name: "Orchestras",
+        name: "orchestra",
         options: [
           Video::FacetBuilder::Option.new(value: "juan-darienzo", label: "Juan D'Arienzo (3)"),
           Video::FacetBuilder::Option.new(value: "alberto-castillo", label: "Alberto Castillo (1)"),
@@ -62,7 +62,7 @@ RSpec.describe Video::FacetBuilder do
     it "returns a genre facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).genres
       expected_output = Video::FacetBuilder::Facet.new(
-        name: "Genres",
+        name: "genre",
         options: [
           Video::FacetBuilder::Option.new(value: "tango", label: "Tango (4)"),
           Video::FacetBuilder::Option.new(value: "milonga", label: "Milonga (1)"),
@@ -78,7 +78,7 @@ RSpec.describe Video::FacetBuilder do
     it "returns a year facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).years
       expected_output = Video::FacetBuilder::Facet.new(
-        name: "Years",
+        name: "year",
         options: [
           Video::FacetBuilder::Option.new(value: 2020, label: "2020 (2)"),
           Video::FacetBuilder::Option.new(value: 2021, label: "2021 (1)"),
@@ -96,7 +96,7 @@ RSpec.describe Video::FacetBuilder do
     it "returns a song facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).songs
       expected_output = Video::FacetBuilder::Facet.new(
-        name: "Songs",
+        name: "song",
         options: [
           Video::FacetBuilder::Option.new(value: "nueve-de-julio-juan-darienzo", label: "Nueve De Julio (2)"),
           Video::FacetBuilder::Option.new(value: "cuando-el-amor-muere-carlos-di-sarli", label: "Cuando El Amor Muere (1)"),
