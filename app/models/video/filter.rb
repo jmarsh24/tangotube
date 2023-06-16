@@ -9,16 +9,16 @@ class Video::Filter
     @current_user = current_user
   end
 
-  def apply_filter
+  def filtered_videos
     filtering_params.each do |filter, value|
       filter = filter.to_sym if filter.is_a?(String)
 
       next unless value.present? && video_relation.respond_to?(filter)
 
       @video_relation = if [:watched, :liked].include?(filter)
-        video_relation.send(filter, current_user)
+        video_relation.public_send(filter, current_user)
       else
-        video_relation.send(filter, value)
+        video_relation.public_send(filter, value)
       end
     end
 

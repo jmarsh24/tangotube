@@ -2,7 +2,7 @@
 
 class Video::Sort
   attr_writer :video_relation
-  
+
   COLUMN_ASSOCIATIONS = [:channel, :orchestra, :performance, :song].freeze
 
   COLUMN_TRANSLATIONS = {
@@ -24,7 +24,7 @@ class Video::Sort
     @sorting_params = sorting_params
   end
 
-  def apply_sort
+  def sorted_videos
     return video_relation if sorting_params.blank?
 
     column = translate_column(sorting_params[:sort])
