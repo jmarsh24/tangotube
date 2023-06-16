@@ -9,7 +9,7 @@ export default class extends Controller {
     endSeconds: Number,
     playbackRate: Number,
   };
-  static targets = ["frame", "playbackRate", "startTime", "endTime"];
+  static targets = ["frame"];
 
   connect() {
     useHover(this, { element: this.element });
