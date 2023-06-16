@@ -4,7 +4,7 @@ class Video::Search
   attr_reader :filtering_params, :sorting_params
   attr_accessor :user
 
-  def initialize(filtering_params:, sorting_params: {sort: "popularity", direction: "desc"}, hidden: false, user: nil)
+  def initialize(filtering_params: {}, sorting_params: {}, hidden: false, user: nil)
     @filtering_params = filtering_params
     @sorting_params = sorting_params
     @user = user
