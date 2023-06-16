@@ -212,7 +212,6 @@ en:
     show:
       dropdown_button: Dropdown button
       event_video_count: Event video count
-  group_by_heading: Group by
   loading_spinner: Loading spinner
   login: Login
   orchestra_videos_count: Orchestra videos count
@@ -285,26 +284,7 @@ en:
       show_link: Show
     new:
       heading: Song
-  sort_by_heading: Sort by
   videos:
-    filters:
-      filter-sorting:
-        filtering:
-          additional_filters_heading: Additional filters
-          hd: Hd
-          liked: Liked
-          new_to_you: New to you
-          watched: Watched
-          with_dancer: With dancer
-      index:
-        deactivate: Deactivate
-        filters: Filters
-        follow_filter_placeholder: Any Follower...
-        genre_filter_placeholder: Any Genre...
-        leader_filter_placeholder: Any Leader...
-        orchestra_filter_placeholder: Any orchestra...
-        sorting: Sorting
-        year_filter_placeholder: Any year...
     form:
       event_info_heading: Event Info
       music_heading: Music
