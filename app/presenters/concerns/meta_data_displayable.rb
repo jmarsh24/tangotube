@@ -35,7 +35,7 @@ module MetaDataDisplayable
   end
 
   def formatted_performance_date
-    metadata.youtube.upload_date.strftime("%B %Y")
+    upload_date.strftime("%B %Y")
   end
 
   def format_song_attributes(title, artist, genre = nil)
