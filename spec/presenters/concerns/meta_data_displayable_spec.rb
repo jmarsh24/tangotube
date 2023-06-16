@@ -14,7 +14,7 @@ RSpec.describe MetaDataDisplayable, type: :module do
   end
 
   describe "#display_metadata" do
-    fit "returns a formatted string with upload date, views, and likes" do
+    it "returns a formatted string with upload date, views, and likes" do
       expect(presenter.display_metadata).to eq("October 2014 • 1K views • 3 likes")
     end
   end
