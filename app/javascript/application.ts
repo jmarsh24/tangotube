@@ -1,5 +1,5 @@
 import '@hotwired/turbo-rails';
-import { start, ui } from '@nerdgeschoss/shimmer';
+import { start } from '@nerdgeschoss/shimmer';
 import { application } from '/controllers/application';
 import { registerControllers } from 'stimulus-vite-helpers';
 import { startErrorTracking } from '/lib/error-tracking';
@@ -18,16 +18,3 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 startErrorTracking();
 start({ application });
-
-document.addEventListener('click', (event: Event) => {
-  const clickedElement = event.target as HTMLElement;
-  const modal = clickedElement.closest('.modal');
-  console.log('Clicked element', clickedElement);
-
-  // Check if the clicked element is inside a modal
-  if (!modal) {
-    console.log('Clicked element is not inside a modal');
-    // Close the modal here
-    ui.modal.close();
-  }
-});
