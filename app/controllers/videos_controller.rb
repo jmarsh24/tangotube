@@ -12,8 +12,7 @@ class VideosController < ApplicationController
   # @route POST /
   # @route GET / (root)
   def index
-    @search = Video::Search.new(filtering_params:, sorting_params:, current_user:)
-    @search_facets = @search.facets
+    @search = Video::Search.new(filtering_params:, sorting_params:, user: current_user)
 
     @current_page = params[:page]&.to_i || 1
 
