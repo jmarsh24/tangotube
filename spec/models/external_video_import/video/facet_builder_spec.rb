@@ -5,44 +5,37 @@ require "rails_helper"
 RSpec.describe Video::FacetBuilder do
   fixtures :all
 
-  describe "#select_facet_counts" do
+  describe "#leaders" do
     it "returns a leader facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).leaders
-      expected_output = [
-        Video::FacetBuilder::Facet.new(name: "Carlitos Espinoza", count: 2, param: "leader", value: "carlitos-espinoza"),
-        Video::FacetBuilder::Facet.new(name: "Corina Herrera", count: 1, param: "leader", value: "corina-herrera"),
-        Video::FacetBuilder::Facet.new(name: "Gianpiero Ya Galdi", count: 1, param: "leader", value: "gianpiero-ya-galdi"),
-        Video::FacetBuilder::Facet.new(name: "Jonathan Saavedra", count: 1, param: "leader", value: "jonathan-saavedra"),
-        Video::FacetBuilder::Facet.new(name: "Octavio Fernandez", count: 1, param: "leader", value: "octavio-fernandez")
-      ]
+      expected_output = Video::FacetBuilder::Facet.new(
+        name: "Leaders",
+        options: [
+          Video::FacetBuilder::Option.new(value: "carlitos-espinoza", label: "Carlitos Espinoza (2)"),
+          Video::FacetBuilder::Option.new(value: "corina-herrera", label: "Corina Herrera (1)"),
+          Video::FacetBuilder::Option.new(value: "gianpiero-ya-galdi", label: "Gianpiero Ya Galdi (1)"),
+          Video::FacetBuilder::Option.new(value: "jonathan-saavedra", label: "Jonathan Saavedra (1)"),
+          Video::FacetBuilder::Option.new(value: "octavio-fernandez", label: "Octavio Fernandez (1)")
+        ]
+      )
 
-      expect(facet).to eq expected_output
+      expect(facet).to eq(expected_output)
     end
   end
 
   describe "#followers" do
     it "returns a follower facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).followers
-      expected_output = [
-        Video::FacetBuilder::Facet.new(name: "Noelia Hurtado", count: 2, param: "follower", value: "noelia-hurtado"),
-        Video::FacetBuilder::Facet.new(name: "Clarisa Aragon", count: 1, param: "follower", value: "clarisa-aragon"),
-        Video::FacetBuilder::Facet.new(name: "Corina Herrera", count: 1, param: "follower", value: "corina-herrera"),
-        Video::FacetBuilder::Facet.new(name: "Inez Muzzopapa", count: 1, param: "follower", value: "inez-muzzopapa"),
-        Video::FacetBuilder::Facet.new(name: "Lorena Tarrantino", count: 1, param: "follower", value: "lorena-tarrantino")
-      ]
-
-      expect(facet).to eq expected_output
-    end
-
-    it "returns a follower facet for videos when filtering for a leader" do
-      video_relation = Video::Filter.new(Video.all, filtering_params: {leader: "corina-herrera"}).apply_filter
-
-      facet_builder = Video::FacetBuilder.new(video_relation)
-      facet = facet_builder.followers
-
-      expected_output = [
-        Video::FacetBuilder::Facet.new(name: "Inez Muzzopapa", count: 1, param: "follower", value: "inez-muzzopapa")
-      ]
+      expected_output = Video::FacetBuilder::Facet.new(
+        name: "Followers",
+        options: [
+          Video::FacetBuilder::Option.new(value: "noelia-hurtado", label: "Noelia Hurtado (2)"),
+          Video::FacetBuilder::Option.new(value: "clarisa-aragon", label: "Clarisa Aragon (1)"),
+          Video::FacetBuilder::Option.new(value: "corina-herrera", label: "Corina Herrera (1)"),
+          Video::FacetBuilder::Option.new(value: "inez-muzzopapa", label: "Inez Muzzopapa (1)"),
+          Video::FacetBuilder::Option.new(value: "lorena-tarrantino", label: "Lorena Tarrantino (1)")
+        ]
+      )
 
       expect(facet).to eq(expected_output)
     end
@@ -51,60 +44,69 @@ RSpec.describe Video::FacetBuilder do
   describe "#orchestras" do
     it "returns an orchestra facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).orchestras
-      expected_output = [
-        Video::FacetBuilder::Facet.new(name: "Juan D'Arienzo", count: 3, param: "orchestra", value: "juan-darienzo"),
-        Video::FacetBuilder::Facet.new(name: "Alberto Castillo", count: 1, param: "orchestra", value: "alberto-castillo"),
-        Video::FacetBuilder::Facet.new(name: "Carlos Di Sarli", count: 1, param: "orchestra", value: "carlos-di-sarli"),
-        Video::FacetBuilder::Facet.new(name: "Osvaldo Pugliese", count: 1, param: "orchestra", value: "osvaldo-pugliese")
-      ]
+      expected_output = Video::FacetBuilder::Facet.new(
+        name: "Orchestras",
+        options: [
+          Video::FacetBuilder::Option.new(value: "juan-darienzo", label: "Juan D'Arienzo (3)"),
+          Video::FacetBuilder::Option.new(value: "alberto-castillo", label: "Alberto Castillo (1)"),
+          Video::FacetBuilder::Option.new(value: "carlos-di-sarli", label: "Carlos Di Sarli (1)"),
+          Video::FacetBuilder::Option.new(value: "osvaldo-pugliese", label: "Osvaldo Pugliese (1)")
+        ]
+      )
 
-      expect(facet).to eq expected_output
+      expect(facet).to eq(expected_output)
     end
   end
 
   describe "#genres" do
     it "returns a genre facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).genres
+      expected_output = Video::FacetBuilder::Facet.new(
+        name: "Genres",
+        options: [
+          Video::FacetBuilder::Option.new(value: "tango", label: "Tango (4)"),
+          Video::FacetBuilder::Option.new(value: "milonga", label: "Milonga (1)"),
+          Video::FacetBuilder::Option.new(value: "vals", label: "Vals (1)")
+        ]
+      )
 
-      expected_output = [
-        Video::FacetBuilder::Facet.new(name: "Tango", count: 4, param: "genre", value: "tango"),
-        Video::FacetBuilder::Facet.new(name: "Milonga", count: 1, param: "genre", value: "milonga"),
-        Video::FacetBuilder::Facet.new(name: "Vals", count: 1, param: "genre", value: "vals")
-      ]
-
-      expect(facet).to eq expected_output
+      expect(facet).to eq(expected_output)
     end
   end
 
   describe "#years" do
     it "returns a year facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).years
+      expected_output = Video::FacetBuilder::Facet.new(
+        name: "Years",
+        options: [
+          Video::FacetBuilder::Option.new(value: 2020, label: "2020 (2)"),
+          Video::FacetBuilder::Option.new(value: 2021, label: "2021 (1)"),
+          Video::FacetBuilder::Option.new(value: 2018, label: "2018 (1)"),
+          Video::FacetBuilder::Option.new(value: 2014, label: "2014 (1)"),
+          Video::FacetBuilder::Option.new(value: 2013, label: "2013 (1)")
+        ]
+      )
 
-      expected_output = [
-        Video::FacetBuilder::Facet.new(name: 2020, count: 2, param: "year", value: 2020),
-        Video::FacetBuilder::Facet.new(name: 2021, count: 1, param: "year", value: 2021),
-        Video::FacetBuilder::Facet.new(name: 2018, count: 1, param: "year", value: 2018),
-        Video::FacetBuilder::Facet.new(name: 2014, count: 1, param: "year", value: 2014),
-        Video::FacetBuilder::Facet.new(name: 2013, count: 1, param: "year", value: 2013)
-      ]
-
-      expect(facet).to eq expected_output
+      expect(facet).to eq(expected_output)
     end
   end
 
   describe "#songs" do
     it "returns a song facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).songs
+      expected_output = Video::FacetBuilder::Facet.new(
+        name: "Songs",
+        options: [
+          Video::FacetBuilder::Option.new(value: "nueve-de-julio-juan-darienzo", label: "Nueve De Julio (2)"),
+          Video::FacetBuilder::Option.new(value: "cuando-el-amor-muere-carlos-di-sarli", label: "Cuando El Amor Muere (1)"),
+          Video::FacetBuilder::Option.new(value: "malandraca-osvaldo-pugliese", label: "Malandraca (1)"),
+          Video::FacetBuilder::Option.new(value: "milonga-querida-juan-darienzo", label: "Milonga Querida (1)"),
+          Video::FacetBuilder::Option.new(value: "violetas-aberto-castillo", label: "Violetas (1)")
+        ]
+      )
 
-      expected_output = [
-        Video::FacetBuilder::Facet.new(name: "Nueve De Julio", count: 2, param: "song", value: "nueve-de-julio-juan-darienzo"),
-        Video::FacetBuilder::Facet.new(name: "Cuando El Amor Muere", count: 1, param: "song", value: "cuando-el-amor-muere-carlos-di-sarli"),
-        Video::FacetBuilder::Facet.new(name: "Malandraca", count: 1, param: "song", value: "malandraca-osvaldo-pugliese"),
-        Video::FacetBuilder::Facet.new(name: "Milonga Querida", count: 1, param: "song", value: "milonga-querida-juan-darienzo"),
-        Video::FacetBuilder::Facet.new(name: "Violetas", count: 1, param: "song", value: "violetas-aberto-castillo")
-      ]
-
-      expect(facet).to eq expected_output
+      expect(facet).to eq(expected_output)
     end
   end
 end
