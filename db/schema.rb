@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
+ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "btree_gin"
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -34,7 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -47,21 +48,23 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "channels", force: :cascade do |t|
     t.string "title"
     t.string "channel_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "thumbnail_url"
     t.boolean "reviewed", default: false
     t.boolean "active", default: true
@@ -80,8 +83,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.decimal "playback_rate", precision: 5, scale: 3, default: "1.0"
     t.bigint "user_id", null: false
     t.bigint "video_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "giphy_id"
     t.index ["user_id"], name: "index_clips_on_user_id"
     t.index ["video_id"], name: "index_clips_on_video_id"
@@ -93,8 +96,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.bigint "commentable_id"
     t.integer "parent_id"
     t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -156,15 +159,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "provider"
     t.string "uid"
     t.string "pid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["pid"], name: "index_deletion_requests_on_pid"
-    t.index ["uid", "provider"], name: "index_deletion_requests_on_uid_and_provider", unique: true
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "title", null: false
     t.string "city", null: false
     t.string "country", null: false
@@ -231,8 +233,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.boolean "imported", default: false
     t.bigint "videos_id"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "reviewed", default: false
     t.index ["user_id"], name: "index_playlists_on_user_id"
     t.index ["videos_id"], name: "index_playlists_on_videos_id"
@@ -242,8 +244,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "genre"
     t.string "title"
     t.string "artist"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "artist_2"
     t.string "composer"
     t.string "author"
@@ -266,11 +268,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.integer "tag_id"
+    t.bigint "tag_id"
     t.string "taggable_type"
-    t.integer "taggable_id"
+    t.bigint "taggable_id"
     t.string "tagger_type"
-    t.integer "tagger_id"
+    t.bigint "tagger_id"
     t.string "context", limit: 128
     t.datetime "created_at", precision: nil
     t.string "tenant", limit: 128
@@ -302,8 +304,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: nil
     t.datetime "remember_created_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.string "first_name"
     t.string "last_name"
@@ -322,9 +324,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
   end
 
   create_table "videos", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "youtube_id", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.string "youtube_id"
     t.bigint "song_id"
     t.bigint "channel_id"
     t.boolean "hidden", default: false
@@ -353,7 +355,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.index ["index"], name: "index_videos_on_index", opclass: :gin_trgm_ops, using: :gin
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
-    t.index ["youtube_id"], name: "index_videos_on_youtube_id", unique: true
+    t.index ["upload_date"], name: "index_videos_on_upload_date"
+    t.index ["youtube_id"], name: "index_videos_on_youtube_id"
   end
 
   create_table "votes", force: :cascade do |t|
@@ -364,8 +367,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.boolean "vote_flag"
     t.string "vote_scope"
     t.integer "vote_weight"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
@@ -400,8 +403,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
   add_foreign_key "couples", "dancers"
   add_foreign_key "couples", "dancers", column: "partner_id"
   add_foreign_key "dancers", "users"
-  add_foreign_key "playlist_videos", "playlists"
-  add_foreign_key "playlist_videos", "videos"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists", "videos", column: "videos_id"
   add_foreign_key "taggings", "tags"

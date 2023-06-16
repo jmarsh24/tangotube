@@ -91,11 +91,11 @@ RSpec.describe Video::Filter do
 
     context "when filtering by liked_by_user" do
       it "returns videos liked by user" do
-        current_user = users(:regular)
+        user = users(:regular)
         video = videos(:video_1_featured)
-        video.upvote_by current_user, vote_scope: "like"
+        video.upvote_by user, vote_scope: "like"
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {liked: true}, current_user:).filtered_videos
+        filtered_videos = described_class.new(Video.all, filtering_params: {liked: true}, user:).filtered_videos
 
         expect(filtered_videos).to match_array([videos(:video_1_featured)])
       end
@@ -108,7 +108,7 @@ RSpec.describe Video::Filter do
 
         Watch.create(user:, video:)
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {watched: true}, current_user: user).filtered_videos
+        filtered_videos = described_class.new(Video.all, filtering_params: {watched: true}, user:).filtered_videos
 
         expect(filtered_videos).to match_array([videos(:video_1_featured)])
       end

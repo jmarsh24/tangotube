@@ -1,0 +1,8 @@
+= turbo_frame_tag "#{@facet.name}_facet" do
+  .stack.stack--xxs
+    label
+      = @facet.name
+    select
+      - @facet.options.each do |facet|
+        option
+          value=facet.value = facet.label

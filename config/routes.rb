@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # Health checks
   get "up" => "rails/health#show", :as => :rails_health_check
   get "status", to: "system_status#show"
-  
+
   # Error routes
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
@@ -27,13 +27,13 @@ Rails.application.routes.draw do
       post "deactivate", to: "channels#deactivate"
     end
   end
-  
+
   # Public pages
   get "/privacy", to: "pages#privacy"
   get "/terms", to: "pages#terms"
   get "/about", to: "pages#about"
   get "/contact", to: "pages#contact"
-  
+
   # Main resources
   resources :dancers, :events, :songs, only: [:index, :show] do
     member do
@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   resources :videos do
     resources :clips, :comments, module: :videos
-    get 'filters', to: 'videos/filters#index', on: :collection
+    get "filters", to: "videos/filters#index", on: :collection
     member do
       patch "upvote", to: "videos#upvote"
       patch "downvote", to: "videos#downvote"
@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       post "hide", to: "videos#hide"
     end
   end
+  resources :facets, only: :show
 
   resources :playlists, :clips, :couples, :orchestras, :performances, only: [:index, :show, :create] do
     member do
@@ -68,7 +69,7 @@ Rails.application.routes.draw do
       post :index
     end
   end
-  
+
   resources :webhooks, :search_suggestions, only: [:index] do
     collection do
       post :search

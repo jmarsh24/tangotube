@@ -20,7 +20,6 @@ class FacetsController < ApplicationController
       :hd,
       :event,
       :year,
-      :id,
       :dancer,
       :query,
       :watched,

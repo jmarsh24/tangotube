@@ -1,25 +1,13 @@
-- cache [params[:genre], params[:leader], params[:follower], params[:orchestra], params[:year], params[:filtering], params[:query], params[:dancer], params[:hd]], expires_in: 12.hours do
-  = turbo_frame_tag :filters, "target": "_top" do
-    = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
-      .stack
-        - if filtering_params.present? || sorting_params.present?
-          = link_to "Clear All", root_path, method: :get, class: "button button--secondary"
-        .stack.stack--desktop-line
-          .stack.stack--zero
-            .stack.stack--line
-              = f.collection_radio_buttons :genre, @search_facets.genres, :id, :name do |b|
-                label
-                  = b.radio_button
-                .genre-option class="#{"genre-option--selected" if params[:genre] == b.value}"
-                  .genre-label = b.text
-            - attributes = [\
-              { label: :leader, collection: @search_facets.leaders, placeholder: "All Leaders", param: :leader },
-              { label: :follower, collection: @search_facets.followers, placeholder: "All Followers", param: :follower },
-              { label: :orchestra, collection: @search_facets.orchestras, placeholder: "All Orchestras", param: :orchestra },
-              { label: :year, collection: @search_facets.years, placeholder: "All Years", param: :year }\
-              ]
-            - attributes.each do |attr|
-              .stack.stack--zero
-                = f.label attr[:label]
-                = f.collection_select attr[:label], attr[:collection], :id, :name, { include_blank: attr[:placeholder], selected: params[attr[:param]].presence }, class: "input input__input #{'selected' if params[attr[:param]].presence}"
-          = f.hidden_field :filtering, value: "true"
+= turbo_frame_tag :filters, "target": "_top" do
+  = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
+    .stack
+      - if filtering_params.present? || sorting_params.present?
+        = link_to "Clear All", root_path, method: :get, class: "button button--secondary"
+      .stack.stack--desktop-line
+        .stack.stack--zero
+          = turbo_frame_tag :genres_facet, src: facet_path(id: "genres", params: filtering_params)
+          = turbo_frame_tag :leaders_facet, src: facet_path(id: "leaders", params: filtering_params)
+          = turbo_frame_tag :followers_facet, src: facet_path(id: "followers", params: filtering_params)
+          = turbo_frame_tag :orchestras_facet, src: facet_path(id: "orchestras", params: filtering_params)
+          = turbo_frame_tag :years_facet, src: facet_path(id: "years", params: filtering_params)
+        = f.hidden_field :filtering, value: "true"

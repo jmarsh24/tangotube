@@ -44,7 +44,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "Orchestras", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: "#{name.titleize} (#{count})", value:)
+      Option.new(label: "#{custom_titleize(name)} (#{count})", value:)
     end
 
     facet
@@ -58,8 +58,8 @@ class Video::FacetBuilder
       .count
 
     facet = Facet.new(name: "Genres", options: [])
-    facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: "#{name&.titleize} (#{count})", value:)
+    facet.options = facet_data.map do |value, count|
+      Option.new(label: "#{value&.titleize} (#{count})", value:)
     end
 
     facet
@@ -93,5 +93,11 @@ class Video::FacetBuilder
     end
 
     facet
+  end
+
+  private
+
+  def custom_titleize(name)
+    name.split("'")&.map(&:titleize)&.join("'")
   end
 end
