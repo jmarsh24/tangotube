@@ -1,7 +1,24 @@
 class UpdateVideoMetadataJob < ApplicationJob
   queue_as :default
 
-  def perform(ids)
+  def perform
+    batch_size = 1000
+    offset = 0
+
+    loop do
+      videos = Video.limit(batch_size).offset(offset)
+
+      break if videos.empty?
+
+      update_metadata_for_videos(videos)
+
+      offset += batch_size
+    end
+  end
+
+  def update_metadata_for_videos(videos)
+    video_ids = videos.pluck(:id)
+
     ActiveRecord::Base.connection.execute <<-SQL
       UPDATE videos 
       SET 
@@ -15,7 +32,7 @@ class UpdateVideoMetadataJob < ApplicationJob
           SELECT jsonb_array_elements_text(metadata->'youtube'->'tags')
         ),
         duration = (metadata->'youtube'->>'duration')::integer
-      WHERE id IN (#{ids.join(", ")});
+      WHERE id IN (#{video_ids.join(", ")});
     SQL
   end
 end
