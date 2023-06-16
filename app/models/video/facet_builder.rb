@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::FacetBuilder
   Facet = Struct.new(:name, :options, keyword_init: true)
   Option = Struct.new(:value, :label, keyword_init: true)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateVideoMetadataJob < ApplicationJob
   queue_as :default
 

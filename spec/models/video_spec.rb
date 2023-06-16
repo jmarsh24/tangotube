@@ -196,13 +196,13 @@ RSpec.describe Video do
       video = videos(:video_1_featured)
       video.update!(featured: true)
 
-      expect(video.featured?).to eq(true)
+      expect(video.featured?).to be(true)
     end
 
     it "returns false when video is not featured" do
       video = videos(:video_1_featured)
 
-      expect(video.featured?).to eq(true)
+      expect(video.featured?).to be(true)
     end
   end
 

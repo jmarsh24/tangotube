@@ -69,7 +69,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
       ).and_return([song_metadata])
 
       attributes = metadata_processor.process(metadata)
-      
+
       expect(attributes[:youtube_id]).to eq("test_video_slug")
       expect(attributes[:upload_date]).to eq("2022-01-01".to_date)
       expect(attributes[:upload_date_year]).to eq(2022)

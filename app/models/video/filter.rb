@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::Filter
   attr_reader :video_relation, :filtering_params
   attr_accessor :user

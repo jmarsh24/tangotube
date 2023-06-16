@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::Search
   attr_reader :filtering_params, :sorting_params
   attr_accessor :user

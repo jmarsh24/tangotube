@@ -34,7 +34,7 @@ class Video < ApplicationRecord
   include Indexable
   include Presentable
 
-  INDEX_QUERY = <<~SQL.squish
+  INDEX_QUERY = <<~SQL.squish.freeze
     UPDATE videos
     SET index = query.index
     FROM (
