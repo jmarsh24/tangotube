@@ -59,7 +59,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "Genres", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: "#{name.titleize} (#{count})", value:)
+      Option.new(label: "#{name&.titleize} (#{count})", value:)
     end
 
     facet
