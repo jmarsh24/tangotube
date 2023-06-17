@@ -1,5 +1,34 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: videos
+#
+#  id                  :bigint           not null, primary key
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  youtube_id          :string
+#  song_id             :bigint
+#  channel_id          :bigint
+#  hidden              :boolean          default(FALSE)
+#  popularity          :integer          default(0)
+#  event_id            :bigint
+#  click_count         :integer          default(0)
+#  featured            :boolean          default(FALSE)
+#  index               :text
+#  metadata            :jsonb
+#  imported_at         :datetime
+#  upload_date         :date
+#  upload_date_year    :integer
+#  title               :text
+#  description         :text
+#  hd                  :boolean
+#  youtube_view_count  :integer
+#  youtube_like_count  :integer
+#  youtube_tags        :text             default([]), is an Array
+#  duration            :integer
+#  metadata_updated_at :datetime
+#
 require "rails_helper"
 
 RSpec.describe Video do
