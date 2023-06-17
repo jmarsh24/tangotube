@@ -2,7 +2,6 @@
 
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: [:upvote, :downvote, :bookmark, :complete, :watchlist]
-  before_action :authorize_admin!, only: [:featured]
   before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
   before_action :set_video, except: [:index, :create, :destroy]
@@ -110,10 +109,6 @@ class VideosController < ApplicationController
     ui.append "pagination-frame", with: "components/pagination", items: @videos, partial: params[:partial], next_page:
   end
 
-  def authorize_admin!
-    authorize :admin, :access?
-  end
-
   def check_for_clear
     if video_params[:commit] == "Clear"
       redirect_to root_path
@@ -200,23 +195,5 @@ class VideosController < ApplicationController
       :direction,
       :sort
     )
-  end
-
-  def update_upvote(scope)
-    if current_user.voted_up_on? @video, vote_scope: scope
-      @video.unvote_by current_user, vote_scope: scope
-    else
-      @video.upvote_by current_user, vote_scope: scope
-    end
-    ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
-  end
-
-  def update_downvote(scope)
-    if current_user.voted_down_on? @video, vote_scope: scope
-      @video.unvote_by current_user, vote_scope: scope
-    else
-      @video.downvote_by current_user, vote_scope: scope
-    end
-    ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 end

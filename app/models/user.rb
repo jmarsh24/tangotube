@@ -25,14 +25,12 @@
 #  role                   :integer
 #
 class User < ApplicationRecord
-  acts_as_voter
-
   after_initialize :set_default_role, if: :new_record?
   before_save :tileize_name
 
   has_many :watches, dependent: :destroy
   has_many :watched_videos, through: :watches, source: :video
-  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_fill: [150, nil]

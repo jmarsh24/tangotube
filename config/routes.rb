@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   resource :manifest, only: :show
 
   resources :videos do
-    resources :clips, :comments, module: :videos
+    resources :clips, module: :videos
     get "filters", to: "videos/filters#index", on: :collection
     member do
       patch "upvote", to: "videos#upvote"

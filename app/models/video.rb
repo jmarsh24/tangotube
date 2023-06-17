@@ -30,7 +30,6 @@
 #  metadata_updated_at :datetime
 #
 class Video < ApplicationRecord
-  acts_as_votable
   include Filterable
   include Indexable
   include Presentable
@@ -74,7 +73,6 @@ class Video < ApplicationRecord
   belongs_to :song, optional: true
   belongs_to :channel, optional: false
   belongs_to :event, optional: true
-  has_many :comments, as: :commentable, dependent: :destroy
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
@@ -142,12 +140,6 @@ class Video < ApplicationRecord
     end
   end
 
-  ["like", "watchlist", "bookmark"].each do |vote_scope|
-    define_method "#{vote_scope}_by" do |vote_flag = true|
-      votes.where(vote_scope:, vote_flag:).map(&:voter_id)
-    end
-  end
-
   def clicked!
     increment(:click_count)
     save!
@@ -159,9 +151,5 @@ class Video < ApplicationRecord
 
   def to_param
     youtube_id || id
-  end
-
-  def update_from_youtube
-    ExternalVideoImport::Importer.new.update(self)
   end
 end

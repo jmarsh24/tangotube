@@ -32,18 +32,6 @@ en:
       results: "%{count} Results"
     new:
       heading: Clip
-  comments:
-    comment:
-      comment_age: "%{updated_at} ago..."
-      continue_this_thread: Continue this thread
-      deleted_header: deleted
-      deleted_paragraph: deleted
-      or: or
-      to_reply: To reply
-    edit:
-      comment_age: Comment age
-    form:
-      add_a_comment: Add a comment
   components:
     cookie_consent:
       accept_all: Accept all
@@ -257,7 +245,6 @@ en:
       playlist_id: Playlist
       playlist_imported: Playlist imported
       playlist_video_count: Playlist video count
-  posted_time_ago: Posted time ago
   results: Results
   search: Search
   show: Show
@@ -347,6 +334,3 @@ en:
         share_button: Share
       watchlist_link:
         watch_later: Watch later
-  yt_comments:
-    comment:
-      like_count: Like count

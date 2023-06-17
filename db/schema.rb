@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
+ActiveRecord::Schema[7.1].define(version: 2023_06_17_075948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_stat_statements"
@@ -90,18 +90,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
     t.index ["video_id"], name: "index_clips_on_video_id"
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "commentable_type"
-    t.bigint "commentable_id"
-    t.integer "parent_id"
-    t.text "body"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
-    t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
   create_table "couple_videos", force: :cascade do |t|
     t.bigint "video_id", null: false
     t.bigint "couple_id", null: false
@@ -179,6 +167,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
     t.string "slug"
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["title"], name: "index_events_on_title", unique: true
+  end
+
+  create_table "likes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "likeable_type", null: false
+    t.bigint "likeable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "orchestras", force: :cascade do |t|
@@ -397,12 +395,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_12_224311) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clips", "users"
   add_foreign_key "clips", "videos"
-  add_foreign_key "comments", "users"
   add_foreign_key "couple_videos", "couples"
   add_foreign_key "couple_videos", "videos"
   add_foreign_key "couples", "dancers"
   add_foreign_key "couples", "dancers", column: "partner_id"
   add_foreign_key "dancers", "users"
+  add_foreign_key "likes", "users"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists", "videos", column: "videos_id"
   add_foreign_key "taggings", "tags"
