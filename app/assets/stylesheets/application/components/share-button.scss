@@ -1,0 +1,37 @@
+.share-button {
+  color: var(--color-neutral-1000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--spacing-xxxs);
+  text-align: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.share-button::before {
+  content: "";
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 48px;
+  height: 48px;
+}
+
+.share-button--email::before {
+  background-image: url('@assets/images/icons/share-email.svg');
+}
+
+.share-button--facebook::before {
+  background-image: url('@assets/images/icons/share-facebook.svg');
+}
+
+.share-button--twitter::before {
+  background-image: url('@assets/images/icons/share-twitter.svg');
+}
+
+.share-button--whatsapp::before {
+  background-image: url('@assets/images/icons/share-whatsapp.svg');
+}

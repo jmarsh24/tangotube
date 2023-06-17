@@ -16,7 +16,7 @@ module ExternalVideoImport
 
         {
           youtube_id: metadata.youtube.slug,
-          upload_date: metadata.youtube.upload_date,
+          upload_date: Date.parse(metadata.youtube.upload_date),
           upload_date_year: metadata.youtube.upload_date.year,
           title: metadata.youtube.title,
           description: metadata.youtube.description,

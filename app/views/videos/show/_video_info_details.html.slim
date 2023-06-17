@@ -1,45 +1,71 @@
-.stack data-controller="tabs" data-tabs-index="0"
-  .tabs
-    .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t(".video_info")
-    .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t(".additional_info")
-    - if @video.song.present?
-      .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t(".music")
-  .tabs__panel data={ "tabs-target": "tabPanel" }
-    = turbo_frame_tag "video_#{@video.youtube_id}" do
-      - if @video.dancers.present?
-        h4.heading-4.heading-4--bold = t(".performers_heading")
-        - @video.dancers.each do |dancer|
-          = render partial: "videos/show/video_info_item", locals: { header: "", value: link_to(dancer.name, root_path(dancer: dancer.slug), {"data-turbo-frame": "_top"}) }
-      - if @video.event.present? || @video.metadata.youtube.upload_date.present? || @video.performance_video.position.present? || @video.performance_video.videos_count.present?
-        h4.heading-4.heading-4--bold = t("event_info_heading")
-        = render partial: "videos/show/video_info_item", locals: { header: t(".title_heading"), value:  link_to(@video.event.title.titleize, root_path(event_id: @video.event.id), {"data-turbo-frame": "_top"}) } if @video.event.present?
-        = render partial: "videos/show/video_info_item", locals: { header: t(".location_heading"), value:  "#{@video.event.city.titleize}, #{@video.event.country.titleize}" } if @video.event.present?
-        = render partial: "videos/show/video_info_item", locals: { header: t("performance_date_heading"), value: @video.upload_date.strftime("%B %d, %Y") }if @video.upload_date.present?
-  .tabs__panel data={ "tabs-target": "tabPanel"}
-    h4.heading-4.heading-4--bold = t(".youtube_info_heading")
-    = render partial: "videos/show/video_info_item", locals: { header: t(".video_title_heading"), value:  @video.metadata.youtube.title }
-    = render partial: "videos/show/video_info_item", locals: { header: t(".video_description_heading"), value:  simple_format(truncate(@video.metadata.youtube.description, length: 200, omission: ""), {"data-turbo-frame": "_top"}), html: { target: "_blank" } } if @video.metadata.youtube.description.present?
-    = render partial: "videos/show/video_info_item", locals: { header: t(".video_upload_date_heading"), value: @video.upload_date.to_formatted_s(:long) }
-    = render partial: "videos/show/video_info_item", locals: { header: t(".video_duration_heading"), value: Time.at(@video.metadata.youtube.duration).utc.strftime("%M:%S") }
-  - if @video.song.present? || @video.metadata.music.spotify_track_name.present? || @video.metadata.youtube.song.titles.first.present?
-    .tabs__panel data={ "tabs-target": "tabPanel"}
-      .stack.stack--desktop-line.stack--desktop-align-top
-        .stack.stack--xs
-          h4.heading-4.heading-4--bold = t(".music_heading")
-          - if @video.song.present?
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_title_heading"), value: link_to(@video.song&.title.titleize, root_path(song_id: @video.song.id), {"data-turbo-frame": "_top"}) }
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_genre_heading"), value: @video.song&.genre.titleize }
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_orchestra_heading"), value: link_to(@video.song&.artist.split("'").map(&:titleize).join("'"), root_path(orchestra: @video.song.artist.downcase), {"data-turbo-frame": "_top"}) }
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_singer_heading"), value: @video.song&.artist_2.titleize } if @video.song.artist_2.present?
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_recording_date_heading"), value: @video.song.date.strftime("%B %d, %Y") } if @video.song.date.present?
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_composer_heading"), value: @video.song.composer.titleize } if @video.song.composer.present?
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_author_heading"), value: @video.song.author.titleize } if @video.song.author.present?
-          - if @video.song.blank? && @video.metadata.music.spotify_track_name.present? && @video.metadata.music.spotify_artist_names.first.present?
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_title_heading"), value: link_to(@video.metadata.music.spotify_track_name.titleize, root_path(query: @video.metadata.music.spotify_track_name.titleize + " " + @video.metadata.music.spotify_artist_names.first.titleize), {"data-turbo-frame": "_top"}) }
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_artist_heading"), value: link_to(@video.metadata.music.spotify_artist_name.titleize, root_path(query: @video.metadata.music.spotify_artist_name.titleize), {"data-turbo-frame": "_top"}) }
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_artist_heading"), value: link_to(@video.metadata.music.spotify_artist_name_2.titleize, root_path(query: @video.metadata.music.spotify_artist_name_2.titleize), {"data-turbo-frame": "_top"}) } if @video.metadata.music.spotify_artist_name_2.present?
-          - if @video.song.blank? && @video.metadata.music.spotify_track_name.blank? && @video.metadata.youtube.song.titles.first.present?
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_title_heading"), value: link_to(@video.metadata.youtube.song.titles.first.titleize, root_path(query: @video.metadata.youtube.song.titles.first.titleize), {"data-turbo-frame": "_top"}) }
-            = render partial: "videos/show/video_info_item", locals: { header: t(".song_artist_heading"), value: link_to(@video.metadata.youtube.song.artist.titleize, root_path(query: @video.metadata.youtube.song.artist.titleize), {"data-turbo-frame": "_top"}) }
-        - if @video.song.present? && @video.song.lyrics.present?
-          = render partial: "videos/show/lyrics"
+.stack.stack--xxs
+  - if @video.dancers.present?
+    h3.heading-3.heading-3--bold = t(".performers_heading")
+    .metadata-item 
+      - leader = @video.leaders.first
+      .metadata-item__label = t(".leader_heading")
+      .metadata-item__value = link_to leader.name, root_path(leader: leader.slug)
+      - follower = @video.followers.first
+      .metadata-item__label = t(".follower_heading")
+      .metadata-item__value = link_to follower.name, root_path(follower: follower.slug)
+  - if @video.event.present?
+    .stack.stack--xxs
+      h3.heading-3.heading-3--bold = t("event_info_heading")
+      - if @video.event.title.present?
+        .metadata-item 
+          .metadata-item__label = t(".title_heading")
+          .metadata-item__value = link_to(@video.event.title.titleize, root_path(event: @video.event.id))
+      - if @video.event.city.present? && @video.event.country.present?
+        .metadata-item 
+          .metadata-item__label = t(".location_heading")
+          .metadata-item__value = "#{@video.event.city.titleize}, #{@video.event.country.titleize}"
+  h3.heading-3.heading-3--bold = t(".youtube_info_heading")
+  .stack.stack--xxs
+    - if @video.title.present?
+      .metadata-item 
+        .metadata-item__label = t(".video_title_heading")
+        .metadata-item__value = @video.title
+    - if @video.description.present?
+      .metadata-item 
+        .metadata-item__label = t(".video_description_heading")
+        .metadata-item__value = simple_format(truncate(@video.description, length: 200, omission: ""))
+    - if @video.upload_date.present?
+      .metadata-item 
+        .metadata-item__label = t(".video_upload_date_heading")
+        .metadata-item__value =   t(".upload_date", date: @video.upload_date)
+    - if @video.duration.present?
+      .metadata-item 
+        .metadata-item__label = t(".video_duration_heading")
+        .metadata-item__value = l(Time.at(@video.duration), format: :video_duration)
+- if @video.song.present?
+  h3.heading-3.heading-3--bold = t(".music_heading")
+  .stack.stack--xxs
+    - if @video.song.title.present?
+      .metadata-item 
+        .metadata-item__label = t(".song_title_heading")
+        .metadata-item__value = link_to(@video.song&.title.titleize, root_path(song: @video.song.slug))
+    - if @video.song.genre.present?
+      .metadata-item 
+        .metadata-item__label = t(".song_genre_heading")
+        .metadata-item__value = @video.song&.genre.titleize
+    - if @video.song.orchestra.present?
+      .metadata-item 
+        .metadata-item__label = t(".song_orchestra_heading")
+        .metadata-item__value = link_to(@video.song&.orchestra.name, root_path(orchestra: @video.orchestra.slug))
+    - if @video.song.artist_2.present?
+      .metadata-item 
+        .metadata-item__label = t(".song_artist_2_heading")
+      .metadata-item__value = @video.song&.artist_2.titleize
+    - if @video.song.date.present?
+      .metadata-item 
+        .metadata-item__label = t(".song_recording_date_heading")
+        .metadata-item__value = t(".song_recording_date", date: l(@video.song.date, format: :song_recording_date))
+    - if @video.song.composer.present?
+      .metadata-item 
+        .metadata-item__label = t(".song_composer_heading")
+        .metadata-item__value = @video.song.composer.titleize
+    - if @video.song.author.present?
+      .metadata-item 
+        .metadata-item__label = t(".song_author_heading")
+        .metadata-item__value = @video.song.author.titleize
+  = render partial: "videos/show/lyrics" if @video.song.lyrics.present?

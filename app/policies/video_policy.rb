@@ -21,6 +21,14 @@ class VideoPolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def like?
+    user.present?
+  end
+
+  def unlike?
+    user.present?
+  end
+
   def act_on?
     user&.admin?
   end

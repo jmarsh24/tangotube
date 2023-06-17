@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :share]
   before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
   before_action :set_video, except: [:index, :create, :destroy]
-  before_action :set_video, only: [:show, :hide, :featured, :like, :unlike]
+  before_action :set_video, only: [:show, :hide, :featured, :like, :unlike, :share]
   helper_method :filtering_params, :sorting_params
 
   # @route GET /videos (videos)
@@ -36,6 +37,10 @@ class VideosController < ApplicationController
     end
 
     @related_videos = Video::RelatedVideos.new(@video)
+    @start_value = params[:start]
+    @end_value = params[:end]
+    @root_url = root_url
+    @playback_rate = params[:speed] || "1"
 
     @video.clicked!
 
@@ -57,18 +62,23 @@ class VideosController < ApplicationController
 
   # POST /videos/:id/like
   def like
+    authorize @video
     current_user.likes.create!(likeable: @video)
     ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 
   # DELETE /videos/:id/unlike
   def unlike
+    authorize @video
     like = current_user.likes.find_by(likeable: @video)
     like&.destroy!
     ui.update("video_#{@video.id}_vote", with: "videos/show/vote")
   end
 
   def filters
+  end
+
+  def share
   end
 
   private

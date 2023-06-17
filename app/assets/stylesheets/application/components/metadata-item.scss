@@ -1,0 +1,12 @@
+.metadata-item {
+  &__label {
+    font-weight: 100;
+  }
+
+  &__value {
+    font-weight: 400;
+    a {
+      color: #D60017;
+    }
+  }
+}

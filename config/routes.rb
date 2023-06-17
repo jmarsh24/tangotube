@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       delete :unlike
       post :hide
       patch :featured
+      get :share
     end
     collection do
       get :filters

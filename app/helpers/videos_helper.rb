@@ -1,27 +1,6 @@
 # frozen_string_literal: true
 
 module VideosHelper
-  def sortable(column, direction, sort_column, sort_direction, title = "")
-    title ||= column.titleize
-
-    if column == sort_column
-      "current #{sort_direction}"
-    end
-
-    link_to root_path(request.query_parameters.merge(sort: column, direction:)), class: "menu-item" do
-      if link_active?(column, direction, sort_column, sort_direction)
-        content_tag(:span, title.to_s)
-        content_tag(:div, class: "icon icon--close icon--xs")
-      else
-        content_tag(:span, title.to_s)
-      end
-    end
-  end
-
-  def link_active?(column, direction, sort_column, sort_direction)
-    column == sort_column && direction == sort_direction
-  end
-
   def videos_header(filtering_params, sorting_params)
     words_array = []
 
@@ -64,9 +43,5 @@ module VideosHelper
     end
 
     words_array.compact_blank.map(&:titleize).join(" - ")
-  end
-
-  def filtering_for_dancer?
-    filtering_params.include?(:dancer) || filtering_params.include?(:follower)
   end
 end

@@ -17,6 +17,7 @@
     "@sentry/browser": "^7.29.0",
     "@types/lodash.debounce": "^4.0.7",
     "@types/node": "^18.11.18",
+    "@types/youtube-player": "^5.5.7",
     "autoprefixer": "^10.4.13",
     "lodash": "^4.17.21",
     "path": "^0.12.7",

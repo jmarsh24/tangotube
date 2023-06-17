@@ -1,0 +1,18 @@
+.video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
+  .video-card__image.video-card--compact__image data-duration="#{video.decorate.hd_duration_data}"
+    - if video.youtube_id == @video.youtube_id
+      = image_tag video.thumbnail, width: 178, height: 100
+    - else
+      = link_to watch_path(v: video.youtube_id) do
+        = image_tag video.thumbnail, width: 178, height: 100
+  .stack.stack--xxxs
+    .stack.stack--line
+      = video.title
+    = link_to video.song.full_title, root_path(song_id: video.song.slug)
+    = link_to video.event.title.titleize, root_path(event_id: video.event.slug)
+    = link_to root_path(channel: video.channel.channel_id) do
+      .stack.stack--line.stack--xxxs
+        = image_tag(video.channel.thumbnail, class: "avatar avatar--sm") if video.channel.thumbnail.present?
+        .video-card__channel__title = video.channel.title
+    .stack.stack--line
+      = video.decorate.display_metadata
