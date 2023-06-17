@@ -18,7 +18,7 @@
   }
 
   &--video {
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-mega-2) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-mega-2) var(--spacing-sm);
   }
 
   @include breakpoint-tablet {
