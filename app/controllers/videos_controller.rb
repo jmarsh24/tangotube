@@ -9,16 +9,21 @@ class VideosController < ApplicationController
   helper_method :filtering_params, :sorting_params
 
   # @route GET /videos (videos)
-  # @route POST /
   # @route GET / (root)
   def index
     @search = Video::Search.new(filtering_params:, sorting_params:, user: current_user)
 
     @current_page = params[:page]&.to_i || 1
 
-    @featured_videos = (filtering_params.empty? && sorting_params.empty?) ? paginated(@search.featured_videos, per: 12) : nil
+    @featured_videos = if filtering_params.empty? && sorting_params.empty?
+      paginated(@search.featured_videos.includes(Video.search_includes), per: 12)
+    end
 
-    @videos = @featured_videos.present? ? paginated(@search.videos.not_featured, per: 12) : paginated(@search.videos, per: 12)
+    @videos = if @featured_videos.present?
+      paginated(@search.videos.not_featured.includes(Video.search_includes), per: 12)
+    else
+      paginated(@search.videos.includes(Video.search_includes), per: 12)
+    end
 
     handle_filtering_and_pagination if params[:filtering] == "true" && params[:pagination].nil? && filtering_params.present?
   end

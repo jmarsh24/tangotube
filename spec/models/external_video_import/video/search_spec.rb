@@ -156,6 +156,12 @@ RSpec.describe Video::Search do
         expect(search.facet(name: "years")).to eq(years_facet)
         expect(search.facet(name: "songs")).to eq(songs_facet)
       end
+
+      it "returns all videos sorted by upload_date in ascending order" do
+        sorted_videos = Video::Sort.new(Video.all, sorting_params: {sort: "upload_date", direction: "asc"}).sorted_videos
+
+        expect(Video::Search.new(sorting_params: {sort: "upload_date", direction: "asc"}).videos).to match_array(sorted_videos)
+      end
     end
   end
 end

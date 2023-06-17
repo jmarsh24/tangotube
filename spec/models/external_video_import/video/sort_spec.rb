@@ -45,5 +45,13 @@ RSpec.describe Video::Sort do
         expect(sorted_videos).to match_array(Video.all.joins(:performance_video).order("performance_videos.performance_id ASC"))
       end
     end
+
+    context "when sorting by orchestra in desc order" do
+      it "sorts the videos by orchestra in desc order" do
+        sorted_videos = Video::Sort.new(Video.all, sorting_params: {sort: "orchestra", direction: "desc"}).sorted_videos
+
+        expect(sorted_videos).to match_array(Video.all.joins(song: :orchestra).order("orchestras.name DESC"))
+      end
+    end
   end
 end

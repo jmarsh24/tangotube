@@ -87,7 +87,6 @@ Rails.application.routes.draw do
   get "banner", to: "banner#index"
   post "banner", to: "banner#index"
   post "savenew", to: "users#savenew"
-  post "/" => "videos#index"
   get "/watch", to: "videos#show"
 
   # Root

@@ -3,8 +3,6 @@
 class Video::Sort
   attr_writer :video_relation
 
-  COLUMN_ASSOCIATIONS = [:channel, :orchestra, :performance, :song].freeze
-
   COLUMN_TRANSLATIONS = {
     year: "videos.upload_date_year",
     upload_date: "videos.upload_date",
@@ -25,43 +23,30 @@ class Video::Sort
   end
 
   def sorted_videos
-    return video_relation if sorting_params.blank?
+    return video_relation unless sorting_params.present?
 
-    column = translate_column(sorting_params[:sort])
-    direction = sorting_params[:direction]
+    column = sorting_params[:sort].to_sym
+    raise ArgumentError, "Invalid sort column" unless COLUMN_TRANSLATIONS.has_key?(column)
 
-    raise ArgumentError, "Invalid sort column" unless COLUMN_TRANSLATIONS.has_key?(column.to_sym)
-    raise ArgumentError, "Invalid sort direction" unless [:asc, :desc].include?(direction.to_sym)
+    direction = sorting_params[:direction].to_sym
+    raise ArgumentError, "Invalid sort direction" unless [:asc, :desc].include?(direction)
 
-    video_relation = join_association(column) if requires_join?(column)
+    column = COLUMN_TRANSLATIONS[column]
 
-    self.video_relation = video_relation.order(column => direction)
+    @video_relation =
+      case column
+      when "songs.title"
+        video_relation.joins(:song)
+      when "performance_videos.performance_id"
+        video_relation.joins(:performance_video)
+      when "channels.title"
+        video_relation.joins(:channel)
+      when "orchestras.name"
+        video_relation.joins(song: :orchestra)
+      else
+        video_relation
+      end
 
-    video_relation
-  end
-
-  private
-
-  def requires_join?(column)
-    COLUMN_ASSOCIATIONS.include?(column.to_sym) || column
-  end
-
-  def join_association(column)
-    case column
-    when "song"
-      video_relation.joins(:song)
-    when "performance"
-      video_relation.joins(:performance_video)
-    when "channel"
-      video_relation.joins(:channel)
-    when "orchestra"
-      video_relation.joins(song: :orchestra)
-    else
-      video_relation
-    end
-  end
-
-  def translate_column(column)
-    COLUMN_TRANSLATIONS[column] || column
+    video_relation.order(column => direction)
   end
 end
