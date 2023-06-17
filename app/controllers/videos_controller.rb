@@ -19,10 +19,8 @@ class VideosController < ApplicationController
       paginated(@search.featured_videos.includes(Video.search_includes), per: 12)
     end
 
-    @videos = if @featured_videos.present?
+    @videos = unless @featured_videos.present?
       paginated(@search.videos.not_featured.includes(Video.search_includes), per: 12)
-    else
-      paginated(@search.videos.includes(Video.search_includes), per: 12)
     end
 
     handle_filtering_and_pagination if params[:filtering] == "true" && params[:pagination].nil? && filtering_params.present?
