@@ -9,14 +9,12 @@
       - if @video.dancers.present?
         h4.heading-4.heading-4--bold = t(".performers_heading")
         - @video.dancers.each do |dancer|
-          = render partial: "videos/show/video_info_item", locals: { header: "", value: link_to(dancer.name, dancer, {"data-turbo-frame": "_top"}) }
+          = render partial: "videos/show/video_info_item", locals: { header: "", value: link_to(dancer.name, root_path(dancer: dancer.slug), {"data-turbo-frame": "_top"}) }
       - if @video.event.present? || @video.metadata.youtube.upload_date.present? || @video.performance_video.position.present? || @video.performance_video.videos_count.present?
         h4.heading-4.heading-4--bold = t("event_info_heading")
         = render partial: "videos/show/video_info_item", locals: { header: t(".title_heading"), value:  link_to(@video.event.title.titleize, root_path(event_id: @video.event.id), {"data-turbo-frame": "_top"}) } if @video.event.present?
         = render partial: "videos/show/video_info_item", locals: { header: t(".location_heading"), value:  "#{@video.event.city.titleize}, #{@video.event.country.titleize}" } if @video.event.present?
         = render partial: "videos/show/video_info_item", locals: { header: t("performance_date_heading"), value: @video.upload_date.strftime("%B %d, %Y") }if @video.upload_date.present?
-        / = render partial: "videos/show/video_info_item", locals: { header: t("performance_number_headiing"), value: @video.performance_video.position } if @video.performance_video.present?
-        / = render partial: "videos/show/video_info_item", locals: { header: t("performance_total_number_heading"), value: @video.performance_video&.videos_count } if @video.performance_video.present?
   .tabs__panel data={ "tabs-target": "tabPanel"}
     h4.heading-4.heading-4--bold = t(".youtube_info_heading")
     = render partial: "videos/show/video_info_item", locals: { header: t(".video_title_heading"), value:  @video.metadata.youtube.title }

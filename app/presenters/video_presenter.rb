@@ -13,7 +13,7 @@ class VideoPresenter < SimpleDelegator
 
   private
 
-  def format_date(performance_date)
-    performance_date&.strftime("%B %Y")
+  def format_date(upload_Date)
+    upload_date&.strftime("%B %Y")
   end
 end

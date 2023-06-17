@@ -4,7 +4,7 @@ module MetaDataDisplayable
   def display_metadata
     formatted_like_count = formatted_count(metadata.youtube.like_count)
     formatted_view_count = formatted_count(metadata.youtube.view_count)
-    "#{formatted_performance_date} • #{formatted_view_count} views • #{formatted_like_count} likes"
+    "#{formatted_upload_date} • #{formatted_view_count} views • #{formatted_like_count} likes"
   end
 
   def meta_title
@@ -34,7 +34,7 @@ module MetaDataDisplayable
     )
   end
 
-  def formatted_performance_date
+  def formatted_upload_date
     upload_date.strftime("%B %Y")
   end
 

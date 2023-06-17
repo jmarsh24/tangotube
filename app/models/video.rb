@@ -84,6 +84,8 @@ class Video < ApplicationRecord
   has_many :couples, through: :couple_videos
   has_many :watches, dependent: :destroy
   has_many :watchers, through: :watches, source: :user
+  has_many :likes, as: :likeable, dependent: :destroy
+  has_many :liking_users, through: :likes, source: :user
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
@@ -106,6 +108,10 @@ class Video < ApplicationRecord
                      .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
                      .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
                  }
+  scope :dancer, ->(value) {
+    joins(:dancers)
+      .where(dancers: {slug: value})
+  }
   scope :genre, ->(value) { joins(:song).where("LOWER(songs.genre) = ?", value.downcase) }
   scope :has_leader, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'leader')") }
   scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }

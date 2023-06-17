@@ -1,5 +1,5 @@
 .vote-bar id="#{dom_id(@video)}_vote"
-  = render "videos/show/upvote_link", video: @video
+  = render "videos/show/like_link", video: @video
   button class="button button--secondary button--icon-square-and-arrow-up button--icon-left" data-controller="share" data-action="click->share#share"
     = t(".share_button")
   - if user_signed_in? && current_user.admin?

@@ -14,22 +14,5 @@
               div
                 = link_to t("edit"), edit_dancer_path(@dancer)
                 = button_to t("destroy"), @dancer, method: :delete, form: { data: { turbo_confirm: t("are_you_sure") } }
-      / .dancer-show__facets
-      /   .dancer-show__facets__facet
-      /     h1.heading-1.heading-1--bold Dance Partners
-      /     .dancer-show__facets__facet__menu
-      /       - @dancer.couples.order(videos_count: :desc).each do |couple|
-      /         - partner = couple.partner
-      /         = link_to couple, class: "dancer-show__facets__facet__menu__item" do
-      /           = image_tag dancer_avatar(partner), class: "dancer-show__facets__facet__menu__item__avatar"
-      /           = partner.name
-      /           = "(#{couple.videos_count})"
-        .dancer-show__facets__facet
-          h1.heading-1.heading-1--bold Orchestras
-          .dancer-show__facets__facet__menu
-            - @orchestras.each do |orchestra|
-              = link_to dancer_path(orchestra: orchestra.slug), class: "dancer-show__facets__facet__menu__item" do
-                = image_tag dancer_avatar(orchestra), class: "dancer-show__facets__facet__menu__item__avatar"
-                = orchestra.name.titleize
       .index-container
         = turbo_frame_tag :videos, src: videos_path(dancer: @dancer.slug, orchestra: params[:orchestra])

@@ -39,8 +39,12 @@ Rails.application.routes.draw do
     member do
       post :like
       delete :unlike
+      post :hide
+      patch :featured
     end
-    get "filters", to: "videos/filters#index", on: :collection
+    collection do
+      get :filters
+    end
   end
 
   # Facet route
@@ -59,20 +63,10 @@ Rails.application.routes.draw do
     end
   end
 
-  # Deletion Request routes
-  resources :deletion_requests, only: [:show] do
-    collection do
-      post :facebook
-    end
-  end
-
   # Sitemap and Banner routes
   get "sitemaps/*path", to: "shimmer/sitemaps#show"
   get "banner", to: "banner#index"
   post "banner", to: "banner#index"
-
-  # Custom user route
-  post "savenew", to: "users#savenew"
 
   # Watch and root routes
   get "/watch", to: "videos#show"

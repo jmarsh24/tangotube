@@ -104,15 +104,18 @@ facundo:
   first_name: "Facundo"
   last_name: "Pinero"
   reviewed: true
+  slug: "facundo-pinero"
 
 vanessa:
   name: "Vanessa Villalba"
   first_name: "Vanessa"
   last_name: "Villalba"
   reviewed: true
+  slug: "vanessa-villalba"
 
 facundo_gil:
   name: "Facundo Gil"
   first_name: "Facundo"
   last_name: "Gil"
   reviewed: "true"
+  slug: "facundo-gil"
