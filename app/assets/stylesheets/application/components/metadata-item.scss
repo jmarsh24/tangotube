@@ -1,14 +1,17 @@
 .metadata-item {
+  display: flex;
+  justify-content: space-between;
   &__label {
-    font-size: var(--font-size-lg);
-    font-weight: 100;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-neutral-600);
   }
 
   &__value {
-    font-weight: 400;
-    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-md);
     a {
-      color: #D60017;
+      color: #d60017;
     }
   }
 }

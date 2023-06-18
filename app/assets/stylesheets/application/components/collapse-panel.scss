@@ -1,9 +1,9 @@
-.your-component {
+.collapse-panel {
   &__close {
-    display: none
+    display: none;
   }
 
-    .collapse-panel {
+  .collapse-panel {
     display: grid;
     grid-template-rows: 0fr;
     overflow: hidden;
@@ -17,15 +17,14 @@
   }
 }
 
-.your-component.open {
-  .your-component__open {
-    display: none
+.collapse-panel.open {
+  .collapse-panel__open {
+    display: none;
   }
-  .your-component__close {
-    display: unset
+  .collapse-panel__close {
+    display: unset;
   }
   .collapse-panel {
-
     grid-template-rows: 1fr;
   }
 }

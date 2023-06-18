@@ -1,12 +1,22 @@
 .lyrics-card {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: var(--spacing-lg);
   background-color: var(--color-neutral-100);
   border-radius: var(--border-radius-xl);
-  padding: var(--spacing-md);
-  font-weight: 500;
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-mega)
+    var(--spacing-md);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-lg);
+
+  &__lyrics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+    text-align: center;
+  }
 }

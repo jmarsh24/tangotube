@@ -4,6 +4,8 @@
     .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t ".Spanish"
     .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t ".English"
   .tabs__panel data-tabs-target="tabPanel"
-    = simple_format(@video.song.lyrics)
+    .lyrics-card__lyrics
+      = simple_format(@video.song.lyrics)
   .tabs__panel data-tabs-target="tabPanel"
-    = simple_format(@video.song.lyrics_en)
+    .lyrics-card__lyrics
+      = simple_format(@video.song.lyrics_en)
