@@ -1,0 +1,15 @@
+.list-box {
+  background-color: var(--color-neutral-0);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius-xl);
+
+  &__item {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-xl);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-gray-300);
+    }
+  }
+}

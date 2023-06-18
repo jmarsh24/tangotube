@@ -1,6 +1,5 @@
 .video-card {
   font-size: var(--font-size-sm);
-  max-width: 568px;
 
   &--compact {
     display: flex;
@@ -17,6 +16,13 @@
         height: 100%;
       }
     }
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xxxs);
   }
 
   &__image {

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :share, :filters]
+  before_action :authenticate_user!, except: [:index, :show, :share, :filters, :sort]
   before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
   before_action :set_video, except: [:index, :create, :destroy]
@@ -11,11 +11,11 @@ class VideosController < ApplicationController
   # @route GET /videos (videos)
   # @route GET / (root)
   def index
-    @search = Video::Search.new(filtering_params:, sorting_params:, user: current_user)
+    @search = Video::Search.new(filtering_params:, sort: params[:sort], user: current_user)
 
     @current_page = params[:page]&.to_i || 1
 
-    @featured_videos = if filtering_params.empty? && sorting_params.empty?
+    @featured_videos = if filtering_params.empty? && params[:sort]&.blank?
       paginated(@search.featured_videos.includes(Video.search_includes), per: 12)
     end
 
@@ -81,6 +81,9 @@ class VideosController < ApplicationController
   def share
   end
 
+  def sort
+  end
+
   private
 
   def handle_filtering_and_pagination(video_search)
@@ -138,13 +141,6 @@ class VideosController < ApplicationController
       :search,
       :dancer,
       :couples
-    )
-  end
-
-  def sorting_params
-    params.permit(
-      :direction,
-      :sort
     )
   end
 end

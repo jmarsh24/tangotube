@@ -5,7 +5,8 @@
         .card__performance-number
           = video.decorate.performance_number
       = image_tag(video.thumbnail, width: 385, height: 216)
-  .stack.stack--xxxs
+
+  .video-card__content
     .scrollable-tags
       - video.dancer_videos.each do |dv|
         - if dv.role == "leader"

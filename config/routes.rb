@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     end
     collection do
       get :filters
+      get :sort
     end
   end
 

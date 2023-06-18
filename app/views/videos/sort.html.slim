@@ -1,0 +1,16 @@
+- options = [ \
+  { value: "most_recent", label: "Recent" }, \
+  { value: "oldest", label: "Oldest" }, \
+  { value: "most_viewed", label: "Most Viewed" }, \
+  { value: "trending", label: "Trending" }, \
+  { value: "most_liked", label: "Most Liked" }, \
+  { value: "performance", label: "Performance" }, \
+  { value: "song", label: "Songs A-Z" }, \
+  { value: "orchestra", label: "Orchestras A-Z" }, \
+  { value: "channel", label: "Channels A-Z" } \
+]
+.list-box
+  - options.each do |option|
+    - selected = params[:sort] == option[:value] ? "selected" : nil
+    .list-box__item 
+      = link_to option[:label], root_path(filtering_params.merge(sort: option[:value])), class: "list-box__item #{selected}"

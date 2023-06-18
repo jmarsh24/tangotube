@@ -1,33 +1,12 @@
-= turbo_frame_tag :filters, "target": "_top" do
-  = form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
-    .stack
-      - if filtering_params.present? || sorting_params.present?
-        = link_to "Clear All", root_path, method: :get, class: "button button--secondary"
-      .stack.stack--desktop-line
-        .stack.stack--zero
-          = turbo_frame_tag :genre_facet, src: facet_path(id: "genres", params: filtering_params)
-            .stack.stack--xxs
-              label = "Genre"
-              select class="input input__input"
-                option value="" = "Any Genre..."
-          = turbo_frame_tag :leader_facet, src: facet_path(id: "leaders", params: filtering_params)
-            .stack.stack--xxs
-              label = "Leader"
-              select class="input input__input"
-                option value="" = "Any Leader..."
-          = turbo_frame_tag :follower_facet, src: facet_path(id: "followers", params: filtering_params)
-            .stack.stack--xxs
-              label = "Follower"
-              select class="input input__input"
-                option value="" = "Any Follower..."
-          = turbo_frame_tag :orchestra_facet, src: facet_path(id: "orchestras", params: filtering_params)
-            .stack.stack--xxs
-              label = "Orchestra"
-              select class="input input__input"
-                option value="" = "Any Orchestra..."
-          = turbo_frame_tag :year_facet, src: facet_path(id: "years", params: filtering_params)
-            .stack.stack--xxs
-              label = "Year"
-              select class="input input__input" 
-                option value="" = "Any Year..."
-        = f.hidden_field :filtering, value: "true"
+= form_with url: root_path, method: :get, data: { controller: "autosubmit", "turbo-stream": "true" } do |f|
+  .stack
+    .stack.stack--desktop-line
+      .stack.stack--zero
+        = turbo_frame_tag :genre_facet, src: facet_path(id: "genres", params: filtering_params)
+        = turbo_frame_tag :leader_facet, src: facet_path(id: "leaders", params: filtering_params)
+        = turbo_frame_tag :follower_facet, src: facet_path(id: "followers", params: filtering_params)
+        = turbo_frame_tag :orchestra_facet, src: facet_path(id: "orchestras", params: filtering_params)
+        = turbo_frame_tag :year_facet, src: facet_path(id: "years", params: filtering_params)
+    - if filtering_params.present? || params[:sort].present?
+      = link_to "Clear All", root_path, method: :get, class: "button button--secondary"
+      = f.hidden_field :filtering, value: "true"

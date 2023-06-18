@@ -1,16 +1,22 @@
 .filter-chip {
   display: inline-flex;
   align-items: center;
-  padding: var(--spacing-xxs) var(--spacing-xs);
-  background-color: var(--color-gray-500);
-  border-radius: var(--border-radius-lg);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-neutral-0);
+  gap: var(--spacing-xxs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--color-neutral-0);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-neutral-1000);
   cursor: pointer;
   transition: background-color 0.2s ease;
 
-  &--selected {
+  &--highlighted {
+    animation: rainbow-border 2s linear infinite;
+  }
+
+  &.active {
     background-color: var(--color-gray-800);
     color: var(--color-neutral-0);
   }
@@ -18,4 +24,42 @@
   &:hover {
     background-color: var(--color-gray-400);
   }
+
+
+
+  @keyframes rainbow-border {
+    0% {
+      border-color: #e1306c;
+    }
+    14% {
+      border-color: #fdca40;
+    }
+    28% {
+      border-color: #f7df1e;
+    }
+    43% {
+      border-color: #9acd32;
+    }
+    57% {
+      border-color: #32cd32;
+    }
+    71% {
+      border-color: #0092cf;
+    }
+    85% {
+      border-color: #3d3d3d;
+    }
+    100% {
+      border-color: #e1306c;
+    }
+  }
+}
+
+.filter-chip__close {
+  @include maskedBackground;
+  content: '';
+  height: var(--spacing-xs);
+  width: var(--spacing-xs);
+  display: block;
+  mask-image: url('@assets/images/icons/close.svg');
 }

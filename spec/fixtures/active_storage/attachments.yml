@@ -125,12 +125,12 @@ profile_image_troilo:
 
 thumbnail_030_tango:
   name: thumbnail
-  record: 030_tango (Channel)
+  record: 030tango (Channel)
   blob: thumbnail_030tango
 
 thumbnail_amelle_tango:
   name: thumbnail
-  record: amelle_tango (Channel)
+  record: armelle_tango (Channel)
   blob: thumbnail_amelle_tango
 
 thumbnail_jkukla_video:
@@ -150,7 +150,7 @@ thumbnail_tango_nuevo_tv:
 
 thumbnail_giorgio_scattorlini:
   name: thumbnail
-  record: giorgio_scattorlini (Channel)
+  record: giorgio_scattolini (Channel)
   blob: thumbnail_giorgio_scattorlini
 
 profile_image_darienzo:
@@ -177,4 +177,3 @@ profile_image_castillo:
   name: profile_image
   record: castillo (User)
   blob: avatar_castillo
-

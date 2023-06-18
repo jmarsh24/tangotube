@@ -1,21 +1,54 @@
-.stack.stack--desktop-line.stack--desktop-align-top
-  .scrollable-bar
-    = render "components/reset_chip", selected: [:sort, :direction, :hd, :watched, :liked].none? { |param| params[param].present? }, label: "All"
-    = render "components/sort_chip", label: "Recent", selected: (params[:sort] == "upload_date" && params[:direction] == "desc"), column: "upload_date", direction: "desc"
-    = render "components/sort_chip", label: "Oldest", selected: (params[:sort] == "upload_date" && params[:direction] == "asc"), column: "upload_date", direction: "asc"
-    = render "components/sort_chip", label: "Most Viewed", selected: (params[:sort] == "view_count" && params[:direction] == "desc"), column: "view_count", direction: "desc"
-    = render "components/sort_chip", label: "Tending", selected: (params[:sort] == "popularity" && params[:direction] == "desc"), column: "popularity", direction: "desc"
-    = render "components/sort_chip", label: "Most Liked", selected: (params[:sort] == "like_count" && params[:direction] == "desc"), column: "like_count", direction: "desc"
-
-  .scrollable-bar
-    = render "components/sort_chip", label: "Performances", selected: (params[:sort] == "performance" && params[:direction] == "desc"), column: "performance", direction: "desc"
-    = render "components/sort_chip", label: "Songs", selected: (params[:sort] == "song" && params[:direction] == "asc"), column: "song", direction: "asc"
-    = render "components/sort_chip", label: "Orchestras", selected: (params[:sort] == "orchestra" && params[:direction] == "asc"), column: "orchestra", direction: "asc"
-    = render "components/sort_chip", label: "Channels", selected: (params[:sort] == "channel" && params[:direction] == "asc"), column: "channel", direction: "asc"
-
-  .scrollable-bar
-    = render "components/filter_chip", label: "HD", selected: params[:hd] == "true", key: "hd", value: "true"
-    - if current_user
-      = render "components/filter_chip", label: "Watched", selected: params[:watched] == "true", key: "watched", value: "true"
-      = render "components/filter_chip", label: "Liked", selected: params[:liked] == "true", key: "liked", value: "true"
-      = render "components/filter_chip", label: "New to You", selected: params[:watched] == "false", key: "watched", value: "false"
+.scrollable-bar
+  - if filtering_params.present? || params[:sort].present?
+    = link_to "Sort", modal_path(sort_videos_path), class: "filter-chip"
+  = link_to "All", root_path, class: ["filter-chip", ("active" if filtering_params.empty?)]
+  .filter-chip class=("active" if params[:genre].present?)
+    - params[:genre].present? ? genre = params[:genre].titleize : genre = "Genre"
+    = link_to genre, modal_path(facet_path(id: "genres", params: filtering_params.except(:genre))), class: "filter-chip__label"
+    - if params[:genre].present?
+      = link_to root_path(filtering_params.except(:genre)) do 
+        .filter-chip__close
+  .filter-chip class=("active" if params[:leader].present?)
+    - params[:leader].present? ? leader = params[:leader].titleize : leader = "Leader"
+    = link_to leader, modal_path(facet_path(id: "leaders", params: filtering_params.except(:leader))), class: "filter-chip__label"
+    - if params[:leader].present?
+      = link_to root_path(filtering_params.except(:leader)) do 
+        .filter-chip__close
+  .filter-chip class=("active" if params[:follower].present?)
+    - params[:follower].present? ? follower = params[:follower].titleize : follower = "Follower"
+    = link_to follower, modal_path(facet_path(id: "followers", params: filtering_params.except(:follower))), class: "filter-chip__label"
+    - if params[:follower].present?
+      = link_to root_path(filtering_params.except(:follower)) do 
+        .filter-chip__close
+  .filter-chip class=("active" if params[:orchestra].present?)
+    - params[:orchestra].present? ? orchestra = params[:orchestra].titleize : orchestra = "Orchestra"
+    = link_to orchestra, modal_path(facet_path(id: "orchestras", params: filtering_params.except(:orchestra))), class: "filter-chip__label"
+    - if params[:orchestra].present?
+      = link_to root_path(filtering_params.except(:orchestra)) do 
+        .filter-chip__close
+  .filter-chip class=("active" if params[:year].present?)
+    - params[:year].present? ? year = params[:year].titleize : year = "Year"
+    = link_to year, modal_path(facet_path(id: "years", params: filtering_params.except(:year))), class: "filter-chip__label"
+    - if params[:year].present?
+      = link_to root_path(filtering_params.except(:year)) do 
+        .filter-chip__close
+  - if current_user
+    .filter-chip class=("active" if params[:watched] == "true")
+      - params[:watched] == "true" ? watched = "Watched" : watched = "Watched"
+      = link_to watched, root_path(filtering_params.merge(watched: true)), class: "filter-chip__label"
+      - if params[:watched].present?
+        = link_to root_path(filtering_params.except(:watched)) do 
+          .filter-chip__close
+    .filter-chip class=("active" if params[:liked].present?)
+      - params[:liked].present? ? liked = params[:liked].titleize : liked = "Liked"
+      = link_to liked, root_path(filtering_params.merge(liked: true)), class: "filter-chip__label"
+      - if params[:liked].present?
+        = link_to root_path(filtering_params.except(:liked)) do 
+          .filter-chip__close
+    .filter-chip.filter-chip--highlighted class=("active" if params[:watched] == false)
+      - params[:watched] == "false" ? watched = "New To You" : watched = "New To You"
+      = link_to watched, root_path(filtering_params.merge(watched: false)), class: "filter-chip__label"
+      - if params[:watched].present?
+        = link_to root_path(filtering_params.except(:watched)) do 
+          .filter-chip__close
+  = link_to "Filters", modal_path(filters_videos_path(filtering_params)), class: ["filter-chip", ("active" if filtering_params.present?)]
