@@ -11,5 +11,4 @@
         .grid.grid--videos = render @featured_videos
     - if @videos.present?
       .stack
-        = render "videos/index/videos/section/header", title: t(".videos")
         = paginated @videos, class: "grid grid--videos"

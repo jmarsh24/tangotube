@@ -7,19 +7,27 @@
   pointer-events: none;
   z-index: var(--z-modal);
   overflow: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &__content {
-    position: relative;
+    position: absolute;
     background-color: var(--color-neutral-0);
-    border-radius: 16px 16px 0 0;
-    transition: opacity 0.5s, transform 0.5s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+    transition: opacity 0.5s;
     opacity: 0;
-    transform: translate(0, 80px);
-    padding: var(--spacing-md);
-    margin: 5vh auto 0;
+    padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
-    min-height: 95vh;
+    max-height: 80%;
+    overflow-y: auto;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
   }
 
   &__title {
@@ -33,17 +41,32 @@
   }
 
   &__close {
+    @include maskedBackground;
     position: absolute;
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
     top: var(--spacing-md);
     right: var(--spacing-md);
-    background-image: url('@assets/images/icons/close.svg');
-    background-size: 14px;
-    background-repeat: no-repeat;
-    background-position: center;
     cursor: pointer;
     z-index: var(--z-modal-close);
+    background-color: var(--color-neutral-200);
+    border-radius: 50%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      background-color: var(--color-gray-700);
+      mask-image: url('@assets/images/icons/close.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      z-index: 1;
+    }
   }
 
   &__frame {
@@ -52,8 +75,25 @@
   }
 
   &--small {
-    .modal__content {
+    &__content {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
       max-width: 420px;
+      max-height: 420px;
+      border-radius: var(--border-radius-xl);
+    }
+  }
+
+  &--large {
+    &__content {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      max-width: 80%;
+      max-height: 80%;
     }
   }
 
@@ -70,7 +110,6 @@
     &__content {
       max-width: 550px;
       border-radius: var(--border-radius-card-sm);
-      margin: 5vh auto;
       height: auto;
       min-height: unset;
       padding: var(--spacing-xl);
@@ -81,13 +120,4 @@
       right: var(--spacing-xl);
     }
   }
-}
-
-.test .modal-blind,
-.test .modal__content {
-  transition: none !important;
-}
-
-body.modal-open {
-  overflow: hidden;
 }

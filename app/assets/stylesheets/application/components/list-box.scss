@@ -1,15 +1,19 @@
 .list-box {
-  background-color: var(--color-neutral-0);
-  border: 1px solid var(--color-gray-300);
+  background-color: var(--color-gray-100);
   border-radius: var(--border-radius-xl);
+}
 
-  &__item {
-    padding: var(--spacing-xs) var(--spacing-sm);
+.list-box__item {
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-gray-200);
+  font-size: var(--font-size-md);
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: var(--color-gray-200);
     border-radius: var(--border-radius-xl);
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--color-gray-300);
-    }
   }
 }

@@ -1,7 +1,8 @@
 = turbo_frame_tag "#{@facet.name}_facet" do
-  h1 = @facet.name.titleize
-  .list-box
-    - @facet.options.each do |facet|
-      - selected = params[@facet.name.to_sym] == facet.value ? "selected" : nil
-      .list-box__item
-        = link_to facet.label, root_path(filtering_params.merge(@facet.name => facet.value)), class: [selected], data: { turbo_frame: "_top" }
+  .stack
+    h1.heading-1 = @facet.name.titleize
+    .list-box
+      - @facet.options.each do |facet|
+        - selected = params[@facet.name.to_sym] == facet.value ? "selected" : nil
+        .list-box__item
+          = link_to facet.label, root_path(filtering_params.merge(@facet.name => facet.value)), class: [selected], data: { turbo_frame: "_top" }

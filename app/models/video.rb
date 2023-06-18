@@ -118,7 +118,7 @@ class Video < ApplicationRecord
   scope :hd, ->(value) { where(hd: value) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
-  scope :liked, ->(user) { where(id: user.votes.where(vote_scope: "like", vote_flag: true).select(:votable_id)) }
+  scope :liked, ->(user) { joins(:likes).where(likes: {likeable_type: "Video", user_id: user.id}) }
   scope :orchestra, ->(value) { joins(:song, :orchestra).where(orchestras: {slug: value}) }
   scope :song, ->(value) { joins(:song).where(songs: {slug: value}) }
   scope :event, ->(value) { joins(:event).where(events: {slug: value}) }

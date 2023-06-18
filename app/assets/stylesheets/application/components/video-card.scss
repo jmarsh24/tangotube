@@ -17,13 +17,14 @@
       }
     }
   }
-  
+
   &__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-xxxs);
     padding: var(--spacing-xxxs) var(--spacing-xxs);
+    font-size: var(--font-size-md);
   }
 
   &__image {
