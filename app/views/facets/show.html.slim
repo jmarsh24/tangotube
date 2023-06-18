@@ -1,4 +1,5 @@
 = turbo_frame_tag "#{@facet.name}_facet" do
+  h1 = @facet.name.titleize
   .list-box
     - @facet.options.each do |facet|
       - selected = params[@facet.name.to_sym] == facet.value ? "selected" : nil

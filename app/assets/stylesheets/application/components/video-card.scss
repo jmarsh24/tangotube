@@ -23,6 +23,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-xxxs);
+    padding: var(--spacing-xxxs) var(--spacing-xxs);
   }
 
   &__image {

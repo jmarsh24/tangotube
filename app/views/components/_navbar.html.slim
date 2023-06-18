@@ -1,10 +1,8 @@
 header.navbar.stack.stack--line.stack--justify-space-between.stack--md data-controller="toggle"
   .stack.stack--inline
-    .stack.stack--line.stack--md
-      .button.icon.icon--burger.icon--md data-action="click->navbar#toggle"
-      a.navbar__logo href=root_path
-  .navbar__search.stack.stack--line
-    = render "components/navbar/search"
+    a.navbar__logo href=root_path
+  / .navbar__search.stack.stack--line
+  /   = render "components/navbar/search"
   .stack.stack--inline.stack--md.stack--justify-right
     .navbar__item.navbar__item--links
       .dropdown data-controller="dropdown dark"
