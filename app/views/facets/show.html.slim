@@ -4,5 +4,6 @@
     .list-box
       - @facet.options.each do |facet|
         - selected = params[@facet.name.to_sym] == facet.value ? "selected" : nil
-        .list-box__item
-          = link_to facet.label, root_path(filtering_params.merge(@facet.name => facet.value)), class: [selected], data: { turbo_frame: "_top" }
+        = link_to root_path(filtering_params.merge(@facet.name => facet.value)), class: [selected], data: { turbo_frame: "_top" } do
+          .list-box__item
+            = facet.label
