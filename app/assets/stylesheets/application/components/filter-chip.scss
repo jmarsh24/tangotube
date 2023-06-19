@@ -2,11 +2,11 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xxs);
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-xxs) var(--spacing-xs);
   background-color: var(--color-neutral-0);
   border: 1px solid var(--color-gray-300);
   border-radius: var(--border-radius-pill);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-normal);
   color: var(--color-neutral-1000);
   cursor: pointer;
@@ -28,8 +28,8 @@
   &__close {
     @include maskedBackground;
     position: relative; /* Use relative positioning on the parent to contain the absolute positioned child */
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     background-color: var(--color-neutral-100);
     border-radius: 50%;
     cursor: pointer;

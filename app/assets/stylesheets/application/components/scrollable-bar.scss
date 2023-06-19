@@ -7,7 +7,7 @@
   flex-wrap: nowrap;
   gap: var(--spacing-xxs);
   scroll-snap-type: x mandatory; /* Enable horizontal scrolling */
-  padding: var(--spacing-xs) var(--spacing-xs);
+  padding: var(--spacing-xxs) var(--spacing-xs);
 }
 
 .scrollable-bar::-webkit-scrollbar {

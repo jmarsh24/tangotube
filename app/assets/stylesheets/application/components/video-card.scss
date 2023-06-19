@@ -22,9 +22,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-xxxs);
+    gap: 6px;
     padding: var(--spacing-xxxs) var(--spacing-xxs);
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-xs);
   }
 
   &__image {

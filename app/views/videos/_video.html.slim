@@ -10,15 +10,40 @@
     .scrollable-tags
       - video.dancer_videos.each do |dv|
         - if dv.role == "leader"
-          = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag tag--sm"
+          = link_to root_path(leader: dv.dancer.slug) do
+            .stack.stack--line.stack--xxs
+              - if dv.dancer.profile_image.attached?
+                = image_tag dv.dancer.profile_image.variant(resize: "100x100"), class: "avatar avatar--sm"
+              - else
+                = image_tag "/icons/person-circle-fill", class: "avatar avatar--sm"
+              = dv.dancer.name
         - elsif dv.role == "follower"
-          = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag tag--sm"
+          = link_to root_path(follower: dv.dancer.slug) do
+            .stack.stack--line.stack--xxs
+              - if dv.dancer.profile_image.attached?
+                = image_tag dv.dancer.profile_image.variant(resize: "100x100"), class: "avatar avatar--sm"
+              - else
+                = image_tag "/icons/person-circle-fill", class: "avatar avatar--sm"
+              = dv.dancer.name
     - if video.song.present?
-      = link_to(video.song.full_title, root_path(song: video.song.slug))
+      = link_to root_path(song: video.song.slug) do
+        .stack.stack--line.stack--xxs
+          - if video.song.orchestra.profile_image.attached?
+            = image_tag video.song.orchestra.profile_image.variant(resize: "100x100"), class: "avatar avatar--sm"
+          - else
+            = image_tag "/icons/person-circle-fill", class: "avatar avatar--sm"
+          = video.song.full_title
     - if video.event.present?
-      = link_to(video.event.title.titleize, root_path(event: video.event.slug), class: "tag tag--sm")
-    = link_to(root_path(channel: video.channel.channel_id), class: "stack stack--line stack--xxs") do 
-      - if video.channel.thumbnail.present?
-        = image_tag(video.channel.thumbnail, class: "avatar avatar--sm")
-      = video.channel.title
-    = video.decorate.display_metadata
+      = link_to root_path(event: video.event.slug) do
+        .stack.stack--line.stack--xxs
+          - if video.event.profile_image.attached?
+            = image_tag video.event.profile_image.variant(resize: "100x100"), class: "avatar avatar--sm"
+          - else
+            = image_tag "/icons/person-circle-fill", class: "avatar avatar--sm"
+          = video.event.title.titleize
+    .stack.stack--line.stack--sm
+      = link_to(root_path(channel: video.channel.channel_id), class: "stack stack--line stack--xxs stack--inline") do 
+        - if video.channel.thumbnail.present?
+          = image_tag(video.channel.thumbnail, class: "avatar avatar--sm")
+        = video.channel.title
+      = video.decorate.display_metadata

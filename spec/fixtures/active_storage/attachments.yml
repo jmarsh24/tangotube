@@ -65,63 +65,43 @@ thumbnail_video_6:
 
 profile_image_carlitos:
   name: profile_image
-  record: carlitos (User)
+  record: carlitos (Dancer)
   blob: avatar_carlitos
 
 profile_image_clarisa:
   name: profile_image
-  record: clarisa (User)
+  record: clarisa (Dancer)
   blob: avatar_clarisa
 
 profile_image_gianpiero:
   name: profile_image
-  record: gianpiero (User)
+  record: gianpiero (Dancer)
   blob: avatar_gianpiero
 
 profile_image_jonathan:
   name: profile_image
-  record: jonathan (User)
+  record: jonathan (Dancer)
   blob: avatar_jonathan
 
 profile_image_lorena:
   name: profile_image
-  record: lorena (User)
+  record: lorena (Dancer)
   blob: avatar_lorena
 
 profile_image_corina:
   name: profile_image
-  record: corina (User)
+  record: corina (Dancer)
   blob: avatar_corina
 
 profile_image_octavio:
   name: profile_image
-  record: octavio (User)
+  record: octavio (Dancer)
   blob: avatar_octavio
 
 profile_image_noelia:
   name: profile_image
-  record: noelia (User)
+  record: noelia (Dancer)
   blob: avatar_noelia
-
-profile_image_darienzo:
-  name: profile_image
-  record: darienzo (User)
-  blob: avatar_darienzo
-
-profile_image_di_sarli:
-  name: profile_image
-  record: di_sarli (User)
-  blob: avatar_di_sarli
-
-profile_image_pugliese:
-  name: profile_image
-  record: pugliese (User)
-  blob: avatar_pugliese
-
-profile_image_troilo:
-  name: profile_image
-  record: troilo (User)
-  blob: avatar_troilo
 
 thumbnail_030_tango:
   name: thumbnail
@@ -155,25 +135,25 @@ thumbnail_giorgio_scattorlini:
 
 profile_image_darienzo:
   name: profile_image
-  record: darienzo (User)
+  record: darienzo (Orchestra)
   blob: avatar_darienzo
 
 profile_image_di_sarli:
   name: profile_image
-  record: di_sarli (User)
+  record: di_sarli (Orchestra)
   blob: avatar_di_sarli
 
 profile_image_pugliese:
   name: profile_image
-  record: pugliese (User)
+  record: pugliese (Orchestra)
   blob: avatar_pugliese
 
 profile_image_troilo:
   name: profile_image
-  record: troilo (User)
+  record: troilo (Orchestra)
   blob: avatar_troilo
 
 profile_image_castillo:
   name: profile_image
-  record: castillo (User)
+  record: castillo (Orchestra)
   blob: avatar_castillo
