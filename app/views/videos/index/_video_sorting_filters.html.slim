@@ -1,32 +1,28 @@
-.scrollable-bar
+= turbo_frame_tag "filter-bar", class: "scrollable-bar"
   - if current_user
     .filter-chip.filter-chip--highlighted class=("active" if params[:watched] == false)
-      - params[:watched] == "false" ? watched = "New To You" : watched = "New To You"
-      = link_to watched, root_path(filtering_params.merge(watched: false)), class: "filter-chip__label"
+      = link_to "New To You", root_path(filtering_params.merge(watched: false)), class: "filter-chip__label"
       - if params[:watched] == "false"
         = link_to root_path(filtering_params.except(:watched)) do 
           .filter-chip__close
     .filter-chip class=("active" if params[:watched] == "true")
-      - params[:watched] == "true" ? watched = "Watched" : watched = "Watched"
-      = link_to watched, root_path(filtering_params.merge(watched: true)), class: "filter-chip__label"
+      = link_to "Watched", root_path(filtering_params.merge(watched: true)), class: "filter-chip__label"
       - if params[:watched] == "true"
         = link_to root_path(filtering_params.except(:watched)) do 
           .filter-chip__close
     .filter-chip class=("active" if params[:liked].present?)
-      - params[:liked].present? ? liked = params[:liked].titleize : liked = "Liked"
-      = link_to liked, root_path(filtering_params.merge(liked: true)), class: "filter-chip__label"
+      = link_to "Liked", root_path(filtering_params.merge(liked: true)), class: "filter-chip__label"
       - if params[:liked].present?
         = link_to root_path(filtering_params.except(:liked)) do 
           .filter-chip__close
   - if filtering_params.present? || params[:sort].present?
     = link_to "Sort", modal_path(sort_videos_path), class: "filter-chip"
   = link_to "All", root_path, class: ["filter-chip", ("active" if filtering_params.empty?)]
-  .filter-chip class=("active" if params[:genre].present?)
-    - params[:genre].present? ? genre = params[:genre].titleize : genre = "Genre"
-    = link_to genre, modal_path(facet_path(id: "genres", params: filtering_params.except(:genre))), class: "filter-chip__label"
+  - params[:genre].present? ? genre = params[:genre].titleize : genre = "Genre"
+  = link_to modal_path(facet_path(id: "genres", params: filtering_params.except(:genre))), class: ["filter-chip", ("active" if params[:genre].present?)] do 
+    = genre
     - if params[:genre].present?
-      = link_to root_path(filtering_params.except(:genre)) do 
-        .filter-chip__close
+      .filter-chip__close data-controller="filter-chip" data-action="click->filter-chip#close:prevent" data-url-value=root_path(filtering_params.except(:genre), filtering: true)
   .filter-chip class=("active" if params[:leader].present?)
     - params[:leader].present? ? leader = params[:leader].titleize : leader = "Leader"
     = link_to leader, modal_path(facet_path(id: "leaders", params: filtering_params.except(:leader))), class: "filter-chip__label"

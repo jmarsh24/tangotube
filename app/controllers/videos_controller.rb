@@ -25,7 +25,9 @@ class VideosController < ApplicationController
       paginated(@search.videos.includes(Video.search_includes), per: 12)
     end
 
-    handle_filtering_and_pagination if params[:filtering] == "true" && params[:pagination].nil? && filtering_params.present?
+    if params[:filtering] == "true" && params[:pagination].nil? && filtering_params.present?
+      ui.update "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
+    end
   end
 
   # @route GET /videos/:id (video)
@@ -85,24 +87,6 @@ class VideosController < ApplicationController
   end
 
   private
-
-  def handle_filtering_and_pagination(video_search)
-    url = request.fullpath.gsub(/&?(filtering|pagination)=true/, "")
-    replace_filters_bar(url)
-    update_video_list(video_search, url)
-    append_pagination(video_search, url) if @current_page > 1 && params[:pagination] == "true"
-  end
-
-  def update_video_list(video_search, url)
-    @videos = video_search.paginated_videos(@current_page, per_page: 12)
-    ui.replace "videos", with: "videos/videos", items: @videos, partial: params[:partial]
-    ui.remove "next-page-link" if @current_page > 1 && params[:pagination] == "true"
-  end
-
-  def append_pagination(video_search, url)
-    next_page = video_search.next_page(@videos)
-    ui.append "pagination-frame", with: "components/pagination", items: @videos, partial: params[:partial], next_page:
-  end
 
   def check_for_clear
     if params[:commit] == "Clear"
