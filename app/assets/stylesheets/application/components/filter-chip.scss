@@ -25,7 +25,30 @@
     background-color: var(--color-gray-400);
   }
 
+  &__close {
+    @include maskedBackground;
+    position: relative; /* Use relative positioning on the parent to contain the absolute positioned child */
+    width: 18px;
+    height: 18px;
+    background-color: var(--color-neutral-100);
+    border-radius: 50%;
+    cursor: pointer;
 
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-neutral-1000);
+      mask-image: url('@assets/images/icons/close.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+  }
 
   @keyframes rainbow-border {
     0% {
@@ -53,13 +76,4 @@
       border-color: #e1306c;
     }
   }
-}
-
-.filter-chip__close {
-  @include maskedBackground;
-  content: '';
-  height: var(--spacing-xs);
-  width: var(--spacing-xs);
-  display: block;
-  mask-image: url('@assets/images/icons/close.svg');
 }
