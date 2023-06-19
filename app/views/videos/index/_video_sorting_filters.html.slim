@@ -1,25 +1,24 @@
 = turbo_frame_tag "filter-bar", class: "scrollable-bar"
-  / = link_to "Filters", modal_path(filters_videos_path(filtering_params)), class: ["filter-chip", ("active" if filtering_params.present?)]
-  = link_to "All", root_path, class: ["filter-chip", ("active" if filtering_params.empty?)]
+  / = link_to "Filters", modal_path(filters_videos_path(@filtering_params)), class: ["filter-chip", ("active" if @filtering_params.present?)]
+  = link_to "All", root_path(filtering: true), class: ["filter-chip", ("active" if @filtering_params.empty?)]
 
   - filter_chips = []
 
-  - if filtering_params.present? || params[:sort].present?
+  - if @filtering_params.present? || params[:sort].present?
     - sort_name = params[:sort].present? ? params[:sort].titleize : "Sort"
-    - sort_link_path = modal_path(sort_videos_path)
+    - sort_link_path = modal_path(sort_videos_path(@filtering_params))
     - sort_active = params[:sort].present?
     = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: sort_active, highlighted: false, closable: false
 
   - if current_user
     - [["New To You", :watched, false], ["Watched", :watched, true, false], ["Liked", :liked, true, false]].each do |label, param_key, value|
       - active = params[param_key].to_s == value.to_s
-      - link_path = active ? root_path(filtering_params.except(param_key)) : root_path(filtering_params.merge(param_key => value))
+      - link_path = active ? root_path(@filtering_params.except(param_key)) : root_path(@filtering_params.merge(param_key => value, filtering: true))
       - highlighted = label == "New To You" ? !active : false
       - filter_chips << [label, link_path, active, highlighted]
-      
   - [:leader, :follower, :orchestra, :year].each do |param_key|
     - name = params[param_key].present? ? params[param_key].titleize : param_key.to_s.titleize
-    - link_path = params[param_key].present? ? root_path(filtering_params.except(param_key)) : modal_path(facet_path(id: param_key.to_s.pluralize, params: filtering_params))
+    - link_path = params[param_key].present? ? root_path(@filtering_params.except(param_key).merge(filtering: true)) : modal_path(facet_path(id: param_key.to_s.pluralize, params: @filtering_params))
     - active = params[param_key].present?
     - filter_chips << [name, link_path, active, false]
 

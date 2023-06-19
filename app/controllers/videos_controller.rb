@@ -6,11 +6,12 @@ class VideosController < ApplicationController
   before_action :check_for_clear, only: [:index]
   before_action :set_video, except: [:index, :create, :destroy]
   before_action :set_video, only: [:show, :hide, :featured, :like, :unlike, :share]
-  helper_method :filtering_params, :sorting_params
 
   # @route GET /videos (videos)
   # @route GET / (root)
   def index
+    @filtering_params = filtering_params
+    @sort_param = params[:sort]
     @search = Video::Search.new(filtering_params:, sort: params[:sort], user: current_user)
 
     @current_page = params[:page]&.to_i || 1
@@ -25,10 +26,14 @@ class VideosController < ApplicationController
       paginated(@search.videos.includes(Video.search_includes), per: 12)
     end
 
-    if params[:filtering] == "true" && params[:pagination].nil? && filtering_params.present?
+    if params[:filtering] == "true" && params[:pagination].nil?
       ui.update "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
-      # url = request.fullpath.gsub(/&?(filtering|pagination)=true/, "")
-      # ui.javascript "history.pushState(history.state, "", new URL(#{url}));"
+      ui.close_modal
+      new_params = @filtering_params.to_h
+      new_params[:sort] = @sort_param if @sort_param.present?
+      new_params.except(:filtering, :pagination)
+      url = url_for(new_params)
+      ui.run_javascript "history.pushState(history.state, '', '#{url}');"
     end
   end
 
@@ -86,6 +91,7 @@ class VideosController < ApplicationController
   end
 
   def sort
+    @filtering_params = filtering_params
   end
 
   private

@@ -13,4 +13,4 @@
   - options.each do |option|
     - selected = params[:sort] == option[:value] ? "selected" : nil
     .list-box__item 
-      = link_to option[:label], root_path(filtering_params.merge(sort: option[:value], filtering: true)), class: "list-box__item #{selected}"
+      = link_to option[:label], root_path(@filtering_params.merge(sort: option[:value], filtering: true)), class: "list-box__item #{selected}"
