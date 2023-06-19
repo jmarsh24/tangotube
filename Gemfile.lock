@@ -107,7 +107,6 @@ GEM
       activerecord (>= 6.0, < 7.1)
     acts_as_list (1.1.0)
       activerecord (>= 4.2)
-    acts_as_votable (0.14.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
     amazing_print (1.5.0)
@@ -672,7 +671,6 @@ DEPENDENCIES
   activestorage
   acts-as-taggable-on
   acts_as_list
-  acts_as_votable
   amazing_print
   annotate
   avo
