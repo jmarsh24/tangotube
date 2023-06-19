@@ -19,7 +19,7 @@
     "@types/node": "^18.11.18",
     "@types/youtube-player": "^5.5.7",
     "autoprefixer": "^10.4.13",
-    "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
     "path": "^0.12.7",
     "sass": "^1.57.1",
     "stimulus-hotkeys": "^1.0.5",

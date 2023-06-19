@@ -3,6 +3,7 @@ header.navbar.stack.stack--line.stack--justify-space-between.stack--md data-cont
     a.navbar__logo href=root_path
   / .navbar__search.stack.stack--line
   /   = render "components/navbar/search"
+  = link_to "", modal_path(new_search_path), class: "icon icon--magnifying-glass"
   .stack.stack--inline.stack--md.stack--justify-right
     .navbar__item.navbar__item--links
       .dropdown data-controller="dropdown dark"

@@ -137,6 +137,7 @@ class Video < ApplicationRecord
   }
   scope :year, ->(value) { where(upload_date_year: value) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
+  scope :searched, ->(term) { where("title ILIKE ?", "%#{term}%") }
 
   class << self
     def index_query

@@ -1,0 +1,33 @@
+.search-bar {
+  &__results {
+    font-size: var(--font-size-sm);
+  }
+
+  &__result {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+
+    &__image {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--border-radius-circle);
+      object-fit: cover;
+    }
+
+    &__details {
+      color: var(--color-gray-300);
+      font-size: var(--font-size-sm);
+
+      &__title {
+        color: var(--color-gray-300);
+        font-size: var(--font-size-sm);
+      }
+
+      &__subtitle {
+        color: var(--color-gray-300);
+        font-size: var(--font-size-xs);
+      }
+    }
+  }
+}

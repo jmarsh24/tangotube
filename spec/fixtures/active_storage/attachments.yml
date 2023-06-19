@@ -158,6 +158,11 @@ profile_image_castillo:
   record: castillo (Orchestra)
   blob: avatar_castillo
 
+profile_image_garcia:
+  name: profile_image
+  record: garcia (Orchestra)
+  blob: avatar_garcia
+
 academia_de_tango_profile_image:
   name: profile_image
   record: academia_de_tango (Event)
@@ -200,15 +205,20 @@ laquila_tango_festival_cover_image:
 
 el_garron_profile_image:
   name: profile_image
-  record: el_garron (Event)
+  record: el_garron_la_grande_tutti (Event)
   blob: thumbnail_el_garron
 
 el_garron_cover_image:
   name: cover_image
-  record: el_garron (Event)
+  record: el_garron_la_grande_tutti (Event)
   blob: cover_el_garron
 
 ladys_tango_festival_cover_image:
   name: cover_image
   record: ladys_tango_festival (Event)
   blob: cover_ladys_tango_festival
+
+ladys_tango_festival_profile_image:
+  name: profile_image
+  record: ladys_tango_festival (Event)
+  blob: thumbnail_ladys_tango_festival

@@ -29,23 +29,12 @@ class Event < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
+  scope :searched, ->(term) { where("title ILIKE ? OR city ILIKE ? OR country ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%") }
+
   def search_title
     return if title.empty?
 
     @search_title ||= title
-  end
-
-  def videos_with_event_title_match
-    Video
-      .joins(:channel)
-      .where(event_id: nil)
-      .where(
-        'unaccent(videos.title) ILIKE unaccent(:query) OR
-                  unaccent(videos.description) ILIKE unaccent(:query) OR
-                  unaccent(videos.tags) ILIKE unaccent(:query) OR
-                  unaccent(channels.title) ILIKE unaccent(:query)',
-        query: "%#{search_title}%"
-      )
   end
 
   def match_videos

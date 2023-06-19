@@ -49,6 +49,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :search, only: [:new, :show]
+
   # Facet route
   resources :facets, only: :show
 

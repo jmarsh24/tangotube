@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import { FetchRequest } from '@rails/request.js';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash.debounce';
 export default class extends Controller {
   inputTarget!: HTMLInputElement;
   event!: Event;
