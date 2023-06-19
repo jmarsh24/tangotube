@@ -12,7 +12,7 @@
     "@github/combobox-nav": "^2.0.2",
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.2.4",
-    "@nerdgeschoss/shimmer": "^0.0.27",
+    "@nerdgeschoss/shimmer": "^0.0.29",
     "@rails/request.js": "^0.0.6",
     "@sentry/browser": "^7.29.0",
     "@types/lodash.debounce": "^4.0.7",
