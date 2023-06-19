@@ -1,10 +1,10 @@
-.vote-bar id="#{dom_id(@video)}_vote"
-  = render "videos/show/like_link", video: @video
+.vote-bar id="#{dom_id(video)}_vote"
+  = render "videos/show/like_link", video:
   .modal-share
-    = link_to modal_path(share_video_path(@video), size: :small), class: "button button--secondary button--icon-square-and-arrow-up button--icon-left" do
+    = link_to modal_path(share_video_path(video), size: :small), class: "button button--secondary button--icon-square-and-arrow-up button--icon-left" do
       = t(".share_button")
   .native-share
-    button class="button button--secondary button--icon-square-and-arrow-up button--icon-left" data-controller="share" data-action="click->share#share" data-share-url="#{video_url(@video)}"
+    button class="button button--secondary button--icon-square-and-arrow-up button--icon-left" data-controller="share" data-action="click->share#share" data-share-url="#{video_url(video)}"
       = t(".share_button")
   - if user_signed_in? && current_user.admin?
-    = render 'videos/show/featured_link', video: @video
+    = render 'videos/show/featured_link', video:

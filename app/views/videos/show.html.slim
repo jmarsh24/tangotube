@@ -8,6 +8,7 @@
     .container--video
       .stack
         = render partial: "videos/show/video_info_primary", locals: { video: @video }
+        = render partial: "videos/show/vote", locals: { video: @video }
         = render partial: "videos/show/video_metadata", locals: { video: @video }
         = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_performance, header: t(".recommended_videos_videos_from_this_performance_header") }
         = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_dancers, header: t(".recommended_videos_from_performers", dancer: @video.leaders.first.name.titleize, partner: @video.followers.first.name.titleize) } if @video.leaders.present? && @video.followers.present?
