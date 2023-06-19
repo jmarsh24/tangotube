@@ -1,39 +1,44 @@
-# frozen_string_literal: true
-
 class Search
-  attr_reader :term
+  attr_reader :term, :category
 
-  def initialize(term:)
+  MODELS = {
+    "songs" => Song,
+    "channels" => Channel,
+    # "dancers" => Dancer,
+    "events" => Event,
+    "orchestra" => Orchestra,
+    "videos" => Video
+  }.freeze
+
+  TOP_LIMIT = 1
+  DEFAULT_LIMIT = 3
+
+  def initialize(term:, category: nil)
     @term = term
+    @category = category
   end
 
   def results
-    @results ||= [channels, events, songs, orchestras, users, videos].flat_map { |e| e.limit(10) }
+    @results ||= search_results
   end
 
   private
 
-  def channels
-    Channel.searched(term)
+  def search_results
+    if MODELS.key?(category)
+      MODELS[category].searched(term)
+    elsif category == "top"
+      top_results
+    else
+      all_results
+    end
   end
 
-  def events
-    Event.searched(term)
+  def top_results
+    MODELS.values.flat_map { |model| model.searched(term).limit(TOP_LIMIT) }
   end
 
-  def songs
-    Song.searched(term)
-  end
-
-  def orchestras
-    Orchestra.searched(term)
-  end
-
-  def users
-    User.searched(term)
-  end
-
-  def videos
-    Video.searched(term)
+  def all_results
+    MODELS.values.flat_map { |model| model.searched(term).limit(DEFAULT_LIMIT) }
   end
 end

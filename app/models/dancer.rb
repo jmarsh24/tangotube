@@ -36,7 +36,7 @@ class Dancer < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-  scope :search_by_full_name, ->(query) { where("CONCAT_WS(' ', unaccent(first_name), unaccent(last_name)) ILIKE unaccent(?)", "%#{query}%") }
+  scope :searched, ->(term) { where("CONCAT_WS(' ', first_name, last_name) ILIKE unaccent(?)", "%#{term}%") }
 
   def full_name
     "#{first_name} #{last_name}"
