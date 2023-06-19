@@ -44,3 +44,15 @@ thumbnail_peppa_palazon: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail
 thumbnail_jkukla_video: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_jkukla_video.jpg" %>
 thumbnail_tango_nuevo_tv: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_tango_nuevo_tv.jpg" %>
 thumbnail_giorgio_scattorlini: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_giorgio_scattorlini.jpg" %>
+
+thumbnail_bailemos_tango_festival: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_bailemos_tango_festival.jpg" %>
+cover_bailemos_tango_festival: <%= ActiveStorage::FixtureSet.blob filename: "cover_bailemos_tango_festival.jpg" %>
+cover_krakus_aires_tango_festival: <%= ActiveStorage::FixtureSet.blob filename: "cover_krakus_aires_tango_festival.png" %>
+thumbnail_krakus_aires_tango_festival: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_krakus_aires_tango_festival.jpg" %>
+cover_el_garron: <%= ActiveStorage::FixtureSet.blob filename: "cover_el_garron.jpg" %>
+thumbnail_el_garron: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_el_garron.jpg" %>
+cover_ladys_tango_festival: <%= ActiveStorage::FixtureSet.blob filename: "cover_ladys_tango_festival.jpg" %>
+cover_lauquila_tango_festival: <%= ActiveStorage::FixtureSet.blob filename: "cover_lauquila_tango_festival.jpg" %>
+thumbnail_lauquila_tango_festival: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_lauquila_tango_festival.jpg" %>
+cover_academia_del_tango: <%= ActiveStorage::FixtureSet.blob filename: "cover_academia_del_tango.jpg" %>
+thumbnail_academia_del_tango: <%= ActiveStorage::FixtureSet.blob filename: "thumbnail_academia_del_tango.jpg" %>

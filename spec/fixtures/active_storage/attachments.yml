@@ -157,3 +157,58 @@ profile_image_castillo:
   name: profile_image
   record: castillo (Orchestra)
   blob: avatar_castillo
+
+academia_de_tango_profile_image:
+  name: profile_image
+  record: academia_de_tango (Event)
+  blob: thumbnail_academia_del_tango
+
+academia_de_tango_cover_image:
+  name: cover_image
+  record: academia_de_tango (Event)
+  blob: cover_academia_del_tango
+
+krakus_aires_tango_festival_profile_image:
+  name: profile_image
+  record: krakus_aires_tango_festival (Event)
+  blob: thumbnail_krakus_aires_tango_festival
+
+krakus_aires_tango_festival_cover_image:
+  name: cover_image
+  record: krakus_aires_tango_festival (Event)
+  blob: cover_krakus_aires_tango_festival
+
+bailemos_tango_festival_profile_image:
+  name: profile_image
+  record: bailemos_tango_festival (Event)
+  blob: thumbnail_bailemos_tango_festival
+
+bailemos_tango_festival_cover_image:
+  name: cover_image
+  record: bailemos_tango_festival (Event)
+  blob: cover_bailemos_tango_festival
+
+laquila_tango_festival_profile_image:
+  name: profile_image
+  record: laquila_tango_festival (Event)
+  blob: thumbnail_lauquila_tango_festival
+
+laquila_tango_festival_cover_image:
+  name: cover_image
+  record: laquila_tango_festival (Event)
+  blob: cover_lauquila_tango_festival
+
+el_garron_profile_image:
+  name: profile_image
+  record: el_garron (Event)
+  blob: thumbnail_el_garron
+
+el_garron_cover_image:
+  name: cover_image
+  record: el_garron (Event)
+  blob: cover_el_garron
+
+ladys_tango_festival_cover_image:
+  name: cover_image
+  record: ladys_tango_festival (Event)
+  blob: cover_ladys_tango_festival
