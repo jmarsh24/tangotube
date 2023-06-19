@@ -122,8 +122,19 @@ class Video < ApplicationRecord
   scope :orchestra, ->(value) { joins(:song, :orchestra).where(orchestras: {slug: value}) }
   scope :song, ->(value) { joins(:song).where(songs: {slug: value}) }
   scope :event, ->(value) { joins(:event).where(events: {slug: value}) }
-  scope :watched, ->(user) { joins(:watches).where(watches: {user_id: user.id}) }
-  scope :not_watched, ->(user) { where.not(id: Watch.select(:video_id).where(user_id: user.id)) }
+  scope :watched, ->(user) {
+    subquery = Watch.where(user_id: user.id).group(:video_id).select(:video_id)
+    where(id: subquery)
+  }
+  scope :not_watched, ->(user) {
+                        subquery = Watch.select(:video_id).where(user_id: user.id)
+                        where.not(id: subquery)
+                      }
+
+  scope :watch_history, ->(user) {
+    subquery = Watch.where(user_id: user.id).group(:video_id).select(:video_id)
+    where(id: subquery)
+  }
   scope :year, ->(value) { where(upload_date_year: value) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
 
