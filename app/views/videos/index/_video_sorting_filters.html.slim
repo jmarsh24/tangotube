@@ -1,50 +1,28 @@
 = turbo_frame_tag "filter-bar", class: "scrollable-bar"
-  - if current_user
-    .filter-chip.filter-chip--highlighted class=("active" if params[:watched] == false)
-      = link_to "New To You", root_path(filtering_params.merge(watched: false)), class: "filter-chip__label"
-      - if params[:watched] == "false"
-        = link_to root_path(filtering_params.except(:watched)) do 
-          .filter-chip__close
-    .filter-chip class=("active" if params[:watched] == "true")
-      = link_to "Watched", root_path(filtering_params.merge(watched: true)), class: "filter-chip__label"
-      - if params[:watched] == "true"
-        = link_to root_path(filtering_params.except(:watched)) do 
-          .filter-chip__close
-    .filter-chip class=("active" if params[:liked].present?)
-      = link_to "Liked", root_path(filtering_params.merge(liked: true)), class: "filter-chip__label"
-      - if params[:liked].present?
-        = link_to root_path(filtering_params.except(:liked)) do 
-          .filter-chip__close
-  - if filtering_params.present? || params[:sort].present?
-    = link_to "Sort", modal_path(sort_videos_path), class: "filter-chip"
+  / = link_to "Filters", modal_path(filters_videos_path(filtering_params)), class: ["filter-chip", ("active" if filtering_params.present?)]
   = link_to "All", root_path, class: ["filter-chip", ("active" if filtering_params.empty?)]
-  - params[:genre].present? ? genre = params[:genre].titleize : genre = "Genre"
-  = link_to modal_path(facet_path(id: "genres", params: filtering_params.except(:genre))), class: ["filter-chip", ("active" if params[:genre].present?)] do 
-    = genre
-    - if params[:genre].present?
-      .filter-chip__close data-controller="filter-chip" data-action="click->filter-chip#close:prevent" data-url-value=root_path(filtering_params.except(:genre), filtering: true)
-  .filter-chip class=("active" if params[:leader].present?)
-    - params[:leader].present? ? leader = params[:leader].titleize : leader = "Leader"
-    = link_to leader, modal_path(facet_path(id: "leaders", params: filtering_params.except(:leader))), class: "filter-chip__label"
-    - if params[:leader].present?
-      = link_to root_path(filtering_params.except(:leader)) do 
-        .filter-chip__close
-  .filter-chip class=("active" if params[:follower].present?)
-    - params[:follower].present? ? follower = params[:follower].titleize : follower = "Follower"
-    = link_to follower, modal_path(facet_path(id: "followers", params: filtering_params.except(:follower))), class: "filter-chip__label"
-    - if params[:follower].present?
-      = link_to root_path(filtering_params.except(:follower)) do 
-        .filter-chip__close
-  .filter-chip class=("active" if params[:orchestra].present?)
-    - params[:orchestra].present? ? orchestra = params[:orchestra].titleize : orchestra = "Orchestra"
-    = link_to orchestra, modal_path(facet_path(id: "orchestras", params: filtering_params.except(:orchestra))), class: "filter-chip__label"
-    - if params[:orchestra].present?
-      = link_to root_path(filtering_params.except(:orchestra)) do 
-        .filter-chip__close
-  .filter-chip class=("active" if params[:year].present?)
-    - params[:year].present? ? year = params[:year].titleize : year = "Year"
-    = link_to year, modal_path(facet_path(id: "years", params: filtering_params.except(:year))), class: "filter-chip__label"
-    - if params[:year].present?
-      = link_to root_path(filtering_params.except(:year)) do 
-        .filter-chip__close
-  = link_to "Filters", modal_path(filters_videos_path(filtering_params)), class: ["filter-chip", ("active" if filtering_params.present?)]
+
+  - filter_chips = []
+
+  - if filtering_params.present? || params[:sort].present?
+    - sort_name = params[:sort].present? ? params[:sort].titleize : "Sort"
+    - sort_link_path = modal_path(sort_videos_path)
+    - sort_active = params[:sort].present?
+    = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: sort_active, highlighted: false, closable: false
+
+  - if current_user
+    - [["New To You", :watched, false], ["Watched", :watched, true, false], ["Liked", :liked, true, false]].each do |label, param_key, value|
+      - active = params[param_key].to_s == value.to_s
+      - link_path = active ? root_path(filtering_params.except(param_key)) : root_path(filtering_params.merge(param_key => value))
+      - highlighted = label == "New To You" ? !active : false
+      - filter_chips << [label, link_path, active, highlighted]
+      
+  - [:leader, :follower, :orchestra, :year].each do |param_key|
+    - name = params[param_key].present? ? params[param_key].titleize : param_key.to_s.titleize
+    - link_path = params[param_key].present? ? root_path(filtering_params.except(param_key)) : modal_path(facet_path(id: param_key.to_s.pluralize, params: filtering_params))
+    - active = params[param_key].present?
+    - filter_chips << [name, link_path, active, false]
+
+  - filter_chips.sort_by! { |name, link_path, active, highlighted| active ? 0 : 1 }
+  - filter_chips.each do |name, link_path, active, highlighted|
+    = render "components/filter_chip", name: name, link_path: link_path, active: active, highlighted: highlighted, closable: true

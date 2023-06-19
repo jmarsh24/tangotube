@@ -3,7 +3,6 @@
     h1.heading-1 = @facet.name.titleize
     .list-box
       - @facet.options.each do |facet|
-        - selected = params[@facet.name.to_sym] == facet.value ? "selected" : nil
-        = link_to root_path(filtering_params.merge(@facet.name => facet.value, :filtering => true)), class: [selected], data: { turbo_frame: "_top" } do
-          .list-box__item
+        = link_to root_path(filtering_params.merge(@facet.name => facet.value, :filtering => true)), data: { turbo_frame: "_top" } do
+          .list-box__item  class=(params[@facet.name.to_sym] == facet.value ? "selected" : nil)
             = facet.label

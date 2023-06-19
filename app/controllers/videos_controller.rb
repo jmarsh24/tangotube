@@ -27,6 +27,8 @@ class VideosController < ApplicationController
 
     if params[:filtering] == "true" && params[:pagination].nil? && filtering_params.present?
       ui.update "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
+      # url = request.fullpath.gsub(/&?(filtering|pagination)=true/, "")
+      # ui.javascript "history.pushState(history.state, "", new URL(#{url}));"
     end
   end
 
