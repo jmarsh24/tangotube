@@ -3,12 +3,9 @@ import { ui } from '@nerdgeschoss/shimmer';
 export function setupModalClose() {
   document.addEventListener('click', (event: Event) => {
     const clickedElement = event.target as HTMLElement;
-    const modal = clickedElement.closest('.modal');
-    console.log('Clicked element', clickedElement);
+    const modal = clickedElement.closest('.modal__content');
 
-    // Check if the clicked element is inside a modal
-    if (modal) {
-      // Close the modal here
+    if (!modal) {
       ui.modal.close();
     }
   });
