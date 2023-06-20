@@ -2,10 +2,21 @@
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
   flex-wrap: nowrap;
   gap: var(--spacing-xxs);
   scroll-snap-type: x mandatory; /* Enable horizontal scrolling */
   padding: var(--spacing-sm) var(--spacing-xs);
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-gray-300) transparent;
+}
+
+.scrollable-bar::-webkit-scrollbar {
+  width: 0;
+  display: none; /* Hide the scrollbar on WebKit browsers (Chrome, Safari) */
+}
+
+.scrollable-bar {
+  -ms-overflow-style: none; /* Hide the scrollbar on Microsoft browsers (Edge) */
+  scrollbar-width: none; /* Hide the scrollbar on Firefox */
+  -webkit-overflow-scrolling: touch;
 }
