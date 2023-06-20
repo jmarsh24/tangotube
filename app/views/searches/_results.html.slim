@@ -1,39 +1,39 @@
-#search-results class="search-bar__results"
-  h1.heading-1 Search results
-  - if search
-    - search.results.each do |result|
-      - case result
-      - when Event
-        = link_to root_path(event: result.slug), class: 'search-bar__result' do
-          = image_tag result.profile_image, width: 60, class: "search-bar__result__image"
-          .search-bar__result__details
-            .search-bar__result__title = result.title
-            .search-bar__result__subtitle #{result.city}, #{result.country}
-      - when Song
-        = link_to root_path(song: result.slug), class: 'search-bar__result' do
-          = image_tag result.orchestra.profile_image, width: 60, class: "search-bar__result__image"
-          .search-bar__result__details
-            .search-bar__result__title = result.full_title
-            .search-bar__result__subtitle = result.artist
-      - when Orchestra
-        = link_to root_path(orchestra: result.slug), class: 'search-bar__result' do
-          = image_tag result.profile_image, width: 60, class: "search-bar__result__image"
-          .search-bar__result__details
-            .search-bar__result__title = result.name
-      - when Channel
-        = link_to root_path(channel: result.channel_id), class: 'search-bar__result' do
-          = image_tag result.thumbnail, width: 60, class: "search-bar__result__image"
-          .search-bar__result__details
-            .search-bar__result__title = result.title
-      - when Video
-        = link_to root_path(v: result.youtube_id), class: 'search-bar__result' do
-          = image_tag result.thumbnail, width: 60, class: "search-bar__result__image"
-          .search-bar__result__details
-            .search-bar__result__title = result.title
-      - when Dancer
-        = link_to root_path(dancer: result.slug), class: 'search-bar__result' do
-          = image_tag result.profile_image, width: 60, class: "search-bar__result__image"
-          .search-bar__result__details
-            .search-bar__result__title = result.name
-  - else
-    p No results found
+#search-results
+  .search__results
+    - if search
+      - search.results.each do |result|
+        - case result
+        - when Event
+          = link_to root_path(event: result.slug), class: 'search__result' do
+            = image_tag result.profile_image, class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.title
+              .search__result-subtitle #{result.city}, #{result.country}
+        - when Song
+          = link_to root_path(song: result.slug), class: 'search__result' do
+            = image_tag result.orchestra.profile_image, class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.full_title
+              .search__result-subtitle = result.artist
+        - when Orchestra
+          = link_to root_path(orchestra: result.slug), class: 'search__result' do
+            = image_tag result.profile_image, class: "search__result-image"
+            .search__result-details
+              .search__result-details__title = result.name
+        - when Channel
+          = link_to root_path(channel: result.channel_id), class: 'search__result' do
+            = image_tag result.thumbnail, class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.title
+        - when Video
+          = link_to root_path(v: result.youtube_id), class: 'search__result' do
+            = image_tag result.thumbnail, class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.title
+        - when Dancer
+          = link_to root_path(dancer: result.slug), class: 'search__result' do
+            = image_tag result.profile_image, class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.name
+    - else
+      p No results found

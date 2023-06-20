@@ -22,7 +22,7 @@ class VideoPresenter < SimpleDelegator
   def display_metadata
     formatted_like_count = formatted_count(youtube_like_count)
     formatted_view_count = formatted_count(youtube_view_count)
-    "#{formatted_performance_date} • #{formatted_view_count} views • #{formatted_like_count} likes"
+    "#{formatted_upload_date} • #{formatted_view_count} views • #{formatted_like_count} likes"
   end
 
   def performance_number
@@ -39,8 +39,15 @@ class VideoPresenter < SimpleDelegator
     number_to_human(count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"})
   end
 
-  def formatted_performance_date
-    upload_date.strftime("%B %Y")
+  def formatted_upload_date
+    return if upload_date.nil?
+
+    begin
+      date = upload_date.is_a?(Date) ? upload_date : Date.parse(upload_date)
+      date.strftime("%B, %Y")
+    rescue ArgumentError
+      "Invalid date"
+    end
   end
 
   def format_song_attributes(title, artist, genre = nil)

@@ -40,4 +40,9 @@
     border: none;
     border-radius: 0;
   }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
 }
