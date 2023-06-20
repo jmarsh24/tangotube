@@ -1,28 +1,25 @@
 .search {
   display: flex;
   flex-direction: column;
+  align-self: flex-start;
 
   &__input {
     width: 100%;
   }
 
   &__header {
-    position: sticky;
-    top: 0;
-    background: var(--color-background);
-    z-index: 1;
+    background: var(--color-neutral-0);
   }
 
   &__categories {
     padding: var(--spacing-xxs) 0;
   }
 
-  &__results {
+  .search__results {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xxs);
     overflow-y: auto;
-    flex-grow: 1;
   }
 
   &__result {

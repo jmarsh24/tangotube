@@ -1,4 +1,5 @@
 #search-header-categories.search__categories
   - categories.each do |category|
-    = link_to search_path(category: category[1]), class: ["filter-chip", ("active" if selected_category == category[1])].compact do
+    label.filter-chip for=category[1]
+      = radio_button_tag :category, category[1], category[1] == selected_category, id: category[1]
       = category[0]

@@ -4,13 +4,11 @@ class Search
   MODELS = {
     "songs" => Song,
     "channels" => Channel,
-    # "dancers" => Dancer,
     "events" => Event,
     "orchestra" => Orchestra,
     "videos" => Video
   }.freeze
 
-  TOP_LIMIT = 1
   DEFAULT_LIMIT = 3
 
   def initialize(term:, category: nil)
@@ -26,19 +24,23 @@ class Search
 
   def search_results
     if MODELS.key?(category)
-      MODELS[category].searched(term)
-    elsif category == "top"
-      top_results
+      results_for_category(category)
     else
       all_results
     end
   end
 
-  def top_results
-    MODELS.values.flat_map { |model| model.searched(term).limit(TOP_LIMIT) }
+  def results_for_category(category)
+    results = MODELS[category].searched(term)
+    results.any? ? results.limit(DEFAULT_LIMIT) : []
   end
 
   def all_results
-    MODELS.values.flat_map { |model| model.searched(term).limit(DEFAULT_LIMIT) }
+    results_for_all_models(DEFAULT_LIMIT)
+  end
+
+  def results_for_all_models(limit)
+    models_with_results = MODELS.values.select { |model| model.searched(term).any? }
+    models_with_results.flat_map { |model| model.searched(term).limit(limit) }
   end
 end

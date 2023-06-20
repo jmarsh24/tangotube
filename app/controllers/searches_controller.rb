@@ -1,11 +1,10 @@
 class SearchesController < ApplicationController
   def new
     @categories = search_categories_options
-    @selected_category = params[:category] || "top"
   end
 
   def show
-    selected_category = params[:category] || "top"
+    selected_category = params[:category]
     categories = search_categories_options
     search = Search.new(term: params[:search], category: selected_category)
     ui.replace("search-results", with: "searches/results", search:)
@@ -16,13 +15,12 @@ class SearchesController < ApplicationController
 
   def search_categories_options
     [
-      ["Top", "top"],
+      ["Top", ""],
+      ["Videos", "videos"],
       ["Songs", "songs"],
-      ["Channels", "channels"],
-      # ["Dancers", "dancers"],
-      ["Events", "events"],
       ["Orchestra", "orchestra"],
-      ["Videos", "videos"]
+      ["Channels", "channels"],
+      ["Events", "events"]
     ]
   end
 end
