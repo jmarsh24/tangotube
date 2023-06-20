@@ -23,10 +23,12 @@ class Search
   private
 
   def search_results
-    if MODELS.key?(category)
+    if category == "all"
+      all_results
+    elsif MODELS.key?(category)
       results_for_category(category)
     else
-      all_results
+      []
     end
   end
 

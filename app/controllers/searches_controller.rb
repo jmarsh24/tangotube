@@ -15,8 +15,8 @@ class SearchesController < ApplicationController
 
   def search_categories_options
     [
-      ["Top", ""],
-      # ["Videos", "videos"],
+      ["All", "all"],
+      ["Videos", "videos"],
       ["Songs", "songs"],
       ["Orchestra", "orchestra"],
       ["Channels", "channels"],

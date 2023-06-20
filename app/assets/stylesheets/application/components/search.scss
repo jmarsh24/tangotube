@@ -12,6 +12,8 @@
   }
 
   &__categories {
+    display: flex;
+    gap: var(--spacing-xs);
     padding: var(--spacing-xxs) 0;
   }
 
