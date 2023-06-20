@@ -1,6 +1,6 @@
 .search
   .search__header
     = form_with url: search_path, method: :get, data: { controller: "autosubmit", action: "input->autosubmit#submit" } do |f|
-      = f.text_field :query, placeholder: "Search...", autocomplete: "off", class: "search__input input input__input"
+      = f.text_field :search, placeholder: "Search...", autocomplete: "off", class: "search__input input input__input"
       = render "searches/categories", categories: @categories, selected_category: @selected_category
   #search-results class="search-bar__results"
