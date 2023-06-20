@@ -2,9 +2,5 @@
   .search__header
     = form_with url: search_path, method: :get, data: { controller: "autosubmit", action: "input->autosubmit#submit" } do |f|
       = f.text_field :query, placeholder: "Search...", autocomplete: "off", class: "search__input input input__input"
-      #search-header-categories.search__categories
-        - @categories.each do |category|
-          = label_tag category[1], class: "filter-chip" do
-            = f.radio_button :category, category[1], id: category[1]
-            = category[0]
+      = render "searches/categories", categories: @categories, selected_category: @selected_category
   #search-results class="search-bar__results"

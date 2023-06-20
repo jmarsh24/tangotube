@@ -1,5 +1,5 @@
 #search-header-categories.search__categories
   - categories.each do |category|
-    label.filter-chip for=category[1] class=("active" if category[1] == selected_category)
+    label for=category[1] class=["filter-chip", ("active" if category[1] == selected_category)]
       = radio_button_tag :category, category[1], category[1] == selected_category, id: category[1]
       = category[0]
