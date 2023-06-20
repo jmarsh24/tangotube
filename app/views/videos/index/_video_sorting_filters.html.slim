@@ -13,7 +13,7 @@
   - if current_user
     - [["New To You", :watched, false], ["Watched", :watched, true, false], ["Liked", :liked, true, false]].each do |label, param_key, value|
       - active = params[param_key].to_s == value.to_s
-      - link_path = active ? root_path(@filtering_params.except(param_key)) : root_path(@filtering_params.merge(param_key => value, filtering: true))
+      - link_path = active ? root_path(@filtering_params.except(param_key), filtering: true) : root_path(@filtering_params.merge(param_key => value, filtering: true))
       - highlighted = label == "New To You" ? !active : false
       - filter_chips << [label, link_path, active, highlighted]
   - [:leader, :follower, :orchestra, :year].each do |param_key|
