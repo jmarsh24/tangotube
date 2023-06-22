@@ -1,20 +1,9 @@
 .grid {
   display: grid;
-
-  &--main {
-    grid-column: 2 / 4;
-    overflow-y: scroll;
-  }
-
   &--videos {
     gap: var(--spacing-xs);
     @include breakpoint-tablet {
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
-  }
-
-  &--holy-grail {
-    grid-template: auto 1fr auto / auto 1fr auto;
-    height: 100vh;
   }
 }

@@ -1,11 +1,12 @@
 doctype html
 html lang=I18n.locale
   = render "components/head"
-  body.grid.grid--holy-grail data-controller="supported toast" data-theme="dark" class=Rails.env
-    = render "components/navbar"
-    = render "components/drawer"
-    main.grid.grid--main
-      = yield
-    = render "components/footer"
-    = render "components/cookie_consent"
-    = render "components/toast"
+  body data-controller="supported toast" data-theme="dark" class=Rails.env
+    .page
+      = render "components/navbar"
+      = render "components/drawer"
+      main.page__main
+        = yield
+      = render "components/footer"
+      = render "components/cookie_consent"
+      = render "components/toast"
