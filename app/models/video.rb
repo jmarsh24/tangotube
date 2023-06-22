@@ -156,7 +156,8 @@ class Video < ApplicationRecord
         thumbnail_attachment: :blob,
         dancers: {profile_image_attachment: :blob},
         event: {profile_image_attachment: :blob},
-        song: {orchestra: {profile_image_attachment: :blob}}
+        song: {orchestra: {profile_image_attachment: :blob}},
+        channel: {thumbnail_attachment: :blob}
       ]
     end
   end
