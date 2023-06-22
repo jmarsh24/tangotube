@@ -38,37 +38,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :comments do
-    resources :comments, module: :comments
-  end
-
   resources :playlists, only: [:index, :create]
-  resources :clips do
-    collection do
-      post :index
-    end
-  end
-  resources :couples do
-    collection do
-      post :index
-    end
-    member do
-      post :show
-    end
-  end
-  resources :orchestras do
-    collection do
-      post :index
-    end
-    member do
-      post :show
-    end
-  end
-  resources :performances do
-    collection do
-      post :index
-    end
-  end
   resource :manifest, only: :show
   resources :videos do
     resources :clips
@@ -100,23 +70,6 @@ Rails.application.routes.draw do
       post :show
     end
   end
-  resources :events do
-    collection do
-      post :index
-    end
-    member do
-      post :show
-    end
-  end
-  resources :songs do
-    collection do
-      post :index
-    end
-    member do
-      post :show
-    end
-  end
-
   post "savenew", to: "users#savenew"
   post "/" => "videos#index"
   get "/watch", to: "videos#show"
