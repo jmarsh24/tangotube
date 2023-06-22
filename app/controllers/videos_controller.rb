@@ -56,6 +56,10 @@ class VideosController < ApplicationController
   # @route GET /videos/:id (video)
   # @route GET /watch (watch)
   def show
+    unless params[:v]
+      redirect_to root_path and return
+    end
+
     if @video.nil?
       ExternalVideoImport::Importer.new.import(video_params[:v], use_scraper: false)
       @video = Video.find_by(youtube_id: video_params[:v])

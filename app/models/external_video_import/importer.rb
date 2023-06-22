@@ -20,7 +20,7 @@ module ExternalVideoImport
         video
       end
     rescue => e
-      handle_error("importing", youtube_slug, e)
+      handle_error("importing", video.youtube_id, e)
     end
 
     def update(video, use_scraper: true, use_music_recognizer: true)

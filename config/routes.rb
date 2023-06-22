@@ -64,12 +64,6 @@ Rails.application.routes.draw do
       post :search
     end
   end
-
-  resources :dancers do
-    member do
-      post :show
-    end
-  end
   post "savenew", to: "users#savenew"
   post "/" => "videos#index"
   get "/watch", to: "videos#show"
