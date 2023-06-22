@@ -9,7 +9,7 @@ export default class extends Controller {
     endSeconds: Number,
     playbackRate: Number,
   };
-  static targets = ['frame', 'playbackRate', 'startTime', 'endTime'];
+  static targets = ['playbackRate', 'startTime', 'endTime'];
 
   youtube: YouTubePlayer.Player | null = null;
   timer: NodeJS.Timeout | null = null;
@@ -30,7 +30,7 @@ export default class extends Controller {
       },
     };
 
-    const player = YouTubePlayer(this.frameTarget, playerConfig);
+    const player = YouTubePlayer(this.element, playerConfig);
     this.youtube = player;
 
     player.on('ready', (e: YouTubePlayer.PlayerEvent) => {
