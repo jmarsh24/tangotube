@@ -34,8 +34,8 @@ class Video::RelatedVideos
 
   def with_same_performance
     videos = Video.exclude_youtube_id(@video.youtube_id).within_week_of(@video.upload_date)
-    leader = @video.leaders.first.slug
-    follower = @video.followers.first.slug
+    leader = @video.leaders.first.slug if @video.leaders.present?
+    follower = @video.followers.first.slug if @video.followers.present?
     channel = @video.channel.channel_id
     Video::Filter.new(videos.includes(Video.search_includes), filtering_params: {channel:, leader:, follower:, hidden: false}).filtered_videos
   end

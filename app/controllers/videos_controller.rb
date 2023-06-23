@@ -35,6 +35,11 @@ class VideosController < ApplicationController
       url = url_for(new_params)
       ui.run_javascript "history.pushState(history.state, '', '#{url}');"
     end
+
+    if @current_page > 1 && params[:pagination] == "true"
+      ui.remove "next-page-link"
+      ui.append "pagination-frame", with: "components/pagination", items: @videos, partial: params[:partial]
+    end
   end
 
   # @route GET /videos/:id (video)
