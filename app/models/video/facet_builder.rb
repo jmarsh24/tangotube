@@ -61,7 +61,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "genre", options: [])
     facet.options = facet_data.map do |value, count|
-      Option.new(label: value&.titleize, value:)
+      Option.new(label: value&.titleize, value:, count:)
     end
 
     facet
@@ -76,7 +76,7 @@ class Video::FacetBuilder
     facet = Facet.new(name: "year", options: [])
 
     facet.options = facet_data.map do |value, count|
-      Option.new(label: value, value:)
+      Option.new(label: value, value:, count:)
     end
 
     facet
