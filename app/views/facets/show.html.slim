@@ -5,4 +5,7 @@
       - @facet.options.each do |facet|
         = link_to root_path(filtering_params.merge(@facet.name => facet.value, :filtering => true)), data: { turbo_frame: "_top" } do
           .list-box__item  class=(params[@facet.name.to_sym] == facet.value ? "selected" : nil)
-            = facet.label
+            .list-box__text
+              = facet.label
+            .list-box__count 
+              = facet.count

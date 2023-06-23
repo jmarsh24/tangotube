@@ -2,7 +2,7 @@
 
 class Video::FacetBuilder
   Facet = Struct.new(:name, :options, keyword_init: true)
-  Option = Struct.new(:value, :label, keyword_init: true)
+  Option = Struct.new(:value, :label, :count, keyword_init: true)
 
   def initialize(video_relation)
     @video_relation = video_relation
@@ -16,7 +16,7 @@ class Video::FacetBuilder
       .count
     facet = Facet.new(name: "leader", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: "#{name} (#{count})", value:)
+      Option.new(label: name, value:, count: count)
     end
 
     facet
@@ -31,7 +31,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "follower", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: "#{name} (#{count})", value:)
+      Option.new(label: name, value:, count: count)
     end
 
     facet
@@ -91,7 +91,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "song", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: "#{name} (#{count})", value:)
+      Option.new(label: name, value:, count: count)
     end
 
     facet
