@@ -56,3 +56,6 @@
       class: IndexVideosJob
       queue: default
       enabled: low_priority
+    sitemap:
+      cron: "0 0 12 * * * Europe/Berlin" # every day at 16:00, Berlin time
+      class: Shimmer::SitemapJob
