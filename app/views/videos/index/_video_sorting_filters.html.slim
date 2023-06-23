@@ -5,10 +5,10 @@
   - filter_chips = []
 
   - if @filtering_params.present? || params[:sort].present?
-    - sort_name = params[:sort].present? ? params[:sort].titleize : "Sort"
+    - sort_name = params[:sort].present? ? "Sort: #{params[:sort].titleize}" : "Sort: Popularity"
     - sort_link_path = modal_path(sort_videos_path(@filtering_params))
     - sort_active = params[:sort].present?
-    = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: sort_active, highlighted: false, closable: false
+    = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: true, highlighted: false, closable: false
 
   - if current_user
     - [["New To You", :watched, false], ["Watched", :watched, true, false], ["Liked", :liked, true, false]].each do |label, param_key, value|
@@ -18,10 +18,10 @@
       - filter_chips << [label, link_path, active, highlighted]
   - [:leader, :follower, :orchestra, :year].each do |param_key|
     - name = params[param_key].present? ? params[param_key].titleize : param_key.to_s.titleize
-    - link_path = params[param_key].present? ? root_path(@filtering_params.except(param_key).merge(filtering: true)) : modal_path(facet_path(id: param_key.to_s.pluralize, params: @filtering_params))
+    - link_path = modal_path facet_path(id: param_key.to_s, params: @filtering_params)
     - active = params[param_key].present?
     - filter_chips << [name, link_path, active, false]
 
   - filter_chips.sort_by! { |name, link_path, active, highlighted| active ? 0 : 1 }
   - filter_chips.each do |name, link_path, active, highlighted|
-    = render "components/filter_chip", name: name, link_path: link_path, active: active, highlighted: highlighted, closable: true
+    = render "components/filter_chip", name:, link_path:, active:, highlighted:, closable: true

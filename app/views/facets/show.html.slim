@@ -3,6 +3,10 @@
     .stack
       h1.heading-1 = @facet.name.titleize
       .list-box
+        - if params[@facet.name.to_sym].present?
+          = link_to root_path(filtering_params.except(@facet.name.to_sym, :filtering)), data: { turbo_frame: "_top" } do 
+            .list-box__item
+              .list-box__text = "All #{@facet.name.pluralize}"
         - @facet.options.each do |option|
           = link_to root_path(filtering_params.merge(@facet.name => option.value, :filtering => true)), data: { turbo_frame: "_top" } do
             .list-box__item class=(params[@facet.name.to_sym] == option.value ? "selected" : nil)

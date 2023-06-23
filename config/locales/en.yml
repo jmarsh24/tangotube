@@ -119,8 +119,9 @@ en:
       loading_spinner: Loading spinner
       results: Results
       videos_count: "%{count} videos"
-  date_formats:
-    song_recording_date: "%B %d, %Y"
+  date:
+    formats:
+      song_recording_date: "%B %d, %Y"
   destroy: Destroy
   devise:
     confirmations:
@@ -345,6 +346,27 @@ en:
         video_title_heading: Title
         video_upload_date_heading: Upload Date
         youtube_info_heading: Youtube Info
+      video_metadata:
+        description: Description
+        follower_heading: Follower heading
+        leader_heading: Leader heading
+        location_heading: Location heading
+        music_heading: Music heading
+        performers_heading: Performers heading
+        song_artist_2_heading: Song artist 2 heading
+        song_author_heading: Song author heading
+        song_composer_heading: Song composer heading
+        song_genre_heading: Song genre heading
+        song_orchestra_heading: Song orchestra heading
+        song_recording_date: Song recording date
+        song_recording_date_heading: Song recording date heading
+        song_title_heading: Song title heading
+        title: Title
+        title_heading: Title heading
+        upload_date: Upload date
+        video_duration_heading: Video duration heading
+        video_upload_date_heading: Video upload date heading
+        youtube_info_heading: Youtube info heading
       vote:
         share_button: Share
       watchlist_link:

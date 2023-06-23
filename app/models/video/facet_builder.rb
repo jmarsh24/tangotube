@@ -8,7 +8,7 @@ class Video::FacetBuilder
     @video_relation = video_relation
   end
 
-  def leaders
+  def leader
     facet_data = Dancer.joins(:dancer_videos)
       .where(dancer_videos: {role: "leader", video_id: @video_relation.select(:id)})
       .group("dancers.name", "dancers.slug")
@@ -22,7 +22,7 @@ class Video::FacetBuilder
     facet
   end
 
-  def followers
+  def follower
     facet_data = Dancer.joins(:dancer_videos)
       .where(dancer_videos: {role: "follower", video_id: @video_relation.select(:id)})
       .group("dancers.name", "dancers.slug")
@@ -37,7 +37,7 @@ class Video::FacetBuilder
     facet
   end
 
-  def orchestras
+  def orchestra
     facet_data = @video_relation
       .joins(song: :orchestra)
       .group("orchestras.name", "orchestras.slug")
@@ -52,7 +52,7 @@ class Video::FacetBuilder
     facet
   end
 
-  def genres
+  def genre
     facet_data = @video_relation
       .joins(:song)
       .group("LOWER(songs.genre)")
@@ -67,7 +67,7 @@ class Video::FacetBuilder
     facet
   end
 
-  def years
+  def year
     facet_data = @video_relation
       .group(:upload_date_year)
       .order("count_all DESC", upload_date_year: :desc)
@@ -82,7 +82,7 @@ class Video::FacetBuilder
     facet
   end
 
-  def songs
+  def song
     facet_data = @video_relation
       .joins(:song)
       .group("songs.title", "songs.slug")
