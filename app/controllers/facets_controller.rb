@@ -5,7 +5,7 @@ class FacetsController < ApplicationController
 
   # @route GET /facets/:id (facet)
   def show
-    @facet = Video::Search.new(filtering_params:, user: current_user).facet(name: params[:id].to_sym)
+    @facet = Video::Search.new(filtering_params:, user: current_user).facet(name: params[:id])
   end
 
   private

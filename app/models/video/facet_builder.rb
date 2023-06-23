@@ -112,6 +112,6 @@ class Video::FacetBuilder
   private
 
   def custom_titleize(name)
-    name.split(")&.map(&:titleize)&.join(")
+    name.split("'")&.map(&:titleize)&.join("'")
   end
 end
