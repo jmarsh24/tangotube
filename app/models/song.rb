@@ -42,6 +42,7 @@ class Song < ApplicationRecord
   scope :filter_by_active, -> { where(active: true) }
   scope :filter_by_not_active, -> { where(active: false) }
   scope :searched, ->(term) { where("title ILIKE ?", "%#{term}%") }
+
   def full_title
     title_part = title&.titleize
     artist_part = artist&.split("'")&.map(&:titleize)&.join("'")

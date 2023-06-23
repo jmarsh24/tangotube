@@ -1,11 +1,12 @@
 = turbo_frame_tag "#{@facet.name}_facet" do
-  .stack
-    h1.heading-1 = @facet.name.titleize
-    .list-box
-      - @facet.options.each do |facet|
-        = link_to root_path(filtering_params.merge(@facet.name => facet.value, :filtering => true)), data: { turbo_frame: "_top" } do
-          .list-box__item  class=(params[@facet.name.to_sym] == facet.value ? "selected" : nil)
-            .list-box__text
-              = facet.label
-            .list-box__count 
-              = facet.count
+  - cache [@facet.name, @facet.options.map { |option| "#{option.value}-#{option.label}-#{option.count}" }.join("-")] do
+    .stack
+      h1.heading-1 = @facet.name.titleize
+      .list-box
+        - @facet.options.each do |option|
+          = link_to root_path(filtering_params.merge(@facet.name => option.value, :filtering => true)), data: { turbo_frame: "_top" } do
+            .list-box__item class=(params[@facet.name.to_sym] == option.value ? "selected" : nil)
+              .list-box__text
+                = option.label
+              .list-box__count 
+                = option.count

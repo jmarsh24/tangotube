@@ -95,4 +95,4 @@
                   .metadata-item__value = video.song.author.titleize
             button.collapse-panel__close data-action="click->collapsable#toggle" Show Less...
 
-  = render partial: "videos/show/lyrics" if video.song.lyrics.present?
+    = render partial: "videos/show/lyrics" if video.song.lyrics.present?
