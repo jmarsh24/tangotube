@@ -27,7 +27,7 @@ class VideosController < ApplicationController
     end
 
     if params[:filtering] == "true" && params[:pagination].nil?
-      ui.update "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
+      ui.replace "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
       ui.close_modal
       new_params = @filtering_params.to_h
       new_params[:sort] = @sort_param if @sort_param.present?
