@@ -16,7 +16,7 @@ class Video::FacetBuilder
       .count
     facet = Facet.new(name: "leader", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: name, value:, count: count)
+      Option.new(label: name, value:, count:)
     end
 
     facet
@@ -31,7 +31,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "follower", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: name, value:, count: count)
+      Option.new(label: name, value:, count:)
     end
 
     facet
@@ -46,7 +46,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "orchestra", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: "#{custom_titleize(name)} (#{count})", value:)
+      Option.new(label: custom_titleize(name), value:, count:)
     end
 
     facet
@@ -61,7 +61,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "genre", options: [])
     facet.options = facet_data.map do |value, count|
-      Option.new(label: "#{value&.titleize} (#{count})", value:)
+      Option.new(label: value&.titleize, value:)
     end
 
     facet
@@ -76,7 +76,7 @@ class Video::FacetBuilder
     facet = Facet.new(name: "year", options: [])
 
     facet.options = facet_data.map do |value, count|
-      Option.new(label: "#{value} (#{count})", value:)
+      Option.new(label: value, value:)
     end
 
     facet
@@ -91,7 +91,7 @@ class Video::FacetBuilder
 
     facet = Facet.new(name: "song", options: [])
     facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: name, value:, count: count)
+      Option.new(label: name, value:, count:)
     end
 
     facet
