@@ -1,9 +1,5 @@
-# frozen_string_literal: true
-
-require "rubygems"
-require "sitemap_generator"
-
-SitemapGenerator::Sitemap.default_host = default_host
+# Set the host name for URL creation
+SitemapGenerator::Sitemap.default_host = Config.host!(default: "localhost:3000")
 
 SitemapGenerator::Sitemap.create do
   add root_path, changefreq: "daily", priority: 0.9
