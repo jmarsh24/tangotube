@@ -9,97 +9,109 @@ class Video::FacetBuilder
   end
 
   def leaders
-    facet_data = Dancer.joins(:dancer_videos)
-      .where(dancer_videos: {role: "leader", video_id: @video_relation.select(:id)})
-      .group("dancers.name", "dancers.slug")
-      .order("count_all DESC", "dancers.name")
-      .count
-    facet = Facet.new(name: "leader", options: [])
-    facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: name, value:, count:)
-    end
+    Rails.cache.fetch(["leaders_facet", @video_relation.cache_key], expires_in: 12.hours) do
+      facet_data = Dancer.joins(:dancer_videos)
+        .where(dancer_videos: {role: "leader", video_id: @video_relation.select(:id)})
+        .group("dancers.name", "dancers.slug")
+        .order("count_all DESC", "dancers.name")
+        .count
+      facet = Facet.new(name: "leader", options: [])
+      facet.options = facet_data.map do |(name, value), count|
+        Option.new(label: name, value:, count:)
+      end
 
-    facet
+      facet
+    end
   end
 
   def followers
-    facet_data = Dancer.joins(:dancer_videos)
-      .where(dancer_videos: {role: "follower", video_id: @video_relation.select(:id)})
-      .group("dancers.name", "dancers.slug")
-      .order("count_all DESC", "dancers.name")
-      .count
+    Rails.cache.fetch(["followers_facet", @video_relation.cache_key], expires_in: 12.hours) do
+      facet_data = Dancer.joins(:dancer_videos)
+        .where(dancer_videos: {role: "follower", video_id: @video_relation.select(:id)})
+        .group("dancers.name", "dancers.slug")
+        .order("count_all DESC", "dancers.name")
+        .count
 
-    facet = Facet.new(name: "follower", options: [])
-    facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: name, value:, count:)
+      facet = Facet.new(name: "follower", options: [])
+      facet.options = facet_data.map do |(name, value), count|
+        Option.new(label: name, value:, count:)
+      end
+
+      facet
     end
-
-    facet
   end
 
   def orchestras
-    facet_data = @video_relation
-      .joins(song: :orchestra)
-      .group("orchestras.name", "orchestras.slug")
-      .order("count_all DESC", "orchestras.name")
-      .count
+    Rails.cache.fetch(["orchestras_facet", @video_relation.cache_key], expires_in: 12.hours) do
+      facet_data = @video_relation
+        .joins(song: :orchestra)
+        .group("orchestras.name", "orchestras.slug")
+        .order("count_all DESC", "orchestras.name")
+        .count
 
-    facet = Facet.new(name: "orchestra", options: [])
-    facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: custom_titleize(name), value:, count:)
+      facet = Facet.new(name: "orchestra", options: [])
+      facet.options = facet_data.map do |(name, value), count|
+        Option.new(label: custom_titleize(name), value:, count:)
+      end
+
+      facet
     end
-
-    facet
   end
 
   def genres
-    facet_data = @video_relation
-      .joins(:song)
-      .group("LOWER(songs.genre)")
-      .order("count_all DESC", "LOWER(songs.genre)")
-      .count
+    Rails.cache.fetch(["genres_facet", @video_relation.cache_key], expires_in: 12.hours) do
+      facet_data = @video_relation
+        .joins(:song)
+        .group("LOWER(songs.genre)")
+        .order("count_all DESC", "LOWER(songs.genre)")
+        .count
 
-    facet = Facet.new(name: "genre", options: [])
-    facet.options = facet_data.map do |value, count|
-      Option.new(label: value&.titleize, value:, count:)
+      facet = Facet.new(name: "genre", options: [])
+      facet.options = facet_data.map do |value, count|
+        Option.new(label: value&.titleize, value:, count:)
+      end
+
+      facet
     end
-
-    facet
   end
 
   def years
-    facet_data = @video_relation
-      .group(:upload_date_year)
-      .order("count_all DESC", upload_date_year: :desc)
-      .count
+    Rails.cache.fetch(["leaders_facet", @video_relation.cache_key], expires_in: 12.hours) do
+      facet_data = @video_relation
+        .group(:upload_date_year)
+        .order("count_all DESC", upload_date_year: :desc)
+        .count
 
-    facet = Facet.new(name: "year", options: [])
+      facet = Facet.new(name: "year", options: [])
 
-    facet.options = facet_data.map do |value, count|
-      Option.new(label: value, value:, count:)
+      facet.options = facet_data.map do |value, count|
+        Option.new(label: value, value:, count:)
+      end
+
+      facet
     end
-
-    facet
   end
 
   def songs
-    facet_data = @video_relation
-      .joins(:song)
-      .group("songs.title", "songs.slug")
-      .order("count_all DESC", "songs.title")
-      .count
+    Rails.cache.fetch(["leader_facet", @video_relation.cache_key], expires_in: 12.hours) do
+      facet_data = @video_relation
+        .joins(:song)
+        .group("songs.title", "songs.slug")
+        .order("count_all DESC", "songs.title")
+        .count
 
-    facet = Facet.new(name: "song", options: [])
-    facet.options = facet_data.map do |(name, value), count|
-      Option.new(label: name, value:, count:)
+      facet = Facet.new(name: "song", options: [])
+      facet.options = facet_data.map do |(name, value), count|
+        Option.new(label: name, value:, count:)
+      end
+
+      facet
     end
-
-    facet
   end
 
   private
 
   def custom_titleize(name)
-    name.split("'")&.map(&:titleize)&.join("'")
+    name.split(")&.map(&:titleize)&.join(")
   end
 end
