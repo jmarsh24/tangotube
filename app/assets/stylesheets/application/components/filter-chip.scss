@@ -1,6 +1,7 @@
 .filter-chip {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-items: center;
   gap: var(--spacing-xxs);
   padding: var(--spacing-xxs) var(--spacing-xs);
   background-color: var(--color-neutral-0);
@@ -22,7 +23,20 @@
   }
 
   &:hover {
-    background-color: var(--color-gray-400);
+    background-color: var(--color-gray-600);
+  }
+
+  &__count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-gray-500);
+    border-radius: var(--border-radius-circle);
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-1000);
   }
 
   &__close {

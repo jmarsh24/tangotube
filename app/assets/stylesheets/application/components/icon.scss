@@ -32,4 +32,8 @@ $icon-sizes: (
   &--neutral {
     background-color: unset;
   }
+
+  &--black {
+    color: var(--color-neutral-0);
+  }
 }

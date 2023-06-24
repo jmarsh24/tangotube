@@ -28,7 +28,7 @@
     - if video.song.present?
       = link_to root_path(song: video.song.slug) do
         .stack.stack--line.stack--xxs
-          - if video.song.orchestra.profile_image.attached?
+          - if video.song&.orchestra&.profile_image&.attached?
             = image_tag video.song.orchestra.profile_image, width: 36, class: "avatar avatar--sm"
           - else
             .icon.icon--person-circle-fill
