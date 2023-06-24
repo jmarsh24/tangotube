@@ -8,15 +8,15 @@
   gap: var(--spacing-xxs);
   scroll-snap-type: x mandatory; /* Enable horizontal scrolling */
   padding: var(--spacing-sm) var(--spacing-xs);
-}
-
-.scrollable-bar::-webkit-scrollbar {
-  width: 0;
-  display: none; /* Hide the scrollbar on WebKit browsers (Chrome, Safari) */
-}
-
-.scrollable-bar {
   -ms-overflow-style: none; /* Hide the scrollbar on Microsoft browsers (Edge) */
   scrollbar-width: none; /* Hide the scrollbar on Firefox */
   -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none; /* Hide the scrollbar on WebKit browsers (Chrome, Safari) */
+  }
+  &--vote {
+    padding: 0;
+  }
 }

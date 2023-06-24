@@ -1,5 +1,8 @@
 ---
 en:
+  time:
+    formats:
+      video_duration: "%H:%M:%S"
   date:
     formats:
       song_recording_date: "%B %e, %Y"
