@@ -2,7 +2,7 @@
   vertical-align: middle;
   width: 36px;
   height: 36px;
-  border-radius: 50%;
+  border-radius: var(--border-radius-circle);
 
   &--sm {
     width: 18px;
