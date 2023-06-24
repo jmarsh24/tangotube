@@ -149,7 +149,7 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
     --z-modal-blind: 900;
     --z-index-toast: 1100;
 
-    --container-gap: 16px;
+    --container-gap: var(--spacing-xxs);
     --grid-width: 1660px;
     --app-drawer-width: 200px;
     --header-height: calc(56px + var(--spacing-md));
