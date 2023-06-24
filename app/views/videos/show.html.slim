@@ -1,16 +1,15 @@
-- cache ["video_show", @video.youtube_id, @video.updated_at] do
-  - content_for :meta_title, @video.decorate.meta_title
-  - content_for :meta_description, @video.decorate.meta_description
-  - content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
-  .video data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
-  .stack
-    = render partial: "videos/show/video_info_primary", locals: { video: @video }
-    = render partial: "videos/show/vote", locals: { video: @video }
-    - if @video.metadata.music.spotify_track_id.present?
-      iframe src="https://open.spotify.com/embed/track/#{@video.metadata.music.spotify_track_id}" width="400" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" 
-    = render partial: "videos/show/video_metadata", locals: { video: @video }
-    = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_performance, header: t(".recommended_videos_videos_from_this_performance_header") }
-    = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_dancers, header: t(".recommended_videos_from_performers", dancer: @video.leaders.first.name.titleize, partner: @video.followers.first.name.titleize) } if @video.leaders.present? && @video.followers.present?
-    = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_event, header: t(".recommended_from_event", event_title: @video.event.title) } if @video.event.present?
-    = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_song, header: t(".recommended_videos_song", song_title: @video.song.title.titleize, song_artist: @video.song.artist.titleize) } if @video.song.present?
-    = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_channel, header: t(".recommended_videos_same_channel", channel_title: @video.channel.title) }
+- content_for :meta_title, @video.decorate.meta_title
+- content_for :meta_description, @video.decorate.meta_description
+- content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
+.video data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
+.stack
+  = render partial: "videos/show/video_info_primary", locals: { video: @video }
+  = render partial: "videos/show/vote", locals: { video: @video }
+  - if @video.metadata.music.spotify_track_id.present?
+    iframe src="https://open.spotify.com/embed/track/#{@video.metadata.music.spotify_track_id}" width="400" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" 
+  = render partial: "videos/show/video_metadata", locals: { video: @video }
+  = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_performance, header: t(".recommended_videos_videos_from_this_performance_header") }
+  = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_dancers, header: t(".recommended_videos_from_performers", dancer: @video.leaders.first.name.titleize, partner: @video.followers.first.name.titleize) } if @video.leaders.present? && @video.followers.present?
+  = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_event, header: t(".recommended_from_event", event_title: @video.event.title) } if @video.event.present?
+  = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_song, header: t(".recommended_videos_song", song_title: @video.song.title.titleize, song_artist: @video.song.artist.titleize) } if @video.song.present?
+  = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_channel, header: t(".recommended_videos_same_channel", channel_title: @video.channel.title) }
