@@ -2,10 +2,11 @@
 en:
   time:
     formats:
-      video_duration: "%H:%M:%S"
+      video_duration: "%M:%S"
   date:
     formats:
       song_recording_date: "%B %e, %Y"
+      video_upload_date: "%B %e, %Y"
   2_mb_file_size_maximum_allowed_file_types_png_jpg:
     2 mb file size maximum allowed
     file types png jpg
@@ -329,7 +330,7 @@ en:
         song_title_heading: Song title
         title: Title
         title_heading: Title
-        upload_date: Upload date
+        upload_date: "%{date}"
         video_duration_heading: Video duration
         video_upload_date_heading: Video upload date
         youtube_info_heading: Youtube info
