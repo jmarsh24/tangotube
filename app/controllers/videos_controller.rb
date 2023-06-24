@@ -27,6 +27,7 @@ class VideosController < ApplicationController
     end
 
     if params[:filtering] == "true" && params[:pagination].nil?
+      ui.update "videos", with: "videos/videos", items: @videos
       ui.replace "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
       ui.close_modal
       new_params = @filtering_params.to_h
@@ -34,11 +35,6 @@ class VideosController < ApplicationController
       new_params.except(:filtering, :pagination)
       url = url_for(new_params)
       ui.run_javascript "history.pushState(history.state, '', '#{url}');"
-    end
-
-    if @current_page > 1 && params[:pagination] == "true"
-      ui.remove "next-page-link"
-      ui.append "pagination-frame", with: "components/pagination", items: @videos, partial: params[:partial]
     end
   end
 

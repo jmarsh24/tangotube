@@ -22,10 +22,7 @@ class ApplicationController < ActionController::Base
     @current_page = params[:page]&.to_i || 1
     scope = scope.page(@current_page).per(per)
     @has_more_pages = !scope.next_page.nil? unless @has_more_pages == true
-    if params[:filtering] == "true"
-      ui.update "videos", with: "videos/videos", items: scope, partial: params[:partial]
-    end
-    if @current_page > 1 && params[:pagination] == "true"
+    if @current_page > 1
       ui.remove "next-page-link"
       ui.append "pagination-frame", with: "components/pagination", items: scope, partial: params[:partial]
     end
