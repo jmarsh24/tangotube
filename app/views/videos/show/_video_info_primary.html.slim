@@ -1,23 +1,20 @@
 .video-info-primary
-  .video-info-primary__title
-    - if video.dancers.present?
-      h1.heading-3.heading-3--bold= video.dancers.map(&:full_name).join(" & ")
-    - else
-      h1.heading-3.heading-3--bold= video.title
-
-  .video-info-primary__song-info
+  .stack.stack--xxxs
+    .video-info-primary__title
+      - if video.dancers.present?
+        h1.heading-4.heading-4--bold= video.dancers.map(&:full_name).join(" & ")
+      - else
+        h1.heading-4.heading-4--bold= video.title
     - if video.song.present?
-      h2.heading-4= link_to video.song.full_title, root_path(song_id: video.song.id)
-
-  .video-info-primary__event-info
+      .video-info-primary__song-info
+        h2.heading-5 = link_to video.song.full_title, root_path(song_id: video.song.id)
     - if video.event.present?
-      = link_to video.event.title.titleize, root_path(event_id: video.event.id)
-
-  .video-info-primary__channel-info
-    .stack.stack--line.stack--xxs
-      - if video.channel.thumbnail_url.present?
-        = link_to image_tag(video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id)
-      = link_to video.channel.title, root_path(channel: video.channel.channel_id), class: "channel-title"
-
-  .video-info-primary__metadata
-    = video.decorate.display_metadata
+      .video-info-primary__event-info
+        = link_to video.event.title.titleize, root_path(event_id: video.event.id)
+    - if video.channel.thumbnail_url.present?
+      .video-info-primary__channel-info
+        .stack.stack--line.stack--xxs
+          = link_to image_tag(video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: video.channel.channel_id)
+          = link_to video.channel.title, root_path(channel: video.channel.channel_id), class: "channel-title"
+    .video-info-primary__metadata
+      = video.decorate.display_metadata

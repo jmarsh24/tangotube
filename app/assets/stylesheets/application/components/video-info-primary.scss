@@ -1,0 +1,20 @@
+.video-info-primary {
+  &__title {
+    font-size: 2px;
+  }
+
+  &__song-info {
+    font-size: var(--font-size-sm);
+  }
+  &__event-info {
+    font-size: var(--font-size-sm);
+  }
+
+  &__channel-info {
+    font-size: var(--font-size-sm);
+  }
+
+  &__metadata {
+    font-size: var(--font-size-sm);
+  }
+}

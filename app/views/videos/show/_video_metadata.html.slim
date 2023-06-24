@@ -2,14 +2,15 @@
   - if video.dancers.present?
     .performers-section
       h3.heading-3.heading-3--bold = t(".performers_heading")
-      - video.dancer_videos.each do |dancer_video|
-        .metadata-item
-          - if dancer_video.role == 'leader'
-            .metadata-item__label = t(".leader_heading")
-            .metadata-item__value = link_to dancer_video.dancer.name.titleize, root_path(leader: dancer_video.dancer.slug)
-          - elsif dancer_video.role == 'follower'
-            .metadata-item__label = t(".follower_heading")
-            .metadata-item__value = link_to dancer_video.dancer.name.titleize, root_path(follower: dancer_video.dancer.slug)
+      .stack.stack--xxs
+        - video.dancer_videos.each do |dancer_video|
+          .metadata-item
+            - if dancer_video.role == 'leader'
+              .metadata-item__label = t(".leader_heading")
+              .tag.tag--sm = link_to dancer_video.dancer.name.titleize, root_path(leader: dancer_video.dancer.slug)
+            - elsif dancer_video.role == 'follower'
+              .metadata-item__label = t(".follower_heading")
+              .tag.tag--sm = link_to dancer_video.dancer.name.titleize, root_path(follower: dancer_video.dancer.slug)
   
   - if video.event.present?
     .event-info-section
@@ -19,11 +20,11 @@
           - if video.event.title.present?
             .metadata-item 
               .metadata-item__label = t(".title_heading")
-              .metadata-item__value = link_to(video.event.title.titleize, root_path(event: video.event.id))
+              .tag.tag--sm = link_to(video.event.title.titleize, root_path(event: video.event.id))
         button.collapse-panel__open data-action="click->collapsable#toggle" Show More...
         .collapse-panel
           .collapse-panel__content
-            .stack.stack--zero
+            .stack.stack--xxs
               - if video.event.city.present? && video.event.country.present?
                 .metadata-item 
                   .metadata-item__label = t(".location_heading")
@@ -39,7 +40,7 @@
         button.collapse-panel__open data-action="click->collapsable#toggle" Show More...
         .collapse-panel
           .collapse-panel__content
-            .stack.stack--zero
+            .stack.stack--xxs
               h3.heading-3.heading-3--bold = t(".description")
               - if video.description.present?
                   = simple_format(video.description)
@@ -58,25 +59,24 @@
       h3.heading-3.heading-3--bold = t(".music_heading")
       .collapse-panel data-controller="collapsable"
         .stack
-          h3.heading-3.heading-3--bold = t(".youtube_info_heading")
-          .stack.stack--zero
+          .stack.stack--xxs
             - if video.song.title.present?
               .metadata-item 
                 .metadata-item__label = t(".song_title_heading")
-                .metadata-item__value = link_to(video.song&.title.titleize, root_path(song: video.song.slug))
+                .tag.tag--sm = link_to(video.song&.title.titleize, root_path(song: video.song.slug))
             - if video.song.genre.present?
               .metadata-item 
                 .metadata-item__label = t(".song_genre_heading")
-                .metadata-item__value = video.song&.genre.titleize
+                .tag.tag--sm = video.song&.genre.titleize
             - if video.song.orchestra.present?
               .metadata-item 
                 .metadata-item__label = t(".song_orchestra_heading")
-                .metadata-item__value = link_to(video.song&.orchestra.name, root_path(orchestra: video.orchestra.slug))
+                .tag.tag--sm = link_to(video.song&.orchestra.name.split("'")&.map(&:titleize)&.join("'"), root_path(orchestra: video.orchestra.slug))
         - if video.song.artist_2.present? || video.song.date.present? || video.song.composer.present? || video.song.author.present?
           button.collapse-panel__open data-action="click->collapsable#toggle" Show More... 
         .collapse-panel
           .collapse-panel__content
-            .stack.stack--zero
+            .stack.stack--xxs
               - if video.song.artist_2.present?
                 .metadata-item 
                   .metadata-item__label = t(".song_artist_2_heading")

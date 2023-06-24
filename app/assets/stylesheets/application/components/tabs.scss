@@ -4,6 +4,8 @@
   padding: var(--spacing-xxxs);
   background-color: var(--color-neutral-200);
   border-radius: 12px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
 
   &__tab {
     flex: 1;

@@ -1,8 +1,7 @@
 .tag {
   display: inline-block;
-  border-radius: 3px;
-  padding: var(--spacing-xxxs) var(--spacing-xxxs);
-  border-radius: 3px;
+  border-radius: var(--border-radius-pill);
+  padding: var(--spacing-xxxs) var(--spacing-xs);
   background: var(--color-neutral-100);
   color: var(--color-neutral-900);
   font-weight: var(--font-weight-normal);

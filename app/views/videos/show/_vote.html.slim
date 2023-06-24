@@ -1,11 +1,10 @@
 .vote-bar id="#{dom_id(video)}_vote"
   = render "videos/show/like_link", video:
-  .modal-share
-    = link_to modal_path(share_video_path(video), size: :small), class: "button button--secondary button--icon-square-and-arrow-up button--icon-left" do
-      = t(".share_button")
-  .native-share
-    button class="button button--secondary button--icon-square-and-arrow-up button--icon-left" data-controller="share" data-action="click->share#share" data-share-url="#{video_url(video)}"
-      = t(".share_button")
+  = link_to modal_path(share_video_path(video), size: :small), class: "button button--vote button--icon-square-and-arrow-up button--icon-left modal-share" do
+    = t(".share_button")
+  button class="button button--vote button--icon-square-and-arrow-up button--icon-left native-share" data-controller="share" data-action="click->share#share" data-share-url="#{video_url(video)}"
+    = t(".share_button")
   - if user_signed_in? && current_user.admin?
     = render 'videos/show/featured_link', video:
-  = render partial: "components/youtube_links", locals: { video: @video }
+  = link_to "Youtube", "vnd.youtube://www.youtube.com/watch?v=#{video.youtube_id}", class: "button button--vote button--icon-play-rectangle youtube-app-link"
+  = link_to "Youtube", "https://youtube.com/watch?v=#{video.youtube_id}", class: "button button--vote button--icon-play-rectangle youtube-web-link"

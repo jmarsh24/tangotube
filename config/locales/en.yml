@@ -1,5 +1,8 @@
 ---
 en:
+  date:
+    formats:
+      song_recording_date: "%B %e, %Y"
   2_mb_file_size_maximum_allowed_file_types_png_jpg:
     2 mb file size maximum allowed
     file types png jpg
@@ -80,9 +83,6 @@ en:
       privacy: Privacy
       terms: Terms
     navbar:
-      auto_mode_link: Auto
-      dark_mode_link: Dark
-      light_mode_link: Light
       search:
         search:
           placeholder: Search 300,000+ videos
@@ -119,9 +119,6 @@ en:
       loading_spinner: Loading spinner
       results: Results
       videos_count: "%{count} videos"
-  date:
-    formats:
-      song_recording_date: "%B %d, %Y"
   destroy: Destroy
   devise:
     confirmations:
@@ -223,13 +220,11 @@ en:
       heading: Orchestras
       label: Label
       loading_spinner: Loading spinner
-      results: Results
     new:
       heading: Heading
     show:
       dancers_and_partner: Dancers and partner
       loading_spinner: Loading spinner
-      results: Results
       video_count: Video count
   pages:
     contact:
@@ -243,7 +238,6 @@ en:
     index:
       heading: Performances
       loading_spinner: Loading spinner
-      results: Results
     new:
       heading: Performance
   playlists:
@@ -282,9 +276,6 @@ en:
       show_link: Show
     new:
       heading: Song
-  time:
-    formats:
-      video_duration: "%M:%S"
   videos:
     form:
       event_info_heading: Event Info
@@ -298,7 +289,6 @@ en:
         This is a search engine for tango videos. Search for tango
         videos by title, artist, orchestra, dancer, couple, or event.
       meta_title: ""
-      videos: Videos
     new:
       heading: Videos
       youtube_id_placeholder: Youtube id placeholder
@@ -319,54 +309,27 @@ en:
         English: English
         Spanish: Spanish
         lyrics_header: Lyrics
-      recommended_from_event: Videos from event
-      recommended_videos_from_performers: Videos from performers
-      recommended_videos_same_channel: Videos from this channel
-      recommended_videos_song: Videos with same song
-      recommended_videos_videos_from_this_performance_header: Videos from this performance
-      video_info_details:
-        duration: Duration %{duration}
+      video_metadata:
+        description: Description
         follower_heading: Follower
         leader_heading: Leader
         location_heading: Location
         music_heading: Music
         performers_heading: Performers
-        song_artist_2_heading: Artist
-        song_author_heading: Author
-        song_composer_heading: Composer
-        song_genre_heading: Genre
-        song_orchestra_heading: Orchestra
-        song_recording_date: Recording Date
-        song_recording_date_heading: Recording Date
-        song_title_heading: Song Title
-        title_heading: Title
-        upload_date: Upload Date
-        video_description_heading: Description
-        video_duration_heading: Duration
-        video_title_heading: Title
-        video_upload_date_heading: Upload Date
-        youtube_info_heading: Youtube Info
-      video_metadata:
-        description: Description
-        follower_heading: Follower heading
-        leader_heading: Leader heading
-        location_heading: Location heading
-        music_heading: Music heading
-        performers_heading: Performers heading
-        song_artist_2_heading: Song artist 2 heading
-        song_author_heading: Song author heading
-        song_composer_heading: Song composer heading
-        song_genre_heading: Song genre heading
-        song_orchestra_heading: Song orchestra heading
-        song_recording_date: Song recording date
-        song_recording_date_heading: Song recording date heading
-        song_title_heading: Song title heading
+        song_artist_2_heading: Song artist 2
+        song_author_heading: Song author
+        song_composer_heading: Song composer
+        song_genre_heading: Song genre
+        song_orchestra_heading: Song orchestra
+        song_recording_date: "%{date}"
+        song_recording_date_heading: Song recording date
+        song_title_heading: Song title
         title: Title
-        title_heading: Title heading
+        title_heading: Title
         upload_date: Upload date
-        video_duration_heading: Video duration heading
-        video_upload_date_heading: Video upload date heading
-        youtube_info_heading: Youtube info heading
+        video_duration_heading: Video duration
+        video_upload_date_heading: Video upload date
+        youtube_info_heading: Youtube info
       vote:
         share_button: Share
       watchlist_link:

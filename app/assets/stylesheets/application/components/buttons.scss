@@ -51,6 +51,23 @@
     }
   }
 
+  &--vote {
+    background-color: var(--color-neutral-200);
+    border-radius: var(--border-radius-pill);
+    color: var(--color-neutral-1000);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    padding: 0 8px;
+
+    &:hover {
+      background-color: var(--color-neutral-400);
+    }
+
+    &.active {
+      background-color: var(--color-neutral-500);
+    }
+  }
+
   &--neutral {
     display: inline-flex;
     flex-direction: row;
@@ -60,7 +77,6 @@
     background-color: var(--color-neutral-200);
     color: var(--color-neutral-1000);
 
-
     &:hover {
       background-color: var(--color-neutral-300);
     }
@@ -69,7 +85,6 @@
       background-color: var(--color-neutral-100);
     }
   }
-
 
   &--block {
     width: 100%;
@@ -97,16 +112,6 @@
     }
   }
 
-  &--search {
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border: 0px;
-    background: var(--color-gray-300);
-    &:hover {
-      background: var(--color-gray-200);
-    }
-  }
-  
   &--link-secondary {
     @extend .button--link;
     color: var(--text-link-secondary-base);
@@ -146,8 +151,8 @@
       &::before {
         @include maskedBackground;
         content: '';
-        height: var(--spacing-md);
-        width: var(--spacing-md);
+        height: var(--spacing-sm);
+        width: var(--spacing-sm);
         display: block;
         mask-image: url('@assets/images/icons/#{$icon}.svg');
       }
