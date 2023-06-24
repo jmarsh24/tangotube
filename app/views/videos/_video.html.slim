@@ -11,7 +11,7 @@
       - video.dancer_videos.each do |dv|
         - if dv.role == "leader"
           = link_to root_path(leader: dv.dancer.slug) do
-            .stack.stack--line.stack--xxs
+            .dancer-tag
               - if dv.dancer.profile_image.attached?
                 = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
               - else
@@ -19,7 +19,7 @@
               = dv.dancer.name
         - elsif dv.role == "follower"
           = link_to root_path(follower: dv.dancer.slug) do
-            .stack.stack--line.stack--xxs
+            .dancer-tag
               - if dv.dancer.profile_image.attached?
                 = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
               - else

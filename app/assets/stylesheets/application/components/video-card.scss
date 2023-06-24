@@ -25,6 +25,7 @@
     gap: 6px;
     padding: var(--spacing-xxxs) var(--spacing-xxs);
     font-size: var(--font-size-xs);
+    overflow: hidden; /* Prevent content overflow */
   }
 
   &__image {

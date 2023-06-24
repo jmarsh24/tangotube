@@ -1,6 +1,22 @@
 .scrollable-tags {
-  display: flex;
-  gap: var(--spacing-xxxs);
-  overflow-x: auto;
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  scroll-snap-type: x mandatory; /* Snap to the tags during scrolling */
+  padding: var(--spacing-xxxs) var(--spacing-xs);
+  gap: var(--spacing-sm);
   white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  display: flex;
+}
+
+.scrollable-tags::-webkit-scrollbar {
+  width: 0;
+  display: none; /* Hide the scrollbar on WebKit browsers (Chrome, Safari) */
+}
+
+.scrollable-tags {
+  -ms-overflow-style: none; /* Hide the scrollbar on Microsoft browsers (Edge) */
+  scrollbar-width: none; /* Hide the scrollbar on Firefox */
+  -webkit-overflow-scrolling: touch;
 }
