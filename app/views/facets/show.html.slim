@@ -1,5 +1,5 @@
 = turbo_frame_tag "#{@facet.name}_facet" do
-  - cache [@facet.name, @facet.options.map { |option| "#{option.value}-#{option.label}-#{option.count}" }.join("-")] do
+  - cache [@facet.name, filtering_params] do
     .stack
       h1.heading-1 = @facet.name.titleize
       .list-box

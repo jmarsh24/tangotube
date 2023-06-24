@@ -43,6 +43,31 @@
       width: 6px;
       height: 6px;
       background-color: var(--color-neutral-1000);
+      mask-image: url('@assets/images/icons/close.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+  }
+
+  &__dropdown {
+    @include maskedBackground;
+    position: relative; /* Use relative positioning on the parent to contain the absolute positioned child */
+    width: 14px;
+    height: 14px;
+    background-color: var(--color-neutral-100);
+    border-radius: 50%;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-neutral-1000);
       mask-image: url('@assets/images/icons/chevron-down.svg');
       mask-size: contain;
       mask-repeat: no-repeat;
