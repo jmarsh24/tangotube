@@ -4,7 +4,7 @@ class SearchesController < ApplicationController
   end
 
   def show
-    selected_category = params[:category]
+    selected_category = params[:category] || "all"
     categories = search_categories_options
     search = Search.new(term: params[:search], category: selected_category)
     ui.replace("search-results", with: "searches/results", search:)
