@@ -2,7 +2,7 @@
   width: 100%;
   overflow-x: auto; /* Enable horizontal scrolling */
   scroll-snap-type: x mandatory; /* Snap to the tags during scrolling */
-  padding: var(--spacing-xxxs) var(--spacing-xs);
+  padding: 0;
   gap: var(--spacing-sm);
   white-space: nowrap;
   scrollbar-width: thin;
