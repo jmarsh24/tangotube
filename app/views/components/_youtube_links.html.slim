@@ -1,6 +1,2 @@
-= link_to "vnd.youtube://www.youtube.com/watch?v=#{video.youtube_id}", class: "youtube-link youtube-app-link"
-  .youtube-link__icon
-  .youtube-link__text Watch on YouTube
-= link_to "https://youtube.com/watch?v=#{video.youtube_id}", class: "youtube-link youtube-web-link"
-  .youtube-link__icon
-  .youtube-link__text Watch on YouTube
+= link_to "Youtube", "vnd.youtube://www.youtube.com/watch?v=#{video.youtube_id}", class: "button button--secondary button--icon-play-rectangle youtube-app-link"
+= link_to "Youtube", "https://youtube.com/watch?v=#{video.youtube_id}", class: "button button--secondary button--icon-play-rectangle youtube-web-link"

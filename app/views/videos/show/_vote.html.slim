@@ -8,3 +8,4 @@
       = t(".share_button")
   - if user_signed_in? && current_user.admin?
     = render 'videos/show/featured_link', video:
+  = render partial: "components/youtube_links", locals: { video: @video }
