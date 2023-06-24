@@ -20,7 +20,7 @@
           - if video.event.title.present?
             .metadata-item 
               .metadata-item__label = t(".title_heading")
-              .tag.tag--sm = link_to(video.event.title.titleize, root_path(event: video.event.id))
+              .tag.tag--sm = link_to(video.event.title.titleize, root_path(event: video.event.slug))
         button.collapse-panel__open data-action="click->collapsable#toggle" Show More...
         .collapse-panel
           .collapse-panel__content

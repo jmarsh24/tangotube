@@ -2,13 +2,12 @@
 - meta.description = t(".meta_description")
 - meta.image = image_url("app_icon.png")
 = render "banner/index"
-.container
-  = render partial: "videos/index/video_sorting_filters"
-  #videos.stack
-    - if @featured_videos.present?
-      .stack
-        = render "videos/index/videos/section/header", title: t(".featured_videos")
-        .grid.grid--videos = render @featured_videos
-    - if @videos.present?
-      .stack
-        = paginated @videos, class: "grid grid--videos"
+= render partial: "videos/index/video_sorting_filters"
+#videos.stack
+  - if @featured_videos.present?
+    .stack
+      = render "videos/index/videos/section/header", title: t(".featured_videos")
+      .grid.grid--videos = render @featured_videos
+  - if @videos.present?
+    .stack
+      = paginated @videos, class: "grid grid--videos"
