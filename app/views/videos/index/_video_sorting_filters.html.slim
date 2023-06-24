@@ -1,5 +1,6 @@
 div id="filter-bar" class="scrollable-bar"
   - active_filters = @filtering_params.to_h.count
+  = link_to "All", root_path(filtering: true), class: ["filter-chip", ("active" if @filtering_params.empty?)]
   = link_to modal_path(filters_videos_path(@filtering_params)), class: ["filter-chip", ("active" if @filtering_params.present?)] do
     .icon.icon--filter-lines.icon--xs
     - if active_filters > 0
