@@ -67,14 +67,14 @@ class VideosController < ApplicationController
   # @route PATCH /videos/:id/featured (featured_video)
   def featured
     @video.update!(featured: !@video.featured?)
-    ui.update("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
+    ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
   end
 
   # POST /videos/:id/like
   def like
     authorize @video
     current_user.likes.create!(likeable: @video)
-    ui.update("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
+    ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
   end
 
   # DELETE /videos/:id/unlike
@@ -82,7 +82,7 @@ class VideosController < ApplicationController
     authorize @video
     like = current_user.likes.find_by(likeable: @video)
     like&.destroy!
-    ui.update("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
+    ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
   end
 
   def filters

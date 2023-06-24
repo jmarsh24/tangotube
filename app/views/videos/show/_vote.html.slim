@@ -1,4 +1,4 @@
-.vote-bar id="#{dom_id(video)}_vote"
+.scrollable-bar id="#{dom_id(video)}_vote"
   div id="like-#{video.youtube_id}"
     - if Like.exists?(user_id: current_user&.id, likeable: @video)
       = button_to unlike_video_path(video), method: :delete, class: "button button--vote button--icon-thumbs-up-fill" do
