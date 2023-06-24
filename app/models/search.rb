@@ -9,7 +9,7 @@ class Search
     "videos" => Video
   }.freeze
 
-  DEFAULT_LIMIT = 3
+  DEFAULT_LIMIT = 20
 
   def initialize(term:, category: nil)
     @term = term
