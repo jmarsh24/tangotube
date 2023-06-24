@@ -12,7 +12,6 @@ class FacetsController < ApplicationController
 
   def filtering_params
     params.permit(
-      :id,
       :leader,
       :follower,
       :channel,

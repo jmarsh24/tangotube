@@ -9,6 +9,7 @@
   { value: "orchestra", label: "Orchestras A-Z" }, \
   { value: "channel", label: "Channels A-Z" } \
 ]
+h1.heading-1 Sorting
 .list-box
   - options.each do |option|
     - selected = params[:sort] == option[:value] ? "selected" : nil

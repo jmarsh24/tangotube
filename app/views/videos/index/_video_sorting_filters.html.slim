@@ -1,4 +1,4 @@
-= turbo_frame_tag "filter-bar", class: "scrollable-bar"
+div id="filter-bar" class="scrollable-bar"
   = link_to "All", root_path(filtering: true), class: ["filter-chip", ("active" if @filtering_params.empty?)]
   / = link_to "Filters", modal_path(filters_videos_path(@filtering_params)), class: ["filter-chip", ("active" if @filtering_params.present?)]
   - filter_chips = []
@@ -6,13 +6,12 @@
   - if @filtering_params.present? || params[:sort].present?
     - sort_name = params[:sort].present? ? "Sort: #{params[:sort].titleize}" : "Sort: Popularity"
     - sort_link_path = modal_path(sort_videos_path(@filtering_params))
-    - sort_active = params[:sort].present?
-    = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: sort_active, highlighted: false, closeable: false
+    = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: true, highlighted: false, closeable: false
 
   - if current_user
-    - [["New To You", :watched, false, true], ["Watched", :watched, true, true], ["Liked", :liked, true, true]].each do |label, param_key, value, closeable|
+    - [["New To You", :watched, false, true, true], ["Watched", :watched, true, true, true], ["Liked", :liked, true, true, true]].each do |label, param_key, value, highlighted, closeable|
       - active = params[param_key].to_s == value.to_s
-      - link_path = active ? root_path(@filtering_params.except(param_key), filtering: true) : root_path(@filtering_params.merge(param_key => value), filtering: true)
+      - link_path = active ? root_path(@filtering_params.except(param_key).merge(filtering: true)) : root_path(@filtering_params.merge(param_key => value, filtering: true))
       - highlighted = label == "New To You" ? !active : false
       - filter_chips << [label, link_path, active, highlighted, closeable]
 
