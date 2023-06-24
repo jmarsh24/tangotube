@@ -97,6 +97,21 @@ class Video::FacetBuilder
     facet
   end
 
+  def event
+    facet_data = @video_relation
+      .joins(:event)
+      .group("events.title", "events.slug")
+      .order("count_all DESC", "events.title")
+      .count
+
+    facet = Facet.new(name: "event", options: [])
+    facet.options = facet_data.map do |(name, value), count|
+      Option.new(label: name, value:, count:)
+    end
+
+    facet
+  end
+
   private
 
   def custom_titleize(name)
