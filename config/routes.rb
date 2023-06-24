@@ -63,11 +63,7 @@ Rails.application.routes.draw do
   resources :files, only: :show, controller: "shimmer/files"
 
   # Webhook and Search Suggestion routes
-  resources :webhooks, :search_suggestions, only: [:index] do
-    collection do
-      post :search
-    end
-  end
+  resources :webhooks, only: [:index, :create]
 
   # Sitemap and Banner routes
   get "sitemaps/*path", to: "shimmer/sitemaps#show"
