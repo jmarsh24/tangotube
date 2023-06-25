@@ -20,9 +20,13 @@ class VideoPresenter < SimpleDelegator
   end
 
   def display_metadata
-    formatted_like_count = formatted_count(youtube_like_count)
-    formatted_view_count = formatted_count(youtube_view_count)
-    "#{formatted_upload_date} • #{formatted_view_count} views • #{formatted_like_count} likes"
+    metadata = [
+      channel&.title,
+      formatted_upload_date,
+      formatted_count(youtube_view_count)&.then { |count| "#{count} views" }
+    ]
+
+    metadata.compact.join(" • ")
   end
 
   def performance_number
@@ -44,7 +48,7 @@ class VideoPresenter < SimpleDelegator
 
     begin
       date = upload_date.is_a?(Date) ? upload_date : Date.parse(upload_date)
-      date.strftime("%B, %Y")
+      date.strftime("%b %Y")
     rescue ArgumentError
       "Invalid date"
     end

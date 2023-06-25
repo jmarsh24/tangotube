@@ -4,46 +4,31 @@
       - if video.performance.present?
         .card__performance-number
           = video.decorate.performance_number
-      = image_tag(video.thumbnail, width: 750)
-
+      = image_tag video.thumbnail, width: 750
   .video-card__content
-    .scrollable-tags
-      - video.dancer_videos.each do |dv|
-        - if dv.role == "leader"
-          = link_to root_path(leader: dv.dancer.slug) do
-            .dancer-tag
-              - if dv.dancer.profile_image.attached?
-                = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
-              - else
-                .icon.icon--person-circle-fill
-              = dv.dancer.name
-        - elsif dv.role == "follower"
-          = link_to root_path(follower: dv.dancer.slug) do
-            .dancer-tag
-              - if dv.dancer.profile_image.attached?
-                = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
-              - else
-                .icon.icon--person-circle-fill
-              = dv.dancer.name
-    - if video.song.present?
-      = link_to root_path(song: video.song.slug) do
-        .stack.stack--line.stack--xxs
-          - if video.song&.orchestra&.profile_image&.attached?
-            = image_tag video.song.orchestra.profile_image, width: 36, class: "avatar avatar--sm"
-          - else
-            .icon.icon--person-circle-fill
-          = video.song.full_title
-    - if video.event.present?
-      = link_to root_path(event: video.event.slug) do
-        .stack.stack--line.stack--xxs
-          - if video.event.profile_image.attached?
-            = image_tag video.event.profile_image, width: 36, class: "avatar avatar--sm"
-          - else
-            .icon.icon--person-circle-fill
-          = video.event.title.titleize
-    .stack.stack--line.stack--sm
-      = link_to(root_path(channel: video.channel.channel_id), class: "stack stack--line stack--xxs stack--inline") do 
-        - if video.channel.thumbnail.present?
-          = image_tag(video.channel.thumbnail, width: 36, class: "avatar avatar--sm")
-        = video.channel.title
-    = video.decorate.display_metadata
+    = image_tag video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, width: 48, class: "avatar avatar--md"
+    .stack.stack--xxxs
+      .scrollable-tags
+        - video.dancer_videos.each do |dv|
+          - if dv.role == "leader"
+            = link_to root_path(leader: dv.dancer.slug) do
+              .stack.stack--line.stack--xxs
+                - if dv.dancer.profile_image.attached?
+                  = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
+                - else
+                  .icon.icon--person-circle-fill
+                = dv.dancer.name
+          - elsif dv.role == "follower"
+            = link_to root_path(follower: dv.dancer.slug) do
+              .stack.stack--line.stack--xxs
+                - if dv.dancer.profile_image.attached?
+                  = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
+                - else
+                  .icon.icon--person-circle-fill
+                = dv.dancer.name
+      - if video.song.present?
+        = link_to video.song.full_title, root_path(song: video.song.slug), class: "stack stack--line stack--xxs video-card__song-metadata"
+      - else
+        = link_to video.title, watch_path(v: video.youtube_id), class: "video-card__title" if video.title.present?
+      .video-card__metadata
+        = video.decorate.display_metadata

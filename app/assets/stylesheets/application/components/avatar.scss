@@ -1,11 +1,21 @@
+$avatar-sizes: (
+  'xs': 18px,
+  'sm': 24px,
+  'md': 36px,
+  'lg': 48px,
+  'xl': 64px,
+);
+
 .avatar {
   vertical-align: middle;
-  width: 36px;
-  height: 36px;
+  width: map-get($avatar-sizes, 'md');
+  height: map-get($avatar-sizes, 'md');
   border-radius: var(--border-radius-circle);
 
-  &--sm {
-    width: 18px;
-    height: 18px;
+  @each $size-name, $size-value in $avatar-sizes {
+    &--#{$size-name} {
+      width: $size-value;
+      height: $size-value;
+    }
   }
 }

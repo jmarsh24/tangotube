@@ -1,5 +1,5 @@
 .video-card {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
 
   &--compact {
     display: flex;
@@ -20,12 +20,20 @@
 
   &__content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    gap: 6px;
-    padding: var(--spacing-xxxs) var(--spacing-xxs);
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xxxs) var(--spacing-xs);
     font-size: var(--font-size-xs);
     overflow: hidden; /* Prevent content overflow */
+  }
+
+  &__metadata {
+    color: var(--color-neutral-700);
+  }
+
+  &__song-metadata {
+    color: var(--color-neutral-700);
   }
 
   &__image {
@@ -44,7 +52,7 @@
       background-color: black;
       color: var(--color-neutral-1000);
       right: 5px;
-      bottom: 5px;
+      bottom: 10px;
       padding: 0 0.3em;
       border-radius: 0.3em;
     }
