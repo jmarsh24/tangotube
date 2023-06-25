@@ -5,9 +5,7 @@
 = render partial: "videos/index/video_sorting_filters"
 #videos.stack
   - if @featured_videos.present?
-    .stack
-      = render "videos/index/videos/section/header", title: t(".featured_videos")
-      .grid.grid--videos = render @featured_videos
+    = render "videos/index/videos/section/header", title: t(".featured_videos")
+    .grid.grid--videos = render @featured_videos
   - if @videos.present?
-    .stack
-      = paginated @videos, class: "grid grid--videos"
+    = paginated @videos, class: "grid grid--videos"
