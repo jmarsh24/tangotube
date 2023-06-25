@@ -48,4 +48,6 @@ VCR.configure do |config|
   config.configure_rspec_metadata!
   config.allow_http_connections_when_no_cassette = true
   config.filter_sensitive_data("<YOUTUBE_API_KEY>") { Config.youtube_api_key! }
+  config.filter_sensitive_data("<SPOTIFY_CLIENT_ID>") { Config.spotify_client_id! }
+  config.filter_sensitive_data("<SPOTIFY_SECRET_KEY>") { Config.spotify_secret_key! }
 end

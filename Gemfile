@@ -69,7 +69,6 @@ gem "serviceworker-rails"
 gem "aws-sdk-s3"
 gem "deepl-rb", require: "deepl"
 gem "yt"
-gem "rspotify"
 gem "newrelic_rpm"
 gem "barnes" # enables detailed metrics within heroku
 gem "sentry-ruby"
