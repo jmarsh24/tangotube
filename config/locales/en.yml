@@ -260,12 +260,12 @@ en:
   show: Show
   show_link: Show link
   sign_out: Sign out
-  song_active: Song active
-  song_artist: Song artist
-  song_author: Song author
-  song_date: Song date
-  song_genre: Song genre
-  song_title: Song title
+  song_active: Active
+  song_artist: Artist
+  song_author: Author
+  song_date: Recording Date
+  song_genre: Genre
+  song_title: Title
   songs:
     edit:
       heading: Song
@@ -320,19 +320,19 @@ en:
         location_heading: Location
         music_heading: Music
         performers_heading: Performers
-        song_artist_2_heading: Song artist 2
-        song_author_heading: Song author
-        song_composer_heading: Song composer
-        song_genre_heading: Song genre
-        song_orchestra_heading: Song orchestra
+        song_artist_2_heading: Artist 2
+        song_author_heading: Author
+        song_composer_heading: Composer
+        song_genre_heading: Genre
+        song_orchestra_heading: Orchestra
         song_recording_date: "%{date}"
-        song_recording_date_heading: Song recording date
-        song_title_heading: Song title
+        song_recording_date_heading: Recording Date
+        song_title_heading: Title
         title: Title
         title_heading: Title
         upload_date: "%{date}"
-        video_duration_heading: Video duration
-        video_upload_date_heading: Video upload date
+        video_duration_heading: Duration
+        video_upload_date_heading: Upload date
         youtube_info_heading: Youtube info
       vote:
         share_button: Share
