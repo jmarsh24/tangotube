@@ -1,0 +1,136 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic MDg2YzA2OTA1MzM5NGQ0Mjg3NzE0OWVhOGI1OTllNWU6NDZkZGI3YmY4YjA4NDY4ZDlhNTAzMWMxZjY1N2Q0NjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 25 Jun 2023 15:03:06 GMT
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQB0HeynDp-cQwTqMATOvfoFcZAgNgmeiMZy-8lGesqDwblf9II9Mp3VDKyXGM7Qu6doAo821E4ehCs9VS95F7RcpLczNtfx8Nw;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Sp-Trace-Id:
+      - 691be34b539a2463
+      X-Envoy-Upstream-Service-Time:
+      - '12'
+      Server:
+      - envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Vary:
+      - Accept-Encoding
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"access_token":"BQCyMmMOr84C49I_cja8_W4dix3ODB4MHrgeLrr8lVN5B0uVImggUobxrahysDpGBDrWJ_8h6yf_TPJ3zLrjAHlAE8WINBPRwr2E-mT6q_8bgF2XSAo","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sun, 25 Jun 2023 15:03:06 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/artists/10exVja0key0uqUkk6LJRT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer BQCyMmMOr84C49I_cja8_W4dix3ODB4MHrgeLrr8lVN5B0uVImggUobxrahysDpGBDrWJ_8h6yf_TPJ3zLrjAHlAE8WINBPRwr2E-mT6q_8bgF2XSAo
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=7200
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Sun, 25 Jun 2023 15:03:06 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/artist/10exVja0key0uqUkk6LJRT"
+          },
+          "followers" : {
+            "href" : null,
+            "total" : 2845396
+          },
+          "genres" : [ "folk-pop", "modern rock" ],
+          "href" : "https://api.spotify.com/v1/artists/10exVja0key0uqUkk6LJRT",
+          "id" : "10exVja0key0uqUkk6LJRT",
+          "images" : [ {
+            "height" : 640,
+            "url" : "https://i.scdn.co/image/ab6761610000e5eb8f074ec8c25406680bf26422",
+            "width" : 640
+          }, {
+            "height" : 320,
+            "url" : "https://i.scdn.co/image/ab676161000051748f074ec8c25406680bf26422",
+            "width" : 320
+          }, {
+            "height" : 160,
+            "url" : "https://i.scdn.co/image/ab6761610000f1788f074ec8c25406680bf26422",
+            "width" : 160
+          } ],
+          "name" : "Vance Joy",
+          "popularity" : 75,
+          "type" : "artist",
+          "uri" : "spotify:artist:10exVja0key0uqUkk6LJRT"
+        }
+  recorded_at: Sun, 25 Jun 2023 15:03:06 GMT
+recorded_with: VCR 6.1.0
