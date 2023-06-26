@@ -6,29 +6,13 @@
           = video.decorate.performance_number
       = image_tag video.thumbnail, width: 750
   .video-card__content
-    = image_tag video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, width: 48, class: "avatar avatar--md"
-    .stack.stack--xxxs
-      .scrollable-tags
-        - video.dancer_videos.each do |dv|
-          - if dv.role == "leader"
-            = link_to root_path(leader: dv.dancer.slug) do
-              .stack.stack--line.stack--xxs
-                - if dv.dancer.profile_image.attached?
-                  = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
-                - else
-                  .icon.icon--person-circle-fill
-                = dv.dancer.name
-          - elsif dv.role == "follower"
-            = link_to root_path(follower: dv.dancer.slug) do
-              .stack.stack--line.stack--xxs
-                - if dv.dancer.profile_image.attached?
-                  = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
-                - else
-                  .icon.icon--person-circle-fill
-                = dv.dancer.name
-      - if video.song.present?
-        = link_to video.song.full_title, root_path(song: video.song.slug), class: "stack stack--line stack--xxs video-card__song-metadata"
-      - else
-        = link_to video.title, watch_path(v: video.youtube_id), class: "video-card__title" if video.title.present?
-      .video-card__metadata
-        = video.decorate.display_metadata
+    .video-card__primary
+      .video-card__title = link_to video.title, watch_path(v: video.youtube_id)
+      .video-card__metadata = video.decorate.display_metadata
+    .scrollable-tags.scrollable-tags--small
+      - video.dancer_videos.each do |dv|
+        - if dv.role == "leader"
+          = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
+        - elsif dv.role == "follower"
+          = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag video-card__dancer"
+    = link_to video.song.full_title, root_path(song: video.song.slug), class: "video-card__song-metadata tag" if video.song.present?
