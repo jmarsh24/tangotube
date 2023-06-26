@@ -55,6 +55,7 @@ class Video::FacetBuilder
   def genre
     facet_data = @video_relation
       .joins(:song)
+      .where("LOWER(songs.genre) IN ('tango', 'milonga', 'vals')")
       .group("LOWER(songs.genre)")
       .order("count_all DESC", "LOWER(songs.genre)")
       .count
