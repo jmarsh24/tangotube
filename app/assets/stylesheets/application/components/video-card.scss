@@ -1,10 +1,11 @@
 .video-card {
-  font-size: var(--font-size-md);
+  font-size: 12px;
+  font-weight: 500;
 
   &--compact {
     display: flex;
     gap: var(--spacing-xs);
-    font-size: var(--font-size-xs);
+    font-size: 12px;
 
     &__image {
       height: 100px;
@@ -18,14 +19,32 @@
     }
   }
 
+  &__title {
+    color: var(--color-neutral-1000);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__primary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
   &__content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-sm);
+    gap: 6px;
     padding: var(--spacing-xxxs) var(--spacing-xs);
-    font-size: var(--font-size-xs);
-    overflow: hidden; /* Prevent content overflow */
+    font-size: 12px;
+    overflow: hidden;
+  }
+
+  &__dancer {
+    color: var(--color-neutral-700);
   }
 
   &__metadata {

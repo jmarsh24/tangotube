@@ -1,15 +1,15 @@
 .tag {
   display: inline-block;
   border-radius: var(--border-radius-pill);
-  padding: var(--spacing-xxxs) var(--spacing-xs);
+  padding: 3px 10px;
   background: var(--color-neutral-100);
   color: var(--color-neutral-900);
-  font-weight: var(--font-weight-normal);
+  font-weight: 500;
 
   &--sm {
     font-size: var(--font-size-xs);
     display: inline-block;
-    font-weight: var(--font-weight-normal);
+    font-weight: 500;
   }
 
   &--lg {

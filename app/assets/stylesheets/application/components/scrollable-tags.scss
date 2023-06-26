@@ -8,6 +8,10 @@
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
   display: flex;
+
+  &--small {
+    gap: var(--spacing-xxs);
+  }
 }
 
 .scrollable-tags::-webkit-scrollbar {
