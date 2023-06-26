@@ -36,124 +36,147 @@ RSpec.describe Video do
 
   describe ".channel" do
     it "returns the channel for the video" do
-      video = videos(:video_1_featured)
+      videos = Video.channel(channels(:"030tango").channel_id)
 
-      expect(video.channel).to eq(channels(:jkukla_video))
+      expect(videos).to match_array([videos(:video_3_featured)])
+      expect(videos).not_to match_array([videos(:video_1_featured)])
     end
   end
 
   describe ".exclude_youtube_id" do
     it "returns videos that do not have the specified youtube_id" do
       video = videos(:video_1_featured)
+      videos = Video.exclude_youtube_id(video.youtube_id)
 
-      expect(Video.exclude_youtube_id(video.youtube_id)).not_to include(video)
+      expect(videos).not_to include(video)
+      expect(videos).to include(videos(:video_2_featured))
     end
   end
 
   describe ".featured" do
     it "returns videos that are featured" do
-      video = videos(:video_1_featured)
+      featured_videos = Video.featured
 
-      expect(Video.featured).to include(video)
+      expect(featured_videos).to include(videos(:video_1_featured))
+      expect(featured_videos).not_to include(videos(:video_5))
     end
   end
 
   describe ".not_featured" do
     it "returns videos that are not featured" do
-      video = videos(:video_1_featured)
+      not_featured_videos = Video.not_featured
 
-      expect(Video.not_featured).not_to include(video)
+      expect(not_featured_videos).to include(videos(:video_5))
+      expect(not_featured_videos).not_to include(videos(:video_1_featured))
     end
   end
 
   describe ".follower" do
     it "returns videos with the specified follower" do
-      video = videos(:video_1_featured)
+      corina_follower_videos = Video.follower("corina-herrera")
 
-      expect(Video.follower("noelia-hurtado")).to include(video)
+      expect(corina_follower_videos).to match_array([videos(:video_6)])
+      expect(corina_follower_videos).not_to include(videos(:video_5))
     end
   end
 
   describe ".leader" do
     it "returns videos with the specified leader" do
-      video = videos(:video_1_featured)
+      corina_leader_videos = Video.leader("corina-herrera")
 
-      expect(Video.leader("carlitos-espinoza")).to include(video)
+      expect(corina_leader_videos).to match_array([videos(:video_5)])
+      expect(corina_leader_videos).not_to include(videos(:video_6))
     end
   end
 
   describe ".genre" do
     it "returns videos with the specified genre" do
-      video = videos(:video_1_featured)
+      vals_videos = Video.genre("vals")
 
-      expect(Video.genre("tango")).to include(video)
+      expect(vals_videos).to match_array([videos(:video_4_featured)])
+      expect(vals_videos).not_to include(videos(:video_5))
     end
   end
 
   describe ".has_leader" do
     it "returns videos that have a leader" do
-      video = videos(:video_1_featured)
+      videos_with_leaders = Video.has_leader
 
-      expect(Video.has_leader).to include(video)
+      expect(videos_with_leaders).to match_array(Video.all)
+      video = videos(:video_1_featured)
+      video.couples.each(&:destroy!)
+      videos(:video_1_featured).leaders.each(&:destroy!)
+      videos_with_leaders.reload
+      expect(videos_with_leaders).not_to include(videos(:video_1_featured))
     end
   end
 
   describe ".has_follower" do
     it "returns videos that have a follower" do
-      video = videos(:video_1_featured)
+      videos_with_followers = Video.has_follower
 
-      expect(Video.has_follower).to include(video)
+      expect(videos_with_followers).to match_array(Video.all)
+      video = videos(:video_1_featured)
+      video.couples.each(&:destroy!)
+      videos(:video_1_featured).followers.each(&:destroy!)
+      videos_with_followers.reload
+      expect(videos_with_followers).not_to include(video)
     end
   end
 
   describe ".hd" do
     it "returns videos that are hd" do
-      video = videos(:video_1_featured)
+      hd_videos = Video.hd(true)
 
-      expect(Video.hd(true)).to include(video)
+      expect(hd_videos).to include(videos(:video_1_featured))
+      expect(hd_videos).not_to include(videos(:video_5))
     end
   end
 
   describe ".hidden" do
     it "returns videos that are hidden" do
-      video = videos(:video_1_featured)
-      video.update!(hidden: true)
+      videos(:video_1_featured).update!(hidden: true)
+      hidden_videos = Video.hidden
 
-      expect(Video.hidden).to include(video)
+      expect(hidden_videos).to include(videos(:video_1_featured))
+      expect(hidden_videos).not_to include(videos(:video_2_featured))
     end
   end
 
   describe ".not_hidden" do
     it "returns videos that are not hidden" do
-      video = videos(:video_1_featured)
+      videos(:video_1_featured).update!(hidden: true)
+      hidden_videos = Video.hidden
 
-      expect(Video.not_hidden).to include(video)
+      expect(hidden_videos).to include(videos(:video_1_featured))
+      expect(hidden_videos).not_to include(videos(:video_2_featured))
     end
   end
 
   describe ".orchestra" do
     it "returns videos with the specified orchestra" do
-      video = videos(:video_1_featured)
-      orchestra = orchestras(:di_sarli)
-      expect(Video.orchestra(orchestra.slug)).to include(video)
+      disarli_videos = Video.orchestra(orchestras(:di_sarli).slug)
+
+      expect(disarli_videos).to include(videos(:video_1_featured))
+      expect(disarli_videos).not_to include(videos(:video_5))
     end
   end
 
   describe ".song" do
     it "returns videos with the specified song" do
-      video = videos(:video_1_featured)
-      song = songs(:cuando_el_amor_muere)
+      cuando_el_amor_muere_videos = Video.song(songs(:cuando_el_amor_muere).slug)
 
-      expect(Video.song(song.slug)).to include(video)
+      expect(cuando_el_amor_muere_videos).to include(videos(:video_1_featured))
+      expect(cuando_el_amor_muere_videos).not_to include(videos(:video_2_featured))
     end
   end
 
   describe ".event" do
     it "returns videos with the specified event" do
-      video = videos(:video_1_featured)
-      event = events(:academia_de_tango)
+      event_videos = Video.event(events(:academia_de_tango).slug)
 
-      expect(Video.event(event.slug)).to include(video)
+      expect(event_videos).to include(videos(:video_1_featured))
+      expect(event_videos).not_to include(videos(:video_2_featured))
     end
   end
 
@@ -189,55 +212,69 @@ RSpec.describe Video do
 
   describe ".year" do
     it "returns videos with the specified year" do
-      video = videos(:video_1_featured)
+      year_videos = Video.year("2014")
 
-      expect(Video.year(2014)).to include(video)
+      expect(year_videos).to include(videos(:video_1_featured))
+      expect(year_videos).not_to include(videos(:video_2_featured))
     end
   end
 
   describe ".within_week_of" do
     it "returns videos that are within a week of the specified date" do
-      video = videos(:video_1_featured)
+      videos(:video_2_featured).update!(upload_date: videos(:video_1_featured).upload_date + 6.days)
+      videos_within_week_of = Video.within_week_of(videos(:video_1_featured).upload_date)
 
-      expect(Video.within_week_of(video.upload_date)).to include(video)
+      expect(videos_within_week_of).to match_array([videos(:video_1_featured), videos(:video_2_featured)])
+      expect(videos_within_week_of).not_to include(videos(:video_3_featured))
     end
   end
 
   describe ".liked" do
-    xit "returns videos that are liked by the specified user" do
-      video = videos(:video_1_featured)
+    it "returns videos that are liked by the specified user" do
+      liked_video = videos(:video_1_featured)
       user = users(:regular)
-      video.upvote_by user, vote_scope: "like"
+      user.likes.create!(likeable: liked_video)
+      liked_videos = Video.liked(user)
 
-      expect(Video.liked(users(:regular))).to include(video)
+      expect(liked_videos).to include(liked_video)
+      expect(liked_videos).not_to include(videos(:video_2_featured))
+    end
+  end
+
+  describe ".search" do
+    it "returns videos that match the search term" do
+      Video.all.each do |video|
+        video.index!(now: true)
+      end
+      mispelled_search = Video.search("carlito espnosa")
+
+      expect(mispelled_search).to include(videos(:video_1_featured), videos(:video_4_featured))
+      expect(mispelled_search).not_to include(videos(:video_2_featured))
     end
   end
 
   describe "#clicked!" do
     it "increases click_count by 1" do
       video = videos(:video_1_featured)
+
       expect { video.clicked! }.to change(video, :click_count).by(1)
     end
   end
 
   describe "#featured?" do
     it "returns true when video is featured" do
-      video = videos(:video_1_featured)
-      video.update!(featured: true)
-
-      expect(video.featured?).to be(true)
+      expect(videos(:video_1_featured).featured?).to be(true)
     end
 
     it "returns false when video is not featured" do
-      video = videos(:video_1_featured)
-
-      expect(video.featured?).to be(true)
+      expect(videos(:video_5).featured?).to be(false)
     end
   end
 
   describe "#to_param" do
     it "returns youtube_id" do
       video = videos(:video_1_featured)
+
       expect(video.to_param).to eq(video.youtube_id)
     end
   end
