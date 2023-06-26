@@ -35,7 +35,7 @@ class Channel < ApplicationRecord
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
-  scope :searched, ->(term) { where("title ILIKE ?", "%#{term}%") }
+  scope :search, ->(term) { where("title ILIKE ?", "%#{term}%") }
 
   def import_new_videos(use_scraper: true, use_music_recognizer: true)
     return unless active

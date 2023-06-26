@@ -26,7 +26,7 @@ class Orchestra < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-  scope :searched, ->(term) { where("name ILIKE ?", "%#{term}%") }
+  scope :search, ->(term) { where("name ILIKE ?", "%#{term}%") }
 
   def to_param
     "#{id}-#{slug}"

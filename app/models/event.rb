@@ -29,7 +29,7 @@ class Event < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-  scope :searched, ->(term) { where("title ILIKE ? OR city ILIKE ? OR country ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%") }
+  scope :search, ->(term) { where("title ILIKE ? OR city ILIKE ? OR country ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%") }
 
   def search_title
     return if title.empty?

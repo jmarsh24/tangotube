@@ -30,18 +30,17 @@ class Song < ApplicationRecord
   validates :artist, presence: true
 
   belongs_to :orchestra, optional: true
-  has_many :videos, dependent: :nullify
+  has_many :videos, dependent: :nullify, counter_cache: true
   has_many :leaders, through: :videos
   has_many :followers, through: :videos
-  counter_culture :orchestra, column_name: "songs_count"
 
   after_validation :set_slug, only: [:create, :update]
 
   scope :sort_by_popularity, -> { order(popularity: :desc) }
-  scope :filter_by_popularity, -> { where.not(popularity: nil) }
-  scope :filter_by_active, -> { where(active: true) }
-  scope :filter_by_not_active, -> { where(active: false) }
-  scope :searched, ->(term) { where("title ILIKE ?", "%#{term}%") }
+  scope :popularity, -> { where.not(popularity: nil) }
+  scope :active, -> { where(active: true) }
+  scope :not_active, -> { where(active: false) }
+  scope :search, ->(term) { where("title ILIKE ?", "%#{term}%") }
 
   def full_title
     title_part = title&.titleize

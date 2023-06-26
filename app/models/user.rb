@@ -55,7 +55,7 @@ class User < ApplicationRecord
 
   scope :admins, -> { where(role: :admin) }
   scope :non_admins, -> { where(role: :user) }
-  scope :searched, ->(term) { where("name ILIKE ? OR email ILIKE ?", "%#{term}%", "%#{term}%") }
+  scope :search, ->(term) { where("name ILIKE ? OR email ILIKE ?", "%#{term}%", "%#{term}%") }
 
   def remember_me
     true

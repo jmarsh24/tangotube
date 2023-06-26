@@ -33,7 +33,7 @@ class Search
   end
 
   def results_for_category(category)
-    results = MODELS[category].searched(term)
+    results = MODELS[category].search(term)
     results.any? ? results.limit(DEFAULT_LIMIT) : []
   end
 
@@ -42,7 +42,7 @@ class Search
   end
 
   def results_for_all_models(limit)
-    models_with_results = MODELS.values.select { |model| model.searched(term).any? }
-    models_with_results.flat_map { |model| model.searched(term).limit(limit) }
+    models_with_results = MODELS.values.select { |model| model.search(term).any? }
+    models_with_results.flat_map { |model| model.search(term).limit(limit) }
   end
 end
