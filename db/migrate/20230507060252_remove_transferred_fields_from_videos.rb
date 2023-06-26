@@ -23,20 +23,12 @@ class RemoveTransferredFieldsFromVideos < ActiveRecord::Migration[7.1]
     remove_column :videos, :performance_total_number, :string
     remove_column :videos, :scanned_youtube_music, :string
     remove_column :videos, :scanned_song, :string
-    remove_column :videos, :acr_response_code, :string
     remove_column :videos, :spotify_artist_id, :string
     remove_column :videos, :spotify_artist_id_1, :string
     remove_column :videos, :spotify_artist_id_2, :string
-    remove_column :videos, :title, :string
-    remove_column :videos, :description, :string
-    remove_column :videos, :duration, :integer
-    remove_column :videos, :view_count, :integer
-    remove_column :videos, :like_count, :integer
     remove_column :videos, :dislike_count, :integer
     remove_column :videos, :favorite_count, :integer
     remove_column :videos, :comment_count, :integer
-    remove_column :videos, :hd, :boolean
-    remove_column :videos, :tags, :text, default: [], array: true
   end
 
   def down
@@ -61,19 +53,11 @@ class RemoveTransferredFieldsFromVideos < ActiveRecord::Migration[7.1]
     add_column :videos, :performance_total_number, :string
     add_column :videos, :scanned_youtube_music, :string
     add_column :videos, :scanned_song, :string
-    add_column :videos, :acr_response_code, :string
     add_column :videos, :spotify_artist_id, :string
     add_column :videos, :spotify_artist_id_1, :string
     add_column :videos, :spotify_artist_id_2, :string
-    add_column :videos, :title, :string
-    add_column :videos, :description, :string
-    add_column :videos, :duration, :integer
-    add_column :videos, :view_count, :integer
-    add_column :videos, :like_count, :integer
     add_column :videos, :dislike_count, :integer
     add_column :videos, :favorite_count, :integer
     add_column :videos, :comment_count, :integer
-    add_column :videos, :hd, :boolean
-    add_column :videos, :tags, :text, default: [], array: true
   end
 end
