@@ -66,4 +66,4 @@
             .metadata-item 
               .metadata-item__label = t(".video_duration_heading")
               .metadata-item__value = l(Time.at(video.duration), format: :video_duration)
-  = render partial: "videos/show/lyrics" if video.song.lyrics.present?
+  = render partial: "videos/show/lyrics" if video&.song&.lyrics.present?
