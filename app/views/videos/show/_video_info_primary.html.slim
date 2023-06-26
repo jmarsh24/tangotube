@@ -1,28 +1,13 @@
 .video-info-primary
-  .stack.stack--line.stack--md
-    = link_to image_tag(video.channel.thumbnail_url, class: "avatar avatar--lg"), root_path(channel: video.channel.channel_id)
-    .stack.stack--xxxs
-      - unless video.song.present?
-        h1.heading-4.heading-4= video.title if video.title.present?
-      .scrollable-tags
+  .stack.stack--xs
+    .stack.stack--xxs
+      h1.heading-4.heading-4 = link_to video.title, watch_path(v: video.youtube_id)
+      .video-info-primary__metadata = video.decorate.display_metadata
+    .stack.stack--xxs.stack--justify-left
+      .scrollable-tags.scrollable-tags--small
         - video.dancer_videos.each do |dv|
           - if dv.role == "leader"
-            = link_to root_path(leader: dv.dancer.slug) do
-              .stack.stack--line.stack--xxs
-                - if dv.dancer.profile_image.attached?
-                  = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
-                - else
-                  .icon.icon--person-circle-fill
-                = dv.dancer.name
+            = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
           - elsif dv.role == "follower"
-            = link_to root_path(follower: dv.dancer.slug) do
-              .stack.stack--line.stack--xxs
-                - if dv.dancer.profile_image.attached?
-                  = image_tag dv.dancer.profile_image, width: 36, class: "avatar avatar--sm"
-                - else
-                  .icon.icon--person-circle-fill
-                = dv.dancer.name
-          h2.heading-5.video-info-primary__song-info = link_to video.song.full_title, root_path(song_id: video.song.id) if video.song.present?
-      - if video.channel.thumbnail_url.present?
-      .video-info-primary__metadata
-        = video.decorate.display_metadata
+            = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag video-card__dancer"
+      = link_to video.song.full_title, root_path(song_id: video.song.id), class: "heading-5 video-info-primary__song-info video-card__song-metadata tag" if video.song.present?
