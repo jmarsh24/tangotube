@@ -13,7 +13,7 @@
             .search__result-subtitle #{result.city}, #{result.country}
       - when Song
         = link_to root_path(song: result.slug), class: 'search__result' do
-          - if result.orchestra.profile_image.attached?
+          - if result&.orchestra&.profile_image&.attached?
             = image_tag result.orchestra.profile_image, class: "search__result-image"
           - else
             = image_tag "default_avatar.jpg", class: "search__result-image"

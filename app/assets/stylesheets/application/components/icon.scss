@@ -10,7 +10,7 @@ $icon-sizes: (
   height: map-get($icon-sizes, 'md');
   width: map-get($icon-sizes, 'md');
   flex-shrink: 0;
-  color: var(--color-neutral-0);
+  color: var(--color-neutral-1000);
 
   @each $size-name, $size-value in $icon-sizes {
     &--#{$size-name} {
