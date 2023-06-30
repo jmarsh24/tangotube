@@ -1,5 +1,5 @@
-= turbo_frame_tag "#{@facet.name}_facet" do
-  - cache [@facet.name, filtering_params] do
+= turbo_frame_tag "#{@facet.name}_facet"
+  - cache [@facet.name, filtering_params, current_user&.id] do
     .stack
       h1.heading-1 = @facet.name.titleize
       .list-box

@@ -11,7 +11,7 @@ class FacetsController < ApplicationController
   private
 
   def filtering_params
-    params.permit(
+    params.permit!.slice(
       :leader,
       :follower,
       :channel,
@@ -25,6 +25,6 @@ class FacetsController < ApplicationController
       :query,
       :watched,
       :liked
-    )
+    ).to_h
   end
 end
