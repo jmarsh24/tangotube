@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby "3.2.2"
 
-gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "7.0.6"
 gem "rack", "2.2.7"
 gem "puma"
 
@@ -40,7 +40,6 @@ gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "kaminari"
 gem "pundit"
-gem "ransack"
 gem "rails-i18n"
 gem "safety_mailer"
 gem "shimmer"
@@ -57,6 +56,8 @@ gem "down"
 gem "capybara"
 gem "cuprite"
 gem "activerecord-postgres_enum"
+gem "fuzzy-string-match"
+gem "ransack"
 
 # Assets
 gem "vite_rails"
