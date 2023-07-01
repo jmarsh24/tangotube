@@ -4,7 +4,7 @@ class DancerResource < Avo::BaseResource
   self.title = :name
   self.includes = [:videos, :couples, :partners, :orchestras, :songs]
   self.search_query = -> do
-    scope.ransack(name_eq: params[:q], m: "or").result(distinct: false)
+    scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
   end
 
   field :id, as: :id
@@ -29,4 +29,8 @@ class DancerResource < Avo::BaseResource
   field :songs, as: :has_many, through: :videos
   field :couples, as: :has_many
   field :partners, as: :has_many, through: :couples
+
+  action ToggleReviewed
+
+  filter ReviewedFilter
 end

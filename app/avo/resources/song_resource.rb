@@ -35,4 +35,5 @@ class SongResource < Avo::BaseResource
 
   filter FeaturedFilter
   filter HiddenFilter
+  filter ActiveFilter
 end
