@@ -7,7 +7,7 @@ module ExternalVideoImport
     attribute :youtube, Youtube::VideoMetadata.to_type
     attribute :music, MusicRecognition::Metadata.to_type
 
-    def searchable_song_titles
+    def song_titles
       [
         music.acr_song_title,
         music.spotify_track_name,
@@ -15,11 +15,19 @@ module ExternalVideoImport
       ].flatten.compact
     end
 
-    def searchable_artist_names
+    def artist_names
       [
         music.spotify_artist_names,
         music.acr_artist_names,
-        youtube.song.titles.first
+        youtube.song.artist,
+        youtube.song.writers
+      ].flatten.compact
+    end
+
+    def album_names
+      [
+        youtube.song.album,
+        music.spotify_album_name
       ].flatten.compact
     end
 

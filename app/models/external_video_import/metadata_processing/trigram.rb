@@ -4,7 +4,7 @@ module ExternalVideoImport
   module MetadataProcessing
     class Trigram
       class << self
-        def best_matches(list:, text:, threshold: 0.6, &block)
+        def best_matches(list:, text:, threshold: 0.75, &block)
           matches = list.map do |item|
             query = block.call(item)
             similarity_ratio = inclusion_similarity(query, text)

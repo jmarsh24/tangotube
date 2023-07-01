@@ -21,6 +21,10 @@ class DancerPolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def search?
+    true
+  end
+
   def act_on?
     user&.admin?
   end

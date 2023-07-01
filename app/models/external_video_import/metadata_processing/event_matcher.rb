@@ -5,7 +5,7 @@ module ExternalVideoImport
     class EventMatcher
       def match(metadata_fields:)
         text = metadata_fields.join(" ")
-        event_data = Trigram.best_matches(list: all_events, text:, threshold: 0.3, &event_match_block)
+        event_data = Trigram.best_matches(list: all_events, text:, threshold: 0.75, &event_match_block)
 
         find_or_create_event(event_data)
       end

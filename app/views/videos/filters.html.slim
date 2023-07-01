@@ -5,4 +5,3 @@
 = turbo_frame_tag :year_facet, src: facet_path(id: "year", params: filtering_params)	
 - if filtering_params.present? || params[:sort].present?	
   = link_to "Clear All", root_path, method: :get, class: "button button--secondary"	
-  = f.hidden_field :filtering, value: "true"

@@ -4,13 +4,11 @@ class UpdateVideoMetadataJob < ApplicationJob
   queue_as :default
 
   def perform
-    # Depending on your DB, you may need to adjust this number. This batch size aims to balance memory usage and number of total operations.
     batch_size = 500
+
     Video.where(title: nil).find_in_batches(batch_size:).with_index do |videos, batch|
-      ActiveRecord::Base.transaction do
-        videos.each do |video|
-          update_metadata(video)
-        end
+      videos.each do |video|
+        update_metadata(video)
       end
       Rails.logger.info "Processed batch ##{batch + 1}"
     end
@@ -19,21 +17,19 @@ class UpdateVideoMetadataJob < ApplicationJob
   private
 
   def update_metadata(video)
-    ActiveRecord::Base.connection.execute <<-SQL
-        UPDATE videos 
-        SET 
-          upload_date_year = EXTRACT(YEAR FROM (metadata->'youtube'->>'upload_date')::timestamp),
-          title = metadata->'youtube'->>'title',
-          description = metadata->'youtube'->>'description',
-          hd = (metadata->'youtube'->>'hd')::boolean,
-          youtube_view_count = (metadata->'youtube'->>'view_count')::integer,
-          youtube_like_count = (metadata->'youtube'->>'like_count')::integer,
-          youtube_tags = ARRAY(
-            SELECT jsonb_array_elements_text(metadata->'youtube'->'tags')
-          ),
-          duration = (metadata->'youtube'->>'duration')::integer
-        WHERE id = #{video.id};
-    SQL
+    youtube_data = video.metadata.youtube
+
+    video.update!(
+      upload_date_year: DateTime.parse(Video.first.metadata.youtube.upload_date.to_s).year,
+      title: youtube_data.title,
+      description: youtube_data.description,
+      hd: youtube_data.hd,
+      youtube_view_count: youtube_data.view_count.to_i,
+      youtube_like_count: youtube_data.like_count.to_i,
+      youtube_tags: youtube_data.tags,
+      duration: youtube_data.duration.to_i,
+      acr_response_code: youtube_data.music.code
+    )
   rescue => e
     Rails.logger.error "Failed to update metadata for video ID #{video.id}: #{e.message}"
   end

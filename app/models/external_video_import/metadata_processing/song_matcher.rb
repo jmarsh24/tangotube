@@ -10,6 +10,8 @@ module ExternalVideoImport
 
       VideoData = Struct.new(:title, :description, :song_titles, :song_albums, :song_artists, keyword_init: true)
 
+      @@songs_cache = nil
+
       def initialize
         @jarow = FuzzyStringMatch::JaroWinkler.create(:pure)
       end
@@ -24,8 +26,7 @@ module ExternalVideoImport
         )
 
         initialize_match_variables
-
-        ::Song.joins(:orchestra).active.find_each do |song|
+        active_songs.each do |song|
           calculate_scores_for_song(song, video_data)
           determine_best_match(song)
         end
@@ -43,8 +44,7 @@ module ExternalVideoImport
         )
 
         initialize_match_variables
-
-        ::Song.joins(:orchestra).active.find_each do |song|
+        active_songs.each do |song|
           calculate_scores_for_song(song, video_data)
           determine_best_match(song)
         end
@@ -58,6 +58,10 @@ module ExternalVideoImport
         @best_match = nil
         @best_score = 0
         @results = {}
+      end
+
+      def active_songs
+        @@songs_cache ||= ::Song.joins(:orchestra).active.to_a
       end
 
       def calculate_scores_for_song(song, video_data)
@@ -104,8 +108,10 @@ module ExternalVideoImport
       end
 
       def calculate_max_score(song_attribute, attributes_array)
-        scores = attributes_array.compact.map do |attribute|
-          ngram_score(song_attribute, attribute)
+        scores = attributes_array.compact.flat_map do |attribute|
+          attribute.split.map do |word|
+            ngram_score(song_attribute, word)
+          end
         end
 
         scores.compact.max || 0
@@ -126,13 +132,13 @@ module ExternalVideoImport
       def normalize(text)
         return "" if text.nil?
 
-        normalized_text = text.parameterize(separator: "").downcase
+        normalized_text = text.gsub("'", "").parameterize(separator: " ").downcase
         STOP_WORDS.each { |stop_word| normalized_text.gsub!(stop_word, "") }
         normalized_text.strip
       end
 
       def normalize_array(array)
-        array.compact.map { |text| normalize(text) }
+        array.compact.map { |text| text.split.map { |word| normalize(word) } }.flatten
       end
     end
   end

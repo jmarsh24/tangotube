@@ -19,7 +19,7 @@ class SpotifyArtistFinder
     when 404
       raise "Artist not found"
     else
-      raise "Unexpected error"
+      raise response
     end
   end
 

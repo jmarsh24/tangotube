@@ -7,7 +7,7 @@ module ExternalVideoImport
         dancers = ::Dancer.all.pluck(:id, :first_name, :last_name)
         metadata_fields = Array(metadata_fields) # Ensure metadata_fields is an array
         text = metadata_fields.join(" ")
-        dancer_ids = find_best_matches(dancers, text, threshold: 0.80)
+        dancer_ids = find_best_matches(dancers, text, threshold: 0.75)
 
         if dancer_ids.any?
           ::Dancer.find(dancer_ids)
