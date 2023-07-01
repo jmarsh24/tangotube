@@ -79,11 +79,11 @@ class Video::FacetBuilder
   end
 
   def song
-    Facet.new(name: "song", option_builder: ->(name, count) { Option.new(label: name[0].titleize, value: name[1], count:) }) do
+    Facet.new(name: "song", option_builder: ->(name, count) { Option.new(label: name[0], value: name[1], count:) }) do
       @video_relation
-        .joins(:song)
-        .group("songs.title", "songs.slug")
-        .order("count_all DESC", "songs.title")
+        .joins(song: :orchestra)
+        .group("songs.display_title", "songs.slug")
+        .order(Arel.sql("COUNT(*) DESC"))
         .limit(10)
         .count
     end
@@ -103,6 +103,6 @@ class Video::FacetBuilder
   private
 
   def custom_titleize(name)
-    name.split("'")&.map(&:titleize)&.join("'")
+    name&.split("'")&.map(&:titleize)&.join("'")
   end
 end
