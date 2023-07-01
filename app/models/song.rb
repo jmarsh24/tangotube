@@ -26,6 +26,8 @@
 #  orchestra_id      :bigint
 #
 class Song < ApplicationRecord
+  include SongSearchable
+
   validates :title, presence: true
   validates :artist, presence: true
 
@@ -34,6 +36,7 @@ class Song < ApplicationRecord
   has_many :leaders, through: :videos
   has_many :followers, through: :videos
 
+  before_save :set_display_title
   after_validation :set_slug, only: [:create, :update]
 
   scope :sort_by_popularity, -> { order(popularity: :desc) }
@@ -82,5 +85,15 @@ class Song < ApplicationRecord
     def missing_english_translation
       where.not(lyrics: nil).where(lyrics_en: nil)
     end
+  end
+
+  private
+
+  def custom_titleize(name)
+    name&.split("'")&.map(&:titleize)&.join("'")
+  end
+
+  def set_display_title
+    self.display_title = [title&.titleize, custom_titleize(orchestra&.name), genre&.titleize, date&.year].compact.join(" - ")
   end
 end

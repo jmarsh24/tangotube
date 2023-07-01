@@ -23,18 +23,15 @@ module ExternalVideoImport
       ].flatten.compact
     end
 
-    def searchable_music_fields
-      [
-        music.acr_album_name,
-        music.spotify_album_name,
-        youtube.song.album,
-        youtube.song.writers
-      ].flatten.compact
-    end
-
     def genre_fields
-      track = RSpotify::Track.find(music.spotify_track_id)
-      external_genres = track.artists.first.genres if track.present?
+      external_genres = []
+      if music.spotify_artist_ids.any?(&:present?)
+        music.spotify_artist_ids.compact.each do |artist_id|
+          external_genres << SpotifyArtistFinder.new.find(artist_id).dig("genres")
+        rescue => e
+          puts "Error retrieving Spotify artist genres: #{e.message}"
+        end
+      end
       [music.genre, external_genres].flatten.compact
     end
   end

@@ -11,79 +11,14 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
 
   describe "#match" do
     context "when the song exists" do
-      let(:metadata_fields) { ["Juan D'Arienzo Nueve De Julio"] }
-      let(:artist_fields) { ["Juan D'Arienzo"] }
-      let(:title_fields) { ["Nueve De Julio"] }
-      let(:genre_fields) { ["Tango"] }
-
       it "returns the best match" do
-        expect(song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:)).to contain_exactly(song)
-      end
-    end
-
-    context "when the song does not exist" do
-      let(:metadata_fields) { ["Juan Villareal Milonga Del Don"] }
-      let(:artist_fields) { ["Juan Villarreal"] }
-      let(:title_fields) { ["Milonga Del Don"] }
-      let(:genre_fields) { ["Tango"] }
-
-      it "returns a newly created song" do
-        expect(song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:)).to include(::Song.last)
-      end
-    end
-
-    context "when metadata has a mix of artist and title fields" do
-      let(:metadata_fields) { ["Nueve De Julio by Juan D'Arienzo"] }
-      let(:artist_fields) { ["Juan D'Arienzo"] }
-      let(:title_fields) { ["Nueve De Julio"] }
-      let(:genre_fields) { ["undefined"] }
-
-      it "returns the best match" do
-        expect(song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:)).to contain_exactly(song)
-      end
-    end
-
-    context "when the threshold is not met" do
-      let(:metadata_fields) { ["Some unrelated metadata"] }
-      let(:artist_fields) { ["Nonexistent Artist"] }
-      let(:title_fields) { ["Nonexistent Title"] }
-      let(:genre_fields) { ["undefined"] }
-
-      it "returns a newly created song" do
-        expect(song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:)).to include(::Song.last)
-      end
-    end
-
-    context "when metadata contains accented characters" do
-      let(:metadata_fields) { ["José García Café Dominguez"] }
-      let(:artist_fields) { ["José García"] }
-      let(:title_fields) { ["Café Dominguez"] }
-      let(:genre_fields) { ["undefined"] }
-
-      it "returns the best match" do
-        expect(song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:)).to contain_exactly(accented_song)
-      end
-    end
-
-    context "when artist_fields and title_fields are nil" do
-      let(:metadata_fields) { ["Some unrelated metadata"] }
-      let(:artist_fields) { [nil] }
-      let(:title_fields) { [nil] }
-      let(:genre_fields) { ["undefined"] }
-
-      it "does not create a new song" do
-        expect { song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:) }.not_to change(::Song, :count)
-      end
-    end
-
-    context "when artist_fields and title_fields are empty" do
-      let(:metadata_fields) { ["Some unrelated metadata"] }
-      let(:artist_fields) { [] }
-      let(:title_fields) { [] }
-      let(:genre_fields) { ["undefined"] }
-
-      it "does not create a new song" do
-        expect { song_matcher.match_or_create(metadata_fields:, artist_fields:, title_fields:, genre_fields:) }.not_to change(::Song, :count)
+        song = Song.create!(title: "Milonga Del 83", artist: "Juan D'Arienzo", genre: "Milonga", orchestra: orchestras(:darienzo), last_name_search: "darienzo")
+        video_title = "Agustina Piaggio &Carlitos Espinoza - Milonga Del 83 - by SivisArt"
+        video_description = "Carlitos Espinoza & Agustina Piaggio  at the Baden Baden Tango Festival 2022.\nSubscribe to my channel.\nImages & Realisation: Sivis'Art - ALL RIGHTS RESERVED.\n-Website: http://www.sivisart.com/\n-Instagram: Sivisart\n-facebook: Sivisart\n\nFeel free to comment, like, share the video. Thank you for your support & Enjoy !"
+        song_titles = ["Milonga Del Ochenta Y Tres", "Milonga Del 83"]
+        song_albums = []
+        song_artists = ["J.DArienzo y su Orquesta Típica"]
+        expect(described_class.new.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(song)
       end
     end
   end
