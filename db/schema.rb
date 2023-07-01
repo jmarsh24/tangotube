@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_26_192632) do
+ActiveRecord::Schema[7.1].define(version: 2023_07_01_085246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -34,9 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_26_192632) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.datetime "created_at", precision: nil, null: false
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -314,6 +312,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_26_192632) do
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
     t.index ["upload_date"], name: "index_videos_on_upload_date"
+    t.index ["upload_date_year"], name: "index_videos_on_upload_date_year"
     t.index ["view_count"], name: "index_videos_on_view_count"
     t.index ["youtube_id"], name: "index_videos_on_youtube_id", unique: true
   end

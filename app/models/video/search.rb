@@ -24,7 +24,7 @@ class Video::Search
   end
 
   def facet(name:)
-    videos = Video::Filter.new(Video.not_hidden, filtering_params: @filtering_params.except(name.to_sym), user:).filtered_videos
+    videos = Video::Filter.new(Video, filtering_params: @filtering_params.except(name.to_sym), user:).filtered_videos
     Video::FacetBuilder.new(videos).public_send(name)
   end
 end
