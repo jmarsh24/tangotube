@@ -16,7 +16,7 @@ class VideosController < ApplicationController
 
     @current_page = params[:page]&.to_i || 1
 
-    @featured_videos = if filtering_params.empty? && params[:sort]&.blank?
+    @featured_videos = if filtering_params.empty? && params[:sort].nil?
       paginated(@search.featured_videos.includes(Video.search_includes), per: 12)
     end
 
