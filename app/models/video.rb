@@ -113,9 +113,9 @@ class Video < ApplicationRecord
       .where(dancers: {slug: value})
   }
   scope :genre, ->(value) {
-                  subquery = Song.where("LOWER(genre) = ?", value.downcase).select(:id)
-                  joins(:song).where(songs: {id: subquery})
-                }
+    subquery = Song.where("LOWER(genre) = ?", value.downcase).select(:id)
+    where(song_id: subquery)
+  }
   scope :has_leader, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'leader')") }
   scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }
   scope :hd, ->(value) { where(hd: value) }
@@ -124,15 +124,15 @@ class Video < ApplicationRecord
   scope :liked, ->(user) { joins(:likes).where(likes: {likeable_type: "Video", user_id: user.id}) }
   scope :orchestra, ->(value) {
                       subquery = Song.joins(:orchestra).where(orchestras: {slug: value}).select(:id)
-                      joins(song: :orchestra).where(songs: {id: subquery})
+                      where(song_id: subquery)
                     }
   scope :song, ->(value) {
                  subquery = Song.where(slug: value).select(:id)
-                 joins(:song).where(songs: {id: subquery})
+                 where(songs_id: subquery)
                }
   scope :event, ->(value) {
                   subquery = Event.where(slug: value).select(:id)
-                  joins(:event).where(events: {id: subquery})
+                  where(event_id: subquery)
                 }
   scope :watched, ->(user) {
     subquery = Watch.where(user_id: user.id).group(:video_id).select(:video_id)
