@@ -11,7 +11,7 @@ class Video::Search
   end
 
   def videos
-    filtered_videos = Video::Filter.new(Video.not_hidden, filtering_params:, user:).filtered_videos
+    filtered_videos = Video::Filter.new(Video, filtering_params:, user:).filtered_videos
     if sort.present?
       Video::Sort.new(filtered_videos, sort:).sorted_videos
     else
@@ -20,7 +20,7 @@ class Video::Search
   end
 
   def featured_videos
-    Video.not_hidden.where(featured: true).order("RANDOM()")
+    Video.where(featured: true).order("RANDOM()")
   end
 
   def facet(name:)

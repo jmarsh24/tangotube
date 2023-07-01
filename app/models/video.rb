@@ -112,16 +112,28 @@ class Video < ApplicationRecord
     joins(:dancers)
       .where(dancers: {slug: value})
   }
-  scope :genre, ->(value) { joins(:song).where("LOWER(songs.genre) = ?", value.downcase) }
+  scope :genre, ->(value) {
+                  subquery = Song.where("LOWER(genre) = ?", value.downcase).select(:id)
+                  joins(:song).where(songs: {id: subquery})
+                }
   scope :has_leader, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'leader')") }
   scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }
   scope :hd, ->(value) { where(hd: value) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :liked, ->(user) { joins(:likes).where(likes: {likeable_type: "Video", user_id: user.id}) }
-  scope :orchestra, ->(value) { joins(:song, :orchestra).where(orchestras: {slug: value}) }
-  scope :song, ->(value) { joins(:song).where(songs: {slug: value}) }
-  scope :event, ->(value) { joins(:event).where(events: {slug: value}) }
+  scope :orchestra, ->(value) {
+                      subquery = Song.joins(:orchestra).where(orchestras: {slug: value}).select(:id)
+                      joins(song: :orchestra).where(songs: {id: subquery})
+                    }
+  scope :song, ->(value) {
+                 subquery = Song.where(slug: value).select(:id)
+                 joins(:song).where(songs: {id: subquery})
+               }
+  scope :event, ->(value) {
+                  subquery = Event.where(slug: value).select(:id)
+                  joins(:event).where(events: {id: subquery})
+                }
   scope :watched, ->(user) {
     subquery = Watch.where(user_id: user.id).group(:video_id).select(:video_id)
     where(id: subquery)
@@ -152,11 +164,7 @@ class Video < ApplicationRecord
         :event,
         :performance_video,
         :performance,
-        thumbnail_attachment: :blob,
-        dancers: {profile_image_attachment: :blob},
-        event: {profile_image_attachment: :blob},
-        song: {orchestra: {profile_image_attachment: :blob}},
-        channel: {thumbnail_attachment: :blob}
+        thumbnail_attachment: :blob
       ]
     end
   end

@@ -119,7 +119,7 @@ class VideosController < ApplicationController
   end
 
   def filtering_params
-    params.permit(
+    params.permit!.slice(
       :leader,
       :follower,
       :channel,
@@ -134,6 +134,6 @@ class VideosController < ApplicationController
       :search,
       :dancer,
       :couples
-    )
+    ).to_h
   end
 end
