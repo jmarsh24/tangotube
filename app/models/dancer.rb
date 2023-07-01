@@ -37,6 +37,8 @@ class Dancer < ApplicationRecord
   after_validation :set_slug, only: [:create, :update]
 
   scope :search, ->(term) { where("CONCAT_WS(' ', first_name, last_name) ILIKE unaccent(?)", "%#{term}%") }
+  scope :reviewed, -> { where(reviewed: true) }
+  scope :unreviewed, -> { where(reviewed: false) }
 
   def full_name
     "#{first_name} #{last_name}"
@@ -44,6 +46,10 @@ class Dancer < ApplicationRecord
 
   def to_param
     "#{id}-#{slug}"
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["bio", "created_at", "first_name", "gender", "id", "last_name", "middle_name", "name", "nick_name", "reviewed", "slug", "updated_at", "user_id", "videos_count"]
   end
 
   private
