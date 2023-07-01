@@ -10,8 +10,8 @@ module ExternalVideoImport
         @thumbnail_attacher = thumbnail_attacher
       end
 
-      def update(metadata, timeout: 2.minutes)
-        @video.update!(metadata:)
+      def update(metadata)
+        @video.update!(metadata: metadata.to_json, metadata_updated_at: Time.current)
         attach_thumbnail(metadata.youtube.thumbnail_url.highest_resolution)
         @video
       rescue ActiveRecord::RecordInvalid => e
