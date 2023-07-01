@@ -128,7 +128,7 @@ class Video < ApplicationRecord
                     }
   scope :song, ->(value) {
                  subquery = Song.where(slug: value).select(:id)
-                 where(songs_id: subquery)
+                 where(song_id: subquery)
                }
   scope :event, ->(value) {
                   subquery = Event.where(slug: value).select(:id)
