@@ -40,10 +40,10 @@ module SongSearchable
         "100" => "cien"
       }
 
-      normalized_text = normalize_text(text)
-      converted_text = convert_numbers(normalized_text, number_mapping)
+      converted_text = convert_numbers(text, number_mapping)
+      normalized_text = normalize_text(converted_text)
 
-      converted_text.encode("UTF-8", invalid: :replace, undef: :replace)
+      normalized_text.encode("UTF-8", invalid: :replace, undef: :replace)
     end
 
     def normalize_text(text)
@@ -51,15 +51,19 @@ module SongSearchable
     end
 
     def convert_numbers(text, number_mapping)
-      text.gsub(/\d+/) do |number|
+      text.gsub(/\b\d+\b/) do |number|
         if number.to_i <= 100
           if number.to_i <= 20 || number.to_i % 10 == 0
-            "#{number} #{number_mapping[number]}" || number
+            number_mapping[number].to_s || number
           else
             tens = (number.to_i / 10) * 10
             units = number.to_i % 10
 
-            "#{number} #{number_mapping[tens.to_s]} y #{number_mapping[units.to_s]}"
+            if units == 0
+              number_mapping[tens.to_s].to_s
+            else
+              "#{number_mapping[tens.to_s]} y #{number_mapping[units.to_s]}"
+            end
           end
         else
           number

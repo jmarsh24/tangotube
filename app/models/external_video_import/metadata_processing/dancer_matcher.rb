@@ -3,25 +3,36 @@
 module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
-      def match(metadata_fields:)
-        dancers = ::Dancer.all.pluck(:id, :first_name, :last_name)
-        metadata_fields = Array(metadata_fields) # Ensure metadata_fields is an array
-        text = metadata_fields.join(" ")
-        dancer_ids = find_best_matches(dancers, text, threshold: 0.75)
+      MATCH_THRESHOLD = 0.70
+      @@dancers = nil
 
-        if dancer_ids.any?
-          ::Dancer.find(dancer_ids)
-        else
-          []
-        end
+      def initialize
+        @fuzzy_matcher = FuzzyText.new
+      end
+
+      def match(video_title:)
+        matched_dancers = find_best_matches(video_title)
+        matched_dancers.any? ? matched_dancers : []
       end
 
       private
 
-      def find_best_matches(dancers, text, threshold:)
-        Trigram.best_matches(list: dancers, text:, threshold:) do |dancer|
-          [dancer[1], dancer[2], dancer[3]].join(" ")
-        end.map { |match| match.first.first }
+      def dancers
+        @@dancers ||= ::Dancer.all
+      end
+
+      def find_best_matches(video_title)
+        dancers.filter { |dancer|
+          match_score(dancer.name, video_title) >= MATCH_THRESHOLD
+        }
+      end
+
+      def match_score(query, target)
+        @fuzzy_matcher.trigram_score(normalize(query), normalize(target))
+      end
+
+      def normalize(text)
+        text.gsub("'", "").gsub("-", "").parameterize(separator: " ")
       end
     end
   end

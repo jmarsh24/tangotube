@@ -11,7 +11,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
 
   describe "#match" do
     context "when the song exists" do
-      it "returns the best match" do
+      fit "returns the best match" do
         song = Song.create!(title: "Milonga del 83", artist: "Juan D'ARIENZO", genre: "Milonga", orchestra: orchestras(:darienzo), last_name_search: "ARIENZO")
         video_title = "Agustina Piaggio &Carlitos Espinoza - Milonga Del 83 - by SivisArt"
         video_description = "Carlitos Espinoza & Agustina Piaggio  at the Baden Baden Tango Festival 2022.\nSubscribe to my channel.\nImages & Realisation: Sivis'Art - ALL RIGHTS RESERVED.\n-Website: http://www.sivisart.com/\n-Instagram: Sivisart\n-facebook: Sivisart\n\nFeel free to comment, like, share the video. Thank you for your support & Enjoy !"

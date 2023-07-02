@@ -6,30 +6,30 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::DancerMatcher do
   fixtures :all
 
   describe "#match" do
-    let(:metadata_fields) { ["Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"] }
     let(:dancer_matcher) { described_class.new }
 
     it "returns the best match for the given dancers" do
-      expect(dancer_matcher.match(metadata_fields:)).to match_array([dancers(:carlitos), dancers(:noelia)])
+      video_title = "Noelia Hurtado & Carlitos Espinoza in Amsterdam 2014 #1"
+      expect(dancer_matcher.match(video_title:)).to match_array([dancers(:carlitos), dancers(:noelia)])
     end
 
     it "returns an empty array when no match is found" do
-      metadata_fields = ["Nonexistent Dancer", "Another Nonexistent Dancer", "Tango"]
+      video_title = "Nonexistent Dancer Another Nonexistent Dancer Tango"
 
-      expect(dancer_matcher.match(metadata_fields:)).to eq([])
+      expect(dancer_matcher.match(video_title:)).to eq([])
     end
 
     it "returns a match for accented characters" do
-      metadata_fields = ["Lorena Tarrantino", "Gianpiero Galdi", "Tango"]
+      video_title = "Lorena Tarrantino Gianpiero Galdi Tango"
 
-      expect(dancer_matcher.match(metadata_fields:)).to match_array([dancers(:lorena), dancers(:gianpiero)])
+      expect(dancer_matcher.match(video_title:)).to match_array([dancers(:lorena), dancers(:gianpiero)])
     end
 
     it "does not find an incorrect match" do
-      metadata_fields = ["Vanesa Villalba and Facundo Pinero - Tu Voz"]
+      video_title = "Vanesa Villalba and Facundo Pinero - Tu Voz"
 
-      expect(dancer_matcher.match(metadata_fields:)).to match_array([dancers(:facundo), dancers(:vanessa)])
-      expect(dancer_matcher.match(metadata_fields:)).not_to include(dancers(:facundo_gil))
+      expect(dancer_matcher.match(video_title:)).to match_array([dancers(:facundo), dancers(:vanessa)])
+      expect(dancer_matcher.match(video_title:)).not_to include(dancers(:facundo_gil))
     end
   end
 end

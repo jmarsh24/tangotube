@@ -4,30 +4,27 @@ module ExternalVideoImport
   module MetadataProcessing
     class Trigram
       class << self
-        def best_matches(list:, text:, threshold: 0.75, &block)
-          matches = list.map do |item|
-            query = block.call(item)
-            similarity_ratio = inclusion_similarity(query, text)
-            [item, similarity_ratio]
-          end
+        def similarity(word1, word2)
+          tri1 = trigram(word1)
+          tri2 = trigram(word2)
 
-          matches.select! { |_, similarity| similarity >= threshold }
-          matches.sort_by! { |_, similarity| -similarity }
+          return 0.0 if [tri1, tri2].any? { |arr| arr.size == 0 }
 
-          matches
+          same_size = (tri1 & tri2).size
+          all_size = (tri1 | tri2).size
+
+          same_size.to_f / all_size
         end
 
         private
 
-        def inclusion_similarity(item_text, query_text)
-          item_text_trigrams = trigramify(item_text)
-          query_text_trigrams = trigramify(query_text)
-          shared_trigrams_size = (item_text_trigrams & query_text_trigrams).size
-          shared_trigrams_size.to_f / item_text_trigrams.size
-        end
+        def trigram(word)
+          return [] if word.strip == ""
 
-        def trigramify(text)
-          text.parameterize(separator: " ").chars.each_cons(3).map(&:join)
+          parts = []
+          padded = "  #{word} ".downcase
+          padded.chars.each_cons(3) { |w| parts << w.join }
+          parts
         end
       end
     end
