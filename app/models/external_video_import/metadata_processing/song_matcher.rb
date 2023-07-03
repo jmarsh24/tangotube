@@ -28,7 +28,7 @@ module ExternalVideoImport
         return perfect_match if perfect_match
 
         results = calculate_all_scores(video_data, songs_with_artist_match)
-
+        binding.pry
         highest_scoring_match(results)
       end
 
@@ -38,7 +38,7 @@ module ExternalVideoImport
         songs_with_artist = []
         video_title_description = normalize([video_data.title, video_data.description, video_data.tags].join(" "))
         video_artist_metadata = normalize([video_data.song_albums, video_data.song_artists].flatten.join(" "))
-
+        binding.pry
         song_artists.each do |artist_name|
           if video_artist_metadata.include?(artist_name) || video_title_description.include?(artist_name)
             songs_with_artist << @songs.select { |song| song.last_name_search.downcase == artist_name }
