@@ -37,8 +37,8 @@ class Channel < ApplicationRecord
   scope :inactive, -> { where(active: false) }
   scope :search, ->(term) { where("title ILIKE ?", "%#{term}%") }
 
-  def import_new_videos(use_scraper: true, use_music_recognizer: true)
-    return unless active
+  def import_new_videos(use_scraper: false, use_music_recognizer: false)
+    return nil unless active && metadata.present?
 
     new_video_ids = videos.map(&:youtube_id) - metadata.video_ids
 
@@ -47,7 +47,7 @@ class Channel < ApplicationRecord
     end
   end
 
-  def update_videos(use_scraper: true, use_music_recognizer: true)
+  def update_videos(use_scraper: false, use_music_recognizer: false)
     return unless active
 
     videos.find_each do |video|
