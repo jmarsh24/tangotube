@@ -1,12 +1,5 @@
 ---
 en:
-  time:
-    formats:
-      video_duration: "%M:%S"
-  date:
-    formats:
-      song_recording_date: "%B %e, %Y"
-      video_upload_date: "%B %e, %Y"
   2_mb_file_size_maximum_allowed_file_types_png_jpg:
     2 mb file size maximum allowed
     file types png jpg
@@ -123,6 +116,10 @@ en:
       loading_spinner: Loading spinner
       results: Results
       videos_count: "%{count} videos"
+  date:
+    formats:
+      song_recording_date: "%B %e, %Y"
+      video_upload_date: "%B %e, %Y"
   destroy: Destroy
   devise:
     confirmations:
@@ -280,6 +277,9 @@ en:
       show_link: Show
     new:
       heading: Song
+  time:
+    formats:
+      video_duration: "%M:%S"
   videos:
     form:
       event_info_heading: Event Info
@@ -313,6 +313,11 @@ en:
         English: English
         Spanish: Spanish
         lyrics_header: Lyrics
+      recommended_from_event: This Event
+      recommended_videos_from_performers: Same Performers
+      recommended_videos_same_channel: Same Channel
+      recommended_videos_song: Same Song
+      recommended_videos_videos_from_this_performance_header: Others from this Performance
       video_metadata:
         description: Description
         follower_heading: Follower
@@ -335,6 +340,9 @@ en:
         video_upload_date_heading: Upload date
         youtube_info_heading: Youtube info
       vote:
+        featured_button: Featured button
+        like: Like
         share_button: Share
+        unlike: Unlike
       watchlist_link:
         watch_later: Watch later
