@@ -53,6 +53,7 @@ module ExternalVideoImport
           song.spotify_track_id = metadata.music.spotify_track_id
           song.save!
         end
+        song
       end
 
       def assign_dancers_with_roles(video_data, dancers)
