@@ -42,13 +42,17 @@ module ExternalVideoImport
       private
 
       def match_song(metadata)
-        @song_matcher.match(
+        song = @song_matcher.match(
           video_title: metadata.youtube.title,
           video_description: metadata.youtube.description,
           song_titles: metadata.song_titles,
           song_artists: metadata.artist_names,
           song_albums: metadata.album_names
         )
+        if song && song.spotify_track_id.blank?
+          song.spotify_track_id = metadata.music.spotify_track_id
+          song.save!
+        end
       end
 
       def assign_dancers_with_roles(video_data, dancers)
