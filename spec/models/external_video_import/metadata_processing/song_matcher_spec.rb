@@ -55,6 +55,45 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, video_tags:, song_titles:, song_albums:, song_artists:)).to eq(song_quedemos_aqui)
         expect(song_matcher.match(video_title:, video_description:, video_tags:, song_titles:, song_albums:, song_artists:)).not_to eq(song_recondandote)
       end
+
+      fit "returns the best match" do
+        song_ya_lo_ves = Song.create!(
+          genre: "TANGO",
+          orchestra: orchestras(:darienzo),
+          title: "Ya lo ves",
+          artist: "Juan D'ARIENZO",
+          last_name_search: "darienzo",
+          active: true
+        )
+
+        song_matcher = described_class.new
+
+        video_title = "Agustina Piaggio &Carlitos Espinoza - Ya lo vez - D'Arienzo Maure by Sivis'Art"
+        video_description = "Carlitos Espinoza & Agustina Piaggio  at the Baden Baden Tango Festival 2022.\nSubscribe to my channel.\nImages & Realisation: Sivis'Art - ALL RIGHTS RESERVED.\n-Website: http://www.sivisart.com/\n-Instagram: Sivisart\n-facebook: Sivisart\n\nFeel free to comment, like, share the video. Thank you for your support & Enjoy !"
+        video_tags = [
+          "tango",
+          "trip",
+          "road trip",
+          "tango festival",
+          "tango argentin",
+          "argentine tango",
+          "vlog",
+          "filmmaking",
+          "france",
+          "europe",
+          "travel",
+          "voyage",
+          "music",
+          "milonga",
+          "dance",
+          "kizumba",
+          "salsa",
+          "latina",
+          "buenos aires"
+        ]
+
+        expect(song_matcher.match(video_title:, video_description:, video_tags:)).to eq(song_ya_lo_ves)
+      end
     end
   end
 end
