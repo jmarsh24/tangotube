@@ -130,13 +130,15 @@ module ExternalVideoImport
         song_artist = normalize(song.artist)
         video_title_description = [normalize(video_data.title), normalize(video_data.description)].join(" ")
 
+        perfect_artist_match = video_title_description.include?(song.last_name_search.downcase)
+
         {
           "title_song_title_in_video" => @fuzzy_text.jaro_winkler_score(song_title, video_title_description),
           "title_song_search_title_in_video" => (song_search_title =~ /\d/) ? @fuzzy_text.jaro_winkler_score(song_search_title, video_title_description) : 0,
           "title_song_title_in_metadata" => @fuzzy_text.jaro_winkler_score(song_title, video_data.song_titles.join(" ")),
           "title_song_search_title_in_metadata" => @fuzzy_text.jaro_winkler_score(song_search_title, video_data.song_titles.join(" ")),
-          "artist_song_artist_in_video" => @fuzzy_text.jaro_winkler_score(song_artist, video_title_description),
-          "artist_song_artist_in_metadata" => @fuzzy_text.jaro_winkler_score(song_artist, normalize(video_data.song_albums.join(" ") + video_data.song_artists.join(" ")))
+          "artist_song_artist_in_video" => perfect_artist_match ? 1.0 : @fuzzy_text.jaro_winkler_score(song_artist, video_title_description),
+          "artist_song_artist_in_metadata" => perfect_artist_match ? 1.0 : @fuzzy_text.jaro_winkler_score(song_artist, normalize(video_data.song_albums.join(" ") + video_data.song_artists.join(" ")))
         }
       end
 
