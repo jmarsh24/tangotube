@@ -7,7 +7,7 @@
     .stack.stack--xxs
       = render partial: "videos/show/video_info_primary", locals: { video: @video }
       = render partial: "videos/show/vote", locals: { video: @video }
-    - if @video.metadata.music.spotify_track_id.present?
+    - if @video&.song&.spotify_track_id.present?
       iframe src="https://open.spotify.com/embed/track/#{@video.metadata.music.spotify_track_id}" width="400" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" 
     = render partial: "videos/show/video_metadata", locals: { video: @video }
   = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_performance, header: t(".recommended_videos_videos_from_this_performance_header") }

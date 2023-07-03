@@ -24,6 +24,8 @@
 #  lyrics_en         :string
 #  slug              :string
 #  orchestra_id      :bigint
+#  display_title     :string
+#  spotify_track_id  :string
 #
 require "rails_helper"
 

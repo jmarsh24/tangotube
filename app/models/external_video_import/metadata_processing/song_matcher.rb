@@ -28,7 +28,7 @@ module ExternalVideoImport
         return perfect_match if perfect_match
 
         results = calculate_all_scores(video_data, songs_with_artist_match)
-        binding.pry
+
         highest_scoring_match(results)
       end
 
@@ -38,7 +38,7 @@ module ExternalVideoImport
         songs_with_artist = []
         video_title_description = normalize([video_data.title, video_data.description, video_data.tags].join(" "))
         video_artist_metadata = normalize([video_data.song_albums, video_data.song_artists].flatten.join(" "))
-        binding.pry
+
         song_artists.each do |artist_name|
           if video_artist_metadata.include?(artist_name) || video_title_description.include?(artist_name)
             songs_with_artist << @songs.select { |song| song.last_name_search.downcase == artist_name }
@@ -135,10 +135,10 @@ module ExternalVideoImport
         {
           "title_song_title_in_video" => @fuzzy_text.jaro_winkler_score(song_title, video_title_description),
           "title_song_search_title_in_video" => (song_search_title =~ /\d/) ? @fuzzy_text.jaro_winkler_score(song_search_title, video_title_description) : 0,
-          "title_song_title_in_metadata" => @fuzzy_text.jaro_winkler_score(song_title, video_data.song_titles.join(" ")),
-          "title_song_search_title_in_metadata" => @fuzzy_text.jaro_winkler_score(song_search_title, video_data.song_titles.join(" ")),
+          "title_song_title_in_metadata" => @fuzzy_text.jaro_winkler_score(song_title, normalize(video_data.song_titles.join(" "))),
+          "title_song_search_title_in_metadata" => @fuzzy_text.jaro_winkler_score(song_search_title, normalize(video_data.song_titles.join(" "))),
           "artist_song_artist_in_video" => perfect_artist_match ? 1.0 : @fuzzy_text.jaro_winkler_score(song_artist, video_title_description),
-          "artist_song_artist_in_metadata" => perfect_artist_match ? 1.0 : @fuzzy_text.jaro_winkler_score(song_artist, normalize(video_data.song_albums.join(" ") + video_data.song_artists.join(" ")))
+          "artist_song_artist_in_metadata" => perfect_artist_match ? 1.0 : @fuzzy_text.jaro_winkler_score(song_artist, normalize([video_data.song_albums + video_data.song_artists].join(" ")))
         }
       end
 
