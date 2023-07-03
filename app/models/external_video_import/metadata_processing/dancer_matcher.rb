@@ -12,6 +12,7 @@ module ExternalVideoImport
 
       def match(video_title:)
         matched_dancers = find_best_matches(video_title)
+        log_matches(matched_dancers) # Log matched dancers
         matched_dancers.any? ? matched_dancers : []
       end
 
@@ -33,6 +34,15 @@ module ExternalVideoImport
 
       def normalize(text)
         text.gsub("'", "").gsub("-", "").parameterize(separator: " ")
+      end
+
+      def log_matches(dancers)
+        if dancers.any?
+          Rails.logger.info "Matched dancers:"
+          dancers.each { |dancer| Rails.logger.info "- #{dancer.name}" }
+        else
+          Rails.logger.info "No dancers matched."
+        end
       end
     end
   end

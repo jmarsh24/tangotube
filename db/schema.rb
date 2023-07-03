@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_07_01_091600) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_02_104139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -244,11 +244,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_07_01_091600) do
     t.string "slug"
     t.bigint "orchestra_id"
     t.string "display_title"
+    t.index ["active"], name: "index_songs_on_active"
     t.index ["artist"], name: "index_songs_on_artist"
     t.index ["genre"], name: "index_songs_on_genre"
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
     t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
     t.index ["title"], name: "index_songs_on_title"
+    t.index ["videos_count"], name: "index_songs_on_videos_count"
   end
 
   create_table "users", force: :cascade do |t|

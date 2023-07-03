@@ -11,10 +11,13 @@ module ExternalVideoImport
       end
 
       def process(metadata)
-        dancers = @dancer_matcher.match(metadata_fields: metadata.youtube.title)
+        dancers = @dancer_matcher.match(video_title: metadata.youtube.title)
+        log_matched_dancers(dancers) # Log matched dancers
         couples = @couple_matcher.match_or_create(dancers:)
+        log_matched_couples(couples) # Log matched couples
 
         song = match_song(metadata)
+        log_matched_song(song) # Log matched song
 
         video_data = {
           youtube_id: metadata.youtube.slug,
@@ -32,9 +35,7 @@ module ExternalVideoImport
           youtube_like_count: metadata.youtube.like_count,
           youtube_tags: metadata.youtube.tags
         }
-
         assign_dancers_with_roles(video_data, dancers)
-
         video_data
       end
 
@@ -59,6 +60,32 @@ module ExternalVideoImport
 
       def determine_dancer_role(dancer)
         (dancer.gender == "male") ? "leader" : "follower"
+      end
+
+      def log_matched_dancers(dancers)
+        if dancers.any?
+          Rails.logger.info "Matched dancers:"
+          dancers.each { |dancer| Rails.logger.info "- #{dancer.name}" }
+        else
+          Rails.logger.info "No dancers matched."
+        end
+      end
+
+      def log_matched_couples(couple)
+        if couple.any?
+          Rails.logger.info "Matched couples:"
+          couple.each { |couple| Rails.logger.info "- #{couple.dancers.map(&:name).join(" & ")}" }
+        else
+          Rails.logger.info "No couples matched."
+        end
+      end
+
+      def log_matched_song(song)
+        if song.present?
+          Rails.logger.info "Matched song: #{song.title} - #{song.artist}"
+        else
+          Rails.logger.info "No song matched."
+        end
       end
     end
   end
