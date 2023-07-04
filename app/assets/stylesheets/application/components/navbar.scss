@@ -6,10 +6,6 @@
   z-index: var(--z-navbar);
   background-color: var(--color-neutral-100);
 
-  @include breakpoint-tablet {
-    top: 0 !important;
-  }
-
   &__item {
     position: relative;
     display: flex;

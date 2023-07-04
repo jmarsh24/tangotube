@@ -12,7 +12,7 @@
   @include breakpoint-tablet {
     display: grid;
     grid-template-columns: 1fr minmax(auto, 1800px) 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 58px 1fr auto;
     justify-items: center;
 
     &__main {
