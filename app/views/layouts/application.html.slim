@@ -7,7 +7,7 @@ html lang=I18n.locale
       = render "components/drawer"
       main.page__main
         = yield
-      = render "components/footer"
+      / = render "components/footer"
       = render "components/cookie_consent"
       = render "components/toast"
     = console if Rails.env.development?

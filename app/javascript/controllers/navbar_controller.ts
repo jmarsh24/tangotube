@@ -13,7 +13,7 @@ export default class NavbarController extends Controller {
   }
 
   handleScroll() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;
     if (scrollTop > this.lastScrollTop) {
       // downscroll code
       this.hideNavbar();
@@ -27,7 +27,7 @@ export default class NavbarController extends Controller {
   hideNavbar() {
     // Use the actual height of your navbar
     // this.element refers to the element this controller is connected to
-    (this.element as HTMLElement).style.top = '-52px';
+    (this.element as HTMLElement).style.top = '-58px';
   }
 
   showNavbar() {

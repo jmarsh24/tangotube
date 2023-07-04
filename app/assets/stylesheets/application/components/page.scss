@@ -25,7 +25,13 @@
       grid-column: 2;
       grid-row: 2;
       max-width: 1920px;
-      padding-top: 0;
+      padding: 0 48px;
+    }
+
+    &--with-filter-bar {
+      .page__main {
+        padding-top: 52px;
+      }
     }
   }
 }
