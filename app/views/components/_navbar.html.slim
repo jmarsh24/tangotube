@@ -1,23 +1,26 @@
-header.navbar.stack.stack--line.stack--justify-space-between.stack--md data-controller="toggle navbar"
-  .stack.stack--inline
-    a.navbar__logo href=root_path
-  .stack.stack--lg.stack--justify-right
-    .navbar__item.navbar__item--links
-      = link_to "", modal_path(new_search_path), class: "icon icon--magnifying-glass"
-      / .dropdown data-controller="dropdown dark"
-      /   button.button.icon.theme-icon data-action="dropdown#toggle click@window->dropdown#hide"
-      /   .menu.menu--right data-dropdown-target="menu"
-      /     .menu-item.theme-menu-item--light data-action="click->dark#light" = t(".light_mode_link")
-      /     .menu-item.theme-menu-item--dark data-action="click->dark#dark" = t(".dark_mode_link")
-      /     .menu-item.theme-menu-item--auto data-action="click->dark#auto" = t(".auto_mode_link")
-      - if current_user
-        .dropdown data-controller="dropdown"
-          button data-action="dropdown#toggle click@window->dropdown#hide"
-            = image_tag avatar_url_for(current_user), class: "avatar"
-          .menu.menu--right.hidden data-dropdown-target="menu"
-            = link_to edit_user_registration_path do
-              .menu-item = t("edit_profile")
-            = link_to destroy_user_session_path, data: { turbo_method: :delete } do
-              .menu-item = t("sign_out")
-      - else
-        = link_to t("login"), new_user_session_path, class: "button button--primary"
+header.navbar.stack.stack--zero data-controller="toggle navbar"
+  .navbar__top.stack.stack--line.stack--justify-space-between.stack--md 
+    .stack.stack--inline
+      a.navbar__logo href=root_path
+    .stack.stack--lg.stack--justify-right
+      .navbar__item.navbar__item--links
+        = link_to "", modal_path(new_search_path), class: "icon icon--magnifying-glass"
+        / .dropdown data-controller="dropdown dark"
+        /   button.button.icon.theme-icon data-action="dropdown#toggle click@window->dropdown#hide"
+        /   .menu.menu--right data-dropdown-target="menu"
+        /     .menu-item.theme-menu-item--light data-action="click->dark#light" = t(".light_mode_link")
+        /     .menu-item.theme-menu-item--dark data-action="click->dark#dark" = t(".dark_mode_link")
+        /     .menu-item.theme-menu-item--auto data-action="click->dark#auto" = t(".auto_mode_link")
+        - if current_user
+          .dropdown data-controller="dropdown"
+            button data-action="dropdown#toggle click@window->dropdown#hide"
+              = image_tag avatar_url_for(current_user), class: "avatar"
+            .menu.menu--right.hidden data-dropdown-target="menu"
+              = link_to edit_user_registration_path do
+                .menu-item = t("edit_profile")
+              = link_to destroy_user_session_path, data: { turbo_method: :delete } do
+                .menu-item = t("sign_out")
+        - else
+          = link_to t("login"), new_user_session_path, class: "button button--primary"
+  - if show_filter_bar?
+    = render partial: "videos/index/video_sorting_filters"

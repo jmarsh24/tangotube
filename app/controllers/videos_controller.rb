@@ -95,6 +95,10 @@ class VideosController < ApplicationController
     @filtering_params = filtering_params
   end
 
+  def show_filter_bar?
+    action_name == "index"
+  end
+
   private
 
   def check_for_clear

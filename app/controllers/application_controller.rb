@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
 
   default_form_builder Shimmer::Form::Builder
 
+  helper_method :show_filter_bar?
+
   private
 
   def configure_permitted_parameters
@@ -27,5 +29,9 @@ class ApplicationController < ActionController::Base
       ui.append "pagination-frame", with: "components/pagination", items: scope, partial: params[:partial]
     end
     scope
+  end
+
+  def show_filter_bar?
+    false
   end
 end

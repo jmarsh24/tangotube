@@ -2,9 +2,24 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
 
   &__main {
     flex: 1;
+    width: 100%;
+    padding-top: 56px;
+  }
+
+  @include breakpoint-tablet {
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, 1800px) 1fr;
+    grid-template-rows: auto 1fr auto;
+    justify-items: center;
+
+    &__main {
+      grid-column: 2;
+      grid-row: 2;
+      max-width: 1920px;
+      padding-top: 0;
+    }
   }
 }

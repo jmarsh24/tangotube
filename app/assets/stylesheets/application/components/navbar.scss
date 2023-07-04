@@ -4,9 +4,7 @@
   top: 0;
   transition: top 0.2s;
   z-index: var(--z-navbar);
-  padding: var(--spacing-xxs) var(--spacing-sm);
   background-color: var(--color-neutral-100);
-  height: var(--navbar-height);
 
   @include breakpoint-tablet {
     top: 0 !important;
@@ -52,5 +50,13 @@
     &:hover {
       background: var(--color-neutral-1000);
     }
+  }
+
+  &__top {
+    padding: var(--spacing-xxs) var(--spacing-xs);
+  }
+
+  &__filters {
+    padding: var(--spacing-xxs) var(--spacing-xs);
   }
 }

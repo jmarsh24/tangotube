@@ -6,15 +6,14 @@
   scrollbar-color: transparent transparent;
   flex-wrap: nowrap;
   gap: var(--spacing-xxs);
-  scroll-snap-type: x mandatory; /* Enable horizontal scrolling */
-  padding: var(--spacing-sm) var(--spacing-xs);
-  -ms-overflow-style: none; /* Hide the scrollbar on Microsoft browsers (Edge) */
-  scrollbar-width: none; /* Hide the scrollbar on Firefox */
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
     width: 0;
-    display: none; /* Hide the scrollbar on WebKit browsers (Chrome, Safari) */
+    display: none;
   }
 
   &--vote {
