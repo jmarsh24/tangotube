@@ -1,9 +1,16 @@
 .navbar {
-  grid-column: 1 / 4;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition: top 0.2s;
   z-index: var(--z-navbar);
   padding: var(--spacing-xxs) var(--spacing-sm);
   background-color: var(--color-neutral-100);
   height: var(--navbar-height);
+
+  @include breakpoint-tablet {
+    top: 0 !important;
+  }
 
   &__item {
     position: relative;
@@ -34,21 +41,6 @@
     width: 100%;
   }
 
-  &__overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: var(--z-navbar-1);
-  }
-  &__main {
-    position: relative;
-    padding: var(--spacing-md) 0;
-    background-color: var(--color-neutral-0);
-    z-index: var(--z-navbar-2);
-  }
   &__logo {
     width: 112px;
     height: 22px;
@@ -60,52 +52,5 @@
     &:hover {
       background: var(--color-neutral-1000);
     }
-  }
-
-  &__close {
-    display: none;
-    margin-left: auto;
-  }
-
-  &__navigation {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    transform: translateY(calc(100% - 16px));
-    width: 100%;
-    background-color: var(--color-neutral-0);
-  }
-
-  &.active {
-    .navbar {
-      &__overlay {
-        display: block;
-        background-color: rgba(var(--color-neutral-1000), 0.3);
-      }
-      &__logo {
-        opacity: 0;
-      }
-      &__open {
-        display: none;
-      }
-      &__close,
-      &__navigation {
-        display: block;
-      }
-    }
-  }
-
-  @include breakpoint-tablet {
-    .navbar {
-      &__search {
-        margin-inline: var(--spacing-md);
-      }
-      &__logo {
-        display: block;
-      }
-    }
-  }
-
-  @include breakpoint-desktop {
   }
 }
