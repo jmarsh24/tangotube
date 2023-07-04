@@ -153,6 +153,8 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
     --grid-width: 1660px;
     --app-drawer-width: 200px;
     --header-height: calc(56px + var(--spacing-md));
+    --page-main-max-width: 1920px;
+    --page-main-padding: 48px;
   }
 
   @include breakpoint-tablet() {

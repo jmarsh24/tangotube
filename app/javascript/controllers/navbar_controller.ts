@@ -27,7 +27,7 @@ export default class NavbarController extends Controller {
   hideNavbar() {
     // Use the actual height of your navbar
     // this.element refers to the element this controller is connected to
-    (this.element as HTMLElement).style.top = '-58px';
+    (this.element as HTMLElement).style.top = '-52px';
   }
 
   showNavbar() {

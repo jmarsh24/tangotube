@@ -53,6 +53,17 @@
   }
 
   &__filters {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
     padding: var(--spacing-xxs) var(--spacing-xs);
+    max-width: var(--page-main-max-width);
+    background-color: var(--color-neutral-0);
+  }
+
+  @include breakpoint-tablet {
+    &__filters {
+      padding: var(--spacing-xxs) var(--page-main-padding);
+    }
   }
 }
