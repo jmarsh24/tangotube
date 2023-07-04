@@ -45,7 +45,9 @@ module ExternalVideoImport
         results = calculate_all_scores(video_data, songs_with_artist_match)
 
         song_hash = highest_scoring_match(results)
-        Song.find(song_hash[:id])
+        if song_hash
+          Song.find(song_hash[:id])
+        end
       end
 
       private
