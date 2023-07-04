@@ -5,7 +5,7 @@ class Video::RelatedVideos
 
   def initialize(video)
     @video = video
-    @videos = Video.includes(Video.search_includes)
+    @videos = Video.includes(Video.search_includes).includes(channel: {thumbnail_attachment: :blob})
   end
 
   def with_same_dancers
