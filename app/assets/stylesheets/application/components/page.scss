@@ -6,13 +6,19 @@
   &__main {
     flex: 1;
     width: 100%;
-    padding-top: 56px;
+    padding-top: 52px;
+  }
+
+  &--with-filter-bar {
+    .page__main {
+      padding-top: 104px;
+    }
   }
 
   @include breakpoint-tablet {
     display: grid;
     grid-template-columns: 1fr minmax(auto, 1800px) 1fr;
-    grid-template-rows: 58px 1fr auto;
+    grid-template-rows: 52px 1fr auto;
     justify-items: center;
 
     &__main {

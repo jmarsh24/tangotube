@@ -1,7 +1,10 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  padding: 0 15px; // Adjust this value to increase or decrease padding on left and right
+
+  &__main-content {
+    padding: 0 12px;
+  }
 
   &--videos {
     gap: 24px;
@@ -17,6 +20,10 @@
     &__main-content,
     &__sidebar {
       grid-column: 1;
+    }
+
+    &__main-content {
+      padding: 0 24px;
     }
 
     @include breakpoint-tablet {

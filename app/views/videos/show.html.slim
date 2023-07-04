@@ -1,13 +1,13 @@
 - content_for :meta_title, @video.decorate.meta_title
 - content_for :meta_description, @video.decorate.meta_description
 - content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
-.stack
+.stack.stack--xs
   .video-block 
     div data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
 
   .grid.grid--2-col
     .grid__main-content
-      .stack.stack--xxs
+      .stack.stack--sm
         = render partial: "videos/show/video_info_primary", locals: { video: @video }
         = render partial: "videos/show/vote", locals: { video: @video }
         = render partial: "videos/show/video_metadata", locals: { video: @video }
