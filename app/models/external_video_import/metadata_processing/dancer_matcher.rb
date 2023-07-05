@@ -11,8 +11,8 @@ module ExternalVideoImport
 
       def match(video_title:)
         matched_dancers = find_best_matches(video_title)
-        log_matches(matched_dancers) # Log matched dancers
-        matched_dancers.any? ? matched_dancers : []
+        log_matches(matched_dancers)
+        matched_dancers.any? ? Dancer.find(matched_dancers[:id]) : []
       end
 
       private
