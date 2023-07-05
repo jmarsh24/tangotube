@@ -43,10 +43,6 @@ module ExternalVideoImport
 
         songs_with_artist_match = search_artist_match(video_data)
 
-        perfect_match = perfect_search_title_match(video_data, songs_with_artist_match)
-
-        return perfect_match if perfect_match
-
         results = calculate_all_scores(video_data, songs_with_artist_match)
         best_result = highest_scoring_match(results)
         if best_result
@@ -78,17 +74,6 @@ module ExternalVideoImport
         end
 
         songs_with_artist
-      end
-
-      def perfect_search_title_match(video_data, filtered_songs)
-        video_title_search_string = "#{video_data.title} #{video_data.description} #{video_data.song_titles} #{video_data.song_albums} #{video_data.tags}"
-        filtered_songs.each do |song|
-          if video_title_search_string.include?(song[:title])
-            return song
-          end
-        end
-
-        nil
       end
 
       def calculate_all_scores(video_data, songs)
