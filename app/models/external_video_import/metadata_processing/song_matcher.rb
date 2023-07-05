@@ -157,7 +157,7 @@ module ExternalVideoImport
         normalized_video_title_description = [normalized_video_title, normalized_video_description].join(" ")
 
         normalized_song_titles = normalize(video_data.song_titles.join(" "))
-        normalized_song_artists_albums = normalize([video_data.song_albums + video_data.song_artists].join(" "))
+        normalized_song_artists_albums = normalize([video_data.song_albums, video_data.song_artists].join(" "))
 
         perfect_artist_match = normalized_video_title_description.include?(song[:last_name_search])
 

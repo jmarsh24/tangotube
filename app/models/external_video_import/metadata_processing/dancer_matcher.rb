@@ -4,7 +4,6 @@ module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
       MATCH_THRESHOLD = 0.70
-      @@dancers = nil
 
       def initialize
         @fuzzy_matcher = FuzzyText.new
@@ -19,17 +18,19 @@ module ExternalVideoImport
       private
 
       def dancers
-        @@dancers ||= ::Dancer.all
+        @dancers ||= Rails.cache("Dancers", expires_in: 24.hours) {
+          ::Dancer.all.map { |dancer| {id: dancer.id, name: normalize(dancer.name)} }.to_a
+        }
       end
 
       def find_best_matches(video_title)
         dancers.filter { |dancer|
-          match_score(dancer.name, video_title) >= MATCH_THRESHOLD
+          match_score(dancer[:name], video_title) >= MATCH_THRESHOLD
         }
       end
 
       def match_score(query, target)
-        @fuzzy_matcher.trigram_score(normalize(query), normalize(target))
+        @fuzzy_matcher.trigram_score(query, normalize(target))
       end
 
       def normalize(text)
@@ -39,7 +40,7 @@ module ExternalVideoImport
       def log_matches(dancers)
         if dancers.any?
           Rails.logger.info "Matched dancers:"
-          dancers.each { |dancer| Rails.logger.info "- #{dancer.name}" }
+          dancers.each { |dancer| Rails.logger.info "- #{dancer[:name]}" }
         else
           Rails.logger.info "No dancers matched."
         end
