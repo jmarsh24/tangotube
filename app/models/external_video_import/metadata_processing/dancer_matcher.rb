@@ -18,7 +18,7 @@ module ExternalVideoImport
       private
 
       def dancers
-        @dancers ||= Rails.cache("Dancers", expires_in: 24.hours) {
+        @dancers ||= Rails.cache.fetch("Dancers", expires_in: 24.hours) {
           ::Dancer.all.map { |dancer| {id: dancer.id, name: normalize(dancer.name)} }.to_a
         }
       end
