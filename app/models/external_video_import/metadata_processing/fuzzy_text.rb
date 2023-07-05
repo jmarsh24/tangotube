@@ -6,7 +6,7 @@ module ExternalVideoImport
   module MetadataProcessing
     class FuzzyText
       def initialize
-        @jarow = FuzzyStringMatch::JaroWinkler.create(:pure)
+        @jarow = FuzzyStringMatch::JaroWinkler.create(:native)
         @groups_cache = {}
       end
 

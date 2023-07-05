@@ -34,7 +34,8 @@ module ExternalVideoImport
       end
 
       def normalize(text)
-        text.gsub("'", "").gsub("-", "").parameterize(separator: " ")
+        ascii_text = text.encode("ASCII", invalid: :replace, undef: :replace, replace: "")
+        ascii_text.gsub("'", "").gsub("-", "").parameterize(separator: " ")
       end
 
       def log_matches(dancers)

@@ -174,7 +174,8 @@ module ExternalVideoImport
       def normalize(text)
         return "" if text.nil?
 
-        normalized_text = text.gsub("'", "").gsub("-", "").parameterize(separator: " ").downcase
+        ascii_text = text.encode("ASCII", invalid: :replace, undef: :replace, replace: "")
+        normalized_text = ascii_text.gsub("'", "").gsub("-", "").parameterize(separator: " ").downcase
         STOP_WORDS.each { |stop_word| normalized_text.gsub!(stop_word, "") }
         normalized_text.strip
       end
