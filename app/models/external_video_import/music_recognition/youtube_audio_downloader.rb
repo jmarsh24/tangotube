@@ -6,9 +6,9 @@ module ExternalVideoImport
       YT_DLP_COMMAND_PREFIX = "https://www.youtube.com/watch?v="
 
       def download_file(slug)
-        audio_success = Tempfile.create([slug.to_s, ".mp3"]) do |file|
+        Tempfile.create([slug.to_s, ".mp3"]) do |file|
+          audio_success = system(yt_dlp_command(file, slug, format: "-f bestaudio"))
           if audio_success
-            system(yt_dlp_command(file, slug, format: "-f bestaudio"))
             yield file if block_given? && audio_success
           else
             Tempfile.create([slug.to_s, ".mp4"]) do |file|
