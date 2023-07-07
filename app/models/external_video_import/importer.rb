@@ -13,11 +13,11 @@ module ExternalVideoImport
       metadata = @video_crawler.metadata(youtube_id, use_scraper:, use_music_recognizer:)
 
       video_attributes = @metadata_processor.process(metadata)
+      updated_attributes = MetadataProcessing::VideoUpdater.new(video).update(metadata)
+      merged_attributes = video_attributes.merge(updated_attributes).merge(metadata_updated_at: Time.current)
 
       Video.transaction do
-        video = Video.create!(video_attributes)
-        MetadataProcessing::VideoUpdater.new(video).update(metadata)
-        video.update!(metadata_updated_at: Time.current)
+        video = Video.create!(merged_attributes)
         video
       end
     rescue => e
@@ -40,11 +40,12 @@ module ExternalVideoImport
       end
 
       video_attributes = @metadata_processor.process(metadata)
+      updated_attributes = MetadataProcessing::VideoUpdater.new(video).update(metadata)
+
+      merged_attributes = video_attributes.merge(updated_attributes).merge(metadata_updated_at: Time.current)
 
       Video.transaction do
-        video.update!(video_attributes)
-        MetadataProcessing::VideoUpdater.new(video).update(metadata)
-        video.update!(metadata_updated_at: Time.current)
+        video.update!(merged_attributes)
         video
       end
     rescue => e
