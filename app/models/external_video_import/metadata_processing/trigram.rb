@@ -4,16 +4,15 @@ module ExternalVideoImport
   module MetadataProcessing
     class Trigram
       class << self
-        def similarity(word1, word2)
-          tri1 = trigram(word1)
-          tri2 = trigram(word2)
+        def similarity(needle:, haystack:)
+          tri1 = trigram(needle)
+          tri2 = trigram(haystack)
 
           return 0.0 if [tri1, tri2].any? { |arr| arr.size == 0 }
 
           same_size = (tri1 & tri2).size
-          all_size = (tri1 | tri2).size
 
-          same_size.to_f / all_size
+          same_size.to_f / tri1.size
         end
 
         private

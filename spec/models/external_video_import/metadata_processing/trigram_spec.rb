@@ -4,36 +4,35 @@ require "rails_helper"
 
 RSpec.describe ExternalVideoImport::MetadataProcessing::Trigram do
   let(:items) { ["Pepito Avellaneda & Tete Rusconi", "Carlos Gavito & Marcela Durán", "Geraldine Rojas & Ezequiel Paludi"] }
-  let(:text) { "Pepito Avellaneda y Tete Rusconi - Tango" }
-  let(:threshold) { 0.6 }
 
-  describe "#best_matches" do
+  describe "#similarity" do
     it "returns the best matches for the given list" do
-      best_matches = described_class.best_matches(list: items, text:, threshold:) { |item| item }
+      text = "Pepito Avellaneda y Tete Rusconi - Tango"
+      similarity_ratio = items.map { |item| described_class.similarity(needle: item, haystack: text) }.max
 
-      expect(best_matches).to eq([[items[0], 0.9642857142857143]])
+      expect(similarity_ratio).to be > 0.8
     end
 
-    it "returns an empty array when no match is found" do
+    it "returns 0 when no match is found" do
       text = "Random dancers - Tango"
-      best_matches = described_class.best_matches(list: items, text:, threshold:) { |item| item }
+      similarity_ratio = items.map { |item| described_class.similarity(needle: item, haystack: text) }.max
 
-      expect(best_matches).to eq([])
+      expect(similarity_ratio).to eq(0)
     end
 
-    it "returns a match for partial names" do
+    it "returns a non-zero match for partial names" do
       text = "Pepito & Tete - Tango"
-      best_matches = described_class.best_matches(list: items, text:, threshold:) { |item| item }
+      similarity_ratio = items.map { |item| described_class.similarity(needle: item, haystack: text) }.max
 
-      expect(best_matches).to eq([])
+      expect(similarity_ratio).to be > 0
     end
 
-    it "returns a match for accented characters" do
+    it "returns a non-zero match for accented characters" do
       items_with_accents = ["Martín Maldonado & Maurizio Ghella", "Esteban Cortez & Evelyn Rivera", "Gustavo Naveira & Giselle Anne"]
       text = "Martín Maldonado y Maurizio Ghella - Tango"
-      best_matches = described_class.best_matches(list: items_with_accents, text:, threshold:) { |item| item }
+      similarity_ratio = items_with_accents.map { |item| described_class.similarity(needle: item, haystack: text) }.max
 
-      expect(best_matches).to eq([[items_with_accents[0], 0.9333333333333333]])
+      expect(similarity_ratio).to be > 0.8
     end
   end
 end

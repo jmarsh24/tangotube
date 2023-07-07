@@ -24,14 +24,14 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
       it "returns the best match" do
         orchestra = Orchestra.create!(
           name: "José Basso",
-          slug: "jose-basso"
+          slug: "jose-basso",
+          search_term: "jose basso"
         )
         song_recondandote = Song.create!(
           genre: "TANGO",
           artist: "José BASSO",
           orchestra:,
           title: "Recordándote",
-          last_name_search: "basso",
           active: true
         )
 
@@ -40,7 +40,6 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
           artist: "José BASSO",
           orchestra:,
           title: "Quedémonos aquí",
-          last_name_search: "basso",
           active: true
         )
 
@@ -62,7 +61,6 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
           orchestra: orchestras(:darienzo),
           title: "Ya lo ves",
           artist: "Juan D'ARIENZO",
-          last_name_search: "darienzo",
           active: true
         )
 
@@ -78,14 +76,14 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
       it "returns the best match" do
         orchestra = Orchestra.create!(
           name: "Alfredo De Angelis",
-          slug: "angelis"
+          slug: "angelis",
+          search_term: "alfredo de angelis"
         )
         song_bajo_el_cono_azul = Song.create!(
           genre: "TANGO",
           orchestra:,
           title: "Bajo El Cono Azul",
           artist: "Alfredo De Angelis",
-          last_name_search: "ANGELIS",
           active: true
         )
 

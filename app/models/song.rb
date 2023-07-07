@@ -28,8 +28,6 @@
 #  spotify_track_id  :string
 #
 class Song < ApplicationRecord
-  include SongSearchable
-
   validates :title, presence: true
   validates :artist, presence: true
 

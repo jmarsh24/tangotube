@@ -6,20 +6,19 @@ module ExternalVideoImport
   module MetadataProcessing
     class FuzzyText
       def initialize
-        @jarow = FuzzyStringMatch::JaroWinkler.create(:native)
         @groups_cache = {}
       end
 
-      def jaro_winkler_score(query, target)
-        attribute_groups = generate_attribute_groups(target, count_words(query) + 2)
-        scores = attribute_groups.map { |group| calculate_similarity_score(query, group) }
+      def jaro_winkler_score(needle:, haystack:)
+        attribute_groups = generate_attribute_groups(haystack, count_words(needle) + 2)
+        scores = attribute_groups.map { |group| calculate_similarity_score(needle, group) }
 
         scores.compact.max || 0
       end
 
-      def trigram_score(query, target)
-        attribute_groups = generate_attribute_groups(target, count_words(query) + 2)
-        scores = attribute_groups.map { |group| Trigram.similarity(query, group) }
+      def trigram_score(needle:, haystack:)
+        attribute_groups = generate_attribute_groups(haystack, count_words(needle) + 2)
+        scores = attribute_groups.map { |group| Trigram.similarity(needle:, haystack: group) }
         scores.compact.max || 0
       end
 
@@ -42,7 +41,7 @@ module ExternalVideoImport
       end
 
       def calculate_similarity_score(query, target)
-        @jarow.getDistance(query, target)
+        FuzzyStringMatch::JaroWinkler.create(:native).getDistance(query, target)
       end
 
       def count_words(str)
