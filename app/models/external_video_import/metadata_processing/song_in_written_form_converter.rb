@@ -1,8 +1,8 @@
 module ExternalVideoImport
   module MetadataProcessing
     class SongInWrittenFormConverter
-      def search_title(title)
-        convert_numbers_to_spanish(title)
+      def convert(song_title)
+        convert_numbers_to_spanish(song_title)
       end
 
       private
