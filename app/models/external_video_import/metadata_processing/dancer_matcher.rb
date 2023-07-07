@@ -30,7 +30,7 @@ module ExternalVideoImport
       end
 
       def match_score(query, target)
-        @fuzzy_matcher.trigram_score(query, normalize(target))
+        @fuzzy_matcher.trigram_score(needle: query, haystack: normalize(target))
       end
 
       def normalize(text)
