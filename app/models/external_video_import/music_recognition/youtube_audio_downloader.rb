@@ -8,15 +8,12 @@ module ExternalVideoImport
       def download_file(slug)
         audio_success = Tempfile.create([slug.to_s, ".mp3"]) do |file|
           system(yt_dlp_command(file, slug, format: "-f bestaudio"))
+          yield file if block_given? && audio_success
         end
 
-        if audio_success
+        Tempfile.create([slug.to_s, ".mp4"]) do |file|
+          system(yt_dlp_command(file, slug))
           yield file if block_given?
-        else
-          Tempfile.create([slug.to_s, ".mp4"]) do |file|
-            system(yt_dlp_command(file, slug))
-            yield file if block_given?
-          end
         end
       end
 
