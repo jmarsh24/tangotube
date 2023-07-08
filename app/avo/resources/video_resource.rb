@@ -3,14 +3,7 @@
 class VideoResource < Avo::BaseResource
   self.title = :youtube_id
   self.includes = [:channel, :song, :event, :dancer_videos, :dancers, :performance_video, :performance]
-  self.search_query = -> {
-    scope.ransack(
-      title_cont: params[:q],
-      description_cont: params[:q],
-      youtube_id_cont: params[:q],
-      m: "or"
-    ).result(distinct: true)
-  }
+  self.search_query = -> { scope.search(params[:q]) }
 
   self.find_record_method = ->(model_class:, id:, params:) {
     (!id.is_a?(Array) && id.to_i == 0) ? model_class.find_by(youtube_id: id) : model_class.find(id)

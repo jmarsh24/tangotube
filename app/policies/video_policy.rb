@@ -33,6 +33,10 @@ class VideoPolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def search?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all
