@@ -49,13 +49,17 @@ class Song < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :not_active, -> { where(active: false) }
   scope :search, ->(terms) do
-                   Array.wrap(terms)
-                     .map { |e| e.tr("*", "").downcase }
-                     .map { |term| remove_stop_words(term) }
-                     .reduce(self) do |scope, term|
-                       scope.where("word_similarity(?, title) > 0.3 OR word_similarity(?, artist) > 0.3 OR word_similarity(?, genre) > 0.3", "%#{term}%", "%#{term}%", "%#{term}%")
-                         .order(Arel.sql("similarity(title, '#{term}') DESC"))
-                     end
+                   sanitized_terms = Array.wrap(terms).map { |term| remove_stop_words(term).tr("*", "").downcase }
+                   return none if sanitized_terms.empty?
+
+                   where_clause = sanitized_terms.map do |term|
+                     "(word_similarity(?, title) > 0.3 OR word_similarity(?, artist) > 0.3 OR word_similarity(?, genre) > 0.3)"
+                   end.join(" OR ")
+
+                   where(where_clause, *sanitized_terms.flat_map { |term| ["%#{term}%", "%#{term}%", "%#{term}%"] })
+                     .order(Arel.sql(
+                       "videos_count DESC, similarity(title, '#{sanitized_terms.first}') DESC"
+                     ))
                  end
 
   def full_title
