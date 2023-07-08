@@ -25,7 +25,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         orchestra = Orchestra.create!(
           name: "José Basso",
           slug: "jose-basso",
-          search_term: "jose basso"
+          search_term: "basso"
         )
         song_recondandote = Song.create!(
           genre: "TANGO",
@@ -77,7 +77,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         orchestra = Orchestra.create!(
           name: "Alfredo De Angelis",
           slug: "angelis",
-          search_term: "alfredo de angelis"
+          search_term: "angelis"
         )
         song_bajo_el_cono_azul = Song.create!(
           genre: "TANGO",
@@ -95,6 +95,50 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         song_artists = ["Alfredo De Angelis", "Alfredo De Angelis"]
 
         expect(song_matcher.match(video_title:, video_description:, video_tags:, song_titles:, song_albums:, song_artists:)).to eq(song_bajo_el_cono_azul)
+      end
+
+      it "returns the best match" do
+        Orchestra.create!(
+          name: "Trío YUMBA",
+          slug: "trio-yumba",
+          search_term: "trio yumba"
+        )
+
+        tanturi = Orchestra.create!(
+          name: "Ricardo Tanturi",
+          slug: "ricardo-tanturi",
+          search_term: "tanturi"
+        )
+
+        song_mozo_guapo = Song.create!(
+          genre: "TANGO",
+          orchestra: tanturi,
+          title: "Mozo guapo",
+          artist: "Ricardo Tanturi",
+          active: true
+        )
+
+        video_title = "Mirella and Carlos Santos David - Mozo guapo"
+        video_description = "Mirella and Carlos Santos David dance “Mozo guapo“ by Ricardo Tanturi, sung by Alberto Castillo, at Cafe Tango in Wuppertal, Germany.\n\n\r\r\r\rIf you love Tango videos, help us create more on\n\r\rhttps://www.patreon.com/030tango\r\r\n\nVisit 030tango for more videos\n\r\rhttps://www.030tango.com\n\n\r\r\r\rRecorded on 2020/09/0\r4\n#030tango #tango #CarlosEMirella"
+        song_titles = ["Mozo Guapo", "Mozo guapo"]
+        song_artists = ["Alberto Castillo"]
+        expect(song_matcher.match(video_title:, video_description:, song_titles:, song_artists:)).to eq(song_mozo_guapo)
+      end
+
+      it "returns the best match" do
+        milonga_vieja = Song.create!(
+          genre: "MILONGA",
+          artist: "Juan D'Arienzo",
+          title: "Milonga Vieja Milonga",
+          orchestra: orchestras(:darienzo)
+        )
+
+        video_title = "Carmencita Calderon y Juan Averna (show 2)  C.I.T.A. 2000"
+        video_description = "фрагмент записи на DVD шоу-выступлений C.I.T.A. 2000"
+        song_titles = ["Milonga Vieja Milonga (Instrumental)"]
+        song_artists = ["Orquesta Alfredo Juan D' Arienzo"]
+
+        expect(song_matcher.match(video_title:, video_description:, song_titles:, song_artists:)).to eq(milonga_vieja)
       end
     end
   end

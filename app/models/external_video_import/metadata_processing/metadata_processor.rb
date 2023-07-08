@@ -12,12 +12,12 @@ module ExternalVideoImport
 
       def process(metadata)
         dancers = @dancer_matcher.match(video_title: metadata.youtube.title)
-        log_matched_dancers(dancers) # Log matched dancers
+        log_matched_dancers(dancers)
         couples = @couple_matcher.match_or_create(dancers:)
-        log_matched_couples(couples) # Log matched couples
+        log_matched_couples(couples)
 
         song = match_song(metadata)
-        log_matched_song(song) # Log matched song
+        log_matched_song(song)
 
         video_data = {
           youtube_id: metadata.youtube.slug,

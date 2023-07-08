@@ -13,11 +13,11 @@ module ExternalVideoImport
       metadata = @video_crawler.metadata(youtube_id, use_scraper:, use_music_recognizer:)
 
       video_attributes = @metadata_processor.process(metadata)
-      updated_attributes = MetadataProcessing::VideoUpdater.new(video).update(metadata)
-      merged_attributes = video_attributes.merge(updated_attributes).merge(metadata_updated_at: Time.current)
+      video_attributes = video_attributes.merge!(metadata_updated_at: Time.current, metadata: metadata.to_json)
 
       Video.transaction do
-        video = Video.create!(merged_attributes)
+        video = Video.create!(video_attributes)
+        attach_thumbnail(video, metadata.youtube.thumbnail_url.highest_resolution)
         video
       end
     rescue => e
@@ -39,12 +39,10 @@ module ExternalVideoImport
 
       video_attributes = @metadata_processor.process(metadata)
 
+      video_attributes = video_attributes.merge!(metadata_updated_at: Time.current, metadata: metadata.to_json)
       begin
-        video.update!(metadata: metadata.to_json, metadata_updated_at: Time.current)
+        video.update!(video_attributes)
         attach_thumbnail(video, metadata.youtube.thumbnail_url.highest_resolution)
-      rescue ActiveRecord::RecordInvalid => e
-        Rails.logger.error("Error updating video: #{e.message}")
-        raise ExternalVideoImport::VideoUpdateError, e.message
       end
 
       video

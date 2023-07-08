@@ -30,7 +30,7 @@ carlitos:
   name: "Carlitos Espinoza"
   first_name: "Carlitos"
   last_name: "Espinoza"
-  nick_name: "Carlitos"
+  nick_name: ["carlitos", "carlitos espinoza"]
   reviewed: true
   gender: "male"
   slug: "carlitos-espinoza"
