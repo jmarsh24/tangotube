@@ -140,6 +140,60 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
 
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_artists:)).to eq(milonga_vieja)
       end
+
+      it "returns the best match" do
+        canaro = Orchestra.create!(
+          name: "Francisco Canaro",
+          slug: "francisco-canaro",
+          search_term: "canaro"
+        )
+
+        se_llevo = Song.create!(
+          genre: "TANGO",
+          title: "Lo que el viento se llevó",
+          artist: "Francisco CANARO",
+          orchestra: canaro
+        )
+
+        amor = Song.create!(
+          genre: "TANGO",
+          title: "Amor",
+          artist: "Francisco CANARO",
+          orchestra: canaro
+        )
+
+        video_title = "Maja Petrović  & Marko Miljević  - \"Lo que el viento se llevo\" - Canaro/Amor"
+        video_description = "La Gilda, Brescia, 05.06.2016."
+        song_titles = ["Lo Que El Viento Se Llevó", "Lo Que El Viento Se llevo (10974)"]
+        song_artists = ["Francisco Canaro", "Fransisco Amor", "Francisco Canaro Y Su Orquesta Tipica"]
+        song_albums = ["Glorias Del Tango: Francisco Canaro Vol. 2"]
+        expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(se_llevo)
+      end
+
+      it "returns the best match" do
+        darienzo = orchestras(:darienzo)
+
+        que_peina_canas = Song.create!(
+          genre: "TANGO",
+          title: "Milonga que peina canas",
+          artist: "Juan Darienzo",
+          orchestra: darienzo
+        )
+
+        cana = Song.create!(
+          genre: "TANGO",
+          title: "Caña",
+          artist: "Juan D'ARIENZO",
+          orchestra: darienzo
+        )
+
+        video_title = "Maja Petrović  & Marko Miljević  - \"Milonga que peina canas\" - D'Arienzo - 4 (Milonga)"
+        video_description = "Show in \"Tango O nada\" in Seoul, September 2018."
+        song_titles = ["Milonga Que Peina Canas", "Milonga que peina canas"]
+        song_artists = ["Juan D'Arienzo y su Orquesta Típica", "Armando Laborde", "Juan d'Arienzo, Armando Laborde"]
+        song_albums = ["La puñalada"]
+        expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(que_peina_canas)
+      end
     end
   end
 end

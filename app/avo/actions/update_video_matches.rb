@@ -12,6 +12,6 @@ class UpdateVideoMatches < Avo::BaseAction
       end
     end
 
-    succeed "Successfully created #{model.videos_count} videos for #{model.name}."
+    succeed "Successfully Update Video Matches"
   end
 end

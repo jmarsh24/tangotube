@@ -5,10 +5,14 @@
     - else
       = link_to watch_path(v: video.youtube_id) do
         = image_tag video.thumbnail, width: 178
-  .stack.stack--xxxs
-    = image_tag(video.channel.thumbnail, width: 36, class: "avatar avatar--sm") if video.channel.thumbnail.present?
-    .stack.stack--line
-      = video.title
-    = link_to video.song.full_title, root_path(song_id: video.song.slug) if video.song.present?
-    .stack.stack--line
-      = video.decorate.display_metadata
+  .video-card__content
+    .video-card__primary
+      .video-card__title = video.title
+      .video-card__metadata = video.decorate.display_metadata
+    .scrollable-tags.scrollable-tags--small
+      - video.dancer_videos.each do |dv|
+        - if dv.role == "leader"
+          = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
+        - elsif dv.role == "follower"
+          = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag video-card__dancer"
+    = link_to video.song.full_title, root_path(song_id: video.song.slug), class: "video-card__song-metadata tag" if video.song.present?

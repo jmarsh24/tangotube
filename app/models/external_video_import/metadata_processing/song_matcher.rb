@@ -3,13 +3,13 @@
 module ExternalVideoImport
   module MetadataProcessing
     class SongMatcher
-      MATCH_THRESHOLD = 0.9
+      MATCH_THRESHOLD = 0.8
       STOP_WORDS = ["y su orquesta tipica"].freeze
 
       def match(video_title:, video_description:, video_tags: [], song_titles: [], song_albums: [], song_artists: [])
-        orchestra_ids = find_orchestras([song_artists, video_title, video_tags, video_description])
+        orchestra_ids = find_orchestras([song_artists, video_title, video_tags, video_description, song_albums])
 
-        return nil if orchestra_ids.empty?
+        return nil if orchestra_ids.nil?
         find_song(orchestra_ids, [video_title, video_description, video_tags, song_titles])
       end
 
@@ -19,13 +19,6 @@ module ExternalVideoImport
         text = text.map { |text| normalize(text.to_s) }
         ochestra_id_names = Orchestra.all.pluck(:id, :search_term)
         orchestra_ids = []
-        ochestra_id_names.each do |id, artist_name|
-          text.reject(&:empty?).each do |text|
-            if text.include?(artist_name)
-              orchestra_ids << id
-            end
-          end
-        end
 
         ochestra_id_names.each do |id, artist_name|
           text.reject(&:empty?).each do |text|
@@ -33,12 +26,13 @@ module ExternalVideoImport
             orchestra_ids << id if ratio > MATCH_THRESHOLD
           end
         end
-        orchestra_ids.uniq!
+        orchestra_ids.uniq
       end
 
       def find_song(orchestra_ids, text)
         text = text.map { |text| normalize(text.to_s) }
         song_ids_title = Song.where(orchestra_id: orchestra_ids).pluck(:id, :title)
+        song_ids_title = song_ids_title.map { |id, title| [id, normalize(title)] }
 
         scores_and_songs = song_ids_title.flat_map do |id, title|
           text.reject(&:blank?).map do |text|

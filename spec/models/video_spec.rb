@@ -258,6 +258,19 @@ RSpec.describe Video do
     end
   end
 
+  describe ".fuzzy_titles" do
+    it "returns videos that match the search term" do
+      video = Video.create!(
+        youtube_id: "123",
+        title: "Pablo Rodriguez & Corina Herrera - La Vi Llegar - Miguel Calo - MSTF 2016",
+        channel: channels(:"030tango")
+      )
+      results = Video.fuzzy_titles("Miguel Calvo")
+
+      expect(results).not_to include(video)
+    end
+  end
+
   describe "#clicked!" do
     it "increases click_count by 1" do
       video = videos(:video_1_featured)
