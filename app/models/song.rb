@@ -28,6 +28,11 @@
 #  spotify_track_id  :string
 #
 class Song < ApplicationRecord
+  STOP_WORDS = {
+    en: ["a", "an", "and", "are", "as", "at", "be", "but", "by", "for", "if", "in", "into", "is", "it", "no", "not", "of", "on", "or", "such", "that", "the", "their", "then", "there", "these", "they", "this", "to", "was", "will", "with"],
+    es: ["un", "una", "unos", "unas", "y", "o", "pero", "por", "para", "como", "al", "de", "del", "los", "las"]
+  }.freeze
+
   validates :title, presence: true
   validates :artist, presence: true
 
@@ -43,7 +48,15 @@ class Song < ApplicationRecord
   scope :popularity, -> { where.not(popularity: nil) }
   scope :active, -> { where(active: true) }
   scope :not_active, -> { where(active: false) }
-  scope :search, ->(term) { where("title ILIKE ?", "%#{term}%") }
+  scope :search, ->(terms) do
+                   Array.wrap(terms)
+                     .map { |e| e.tr("*", "").downcase }
+                     .map { |term| remove_stop_words(term) }
+                     .reduce(self) do |scope, term|
+                       scope.where("word_similarity(?, title) > 0.3 OR word_similarity(?, artist) > 0.3 OR word_similarity(?, genre) > 0.3", "%#{term}%", "%#{term}%", "%#{term}%")
+                         .order(Arel.sql("similarity(title, '#{term}') DESC"))
+                     end
+                 end
 
   def full_title
     title_part = title&.titleize
@@ -67,19 +80,8 @@ class Song < ApplicationRecord
   end
 
   class << self
-    def full_title_search(query)
-      words = query.to_s.strip.split
-      words.reduce(all) do |combined_scope, word|
-        combined_scope
-          .where(
-            "unaccent(songs.title) ILIKE unaccent(:query) OR
-              unaccent(regexp_replace(artist, '''', '', 'g')) ILIKE unaccent(:query) OR
-              unaccent(genre) ILIKE unaccent(:query) OR
-              unaccent(artist) ILIKE unaccent(:query)",
-            query: "%#{word}%"
-          )
-          .references(:song)
-      end
+    def index_query
+      INDEX_QUERY
     end
 
     def missing_english_translation
@@ -95,5 +97,13 @@ class Song < ApplicationRecord
 
   def set_display_title
     self.display_title = [title&.titleize, custom_titleize(orchestra&.name), genre&.titleize, date&.year].compact.join(" - ")
+  end
+
+  def self.remove_stop_words(term)
+    languages = [:en, :es]
+    stop_words = languages.map { |language| STOP_WORDS[language] }.compact.flatten
+    return term unless stop_words
+
+    term.split.reject { |word| stop_words.include?(word) }.join(" ")
   end
 end

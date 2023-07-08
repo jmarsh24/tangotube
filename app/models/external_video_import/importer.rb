@@ -28,31 +28,46 @@ module ExternalVideoImport
       use_music_recognizer &&= video.acr_response_code != 0
       metadata = @video_crawler.metadata(video.youtube_id, use_scraper:, use_music_recognizer:)
 
-      # Preserve existing metadata values if not using scraper
       if !use_scraper
         metadata.youtube.song = video.metadata.youtube.song.attributes
         metadata.youtube.recommended_video_ids = video.metadata.youtube.recommended_video_ids
       end
 
-      # Preserve existing metadata.music values if not using music recognizer
       if !use_music_recognizer && (metadata.music.code != 0 || metadata.music.code != 1001)
         metadata.music = video.metadata.music.attributes
       end
 
       video_attributes = @metadata_processor.process(metadata)
-      updated_attributes = MetadataProcessing::VideoUpdater.new(video).update(metadata)
 
-      merged_attributes = video_attributes.merge(updated_attributes).merge(metadata_updated_at: Time.current)
-
-      Video.transaction do
-        video.update!(merged_attributes)
-        video
+      begin
+        video.update!(metadata: metadata.to_json, metadata_updated_at: Time.current)
+        attach_thumbnail(video, metadata.youtube.thumbnail_url.highest_resolution)
+      rescue ActiveRecord::RecordInvalid => e
+        Rails.logger.error("Error updating video: #{e.message}")
+        raise ExternalVideoImport::VideoUpdateError, e.message
       end
+
+      video
     rescue => e
       handle_error("updating", video.youtube_id, e)
     end
 
     private
+
+    def attach_thumbnail(object, thumbnail_url)
+      return if thumbnail_url.blank?
+
+      begin
+        downloaded_image = Down.download(thumbnail_url)
+        object.thumbnail.attach(io: downloaded_image, filename: File.basename(downloaded_image.path), content_type: downloaded_image.content_type)
+      rescue Down::Error => e
+        Rails.logger.warn("Failed to download thumbnail from #{thumbnail_url}: #{e.message}")
+      rescue Errno::ENOENT => e
+        Rails.logger.warn("Failed to download thumbnail from #{thumbnail_url}: #{e.message}")
+      rescue => e
+        Rails.logger.error("Error attaching thumbnail: #{e.message}")
+      end
+    end
 
     def handle_error(action, youtube_slug, error)
       case error
