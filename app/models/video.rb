@@ -32,6 +32,7 @@
 #  youtube_like_count  :integer
 #  youtube_tags        :text             default([]), is an Array
 #  metadata_updated_at :datetime
+#  normalized_title    :string
 #
 class Video < ApplicationRecord
   include Filterable
@@ -75,7 +76,7 @@ class Video < ApplicationRecord
   SQL
 
   belongs_to :song, optional: true
-  belongs_to :channel, optional: false
+  belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
@@ -153,6 +154,11 @@ class Video < ApplicationRecord
   }
   scope :year, ->(value) { where(upload_date_year: value) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
+  scope :fuzzy_titles, ->(terms) do
+                         terms = [terms] unless terms.is_a?(Array)
+                         query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.75", term]) }.join(" OR ")
+                         where(query)
+                       end
 
   class << self
     def index_query

@@ -7,7 +7,7 @@
 #  first_name   :string
 #  last_name    :string
 #  middle_name  :string
-#  nick_name    :string
+#  nick_name    :string           default([]), is an Array
 #  user_id      :bigint
 #  bio          :text
 #  slug         :string

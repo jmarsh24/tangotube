@@ -28,11 +28,6 @@
 #  spotify_track_id  :string
 #
 class Song < ApplicationRecord
-  STOP_WORDS = {
-    en: ["a", "an", "and", "are", "as", "at", "be", "but", "by", "for", "if", "in", "into", "is", "it", "no", "not", "of", "on", "or", "such", "that", "the", "their", "then", "there", "these", "they", "this", "to", "was", "will", "with"],
-    es: ["un", "una", "unos", "unas", "y", "o", "pero", "por", "para", "como", "al", "de", "del", "los", "las"]
-  }.freeze
-
   validates :title, presence: true
   validates :artist, presence: true
 
@@ -48,19 +43,29 @@ class Song < ApplicationRecord
   scope :popularity, -> { where.not(popularity: nil) }
   scope :active, -> { where(active: true) }
   scope :not_active, -> { where(active: false) }
-  scope :search, ->(terms) do
-                   sanitized_terms = Array.wrap(terms).map { |term| remove_stop_words(term).tr("*", "").downcase }
-                   return none if sanitized_terms.empty?
+  scope :search, ->(search_term) {
+    search_terms = search_term.split(" ").map { |term| TextNormalizer.normalize(term) }
+    quoted_search_terms = search_terms.map { |term| ActiveRecord::Base.connection.quote_string(term) }
 
-                   where_clause = sanitized_terms.map do |term|
-                     "(word_similarity(?, title) > 0.3 OR word_similarity(?, artist) > 0.3 OR word_similarity(?, genre) > 0.3)"
-                   end.join(" OR ")
+    similarity_expr = search_terms.each_with_index.map do |term, index|
+      title_similarity = "similarity(title, '#{quoted_search_terms[index]}')"
+      artist_similarity = "similarity(artist, '#{quoted_search_terms[index]}')"
+      genre_similarity = "similarity(genre, '#{quoted_search_terms[index]}')"
 
-                   where(where_clause, *sanitized_terms.flat_map { |term| ["%#{term}%", "%#{term}%", "%#{term}%"] })
-                     .order(Arel.sql(
-                       "videos_count DESC, similarity(title, '#{sanitized_terms.first}') DESC"
-                     ))
-                 end
+      "#{title_similarity} * 2 + #{artist_similarity} * 1.5 + #{genre_similarity}"
+    end.join(" + ")
+
+    search_conditions = search_terms.map { |term|
+      "(title % '#{term}' OR artist % '#{term}' OR genre % '#{term}')"
+    }.join(" OR ")
+
+    select_expr = "songs.*, #{similarity_expr} AS relevance_score"
+    order_expr = "relevance_score DESC, videos_count DESC"
+
+    where(search_conditions)
+      .select(select_expr)
+      .order(Arel.sql(order_expr))
+  }
 
   def full_title
     title_part = title&.titleize
@@ -101,13 +106,5 @@ class Song < ApplicationRecord
 
   def set_display_title
     self.display_title = [title&.titleize, custom_titleize(orchestra&.name), genre&.titleize, date&.year].compact.join(" - ")
-  end
-
-  def self.remove_stop_words(term)
-    languages = [:en, :es]
-    stop_words = languages.map { |language| STOP_WORDS[language] }.compact.flatten
-    return term unless stop_words
-
-    term.split.reject { |word| stop_words.include?(word) }.join(" ")
   end
 end

@@ -12,6 +12,7 @@
 #  updated_at   :datetime         not null
 #  videos_count :integer          default(0), not null
 #  songs_count  :integer          default(0), not null
+#  search_term  :string
 #
 class Orchestra < ApplicationRecord
   has_many :songs, dependent: :destroy

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_08_092434) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_08_170100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -67,8 +67,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_092434) do
     t.jsonb "metadata"
     t.datetime "metadata_updated_at"
     t.datetime "imported_at"
+    t.integer "videos_count", default: 0
+    t.index ["active"], name: "index_channels_on_active"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
     t.index ["title"], name: "index_channels_on_title"
+    t.index ["videos_count"], name: "index_channels_on_videos_count"
   end
 
   create_table "clips", force: :cascade do |t|
@@ -125,7 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_092434) do
     t.string "first_name"
     t.string "last_name"
     t.string "middle_name"
-    t.string "nick_name"
+    t.string "nick_name", default: [], array: true
     t.bigint "user_id"
     t.text "bio"
     t.string "slug"
@@ -134,6 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_092434) do
     t.datetime "updated_at", null: false
     t.integer "videos_count", default: 0, null: false
     t.enum "gender", enum_type: "gender_new"
+    t.index ["name"], name: "index_dancers_on_name", opclass: :gist_trgm_ops, using: :gist
     t.index ["slug"], name: "index_dancers_on_slug"
     t.index ["user_id"], name: "index_dancers_on_user_id"
   end
@@ -308,12 +312,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_092434) do
     t.integer "youtube_like_count"
     t.text "youtube_tags", default: [], array: true
     t.datetime "metadata_updated_at"
+    t.string "normalized_title"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["click_count"], name: "index_videos_on_click_count"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
+    t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gin_trgm_ops, using: :gin
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
     t.index ["upload_date"], name: "index_videos_on_upload_date"

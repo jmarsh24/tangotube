@@ -9,7 +9,7 @@
 #  first_name   :string
 #  last_name    :string
 #  middle_name  :string
-#  nick_name    :string
+#  nick_name    :string           default([]), is an Array
 #  user_id      :bigint
 #  bio          :text
 #  slug         :string
@@ -36,9 +36,24 @@ class Dancer < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-  scope :search, ->(term) { where("CONCAT_WS(' ', first_name, last_name) ILIKE unaccent(?)", "%#{term}%") }
   scope :reviewed, -> { where(reviewed: true) }
   scope :unreviewed, -> { where(reviewed: false) }
+  scope :search, ->(name) {
+                   quoted_name = ActiveRecord::Base.connection.quote_string(name)
+                   where("name % :name", name:)
+                     .order(Arel.sql("videos_count DESC, similarity(name, '#{quoted_name}') DESC"))
+                 }
+
+  def update_video_matches
+    search_terms = [TextNormalizer.normalize(name)]
+    search_terms.concat(nick_name.map { |term| TextNormalizer.normalize(term) }) if nick_name.present?
+    matching_videos = Video.fuzzy_titles(search_terms)
+
+    matching_videos.find_each do |video|
+      role = (gender == "male") ? "leader" : "follower"
+      DancerVideo.find_or_create_by(dancer: self, video:, role:)
+    end
+  end
 
   def full_name
     "#{first_name} #{last_name}"

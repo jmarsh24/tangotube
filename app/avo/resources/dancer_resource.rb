@@ -2,9 +2,9 @@
 
 class DancerResource < Avo::BaseResource
   self.title = :name
-  self.includes = [:videos, :couples, :partners, :orchestras, :songs]
+  self.includes = []
   self.search_query = -> do
-    scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
+    scope.search(params[:q])
   end
 
   field :id, as: :id
@@ -14,10 +14,8 @@ class DancerResource < Avo::BaseResource
   field :first_name, as: :text
   field :last_name, as: :text
   field :middle_name, as: :text
-  field :nick_name, as: :text
-  field :videos_count, as: :number do
-    model.videos.length
-  end
+  field :nick_name, as: :tags
+  field :videos_count, as: :number, sortable: true, read_only: true, only_on: [:index, :show]
   field :bio, as: :textarea, only_on: [:edit, :new, :show]
   field :slug, as: :text
   field :gender, as: :select, enum: ::Dancer.genders
@@ -31,6 +29,7 @@ class DancerResource < Avo::BaseResource
   field :partners, as: :has_many, through: :couples
 
   action ToggleReviewed
+  action UpdateVideoMatches
 
   filter ReviewedFilter
 end

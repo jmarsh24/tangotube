@@ -35,7 +35,6 @@ module Indexable
 
     scope :search, ->(terms) do
       Array.wrap(terms)
-        .map { |e| e.tr("*", "").downcase }
         .map { |term| remove_stop_words(term) }
         .reduce(self) do |scope, term|
           scope.where("word_similarity(?, index) > 0.3", "%#{term}%")

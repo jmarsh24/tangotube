@@ -32,6 +32,7 @@
 #  youtube_like_count  :integer
 #  youtube_tags        :text             default([]), is an Array
 #  metadata_updated_at :datetime
+#  normalized_title    :string
 #
 require "rails_helper"
 

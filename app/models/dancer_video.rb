@@ -12,7 +12,7 @@
 #  role       :enum
 #
 class DancerVideo < ApplicationRecord
-  belongs_to :dancer
+  belongs_to :dancer, counter_cache: :videos_count
   belongs_to :video
   counter_culture :dancer, column_name: "videos_count"
 
