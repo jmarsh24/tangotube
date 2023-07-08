@@ -9,7 +9,7 @@ class Search
     "videos" => Video
   }.freeze
 
-  DEFAULT_LIMIT = 20
+  DEFAULT_LIMIT = 10
 
   def initialize(term:, category: nil)
     @term = term
@@ -38,7 +38,7 @@ class Search
   end
 
   def all_results
-    results_for_all_models(DEFAULT_LIMIT)
+    results_for_all_models(DEFAULT_LIMIT).group_by { |result| result.class.name }
   end
 
   def results_for_all_models(limit)
