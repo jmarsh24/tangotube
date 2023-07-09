@@ -1,6 +1,6 @@
 .video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
   .video-card__image.video-card--compact__image data-duration="#{video.decorate.hd_duration_data}"
-    - thumbnail = video.thumbnail.present? ? video.thumbnail : "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
+    - thumbnail = "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
     - if video.youtube_id == @video.youtube_id
       - if video.youtube_id == @video.youtube_id
       = image_tag thumbnail
