@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikeResource < Avo::BaseResource
   self.title = :id
   self.includes = []

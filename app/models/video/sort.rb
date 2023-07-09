@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video::Sort
   attr_writer :video_relation
 

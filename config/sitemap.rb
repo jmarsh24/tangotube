@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = Config.host!(default: "localhost:3000")
 

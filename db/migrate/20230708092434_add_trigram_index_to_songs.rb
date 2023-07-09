@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTrigramIndexToSongs < ActiveRecord::Migration[7.0]
   def up
     remove_index :songs, :artist
