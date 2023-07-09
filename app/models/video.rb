@@ -159,6 +159,7 @@ class Video < ApplicationRecord
                          query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.9", term]) }.join(" OR ")
                          where(query)
                        end
+  scope :most_popular, -> { order(click_count: :desc) }
 
   class << self
     def index_query

@@ -1,4 +1,4 @@
-#search-results.search__results.scrollable-container__content
+= turbo_frame_tag "search-results", target: "_top", class: "search-bar__results search__results scrollable-container__content"
   - if search.results.present?
     - search.results.each do |type, results|
       h2.heading-2 = type.pluralize

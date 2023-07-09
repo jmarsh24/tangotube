@@ -12,7 +12,7 @@ class Search
 
   DEFAULT_LIMIT = 5
 
-  def initialize(term:, category: nil)
+  def initialize(term:, category: "all")
     @term = term
     @category = category
   end
@@ -40,8 +40,13 @@ class Search
   end
 
   def results_for_all_models(limit)
-    models_with_results = MODELS.values.select { |model| model.search(term).any? }
-    models_with_results.flat_map { |model| model.search(term).limit(limit) }
+    if term.present?
+      models_with_results = MODELS.values.select { |model| model.search(term).any? }
+      models_with_results.flat_map { |model| model.search(term).limit(limit) }
+    else
+      models_with_results = MODELS.values.select { |model| model.respond_to?(:most_popular) }
+      models_with_results.flat_map { |model| model.most_popular.limit(limit) }
+    end
   end
 
   def group_by_model(results)

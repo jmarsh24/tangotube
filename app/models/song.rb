@@ -43,6 +43,7 @@ class Song < ApplicationRecord
   scope :popularity, -> { where.not(popularity: nil) }
   scope :active, -> { where(active: true) }
   scope :not_active, -> { where(active: false) }
+  scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(search_term) {
     search_terms = search_term.split(" ").map { |term| TextNormalizer.normalize(term) }
     quoted_search_terms = search_terms.map { |term| ActiveRecord::Base.connection.quote_string(term) }

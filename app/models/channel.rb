@@ -37,6 +37,7 @@ class Channel < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
   scope :search, ->(term) { where("title ILIKE ?", "%#{term}%") }
+  scope :most_popular, -> { order(videos_count: :desc) }
 
   def import_new_videos(use_scraper: false, use_music_recognizer: false)
     return nil unless active && metadata.present?

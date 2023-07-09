@@ -29,6 +29,8 @@ class Event < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
+  scope :most_popular, -> { order(videos_count: :desc) }
+  scope :active, -> { where(active: true) }
   scope :search, ->(term) { where("title ILIKE ? OR city ILIKE ? OR country ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%") }
 
   def search_title

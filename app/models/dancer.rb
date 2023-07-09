@@ -43,6 +43,7 @@ class Dancer < ApplicationRecord
                    where("name % :name", name:)
                      .order(Arel.sql("videos_count DESC, similarity(name, '#{quoted_name}') DESC"))
                  }
+  scope :most_popular, -> { order(videos_count: :desc) }
 
   def update_video_matches
     search_terms = [TextNormalizer.normalize(name)]
