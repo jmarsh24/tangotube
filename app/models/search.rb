@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Search
   attr_reader :term, :category
 
@@ -31,7 +33,7 @@ class Search
   private
 
   def results_for_category(category)
-    results = MODELS[category].search(term)
+    results = get_results(MODELS[category])
     results.any? ? group_by_model(results.limit(DEFAULT_LIMIT)) : []
   end
 
@@ -40,12 +42,17 @@ class Search
   end
 
   def results_for_all_models(limit)
+    models_with_results = MODELS.values.flat_map { |model| get_results(model).limit(limit) }
+    models_with_results.any? ? models_with_results : []
+  end
+
+  def get_results(model)
     if term.present?
-      models_with_results = MODELS.values.select { |model| model.search(term).any? }
-      models_with_results.flat_map { |model| model.search(term).limit(limit) }
+      model.search(term)
+    elsif model.respond_to?(:most_popular)
+      model.most_popular
     else
-      models_with_results = MODELS.values.select { |model| model.respond_to?(:most_popular) }
-      models_with_results.flat_map { |model| model.most_popular.limit(limit) }
+      model.none
     end
   end
 
