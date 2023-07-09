@@ -6,7 +6,8 @@ class Search
     "channels" => Channel,
     "events" => Event,
     "orchestra" => Orchestra,
-    "videos" => Video
+    "videos" => Video,
+    "dancers" => Dancer
   }.freeze
 
   DEFAULT_LIMIT = 10
