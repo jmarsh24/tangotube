@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddIndexesForVideoSearch < ActiveRecord::Migration[7.1]
+class AddIndexesForVideoSearch < ActiveRecord::Migration[7.0]
   def change
     add_index :videos, :upload_date
     add_index :videos, :click_count

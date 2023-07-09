@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RemoveFieldsFromChannels < ActiveRecord::Migration[7.1]
+class RemoveFieldsFromChannels < ActiveRecord::Migration[7.0]
   def change
     remove_column :channels, :imported, :boolean
     remove_column :channels, :imported_videos_count, :integer

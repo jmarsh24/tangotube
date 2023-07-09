@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RemoveTransferredFieldsFromVideos < ActiveRecord::Migration[7.1]
+class RemoveTransferredFieldsFromVideos < ActiveRecord::Migration[7.0]
   def up
     remove_column :videos, :youtube_song, :string
     remove_column :videos, :youtube_artist, :string

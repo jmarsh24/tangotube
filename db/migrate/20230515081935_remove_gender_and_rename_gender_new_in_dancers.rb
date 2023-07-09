@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RemoveGenderAndRenameGenderNewInDancers < ActiveRecord::Migration[7.1]
+class RemoveGenderAndRenameGenderNewInDancers < ActiveRecord::Migration[7.0]
   def up
     remove_column :dancers, :gender
     rename_column :dancers, :gender_new, :gender

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddGenderToDancers < ActiveRecord::Migration[7.1]
+class AddGenderToDancers < ActiveRecord::Migration[7.0]
   def up
     execute <<-SQL
       DO $$ BEGIN
