@@ -4,6 +4,17 @@
   gap: var(--spacing-xs);
   position: relative;
 
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    background-image: url('@assets/images/icons/close.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
   &__label {
     @extend .paragraph;
   }

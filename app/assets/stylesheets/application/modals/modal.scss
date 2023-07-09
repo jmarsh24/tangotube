@@ -10,30 +10,25 @@
   align-items: center;
   justify-content: center;
 
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 24px 16px 24px;
+  }
+
   &__content {
-    position: absolute;
-    background-color: var(--color-neutral-0);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    background-color: var(--color-neutral-0);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
     width: 100%;
-    bottom: 0;
-    padding: var(--spacing-lg);
-    border-radius: 16px 16px 0 0;
+    height: 100%;
+    background-color: var(--color-neutral-0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 16px 16px 16px 16px;
     transition: opacity 0.5s, transform 0.5s;
     opacity: 0;
     transform: translate(0, 80px);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    min-height: 50vh;
-    height: calc(100vh - var(--header-height));
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    max-height: 100%;
   }
 
   &__title {
@@ -76,8 +71,7 @@
   }
 
   &__frame {
-    flex: 1;
-    scroll-behavior: smooth;
+    width: 100%;
   }
 
   &--small {
@@ -96,6 +90,14 @@
     .modal__content {
       opacity: 1;
       transform: none;
+    }
+  }
+
+  @include breakpoint-tablet {
+    &__content {
+      width: unset;
+      max-height: 75vh;
+      max-width: 40vw;
     }
   }
 }

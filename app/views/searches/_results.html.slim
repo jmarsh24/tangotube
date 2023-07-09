@@ -1,7 +1,7 @@
-#search-results.search__results
+#search-results.search__results.scrollable-container__content
   - if search.results.present?
     - search.results.each do |type, results|
-      h2 = type.pluralize
+      h2.heading-2 = type.pluralize
       - results.each do |result|
         - case result
         - when Event

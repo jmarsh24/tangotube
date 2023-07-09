@@ -1,4 +1,4 @@
-.search__categories#search-header-categories
+.search__categories#search-header-categories.scrollable-bar
   - categories.each do |category|
     .switcher
       label.switcher__button[for=category[1] class=(category[1] == selected_category || (selected_category.blank? && category[1].blank?) ? "active" : "")]

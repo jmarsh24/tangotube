@@ -10,7 +10,7 @@ class Search
     "dancers" => Dancer
   }.freeze
 
-  DEFAULT_LIMIT = 10
+  DEFAULT_LIMIT = 5
 
   def initialize(term:, category: nil)
     @term = term
