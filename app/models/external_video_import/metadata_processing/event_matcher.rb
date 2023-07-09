@@ -3,29 +3,36 @@
 module ExternalVideoImport
   module MetadataProcessing
     class EventMatcher
+      def initialize
+        @trigram = Trigram.new
+      end
+
       def match(metadata_fields:)
         text = metadata_fields.join(" ")
-        event_data = Trigram.best_matches(list: all_events, text:, threshold: 0.3, &event_match_block)
+        event_data = @trigram.best_matches(list: all_events, text:, threshold: 0.75, &event_match_block)
 
-        find_or_create_event(event_data)
+        best_match = event_data.first
+
+        if best_match
+          ::Event.find(best_match.first[:id])
+        end
       end
 
       private
 
       def all_events
-        ::Event.all.pluck(:id, :title, :city, :country)
+        @all_events ||= Rails.cache.fetch("Events", expires_in: 24.hours) {
+          ::Event.all.map { |event| {id: event.id, title: normalize(event.title), city: normalize(event.city), country: normalize(event.country)} }.to_a
+        }
       end
 
       def event_match_block
-        lambda { |event| [event[1], event[2], event[3]].join(" ") }
+        lambda { |event| [event[:title], event[:city], event[:country]].join(" ") }
       end
 
-      def find_or_create_event(event_data)
-        best_match = event_data.first
-
-        if best_match
-          ::Event.find(best_match.first.first)
-        end
+      def normalize(text)
+        ascii_text = text.encode("ASCII", invalid: :replace, undef: :replace, replace: "")
+        ascii_text.gsub("'", "").gsub("-", "").parameterize(separator: " ")
       end
     end
   end

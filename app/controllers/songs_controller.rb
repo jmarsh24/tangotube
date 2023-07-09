@@ -17,13 +17,11 @@ class SongsController < ApplicationController
     authorize @song
   end
 
-  # @route GET /songs/new (new_song)
   def new
     @song = Song.new
     authorize @song
   end
 
-  # @route POST /songs (songs)
   def create
     @song = Song.new(song_params)
     authorize @song
@@ -35,13 +33,10 @@ class SongsController < ApplicationController
     end
   end
 
-  # @route GET /songs/:id/edit (edit_song)
   def edit
     authorize @song
   end
 
-  # @route PATCH /songs/:id (song)
-  # @route PUT /songs/:id (song)
   def update
     authorize @song
 
@@ -52,7 +47,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # @route DELETE /songs/:id (song)
   def destroy
     authorize @song
     @song.destroy

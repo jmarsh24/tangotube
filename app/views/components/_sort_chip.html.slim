@@ -1,0 +1,2 @@
+= link_to root_path(request.query_parameters.merge(sort: column, direction: direction)), class: "sort-chip #{'sort-chip--selected' if selected }" do
+  span.sort-chip__label = label.to_s

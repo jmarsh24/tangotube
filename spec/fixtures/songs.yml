@@ -22,6 +22,8 @@
 #  lyrics_en         :string
 #  slug              :string
 #  orchestra_id      :bigint
+#  display_title     :string
+#  spotify_track_id  :string
 #
 
 nueve_de_julio:
@@ -40,8 +42,64 @@ cuando_el_amor_muere:
   artist: "Carlos Di Sarli"
   last_name_search: "di sarli"
   slug: "cuando-el-amor-muere-carlos-di-sarli"
-  lyrics_en: 'Without peace, defeated by this love \n I left another love in the distance, \n in this one life embraced me \n and in the other two little white hands. \n The witches of pain sentence, \n and between two fires go my longings; \n I would like to drown this passion \n I would like to spread my wings and leave, \n but my heart cries out to me. \n One lives only once. \n One loves only once, \n and there is no more sublime glory \n than to suffer for a love; \n but when that love dies \n another to the soul does not return, \n because this passion kisses us \n only once, and goodbye. \n Forgive me, Lord, if I forget \n on these lips other prayers, \n I did not know of this sleeping love \n that my own dreams go with it. \n But, today, that in love I live, \n for this love I stake everything, \n that a passion cannot be conquered \n when anxiety is burning \n and this is what the heart tells us.'
-  lyrics: 'Sin paz, por este amor vencida \n dejé otro amor a la distancia, \n en éste me abrazó la vida \n y al otro dos manitas blancas. \n Las brujas del dolor sentencian, \n y entre dos fuegos van mis ansias; \n quisiera ahogar esta pasión \n tender mis alas y partir, \n pero me grita el corazón. \n Una sola vez se vive. \n Una sola vez se ama, \n y no hay gloria más sublime \n que sufrir por un amor; \n pero cuando ese amor se muere \n otro al alma no regresa, \n porque esta pasión nos besa \n una sola vez, y adiós. \n Perdóname, Señor, si olvido \n en estos labios otros ruegos, \n no supe de este amor dormido \n que van con él mis propios sueños. \n Pero, hoy, que enamorado vivo, \n por este amor todo me juego, \n que no se vence a una pasión \n cuando es ardiente la ansiedad \n y así nos dice el corazón.'
+  lyrics_en: |
+    Without peace, defeated by this love  
+    I left another love in the distance,  
+    in this one life embraced me  
+    and in the other two little white hands.  
+    The witches of pain sentence,  
+    and between two fires go my longings;  
+    I would like to drown this passion  
+    I would like to spread my wings and leave,  
+    but my heart cries out to me.  
+
+    One lives only once.  
+    One loves only once,  
+    and there is no more sublime glory  
+    than to suffer for a love;  
+    but when that love dies  
+    another to the soul does not return,  
+    because this passion kisses us  
+    only once, and goodbye.  
+    Forgive me, Lord, if I forget  
+    on these lips other prayers,  
+    I did not know of this sleeping love  
+    that my own dreams go with it.  
+
+    But, today, that in love I live,  
+    for this love I stake everything,  
+    that a passion cannot be conquered  
+    when anxiety is burning  
+    and this is what the heart tells us.
+  lyrics: |
+    Sin paz, por este amor vencida  
+    dejé otro amor a la distancia,  
+    en éste me abrazó la vida  
+    y al otro dos manitas blancas.  
+    Las brujas del dolor sentencian,  
+    y entre dos fuegos van mis ansias;  
+    quisiera ahogar esta pasión  
+    tender mis alas y partir,  
+    pero me grita el corazón.  
+
+    Una sola vez se vive.  
+    Una sola vez se ama,  
+    y no hay gloria más sublime  
+    que sufrir por un amor;  
+    pero cuando ese amor se muere  
+    otro al alma no regresa,  
+    porque esta pasión nos besa  
+    una sola vez, y adiós.  
+    Perdóname, Señor, si olvido  
+    en estos labios otros ruegos,  
+    no supe de este amor dormido  
+    que van con él mis propios sueños.  
+
+    Pero, hoy, que enamorado vivo,  
+    por este amor todo me juego,  
+    que no se vence a una pasión  
+    cuando es ardiente la ansiedad  
+    y así nos dice el corazón.
 
 violetas:
   genre: "Vals"
@@ -50,8 +108,76 @@ violetas:
   artist: "Alberto Castillo"
   last_name_search: "di sarli"
   slug: "violetas-aberto-castillo"
-  lyrics_en: "These violets that yesterday \n you gave me lovingly, with so much fervor, \n I keep them as an emblem of a love, \n that my eyes have already seen fade \n among the thick mist of a deep pain... \n They, perhaps, will tell me \n in their mute language with cold expression: \n that in vain do I hope that the bird of love \n the bird of love that knew how to give \n a world of chirps to my heart... \n And in this struggle of evil \n with the cup of my youth \n I drink the mortal wine \n from the fountain of your ingratitude... \n For, fatal destiny \n has extinguished my flower of virtue; \n and together with the violets \n that you gave me one day, \n the melancholy \n of my disenchantment \n punishes me so much \n that I can't take it anymore!... \n My soul was left sad, \n withered and without consolation, following chance... \n Like the violets it withered \n and lost all its perfume \n never to find it again in life. \n Think that I was always \n yu joyful songbook more spiritual, \n that when I offered you my songs \n a thousand times with ardent frenzy \n your lips swore me immortal affection!"
-  lyrics: 'Estas violetas que ayer \n me diste cariñosa, con tanto fervor, \n las guardo como emblema de un querer, \n que vieron ya mis ojos fenecer \n entre la espeso bruma de un hondo dolor... \n Ellas, tal vez, me dirán \n en su lenguaje mudo con fría expresión: \n que en vano espero que ha de regresar \n el ave del amor que supo dar \n un mundo de gorjeos mi corazón... \n Y en esta lucha del mal \n con la copa de mi juventud, \n bebo el vino mortal \n de la fuente de tu ingratitud... \n Pues, el destino fatal \n ha extinguido mi flor de virtud; \n y juntita a las violetas \n que me diste un día, \n la melancolía \n de mi desencanto, \n me castiga tanto \n ¡que no puedo más!... \n Triste mi alma quedó, \n marchita y sin consuelo siguiendo el azar... \n Igual que las violetas se agostó \n y todo su perfume ya perdió \n para nunca en la vida volverlo a encontrar. \n Piensa que siempre yo fui \n yu alegre cancionero más espiritual, \n que cuando mis cantares te ofrecí \n mil veces con ardiente frenesí \n ¡me juraron tus labios cariño inmortal!'
+  lyrics_en: |
+    These violets that yesterday
+    you gave me lovingly, with so much fervor,
+    I keep them as an emblem of a love,
+    that my eyes have already seen fade
+    among the thick mist of a deep pain...
+    They, perhaps, will tell me
+    in their mute language with cold expression:
+    that in vain do I hope that the bird of love
+    the bird of love that knew how to give
+    a world of chirps to my heart...
+
+    And in this struggle of evil
+    with the cup of my youth
+    I drink the mortal wine
+    from the fountain of your ingratitude...
+    For, fatal destiny
+    has extinguished my flower of virtue;
+    and together with the violets
+    that you gave me one day,
+    the melancholy
+    of my disenchantment
+    punishes me so much
+    that I can't take it anymore!...
+
+    My soul was left sad,
+    withered and without consolation, following chance...
+    Like the violets it withered
+    and lost all its perfume
+    never to find it again in life.
+    Think that I was always
+    yu joyful songbook more spiritual,
+    that when I offered you my songs
+    a thousand times with ardent frenzy
+    your lips swore me immortal affection!
+  lyrics: |
+    Estas violetas que ayer
+    me diste cariñosa, con tanto fervor,
+    las guardo como emblema de un querer,
+    que vieron ya mis ojos fenecer
+    entre la espeso bruma de un hondo dolor...
+    Ellas, tal vez, me dirán
+    en su lenguaje mudo con fría expresión:
+    que en vano espero que ha de regresar
+    el ave del amor que supo dar
+    un mundo de gorjeos mi corazón...
+
+    Y en esta lucha del mal
+    con la copa de mi juventud,
+    bebo el vino mortal
+    de la fuente de tu ingratitud...
+    Pues, el destino fatal
+    ha extinguido mi flor de virtud;
+    y juntita a las violetas
+    que me diste un día,
+    la melancolía
+    de mi desencanto,
+    me castiga tanto
+    ¡que no puedo más!...
+
+    Triste mi alma quedó,
+    marchita y sin consuelo siguiendo el azar...
+    Igual que las violetas se agostó
+    y todo su perfume ya perdió
+    para nunca en la vida volverlo a encontrar.
+    Piensa que siempre yo fui
+    yu alegre cancionero más espiritual,
+    que cuando mis cantares te ofrecí
+    mil veces con ardiente frenesí
+    ¡me juraron tus labios cariño inmortal!
 
 milonga_querida:
   genre: "Milonga"
@@ -60,8 +186,60 @@ milonga_querida:
   artist: "Juan D'Arienzo"
   last_name_search: "darienzo"
   slug: "milonga-querida-juan-darienzo"
-  lyrics_en: 'The poets did not paint her \n in their seductive verses, \n nor did they know her life \n nor the love of her loves. \n She was the prettiest in the neighborhood \n and because she was pretty, she was coveted, \n and more than a hundred entreveros \n her beauty provoked. \n But she knew well \n who silently loved her \n and at last she understood no one \n for she gave herself to no one; \n to see her alone, very alone, \n a thousand comments were made \n and defamed her name \n for not getting her love. \n That sad boy, \n so humble and so simple, \n left silently one night \n from the cheerful tenement. \n And that pretty girl \n for pretty coveted, \n loaded her things one afternoon, \n and never returned to her neighborhood.'
-  lyrics: 'No la pintaron los poetas \n en sus versos seductores, \n ni conocieron su vida \n ni el amor de sus amores. \n Fue la más linda del barrio \n y por linda, codiciada, \n y más de cien entreveros \n su belleza provocó. \n Pero ella bien conocía \n quién en silencio la amaba \n y a nadie al fin comprendía \n pues con ninguno se daba; \n por verla sola, muy sola, \n mil comentarios se hicieron \n y difamaron su nombre \n al no conseguir su amor. \n Aquel muchacho tan triste, \n tan humilde y tan sencillo, \n se fue en silencio una noche \n del alegre conventillo. \n Y aquella piba bonita \n por bonita codiciada, \n cargó una tarde sus cosas, \n y a su barrio no volvió.'
+  lyrics_en: |
+    The poets did not paint her
+    in their seductive verses,
+    nor did they know her life
+    nor the love of her loves.
+    She was the prettiest in the neighborhood
+    and because she was pretty, she was coveted,
+    and more than a hundred entreveros
+    her beauty provoked.
+
+    But she knew well
+    who silently loved her
+    and at last she understood no one
+    for she gave herself to no one;
+    to see her alone, very alone,
+    a thousand comments were made
+    and defamed her name
+    for not getting her love.
+
+    That sad boy,
+    so humble and so simple,
+    left silently one night
+    from the cheerful tenement.
+    And that pretty girl
+    for pretty coveted,
+    loaded her things one afternoon,
+    and never returned to her neighborhood.
+  lyrics: |
+    No la pintaron los poetas
+    en sus versos seductores,
+    ni conocieron su vida
+    ni el amor de sus amores.
+    Fue la más linda del barrio
+    y por linda, codiciada,
+    y más de cien entreveros
+    su belleza provocó.
+
+    Pero ella bien conocía
+    quién en silencio la amaba
+    y a nadie al fin comprendía
+    pues con ninguno se daba;
+    por verla sola, muy sola,
+    mil comentarios se hicieron
+    y difamaron su nombre
+    al no conseguir su amor.
+
+    Aquel muchacho tan triste,
+    tan humilde y tan sencillo,
+    se fue en silencio una noche
+    del alegre conventillo.
+    Y aquella piba bonita
+    por bonita codiciada,
+    cargó una tarde sus cosas,
+    y a su barrio no volvió.
 
 malandraca:
   genre: "Tango"

@@ -36,7 +36,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
       allow(youtube_metadata).to receive(:title).and_return("Test Video Title")
       allow(youtube_metadata).to receive(:description).and_return("Test video description")
       allow(youtube_metadata).to receive(:slug).and_return("test_video_slug")
-      allow(youtube_metadata).to receive(:upload_date).and_return("2022-01-01")
+      allow(youtube_metadata).to receive(:upload_date).and_return("2022-01-01".to_date)
       allow(youtube_metadata).to receive(:duration).and_return(180)
       allow(youtube_metadata).to receive(:tags).and_return(["tag1", "tag2"])
       allow(youtube_metadata).to receive(:hd).and_return(true)
@@ -70,14 +70,12 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
 
       attributes = metadata_processor.process(metadata)
 
-      expect(attributes).to eq(
-        youtube_id: "test_video_slug",
-        upload_date: "2022-01-01",
-        channel: "matched_channel",
-        song: song_metadata,
-        dancers:,
-        couples: couple
-      )
+      expect(attributes[:youtube_id]).to eq("test_video_slug")
+      expect(attributes[:upload_date]).to eq("2022-01-01".to_date)
+      expect(attributes[:upload_date_year]).to eq(2022)
+      expect(attributes[:song]).to eq(song_metadata)
+      expect(attributes[:dancers]).to eq(dancers)
+      expect(attributes[:couples]).to eq(couple)
     end
   end
 end

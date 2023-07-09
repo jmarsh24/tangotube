@@ -1,42 +1,38 @@
-#filters {
-  padding: var(--spacing-sm);
-  overflow: visible;
+// #filters {
+//   padding: var(--spacing-sm);
+//   overflow: visible;
+// }
 
-  .button {
-    display: none;
-  }
-}
+// #desktop-filters {
+//   display: none;
+// }
 
-#desktop-filters {
-  display: none;
-}
+// @include breakpoint-desktop {
+//   #filters {
+//     position: unset;
+//     background-color: unset;
+//     margin-top: unset;
+//     display: flex !important;
+//     padding: unset;
+//   }
 
-@include breakpoint-desktop {
-  #filters {
-    position: unset;
-    background-color: unset;
-    margin-top: unset;
-    display: flex !important;
-    padding: unset;
-  }
+//   #menu-additional-filters {
+//     display: none;
+//   }
 
-  #menu-additional-filters {
-    display: none;
-  }
+//   #button-filter {
+//     display: none;
+//   }
 
-  #button-filter {
-    display: none;
-  }
+//   #mobile-filters {
+//     display: none;
+//   }
 
-  #mobile-filters {
-    display: none;
-  }
+//   #desktop-filters {
+//     display: block;
+//   }
 
-  #desktop-filters {
-    display: block;
-  }
-
-  #mobile-button {
-    display: none;
-  }
-}
+//   #mobile-button {
+//     display: none;
+//   }
+// }

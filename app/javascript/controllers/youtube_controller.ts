@@ -1,6 +1,6 @@
-import { Controller } from "@hotwired/stimulus";
-import YouTubePlayer from "youtube-player";
-import { useHover } from "stimulus-use";
+import { Controller } from '@hotwired/stimulus';
+import YouTubePlayer from 'youtube-player';
+import { useHover } from 'stimulus-use';
 
 export default class extends Controller {
   static values = {
@@ -9,11 +9,15 @@ export default class extends Controller {
     endSeconds: Number,
     playbackRate: Number,
   };
-  static targets = ["frame", "playbackRate", "startTime", "endTime"];
+  static targets = ['playbackRate', 'startTime', 'endTime'];
+
+  youtube: YouTubePlayer.Player | null = null;
+  timer: NodeJS.Timeout | null = null;
 
   connect() {
     useHover(this, { element: this.element });
-    var playerConfig = {
+
+    const playerConfig: YouTubePlayer.PlayerOptions = {
       videoId: this.videoIdValue,
       playerVars: {
         autoplay: 0, // Auto-play the video on load
@@ -23,91 +27,57 @@ export default class extends Controller {
         cc_load_policy: 0, // Hide closed captions
         iv_load_policy: 3, // Hide the Video Annotations
         start: this.startSecondsValue,
-        // end: this.endSecondsValue,
       },
     };
 
-    const player = YouTubePlayer(this.frameTarget, playerConfig);
+    const player = YouTubePlayer(this.element, playerConfig);
+    this.youtube = player;
 
-    player.on("ready", (e) => {
-      this.element.setAttribute("data-duration", e.target.getDuration());
-      this.youtube = e.target;
-      this.element.setAttribute("data-time", this.time);
-      this.element.setAttribute("data-state", -1);
+    player.on('ready', (e: YouTubePlayer.PlayerEvent) => {
+      this.element.setAttribute(
+        'data-duration',
+        e.target.getDuration().toString()
+      );
+      this.element.setAttribute('data-time', this.time.toString());
+      this.element.setAttribute('data-state', '-1');
     });
 
     player.setPlaybackRate(this.playbackRateValue);
 
-    player.on("playbackRateChange", (e) => {
+    player.on('playbackRateChange', (e: YouTubePlayer.PlayerEvent) => {
       this.playbackRateTarget.value = parseFloat(this.player.getPlaybackRate())
         .toFixed(2)
         .toString();
     });
 
-    player.on("stateChange", (e) => {
-      this.element.setAttribute("data-state", e.data);
-      this.element.setAttribute("data-time", this.time);
-      this.element.setAttribute("data-playbackRate", this.playbackRateValue);
-      e.data === 1 ? this.startTimer() : clearInterval(this.timer);
-    });
-  }
-
-  // mouseEnter() {
-  //   this.play();
-  // }
-
-  // mouseLeave() {
-  //   this.pause();
-  // }
-
-  updatePlaybackRate() {
-    this.player.setPlaybackRate(parseFloat(this.playbackRateTarget.value));
-  }
-
-  updateStartTime() {
-    var startTimeArray = this.startTimeTarget.value.split(":");
-    if (startTimeArray.length == 2) {
-      var startTime = +startTimeArray[0] * 60 + +startTimeArray[1];
-    }
-    if (startTimeArray.length == 1) {
-      var startTime = startTimeArray[0];
-    }
-    this.startSecondsValue = startTime;
-    this.player.loadVideoById({
-      videoId: this.videoIdValue,
-      startSeconds: this.startSecondsValue,
-      // endSeconds: this.endSecondsValue,
-    });
-  }
-
-  updateEndTime() {
-    var endTimeArray = this.endTimeTarget.value.split(":");
-    if (endTimeArray.length == 2) {
-      var endTime = +endTimeArray[0] * 60 + +endTimeArray[1];
-    }
-    if (endTimeArray.length == 1) {
-      var endTime = endTimeArray[0];
-    }
-    this.endSecondsValue = endTime;
-    this.player.loadVideoById({
-      videoId: this.videoIdValue,
-      startSeconds: this.startSecondsValue,
-      // endSeconds: this.endSecondsValue,
+    player.on('stateChange', (e: YouTubePlayer.PlayerEvent) => {
+      this.element.setAttribute('data-state', e.data.toString());
+      this.element.setAttribute('data-time', this.time.toString());
+      this.element.setAttribute(
+        'data-playbackRate',
+        this.playbackRateValue.toString()
+      );
+      if (e.data === 1) {
+        this.startTimer();
+      } else {
+        clearInterval(this.timer as NodeJS.Timeout);
+      }
     });
   }
 
   disconnect() {
-    document.removeEventListener("turbo:before-cache", this.player.destroy);
+    document.removeEventListener('turbo:before-cache', this.player.destroy);
+    clearInterval(this.timer as NodeJS.Timeout);
   }
 
   startTimer() {
     this.timer = setInterval(() => {
-      if (this.time == this.endSecondsValue) {
+      if (this.time === this.endSecondsValue) {
         this.player.seekTo(this.startSecondsValue);
       }
-      this.element.setAttribute("data-time", this.time);
+      this.element.setAttribute('data-time', this.time.toString());
       this.element.dispatchEvent(
-        new CustomEvent("youtube", {
+        new CustomEvent('youtube', {
           bubbles: false,
           cancelable: false,
           detail: { time: this.time },
@@ -116,33 +86,38 @@ export default class extends Controller {
     }, 1000);
   }
 
-  playPause(event) {
+  playPause(event: Event) {
     event.preventDefault();
-    var playerState = this.element.getAttribute("data-state");
-    if (playerState == 5 || playerState == 2 || playerState == -1) {
+    const playerState = this.element.getAttribute('data-state');
+    if (playerState === '5' || playerState === '2' || playerState === '-1') {
       this.play();
     } else {
       this.pause();
     }
   }
 
-  setTime1(event) {
+  setTime1(event: Event) {
     event.preventDefault();
-    var currentTime = this.element.getAttribute("data-time");
+    const currentTime = parseInt(
+      this.element.getAttribute('data-time') || '0',
+      10
+    );
     this.startSecondsValue = currentTime;
-    this.startTimeTarget.value = currentTime;
+    this.startTimeTarget.value = currentTime.toString();
     this.player.loadVideoById({
       videoId: this.videoIdValue,
       startSeconds: this.startSecondsValue,
-      endSeconds: this.endSecondsValue,
     });
   }
 
-  setTime2(event) {
+  setTime2(event: Event) {
     event.preventDefault();
-    var currentTime = this.element.getAttribute("data-time");
+    const currentTime = parseInt(
+      this.element.getAttribute('data-time') || '0',
+      10
+    );
     this.endSecondsValue = currentTime;
-    this.endTimeTarget.value = currentTime;
+    this.endTimeTarget.value = currentTime.toString();
     this.player.loadVideoById({
       videoId: this.videoIdValue,
       startSeconds: this.startSecondsValue,
@@ -150,85 +125,90 @@ export default class extends Controller {
     });
   }
 
-  toggleMute(event) {
-    event.preventDefault();
-    if (this.player.isMuted()) {
-      this.unMute();
-    } else {
-      this.mute();
-    }
+  updatePlaybackRate() {
+    this.player.setPlaybackRate(parseFloat(this.playbackRateTarget.value));
   }
 
-  reset(event) {
-    event.preventDefault();
-    var currentTime = this.time;
+  updateStartTime() {
+    const startTimeArray = this.startTimeTarget.value.split(':');
+    let startTime = 0;
+    if (startTimeArray.length === 2) {
+      startTime = +startTimeArray[0] * 60 + +startTimeArray[1];
+    }
+    if (startTimeArray.length === 1) {
+      startTime = +startTimeArray[0];
+    }
+    this.startSecondsValue = startTime;
     this.player.loadVideoById({
       videoId: this.videoIdValue,
-      startSeconds: currentTime,
+      startSeconds: this.startSecondsValue,
     });
-    this.endSecondsValue = "";
-    this.endTimeTarget.value = "";
-    this.startSecondsValue = "";
-    this.startTimeTarget.value = "";
-    this.player.setPlaybackRate(1);
-    this.playbackRateTarget == 1;
   }
 
-  playFullscreen() {
-    this.play(); //won't work on mobile
-    var iframe = this.frameTarget;
-    var requestFullScreen =
-      iframe.requestFullScreen ||
-      iframe.mozRequestFullScreen ||
-      iframe.webkitRequestFullScreen;
-    if (requestFullScreen) {
-      requestFullScreen.bind(iframe)();
+  updateEndTime() {
+    const endTimeArray = this.endTimeTarget.value.split(':');
+    let endTime = 0;
+    if (endTimeArray.length === 2) {
+      endTime = +endTimeArray[0] * 60 + +endTimeArray[1];
     }
+    if (endTimeArray.length === 1) {
+      endTime = +endTimeArray[0];
+    }
+    this.endSecondsValue = endTime;
+    this.player.loadVideoById({
+      videoId: this.videoIdValue,
+      startSeconds: this.startSecondsValue,
+      endSeconds: this.endSecondsValue,
+    });
   }
 
-  increasePlaybackRate(event) {
-    event.preventDefault();
-    this.player.setPlaybackRate(this.playbackRate + 0.25);
+  play() {
+    this.player.playVideo();
   }
 
-  decreasePlaybackRate(event) {
-    event.preventDefault();
-    this.player.setPlaybackRate(this.playbackRate - 0.25);
+  pause() {
+    this.player.pauseVideo();
   }
 
-  seekForward(event) {
-    event.preventDefault();
-    this.seek(this.time + 5);
+  stop() {
+    this.player.stopVideo();
   }
 
-  seekBackward(event) {
-    event.preventDefault();
-    this.seek(this.time - 5);
+  mute() {
+    this.player.mute();
   }
 
-  play = () => this.player.playVideo();
-  pause = () => this.player.pauseVideo();
-  stop = () => this.player.stopVideo();
-  mute = () => this.player.mute();
-  unMute = () => this.player.unMute();
-  seek = (seconds) => this.player.seekTo(seconds);
-  // playbackRate = (rate) => this.player.setPlaybackRate(rate);
+  unMute() {
+    this.player.unMute();
+  }
+
+  seek(seconds: number) {
+    this.player.seekTo(seconds);
+  }
 
   get player() {
+    if (!this.youtube) {
+      throw new Error('YouTube player is not initialized.');
+    }
     return this.youtube;
   }
+
   get time() {
     return Math.round(this.player.getCurrentTime());
   }
+
   get playbackRate() {
     return this.player.getPlaybackRate();
   }
+
   get duration() {
     return this.player.getDuration();
   }
+
   get state() {
-    return this.element.getAttribute("data-state");
+    return this.element.getAttribute('data-state') || '';
   }
+
   get loaded() {
     return this.player.getVideoLoadedFraction();
   }

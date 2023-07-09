@@ -1,14 +1,13 @@
-.stack.stack--desktop-line
-  .stack.stack--xxs
-    h1.heading-3.heading-3--bold= @video.decorate.title_link
-    h2.heading-4= @video.decorate.song_link
-    = link_to @video.event.title.titleize, root_path(event_id: @video.event.id), { "data-turbo-frame": "_top" } if @video.event.present?
-    .stack.stack--line.stack--xxs
-      = link_to image_tag(@video.channel.thumbnail_url, class: "avatar avatar--sm"), root_path(channel: @video.channel.channel_id), { "data-turbo-frame": "_top" } if @video.channel.thumbnail_url.present?
-      = link_to truncate(@video.channel.title, length: 45, omission: ""), root_path(channel: @video.channel.channel_id), { class: "channel-title", "data-turbo-frame": "_top" }
-    div
-      = @video.decorate.display_metadata
-  .stack data-controller="clipboard" data-clipboard-success-content="Copied!" data-clipboard-video-id="#{@video.youtube_id}" data-clipboard-root-url="#{@root_url}"
-    .stack
-      = render "videos/show/vote"
-      
+.video-info-primary
+  .stack.stack--xs
+    .stack.stack--xxs
+      h1.heading-4.heading-4 = link_to video.title, watch_path(v: video.youtube_id)
+      .video-info-primary__metadata = video.decorate.display_metadata
+    .stack.stack--xxs.stack--justify-left
+      .scrollable-tags.scrollable-tags--small
+        - video.dancer_videos.each do |dv|
+          - if dv.role == "leader"
+            = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
+          - elsif dv.role == "follower"
+            = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag video-card__dancer"
+      = link_to video.song.full_title, root_path(song_id: video.song.id), class: "heading-5 video-info-primary__song-info video-card__song-metadata tag" if video.song.present?

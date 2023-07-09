@@ -13,6 +13,6 @@ def download_audio
   FileUtils.cp "spec/fixtures/files/blank_audio.mp3", audio_filepath.to_s
 end
 
-if ARGV[ARGV.index("-f") + 1] == "140"
+if ARGV[ARGV.index("-f") + 1] == "bestaudio"
   download_audio
 end

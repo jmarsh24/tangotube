@@ -4,19 +4,28 @@
   gap: var(--spacing-xs);
   position: relative;
 
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    background-image: url('@assets/images/icons/close.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
   &__label {
     @extend .paragraph;
   }
 
   &__input {
-    font-family: inherit;
     border: 1px solid var(--color-neutral-300);
     border-radius: var(--border-radius-input-sm);
     padding: var(--spacing-xs) var(--spacing-xs);
     transition: border-color 0.2s;
     background-color: transparent;
     color: var(--color-neutral-1000);
-    width: 100%;
 
     &::placeholder {
       color: var(--color-neutral-1000);
@@ -26,61 +35,8 @@
       outline: none;
     }
 
-    &:focus {
-      border-color: var(--color-neutral-250);
-    }
-  }
-
-  textarea.input__input {
-    border-radius: var(--border-radius-input-sm);
-  }
-
-  &__description {
-    font-size: 12px;
-    line-height: 18px;
-    color: var(--color-neutral-1000);
-
-    &--bold {
-      font-weight: 700;
-    }
-
-    @include breakpoint-tablet {
-      font-size: 14px;
-      line-height: 21px;
-    }
-  }
-
-  &--checkbox {
-    display: flex;
-    gap: 10px;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: flex-end;
-
-    .input__label {
-      @extend .caption;
-    }
-
-    .input__input {
-      height: 18px;
-      width: 18px;
-      border-radius: 50%;
-      border: 1px solid var(--color-neutral-1000);
-      flex-shrink: 0;
-      padding: 0;
-      appearance: none;
-
-      &:focus {
-        box-shadow: 0px 0px 5px 1px rgba(45, 147, 231, 0.4);
-      }
-
-      &:checked {
-        background-color: var(--color-neutral-1000);
-        // background-image: url('@assets/images/icons/check-white.svg');
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
+    &.selected {
+      font-weight: bold;
     }
   }
 
@@ -89,5 +45,15 @@
     border-bottom-right-radius: 0px;
     padding: var(--spacing-xxs) var(--spacing-xxs);
     font-size: var(--font-size-sm);
+  }
+
+  &--no-border {
+    border: none;
+    border-radius: 0;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
   }
 }

@@ -3,25 +3,48 @@
 module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
-      def match(metadata_fields:)
-        dancers = ::Dancer.all.pluck(:id, :first_name, :last_name)
-        metadata_fields = Array(metadata_fields) # Ensure metadata_fields is an array
-        text = metadata_fields.join(" ")
-        dancer_ids = find_best_matches(dancers, text, threshold: 0.80)
+      MATCH_THRESHOLD = 0.70
 
-        if dancer_ids.any?
-          ::Dancer.find(dancer_ids)
-        else
-          []
-        end
+      def initialize
+        @fuzzy_matcher = FuzzyText.new
+      end
+
+      def match(video_title:)
+        matched_dancers = find_best_matches(video_title)
+        log_matches(matched_dancers)
+        matched_dancers.any? ? Dancer.find(matched_dancers.map { |dancer| dancer[:id] }) : []
       end
 
       private
 
-      def find_best_matches(dancers, text, threshold:)
-        Trigram.best_matches(list: dancers, text:, threshold:) do |dancer|
-          [dancer[1], dancer[2], dancer[3]].join(" ")
-        end.map { |match| match.first.first }
+      def dancers
+        @dancers ||= Rails.cache.fetch("Dancers", expires_in: 24.hours) {
+          ::Dancer.all.map { |dancer| {id: dancer.id, name: normalize(dancer.name)} }.to_a
+        }
+      end
+
+      def find_best_matches(video_title)
+        dancers.filter { |dancer|
+          match_score(dancer[:name], video_title) >= MATCH_THRESHOLD
+        }
+      end
+
+      def match_score(query, target)
+        @fuzzy_matcher.trigram_score(needle: query, haystack: normalize(target))
+      end
+
+      def normalize(text)
+        ascii_text = text.encode("ASCII", invalid: :replace, undef: :replace, replace: "")
+        ascii_text.gsub("'", "").gsub("-", "").parameterize(separator: " ")
+      end
+
+      def log_matches(dancers)
+        if dancers.any?
+          Rails.logger.info "Matched dancers:"
+          dancers.each { |dancer| Rails.logger.info "- #{dancer[:name]}" }
+        else
+          Rails.logger.info "No dancers matched."
+        end
       end
     end
   end

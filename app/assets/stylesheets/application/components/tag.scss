@@ -1,20 +1,21 @@
 .tag {
   display: inline-block;
-  border-radius: 3px;
-  padding: var(--spacing-xxxs) var(--spacing-xxxs);
-  border-radius: 3px;
+  border-radius: var(--border-radius-pill);
+  padding: 3px 10px;
   background: var(--color-neutral-100);
   color: var(--color-neutral-900);
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 12px;
+  white-space: nowrap;
 
   &--sm {
-    font-size: 0.8em;
+    font-size: var(--font-size-xs);
     display: inline-block;
     font-weight: 500;
   }
 
   &--lg {
-    font-size: 1.2em;
+    font-size: var(--font-size-lg);
     border-radius: 4px;
   }
 }

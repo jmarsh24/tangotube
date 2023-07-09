@@ -7,280 +7,189 @@
 #  id                  :bigint           not null, primary key
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  title               :text
 #  youtube_id          :string           not null
+#  description         :string
+#  duration            :integer
+#  view_count          :integer
 #  song_id             :bigint
+#  acr_response_code   :integer
 #  channel_id          :bigint
 #  hidden              :boolean          default(FALSE)
+#  hd                  :boolean          default(FALSE)
 #  popularity          :integer          default(0)
+#  like_count          :integer          default(0)
 #  event_id            :bigint
 #  click_count         :integer          default(0)
 #  featured            :boolean          default(FALSE)
 #  index               :text
 #  metadata            :jsonb
+#  tags                :text             default([]), is an Array
 #  imported_at         :datetime
 #  upload_date         :date
+#  upload_date_year    :integer
+#  youtube_view_count  :integer
+#  youtube_like_count  :integer
+#  youtube_tags        :text             default([]), is an Array
 #  metadata_updated_at :datetime
+#  normalized_title    :string
 #
 class Video < ApplicationRecord
-  acts_as_votable
   include Filterable
   include Indexable
   include Presentable
 
-  attribute :metadata, ExternalVideoImport::Metadata.to_type
-
-  validates :youtube_id, presence: true, uniqueness: true
+  INDEX_QUERY = <<~SQL.squish.freeze
+    UPDATE videos
+    SET index = query.index
+    FROM (
+      SELECT
+        videos.id,
+        LOWER(
+          CONCAT_WS(' ',
+            MIN(normalize(dancers.first_name)),
+            MIN(normalize(dancers.last_name)),
+            MIN(normalize(channels.channel_id)),
+            MIN(normalize(channels.title)),
+            MIN(normalize(songs.title)),
+            MIN(normalize(songs.genre)),
+            MIN(normalize(songs.artist)),
+            MIN(normalize(orchestras.name)),
+            MIN(normalize(events.city)),
+            MIN(normalize(events.title)),
+            MIN(normalize(events.country)),
+            normalize(videos.youtube_id),
+            normalize(videos.title),
+            normalize(videos.description)
+          )
+        ) AS index
+      FROM videos
+      LEFT JOIN channels ON channels.id = videos.channel_id
+      LEFT JOIN songs ON songs.id = videos.song_id
+      LEFT JOIN events ON events.id = videos.event_id
+      LEFT JOIN dancer_videos ON dancer_videos.video_id = videos.id
+      LEFT JOIN dancers ON dancers.id = dancer_videos.dancer_id
+      LEFT JOIN orchestras ON orchestras.id = songs.orchestra_id
+      GROUP BY videos.id
+    ) AS query
+    WHERE videos.id IN (?) AND query.id = videos.id
+  SQL
 
   belongs_to :song, optional: true
-  belongs_to :channel, optional: false
+  belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true
-  has_many :comments, as: :commentable, dependent: :destroy
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
-  has_many :follower_roles, ->(_role) { where(role: :follower) }, class_name: "DancerVideo", inverse_of: :dancer, dependent: :destroy
-  has_many :leader_roles, ->(_role) { where(role: :leader) }, class_name: "DancerVideo", inverse_of: :dancer, dependent: :destroy
+  has_many :leader_roles, -> { where(role: :leader) }, class_name: "DancerVideo", inverse_of: :video, dependent: :destroy
   has_many :leaders, through: :leader_roles, source: :dancer
+  has_many :follower_roles, -> { where(role: :follower) }, class_name: "DancerVideo", inverse_of: :video, dependent: :destroy
   has_many :followers, through: :follower_roles, source: :dancer
-
   has_many :couple_videos, dependent: :destroy
   has_many :couples, through: :couple_videos
+  has_many :watches, dependent: :destroy
+  has_many :watchers, through: :watches, source: :user
+  has_many :likes, as: :likeable, dependent: :destroy
+  has_many :liking_users, through: :likes, source: :user
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
-
   has_one_attached :thumbnail
 
-  scope :filter_by_orchestra, ->(song_artist, _user) { joins(:song).where("unaccent(songs.artist) ILIKE unaccent(?)", song_artist) }
-  scope :filter_by_genre, ->(song_genre, _user) { joins(:song).where("unaccent(songs.genre) ILIKE unaccent(?)", song_genre) }
-  scope :with_leader, ->(dancer) {
-    where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id))
-  }
-  scope :with_follower, ->(dancer) {
-    where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id))
-  }
-  scope :filter_by_leader, ->(dancer_name, _user) {
-    with_leader(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
-  }
-  scope :filter_by_follower, ->(dancer_name, _user) {
-    with_follower(Dancer.where("unaccent(dancers.name) ILIKE unaccent(?)", dancer_name))
-  }
-  scope :filter_by_couples, ->(couple_name, _user) {
-    where(id: CoupleVideo.joins(:couple).where(couple: {slug: couple_name}).select(:video_id))
-  }
-  scope :filter_by_channel, ->(channel_id, _user) { joins(:channel).where("channels.channel_id ILIKE ?", channel_id) }
-  scope :filter_by_event_id, ->(event_id, _user) { where(event_id:) }
-  scope :filter_by_event, ->(event_slug, _user) { joins(:event).where("events.slug ILIKE ?", event_slug) }
-  scope :filter_by_song_id, ->(song_id, _user) { where(song_id:) }
-  scope :filter_by_song, ->(song_slug, _user) { joins(:song).where("songs.slug ILIKE ?", song_slug) }
-  scope :filter_by_hd, ->(boolean, _user) { where(hd: boolean) }
-  scope :filter_by_year, ->(year, _user) { where("extract(year from upload_date) = ?", year) }
-  scope :filter_by_upload_year, ->(year, _user) { where("extract(year from upload_date) = ?", year) }
-  scope :hidden, -> { where(hidden: true) }
-  scope :active_and_visible, -> { joins(:channel).merge(Channel.active).visible }
-  scope :visible, -> { where(hidden: false) }
+  attribute :metadata, ExternalVideoImport::Metadata.to_type
+  validates :youtube_id, presence: true, uniqueness: true
+
+  scope :channel, ->(value) { joins(:channel).where(channels: {channel_id: value}) }
+  scope :exclude_youtube_id, ->(value) { where.not(youtube_id: value) }
   scope :featured, -> { where(featured: true) }
-  scope :unfeatured, -> { where(featured: false) }
-  scope :has_song, -> { where.not(song_id: nil) }
-  scope :has_leader, -> { where(id: DancerVideo.where(role: :leader, dancer:).select(:video_id)) }
-  scope :has_follower, -> { where(id: DancerVideo.where(role: :follower, dancer:).select(:video_id)) }
-  scope :has_leader_and_follower, -> { joins(:dancer_videos).where(dancer_videos: {role: [:leader, :follower]}) }
-  scope :missing_follower, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :follower}) }
-  scope :missing_leader, -> { joins(:dancer_videos).where.not(dancer_videos: {role: :leader}) }
-  scope :missing_song, -> { where(song_id: nil) }
-  scope :unrecognized_music, -> {
-    where.not(metadata: {music: {code: [0, 1001]}})
-      .or(where(metadata: nil))
+  scope :not_featured, -> { where(featured: false) }
+  scope :follower, ->(value) {
+                     joins("JOIN dancer_videos AS follower_dancer_videos ON follower_dancer_videos.video_id = videos.id")
+                       .joins("JOIN dancers AS follower_dancers ON follower_dancers.id = follower_dancer_videos.dancer_id")
+                       .where(follower_dancers: {slug: value}, follower_dancer_videos: {role: "follower"})
+                   }
+  scope :leader, ->(value) {
+                   joins("JOIN dancer_videos AS leader_dancer_videos ON leader_dancer_videos.video_id = videos.id")
+                     .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
+                     .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
+                 }
+  scope :dancer, ->(value) {
+    joins(:dancers)
+      .where(dancers: {slug: value})
   }
-
-  scope :with_same_dancers, ->(video) {
-    includes(Video.search_includes)
-      .with_leader(video.leaders.first)
-      .with_follower(video.followers.first)
-      .where(hidden: false)
-      .where.not(youtube_id: video.youtube_id)
+  scope :genre, ->(value) {
+    subquery = Song.where("LOWER(genre) = ?", value.downcase).select(:id)
+    where(song_id: subquery)
   }
-
-  scope :with_same_event, ->(video) {
-    includes(Video.search_includes)
-      .where(event_id: video.event_id)
-      .where.not(event: nil)
-      .where("upload_date <= ?", video.upload_date + 7.days)
-      .where("upload_date >= ?", video.upload_date - 7.days)
-      .where(hidden: false)
-      .where.not(youtube_id: video.youtube_id)
+  scope :has_leader, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'leader')") }
+  scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }
+  scope :hd, ->(value) { where(hd: value) }
+  scope :hidden, -> { where(hidden: true) }
+  scope :not_hidden, -> { where(hidden: false) }
+  scope :liked, ->(user) { joins(:likes).where(likes: {likeable_type: "Video", user_id: user.id}) }
+  scope :orchestra, ->(value) {
+                      subquery = Song.joins(:orchestra).where(orchestras: {slug: value}).select(:id)
+                      where(song_id: subquery)
+                    }
+  scope :song, ->(value) {
+                 subquery = Song.where(slug: value).select(:id)
+                 where(song_id: subquery)
+               }
+  scope :event, ->(value) {
+                  subquery = Event.where(slug: value).select(:id)
+                  where(event_id: subquery)
+                }
+  scope :watched, ->(user) {
+    subquery = Watch.where(user_id: user.id).group(:video_id).select(:video_id)
+    where(id: subquery)
   }
+  scope :not_watched, ->(user) {
+                        subquery = Watch.select(:video_id).where(user_id: user.id)
+                        where.not(id: subquery)
+                      }
 
-  scope :with_same_song, ->(video) {
-    includes(Video.search_includes)
-      .where(song_id: video.song_id)
-      .has_leader_and_follower
-      .where(hidden: false)
-      .where.not(song_id: nil)
-      .where.not(youtube_id: video.youtube_id)
+  scope :watch_history, ->(user) {
+    subquery = Watch.where(user_id: user.id).group(:video_id).select(:video_id)
+    where(id: subquery)
   }
-
-  scope :with_same_channel, ->(video) {
-    includes(Video.search_includes)
-      .where(channel_id: video.channel_id)
-      .has_leader_and_follower
-      .where(hidden: false)
-      .where.not(youtube_id: video.youtube_id)
-  }
-
-  # Combined Scopes
-
-  scope :title_match_missing_leader,
-    ->(leader_name) {
-      missing_leader.with_dancer_name_in_title(leader_name)
-    }
-  scope :title_match_missing_follower,
-    ->(follower_name) {
-      missing_follower.with_dancer_name_in_title(follower_name)
-    }
+  scope :year, ->(value) { where(upload_date_year: value) }
+  scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
+  scope :fuzzy_titles, ->(terms) do
+                         terms = [terms] unless terms.is_a?(Array)
+                         query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.9", term]) }.join(" OR ")
+                         where(query)
+                       end
+  scope :most_popular, -> { order(click_count: :desc) }
 
   class << self
     def index_query
-      <<~SQL.squish
-        UPDATE videos
-        SET index = query.index
-        FROM (
-          SELECT
-            videos.id,
-            LOWER(
-              CONCAT_WS(' ',
-                videos.metadata->'youtube'->>'title',
-                videos.metadata->'youtube'->>'description',
-                videos.metadata->'music'->>'acr_song_title',
-                ARRAY_TO_STRING(STRING_TO_ARRAY(REPLACE((videos.metadata->'music'->'acr_artist_names')::text, 'null', ''), ',', ''), ' '),
-                ARRAY_TO_STRING(STRING_TO_ARRAY(REPLACE((videos.metadata->'youtube'->'song'->'titles')::text, 'null', ''), ',', ''), ' '),
-                videos.metadata->'youtube'->'song'->>'artist',
-                ARRAY_TO_STRING(STRING_TO_ARRAY(REPLACE((videos.metadata->'music'->'spotify_artist_names')::text, 'null', ''), ',', ''), ' '),
-                videos.metadata->'music'->>'spotify_track_name',
-                ARRAY_TO_STRING(STRING_TO_ARRAY(REPLACE((videos.metadata->'youtube'->'tags')::text, 'null', ''), ',', ''), ' '),
-                MIN(dancers.first_name), MIN(dancers.last_name), MIN(dancers.nick_name),
-                MIN(channels.channel_id), MIN(channels.title),
-                STRING_AGG(songs.title, ' '), STRING_AGG(songs.genre, ' '), STRING_AGG(songs.artist, ' '),
-                STRING_AGG(events.city, ' '), STRING_AGG(events.title, ' '), STRING_AGG(events.country, ' ')
-              )
-            ) as index
-          FROM videos
-          LEFT JOIN channels ON channels.id = videos.channel_id
-          LEFT JOIN songs ON songs.id = videos.song_id
-          LEFT JOIN events ON events.id = videos.event_id
-          LEFT JOIN dancer_videos ON dancer_videos.video_id = videos.id
-          LEFT JOIN dancers ON dancers.id = dancer_videos.dancer_id
-          GROUP BY videos.id
-        ) AS query
-        WHERE videos.id IN (?) and query.id = videos.id
-      SQL
-    end
-
-    def filter_by_query(query, _user)
-      search(query)
+      INDEX_QUERY
     end
 
     def search_includes
       [
+        :channel,
         :dancer_videos,
+        :dancers,
         :song,
         :event,
-        :channel,
-        :dancers,
         :performance_video,
         :performance,
         thumbnail_attachment: :blob
       ]
     end
-
-    def with_dancer_name_in_title(name)
-      where("unaccent(title) ILIKE unaccent(?)", "%#{name}%")
-    end
-
-    def filter_by_dancer(name, _user)
-      if name == "true"
-        joins(:dancers)
-      else
-        joins(:dancers).where("dancers.slug ILIKE ?", name)
-      end
-    end
-
-    def filter_by_watched(boolean, user)
-      case boolean
-      when "true"
-        where(id: user.votes.where(vote_scope: "watchlist").pluck(:id))
-      when "false"
-        where.not(id: user.votes.where(vote_scope: "watchlist").pluck(:id))
-      end
-    end
-
-    def filter_by_liked(boolean, user)
-      case boolean
-      when "true"
-        where(id: user.find_up_voted_items.pluck(:id))
-      when "false"
-        where(id: user.find_up_downsvoted_items.pluck(:id))
-      end
-    end
-  end
-
-  def with_same_performance
-    Video
-      .includes(Video.search_includes)
-      .where(channel_id:)
-      .has_leader_and_follower
-      .where(hidden: false)
-      .where.not(youtube_id:)
-      .where(upload_date: (upload_date - 7.days)..(upload_date + 7.days))
   end
 
   def clicked!
     increment(:click_count)
-    increment(:popularity)
     save!
-  end
-
-  def liked_by
-    votes_for.where(vote_scope: "like")&.where(vote_flag: true)&.map(&:voter_id)
-  end
-
-  def disliked_by
-    votes_for.where(vote_scope: "like")&.where(vote_flag: false)&.map(&:voter_id)
-  end
-
-  def watched_by
-    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: true)&.map(&:voter_id)
-  end
-
-  def not_watched_by
-    User.all.pluck(:id) - votes_for.where(vote_scope: "watchlist")&.where(vote_flag: true)&.map(&:voter_id)
-  end
-
-  def bookmarked_by
-    votes_for.where(vote_scope: "bookmark")&.map(&:voter_id)
-  end
-
-  def watched_later_by
-    votes_for.where(vote_scope: "watchlist")&.where(vote_flag: false)&.map(&:voter_id)
   end
 
   def featured?
     featured
   end
 
-  def thumbnail_url
-    thumbnail.presence || "https://i.ytimg.com/vi/#{youtube_id}/hqdefault.jpg"
-  end
-
-  def hidden?
-    hidden
-  end
-
   def to_param
     youtube_id || id
-  end
-
-  def update_from_youtube
-    ExternalVideoImport::Importer.new.update(self)
   end
 end

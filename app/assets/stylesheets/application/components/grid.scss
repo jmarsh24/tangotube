@@ -1,20 +1,41 @@
 .grid {
   display: grid;
+  grid-template-columns: 1fr;
 
-  &--main {
-    grid-column: 2 / 4;
-    overflow-y: scroll;
+  &__main-content {
+    padding: 0 12px;
   }
 
   &--videos {
-    gap: 20px;
+    gap: 24px;
+
     @include breakpoint-tablet {
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
   }
 
-  &--holy-grail {
-    grid-template: auto 1fr auto / auto 1fr auto;
-    height: 100vh;
+  &--2-col {
+    gap: 24px;
+
+    &__main-content,
+    &__sidebar {
+      grid-column: 1;
+    }
+
+    &__main-content {
+      padding: 0 24px;
+    }
+
+    @include breakpoint-tablet {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    &__main-content {
+      grid-column: 1;
+    }
+
+    &__sidebar {
+      grid-column: 2;
+    }
   }
 }

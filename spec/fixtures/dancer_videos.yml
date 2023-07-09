@@ -5,67 +5,67 @@
 #  id         :bigint           not null, primary key
 #  dancer_id  :bigint
 #  video_id   :bigint
-#  role       :integer          default("neither"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  role       :enum
 #
 
 dancer_video_1:
   dancer: carlitos
   video: video_1_featured
-  role: 1
+  role: "leader"
 
 dancer_video_2:
   dancer: noelia
   video: video_1_featured
-  role: 2
+  role: "follower"
 
 dancer_video_3:
   dancer: gianpiero
   video: video_2_featured
-  role: 1
+  role: "leader"
 
 dancer_video_4:
   dancer: lorena
   video: video_2_featured
-  role: 2
+  role: "follower"
 
 dancer_video_5:
   dancer: jonathan
   video: video_3_featured
-  role: 1
+  role: "leader"
 
 dancer_video_6:
   dancer: clarisa
   video: video_3_featured
-  role: 2
+  role: "follower"
 
 dancer_video_7:
   dancer: carlitos
   video: video_4_featured
-  role: 1
+  role: "leader"
 
 dancer_video_8:
   dancer: noelia
   video: video_4_featured
-  role: 2
+  role: "follower"
 
 dancer_video_9:
   dancer: corina
   video: video_5
-  role: 1
+  role: "leader"
 
 dancer_video_10:
   dancer: inez
   video: video_5
-  role: 2
+  role: "follower"
 
 dancer_video_11:
   dancer: octavio
   video: video_6
-  role: 1
+  role: "leader"
 
 dancer_video_12:
   dancer: corina
   video: video_6
-  role: 2
+  role: "follower"

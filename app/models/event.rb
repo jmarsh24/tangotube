@@ -29,23 +29,14 @@ class Event < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
+  scope :most_popular, -> { order(videos_count: :desc) }
+  scope :active, -> { where(active: true) }
+  scope :search, ->(term) { where("title ILIKE ? OR city ILIKE ? OR country ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%") }
+
   def search_title
     return if title.empty?
 
     @search_title ||= title
-  end
-
-  def videos_with_event_title_match
-    Video
-      .joins(:channel)
-      .where(event_id: nil)
-      .where(
-        'unaccent(videos.title) ILIKE unaccent(:query) OR
-                  unaccent(videos.description) ILIKE unaccent(:query) OR
-                  unaccent(videos.tags) ILIKE unaccent(:query) OR
-                  unaccent(channels.title) ILIKE unaccent(:query)',
-        query: "%#{search_title}%"
-      )
   end
 
   def match_videos
@@ -81,6 +72,10 @@ class Event < ApplicationRecord
         .order(:id)
         .each { |event| MatchEventJob.perform_later(event.id) }
     end
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["active", "category", "city", "country", "created_at", "end_date", "id", "reviewed", "slug", "start_date", "title", "updated_at", "videos_count"]
   end
 
   private

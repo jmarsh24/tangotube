@@ -1,27 +1,21 @@
-- cache_if !video.hidden?, ["video", video.youtube_id] do
-  .video-card.stack.stack--xxxs id="video_#{video.youtube_id}"
-    = link_to watch_path(v: video.youtube_id) do
-      .video-card__image data-duration="#{video.decorate.hd_duration_data}"
-        - if video.performance.present?
-          .card__performance-number
-            = video.decorate.performance_number
-        = image_tag(video.thumbnail.present? ? video.thumbnail : video.thumbnail_url, width: 385, height: 216)
-    .stack.stack--xxxs
-      .scrollable-tags
-        - video.dancer_videos.each do |dv|
-          - link = dv.role == "leader" ? root_path(leader: dv.dancer.name.to_param) : root_path(follower: dv.dancer.name.to_param)
-          = link_to link, class: "tag tag--sm" do
-            = dv.dancer.name
-      - if video.decorate.song_link.present?
-        .stack.stack--line.stack--xxxs
-          = video.decorate.song_link
-      - if video.event.present?
-        .stack.stack--line.stack--xxxs
-          - if video.event.title.present?
-            = link_to video.event.title.titleize, root_path(event: video.event.slug), class: "tag tag--sm"
-      .stack.stack--line.stack--xxs
-        - if video.channel.thumbnail.present? || video.channel.thumbnail_url.present?
-          = link_to image_tag(video.channel.thumbnail.present? ? video.channel.thumbnail : video.channel.thumbnail_url, class: "avatar avatar--sm"), video.channel.title.present? ? root_path(channel: video.channel.channel_id) : "#", { "data-turbo-frame": "_top" }
-        - if video.channel.title.present?
-          = link_to video.channel.title, root_path(channel: video.channel.channel_id)
-      = video.decorate.display_metadata
+.video-card.stack.stack--xxxs id="video_#{video.youtube_id}"
+  = link_to watch_path(v: video.youtube_id) do
+    .video-card__image data-duration="#{video.decorate.hd_duration_data}"
+      - if video.performance.present?
+        .card__performance-number
+          = video.decorate.performance_number
+      - if video.thumbnail.present?
+        = image_tag video.thumbnail, width: 750
+      - else
+        = image_tag "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
+  .video-card__content
+    .video-card__primary
+      .video-card__title = link_to video.title, watch_path(v: video.youtube_id)
+      .video-card__metadata = video.decorate.display_metadata
+    .scrollable-tags.scrollable-tags--small
+      - video.dancer_videos.each do |dv|
+        - if dv.role == "leader"
+          = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
+        - elsif dv.role == "follower"
+          = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag video-card__dancer"
+    = link_to video.song.full_title, root_path(song: video.song.slug), class: "video-card__song-metadata tag" if video.song.present?

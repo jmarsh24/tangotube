@@ -1,0 +1,30 @@
+.navbar__filters id="filter-bar" class="scrollable-bar"
+  - active_filters = @filtering_params.to_h.count
+  = link_to "All", root_path(filtering: true), class: ["filter-chip", ("active" if @filtering_params.empty?)]
+  = link_to modal_path(filters_videos_path(@filtering_params)), class: ["filter-chip ", ("active" if @filtering_params.present?)] do
+    .filter-chip__filter-lines
+    - if active_filters > 0
+      .filter-chip__count = active_filters
+  - filter_chips = []
+
+  - if @filtering_params.present? || params[:sort].present?
+    - sort_name = params[:sort].present? ? "Sort: #{params[:sort].titleize}" : "Sort: Popularity"
+    - sort_link_path = modal_path(sort_videos_path(@filtering_params))
+    = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: true, highlighted: false, closeable: false
+
+  - if current_user
+    - [["New To You", :watched, false, true, true], ["Watched", :watched, true, true, true], ["Liked", :liked, true, true, true]].each do |label, param_key, value, highlighted, closeable|
+      - active = params[param_key].to_s == value.to_s
+      - link_path = active ? root_path(@filtering_params.except(param_key).merge(filtering: true)) : root_path(@filtering_params.merge(param_key => value, filtering: true))
+      - highlighted = label == "New To You" ? !active : false
+      - filter_chips << [label, link_path, active, highlighted, closeable]
+
+  - [:genre, :leader, :follower, :orchestra, :song, :year, :event].each do |param_key|
+    - name = params[param_key].present? ? params[param_key].titleize : param_key.to_s.titleize
+    - link_path = modal_path facet_path(id: param_key.to_s, params: @filtering_params)
+    - active = params[param_key].present?
+    - filter_chips << [name, link_path, active, false, false]
+
+  - filter_chips.sort_by! { |name, link_path, active, highlighted, closeable| active ? 0 : 1 } if @filtering_params.present?
+  - filter_chips.each do |name, link_path, active, highlighted, closeable|
+    = render "components/filter_chip", name:, link_path:, active:, highlighted:, closeable:

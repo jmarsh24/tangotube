@@ -37,12 +37,10 @@ class OrchestrasController < ApplicationController
     end
   end
 
-  # @route GET /orchestras/new (new_orchestra)
   def new
     @orchestra = Orchestra.new
   end
 
-  # @route GET /orchestras/:id/edit (edit_orchestra)
   def edit
   end
 
@@ -57,8 +55,6 @@ class OrchestrasController < ApplicationController
     end
   end
 
-  # @route PATCH /orchestras/:id (orchestra)
-  # @route PUT /orchestras/:id (orchestra)
   def update
     if @orchestra.update(orchestra_params)
       redirect_to @orchestra
@@ -67,7 +63,6 @@ class OrchestrasController < ApplicationController
     end
   end
 
-  # @route DELETE /orchestras/:id (orchestra)
   def destroy
     @orchestra.destroy
     redirect_to orchestras_url

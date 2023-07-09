@@ -23,7 +23,6 @@ class UserResource < Avo::BaseResource
   field :unconfirmed_email, as: :text
   field :role, as: :select, enum: ::User.roles
   field :avatar, as: :file, is_image: true, is_avatar: true
-  field :comments, as: :has_many
 
   # def scopes
   #   scope Avo::Scopes::Admins

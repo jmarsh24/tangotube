@@ -7,7 +7,7 @@ module ExternalVideoImport
       @music_recognizer = music_recognizer
     end
 
-    def metadata(slug, use_scraper: true, use_music_recognizer: true)
+    def metadata(slug, use_scraper: false, use_music_recognizer: false)
       Metadata.new(
         youtube: @metadata_provider.video_metadata(slug, use_scraper:),
         music: use_music_recognizer ? @music_recognizer.process_audio_snippet(slug) : MusicRecognition::Metadata.new

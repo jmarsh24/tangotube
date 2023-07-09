@@ -1,0 +1,48 @@
+.switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-gray-100);
+  border-radius: var(--border-radius-pill);
+
+  &__button {
+    padding: var(--spacing-xxs) var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    &:hover {
+      background-color: var(--color-gray-200);
+    }
+    &:active {
+      background-color: var(--color-gray-300);
+    }
+  }
+
+  &__button input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    appearance: none;
+    border-radius: 0;
+    border: none;
+    cursor: pointer;
+    &:checked {
+      background-color: var(--color-neutral-500);
+    }
+    &:checked + span {
+      color: white;
+    }
+  }
+
+  span {
+    font-size: var(--font-size-sm);
+    line-height: 20px;
+    font-weight: var(--font-weight-normal);
+    position: relative;
+    cursor: pointer;
+  }
+}

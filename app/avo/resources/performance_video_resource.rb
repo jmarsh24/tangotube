@@ -13,7 +13,7 @@ class PerformanceVideoResource < Avo::BaseResource
     model.video.thumbnail
   end
   field :title, as: :text do |model|
-    model.video.metadata.youtube.title
+    model.video.title
   end
   field :performance_id, as: :number
   field :position, as: :number
@@ -25,7 +25,7 @@ class PerformanceVideoResource < Avo::BaseResource
       model.video.thumbnail
     end
     title :title, as: :text do |model|
-      model.video.metadata.youtube.title
+      model.video.title
     end
     body :position, as: :text do |model|
       "Position: #{model.position} / #{model.performance.performance_videos.length}"

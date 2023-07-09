@@ -16,6 +16,7 @@ module ExternalVideoImport
       attribute :isrc, :string
       attribute :genre, :string
       attribute :spotify_artist_names, :array_of_strings, default: -> { [] }
+      attribute :spotify_artist_ids, :array_of_strings, default: -> { [] }
       attribute :spotify_track_name, :string
       attribute :spotify_track_id, :string
       attribute :spotify_album_name, :string

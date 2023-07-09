@@ -8,4 +8,5 @@ Rails.application.config.generators do |g|
     routing_specs: false,
     request_specs: false,
     controller_specs: false
+  g.orm :active_record, primary_key_type: :uuid
 end

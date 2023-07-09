@@ -1,0 +1,13 @@
+.scrollable-container {
+  height: 100%;
+
+  &__content {
+    flex: 1;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}

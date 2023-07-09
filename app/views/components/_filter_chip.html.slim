@@ -1,0 +1,7 @@
+= link_to link_path, class: ["filter-chip", (highlighted ? 'filter-chip--highlighted' : nil), (active ? 'active' : nil)] do
+  = name
+  - if active && closeable
+    .filter-chip__close
+  - elsif !active && closeable
+  - else
+    .filter-chip__dropdown

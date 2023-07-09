@@ -10,21 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_08_215609) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "unaccent"
+
+  create_enum :gender_new, [
+    "male",
+    "female",
+  ], force: :cascade
+
+  create_enum :role_new, [
+    "neither",
+    "leader",
+    "follower",
+    "both",
+  ], force: :cascade
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.datetime "created_at", precision: nil, null: false
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -57,8 +67,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.jsonb "metadata"
     t.datetime "metadata_updated_at"
     t.datetime "imported_at"
+    t.integer "videos_count", default: 0
+    t.index ["active"], name: "index_channels_on_active"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
     t.index ["title"], name: "index_channels_on_title"
+    t.index ["videos_count"], name: "index_channels_on_videos_count"
   end
 
   create_table "clips", force: :cascade do |t|
@@ -73,18 +86,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "giphy_id"
     t.index ["user_id"], name: "index_clips_on_user_id"
     t.index ["video_id"], name: "index_clips_on_video_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "commentable_type"
-    t.bigint "commentable_id"
-    t.integer "parent_id"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "couple_videos", force: :cascade do |t|
@@ -114,9 +115,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
   create_table "dancer_videos", force: :cascade do |t|
     t.bigint "dancer_id"
     t.bigint "video_id"
-    t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.enum "role", enum_type: "role_new"
     t.index ["dancer_id", "video_id"], name: "index_dancer_videos_on_dancer_id_and_video_id", unique: true
     t.index ["dancer_id"], name: "index_dancer_videos_on_dancer_id"
     t.index ["video_id"], name: "index_dancer_videos_on_video_id"
@@ -127,7 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "first_name"
     t.string "last_name"
     t.string "middle_name"
-    t.string "nick_name"
+    t.string "nick_name", default: [], array: true
     t.bigint "user_id"
     t.text "bio"
     t.string "slug"
@@ -135,7 +136,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "videos_count", default: 0, null: false
-    t.integer "gender"
+    t.enum "gender", enum_type: "gender_new"
+    t.index ["name"], name: "index_dancers_on_name", opclass: :gist_trgm_ops, using: :gist
+    t.index ["slug"], name: "index_dancers_on_slug"
     t.index ["user_id"], name: "index_dancers_on_user_id"
   end
 
@@ -166,6 +169,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.index ["title"], name: "index_events_on_title", unique: true
   end
 
+  create_table "likes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "likeable_type", null: false
+    t.bigint "likeable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "orchestras", force: :cascade do |t|
     t.string "name", null: false
     t.text "bio"
@@ -174,7 +187,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.datetime "updated_at", null: false
     t.integer "videos_count", default: 0, null: false
     t.integer "songs_count", default: 0, null: false
+    t.string "search_term"
     t.index ["name"], name: "index_orchestras_on_name", unique: true
+    t.index ["slug"], name: "index_orchestras_on_slug"
   end
 
   create_table "performance_videos", force: :cascade do |t|
@@ -194,17 +209,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "playlist_videos", force: :cascade do |t|
-    t.bigint "playlist_id", null: false
-    t.bigint "video_id", null: false
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["playlist_id", "video_id"], name: "index_playlist_videos_on_playlist_id_and_video_id", unique: true
-    t.index ["playlist_id"], name: "index_playlist_videos_on_playlist_id"
-    t.index ["video_id"], name: "index_playlist_videos_on_video_id"
   end
 
   create_table "playlists", force: :cascade do |t|
@@ -244,42 +248,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
     t.string "lyrics_en"
     t.string "slug"
     t.bigint "orchestra_id"
-    t.index ["artist"], name: "index_songs_on_artist"
-    t.index ["genre"], name: "index_songs_on_genre"
+    t.string "display_title"
+    t.string "spotify_track_id"
+    t.index ["active"], name: "index_songs_on_active"
+    t.index ["artist"], name: "index_songs_on_artist", opclass: :gin_trgm_ops, using: :gin
+    t.index ["genre"], name: "index_songs_on_genre", opclass: :gin_trgm_ops, using: :gin
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
     t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
-    t.index ["title"], name: "index_songs_on_title"
-  end
-
-  create_table "taggings", force: :cascade do |t|
-    t.integer "tag_id"
-    t.string "taggable_type"
-    t.integer "taggable_id"
-    t.string "tagger_type"
-    t.integer "tagger_id"
-    t.string "context", limit: 128
-    t.datetime "created_at", precision: nil
-    t.string "tenant", limit: 128
-    t.index ["context"], name: "index_taggings_on_context"
-    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
-    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
-    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
-    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
-    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
-    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
-    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
-    t.index ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
-    t.index ["tenant"], name: "index_taggings_on_tenant"
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "taggings_count", default: 0
-    t.index ["name"], name: "index_tags_on_name", unique: true
+    t.index ["title"], name: "index_songs_on_title", opclass: :gin_trgm_ops, using: :gin
+    t.index ["videos_count"], name: "index_songs_on_videos_count"
   end
 
   create_table "users", force: :cascade do |t|
@@ -310,43 +287,56 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
   create_table "videos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "title"
     t.string "youtube_id", null: false
+    t.string "description"
+    t.integer "duration"
+    t.integer "view_count"
     t.bigint "song_id"
+    t.integer "acr_response_code"
     t.bigint "channel_id"
     t.boolean "hidden", default: false
+    t.boolean "hd", default: false
     t.integer "popularity", default: 0
+    t.integer "like_count", default: 0
     t.bigint "event_id"
     t.integer "click_count", default: 0
     t.boolean "featured", default: false
     t.text "index"
     t.jsonb "metadata"
+    t.text "tags", default: [], array: true
     t.datetime "imported_at"
     t.date "upload_date"
+    t.integer "upload_date_year"
+    t.integer "youtube_view_count"
+    t.integer "youtube_like_count"
+    t.text "youtube_tags", default: [], array: true
     t.datetime "metadata_updated_at"
+    t.string "normalized_title"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
+    t.index ["click_count"], name: "index_videos_on_click_count"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"
+    t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
-    t.index ["index"], name: "index_videos_on_index", opclass: :gin_trgm_ops, using: :gin
+    t.index ["index"], name: "index_videos_on_index", opclass: :gist_trgm_ops, using: :gist
+    t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gin_trgm_ops, using: :gin
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
+    t.index ["upload_date"], name: "index_videos_on_upload_date"
+    t.index ["upload_date_year"], name: "index_videos_on_upload_date_year"
+    t.index ["view_count"], name: "index_videos_on_view_count"
     t.index ["youtube_id"], name: "index_videos_on_youtube_id", unique: true
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.string "votable_type"
-    t.bigint "votable_id"
-    t.string "voter_type"
-    t.bigint "voter_id"
-    t.boolean "vote_flag"
-    t.string "vote_scope"
-    t.integer "vote_weight"
+  create_table "watches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "video_id", null: false
+    t.datetime "watched_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
-    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
-    t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
+    t.index ["user_id"], name: "index_watches_on_user_id"
+    t.index ["video_id"], name: "index_watches_on_video_id"
   end
 
   create_table "youtube_events", force: :cascade do |t|
@@ -361,16 +351,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_13_183518) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clips", "users"
   add_foreign_key "clips", "videos"
-  add_foreign_key "comments", "users"
   add_foreign_key "couple_videos", "couples"
   add_foreign_key "couple_videos", "videos"
   add_foreign_key "couples", "dancers"
   add_foreign_key "couples", "dancers", column: "partner_id"
   add_foreign_key "dancers", "users"
-  add_foreign_key "playlist_videos", "playlists"
-  add_foreign_key "playlist_videos", "videos"
+  add_foreign_key "likes", "users"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists", "videos", column: "videos_id"
-  add_foreign_key "taggings", "tags"
   add_foreign_key "videos", "events"
+  add_foreign_key "watches", "users"
+  add_foreign_key "watches", "videos"
 end

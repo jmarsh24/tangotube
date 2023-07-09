@@ -1,17 +1,54 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
   padding: 0;
-  text-align: inherit;
-  font-size: inherit;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 1em;
+  font-family: inherit;
   line-height: inherit;
-  font-style: inherit;
-  font-weight: inherit;
-  appearance: none;
-  border-radius: none;
-  border: none;
-  background-color: transparent;
-  list-style: none;
-  text-decoration: none;
   color: inherit;
+}
+
+html,
+body {
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: var(--size-text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  color: var(--color-text);
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+  background-color: var(--color-background-body);
+  font-feature-settings: 'kern' 1, 'onum' 0, 'liga' 1;
+  caret-color: var(--color-tint);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: inherit;
+  line-height: 1;
+  font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

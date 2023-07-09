@@ -1,30 +1,16 @@
 .video-card {
-  font-size: var(--font-size-sm);
-  max-width: 568px;
-
-  &--compact {
-    display: flex;
-    gap: var(--spacing-xs);
-    font-size: var(--font-size-xs);
-
-    &__image {
-      height: 100px;
-      aspect-ratio: 16 / 9;
-
-      img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
+  font-size: 12px;
+  font-weight: 500;
 
   &__image {
     position: relative;
+    aspect-ratio: 16 / 9;
+    background-color: var(--color-neutral-200);
 
     img {
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
     }
@@ -35,7 +21,7 @@
       background-color: black;
       color: var(--color-neutral-1000);
       right: 5px;
-      bottom: 5px;
+      bottom: 10px;
       padding: 0 0.3em;
       border-radius: 0.3em;
     }
@@ -49,6 +35,56 @@
       padding: 0.1em 0.3em;
       border-radius: 0.3em;
       z-index: 1;
+    }
+  }
+
+  &__title {
+    color: var(--color-neutral-1000);
+    font-weight: 500;
+  }
+
+  &__primary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: var(--spacing-xxxs) var(--spacing-xs);
+    font-size: 12px;
+    overflow: hidden;
+  }
+
+  &__dancer {
+    color: var(--color-neutral-700);
+  }
+
+  &__metadata {
+    color: var(--color-neutral-700);
+  }
+
+  &__song-metadata {
+    color: var(--color-neutral-700);
+  }
+
+  &--compact {
+    display: flex;
+    gap: var(--spacing-xs);
+    font-size: 12px;
+
+    &__image {
+      height: 100px;
+      aspect-ratio: 16 / 9;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

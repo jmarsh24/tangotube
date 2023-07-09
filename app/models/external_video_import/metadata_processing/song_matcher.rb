@@ -3,42 +3,56 @@
 module ExternalVideoImport
   module MetadataProcessing
     class SongMatcher
-      def match_or_create(metadata_fields:, artist_fields: nil, title_fields: nil, genre_fields: ["undefined"])
-        text = [metadata_fields, artist_fields, title_fields].join(" ")
-        best_matches = Trigram.best_matches(list: all_songs, text:, &song_match_block)
+      MATCH_THRESHOLD = 0.8
+      STOP_WORDS = ["y su orquesta tipica"].freeze
 
-        find_or_create_songs(best_matches, title_fields, artist_fields, genre_fields)
+      def match(video_title:, video_description:, video_tags: [], song_titles: [], song_albums: [], song_artists: [])
+        orchestra_ids = find_orchestras([song_artists, video_title, video_tags, video_description, song_albums])
+
+        return nil if orchestra_ids.nil?
+        find_song(orchestra_ids, [video_title, video_description, video_tags, song_titles])
       end
 
       private
 
-      def all_songs
-        ::Song.all.pluck(:id, :title, :last_name_search)
+      def find_orchestras(text)
+        text = text.map { |text| normalize(text.to_s) }
+        ochestra_id_names = Orchestra.all.pluck(:id, :search_term)
+        orchestra_ids = []
+
+        ochestra_id_names.each do |id, artist_name|
+          text.reject(&:empty?).each do |text|
+            ratio = FuzzyText.new.jaro_winkler_score(needle: artist_name, haystack: text)
+            orchestra_ids << id if ratio > MATCH_THRESHOLD
+          end
+        end
+        orchestra_ids.uniq
       end
 
-      def song_match_block
-        lambda { |song| [song[1], song[2]].join(" ") }
-      end
+      def find_song(orchestra_ids, text)
+        text = text.map { |text| normalize(text.to_s) }
+        song_ids_title = Song.where(orchestra_id: orchestra_ids).pluck(:id, :title)
+        song_ids_title = song_ids_title.map { |id, title| [id, normalize(title)] }
 
-      def find_or_create_songs(matches, title_fields, artist_fields, genre_fields)
-        songs = find_songs(matches)
-
-        if songs.empty? && valid_fields?(title_fields, artist_fields)
-          songs << ::Song.create!(title: title_fields.first, artist: artist_fields.first, genre: genre_fields.first)
+        scores_and_songs = song_ids_title.flat_map do |id, title|
+          text.reject(&:blank?).map do |text|
+            score = FuzzyText.new.jaro_winkler_score(needle: title, haystack: text)
+            [score, id, title] if score >= MATCH_THRESHOLD
+          end.compact
         end
 
-        songs
+        return nil if scores_and_songs.empty?
+        best_match = scores_and_songs.min_by { |score, id, title| [-score, -title.length] }
+        Song.find(best_match[1])
       end
 
-      def find_songs(matches)
-        matches.map do |match|
-          song_id = match.first[0]
-          ::Song.find(song_id)
-        end
-      end
+      def normalize(text)
+        return "" if text.nil?
 
-      def valid_fields?(*fields)
-        fields.all? { |field| field&.any? }
+        ascii_text = text.encode("ASCII", invalid: :replace, undef: :replace, replace: "")
+        normalized_text = ascii_text.gsub("'", "").gsub("-", "").parameterize(separator: " ").downcase
+        STOP_WORDS.each { |stop_word| normalized_text.gsub!(stop_word, "") }
+        normalized_text.strip
       end
     end
   end

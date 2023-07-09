@@ -65,72 +65,52 @@ thumbnail_video_6:
 
 profile_image_carlitos:
   name: profile_image
-  record: carlitos (User)
+  record: carlitos (Dancer)
   blob: avatar_carlitos
 
 profile_image_clarisa:
   name: profile_image
-  record: clarisa (User)
+  record: clarisa (Dancer)
   blob: avatar_clarisa
 
 profile_image_gianpiero:
   name: profile_image
-  record: gianpiero (User)
+  record: gianpiero (Dancer)
   blob: avatar_gianpiero
 
 profile_image_jonathan:
   name: profile_image
-  record: jonathan (User)
+  record: jonathan (Dancer)
   blob: avatar_jonathan
 
 profile_image_lorena:
   name: profile_image
-  record: lorena (User)
+  record: lorena (Dancer)
   blob: avatar_lorena
 
 profile_image_corina:
   name: profile_image
-  record: corina (User)
+  record: corina (Dancer)
   blob: avatar_corina
 
 profile_image_octavio:
   name: profile_image
-  record: octavio (User)
+  record: octavio (Dancer)
   blob: avatar_octavio
 
 profile_image_noelia:
   name: profile_image
-  record: noelia (User)
+  record: noelia (Dancer)
   blob: avatar_noelia
-
-profile_image_darienzo:
-  name: profile_image
-  record: darienzo (User)
-  blob: avatar_darienzo
-
-profile_image_di_sarli:
-  name: profile_image
-  record: di_sarli (User)
-  blob: avatar_di_sarli
-
-profile_image_pugliese:
-  name: profile_image
-  record: pugliese (User)
-  blob: avatar_pugliese
-
-profile_image_troilo:
-  name: profile_image
-  record: troilo (User)
-  blob: avatar_troilo
 
 thumbnail_030_tango:
   name: thumbnail
-  record: 030_tango (Channel)
+  record: 030tango (Channel)
   blob: thumbnail_030tango
 
 thumbnail_amelle_tango:
   name: thumbnail
-  record: amelle_tango (Channel)
+  record: armelle_tango (Channel)
   blob: thumbnail_amelle_tango
 
 thumbnail_jkukla_video:
@@ -150,31 +130,95 @@ thumbnail_tango_nuevo_tv:
 
 thumbnail_giorgio_scattorlini:
   name: thumbnail
-  record: giorgio_scattorlini (Channel)
+  record: giorgio_scattolini (Channel)
   blob: thumbnail_giorgio_scattorlini
 
 profile_image_darienzo:
   name: profile_image
-  record: darienzo (User)
+  record: darienzo (Orchestra)
   blob: avatar_darienzo
 
 profile_image_di_sarli:
   name: profile_image
-  record: di_sarli (User)
+  record: di_sarli (Orchestra)
   blob: avatar_di_sarli
 
 profile_image_pugliese:
   name: profile_image
-  record: pugliese (User)
+  record: pugliese (Orchestra)
   blob: avatar_pugliese
 
 profile_image_troilo:
   name: profile_image
-  record: troilo (User)
+  record: troilo (Orchestra)
   blob: avatar_troilo
 
 profile_image_castillo:
   name: profile_image
-  record: castillo (User)
+  record: castillo (Orchestra)
   blob: avatar_castillo
 
+profile_image_garcia:
+  name: profile_image
+  record: garcia (Orchestra)
+  blob: avatar_garcia
+
+academia_de_tango_profile_image:
+  name: profile_image
+  record: academia_de_tango (Event)
+  blob: thumbnail_academia_del_tango
+
+academia_de_tango_cover_image:
+  name: cover_image
+  record: academia_de_tango (Event)
+  blob: cover_academia_del_tango
+
+krakus_aires_tango_festival_profile_image:
+  name: profile_image
+  record: krakus_aires_tango_festival (Event)
+  blob: thumbnail_krakus_aires_tango_festival
+
+krakus_aires_tango_festival_cover_image:
+  name: cover_image
+  record: krakus_aires_tango_festival (Event)
+  blob: cover_krakus_aires_tango_festival
+
+bailemos_tango_festival_profile_image:
+  name: profile_image
+  record: bailemos_tango_festival (Event)
+  blob: thumbnail_bailemos_tango_festival
+
+bailemos_tango_festival_cover_image:
+  name: cover_image
+  record: bailemos_tango_festival (Event)
+  blob: cover_bailemos_tango_festival
+
+laquila_tango_festival_profile_image:
+  name: profile_image
+  record: laquila_tango_festival (Event)
+  blob: thumbnail_lauquila_tango_festival
+
+laquila_tango_festival_cover_image:
+  name: cover_image
+  record: laquila_tango_festival (Event)
+  blob: cover_lauquila_tango_festival
+
+el_garron_profile_image:
+  name: profile_image
+  record: el_garron_la_grande_tutti (Event)
+  blob: thumbnail_el_garron
+
+el_garron_cover_image:
+  name: cover_image
+  record: el_garron_la_grande_tutti (Event)
+  blob: cover_el_garron
+
+ladys_tango_festival_cover_image:
+  name: cover_image
+  record: ladys_tango_festival (Event)
+  blob: cover_ladys_tango_festival
+
+ladys_tango_festival_profile_image:
+  name: profile_image
+  record: ladys_tango_festival (Event)
+  blob: thumbnail_ladys_tango_festival

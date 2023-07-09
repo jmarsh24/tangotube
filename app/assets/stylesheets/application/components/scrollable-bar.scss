@@ -1,0 +1,22 @@
+.scrollable-bar {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  flex-wrap: nowrap;
+  gap: var(--spacing-xxs);
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+
+  &--vote {
+    padding: 0;
+  }
+}

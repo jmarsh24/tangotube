@@ -1,3 +1,0 @@
-div id="downvote-#{video.youtube_id}"
-  = button_to downvote_video_path(video.youtube_id), method: :patch, class: ["button button--secondary", current_user&.voted_down_on?(video, vote_scope: 'like') ? "button--icon-thumbs-down-fill" : "button--icon-thumbs-down"] do
-    = t('.dislike')

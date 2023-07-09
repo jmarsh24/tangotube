@@ -26,10 +26,14 @@ $icon-sizes: (
   }
 
   &--white {
-    color: white;
+    color: var(--color-neutral-0);
   }
 
   &--neutral {
     background-color: unset;
+  }
+
+  &--black {
+    color: var(--color-neutral-1000);
   }
 }

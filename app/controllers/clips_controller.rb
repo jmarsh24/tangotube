@@ -7,7 +7,6 @@ class ClipsController < ApplicationController
 
   # @route POST /clips (clips)
   # @route GET /clips (clips)
-  # @route GET /videos/:video_id/clips (video_clips)
   def index
     @clips = Clip.all.includes(:video).order(created_at: :desc)
     @clips = @clips.tagged_with(params[:tag]) if params[:tag].present?
@@ -15,27 +14,22 @@ class ClipsController < ApplicationController
     @clips = paginated(@clips)
   end
 
+  # @route POST /clips/:id (clip)
   # @route GET /clips/:id (clip)
-  # @route GET /videos/:video_id/clips/:id (video_clip)
   def show
     authorize @clip
   end
 
-  # @route GET /clips/new (new_clip)
-  # @route GET /videos/:video_id/clips/new (new_video_clip)
   def new
     @clip = Clip.new
     authorize @clip
   end
 
-  # @route GET /clips/:id/edit (edit_clip)
-  # @route GET /videos/:video_id/clips/:id/edit (edit_video_clip)
   def edit
     authorize @clip
   end
 
   # @route POST /clips (clips)
-  # @route POST /videos/:video_id/clips (video_clips)
   def create
     @clip = Clip.new(clip_params)
     @clip.user = current_user
@@ -59,10 +53,6 @@ class ClipsController < ApplicationController
     end
   end
 
-  # @route PATCH /clips/:id (clip)
-  # @route PUT /clips/:id (clip)
-  # @route PATCH /videos/:video_id/clips/:id (video_clip)
-  # @route PUT /videos/:video_id/clips/:id (video_clip)
   def update
     authorize @clip
 
@@ -73,8 +63,6 @@ class ClipsController < ApplicationController
     end
   end
 
-  # @route DELETE /clips/:id (clip)
-  # @route DELETE /videos/:video_id/clips/:id (video_clip)
   def destroy
     authorize @clip
     @clip.destroy

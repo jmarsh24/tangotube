@@ -1,0 +1,129 @@
+.filter-chip {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: var(--spacing-xxs);
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  background-color: var(--color-neutral-0);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-neutral-1000);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &--highlighted {
+    animation: rainbow-border 2s linear infinite;
+  }
+
+  &.active {
+    background-color: var(--color-gray-800);
+    color: var(--color-neutral-0);
+  }
+
+  &:hover {
+    background-color: var(--color-gray-600);
+  }
+
+  &__count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-gray-500);
+    border-radius: var(--border-radius-circle);
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-1000);
+  }
+
+  &__close {
+    @include maskedBackground;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    background-color: var(--color-neutral-100);
+    border-radius: 50%;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-neutral-1000);
+      mask-image: url('@assets/images/icons/close.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+  }
+
+  &__dropdown {
+    @include maskedBackground;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    background-color: var(--color-neutral-100);
+    border-radius: 50%;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-neutral-1000);
+      mask-image: url('@assets/images/icons/chevron-down.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+  }
+
+  &__filter-lines {
+    @include maskedBackground;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    mask-image: url('@assets/images/icons/filter-lines.svg');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+
+  @keyframes rainbow-border {
+    0% {
+      border-color: #e1306c;
+    }
+    14% {
+      border-color: #fdca40;
+    }
+    28% {
+      border-color: #f7df1e;
+    }
+    43% {
+      border-color: #9acd32;
+    }
+    57% {
+      border-color: #32cd32;
+    }
+    71% {
+      border-color: #0092cf;
+    }
+    85% {
+      border-color: #3d3d3d;
+    }
+    100% {
+      border-color: #e1306c;
+    }
+  }
+}

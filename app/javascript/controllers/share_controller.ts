@@ -6,11 +6,15 @@ export default class extends Controller {
 
   connect(): void {
     if (!navigator.share) {
-      (this.element as HTMLDivElement).hidden = true;
+      this.element.classList.add('hidden');
     }
   }
 
   share(): void {
-    navigator.share({ url: this.urlValue });
+    if (navigator.share) {
+      navigator.share({ url: this.urlValue });
+    } else {
+      console.log('Fallback share behavior');
+    }
   }
 }

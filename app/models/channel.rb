@@ -16,6 +16,7 @@
 #  metadata            :jsonb
 #  metadata_updated_at :datetime
 #  imported_at         :datetime
+#  videos_count        :integer          default(0)
 #
 class Channel < ApplicationRecord
   include Reviewable
@@ -35,13 +36,11 @@ class Channel < ApplicationRecord
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
-  scope :title_search,
-    lambda { |query|
-      where("unaccent(title) ILIKE unaccent(?)", "%#{query}%")
-    }
+  scope :search, ->(term) { where("title ILIKE ?", "%#{term}%") }
+  scope :most_popular, -> { order(videos_count: :desc) }
 
-  def import_new_videos(use_scraper: true, use_music_recognizer: true)
-    return unless active
+  def import_new_videos(use_scraper: false, use_music_recognizer: false)
+    return nil unless active && metadata.present?
 
     new_video_ids = videos.map(&:youtube_id) - metadata.video_ids
 
@@ -50,7 +49,7 @@ class Channel < ApplicationRecord
     end
   end
 
-  def update_videos(use_scraper: true, use_music_recognizer: true)
+  def update_videos(use_scraper: false, use_music_recognizer: false)
     return unless active
 
     videos.find_each do |video|

@@ -25,12 +25,13 @@
 #  role                   :integer
 #
 class User < ApplicationRecord
-  acts_as_voter
-
   after_initialize :set_default_role, if: :new_record?
   before_save :tileize_name
 
-  has_many :comments, dependent: :destroy
+  has_many :watches, dependent: :destroy
+  has_many :watched_videos, through: :watches, source: :video
+  has_many :likes, dependent: :destroy
+  has_many :liked_videos, through: :likes, source: :likeable, source_type: "Video"
 
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_fill: [150, nil]
@@ -54,6 +55,7 @@ class User < ApplicationRecord
 
   scope :admins, -> { where(role: :admin) }
   scope :non_admins, -> { where(role: :user) }
+  scope :search, ->(term) { where("name ILIKE ? OR email ILIKE ?", "%#{term}%", "%#{term}%") }
 
   def remember_me
     true

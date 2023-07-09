@@ -1,44 +1,79 @@
-/** Ultra Light */
+/** San Francisco */
 @font-face {
   font-family: 'San Francisco';
   font-weight: 300;
-  src: url('@assets/fonts/sanfranciscodisplay-ultralight-webfont.woff2');
+  src: url('@assets/fonts/san-francisco-ultralight.woff2');
 }
 
-/** Thin */
 @font-face {
   font-family: 'San Francisco';
   font-weight: 400;
-  src: url('@assets/fonts/sanfranciscodisplay-thin-webfont.woff2');
+  src: url('@assets/fonts/san-francisco-thin.woff2');
 }
 
-/** Medium */
 @font-face {
   font-family: 'San Francisco';
   font-weight: normal;
-  src: url('@assets/fonts/sanfranciscodisplay-medium-webfont.woff2');
+  src: url('@assets/fonts/san-francisco-medium.woff2');
 }
 
-/** Semi Bold */
 @font-face {
   font-family: 'San Francisco';
   font-weight: 500;
-  src: url('@assets/fonts/sanfranciscodisplay-semibold-webfont.woff2');
+  src: url('@assets/fonts/san-francisco-semibold.woff2');
 }
 
-/** Bold */
 @font-face {
   font-family: 'San Francisco';
   font-weight: 700;
-  src: url('@assets/fonts/sanfranciscodisplay-bold-webfont.woff2');
+  src: url('@assets/fonts/san-francisco-bold.woff2');
+}
+
+/** Airbnb Cereal */
+@font-face {
+  font-family: 'Airbnb Cereal';
+  font-weight: 400;
+  src: url('@assets/fonts/Airbnb-Cereal-Book.otf');
+}
+
+@font-face {
+  font-family: 'Airbnb Cereal';
+  font-weight: 900;
+  src: url('@assets/fonts/Airbnb-Cereal-Black.otf');
+}
+
+@font-face {
+  font-family: 'Airbnb Cereal';
+  font-weight: 700;
+  src: url('@assets/fonts/Airbnb-Cereal-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Airbnb Cereal';
+  font-weight: 500;
+  src: url('@assets/fonts/Airbnb-Cereal-Medium.otf');
+}
+
+@font-face {
+  font-family: 'Airbnb Cereal';
+  font-weight: 300;
+  src: url('@assets/fonts/Airbnb-Cereal-Light.otf');
+}
+
+@font-face {
+  font-family: 'Airbnb Cereal';
+  font-weight: 800;
+  src: url('@assets/fonts/Airbnb-Cereal-Extrabold.otf');
 }
 
 .caption {
   font-size: 12px;
   line-height: 18px;
+
   &--bold {
     font-weight: 700;
   }
+
   @include breakpoint-tablet {
     font-size: 14px;
     line-height: 21px;

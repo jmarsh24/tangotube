@@ -25,13 +25,11 @@ class CouplesController < ApplicationController
     authorize @couple
   end
 
-  # @route GET /couples/new (new_couple)
   def new
     @couple = Couple.new
     authorize @couple
   end
 
-  # @route GET /couples/:id/edit (edit_couple)
   def edit
     authorize @couple
   end
@@ -48,8 +46,6 @@ class CouplesController < ApplicationController
     end
   end
 
-  # @route PATCH /couples/:id (couple)
-  # @route PUT /couples/:id (couple)
   def update
     authorize @couple
 
@@ -60,7 +56,6 @@ class CouplesController < ApplicationController
     end
   end
 
-  # @route DELETE /couples/:id (couple)
   def destroy
     authorize @couple
 

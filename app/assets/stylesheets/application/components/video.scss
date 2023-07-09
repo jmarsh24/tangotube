@@ -1,7 +1,18 @@
-.video iframe {
+.video-block {
+  position: sticky;
+  top: 0;
   aspect-ratio: 16 / 9;
-  width: min(100%, var(--grid-width));
-  height: 100%;
-  border: 0;
-  margin: 0 auto;
+  z-index: var(--z-index-video-overlay);
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include breakpoint-tablet {
+    position: relative;
+  }
 }

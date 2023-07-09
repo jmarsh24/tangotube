@@ -14,10 +14,12 @@ $sizes: (
 );
 
 $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
-  'clock-fill', 'clock', 'close', 'facebook', 'google', 'heart-fill', 'heart',
-  'house-fill', 'magnifying-glass', 'moon-fill', 'safari', 'safari-fill',
-  'scissors-circle-fill', 'scissors-circle', 'scissors', 'star-filled', 'star',
-  'sun-max-fill', 'sun-max', 'square-and-arrow-up', 'thumbs-down-fill',
+  'clock-fill', 'clock', 'close', 'file-upload', 'filter-lines', 'google',
+  'heart-fill', 'heart', 'house-fill', 'magnifying-glass', 'moon-fill',
+  'person-circle-fill', 'play-rectangle', 'safari-fill', 'safari',
+  'scissors-circle-fill', 'scissors-circle', 'scissors', 'share-facebook',
+  'share-facebook', 'share-twitter', 'share-whatsapp', 'square-and-arrow-up',
+  'star-filled', 'star', 'sun-max-fill', 'sun-max', 'thumbs-down-fill',
   'thumbs-down', 'thumbs-up-fill', 'thumbs-up';
 
 // Breakpoints
@@ -75,6 +77,7 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
     --border-radius-md: 0.25rem; /* 4px */
     --border-radius-lg: 0.5rem; /* 8px */
     --border-radius-xl: 1rem; /* 16px */
+    --border-radius-xxl: 2rem; /* 32px */
 
     --border-radius-circle: 50%;
     --border-radius-pill: 9999px;
@@ -88,7 +91,7 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
     --z-modal-close: 1001;
     --z-menu: 50;
     --z-dropdown: 1000;
-    --z-navbar: 1002;
+    --z-navbar: 999;
     --z-navbar-1: 0;
     --z-navbar-1: 2;
     --z-navbar-2: 3;
@@ -142,11 +145,16 @@ $icons: 'arrow-down', 'arrow-up', 'bookmark-fill', 'bookmark', 'burger',
     --z-index-toast: 950;
     --z-index-tooltip: 1000;
     --z-index-cookies: 1000;
+    --z-modal: 1000;
+    --z-modal-blind: 900;
+    --z-index-toast: 1100;
 
-    --container-gap: 16px;
+    --container-gap: var(--spacing-xxs);
     --grid-width: 1660px;
     --app-drawer-width: 200px;
     --header-height: calc(56px + var(--spacing-md));
+    --page-main-max-width: 1920px;
+    --page-main-padding: 48px;
   }
 
   @include breakpoint-tablet() {

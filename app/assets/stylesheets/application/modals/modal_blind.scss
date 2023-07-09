@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: var(--z-modal);
+  z-index: var(--z-modal-blind);
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.5s;

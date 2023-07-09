@@ -12,6 +12,7 @@
 #  updated_at   :datetime         not null
 #  videos_count :integer          default(0), not null
 #  songs_count  :integer          default(0), not null
+#  search_term  :string
 #
 class Orchestra < ApplicationRecord
   has_many :songs, dependent: :destroy
@@ -25,6 +26,8 @@ class Orchestra < ApplicationRecord
   has_one_attached :cover_image
 
   after_validation :set_slug, only: [:create, :update]
+
+  scope :search, ->(term) { where("name ILIKE ?", "%#{term}%") }
 
   def to_param
     "#{id}-#{slug}"

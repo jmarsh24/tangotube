@@ -39,6 +39,7 @@ module ExternalVideoImport
           isrc: data.dig(:metadata, :music, 0, :external_ids, :isrc),
           genre: data.dig(:metadata, :music, 0, :genres, 0, :name),
           spotify_artist_names: data.dig(:metadata, :music, 0, :external_metadata, :spotify, :artists)&.map { |e| e[:name] } || [],
+          spotify_artist_ids: data.dig(:metadata, :music, 0, :external_metadata, :spotify, :artists)&.map { |e| e[:id] } || [],
           spotify_track_name: data.dig(:metadata, :music, 0, :external_metadata, :spotify, :track, :name),
           spotify_track_id: data.dig(:metadata, :music, 0, :external_metadata, :spotify, :track, :id),
           spotify_album_name: data.dig(:metadata, :music, 0, :external_metadata, :spotify, :album, :name),
