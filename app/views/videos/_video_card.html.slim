@@ -1,10 +1,12 @@
 .video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
   .video-card__image.video-card--compact__image data-duration="#{video.decorate.hd_duration_data}"
+    - thumbnail = video.thumbnail.present? ? video.thumbnail : "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
     - if video.youtube_id == @video.youtube_id
-      = image_tag video.thumbnail, width: 178
+      - if video.youtube_id == @video.youtube_id
+      = image_tag thumbnail
     - else
       = link_to watch_path(v: video.youtube_id) do
-        = image_tag video.thumbnail, width: 178
+        = image_tag thumbnail
   .video-card__content
     .video-card__primary
       .video-card__title = video.title
