@@ -52,6 +52,7 @@
     z-index: var(--z-modal-close);
     background-color: var(--color-neutral-200);
     border-radius: 50%;
+    z-index: var(--z-modal-close);
 
     &::before {
       content: '';
