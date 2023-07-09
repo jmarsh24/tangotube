@@ -46,7 +46,7 @@ class VideosController < ApplicationController
     end
 
     if @video.nil?
-      ExternalVideoImport::Importer.new.import(params[:v], use_scraper: false)
+      ExternalVideoImport::Importer.new.import(params[:v])
       @video = Video.find_by(youtube_id: params[:v])
     end
 

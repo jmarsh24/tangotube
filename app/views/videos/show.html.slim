@@ -17,4 +17,4 @@
       = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_dancers, header: t(".recommended_videos_from_performers", dancer: @video.leaders.first.name.titleize, partner: @video.followers.first.name.titleize) } if @video.leaders.present? && @video.followers.present?
       = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_event, header: t(".recommended_from_event", event_title: @video.event.title) } if @video.event.present?
       = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_song, header: t(".recommended_videos_song", song_title: @video.song.title.titleize, song_artist: @video.song.artist.titleize) } if @video.song.present?
-      = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_channel, header: t(".recommended_videos_same_channel", channel_title: @video.channel.title) }
+      / = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_channel, header: t(".recommended_videos_same_channel", channel_title: @video.channel.title) }
