@@ -4,8 +4,7 @@
     "entrypointsDir": "app/javascript/entrypoints",
     "additionalEntrypoints": [
       "app/javascript/entrypoints/application.ts",
-      "app/assets/images/**/*",
-      "app/assets/fonts/**/*"
+      "app/assets/images/**/*"
     ],
     "watchAdditionalPaths": [
       "app/javascript/**/*",
