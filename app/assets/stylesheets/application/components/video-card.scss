@@ -41,6 +41,7 @@
   &__title {
     color: var(--color-neutral-1000);
     font-weight: 500;
+    word-wrap: normal;
   }
 
   &__primary {
@@ -75,16 +76,10 @@
     display: flex;
     gap: var(--spacing-xs);
     font-size: 12px;
+    max-width: 600px;
 
     &__image {
       height: 100px;
-      aspect-ratio: 16 / 9;
-
-      img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
     }
   }
 }

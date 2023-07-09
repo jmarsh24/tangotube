@@ -16,26 +16,24 @@
 
   &--2-col {
     gap: 24px;
-
     &__main-content,
     &__sidebar {
       grid-column: 1;
     }
-
     &__main-content {
       padding: 0 24px;
     }
 
     @include breakpoint-tablet {
       grid-template-columns: 2fr 1fr;
-    }
 
-    &__main-content {
-      grid-column: 1;
-    }
+      &__main-content {
+        grid-column: 1;
+      }
 
-    &__sidebar {
-      grid-column: 2;
+      &__sidebar {
+        grid-column: 2;
+      }
     }
   }
 }
