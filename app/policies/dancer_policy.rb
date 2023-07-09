@@ -29,28 +29,32 @@ class DancerPolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def search?
+    true
+  end
+
   def upload_profile_image?
     user&.admin?
   end
 
-  def delete_profile_image?
+  def remove_profile_image?
     user&.admin?
   end
 
   def download_profile_image?
-    true
+    user&.admin?
   end
 
   def upload_cover_image?
     user&.admin?
   end
 
-  def delete_cover_image?
+  def remove_cover_image?
     user&.admin?
   end
 
   def download_cover_image?
-    true
+    user&.admin?
   end
 
   class Scope < Scope

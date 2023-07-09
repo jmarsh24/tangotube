@@ -25,6 +25,34 @@ class OrchestraPolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def search?
+    true
+  end
+
+  def upload_profile_image?
+    user&.admin?
+  end
+
+  def remove_profile_image?
+    user&.admin?
+  end
+
+  def download_profile_image?
+    user&.admin?
+  end
+
+  def upload_cover_image?
+    user&.admin?
+  end
+
+  def remove_cover_image?
+    user&.admin?
+  end
+
+  def download_cover_image?
+    user&.admin?
+  end
+
   class Scope < Scope
     def resolve
       scope.all
