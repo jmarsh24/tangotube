@@ -2,7 +2,6 @@
 
 module ApplicationHelper
   include Shimmer::FileHelper
-
   def avatar_url_for(user, opts = {})
     size = opts[:size || 32]
 
