@@ -97,6 +97,7 @@
   @include breakpoint-tablet {
     &__content {
       width: unset;
+      height: unset;
       max-height: 75vh;
       max-width: 40vw;
     }
