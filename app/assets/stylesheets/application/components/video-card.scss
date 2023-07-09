@@ -76,10 +76,15 @@
     display: flex;
     gap: var(--spacing-xs);
     font-size: 12px;
-    max-width: 600px;
 
     &__image {
-      height: 100px;
+      height: 80px;
+    }
+
+    @include breakpoint-tablet {
+      &__image {
+        height: 120px;
+      }
     }
   }
 }
