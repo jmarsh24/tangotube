@@ -15,7 +15,7 @@ RSpec.describe Video::Search do
       expect(Video::Search.new.facet(name: "song").options).to eq(Video::FacetBuilder.new(Video.all).song.options)
     end
 
-    fit "returns all videos when filtering with leader and sorting" do
+    it "returns all videos when filtering with leader and sorting" do
       search = Video::Search.new(filtering_params: {leader: "corina-herrera"})
       expected_videos = Video::Filter.new(Video.all, filtering_params: {leader: "corina-herrera"}).filtered_videos
 

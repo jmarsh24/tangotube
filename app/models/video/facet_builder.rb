@@ -28,7 +28,7 @@ class Video::FacetBuilder
       Dancer.joins(:dancer_videos)
         .where(dancer_videos: {role: "leader", video_id: @video_relation.select(:id)})
         .group("dancers.name", "dancers.slug")
-        .order(Arel.sql("COUNT(*) DESC"))
+        .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
         .limit(10)
         .count
     end
@@ -39,7 +39,7 @@ class Video::FacetBuilder
       Dancer.joins(:dancer_videos)
         .where(dancer_videos: {role: "follower", video_id: @video_relation.select(:id)})
         .group("dancers.name", "dancers.slug")
-        .order(Arel.sql("COUNT(*) DESC"))
+        .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
         .limit(10)
         .count
     end
@@ -50,7 +50,7 @@ class Video::FacetBuilder
       @video_relation
         .joins(song: :orchestra)
         .group("orchestras.name", "orchestras.slug")
-        .order(Arel.sql("COUNT(*) DESC"))
+        .order(Arel.sql("COUNT(*) DESC"), "orchestras.videos_count DESC")
         .limit(10)
         .count
     end
@@ -83,7 +83,7 @@ class Video::FacetBuilder
       @video_relation
         .joins(song: :orchestra)
         .group("songs.display_title", "songs.slug")
-        .order(Arel.sql("COUNT(*) DESC"))
+        .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
         .limit(10)
         .count
     end
