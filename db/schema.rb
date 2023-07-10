@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_08_215609) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -205,7 +205,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_215609) do
 
   create_table "performances", force: :cascade do |t|
     t.date "date"
-    t.integer "videos_count"
+    t.integer "videos_count", default: 0, null: false
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -37,7 +37,6 @@
 class Video < ApplicationRecord
   include Filterable
   include Indexable
-  include Presentable
 
   INDEX_QUERY = <<~SQL.squish.freeze
     UPDATE videos
@@ -191,5 +190,11 @@ class Video < ApplicationRecord
 
   def to_param
     youtube_id || id
+  end
+
+  def hd_duration_data
+    return if duration.blank?
+
+    Time.at(duration).utc.strftime("#{hd? ? "HD " : ""}%M:%S")
   end
 end

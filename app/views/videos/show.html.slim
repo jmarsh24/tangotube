@@ -1,5 +1,5 @@
-- content_for :meta_title, @video.decorate.meta_title
-- content_for :meta_description, @video.decorate.meta_description
+- content_for :meta_title, @video.title
+- content_for :meta_description, @video.description
 - content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
 .stack.stack--xs
   .video-block 

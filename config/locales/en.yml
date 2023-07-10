@@ -119,7 +119,7 @@ en:
   date:
     formats:
       song_recording_date: "%B %e, %Y"
-      video_upload_date: "%B %e, %Y"
+      short_month_year: "%b %Y"
   destroy: Destroy
   devise:
     confirmations:
@@ -211,6 +211,7 @@ en:
     show:
       dropdown_button: Dropdown button
       event_video_count: Event video count
+  invalid_date: Invalid date
   loading_spinner: Loading spinner
   login: Login
   orchestra_videos_count: Orchestra videos count
@@ -346,3 +347,4 @@ en:
         unlike: Unlike
       watchlist_link:
         watch_later: Watch later
+  views_count: "%{count} views"

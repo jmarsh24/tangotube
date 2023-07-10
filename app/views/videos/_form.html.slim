@@ -13,12 +13,12 @@
       .attribute-label
         label = t(".performance_number_label")
       .attribute-value
-        = f.select(:performance_number, (1..8), { value: video.performance_number, prompt: "Select Performance Number" }, "data-controller": "tom-select")
+        = f.select(:performance_number, (1..8), { value: video.performance_video.position, prompt: "Select Performance Number" }, "data-controller": "tom-select")
     .attribute-row
       .attribute-label
         label = t(".performance_total_number_label")
       .attribute-value
-        = f.select(:performance_total_number, (1..8), { value: video.performance_total_number, prompt: "Select Total Number of Performance" }, "data-controller": "tom-select")
+        = f.select(:performance_total_number, (1..8), { value: video.performance.videos_count, prompt: "Select Total Number of Performance" }, "data-controller": "tom-select")
     h4.heading-4.heading-4--bold = t(".music_heading")
   div
     = f.label "hidden?"

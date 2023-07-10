@@ -296,4 +296,12 @@ RSpec.describe Video do
       expect(video.to_param).to eq(video.youtube_id)
     end
   end
+
+  describe "#hd_duration_data" do
+    it "returns the duration in seconds" do
+      video = videos(:video_1_featured)
+
+      expect(video.hd_duration_data).to eq("HD 02:47")
+    end
+  end
 end

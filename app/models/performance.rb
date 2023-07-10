@@ -6,7 +6,7 @@
 #
 #  id           :bigint           not null, primary key
 #  date         :date
-#  videos_count :integer
+#  videos_count :integer          default(0), not null
 #  slug         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

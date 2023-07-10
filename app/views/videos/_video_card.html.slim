@@ -1,5 +1,5 @@
 .video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
-  .video-card__image.video-card--compact__image data-duration="#{video.decorate.hd_duration_data}"
+  .video-card__image.video-card--compact__image data-duration="#{video.hd_duration_data}"
     - thumbnail = "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
     - if video.youtube_id == @video.youtube_id
       - if video.youtube_id == @video.youtube_id
@@ -10,7 +10,7 @@
   .video-card__content
     .video-card__primary
       .video-card__title = video.title
-      .video-card__metadata = video.decorate.display_metadata
+      .video-card__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
     .scrollable-tags.scrollable-tags--small
       - video.dancer_videos.each do |dv|
         - if dv.role == "leader"
