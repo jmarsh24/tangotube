@@ -172,8 +172,9 @@ class Video < ApplicationRecord
         :song,
         :event,
         dancer_videos: :dancer,
-        performance_video: :performance,
         thumbnail_attachment: :blob
+        performance_video: :performance,
+        dancer_videos: :dancer
       ]
     end
   end
