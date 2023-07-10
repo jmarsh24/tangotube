@@ -1,4 +1,4 @@
-- cache [video.youtube_id, video.dancer_videos.maximum(:updated_at), video.song], expires_in: 24.hours do
+- cache [video.youtube_id, video.song], expires_in: 24.hours do
   video-card.stack.stack--xxxs id="video_#{video.youtube_id}"
     = link_to watch_path(v: video.youtube_id) do
       .video-card__image data-duration="#{video.decorate.hd_duration_data}"

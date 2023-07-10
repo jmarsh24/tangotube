@@ -14,6 +14,4 @@
 class PerformanceVideo < ApplicationRecord
   belongs_to :video
   belongs_to :performance
-
-  delegate :videos_count, to: :performance, prefix: true
 end
