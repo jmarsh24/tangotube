@@ -34,6 +34,8 @@ nueve_de_julio:
   last_name_search: "darienzo"
   slug: "nueve-de-julio-juan-darienzo"
   composer: "composer"
+  date: <%= Date.parse('1935-12-31') %>
+  display_title: "Nueve De Julio - Juan D'Arienzo - Tango - 1935"
 
 cuando_el_amor_muere:
   genre: "Tango"
@@ -42,6 +44,8 @@ cuando_el_amor_muere:
   artist: "Carlos Di Sarli"
   last_name_search: "di sarli"
   slug: "cuando-el-amor-muere-carlos-di-sarli"
+  date: <%= Date.parse('1941-07-02') %>
+  display_title: "Cuando El Amor Muere - Carlos Di Sarli - Tango - 1941"
   lyrics_en: |
     Without peace, defeated by this love  
     I left another love in the distance,  
@@ -108,6 +112,8 @@ violetas:
   artist: "Alberto Castillo"
   last_name_search: "di sarli"
   slug: "violetas-aberto-castillo"
+  date: <%= Date.parse('1948-05-12') %>
+  display_title: "Violetas - Alberto Castillo - Vals - 1948"
   lyrics_en: |
     These violets that yesterday
     you gave me lovingly, with so much fervor,
@@ -186,6 +192,8 @@ milonga_querida:
   artist: "Juan D'Arienzo"
   last_name_search: "darienzo"
   slug: "milonga-querida-juan-darienzo"
+  date: <%= Date.parse('1938-11-09') %>
+  display_title: "Milonga Querida - Juan D'Arienzo - Milonga - 1938"
   lyrics_en: |
     The poets did not paint her
     in their seductive verses,
@@ -248,12 +256,5 @@ malandraca:
   artist: "Osvaldo Pugliese"
   slug: "malandraca-osvaldo-pugliese"
   last_name_search: "pugliese"
-
-cafe_dominguez:
-  genre: "Tango"
-  title: "Café Dominguez"
-  orchestra: garcia
-  artist: "José García"
-  last_name_search: "garcia"
-  slug: "cafe-dominguez-jose-garcia"
-  composer: "composer"
+  date: <%= Date.parse('1948-05-31') %>
+  display_title: "Malandraca - Osvaldo Pugliese - Tango - 1948"
