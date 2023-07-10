@@ -1,13 +1,14 @@
-.video-info-primary
-  .stack.stack--xs
-    .stack.stack--xxs
-      h1.heading-4.heading-4 = link_to video.title, watch_path(v: video.youtube_id)
-      .video-info-primary__metadata = video.decorate.display_metadata
-    .stack.stack--xxs.stack--justify-left
-      .scrollable-tags.scrollable-tags--small
-        - video.dancer_videos.each do |dv|
-          - if dv.role == "leader"
-            = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
-          - elsif dv.role == "follower"
-            = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag video-card__dancer"
-      = link_to video.song.full_title, root_path(song_id: video.song.id), class: "heading-5 video-info-primary__song-info video-card__song-metadata tag" if video.song.present?
+- cache video, expires_in: 24.hours do
+  .video-info-primary
+    .stack.stack--xs
+      .stack.stack--xxs
+        h1.heading-4.heading-4 = link_to video.title, watch_path(v: video.youtube_id)
+        .video-info-primary__metadata = video.decorate.display_metadata
+      .stack.stack--xxs.stack--justify-left
+        .scrollable-tags.scrollable-tags--small
+          - video.dancer_videos.each do |dv|
+            - if dv.role == "leader"
+              = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
+            - elsif dv.role == "follower"
+              = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag video-card__dancer"
+        = link_to video.song.full_title, root_path(song_id: video.song.id), class: "heading-5 video-info-primary__song-info video-card__song-metadata tag" if video.song.present?
