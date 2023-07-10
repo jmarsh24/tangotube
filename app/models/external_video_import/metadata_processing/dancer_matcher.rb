@@ -10,7 +10,7 @@ module ExternalVideoImport
         dancers = Dancer.where(id: dancer_ids)
         if dancers.any?
           Rails.logger.debug "Matched dancers:"
-          dancers.each { |dancer| Rails.logger.info "- #{dancer.name}" }
+          dancers.each { |dancer| Rails.logger.debug "- #{dancer.name}" }
         else
           Rails.logger.debug "No dancers matched."
         end

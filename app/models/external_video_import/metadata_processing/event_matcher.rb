@@ -3,36 +3,29 @@
 module ExternalVideoImport
   module MetadataProcessing
     class EventMatcher
-      def initialize
-        @trigram = Trigram.new
-      end
+      MATCH_THRESHOLD = 0.8
 
-      def match(metadata_fields:)
-        text = metadata_fields.join(" ")
-        event_data = @trigram.best_matches(list: all_events, text:, threshold: 0.75, &event_match_block)
+      def match(video_title: nil, video_description: nil)
+        normalized_text = TextNormalizer.normalize(video_title + video_description)
+        event_id_titles = Event.all.pluck(:id, :title)
+        event_id_titles.map! { |id, title| [id, TextNormalizer.normalize(title)] }
 
-        best_match = event_data.first
-
-        if best_match
-          ::Event.find(best_match.first[:id])
+        matched_event = nil
+        event_id_titles.each do |id, title|
+          ratio = Trigram.similarity(needle: title, haystack: normalized_text)
+          if ratio > MATCH_THRESHOLD
+            matched_event = Event.find(id)
+            break
+          end
         end
-      end
 
-      private
-
-      def all_events
-        @all_events ||= Rails.cache.fetch("Events", expires_in: 24.hours) {
-          ::Event.all.map { |event| {id: event.id, title: normalize(event.title), city: normalize(event.city), country: normalize(event.country)} }.to_a
-        }
-      end
-
-      def event_match_block
-        lambda { |event| [event[:title], event[:city], event[:country]].join(" ") }
-      end
-
-      def normalize(text)
-        ascii_text = text.encode("ASCII", invalid: :replace, undef: :replace, replace: "")
-        ascii_text.gsub("'", "").gsub("-", "").parameterize(separator: " ")
+        if matched_event
+          Rails.logger.debug "Matched event: #{matched_event.title}"
+          matched_event
+        else
+          Rails.logger.debug "No event matched."
+          nil
+        end
       end
     end
   end
