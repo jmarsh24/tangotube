@@ -27,7 +27,7 @@ class Video::FacetBuilder
     Facet.new(name: "leader", option_builder: ->(name, count) { Option.new(label: name[0], value: name[1], count:) }) do
       Dancer.joins(:dancer_videos)
         .where(dancer_videos: {role: "leader", video_id: @video_relation.select(:id)})
-        .group("dancers.name", "dancers.slug")
+        .group("dancers.name", "dancers.slug", "dancers.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
         .limit(10)
         .count
@@ -38,7 +38,7 @@ class Video::FacetBuilder
     Facet.new(name: "follower", option_builder: ->(name, count) { Option.new(label: name[0], value: name[1], count:) }) do
       Dancer.joins(:dancer_videos)
         .where(dancer_videos: {role: "follower", video_id: @video_relation.select(:id)})
-        .group("dancers.name", "dancers.slug")
+        .group("dancers.name", "dancers.slug", "dancers.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
         .limit(10)
         .count
@@ -49,7 +49,7 @@ class Video::FacetBuilder
     Facet.new(name: "orchestra", option_builder: ->(name, count) { Option.new(label: custom_titleize(name[0]), value: name[1], count:) }) do
       @video_relation
         .joins(song: :orchestra)
-        .group("orchestras.name", "orchestras.slug")
+        .group("orchestras.name", "orchestras.slug", "orchestras.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "orchestras.videos_count DESC")
         .limit(10)
         .count
@@ -82,8 +82,8 @@ class Video::FacetBuilder
     Facet.new(name: "song", option_builder: ->(name, count) { Option.new(label: name[0], value: name[1], count:) }) do
       @video_relation
         .joins(song: :orchestra)
-        .group("songs.display_title", "songs.slug")
-        .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
+        .group("songs.display_title", "songs.slug", "songs.videos_count")
+        .order(Arel.sql("COUNT(*) DESC"), "songs.videos_count DESC")
         .limit(10)
         .count
     end
@@ -93,7 +93,7 @@ class Video::FacetBuilder
     Facet.new(name: "event", option_builder: ->(name, count) { Option.new(label: name[0], value: name[1], count:) }) do
       @video_relation
         .joins(:event)
-        .group("events.title", "events.slug")
+        .group("events.title", "events.slug", "events.videos_count")
         .order("count_all DESC", "events.title")
         .limit(10)
         .count
