@@ -5,46 +5,34 @@ module ExternalVideoImport
     class DancerMatcher
       MATCH_THRESHOLD = 0.8
 
-      def initialize
-        @fuzzy_matcher = FuzzyText.new
-      end
-
       def match(video_title:)
-        matched_dancers = find_best_matches(video_title)
-        log_matches(matched_dancers)
-        matched_dancers.any? ? Dancer.find(matched_dancers.map { |dancer| dancer[:id] }) : []
+        dancer_ids = find_dancers(video_title)
+        dancers = Dancer.where(id: dancer_ids)
+        if dancers.any?
+          Rails.logger.debug "Matched dancers:"
+          dancers.each { |dancer| Rails.logger.debug "- #{dancer.name}" }
+        else
+          Rails.logger.debug "No dancers matched."
+        end
+        dancers
       end
 
       private
 
-      def dancers
-        @dancers ||= Rails.cache.fetch("Dancers", expires_in: 24.hours) {
-          ::Dancer.all.map { |dancer| {id: dancer.id, name: normalize(dancer.name)} }.to_a
-        }
-      end
-
-      def find_best_matches(video_title)
-        dancers.filter { |dancer|
-          match_score(dancer[:name], video_title) >= MATCH_THRESHOLD
-        }
-      end
-
-      def match_score(query, target)
-        @fuzzy_matcher.trigram_score(needle: query, haystack: normalize(target))
-      end
-
-      def normalize(text)
-        ascii_text = text.encode("ASCII", invalid: :replace, undef: :replace, replace: "")
-        ascii_text.gsub("'", "").gsub("-", "").parameterize(separator: " ")
-      end
-
-      def log_matches(dancers)
-        if dancers.any?
-          Rails.logger.info "Matched dancers:"
-          dancers.each { |dancer| Rails.logger.info "- #{dancer[:name]}" }
-        else
-          Rails.logger.info "No dancers matched."
+      def find_dancers(video_title)
+        normalized_title = TextNormalizer.normalize(video_title)
+        dancer_id_names = Dancer.all.pluck(:id, :name, :nick_name)
+        dancer_id_names.map! { |id, name, nick_name| [id, TextNormalizer.normalize(name), nick_name.map { |nick_name| TextNormalizer.normalize(nick_name) }] }
+        dancer_ids = []
+        dancer_id_names.each do |id, name, nick_name|
+          nick_name.each do |nick_name|
+            ratio = FuzzyText.new.trigram_score(needle: nick_name, haystack: normalized_title)
+            dancer_ids << id if ratio > MATCH_THRESHOLD
+          end
+          ratio = FuzzyText.new.trigram_score(needle: name, haystack: normalized_title)
+          dancer_ids << id if ratio > MATCH_THRESHOLD
         end
+        dancer_ids.uniq
       end
     end
   end

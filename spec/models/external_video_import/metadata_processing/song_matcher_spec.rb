@@ -6,7 +6,6 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
   fixtures :all
 
   let(:song) { songs(:nueve_de_julio) }
-  let(:accented_song) { songs(:cafe_dominguez) }
   let(:song_matcher) { described_class.new }
 
   describe "#match" do
