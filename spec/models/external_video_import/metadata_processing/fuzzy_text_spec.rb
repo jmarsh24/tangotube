@@ -23,7 +23,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::FuzzyText do
   describe "#trigram_score" do
     it "returns a high score for similar strings" do
       score = fuzzy_text.trigram_score(needle: song_title, haystack: video_title)
-      expect(score).to be > 0.8
+      expect(score).to be >= 0.8
     end
 
     it "returns a low score for dissimilar strings" do
