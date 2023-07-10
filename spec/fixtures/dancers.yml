@@ -63,6 +63,7 @@ gianpiero:
   name: "Gianpiero Ya Galdi"
   first_name: "Gianpiero"
   last_name: "Galdi"
+  nick_name: ["Gianpiero Galdi"]
   reviewed: true
   gender: "female"
   slug: "gianpiero-ya-galdi"
