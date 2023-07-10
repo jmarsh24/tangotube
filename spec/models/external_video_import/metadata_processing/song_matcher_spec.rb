@@ -194,6 +194,20 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         song_albums = ["La puñalada"]
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(que_peina_canas)
       end
+
+      it "returns the best match" do
+        calo = Orchestra.create!(
+          name: "Miguel Calo",
+          slug: "miguel-calo",
+          search_term: "calo"
+        )
+
+        el_chamuyo = Song.create!(title: "El Chamuyo", artist: "Miguel CALO", orchestra: calo)
+        video_title = "Carlitos Espinoza & Agustina Piaggio - Sobre el Pucho - MSTF 2022 #summerembraces"
+        video_description = "www.summertango.com"
+
+        expect(song_matcher.match(video_title:, video_description:)).not_to eq(el_chamuyo)
+      end
     end
   end
 end
