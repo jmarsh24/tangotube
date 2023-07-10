@@ -6,7 +6,7 @@ RSpec.describe Video::FacetBuilder do
   fixtures :all
 
   describe "#leaders" do
-    it "returns a leader facet for all videos" do
+    fit "returns a leader facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).leader
       expected_options = [
         Video::FacetBuilder::Option.new(value: "carlitos-espinoza", label: "Carlitos Espinoza", count: 2),
@@ -22,7 +22,7 @@ RSpec.describe Video::FacetBuilder do
   end
 
   describe "#followers" do
-    it "returns a follower facet for all videos" do
+    fit "returns a follower facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).follower
       expected_options = [
         Video::FacetBuilder::Option.new(value: "noelia-hurtado", label: "Noelia Hurtado", count: 2),
@@ -38,7 +38,7 @@ RSpec.describe Video::FacetBuilder do
   end
 
   describe "#orchestras" do
-    it "returns an orchestra facet for all videos" do
+    fit "returns an orchestra facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).orchestra
       expected_options = [
         Video::FacetBuilder::Option.new(value: "juan-darienzo", label: "Juan D'Arienzo", count: 3),
@@ -53,7 +53,7 @@ RSpec.describe Video::FacetBuilder do
   end
 
   describe "#genres" do
-    it "returns a genre facet for all videos" do
+    fit "returns a genre facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).genre
       expected_options = [
         Video::FacetBuilder::Option.new(value: "tango", label: "Tango", count: 4),
@@ -67,7 +67,7 @@ RSpec.describe Video::FacetBuilder do
   end
 
   describe "#years" do
-    it "returns a year facet for all videos" do
+    fit "returns a year facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).year
       expected_options = [
         Video::FacetBuilder::Option.new(value: 2020, label: 2020, count: 2),
@@ -83,7 +83,7 @@ RSpec.describe Video::FacetBuilder do
   end
 
   describe "#songs" do
-    it "returns a song facet for all videos" do
+    fit "returns a song facet for all videos" do
       facet = Video::FacetBuilder.new(Video.all).song
       expected_options = [
         Video::FacetBuilder::Option.new(value: "nueve-de-julio-juan-darienzo", label: "Nueve De Julio - Juan D'Arienzo - Tango - 1935", count: 2),
