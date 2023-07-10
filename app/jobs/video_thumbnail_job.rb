@@ -4,7 +4,7 @@ class VideoThumbnailJob < ApplicationJob
   queue_as :default
 
   def perform(video)
-    return if video.metadata.blank?
+    return if video.metadata.youtube.thumbnail_url.blank?
 
     thumbnail_url = video.metadata.youtube.thumbnail_url.highest_resolution
     return if thumbnail_url.blank?
