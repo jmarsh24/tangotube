@@ -31,5 +31,14 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::DancerMatcher do
       expect(dancer_matcher.match(video_title:)).to match_array([dancers(:facundo), dancers(:vanessa)])
       expect(dancer_matcher.match(video_title:)).not_to include(dancers(:facundo_gil))
     end
+
+    it "does not find a match for a dancer with a similar name" do
+      video_title = "Carlitos Espinoza & Agustina Piaggio - Sobre el Pucho - MSTF 2022 "
+      augustina_piaggio = Dancer.create!(name: "Augustina Piaggio", gender: "female", first_name: "Augustina", last_name: "Piaggio")
+
+      Dancer.create!(name: "Augustina Paez", gender: "female", first_name: "Augustina", last_name: "Paez")
+
+      expect(dancer_matcher.match(video_title:)).to match_array([dancers(:carlitos), augustina_piaggio])
+    end
   end
 end
