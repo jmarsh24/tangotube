@@ -3,7 +3,7 @@
 module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
-      MATCH_THRESHOLD = 0.70
+      MATCH_THRESHOLD = 0.8
 
       def initialize
         @fuzzy_matcher = FuzzyText.new

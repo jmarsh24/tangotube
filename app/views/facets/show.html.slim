@@ -2,7 +2,7 @@
   - cache [@facet.name, filtering_params, current_user&.id] do
     .stack.stack--zero
       .modal__header
-        h1.heading-1 = @facet.name.titleize
+        h3.heading-3 = @facet.name.titleize
       .content-container
         .list-box
           - if params[@facet.name.to_sym].present?

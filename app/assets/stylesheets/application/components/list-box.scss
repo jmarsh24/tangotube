@@ -14,6 +14,7 @@
     font-size: var(--font-size-md);
     transition: background-color 0.2s ease-in-out;
     gap: var(--spacing-xl);
+    border-radius: var(--border-radius-xl);
 
     &:last-child {
       border-bottom: none;
@@ -21,13 +22,11 @@
 
     &:hover {
       background-color: var(--color-gray-200);
-      border-radius: var(--border-radius-xl);
     }
 
     &.selected {
       background-color: var(--color-gray-300);
       font-weight: var(--font-weight-bold);
-      border-radius: var(--border-radius-xl);
     }
   }
   &__text {

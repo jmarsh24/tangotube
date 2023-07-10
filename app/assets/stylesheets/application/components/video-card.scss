@@ -2,6 +2,18 @@
   font-size: 12px;
   font-weight: 500;
 
+  &__performance-number {
+    position: absolute;
+    background-color: black;
+    color: var(--color-neutral-1000);
+    font-size: 12px;
+    right: 5px;
+    top: 5px;
+    padding: 0.1em 0.3em;
+    border-radius: 0.3em;
+    z-index: 1000;
+  }
+
   &__image {
     position: relative;
     aspect-ratio: 16 / 9;
@@ -20,21 +32,11 @@
       position: absolute;
       background-color: black;
       color: var(--color-neutral-1000);
+      font-size: 12px;
       right: 5px;
       bottom: 10px;
       padding: 0 0.3em;
       border-radius: 0.3em;
-    }
-
-    &__performance-number {
-      position: absolute;
-      background-color: black;
-      color: var(--color-neutral-1000);
-      right: 5px;
-      top: 5px;
-      padding: 0.1em 0.3em;
-      border-radius: 0.3em;
-      z-index: 1;
     }
   }
 

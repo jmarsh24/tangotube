@@ -3,7 +3,7 @@
 module ExternalVideoImport
   module MetadataProcessing
     class SongMatcher
-      MATCH_THRESHOLD = 0.8
+      MATCH_THRESHOLD = 0.9
       STOP_WORDS = ["y su orquesta tipica"].freeze
 
       def match(video_title:, video_description:, video_tags: [], song_titles: [], song_albums: [], song_artists: [])

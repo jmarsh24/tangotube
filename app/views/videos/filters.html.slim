@@ -1,7 +1,11 @@
-= turbo_frame_tag :genre_facet, src: facet_path(id: "genre", params: filtering_params)	
-= turbo_frame_tag :leader_facet, src: facet_path(id: "leader", params: filtering_params)	
-= turbo_frame_tag :follower_facet, src: facet_path(id: "follower", params: filtering_params)	
-= turbo_frame_tag :orchestra_facet, src: facet_path(id: "orchestra", params: filtering_params)	
-= turbo_frame_tag :year_facet, src: facet_path(id: "year", params: filtering_params)	
-- if filtering_params.present? || params[:sort].present?	
-  = link_to "Clear All", root_path, method: :get, class: "button button--secondary"	
+.stack.stack--zero.scrollable-container
+  .modal__header 
+    h3.heading-3 Filters
+  .scrollable-container__content
+    = turbo_frame_tag :genre_facet, src: facet_path(id: "genre", params: filtering_params)	
+    = turbo_frame_tag :leader_facet, src: facet_path(id: "leader", params: filtering_params)	
+    = turbo_frame_tag :follower_facet, src: facet_path(id: "follower", params: filtering_params)	
+    = turbo_frame_tag :orchestra_facet, src: facet_path(id: "orchestra", params: filtering_params)	
+    = turbo_frame_tag :year_facet, src: facet_path(id: "year", params: filtering_params)	
+    / - if filtering_params.present? || params[:sort].present?	
+    /   = link_to "Clear All", root_path, method: :get, class: "button button--secondary"	
