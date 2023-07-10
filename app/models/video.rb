@@ -169,13 +169,11 @@ class Video < ApplicationRecord
     def search_includes
       [
         :channel,
-        :dancer_videos,
-        :dancers,
         :song,
         :event,
-        :performance_video,
-        :performance,
-        thumbnail_attachment: :blob
+        performance_video: :performance,
+        thumbnail_attachment: :blob,
+        dancer_videos: :dancer
       ]
     end
   end
