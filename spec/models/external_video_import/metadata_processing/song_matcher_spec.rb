@@ -10,7 +10,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
 
   describe "#match" do
     context "when the song exists" do
-      it "returns the best match" do
+      it "returns a match for Milonga del 83" do
         song = Song.create!(title: "Milonga del 83", artist: "Juan D'ARIENZO", genre: "Milonga", orchestra: orchestras(:darienzo), last_name_search: "darienzo")
         video_title = "Agustina Piaggio &Carlitos Espinoza - Milonga Del 83 - by SivisArt"
         video_description = "Carlitos Espinoza & Agustina Piaggio  at the Baden Baden Tango Festival 2022.\nSubscribe to my channel.\nImages & Realisation: Sivis'Art - ALL RIGHTS RESERVED.\n-Website: http://www.sivisart.com/\n-Instagram: Sivisart\n-facebook: Sivisart\n\nFeel free to comment, like, share the video. Thank you for your support & Enjoy !"
@@ -20,7 +20,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(described_class.new.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(song)
       end
 
-      it "returns the best match" do
+      it "returns a match for Quedemos aqui" do
         orchestra = Orchestra.create!(
           name: "José Basso",
           slug: "jose-basso",
@@ -54,7 +54,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, video_tags:, song_titles:, song_albums:, song_artists:)).not_to eq(song_recondandote)
       end
 
-      it "returns the best match" do
+      it "returns the match for ya lo ves" do
         song_ya_lo_ves = Song.create!(
           genre: "TANGO",
           orchestra: orchestras(:darienzo),
@@ -72,7 +72,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, video_tags:)).to eq(song_ya_lo_ves)
       end
 
-      it "returns the best match" do
+      it "returns the match for bajo el cono azul" do
         orchestra = Orchestra.create!(
           name: "Alfredo De Angelis",
           slug: "angelis",
@@ -96,7 +96,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, video_tags:, song_titles:, song_albums:, song_artists:)).to eq(song_bajo_el_cono_azul)
       end
 
-      it "returns the best match" do
+      it "returns the a match for mozo guapo" do
         Orchestra.create!(
           name: "Trío YUMBA",
           slug: "trio-yumba",
@@ -124,7 +124,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_artists:)).to eq(song_mozo_guapo)
       end
 
-      it "returns the best match" do
+      it "returns a match for milonga vieja milonga" do
         milonga_vieja = Song.create!(
           genre: "MILONGA",
           artist: "Juan D'Arienzo",
@@ -140,7 +140,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_artists:)).to eq(milonga_vieja)
       end
 
-      it "returns the best match" do
+      it "returns the a match for lo que el viento se llevo" do
         canaro = Orchestra.create!(
           name: "Francisco Canaro",
           slug: "francisco-canaro",
@@ -154,7 +154,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
           orchestra: canaro
         )
 
-        amor = Song.create!(
+        Song.create!(
           genre: "TANGO",
           title: "Amor",
           artist: "Francisco CANARO",
@@ -169,7 +169,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(se_llevo)
       end
 
-      it "returns the best match" do
+      it "returns a match for milonga qu peina canas" do
         darienzo = orchestras(:darienzo)
 
         que_peina_canas = Song.create!(
@@ -179,7 +179,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
           orchestra: darienzo
         )
 
-        cana = Song.create!(
+        Song.create!(
           genre: "TANGO",
           title: "Caña",
           artist: "Juan D'ARIENZO",
@@ -194,7 +194,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(que_peina_canas)
       end
 
-      it "returns the best match" do
+      it "returns a match for el chamuyo" do
         calo = Orchestra.create!(
           name: "Miguel Calo",
           slug: "miguel-calo",
