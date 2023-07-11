@@ -90,7 +90,7 @@ RSpec.describe Video::RelatedVideos do
       DancerVideo.create!(dancer: video.leaders.first, video: video_same_channel, role: "leader")
       DancerVideo.create!(dancer: video.followers.first, video: video_same_channel, role: "follower")
 
-      expect(recommendation.with_same_performance).to match_array(video_same_channel)
+      expect(recommendation.with_same_performance).to match_array([video_same_channel, videos(:video_1_featured)])
     end
   end
 end

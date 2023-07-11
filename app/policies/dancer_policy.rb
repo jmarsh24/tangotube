@@ -29,10 +29,6 @@ class DancerPolicy < ApplicationPolicy
     user&.admin?
   end
 
-  def search?
-    true
-  end
-
   def upload_profile_image?
     user&.admin?
   end

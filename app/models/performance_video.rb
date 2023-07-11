@@ -13,5 +13,7 @@
 #
 class PerformanceVideo < ApplicationRecord
   belongs_to :video
-  belongs_to :performance
+  belongs_to :performance, counter_cache: :videos_count
+
+  delegate :videos_count, to: :performance, prefix: true
 end

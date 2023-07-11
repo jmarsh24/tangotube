@@ -90,10 +90,10 @@ RSpec.describe Video::Filter do
     end
 
     context "when filtering by liked_by_user" do
-      xit "returns videos liked by user" do
+      it "returns videos liked by user" do
         user = users(:regular)
         video = videos(:video_1_featured)
-        video.upvote_by user, vote_scope: "like"
+        user.like(video)
 
         filtered_videos = described_class.new(Video.all, filtering_params: {liked: true}, user:).filtered_videos
 
@@ -106,7 +106,7 @@ RSpec.describe Video::Filter do
         user = users(:regular)
         video = videos(:video_1_featured)
 
-        Watch.create(user:, video:)
+        user.watch(video)
 
         filtered_videos = described_class.new(Video.all, filtering_params: {watched: true}, user:).filtered_videos
 
@@ -140,13 +140,13 @@ RSpec.describe Video::Filter do
     end
 
     context "when filtering by dancer" do
-      it "returns videos with dancer" do
+      it "returns videos for follower/leader" do
         filtered_videos = described_class.new(Video.all, filtering_params: {dancer: "corina-herrera"}).filtered_videos
 
         expect(filtered_videos).to match_array([videos(:video_5), videos(:video_6)])
       end
 
-      it "returns videos with dancer" do
+      it "returns videos for normal leader" do
         filtered_videos = described_class.new(Video.all, filtering_params: {dancer: "carlitos-espinoza"}).filtered_videos
 
         expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])

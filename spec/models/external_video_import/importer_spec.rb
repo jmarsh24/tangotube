@@ -5,25 +5,8 @@ require "rails_helper"
 RSpec.describe ExternalVideoImport::Importer do
   fixtures :all
 
-  let(:song_matcher) { instance_double("SongMatcher") }
-  let(:video_crawler) { instance_double("Crawler") }
-  let(:channel_matcher) { instance_double("ChannelMatcher") }
-  let(:dancer_matcher) { instance_double("DancerMatcher") }
-  let(:couple_matcher) { instance_double("CoupleMatcher") }
-
-  let(:importer) do
-    described_class.new(
-      video_crawler:,
-      metadata_processor: ExternalVideoImport::MetadataProcessing::MetadataProcessor.new
-    )
-  end
-  let(:video) { videos(:video_1_featured) }
-  let(:song) { songs(:nueve_de_julio) }
-  let(:channel) { channels(:"030tango") }
-  let(:carlitos) { dancers(:carlitos) }
-  let(:noelia) { dancers(:noelia) }
-  let(:couple) { couples(:carlitos_noelia) }
-  let(:youtube_slug) { "test_video_slug" }
+  let(:video_crawler) { ExternalVideoImport::Crawler.new }
+  let(:metadata_processor) { ExternalVideoImport::MetadataProcessing::MetadataProcessor.new }
   let(:metadata) do
     ExternalVideoImport::Metadata.new(
       youtube: ExternalVideoImport::Youtube::VideoMetadata.new(
@@ -76,66 +59,84 @@ RSpec.describe ExternalVideoImport::Importer do
     )
   end
 
+  let(:processed_metadata) do
+    {youtube_id: "test_video_slug",
+     upload_date: Date.parse("01 Jan 2022"),
+     upload_date_year: 2022,
+     title: "Carlitos Espinoza & Noelia Hurtado - Nueve de Julio - Tango 3 / 5",
+     description: "Test video description featuring amazing dancers and great music.",
+     channel: channels(:"030tango"),
+     song: songs(:nueve_de_julio),
+     couples: [couples(:carlitos_noelia)],
+     acr_response_code: nil,
+     duration: 180,
+     hd: true,
+     youtube_view_count: 1000,
+     youtube_like_count: 200,
+     youtube_tags: ["tag1", "tag2"],
+     dancer_videos: [
+       DancerVideo.new(dancer_id: 839919117, role: "leader"),
+       DancerVideo.new(dancer_id: 467770177, role: "follower")
+     ]}
+  end
+
+  let(:importer) do
+    described_class.new(
+      video_crawler:,
+      metadata_processor:
+    )
+  end
+
   before do
-    stub_request(:get, "https://api.spotify.com/v1/tracks/6wcryUdE3GbVVnuBFE6Zmv")
-      .to_return(body: file_fixture("spotify_response.json").read)
-    stub_request(:get, "https://api.spotify.com/v1/artists/649cpnHPJs3XtCIa3XUfq3")
-      .to_return(body: file_fixture("spotify_response_1.json").read)
-    allow(video_crawler).to receive(:metadata).with(youtube_slug, {use_scraper: true, use_music_recognizer: true}).and_return(metadata)
+    allow(video_crawler).to receive(:metadata).with("test_video_slug", use_scraper: false, use_music_recognizer: false).and_return(metadata)
+    allow(metadata_processor).to receive(:process).with(metadata).and_return(processed_metadata)
   end
 
   describe "#import" do
-    before do
-      allow(song_matcher).to receive(:match_or_create).and_return(song)
-      allow(channel_matcher).to receive(:match_or_create).and_return(channel)
-      allow(dancer_matcher).to receive(:match).and_return([carlitos, noelia])
-      allow(couple_matcher).to receive(:match_or_create).and_return(couple)
+    it "imports a video with the correct attributes" do
+      expect { importer.import("test_video_slug") }.to change { Video.count }.by(1)
+
+      video = Video.last
+      expect(video.youtube_id).to eq(metadata.youtube.slug)
+      expect(video.metadata.youtube.title).to eq(metadata.youtube.title)
+      expect(video.metadata.youtube.description).to eq(metadata.youtube.description)
+      expect(video.upload_date).to eq(Date.parse("2022-01-01"))
+      expect(video.metadata.youtube.duration).to eq(180)
+      expect(video.metadata.youtube.tags).to match_array(["tag1", "tag2"])
+      expect(video.metadata.youtube.hd).to be(true)
+      expect(video.metadata.youtube.view_count).to eq(1000)
+      expect(video.metadata.youtube.favorite_count).to eq(100)
+      expect(video.metadata.youtube.comment_count).to eq(50)
+      expect(video.metadata.youtube.like_count).to eq(200)
+      expect(video.song).to eq(songs(:nueve_de_julio))
+      expect(video.channel).to eq(channels(:"030tango"))
+      expect(video.dancers).to match_array([dancers(:carlitos), dancers(:noelia)])
+      expect(video.couples).to eq([couples(:carlitos_noelia)])
+      expect(video.metadata).to eq(metadata)
     end
+  end
 
-    context "when a video with the same youtube slug does not exist" do
-      it "imports a video with the correct attributes" do
-        expect { importer.import(youtube_slug) }.to change { Video.count }.by(1)
+  context "when a video with the same youtube slug already exists" do
+    let(:existing_video) { videos(:video_1_featured) }
 
-        video = Video.last
-        expect(video.youtube_id).to eq(metadata.youtube.slug)
-        expect(video.metadata.youtube.title).to eq(metadata.youtube.title)
-        expect(video.metadata.youtube.description).to eq(metadata.youtube.description)
-        expect(video.upload_date).to eq(Date.parse("2022-01-01"))
-        expect(video.metadata.youtube.duration).to eq(180)
-        expect(video.metadata.youtube.tags).to match_array(["tag1", "tag2"])
-        expect(video.metadata.youtube.hd).to be(true)
-        expect(video.metadata.youtube.view_count).to eq(1000)
-        expect(video.metadata.youtube.favorite_count).to eq(100)
-        expect(video.metadata.youtube.comment_count).to eq(50)
-        expect(video.metadata.youtube.like_count).to eq(200)
-        expect(video.song).to eq(song)
-        expect(video.channel).to eq(channel)
-        expect(video.dancers).to match_array(couple.dancers)
-        expect(video.couples).to match_array(couple)
-        expect(video.metadata).to eq(metadata)
-      end
-    end
+    it "updates the existing video" do
+      expect { importer.import(videos(:video_1_featured).youtube_id) }.not_to change { Video.count }
 
-    context "when a video with the same youtube slug already exists" do
-      let(:existing_video) { videos(:video_1_featured) }
-
-      it "updates the existing video" do
-        expect { importer.import(videos(:video_1_featured).youtube_id) }.not_to change { Video.count }
-
-        existing_video.reload
-      end
+      existing_video.reload
     end
   end
 
   describe "#update" do
+    let(:existing_video) { videos(:video_1_featured) }
+
     before do
-      allow(video_crawler).to receive(:metadata).with(video.youtube_id, {use_scraper: true, use_music_recognizer: true}).and_return(metadata)
-      video.assign_attributes(metadata: nil)
+      allow(video_crawler).to receive(:metadata).with(existing_video.youtube_id, use_scraper: false, use_music_recognizer: false).and_return(metadata)
+      existing_video.assign_attributes(metadata: nil)
     end
 
-    it "updates a video with the correct attributes" do
-      expect(importer.update(video)).to eq(video)
-      expect(video.metadata).to eq(metadata)
+    it "updates a existing video with the correct attributes" do
+      expect(importer.update(existing_video)).to eq(existing_video)
+      expect(existing_video.metadata).to eq(metadata)
     end
   end
 end
