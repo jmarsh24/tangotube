@@ -29,12 +29,12 @@ module ExternalVideoImport
       metadata = @video_crawler.metadata(video.youtube_id, use_scraper:, use_music_recognizer:)
 
       if !use_scraper
-        metadata.youtube.song = video.metadata.youtube.song.attributes
-        metadata.youtube.recommended_video_ids = video.metadata.youtube.recommended_video_ids
+        metadata.youtube.song = video.metadata&.youtube&.song&.attributes.presence
+        metadata.youtube.recommended_video_ids = video.metadata&.youtube&.recommended_video_ids.presence
       end
 
       if !use_music_recognizer && (metadata.music.code != 0 || metadata.music.code != 1001)
-        metadata.music = video.metadata.music.attributes
+        metadata.music = video.metadata&.music&.attributes.presence
       end
 
       video_attributes = @metadata_processor.process(metadata)
