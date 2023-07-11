@@ -4,7 +4,7 @@ module ExternalVideoImport
   module MetadataProcessing
     class CoupleMatcher
       def match_or_create(dancers:)
-        return [] if dancers.size < 2
+        return [] if dancers.size != 2
 
         dancer_pairs = dancers.combination(2).to_a
         couples = dancer_pairs.map do |dancer_pair|
