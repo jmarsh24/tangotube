@@ -70,6 +70,18 @@ class User < ApplicationRecord
     self.last_name = last_name.strip.titleize if name.present?
   end
 
+  def like(video)
+    likes.find_or_create_by(likeable: video)
+  end
+
+  def unlike(video)
+    likes.where(likeable: video).destroy_all
+  end
+
+  def watch(video)
+    watches.create(video:, watched_at: DateTime.now)
+  end
+
   class << self
     def from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
