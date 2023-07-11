@@ -28,7 +28,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::CoupleMatcher do
       expect(result.first.partner).to eq(dancers.second)
     end
 
-    fit "returns an empty array when more than 2 dancers are provided" do
+    it "returns an empty array when more than 2 dancers are provided" do
       dancers = [dancers(:carlitos), dancers(:noelia), dancers(:jonathan)]
       result = couple_matcher.match_or_create(dancers:)
       expect(result).to eq([])

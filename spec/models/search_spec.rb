@@ -8,10 +8,9 @@ RSpec.describe Search, type: :model do
   describe "#results" do
     it "returns an array of results" do
       channel = channels(:"030tango")
-      search = Search.new("030")
-      expect(search.results).to be_an(Array)
-      expect(search.results.first).to be_a(Channel)
-      expect(search.results.first).to eq(channel)
+      search = Search.new(term: "030")
+
+      expect(search.results["Channel"].first).to eq(channel)
     end
   end
 end
