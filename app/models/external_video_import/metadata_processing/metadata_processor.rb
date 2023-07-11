@@ -77,9 +77,8 @@ module ExternalVideoImport
       end
 
       def log_matched_couples(couple)
-        if couple.any?
-          Rails.logger.info "Matched couples:"
-          couple.each { |couple| Rails.logger.info "- #{couple.dancers.map(&:name).join(" & ")}" }
+        if couple.present?
+          Rails.logger.info "Matched couples: #{couple.dancers.map(&:name).join(" & ")}"
         else
           Rails.logger.info "No couples matched."
         end
