@@ -16,18 +16,6 @@ RSpec.describe Video::Search do
     end
 
     it "returns all videos when filtering with leader and sorting" do
-      search = Video::Search.new(filtering_params: {leader: "corina-herrera"})
-      expected_videos = Video::Filter.new(Video.all, filtering_params: {leader: "corina-herrera"}).filtered_videos
-
-      expect(search.facet(name: "leader").options).to eq(Video::FacetBuilder.new(Video.all).leader.options)
-      expect(search.facet(name: "follower").options).to eq(Video::FacetBuilder.new(expected_videos).follower.options)
-      expect(search.facet(name: "orchestra").options).to eq(Video::FacetBuilder.new(expected_videos).orchestra.options)
-      expect(search.facet(name: "genre").options).to eq(Video::FacetBuilder.new(expected_videos).genre.options)
-      expect(search.facet(name: "year").options).to eq(Video::FacetBuilder.new(expected_videos).year.options)
-      expect(search.facet(name: "song").options).to eq(Video::FacetBuilder.new(expected_videos).song.options)
-    end
-
-    it "returns all videos when filtering with leader and sorting" do
       leaders_facet = [
         Video::FacetBuilder::Option.new(label: "Carlitos Espinoza", value: "carlitos-espinoza", count: 2),
         Video::FacetBuilder::Option.new(label: "Corina Herrera", value: "corina-herrera", count: 1),
@@ -59,29 +47,17 @@ RSpec.describe Video::Search do
     end
 
     it "returns all videos when filtering with liked" do
-      leaders_facet = [
-        Video::FacetBuilder::Option.new(label: "Carlitos Espinoza", value: "carlitos-espinoza", count: 1)
-      ]
+      leaders_facet = [Video::FacetBuilder::Option.new(label: "Carlitos Espinoza", value: "carlitos-espinoza", count: 1)]
 
-      followers_facet = [
-        Video::FacetBuilder::Option.new(label: "Noelia Hurtado", value: "noelia-hurtado", count: 1)
-      ]
+      followers_facet = [Video::FacetBuilder::Option.new(label: "Noelia Hurtado", value: "noelia-hurtado", count: 1)]
 
-      orchestras_facet = [
-        Video::FacetBuilder::Option.new(label: "Carlos Di Sarli", value: "carlos-di-sarli", count: 1)
-      ]
+      orchestras_facet = [Video::FacetBuilder::Option.new(label: "Carlos Di Sarli", value: "carlos-di-sarli", count: 1)]
 
-      genres_facet = [
-        Video::FacetBuilder::Option.new(label: "Tango", value: "tango", count: 1)
-      ]
+      genres_facet = [Video::FacetBuilder::Option.new(label: "Tango", value: "tango", count: 1)]
 
-      years_facet = [
-        Video::FacetBuilder::Option.new(label: 2014, value: 2014, count: 1)
-      ]
+      years_facet = [Video::FacetBuilder::Option.new(label: 2014, value: 2014, count: 1)]
 
-      songs_facet = [
-        Video::FacetBuilder::Option.new(label: "Cuando El Amor Muere - Carlos Di Sarli - Tango - 1941", value: "cuando-el-amor-muere-carlos-di-sarli", count: 1)
-      ]
+      songs_facet = [Video::FacetBuilder::Option.new(label: "Cuando El Amor Muere - Carlos Di Sarli - Tango - 1941", value: "cuando-el-amor-muere-carlos-di-sarli", count: 1)]
 
       user = users(:regular)
       video = videos(:video_1_featured)
