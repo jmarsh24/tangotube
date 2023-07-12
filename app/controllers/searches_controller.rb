@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class SearchesController < ApplicationController
+  # @route GET /search/new (new_search)
   def new
     @categories = search_categories_options
   end
 
+  # @route GET /search (search)
   def show
     selected_category = params[:category] || "all"
     categories = search_categories_options

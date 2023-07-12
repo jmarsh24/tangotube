@@ -5,7 +5,6 @@ class PerformancesController < ApplicationController
   before_action :set_performance, only: [:show, :edit, :update, :destroy]
   before_action :authorize_admin!, except: [:index, :show]
 
-  # @route POST /performances (performances)
   # @route GET /performances (performances)
   def index
     performances = Performance.where("videos_count < 7").includes(:videos).order(videos_count: :desc)
@@ -17,7 +16,6 @@ class PerformancesController < ApplicationController
     end
   end
 
-  # @route POST /performances/:id (performance)
   # @route GET /performances/:id (performance)
   def show
   end

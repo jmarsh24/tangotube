@@ -10,6 +10,7 @@ class WebhooksController < ApplicationController
     end
   end
 
+  # @route POST /webhooks (webhooks)
   def create
     youtube_event = YoutubeEvent.create!(
       data: Hash.from_xml(request.body.read).as_json

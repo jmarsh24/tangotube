@@ -5,7 +5,6 @@ class CouplesController < ApplicationController
   before_action :set_couple, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized, except: [:index, :show]
 
-  # @route POST /couples (couples)
   # @route GET /couples (couples)
   def index
     @couples = if params[:query].present?
@@ -17,7 +16,6 @@ class CouplesController < ApplicationController
     @pagy, @couples = pagy(@couples, items: 12)
   end
 
-  # @route POST /couples/:id (couple)
   # @route GET /couples/:id (couple)
   def show
     @videos = @couple.videos

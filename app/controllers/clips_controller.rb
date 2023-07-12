@@ -5,7 +5,6 @@ class ClipsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_video, only: [:create, :show, :edit, :update, :destroy]
 
-  # @route POST /clips (clips)
   # @route GET /clips (clips)
   def index
     @clips = Clip.all.includes(:video).order(created_at: :desc)
@@ -14,7 +13,6 @@ class ClipsController < ApplicationController
     @clips = paginated(@clips)
   end
 
-  # @route POST /clips/:id (clip)
   # @route GET /clips/:id (clip)
   def show
     authorize @clip

@@ -4,7 +4,6 @@ class OrchestrasController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_orchestra, only: [:show, :edit, :update, :destroy]
 
-  # @route POST /orchestras (orchestras)
   # @route GET /orchestras (orchestras)
   def index
     orchestras = if params[:query].present?
@@ -20,7 +19,6 @@ class OrchestrasController < ApplicationController
     end
   end
 
-  # @route POST /orchestras/:id (orchestra)
   # @route GET /orchestras/:id (orchestra)
   def show
     @dancers = @orchestra.dancers.distinct.includes(profile_image_attachment: :blob).order(videos_count: :desc)

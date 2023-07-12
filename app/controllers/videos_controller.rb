@@ -74,14 +74,14 @@ class VideosController < ApplicationController
     ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
   end
 
-  # POST /videos/:id/like
+  # @route POST /videos/:id/like (like_video)
   def like
     authorize @video
     current_user.likes.create!(likeable: @video)
     ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
   end
 
-  # DELETE /videos/:id/unlike
+  # @route DELETE /videos/:id/unlike (unlike_video)
   def unlike
     authorize @video
     like = current_user.likes.find_by(likeable: @video)
@@ -89,12 +89,15 @@ class VideosController < ApplicationController
     ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
   end
 
+  # @route GET /videos/filters (filters_videos)
   def filters
   end
 
+  # @route GET /videos/:id/share (share_video)
   def share
   end
 
+  # @route GET /videos/sort (sort_videos)
   def sort
     @filtering_params = filtering_params
   end
