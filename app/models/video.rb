@@ -74,9 +74,9 @@ class Video < ApplicationRecord
     WHERE videos.id IN (?) AND query.id = videos.id
   SQL
 
-  belongs_to :song, optional: true
+  belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
-  belongs_to :event, optional: true
+  belongs_to :event, optional: true, counter_cache: true
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
