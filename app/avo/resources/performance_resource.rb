@@ -13,9 +13,7 @@ class PerformanceResource < Avo::BaseResource
   field :performance_videos, as: :has_many
   field :videos, as: :has_many
   field :dancers, as: :has_many
-  field :videos_count, as: :number do
-    model.performance_videos.length
-  end
+  field :videos_count, read_only: true, sortable: true, hide_on: [:new, :edit]
   field :dancers_count, as: :number do
     model.dancers.length
   end

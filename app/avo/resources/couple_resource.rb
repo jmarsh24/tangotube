@@ -10,9 +10,7 @@ class CoupleResource < Avo::BaseResource
   field :id, as: :id
   field :dancer, as: :belongs_to
   field :partner, as: :belongs_to
-  field :videos_count, as: :number do
-    model.videos.length
-  end
+  field :videos_count, read_only: true, sortable: true, hide_on: [:new, :edit]
   field :dancer_image, as: :file, is_image: true, is_avatar: true do
     model.dancer.profile_image
   end

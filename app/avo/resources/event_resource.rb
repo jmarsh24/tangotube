@@ -18,9 +18,7 @@ class EventResource < Avo::BaseResource
 
   field :id, as: :id
   field :title, as: :text, required: true
-  field :videos_count, as: :number do
-    model.videos.length
-  end
+  field :videos_count, read_only: true, sortable: true, hide_on: [:new, :edit]
   field :dancers, as: :has_many
   field :city, as: :text, required: true
   field :country, as: :text, required: true

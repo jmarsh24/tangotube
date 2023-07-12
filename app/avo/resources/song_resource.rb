@@ -28,7 +28,7 @@ class SongResource < Avo::BaseResource
   field :active, as: :boolean
   field :lyrics, as: :text, hide_on: [:index]
   field :el_recodo_song_id, as: :number, hide_on: [:index]
-  field :videos_count, as: :number
+  field :videos_count, as: :number, read_only: true, sortable: true, hide_on: [:new, :edit]
   field :lyrics_en, as: :text, hide_on: [:index]
   field :slug, as: :text
   field :videos, as: :has_many
