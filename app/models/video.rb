@@ -93,6 +93,7 @@ class Video < ApplicationRecord
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
+
   has_one_attached :thumbnail
 
   attribute :metadata, ExternalVideoImport::Metadata.to_type
@@ -169,10 +170,9 @@ class Video < ApplicationRecord
       [
         :channel,
         :song,
-        :event,
+        :performance,
         dancer_videos: :dancer,
-        thumbnail_attachment: :blob,
-        performance_video: :performance
+        thumbnail_attachment: :blob
       ]
     end
   end
