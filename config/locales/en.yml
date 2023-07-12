@@ -27,9 +27,6 @@ en:
       clips_input_placeholder: Clips input placeholder
       end_time: End time
       start_time: Start time
-    index:
-      loading_spinner: Loading spinner
-      results: "%{count} Results"
     new:
       heading: Clip
   components:
@@ -74,10 +71,6 @@ en:
       google_privacy_policy: Google Privacy Policy
       privacy: Privacy
       terms: Terms
-    navbar:
-      search:
-        search:
-          placeholder: Search 300,000+ videos
   couples:
     couple:
       dancer_names: Dancer names
@@ -101,20 +94,12 @@ en:
       edit_dancer: Editing dancer
     index:
       ":": ":"
-      loading_spinner: Loading spinner
-      results: Results
       search_dancer: Search dancer
     new:
       new_dancer: New dancer
     show:
       dropdown: Dropdown
-      loading_spinner: Loading spinner
-      results: Results
       videos_count: "%{count} videos"
-  date:
-    formats:
-      short_month_year: "%b %Y"
-      song_recording_date: "%B %e, %Y"
   destroy: Destroy
   devise:
     confirmations:
@@ -201,7 +186,6 @@ en:
     show:
       dropdown_button: Dropdown button
       event_video_count: Event video count
-  invalid_date: Invalid date
   loading_spinner: Loading spinner
   login: Login
   orchestra_videos_count: Orchestra videos count
@@ -243,7 +227,6 @@ en:
       playlist_id: Playlist
       playlist_imported: Playlist imported
       playlist_video_count: Playlist video count
-  results: Results
   search: Search
   show: Show
   show_link: Show link
@@ -268,9 +251,6 @@ en:
       show_link: Show
     new:
       heading: Song
-  time:
-    formats:
-      video_duration: "%M:%S"
   videos:
     form:
       event_info_heading: Event Info
@@ -294,22 +274,15 @@ en:
       twitter: Twitter
       whatsapp: Whatsapp
     show:
-      featured_link:
-        featured_button: Featured
-      like_link:
-        like: Like
-        unlike: Unlike
       lyrics:
         English: English
         Spanish: Spanish
         lyrics_header: Lyrics
       recommended_from_event: This Event
       recommended_videos_from_performers: Same Performers
-      recommended_videos_same_channel: Same Channel
       recommended_videos_song: Same Song
       recommended_videos_videos_from_this_performance_header: Others from this Performance
       video_metadata:
-        description: Description
         follower_heading: Follower
         leader_heading: Leader
         location_heading: Location
@@ -323,12 +296,10 @@ en:
         song_recording_date: "%{date}"
         song_recording_date_heading: Recording Date
         song_title_heading: Title
-        title: Title
         title_heading: Title
         upload_date: "%{date}"
         video_duration_heading: Duration
         video_upload_date_heading: Upload date
-        youtube_info_heading: Youtube info
       vote:
         featured_button: Featured
         like: Like
