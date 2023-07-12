@@ -4,7 +4,7 @@ class VideoThumbnailJob < ApplicationJob
   queue_as :default
 
   BASE_THUMBNAIL_URL = "https://i.ytimg.com/vi"
-  RESOLUTIONS = ["maxresdefault.jpg", "sddefault.jpg", "hqdefault.jpg", "mqdefault.jpg", "default.jpg"]
+  RESOLUTIONS = ["maxresdefault.jpg", "sddefault.jpg", "hqdefault.jpg", "mqdefault.jpg", "default.jpg"].freeze
 
   def perform(video)
     return if video.youtube_id.blank?
