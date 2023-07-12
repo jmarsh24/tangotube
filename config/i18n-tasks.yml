@@ -2,5 +2,16 @@ search:
   exclude:
     - app/assets
 ignore_unused:
-  - '*_mailer.*.subject'
+  - "*_mailer.*.subject"
   - activerecord.attributes.*
+  - "dancers.date"
+  - "date.formats.short_month_year"
+  - "date.formats.song_recording_date"
+  - "formats.video_duration"
+  - "number.human.format.delimiter"
+  - "number.human.format.precision"
+  - "number.human.format.short"
+  - "number.human.storage_units.short.billion"
+  - "number.human.storage_units.short.million"
+  - "number.human.storage_units.short.thousand"
+  - "time"

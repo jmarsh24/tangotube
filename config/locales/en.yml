@@ -90,6 +90,7 @@ en:
   dancers:
     dancer:
       videos_count: "%{count} videos"
+    date:
     edit:
       edit_dancer: Editing dancer
     index:
@@ -100,6 +101,10 @@ en:
     show:
       dropdown: Dropdown
       videos_count: "%{count} videos"
+  date:
+    formats:
+      short_month_year: "%b %Y"
+      song_recording_date: "%B %e, %Y"
   destroy: Destroy
   devise:
     confirmations:
@@ -186,8 +191,21 @@ en:
     show:
       dropdown_button: Dropdown button
       event_video_count: Event video count
+  formats:
+    video_duration: "%M:%S"
   loading_spinner: Loading spinner
   login: Login
+  number:
+    human:
+      format:
+        delimiter: ''
+        precision: 2
+        short: "%n%u"
+      storage_units:
+        short:
+          billion: B
+          million: M
+          thousand: K
   orchestra_videos_count: Orchestra videos count
   orchestras:
     edit:
@@ -251,6 +269,7 @@ en:
       show_link: Show
     new:
       heading: Song
+  time:
   videos:
     form:
       event_info_heading: Event Info
