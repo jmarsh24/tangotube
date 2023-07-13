@@ -2,7 +2,6 @@
   - cache [params[:search], params[:category]] do
     - if search.results.present?
       - search.results.each do |type, result|
-        / h2.heading-2 = type.pluralize
         - case type
         - when "events"
           = link_to root_path(event: result.slug), class: 'search__result' do

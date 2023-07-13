@@ -33,7 +33,7 @@ class Search
   private
 
   def results_for_category(category)
-    results = get_results(MODELS[category]).includes(image_attachments(category))
+    results = get_results(MODELS[category]).includes(image_attachments(MODELS[category].to_s))
     results.any? ? map_results(category, results.sort_by(&:relevancy).reverse.take(DEFAULT_LIMIT)) : []
   end
 
