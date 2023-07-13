@@ -12,10 +12,10 @@ class VideoResource < Avo::BaseResource
   grid do
     cover :thumbnail, as: :file, is_image: true
     title :youtube_id, as: :text do
-      model.metadata.title
+      model.title
     end
     body :description, as: :text do
-      model.metadata.description
+      model.description
     end
   end
 
