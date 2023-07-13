@@ -31,7 +31,13 @@ class Event < ApplicationRecord
 
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :active, -> { where(active: true) }
-  scope :search, ->(term) { where("title ILIKE ? OR city ILIKE ? OR country ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%") }
+  scope :search, ->(term) {
+                   quoted_term = ActiveRecord::Base.connection.quote_string("%#{term}%")
+                   similarity_expr = Arel.sql("similarity(title, '#{quoted_term}') DESC")
+                   select("*, similarity(title, '#{quoted_term}') + (videos_count / 1000) as relevancy")
+                     .where("title ILIKE :term OR city ILIKE :term OR country ILIKE :term", term: "%#{term}%")
+                     .order(similarity_expr, relevancy: :desc)
+                 }
 
   def search_title
     return if title.empty?

@@ -1,59 +1,64 @@
 = turbo_frame_tag "search-results", target: "_top", class: "search__results scrollable-container__content"
   - cache [params[:search], params[:category]] do
     - if search.results.present?
-      - search.results.each do |type, results|
-        h2.heading-2 = type.pluralize
-        - results.each do |result|
-          - case result
-          - when Event
-            = link_to root_path(event: result.slug), class: 'search__result' do
-              - if result.profile_image.attached?
-                = image_tag result.profile_image, class: "search__result-image"
-              - else
-                = image_tag "default_avatar.jpg", class: "search__result-image"
-              .search__result-details
-                .search__result-title = result.title
-                .search__result-subtitle #{result.city}, #{result.country}
-          - when Song
-            = link_to root_path(song: result.slug), class: 'search__result' do
-              - if result&.orchestra&.profile_image&.attached?
-                = image_tag result.orchestra.profile_image, class: "search__result-image"
-              - else
-                = image_tag "default_avatar.jpg", class: "search__result-image"
-              .search__result-details
-                .search__result-title = result.full_title
-                .search__result-subtitle = result.artist
-          - when Orchestra
-            = link_to root_path(orchestra: result.slug), class: 'search__result' do
-              - if result.profile_image.attached?
-                = image_tag result.profile_image, class: "search__result-image"
-              - else
-                = image_tag "default_avatar.jpg", class: "search__result-image"
-              .search__result-details
-                .search__result-details__title = result.name
-          - when Channel
-            = link_to root_path(channel: result.channel_id), class: 'search__result' do
-              - if result.thumbnail.present?
-                = image_tag result.thumbnail, class: "search__result-image"
-              - else
-                = image_tag "default_avatar.jpg", class: "search__result-image"
-              .search__result-details
-                .search__result-title = result.title
-          - when Video
-            = link_to root_path(v: result.youtube_id), class: 'search__result' do
-              - if result.thumbnail.present?
-                = image_tag result.thumbnail, class: "search__result-image"
-              - else
-                = image_tag "default_avatar.jpg", class: "search__result-image"
-              .search__result-details
-                .search__result-title = result.title
-          - when Dancer
-            = link_to root_path(dancer: result.slug), class: 'search__result' do
-              - if result.profile_image.attached?
-                = image_tag result.profile_image, class: "search__result-image"
-              - else
-                = image_tag "default_avatar.jpg", class: "search__result-image"
-              .search__result-details
-                .search__result-title = result.name
-          - else
-            p No results found
+      - search.results.each do |type, result|
+        / h2.heading-2 = type.pluralize
+        - case type
+        - when "events"
+          = link_to root_path(event: result.slug), class: 'search__result' do
+            - if result.profile_image.attached?
+              = image_tag result.profile_image, class: "search__result-image"
+            - else
+              = image_tag "default_avatar.jpg", class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.title
+              .search__result-subtitle #{result.city}, #{result.country}
+              .search__results-type = type
+        - when "songs"
+          = link_to root_path(song: result.slug), class: 'search__result' do
+            - if result&.orchestra&.profile_image&.attached?
+              = image_tag result.orchestra.profile_image, class: "search__result-image"
+            - else
+              = image_tag "default_avatar.jpg", class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.full_title
+              .search__result-subtitle = result.artist
+              .search__results-type = type
+        - when "orchestras"
+          = link_to root_path(orchestra: result.slug), class: 'search__result' do
+            - if result.profile_image.attached?
+              = image_tag result.profile_image, class: "search__result-image"
+            - else
+              = image_tag "default_avatar.jpg", class: "search__result-image"
+            .search__result-details
+              .search__result-details__title = result.name
+              .search__results-type = type
+        - when "channels"
+          = link_to root_path(channel: result.channel_id), class: 'search__result' do
+            - if result.thumbnail.present?
+              = image_tag result.thumbnail, class: "search__result-image"
+            - else
+              = image_tag "default_avatar.jpg", class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.title
+              .search__results-type = type
+        - when "videos"
+          = link_to root_path(v: result.youtube_id), class: 'search__result' do
+            - if result.thumbnail.present?
+              = image_tag result.thumbnail, class: "search__result-image"
+            - else
+              = image_tag "default_avatar.jpg", class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.title
+              .search__results-type = type
+        - when "dancers"
+          = link_to root_path(dancer: result.slug), class: 'search__result' do
+            - if result.profile_image.attached?
+              = image_tag result.profile_image, class: "search__result-image"
+            - else
+              = image_tag "default_avatar.jpg", class: "search__result-image"
+            .search__result-details
+              .search__result-title = result.name
+              .search__results-type = type
+    - else
+      p No results found

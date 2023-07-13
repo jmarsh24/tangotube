@@ -36,7 +36,12 @@ class Channel < ApplicationRecord
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
-  scope :search, ->(term) { where("title ILIKE ?", "%#{term}%") }
+  scope :search, ->(term) {
+    quoted_term = ActiveRecord::Base.connection.quote_string("%#{term}%")
+    select("*, (videos_count/1000 * similarity(title, '#{quoted_term}')) as relevancy")
+      .where("title ILIKE :term OR title % :fuzzy_term", term: "%#{term}%", fuzzy_term: term)
+      .order("relevancy DESC")
+  }
   scope :most_popular, -> { order(videos_count: :desc) }
 
   def import_new_videos(use_scraper: false, use_music_recognizer: false)

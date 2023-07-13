@@ -27,7 +27,12 @@ class Orchestra < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-  scope :search, ->(term) { where("name ILIKE ?", "%#{term}%") }
+  scope :search, ->(term) {
+                   quoted_term = ActiveRecord::Base.connection.quote_string("%#{term}%")
+                   select("*, similarity(name, '#{quoted_term}') + (videos_count / 1000) as relevancy")
+                     .where("name % :term", term:)
+                     .order("relevancy DESC")
+                 }
 
   def to_param
     "#{id}-#{slug}"

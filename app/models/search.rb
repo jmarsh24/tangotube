@@ -7,10 +7,10 @@ class Search
     "songs" => Song,
     "channels" => Channel,
     "events" => Event,
-    "orchestra" => Orchestra,
+    "orchestras" => Orchestra,
     "videos" => Video,
     "dancers" => Dancer
-  }.freeze
+  }
 
   DEFAULT_LIMIT = 5
 
@@ -33,17 +33,14 @@ class Search
   private
 
   def results_for_category(category)
-    results = get_results(MODELS[category])
-    results.any? ? group_by_model(results.limit(DEFAULT_LIMIT)) : []
+    results = get_results(MODELS[category]).includes(image_attachments(category))
+    results.any? ? map_results(category, results.sort_by(&:relevancy).reverse.take(DEFAULT_LIMIT)) : []
   end
 
   def all_results
-    group_by_model(results_for_all_models(DEFAULT_LIMIT))
-  end
-
-  def results_for_all_models(limit)
-    models_with_results = MODELS.values.flat_map { |model| get_results(model).limit(limit) }
-    models_with_results.any? ? models_with_results : []
+    models_with_results = MODELS.values.flat_map { |model| get_results(model).includes(image_attachments(model)) }
+    results = models_with_results.reject(&:empty?)
+    results.any? ? map_results_all(results.flatten) : []
   end
 
   def get_results(model)
@@ -56,7 +53,34 @@ class Search
     end
   end
 
-  def group_by_model(results)
-    results.group_by { |result| result.class.name }
+  def map_results(category, results)
+    results.map { |result| [category, result] }
+  end
+
+  def map_results_all(results)
+    results.map { |result| [model_category(result), result] }
+  end
+
+  def model_category(record)
+    MODELS.invert[record.class]
+  end
+
+  def image_attachments(model)
+    case model.to_s
+    when "Event"
+      :profile_image_attachment
+    when "Song"
+      {orchestra: :profile_image_attachment}
+    when "Orchestra"
+      :profile_image_attachment
+    when "Channel"
+      :thumbnail_attachment
+    when "Video"
+      :thumbnail_attachment
+    when "Dancer"
+      :profile_image_attachment
+    else
+      []
+    end
   end
 end

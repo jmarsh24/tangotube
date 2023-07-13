@@ -35,7 +35,6 @@
 #  normalized_title    :string
 #
 class Video < ApplicationRecord
-  include Filterable
   include Indexable
 
   INDEX_QUERY = <<~SQL.squish.freeze
@@ -114,9 +113,12 @@ class Video < ApplicationRecord
                      .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
                  }
   scope :dancer, ->(value) {
-    joins(:dancers)
-      .where(dancers: {slug: value})
-  }
+                   result = joins(:dancers)
+                     .where(dancers: {slug: value})
+                   binding.pry
+                   puts result.to_sql
+                   result
+                 }
   scope :genre, ->(value) {
     subquery = Song.where("LOWER(genre) = ?", value.downcase).select(:id)
     where(song_id: subquery)

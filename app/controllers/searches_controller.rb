@@ -23,7 +23,7 @@ class SearchesController < ApplicationController
       ["Videos", "videos"],
       ["Dancers", "dancers"],
       ["Songs", "songs"],
-      ["Orchestra", "orchestra"],
+      ["Orchestras", "orchestras"],
       ["Channels", "channels"],
       ["Events", "events"]
     ]

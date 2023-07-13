@@ -45,28 +45,21 @@ class Song < ApplicationRecord
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(search_term) {
-    search_terms = search_term.split(" ").map { |term| TextNormalizer.normalize(term) }
-    quoted_search_terms = search_terms.map { |term| ActiveRecord::Base.connection.quote_string(term) }
+                   search_terms = search_term.split(" ").map { |term| TextNormalizer.normalize(term) }
+                   quoted_search_terms = search_terms.map { |term| ActiveRecord::Base.connection.quote_string(term) }
 
-    similarity_expr = search_terms.each_with_index.map do |term, index|
-      title_similarity = "similarity(title, '#{quoted_search_terms[index]}')"
-      artist_similarity = "similarity(artist, '#{quoted_search_terms[index]}')"
-      genre_similarity = "similarity(genre, '#{quoted_search_terms[index]}')"
+                   similarity_expr = search_terms.each_with_index.map do |term, index|
+                     title_similarity = "similarity(title, '#{quoted_search_terms[index]}') * 2"
+                     artist_similarity = "similarity(artist, '#{quoted_search_terms[index]}') * 1.5"
+                     genre_similarity = "similarity(genre, '#{quoted_search_terms[index]}')"
 
-      "#{title_similarity} * 2 + #{artist_similarity} * 1.5 + #{genre_similarity}"
-    end.join(" + ")
+                     "(#{title_similarity} + #{artist_similarity} + #{genre_similarity})"
+                   end.join(" + ")
 
-    search_conditions = search_terms.map { |term|
-      "(title % '#{term}' OR artist % '#{term}' OR genre % '#{term}')"
-    }.join(" OR ")
-
-    select_expr = "songs.*, #{similarity_expr} AS relevance_score"
-    order_expr = "relevance_score DESC, videos_count DESC"
-
-    where(search_conditions)
-      .select(select_expr)
-      .order(Arel.sql(order_expr))
-  }
+                   select("#{table_name}.*, (#{similarity_expr}) AS relevancy")
+                     .where(search_terms.map { |_term| "title ILIKE :term OR artist ILIKE :term OR genre ILIKE :term" }.join(" OR "), term: "%#{search_terms.first}%")
+                     .order("relevancy DESC")
+                 }
 
   def full_title
     title_part = title&.titleize

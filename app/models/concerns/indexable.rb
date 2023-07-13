@@ -34,12 +34,13 @@ module Indexable
     end
 
     scope :search, ->(terms) do
-      Array.wrap(terms)
-        .map { |term| remove_stop_words(term) }
-        .reduce(self) do |scope, term|
-          scope.where("word_similarity(?, index) > 0.3", "%#{term}%")
-        end
-    end
+                     Array.wrap(terms)
+                       .map { |term| remove_stop_words(term) }
+                       .reduce(self) do |scope, term|
+                         scope.select("*, word_similarity('#{ActiveRecord::Base.connection.quote_string(term)}', index) as relevancy")
+                           .where("word_similarity(?, index) > 0.3", "%#{term}%")
+                       end
+                   end
 
     def index!(now: false)
       self.class.index!(id, now:)
