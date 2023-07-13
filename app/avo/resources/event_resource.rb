@@ -2,7 +2,7 @@
 
 class EventResource < Avo::BaseResource
   self.title = :title
-  self.includes = [:videos]
+  self.includes = [:cover_image_attachment]
   self.search_query = -> {
     scope.ransack(
       title_cont: params[:q],
@@ -18,7 +18,7 @@ class EventResource < Avo::BaseResource
 
   field :id, as: :id
   field :title, as: :text, required: true
-  field :videos_count, read_only: true, sortable: true, hide_on: [:new, :edit]
+  field :videos_count, as: :number, only_on: :index, sortable: true, read_only: true
   field :dancers, as: :has_many
   field :city, as: :text, required: true
   field :country, as: :text, required: true
