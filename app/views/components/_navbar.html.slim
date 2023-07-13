@@ -14,7 +14,7 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
         - if current_user
           .dropdown data-controller="dropdown"
             button data-action="dropdown#toggle click@window->dropdown#hide"
-              = image_tag avatar_url_for(current_user), class: "avatar"
+              = image_tag current_user.avatar, width: 80, class: "avatar"
             .menu.menu--right.hidden data-dropdown-target="menu"
               = link_to edit_user_registration_path do
                 .menu-item = t("edit_profile")

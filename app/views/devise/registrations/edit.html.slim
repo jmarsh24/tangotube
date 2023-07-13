@@ -1,16 +1,15 @@
 .container.devise
-  = form_with model: resource, url: user_session_path, local: true, class: "stack" do |f|
+  = form_with model: resource, url: registration_path(resource_name), class: "stack" do |f|
     .stack.stack--xs.stack--tablet-xs
       .file-upload
         = f.file_field :avatar, class: "file-upload__input"
         label#drag_and_drop.file-upload__label for="avatar" = t(".drag_and_drop")
         .stack#replace_image
-          img.w-picker src=avatar_url_for(resource, width: 100)
+          = image_tag resource.avatar, width: 400, class: "w-picker"
           footer.stack.stack--line.stack--justify-right
             label.button.button--link.button--sm.button--tablet-md for="user_avatar" = t(".replace_image")
       = f.input :first_name, as: :string, autocomplete: "off", class: "input input__input input--text"
       = f.input :last_name, as: :string, autocomplete: "off", class: "input input__input input--text"
       = f.input :email, as: :email, class: "input input__input input--email"
-      = f.input :password, as: :password, class: "input input__input input--text"
+      / = f.input :password, as: :password, class: "input input__input input--text"
       = f.submit t(".save"), class: "button button--primary"
-

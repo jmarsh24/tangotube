@@ -4,21 +4,12 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include Shimmer::Consent
   include Shimmer::RemoteNavigation
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   default_form_builder Shimmer::Form::Builder
 
   helper_method :show_filter_bar?
 
   private
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password) }
-
-    devise_parameter_sanitizer.permit(:account_update) do |u|
-      u.permit(:first_name, :last_name, :email, :password, :current_password, :avatar)
-    end
-  end
 
   def paginated(scope, per: 10)
     @current_page = params[:page]&.to_i || 1

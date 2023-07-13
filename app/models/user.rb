@@ -33,9 +33,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_videos, through: :likes, source: :likeable, source_type: "Video"
 
-  has_one_attached :avatar do |attachable|
-    attachable.variant :thumb, resize_to_fill: [150, nil]
-  end
+  has_one_attached :avatar
 
   validates :first_name, presence: true
   validates :last_name, presence: true
