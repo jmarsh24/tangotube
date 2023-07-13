@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_151934) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
     t.integer "videos_count", default: 0
     t.index ["active"], name: "index_channels_on_active"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
-    t.index ["title"], name: "index_channels_on_title"
+    t.index ["title"], name: "index_channels_on_title_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["videos_count"], name: "index_channels_on_videos_count"
   end
 
@@ -165,8 +165,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
     t.boolean "reviewed", default: false
     t.integer "videos_count", default: 0, null: false
     t.string "slug"
+    t.index ["city"], name: "index_events_on_city_trigram", opclass: :gin_trgm_ops, using: :gin
+    t.index ["country"], name: "index_events_on_country_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["slug"], name: "index_events_on_slug", unique: true
-    t.index ["title"], name: "index_events_on_title", unique: true
+    t.index ["title"], name: "index_events_on_title_trigram", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "likes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
