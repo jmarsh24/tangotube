@@ -30,7 +30,7 @@ class Search
   end
 
   def allowed_models
-    ["song", "channel", "event", "orchestra", "video", "dancer"]
+    ["Song", "Channel", "Event", "Orchestra", "Video", "Dancer"]
   end
 
   def results_for_category
