@@ -112,13 +112,7 @@ class Video < ApplicationRecord
                      .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
                      .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
                  }
-  scope :dancer, ->(value) {
-                   result = joins(:dancers)
-                     .where(dancers: {slug: value})
-                   binding.pry
-                   puts result.to_sql
-                   result
-                 }
+  scope :dancer, ->(value) { joins(:dancers).where(dancers: {slug: value}) }
   scope :genre, ->(value) {
     subquery = Song.where("LOWER(genre) = ?", value.downcase).select(:id)
     where(song_id: subquery)
