@@ -20,12 +20,12 @@ class SearchesController < ApplicationController
   def search_categories_options
     [
       ["All", "all"],
-      ["Videos", "videos"],
-      ["Dancers", "dancers"],
-      ["Songs", "songs"],
-      ["Orchestras", "orchestras"],
-      ["Channels", "channels"],
-      ["Events", "events"]
+      ["Videos", "video"],
+      ["Dancers", "dancer"],
+      ["Songs", "song"],
+      ["Orchestras", "orchestra"],
+      ["Channels", "channel"],
+      ["Events", "event"]
     ]
   end
 end
