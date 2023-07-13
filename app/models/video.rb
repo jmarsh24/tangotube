@@ -156,7 +156,7 @@ class Video < ApplicationRecord
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
   scope :fuzzy_titles, ->(terms) do
                          terms = [terms] unless terms.is_a?(Array)
-                         query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.9", term]) }.join(" OR ")
+                         query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")
                          where(query)
                        end
   scope :most_popular, -> { order(click_count: :desc) }
