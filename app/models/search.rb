@@ -7,7 +7,8 @@ class Search
   Result = Struct.new(:type, :record, :score, keyword_init: true)
 
   def self.global(query)
-    sql = <<-SQL
+    sql =
+      <<-SQL
             (
         SELECT
           'channels' AS record_type,
@@ -66,10 +67,21 @@ class Search
           OR :query % artist
           OR :query % genre
       )
+      UNION
+      (
+        SELECT
+          'videos' AS record_type,
+          id AS record_id,
+          similarity(:query, index) AS score
+        FROM
+          videos
+        WHERE
+          index ILIKE '%' || :query || '%'
+      )
       ORDER BY
         score DESC
         LIMIT 10;
-    SQL
+      SQL
 
     ActiveRecord::Base.connection.exec_query(
       ActiveRecord::Base.sanitize_sql_array([sql, query:])
