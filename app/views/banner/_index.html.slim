@@ -1,4 +1,4 @@
-- if cookies[:banner_closed].blank?
+- if cookies[:banner_closed].blank? && !user_signed_in?
   #banner.banner
     = video_tag(["https://tangotube.s3.eu-central-1.amazonaws.com/banner.mp4","https://tangotube.s3.eu-central-1.amazonaws.com/banner.webm"], poster: asset_path("hero_video_preview.jpg"), loop: true, muted: true, playsinline: true, autoplay: true, class: "banner__video")
     .banner__card.stack.stack--md
