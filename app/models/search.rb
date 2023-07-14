@@ -92,20 +92,28 @@ class Search
   private
 
   def load_records(records)
+    records_grouped_by_type = records.group_by { |record| record["record_type"] }
+
     results = []
-    records.each do |record|
-      type = record["record_type"].singularize
-      id = record["record_id"]
-      score = record["score"]
+    records_grouped_by_type.each do |type, records|
+      klass = type.singularize.classify.constantize
 
-      # Load the record of this type if it hasn't been loaded yet
-      loaded_record = type.classify.constantize.find_by(id:)
-      next unless loaded_record
+      ids = records.map { |record| record["record_id"] }
 
-      # Create a result struct and add it to the results array
-      result = Result.new(type:, record: loaded_record, score:)
-      results << result
+      includes = includes_for_type(type)
+
+      loaded_records = klass.includes(includes).where(id: ids)
+
+      records.each do |record|
+        loaded_record = loaded_records.find { |lr| lr.id == record["record_id"] }
+        next unless loaded_record
+
+        score = record["score"]
+        result = Result.new(type: type.singularize, record: loaded_record, score:)
+        results << result
+      end
     end
+
     results
   end
 
@@ -148,19 +156,19 @@ class Search
     results.map { |result| [result.class.to_s.downcase, result] }
   end
 
-  def image_attachments(model_name)
-    case model_name
-    when "Event"
+  def includes_for_type(type)
+    case type
+    when "events"
       :profile_image_attachment
-    when "Song"
+    when "songs"
       {orchestra: :profile_image_attachment}
-    when "Orchestra"
+    when "orchestras"
       :profile_image_attachment
-    when "Channel"
+    when "channels"
       :thumbnail_attachment
-    when "Video"
+    when "videos"
       :thumbnail_attachment
-    when "Dancer"
+    when "dancers"
       :profile_image_attachment
     else
       []
