@@ -134,7 +134,7 @@ class Search
 
   def results_for_category
     model = category.to_s.classify.constantize
-    results = query.present? ? model.search(query) : model.most_popular
+    results = query.present? ? model.search(query) : model.most_popular.includes(includes_for_type(category))
     if results.any?
       results = results.take(DEFAULT_LIMIT)
       results.map do |record|
@@ -142,7 +142,7 @@ class Search
         Result.new(type: category.to_s.downcase.singularize, record:, score:)
       end
     elsif model.respond_to?(:most_popular)
-      model.most_popular
+      model.most_popular.includes(includes_for_type(category))
     else
       []
     end
@@ -151,7 +151,7 @@ class Search
   def most_popular_results
     allowed_models.map { |m| m.singularize.camelize.constantize }.flat_map do |model|
       next unless model.respond_to?(:most_popular)
-      model.most_popular.take(DEFAULT_LIMIT).map do |record|
+      model.most_popular.includes(includes_for_type(model.to_s)).take(DEFAULT_LIMIT).map do |record|
         Result.new(type: model.to_s.downcase.singularize, record:, score: nil)
       end
     end.flatten
