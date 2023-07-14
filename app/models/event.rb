@@ -31,10 +31,11 @@ class Event < ApplicationRecord
 
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :active, -> { where(active: true) }
-  scope :search, ->(term) {
-                   quoted_term = ActiveRecord::Base.connection.quote_string(term)
-                   select("*, (similarity (title, '#{quoted_term}') * 0.3 + similarity (city, '#{quoted_term}') * 0.1 + similarity (country, '#{quoted_term}') * 0.1 + videos_count / 1000 * 0.2) AS score")
-                     .where(":term % title OR :term % city OR :term % country ", term:)
+  scope :search, ->(query) {
+                   normalized_query = TextNormalizer.normalize(query)
+                   quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
+                   select("*, (similarity (title, '#{quoted_query}') * 0.3 + similarity (city, '#{quoted_query}') * 0.1 + similarity (country, '#{quoted_query}') * 0.1 + videos_count / 1000 * 0.2) AS score")
+                     .where(":query % title OR :query % city OR :query % country ", query: normalized_query)
                      .order("score DESC")
                  }
 
