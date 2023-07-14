@@ -57,9 +57,6 @@ Rails.application.routes.draw do
   # Like routes
   resources :likes, only: [:create, :destroy]
 
-  # Playlist, Clip, Couple, Orchestra, Performance routes
-  resources :playlists, :clips, :couples, :orchestras, :performances, only: [:index, :show, :create]
-
   resources :files, only: :show, controller: "shimmer/files"
 
   # Webhook and Search Suggestion routes
