@@ -40,7 +40,7 @@ class Dancer < ApplicationRecord
   scope :unreviewed, -> { where(reviewed: false) }
   scope :search, ->(name) {
                    quoted_name = ActiveRecord::Base.connection.quote_string(name)
-                   select("dancers.*, (videos_count / 1000 + similarity(name, '#{quoted_name}')) as score")
+                   select("*, ((videos_count / 1000) + similarity(name, '#{quoted_name}') *.3) as score")
                      .where("? % name", name)
                      .order("score DESC")
                  }

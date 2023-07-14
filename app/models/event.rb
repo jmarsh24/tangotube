@@ -32,11 +32,10 @@ class Event < ApplicationRecord
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :active, -> { where(active: true) }
   scope :search, ->(term) {
-                   quoted_term = ActiveRecord::Base.connection.quote_string("%#{term}%")
-                   similarity_expr = Arel.sql("similarity(title, '#{quoted_term}') DESC")
-                   select("*, similarity(title, '#{quoted_term}') + (videos_count / 1000) as relevancy")
-                     .where("title ILIKE :term OR city ILIKE :term OR country ILIKE :term", term: "%#{term}%")
-                     .order(similarity_expr, relevancy: :desc)
+                   quoted_term = ActiveRecord::Base.connection.quote_string(term)
+                   select("*, (similarity (title, '#{quoted_term}') * 0.3 + similarity (city, '#{quoted_term}') * 0.1 + similarity (country, '#{quoted_term}') * 0.1 + videos_count / 1000 * 0.2) AS score")
+                     .where(":term % title OR :term % city OR :term % country ", term:)
+                     .order("score DESC")
                  }
 
   def search_title

@@ -60,6 +60,25 @@ class Song < ApplicationRecord
                      .where(search_terms.map { |_term| "title ILIKE :term OR artist ILIKE :term OR genre ILIKE :term" }.join(" OR "), term: "%#{search_terms.first}%")
                      .order("relevancy DESC")
                  }
+  scope :search, ->(search_term) {
+                   search_terms = search_term.split(" ").map { |term| TextNormalizer.normalize(term) }
+                   quoted_search_terms = search_terms.map { |term| ActiveRecord::Base.connection.quote_string(term) }
+
+                   similarity_expr = search_terms.each_with_index.map do |term, index|
+                     title_similarity = "similarity(title, '#{quoted_search_terms[index]}') * .4"
+                     artist_similarity = "similarity(artist, '#{quoted_search_terms[index]}') * .3"
+                     genre_similarity = "similarity(genre, '#{quoted_search_terms[index]}')"
+
+                     "(#{title_similarity} + #{artist_similarity} + #{genre_similarity})"
+                   end.join(" + ")
+
+                   where_clause = search_terms.map { |term| "(:term % title OR :term % artist OR :term % genre)" }.join(" OR ")
+                   where_args = search_terms.map { |term| ["term", "%#{term}%"] }.to_h
+
+                   select("#{table_name}.*, (#{similarity_expr}) AS score")
+                     .where(where_clause, where_args)
+                     .order("score DESC")
+                 }
 
   def full_title
     title_part = title&.titleize
