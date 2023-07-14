@@ -17,7 +17,6 @@ class Search
           channels
         WHERE
           :query % title
-          OR 'sarli' % title
       )
       UNION 
       (
@@ -29,7 +28,6 @@ class Search
           dancers
         WHERE
           :query % name
-          OR 'sarli' % name
       )
       UNION 
       (
@@ -54,7 +52,6 @@ class Search
           orchestras
         WHERE
           :query % name
-          OR 'sarli' % name
       )
       UNION 
       (
