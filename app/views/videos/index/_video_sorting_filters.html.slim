@@ -1,10 +1,12 @@
 .navbar__filters id="filter-bar" class="scrollable-bar"
   - active_filters = @filtering_params.to_h.count
-  = link_to "All", root_path(filtering: true), class: ["filter-chip", ("active" if @filtering_params.empty?)]
-  = link_to modal_path(filters_videos_path(@filtering_params)), class: ["filter-chip ", ("active" if @filtering_params.present?)] do
-    .filter-chip__filter-lines
-    - if active_filters > 0
-      .filter-chip__count = active_filters
+  .dropdown data-controller="dropdown"
+    button data-action="dropdown#toggle click@window->dropdown#hide" class="filter-chip" class=("active" if @filtering_params.present?)
+      .filter-chip__filter-lines
+        - if active_filters > 0
+          .filter-chip__count = active_filters
+    .menu.menu--left data-dropdown-target="menu"
+      = link_to t(".clear_all_filters"), root_path(filtering: true), class: "menu-item" 
   - filter_chips = []
 
   - if @filtering_params.present? || params[:sort].present?
