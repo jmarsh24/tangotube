@@ -37,8 +37,8 @@ module Indexable
                      Array.wrap(terms)
                        .map { |term| remove_stop_words(term) }
                        .reduce(self) do |scope, term|
-                         scope.select("*, similarity('#{ActiveRecord::Base.connection.quote_string(term)}', index) as relevancy")
-                           .where("similarity(?, index) > 0.3", "%#{term}%")
+                         scope.select("*, similarity('#{ActiveRecord::Base.connection.quote_string(term)}', index) as score")
+                           .where("index ILIKE ?", "%#{term}%")
                        end
                    end
 
