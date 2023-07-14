@@ -3,7 +3,7 @@
 class Search
   attr_reader :query, :category
 
-  DEFAULT_LIMIT = 5
+  DEFAULT_LIMIT = 50
   Result = Struct.new(:type, :record, :score, keyword_init: true)
 
   def self.global(query)
