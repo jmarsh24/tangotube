@@ -26,4 +26,5 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
         - else
           = link_to t("login"), new_user_session_path, class: "button button--primary"
   - if show_filter_bar?
-    = render partial: "videos/index/video_sorting_filters"
+    .stack.stack--justify-center.navbar__bottom
+      = render partial: "videos/index/video_sorting_filters"

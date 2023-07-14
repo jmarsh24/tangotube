@@ -21,5 +21,5 @@
         = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_event, header: t(".recommended_from_event", event_title: @video.event.title) } if @video.event.present?
       - cache [@video.youtube_id, "with_same_song"] do
         = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_song, header: t(".recommended_videos_song", song_title: @video.song.title.titleize, song_artist: @video.song.artist.titleize) } if @video.song.present?
-      / - cache [@video.youtube_id, "with_same_channel"] do
-        / = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_channel, header: t(".recommended_videos_same_channel", channel_title: @video.channel.title) }
+      - cache [@video.youtube_id, "with_same_channel"] do
+        = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_channel, header: t(".recommended_videos_same_channel", channel_title: @video.channel.title) }
