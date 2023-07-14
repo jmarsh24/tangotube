@@ -1,7 +1,6 @@
 .navbar__filters id="filter-bar" class="scrollable-bar"
   - active_filters = @filtering_params.to_h.count
-  = link_to "All", root_path(filtering: true), class: ["filter-chip", ("active" if @filtering_params.empty?)]
-  = link_to modal_path(filters_videos_path(@filtering_params)), class: ["filter-chip ", ("active" if @filtering_params.present?)] do
+  = link_to root_path(filtering: true), class: ["filter-chip ", ("active" if @filtering_params.present?)] do
     .filter-chip__filter-lines
     - if active_filters > 0
       .filter-chip__count = active_filters

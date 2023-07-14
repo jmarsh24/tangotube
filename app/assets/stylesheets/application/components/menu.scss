@@ -18,17 +18,4 @@
   &.hidden {
     display: none;
   }
-
-  @include breakpoint-tablet {
-    #filters {
-      position: unset;
-      background-color: unset;
-      margin-top: unset;
-      display: block !important;
-
-      #menu-additional-filters {
-        display: none;
-      }
-    }
-  }
 }
