@@ -29,7 +29,7 @@ class Video::FacetBuilder
         .where(dancer_videos: {role: "leader", video_id: @video_relation.select(:id)})
         .group("dancers.name", "dancers.slug", "dancers.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
-        .limit(10)
+        .limit(30)
         .count
     end
   end
@@ -40,7 +40,7 @@ class Video::FacetBuilder
         .where(dancer_videos: {role: "follower", video_id: @video_relation.select(:id)})
         .group("dancers.name", "dancers.slug", "dancers.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
-        .limit(10)
+        .limit(30)
         .count
     end
   end
@@ -51,7 +51,7 @@ class Video::FacetBuilder
         .joins(song: :orchestra)
         .group("orchestras.name", "orchestras.slug", "orchestras.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "orchestras.videos_count DESC")
-        .limit(10)
+        .limit(30)
         .count
     end
   end
@@ -63,7 +63,7 @@ class Video::FacetBuilder
         .where("LOWER(songs.genre) IN ('tango', 'milonga', 'vals')")
         .group("LOWER(songs.genre)")
         .order("count_all DESC", "LOWER(songs.genre)")
-        .limit(10)
+        .limit(30)
         .count
     end
   end
@@ -73,7 +73,7 @@ class Video::FacetBuilder
       @video_relation
         .group(:upload_date_year)
         .order("count_all DESC", upload_date_year: :desc)
-        .limit(10)
+        .limit(30)
         .count
     end
   end
@@ -84,7 +84,7 @@ class Video::FacetBuilder
         .joins(song: :orchestra)
         .group("songs.display_title", "songs.slug", "songs.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "songs.videos_count DESC")
-        .limit(10)
+        .limit(30)
         .count
     end
   end
@@ -95,7 +95,7 @@ class Video::FacetBuilder
         .joins(:event)
         .group("events.title", "events.slug", "events.videos_count")
         .order("count_all DESC", "events.title")
-        .limit(10)
+        .limit(30)
         .count
     end
   end
