@@ -27,11 +27,11 @@ class Orchestra < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-  scope :search, ->(term) {
-                   quoted_term = ActiveRecord::Base.connection.quote_string("%#{term}%")
-                   select("*, similarity(name, '#{quoted_term}') + (videos_count / 1000) as relevancy")
-                     .where("name % :term", term:)
-                     .order("relevancy DESC")
+  scope :search, ->(name) {
+                   quoted_name = ActiveRecord::Base.connection.quote_string(name)
+                   select("*, similarity(name, '#{quoted_name}') + (videos_count / 1000) as score")
+                     .where("? % name", name)
+                     .order("score DESC")
                  }
 
   def to_param
