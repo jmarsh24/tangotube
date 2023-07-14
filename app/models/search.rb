@@ -82,8 +82,10 @@ class Search
   end
 
   def results
+    return most_popular_results if query.blank?
+
     @results ||=
-      if category == "all"
+      if category == "all" && query.present?
         load_records(Search.global(query))
       else
         results_for_category
@@ -132,38 +134,27 @@ class Search
 
   def results_for_category
     model = category.to_s.classify.constantize
-    results = model.search(query)
+    results = query.present? ? model.search(query) : model.most_popular
     if results.any?
       results = results.take(DEFAULT_LIMIT)
       results.map do |record|
         score = record.try(:score) || 0
         Result.new(type: category.to_s.downcase.singularize, record:, score:)
       end
+    elsif model.respond_to?(:most_popular)
+      model.most_popular
     else
       []
     end
   end
 
-  def all_results
-    models_with_results = allowed_models.map(&:constantize).flat_map { |model| get_results(model).includes(image_attachments(model.to_s)) }
-    results = models_with_results.reject(&:empty?)
-    results.any? ? map_results_all(results.flatten) : []
-  end
-
-  def get_results(model)
-    if query.present?
-      model.search(query)
-    else
-      model.most_popular
-    end
-  end
-
-  def map_results(category, results)
-    results.map { |result| [category, result] }
-  end
-
-  def map_results_all(results)
-    results.map { |result| [result.class.to_s.downcase, result] }
+  def most_popular_results
+    allowed_models.map { |m| m.singularize.camelize.constantize }.flat_map do |model|
+      next unless model.respond_to?(:most_popular)
+      model.most_popular.take(DEFAULT_LIMIT).map do |record|
+        Result.new(type: model.to_s.downcase.singularize, record:, score: nil)
+      end
+    end.flatten
   end
 
   def includes_for_type(type)

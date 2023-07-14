@@ -35,6 +35,8 @@ class Orchestra < ApplicationRecord
                      .order("score DESC")
                  }
 
+  scope :most_popular, -> { order(videos_count: :desc) }
+
   def to_param
     "#{id}-#{slug}"
   end
