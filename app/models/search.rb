@@ -146,7 +146,9 @@ class Search
 
   def results_for_category
     model = category.to_s.classify.constantize
-    results = query.present? ? model.search(query) : model.most_popular.includes(includes_for_type(category))
+    includes = includes_for_type(category.to_s)
+
+    results = query.present? ? model.search(query).includes(includes) : model.most_popular.includes(includes)
     if results.any?
       results = results.take(DEFAULT_LIMIT)
       results.map do |record|
@@ -154,7 +156,7 @@ class Search
         Result.new(type: category.to_s.downcase.singularize, record:, score:)
       end
     elsif model.respond_to?(:most_popular)
-      model.most_popular.includes(includes_for_type(category))
+      model.most_popular.includes(includes)
     else
       []
     end
@@ -172,17 +174,15 @@ class Search
   def includes_for_type(type)
     case type
     when "events"
-      :profile_image_attachment
+      {profile_image_attachment: :blob}
     when "songs"
-      {orchestra: :profile_image_attachment}
+      {orchestra: {profile_image_attachment: :blob}}
     when "orchestras"
-      :profile_image_attachment
-    when "channels"
-      :thumbnail_attachment
-    when "videos"
-      :thumbnail_attachment
+      {profile_image_attachment: :blob}
+    when "channels", "videos"
+      {thumbnail_attachment: :blob}
     when "dancers"
-      :profile_image_attachment
+      {profile_image_attachment: :blob}
     else
       []
     end
