@@ -26,7 +26,7 @@ $icon-sizes: (
   }
 
   &--white {
-    color: var(--color-neutral-0);
+    color: white;
   }
 
   &--neutral {
@@ -34,6 +34,6 @@ $icon-sizes: (
   }
 
   &--black {
-    color: var(--color-neutral-1000);
+    color: black;
   }
 }
