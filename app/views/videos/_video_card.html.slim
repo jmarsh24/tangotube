@@ -3,10 +3,10 @@
     - thumbnail = video.thumbnail.attached? ? video.thumbnail : "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
     - if video.youtube_id == @video.youtube_id
       - if video.youtube_id == @video.youtube_id
-      = image_tag thumbnail
+      = image_tag thumbnail, width: 400
     - else
       = link_to watch_path(v: video.youtube_id) do
-        = image_tag thumbnail
+        = image_tag thumbnail, width: 400
   .video-card__content
     .video-card__primary
       .video-card__title = video.title
