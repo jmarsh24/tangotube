@@ -12,7 +12,6 @@
       cron: "0 0 * * 1" # Runs every Monday at 00:00
       class: ImportNewVideosForAllChannelsJob
       queue: default
-      enabled: false
       args:
         use_scraper: true
         use_music_recognizer: false
@@ -20,7 +19,6 @@
       cron: "0 0 * * 1" # Runs every Monday at 00:00
       class: ImportNewVideosForAllChannelsJob
       queue: default
-      enabled: false
       args:
         use_scraper: false
         use_music_recognizer: true
@@ -28,7 +26,6 @@
       cron: "0 0 * * 1" # Runs every Monday at 00:00
       class: ImportNewVideosForAllChannelsJob
       queue: default
-      enabled: false
       args:
         use_scraper: true
         use_music_recognizer: true
@@ -36,7 +33,6 @@
       cron: "0 0 * * 1" # Runs every Monday at 00:00
       class: ImportNewVideosForAllChannelsJob
       queue: default
-      enabled: false
       args:
         use_scraper: false
         use_music_recognizer: false
@@ -44,17 +40,14 @@
       cron: "0 0 * * *" # Runs daily at 00:00
       class: UpdateUnrecognizedMusicVideosJob
       queue: default
-      enabled: false
     enqueue_update_active_channels_job:
       cron: "0 0 * * *" # Runs daily at 00:00
       class: UpdateActiveChannelsJob
       queue: default
-      enabled: false
     index_videos:
       every: ["2h"]
       class: IndexVideosJob
       queue: default
-      enabled: false
     sitemap:
       cron: "0 0 12 * * * Europe/Berlin" # every day at 16:00, Berlin time
       class: Shimmer::SitemapJob
