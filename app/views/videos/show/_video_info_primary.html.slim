@@ -1,4 +1,4 @@
-- cache [video.youtube_id, video.dancers, video.song, video.title], expires_in: 24.hours do
+= cache [video.youtube_id, video.dancer_ids, video.song, video.title], expires_in: 24.hours do
   .video-info-primary
     .stack.stack--xs
       .stack.stack--xxs
@@ -6,7 +6,7 @@
         .video-info-primary__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
       .stack.stack--xxs.stack--justify-left
         .scrollable-tags.scrollable-tags--small
-          - video.dancer_videos.each do |dv|
+          - video.dancer_videos.includes(:dancer).each do |dv|
             - if dv.role == "leader"
               = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
             - elsif dv.role == "follower"

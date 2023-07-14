@@ -21,9 +21,9 @@ class VideosController < ApplicationController
     end
 
     @videos = if @featured_videos.present?
-      paginated(@search.videos.not_featured.includes(Video.search_includes), per: 12)
+      paginated(@search.videos.not_hidden.not_featured.includes(Video.search_includes), per: 12)
     else
-      paginated(@search.videos.includes(Video.search_includes), per: 12)
+      paginated(@search.videos.not_hidden.includes(Video.search_includes), per: 12)
     end
 
     if params[:filtering] == "true" && params[:pagination].nil?
@@ -48,6 +48,7 @@ class VideosController < ApplicationController
     if @video.nil?
       ExternalVideoImport::Importer.new.import(params[:v])
       @video = Video.find_by(youtube_id: params[:v])
+      @dancer_videos = @video.dancer_videos.to_a
     end
 
     @related_videos = Video::RelatedVideos.new(@video)
