@@ -38,11 +38,11 @@ class Dancer < ApplicationRecord
 
   scope :reviewed, -> { where(reviewed: true) }
   scope :unreviewed, -> { where(reviewed: false) }
-  scope :search, ->(name, min_score: 0.1) {
+  scope :search, ->(name) {
                    quoted_name = ActiveRecord::Base.connection.quote_string(name)
-                   select("dancers.*, (videos_count / 1000 + similarity(name, '#{quoted_name}')) as relevancy")
-                     .where("name ILIKE :prefix_name AND similarity(name, '#{quoted_name}') >= :min_score", prefix_name: "#{name}%", min_score:)
-                     .order("relevancy DESC")
+                   select("dancers.*, (videos_count / 1000 + similarity(name, '#{quoted_name}')) as score")
+                     .where("? % name", name)
+                     .order("score DESC")
                  }
   scope :most_popular, -> { order(videos_count: :desc) }
 

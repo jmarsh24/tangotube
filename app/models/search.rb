@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Search
-  attr_reader :term, :category
+  attr_reader :query, :category
 
   DEFAULT_LIMIT = 5
   Result = Struct.new(:type, :record, :score, keyword_init: true)
@@ -67,7 +67,8 @@ class Search
           OR :query % genre
       )
       ORDER BY
-        score DESC;
+        score DESC
+        LIMIT 10;
     SQL
 
     ActiveRecord::Base.connection.exec_query(
@@ -75,15 +76,15 @@ class Search
     )
   end
 
-  def initialize(term:, category: "all")
-    @term = term
+  def initialize(query:, category: "all")
+    @query = query
     @category = allowed_category(category)
   end
 
   def results
     @results ||=
       if category == "all"
-        load_records(Search.global(term))
+        load_records(Search.global(query))
       else
         results_for_category
       end
@@ -126,12 +127,21 @@ class Search
   end
 
   def allowed_models
-    ["Song", "Channel", "Event", "Orchestra", "Video", "Dancer"]
+    ["song", "channel", "event", "orchestra", "video", "dancer"]
   end
 
   def results_for_category
-    results = get_results(category).includes(image_attachments(category.to_s))
-    results.any? ? map_results(category.to_s.downcase, results.sort_by(&:relevancy).reverse.take(DEFAULT_LIMIT)) : []
+    model = category.to_s.classify.constantize
+    results = model.search(query)
+    if results.any?
+      results = results.take(DEFAULT_LIMIT)
+      results.map do |record|
+        score = record.try(:score) || 0
+        Result.new(type: category.to_s.downcase.singularize, record:, score:)
+      end
+    else
+      []
+    end
   end
 
   def all_results
@@ -141,8 +151,8 @@ class Search
   end
 
   def get_results(model)
-    if term.present?
-      model.search(term)
+    if query.present?
+      model.search(query)
     else
       model.most_popular
     end

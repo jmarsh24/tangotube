@@ -10,7 +10,7 @@ class SearchesController < ApplicationController
   def show
     selected_category = params[:category] || "all"
     categories = search_categories_options
-    results = Search.new(term: params[:search], category: selected_category).results
+    results = Search.new(query: params[:query], category: selected_category).results
     ui.replace("search-results", with: "searches/results", results:)
     ui.replace("search-header-categories", with: "searches/categories", selected_category:, categories:)
   end
