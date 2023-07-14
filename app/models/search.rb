@@ -80,7 +80,7 @@ class Search
       )
       ORDER BY
         score DESC
-        LIMIT 10;
+        LIMIT 100;
       SQL
 
     ActiveRecord::Base.connection.exec_query(
