@@ -58,6 +58,9 @@
     width: 100%;
     padding: var(--spacing-xxs) var(--spacing-xs);
     max-width: var(--page-main-max-width);
+  }
+
+  &__bottom {
     background-color: var(--color-neutral-0);
   }
 
