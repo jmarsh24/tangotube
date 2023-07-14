@@ -45,20 +45,16 @@ class Video < ApplicationRecord
         videos.id,
         LOWER(
           CONCAT_WS(' ',
-            MIN(normalize(dancers.first_name)),
-            MIN(normalize(dancers.last_name)),
-            MIN(normalize(channels.channel_id)),
-            MIN(normalize(channels.title)),
-            MIN(normalize(songs.title)),
-            MIN(normalize(songs.genre)),
-            MIN(normalize(songs.artist)),
-            MIN(normalize(orchestras.name)),
-            MIN(normalize(events.city)),
-            MIN(normalize(events.title)),
-            MIN(normalize(events.country)),
-            normalize(videos.youtube_id),
-            normalize(videos.title),
-            normalize(videos.description)
+            STRING_AGG(normalize(dancers.name), ' '),
+            STRING_AGG(normalize(channels.title), ' '),
+            STRING_AGG(normalize(songs.title), ' '),
+            STRING_AGG(normalize(songs.artist), ' '),
+            STRING_AGG(normalize(orchestras.name), ' '),
+            STRING_AGG(normalize(events.city), ' '),
+            STRING_AGG(normalize(events.title), ' '),
+            STRING_AGG(normalize(events.country), ' '),
+            videos.youtube_id,
+            normalize(videos.title)
           )
         ) AS index
       FROM videos
@@ -68,7 +64,7 @@ class Video < ApplicationRecord
       LEFT JOIN dancer_videos ON dancer_videos.video_id = videos.id
       LEFT JOIN dancers ON dancers.id = dancer_videos.dancer_id
       LEFT JOIN orchestras ON orchestras.id = songs.orchestra_id
-      GROUP BY videos.id
+      GROUP BY videos.id, videos.youtube_id
     ) AS query
     WHERE videos.id IN (?) AND query.id = videos.id
   SQL
