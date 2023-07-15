@@ -85,6 +85,7 @@ group :development, :test do
   gem "i18n-tasks"
   gem "chusaku", require: false
   gem "capybara-screenshot-diff"
+  gem "bullet"
 end
 
 group :test do
@@ -108,5 +109,4 @@ group :development do
   gem "rubocop-rspec"
   gem "rubocop-rake"
   gem "mrsk"
-  gem "bullet"
 end

@@ -1,4 +1,4 @@
-:concurrency: 10
+:concurrency: 3
 :queues:
   - dispatch
   - default
@@ -8,13 +8,6 @@
   - active_storage_purge
 :scheduler:
   :schedule:
-    enqueue_channel_video_fetcher_for_all_channels_with_scraper:
-      cron: "0 0 * * 1" # Runs every Monday at 00:00
-      class: ImportNewVideosForAllChannelsJob
-      queue: default
-      args:
-        use_scraper: true
-        use_music_recognizer: false
     enqueue_channel_video_fetcher_for_all_channels_with_music_recognizer:
       cron: "0 0 * * 1" # Runs every Monday at 00:00
       class: ImportNewVideosForAllChannelsJob
@@ -22,14 +15,7 @@
       args:
         use_scraper: false
         use_music_recognizer: true
-    enqueue_channel_video_fetcher_for_all_channels_with_both:
-      cron: "0 0 * * 1" # Runs every Monday at 00:00
-      class: ImportNewVideosForAllChannelsJob
-      queue: default
-      args:
-        use_scraper: true
-        use_music_recognizer: true
-    enqueue_channel_video_fetcher_for_all_channels_without_both:
+    enqueue_channel_video_fetcher_for_all_channels_without_music_recognizer:
       cron: "0 0 * * 1" # Runs every Monday at 00:00
       class: ImportNewVideosForAllChannelsJob
       queue: default
