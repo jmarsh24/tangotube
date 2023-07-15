@@ -397,6 +397,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_105437) do
   add_index "video_searches", ["songs_artist"], name: "index_video_searches_on_songs_artist", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["songs_title"], name: "index_video_searches_on_songs_title", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["upload_date"], name: "index_video_searches_on_upload_date"
+  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
   add_index "video_searches", ["videos_title"], name: "index_video_searches_on_videos_title", opclass: :gist_trgm_ops, using: :gist
 
 end
