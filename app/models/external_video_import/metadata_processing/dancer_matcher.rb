@@ -22,10 +22,12 @@ module ExternalVideoImport
       def find_dancers(video_title)
         normalized_title = TextNormalizer.normalize(video_title)
         dancer_id_names = Dancer.all.pluck(:id, :name, :nick_name)
-        dancer_id_names.map! { |id, name, nick_name| [id, TextNormalizer.normalize(name), nick_name.map { |nick_name| TextNormalizer.normalize(nick_name) }] }
+        dancer_id_names.map! do |id, name, nick_name|
+          [id, TextNormalizer.normalize(name), nick_name&.map { |nick| TextNormalizer.normalize(nick) }]
+        end
         dancer_ids = []
-        dancer_id_names.each do |id, name, nick_name|
-          nick_name.each do |nick_name|
+        dancer_id_names.each do |id, name, nick_names|
+          nick_names&.each do |nick_name|
             ratio = FuzzyText.new.trigram_score(needle: nick_name, haystack: normalized_title)
             dancer_ids << id if ratio > MATCH_THRESHOLD
           end
