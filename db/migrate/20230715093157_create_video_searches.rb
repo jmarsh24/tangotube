@@ -12,5 +12,6 @@ class CreateVideoSearches < ActiveRecord::Migration[7.0]
     add_index :video_searches, :videos_title, using: :gist, opclass: :gist_trgm_ops
     add_index :video_searches, :click_count
     add_index :video_searches, :upload_date
+    add_index :video_searches, :video_id, unique: true
   end
 end
