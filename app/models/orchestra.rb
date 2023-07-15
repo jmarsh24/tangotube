@@ -27,7 +27,6 @@ class Orchestra < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-<<<<<<< HEAD
   scope :search, ->(query) {
                    normalized_query = TextNormalizer.normalize(query)
                    quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
@@ -36,9 +35,6 @@ class Orchestra < ApplicationRecord
                      .order("score DESC")
                  }
 
-=======
-  scope :search, ->(term) { where("name ILIKE ?", "%#{term}%") }
->>>>>>> main
   scope :most_popular, -> { order(videos_count: :desc) }
 
   def to_param
