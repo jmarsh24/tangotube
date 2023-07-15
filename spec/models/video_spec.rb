@@ -248,13 +248,14 @@ RSpec.describe Video do
 
   describe ".search" do
     it "returns videos that match the search term" do
-      Video.all.each do |video|
-        video.index!(now: true)
-      end
-      mispelled_search = Video.search("carlito espnosa")
+      VideoSearch.refresh
 
-      expect(mispelled_search).to include(videos(:video_1_featured), videos(:video_4_featured))
-      expect(mispelled_search).not_to include(videos(:video_2_featured))
+      mispelled_search = Video.search("carlitos espnosa")
+
+      video_ids = mispelled_search.map(&:id)
+
+      expect(video_ids).to include(videos(:video_1_featured).id, videos(:video_4_featured).id)
+      expect(video_ids).not_to include(videos(:video_2_featured).id)
     end
   end
 
