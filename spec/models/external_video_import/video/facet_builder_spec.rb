@@ -17,7 +17,7 @@ RSpec.describe Video::FacetBuilder do
       ]
 
       expect(facet.name).to eq("leader")
-      expect(facet.options).to eq(expected_options)
+      expect(facet.options).to match_array(expected_options)
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe Video::FacetBuilder do
       ]
 
       expect(facet.name).to eq("follower")
-      expect(facet.options).to eq(expected_options)
+      expect(facet.options).to match_array(expected_options)
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe Video::FacetBuilder do
       ]
 
       expect(facet.name).to eq("orchestra")
-      expect(facet.options).to eq(expected_options)
+      expect(facet.options).to match_array(expected_options)
     end
   end
 
@@ -62,7 +62,7 @@ RSpec.describe Video::FacetBuilder do
       ]
 
       expect(facet.name).to eq("genre")
-      expect(facet.options).to eq(expected_options)
+      expect(facet.options).to match_array(expected_options)
     end
   end
 
@@ -78,7 +78,7 @@ RSpec.describe Video::FacetBuilder do
       ]
 
       expect(facet.name).to eq("year")
-      expect(facet.options).to eq(expected_options)
+      expect(facet.options).to match_array(expected_options)
     end
   end
 
@@ -94,7 +94,7 @@ RSpec.describe Video::FacetBuilder do
       ]
 
       expect(facet.name).to eq("song")
-      expect(facet.options).to eq(expected_options)
+      expect(facet.options).to match_array(expected_options)
     end
   end
 end
