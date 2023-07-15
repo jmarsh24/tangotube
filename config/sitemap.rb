@@ -5,7 +5,7 @@ SitemapGenerator::Sitemap.adapter = Shimmer::SitemapAdapter.new
 SitemapGenerator::Sitemap.default_host = Config.host!(default: "https://tangotube.tv")
 
 SitemapGenerator::Sitemap.create do
-  add root_path, changefreq: "daily", priority: 0.9
+  add root_path, changefreq: "daily"
   add contact_path, changefreq: "weekly"
 
   # Adding static pages
