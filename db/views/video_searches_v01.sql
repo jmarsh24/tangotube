@@ -3,16 +3,15 @@ SELECT
     videos.youtube_id AS youtube_id,
     videos.click_count AS click_count,
     videos.upload_date AS upload_date,
-    LOWER(CONCAT_WS(' ', STRING_AGG(DISTINCT normalize(dancers.name), ' '))) AS dancers_names,
-    LOWER(CONCAT_WS(' ', STRING_AGG(DISTINCT normalize(channels.title), ' '))) AS channels_title,
-    LOWER(CONCAT_WS(' ', STRING_AGG(DISTINCT normalize(songs.title), ' '))) AS songs_title,
-    LOWER(CONCAT_WS(' ', STRING_AGG(DISTINCT normalize(songs.artist), ' '))) AS songs_artist,
-    LOWER(CONCAT_WS(' ', STRING_AGG(DISTINCT normalize(orchestras.name), ' '))) AS orchestras_name,
-    LOWER(CONCAT_WS(' ', STRING_AGG(DISTINCT normalize(events.city), ' '))) AS events_city,
-    LOWER(CONCAT_WS(' ', STRING_AGG(DISTINCT normalize(events.title), ' '))) AS events_title,
-    LOWER(CONCAT_WS(' ', STRING_AGG(DISTINCT normalize(events.country), ' '))) AS events_country,
-    normalize(videos.title) AS videos_title,
-    normalize(videos.description) AS videos_description
+    LOWER(CONCAT_WS(' ', STRING_AGG(dancers.name, ' '))) AS dancer_names,
+    LOWER(CONCAT_WS(' ', STRING_AGG(channels.title, ' '))) AS channel_title,
+    LOWER(CONCAT_WS(' ', STRING_AGG(songs.title, ' '))) AS song_title,
+    LOWER(CONCAT_WS(' ', STRING_AGG(songs.artist, ' '))) AS song_artist,
+    LOWER(CONCAT_WS(' ', STRING_AGG(orchestras.name, ' '))) AS orchestra_name,
+    LOWER(CONCAT_WS(' ', STRING_AGG(events.city, ' '))) AS event_city,
+    LOWER(CONCAT_WS(' ', STRING_AGG(events.title, ' '))) AS event_title,
+    LOWER(CONCAT_WS(' ', STRING_AGG(events.country, ' '))) AS event_country,
+    LOWER(normalize(videos.title)) AS video_title
   FROM videos
   LEFT JOIN channels ON channels.id = videos.channel_id
   LEFT JOIN songs ON songs.id = videos.song_id

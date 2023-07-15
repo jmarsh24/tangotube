@@ -5,7 +5,7 @@
         - type = result.type
         - record = result.record
         - case result.type
-        - when "event"
+        - when "events"
           = link_to root_path(event: record.slug), class: 'search__result' do
             - if record.profile_image.attached?
               = image_tag record.profile_image, class: "search__result-image"
@@ -15,7 +15,7 @@
               .search__result-title = record.title
               .search__result-subtitle #{record.city}, #{record.country}
               .search__results-type = type
-        - when "song"
+        - when "songs"
           = link_to root_path(song: record.slug), class: 'search__result' do
             - if record&.orchestra&.profile_image&.attached?
               = image_tag record.orchestra.profile_image, class: "search__result-image"
@@ -25,7 +25,7 @@
               .search__result-title = record.full_title
               .search__result-subtitle = record.artist
               .search__results-type = type
-        - when "orchestra"
+        - when "orchestras"
           = link_to root_path(orchestra: record.slug), class: 'search__result' do
             - if record.profile_image.attached?
               = image_tag record.profile_image, class: "search__result-image"
@@ -34,7 +34,7 @@
             .search__result-details
               .search__result-details__title = record.name
               .search__results-type = type
-        - when "channel"
+        - when "channels"
           = link_to root_path(channel: record.channel_id), class: 'search__result' do
             - if record.thumbnail.present?
               = image_tag record.thumbnail, class: "search__result-image"
@@ -43,7 +43,7 @@
             .search__result-details
               .search__result-title = record.title
               .search__results-type = type
-        - when "video"
+        - when "videos"
           = link_to watch_path(v: record.youtube_id), class: 'search__result' do
             - if record.thumbnail.present?
               = image_tag record.thumbnail, class: "search__result-image"
@@ -52,7 +52,7 @@
             .search__result-details
               .search__result-title = record.title
               .search__results-type = type
-        - when "dancer"
+        - when "dancers"
           = link_to root_path(dancer: record.slug), class: 'search__result' do
             - if record.profile_image.attached?
               = image_tag record.profile_image, class: "search__result-image"

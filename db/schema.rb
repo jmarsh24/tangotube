@@ -368,16 +368,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_105437) do
       videos.youtube_id,
       videos.click_count,
       videos.upload_date,
-      lower(concat_ws(' '::text, string_agg(DISTINCT "normalize"((dancers.name)::text), ' '::text))) AS dancers_names,
-      lower(concat_ws(' '::text, string_agg(DISTINCT "normalize"((channels.title)::text), ' '::text))) AS channels_title,
-      lower(concat_ws(' '::text, string_agg(DISTINCT "normalize"((songs.title)::text), ' '::text))) AS songs_title,
-      lower(concat_ws(' '::text, string_agg(DISTINCT "normalize"((songs.artist)::text), ' '::text))) AS songs_artist,
-      lower(concat_ws(' '::text, string_agg(DISTINCT "normalize"((orchestras.name)::text), ' '::text))) AS orchestras_name,
-      lower(concat_ws(' '::text, string_agg(DISTINCT "normalize"((events.city)::text), ' '::text))) AS events_city,
-      lower(concat_ws(' '::text, string_agg(DISTINCT "normalize"((events.title)::text), ' '::text))) AS events_title,
-      lower(concat_ws(' '::text, string_agg(DISTINCT "normalize"((events.country)::text), ' '::text))) AS events_country,
-      "normalize"(videos.title) AS videos_title,
-      "normalize"((videos.description)::text) AS videos_description
+      lower(concat_ws(' '::text, string_agg((dancers.name)::text, ' '::text))) AS dancer_names,
+      lower(concat_ws(' '::text, string_agg((channels.title)::text, ' '::text))) AS channel_title,
+      lower(concat_ws(' '::text, string_agg((songs.title)::text, ' '::text))) AS song_title,
+      lower(concat_ws(' '::text, string_agg((songs.artist)::text, ' '::text))) AS song_artist,
+      lower(concat_ws(' '::text, string_agg((orchestras.name)::text, ' '::text))) AS orchestra_name,
+      lower(concat_ws(' '::text, string_agg((events.city)::text, ' '::text))) AS event_city,
+      lower(concat_ws(' '::text, string_agg((events.title)::text, ' '::text))) AS event_title,
+      lower(concat_ws(' '::text, string_agg((events.country)::text, ' '::text))) AS event_country,
+      lower("normalize"(videos.title)) AS video_title
      FROM ((((((videos
        LEFT JOIN channels ON ((channels.id = videos.channel_id)))
        LEFT JOIN songs ON ((songs.id = videos.song_id)))
@@ -387,17 +386,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_105437) do
        LEFT JOIN orchestras ON ((orchestras.id = songs.orchestra_id)))
     GROUP BY videos.id, videos.youtube_id;
   SQL
-  add_index "video_searches", ["channels_title"], name: "index_video_searches_on_channels_title", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["channel_title"], name: "index_video_searches_on_channel_title", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["click_count"], name: "index_video_searches_on_click_count"
-  add_index "video_searches", ["dancers_names"], name: "index_video_searches_on_dancers_names", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["events_city"], name: "index_video_searches_on_events_city", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["events_country"], name: "index_video_searches_on_events_country", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["events_title"], name: "index_video_searches_on_events_title", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["orchestras_name"], name: "index_video_searches_on_orchestras_name", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["songs_artist"], name: "index_video_searches_on_songs_artist", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["songs_title"], name: "index_video_searches_on_songs_title", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["dancer_names"], name: "index_video_searches_on_dancer_names", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["event_city"], name: "index_video_searches_on_event_city", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["event_country"], name: "index_video_searches_on_event_country", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["event_title"], name: "index_video_searches_on_event_title", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["orchestra_name"], name: "index_video_searches_on_orchestra_name", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["song_artist"], name: "index_video_searches_on_song_artist", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["song_title"], name: "index_video_searches_on_song_title", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["upload_date"], name: "index_video_searches_on_upload_date"
   add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
-  add_index "video_searches", ["videos_title"], name: "index_video_searches_on_videos_title", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
 
 end

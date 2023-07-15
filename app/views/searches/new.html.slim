@@ -2,6 +2,6 @@
   = form_with url: search_path, method: :get, data: { controller: "autosubmit", action: "input->autosubmit#submit" } do |f|
     .search__header
       h1.heading-1 class="search__title" Search
-      = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autofocus: true, autocomplete: "off" 
+      = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autofocus: true, autocomplete: "off", autocorrect: "off", autocapitalize: "none"
     = render "searches/categories", categories: @categories, selected_category: @selected_category
   = turbo_frame_tag "search-results", src: search_path, class: "search-bar__results"
