@@ -46,7 +46,7 @@ class Song < ApplicationRecord
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(terms) {
                    Array.wrap(terms)
-                     .map { |term| remove_stop_words(term) }
+                     .map { |term| TextNormalizer.normalize(term) }
                      .reduce(self) do |scope, term|
                        normalized_term = term.downcase
                        quoted_term = ActiveRecord::Base.connection.quote_string(normalized_term)
