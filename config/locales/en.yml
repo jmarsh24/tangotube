@@ -4,7 +4,6 @@ en:
     file types png jpg
   404_icon: 404 icon
   404_not_found: 404 not found
-  all_clips: All clips
   are_you_sure: Are you sure?
   author_label: Author label
   back: Back
@@ -19,16 +18,6 @@ en:
     channel:
       pencil_square_icon: Pencil square icon
       trash_icon: Trash icon
-  clips:
-    edit:
-      destroy: Destroy
-      show_this_clip: Show this clip
-    form:
-      clips_input_placeholder: Clips input placeholder
-      end_time: End time
-      start_time: Start time
-    new:
-      heading: Clip
   components:
     cookie_consent:
       accept_all: Accept all
@@ -59,12 +48,6 @@ en:
         behavior. We collect and analyze your user data to provide personalized recommendations.
         We use our own software for this service which works without a third-party
         tool.
-    drawer:
-      clips: Clips
-      explore: Explore
-      history: History
-      home: Home
-      liked: Liked
     footer:
       about: About
       contact: Contact

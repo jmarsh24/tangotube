@@ -15,3 +15,4 @@ ignore_unused:
   - "number.human.storage_units.short.million"
   - "number.human.storage_units.short.thousand"
   - "time"
+  - "time.formats.video_duration"
