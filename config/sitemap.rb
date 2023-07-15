@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Set the host name for URL creation
+SitemapGenerator::Sitemap.adapter = Shimmer::SitemapAdapter.new
+
 SitemapGenerator::Sitemap.default_host = Config.host!(default: "https://tangotube.tv")
 
 SitemapGenerator::Sitemap.create do
