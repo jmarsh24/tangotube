@@ -2,7 +2,7 @@
 
 class CoupleResource < Avo::BaseResource
   self.title = :dancer_names
-  self.includes = [:dancer, :partner, :videos]
+  self.includes = [:dancer]
   self.search_query = -> do
     scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
   end
@@ -11,12 +11,6 @@ class CoupleResource < Avo::BaseResource
   field :dancer, as: :belongs_to
   field :partner, as: :belongs_to
   field :videos_count, read_only: true, sortable: true, hide_on: [:new, :edit]
-  field :dancer_image, as: :file, is_image: true, is_avatar: true do
-    model.dancer.profile_image
-  end
-  field :partner_image, as: :file, is_image: true, is_avatar: true do
-    model.partner.profile_image
-  end
   field :slug, as: :text
   field :unique_couple_id, as: :text, hide_on: [:index, :show]
   field :couple_videos, as: :has_many
