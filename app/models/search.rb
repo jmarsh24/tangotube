@@ -8,78 +8,104 @@ class Search
 
   def self.global(query)
     sql =
-      <<-SQL
+      <<~SQL
+        WITH min_max_dates AS (
+          SELECT 
+            EXTRACT(EPOCH FROM MIN(upload_date)) as min_date,
+            EXTRACT(EPOCH FROM MAX(upload_date)) as max_date
+          FROM videos
+        )
+                    (
+                SELECT
+                  'channels' AS record_type,
+                  id AS record_id,
+                  (similarity (title, :query) * 0.4  * 0.4 + videos_count / 1000 * 0.2) AS score
+                FROM
+                  channels
+                WHERE
+                  :query % title
+              )
+              UNION 
+              (
+                SELECT
+                  'dancers' AS record_type,
+                  id AS record_id,
+                  (similarity (name, :query) * 0.4  * 0.4 + videos_count / 1000 * 0.2) AS score
+                FROM
+                  dancers
+                WHERE
+                  :query % name
+              )
+              UNION 
+              (
+                SELECT
+                  'events' AS record_type,
+                  id AS record_id,
+                  (similarity (title, :query) * 0.4 + similarity (city, :query) * 0.3 + similarity (country, :query) * 0.3 + videos_count / 1000 * 0.2) AS score
+                FROM
+                  events
+                WHERE
+                  :query % title
+                  OR :query % city
+                  OR :query % country
+              )
+              UNION 
+              (
+                SELECT
+                  'orchestras' AS record_type,
+                  id AS record_id,
+                  (similarity (name, :query) * 0.4 * 0.4 + videos_count / 1000 * 0.2) AS score
+                FROM
+                  orchestras
+                WHERE
+                  :query % name
+              )
+              UNION 
+              (
+                SELECT
+                  'songs' AS record_type,
+                  id AS record_id,
+                  (similarity (title, :query) * 0.4 + similarity (artist, :query) * 0.3 + similarity (genre, :query) * 0.1 + videos_count / 1000 * 0.2) AS score
+                FROM
+                  songs
+                WHERE
+                  :query % title
+                  OR :query % artist
+                  OR :query % genre
+              )
+              UNION 
+        (
+          SELECT
+            'videos' AS record_type,
+            video_id AS record_id,
             (
-        SELECT
-          'channels' AS record_type,
-          id AS record_id,
-          (similarity (title, :query) * 0.4  * 0.4 + videos_count / 1000 * 0.2) AS score
-        FROM
-          channels
-        WHERE
-          :query % title
-      )
-      UNION 
-      (
-        SELECT
-          'dancers' AS record_type,
-          id AS record_id,
-          (similarity (name, :query) * 0.4  * 0.4 + videos_count / 1000 * 0.2) AS score
-        FROM
-          dancers
-        WHERE
-          :query % name
-      )
-      UNION 
-      (
-        SELECT
-          'events' AS record_type,
-          id AS record_id,
-          (similarity (title, :query) * 0.4 + similarity (city, :query) * 0.3 + similarity (country, :query) * 0.3 + videos_count / 1000 * 0.2) AS score
-        FROM
-          events
-        WHERE
-          :query % title
-          OR :query % city
-          OR :query % country
-      )
-      UNION 
-      (
-        SELECT
-          'orchestras' AS record_type,
-          id AS record_id,
-          (similarity (name, :query) * 0.4 * 0.4 + videos_count / 1000 * 0.2) AS score
-        FROM
-          orchestras
-        WHERE
-          :query % name
-      )
-      UNION 
-      (
-        SELECT
-          'songs' AS record_type,
-          id AS record_id,
-          (similarity (title, :query) * 0.4 + similarity (artist, :query) * 0.3 + similarity (genre, :query) * 0.1 + videos_count / 1000 * 0.2) AS score
-        FROM
-          songs
-        WHERE
-          :query % title
-          OR :query % artist
-          OR :query % genre
-      )
-      UNION
-      (
-        SELECT
-          'videos' AS record_type,
-          id AS record_id,
-          similarity(:query, index) AS score
-        FROM
-          videos
-        WHERE
-          index ILIKE '%' || :query || '%'
-      )
-      ORDER BY
-        score DESC
+              (1 - ((EXTRACT(EPOCH FROM current_date) - EXTRACT(EPOCH FROM upload_date)) / ((SELECT max_date FROM min_max_dates) - (SELECT min_date FROM min_max_dates)))) * 0.4 +
+              click_count::float / (SELECT MAX(click_count)::float FROM video_searches) * 0.2 +
+              similarity(dancers_names, :query) * 0.35 +
+              similarity(channels_title, :query) * 0.05 +
+              similarity(songs_title, :query) * 0.25 +
+              similarity(songs_artist, :query) * 0.05 +
+              similarity(orchestras_name, :query) * 0.15 +
+              similarity(events_city, :query) * 0.05 +
+              similarity(events_title, :query) * 0.1 +
+              similarity(events_country, :query) * 0.05 +
+              similarity(videos_title, :query) * 0.15
+            ) AS score 
+          FROM 
+            video_searches 
+          WHERE 
+            :query % dancers_names OR
+            :query % channels_title OR
+            :query % songs_title OR
+            :query % songs_artist OR
+            :query % orchestras_name OR
+            :query % events_city OR
+            :query % events_title OR
+            :query % events_country OR
+            :query % videos_title 
+        )
+        ORDER BY
+          score DESC
         LIMIT 100;
       SQL
 

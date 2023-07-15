@@ -58,6 +58,7 @@ gem "cuprite"
 gem "activerecord-postgres_enum"
 gem "fuzzy-string-match"
 gem "ransack"
+gem "scenic"
 
 # Assets
 gem "vite_rails"

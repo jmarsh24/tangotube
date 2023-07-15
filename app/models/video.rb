@@ -35,40 +35,6 @@
 #  normalized_title    :string
 #
 class Video < ApplicationRecord
-  include Indexable
-
-  INDEX_QUERY = <<~SQL.squish.freeze
-    UPDATE videos
-    SET index = query.index
-    FROM (
-      SELECT
-        videos.id,
-        LOWER(
-          CONCAT_WS(' ',
-            STRING_AGG(normalize(dancers.name), ' '),
-            STRING_AGG(normalize(channels.title), ' '),
-            STRING_AGG(normalize(songs.title), ' '),
-            STRING_AGG(normalize(songs.artist), ' '),
-            STRING_AGG(normalize(orchestras.name), ' '),
-            STRING_AGG(normalize(events.city), ' '),
-            STRING_AGG(normalize(events.title), ' '),
-            STRING_AGG(normalize(events.country), ' '),
-            videos.youtube_id,
-            normalize(videos.title)
-          )
-        ) AS index
-      FROM videos
-      LEFT JOIN channels ON channels.id = videos.channel_id
-      LEFT JOIN songs ON songs.id = videos.song_id
-      LEFT JOIN events ON events.id = videos.event_id
-      LEFT JOIN dancer_videos ON dancer_videos.video_id = videos.id
-      LEFT JOIN dancers ON dancers.id = dancer_videos.dancer_id
-      LEFT JOIN orchestras ON orchestras.id = songs.orchestra_id
-      GROUP BY videos.id, videos.youtube_id
-    ) AS query
-    WHERE videos.id IN (?) AND query.id = videos.id
-  SQL
-
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
@@ -154,6 +120,10 @@ class Video < ApplicationRecord
   scope :most_popular, -> { order(click_count: :desc) }
 
   class << self
+    def search(terms)
+      Video.find(VideoSearch.search(terms))
+    end
+
     def index_query
       INDEX_QUERY
     end

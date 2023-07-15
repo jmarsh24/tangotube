@@ -44,18 +44,28 @@ class Song < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
-  scope :search, ->(search_term) {
-                   normalized_term = TextNormalizer.normalize(search_term)
-                   quoted_term = ActiveRecord::Base.connection.quote_string(normalized_term)
+  scope :search, ->(terms) {
+                   Array.wrap(terms)
+                     .map { |term| remove_stop_words(term) }
+                     .reduce(self) do |scope, term|
+                       normalized_term = term.downcase
+                       quoted_term = ActiveRecord::Base.connection.quote_string(normalized_term)
 
-                   title_similarity = "similarity(title, '#{quoted_term}') * 0.4"
-                   artist_similarity = "similarity(artist, '#{quoted_term}') * 0.3"
-                   genre_similarity = "similarity(genre, '#{quoted_term}') * 0.1"
-                   videos_score = "videos_count / 1000 * 0.2"
-                   total_score = "(#{title_similarity} + #{artist_similarity} + #{genre_similarity} + #{videos_score}) AS score"
-                   select("*, #{total_score}")
-                     .where(":term % title OR :term % artist OR :term % genre", term: normalized_term)
-                     .order("score DESC")
+                       dancers_similarity = "(similarity(dancers_names, '#{quoted_term}') * 0.35)"
+                       channels_similarity = "(similarity(channels_title, '#{quoted_term}') * 0.05)"
+                       songs_similarity = "(similarity(songs_title, '#{quoted_term}') * 0.25)"
+                       artist_similarity = "(similarity(songs_artist, '#{quoted_term}') * 0.05)"
+                       orchestras_similarity = "(similarity(orchestras_name, '#{quoted_term}') * 0.15)"
+                       events_city_similarity = "(similarity(events_city, '#{quoted_term}') * 0.05)"
+                       events_title_similarity = "(similarity(events_title, '#{quoted_term}') * 0.1)"
+                       events_country_similarity = "(similarity(events_country, '#{quoted_term}') * 0.05)"
+                       videos_similarity = "(similarity(videos_title, '#{quoted_term}') * 0.15)"
+
+                       total_score = "(#{dancers_similarity} + #{channels_similarity} + #{songs_similarity} + #{artist_similarity} + #{orchestras_similarity} + #{events_city_similarity} + #{events_title_similarity} + #{events_country_similarity} + #{videos_similarity}) as score"
+
+                       scope.select("video_id, #{total_score}")
+                         .where("? % dancers_names OR ? % channels_title OR ? % songs_title OR ? % songs_artist OR ? % orchestras_name OR ? % events_city OR ? % events_title OR ? % events_country OR ? % videos_title", quoted_term, quoted_term, quoted_term, quoted_term, quoted_term, quoted_term, quoted_term, quoted_term, quoted_term)
+                     end
                  }
 
   def full_title

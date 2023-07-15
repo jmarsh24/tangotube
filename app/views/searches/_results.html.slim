@@ -44,7 +44,7 @@
               .search__result-title = record.title
               .search__results-type = type
         - when "video"
-          = link_to root_path(v: record.youtube_id), class: 'search__result' do
+          = link_to watch_path(v: record.youtube_id), class: 'search__result' do
             - if record.thumbnail.present?
               = image_tag record.thumbnail, class: "search__result-image"
             - else

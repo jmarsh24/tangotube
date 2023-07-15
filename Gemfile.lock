@@ -526,6 +526,9 @@ GEM
     rufus-scheduler (3.9.0)
       fugit (~> 1.1, >= 1.1.6)
     safety_mailer (0.0.10)
+    scenic (1.7.0)
+      activerecord (>= 4.0.0)
+      railties (>= 4.0.0)
     sentry-rails (5.9.0)
       railties (>= 5.0)
       sentry-ruby (~> 5.9.0)
@@ -712,6 +715,7 @@ DEPENDENCIES
   rubocop-rspec
   ruby-lsp
   safety_mailer
+  scenic
   sentry-rails
   sentry-ruby
   serviceworker-rails
