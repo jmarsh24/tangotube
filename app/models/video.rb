@@ -35,45 +35,6 @@
 #  normalized_title    :string
 #
 class Video < ApplicationRecord
-  include Filterable
-  include Indexable
-
-  INDEX_QUERY = <<~SQL.squish.freeze
-    UPDATE videos
-    SET index = query.index
-    FROM (
-      SELECT
-        videos.id,
-        LOWER(
-          CONCAT_WS(' ',
-            MIN(normalize(dancers.first_name)),
-            MIN(normalize(dancers.last_name)),
-            MIN(normalize(channels.channel_id)),
-            MIN(normalize(channels.title)),
-            MIN(normalize(songs.title)),
-            MIN(normalize(songs.genre)),
-            MIN(normalize(songs.artist)),
-            MIN(normalize(orchestras.name)),
-            MIN(normalize(events.city)),
-            MIN(normalize(events.title)),
-            MIN(normalize(events.country)),
-            normalize(videos.youtube_id),
-            normalize(videos.title),
-            normalize(videos.description)
-          )
-        ) AS index
-      FROM videos
-      LEFT JOIN channels ON channels.id = videos.channel_id
-      LEFT JOIN songs ON songs.id = videos.song_id
-      LEFT JOIN events ON events.id = videos.event_id
-      LEFT JOIN dancer_videos ON dancer_videos.video_id = videos.id
-      LEFT JOIN dancers ON dancers.id = dancer_videos.dancer_id
-      LEFT JOIN orchestras ON orchestras.id = songs.orchestra_id
-      GROUP BY videos.id
-    ) AS query
-    WHERE videos.id IN (?) AND query.id = videos.id
-  SQL
-
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
@@ -160,6 +121,10 @@ class Video < ApplicationRecord
   scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
 
   class << self
+    def search(terms)
+      Video.find(VideoSearch.search(terms))
+    end
+
     def index_query
       INDEX_QUERY
     end

@@ -45,28 +45,18 @@ class Song < ApplicationRecord
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(search_term) {
-    search_terms = search_term.split(" ").map { |term| TextNormalizer.normalize(term) }
-    quoted_search_terms = search_terms.map { |term| ActiveRecord::Base.connection.quote_string(term) }
+                   normalized_term = TextNormalizer.normalize(search_term)
+                   quoted_term = ActiveRecord::Base.connection.quote_string(normalized_term)
 
-    similarity_expr = search_terms.each_with_index.map do |term, index|
-      title_similarity = "similarity(title, '#{quoted_search_terms[index]}')"
-      artist_similarity = "similarity(artist, '#{quoted_search_terms[index]}')"
-      genre_similarity = "similarity(genre, '#{quoted_search_terms[index]}')"
-
-      "#{title_similarity} * 2 + #{artist_similarity} * 1.5 + #{genre_similarity}"
-    end.join(" + ")
-
-    search_conditions = search_terms.map { |term|
-      "(title % '#{term}' OR artist % '#{term}' OR genre % '#{term}')"
-    }.join(" OR ")
-
-    select_expr = "songs.*, #{similarity_expr} AS relevance_score"
-    order_expr = "relevance_score DESC, videos_count DESC"
-
-    where(search_conditions)
-      .select(select_expr)
-      .order(Arel.sql(order_expr))
-  }
+                   title_similarity = "similarity(title, '#{quoted_term}') * 0.4"
+                   artist_similarity = "similarity(artist, '#{quoted_term}') * 0.3"
+                   genre_similarity = "similarity(genre, '#{quoted_term}') * 0.1"
+                   videos_score = "videos_count / 1000 * 0.2"
+                   total_score = "(#{title_similarity} + #{artist_similarity} + #{genre_similarity} + #{videos_score}) AS score"
+                   select("*, #{total_score}")
+                     .where(":term % title OR :term % artist OR :term % genre", term: normalized_term)
+                     .order("score DESC")
+                 }
 
   def full_title
     title_part = title&.titleize

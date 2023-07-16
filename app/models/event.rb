@@ -31,7 +31,13 @@ class Event < ApplicationRecord
 
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :active, -> { where(active: true) }
-  scope :search, ->(term) { where("title ILIKE ? OR city ILIKE ? OR country ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%") }
+  scope :search, ->(query) {
+                   normalized_query = TextNormalizer.normalize(query)
+                   quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
+                   select("*, (similarity (title, '#{quoted_query}') * 0.3 + similarity (city, '#{quoted_query}') * 0.1 + similarity (country, '#{quoted_query}') * 0.1 + videos_count / 1000 * 0.2) AS score")
+                     .where(":query % title OR :query % city OR :query % country ", query: normalized_query)
+                     .order("score DESC")
+                 }
 
   def search_title
     return if title.empty?

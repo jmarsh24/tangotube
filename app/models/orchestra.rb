@@ -27,7 +27,14 @@ class Orchestra < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-  scope :search, ->(term) { where("name ILIKE ?", "%#{term}%") }
+  scope :search, ->(query) {
+                   normalized_query = TextNormalizer.normalize(query)
+                   quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
+                   select("*, similarity(name, '#{quoted_query}') + (videos_count / 1000) as score")
+                     .where("? % name", normalized_query)
+                     .order("score DESC")
+                 }
+
   scope :most_popular, -> { order(videos_count: :desc) }
 
   def to_param

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_15_105437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
     t.integer "videos_count", default: 0
     t.index ["active"], name: "index_channels_on_active"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
-    t.index ["title"], name: "index_channels_on_title"
+    t.index ["title"], name: "index_channels_on_title_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["videos_count"], name: "index_channels_on_videos_count"
   end
 
@@ -165,8 +165,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
     t.boolean "reviewed", default: false
     t.integer "videos_count", default: 0, null: false
     t.string "slug"
+    t.index ["city"], name: "index_events_on_city_trigram", opclass: :gin_trgm_ops, using: :gin
+    t.index ["country"], name: "index_events_on_country_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["slug"], name: "index_events_on_slug", unique: true
-    t.index ["title"], name: "index_events_on_title", unique: true
+    t.index ["title"], name: "index_events_on_title_trigram", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "likes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -302,7 +304,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
     t.bigint "event_id"
     t.integer "click_count", default: 0
     t.boolean "featured", default: false
-    t.text "index"
     t.jsonb "metadata"
     t.text "tags", default: [], array: true
     t.datetime "imported_at"
@@ -319,7 +320,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
     t.index ["featured"], name: "index_videos_on_featured"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
-    t.index ["index"], name: "index_videos_on_index", opclass: :gist_trgm_ops, using: :gist
     t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gin_trgm_ops, using: :gin
     t.index ["popularity"], name: "index_videos_on_popularity"
     t.index ["song_id"], name: "index_videos_on_song_id"
@@ -362,4 +362,41 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_093028) do
   add_foreign_key "videos", "events"
   add_foreign_key "watches", "users"
   add_foreign_key "watches", "videos"
+
+  create_view "video_searches", materialized: true, sql_definition: <<-SQL
+      SELECT videos.id AS video_id,
+      videos.youtube_id,
+      videos.click_count,
+      videos.upload_date,
+      lower(concat_ws(' '::text, string_agg((dancers.name)::text, ' '::text))) AS dancer_names,
+      lower(concat_ws(' '::text, string_agg((channels.title)::text, ' '::text))) AS channel_title,
+      lower(concat_ws(' '::text, string_agg((songs.title)::text, ' '::text))) AS song_title,
+      lower(concat_ws(' '::text, string_agg((songs.artist)::text, ' '::text))) AS song_artist,
+      lower(concat_ws(' '::text, string_agg((orchestras.name)::text, ' '::text))) AS orchestra_name,
+      lower(concat_ws(' '::text, string_agg((events.city)::text, ' '::text))) AS event_city,
+      lower(concat_ws(' '::text, string_agg((events.title)::text, ' '::text))) AS event_title,
+      lower(concat_ws(' '::text, string_agg((events.country)::text, ' '::text))) AS event_country,
+      lower("normalize"(videos.title)) AS video_title
+     FROM ((((((videos
+       LEFT JOIN channels ON ((channels.id = videos.channel_id)))
+       LEFT JOIN songs ON ((songs.id = videos.song_id)))
+       LEFT JOIN events ON ((events.id = videos.event_id)))
+       LEFT JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
+       LEFT JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
+       LEFT JOIN orchestras ON ((orchestras.id = songs.orchestra_id)))
+    GROUP BY videos.id, videos.youtube_id;
+  SQL
+  add_index "video_searches", ["channel_title"], name: "index_video_searches_on_channel_title", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["click_count"], name: "index_video_searches_on_click_count"
+  add_index "video_searches", ["dancer_names"], name: "index_video_searches_on_dancer_names", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["event_city"], name: "index_video_searches_on_event_city", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["event_country"], name: "index_video_searches_on_event_country", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["event_title"], name: "index_video_searches_on_event_title", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["orchestra_name"], name: "index_video_searches_on_orchestra_name", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["song_artist"], name: "index_video_searches_on_song_artist", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["song_title"], name: "index_video_searches_on_song_title", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["upload_date"], name: "index_video_searches_on_upload_date"
+  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
+  add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
+
 end

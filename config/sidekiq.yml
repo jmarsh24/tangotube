@@ -33,3 +33,8 @@
     sitemap:
       cron: "0 0 12 * * * Europe/Berlin" # every day at 16:00, Berlin time
       class: Shimmer::SitemapJob
+    refresh_materialized_view:
+      every: ["1h"] # or use '60m' for every 60 minutes
+      class: RefreshMaterializedViewJob
+      queue: low_priority
+      enabled: true
