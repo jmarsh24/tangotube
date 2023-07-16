@@ -5,7 +5,7 @@ class UpdateUnrecognizedMusicVideosJob < ApplicationJob
 
   def perform
     Video.unrecognized_music.limit(10_000).find_each do |video|
-      UpdateVideoJob.perform_later(video, use_scraper: false)
+      UpdateVideoJob.perform_later(video, use_music_recognizer: true)
     end
   end
 end
