@@ -157,6 +157,7 @@ class Video < ApplicationRecord
                          where(query)
                        end
   scope :most_popular, -> { order(click_count: :desc) }
+  scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
 
   class << self
     def index_query

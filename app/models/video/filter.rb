@@ -17,17 +17,16 @@ class Video::Filter
 
       next unless value.present? && video_relation.respond_to?(filter)
 
-      @video_relation = if [:watched, :liked].include?(filter)
-        video_relation.public_send(filter, user)
+      @video_relation = case filter
+      when :watched
+        (value.to_s.downcase == "true") ? video_relation.watched(user) : video_relation.not_watched(user)
+      when :liked
+        video_relation.liked(user)
       else
         video_relation.public_send(filter, value)
       end
     end
 
     video_relation
-  end
-
-  def videos
-    apply_filter
   end
 end
