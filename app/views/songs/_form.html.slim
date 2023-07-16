@@ -1,9 +1,0 @@
-= form_with(model: song) do |form|
-  = form.text_field :title, value: song.title
-  = form.text_field :artist, label: t(".artist_label"), value: song.artist
-  = form.text_field :genre, label: t(".genre_label"), value: song.genre
-  = form.date_field :date, label: t(".recording_date_label"), value: song.date
-  = form.check_box :active, label: t(".active_label"), value: song.active
-  = form.text_field :author, label: t("author_label"), value: song.author
-  div
-    = form.submit
