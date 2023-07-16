@@ -1,8 +1,9 @@
 .content-container.devise
   h4.heading-4.heading-4--bold = t(".forgot_your_password_heading")
   p = t(".sub_heading")
-  = form_for resource, as: resource_name, url: password_path(resource_name), data: { turbo: false }, class: "stack"  do |f|
+  = form_for resource, as: resource_name, url: password_path(resource_name) do |f|
     .stack.stack--xs.stack--tablet-xs
-      = render "devise/shared/error_messages", resource: resource
+      = render "devise/shared/error_messages", resource:
+      = f.label :email
       = f.input :email, as: :email, autofocus: true, class: "input input__input input--text"
       = f.submit t(".send"), class: "primary-button"

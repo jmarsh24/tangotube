@@ -1,7 +1,9 @@
 .stack.stack--xs.stack--tablet-line.stack--tablet-justify-center.stack--justify-center.stack--align-center
   .devise
-    = form_with model: resource, url: user_session_path, data: { turbo: false }, class: "stack stack--xs" do |f|
+    = form_with resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }, class: "stack stack--xs" do |f|
+      = f.label :email
       = f.input :email, as: :email, autofocus: true, class: "input input__input input--email"
+      = f.label :password
       = f.input :password, as: :password, autocomplete: "current-password", class: "input input__input input--text"
       = f.submit t("login"), class: "button button--primary button--block"
       a.link href=edit_user_registration_path

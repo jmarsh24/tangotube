@@ -4,5 +4,8 @@
       = render "devise/shared/error_messages", resource: resource
       = f.hidden_field :reset_password_token
       = f.hidden_field :email
+      = f.label :password, "New password"
       = f.input :password, as: :password, autocomplete: "new-password", autofocus: true, class: "input input__input input--text"
+      = f.label :password_confirmation, "Confirm new password"
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: "input input__input input--text"
       = f.submit t(".change_my_password"), class: "primary-button"
