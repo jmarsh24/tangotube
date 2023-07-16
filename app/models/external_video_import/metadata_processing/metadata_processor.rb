@@ -14,7 +14,6 @@ module ExternalVideoImport
         dancers = @dancer_matcher.match(video_title: metadata.youtube.title)
         log_matched_dancers(dancers)
         couple = @couple_matcher.match_or_create(dancers:)
-        binding.pry
         log_matched_couples(couple)
 
         song = match_song(metadata)
