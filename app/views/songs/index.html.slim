@@ -1,9 +1,0 @@
-p style="color: green"
-  notice
-h1.heading-1.heading-1--bold = t(".heading")
-#songs
-  - @songs.each do |song|
-    = render song
-    p
-      = link_to = t(".show_link"), song
-= link_to t(".new_link"), new_song_path

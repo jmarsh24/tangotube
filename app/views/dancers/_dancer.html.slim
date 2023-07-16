@@ -1,8 +1,0 @@
-.dancer__card id="#{dom_id(dancer)}"
-  = link_to dancer do
-    = image_tag dancer_avatar(dancer)
-  .dancer__card__body
-    div
-      = link_to dancer do
-        = dancer.name
-      = t(".videos_count", count: dancer.videos_count)

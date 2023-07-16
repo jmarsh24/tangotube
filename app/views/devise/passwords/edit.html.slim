@@ -1,4 +1,4 @@
-.container.devise
+.content-container.devise
   = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, data: { turbo: false }, class: "stack"  do |f|
     .stack.stack--xs.stack--tablet-xs
       = render "devise/shared/error_messages", resource: resource

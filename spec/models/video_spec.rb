@@ -272,6 +272,35 @@ RSpec.describe Video do
     end
   end
 
+  describe ".unrecognized_music" do
+    context "when video has acr_response code of 1001" do
+      it "does not include the video" do
+        recognized_music_video = videos(:video_1_featured)
+        recognized_music_video.update!(acr_response_code: 1001)
+
+        expect(Video.unrecognized_music).not_to include(recognized_music_video)
+      end
+    end
+
+    context "when video has acr_response code of 0" do
+      it "does not include the video" do
+        recognized_music_video = videos(:video_1_featured)
+        recognized_music_video.update!(acr_response_code: 0)
+
+        expect(Video.unrecognized_music).not_to include(recognized_music_video)
+      end
+    end
+
+    context "when video has acr_response code of nil" do
+      it "includes the video" do
+        unrecognized_music_video = videos(:video_1_featured)
+        unrecognized_music_video.update!(acr_response_code: nil)
+
+        expect(Video.unrecognized_music).to include(unrecognized_music_video)
+      end
+    end
+  end
+
   describe "#clicked!" do
     it "increases click_count by 1" do
       video = videos(:video_1_featured)

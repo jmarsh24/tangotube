@@ -13,8 +13,8 @@ module ExternalVideoImport
       def process(metadata)
         dancers = @dancer_matcher.match(video_title: metadata.youtube.title)
         log_matched_dancers(dancers)
-        couples = @couple_matcher.match_or_create(dancers:)
-        log_matched_couples(couples)
+        couple = @couple_matcher.match_or_create(dancers:)
+        log_matched_couples(couple)
 
         song = match_song(metadata)
         log_matched_song(song)
@@ -27,7 +27,7 @@ module ExternalVideoImport
           description: metadata.youtube.description,
           channel: @channel_matcher.match_or_create(channel_metadata: metadata.youtube.channel),
           song:,
-          couples:,
+          couples: [couple].compact,
           acr_response_code: metadata.music.code,
           duration: metadata.youtube.duration,
           hd: metadata.youtube.hd,
@@ -78,7 +78,7 @@ module ExternalVideoImport
 
       def log_matched_couples(couple)
         if couple.present?
-          Rails.logger.info "Matched couples: #{couple.first.dancers.map(&:name).join(" & ")}"
+          Rails.logger.info "Matched couples: #{couple.dancers.map(&:name).join(" & ")}"
         else
           Rails.logger.info "No couples matched."
         end

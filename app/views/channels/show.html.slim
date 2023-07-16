@@ -1,7 +1,0 @@
-p style="color: green"
-  = notice
-= render @channel
-div
-  = link_to t("edit"), edit_channel_path(@channel) |
-  = link_to t("back"), channels_path
-  = button_to t("destroy"), @channel, method: :delete

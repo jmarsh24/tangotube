@@ -1,4 +1,4 @@
-.container.devise
+.content-container.devise
   h2.heading-2.heading-2--bold = t(".resend_confirmation_instructions")
   = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }), class: "stack" do |f|
     .stack.stack--xs.stack--tablet-xs
