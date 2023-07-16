@@ -15,7 +15,6 @@ A video platform for dancers by dancers, curating, enriching, and organizing tan
     - [Current Features](#current-features)
     - [Future Features](#future-features)
   - [Development](#development)
-    - [Index and Search](#index-and-search)
 
 ## Introduction
 
@@ -69,13 +68,5 @@ The project began during the COVID outbreak in March 2020. A dancer started cura
 - Integration with Spotify and other major music platforms.
 
 ## Development
-
-### Index and Search
-
-Some models (e.g., Videos) are indexed in an optimized fashion, requiring a SQL statement to be executed on creation and update. When a model's `index_query` is modified (e.g., new field to search on), it will only affect data being added or modified from this point on. After deploying, it's essential to perform a re-indexing of the affected model by connecting to the specified environment (e.g., `heroku run rails c --app=tangotube-staging`) and performing the following command (using Videos as an example).
-
-```ruby
-Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: false) }
-```
 
 Hint: Change to `now: true` for a synchronous action and be aware of when the process has completed. Otherwise, it will be enqueued to _Sidekiq_ and run asynchronously.

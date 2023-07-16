@@ -116,25 +116,24 @@ RSpec.describe Video::Filter do
 
     context "when filtering by query" do
       it "returns videos matching query" do
-        Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
+        VideoSearch.refresh
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {search: "carlitoss"}).filtered_videos
-
+        filtered_videos = described_class.new(Video.all, filtering_params: {search: "carlitoss espinozza"}).filtered_videos
         expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
       end
 
       it "returns videos matching query with accents" do
-        Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
+        VideoSearch.refresh
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {search: "carlíitos"}).filtered_videos
+        filtered_videos = described_class.new(Video.all, filtering_params: {search: "carlíitos espinozza"}).filtered_videos
 
         expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
       end
 
       it "returns videos matching query with a ' character" do
-        Video.find_in_batches.each { |e| Video.index!(e.map(&:id), now: true) }
+        VideoSearch.refresh
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {search: "darienzo"}).filtered_videos
+        filtered_videos = described_class.new(Video.all, filtering_params: {search: "juann darienzoo"}).filtered_videos
         expect(filtered_videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
       end
     end
