@@ -13,8 +13,9 @@ module ExternalVideoImport
       def process(metadata)
         dancers = @dancer_matcher.match(video_title: metadata.youtube.title)
         log_matched_dancers(dancers)
-        couples = @couple_matcher.match_or_create(dancers:)
-        log_matched_couples(couples)
+        couple = @couple_matcher.match_or_create(dancers:)
+        binding.pry
+        log_matched_couples(couple)
 
         song = match_song(metadata)
         log_matched_song(song)
@@ -27,7 +28,7 @@ module ExternalVideoImport
           description: metadata.youtube.description,
           channel: @channel_matcher.match_or_create(channel_metadata: metadata.youtube.channel),
           song:,
-          couples:,
+          couples: [couple],
           acr_response_code: metadata.music.code,
           duration: metadata.youtube.duration,
           hd: metadata.youtube.hd,
