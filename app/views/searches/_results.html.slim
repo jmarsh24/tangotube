@@ -1,5 +1,5 @@
 = turbo_frame_tag "search-results", target: "_top", class: "search__results scrollable-container__content"
-  - cache [params[:search], params[:category]] do
+  - cache [params[:query], params[:category]] do
     - if results.present?
       - results.each do |result|
         - type = result.type
