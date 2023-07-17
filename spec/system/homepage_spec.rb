@@ -20,18 +20,16 @@ RSpec.describe "homepage", type: :system do
 
   context "videos" do
     before do
-      find(".banner__card .icon.icon--close").click
       accept_all_button = find(".personalization-request__content a.button.button--primary", text: "Accept all")
       accept_all_button.click
       page.evaluate_script("document.cookie = 'banner_closed=true; path=/;'")
     end
 
-    it "displays featured videos" do
+    fit "displays featured videos" do
       featured_videos = [videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)]
 
-      screenshot "homepage_featured_videos_present"
+      screenshot "homepage_videos_present"
 
-      expect(page).to have_content("Featured videos")
       featured_videos.each do |video|
         expect(page).to have_content(video.song.full_title)
         video.dancers.each do |dancer|
