@@ -6,6 +6,10 @@ RSpec.describe Video::Search do
   fixtures :all
 
   describe "#videos" do
+    before do
+      VideoSearch.refresh
+    end
+
     it "returns all videos with facets" do
       expect(Video::Search.new.facet(name: "leader").options).to eq(Video::FacetBuilder.new(Video.all).leader.options)
       expect(Video::Search.new.facet(name: "follower").options).to eq(Video::FacetBuilder.new(Video.all).follower.options)
