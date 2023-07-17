@@ -6,7 +6,7 @@
   text-align: center;
   border-radius: var(--border-radius-md);
   padding: var(--spacing-xxs) var(--spacing-xs);
-  border: 1px solid transparent;
+  border: none;
   cursor: pointer;
   transition: background-color 0.2s;
   text-decoration: none;
@@ -38,7 +38,6 @@
 
   &--secondary {
     background-color: var(--color-neutral-400);
-    border-color: var(--color-neutral-400);
     color: var(--color-neutral-0);
 
     &:hover {

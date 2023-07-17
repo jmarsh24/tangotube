@@ -9,7 +9,7 @@
     @extend .caption;
     border: 1px dotted var(--background-input-border-primary-default);
     border-radius: var(--border-radius-card-sm);
-    padding: var(--spacing-xxl);
+    padding: var(--spacing-xs);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,8 +48,4 @@
   opacity: 0;
   position: absolute;
   pointer-events: none;
-}
-.w-picker {
-  max-height: 350px;
-  width: 100%;
 }

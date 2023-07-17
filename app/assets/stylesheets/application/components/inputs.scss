@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: var(--spacing-xs);
   position: relative;
+  font-size: 16px;
 
   &::-webkit-search-cancel-button {
     -webkit-appearance: none;
@@ -22,7 +23,7 @@
   &__input {
     border: 1px solid var(--color-neutral-300);
     border-radius: var(--border-radius-input-sm);
-    padding: var(--spacing-xs) var(--spacing-xs);
+    padding: 8px 16px;
     transition: border-color 0.2s;
     background-color: transparent;
     color: var(--color-neutral-1000);
@@ -38,13 +39,6 @@
     &.selected {
       font-weight: bold;
     }
-  }
-
-  &--search {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    padding: var(--spacing-xxs) var(--spacing-xxs);
-    font-size: var(--font-size-sm);
   }
 
   &--no-border {
