@@ -2,7 +2,7 @@
   .modal__header
     h2.heading-2 = t(".new_password")
   .content-container
-    .devise.stack.stack--xs
+    .stack.stack--xs
       = form_for resource, as: resource_name, url: password_path(resource_name) do |f|
         .stack.stack--xs
           = f.input :email, as: :email, autofocus: true, class: "input input__input input--text"

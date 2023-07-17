@@ -2,7 +2,7 @@
   .modal__header
     h2.heading-2 = t(".new_confirmation")
   .content-container
-    .devise.stack.stack--xs
+    .stack.stack--xs
       h2.heading-2.heading-2--bold = t(".resend_confirmation_instructions")
       = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
         .stack.stack--xs.stack--tablet-xs

@@ -2,7 +2,7 @@
   .modal__header
     h2.heading-2 = t(".login")
   .content-container
-    .devise.stack.stack--xs
+    .stack.stack--xs
       = form_with model: resource, as: resource_name, url: session_path(resource_name), data: {turbo: false} do |f|
         .stack.stack--xs
           = f.input :email, as: :email, autofocus: true, class: "input input__input input--email"
