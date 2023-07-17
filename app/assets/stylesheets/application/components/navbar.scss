@@ -50,6 +50,7 @@
 
   &__top {
     padding: var(--spacing-xxs) var(--spacing-xs);
+    max-width: var(--page-main-max-width);
   }
 
   &__filters {

@@ -11,6 +11,7 @@
 
     @include breakpoint-tablet {
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      padding: 0 24px;
     }
   }
 
