@@ -1,9 +1,10 @@
-.devise.stack.stack--xs.stack--tablet-line.stack--tablet-justify-center.stack--justify-center.stack--align-center
-  h4.heading-4.heading-4--bold = t(".forgot_your_password_heading")
-  p = t(".sub_heading")
-  = form_for resource, as: resource_name, url: password_path(resource_name) do |f|
-    .stack.stack--xs.stack--tablet-xs
-      = render "devise/shared/error_messages", resource:
-      = f.label :email
-      = f.input :email, as: :email, autofocus: true, class: "input input__input input--text"
-      = f.submit t(".send"), class: "primary-button"
+= turbo_frame_tag :devise
+  .modal__header
+    h2.heading-2 = t(".new_password")
+  .content-container
+    .devise.stack.stack--xs.stack--justify-center.stack--align-center
+      = form_for resource, as: resource_name, url: password_path(resource_name) do |f|
+        .stack.stack--xs
+          = render "devise/shared/error_messages", resource:
+          = f.input :email, as: :email, autofocus: true, class: "input input__input input--text"
+          = f.submit t(".send"), class: "button button--primary button--fill"

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  layout false, only: [:new, :create]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def update_resource(resource, params)
