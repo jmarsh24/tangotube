@@ -4,7 +4,6 @@
   justify-content: center;
   height: calc(100vh - 96px);
   overflow: hidden;
-  font-family: Poppins, Arial, sans-serif;
   font-weight: 700;
   color: var(--color-neutral-1000);
 
@@ -23,14 +22,13 @@
     color: #fff;
     background-color: rgba(0, 0, 0, 0.4);
 
-    h1.heading-1.heading-1--bold {
+    h1.heading-1 {
       font-size: clamp(48px, 4vw, 81px);
       text-shadow: 3px 3px #000;
     }
 
-    h2.heading-2.heading-2--bold {
+    h2.heading-2 {
       font-size: clamp(18px, 1vw, 28px);
-      font-weight: 100;
     }
   }
 
