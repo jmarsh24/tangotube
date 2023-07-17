@@ -5,5 +5,5 @@
 - if @has_more_pages
   - url = Kaminari::Helpers::NextPage.new(self, current_page: @current_page, params: { partial: partial }).url
   - url = url.concat("&pagination=true") if url.present?
-  a#next-page-link.stack.stack--justify-center.stack--line data={ "turbo-frame": "pagination-frame", controller: "viewport-click", "turbo-stream": "true" } href=url
+  a#next-page-link.next-page-link.stack.stack--justify-center.stack--line data={ "turbo-frame": "pagination-frame", controller: "viewport-click", "turbo-stream": "true" } href=url
     = render "components/spinner"
