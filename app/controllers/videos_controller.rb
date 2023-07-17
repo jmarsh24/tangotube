@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :share]
   before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
   before_action :set_video, except: [:index, :create, :destroy]
@@ -66,10 +67,6 @@ class VideosController < ApplicationController
 
   # @route POST /videos/:id/like (like_video)
   def like
-    unless current_user
-      ui.open_modal(new_user_session_path)
-      return
-    end
     current_user.likes.create!(likeable: @video)
     ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
   end
