@@ -2,11 +2,16 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   &__main {
+    display: flex;
     flex: 1;
     width: 100%;
     padding-top: 44px;
+    justify-content: center;
+    align-items: center;
   }
 
   &--with-filter-bar {
@@ -16,11 +21,6 @@
   }
 
   @include breakpoint-tablet {
-    display: grid;
-    grid-template-columns: 1fr minmax(auto, var(--page-main-max-width)) 1fr;
-    grid-template-rows: 58px 1fr auto;
-    justify-items: center;
-
     &__main {
       grid-column: 2;
       grid-row: 2;
