@@ -2,7 +2,7 @@
   .modal__header
     h2.heading-2 = t(".unlock_account")
   .content-container
-    .devise.stack.stack--xs.stack--justify-center.stack--align-center
+    .devise.stack.stack--xs
       h2.heading-2.heading-2--bold = t(".send_reset_instructions")
       = form_with model: resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f|
         = f.input :email, as: :email, autofocus: true, autocomplete: "email"

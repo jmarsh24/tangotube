@@ -2,7 +2,7 @@
   .modal__header
     h2.heading-2 = t(".login")
   .content-container
-    .devise.stack.stack--xs.stack--justify-center.stack--align-center
+    .devise.stack.stack--xs
       = form_with model: resource, as: resource_name, url: registration_path(resource_name) do |f|
         .stack.stack--xs
           = f.input :email, as: :email, class: "input input__input input--email"
