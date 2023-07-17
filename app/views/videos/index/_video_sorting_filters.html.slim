@@ -7,7 +7,7 @@
   - filter_chips = []
 
   - if @filtering_params.present? || params[:sort].present?
-    - sort_name = params[:sort].present? ? "Sort: #{params[:sort].titleize}" : "Sort: Popularity"
+    - sort_name = params[:sort].present? ? "Sort: #{params[:sort].titleize}" : "Sort: Trending"
     - sort_link_path = modal_path(sort_videos_path(@filtering_params))
     = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: true, highlighted: false, closeable: false
 

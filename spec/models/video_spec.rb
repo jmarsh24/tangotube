@@ -301,14 +301,6 @@ RSpec.describe Video do
     end
   end
 
-  describe "#clicked!" do
-    it "increases click_count by 1" do
-      video = videos(:video_1_featured)
-
-      expect { video.clicked! }.to change(video, :click_count).by(1)
-    end
-  end
-
   describe "#featured?" do
     it "returns true when video is featured" do
       expect(videos(:video_1_featured).featured?).to be(true)

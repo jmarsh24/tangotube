@@ -57,8 +57,6 @@ class VideosController < ApplicationController
     @root_url = root_url
     @playback_rate = params[:speed] || "1"
 
-    @video.clicked!
-
     current_user&.watches&.create(video: @video, watched_at: Time.now)
   end
 

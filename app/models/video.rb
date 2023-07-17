@@ -54,6 +54,7 @@ class Video < ApplicationRecord
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
+  has_many :video_searches
 
   has_one_attached :thumbnail
 
@@ -119,6 +120,10 @@ class Video < ApplicationRecord
                        end
   scope :most_popular, -> { order(click_count: :desc) }
   scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
+  scope :trending, -> {
+    joins(:video_searches)
+      .order("video_searches.score DESC")
+  }
 
   class << self
     def search(terms)
@@ -138,11 +143,6 @@ class Video < ApplicationRecord
         thumbnail_attachment: :blob
       ]
     end
-  end
-
-  def clicked!
-    increment(:click_count)
-    save!
   end
 
   def featured?
