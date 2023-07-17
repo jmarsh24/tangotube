@@ -18,12 +18,14 @@
 
     &::before {
       content: '';
-      background-image: url('@assets/images/icons/file-upload.svg');
-      background-size: contain;
-      background-repeat: no-repeat;
-      height: 36px;
+      position: relative;
       width: 56px;
-      display: block;
+      height: 36px;
+      background-color: var(--color-neutral-500);
+      mask-image: url('@assets/images/icons/file-upload.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
     }
   }
   &__input {

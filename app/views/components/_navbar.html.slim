@@ -19,12 +19,13 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
               - else
                 = image_tag "default_avatar.jpg", class: "avatar"
             .menu.menu--right.hidden data-dropdown-target="menu"
-              = link_to edit_user_registration_path do
+              = link_to modal_path(edit_user_registration_path) do
                 .menu-item = t("edit_profile")
               = link_to destroy_user_session_path, data: { turbo_method: :delete } do
                 .menu-item = t("sign_out")
         - else
-          = link_to t("login"), new_user_session_path, class: "button button--primary"
+          = link_to t("sign_up"), modal_path(new_user_registration_path), class: "button button--secondary"
+          = link_to t("login"), modal_path(new_user_session_path), class: "button button--primary"
   - if show_filter_bar?
     .stack.stack--justify-center.navbar__bottom
       = render partial: "videos/index/video_sorting_filters"

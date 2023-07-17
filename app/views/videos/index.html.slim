@@ -4,7 +4,7 @@
 = render "banner/index"
 #videos.stack
   - if @featured_videos.present?
-    = render "videos/index/videos/section/header", title: t(".featured_videos")
+    h2.heading-2 = t(".featured_videos")
     .grid.grid--videos = render @featured_videos
   - if @videos.present?
     = paginated @videos, class: "grid grid--videos"

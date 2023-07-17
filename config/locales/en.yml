@@ -92,6 +92,7 @@ en:
   devise:
     confirmations:
       new:
+        new_confirmation: New Confirmation
         resend_confirmation_instructions: Resend confirmation instructions
         resend_confirmation_instructions_button: Resend confirmation instructions
           button
@@ -125,21 +126,34 @@ en:
     passwords:
       edit:
         change_my_password: Change my password
+        edit_password: Edit Password
       new:
         forgot_your_password_heading: Forgot your password heading
+        new_password: New Password
         send: Send
         sub_heading: Sub heading
     registrations:
       edit:
         drag_and_drop: Drag and drop
+        edit_user: Edit User
         replace_image: Replace image
         save: Save
       new:
+        login: Login
         sign_in: Sign in
+        sign_up: Sign up
+    sessions:
+      new:
+        login: Login
     shared:
       links:
         forgot_password: Forgot password
         log_in: Log in
+        sign_in_with_google: Sign in with google
+    unlocks:
+      new:
+        send_reset_instructions: Send reset instructions
+        unlock_account: Unlock Account
   drag_and_drop_here: Drag and drop here
   drag_here_to_upload_or_click_here_to_browse: Drag here to upload or click here to
     browse
@@ -230,6 +244,7 @@ en:
   show: Show
   show_link: Show link
   sign_out: Sign out
+  sign_up: Sign up
   song_active: Active
   song_artist: Artist
   song_author: Author
