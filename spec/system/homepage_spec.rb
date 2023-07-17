@@ -5,7 +5,10 @@ require "system_helper"
 RSpec.describe "homepage", type: :system do
   fixtures :all
 
-  before { visit root_path }
+  before do
+    VideoSearch.refresh
+    visit root_path
+  end
 
   context "banner" do
     it "displays the banner" do
