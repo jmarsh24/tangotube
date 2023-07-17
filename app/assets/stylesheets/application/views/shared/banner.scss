@@ -23,7 +23,9 @@
     background-color: rgba(0, 0, 0, 0.4);
 
     h1.heading-1 {
-      font-size: clamp(48px, 4vw, 81px);
+      font-size: clamp(56px, 4vw, 81px);
+      line-height: 81px;
+      word-wrap: normal;
       text-shadow: 3px 3px #000;
     }
 
