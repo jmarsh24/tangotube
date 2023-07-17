@@ -25,7 +25,7 @@ RSpec.describe "homepage", type: :system do
       page.evaluate_script("document.cookie = 'banner_closed=true; path=/;'")
     end
 
-    fit "displays featured videos" do
+    it "displays featured videos" do
       featured_videos = [videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)]
 
       screenshot "homepage_videos_present"
