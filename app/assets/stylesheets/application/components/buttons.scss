@@ -90,7 +90,8 @@
   }
 
   &--sm {
-    padding: var(--spacing-xxxs) var(--spacing-xxs);
+    padding: 4px 8px;
+    font-size: 12px;
   }
 
   &--link {
@@ -125,10 +126,6 @@
   }
 
   @include breakpoint-tablet {
-    &--sm {
-      padding: calc(var(--spacing-xs) - 1px) var(--spacing-xl);
-    }
-
     &--link {
       padding: 0;
 

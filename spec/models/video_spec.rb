@@ -17,12 +17,9 @@
 #  channel_id          :bigint
 #  hidden              :boolean          default(FALSE)
 #  hd                  :boolean          default(FALSE)
-#  popularity          :integer          default(0)
 #  like_count          :integer          default(0)
 #  event_id            :bigint
-#  click_count         :integer          default(0)
 #  featured            :boolean          default(FALSE)
-#  index               :text
 #  metadata            :jsonb
 #  tags                :text             default([]), is an Array
 #  imported_at         :datetime
@@ -33,6 +30,8 @@
 #  youtube_tags        :text             default([]), is an Array
 #  metadata_updated_at :datetime
 #  normalized_title    :string
+#  click_count         :integer
+#  popularity          :integer
 #
 require "rails_helper"
 
@@ -298,14 +297,6 @@ RSpec.describe Video do
 
         expect(Video.unrecognized_music).to include(unrecognized_music_video)
       end
-    end
-  end
-
-  describe "#clicked!" do
-    it "increases click_count by 1" do
-      video = videos(:video_1_featured)
-
-      expect { video.clicked! }.to change(video, :click_count).by(1)
     end
   end
 

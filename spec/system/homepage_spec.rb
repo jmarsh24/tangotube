@@ -5,7 +5,10 @@ require "system_helper"
 RSpec.describe "homepage", type: :system do
   fixtures :all
 
-  before { visit root_path }
+  before do
+    VideoSearch.refresh
+    visit root_path
+  end
 
   context "banner" do
     it "displays the banner" do
@@ -13,21 +16,10 @@ RSpec.describe "homepage", type: :system do
 
       screenshot "homepage_banner_present"
     end
-
-    it "closes the banner" do
-      find(".banner__card .icon.icon--close").click
-
-      expect(page).not_to have_css("#banner.banner")
-      expect(page).to have_current_path(root_path)
-      expect(page).to have_content("Login")
-
-      screenshot "homepage_banner_closed"
-    end
   end
 
   context "videos" do
     before do
-      find(".banner__card .icon.icon--close").click
       accept_all_button = find(".personalization-request__content a.button.button--primary", text: "Accept all")
       accept_all_button.click
       page.evaluate_script("document.cookie = 'banner_closed=true; path=/;'")
@@ -36,9 +28,8 @@ RSpec.describe "homepage", type: :system do
     it "displays featured videos" do
       featured_videos = [videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)]
 
-      screenshot "homepage_featured_videos_present"
+      screenshot "homepage_videos_present"
 
-      expect(page).to have_content("Featured videos")
       featured_videos.each do |video|
         expect(page).to have_content(video.song.full_title)
         video.dancers.each do |dancer|

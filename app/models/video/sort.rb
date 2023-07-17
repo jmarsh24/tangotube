@@ -7,7 +7,6 @@ class Video::Sort
     most_recent: {column: "videos.upload_date", direction: "desc"},
     oldest: {column: "videos.upload_date", direction: "asc"},
     most_viewed: {column: "videos.youtube_view_count", direction: "desc"},
-    trending: {column: "videos.popularity", direction: "desc"},
     most_liked: {column: "videos.youtube_like_count", direction: "desc"},
     performance: {column: "performance_videos.performance_id", direction: "desc"},
     song: {column: "songs.title", direction: "asc"},
@@ -23,6 +22,7 @@ class Video::Sort
   end
 
   def sorted_videos
+    return video_relation.trending if sort == :trending
     return video_relation unless COLUMN_TRANSLATIONS.key?(sort)
 
     column = COLUMN_TRANSLATIONS[sort][:column]

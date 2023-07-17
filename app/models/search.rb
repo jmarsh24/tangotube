@@ -94,19 +94,7 @@ class Search
           SELECT
             'videos' AS record_type,
             video_id AS record_id,
-            (
-              (1 - ((EXTRACT(EPOCH FROM current_date) - EXTRACT(EPOCH FROM upload_date)) / ((SELECT max_date FROM min_max_dates) - (SELECT min_date FROM min_max_dates)))) * 0.4 +
-              click_count::float / (SELECT MAX(click_count)::float FROM video_searches) * 0.2 +
-              similarity(dancer_names, :query) * 0.35 +
-              similarity(channel_title, :query) * 0.05 +
-              similarity(song_title, :query) * 0.25 +
-              similarity(song_artist, :query) * 0.05 +
-              similarity(orchestra_name, :query) * 0.15 +
-              similarity(event_city, :query) * 0.05 +
-              similarity(event_title, :query) * 0.1 +
-              similarity(event_country, :query) * 0.05 +
-              similarity(video_title, :query) * 0.15
-            ) AS score 
+            score
           FROM 
             video_searches 
           WHERE 

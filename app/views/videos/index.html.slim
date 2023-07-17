@@ -2,10 +2,6 @@
 - meta.description = t(".meta_description")
 - meta.image = image_url("app_icon.png")
 = render "banner/index"
-#videos.stack.stack--sm
-  - if @featured_videos.present?
-    .video-header
-      h2.heading-2 = t(".featured_videos")
-    .grid.grid--videos = render @featured_videos
+#videos.stack
   - if @videos.present?
     = paginated @videos, class: "grid grid--videos"

@@ -15,15 +15,7 @@ class VideosController < ApplicationController
 
     @current_page = params[:page]&.to_i || 1
 
-    @featured_videos = if filtering_params.empty? && params[:sort].nil?
-      paginated(@search.featured_videos.includes(Video.search_includes), per: 12)
-    end
-
-    @videos = if @featured_videos.present?
-      paginated(@search.videos.not_hidden.not_featured.includes(Video.search_includes), per: 12)
-    else
-      paginated(@search.videos.not_hidden.includes(Video.search_includes), per: 12)
-    end
+    @videos = paginated(@search.videos.not_hidden.includes(Video.search_includes), per: 12)
 
     if params[:filtering] == "true" && params[:pagination].nil?
       ui.update "videos", with: "videos/videos", items: @videos
@@ -55,8 +47,6 @@ class VideosController < ApplicationController
     @end_value = params[:end]
     @root_url = root_url
     @playback_rate = params[:speed] || "1"
-
-    @video.clicked!
 
     current_user&.watches&.create(video: @video, watched_at: Time.now)
   end
