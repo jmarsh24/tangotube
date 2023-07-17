@@ -67,7 +67,7 @@
 
   @include breakpoint-tablet {
     &__filters {
-      padding: var(--spacing-xxs) var(--page-main-padding);
+      padding: var(--spacing-xxs) var(--spacing-md);
     }
   }
 }
