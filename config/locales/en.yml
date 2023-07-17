@@ -1,12 +1,7 @@
 ---
 en:
-  2_mb_file_size_maximum_allowed_file_types_png_jpg: 2 mb file size maximum allowed
-    file types png jpg
   404_icon: 404 icon
   404_not_found: 404 not found
-  are_you_sure: Are you sure?
-  author_label: Author label
-  back: Back
   banner:
     index:
       heading_1: The new way to watch Tango
@@ -14,10 +9,6 @@ en:
       heading_3: Learn the Lyrics & Orchestras
       heading_4: Watch Without Ads
       try_it_now: Try it now
-  channels:
-    channel:
-      pencil_square_icon: Pencil square icon
-      trash_icon: Trash icon
   components:
     cookie_consent:
       accept_all: Accept all
@@ -54,41 +45,12 @@ en:
       google_privacy_policy: Google Privacy Policy
       privacy: Privacy
       terms: Terms
-  couples:
-    couple:
-      dancer_names: Dancer names
-      videos_count: "%{count} videos"
-    edit:
-      edit: Edit
-    index:
-      heading: Heading
-      new_couple: New couple
-      search: Search
-      search_dancer: Search dancer
-    new:
-      heading: Couple
-    show:
-      dancer_names: Dancer names
-      videos_count: "%{count} videos"
   dancers:
-    dancer:
-      videos_count: "%{count} videos"
     date:
-    edit:
-      edit_dancer: Editing dancer
-    index:
-      ":": ":"
-      search_dancer: Search dancer
-    new:
-      new_dancer: New dancer
-    show:
-      dropdown: Dropdown
-      videos_count: "%{count} videos"
   date:
     formats:
       short_month_year: "%b %Y"
       song_recording_date: "%B %e, %Y"
-  destroy: Destroy
   devise:
     confirmations:
       new:
@@ -128,19 +90,16 @@ en:
         change_my_password: Change my password
         edit_password: Edit Password
       new:
-        forgot_your_password_heading: Forgot your password heading
         new_password: New Password
         send: Send
-        sub_heading: Sub heading
     registrations:
       edit:
-        drag_and_drop: Drag and drop
+        drag_and_drop_avatar: Drag and drop avatar
         edit_user: Edit User
         replace_image: Replace image
         save: Save
       new:
         login: Login
-        sign_in: Sign in
         sign_up: Sign up
     sessions:
       new:
@@ -154,11 +113,6 @@ en:
       new:
         send_reset_instructions: Send reset instructions
         unlock_account: Unlock Account
-  drag_and_drop_here: Drag and drop here
-  drag_here_to_upload_or_click_here_to_browse: Drag here to upload or click here to
-    browse
-  dropzone_allowed_text: Dropzone allowed text
-  edit: Edit
   edit_profile: Edit profile
   errors:
     button: Button
@@ -173,22 +127,6 @@ en:
       page_does_not_exist: Page does not exist
       page_not_found: Page not found
   event_info_heading: Event Info
-  event_location: Location
-  event_videos_count: Event videos count
-  events:
-    edit:
-      heading: Events
-    index:
-      heading: Events
-      loading_spinner: Loading spinner
-      search_button: Search button
-      search_label: Search label
-    new:
-      heading: Event
-    show:
-      dropdown_button: Dropdown button
-      event_video_count: Event video count
-  loading_spinner: Loading spinner
   login: Login
   number:
     human:
@@ -201,89 +139,20 @@ en:
           billion: B
           million: M
           thousand: K
-  orchestra_videos_count: Orchestra videos count
-  orchestras:
-    edit:
-      heading: Orchestras
-    index:
-      heading: Orchestras
-      label: Label
-      loading_spinner: Loading spinner
-    new:
-      heading: Heading
-    show:
-      dancers_and_partner: Dancers and partner
-      loading_spinner: Loading spinner
-      video_count: Video count
   pages:
     contact:
       contact_me: Contact Me
-  performance_date_label: Performance Date
-  performance_videos_count: "%{count} videos"
-  performances:
-    edit:
-      heading: Performance
-      show_link: Show
-    index:
-      heading: Performances
-      loading_spinner: Loading spinner
-    new:
-      heading: Performance
-  playlists:
-    index:
-      add_new_playlist: Add new playlist
-      heading: Playlists
-      insert_playlist_id_here: Insert playlist id here
-    show:
-      playlist_channel_id: Playlist channel
-      playlist_channel_title: Playlist channel title
-      playlist_id: Playlist
-      playlist_imported: Playlist imported
-      playlist_video_count: Playlist video count
-  search: Search
-  show: Show
-  show_link: Show link
   sign_out: Sign out
   sign_up: Sign up
-  song_active: Active
-  song_artist: Artist
-  song_author: Author
-  song_date: Recording Date
-  song_genre: Genre
-  song_title: Title
-  songs:
-    edit:
-      heading: Song
-    form:
-      active_label: Active label
-      artist_label: Artist label
-      genre_label: Genre label
-      recording_date_label: Recording date label
-    index:
-      heading: Songs
-      new_link: New
-      show_link: Show
-    new:
-      heading: Song
   time:
     formats:
       video_duration: "%M:%S"
   videos:
-    form:
-      event_info_heading: Event Info
-      music_heading: Music
-      performance_number_label: Performance Positio
-      performance_total_number_label: Performance Total
-      performers_heading: Performers
     index:
       featured_videos: Featured videos
       meta_description: This is a search engine for tango videos. Search for tango
         videos by title, artist, orchestra, dancer, couple, or event.
       meta_title: ''
-    new:
-      heading: Videos
-      youtube_id_placeholder: Youtube id placeholder
-      youtube_uri_placeholder: Youtube uri placeholder
     share:
       copy: Copy
       email: Email

@@ -19,6 +19,8 @@
     "@types/node": "^18.11.18",
     "@types/youtube-player": "^5.5.7",
     "autoprefixer": "^10.4.13",
+    "cropperjs": "^1.5.13",
+    "exif-rotate-js": "^1.4.0",
     "lodash.debounce": "^4.0.8",
     "path": "^0.12.7",
     "sass": "^1.57.1",

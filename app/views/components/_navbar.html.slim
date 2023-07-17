@@ -17,13 +17,13 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
               = image_tag current_user.avatar, width: 80, class: "avatar"
             - else
               = image_tag "default_avatar.jpg", class: "avatar"
-              .menu.menu--right.hidden data-dropdown-target="menu" data-action="click->dropdown#toggle"
-                - if current_user
-                  = link_to t("edit_profile"), modal_path(edit_user_registration_path), class: "menu-item"
-                  = link_to t("sign_out"), destroy_user_session_path, class: "menu-item", data: { turbo_method: :delete }
-                - else
-                  = link_to t("login"), modal_path(new_user_session_path), class: "menu-item"
-                  = link_to t("sign_up"), modal_path(new_user_registration_path), class: "menu-item menu-item--bold"
+          .menu.menu--right.hidden data-dropdown-target="menu" data-action="click->dropdown#toggle"
+            - if current_user
+              = link_to t("edit_profile"), modal_path(edit_user_registration_path), class: "menu-item"
+              = link_to t("sign_out"), destroy_user_session_path, class: "menu-item", data: { turbo_method: :delete }
+            - else
+              = link_to t("login"), modal_path(new_user_session_path), class: "menu-item"
+              = link_to t("sign_up"), modal_path(new_user_registration_path), class: "menu-item menu-item--bold"
   - if show_filter_bar?
     .stack.stack--justify-center.navbar__bottom
       = render partial: "videos/index/video_sorting_filters"

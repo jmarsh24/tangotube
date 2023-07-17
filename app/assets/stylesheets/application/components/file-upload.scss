@@ -1,10 +1,6 @@
 .file-upload {
   position: relative;
 
-  &.hidden {
-    display: none;
-  }
-
   &__label {
     @extend .caption;
     border: 1px dotted var(--background-input-border-primary-default);
@@ -39,13 +35,18 @@
   }
 }
 
-#user_avatar:valid ~ #drag_and_drop {
-  opacity: 0;
-  position: absolute;
-  pointer-events: none;
+#drag_and_drop {
+  display: none;
 }
-#user_avatar:invalid ~ #replace_image {
-  opacity: 0;
-  position: absolute;
-  pointer-events: none;
+
+#replace_image {
+  display: none;
+}
+
+#drag_and_drop:not(.hidden) {
+  display: block;
+}
+
+#replace_image:not(.hidden) {
+  display: block;
 }
