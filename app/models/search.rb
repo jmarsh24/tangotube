@@ -30,7 +30,7 @@ class Search
         		'channels' AS record_type,
         		id AS record_id,
         		(similarity (title,
-        				:query) * 0.4 * 0.4 + videos_count / 1000 * 0.2) AS score
+        				:query) * 10000 * 0.4 + videos_count / 1000 * 0.2) AS score
         	FROM
         		channels
         	WHERE
@@ -40,7 +40,7 @@ class Search
         		'dancers' AS record_type,
         		id AS record_id,
         		(similarity (name,
-        				:query) * 0.4 * 0.4 + videos_count / 1000 * 0.2) AS score
+        				:query) * 10000 * 0.4 + videos_count / 1000 * 0.2) AS score
         	FROM
         		dancers
         	WHERE
@@ -50,7 +50,7 @@ class Search
         		'events' AS record_type,
         		id AS record_id,
         		(similarity (title,
-        				:query) * 0.4 + similarity (city,
+        				:query) * 10000 + similarity (city,
         				:query) * 0.3 + similarity (country,
         				:query) * 0.3 + videos_count / 1000 * 0.2) AS score
         	FROM
@@ -64,7 +64,7 @@ class Search
         		'orchestras' AS record_type,
         		id AS record_id,
         		(similarity (name,
-        				:query) * 0.4 * 0.4 + videos_count / 1000 * 0.2) AS score
+        				:query) * 10000 + videos_count / 1000 * 0.2) AS score
         	FROM
         		orchestras
         	WHERE
@@ -74,8 +74,8 @@ class Search
         		'songs' AS record_type,
         		id AS record_id,
         		(similarity (title,
-        				:query) * 0.4 + similarity (artist,
-        				:query) * 0.3 + similarity (genre,
+        				:query) * 10000 + similarity (artist,
+        				:query) * 10000 + similarity (genre,
         				:query) * 0.1 + videos_count / 1000 * 0.2) AS score
         	FROM
         		songs
