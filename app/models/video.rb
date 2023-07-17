@@ -17,12 +17,9 @@
 #  channel_id          :bigint
 #  hidden              :boolean          default(FALSE)
 #  hd                  :boolean          default(FALSE)
-#  popularity          :integer          default(0)
 #  like_count          :integer          default(0)
 #  event_id            :bigint
-#  click_count         :integer          default(0)
 #  featured            :boolean          default(FALSE)
-#  index               :text
 #  metadata            :jsonb
 #  tags                :text             default([]), is an Array
 #  imported_at         :datetime
@@ -54,7 +51,7 @@ class Video < ApplicationRecord
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
-  has_many :video_searches
+  has_many :video_searches, dependent: :destroy
 
   has_one_attached :thumbnail
 
@@ -118,7 +115,6 @@ class Video < ApplicationRecord
                          query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")
                          where(query)
                        end
-  scope :most_popular, -> { order(click_count: :desc) }
   scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
   scope :trending, -> {
     joins(:video_searches)

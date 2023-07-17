@@ -17,12 +17,9 @@
 #  channel_id          :bigint
 #  hidden              :boolean          default(FALSE)
 #  hd                  :boolean          default(FALSE)
-#  popularity          :integer          default(0)
 #  like_count          :integer          default(0)
 #  event_id            :bigint
-#  click_count         :integer          default(0)
 #  featured            :boolean          default(FALSE)
-#  index               :text
 #  metadata            :jsonb
 #  tags                :text             default([]), is an Array
 #  imported_at         :datetime
