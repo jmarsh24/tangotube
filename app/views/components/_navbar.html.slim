@@ -13,7 +13,7 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
         /     .menu-item.theme-menu-item--auto data-action="click->dark#auto" = t(".auto_mode_link")
         .dropdown data-controller="dropdown"
           button data-action="dropdown#toggle click@window->dropdown#hide"
-            - if current_user&.avatar
+            - if current_user&.avatar&.attached?
               = image_tag current_user.avatar, width: 80, class: "avatar"
             - else
               = image_tag "default_avatar.jpg", class: "avatar"
