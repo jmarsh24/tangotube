@@ -2,48 +2,84 @@
   font-weight: 700;
   font-size: 48px;
   line-height: 72px;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .heading-1 {
   font-size: 32px;
   line-height: 48px;
   font-weight: 700;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .heading-2 {
   font-size: 24px;
   line-height: 36px;
   font-weight: 700;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .heading-3 {
   font-size: 20px;
   line-height: 30px;
   font-weight: 700;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .heading-4 {
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .paragraph {
   font-size: 16px;
   line-height: 24px;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .caption {
   font-size: 12px;
   line-height: 18px;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .text-uppercase {
   text-transform: uppercase;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .text-align-center {
   text-align: center;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .action-footer-link {
@@ -52,48 +88,36 @@
   text-decoration: none;
   color: inherit;
   font-weight: 700;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
 .action-small-links {
   font-size: 14px;
   line-height: 21px;
   font-weight: 700;
+
+  &--padded {
+    padding-left: 20px;
+  }
 }
 
-/* Tablet breakpoint styles */
-@media screen and (min-width: 768px) {
-  .heading-1 {
-    font-size: 42px;
-    line-height: 63px;
-  }
-
-  .heading-2 {
-    font-size: 30px;
-    line-height: 45px;
-  }
-
-  .heading-3 {
-    font-size: 24px;
-    line-height: 36px;
-  }
-
-  .heading-4 {
-    font-size: 18px;
-    line-height: 27px;
-  }
-
-  .caption {
-    font-size: 14px;
-    line-height: 21px;
-  }
-
-  .action-footer-link {
-    font-size: 16px;
-    line-height: 24px;
-  }
-
+@include breakpoint-tablet {
+  .mega,
+  .heading-1,
+  .heading-2,
+  .heading-3,
+  .heading-4,
+  .paragraph,
+  .caption,
+  .text-uppercase,
+  .text-align-center,
+  .action-footer-link,
   .action-small-links {
-    font-size: 16px;
-    line-height: 24px;
+    &--padded {
+      padding-left: 30px;
+    }
   }
 }
