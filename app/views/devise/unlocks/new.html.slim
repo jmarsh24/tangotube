@@ -1,7 +1,7 @@
 .content-container.devise
-h2.heading-2.heading-2--bold Resend unlock instructions
-= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
+h2.heading-2.heading-2--bold = t(".send_reset_instructions")
+= form_with model: resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f|
+  = render "devise/shared/error_messages", resource:
     = f.label :email
     = f.email_field :email, autofocus: true, autocomplete: "email"
     = f.submit "Resend unlock instructions"
