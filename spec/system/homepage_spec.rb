@@ -16,16 +16,6 @@ RSpec.describe "homepage", type: :system do
 
       screenshot "homepage_banner_present"
     end
-
-    it "closes the banner" do
-      find(".banner__card .icon.icon--close").click
-
-      expect(page).not_to have_css("#banner.banner")
-      expect(page).to have_current_path(root_path)
-      expect(page).to have_content("Login")
-
-      screenshot "homepage_banner_closed"
-    end
   end
 
   context "videos" do

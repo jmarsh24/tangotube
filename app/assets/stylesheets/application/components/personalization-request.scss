@@ -9,6 +9,19 @@
   backdrop-filter: blur(6px);
   padding: var(--spacing-md) var(--spacing-md);
   z-index: var(--z-index-cookies);
+  border-radius: var(--border-radius-xl);
+  font-size: 12px;
+  p {
+    font-size: 12px;
+  }
+
+  .subheading {
+    font-size: 12px;
+  }
+  @include breakpoint-tablet {
+    max-width: 600px;
+    left: unset;
+  }
 
   &__content {
     @include breakpoint-tablet {
@@ -18,18 +31,9 @@
   }
 
   &__text {
-    @include breakpoint-tablet {
-      margin-bottom: 0;
-      margin-right: 40px;
-    }
-
     a {
       text-decoration: underline;
     }
-  }
-
-  p + p {
-    margin-top: 12px;
   }
 
   .heading {

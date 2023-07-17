@@ -2,16 +2,15 @@
 - if !consent_settings.given?
   .personalization-request data-controller="consent"
     .container
-      .heading.heading-2 = t ".banner_title"
       .personalization-request__content.stack
-        .personalization-request__text
+        .personalization-request__textw
           = simple_format t ".banner_description_html", deny: deny_tag, privacy: link_to(t(".privacy"), privacy_path)
-        .stack.stack--sm.stack--tablet-line.stack--tablet-justify-right
-          a.button.button--sm.button--secondary data-action="consent#manage" = t(".manage")
-          a.button.button--sm.button--primary data-action="consent#permitAll" = t(".accept_all")
+        .stack.stack--sm.stack--line.stack--justify-space-between
+          a.button.button--primary.button--sm data-action="consent#permitAll" = t(".accept_all")
+          a.button.button--secondary.button--sm data-action="consent#manage" = t(".manage")
 .personalization-request#personalization-settings data-controller="consent" hidden=true
   .container
-    .heading = t ".manage_title"
+    .heading-4 = t ".manage_title"
     .stack
       .line = simple_format t ".manage_description", deny: deny_tag, privacy: link_to(t(".privacy"), privacy_path)
       - [:essential, :targeting, :statistic].each do |setting|
