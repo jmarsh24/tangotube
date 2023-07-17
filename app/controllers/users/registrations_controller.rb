@@ -13,6 +13,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def new
+    if request.format.turbo_stream?
+      render layout: false
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
