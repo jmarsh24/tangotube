@@ -1,6 +1,7 @@
-.stack.stack--xs.stack--tablet-line.stack--tablet-justify-center.stack--justify-center.stack--align-center
-  .devise
-    = form_with model: resource, as: resource_name, url: session_path(resource_name) do |f|
+.devise.stack.stack--xs.stack--tablet-line.stack--tablet-justify-center.stack--justify-center.stack--align-center
+  = form_with model: resource, as: resource_name, url: session_path(resource_name) do |f|
+    .stack.stack--xs.stack--tablet-xs
+      = render "devise/shared/error_messages", resource:
       = f.label :email
       = f.email_field :email, autofocus: true, class: "input input__input input--email"
       = f.label :password

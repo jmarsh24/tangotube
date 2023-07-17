@@ -136,10 +136,14 @@ en:
         save: Save
       new:
         sign_in: Sign in
+        sign_up: Sign up
     shared:
       links:
         forgot_password: Forgot password
         log_in: Log in
+    unlocks:
+      new:
+        send_reset_instructions: Send reset instructions
   drag_and_drop_here: Drag and drop here
   drag_here_to_upload_or_click_here_to_browse: Drag here to upload or click here to
     browse
@@ -230,6 +234,7 @@ en:
   show: Show
   show_link: Show link
   sign_out: Sign out
+  sign_up: Sign up
   song_active: Active
   song_artist: Artist
   song_author: Author

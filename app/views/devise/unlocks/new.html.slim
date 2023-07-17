@@ -1,8 +1,8 @@
-.content-container.devise
-h2.heading-2.heading-2--bold = t(".send_reset_instructions")
-= form_with model: resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f|
-  = render "devise/shared/error_messages", resource:
+.devise.stack.stack--xs.stack--tablet-line.stack--tablet-justify-center.stack--justify-center.stack--align-center
+  h2.heading-2.heading-2--bold = t(".send_reset_instructions")
+  = form_with model: resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f|
+    = render "devise/shared/error_messages", resource:
     = f.label :email
     = f.email_field :email, autofocus: true, autocomplete: "email"
     = f.submit "Resend unlock instructions"
-= render "devise/shared/links"
+  = render "devise/shared/links"

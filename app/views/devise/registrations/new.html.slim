@@ -1,11 +1,10 @@
-.content-container.devise.stack.stack--justify-center
+.devise.stack.stack--xs.stack--tablet-line.stack--tablet-justify-center.stack--justify-center.stack--align-center
   = form_with model: resource, as: resource_name, url: registration_path(resource_name) do |f|
     .stack.stack--xs.stack--tablet-xs
-      = f.label :email
+      = render "devise/shared/error_messages", resource:
       = f.input :email, as: :email, class: "input input__input input--email"
-      = f.label :password
       = f.input :password, as: :password, class: "input input__input input--text"
       = f.label :password_confirmation
-      = f.password_field :password_confirmation, autocomplete: "new-password"
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: "input input__input input--text"
       = f.submit t(".sign_up"), class: "button button--primary button--fill"
       = render "devise/shared/links"
