@@ -5,6 +5,5 @@
     .devise.stack.stack--xs.stack--justify-center.stack--align-center
       = form_for resource, as: resource_name, url: password_path(resource_name) do |f|
         .stack.stack--xs
-          = render "devise/shared/error_messages", resource:
           = f.input :email, as: :email, autofocus: true, class: "input input__input input--text"
           = f.submit t(".send"), class: "button button--primary button--fill"

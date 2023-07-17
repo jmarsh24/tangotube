@@ -5,9 +5,8 @@
     .devise.stack.stack--xs.stack--justify-center.stack--align-center
       = form_with model: resource, as: resource_name, url: session_path(resource_name) do |f|
         .stack.stack--xs.stack--tablet-xs
-          = render "devise/shared/error_messages", resource:
           = f.input :email, as: :email, autofocus: true, class: "input input__input input--email"
           = f.input :password, as: :password, autocomplete: "current-password", class: "input input__input input--text"
           = f.submit t("login"), class: "button button--primary button--fill"
           a.link href=edit_user_registration_path
-          = render "devise/shared/links"
+      = render "devise/shared/links"

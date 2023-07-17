@@ -36,6 +36,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :email, presence: true
+  validates_confirmation_of :password
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

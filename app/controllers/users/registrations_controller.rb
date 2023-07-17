@@ -5,10 +5,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def update_resource(resource, params)
-    if params[:password].blank? && params[:password_confirmation].blank?
+    if resource.provider == "google_oauth2"
+      params.delete("current_password")
+      resource.password = params["password"]
       resource.update_without_password(params)
     else
-      resource.update(params)
+      resource.update_with_password(params)
     end
   end
 

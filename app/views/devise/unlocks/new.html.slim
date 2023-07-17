@@ -5,7 +5,6 @@
     .devise.stack.stack--xs.stack--justify-center.stack--align-center
       h2.heading-2.heading-2--bold = t(".send_reset_instructions")
       = form_with model: resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f|
-        = render "devise/shared/error_messages", resource:
         = f.input :email, as: :email, autofocus: true, autocomplete: "email"
         = f.submit "Resend unlock instructions", class: "button button--primary button--fill"
       = render "devise/shared/links"
