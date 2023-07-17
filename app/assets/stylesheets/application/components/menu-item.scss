@@ -6,9 +6,15 @@
   min-width: 120px;
   color: var(--color-neutral-800);
   font-size: 14px;
+  font-weight: 400;
   cursor: pointer;
 
   &:hover {
     background-color: var(--color-neutral-200);
+    color: var(--color-neutral-1000);
+  }
+
+  &--bold {
+    font-weight: 500;
   }
 }

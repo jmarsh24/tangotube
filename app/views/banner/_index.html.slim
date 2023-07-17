@@ -1,11 +1,13 @@
 - if cookies[:banner_closed].blank? && !user_signed_in?
   #banner.banner
     = video_tag(["https://tangotube.s3.eu-central-1.amazonaws.com/banner.mp4","https://tangotube.s3.eu-central-1.amazonaws.com/banner.webm"], poster: asset_path("hero_video_preview.jpg"), loop: true, muted: true, playsinline: true, autoplay: true, class: "banner__video")
-    .banner__card.stack.stack--md
-      h1.heading-1.heading-1--bold = t(".heading_1")
-      h2.heading-2.heading-2--bold = t(".heading_2")
-      h2.heading-2.heading-2--bold = t(".heading_3")
-      h2.heading-2.heading-2--bold = t(".heading_4")
-      = link_to t(".try_it_now"), new_user_registration_path, class: "button button--primary"
+    .banner__card
+      .stack.stack--xxl
+        h1.heading-1 = t(".heading_1")
+        .stack.stack--md
+          h2.heading-2 = t(".heading_2")
+          h2.heading-2 = t(".heading_3")
+          h2.heading-2 = t(".heading_4")
+      = link_to t(".try_it_now"), modal_path(new_user_registration_path), class: "button button--primary"
       = button_to banner_path(banner_closed: true), class: "banner__close", "aria-label": "close_banner" do
         .icon.icon--close.icon--xl.icon--white

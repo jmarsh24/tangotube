@@ -12,7 +12,7 @@
         = render partial: "videos/show/vote", locals: { video: @video }
         = render partial: "videos/show/video_metadata", locals: { video: @video }
         = render partial: "videos/show/lyrics" if @video&.song&.lyrics.present?
-    .grid__sidebar
+    .grid__sidebar.stack.stack--sm
       - cache [@video.youtube_id, "with_same_performance"] do
         = render partial: "videos/show/recommended_videos", locals: { videos: @related_videos.with_same_performance, header: t(".recommended_videos_videos_from_this_performance_header") }
       - cache [@video.youtube_id, "with_same_dancers"] do

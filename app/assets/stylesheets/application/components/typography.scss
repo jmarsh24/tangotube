@@ -60,8 +60,7 @@
   font-weight: 700;
 }
 
-/* Tablet breakpoint styles */
-@media screen and (min-width: 768px) {
+@include breakpoint-tablet {
   .heading-1 {
     font-size: 42px;
     line-height: 63px;

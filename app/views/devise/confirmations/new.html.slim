@@ -1,10 +1,11 @@
-.content-container.devise
-  h2.heading-2.heading-2--bold = t(".resend_confirmation_instructions")
-  = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }), class: "stack" do |f|
-    .stack.stack--xs.stack--tablet-xs
-      = render "devise/shared/error_messages", resource: resource
-      .field
-        = f.input :email, as: :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-      .actions
-        = f.submit t(".resend_confirmation_instructions_button")
-      = render "devise/shared/links"
+.devise
+  .modal__header
+    h2.heading-2 = t(".new_confirmation")
+  .content-container
+    .stack.stack--xs
+      h2.heading-2.heading-2--bold = t(".resend_confirmation_instructions")
+      = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+        .stack.stack--xs.stack--tablet-xs
+          = f.input :email, as: :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+          = f.submit t(".resend_confirmation_instructions_button"), class: "button button--primary button--fill"
+          = render "devise/shared/links"
