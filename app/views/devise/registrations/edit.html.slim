@@ -5,11 +5,11 @@
     .devise.stack.stack--xs
       = form_with model: resource, url: registration_path(resource_name) do |f|
         .stack.stack--xs
-          .file-upload
-            = f.file_field :avatar, class: "file-upload__input"
-            label#drag_and_drop.file-upload__label for="avatar" = t(".drag_and_drop")
+          .file-upload 
+            = f.file_field :avatar, required: true, class: 'file-upload__input', id: 'user_avatar'
+            label#drag_and_drop.file-upload__label for="user_avatar" = t(".drag_and_drop_avatar")
             .stack#replace_image
-              = image_tag resource.avatar, width: 400
+              = image_tag(resource.avatar, class: 'w-picker', width: 300)
               footer.stack.stack--line.stack--justify-right
                 label.button.button--link.button--sm.button--tablet-md for="user_avatar" = t(".replace_image")
           = f.input :first_name, as: :string, autocomplete: "off", class: "input input__input input--text"
