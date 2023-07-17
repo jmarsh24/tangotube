@@ -118,6 +118,7 @@ class Video < ApplicationRecord
                          where(query)
                        end
   scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
+  scope :most_popular, -> { trending }
   scope :trending, -> {
     joins(:video_searches)
       .order("video_searches.score DESC")
