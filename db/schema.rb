@@ -392,6 +392,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_17_151744) do
     ORDER BY (round(((((count(DISTINCT watches.id) + count(DISTINCT likes.id)))::numeric + exp((((- EXTRACT(epoch FROM (now() - (videos.upload_date)::timestamp with time zone))) / (3600)::numeric) / ((24 * 7))::numeric))) + exp((((- EXTRACT(epoch FROM (now() - (GREATEST(COALESCE(max(watches.watched_at), (videos.upload_date)::timestamp without time zone), COALESCE(max(likes.created_at), (videos.upload_date)::timestamp without time zone)))::timestamp with time zone))) / (3600)::numeric) / ((24 * 7))::numeric))), 2)) DESC;
   SQL
   add_index "video_searches", ["dancer_names"], name: "index_video_searches_on_dancer_names", opclass: :gist_trgm_ops, using: :gist
+  add_index "video_searches", ["score"], name: "index_video_searches_on_score"
   add_index "video_searches", ["upload_date"], name: "index_video_searches_on_upload_date"
   add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
   add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
