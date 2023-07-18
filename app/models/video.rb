@@ -60,34 +60,34 @@ class Video < ApplicationRecord
   attribute :metadata, ExternalVideoImport::Metadata.to_type
   validates :youtube_id, presence: true, uniqueness: true
 
-  scope :channel, ->(value) { joins(:channel).where(channels: {channel_id: value}) }
-  scope :exclude_youtube_id, ->(value) { where.not(youtube_id: value) }
+  scope :channel, ->(channel_id) { joins(:channel).where(channel: {channel_id:}) }
+  scope :exclude_youtube_id, ->(youtube_id) { where.not(youtube_id:) }
   scope :featured, -> { where(featured: true) }
   scope :not_featured, -> { where(featured: false) }
-  scope :follower, ->(value) {
+  scope :follower, ->(slug) {
                      joins("JOIN dancer_videos AS follower_dancer_videos ON follower_dancer_videos.video_id = videos.id")
                        .joins("JOIN dancers AS follower_dancers ON follower_dancers.id = follower_dancer_videos.dancer_id")
-                       .where(follower_dancers: {slug: value}, follower_dancer_videos: {role: "follower"})
+                       .where(follower_dancers: {slug:}, follower_dancer_videos: {role: "follower"})
                    }
-  scope :leader, ->(value) {
+  scope :leader, ->(slug) {
                    joins("JOIN dancer_videos AS leader_dancer_videos ON leader_dancer_videos.video_id = videos.id")
                      .joins("JOIN dancers AS leader_dancers ON leader_dancers.id = leader_dancer_videos.dancer_id")
-                     .where(leader_dancers: {slug: value}, leader_dancer_videos: {role: "leader"})
+                     .where(leader_dancers: {slug:}, leader_dancer_videos: {role: "leader"})
                  }
-  scope :has_leader, -> { joins("JOIN dancer_videos AS leader_dancer_videos ON leader_dancer_videos.video_id = videos.id") }
-  scope :has_follower, -> { joins("JOIN dancer_videos AS follower_dancer_videos ON follower_dancer_videos.video_id = videos.id") }
-  scope :dancer, ->(value) { joins(:dancers).where(dancers: {slug: value}) }
+  scope :has_leader, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'leader')") }
+  scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }
+  scope :dancer, ->(slug) { joins(:dancers).where(dancers: {slug:}) }
   scope :genre, ->(value) { joins(:song).where("LOWER(genre) = ?", value.downcase) }
-  scope :hd, ->(value) { where(hd: value) }
+  scope :hd, ->(hd) { where(hd:) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
   scope :liked, ->(user) { joins(:likes).where(likes: {likeable_type: "Video", user_id: user.id}) }
-  scope :orchestra, ->(slug) { joins(song: :ochestra).where(orchestras: {slug:}) }
-  scope :song, ->(value) { joins(:song).where(song_id: value) }
-  scope :event, ->(value) { joins(:event).where(event_id: value) }
-  scope :watched, ->(user_id) { joins(:watched).where(user_id:) }
-  scope :not_watched, ->(user) { joins(:watched).where.not(id: subquery) }
-  scope :year, ->(value) { where(upload_date_year: value) }
+  scope :orchestra, ->(slug) { joins(song: :orchestra).where(orchestras: {slug:}) }
+  scope :song, ->(slug) { joins(:song).where(songs: {slug:}) }
+  scope :event, ->(slug) { joins(:event).where(events: {slug:}) }
+  scope :watched, ->(user_id) { joins(:watches).where(watches: {user_id:}) }
+  scope :not_watched, ->(user_id) { where.not(id: Watch.where(user_id:).select(:video_id)) }
+  scope :year, ->(upload_date_year) { where(upload_date_year:) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
   scope :most_popular, -> { trending }
   scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
