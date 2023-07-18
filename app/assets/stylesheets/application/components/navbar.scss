@@ -1,10 +1,8 @@
 .navbar {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  transition: top 0.2s;
+  position: sticky;
   z-index: var(--z-navbar);
   background-color: var(--color-neutral-100);
+  top: 0;
 
   &__item {
     position: relative;
@@ -64,10 +62,10 @@
   &__bottom {
     background-color: var(--color-neutral-0);
   }
-
   @include breakpoint-tablet {
     &__filters {
       padding: var(--spacing-xxs) var(--spacing-md);
     }
+    top: 0 !important;
   }
 }

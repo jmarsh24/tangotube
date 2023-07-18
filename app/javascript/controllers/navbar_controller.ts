@@ -14,9 +14,13 @@ export default class NavbarController extends Controller {
 
   handleScroll() {
     let scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    // Check if the filter bar is present
+    const filterBar = document.getElementById('filter-bar');
+
     if (scrollTop > this.lastScrollTop) {
       // downscroll code
-      this.hideNavbar();
+      this.hideNavbar(filterBar);
     } else {
       // upscroll code
       this.showNavbar();
@@ -24,10 +28,14 @@ export default class NavbarController extends Controller {
     this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
   }
 
-  hideNavbar() {
+  hideNavbar(filterBar: HTMLElement | null) {
     // Use the actual height of your navbar
     // this.element refers to the element this controller is connected to
-    (this.element as HTMLElement).style.top = '-44px';
+    if (filterBar) {
+      (this.element as HTMLElement).style.top = '-44px';
+    } else {
+      // Put whatever you need here if the filter bar is not present
+    }
   }
 
   showNavbar() {

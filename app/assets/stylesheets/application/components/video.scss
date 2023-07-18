@@ -1,6 +1,6 @@
 .video-block {
   position: sticky;
-  top: 0;
+  top: 44px;
   aspect-ratio: 16 / 9;
   z-index: var(--z-index-video-overlay);
 
@@ -14,5 +14,6 @@
 
   @include breakpoint-tablet {
     position: relative;
+    top: 0px;
   }
 }
