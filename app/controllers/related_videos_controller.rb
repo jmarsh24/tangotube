@@ -15,6 +15,6 @@ class RelatedVideosController < ApplicationController
       related_videos_service.with_same_channel
     when "same_performance"
       related_videos_service.with_same_performance
-    end
+    end.includes(:channel, :song, dancer_videos: :dancer, thumbnail_attachment: :blob)
   end
 end

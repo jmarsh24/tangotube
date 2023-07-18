@@ -152,11 +152,11 @@ en:
       contact_me: Contact Me
   related_videos:
     show:
-      header_same_channel: Same Clickhannel
+      header_same_channel: Same Channel
       header_same_dancers: Same Performers
       header_same_event: This Event
       header_same_performance: Others from this Performance
-      header_same_song: Header same song
+      header_same_song: Same Song
   sign_out: Sign out
   sign_up: Sign up
   time:
