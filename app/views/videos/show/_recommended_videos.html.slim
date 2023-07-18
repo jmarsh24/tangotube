@@ -1,8 +1,0 @@
-- if videos.present?
-  .recommended-videos-card.stack data-controller="reveal" data-reveal-hidden-class="open" data-reveal-target="item"
-    .recommended-videos-card__videos.stack.stack--md
-      h2.heading-2.heading-2--bold.heading-2--padded = header
-      = render partial: 'video_card', collection: videos, as: :video
-    - if videos.size > 3
-      button.button.button--secondary.stack.stack--justify-center data-action="click->reveal#toggle"
-        .recommended-videos-card__icon.icon

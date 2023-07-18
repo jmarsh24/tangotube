@@ -54,6 +54,8 @@ Rails.application.routes.draw do
   # Facet route
   resources :facets, only: :show
 
+  resources :related_videos, only: [:show]
+
   # Like routes
   resources :likes, only: [:create, :destroy]
 
