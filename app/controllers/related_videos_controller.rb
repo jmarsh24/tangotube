@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RelatedVideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
