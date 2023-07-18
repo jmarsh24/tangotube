@@ -14,9 +14,9 @@ class Video::RelatedVideos
   end
 
   def with_same_event
-    videos.within_week_of(@video.upload_date)
+    videos = Video.within_week_of(@video.upload_date)
     event = @video.event.slug
-    Video::Filter.new(Video.all, filtering_params: {event:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
+    Video::Filter.new(videos, filtering_params: {event:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
   end
 
   def with_same_song
@@ -32,7 +32,7 @@ class Video::RelatedVideos
   end
 
   def with_same_performance
-    videos Video.within_week_of(@video.upload_date)
+    videos = Video.within_week_of(@video.upload_date)
     leader = @video.leaders.first.slug if @video.leaders.present?
     follower = @video.followers.first.slug if @video.followers.present?
     channel = @video.channel.channel_id
