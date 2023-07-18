@@ -20,13 +20,14 @@ class Video::RelatedVideos
   end
 
   def with_same_song
-    videos = Video.joins(:dancers)
+    videos = Video.joins(:dancer_videos)
     song = @video.song.slug
-    Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
+    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id).uniq
+    Video.find(video_ids)
   end
 
   def with_same_channel
-    videos = Video.joins(:dancers)
+    videos = Video.joins(:dancer_videos)
     channel = @video.channel.channel_id
     Video::Filter.new(videos, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
   end

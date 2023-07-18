@@ -32,7 +32,7 @@ RSpec.describe Video::RelatedVideos do
   end
 
   describe "#with_same_song" do
-    it "returns videos with same song" do
+    fit "returns videos with same song" do
       video = videos(:video_1_featured)
       recommendation = described_class.new(video)
       video_same_song = Video.create!(
