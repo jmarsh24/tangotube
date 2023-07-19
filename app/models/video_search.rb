@@ -4,7 +4,7 @@
 #
 # Table name: video_searches
 #
-#  video_id                    :bigint           primary key
+#  video_id                    :bigint
 #  youtube_id                  :string
 #  upload_date                 :date
 #  dancer_names                :text
@@ -23,7 +23,7 @@
 #  score                       :decimal(, )
 #
 class VideoSearch < ApplicationRecord
-  self.primary_key = :video_id
+  self.primary_key = :id
   belongs_to :video
 
   class << self

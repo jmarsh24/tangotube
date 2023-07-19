@@ -8,6 +8,7 @@ RSpec.describe Video::Search do
   describe "#videos" do
     before do
       VideoSearch.refresh
+      VideoScore.refresh
     end
 
     it "returns all videos with facets" do

@@ -4,7 +4,7 @@
 #
 # Table name: video_searches
 #
-#  video_id                    :bigint           primary key
+#  video_id                    :bigint
 #  youtube_id                  :string
 #  upload_date                 :date
 #  dancer_names                :text
