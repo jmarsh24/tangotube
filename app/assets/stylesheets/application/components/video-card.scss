@@ -1,12 +1,12 @@
 .video-card {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
 
   &__performance-number {
     position: absolute;
     background-color: black;
     color: var(--color-neutral-1000);
-    font-size: 12px;
+    font-size: 14px;
     right: 5px;
     top: 5px;
     padding: 0.1em 0.3em;
@@ -32,7 +32,7 @@
       position: absolute;
       background-color: black;
       color: var(--color-neutral-1000);
-      font-size: 12px;
+      font-size: 14px;
       right: 5px;
       bottom: 10px;
       padding: 0 0.3em;
@@ -44,6 +44,7 @@
     color: var(--color-neutral-1000);
     font-weight: 500;
     word-wrap: normal;
+    font-size: 14px;
   }
 
   &__primary {
@@ -56,36 +57,37 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
-    padding: var(--spacing-xxxs) var(--spacing-xs);
-    font-size: 12px;
+    gap: 8px;
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    font-size: 10px;
     overflow: hidden;
   }
 
   &__dancer {
     color: var(--color-neutral-700);
+    font-size: 14px;
   }
 
   &__metadata {
     color: var(--color-neutral-700);
+    font-size: 14px;
   }
 
   &__song-metadata {
     color: var(--color-neutral-700);
+    font-size: 14px;
   }
 
-  &--compact {
-    display: flex;
-    gap: var(--spacing-xs);
-    font-size: 12px;
-
-    &__image {
-      height: 80px;
-    }
-
-    @include breakpoint-tablet {
-      &__image {
-        height: 120px;
+  @include breakpoint-tablet {
+    &--compact {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+      max-width: 800px;
+      .video-card__image {
+        width: 100%;
+        min-width: 200px;
+        max-width: 360px;
       }
     }
   }

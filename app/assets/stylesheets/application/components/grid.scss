@@ -6,10 +6,6 @@
     padding: 0 12px;
   }
 
-  &__sidebar {
-    padding: 0 12px;
-  }
-
   &--videos {
     gap: 24px;
 
@@ -28,13 +24,10 @@
     &__sidebar {
       grid-column: 1;
     }
-    &__main-content {
-      padding: 0 24px;
-    }
 
     @include breakpoint-tablet {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 3fr 5fr;
 
       .grid__main-content {
         grid-column: 1;

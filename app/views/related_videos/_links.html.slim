@@ -1,5 +1,5 @@
 #related-videos-links
-  .stack.stack--line.stack--xxs
+  .stack.stack--line.stack--xs
     - if video.performance.present?
       = link_to "Same Performance", related_video_path(id: video.id, type: "same_performance"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_performance" ? "active" : ""]
     - if @video.leaders.present? || @video.followers.present?
