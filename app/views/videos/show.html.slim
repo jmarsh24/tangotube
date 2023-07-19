@@ -13,7 +13,8 @@
         = render partial: "videos/show/video_metadata", locals: { video: @video }
         = render partial: "videos/show/lyrics" if @video&.song&.lyrics.present?
     .grid__sidebar.stack.stack--sm
-      = render partial: "related_videos/links", locals: { video: @video }
+      .scrollable-bar
+        = render partial: "related_videos/links", locals: { video: @video }
       = turbo_frame_tag "related-videos-card", src: related_video_path(id: @video.id, type: "same_performance")
         .stack.justify-center.stack--line
           = render "components/spinner"
