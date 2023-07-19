@@ -2,7 +2,7 @@
   .stack.stack--line.stack--xxs
     - if video.performance.present?
       = link_to "Same Performance", related_video_path(id: video.id, type: "same_performance"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_performance" ? "active" : ""]
-    - if video.dancers.present?
+    - if @video.leaders.present? || @video.followers.present?
       = link_to "Same Dancers", related_video_path(id: video.id, type: "same_dancers"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_dancers" ? "active" : ""]
     - if video.song.present?
       = link_to "Same Song", related_video_path(id: video.id, type: "same_song"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_song" ? "active" : ""]

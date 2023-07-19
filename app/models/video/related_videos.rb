@@ -8,11 +8,13 @@ class Video::RelatedVideos
   end
 
   def with_same_dancers
-    return Video.none unless @video.leaders.present? && @video.followers.present?
+    return Video.none unless @video.leaders.present? || @video.followers.present?
 
-    leader = @video.leaders.first.slug
-    follower = @video.followers.first.slug
-    Video::Filter.new(Video.all, filtering_params: {leader:, follower:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
+    filtering_params = {hidden: false}
+    filtering_params[:leader] = @video.leaders.first.slug if @video.leaders.present?
+    filtering_params[:follower] = @video.followers.first.slug if @video.followers.present?
+
+    Video::Filter.new(Video.all, filtering_params:, excluded_youtube_id: @video.youtube_id).filtered_videos
   end
 
   def with_same_event
@@ -54,7 +56,7 @@ class Video::RelatedVideos
   def available_types
     types = []
     types << "same_performance" if @video.performance.present?
-    types << "same_dancers" if @video.dancers.present?
+    types << "same_dancers" if @video.leaders.present? || @video.followers.present?
     types << "same_song" if @video.song.present?
     types << "same_event" if @video.event.present?
     types << "same_channel" if @video.channel.present?
