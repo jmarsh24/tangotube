@@ -88,7 +88,7 @@ class Video < ApplicationRecord
   scope :not_watched, ->(user_id) { where.not(id: Watch.where(user_id:).select(:video_id)) }
   scope :year, ->(upload_date_year) { where(upload_date_year:) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
-  scope :most_popular, -> { trending }
+  scope :most_popular, -> { trending_1 }
   scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
   scope :trending_1, -> { joins(:video_scores).order("video_scores.score_1 DESC") }
   scope :trending_2, -> { joins(:video_scores).order("video_scores.score_2 DESC") }
