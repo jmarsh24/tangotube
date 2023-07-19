@@ -19,6 +19,6 @@ class RelatedVideosController < ApplicationController
     when "same_performance"
       related_videos_service.with_same_performance
     end
-    @related_videos = related_videos ? related_videos.includes(:channel, :song, dancer_videos: :dancer, thumbnail_attachment: :blob).limit(8) : []
+    @related_videos = related_videos.includes(:channel, :song, dancer_videos: :dancer, thumbnail_attachment: :blob).limit(8)
   end
 end

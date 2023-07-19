@@ -28,8 +28,8 @@ class Video::RelatedVideos
 
     videos = Video.joins(:dancer_videos)
     song = @video.song.slug
-    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id).uniq
-    Video.find(video_ids)
+    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.select(:id)
+    Video.where(id: video_ids)
   end
 
   def with_same_channel

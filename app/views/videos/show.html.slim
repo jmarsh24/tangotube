@@ -14,7 +14,17 @@
         = render partial: "videos/show/lyrics" if @video&.song&.lyrics.present?
     .grid__sidebar.stack.stack--sm
       = turbo_frame_tag "same_performance", src: related_video_path(id: @video.id, type: "same_performance")
+        .stack.justify-center.stack--line
+          = render "components/spinner"
       = turbo_frame_tag "same_dancers", src: related_video_path(id: @video.id, type: "same_dancers")
+        .stack.justify-center.stack--line
+          = render "components/spinner"
       = turbo_frame_tag "same_event", src: related_video_path(id: @video.id, type: "same_event")
+        .stack.justify-center.stack--line
+          = render "components/spinner"
       = turbo_frame_tag "same_song", src: related_video_path(id: @video.id, type: "same_song")
+        .stack.justify-center.stack--line
+          = render "components/spinner"
       = turbo_frame_tag "same_channel", src: related_video_path(id: @video.id, type: "same_channel")
+        .stack.justify-center.stack--line
+          = render "components/spinner"
