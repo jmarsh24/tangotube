@@ -28,7 +28,7 @@ class Video::RelatedVideos
 
     videos = Video.joins(:dancer_videos)
     song = @video.song.slug
-    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.select(:id)
+    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id)
     Video.where(id: video_ids)
   end
 
@@ -37,7 +37,8 @@ class Video::RelatedVideos
 
     videos = Video.joins(:dancer_videos)
     channel = @video.channel.channel_id
-    Video::Filter.new(videos, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
+    video_ids = Video::Filter.new(videos, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id)
+    Video.where(id: video_ids)
   end
 
   def with_same_performance
