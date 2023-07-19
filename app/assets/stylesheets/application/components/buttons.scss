@@ -5,7 +5,7 @@
   line-height: var(--spacing-md);
   text-align: center;
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-xxs) var(--spacing-xs);
+  padding: var(--spacing-xxxs) var(--spacing-xxs);
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -37,16 +37,18 @@
   }
 
   &--secondary {
-    background-color: var(--color-neutral-400);
-    color: var(--color-neutral-0);
+    font-weight: 400;
+    font-size: 14px;
+    background-color: var(--color-neutral-100);
+    color: var(--color-neutral-1000);
 
     &:hover {
-      color: var(--color-neutral-0);
-      background-color: var(--color-neutral-600);
+      background-color: var(--color-neutral-300);
     }
 
     &.active {
-      background-color: var(--color-neutral-500);
+      background-color: var(--color-neutral-1000);
+      color: var(--color-neutral-0);
     }
   }
 

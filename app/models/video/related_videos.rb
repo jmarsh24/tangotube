@@ -28,8 +28,8 @@ class Video::RelatedVideos
 
     videos = Video.joins(:dancer_videos)
     song = @video.song.slug
-    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id).uniq
-    Video.find(video_ids)
+    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id)
+    Video.where(id: video_ids)
   end
 
   def with_same_channel
@@ -37,7 +37,8 @@ class Video::RelatedVideos
 
     videos = Video.joins(:dancer_videos)
     channel = @video.channel.channel_id
-    Video::Filter.new(videos, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
+    video_ids = Video::Filter.new(videos, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id)
+    Video.where(id: video_ids)
   end
 
   def with_same_performance
@@ -48,5 +49,15 @@ class Video::RelatedVideos
     follower = @video.followers.first.slug if @video.followers.present?
     channel = @video.channel.channel_id
     Video::Filter.new(videos, filtering_params: {channel:, leader:, follower:, hidden: false}).filtered_videos
+  end
+
+  def available_types
+    types = []
+    types << "same_performance" if @video.performance.present?
+    types << "same_dancers" if @video.dancers.present?
+    types << "same_song" if @video.song.present?
+    types << "same_event" if @video.event.present?
+    types << "same_channel" if @video.channel.present?
+    types
   end
 end

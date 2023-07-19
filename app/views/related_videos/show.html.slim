@@ -1,15 +1,4 @@
 - cache [@type, @related_videos] do
-  = turbo_frame_tag @type do
-    / i18n-tasks-use t('.header_same_dancers')
-    / i18n-tasks-use t('.header_same_event')
-    / i18n-tasks-use t('.header_same_song')
-    / i18n-tasks-use t('.header_same_channel')
-    / i18n-tasks-use t('.header_same_performance')
-    - if @related_videos.present?
-      .recommended-videos-card.stack data-controller="reveal" data-reveal-hidden-class="open" data-reveal-target="item"
-        .recommended-videos-card__videos.stack.stack--md
-          h2.heading-2.heading-2--bold.heading-2--padded = @header
-          = render partial: 'video_card', collection: @related_videos, as: :video
-        - if @related_videos.size > 3
-          button.button.button--secondary.stack.stack--justify-center data-action="click->reveal#toggle"
-            .recommended-videos-card__icon.icon
+  = turbo_frame_tag "related-videos-card"
+    = render partial: "videos", locals: { videos: @related_videos, type: @type, video: @video }
+    

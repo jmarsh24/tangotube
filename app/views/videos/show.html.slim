@@ -4,7 +4,6 @@
 .stack.stack--xs
   .video-block 
     div data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
-
   .grid.grid--2-col
     .grid__main-content
       .stack.stack--sm
@@ -13,8 +12,8 @@
         = render partial: "videos/show/video_metadata", locals: { video: @video }
         = render partial: "videos/show/lyrics" if @video&.song&.lyrics.present?
     .grid__sidebar.stack.stack--sm
-      = turbo_frame_tag "same_performance", src: related_video_path(id: @video.id, type: "same_performance")
-      = turbo_frame_tag "same_dancers", src: related_video_path(id: @video.id, type: "same_dancers")
-      = turbo_frame_tag "same_event", src: related_video_path(id: @video.id, type: "same_event")
-      = turbo_frame_tag "same_song", src: related_video_path(id: @video.id, type: "same_song")
-      = turbo_frame_tag "same_channel", src: related_video_path(id: @video.id, type: "same_channel")
+      .scrollable-bar
+        = render partial: "related_videos/links", locals: { video: @video, type: @type }
+      = turbo_frame_tag "related-videos-card", src: related_video_path(id: @video.id, type: @type)
+        .stack.justify-center.stack--line
+          = render "components/spinner"
