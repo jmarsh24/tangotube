@@ -5,7 +5,6 @@ class RelatedVideosController < ApplicationController
     @video = Video.find(params[:id])
     related_videos = Video::RelatedVideos.new(@video)
     @type = params[:type]
-    @header = t(".header_#{params[:type]}")
 
     related_videos = case params[:type]
     when "same_dancers"
@@ -24,7 +23,7 @@ class RelatedVideosController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         ui.replace "related-video-links", with: "links", video: @video
-        ui.append "related-videos", with: "videos", videos: @related_videos, type: @type, video: @video, header: @header
+        ui.append "related-videos", with: "videos", videos: @related_videos, type: @type, video: @video
       end
       format.html
     end
