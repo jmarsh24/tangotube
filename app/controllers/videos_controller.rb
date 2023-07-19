@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :share]
+  before_action :authenticate_user!, except: [:index, :show, :share, :sort, :filters]
   before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
   before_action :set_video, except: [:index, :create, :destroy]
