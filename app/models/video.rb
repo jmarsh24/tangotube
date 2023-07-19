@@ -30,8 +30,6 @@
 #  youtube_tags        :text             default([]), is an Array
 #  metadata_updated_at :datetime
 #  normalized_title    :string
-#  click_count         :integer
-#  popularity          :integer
 #
 class Video < ApplicationRecord
   belongs_to :song, optional: true, counter_cache: true
@@ -54,6 +52,7 @@ class Video < ApplicationRecord
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
   has_many :video_searches, dependent: :destroy
+  has_many :video_scores, dependent: :destroy
 
   has_one_attached :thumbnail
 
@@ -91,10 +90,11 @@ class Video < ApplicationRecord
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
   scope :most_popular, -> { trending }
   scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
-  scope :trending, -> {
-    joins(:video_searches)
-      .order("video_searches.score DESC")
-  }
+  scope :trending_1, -> { joins(:video_scores).order("video_scores.score_1 DESC") }
+  scope :trending_2, -> { joins(:video_scores).order("video_scores.score_2 DESC") }
+  scope :trending_3, -> { joins(:video_scores).order("video_scores.score_3 DESC") }
+  scope :trending_4, -> { joins(:video_scores).order("video_scores.score_4 DESC") }
+  scope :trending_5, -> { joins(:video_scores).order("video_scores.score_5 DESC") }
   scope :fuzzy_titles, ->(terms) do
                          terms = [terms] unless terms.is_a?(Array)
                          query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")
