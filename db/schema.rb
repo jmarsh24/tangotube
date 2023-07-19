@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_192045) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_19_205801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -446,6 +446,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_192045) do
   add_index "video_scores", ["score_3"], name: "index_video_scores_on_score_3"
   add_index "video_scores", ["score_4"], name: "index_video_scores_on_score_4"
   add_index "video_scores", ["score_5"], name: "index_video_scores_on_score_5"
-  add_index "video_scores", ["video_id"], name: "index_video_scores_on_video_id", unique: true
 
 end
