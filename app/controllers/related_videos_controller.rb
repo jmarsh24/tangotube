@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class RelatedVideosController < ApplicationController
+  # @route GET /related_videos/:id (related_video)
   def show
     @video = Video.find(params[:id])
     related_videos = Video::RelatedVideos.new(@video)
