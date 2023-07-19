@@ -43,6 +43,8 @@ class VideosController < ApplicationController
       @dancer_videos = @video.dancer_videos.to_a
     end
 
+    @type = Video::RelatedVideos.new(@video).available_types.first
+
     @start_value = params[:start]
     @end_value = params[:end]
     @root_url = root_url
