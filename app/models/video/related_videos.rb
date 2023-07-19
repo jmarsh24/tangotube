@@ -49,4 +49,14 @@ class Video::RelatedVideos
     channel = @video.channel.channel_id
     Video::Filter.new(videos, filtering_params: {channel:, leader:, follower:, hidden: false}).filtered_videos
   end
+
+  def available_types
+    types = []
+    types << "same_performance" if @video.performance.present?
+    types << "same_event" if @video.event.present?
+    types << "same_dancers" if @video.dancers.present?
+    types << "same_song" if @video.song.present?
+    types << "same_channel" if @video.channel.present?
+    types
+  end
 end

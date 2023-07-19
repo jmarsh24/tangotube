@@ -4,7 +4,7 @@ class RelatedVideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     related_videos = Video::RelatedVideos.new(@video)
-    @type = params[:type]
+    @type = params[:type] || related_videos.available_types.first
 
     related_videos = case params[:type]
     when "same_dancers"
