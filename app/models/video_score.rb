@@ -12,7 +12,7 @@
 #  score_5  :float
 #
 class VideoScore < ApplicationRecord
-  self.primary_key = :id
+  self.primary_key = :video_id
   belongs_to :video
 
   class << self
