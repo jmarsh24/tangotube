@@ -35,12 +35,10 @@ class Video::RelatedVideos
   end
 
   def with_same_channel
-    return Video.none unless @video.channel.present?
+    return Video.none unless @video.channel.present? && @video.channel.videos_count > 1
 
-    videos = Video.joins(:dancer_videos)
     channel = @video.channel.channel_id
-    video_ids = Video::Filter.new(videos, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id)
-    Video.where(id: video_ids)
+    Video::Filter.new(Video.all, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
   end
 
   def with_same_performance

@@ -8,5 +8,5 @@
       = link_to "Same Song", related_video_path(id: video.id, type: "same_song"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_song" ? "active" : ""]
     - if video.event.present?
       = link_to "Same Event", related_video_path(id: video.id, type: "same_event"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_event" ? "active" : ""]
-    - if video.channel.present?
+    - if video.channel.present? && @video.channel.videos_count > 1
       = link_to "Same Channel", related_video_path(id: video.id, type: "same_channel"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_channel" ? "active" : ""]
