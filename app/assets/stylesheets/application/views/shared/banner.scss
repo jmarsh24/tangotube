@@ -23,14 +23,14 @@
     background-color: rgba(0, 0, 0, 0.4);
 
     h1.heading-1 {
-      font-size: clamp(56px, 4vw, 81px);
+      font-size: clamp(48px, 4vw, 81px);
       line-height: 81px;
       word-wrap: normal;
       text-shadow: 3px 3px #000;
     }
 
     h2.heading-2 {
-      font-size: clamp(1.5rem, 2vw, 1.75rem);
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
       text-shadow: 3px 3px #000;
     }
   }
@@ -48,8 +48,8 @@
   &__close {
     @include maskedBackground;
     position: absolute;
-    top: 60px;
-    right: 60px;
+    top: 48px;
+    right: 48px;
     cursor: pointer;
 
     &::after {
@@ -58,8 +58,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 48px;
-      height: 48px;
+      width: 36px;
+      height: 36px;
       background-color: white;
       mask-image: url('@assets/images/icons/close.svg');
       mask-size: contain;
@@ -67,10 +67,16 @@
       mask-position: center;
     }
   }
-}
 
-@media (max-width: 768px) {
-  .banner {
-    width: 100vw;
+  @include breakpoint-tablet {
+    &__close {
+      top: 60px;
+      right: 60px;
+
+      &::after {
+        width: 48px;
+        height: 48px;
+      }
+    }
   }
 }
