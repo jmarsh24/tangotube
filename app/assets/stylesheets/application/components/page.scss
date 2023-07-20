@@ -10,5 +10,6 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    max-width: var(--page-main-max-width);
   }
 }
