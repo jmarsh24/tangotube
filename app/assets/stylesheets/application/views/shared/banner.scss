@@ -44,19 +44,26 @@
     min-width: 100%;
   }
 
-  &__icon {
-    position: absolute;
-    bottom: 16px;
-    font-size: var(--font-size-2x-large);
-  }
-
   &__close {
+    @include maskedBackground;
     position: absolute;
-    right: 16px;
-    top: 16px;
+    top: 210px;
+    right: 60px;
+    cursor: pointer;
 
-    &:hover {
-      cursor: pointer;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      background-color: white;
+      mask-image: url('@assets/images/icons/close.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
     }
   }
 }

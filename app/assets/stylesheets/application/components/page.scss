@@ -6,11 +6,10 @@
   align-items: center;
 
   &__main {
-    display: flex;
-    flex: 1;
     width: 100%;
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
   @include breakpoint-tablet {
