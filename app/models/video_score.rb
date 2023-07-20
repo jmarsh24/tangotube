@@ -14,19 +14,12 @@
 class VideoScore < ApplicationRecord
   self.primary_key = :video_id
   belongs_to :video
+  has_one :video_search
 
   class << self
     def refresh
       Scenic.database.refresh_materialized_view("video_scores", concurrently: true, cascade: false)
     end
-
-    def refresh_video_search
-      VideoScore.refresh
-    end
-  end
-
-  def refresh_video_score
-    VideoSearch.refresh
   end
 
   def readonly?

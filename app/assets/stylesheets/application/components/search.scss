@@ -48,6 +48,7 @@
   }
 
   &__result-image {
+    aspect-ratio: 16/ 9;
     height: 64px;
     object-fit: cover;
   }

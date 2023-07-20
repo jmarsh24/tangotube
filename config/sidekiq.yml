@@ -34,12 +34,12 @@
       cron: "0 0 12 * * * Europe/Berlin" # every day at 16:00, Berlin time
       class: Shimmer::SitemapJob
     refresh_video_searches_view:
-      every: ["20m"]
+      every: ["60m"]
       class: RefreshVideoSearchesViewJob
       queue: low_priority
       enabled: true
     refresh_video_scores_scores:
-      every: ["5m"]
+      every: ["10m"]
       class: RefreshVideoScoresJob
       queue: low_priority
       enabled: true
