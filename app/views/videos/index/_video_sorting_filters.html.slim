@@ -18,7 +18,7 @@
       / - highlighted = label == "New To You" ? !active : false
       - filter_chips << [label, link_path, active, false, closeable]
 
-  - [:genre, :leader, :follower, :orchestra, :song, :year, :event].each do |param_key|
+  - [:leader, :follower, :orchestra, :song, :genre, :year, :event].each do |param_key|
     - name = params[param_key].present? ? params[param_key].titleize : param_key.to_s.titleize
     - link_path = modal_path facet_path(id: param_key.to_s, params: @filtering_params)
     - active = params[param_key].present?
