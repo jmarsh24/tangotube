@@ -24,7 +24,7 @@
         use_scraper: false
         use_music_recognizer: false
       enabled: <%= ENV['RAILS_ENV'] == 'production' %>
-    enqueue_update_unrecognized_music_videos_job:
+    enqueue_update_music_recognized_videos_job:
       cron: "0 7 * * * Europe/Berlin" # Runs daily at 7am Berlin time
       class: UpdateUnrecognizedMusicVideosJob
       queue: default

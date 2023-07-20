@@ -2,10 +2,10 @@
 
 class PerformanceResource < Avo::BaseResource
   self.title = :id
-  self.includes = [:videos, :performance_videos, :dancers]
-  self.search_query = -> do
-    scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-  end
+  self.includes = []
+  # self.search_query = -> do
+  #   scope.search(params[:q])
+  # end
 
   field :id, as: :id
   field :date, as: :date

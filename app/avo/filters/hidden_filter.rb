@@ -9,7 +9,7 @@ class HiddenFilter < Avo::Filters::BooleanFilter
     if values["hidden"]
       query = query.hidden
     elsif values["unhidden"]
-      query = query.visible
+      query = query.not_hidden
     end
 
     query

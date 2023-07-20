@@ -20,7 +20,6 @@
 #  featured            :boolean          default(FALSE)
 #  metadata            :jsonb
 #  tags                :text             default([]), is an Array
-#  imported_at         :datetime
 #  upload_date         :date
 #  upload_date_year    :integer
 #  youtube_view_count  :integer

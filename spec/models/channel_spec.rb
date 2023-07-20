@@ -15,7 +15,6 @@
 #  description         :text
 #  metadata            :jsonb
 #  metadata_updated_at :datetime
-#  imported_at         :datetime
 #  videos_count        :integer          default(0)
 #
 require "rails_helper"

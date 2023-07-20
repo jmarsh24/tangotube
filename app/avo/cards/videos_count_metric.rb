@@ -1,17 +1,14 @@
 # frozen_string_literal: true
 
 class VideosCountMetric < Avo::Dashboards::MetricCard
-  self.id = "users_metric"
-  self.label = "Users count"
-  self.description = "Users description"
+  self.id = "videos_metric"
+  self.label = "Videos count"
+  self.description = "Videos description"
   self.cols = 1
   self.initial_range = 30
   self.ranges = [7, 30, 60, 365, "TODAY", "MTD", "QTD", "YTD", "ALL"]
-  # self.prefix = "$"
-  # self.suffix = "%"
   self.refresh_every = 10.minutes
 
-  # You have access to context, params, range, current dashboard, and current card
   def query
     from = Date.today.midnight - 1.week
     to = DateTime.current
@@ -37,12 +34,24 @@ class VideosCountMetric < Avo::Dashboards::MetricCard
 
     scope = Video
 
+    if options[:videos_count].present?
+      scope
+    end
+
     if options[:featured_videos].present?
       scope = scope.featured
     end
 
     if options[:visible_videos].present?
-      scope = scope.visible
+      scope = scope.not_hidden
+    end
+
+    if options[:music_recognized].present?
+      scope = scope.music_recognized
+    end
+
+    if options[:music_unrecognized].present?
+      scope = scope.music_unrecognized
     end
 
     result scope.where(created_at: from..to).count

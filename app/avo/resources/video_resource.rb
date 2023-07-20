@@ -2,7 +2,7 @@
 
 class VideoResource < Avo::BaseResource
   self.title = :youtube_id
-  self.includes = [:channel, :song, :event, :dancer_videos, :dancers, :performance_video, :performance]
+  self.includes = [:channel, :song, :event]
   self.search_query = -> { scope.search(params[:q]) }
 
   self.find_record_method = ->(model_class:, id:, params:) {
@@ -20,22 +20,24 @@ class VideoResource < Avo::BaseResource
   end
 
   field :id, as: :id
+  field :link, as: :text do |video|
+    link_to "Video", main_app.watch_path(v: video.youtube_id), target: "_blank", rel: "noopener"
+  end
+  field :link, as: :text do |video|
+    link_to "Youtube", "https://www.youtube.com/watch?v=#{video.youtube_id}", target: "_blank", rel: "noopener"
+  end
   field :thumbnail, as: :file, is_image: true
-  field :youtube_id, as: :text
   field :song, as: :belongs_to
   field :channel, as: :belongs_to
   field :hidden, as: :boolean
   field :featured, as: :boolean
-  field :popularity, as: :number
   field :event, as: :belongs_to
-  field :click_count, as: :number
   field :metadata, as: :code, language: "javascript", only_on: :edit
   field :metadata, as: :code, language: "javascript" do |model|
     if model.metadata.present?
       JSON.pretty_generate(model.metadata.as_json)
     end
   end
-  field :imported_at, as: :date_time
   field :upload_date, as: :date
   field :metadata_updated_at, as: :date_time
   field :dancer_videos, as: :has_many

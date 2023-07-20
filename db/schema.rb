@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_20_061952) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_20_135041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -68,7 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_061952) do
     t.text "description"
     t.jsonb "metadata"
     t.datetime "metadata_updated_at"
-    t.datetime "imported_at"
     t.integer "videos_count", default: 0
     t.index ["active"], name: "index_channels_on_active"
     t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
@@ -306,7 +305,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_061952) do
     t.boolean "featured", default: false
     t.jsonb "metadata"
     t.text "tags", default: [], array: true
-    t.datetime "imported_at"
     t.date "upload_date"
     t.integer "upload_date_year"
     t.integer "youtube_view_count"

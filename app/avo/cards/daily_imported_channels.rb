@@ -10,7 +10,7 @@ class DailyImportedChannels < Avo::Dashboards::ChartkickCard
   self.legend = true
 
   def query
-    data = Video.group_by_day(:imported_at).count
+    data = Channel.group_by_day(:created_at).count
     result(data)
   end
 end

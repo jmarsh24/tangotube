@@ -22,7 +22,6 @@
 #  featured            :boolean          default(FALSE)
 #  metadata            :jsonb
 #  tags                :text             default([]), is an Array
-#  imported_at         :datetime
 #  upload_date         :date
 #  upload_date_year    :integer
 #  youtube_view_count  :integer
@@ -269,13 +268,13 @@ RSpec.describe Video do
     end
   end
 
-  describe ".unrecognized_music" do
+  describe ".music_recognized" do
     context "when video has acr_response code of 1001" do
       it "does not include the video" do
         recognized_music_video = videos(:video_1_featured)
         recognized_music_video.update!(acr_response_code: 1001)
 
-        expect(Video.unrecognized_music).not_to include(recognized_music_video)
+        expect(Video.music_recognized).not_to include(recognized_music_video)
       end
     end
 
@@ -284,16 +283,16 @@ RSpec.describe Video do
         recognized_music_video = videos(:video_1_featured)
         recognized_music_video.update!(acr_response_code: 0)
 
-        expect(Video.unrecognized_music).not_to include(recognized_music_video)
+        expect(Video.music_recognized).not_to include(recognized_music_video)
       end
     end
 
     context "when video has acr_response code of nil" do
       it "includes the video" do
-        unrecognized_music_video = videos(:video_1_featured)
-        unrecognized_music_video.update!(acr_response_code: nil)
+        music_recognized_video = videos(:video_1_featured)
+        music_recognized_video.update!(acr_response_code: nil)
 
-        expect(Video.unrecognized_music).to include(unrecognized_music_video)
+        expect(Video.music_recognized).to include(music_recognized_video)
       end
     end
   end

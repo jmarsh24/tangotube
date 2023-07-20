@@ -3,15 +3,11 @@
 class PerformanceVideoResource < Avo::BaseResource
   self.title = :id
   self.includes = [:video, :performance]
-  self.search_query = -> do
-    scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-  end
+  # self.search_query = -> do
+  #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
+  # end
 
   field :id, as: :id
-
-  field :video_thumbnail, as: :file, is_image: true, is_avatar: true do
-    model.video.thumbnail
-  end
   field :title, as: :text do |model|
     model.video.title
   end

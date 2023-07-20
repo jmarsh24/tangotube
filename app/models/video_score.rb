@@ -4,7 +4,7 @@
 #
 # Table name: video_scores
 #
-#  video_id :bigint
+#  video_id :bigint           primary key
 #  score_1  :float
 #  score_2  :float
 #  score_3  :float

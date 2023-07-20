@@ -22,7 +22,6 @@
 #  featured            :boolean          default(FALSE)
 #  metadata            :jsonb
 #  tags                :text             default([]), is an Array
-#  imported_at         :datetime
 #  upload_date         :date
 #  upload_date_year    :integer
 #  youtube_view_count  :integer
@@ -89,7 +88,6 @@ class Video < ApplicationRecord
   scope :year, ->(upload_date_year) { where(upload_date_year:) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
   scope :most_popular, -> { trending_1 }
-  scope :unrecognized_music, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
   scope :trending_1, -> { joins(:video_scores).order("video_scores.score_1 DESC") }
   scope :trending_2, -> { joins(:video_scores).order("video_scores.score_2 DESC") }
   scope :trending_3, -> { joins(:video_scores).order("video_scores.score_3 DESC") }
@@ -100,6 +98,8 @@ class Video < ApplicationRecord
                          query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")
                          where(query)
                        end
+  scope :music_recognized, -> { where(acr_response_code: 0) }
+  scope :music_unrecognized, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
 
   class << self
     def search(terms)
