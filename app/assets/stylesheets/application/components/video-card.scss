@@ -1,12 +1,12 @@
 .video-card {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
 
   &__performance-number {
     position: absolute;
     background-color: black;
     color: var(--color-neutral-1000);
-    font-size: 14px;
+    font-size: 12px;
     right: 5px;
     top: 5px;
     padding: 0.1em 0.3em;
@@ -32,7 +32,7 @@
       position: absolute;
       background-color: black;
       color: var(--color-neutral-1000);
-      font-size: 14px;
+      font-size: 12px;
       right: 5px;
       bottom: 10px;
       padding: 0 0.3em;
@@ -44,7 +44,7 @@
     color: var(--color-neutral-1000);
     font-weight: 500;
     word-wrap: normal;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   &__primary {
@@ -65,29 +65,41 @@
 
   &__dancer {
     color: var(--color-neutral-700);
-    font-size: 14px;
+    font-size: 11px;
   }
 
   &__metadata {
     color: var(--color-neutral-700);
-    font-size: 14px;
+    font-size: 12px;
   }
 
   &__song-metadata {
     color: var(--color-neutral-700);
-    font-size: 14px;
+    font-size: 11px;
   }
 
   @include breakpoint-tablet {
     &--compact {
       display: flex;
       gap: 10px;
-      font-size: 14px;
+      font-size: 13px;
       max-width: 800px;
+      .video-card__title {
+        font-size: 13px;
+      }
+      .video-card__metadata {
+        font-size: 13px;
+      }
       .video-card__image {
         width: 100%;
         min-width: 200px;
         max-width: 360px;
+      }
+      .video-card__dancer {
+        font-size: 11px;
+      }
+      .video-card__song-metadata {
+        font-size: 11px;
       }
     }
   }

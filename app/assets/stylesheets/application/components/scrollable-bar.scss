@@ -19,4 +19,8 @@
   &--vote {
     padding: 0;
   }
+
+  &--padded {
+    padding: 0 var(--spacing-xs);
+  }
 }
