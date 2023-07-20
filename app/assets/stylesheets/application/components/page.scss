@@ -11,12 +11,4 @@
     flex-direction: column;
     gap: 24px;
   }
-
-  @include breakpoint-tablet {
-    &__main {
-      grid-column: 2;
-      grid-row: 2;
-      max-width: var(--page-main-max-width);
-    }
-  }
 }

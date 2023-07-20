@@ -30,7 +30,8 @@
     }
 
     h2.heading-2 {
-      font-size: clamp(18px, 1vw, 28px);
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      text-shadow: 3px 3px #000;
     }
   }
 
