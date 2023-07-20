@@ -18,7 +18,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 16px;
+    gap: 36px;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.4);
 
@@ -30,7 +30,7 @@
     }
 
     h2.heading-2 {
-      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      font-size: clamp(1.5rem, 2vw, 1.75rem);
       text-shadow: 3px 3px #000;
     }
   }
