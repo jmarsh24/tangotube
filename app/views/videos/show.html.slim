@@ -1,6 +1,7 @@
-- content_for :meta_title, @video.title
-- content_for :meta_description, @video.description
-- content_for :meta_image, "https://img.youtube.com/vi/#{@video.youtube_id}/hqdefault.jpg"
+- meta.title = @video.title
+- meta.description = @video.description
+- meta.image = @video.thumbnail.url
+- meta.canonical = watch_url(v: @video)
 .stack.stack--xs
   .video-block 
     div data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"

@@ -70,6 +70,6 @@ Rails.application.routes.draw do
   post "banner", to: "banner#index"
 
   # Watch and root routes
-  get "/watch", to: "videos#show"
+  get "/watch", to: "videos#show", as: "watch"
   root "videos#index"
 end
