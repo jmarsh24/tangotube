@@ -91,11 +91,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  if ENV["E2E"] == "1"
-    config.action_mailer.delivery_method = :test
-  else
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
+  if Config.ses_smtp_username? && Config.ses_smtp_password?
+    smtp_settings = {
       address: "email-smtp.eu-west-1.amazonaws.com",
       port: 587,
       domain: "tangotube.tv",
@@ -105,6 +102,7 @@ Rails.application.configure do
       enable_starttls_auto: true
     }
   end
+
   if Config.enable_mailers?
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = smtp_settings
