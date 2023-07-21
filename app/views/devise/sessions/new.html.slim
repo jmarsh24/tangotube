@@ -3,9 +3,8 @@
     h2.heading-2 = t(".login")
   .content-container
     .stack.stack--xs
-      = form_with model: resource, as: resource_name, url: session_path(resource_name), data: {turbo: false} do |f|
+      = form_with model: resource, as: resource_name, url: session_path(resource_name) do |f|
         .stack.stack--xs
-          = render "devise/shared/error_messages", resource:
           = f.input :email, as: :email, autofocus: true, class: "input input__input input--email"
           = f.input :password, as: :password, autocomplete: "current-password", class: "input input__input input--text"
           = f.submit t("login"), class: "button button--primary button--fill"

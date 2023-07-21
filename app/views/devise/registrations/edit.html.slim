@@ -13,10 +13,9 @@
                 img.w-picker data-cropper-target="image" src=image_file_path(resource.avatar, width: 300)
                 footer.stack.stack--line.stack--justify-right
                   label.button.button--link.button--sm.button--tablet-md for="user_avatar" = t(".replace_image")
-            = render "devise/shared/error_messages", resource:
-            = f.input :first_name, as: :string, autocomplete: "off", class: "input input__input input--text"
-            = f.input :last_name, as: :string, autocomplete: "off", class: "input input__input input--text"
-            = f.input :email, as: :email, class: "input input__input input--email"
-            = f.input :password, as: :password, class: "input input__input input--text"
-            = f.input :password_confirmation, class: "input input__input input--text"
+            = f.input :first_name, as: :string, autocomplete: "off", class: "input input__input input--text input--block"
+            = f.input :last_name, as: :string, autocomplete: "off", class: "input input__input input--text input--block"
+            = f.input :email, as: :email, class: "input input__input input--email input--block"
+            = f.input :password, as: :password, class: "input input__input input--text  input--block"
+            = f.input :password_confirmation, class: "input input__input input--text input--block"
             = f.submit t(".save"), "data-action": "click->cropper#submit", class: "button button--primary button--fill"

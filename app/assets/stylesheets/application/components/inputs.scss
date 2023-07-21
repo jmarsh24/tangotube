@@ -41,6 +41,10 @@
     }
   }
 
+  &__error {
+    color: var(--color-danger-500);
+  }
+
   &--no-border {
     border: none;
     border-radius: 0;
