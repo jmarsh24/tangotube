@@ -91,14 +91,17 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  if Config.sendgrid_api_key? && Config.sendgrid_address?
-    smtp_settings = {
-      user_name: "apikey",
-      password: Config.sendgrid_api_key!,
-      domain: "tangotube.tv",
-      address: Config.sendgrid_address!,
+  if ENV["E2E"] == "1"
+    config.action_mailer.delivery_method = :test
+  else
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "email-smtp.eu-west-1.amazonaws.com",
       port: 587,
-      authentication: :plain,
+      domain: "tangotube.tv",
+      user_name: Config.ses_smtp_username!,
+      password: Config.ses_smtp_password!,
+      authentication: :login,
       enable_starttls_auto: true
     }
   end
