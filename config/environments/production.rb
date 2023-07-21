@@ -93,7 +93,7 @@ Rails.application.configure do
 
   if Config.ses_smtp_username? && Config.ses_smtp_password?
     smtp_settings = {
-      address: "email-smtp.eu-west-1.amazonaws.com",
+      address: "email-smtp.eu-central-1.amazonaws.com",
       port: 587,
       domain: "tangotube.tv",
       user_name: Config.ses_smtp_username!,
