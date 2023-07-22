@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_20_135041) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_100521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -423,7 +423,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_135041) do
       lower(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text))) AS event_title,
       lower(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text))) AS event_country,
       lower(NORMALIZE(videos.title)) AS video_title,
-      video_scores.score_1
+      video_scores.score_1 AS score
      FROM (((((((((videos
        LEFT JOIN watches ON ((videos.id = watches.video_id)))
        LEFT JOIN likes ON (((videos.id = likes.likeable_id) AND ((likes.likeable_type)::text = 'Video'::text))))
