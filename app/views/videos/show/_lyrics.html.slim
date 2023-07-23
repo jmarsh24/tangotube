@@ -1,12 +1,8 @@
 - cache [@video.song.lyrics, @video.song.lyrics_en] do
-  .lyrics-card data-controller="tabs" data-tabs-index="0"
-    h2.heading-2.heading-4--bold = t ".lyrics_header"
-    .tabs
-      .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t ".Spanish"
-      .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t ".English"
-    .tabs__panel data-tabs-target="tabPanel"
-      .lyrics-card__lyrics
-        = simple_format(@video.song.lyrics)
-    .tabs__panel data-tabs-target="tabPanel"
-      .lyrics-card__lyrics
-        = simple_format(@video.song.lyrics_en)
+  .lyrics-card.lyrics-card--preview
+    .stack.stack--line.stack--justify-space-between
+      h2.heading-2.heading-4--bold = t ".lyrics_header"
+      a href=modal_path(song_lyrics_path(@video.song))
+        .icon-wrapper
+          .icon.icon--arrows-expand.icon--md.icon--padding-md
+    = simple_format(truncate(@video.song.lyrics, length: 130, omission: ""))

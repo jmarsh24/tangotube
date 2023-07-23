@@ -49,6 +49,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :songs do
+    resource :lyrics, only: [:show]
+  end
+
   resource :search, only: [:new, :show]
 
   # Facet route

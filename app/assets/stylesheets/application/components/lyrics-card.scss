@@ -2,21 +2,43 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: var(--spacing-lg);
   background-color: #b71121;
   border-radius: var(--border-radius-xl);
-  padding: var(--spacing-md) var(--spacing-md) var(--spacing-mega)
-    var(--spacing-md);
   font-weight: var(--font-weight-bold);
-  font-size: 18px;
+  font-size: 24px;
+  position: relative;
+  overflow: hidden;
 
-  &__lyrics {
+  &__header {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 16px;
+    padding: 24px 24px 24px 24px;
+    box-shadow: 0 20px 20px -20px rgba(70, 70, 70, 0.4);
+  }
+
+  &__lyrics {
+    position: relative;
     gap: var(--spacing-lg);
-    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-lg);
+  }
+
+  &--preview {
+    padding: 24px;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 150px;
+      pointer-events: none;
+      background-image: linear-gradient(
+        to top,
+        rgba(183, 17, 33, 1),
+        rgba(183, 17, 33, 0)
+      );
+    }
   }
 }

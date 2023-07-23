@@ -1,23 +1,24 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
+  static targets = ['tab', 'tabPanel'];
+
   tabPanelTargets!: HTMLElement[];
   tabTargets!: HTMLElement[];
 
-  static targets = ['tab', 'tabPanel'];
-
-  initialize() {
+  initialize(): void {
     this.showTab();
   }
 
-  change(e) {
-    this.index = this.tabTargets.indexOf(e.target);
-    this.showTab(this.index);
+  change(event: Event): void {
+    const currentTarget = event.currentTarget as HTMLElement;
+    this.index = this.tabTargets.indexOf(currentTarget);
+    this.showTab();
   }
 
-  showTab() {
+  showTab(): void {
     this.tabPanelTargets.forEach((el, i) => {
-      if (i == this.index) {
+      if (i === this.index) {
         el.classList.remove('hidden');
       } else {
         el.classList.add('hidden');
@@ -25,7 +26,7 @@ export default class extends Controller {
     });
 
     this.tabTargets.forEach((el, i) => {
-      if (i == this.index) {
+      if (i === this.index) {
         el.classList.add('active');
       } else {
         el.classList.remove('active');
@@ -33,12 +34,13 @@ export default class extends Controller {
     });
   }
 
-  get index() {
-    return parseInt(this.data.get('index'));
+  get index(): number {
+    const index = this.data.get('index');
+    return index ? parseInt(index) : 0;
   }
 
-  set index(value): number {
-    this.data.set('index', value);
+  set index(value: number) {
+    this.data.set('index', value.toString());
     this.showTab();
   }
 }

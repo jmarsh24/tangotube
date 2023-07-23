@@ -5,6 +5,18 @@ $icon-sizes: (
   'xl': 32px,
 );
 
+$icon-padding-sizes: (
+  'xs': 4px,
+  'sm': 8px,
+  'md': 12px,
+  'lg': 16px,
+  'xl': 20px,
+);
+
+.icon-wrapper {
+  padding: var(--spacing-xs);
+}
+
 .icon {
   @include maskedBackground;
   height: map-get($icon-sizes, 'md');
