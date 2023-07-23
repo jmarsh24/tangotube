@@ -49,7 +49,6 @@
               = image_tag "default_avatar.jpg", class: "search__result-image"
             .search__result-details
               .search__result-title = record.title
-              .search__results-type = type.singularize.titleize
         - when "dancers"
           = link_to root_path(dancer: record.slug), class: 'search__result' do
             - if record.profile_image.attached?

@@ -81,7 +81,7 @@ class Search
             SELECT
               'videos' AS record_type,
               video_id AS record_id,
-              (score_1 * 0.3) AS score
+              (score * 0.3) AS score
             FROM
               video_searches
             WHERE
