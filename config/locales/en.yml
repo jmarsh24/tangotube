@@ -132,8 +132,6 @@ en:
   login: Login
   lyrics:
     show:
-      English: English
-      Spanish: Spanish
       english: English
       lyrics_header: Lyrics header
       spanish: Spanish
@@ -174,8 +172,6 @@ en:
       whatsapp: Whatsapp
     show:
       lyrics:
-        English: English
-        Spanish: Spanish
         lyrics_header: Lyrics
       video_metadata:
         follower_heading: Follower
