@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   # Video routes
   resources :videos do
     member do
+      get :details
       post :like
       delete :unlike
       post :hide

@@ -1,0 +1,10 @@
+.video-details
+  .modal__header 
+    h1.heading-1 = t(".video_details")
+  .video-details__content.stack
+    h4.heading-4 = t(".title")
+    .video-details__title = @video.title
+    h4.heading-4 = t(".description")
+    .video-details__description = @video.description
+    h4.heading-4 = t(".metadata")
+    .video-details__metadata = [@video.channel&.title,l(@video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(@video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")

@@ -3,12 +3,6 @@
     .stack.stack--xs
       .stack.stack--xxs
         h1.heading-4.heading-4 = link_to video.title, watch_path(v: video.youtube_id)
-        .video-info-primary__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
-      .stack.stack--xxs.stack--justify-left
-        .scrollable-tags.scrollable-tags--small
-          - video.dancer_videos.includes(:dancer).each do |dv|
-            - if dv.role == "leader"
-              = link_to dv.dancer.name, root_path(leader: dv.dancer.slug), class: "tag video-card__dancer"
-            - elsif dv.role == "follower"
-              = link_to dv.dancer.name, root_path(follower: dv.dancer.slug), class: "tag video-card__dancer"
-        = link_to video.song.full_title, root_path(song_id: video.song.id), class: "heading-5 video-info-primary__song-info video-card__song-metadata tag" if video.song.present?
+        .stack.stack--line.stack--align-bottom.stack--justify-left
+          .video-info-primary__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
+          = link_to "...more", modal_path(details_video_path(@video)), class: "video-info-primary__more-link"

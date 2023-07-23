@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :share, :sort, :filters]
+  before_action :authenticate_user!, except: [:index, :show, :share, :sort, :filters, :details]
   before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
   before_action :set_video, except: [:index, :create, :destroy]
@@ -39,8 +39,7 @@ class VideosController < ApplicationController
 
     if @video.nil?
       ExternalVideoImport::Importer.new.import(params[:v])
-      @video = Video.find_by(youtube_id: params[:v])
-      @dancer_videos = @video.dancer_videos.to_a
+      @video = Video.includes(dancer_videos: :dancer).find_by(youtube_id: params[:v])
     end
 
     @type = Video::RelatedVideos.new(@video).available_types.first
@@ -90,6 +89,10 @@ class VideosController < ApplicationController
   # @route GET /videos/sort (sort_videos)
   def sort
     @filtering_params = filtering_params
+  end
+
+  def details
+    @video = Video.find_by(youtube_id: params[:id])
   end
 
   def show_filter_bar?
