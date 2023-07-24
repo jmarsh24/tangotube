@@ -21,7 +21,6 @@
 class VideoSearch < ApplicationRecord
   self.primary_key = :id
   belongs_to :video
-  belongs_to :video_score
 
   class << self
     def search(term)
@@ -30,7 +29,7 @@ class VideoSearch < ApplicationRecord
 
       video_searches = self
         .select("video_id, score")
-        .where("? % dancer_names OR ? % channel_title OR ? % song_title OR ? % song_artist OR ? % orchestra_name OR ? % event_city OR ? % event_title OR ? % event_country OR ? % video_title", quoted_term, quoted_term, quoted_term, quoted_term, quoted_term, quoted_term, quoted_term, quoted_term, quoted_term)
+        .where(":term % dancer_names OR :term % channel_title OR :term % song_title OR :term % song_artist OR :term % orchestra_name OR :term % event_city OR :term % event_title OR :term % event_country OR :term % video_title", term: quoted_term)
         .order("score DESC")
 
       video_searches.map(&:video_id)

@@ -14,7 +14,6 @@
 class VideoScore < ApplicationRecord
   self.primary_key = :video_id
   belongs_to :video
-  has_one :video_search
 
   class << self
     def refresh
