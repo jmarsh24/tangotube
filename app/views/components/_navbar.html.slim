@@ -25,8 +25,11 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
               - else
                 = link_to t("login"), new_user_session_path, class: "menu-item", data_turbo_stream: true
                 = link_to t("sign_up"), new_user_registration_path, class: "menu-item menu-item--bold", data_turbo_stream: true
+              .divider
               = link_to t(".privacy"), privacy_path, class: "menu-item"
               = link_to t(".terms"), terms_path, class: "menu-item"
+              = link_to t(".contact"), contact_path, class: "menu-item"
+              = link_to t(".about"), about_path, class: "menu-item"
               = link_to t(".google_privacy_policy"), "http://www.google.com/policies/privacy", target: "_blank", class: "menu-item"
               = link_to "Support The Project", "https://www.patreon.com/tangotube", class: "menu-item", target: "_blank", "aria-label": "Patreon"
   - if show_filter_bar?
