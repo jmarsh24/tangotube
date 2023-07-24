@@ -1,11 +1,12 @@
 .scrollable-bar {
   display: flex;
+  align-items: center;
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
   flex-wrap: nowrap;
-  gap: var(--spacing-xxs);
+  gap: var(--spacing-xs);
   scroll-snap-type: x mandatory;
   -ms-overflow-style: none;
   scrollbar-width: none;

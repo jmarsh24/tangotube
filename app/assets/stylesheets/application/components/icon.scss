@@ -48,4 +48,14 @@ $icon-padding-sizes: (
   &--black {
     color: black;
   }
+
+  &--youtube {
+    width: 68px;
+    height: 20px;
+    padding: 12px;
+    background-image: url('@assets/images/icons/yt-logo-dark.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }

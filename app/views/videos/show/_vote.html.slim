@@ -16,5 +16,5 @@
     div id="featured-#{video.youtube_id}"
       = button_to featured_video_path(video.youtube_id), method: :patch, class: ["button button--vote", video.featured? ? "button--icon-star-filled" : "button--icon-star"]
         = t(".featured_button")
-  = link_to "Youtube", "vnd.youtube://www.youtube.com/watch?v=#{video.youtube_id}", class: "button button--vote button--icon-play-rectangle youtube-app-link"
-  = link_to "Youtube", "https://youtube.com/watch?v=#{video.youtube_id}", target: "_blank", class: "button button--vote button--icon-play-rectangle youtube-web-link"
+  = link_to "", "vnd.youtube://www.youtube.com/watch?v=#{video.youtube_id}", class: "button icon--youtube youtube-app-link"
+  = link_to "", "https://youtube.com/watch?v=#{video.youtube_id}", target: "_blank", class: "button icon--youtube youtube-web-link"
