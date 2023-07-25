@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DailyUserSignups < Avo::Dashboards::ChartkickCard
   self.id = "line_chart"
   self.label = "Daily User Signups"

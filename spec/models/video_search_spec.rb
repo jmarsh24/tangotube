@@ -16,7 +16,7 @@
 #  event_title    :text
 #  event_country  :text
 #  video_title    :text
-#  score_1        :float
+#  score          :float
 #
 RSpec.describe VideoSearch do
   fixtures :all

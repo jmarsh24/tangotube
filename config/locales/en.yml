@@ -44,6 +44,12 @@ en:
       google_privacy_policy: Google Privacy Policy
       privacy: Privacy
       terms: Terms
+    navbar:
+      about: About
+      contact: Contact
+      google_privacy_policy: Google privacy policy
+      privacy: Privacy
+      terms: Terms
   dancers:
     date:
   date:
@@ -156,6 +162,9 @@ en:
       video_duration: "%M:%S"
   videos:
     details:
+      description: Description
+      metadata: Metadata
+      title: Title
       video_details: Video details
     index:
       meta_description: Tangotube.tv is a dedicated tango video platform that enhances
