@@ -32,10 +32,11 @@ class User < ApplicationRecord
   has_many :watched_videos, through: :watches, source: :video
   has_many :likes, dependent: :destroy
   has_many :liked_videos, through: :likes, source: :likeable, source_type: "Video"
+  has_many :clips, dependent: :nullify
 
   has_one_attached :avatar
 
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
   validates_confirmation_of :password
 
   # Include default devise modules. Others available are:
@@ -80,17 +81,26 @@ class User < ApplicationRecord
   end
 
   class << self
-    def from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.email = auth.info.email
-        user.password = Devise.friendly_token[0, 20]
-        user.name = auth.info.name   # assuming the user model has a name
-        user.first_name = auth.info.first_name
-        user.last_name = auth.info.last_name
-        user.image = auth.info.image
-        user.provider = auth.provider
+    def self.from_omniauth(auth)
+      user = User.where(email: auth.info.email).first
+
+      if user
+        user.update(uid: auth.uid, provider: auth.provider)
+      else
+        user = User.create(
+          email: auth.info.email,
+          password: Devise.friendly_token[0, 20],
+          name: auth.info.name,   # assuming the user model has a name
+          first_name: auth.info.first_name,
+          last_name: auth.info.last_name,
+          image: auth.info.image,
+          uid: auth.uid,
+          provider: auth.provider
+        )
         user.skip_confirmation!
       end
+
+      user
     end
   end
 end
