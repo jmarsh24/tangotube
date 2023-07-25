@@ -91,6 +91,7 @@ class VideosController < ApplicationController
     @filtering_params = filtering_params
   end
 
+  # @route GET /videos/:id/details (details_video)
   def details
     @video = Video.find_by(youtube_id: params[:id])
   end
