@@ -6,7 +6,7 @@
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
   flex-wrap: nowrap;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-xxs);
   scroll-snap-type: x mandatory;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -19,6 +19,7 @@
 
   &--vote {
     padding: 0;
+    gap: var(--spacing-xs);
   }
 
   &--padded {
