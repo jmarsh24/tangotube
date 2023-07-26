@@ -83,6 +83,7 @@ class User < ApplicationRecord
   class << self
     def from_omniauth(auth)
       user = User.where(email: auth.info.email).first
+
       if user
         user.update(uid: auth.uid, provider: auth.provider)
       else

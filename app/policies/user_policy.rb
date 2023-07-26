@@ -2,32 +2,32 @@
 
 class UserPolicy < ApplicationPolicy
   def index?
-    true
+    user.admin?
   end
 
   def show?
-    true
+    user.admin? || record == user
   end
 
   def create?
-    user&.admin?
+    user.admin?
   end
 
   def update?
-    user&.admin?
+    user.admin? || record == user
   end
 
   def destroy?
-    user&.admin?
-  end
-
-  def act_on?
-    user&.admin?
+    user.admin?
   end
 
   class Scope < Scope
     def resolve
-      scope.all
+      if user.admin?
+        scope.all
+      else
+        scope.where(id: user.id)
+      end
     end
   end
 end
