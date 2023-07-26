@@ -81,16 +81,15 @@ class User < ApplicationRecord
   end
 
   class << self
-    def self.from_omniauth(auth)
+    def from_omniauth(auth)
       user = User.where(email: auth.info.email).first
-
       if user
         user.update(uid: auth.uid, provider: auth.provider)
       else
         user = User.create(
           email: auth.info.email,
           password: Devise.friendly_token[0, 20],
-          name: auth.info.name,   # assuming the user model has a name
+          name: auth.info.name,
           first_name: auth.info.first_name,
           last_name: auth.info.last_name,
           image: auth.info.image,
