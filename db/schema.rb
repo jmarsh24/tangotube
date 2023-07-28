@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_100521) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_163252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -281,6 +281,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_100521) do
     t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.integer "role"
+    t.boolean "supporter", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -312,6 +313,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_100521) do
     t.text "youtube_tags", default: [], array: true
     t.datetime "metadata_updated_at"
     t.string "normalized_title"
+    t.index ["acr_response_code"], name: "index_videos_on_acr_response_code"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["featured"], name: "index_videos_on_featured"
@@ -450,3 +452,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_100521) do
   add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
 
 end
+where(acr_response_code: [nil, 0, 1001])
