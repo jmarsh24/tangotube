@@ -40,7 +40,7 @@ class Home < Avo::Dashboards::BaseDashboard
     label: "Unrecognized Videos Metric",
     description: "Count of the unrecognized videos.",
     options: {
-      unrecognized_videos: true
+      music_unrecognized: true
     }
   card VideosCountMetric,
     label: "Recognized Music Videos Metric",
