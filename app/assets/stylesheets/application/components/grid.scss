@@ -1,6 +1,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
+  overflow: hidden; // Prevents horizontal scrollbar from appearing
 
   &__main-content {
     padding: 0 12px;
