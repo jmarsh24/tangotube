@@ -298,30 +298,30 @@ RSpec.describe Video do
   end
 
   describe ".music_unrecognized" do
-    fit "returns videos that have acr_response_code of nil" do
+    it "returns videos that have acr_response_code of nil" do
       music_unrecognized_video = videos(:video_1_featured)
       music_unrecognized_video.update!(acr_response_code: nil)
 
       expect(Video.music_unrecognized).to include(music_unrecognized_video)
     end
 
-    fit "does not return videos that have acr_response_code of 0" do
+    it "returns videos that have acr_response_code of 3003" do
+      music_unrecognized_video = videos(:video_1_featured)
+      music_unrecognized_video.update!(acr_response_code: 3003)
+
+      expect(Video.music_unrecognized).to include(music_unrecognized_video)
+    end
+
+    it "does not return videos that have acr_response_code of 0" do
       music_unrecognized_video = videos(:video_1_featured)
       music_unrecognized_video.update!(acr_response_code: 0)
 
       expect(Video.music_unrecognized).not_to include(music_unrecognized_video)
     end
 
-    fit "does not return videos that have acr_response_code of 1001" do
+    it "does not return videos that have acr_response_code of 1001" do
       music_unrecognized_video = videos(:video_1_featured)
       music_unrecognized_video.update!(acr_response_code: 1001)
-
-      expect(Video.music_unrecognized).not_to include(music_unrecognized_video)
-    end
-
-    fit "does not return videos that have acr_response_code of 3003" do
-      music_unrecognized_video = videos(:video_1_featured)
-      music_unrecognized_video.update!(acr_response_code: 3003)
 
       expect(Video.music_unrecognized).not_to include(music_unrecognized_video)
     end

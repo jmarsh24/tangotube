@@ -99,7 +99,7 @@ class Video < ApplicationRecord
                          where(query)
                        end
   scope :music_recognized, -> { where(acr_response_code: 0) }
-  scope :music_unrecognized, -> { where.not(acr_response_code: [0, 1001]) }
+  scope :music_unrecognized, -> { where.not(acr_response_code: [0, 1001]).or(where(acr_response_code: nil)) }
 
   class << self
     def search(terms)
