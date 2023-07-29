@@ -1,4 +1,6 @@
 .video-card {
+  display: flex;
+  flex-direction: column;
   font-size: 12px;
   font-weight: 500;
 
@@ -80,7 +82,6 @@
 
   @include breakpoint-tablet {
     &--compact {
-      display: flex;
       gap: 10px;
       font-size: 13px;
       max-width: 800px;
