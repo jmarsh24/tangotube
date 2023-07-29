@@ -80,7 +80,7 @@ class Song < ApplicationRecord
   end
 
   def update_spotify_track_id
-    track = Spotify::TrackFinder.search_track("#{title} #{artist}")
+    track = Spotify::TrackFinder.new.search_track("#{title} #{artist}")
     update(spotify_track_id: track.dig("id"))
   end
 

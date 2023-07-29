@@ -1,0 +1,186 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic MDg2YzA2OTA1MzM5NGQ0Mjg3NzE0OWVhOGI1OTllNWU6NDZkZGI3YmY4YjA4NDY4ZDlhNTAzMWMxZjY1N2Q0NjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 29 Jul 2023 13:31:17 GMT
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQCMg8gjIwc8-S7TMM5csw5k5XzelkFubZvYpCZZf_AKXkyx4G85rBNlBsypEkkabtxo0z9O3CqBRyNEuENgrqhkXpPMaVATLD8;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Sp-Trace-Id:
+      - 8ec6901158a7a913
+      X-Envoy-Upstream-Service-Time:
+      - '10'
+      Server:
+      - envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Vary:
+      - Accept-Encoding
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"access_token":"BQCs-L91jDUfJKwusRT20_1JpfNSeSY-nBcZgyB891pYUCrEuqdKEyGv890f-TKeUNwElH0eDg-fu-mUkHWwION9cbm5UCycWXceWA2mDNXsV5l6bww","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 29 Jul 2023 13:31:17 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?limit=1&q=Nueve%20De%20Julio%20Juan%20D%27Arienzo&type=track
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer BQCs-L91jDUfJKwusRT20_1JpfNSeSY-nBcZgyB891pYUCrEuqdKEyGv890f-TKeUNwElH0eDg-fu-mUkHWwION9cbm5UCycWXceWA2mDNXsV5l6bww
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=7200
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Sat, 29 Jul 2023 13:31:17 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "tracks" : {
+            "href" : "https://api.spotify.com/v1/search?query=Nueve+De+Julio+Juan+D%27Arienzo&type=track&offset=0&limit=1",
+            "items" : [ {
+              "album" : {
+                "album_type" : "album",
+                "artists" : [ {
+                  "external_urls" : {
+                    "spotify" : "https://open.spotify.com/artist/4Kd66a11TeEgIKkIF6l9cG"
+                  },
+                  "href" : "https://api.spotify.com/v1/artists/4Kd66a11TeEgIKkIF6l9cG",
+                  "id" : "4Kd66a11TeEgIKkIF6l9cG",
+                  "name" : "Orquesta Juan D' Arienzo",
+                  "type" : "artist",
+                  "uri" : "spotify:artist:4Kd66a11TeEgIKkIF6l9cG"
+                } ],
+                "available_markets" : [ "AD", "AE", "AG", "AL", "AM", "AO", "AR", "AT", "AU", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BN", "BO", "BR", "BS", "BT", "BW", "BY", "BZ", "CA", "CD", "CG", "CH", "CI", "CL", "CM", "CO", "CR", "CV", "CW", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "ES", "ET", "FI", "FJ", "FM", "FR", "GA", "GB", "GD", "GE", "GH", "GM", "GN", "GQ", "GR", "GT", "GW", "GY", "HK", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IN", "IQ", "IS", "IT", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "MG", "MH", "MK", "ML", "MN", "MO", "MR", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NE", "NG", "NI", "NL", "NO", "NP", "NR", "NZ", "OM", "PA", "PE", "PG", "PH", "PK", "PL", "PS", "PT", "PW", "PY", "QA", "RO", "RW", "SA", "SB", "SC", "SE", "SG", "SI", "SK", "SL", "SM", "SN", "SR", "ST", "SV", "SZ", "TD", "TG", "TH", "TJ", "TL", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "US", "UY", "UZ", "VC", "VE", "VN", "VU", "WS", "ZA", "ZM", "ZW" ],
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/album/4YUE1ckGBtE1NXOKn9UBrz"
+                },
+                "href" : "https://api.spotify.com/v1/albums/4YUE1ckGBtE1NXOKn9UBrz",
+                "id" : "4YUE1ckGBtE1NXOKn9UBrz",
+                "images" : [ {
+                  "height" : 640,
+                  "url" : "https://i.scdn.co/image/ab67616d0000b2736f2d5a3caef90abb3db49a8b",
+                  "width" : 640
+                }, {
+                  "height" : 300,
+                  "url" : "https://i.scdn.co/image/ab67616d00001e026f2d5a3caef90abb3db49a8b",
+                  "width" : 300
+                }, {
+                  "height" : 64,
+                  "url" : "https://i.scdn.co/image/ab67616d000048516f2d5a3caef90abb3db49a8b",
+                  "width" : 64
+                } ],
+                "name" : "Orquesta Juan D' arienzo - 9 de Julio",
+                "release_date" : "1987-05-24",
+                "release_date_precision" : "day",
+                "total_tracks" : 14,
+                "type" : "album",
+                "uri" : "spotify:album:4YUE1ckGBtE1NXOKn9UBrz"
+              },
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4Kd66a11TeEgIKkIF6l9cG"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4Kd66a11TeEgIKkIF6l9cG",
+                "id" : "4Kd66a11TeEgIKkIF6l9cG",
+                "name" : "Orquesta Juan D' Arienzo",
+                "type" : "artist",
+                "uri" : "spotify:artist:4Kd66a11TeEgIKkIF6l9cG"
+              } ],
+              "available_markets" : [ "AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "MK", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET" ],
+              "disc_number" : 1,
+              "duration_ms" : 156586,
+              "explicit" : false,
+              "external_ids" : {
+                "isrc" : "ARG991006321"
+              },
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/5pGwtsdw7kUdMrD7ypSks4"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/5pGwtsdw7kUdMrD7ypSks4",
+              "id" : "5pGwtsdw7kUdMrD7ypSks4",
+              "is_local" : false,
+              "name" : "Loca",
+              "popularity" : 32,
+              "preview_url" : "https://p.scdn.co/mp3-preview/dcdc7810f574a4bcda4291a64854350b37b8d930?cid=<SPOTIFY_CLIENT_ID>",
+              "track_number" : 2,
+              "type" : "track",
+              "uri" : "spotify:track:5pGwtsdw7kUdMrD7ypSks4"
+            } ],
+            "limit" : 1,
+            "next" : "https://api.spotify.com/v1/search?query=Nueve+De+Julio+Juan+D%27Arienzo&type=track&offset=1&limit=1",
+            "offset" : 0,
+            "previous" : null,
+            "total" : 868
+          }
+        }
+  recorded_at: Sat, 29 Jul 2023 13:31:17 GMT
+recorded_with: VCR 6.1.0
