@@ -81,6 +81,7 @@ class Song < ApplicationRecord
 
   def update_spotify_track_id
     track = Spotify::TrackFinder.new.search_track("#{title} #{artist}")
+    return if track.nil?
     update(spotify_track_id: track.dig("id"))
   end
 
