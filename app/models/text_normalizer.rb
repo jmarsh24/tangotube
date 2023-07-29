@@ -9,7 +9,7 @@ class TextNormalizer
   def self.normalize(text)
     return "" if text.nil?
 
-    ascii_text = text.encode("ASCII", invalid: :replace, undef: :replace, replace: "")
+    ascii_text = I18n.transliterate(text)
     normalized_text = ascii_text.gsub("'", "").gsub("-", "").parameterize(separator: " ").downcase
     STOP_WORDS.each { |_lang, regex| normalized_text.gsub!(regex, "") }
     normalized_text.squeeze(" ").strip
