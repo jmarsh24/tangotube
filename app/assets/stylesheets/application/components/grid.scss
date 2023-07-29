@@ -1,7 +1,12 @@
 .grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  overflow: hidden; // Prevents horizontal scrollbar from appearing
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  grid-template-rows: auto 1fr;
+
+  & > * {
+    min-width: 0;
+  }
 
   &__main-content {
     padding: 0 12px;
