@@ -79,6 +79,11 @@ class Song < ApplicationRecord
     slug
   end
 
+  def update_spotify_track_id
+    track = Spotify::TrackFinder.search_track("#{title} #{artist}")
+    update(spotify_track_id: track.dig("id"))
+  end
+
   class << self
     def index_query
       INDEX_QUERY
