@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic MDg2YzA2OTA1MzM5NGQ0Mjg3NzE0OWVhOGI1OTllNWU6NDZkZGI3YmY4YjA4NDY4ZDlhNTAzMWMxZjY1N2Q0NjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 29 Jul 2023 13:03:24 GMT
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQB_MTvNHlgp0UE8DJ23u9bGwLCphBOXuoofPy5HkZDKD6iLaV0tNVwXyw7ruZPpB7wBtFxUm4Y1zPcUIENx90wcBVu7zDa2ZV4;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Sp-Trace-Id:
+      - f84d9de63549cead
+      X-Envoy-Upstream-Service-Time:
+      - '9'
+      Server:
+      - envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Vary:
+      - Accept-Encoding
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"access_token":"BQDjtI2C3p89-bXyMHaja1BQWIQifSz5j1FMhJgtESlAFxEXzLB9_vt79VwvPbLAx5HtADp9QqdswYNs77r9rQbKtSLOwTziQJ1gyMX9e1a9T37Oe7U","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 29 Jul 2023 13:03:24 GMT
+recorded_with: VCR 6.1.0

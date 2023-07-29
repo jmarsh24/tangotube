@@ -1,0 +1,186 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic MDg2YzA2OTA1MzM5NGQ0Mjg3NzE0OWVhOGI1OTllNWU6NDZkZGI3YmY4YjA4NDY4ZDlhNTAzMWMxZjY1N2Q0NjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 29 Jul 2023 13:02:27 GMT
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQDcihb4Sw1vgnN9RRUphO8wQCJ5BQP1f11G8yHTDJvC83JgRLUy_Y4dzQfr11Yv0pXEqLqt85jfLt_VcwDvEAfxVEYapaIUNfE;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Sp-Trace-Id:
+      - '0278faf42197c2d5'
+      X-Envoy-Upstream-Service-Time:
+      - '8'
+      Server:
+      - envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Vary:
+      - Accept-Encoding
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"access_token":"BQBx0-GOxvAA2zOM-3r44qDgW2ljiTpQha50rFbYATJx9K-4lVtan548Zw4-XU85QEjDneTk4337iTo3N5fjRJiZMhMsmb0tW3bQvPITHY2uz7uSafM","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 29 Jul 2023 13:02:27 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?limit=1&q=la%20yumba%20osvaldo%20pugliese&type=track
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer BQBx0-GOxvAA2zOM-3r44qDgW2ljiTpQha50rFbYATJx9K-4lVtan548Zw4-XU85QEjDneTk4337iTo3N5fjRJiZMhMsmb0tW3bQvPITHY2uz7uSafM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=7200
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Sat, 29 Jul 2023 13:02:27 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "tracks" : {
+            "href" : "https://api.spotify.com/v1/search?query=la+yumba+osvaldo+pugliese&type=track&offset=0&limit=1",
+            "items" : [ {
+              "album" : {
+                "album_type" : "album",
+                "artists" : [ {
+                  "external_urls" : {
+                    "spotify" : "https://open.spotify.com/artist/2HO9rAU2R7CRnmhx0ytN41"
+                  },
+                  "href" : "https://api.spotify.com/v1/artists/2HO9rAU2R7CRnmhx0ytN41",
+                  "id" : "2HO9rAU2R7CRnmhx0ytN41",
+                  "name" : "Osvaldo Pugliese",
+                  "type" : "artist",
+                  "uri" : "spotify:artist:2HO9rAU2R7CRnmhx0ytN41"
+                } ],
+                "available_markets" : [ "AD", "AE", "AG", "AL", "AM", "AO", "AR", "AT", "AU", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BN", "BO", "BR", "BS", "BT", "BW", "BY", "BZ", "CA", "CD", "CG", "CH", "CI", "CL", "CM", "CO", "CR", "CV", "CW", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "ES", "ET", "FI", "FJ", "FM", "FR", "GA", "GB", "GD", "GE", "GH", "GM", "GN", "GQ", "GR", "GT", "GW", "GY", "HK", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IN", "IQ", "IS", "IT", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MG", "MH", "MK", "ML", "MN", "MO", "MR", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NE", "NG", "NI", "NL", "NO", "NP", "NR", "NZ", "OM", "PA", "PE", "PG", "PH", "PK", "PL", "PS", "PT", "PW", "PY", "QA", "RO", "RS", "RW", "SA", "SB", "SC", "SE", "SG", "SI", "SK", "SL", "SM", "SN", "SR", "ST", "SV", "SZ", "TD", "TG", "TH", "TJ", "TL", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "US", "UY", "UZ", "VC", "VE", "VN", "VU", "WS", "XK", "ZA", "ZM", "ZW" ],
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/album/4duy4YMP7CHvE8kQk8oZXi"
+                },
+                "href" : "https://api.spotify.com/v1/albums/4duy4YMP7CHvE8kQk8oZXi",
+                "id" : "4duy4YMP7CHvE8kQk8oZXi",
+                "images" : [ {
+                  "height" : 640,
+                  "url" : "https://i.scdn.co/image/ab67616d0000b27335bf00c7e1f5fef15aa7bfa9",
+                  "width" : 640
+                }, {
+                  "height" : 300,
+                  "url" : "https://i.scdn.co/image/ab67616d00001e0235bf00c7e1f5fef15aa7bfa9",
+                  "width" : 300
+                }, {
+                  "height" : 64,
+                  "url" : "https://i.scdn.co/image/ab67616d0000485135bf00c7e1f5fef15aa7bfa9",
+                  "width" : 64
+                } ],
+                "name" : "The Vast Ocean of Tango",
+                "release_date" : "2021-07-23",
+                "release_date_precision" : "day",
+                "total_tracks" : 12,
+                "type" : "album",
+                "uri" : "spotify:album:4duy4YMP7CHvE8kQk8oZXi"
+              },
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/2HO9rAU2R7CRnmhx0ytN41"
+                },
+                "href" : "https://api.spotify.com/v1/artists/2HO9rAU2R7CRnmhx0ytN41",
+                "id" : "2HO9rAU2R7CRnmhx0ytN41",
+                "name" : "Osvaldo Pugliese",
+                "type" : "artist",
+                "uri" : "spotify:artist:2HO9rAU2R7CRnmhx0ytN41"
+              } ],
+              "available_markets" : [ "AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK" ],
+              "disc_number" : 1,
+              "duration_ms" : 166948,
+              "explicit" : false,
+              "external_ids" : {
+                "isrc" : "AUXN22163142"
+              },
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/0tGPciWRMCp1o5P2YlSU79"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/0tGPciWRMCp1o5P2YlSU79",
+              "id" : "0tGPciWRMCp1o5P2YlSU79",
+              "is_local" : false,
+              "name" : "La Yumba",
+              "popularity" : 20,
+              "preview_url" : "https://p.scdn.co/mp3-preview/bad3980fdc6f378015648421b8a7e0e5b0fe9427?cid=<SPOTIFY_CLIENT_ID>",
+              "track_number" : 10,
+              "type" : "track",
+              "uri" : "spotify:track:0tGPciWRMCp1o5P2YlSU79"
+            } ],
+            "limit" : 1,
+            "next" : "https://api.spotify.com/v1/search?query=la+yumba+osvaldo+pugliese&type=track&offset=1&limit=1",
+            "offset" : 0,
+            "previous" : null,
+            "total" : 802
+          }
+        }
+  recorded_at: Sat, 29 Jul 2023 13:02:28 GMT
+recorded_with: VCR 6.1.0

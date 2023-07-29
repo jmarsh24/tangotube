@@ -35,7 +35,7 @@ module ExternalVideoImport
       external_genres = []
       if music.spotify_artist_ids.any?(&:present?)
         music.spotify_artist_ids.compact.each do |artist_id|
-          external_genres << SpotifyArtistFinder.new.find(artist_id).dig("genres")
+          external_genres << Spotify::ArtistFinder.new.find(artist_id).dig("genres")
         rescue => e
           puts "Error retrieving Spotify artist genres: #{e.message}"
         end
