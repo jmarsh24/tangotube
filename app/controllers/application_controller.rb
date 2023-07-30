@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :show_filter_bar?
 
+  before_action :check_supporter
+
+  def check_supporter
+    @show_support_modal = current_user && !current_user.supporter
+  end
+
   private
 
   def paginated(scope, per: 10)

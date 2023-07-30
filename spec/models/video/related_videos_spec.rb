@@ -68,8 +68,20 @@ RSpec.describe Video::RelatedVideos do
       )
       DancerVideo.create!(dancer: video.leaders.first, video: video_same_channel, role: "leader")
       DancerVideo.create!(dancer: video.followers.first, video: video_same_channel, role: "follower")
+      video_same_channel_2 = Video.create!(
+        event: video.event,
+        channel: video.channel,
+        song: video.song,
+        youtube_id: "1235",
+        upload_date: video.upload_date + 5.days,
+        hidden: false,
+        title: "unnecessary",
+        description: "unnecessary"
+      )
+      DancerVideo.create!(dancer: video.leaders.first, video: video_same_channel_2, role: "leader")
+      DancerVideo.create!(dancer: video.followers.first, video: video_same_channel_2, role: "follower")
 
-      expect(recommendation.with_same_channel).to match_array([video_same_channel])
+      expect(recommendation.with_same_channel).to match_array([video_same_channel, video_same_channel_2])
     end
   end
 

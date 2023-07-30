@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -24,29 +26,22 @@
 #  supporter              :boolean          default(FALSE)
 #
 
-admin:
-  email: "admin@example.com"
-  first_name: "Admin"
-  last_name: "User"
-  name: "Admin User"
-  role: "admin"
-  confirmed_at: <%= Time.now %>
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+require "rails_helper"
 
-regular:
-  email: "user@example.com"
-  first_name: "Regular"
-  last_name: "User"
-  name: "Regular User"
-  role: "user"
-  confirmed_at: <%= Time.now %>
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+RSpec.describe User do
+  fixtures :all
 
-dancer:
-  email: "carlitos@tango.com"
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  name: "Carlitos Espinoza"
-  role: "user"
-  confirmed_at: <%= Time.now %>
-  first_name: "Carlitos"
-  last_name: "Espinoza"
+  describe ".sync_with_patreon!" do
+    it "does not update user if they don't have active pledge", :vcr do
+      non_supporter = users(:regular)
+      User.sync_with_patreon!
+      expect(non_supporter.reload.supporter).to be(false)
+    end
+
+    it "updates user if they have active pledge", :vcr do
+      non_supporter = users(:regular)
+      User.sync_with_patreon!
+      expect(non_supporter.reload.supporter).to be(true)
+    end
+  end
+end

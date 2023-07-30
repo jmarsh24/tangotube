@@ -59,6 +59,7 @@ gem "activerecord-postgres_enum"
 gem "fuzzy-string-match"
 gem "ransack"
 gem "scenic"
+gem "patreon"
 
 # Assets
 gem "vite_rails"

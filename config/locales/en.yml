@@ -167,6 +167,17 @@ en:
       contact_me: Contact Me
   sign_out: Sign out
   sign_up: Sign up
+  support:
+    show:
+      button_text: Become a Patron!
+      heading: Love TangoTube?
+      paragraph1: Help us keep the tango rhythm alive! We're devoted to bringing you
+        the best of tango videos. Your support on Patreon helps us improve and maintain
+        TangoTube.
+      paragraph2: As a patron, you'll get early access to new features and influence
+        our future developments.
+      team: The TangoTube Team
+      thank_you: Thank you,
   time:
     formats:
       video_duration: "%M:%S"

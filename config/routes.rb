@@ -66,13 +66,14 @@ Rails.application.routes.draw do
 
   resources :files, only: :show, controller: "shimmer/files"
 
-  # Webhook and Search Suggestion routes
-  resources :webhooks, only: [:index, :create]
+  match "/webhooks/youtube", to: "webhooks#youtube", via: [:get, :post]
+  post "/webhooks/patreon", to: "webhooks#patreon"
 
   # Sitemap and Banner routes
   get "sitemaps/*path", to: "shimmer/sitemaps#show"
   get "banner", to: "banner#index"
   post "banner", to: "banner#index"
+  get "support_us", to: "support#show"
 
   # Watch and root routes
   get "/watch", to: "videos#show", as: "watch"

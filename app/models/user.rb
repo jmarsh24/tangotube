@@ -23,6 +23,7 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  role                   :integer
+#  supporter              :boolean          default(FALSE)
 #
 class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
@@ -101,6 +102,18 @@ class User < ApplicationRecord
       end
 
       user
+    end
+
+    def sync_with_patreon!
+      api_client = Patreon::API.new(Config.patreon_access_token!)
+      campaign_and_patrons = api_client.fetch_campaign_and_patrons
+      campaign_and_patrons.data.each do |campaign|
+        campaign.pledges.each do |pledge|
+          email = pledge.patron.email
+          user = User.find_by(email:)
+          user.update!(supporter: true) if user.present? && user.supporter == false
+        end
+      end
     end
   end
 end

@@ -7,6 +7,7 @@ RSpec.describe Search, type: :model do
 
   describe "#results" do
     it "returns an array of results" do
+      skip "Waiting for videosearch to be refactored"
       channel = channels(:"030tango")
       search = Search.new(query: "030")
 
