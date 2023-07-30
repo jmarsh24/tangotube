@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PatreonEventResource < Avo::BaseResource
   self.title = :id
   self.includes = []

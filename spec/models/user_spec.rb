@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -30,16 +32,16 @@ RSpec.describe User do
   fixtures :all
 
   describe ".sync_with_patreon!" do
-    fit "does not update user if they don't have active pledge", :vcr do
+    it "does not update user if they don't have active pledge", :vcr do
       non_supporter = users(:regular)
       User.sync_with_patreon!
-      expect(non_supporter.reload.supporter).to eq(false)
+      expect(non_supporter.reload.supporter).to be(false)
     end
 
-    fit "updates user if they have active pledge", :vcr do
+    it "updates user if they have active pledge", :vcr do
       non_supporter = users(:regular)
       User.sync_with_patreon!
-      expect(non_supporter.reload.supporter).to eq(true)
+      expect(non_supporter.reload.supporter).to be(true)
     end
   end
 end
