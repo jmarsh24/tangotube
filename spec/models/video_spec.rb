@@ -352,4 +352,14 @@ RSpec.describe Video do
       expect(video.hd_duration_data).to eq("HD 02:47")
     end
   end
+
+  describe "#normalized_title" do
+    it "saves the title normalized" do
+      video = videos(:video_1_featured)
+      video.normalize_title
+      video.save!
+
+      expect(video.reload.normalized_title).to eq("noelia hurtado carlitos espinoza amsterdam 2014 1")
+    end
+  end
 end

@@ -99,7 +99,9 @@ class Video < ApplicationRecord
                          where(query)
                        end
   scope :music_recognized, -> { where(acr_response_code: 0) }
-  scope :music_unrecognized, -> { where.not(acr_response_code: [0, 1001]).or(where(acr_response_code: nil)) }
+  scope :music_unrecognized, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
+
+  before_validation :normalize_title
 
   class << self
     def search(terms)
@@ -119,6 +121,10 @@ class Video < ApplicationRecord
         thumbnail_attachment: :blob
       ]
     end
+  end
+
+  def normalize_title
+    self.normalized_title = TextNormalizer.normalize(title)
   end
 
   def featured?
