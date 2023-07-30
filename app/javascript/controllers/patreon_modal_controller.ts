@@ -19,12 +19,14 @@ export default class extends Controller {
   }
 
   getMinutesSinceLastTimestamp(): number {
-    const initialTimestamp = localStorage.getItem('initialTimestamp');
-    if (!initialTimestamp) {
+    const lastModalShownTimestamp = localStorage.getItem(
+      'lastModalShownTimestamp'
+    );
+    if (!lastModalShownTimestamp) {
       this.resetTimestamp();
       return 0;
     } else {
-      return (Date.now() - Number(initialTimestamp)) / 60000;
+      return (Date.now() - Number(lastModalShownTimestamp)) / 60000;
     }
   }
 
@@ -33,6 +35,6 @@ export default class extends Controller {
   }
 
   resetTimestamp(): void {
-    localStorage.setItem('initialTimestamp', String(Date.now()));
+    localStorage.setItem('lastModalShownTimestamp', String(Date.now()));
   }
 }
