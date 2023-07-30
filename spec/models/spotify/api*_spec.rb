@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Spotify::Api do
+RSpec.describe Spotify::API do
   it "returns an access token", :vcr do
     api = Spotify::API.new
     token = api.access_token
