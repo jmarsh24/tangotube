@@ -50,4 +50,5 @@ VCR.configure do |config|
   config.filter_sensitive_data("<YOUTUBE_API_KEY>") { Config.youtube_api_key! }
   config.filter_sensitive_data("<SPOTIFY_CLIENT_ID>") { Config.spotify_client_id! }
   config.filter_sensitive_data("<SPOTIFY_SECRET_KEY>") { Config.spotify_secret_key! }
+  config.filter_sensitive_data("<PATREON_ACCESS_TOKEN>") { Config.patreon_access_token! }
 end

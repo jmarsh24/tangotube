@@ -1,6 +1,6 @@
 - meta.title = @video.title
 - meta.description = @video.description
-- meta.image = @video.thumbnail.url
+- meta.image = image(@video.thumbnail)
 - meta.canonical = watch_url(v: @video)
 .stack.stack--xs
   .video-block 
