@@ -465,4 +465,3 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_185636) do
   add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
 
 end
-where(acr_response_code: [nil, 0, 1001])
