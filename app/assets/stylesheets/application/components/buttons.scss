@@ -101,6 +101,27 @@
     font-size: 18px;
   }
 
+  &--patreon {
+    background-color: #ff424d;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0 8px;
+
+    &::before {
+      content: '';
+      color: black;
+    }
+
+    &:hover {
+      background-color: #e02231;
+    }
+
+    &.active {
+      background-color: #b01b28;
+    }
+  }
+
   &--link {
     background-color: transparent;
     color: var(--text-link-primary-base);

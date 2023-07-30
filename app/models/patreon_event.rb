@@ -1,0 +1,2 @@
+class PatreonEvent < ApplicationRecord
+end

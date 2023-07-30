@@ -21,4 +21,3 @@ LEFT JOIN dancer_videos ON dancer_videos.video_id = videos.id
 LEFT JOIN dancers ON dancers.id = dancer_videos.dancer_id
 LEFT JOIN orchestras ON orchestras.id = songs.orchestra_id
 GROUP BY videos.id, videos.youtube_id
-ORDER BY score DESC
