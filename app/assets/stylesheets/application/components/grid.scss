@@ -1,9 +1,19 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  grid-template-rows: auto 1fr;
+
+  & > * {
+    min-width: 0;
+  }
 
   &__main-content {
     padding: 0 12px;
+  }
+
+  @include breakpoint-tablet {
+    display: grid;
   }
 
   &--videos {

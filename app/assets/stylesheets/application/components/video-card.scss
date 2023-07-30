@@ -1,4 +1,6 @@
 .video-card {
+  display: flex;
+  flex-direction: column;
   font-size: 12px;
   font-weight: 500;
 
@@ -51,6 +53,7 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+    padding: var(--spacing-xxs) var(--spacing-xxs);
   }
 
   &__content {
@@ -58,9 +61,9 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    padding: var(--spacing-xxs) var(--spacing-xs);
     font-size: 10px;
-    overflow: hidden;
+    padding-top: var(--spacing-xxs);
+    padding-left: var(--spacing-xxs);
   }
 
   &__dancer {
@@ -80,7 +83,6 @@
 
   @include breakpoint-tablet {
     &--compact {
-      display: flex;
       gap: 10px;
       font-size: 13px;
       max-width: 800px;

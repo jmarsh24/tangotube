@@ -1,0 +1,140 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic MDg2YzA2OTA1MzM5NGQ0Mjg3NzE0OWVhOGI1OTllNWU6NDZkZGI3YmY4YjA4NDY4ZDlhNTAzMWMxZjY1N2Q0NjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 29 Jul 2023 13:09:09 GMT
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQBj3zZl5Ztb8BSPjJko6cjQhKHtvX9-dQZDHCpwTPbiUBWxOLTdbu9NiF-gx0LsHxb7IcMoNODPPt8CZQB3zD9XFNw-5UwWkPE;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Sp-Trace-Id:
+      - 75aaf77cab267988
+      X-Envoy-Upstream-Service-Time:
+      - '9'
+      Server:
+      - envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Vary:
+      - Accept-Encoding
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"access_token":"BQD04L4IinuGOMq5A4fVHPzk0p_RyXr7h-UF2pFFMtFwHZiiQfWqKhHUHzEx83uJyfAXzOizMDka1-9saksmF8LJrH6NgzJDPyJt2wvfGf9X7wIB7BA","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 29 Jul 2023 13:09:09 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/artists/2HO9rAU2R7CRnmhx0ytN41
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer BQD04L4IinuGOMq5A4fVHPzk0p_RyXr7h-UF2pFFMtFwHZiiQfWqKhHUHzEx83uJyfAXzOizMDka1-9saksmF8LJrH6NgzJDPyJt2wvfGf9X7wIB7BA
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=7200
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Sat, 29 Jul 2023 13:09:10 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/artist/2HO9rAU2R7CRnmhx0ytN41"
+          },
+          "followers" : {
+            "href" : null,
+            "total" : 54228
+          },
+          "genres" : [ "latin classical", "tango" ],
+          "href" : "https://api.spotify.com/v1/artists/2HO9rAU2R7CRnmhx0ytN41",
+          "id" : "2HO9rAU2R7CRnmhx0ytN41",
+          "images" : [ {
+            "height" : 662,
+            "url" : "https://i.scdn.co/image/368e3ac2a8c4b7e9975cd75dbfee53091b99700c",
+            "width" : 886
+          }, {
+            "height" : 478,
+            "url" : "https://i.scdn.co/image/320556c1d06b97379b3d2e7edd44e54c140bb886",
+            "width" : 640
+          }, {
+            "height" : 149,
+            "url" : "https://i.scdn.co/image/9306db87398e6b7c374a3ae0100f8fc9e8439c83",
+            "width" : 199
+          }, {
+            "height" : 48,
+            "url" : "https://i.scdn.co/image/eb27af46a0ce6f27254b6513ff9374676ca01389",
+            "width" : 64
+          } ],
+          "name" : "Osvaldo Pugliese",
+          "popularity" : 36,
+          "type" : "artist",
+          "uri" : "spotify:artist:2HO9rAU2R7CRnmhx0ytN41"
+        }
+  recorded_at: Sat, 29 Jul 2023 13:09:10 GMT
+recorded_with: VCR 6.1.0

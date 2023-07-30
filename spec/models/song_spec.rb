@@ -44,4 +44,13 @@ RSpec.describe Song do
       expect(song.full_title).to eq("Nueve De Julio - Juan D'Arienzo")
     end
   end
+
+  describe "#update_spotify_track_id" do
+    it "updates the spotify_track_id", :vcr do
+      song = songs(:nueve_de_julio)
+      expect {
+        song.update_spotify_track_id
+      }.to change { song.reload.spotify_track_id }.to("5pGwtsdw7kUdMrD7ypSks4")
+    end
+  end
 end

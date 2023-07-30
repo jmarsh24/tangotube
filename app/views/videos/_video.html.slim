@@ -1,5 +1,5 @@
 - cache [video.youtube_id, video.song&.updated_at, video.performance_video&.position, video.performance&.updated_at, video.thumbnail, video.updated_at], expires_in: 24.hours do
-  .video-card.stack.stack--xxxs id="video_#{video.youtube_id}"
+  .video-card id="video_#{video.youtube_id}"
     = link_to watch_path(v: video.youtube_id) do
       .video-card__image data-duration="#{video.hd_duration_data}"
         - if video.performance.present?
