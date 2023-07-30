@@ -3,7 +3,8 @@
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  # @route GET /webhooks/youtube (webhooks#youtube)
+  # @route GET /webhooks/youtube (webhooks_youtube)
+  # @route POST /webhooks/youtube (webhooks_youtube)
   def youtube
     if params["hub.challenge"]
       render plain: params["hub.challenge"]
@@ -14,7 +15,7 @@ class WebhooksController < ApplicationController
     end
   end
 
-  # @route POST /webhooks/patreon (webhooks#patreon)
+  # @route POST /webhooks/patreon (webhooks_patreon)
   def patreon
     patreon_event = PatreonEvent.create!(
       event_type: request.headers["X-Patreon-Event"],
