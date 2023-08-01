@@ -8,6 +8,10 @@
 
   &--compact {
     flex-direction: row;
+
+    .video-card__image {
+      min-width: 180px;
+    }
   }
 
   &__performance-number {
