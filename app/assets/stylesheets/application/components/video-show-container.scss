@@ -1,0 +1,5 @@
+.video-show-container {
+  @include breakpoint-tablet {
+    padding: 0 var(--spacing-xxxl);
+  }
+}

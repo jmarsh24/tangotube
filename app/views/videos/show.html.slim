@@ -2,7 +2,7 @@
 - meta.description = @video.description
 - meta.image = image(@video.thumbnail)
 - meta.canonical = watch_url(v: @video)
-.stack.stack--xs
+.stack.stack--xs.video-show-container
   .video-block 
     div data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
   .grid.grid--2-col

@@ -36,9 +36,9 @@
       grid-column: 1;
     }
 
-    @include breakpoint-tablet {
+    @include breakpoint-desktop {
       display: grid;
-      grid-template-columns: 3fr 5fr;
+      grid-template-columns: 1fr 1fr;
 
       .grid__main-content {
         grid-column: 1;
