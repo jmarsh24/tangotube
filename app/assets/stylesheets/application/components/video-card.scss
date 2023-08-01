@@ -3,6 +3,8 @@
   flex-direction: column;
   font-size: 12px;
   font-weight: 500;
+  gap: 8px;
+  width: 100%;
 
   &--compact {
     flex-direction: row;
@@ -12,7 +14,6 @@
     position: absolute;
     background-color: black;
     color: var(--color-neutral-1000);
-    font-size: 12px;
     right: 5px;
     top: 5px;
     padding: 0.1em 0.3em;
@@ -24,14 +25,20 @@
     position: relative;
     aspect-ratio: 16 / 9;
     background-color: var(--color-neutral-200);
-    min-width: 360px;
+    min-width: 220px;
+    height: 100%;
+    overflow: hidden;
 
     img {
       position: absolute;
       top: 0;
+      right: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      background-color: transparent;
+      object-fit: cover;
     }
 
     &::after {
@@ -39,7 +46,6 @@
       position: absolute;
       background-color: black;
       color: var(--color-neutral-1000);
-      font-size: 12px;
       right: 5px;
       bottom: 10px;
       padding: 0 0.3em;
@@ -65,9 +71,8 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    font-size: 10px;
-    padding-top: var(--spacing-xxs);
-    padding-left: var(--spacing-xxs);
+    overflow: hidden;
+    padding: 0 12px;
   }
 
   &__dancer {
@@ -77,7 +82,6 @@
 
   &__metadata {
     color: var(--color-neutral-700);
-    font-size: 12px;
   }
 
   &__song-metadata {
@@ -90,14 +94,6 @@
       gap: 10px;
       font-size: 13px;
 
-      .video-card__content {
-        padding: unset;
-      }
-
-      .video-card__primary {
-        padding: unset;
-      }
-
       .video-card__title {
         font-size: 13px;
       }
@@ -105,7 +101,7 @@
         font-size: 13px;
       }
       .video-card__image {
-        width: 360px;
+        min-width: 360px;
       }
       .video-card__dancer {
         font-size: 11px;

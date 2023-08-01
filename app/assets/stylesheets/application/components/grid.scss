@@ -12,6 +12,10 @@
     padding: 0 12px;
   }
 
+  &__sidebar {
+    padding: 0 12px;
+  }
+
   @include breakpoint-tablet {
     display: grid;
   }
@@ -30,11 +34,6 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-
-    &__main-content,
-    &__sidebar {
-      grid-column: 1;
-    }
 
     @include breakpoint-desktop {
       display: grid;
