@@ -69,6 +69,8 @@ Rails.application.routes.draw do
   match "/webhooks/youtube", to: "webhooks#youtube", via: [:get, :post]
   post "/webhooks/patreon", to: "webhooks#patreon"
 
+  resources :recent_searches, only: [:create]
+
   # Sitemap and Banner routes
   get "sitemaps/*path", to: "shimmer/sitemaps#show"
   get "banner", to: "banner#index"

@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_videos, through: :likes, source: :likeable, source_type: "Video"
   has_many :clips, dependent: :nullify
+  has_many :recent_searches, dependent: :destroy
 
   has_one_attached :avatar
 

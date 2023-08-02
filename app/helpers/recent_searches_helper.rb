@@ -1,0 +1,2 @@
+module RecentSearchesHelper
+end

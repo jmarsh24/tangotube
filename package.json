@@ -13,7 +13,7 @@
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@nerdgeschoss/shimmer": "^0.0.29",
-    "@rails/request.js": "^0.0.6",
+    "@rails/request.js": "^0.0.8",
     "@sentry/browser": "^7.29.0",
     "@types/lodash.debounce": "^4.0.7",
     "@types/node": "^18.11.18",
