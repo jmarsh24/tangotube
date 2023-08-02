@@ -24,6 +24,7 @@
 #  unconfirmed_email      :string
 #  role                   :integer
 #  supporter              :boolean          default(FALSE)
+#  patreon_id             :string
 #
 
 require "rails_helper"

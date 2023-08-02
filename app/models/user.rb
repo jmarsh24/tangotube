@@ -24,6 +24,7 @@
 #  unconfirmed_email      :string
 #  role                   :integer
 #  supporter              :boolean          default(FALSE)
+#  patreon_id             :string
 #
 class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?

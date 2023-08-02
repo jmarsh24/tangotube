@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RecentSearchResource < Avo::BaseResource
   self.title = :id
   self.includes = []

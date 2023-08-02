@@ -1,6 +1,7 @@
 .search__categories#search-header-categories.scrollable-bar
-  - categories.each do |category|
-    .switcher
-      label.switcher__button[for=category[1] class=(category[1] == selected_category || (selected_category.blank? && category[1].blank?) ? "active" : "")]
-        = radio_button_tag :category, category[1], category[1] == selected_category || (selected_category.blank? && category[1].blank?), id: category[1]
-        span = category[0]
+  - if params[:query].present?
+    - categories.each do |category|
+      .switcher
+        label.switcher__button[for=category[1] class=(category[1] == selected_category || (selected_category.blank? && category[1].blank?) ? "active" : "")]
+          = radio_button_tag :category, category[1], category[1] == selected_category || (selected_category.blank? && category[1].blank?), id: category[1]
+          span = category[0]

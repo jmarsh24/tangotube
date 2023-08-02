@@ -1,0 +1,67 @@
+= turbo_frame_tag "search-results", target: "_top", class: "search__results scrollable-container__content"
+  h3.heading-3 = t(".recent_searches")
+  - recent_searches.each do |recent_search|
+    - record = recent_search.searchable
+    - case recent_search.searchable_type
+    - when "Event"
+      .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
+        = link_to root_path(event: record.slug), class: "search__result" do
+          - if record.profile_image.attached?
+            = image_tag record.profile_image, class: "search__result-image-circle"
+          - else
+            = image_tag "default_avatar.jpg", class: "search__result-image-circle"
+          .search__result-title = record.title
+        = button_to recent_search_path(recent_search), method: :delete do
+          .icon.icon--close.icon--md
+    - when "Song"
+      .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
+        = link_to root_path(song: record.slug), class: "search__result" do
+          - if record&.orchestra&.profile_image&.attached?
+            = image_tag record.orchestra.profile_image, class: "search__result-image-circle"
+          - else
+            = image_tag "default_avatar.jpg", class: "search__result-image-circle"
+          .search__result-title = record.full_title
+        = button_to recent_search_path(recent_search), method: :delete do
+          .icon.icon--close.icon--md
+    - when "Orchestra"
+      .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
+        = link_to root_path(orchestra: record.slug), class: "search__result" do
+          - if record.profile_image.attached?
+            = image_tag record.profile_image, class: "search__result-image-circle"
+          - else
+            = image_tag "default_avatar.jpg", class: "search__result-image-circle"
+          .search__result-title = record.name
+        = button_to recent_search_path(recent_search), method: :delete do
+          .icon.icon--close.icon--md
+    - when "Channel"
+      .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
+        = link_to root_path(channel: record.channel_id), class: "search__result" do
+          - if record.thumbnail.present?
+            = image_tag record.thumbnail, class: "search__result-image-circle"
+          - else
+            = image_tag "default_avatar.jpg", class: "search__result-image-circle"
+          .search__result-title = record.title
+        = button_to recent_search_path(recent_search), method: :delete do
+          .icon.icon--close.icon--md
+    - when "Video"
+      .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
+        = link_to watch_path(v: record.youtube_id), class: "search__result" do
+          - if record.thumbnail.present?
+            = image_tag record.thumbnail, class: "search__result-image"
+          - else
+            = image_tag "default_avatar.jpg", class: "search__result-image"
+          .search__result-title = record.title
+        = button_to recent_search_path(recent_search), method: :delete do
+          .icon.icon--close.icon--md
+    - when "Dancer"
+      .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
+        = link_to root_path(dancer: record.slug), class: "search__result" do
+          - if record.profile_image.attached?
+            = image_tag record.profile_image, class: "search__result-image-circle"
+          - else
+            = image_tag "default_avatar.jpg", class: "search__result-image-circle"
+          .search__result-title = record.name
+        = button_to recent_search_path(recent_search), method: :delete do
+          .icon.icon--close.icon--md
+    - else
+      p Unrecognized searchable type

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RecentSearchesController < ApplicationController
   before_action :authenticate_user!
 
@@ -11,6 +13,12 @@ class RecentSearchesController < ApplicationController
     else
       head :unprocessable_entity
     end
+  end
+
+  def destroy
+    recent_search = RecentSearch.find(params[:id])
+    recent_search.destroy
+    ui.remove(recent_search)
   end
 
   private
