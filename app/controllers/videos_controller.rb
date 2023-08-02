@@ -5,7 +5,7 @@ class VideosController < ApplicationController
   before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
   before_action :set_video, except: [:index, :create, :destroy]
-  before_action :set_video, only: [:show, :hide, :featured, :like, :unlike, :share]
+  before_action :set_video, only: [:show, :hide, :featured, :like, :unlike, :share, :details]
 
   # @route GET /videos (videos)
   # @route GET / (root)
