@@ -12,9 +12,13 @@ class SearchesController < ApplicationController
     selected_category = params[:category] || "all"
     categories = search_categories_options
     results = Search.new(query: params[:query], category: selected_category).results
-    ui.replace("search-results", with: "searches/results", results:)
-    ui.replace("search-results", with: "searches/recent_searches", recent_searches: current_user.recent_searches.unique_by_searchable.limit(10)) unless params[:query].present?
-    ui.replace("search-header-categories", with: "searches/categories", selected_category:, categories:)
+
+    if current_user && params[:query].blank?
+      ui.replace("search-results", with: "searches/recent_searches", recent_searches: current_user.recent_searches.unique_by_searchable.limit(10))
+    else
+      ui.replace("search-results", with: "searches/results", results:)
+      ui.replace("search-header-categories", with: "searches/categories", selected_category:, categories:)
+    end
   end
 
   private
