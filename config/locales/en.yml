@@ -193,7 +193,7 @@ en:
       lyrics:
         lyrics_header: Lyrics
       video_info_primary:
-        more: ...more
+        more: "...more"
       video_metadata:
         follower_heading: Follower
         leader_heading: Leader

@@ -3,6 +3,7 @@
 class RecentSearchesController < ApplicationController
   before_action :authenticate_user!
 
+  # @route POST /recent_searches (recent_searches)
   def create
     resource = GlobalID::Locator.locate recent_search_params[:resource_gid]
     head :unprocessable_entity and return unless resource
@@ -15,6 +16,7 @@ class RecentSearchesController < ApplicationController
     end
   end
 
+  # @route DELETE /recent_searches/:id (recent_search)
   def destroy
     recent_search = RecentSearch.find(params[:id])
     recent_search.destroy

@@ -16,10 +16,11 @@
 class RecentSearch < ApplicationRecord
   belongs_to :user
   belongs_to :searchable, polymorphic: true
+  scope :unique_by_searchable, -> {
+                                 subquery = self.select("DISTINCT ON (searchable_id, searchable_type) recent_searches.*")
+                                   .order("searchable_id, searchable_type, created_at DESC")
+                                   .to_sql
 
-  scope :most_recent, -> { order(created_at: :desc) }
-  scope :unique_searches, -> {
-    select("DISTINCT ON (recent_searches.searchable_id, recent_searches.searchable_type) recent_searches.*")
-      .order("recent_searches.searchable_id, recent_searches.searchable_type, recent_searches.created_at DESC")
-  }
+                                 from("(#{subquery}) AS recent_searches").order("created_at DESC")
+                               }
 end
