@@ -1,8 +1,8 @@
 - cache [@video.song.lyrics, @video.song.lyrics_en] do
-  .lyrics-card.lyrics-card--preview
-    .stack.stack--line.stack--justify-space-between
-      h2.heading-2.heading-4--bold = t ".lyrics_header"
-      a href=modal_path(song_lyrics_path(@video.song))
-        .icon-wrapper
-          .icon.icon--arrows-expand.icon--md.icon--padding-md
-    = simple_format(truncate(@video.song.lyrics, length: 130, omission: ""))
+  a href=modal_path(song_lyrics_path(@video.song))
+    .lyrics-card.lyrics-card--preview
+        .stack.stack--line.stack--justify-space-between
+          h2.heading-2.heading-4--bold = t ".lyrics_header"
+          .icon-wrapper
+            .icon.icon--arrows-expand.icon--md.icon--padding-md
+        = simple_format(truncate(@video.song.lyrics, length: 130, omission: ""))
