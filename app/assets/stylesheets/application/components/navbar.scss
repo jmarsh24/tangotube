@@ -27,10 +27,15 @@
     }
   }
 
-  &__search {
-    position: relative;
-    flex: 0 1 728px;
-    width: 100%;
+  &__search-bar {
+    display: none;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: 500px;
+    border-radius: 5px;
+    height: 40px;
+    padding: 12px;
+    background: var(--color-neutral-300);
   }
 
   &__logo {
@@ -62,10 +67,19 @@
   &__bottom {
     background-color: var(--color-neutral-0);
   }
+
   @include breakpoint-tablet {
     &__filters {
       padding: var(--spacing-xxs) var(--spacing-md);
     }
     top: 0 !important;
+
+    #mobile-search {
+      display: none;
+    }
+
+    &__search-bar {
+      display: flex;
+    }
   }
 }
