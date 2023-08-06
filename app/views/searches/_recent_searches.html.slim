@@ -5,7 +5,7 @@
     - case recent_search.searchable_type
     - when "Event"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to root_path(event: record.slug), class: "search__result" do
+        = link_to root_path(event: record.slug), class: "search__result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.profile_image.attached?
             = image_tag record.profile_image, class: "search__result-image-circle"
           - else
@@ -15,7 +15,7 @@
           .icon.icon--close.icon--md
     - when "Song"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to root_path(song: record.slug), class: "search__result" do
+        = link_to root_path(song: record.slug), class: "search__result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record&.orchestra&.profile_image&.attached?
             = image_tag record.orchestra.profile_image, class: "search__result-image-circle"
           - else
@@ -25,7 +25,7 @@
           .icon.icon--close.icon--md
     - when "Orchestra"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to root_path(orchestra: record.slug), class: "search__result" do
+        = link_to root_path(orchestra: record.slug), class: "search__result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.profile_image.attached?
             = image_tag record.profile_image, class: "search__result-image-circle"
           - else
@@ -35,7 +35,7 @@
           .icon.icon--close.icon--md
     - when "Channel"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to root_path(channel: record.channel_id), class: "search__result" do
+        = link_to root_path(channel: record.channel_id), class: "search__result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.thumbnail.present?
             = image_tag record.thumbnail, class: "search__result-image-circle"
           - else
@@ -45,7 +45,7 @@
           .icon.icon--close.icon--md
     - when "Video"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to watch_path(v: record.youtube_id), class: "search__result" do
+        = link_to watch_path(v: record.youtube_id), class: "search__result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.thumbnail.present?
             = image_tag record.thumbnail, class: "search__result-image"
           - else
@@ -55,7 +55,7 @@
           .icon.icon--close.icon--md
     - when "Dancer"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to root_path(dancer: record.slug), class: "search__result" do
+        = link_to root_path(dancer: record.slug), class: "search__result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.profile_image.attached?
             = image_tag record.profile_image, class: "search__result-image-circle"
           - else
