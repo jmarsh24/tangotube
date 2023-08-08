@@ -26,72 +26,95 @@ class Search
     terms = query.split(" ")
     sql = terms.flat_map do |term|
       ActiveRecord::Base.sanitize_sql_array([
-        <<~SQL, query: term
+        <<~SQL, query: "%#{term}%", normalized_query: term
           (
             SELECT
               'channels' AS record_type,
               id AS record_id,
-              (similarity (title, :query) * 0.5 + (videos_count::float / (SELECT MAX(videos_count)::float FROM channels)) * 0.5) AS score
+              0.7 * (COALESCE(videos_count, 0)::float / (SELECT MAX(videos_count)::float FROM channels)) * similarity(title, :normalized_query) AS score
             FROM
               channels
             WHERE
-              :query % title)
+              title ILIKE :query
+          )
           UNION ALL
           (
             SELECT
               'dancers' AS record_type,
               id AS record_id,
-              (similarity (name, :query) * 0.5 + (videos_count::float / (SELECT MAX(videos_count)::float FROM dancers)) * 0.5) AS score
+              0.7 * (COALESCE(videos_count, 0)::float / (SELECT MAX(videos_count)::float FROM dancers)) * similarity(name, :normalized_query) AS score
             FROM
               dancers
             WHERE
-              :query % name)
+              name ILIKE :query
+          )
           UNION ALL
           (
             SELECT
               'events' AS record_type,
               id AS record_id,
-              (similarity (title, :query) + similarity (city, :query) * 0.33 + similarity (country, :query) * 0.33 + (videos_count::float / (SELECT MAX(videos_count)::float FROM events)) * 0.33) AS score
+              0.7 * (COALESCE(videos_count, 0)::float / (SELECT MAX(videos_count)::float FROM events)) * GREATEST(
+                similarity(title, :normalized_query),
+                similarity(city, :normalized_query),
+                similarity(country, :normalized_query)
+              ) AS score
             FROM
               events
             WHERE
-              :query % title OR :query % city OR :query % country)
+              title ILIKE :query OR city ILIKE :query OR country ILIKE :query
+          )
           UNION ALL
           (
             SELECT
               'orchestras' AS record_type,
               id AS record_id,
-              (similarity (name, :query) * 0.5 + (videos_count::float / (SELECT MAX(videos_count)::float FROM orchestras)) * 0.5) AS score
+              0.7 * (COALESCE(videos_count, 0)::float / (SELECT MAX(videos_count)::float FROM orchestras)) * similarity(name, :normalized_query) AS score
             FROM
               orchestras
             WHERE
-              :query % name)
+              name ILIKE :query
+          )
           UNION ALL
           (
             SELECT
               'songs' AS record_type,
               id AS record_id,
-              (similarity (title, :query) * 0.6 + similarity (artist, :query) * 0.1 + similarity (genre, :query) * 0.1 + (videos_count::float / (SELECT MAX(videos_count)::float FROM songs)) * 0.2) AS score
+              0.7 * (COALESCE(videos_count, 0)::float / (SELECT MAX(videos_count)::float FROM songs)) * GREATEST(
+                similarity(title, :normalized_query),
+                similarity(artist, :normalized_query),
+                similarity(genre, :normalized_query)
+              ) AS score
             FROM
               songs
             WHERE
-              :query % title OR :query % artist OR :query % genre)
+              title ILIKE :query OR artist ILIKE :query OR genre ILIKE :query
+          )
           UNION ALL
           (
             SELECT
               'videos' AS record_type,
-              video_id AS record_id,
-              (score * 0.3) AS score
+              video_searches.video_id AS record_id,
+              0.5 * COALESCE(video_scores.score_1, 0)::float AS score
             FROM
               video_searches
+              LEFT JOIN video_scores ON video_searches.video_id = video_scores.video_id
             WHERE
-              :query % dancer_names OR :query % channel_title OR :query % song_title OR :query % song_artist OR :query % orchestra_name OR :query % event_city OR :query % event_title OR :query % event_country OR :query % video_title)
+              dancer_names ILIKE :query OR channel_title ILIKE :query OR song_title ILIKE :query OR song_artist ILIKE :query OR orchestra_name ILIKE :query OR event_city ILIKE :query OR event_title ILIKE :query OR event_country ILIKE :query OR video_title ILIKE :query
+          )
         SQL
       ])
     end.join(" UNION ALL ")
 
-    sql << " ORDER BY score DESC LIMIT 100;"
-    ActiveRecord::Base.connection.exec_query(sql)
+    aggregated_sql = <<~SQL
+      SELECT record_type, record_id, SUM(score) as score 
+      FROM (
+        #{sql}
+      ) AS subquery
+      GROUP BY record_type, record_id
+      ORDER BY score DESC LIMIT 100;
+    SQL
+
+    ActiveRecord::Base.connection.exec_query(aggregated_sql)
   end
 
   private
