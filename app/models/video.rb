@@ -98,8 +98,9 @@ class Video < ApplicationRecord
                          query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")
                          where(query)
                        end
-  scope :music_recognized, -> { where(acr_response_code: 0) }
-  scope :music_unrecognized, -> { where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
+  scope :from_active_channels, -> { joins(:channel).where(channels: {active: true}) }
+  scope :music_recognized, -> { from_active_channels.where(acr_response_code: 0) }
+  scope :music_unrecognized, -> { from_active_channels.where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001])) }
 
   before_validation :normalize_title
 
