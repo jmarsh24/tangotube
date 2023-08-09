@@ -9,7 +9,7 @@
 :scheduler:
   :schedule:
     enqueue_channel_video_fetcher_for_all_channels_with_music_recognizer:
-      cron: "0 0 * * 1" # Runs every Monday at 00:00
+      cron: "0 5 * * * Europe/Berlin" # Runs daily at 5am Berlin time
       class: ImportNewVideosForAllChannelsJob
       queue: default
       args:
@@ -17,15 +17,15 @@
         use_music_recognizer: true
       enabled: <%= ENV['RAILS_ENV'] == 'production' %>
     enqueue_channel_video_fetcher_for_all_channels_without_music_recognizer:
-      cron: "0 0 * * 1" # Runs every Monday at 00:00
+      cron: "0 5 * * * Europe/Berlin" # Runs daily at 5am Berlin time
       class: ImportNewVideosForAllChannelsJob
       queue: default
       args:
         use_scraper: false
         use_music_recognizer: false
-      enabled: <%= ENV['RAILS_ENV'] == 'production' %>
+      enabled: false
     enqueue_update_music_recognized_videos_job:
-      cron: "0 7 * * * Europe/Berlin" # Runs daily at 7am Berlin time
+      cron: "0 12 * * * Europe/Berlin" # Runs daily at 12pm Berlin time
       class: UpdateUnrecognizedMusicVideosJob
       queue: default
       enabled: <%= ENV['RAILS_ENV'] == 'production' %>
