@@ -1,0 +1,7 @@
+= turbo_frame_tag "channels_results" do
+  h3 channels
+  - if @channels.any?
+    - @channels.each do |channel| 
+      = link_to channel.title, root_path(channel: channel.slug) 
+  - else 
+    p No channels found.

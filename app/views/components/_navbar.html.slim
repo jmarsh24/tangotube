@@ -3,9 +3,10 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
     .navbar__top.stack.stack--md.stack--line.stack--justify-space-between
       .stack.stack--inline
         a.navbar__logo href=root_path
-      = link_to modal_path(new_search_path) do
-        .navbar__search-bar
-          .icon.icon--magnifying-glass
+      = form_with url: search_path, method: :get, data: { controller: "autosubmit", action: "input->autosubmit#submit" } do |f|
+        = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autocomplete: "off", autocorrect: "off", autocapitalize: "none", "data-controller": "search-modal", "data-action": "focus->search-modal#show", id: "desktop-search-input"
+        / .navbar__search-bar
+        /   .icon.icon--magnifying-glass
           span.navbar__search-bar__text = t(".search")
       .navbar__item.navbar__item--links
         = link_to modal_path(new_search_path), id: "mobile-search" do

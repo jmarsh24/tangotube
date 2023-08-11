@@ -83,6 +83,7 @@ class Video < ApplicationRecord
   scope :orchestra, ->(slug) { joins(song: :orchestra).where(orchestras: {slug:}) }
   scope :song, ->(slug) { joins(:song).where(songs: {slug:}) }
   scope :event, ->(slug) { joins(:event).where(events: {slug:}) }
+  scope :couple, ->(slug) { joins(:couples).where(couples: {slug:}) }
   scope :watched, ->(user_id) { joins(:watches).where(watches: {user_id:}) }
   scope :not_watched, ->(user_id) { where.not(id: Watch.where(user_id:).select(:video_id)) }
   scope :year, ->(upload_date_year) { where(upload_date_year:) }

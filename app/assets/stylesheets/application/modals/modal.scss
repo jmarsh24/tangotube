@@ -98,12 +98,14 @@
 
   @include breakpoint-tablet {
     &__content {
-      width: unset;
-      height: unset;
-      min-width: 60vw;
-      max-height: 75vh;
-      max-width: 80vw;
-      bottom: unset;
+      transition: none;
+      height: calc(100% - 58px);
+      //     width: unset;
+      //     height: unset;
+      //     min-width: 60vw;
+      //     max-height: 75vh;
+      //     max-width: 80vw;
+      //     bottom: unset;
     }
   }
 }

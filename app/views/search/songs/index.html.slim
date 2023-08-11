@@ -1,0 +1,7 @@
+= turbo_frame_tag "songs_results" do
+  h3 songs
+  - if @songs.any?
+    - @songs.each do |song| 
+      = link_to song.full_title, root_path(song: song.slug) 
+  - else 
+    p No songs found.

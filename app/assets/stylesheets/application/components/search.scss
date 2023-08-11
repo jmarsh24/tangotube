@@ -67,4 +67,64 @@
     color: var(--color-neutral-1000);
     font-size: 14px;
   }
+
+  @include breakpoint-tablet {
+    &__result {
+      background: var(--color-neutral-300);
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius-lg);
+    }
+  }
+}
+
+#mobile-search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#desktop-search-results {
+  display: none;
+}
+
+#desktop-search-input {
+  display: none;
+}
+
+@include breakpoint-tablet {
+  #desktop-search-results {
+    .search-results__videos {
+      display: flex;
+      flex-direction: column;
+      grid-column: 2;
+      gap: 16px;
+    }
+    .search-results__dancers,
+    .search-results__channels,
+    .search-results__songs,
+    .search-results__orchestras {
+      display: flex;
+      flex-direction: column;
+      grid-column: 1;
+      gap: 16px;
+    }
+  }
+
+  #mobile-search-input {
+    display: none;
+  }
+
+  #desktop-search-input {
+    display: block;
+  }
+
+  #mobile-search-results {
+    display: none;
+  }
+
+  #desktop-search-results {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 32px;
+  }
 }

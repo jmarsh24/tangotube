@@ -1,0 +1,7 @@
+= turbo_frame_tag "couples_results" do
+  h3 couples
+  - if @couples.any?
+    - @couples.each do |couple| 
+      = link_to couple.dancer_names, root_path(couple: couple.slug) 
+  - else 
+    p No couples found.

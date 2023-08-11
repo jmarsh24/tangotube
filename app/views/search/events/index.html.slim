@@ -1,0 +1,7 @@
+= turbo_frame_tag "events_results" do
+  h3 events
+  - if @events.any?
+    - @events.each do |event| 
+      = link_to event.title, root_path(event: event.slug)
+  - else 
+    p No events found.

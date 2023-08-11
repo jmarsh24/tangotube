@@ -21,29 +21,17 @@ class Couple < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
   before_save :set_videos_count
-  before_save :set_unique_couple_id
-  after_create :create_inverse, unless: :has_inverse?
-  after_destroy :destroy_inverses, if: :has_inverse?
+  before_save :order_dancers
 
-  def create_inverse
-    self.class.create(inverse_couple_options)
-  end
+  scope :search, ->(query) {
+    normalized_query = TextNormalizer.normalize(query)
+    quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
 
-  def destroy_inverses
-    inverses.destroy_all
-  end
-
-  def has_inverse?
-    self.class.exists?(inverse_couple_options)
-  end
-
-  def inverses
-    self.class.where(inverse_couple_options)
-  end
-
-  def inverse_couple_options
-    {dancer_id: partner_id, partner_id: dancer_id}
-  end
+    joins(:dancer, :partner)
+      .select("couples.*,((couples.videos_count / 1000) + ( (word_similarity(dancers.name, '#{quoted_query}') + word_similarity(partners_couples.name, '#{quoted_query}')) / 2 * 0.3)) as score")
+      .where("dancers.name <% :query OR partners_couples.name <% :query", query: normalized_query)
+      .order("score DESC")
+  }
 
   def videos
     Video.where(id: DancerVideo.where(dancer_id: [dancer_id, partner_id])
@@ -66,15 +54,17 @@ class Couple < ApplicationRecord
 
   private
 
+  def order_dancers
+    if dancer_id > partner_id
+      self.dancer_id, self.partner_id = partner_id, dancer_id
+    end
+  end
+
   def set_videos_count
     self.videos_count = videos.size
   end
 
   def set_slug
     self.slug = dancer_names.parameterize
-  end
-
-  def set_unique_couple_id
-    self.unique_couple_id = [dancer_id, partner_id].sort.map(&:to_s).join("|")
   end
 end

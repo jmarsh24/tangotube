@@ -1,0 +1,7 @@
+= turbo_frame_tag "dancers_results" do
+  h3 Dancers
+  - if @dancers.any?
+    - @dancers.each do |dancer| 
+      = link_to dancer.name, root_path(dancer: dancer.slug)
+  - else 
+    p No dancers found.
