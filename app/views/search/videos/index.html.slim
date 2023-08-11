@@ -1,6 +1,4 @@
 = turbo_frame_tag "videos_results" do
-  h3 videos
   - if @videos.any?
+    h3 videos
     = render @videos
-  - else 
-    p No videos found.

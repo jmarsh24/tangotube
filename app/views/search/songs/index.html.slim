@@ -1,6 +1,4 @@
 = turbo_frame_tag "songs_results" do
-  h3 songs
   - if @songs.any?
+    h3 songs
     = render @songs
-  - else 
-    p No songs found.

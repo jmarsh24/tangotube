@@ -1,6 +1,4 @@
 = turbo_frame_tag "events_results" do
-  h3 events
   - if @events.any?
+    h3 events
     = render @events
-  - else 
-    p No events found.

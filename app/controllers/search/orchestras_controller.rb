@@ -3,6 +3,7 @@ class Search::OrchestrasController < ApplicationController
     @orchestras = if params[:query].present?
       Orchestra.search(params[:query])
         .with_attached_profile_image
+        .limit(10)
         .load_async
     else
       Orchestra.all.limit(10).order(videos_count: :desc).load_async

@@ -1,6 +1,4 @@
 = turbo_frame_tag "dancers_results" do
-  h3 Dancers
   - if @dancers.any?
+    h3 Dancers
     = render @dancers
-  - else 
-    p No dancers found.

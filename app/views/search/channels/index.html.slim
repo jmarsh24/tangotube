@@ -1,6 +1,4 @@
 = turbo_frame_tag "channels_results" do
-  h3 channels
   - if @channels.any?
+    h3 channels
     = render @channels
-  - else 
-    p No channels found.

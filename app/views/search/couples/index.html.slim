@@ -1,6 +1,4 @@
 = turbo_frame_tag "couples_results" do
-  h3 couples
   - if @couples.any?
+    h3 couples
     = render @couples
-  - else 
-    p No couples found.
