@@ -31,13 +31,15 @@
     flex-direction: column;
     gap: var(--spacing-lg);
     overflow-y: auto;
-    padding: 0 var(--spacing-md) var(--spacing-xxxl) var(--spacing-md);
+    padding: var(--spacing-md);
+    z-index: var(--z-search-modal-index);
   }
 
   &__result {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+    width: 300px;
   }
 
   &__result-image-circle {
@@ -130,6 +132,7 @@
 
 .left-column,
 .right-column {
+  width: 500px;
   display: flex;
   flex-direction: column;
 }
