@@ -1,7 +1,6 @@
 = turbo_frame_tag "videos_results" do
   h3 videos
   - if @videos.any?
-    - @videos.each do |video| 
-      = link_to video.title, watch_path(v: video.youtube_id) 
+    = render @videos
   - else 
     p No videos found.

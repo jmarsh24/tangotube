@@ -27,12 +27,17 @@ class VideoSearch < ApplicationRecord
       normalized_term = TextNormalizer.normalize(term)
       quoted_term = ActiveRecord::Base.connection.quote_string(normalized_term)
 
-      video_searches = self
-        .select("video_id, score")
-        .where(":term % dancer_names OR :term % channel_title OR :term % song_title OR :term % song_artist OR :term % orchestra_name OR :term % event_city OR :term % event_title OR :term % event_country OR :term % video_title", term: quoted_term)
-        .order("score DESC")
+      video_searches = where(":term % dancer_names OR
+              :term % channel_title OR
+              :term % song_title OR
+              :term % song_artist OR
+              :term % orchestra_name OR
+              :term % event_city OR
+              :term % event_title OR
+              :term % event_country OR
+              :term <% video_title", term: quoted_term)
 
-      video_searches.map(&:video_id)
+      video_searches.pluck("video_searches.video_id")
     end
 
     def refresh

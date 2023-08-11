@@ -1,16 +1,25 @@
-= turbo_frame_tag "search-results", target: "_top", class: "search__results scrollable-container__content"
-  - cache [params[:query], params[:category]], expires: 1.hour do
-    - if results.present?
-      - grouped_results = results.group_by(&:type)
+= turbo_frame_tag "search-results", data: { "search-modal-target": "modal" }, target: "_top", style: "position: absolute; background-color: black; width: 100%; height: 100%; z-index: 1000;"
+  / - cache [params[:query], params[:category]], expires: 1.hour do
+  /   div class="search__results scrollable-container__content"
+  /     - if results.present?
+  /       - grouped_results = results.group_by(&:type)
+  /       - order_of_display = ["dancers", "channels", "songs", "orchestras", "couples", "videos"]
 
-      #desktop-search-results
-        - grouped_results.each do |type, type_results|
-          h3 = type.pluralize.titleize
-          div class="search-results__#{type}" style="display: flex;"
-            = render partial: "result", collection: type_results, as: :result
+  /       #desktop-search-results
+  /         .left-column
+  /           - order_of_display.each do |type|
+  /             - if grouped_results[type] && type != "videos"
+  /               div class="search-results__#{type}"
+  /                 h3 = type.pluralize.titleize
+  /                 = render partial: "result", collection: grouped_results[type], as: :result
 
-      #mobile-search-results
-        = render partial: "result", collection: results, as: :result
-    - else
-      p No results found
-  
+  /         .right-column
+  /           - if grouped_results["videos"]
+  /             div class="search-results__videos"
+  /               h3 = "Videos"
+  /               = render partial: "result", collection: grouped_results["videos"], as: :result
+
+  /       #mobile-search-results
+  /         = render partial: "result", collection: results, as: :result
+  /     - else
+  /       p No results found

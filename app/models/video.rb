@@ -105,8 +105,11 @@ class Video < ApplicationRecord
   before_validation :normalize_title
 
   class << self
-    def search(terms)
-      Video.find(VideoSearch.search(terms))
+    def search(query)
+      video_ids = VideoSearch.search(query)
+      joins(:video_searches)
+        .where(id: video_ids)
+        .order("video_searches.score DESC")
     end
 
     def index_query

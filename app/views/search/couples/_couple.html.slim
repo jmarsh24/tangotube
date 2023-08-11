@@ -1,0 +1,4 @@
+= link_to root_path(couple: couple.slug) do
+  = image_tag couple.dancer.profile_image, width: 200 
+  = image_tag couple.partner.profile_image, width: 200
+  = couple.dancer_names

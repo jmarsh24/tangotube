@@ -1,0 +1,4 @@
+= link_to root_path(event: event.slug) do
+  = image_tag event.profile_image, width: 200
+  = event.title
+  = "#{event.city}, #{event.country}"

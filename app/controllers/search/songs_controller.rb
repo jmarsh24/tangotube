@@ -3,7 +3,7 @@ class Search::SongsController < ApplicationController
     @songs = if params[:query].present?
       Song.search(params[:query]).load_async
     else
-      Song.all.most_popular
+      Song.all.limit(10).order(created_at: :desc).load_async
     end
   end
 end

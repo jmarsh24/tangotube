@@ -1,7 +1,6 @@
 = turbo_frame_tag "orchestras_results" do
   h3 orchestras
   - if @orchestras.any?
-    - @orchestras.each do |orchestra| 
-      = link_to orchestra.name, root_path(orchestra: orchestra.slug) 
+    = render @orchestras
   - else 
     p No orchestras found.
