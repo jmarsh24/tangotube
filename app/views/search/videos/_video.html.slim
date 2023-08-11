@@ -1,3 +1,7 @@
-= link_to watch_path(v: video.youtube_id) do
-  = image_tag video.thumbnail, width: 200
-  = video.title
+= link_to watch_path(v: video.youtube_id), class: "search__result", data: { controller: "recent-search", "recent-search-gid-value": video.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
+  - if video.thumbnail.present?
+    = image_tag video.thumbnail, class: "search__result-image"
+  - else
+    = image_tag "default_avatar.jpg", class: "search__result-image"
+  .search__result-details
+    .search__result-title = video.title

@@ -1,2 +1,8 @@
-= link_to root_path(song: song.slug) do
-  = song.full_title
+  = link_to root_path(song: song.slug), class: "search__result", data: { controller: "recent-search", "recent-search-gid-value": song.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
+    - if song&.orchestra&.profile_image&.attached?
+      = image_tag song.orchestra.profile_image, class: "search__result-image-circle"
+    - else
+      = image_tag "default_avatar.jpg", class: "search__result-image-circle"
+    .search__result-details
+      .search__result-title = song.full_title
+      .search__results-type = song.class.to_s.singularize.titleize

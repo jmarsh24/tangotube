@@ -1,4 +1,4 @@
 = turbo_frame_tag "songs_results" do
   - if @songs.any?
-    h3 songs
+    h3.heading-3 = t(".songs")
     = render @songs

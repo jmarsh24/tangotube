@@ -1,4 +1,4 @@
 = turbo_frame_tag "events_results" do
   - if @events.any?
-    h3 events
+    h3.heading-3 = t(".events")
     = render @events
