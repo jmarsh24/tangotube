@@ -1,4 +1,4 @@
-.navbar__filters id="filter-bar" class="scrollable-bar scrollable-bar--padded"
+.navbar__filters id="filter-bar" class="scrollable-bar"
   - if @filtering_params.present?
     - active_filters = @filtering_params.to_h.count
     = link_to root_path(filtering: true), class: ["filter-chip ", ("active" if @filtering_params.present?)] do
