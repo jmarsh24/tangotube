@@ -1,5 +1,5 @@
 = turbo_frame_tag "orchestras_results" do
   - if @orchestras.any?
     h3.heading-3.search__headerww = t(".orchestras")
-    .stack.stack--line.scrollable-bar
+    .stack
       = render @orchestras

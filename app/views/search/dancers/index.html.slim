@@ -1,5 +1,5 @@
 = turbo_frame_tag "dancers_results" do
   - if @dancers.any?
     h3.heading-3.search__header = t(".dancers")
-    .stack.stack--line.scrollable-bar
+    .stack
       = render @dancers

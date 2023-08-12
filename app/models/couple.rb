@@ -23,15 +23,25 @@ class Couple < ApplicationRecord
   before_save :set_videos_count
   before_save :order_dancers
 
-  scope :search, ->(query) {
-    normalized_query = TextNormalizer.normalize(query)
-    quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
+  scope :search, ->(search_term) {
+                   max_videos_count = Dancer.maximum(:videos_count).to_f
+                   terms = TextNormalizer.normalize(search_term).split
 
-    joins(:dancer, :partner)
-      .select("couples.*,((couples.videos_count / 1000) + ( (word_similarity(dancers.name, '#{quoted_query}') + word_similarity(partners_couples.name, '#{quoted_query}')) / 2 * 0.3)) as score")
-      .where("dancers.name <% :query OR partners_couples.name <% :query", query: normalized_query)
-      .order("score DESC")
-  }
+                   dancer_conditions = terms.map { "dancers.name % ?" }.join(" OR ")
+                   partner_conditions = terms.map { "partners_dancers.name % ?" }.join(" OR ")
+
+                   where_conditions = "(#{dancer_conditions}) AND (#{partner_conditions})"
+
+                   order_sql = <<-SQL.squish
+    0.8 * (1 - (COALESCE(dancers.name, partners_dancers.name) <-> '#{search_term}'))
+    + 0.2 * (COALESCE(dancers.videos_count, partners_dancers.videos_count)::float / #{max_videos_count}) DESC
+                   SQL
+
+                   joins(:dancer)
+                     .joins("INNER JOIN dancers partners_dancers ON partners_dancers.id = couples.partner_id")
+                     .where(where_conditions, *(terms * 2))
+                     .order(Arel.sql(order_sql))
+                 }
 
   def videos
     Video.where(id: DancerVideo.where(dancer_id: [dancer_id, partner_id])

@@ -1,13 +1,13 @@
 class Search::CouplesController < ApplicationController
   def index
-    @couples = if params[:query].present?
-      Couple.includes(dancer: {profile_image_attachment: :blob}, partner: {profile_image_attachment: :blob})
-        .search(params[:query])
-        .order(videos_count: :desc)
-        .limit(10)
-        .load_async
-    else
-      Couple.all.limit(10).order(videos_count: :desc).load_async
+    @couples = Rails.cache.fetch(["search_couples", params[:query].presence], expires_in: 1.hour) do
+      if params[:query].present?
+        Couple.includes(dancer: {profile_image_attachment: :blob}, partner: {profile_image_attachment: :blob})
+          .search(params[:query])
+          .limit(10)
+      else
+        Couple.all.limit(10).order(videos_count: :desc)
+      end
     end
   end
 end

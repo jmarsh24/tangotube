@@ -1,5 +1,5 @@
 = turbo_frame_tag "songs_results" do
   - if @songs.any?
     h3.heading-3.search__header = t(".songs")
-    .stack.stack--line.scrollable-bar
+    .stack
       = render @songs

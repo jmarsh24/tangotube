@@ -1,18 +1,19 @@
 = turbo_frame_tag "search-results", data: { "search-modal-target": "modal" }, style: "position: absolute; background: black; top: 0; left: 0; right: 0; bottom: 0;"
-  - cache [params[:query], params[:category]], expires: 1.hour do
-    .scrollable-container__content
-      #desktop-search-results
-        .left-column
-          = turbo_frame_tag "dancers_results", src: search_dancers_path(query: @query), target: "_top"
-            = render "components/spinner"
-          = turbo_frame_tag "couples_results", src: search_couples_path(query: @query), target: "_top"
-            = render "components/spinner"
-          = turbo_frame_tag "songs_results", src: search_songs_path(query: @query), target: "_top"
-            = render "components/spinner"
-          = turbo_frame_tag "orchestras_results", src: search_orchestras_path(query: @query), target: "_top"
-            = render "components/spinner"
-          = turbo_frame_tag "events_results", src: search_events_path(query: @query), target: "_top"
-            = render "components/spinner"
-        .right-column
-          = turbo_frame_tag "videos_results", src: search_videos_path(query: @query), target: "_top"
-            = render "components/spinner"
+  .scrollable-container__content
+    #desktop-search-results
+      .left-column
+        = turbo_frame_tag "dancers_results", src: search_dancers_path(query: @query), target: "_top"
+          = render "components/spinner"
+        = turbo_frame_tag "couples_results", src: search_couples_path(query: @query), target: "_top"
+          = render "components/spinner"
+        = turbo_frame_tag "songs_results", src: search_songs_path(query: @query), target: "_top"
+          = render "components/spinner"
+        = turbo_frame_tag "orchestras_results", src: search_orchestras_path(query: @query), target: "_top"
+          = render "components/spinner"
+        = turbo_frame_tag "events_results", src: search_events_path(query: @query), target: "_top"
+          = render "components/spinner"
+        = turbo_frame_tag "channels_results", src: search_channels_path(query: @query), target: "_top"
+          = render "components/spinner"
+      .right-column
+        = turbo_frame_tag "videos_results", src: search_videos_path(query: @query), target: "_top"
+          = render "components/spinner"

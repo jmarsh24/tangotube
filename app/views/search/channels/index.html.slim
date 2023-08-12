@@ -1,5 +1,5 @@
 = turbo_frame_tag "channels_results" do
   - if @channels.any?
     h3.heading-3.search__header = t(".channels")
-    .stack.stack--line.scrollable-bar
+    .stack
       = render @channels

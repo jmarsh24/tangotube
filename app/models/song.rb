@@ -45,18 +45,21 @@ class Song < ApplicationRecord
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(search_term) {
-                   normalized_term = TextNormalizer.normalize(search_term)
-                   quoted_term = ActiveRecord::Base.connection.quote_string(normalized_term)
+    terms = TextNormalizer.normalize(search_term).split(" ")
 
-                   title_similarity = "similarity(title, '#{quoted_term}') * 0.4"
-                   artist_similarity = "similarity(artist, '#{quoted_term}') * 0.3"
-                   genre_similarity = "similarity(genre, '#{quoted_term}') * 0.1"
-                   videos_score = "videos_count / 1000 * 0.2"
-                   total_score = "(#{title_similarity} + #{artist_similarity} + #{genre_similarity} + #{videos_score}) AS score"
-                   select("*, #{total_score}")
-                     .where(":term % title OR :term % artist OR :term % genre", term: normalized_term)
-                     .order("score DESC")
-                 }
+    trigram_queries = terms.map do |term|
+      sanitized_term = ActiveRecord::Base.connection.quote_string(term)
+      "(title % '#{sanitized_term}' OR artist % '#{sanitized_term}' OR genre % '#{sanitized_term}')"
+    end
+
+    similarity_scores = terms.map do |term|
+      sanitized_term = ActiveRecord::Base.connection.quote_string(term)
+      "((title <-> '#{sanitized_term}') + (artist <-> '#{sanitized_term}') + (genre <-> '#{sanitized_term}'))"
+    end.join(" + ")
+
+    where(trigram_queries.join(" OR "))
+      .order(Arel.sql("#{similarity_scores} ASC, videos_count DESC"))
+  }
 
   def full_title
     title_part = title&.titleize

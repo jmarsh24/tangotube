@@ -1,13 +1,13 @@
 class Search::EventsController < ApplicationController
   def index
-    @events = if params[:query].present?
-      Event.search(params[:query])
-        .with_attached_profile_image
-        .order(videos_count: :desc)
-        .limit(10)
-        .load_async
-    else
-      Event.all.limit(10).order(videos_count: :desc).load_async
+    @events = Rails.cache.fetch(["search_events", params[:query].presence], expires_in: 1.hour) do
+      if params[:query].present?
+        Event.search(params[:query])
+          .with_attached_profile_image
+          .limit(10)
+      else
+        Event.all.limit(10).order(videos_count: :desc)
+      end
     end
   end
 end

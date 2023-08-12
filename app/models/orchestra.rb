@@ -27,13 +27,20 @@ class Orchestra < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
 
-  scope :search, ->(query) {
-                   normalized_query = TextNormalizer.normalize(query)
-                   quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
-                   select("*, similarity(name, '#{quoted_query}') + (videos_count / 1000) as score")
-                     .where("? % name", normalized_query)
-                     .order("score DESC")
-                 }
+  scope :search, ->(search_term) {
+    max_videos_count = Orchestra.maximum(:videos_count).to_f
+
+    terms = TextNormalizer.normalize(search_term).split
+
+    where_conditions = terms.map { "orchestras.name % ?" }.join(" OR ")
+    order_sql = <<-SQL
+      0.5 * (1 - ("orchestras"."name" <-> '#{search_term}')) + 0.5 * (videos_count::float / #{max_videos_count}) DESC
+    SQL
+
+    Orchestra
+      .where(where_conditions, *terms)
+      .order(Arel.sql(order_sql))
+  }
 
   scope :most_popular, -> { order(videos_count: :desc) }
 
