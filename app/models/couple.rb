@@ -30,11 +30,10 @@ class Couple < ApplicationRecord
                    dancer_conditions = terms.map { "dancers.name % ?" }.join(" OR ")
                    partner_conditions = terms.map { "partners_dancers.name % ?" }.join(" OR ")
 
-                   where_conditions = "(#{dancer_conditions}) AND (#{partner_conditions})"
+                   where_conditions = "(#{dancer_conditions}) OR (#{partner_conditions})"
 
                    order_sql = <<-SQL.squish
-    0.8 * (1 - (COALESCE(dancers.name, partners_dancers.name) <-> '#{search_term}'))
-    + 0.2 * (COALESCE(dancers.videos_count, partners_dancers.videos_count)::float / #{max_videos_count}) DESC
+    0.8 * (1 - (COALESCE(dancers.name, partners_dancers.name) <-> '#{search_term}')) + 0.2 * (COALESCE(dancers.videos_count, partners_dancers.videos_count)::float / #{max_videos_count}) DESC
                    SQL
 
                    joins(:dancer)
