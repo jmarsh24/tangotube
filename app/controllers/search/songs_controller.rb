@@ -4,7 +4,7 @@ class Search::SongsController < ApplicationController
       if params[:query].present?
         Song.search(params[:query]).limit(10)
       else
-        Song.all.limit(10)
+        Song.all.limit(10).most_popular
       end
   end
 end

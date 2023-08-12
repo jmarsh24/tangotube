@@ -19,6 +19,9 @@
       h3.heading-3.search__header = t(".channels")
       = render "components/spinner"
   .search-results__main-content
-    = turbo_frame_tag "videos_results", src: search_videos_path(query: @query), target: "_top", class: "search-section search-section--videos"
-      h3.heading-3.search__header = t(".videos")
-      = render "components/spinner"
+    - if user_signed_in? && params[:query].nil?
+      = render "searches/recent_searches", recent_searches: @recent_searches
+    - else
+      = turbo_frame_tag "videos_results", src: search_videos_path(query: @query), target: "_top", class: "search-section search-section--videos"
+        h3.heading-3.search__header = t(".videos")
+        = render "components/spinner"

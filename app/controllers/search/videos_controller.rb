@@ -6,7 +6,7 @@ class Search::VideosController < ApplicationController
           .with_attached_thumbnail
           .limit(12)
       else
-        Video.all.limit(10).order(created_at: :desc)
+        Video.all.limit(10).most_popular
       end
     end
   end

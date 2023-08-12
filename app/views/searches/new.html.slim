@@ -4,5 +4,4 @@
   = turbo_frame_tag "search-results", data: { "search-modal-target": "modal" }, class: "search-results"
     .search.stack.scrollable-container  
       / = render "searches/categories", categories: @categories, selected_category: @selected_category
-      - if current_user
-        = render "searches/recent_searches", recent_searches: @recent_searches
+      = render "searches/show", src: search_path
