@@ -38,7 +38,10 @@
   }
 
   &__thumbnail {
-    width: 128px;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 360px;
+
     @include breakpoint-tablet {
     }
   }
