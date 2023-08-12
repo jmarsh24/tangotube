@@ -23,21 +23,41 @@ class VideoSearch < ApplicationRecord
   belongs_to :video
 
   class << self
+    def subquery(term)
+      sanitized_term = ActiveRecord::Base.connection.quote_string(term)
+      select(
+        "video_searches.video_id",
+        "(
+      1.0 * (dancer_names <-> '#{sanitized_term}') +
+      1.0 * (channel_title <-> '#{sanitized_term}') +
+      1.0 * (song_title <-> '#{sanitized_term}') +
+      1.0 * (song_artist <-> '#{sanitized_term}') +
+      1.0 * (orchestra_name <-> '#{sanitized_term}') +
+      1.0 * (event_city <-> '#{sanitized_term}') +
+      1.0 * (event_title <-> '#{sanitized_term}') +
+      1.0 * (event_country <-> '#{sanitized_term}') +
+      1.0 * (video_title <-> '#{sanitized_term}') +
+      1.0 * CAST((video_description_vector @@ plainto_tsquery('#{sanitized_term}')) AS INTEGER)
+    ) + video_scores.score_1 AS total_score"
+      )
+        .joins("INNER JOIN video_scores ON video_scores.video_id = video_searches.video_id")
+        .where(
+          "'#{sanitized_term}' % dancer_names OR
+     '#{sanitized_term}' % channel_title OR
+     '#{sanitized_term}' % song_title OR
+     '#{sanitized_term}' % song_artist OR
+     '#{sanitized_term}' % orchestra_name OR
+     '#{sanitized_term}' % event_city OR
+     '#{sanitized_term}' % event_title OR
+     '#{sanitized_term}' % event_country OR
+     '#{sanitized_term}' <% video_title OR
+     video_description_vector @@ plainto_tsquery('#{sanitized_term}')"
+        )
+    end
+
     def search(term)
-      normalized_term = TextNormalizer.normalize(term)
-      quoted_term = ActiveRecord::Base.connection.quote_string(normalized_term)
-
-      video_searches = where(":term % dancer_names OR
-              :term % channel_title OR
-              :term % song_title OR
-              :term % song_artist OR
-              :term % orchestra_name OR
-              :term % event_city OR
-              :term % event_title OR
-              :term % event_country OR
-              :term <% video_title", term: quoted_term)
-
-      video_searches.pluck("video_searches.video_id")
+      Video.joins("INNER JOIN (#{subquery(term).to_sql}) AS subquery ON videos.id = subquery.video_id")
+        .order("subquery.total_score ASC")
     end
 
     def refresh

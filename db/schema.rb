@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_09_231830) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_12_114356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -438,6 +438,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_231830) do
       SELECT videos.id AS video_id,
       videos.youtube_id,
       videos.upload_date,
+      videos.description AS video_description,
+      to_tsvector('english'::regconfig, (videos.description)::text) AS video_description_vector,
       TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
       TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
       TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
@@ -470,6 +472,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_231830) do
   add_index "video_searches", ["song_artist"], name: "index_video_searches_on_song_artist", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["song_title"], name: "index_video_searches_on_song_title", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["upload_date"], name: "index_video_searches_on_upload_date"
+  add_index "video_searches", ["video_description_vector"], name: "index_video_searches_on_video_description_vector", using: :gin
   add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
   add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
 
