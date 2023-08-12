@@ -23,24 +23,14 @@ class Couple < ApplicationRecord
   before_save :set_videos_count
   before_save :order_dancers
 
-  scope :search, ->(search_term) {
-                   max_videos_count = Dancer.maximum(:videos_count).to_f
-                   terms = TextNormalizer.normalize(search_term).split
+  scope :search, ->(name) {
+    max_videos = maximum(:videos_count)
 
-                   dancer_conditions = terms.map { "dancers.name % ?" }.join(" OR ")
-                   partner_conditions = terms.map { "partners_dancers.name % ?" }.join(" OR ")
-
-                   where_conditions = "(#{dancer_conditions}) OR (#{partner_conditions})"
-
-                   order_sql = <<-SQL.squish
-    0.8 * (1 - (COALESCE(dancers.name, partners_dancers.name) <-> '#{search_term}')) + 0.2 * (COALESCE(dancers.videos_count, partners_dancers.videos_count)::float / #{max_videos_count}) DESC
-                   SQL
-
-                   joins(:dancer)
-                     .joins("INNER JOIN dancers partners_dancers ON partners_dancers.id = couples.partner_id")
-                     .where(where_conditions, *(terms * 2))
-                     .order(Arel.sql(order_sql))
-                 }
+    joins(:dancer, :partner)
+      .where("dancers.name % :name OR partners_couples.name % :name", name:)
+      .select("couples.*, (0.1 * (1 - COALESCE(dancers.name <-> '#{name}', partners_couples.name <-> '#{name}')) + 0.9 * (couples.videos_count::float / #{max_videos})) AS order_value")
+      .order("order_value DESC")
+  }
 
   def videos
     Video.where(id: DancerVideo.where(dancer_id: [dancer_id, partner_id])
