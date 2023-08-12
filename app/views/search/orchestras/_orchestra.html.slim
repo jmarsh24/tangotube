@@ -1,9 +1,9 @@
 = cache [orchestra, "orchestra-result"] do
-  = link_to root_path(orchestra: orchestra.slug), class: "search__result", data: { controller: "recent-search", "recent-search-gid-value": orchestra.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
+  = link_to root_path(orchestra: orchestra.slug), class: "search-result search-result--orchestra", data: { controller: "recent-search", "recent-search-gid-value": orchestra.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
     - if orchestra.profile_image.attached?
-      = image_tag orchestra.profile_image, class: "search__result-image-circle"
+      = image_tag orchestra.profile_image, class: "search-result__image-circle"
     - else
-      = image_tag "default_avatar.jpg", class: "search__result-image-circle"
-    .search__result-details
-      .search__result-details__title = orchestra.name
-      .search__results-type = orchestra.class.to_s.singularize.titleize
+      = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+    .search-result-details
+      .search-result__title = orchestra.name
+      .search-results__type = orchestra.class.to_s.singularize.titleize

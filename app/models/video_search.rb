@@ -37,8 +37,8 @@ class VideoSearch < ApplicationRecord
       1.0 * (event_title <-> '#{sanitized_term}') +
       1.0 * (event_country <-> '#{sanitized_term}') +
       1.0 * (video_title <-> '#{sanitized_term}') +
-      1.0 * CAST((video_description_vector @@ plainto_tsquery('#{sanitized_term}')) AS INTEGER)
-    ) + video_scores.score_1 AS total_score"
+      1.0 * CAST((video_description_vector @@ plainto_tsquery('#{sanitized_term}')) AS INTEGER)) +
+      2.0 * video_scores.score_1 AS total_score"
       )
         .joins("INNER JOIN video_scores ON video_scores.video_id = video_searches.video_id")
         .where(

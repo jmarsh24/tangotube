@@ -1,5 +1,4 @@
-= turbo_frame_tag "events_results" do
+= turbo_frame_tag "events_results", class: "search-section search-section--events" do
   - if @events.any?
     h3.heading-3.search__header = t(".events")
-    .stack
-      = render @events
+    = render @events

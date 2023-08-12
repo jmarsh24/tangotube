@@ -1,10 +1,8 @@
-= turbo_frame_tag "search-results", data: { "search-modal-target": "modal" }, class: "search-bar__results", style:"position: absolute; background: black;"
-  .search.stack.scrollable-container
-    /   = form_with url: search_path, method: :get, data: { controller: "autosubmit", action: "input->autosubmit#submit" } do |f|
-    /     .modal__header
-    /     = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autocomplete: "off", autocorrect: "off", autocapitalize: "none", id: "mobile-search-input"
-    = render "searches/categories", categories: @categories, selected_category: @selected_category
-    - if current_user
-      = render "searches/recent_searches", recent_searches: @recent_searches
-    / - else
-    /   = turbo_frame_tag "search-results", src: search_path, class: "search-bar__results"
+= turbo_frame_tag "search-window", data: { "search-modal-target": "modal" }, class: "window"
+  = form_with url: search_path, method: :get, data: { controller: "autosubmit", action: "input->autosubmit#submit" } do |f|
+    = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autocomplete: "off", autocorrect: "off", autocapitalize: "none", id: "mobile-search-input"
+  = turbo_frame_tag "search-results", data: { "search-modal-target": "modal" }, class: "search-results"
+    .search.stack.scrollable-container  
+      / = render "searches/categories", categories: @categories, selected_category: @selected_category
+      - if current_user
+        = render "searches/recent_searches", recent_searches: @recent_searches

@@ -11,19 +11,7 @@
   }
 
   &__header {
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-xs)
-      var(--spacing-md);
-  }
-
-  &__results-type {
-    font-size: 12px;
-    color: var(--color-neutral-500);
-  }
-
-  &__categories {
-    display: flex;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xxs) 0 0 var(--spacing-md);
+    padding-bottom: var(--spacing-md);
   }
 
   &__results {
@@ -35,47 +23,10 @@
     z-index: var(--z-search-modal-index);
   }
 
-  &__result {
+  &__categories {
     display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    width: 300px;
-  }
-
-  &__result-image-circle {
-    width: 64px;
-    height: 64px;
-    border-radius: var(--border-radius-circle);
-    object-fit: cover;
-  }
-
-  &__result-image {
-    aspect-ratio: 16/ 9;
-    height: 64px;
-    object-fit: cover;
-  }
-
-  &__result-details {
-    color: var(--color-neutral-1000);
-    font-size: var(--font-size-sm);
-  }
-
-  &__result-title {
-    color: var(--color-neutral-1000);
-    font-size: 14px;
-  }
-
-  &__result-subtitle {
-    color: var(--color-neutral-1000);
-    font-size: 14px;
-  }
-
-  @include breakpoint-tablet {
-    &__result {
-      background: var(--color-neutral-300);
-      padding: var(--spacing-md);
-      border-radius: var(--border-radius-lg);
-    }
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xxs) 0 0 var(--spacing-md);
   }
 }
 

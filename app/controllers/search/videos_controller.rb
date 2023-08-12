@@ -4,7 +4,7 @@ class Search::VideosController < ApplicationController
       if params[:query].present?
         Video.search(params[:query])
           .with_attached_thumbnail
-          .limit(24)
+          .limit(12)
       else
         Video.all.limit(10).order(created_at: :desc)
       end

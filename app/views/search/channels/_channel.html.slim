@@ -1,9 +1,9 @@
 = cache [channel, "channel-result"] do
-  = link_to root_path(channel: channel.channel_id), class: "search__result", data: { controller: "recent-search", "recent-search-gid-value": channel.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
+  = link_to root_path(channel: channel.channel_id), class: "search-result search-result--channel", data: { controller: "recent-search", "recent-search-gid-value": channel.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
     - if channel.thumbnail.present?
-      = image_tag channel.thumbnail, class: "search__result-image-circle"
+      = image_tag channel.thumbnail, class: "search-result__image-circle"
     - else
-      = image_tag "default_avatar.jpg", class: "search__result-image-circle"
-    .search__result-details
-      .search__result-title = channel.title
-      .search__results-type = channel.class.to_s.singularize.titleize
+      = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+    .search-result__details
+      .search-result__title = channel.title
+      .search-results__type = channel.class.to_s.singularize.titleize

@@ -6,6 +6,6 @@ html lang=I18n.locale
       = render "components/navbar"
       main.page__main
         = yield
-        = turbo_frame_tag "search-results", src: new_search_path, data: { "search-modal-target": "modal" }, target: "_top", style:"display: none; position: absolute; background: black; top: 0; left: 0; right: 0; bottom: 0;"
       = render "components/cookie_consent"
       = render "components/toast"
+      = turbo_frame_tag "search-window", src: new_search_path, data: { "search-modal-target": "modal" }, target: "_top", class: "window"

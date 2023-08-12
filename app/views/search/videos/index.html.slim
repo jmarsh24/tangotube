@@ -1,5 +1,4 @@
-= turbo_frame_tag "videos_results" do
+= turbo_frame_tag "videos_results", class: "search-section search-section--videos" do
   - if @videos.any?
     h3.heading-3.search__header = t(".videos")
-    .stack
-      = render @videos
+    = render @videos
