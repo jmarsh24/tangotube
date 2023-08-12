@@ -1,7 +1,7 @@
 .search {
   &__input {
-    background-color: var(--color-neutral-1000);
-    color: var(--color-neutral-0);
+    background-color: var(--color-neutral-200);
+    color: var(--color-neutral-1000);
     width: 100%;
     font-weight: 500;
 
@@ -30,39 +30,11 @@
   }
 }
 
-#mobile-search-results {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-#desktop-search-results {
-  display: none;
-}
-
 #desktop-search-input {
   display: none;
 }
 
 @include breakpoint-tablet {
-  #desktop-search-results {
-    .search-results__videos {
-      display: flex;
-      flex-direction: column;
-      grid-column: 2;
-      gap: 16px;
-    }
-    .search-results__dancers,
-    .search-results__channels,
-    .search-results__songs,
-    .search-results__orchestras {
-      display: flex;
-      flex-direction: column;
-      grid-column: 1;
-      gap: 16px;
-    }
-  }
-
   #mobile-search-input {
     display: none;
   }
@@ -70,31 +42,4 @@
   #desktop-search-input {
     display: block;
   }
-
-  #mobile-search-results {
-    display: none;
-  }
-
-  #desktop-search-results {
-    display: flex;
-    gap: 16px;
-  }
-}
-
-.left-column,
-.right-column {
-  width: 500px;
-  display: flex;
-  flex-direction: column;
-}
-.search-results__dancers,
-.search-results__dancers,
-.search-results__channels,
-.search-results__songs,
-.search-results__orchestras,
-.search-results__couples,
-.search-results__videos {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 }

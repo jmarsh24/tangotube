@@ -63,5 +63,21 @@
           .search-result__title = record.name
         = button_to recent_search_path(recent_search), method: :delete do
           .icon.icon--close.icon--md
+    - when "Couple"
+      .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
+        = link_to root_path(couple: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
+          .overlapping-avatars
+            - if record.dancer.profile_image.attached?
+              = image_tag record.dancer.profile_image, class: "overlapping-avatar"
+            - else
+              = image_tag "default_avatar.jpg", class: "overlapping-avatar"
+            - if record.partner.profile_image.attached?
+              = image_tag record.partner.profile_image, class: "overlapping-avatar"
+            - else
+              = image_tag "default_avatar.jpg", class: "overlapping-avatar"
+
+          .search-result__title = record.dancer_names
+        = button_to recent_search_path(recent_search), method: :delete do
+          .icon.icon--close.icon--md
     - else
       p Unrecognized searchable type

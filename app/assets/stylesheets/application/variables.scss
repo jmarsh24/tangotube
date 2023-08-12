@@ -144,19 +144,19 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
 
     --z-index-drawer: 700;
     --z-index-dialog: 800;
-    --z-index-dropdown: 900;
+    --z-index-dropdown: 1300;
     --z-index-toast: 950;
     --z-index-tooltip: 1000;
     --z-index-cookies: 1000;
     --z-modal: 1000;
     --z-modal-blind: 900;
-    --z-index-toast: 1100;
-    --z-index-window: 1200;
+    --z-index-toast: 1200;
+    --z-index-window: 1100;
 
     --container-gap: var(--spacing-xxs);
     --grid-width: 1660px;
     --app-drawer-width: 200px;
-    --header-height: calc(52px);
+    --header-height: calc(58px);
     --page-main-max-width: 1920px;
     --page-main-padding: 48px;
   }
