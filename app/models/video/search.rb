@@ -11,11 +11,11 @@ class Video::Search
   end
 
   def videos
-    filtered_videos = Video::Filter.new(Video, filtering_params:, user:).filtered_videos
+    filtered_videos = Video::Filter.new(Video, filtering_params:, user:).videos
     if sort.present?
-      Video::Sort.new(filtered_videos, sort:).sorted_videos
+      Video::Sort.new(filtered_videos, sort:).videos
     else
-      Video::Sort.new(filtered_videos).sorted_videos
+      Video::Sort.new(filtered_videos).videos
     end
   end
 
@@ -24,7 +24,7 @@ class Video::Search
   end
 
   def facet(name:)
-    videos = Video::Filter.new(Video, filtering_params: @filtering_params.except(name.to_sym), user:).filtered_videos
+    videos = Video::Filter.new(Video, filtering_params: @filtering_params.except(name.to_sym), user:).videos
     Video::FacetBuilder.new(videos).public_send(name)
   end
 end

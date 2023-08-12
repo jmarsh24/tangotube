@@ -8,7 +8,7 @@ class Video::Sort
     oldest: {column: "videos.upload_date", direction: "asc"},
     most_viewed: {column: "videos.youtube_view_count", direction: "desc"},
     most_liked: {column: "videos.youtube_like_count", direction: "desc"},
-    performance: {column: "performance_videos.performance_id", direction: "desc"},
+    performance: {column: "performance_videos.position", direction: "asc"},
     song: {column: "songs.title", direction: "asc"},
     orchestra: {column: "orchestras.name", direction: "asc"},
     channel: {column: "channels.title", direction: "asc"}
@@ -21,7 +21,7 @@ class Video::Sort
     @sort = sort.to_sym
   end
 
-  def sorted_videos
+  def videos
     return video_relation.public_send([:trending_1, :trending_2, :trending_3, :trending_4, :trending_5].sample) if sort == :trending
     return video_relation unless COLUMN_TRANSLATIONS.key?(sort)
 
@@ -32,7 +32,7 @@ class Video::Sort
       case column
       when "songs.title"
         video_relation.joins(:song)
-      when "performance_videos.performance_id"
+      when "performance_videos.position"
         video_relation.joins(:performance_video)
       when "channels.title"
         video_relation.joins(:channel)
