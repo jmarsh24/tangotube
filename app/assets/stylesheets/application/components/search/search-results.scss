@@ -4,22 +4,16 @@
   flex-direction: column;
   gap: 24px;
   justify-content: center;
-  max-width: 1500px;
   margin: 0 auto;
 
   @include breakpoint-tablet {
     flex-direction: row;
-    min-width: 572px;
   }
 }
 
 .search-results__sidebar {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-
-  @include breakpoint-tablet {
-    flex: 0.5;
-    gap: 24px;
-  }
+  gap: var(--spacing-md);
+  width: 1000px;
 }

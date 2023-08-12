@@ -1,0 +1,17 @@
+.tablet-scrollable-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+
+  @include breakpoint-tablet {
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    scrollbar-width: none;
+  }
+}

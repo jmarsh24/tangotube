@@ -1,4 +1,5 @@
 = turbo_frame_tag "songs_results", class: "search-section search-section--songs" do
   - if @songs.any?
     h3.heading-3.search__header = t(".songs")
-    = render @songs
+    .tablet-scrollable-content
+      = render @songs
