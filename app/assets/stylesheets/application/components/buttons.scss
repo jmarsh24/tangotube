@@ -58,7 +58,6 @@
     color: var(--color-neutral-1000);
     font-size: 12px;
     font-weight: var(--font-weight-normal);
-    padding: 0 8px;
 
     &:hover {
       background-color: var(--color-neutral-400);
@@ -104,9 +103,10 @@
   &--patreon {
     background-color: #ff424d;
     color: white;
-    font-size: 12px;
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 16px;
     font-weight: 500;
-    padding: 0 8px;
 
     &::before {
       content: '';
