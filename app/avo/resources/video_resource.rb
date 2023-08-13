@@ -23,13 +23,13 @@ class VideoResource < Avo::BaseResource
   end
 
   field :id, as: :id
+  field :thumbnail, as: :file, is_image: true, as_avatar: :square, size: 60
   field :link, as: :text do |video|
     link_to "Video", main_app.watch_path(v: video.youtube_id), target: "_blank", rel: "noopener"
   end
   field :link, as: :text do |video|
     link_to "Youtube", "https://www.youtube.com/watch?v=#{video.youtube_id}", target: "_blank", rel: "noopener"
   end
-  field :thumbnail, as: :file, is_image: true
   field :song, as: :belongs_to
   field :channel, as: :belongs_to
   field :hidden, as: :boolean
@@ -56,10 +56,12 @@ class VideoResource < Avo::BaseResource
       JSON.pretty_generate(model.metadata.as_json)
     end
   end
-  field :upload_date, as: :date
+  field :upload_date, as: :date, hide_on: [:new, :edit, :index]
   field :metadata_updated_at, as: :date_time, hide_on: [:new, :edit, :index]
   field :created_at, as: :date_time, hide_on: [:new, :edit, :index]
   field :updated_at, as: :date_time, hide_on: [:new, :edit, :index]
+  field :dancer_videos, as: :has_many
+  field :dancers, as: :has_many, through: :dancer_videos
 
   action ToggleHidden
   action ToggleFeatured
