@@ -7,5 +7,11 @@
   display: none;
   background-color: black;
   z-index: var(--z-index-window);
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg)
+    var(--spacing-lg);
+
+  &__close {
+    cursor: pointer;
+    z-index: var(--z-modal-close);
+  }
 }

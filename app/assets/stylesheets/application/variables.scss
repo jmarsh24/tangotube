@@ -14,7 +14,7 @@ $sizes: (
 );
 
 $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 'burger',
-  'clock-fill', 'clock', 'close', 'file-upload', 'filter-lines', 'google',
+  'chevron-left', 'chevron-down', 'clock-fill', 'clock', 'close',  'file-upload', 'filter-lines', 'google',
   'heart-fill', 'heart', 'house-fill', 'image', 'magnifying-glass', 'moon-fill', 'patreon',
   'person-circle-fill', 'play-rectangle', 'safari-fill', 'safari',
   'scissors-circle-fill', 'scissors-circle', 'scissors', 'share-facebook',
@@ -156,7 +156,7 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --container-gap: var(--spacing-xxs);
     --grid-width: 1660px;
     --app-drawer-width: 200px;
-    --header-height: calc(58px);
+    --header-height: calc(52px);
     --page-main-max-width: 1920px;
     --page-main-padding: 48px;
   }

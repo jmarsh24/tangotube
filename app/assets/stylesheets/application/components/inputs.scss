@@ -6,13 +6,14 @@
   font-size: 16px;
 
   &::-webkit-search-cancel-button {
+    @include maskedBackground;
     -webkit-appearance: none;
-    height: 24px;
-    width: 24px;
-    background-image: url('@assets/images/icons/close.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
+    height: 14px;
+    width: 14px;
+    mask-image: url('@assets/images/icons/close.svg');
+    mask-size: fit;
+    mask-position: center left;
+    mask-repeat: no-repeat;
     cursor: pointer;
   }
 
@@ -23,7 +24,7 @@
   &__input {
     border: 1px solid var(--color-neutral-300);
     border-radius: var(--border-radius-input-sm);
-    padding: 8px 16px;
+    padding: 6px 10px;
     transition: border-color 0.2s;
     background-color: transparent;
     color: var(--color-neutral-1000);

@@ -1,25 +1,26 @@
 .search-window {
+  position: relative;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   justify-content: center;
-  max-width: 1500px; // Set max width
-  margin: 0 auto; // Center the component
+  max-width: 1500px;
+  margin: 0 auto;
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include breakpoint-tablet {
+      flex: 0.5;
+      gap: 24px;
+    }
+  }
 
   @include breakpoint-tablet {
     flex-direction: row;
     min-width: 572px;
-  }
-}
-
-.search-window__sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-  @include breakpoint-tablet {
-    flex: 0.5;
-    gap: 24px;
   }
 }

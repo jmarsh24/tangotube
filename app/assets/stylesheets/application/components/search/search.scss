@@ -5,6 +5,10 @@
     width: 100%;
     font-weight: 500;
 
+    @include breakpoint-tablet {
+      width: 360px;
+    }
+
     &::placeholder {
       color: var(--color-neutral-600);
     }

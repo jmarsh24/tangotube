@@ -2,7 +2,8 @@
   padding-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
   justify-content: center;
   margin: 0 auto;
 
