@@ -2,10 +2,7 @@
 
 class PerformanceResource < Avo::BaseResource
   self.title = :id
-  self.includes = []
-  # self.search_query = -> do
-  #   scope.search(params[:q])
-  # end
+  self.includes = [:dancers, :performance_videos]
 
   field :id, as: :id
   field :date, as: :date

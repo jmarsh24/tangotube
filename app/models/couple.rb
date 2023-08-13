@@ -23,6 +23,7 @@ class Couple < ApplicationRecord
   before_save :set_videos_count
   before_save :order_dancers
 
+  scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(name) {
     max_videos = maximum(:videos_count)
 

@@ -3,9 +3,6 @@
 class PerformanceVideoResource < Avo::BaseResource
   self.title = :id
   self.includes = [:video, :performance]
-  # self.search_query = -> do
-  #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-  # end
 
   field :id, as: :id
   field :title, as: :text do |model|

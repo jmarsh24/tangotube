@@ -12,7 +12,7 @@ class DancerResource < Avo::BaseResource
 
   field :id, as: :id
   field :reviewed, as: :boolean
-  field :profile_image, as: :file, is_image: true, is_avatar: true
+  field :profile_image, as: :file, is_image: true, as_avatar: :circle
   field :name, as: :text
   field :first_name, as: :text
   field :last_name, as: :text

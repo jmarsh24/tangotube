@@ -22,11 +22,6 @@ class UserResource < Avo::BaseResource
   field :confirmation_sent_at, as: :datetime
   field :unconfirmed_email, as: :text
   field :role, as: :select, enum: ::User.roles
-  field :avatar, as: :file, is_image: true, is_avatar: true
+  field :avatar, as: :file, is_image: true, as_avatar: :circle
   field :created_at, as: :datetime
-
-  # def scopes
-  #   scope Avo::Scopes::Admins
-  #   scope Avo::Scopes::NonAdmins
-  # end
 end

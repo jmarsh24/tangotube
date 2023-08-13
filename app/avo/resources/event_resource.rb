@@ -2,7 +2,7 @@
 
 class EventResource < Avo::BaseResource
   self.title = :title
-  self.includes = [:cover_image_attachment]
+  self.includes = []
   self.search_query = -> {
     scope.ransack(
       title_cont: params[:q],
@@ -20,6 +20,7 @@ class EventResource < Avo::BaseResource
   }
 
   field :id, as: :id
+  field :profile_image, as: :file, is_image: true, as_avatar: :circle
   field :title, as: :text, required: true
   field :videos_count, as: :number, only_on: :index, sortable: true, read_only: true
   field :dancers, as: :has_many
@@ -31,8 +32,7 @@ class EventResource < Avo::BaseResource
   field :active, as: :boolean
   field :reviewed, as: :boolean
   field :slug, as: :text
-  field :profile_image, as: :file, is_image: true, is_avatar: true
-  field :cover_image, as: :file, is_image: true, is_avatar: true
+  field :cover_image, as: :file, is_image: true, hide_on: [:index]
   field :videos, as: :has_many
   field :created_at, as: :date_time
   field :updated_at, as: :date_time
