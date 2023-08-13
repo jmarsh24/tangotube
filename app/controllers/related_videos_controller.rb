@@ -19,7 +19,7 @@ class RelatedVideosController < ApplicationController
     when "same_performance"
       related_videos.with_same_performance
     end
-    @related_videos = related_videos.includes(:channel, :song, dancer_videos: :dancer, thumbnail_attachment: :blob).limit(8)
+    @related_videos = related_videos.preload(Video.search_includes).limit(8)
 
     respond_to do |format|
       format.turbo_stream do

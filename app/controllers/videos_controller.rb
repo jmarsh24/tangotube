@@ -16,7 +16,7 @@ class VideosController < ApplicationController
 
     @current_page = params[:page]&.to_i || 1
 
-    @videos = paginated(@search.videos.not_hidden.from_active_channels.includes(Video.search_includes), per: 12)
+    @videos = paginated(@search.videos.not_hidden.from_active_channels.preload(Video.search_includes), per: 12)
 
     if params[:filtering] == "true" && params[:pagination].nil?
       ui.update "videos", with: "videos/videos", items: @videos
