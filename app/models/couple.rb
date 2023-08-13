@@ -44,7 +44,7 @@ class Couple < ApplicationRecord
   end
 
   def dancer_names
-    "#{dancer.name} #{partner.name}"
+    "#{dancer.name} & #{partner.name}"
   end
 
   def dancers
