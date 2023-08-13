@@ -11,7 +11,7 @@ class Video::Filter
     @user = user
   end
 
-  def filtered_videos
+  def videos
     filtering_params.each do |filter, value|
       filter = filter.to_sym if filter.is_a?(String)
 

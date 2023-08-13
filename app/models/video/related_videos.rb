@@ -14,7 +14,7 @@ class Video::RelatedVideos
     filtering_params[:leader] = @video.leaders.first.slug if @video.leaders.present?
     filtering_params[:follower] = @video.followers.first.slug if @video.followers.present?
 
-    Video::Filter.new(Video.all, filtering_params:, excluded_youtube_id: @video.youtube_id).filtered_videos
+    Video::Filter.new(Video.all, filtering_params:, excluded_youtube_id: @video.youtube_id).videos
   end
 
   def with_same_event
@@ -22,7 +22,7 @@ class Video::RelatedVideos
 
     videos = Video.within_week_of(@video.upload_date)
     event = @video.event.slug
-    Video::Filter.new(videos, filtering_params: {event:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
+    Video::Filter.new(videos, filtering_params: {event:, hidden: false}, excluded_youtube_id: @video.youtube_id).videos
   end
 
   def with_same_song
@@ -30,7 +30,7 @@ class Video::RelatedVideos
 
     videos = Video.joins(:dancer_videos)
     song = @video.song.slug
-    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos.pluck(:id)
+    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).videos.pluck(:id)
     Video.where(id: video_ids)
   end
 
@@ -38,7 +38,7 @@ class Video::RelatedVideos
     return Video.none unless @video.channel.present? && @video.channel.videos_count > 1
 
     channel = @video.channel.channel_id
-    Video::Filter.new(Video.all, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).filtered_videos
+    Video::Filter.new(Video.all, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).videos
   end
 
   def with_same_performance
@@ -48,7 +48,8 @@ class Video::RelatedVideos
     leader = @video.leaders.first.slug if @video.leaders.present?
     follower = @video.followers.first.slug if @video.followers.present?
     channel = @video.channel.channel_id
-    Video::Filter.new(videos, filtering_params: {channel:, leader:, follower:, hidden: false}).filtered_videos
+    filtered_videos = Video::Filter.new(videos, filtering_params: {channel:, leader:, follower:, hidden: false}).videos
+    Video::Sort.new(filtered_videos, sort: "performance").videos
   end
 
   def available_types

@@ -1,7 +1,7 @@
 - cache [video.youtube_id, video.song, video.event, video.dancers], expires_in: 24.hours do
   .video-metadata
     .youtube-info-section.stack.stack--lg
-      - if video.dancers.present?
+      - if video.dancer_videos.present?
         .performers-section
           h3.heading-3.heading-3--bold = t(".performers_heading")
           .stack.stack--xs

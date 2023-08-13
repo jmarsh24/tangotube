@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  z-index: var(--z-dropdown);
+  z-index: var(--z-index-dropdown);
 
   &__label {
     padding: var(--spacing-xxs) var(--spacing-sm);

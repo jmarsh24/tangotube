@@ -1,0 +1,31 @@
+.search-results {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  justify-content: center;
+  margin: 0 auto;
+  overflow: scroll;
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    @include breakpoint-tablet {
+      width: 50vw;
+    }
+  }
+  &__main-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    @include breakpoint-tablet {
+      width: 40vw;
+    }
+  }
+
+  @include breakpoint-tablet {
+    flex-direction: row;
+  }
+}

@@ -60,8 +60,8 @@
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    padding: 0 var(--spacing-xs);
     max-width: var(--page-main-max-width);
+    padding: 0 var(--spacing-xxs);
   }
 
   &__bottom {
@@ -69,10 +69,11 @@
   }
 
   @include breakpoint-tablet {
-    &__filters {
-      padding: var(--spacing-xxs) var(--spacing-md);
-    }
     top: 0 !important;
+
+    &__filters {
+      padding: 0 var(--spacing-md);
+    }
 
     #mobile-search {
       display: none;

@@ -1,0 +1,28 @@
+.search-window {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background-color: black;
+  z-index: var(--z-index-window);
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg)
+    var(--spacing-lg);
+  display: none;
+  height: 100%;
+  overflow: scroll;
+
+  &__close {
+    cursor: pointer;
+    z-index: var(--z-modal-close);
+  }
+
+  &--open {
+    display: block;
+  }
+}
+
+body.search-window--open {
+  overflow: hidden;
+}

@@ -14,7 +14,7 @@ $sizes: (
 );
 
 $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 'burger',
-  'clock-fill', 'clock', 'close', 'file-upload', 'filter-lines', 'google',
+  'chevron-left', 'chevron-down', 'clock-fill', 'clock', 'close',  'file-upload', 'filter-lines', 'google',
   'heart-fill', 'heart', 'house-fill', 'image', 'magnifying-glass', 'moon-fill', 'patreon',
   'person-circle-fill', 'play-rectangle', 'safari-fill', 'safari',
   'scissors-circle-fill', 'scissors-circle', 'scissors', 'share-facebook',
@@ -102,6 +102,7 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --z-menu: 99;
     --z-footer: 99;
     --z-performance_number: 99;
+    --z-search-modal: 999;
 
     --navbar-height: 56px;
     --video-aspect-ratio: 0.8;
@@ -143,18 +144,19 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
 
     --z-index-drawer: 700;
     --z-index-dialog: 800;
-    --z-index-dropdown: 900;
+    --z-index-dropdown: 1300;
     --z-index-toast: 950;
     --z-index-tooltip: 1000;
     --z-index-cookies: 1000;
     --z-modal: 1000;
     --z-modal-blind: 900;
-    --z-index-toast: 1100;
+    --z-index-toast: 1200;
+    --z-index-window: 1100;
 
     --container-gap: var(--spacing-xxs);
     --grid-width: 1660px;
     --app-drawer-width: 200px;
-    --header-height: calc(56px + var(--spacing-md));
+    --header-height: calc(52px);
     --page-main-max-width: 1920px;
     --page-main-padding: 48px;
   }

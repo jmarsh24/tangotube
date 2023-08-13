@@ -31,13 +31,22 @@ class Event < ApplicationRecord
 
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :active, -> { where(active: true) }
-  scope :search, ->(query) {
-                   normalized_query = TextNormalizer.normalize(query)
-                   quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
-                   select("*, (similarity (title, '#{quoted_query}') * 0.3 + similarity (city, '#{quoted_query}') * 0.1 + similarity (country, '#{quoted_query}') * 0.1 + videos_count / 1000 * 0.2) AS score")
-                     .where(":query % title OR :query % city OR :query % country ", query: normalized_query)
-                     .order("score DESC")
-                 }
+  scope :search, ->(search_term) {
+    terms = TextNormalizer.normalize(search_term).split(" ")
+
+    trigram_queries = terms.map do |term|
+      sanitized_term = ActiveRecord::Base.connection.quote_string(term)
+      "(title % '#{sanitized_term}' OR city % '#{sanitized_term}' OR country % '#{sanitized_term}')"
+    end
+
+    similarity_scores = terms.map do |term|
+      sanitized_term = ActiveRecord::Base.connection.quote_string(term)
+      "((title <-> '#{sanitized_term}') + (city <-> '#{sanitized_term}') + (country <-> '#{sanitized_term}'))"
+    end.join(" + ")
+
+    where(trigram_queries.join(" OR "))
+      .order(Arel.sql("#{similarity_scores} ASC, videos_count DESC"))
+  }
 
   def search_title
     return if title.empty?

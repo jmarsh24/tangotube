@@ -23,16 +23,38 @@ class VideoSearch < ApplicationRecord
   belongs_to :video
 
   class << self
+    def subquery(term)
+      sanitized_term = ActiveRecord::Base.connection.quote_string(term)
+      select(
+        "video_searches.video_id",
+        "(0.2 * (dancer_names <-> '#{sanitized_term}') +
+      0.2 * (channel_title <-> '#{sanitized_term}') +
+      0.2 * (song_title <-> '#{sanitized_term}') +
+      0.2 * (song_artist <-> '#{sanitized_term}') +
+      0.2 * (orchestra_name <-> '#{sanitized_term}') +
+      0.2 * (event_city <-> '#{sanitized_term}') +
+      0.2 * (event_title <-> '#{sanitized_term}') +
+      0.2 * (event_country <-> '#{sanitized_term}') +
+      0.2 * (video_title <-> '#{sanitized_term}') +
+      0.2 * CAST((video_description_vector @@ plainto_tsquery('#{sanitized_term}')) AS INTEGER)) +
+      3.0 * video_scores.score_1 AS total_score"
+      )
+        .joins("INNER JOIN video_scores ON video_scores.video_id = video_searches.video_id")
+        .where("'#{sanitized_term}' % dancer_names OR
+     '#{sanitized_term}' % channel_title OR
+     '#{sanitized_term}' % song_title OR
+     '#{sanitized_term}' % song_artist OR
+     '#{sanitized_term}' % orchestra_name OR
+     '#{sanitized_term}' % event_city OR
+     '#{sanitized_term}' % event_title OR
+     '#{sanitized_term}' % event_country OR
+     '#{sanitized_term}' <% video_title OR
+     video_description_vector @@ plainto_tsquery('#{sanitized_term}')")
+    end
+
     def search(term)
-      normalized_term = TextNormalizer.normalize(term)
-      quoted_term = ActiveRecord::Base.connection.quote_string(normalized_term)
-
-      video_searches = self
-        .select("video_id, score")
-        .where(":term % dancer_names OR :term % channel_title OR :term % song_title OR :term % song_artist OR :term % orchestra_name OR :term % event_city OR :term % event_title OR :term % event_country OR :term % video_title", term: quoted_term)
-        .order("score DESC")
-
-      video_searches.map(&:video_id)
+      Video.joins("INNER JOIN (#{subquery(term).to_sql}) AS subquery ON videos.id = subquery.video_id")
+        .order("subquery.total_score DESC")
     end
 
     def refresh

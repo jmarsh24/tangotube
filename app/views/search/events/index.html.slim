@@ -1,0 +1,5 @@
+= turbo_frame_tag "events_results", class: "search-section search-section--events" do
+  - if @events.any?
+    h3.heading-3.search__header = t(".events")
+    .tablet-scrollable-content
+      = render @events

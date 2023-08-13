@@ -54,8 +54,6 @@ Rails.application.routes.draw do
     resource :lyrics, only: [:show]
   end
 
-  resource :search, only: [:new, :show]
-
   # Facet route
   resources :facets, only: :show
 
@@ -70,6 +68,18 @@ Rails.application.routes.draw do
   post "/webhooks/patreon", to: "webhooks#patreon"
 
   resources :recent_searches, only: [:create, :destroy]
+
+  resource :search, only: [:new, :show]
+
+  namespace :search do
+    resources :dancers, only: [:index]
+    resources :songs, only: [:index]
+    resources :videos, only: [:index]
+    resources :orchestras, only: [:index]
+    resources :couples, only: [:index]
+    resources :events, only: [:index]
+    resources :channels, only: [:index]
+  end
 
   # Sitemap and Banner routes
   get "sitemaps/*path", to: "shimmer/sitemaps#show"

@@ -35,13 +35,20 @@ class Channel < ApplicationRecord
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
-  scope :search, ->(query) {
-    normalized_query = TextNormalizer.normalize(query)
-    quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
-    select("*, (videos_count/1000 * .2 * similarity(title, '#{quoted_query}')) as score")
-      .where("? % title", normalized_query)
-      .order("score DESC")
-  }
+  scope :search, ->(search_term) {
+                   max_videos_count = Channel.maximum(:videos_count).to_f
+
+                   terms = TextNormalizer.normalize(search_term).split
+
+                   where_conditions = terms.map { "channels.title % ?" }.join(" OR ")
+                   order_sql = <<-SQL
+      0.8 * (1 - ("channels"."title" <-> '#{search_term}')) + 0.2 * (videos_count::float / #{max_videos_count}) DESC
+                   SQL
+
+                   Channel
+                     .where(where_conditions, *terms)
+                     .order(Arel.sql(order_sql))
+                 }
   scope :most_popular, -> { order(videos_count: :desc) }
 
   def import_new_videos(use_scraper: false, use_music_recognizer: false)

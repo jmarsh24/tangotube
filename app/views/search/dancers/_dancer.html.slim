@@ -1,0 +1,10 @@
+= cache [dancer, "dancer-result"] do
+  - dancer_path = dancer.male? ? root_path(leader: dancer.slug) : root_path(follower: dancer.slug)
+  = link_to dancer_path, class: "search-result search-result--dancer", data: { controller: "recent-search", "recent-search-gid-value": dancer.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
+    - if dancer.profile_image.attached?
+      = image_tag dancer.profile_image, class: "search-result__image-circle"
+    - else
+      = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+    .search-result__details
+      .search-result__title = dancer.name
+      .search-result__type = dancer.class.to_s.singularize.titleize

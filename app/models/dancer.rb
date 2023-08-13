@@ -38,13 +38,21 @@ class Dancer < ApplicationRecord
 
   scope :reviewed, -> { where(reviewed: true) }
   scope :unreviewed, -> { where(reviewed: false) }
-  scope :search, ->(query) {
-                   normalized_query = TextNormalizer.normalize(query)
-                   quoted_query = ActiveRecord::Base.connection.quote_string(normalized_query)
-                   select("*, ((videos_count / 1000) + similarity(name, '#{quoted_query}') *.3) as score")
-                     .where("? % name", normalized_query)
-                     .order("score DESC")
-                 }
+  scope :search, ->(search_term) {
+    max_videos_count = Dancer.maximum(:videos_count).to_f
+
+    terms = TextNormalizer.normalize(search_term).split
+
+    where_conditions = terms.map { "dancers.name % ?" }.join(" OR ")
+    order_sql = <<-SQL
+      0.5 * (1 - ("dancers"."name" <-> '#{search_term}')) + 0.5 * (videos_count::float / #{max_videos_count}) DESC
+    SQL
+
+    Dancer
+      .where(where_conditions, *terms)
+      .order(Arel.sql(order_sql))
+  }
+
   scope :most_popular, -> { order(videos_count: :desc) }
 
   def update_video_matches

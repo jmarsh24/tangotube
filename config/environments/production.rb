@@ -107,4 +107,6 @@ Rails.application.configure do
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = smtp_settings
   end
+
+  config.active_record.async_query_executor = :global_thread_pool
 end

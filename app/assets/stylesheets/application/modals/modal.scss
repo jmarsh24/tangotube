@@ -98,11 +98,11 @@
 
   @include breakpoint-tablet {
     &__content {
+      transition: none;
       width: unset;
       height: unset;
-      min-width: 60vw;
       max-height: 75vh;
-      max-width: 80vw;
+      max-width: 30vw;
       bottom: unset;
     }
   }

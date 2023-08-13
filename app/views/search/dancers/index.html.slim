@@ -1,0 +1,5 @@
+= turbo_frame_tag "dancers_results", class: "search-section search-section--dancers" do
+  - if @dancers.any?
+    h3.heading-3.search__header = t(".dancers")
+    .tablet-scrollable-content
+      = render @dancers

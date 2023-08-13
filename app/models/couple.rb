@@ -21,29 +21,16 @@ class Couple < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
   before_save :set_videos_count
-  before_save :set_unique_couple_id
-  after_create :create_inverse, unless: :has_inverse?
-  after_destroy :destroy_inverses, if: :has_inverse?
+  before_save :order_dancers
 
-  def create_inverse
-    self.class.create(inverse_couple_options)
-  end
+  scope :search, ->(name) {
+    max_videos = maximum(:videos_count)
 
-  def destroy_inverses
-    inverses.destroy_all
-  end
-
-  def has_inverse?
-    self.class.exists?(inverse_couple_options)
-  end
-
-  def inverses
-    self.class.where(inverse_couple_options)
-  end
-
-  def inverse_couple_options
-    {dancer_id: partner_id, partner_id: dancer_id}
-  end
+    joins(:dancer, :partner)
+      .where("dancers.name % :name OR partners_couples.name % :name", name:)
+      .select("couples.*, (0.1 * (1 - COALESCE(dancers.name <-> '#{name}', partners_couples.name <-> '#{name}')) + 0.9 * (couples.videos_count::float / #{max_videos})) AS order_value")
+      .order("order_value DESC")
+  }
 
   def videos
     Video.where(id: DancerVideo.where(dancer_id: [dancer_id, partner_id])
@@ -66,15 +53,17 @@ class Couple < ApplicationRecord
 
   private
 
+  def order_dancers
+    if dancer_id > partner_id
+      self.dancer_id, self.partner_id = partner_id, dancer_id
+    end
+  end
+
   def set_videos_count
     self.videos_count = videos.size
   end
 
   def set_slug
     self.slug = dancer_names.parameterize
-  end
-
-  def set_unique_couple_id
-    self.unique_couple_id = [dancer_id, partner_id].sort.map(&:to_s).join("|")
   end
 end

@@ -40,7 +40,7 @@ RSpec.describe Video::Search do
       songs_facet = [Video::FacetBuilder::Option.new(label: "Milonga Querida - Juan D'Arienzo - Milonga - 1938", value: "milonga-querida-juan-darienzo", count: 1)]
 
       search = Video::Search.new(filtering_params: {leader: "corina-herrera"})
-      expected_videos = Video::Filter.new(Video.all, filtering_params: {leader: "corina-herrera"}).filtered_videos
+      expected_videos = Video::Filter.new(Video.all, filtering_params: {leader: "corina-herrera"}).videos
 
       expect(search.videos).to match_array(expected_videos)
       expect(search.facet(name: "leader").options).to match_array(leaders_facet)
