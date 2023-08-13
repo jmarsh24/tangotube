@@ -10,6 +10,8 @@
   padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg)
     var(--spacing-lg);
   display: none;
+  height: 100%;
+  overflow: scroll;
 
   &__close {
     cursor: pointer;
