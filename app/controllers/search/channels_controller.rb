@@ -7,6 +7,7 @@ class Search::ChannelsController < ApplicationController
       if params[:query].present?
         Channel.search(params[:query])
           .with_attached_thumbnail
+          .active
           .limit(10)
       else
         Channel.all.limit(10).order(videos_count: :desc)
