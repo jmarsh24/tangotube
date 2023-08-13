@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_183034) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_212916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -370,10 +370,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_183034) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clips", "users"
   add_foreign_key "clips", "videos"
-  add_foreign_key "couple_videos", "couples"
+  add_foreign_key "couple_videos", "couples", on_delete: :cascade
   add_foreign_key "couple_videos", "videos"
-  add_foreign_key "couples", "dancers"
-  add_foreign_key "couples", "dancers", column: "partner_id"
+  add_foreign_key "couples", "dancers", column: "partner_id", on_delete: :cascade
+  add_foreign_key "couples", "dancers", on_delete: :cascade
   add_foreign_key "dancers", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "playlists", "users"

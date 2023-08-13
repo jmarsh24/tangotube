@@ -27,6 +27,7 @@ class Dancer < ApplicationRecord
   has_many :songs, through: :videos
 
   has_many :couples, dependent: :destroy
+  has_many :couple_videos, through: :couples
   has_many :partners, through: :couples
   has_many :performances, through: :videos
 
@@ -72,10 +73,6 @@ class Dancer < ApplicationRecord
 
   def to_param
     "#{id}-#{slug}"
-  end
-
-  def self.ransackable_attributes(auth_object = nil)
-    ["bio", "created_at", "first_name", "gender", "id", "last_name", "middle_name", "name", "nick_name", "reviewed", "slug", "updated_at", "user_id", "videos_count"]
   end
 
   private

@@ -16,6 +16,7 @@
 class Couple < ApplicationRecord
   belongs_to :dancer
   belongs_to :partner, class_name: "Dancer"
+  has_many :partnered_couples, class_name: "Couple", foreign_key: "partner_id", dependent: :destroy, inverse_of: :partner
   has_many :couple_videos, dependent: :destroy
   has_many :videos, through: :couple_videos
 

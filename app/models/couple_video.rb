@@ -12,5 +12,5 @@
 #
 class CoupleVideo < ApplicationRecord
   belongs_to :video
-  belongs_to :couple
+  belongs_to :couple, counter_cache: true
 end

@@ -89,10 +89,6 @@ class Event < ApplicationRecord
     end
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["active", "category", "city", "country", "created_at", "end_date", "id", "reviewed", "slug", "start_date", "title", "updated_at", "videos_count"]
-  end
-
   private
 
   def set_slug
