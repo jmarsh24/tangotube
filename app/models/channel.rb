@@ -27,8 +27,10 @@ class Channel < ApplicationRecord
   has_many :videos, dependent: :destroy
   has_many :performance_videos, through: :videos
   has_many :performances, through: :performance_videos
+  has_many :events, through: :videos
   has_many :dancers, through: :videos
   has_many :couples, through: :videos
+  has_many :songs, through: :videos
 
   has_one_attached :thumbnail
 

@@ -27,6 +27,12 @@ class ChannelResource < Avo::BaseResource
   field :videos_count, as: :number, read_only: true, sortable: true, hide_on: [:new, :edit]
   field :channel_id, as: :text
   field :reviewed, as: :boolean
+  field :videos, as: :has_many
+  field :events, as: :has_many
+  field :dancers, as: :has_many
+  field :couples, as: :has_many
+  field :songs, as: :has_many
+  field :performances, as: :has_many
 
   action ToggleActive
 

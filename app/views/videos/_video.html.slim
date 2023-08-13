@@ -2,7 +2,7 @@
   .video-card id="video_#{video.youtube_id}"
     = link_to watch_path(v: video.youtube_id) do
       .video-card__image data-duration="#{video.hd_duration_data}"
-        - if video.performance.present?
+        - if video.performance_video.present?
           .card__performance-number
             = "#{video.performance_video.position} / #{video.performance.videos_count}"
         - if video.thumbnail.present?

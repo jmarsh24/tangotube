@@ -121,6 +121,7 @@ class Video < ApplicationRecord
         :channel,
         :song,
         :performance,
+        performance_video: :performance,
         dancer_videos: :dancer,
         thumbnail_attachment: :blob
       ]
