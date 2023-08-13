@@ -6,6 +6,9 @@ class OrchestraResource < Avo::BaseResource
   self.search_query = -> do
     scope.search(params[:q])
   end
+  self.resolve_query_scope = ->(model_class:) do
+    model_class.most_popular
+  end
 
   field :id, as: :id
 

@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class VideoResource < Avo::BaseResource
-  self.title = :youtube_id
-  self.includes = [:channel, :song, :event]
+  self.title = :title
+  self.includes = [:channel, :song, :event, :video_score, :dancers, :dancer_videos]
   self.search_query = -> { scope.search(params[:q]) }
+  self.resolve_query_scope = ->(model_class:) do
+    model_class.trending_1
+  end
 
   self.find_record_method = ->(model_class:, id:, params:) {
     (!id.is_a?(Array) && id.to_i == 0) ? model_class.find_by(youtube_id: id) : model_class.find(id)
@@ -32,6 +35,21 @@ class VideoResource < Avo::BaseResource
   field :hidden, as: :boolean
   field :featured, as: :boolean
   field :event, as: :belongs_to
+  field :score_1, as: :number do |model|
+    format("%.3f", model.video_score.score_1)
+  end
+  field :score_2, as: :number do |model|
+    format("%.3f", model.video_score.score_2)
+  end
+  field :score_3, as: :number do |model|
+    format("%.3f", model.video_score.score_3)
+  end
+  field :score_4, as: :number do |model|
+    format("%.3f", model.video_score.score_4)
+  end
+  field :score_5, as: :number do |model|
+    format("%.3f", model.video_score.score_5)
+  end
   field :metadata, as: :code, language: "javascript", only_on: :edit
   field :metadata, as: :code, language: "javascript" do |model|
     if model.metadata.present?
@@ -39,11 +57,9 @@ class VideoResource < Avo::BaseResource
     end
   end
   field :upload_date, as: :date
-  field :metadata_updated_at, as: :date_time
-  field :dancer_videos, as: :has_many
-  field :dancers, as: :has_many
-  field :created_at, as: :date_time
-  field :updated_at, as: :date_time
+  field :metadata_updated_at, as: :date_time, hide_on: [:new, :edit, :index]
+  field :created_at, as: :date_time, hide_on: [:new, :edit, :index]
+  field :updated_at, as: :date_time, hide_on: [:new, :edit, :index]
 
   action ToggleHidden
   action ToggleFeatured

@@ -6,6 +6,9 @@ class CoupleResource < Avo::BaseResource
   self.search_query = -> do
     scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
   end
+  self.resolve_query_scope = ->(model_class:) do
+    model_class.most_popular
+  end
 
   field :id, as: :id
   field :dancer, as: :belongs_to

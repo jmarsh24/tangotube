@@ -1,0 +1,2 @@
+class PatreonEventPolicy < ApplicationPolicy
+end

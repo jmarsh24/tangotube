@@ -3,6 +3,9 @@
 class SongResource < Avo::BaseResource
   self.title = :full_title
   self.includes = [:orchestra, :videos]
+  self.resolve_query_scope = ->(model_class:) do
+    model_class.most_popular
+  end
 
   self.search_query = -> do
     scope.search(params[:q])

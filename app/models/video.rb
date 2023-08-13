@@ -51,8 +51,8 @@ class Video < ApplicationRecord
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
   # rubocop:disable Rails/HasManyOrHasOneDependent
-  has_many :video_scores
-  has_many :video_searches
+  has_one :video_score
+  has_one :video_search
   # rubocop:enable Rails/HasManyOrHasOneDependent
 
   has_one_attached :thumbnail
@@ -91,11 +91,11 @@ class Video < ApplicationRecord
   scope :year, ->(upload_date_year) { where(upload_date_year:) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
   scope :most_popular, -> { trending_1 }
-  scope :trending_1, -> { joins(:video_scores).order("video_scores.score_1 DESC") }
-  scope :trending_2, -> { joins(:video_scores).order("video_scores.score_2 DESC") }
-  scope :trending_3, -> { joins(:video_scores).order("video_scores.score_3 DESC") }
-  scope :trending_4, -> { joins(:video_scores).order("video_scores.score_4 DESC") }
-  scope :trending_5, -> { joins(:video_scores).order("video_scores.score_5 DESC") }
+  scope :trending_1, -> { joins(:video_score).order("video_score.score_1 DESC") }
+  scope :trending_2, -> { joins(:video_score).order("video_score.score_2 DESC") }
+  scope :trending_3, -> { joins(:video_score).order("video_score.score_3 DESC") }
+  scope :trending_4, -> { joins(:video_score).order("video_score.score_4 DESC") }
+  scope :trending_5, -> { joins(:video_score).order("video_score.score_5 DESC") }
   scope :fuzzy_titles, ->(terms) do
                          terms = [terms] unless terms.is_a?(Array)
                          query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")

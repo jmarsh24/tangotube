@@ -11,6 +11,9 @@ class EventResource < Avo::BaseResource
       m: "or"
     ).result(distinct: true)
   }
+  self.resolve_query_scope = ->(model_class:) do
+    model_class.most_popular
+  end
 
   self.find_record_method = ->(model_class:, id:, params:) {
     (!id.is_a?(Array) && id.to_i == 0) ? model_class.find_by(slug: id) : model_class.find(id)
