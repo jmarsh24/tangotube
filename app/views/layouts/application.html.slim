@@ -8,4 +8,4 @@ html lang=I18n.locale
         = yield
       = render "components/cookie_consent"
       = render "components/toast"
-      = turbo_frame_tag "search-window", src: new_search_path, data: { "search-modal-target": "modal" }, target: "_top", class: "window"
+      = turbo_frame_tag "search-window", src: new_search_path, data: { "search-modal-target": "modal" }, target: "_top", class: "search-window"

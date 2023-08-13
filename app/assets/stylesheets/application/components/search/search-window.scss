@@ -1,26 +1,17 @@
 .search-window {
-  position: relative;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  justify-content: center;
-  max-width: 1500px;
-  margin: 0 auto;
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background-color: black;
+  z-index: var(--z-index-window);
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg)
+    var(--spacing-lg);
 
-  &__sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-
-    @include breakpoint-tablet {
-      flex: 0.5;
-      gap: 24px;
-    }
-  }
-
-  @include breakpoint-tablet {
-    flex-direction: row;
-    min-width: 572px;
+  &__close {
+    cursor: pointer;
+    z-index: var(--z-modal-close);
   }
 }
