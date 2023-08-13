@@ -20,6 +20,7 @@ module ExternalVideoImport
       attribute :like_count, :integer
       attribute :thumbnail_url, ThumbnailUrl.to_type
       attribute :channel, ChannelMetadata.to_type
+      attribute :blocked, :boolean, default: -> { false }
     end
   end
 end

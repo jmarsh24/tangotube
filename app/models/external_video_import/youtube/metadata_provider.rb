@@ -29,7 +29,8 @@ module ExternalVideoImport
             song: scraped_data.song,
             thumbnail_url: api_client_metadata.thumbnail_url,
             recommended_video_ids: scraped_data.recommended_video_ids,
-            channel: api_client_metadata.channel
+            channel: api_client_metadata.channel,
+            blocked: api_client_metadata.blocked
           )
         else
           VideoMetadata.new(
@@ -47,7 +48,8 @@ module ExternalVideoImport
             song: SongMetadata.new,
             thumbnail_url: api_client_metadata.thumbnail_url,
             recommended_video_ids: [],
-            channel: api_client_metadata.channel
+            channel: api_client_metadata.channel,
+            blocked: api_client_metadata.blocked
           )
         end
       end

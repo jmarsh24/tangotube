@@ -18,7 +18,7 @@ module ExternalVideoImport
 
         song = match_song(metadata)
         log_matched_song(song)
-
+        binding.irb
         video_data = {
           youtube_id: metadata.youtube.slug,
           upload_date: metadata.youtube.upload_date.to_datetime,
@@ -33,7 +33,8 @@ module ExternalVideoImport
           hd: metadata.youtube.hd,
           youtube_view_count: metadata.youtube.view_count,
           youtube_like_count: metadata.youtube.like_count,
-          youtube_tags: metadata.youtube.tags
+          youtube_tags: metadata.youtube.tags,
+          hidden: metadata.youtube.blocked
         }
         assign_dancers_with_roles(video_data, dancers)
         video_data
