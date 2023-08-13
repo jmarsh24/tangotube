@@ -5,7 +5,7 @@ class Search::CouplesController < ApplicationController
   def index
     @couples = Rails.cache.fetch(["search_couples", params[:query].presence], expires_in: 1.hour) do
       if params[:query].present?
-        Couple.includes(dancer: {profile_image_attachment: :blob}, partner: {profile_image_attachment: :blob})
+        Couple.includes(:dancer, :parnter, dancer: {profile_image_attachment: :blob}, partner: {profile_image_attachment: :blob})
           .search(params[:query])
           .limit(10)
       else
