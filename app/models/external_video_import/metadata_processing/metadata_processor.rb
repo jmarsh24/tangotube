@@ -18,7 +18,7 @@ module ExternalVideoImport
 
         song = match_song(metadata)
         log_matched_song(song)
-        binding.irb
+
         video_data = {
           youtube_id: metadata.youtube.slug,
           upload_date: metadata.youtube.upload_date.to_datetime,

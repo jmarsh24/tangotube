@@ -20,7 +20,7 @@ module ExternalVideoImport
           like_count: youtube_video.like_count,
           thumbnail_url: extract_thumbnail_url(youtube_video),
           channel: fetch_channel_metadata(youtube_video.channel_id),
-          blocked: youtube_video.content_detail.data.dig("regionRestriction", "blocked").include?("US")
+          blocked: youtube_video.content_detail.data.dig("regionRestriction", "blocked")&.include?("US") || false
         )
       end
 
