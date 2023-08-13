@@ -50,8 +50,6 @@ class Video < ApplicationRecord
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
-  has_many :video_searches, dependent: :destroy
-  has_many :video_scores, dependent: :destroy
 
   has_one_attached :thumbnail
 
