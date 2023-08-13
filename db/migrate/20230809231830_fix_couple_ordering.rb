@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixCoupleOrdering < ActiveRecord::Migration[7.0]
   def up
     swap_couples = Couple.where("dancer_id > partner_id")

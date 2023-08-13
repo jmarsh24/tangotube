@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class Search::VideosController < ApplicationController
+  # @route GET /search/videos (search_videos)
   def index
     @videos = Rails.cache.fetch(["search_videos", params[:query].presence], expires_in: 1.hour) do
       if params[:query].present?
