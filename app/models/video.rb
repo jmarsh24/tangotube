@@ -50,6 +50,10 @@ class Video < ApplicationRecord
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
+  # rubocop:disable Rails/HasManyOrHasOneDependent
+  has_many :video_scores
+  has_many :video_searches
+  # rubocop:enable Rails/HasManyOrHasOneDependent
 
   has_one_attached :thumbnail
 
