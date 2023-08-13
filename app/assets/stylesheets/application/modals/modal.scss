@@ -99,7 +99,6 @@
   @include breakpoint-tablet {
     &__content {
       transition: none;
-      // height: calc(100% - 58px);
       width: unset;
       height: unset;
       max-height: 75vh;

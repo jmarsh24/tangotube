@@ -1,5 +1,5 @@
 .search-window {
-  position: absolute;
+  position: fixed;
   top: var(--header-height);
   left: 0;
   right: 0;
@@ -9,9 +9,18 @@
   z-index: var(--z-index-window);
   padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg)
     var(--spacing-lg);
+  display: none;
 
   &__close {
     cursor: pointer;
     z-index: var(--z-modal-close);
   }
+
+  &--open {
+    display: block;
+  }
+}
+
+body.search-window--open {
+  overflow: hidden;
 }

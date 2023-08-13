@@ -1,4 +1,4 @@
-= turbo_frame_tag "search-results", target: "_top", class: "stack scrollable-container__content"
+= turbo_frame_tag "search-results", target: "_top", class: "stack"
   h3.heading-3 = t(".recent_searches")
   - recent_searches.each do |recent_search|
     - record = recent_search.searchable
