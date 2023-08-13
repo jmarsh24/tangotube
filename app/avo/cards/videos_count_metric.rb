@@ -5,7 +5,7 @@ class VideosCountMetric < Avo::Dashboards::MetricCard
   self.label = "Videos count"
   self.description = "Videos description"
   self.cols = 1
-  self.initial_range = 30
+  self.initial_range = "ALL"
   self.ranges = [7, 30, 60, 365, "TODAY", "MTD", "QTD", "YTD", "ALL"]
   self.refresh_every = 10.minutes
 
