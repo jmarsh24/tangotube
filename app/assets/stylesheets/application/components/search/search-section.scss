@@ -3,4 +3,17 @@
   flex-direction: column;
   gap: var(--spacing-md);
   position: relative;
+
+  &--dancers,
+  &--events,
+  &--orchestras,
+  &--songs {
+    min-width: 50vw;
+    min-height: 150px;
+  }
+
+  &--videos {
+    min-width: 400px;
+    min-height: 40vw;
+  }
 }

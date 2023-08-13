@@ -7,14 +7,20 @@
   justify-content: center;
   margin: 0 auto;
 
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 50vw;
+  }
+  &__main-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 40vw;
+  }
+
   @include breakpoint-tablet {
     flex-direction: row;
   }
-}
-
-.search-results__sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-  width: 700px;
 }
