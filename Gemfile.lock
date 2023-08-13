@@ -577,6 +577,8 @@ GEM
       activerecord (>= 5.2)
     streamio-ffmpeg (3.0.2)
       multi_json (~> 1.8)
+    strip_attributes (1.13.0)
+      activemodel (>= 3.0, < 8.0)
     syntax_tree (6.1.1)
       prettier_print (>= 1.2.0)
     temple (0.10.1)
@@ -720,6 +722,7 @@ DEPENDENCIES
   stimulus-rails
   store_model
   streamio-ffmpeg
+  strip_attributes
   translate_client
   turbo-rails
   vcr

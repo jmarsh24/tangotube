@@ -60,6 +60,7 @@ gem "fuzzy-string-match"
 gem "ransack"
 gem "scenic"
 gem "patreon"
+gem "strip_attributes"
 
 # Assets
 gem "vite_rails"

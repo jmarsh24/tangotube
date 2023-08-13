@@ -22,6 +22,7 @@ class Channel < ApplicationRecord
   include Importable
 
   attribute :metadata, ChannelMetadata.to_type
+  strip_attributes only: :channel_id
 
   has_many :videos, dependent: :destroy
   has_many :performance_videos, through: :videos
