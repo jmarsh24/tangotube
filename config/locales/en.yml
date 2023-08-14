@@ -170,16 +170,8 @@ en:
   support:
     show:
       button_text: Become a Patron!
-      heading: Love TangoTube?
-      paragraph1:
-        Help us keep the tango rhythm alive! We're devoted to bringing you
-        the best of tango videos. Your support on Patreon helps us improve and maintain
-        TangoTube.
-      paragraph2:
-        As a patron, you'll get early access to new features and influence
-        our future developments.
-      team: The TangoTube Team
-      thank_you: Thank you,
+      heading: From dream to reality, it wasn't easy...
+      paragraph1: It's been a long journey to get here. Click below to see how you can be a part of that journey!
   time:
     formats:
       video_duration: "%M:%S"

@@ -1,41 +1,67 @@
-.mega {
-  font-weight: 700;
-  font-size: 48px;
-  line-height: 72px;
+// Font Sizes and Line Heights
+$sizes: (
+  mega: (
+    font: 48px,
+    line: 72px,
+  ),
+  heading-1: (
+    font: 32px,
+    line: 48px,
+  ),
+  heading-2: (
+    font: 24px,
+    line: 36px,
+  ),
+  heading-3: (
+    font: 20px,
+    line: 30px,
+  ),
+  heading-4: (
+    font: 16px,
+    line: 24px,
+  ),
+  paragraph: (
+    font: 16px,
+    line: 24px,
+  ),
+  caption: (
+    font: 12px,
+    line: 18px,
+  ),
+  action-footer-link: (
+    font: 14px,
+    line: 21px,
+  ),
+  action-small-links: (
+    font: 14px,
+    line: 21px,
+  ),
+);
+
+// Font Weights
+$weights: (
+  300: 300,
+  400: 400,
+  500: 500,
+  700: 700,
+  800: 800,
+  900: 900,
+);
+
+// Generate classes for font sizes and line heights
+@each $class, $properties in $sizes {
+  .#{$class} {
+    font-size: map-get($properties, font);
+    line-height: map-get($properties, line);
+    font-weight: 700; // since most of your classes had font-weight: 700
+  }
 }
 
-.heading-1 {
-  font-size: 32px;
-  line-height: 48px;
-  font-weight: 700;
-}
-
-.heading-2 {
-  font-size: 24px;
-  line-height: 36px;
-  font-weight: 700;
-}
-
-.heading-3 {
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 700;
-}
-
-.heading-4 {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 700;
-}
-
-.paragraph {
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.caption {
-  font-size: 12px;
-  line-height: 18px;
+// Generate classes for font weights
+@each $class, $weight in $weights {
+  .font-weight-#{$class} {
+    font-weight: $weight;
+  }
 }
 
 .text-uppercase {
@@ -46,53 +72,50 @@
   text-align: center;
 }
 
-.action-footer-link {
-  font-size: 14px;
-  line-height: 21px;
+.action-footer-link,
+.action-small-links {
   text-decoration: none;
   color: inherit;
   font-weight: 700;
 }
 
-.action-small-links {
-  font-size: 14px;
-  line-height: 21px;
-  font-weight: 700;
-}
-
 @include breakpoint-tablet {
-  .heading-1 {
-    font-size: 42px;
-    line-height: 63px;
-  }
+  // Adjustments for tablet sizes
+  $tablet-sizes: (
+    heading-1: (
+      font: 42px,
+      line: 63px,
+    ),
+    heading-2: (
+      font: 30px,
+      line: 45px,
+    ),
+    heading-3: (
+      font: 24px,
+      line: 36px,
+    ),
+    heading-4: (
+      font: 18px,
+      line: 27px,
+    ),
+    caption: (
+      font: 14px,
+      line: 21px,
+    ),
+    action-footer-link: (
+      font: 16px,
+      line: 24px,
+    ),
+    action-small-links: (
+      font: 16px,
+      line: 24px,
+    ),
+  );
 
-  .heading-2 {
-    font-size: 30px;
-    line-height: 45px;
-  }
-
-  .heading-3 {
-    font-size: 24px;
-    line-height: 36px;
-  }
-
-  .heading-4 {
-    font-size: 18px;
-    line-height: 27px;
-  }
-
-  .caption {
-    font-size: 14px;
-    line-height: 21px;
-  }
-
-  .action-footer-link {
-    font-size: 16px;
-    line-height: 24px;
-  }
-
-  .action-small-links {
-    font-size: 16px;
-    line-height: 24px;
+  @each $class, $properties in $tablet-sizes {
+    .#{$class} {
+      font-size: map-get($properties, font);
+      line-height: map-get($properties, line);
+    }
   }
 }

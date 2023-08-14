@@ -1,15 +1,11 @@
 .modal__header
-  h1.heading-1
-    = t('.heading')
-.content-container.stack
-  p
-    = t('.paragraph1')
-  p
-    = t('.paragraph2')
-  div
-    a.button.button--icon-patreon.button--patreon href="https://www.patreon.com/bePatron?u=54750768" target="_blank"
-      = t('.button_text')
-  p
-    = t('.thank_you')
-  p
-    = t('.team')
+  .stack.stack--xl
+    .stack.stack--sm
+      h2.heading-2.text-align-center 🚀
+      h2.heading-2.text-align-center
+        = t('.heading')
+    .stack.stack--xxl
+      h4.heading-4.text-align-center
+        = t('.paragraph1')
+      a.button.button--icon-patreon.button--patreon href="https://www.patreon.com/bePatron?u=54750768" target="_blank"
+        = t('.button_text')
