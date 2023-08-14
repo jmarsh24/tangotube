@@ -2,8 +2,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  min-width: 300px;
-  width: 100%;
+  flex-shrink: 0;
 
   &__type {
     font-size: 12px;
