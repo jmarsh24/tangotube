@@ -17,7 +17,7 @@ class MetadataBuilder
       song: ExternalVideoImport::Youtube::SongMetadata.new(titles: [video.youtube_song], artist: video.youtube_artist),
       thumbnail_url: nil,
       recommended_video_ids: [],
-      channel: ExternalVideoImport::Youtube::ChannelMetadata.new(id: video.channel.channel_id, title: video.channel.title, thumbnail_url: video.channel.thumbnail_url)
+      channel: ExternalVideoImport::Youtube::ChannelMetadata.new(id: video.channel.youtube_slug, title: video.channel.title, thumbnail_url: video.channel.thumbnail_url)
     )
 
     music_recognition_metadata = ExternalVideoImport::MusicRecognition::Metadata.new(

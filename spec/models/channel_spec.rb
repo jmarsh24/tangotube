@@ -6,7 +6,7 @@
 #
 #  id                  :bigint           not null, primary key
 #  title               :string
-#  channel_id          :string           not null
+#  youtube_slug          :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  thumbnail_url       :string
@@ -39,7 +39,7 @@ RSpec.describe Channel do
 
     it "destroys the channel if it doesn't exist on YouTube" do
       channel = channels(:"030tango")
-      channel.update!(channel_id: "invalid")
+      channel.update!(youtube_slug: "invalid")
 
       channel.fetch_and_save_metadata!
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_212916) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_140930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -59,7 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_212916) do
 
   create_table "channels", force: :cascade do |t|
     t.string "title"
-    t.string "channel_id", null: false
+    t.string "youtube_slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "thumbnail_url"
@@ -70,9 +70,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_212916) do
     t.datetime "metadata_updated_at"
     t.integer "videos_count", default: 0
     t.index ["active"], name: "index_channels_on_active"
-    t.index ["channel_id"], name: "index_channels_on_channel_id", unique: true
     t.index ["title"], name: "index_channels_on_title_trigram", opclass: :gist_trgm_ops, using: :gist
     t.index ["videos_count"], name: "index_channels_on_videos_count"
+    t.index ["youtube_slug"], name: "index_channels_on_youtube_slug", unique: true
   end
 
   create_table "clips", force: :cascade do |t|

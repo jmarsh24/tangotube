@@ -14,12 +14,12 @@ module ExternalVideoImport
       private
 
       def match_channel(channel_metadata)
-        ::Channel.find_by(channel_id: channel_metadata.id)
+        ::Channel.find_by(youtube_slug: channel_metadata.id)
       end
 
       def create_channel(channel_metadata)
         channel = ::Channel.create!(
-          channel_id: channel_metadata.id,
+          youtube_slug: channel_metadata.id,
           title: channel_metadata.title,
           thumbnail_url: channel_metadata.thumbnail_url
         )

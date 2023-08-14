@@ -6,7 +6,7 @@
 #
 #  id                  :bigint           not null, primary key
 #  title               :string
-#  channel_id          :string           not null
+#  youtube_slug          :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  thumbnail_url       :string
@@ -22,7 +22,7 @@ class Channel < ApplicationRecord
   include Importable
 
   attribute :metadata, ChannelMetadata.to_type
-  strip_attributes only: :channel_id
+  strip_attributes only: :youtube_slug
 
   has_many :videos, dependent: :destroy
   has_many :performance_videos, through: :videos
@@ -34,7 +34,7 @@ class Channel < ApplicationRecord
 
   has_one_attached :thumbnail
 
-  validates :channel_id, presence: true, uniqueness: true
+  validates :youtube_slug, presence: true, uniqueness: true
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
@@ -54,10 +54,12 @@ class Channel < ApplicationRecord
                  }
   scope :most_popular, -> { order(videos_count: :desc) }
 
+  def new_video_ids
+    metadata.video_ids - videos.map(&:youtube_id)
+  end
+
   def import_new_videos(use_scraper: false, use_music_recognizer: false)
     return nil unless active && metadata.present?
-
-    new_video_ids = videos.map(&:youtube_id) - metadata.video_ids
 
     new_video_ids.each do |video_id|
       ImportVideoJob.perform_later(video_id, use_scraper:, use_music_recognizer:)
@@ -73,7 +75,7 @@ class Channel < ApplicationRecord
   end
 
   def fetch_and_save_metadata!
-    metadata = ExternalChannelImporter.new.fetch_metadata(channel_id)
+    metadata = ExternalChannelImporter.new.fetch_metadata(youtube_slug)
     update!(metadata:, metadata_updated_at: Time.current)
   rescue Yt::Errors::NoItems
     destroy!
@@ -88,6 +90,6 @@ class Channel < ApplicationRecord
   def attach_avatar_thumbnail(thumbnail_url)
     return if thumbnail_url.blank?
 
-    thumbnail.attach(io: URI.parse(thumbnail_url).open, filename: "#{channel_id}.jpg")
+    thumbnail.attach(io: URI.parse(thumbnail_url).open, filename: "#{youtube_slug}.jpg")
   end
 end

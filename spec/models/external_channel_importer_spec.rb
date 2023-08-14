@@ -29,7 +29,7 @@ RSpec.describe ExternalChannelImporter do
       channel = ExternalChannelImporter.new.import(slug)
       expect(channel.metadata).to be_present
       expect(channel.title).to eq(yt_channel.title)
-      expect(channel.channel_id).to eq(yt_channel.id)
+      expect(channel.youtube_slug).to eq(yt_channel.id)
       expect(channel.description).to eq(yt_channel.description)
       expect(channel.thumbnail_url).to eq(yt_channel.thumbnail_url)
       expect(channel.metadata_updated_at).to be_present

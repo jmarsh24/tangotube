@@ -3,7 +3,7 @@
 class DestroyAllChannelVideosJob < ApplicationJob
   queue_as :low_priority
 
-  def perform(channel_id)
-    Channel.find_by(channel_id:).destroy_all_videos
+  def perform(youtube_slug)
+    Channel.find_by(youtube_slug:).destroy_all_videos
   end
 end

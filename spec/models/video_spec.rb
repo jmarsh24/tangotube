@@ -37,7 +37,7 @@ RSpec.describe Video do
 
   describe ".channel" do
     it "returns the channel for the video" do
-      videos = Video.channel(channels(:"030tango").channel_id)
+      videos = Video.channel(channels(:"030tango").youtube_slug)
 
       expect(videos).to match_array([videos(:video_3_featured)])
       expect(videos).not_to match_array([videos(:video_1_featured)])

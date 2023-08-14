@@ -7,7 +7,7 @@ class ExternalChannelImporter
     channel_metadata = create_metadata(slug)
     Channel.create!(
       title: channel_metadata.title,
-      channel_id: channel_metadata.id,
+      youtube_slug: channel_metadata.id,
       description: channel_metadata.description,
       thumbnail_url: channel_metadata.thumbnail_url,
       metadata: channel_metadata,
@@ -43,12 +43,10 @@ class ExternalChannelImporter
   private
 
   def video_ids(youtube_channel)
-    channel_video_count = youtube_channel.video_count
-    if channel_video_count.to_i < 500
-      video_ids = youtube_channel.videos.map(&:id)
+    if youtube_channel.video_count < 500
+      youtube_channel.videos.map(&:id)
     else
-      video_ids youtube_channel.related_playlists.first&.playlist_items&.map(&:video_id)
+      youtube_channel.related_playlists.first&.playlist_items&.map(&:video_id)
     end
-    video_ids
   end
 end

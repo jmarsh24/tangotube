@@ -17,10 +17,10 @@ class ChannelResource < Avo::BaseResource
 
   field :id, as: :id
   field :link, as: :text do |channel|
-    link_to "Channel", main_app.root_path(channel: channel.channel_id), target: "_blank", rel: "noopener"
+    link_to "Channel", main_app.root_path(channel: channel.youtube_slug), target: "_blank", rel: "noopener"
   end
   field :link, as: :text do |channel|
-    link_to "Youtube", "https://www.youtube.com/channel/#{channel.channel_id}", target: "_blank", rel: "noopener"
+    link_to "Youtube", "https://www.youtube.com/channel/#{channel.youtube_slug}", target: "_blank", rel: "noopener"
   end
   field :active, as: :boolean
   field :thumbnail_url, as: :external_image, hide_on: :show, as_avatar: :rounded
@@ -28,7 +28,7 @@ class ChannelResource < Avo::BaseResource
     channel.title.truncate(30)
   end
   field :videos_count, as: :number, read_only: true, sortable: true, hide_on: [:new, :edit]
-  field :channel_id, as: :text
+  field :youtube_slug, as: :text
   field :reviewed, as: :boolean
   field :videos, as: :has_many
   field :events, as: :has_many

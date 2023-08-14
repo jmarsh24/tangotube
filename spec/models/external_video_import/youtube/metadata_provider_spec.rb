@@ -19,7 +19,7 @@ RSpec.describe ExternalVideoImport::Youtube::MetadataProvider do
       comment_count: 20,
       like_count: 70,
       thumbnail_url:,
-      channel: ExternalVideoImport::Youtube::ChannelMetadata.new(id: "channel_id", title: "channel title", thumbnail_url: "thumbnail_url")
+      channel: ExternalVideoImport::Youtube::ChannelMetadata.new(id: "youtube_slug", title: "channel title", thumbnail_url: "thumbnail_url")
     )
   end
 
@@ -73,7 +73,7 @@ RSpec.describe ExternalVideoImport::Youtube::MetadataProvider do
         expect(video_metadata.song.album).to eq("album")
         expect(video_metadata.thumbnail_url.standard).to eq("thumbnail_url")
         expect(video_metadata.recommended_video_ids).to eq(["recommended_video_ids"])
-        expect(video_metadata.channel.id).to eq("channel_id")
+        expect(video_metadata.channel.id).to eq("youtube_slug")
         expect(video_metadata.channel.title).to eq("channel title")
         expect(video_metadata.channel.thumbnail_url).to eq("thumbnail_url")
       end

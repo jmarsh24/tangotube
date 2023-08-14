@@ -14,7 +14,7 @@
 #  view_count          :integer
 #  song_id             :bigint
 #  acr_response_code   :integer
-#  channel_id          :bigint
+#  youtube_slug          :bigint
 #  hidden              :boolean          default(FALSE)
 #  hd                  :boolean          default(FALSE)
 #  like_count          :integer          default(0)
@@ -60,7 +60,7 @@ class Video < ApplicationRecord
   attribute :metadata, ExternalVideoImport::Metadata.to_type
   validates :youtube_id, presence: true, uniqueness: true
 
-  scope :channel, ->(channel_id) { joins(:channel).where(channel: {channel_id:}) }
+  scope :channel, ->(youtube_slug) { joins(:channel).where("channel.youtube_slug" => youtube_slug) }
   scope :exclude_youtube_id, ->(youtube_id) { where.not(youtube_id:) }
   scope :featured, -> { where(featured: true) }
   scope :not_featured, -> { where(featured: false) }
@@ -101,7 +101,7 @@ class Video < ApplicationRecord
                          query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")
                          where(query)
                        end
-  scope :from_active_channels, -> { joins(:channel).where(channels: {active: true}) }
+  scope :from_active_channels, -> { joins(:channel).where("channel.active" => true) }
   scope :music_recognized, -> { from_active_channels.where(acr_response_code: 0) }
   scope :music_unrecognized, -> { from_active_channels.where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001, 2004])) }
 
