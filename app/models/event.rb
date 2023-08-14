@@ -20,6 +20,7 @@
 #
 class Event < ApplicationRecord
   has_many :videos, dependent: :nullify
+  has_many :dancers, through: :videos
   has_one_attached :profile_image
   has_one_attached :cover_image
 

@@ -23,7 +23,8 @@ class EventResource < Avo::BaseResource
   field :profile_image, as: :file, is_image: true, as_avatar: :circle
   field :title, as: :text, required: true
   field :videos_count, as: :number, only_on: :index, sortable: true, read_only: true
-  field :dancers, as: :has_many
+  field :videos, as: :has_many
+  field :dancers, as: :has_many, through: :videos
   field :city, as: :text, required: true
   field :country, as: :text, required: true
   field :category, as: :text
