@@ -18,6 +18,8 @@ class RelatedVideosController < ApplicationController
       related_videos.with_same_channel
     when "same_performance"
       related_videos.with_same_performance
+    else
+      Video.none
     end
     @related_videos = related_videos.preload(Video.search_includes).limit(8)
 
