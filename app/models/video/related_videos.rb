@@ -14,7 +14,7 @@ class Video::RelatedVideos
     filtering_params[:leader] = @video.leaders.first.slug if @video.leaders.present?
     filtering_params[:follower] = @video.followers.first.slug if @video.followers.present?
 
-    Video::Filter.new(Video.all, filtering_params:, excluded_youtube_id: @video.youtube_id).videos
+    Video::Filter.new(Video.all.includes(:dancers), filtering_params:, excluded_youtube_id: @video.youtube_id).videos
   end
 
   def with_same_event

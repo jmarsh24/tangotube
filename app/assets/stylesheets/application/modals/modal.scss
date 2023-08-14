@@ -70,6 +70,10 @@
     }
   }
 
+  &__frame {
+    width: 100%;
+  }
+
   &__header {
     padding: var(--spacing-md);
   }

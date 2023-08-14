@@ -1,12 +1,14 @@
 - url = watch_url(v: @video.youtube_id)
-.stack
-  h1 Share
-  .copy-bar data-controller="clipboard"
-    input readonly="readonly" type="text" class="input input__input input--no-border" data-clipboard-target="source" value=url 
-    button class="button button--primary" data-action="clipboard#copy:prevent toast#show:prevent"
-      = t(".copy")
-  .stack.stack--line.stack--justify-space-around
-    = link_to t(".whatsapp"), "whatsapp://send?text=#{url}", target: "_blank", class: "share-button share-button--whatsapp"
-    = link_to t(".facebook"), "https://www.facebook.com/sharer/sharer.php?u=#{url}", target: "_blank", class: "share-button share-button--facebook"
-    = link_to t(".twitter"), "https://www.facebook.com/sharer/sharer.php?u=#{url}", target: "_blank", class: "share-button share-button--twitter"
-    = link_to t(".email"), "mailto:?subject=Check out this video&body=#{url}", target: "_blank", class: "share-button share-button--email"
+.modal__header
+  h2.heading-2 Share
+.modal__body
+  .stack
+    .copy-bar data-controller="clipboard"
+      input readonly="readonly" type="text" class="input input__input input--no-border" data-clipboard-target="source" value=url 
+      button class="button button--primary" data-action="clipboard#copy:prevent toast#show:prevent"
+        = t(".copy")
+    .stack.stack--line.stack--justify-space-around
+      = link_to t(".whatsapp"), "whatsapp://send?text=#{url}", target: "_blank", class: "share-button share-button--whatsapp"
+      = link_to t(".facebook"), "https://www.facebook.com/sharer/sharer.php?u=#{url}", target: "_blank", class: "share-button share-button--facebook"
+      = link_to t(".twitter"), "https://www.facebook.com/sharer/sharer.php?u=#{url}", target: "_blank", class: "share-button share-button--twitter"
+      = link_to t(".email"), "mailto:?subject=Check out this video&body=#{url}", target: "_blank", class: "share-button share-button--email"
