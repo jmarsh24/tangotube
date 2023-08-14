@@ -11,6 +11,7 @@
 #  updated_at :datetime         not null
 #
 class CoupleVideo < ApplicationRecord
+  belongs_to :couple, counter_cache: :videos_count
   belongs_to :video
-  belongs_to :couple, counter_cache: true
+  counter_culture :couple, column_name: "videos_count"
 end
