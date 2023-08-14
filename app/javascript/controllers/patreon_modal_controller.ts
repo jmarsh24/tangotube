@@ -8,7 +8,7 @@ export default class extends Controller {
 
   checkAndShowModal(): void {
     if (this.shouldShowModal()) {
-      ui.modal.open({ url: '/support_us' });
+      ui.modal.open({ url: '/support_us', size: 'small' });
       this.resetTimestamp();
     }
   }
