@@ -10,14 +10,8 @@ class SearchesController < ApplicationController
   # @route GET /search (search)
   def show
     @query = params[:query]
+    @recent_searches = current_user.recent_searches.includes(:searchable).unique_by_searchable.limit(10) if current_user
     ui.replace("search-results", with: "show")
-
-    # selected_category = params[:category] || "all"
-    # categories = search_categories_options
-    # search = Search.new(query: params[:query], category: selected_category)
-
-    # ui.replace("search-results", with: "searches/results", results:)
-    # ui.replace("search-header-categories", with: "searches/categories", selected_category:, categories:)
   end
 
   private
