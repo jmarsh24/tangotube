@@ -11,7 +11,7 @@
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
           .search-result__title = record.title
-        = button_to recent_search_path(recent_search), method: :delete do
+        = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Song"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
@@ -21,7 +21,7 @@
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
           .search-result__title = record.full_title
-        = button_to recent_search_path(recent_search), method: :delete do
+        = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Orchestra"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
@@ -31,7 +31,7 @@
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
           .search-result__title = record.name
-        = button_to recent_search_path(recent_search), method: :delete do
+        = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Channel"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
@@ -41,7 +41,7 @@
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
           .search-result__title = record.title
-        = button_to recent_search_path(recent_search), method: :delete do
+        = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Video"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
@@ -51,7 +51,7 @@
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image"
           .search-result__title = record.title
-        = button_to recent_search_path(recent_search), method: :delete do
+        = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Dancer"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
@@ -61,7 +61,7 @@
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
           .search-result__title = record.name
-        = button_to recent_search_path(recent_search), method: :delete do
+        = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Couple"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
@@ -77,7 +77,7 @@
               = image_tag "default_avatar.jpg", class: "overlapping-avatar"
 
           .search-result__title = record.dancer_names
-        = button_to recent_search_path(recent_search), method: :delete do
+        = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - else
       p Unrecognized searchable type

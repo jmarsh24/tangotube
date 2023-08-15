@@ -34,26 +34,23 @@
     font-size: var(--font-size-sm);
   }
 
-  &__title {
-    color: var(--color-neutral-1000);
-    font-size: 16px;
-    max-width: 260px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
+  &__title,
   &__subtitle {
+    flex: 0 1 320px;
     color: var(--color-neutral-1000);
     font-size: 16px;
-    max-width: 260px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 200px;
+    @include breakpoint-mobile {
+      max-width: 280px;
+    }
+    @include breakpoint-tablet {
+      max-width: 420px;
+    }
   }
 
   &__thumbnail {
@@ -67,10 +64,16 @@
     }
   }
 
+  &__delete {
+    padding: var(--spacing-sm);
+  }
+
   &--dancer,
   &--couple,
   &--song,
-  &--channel {
+  &--channel,
+  &--event,
+  &--orchestra {
     &:nth-child(n + 4) {
       display: none;
     }
@@ -80,7 +83,9 @@
     &--dancer,
     &--couple,
     &--song,
-    &--channel {
+    &--channel,
+    &--event,
+    &--orchestra {
       &:nth-child(n + 4) {
         display: flex;
       }

@@ -53,7 +53,7 @@ class VideoSearch < ApplicationRecord
     end
 
     def search(term)
-      Video.joins("INNER JOIN (#{subquery(term).to_sql}) AS subquery ON videos.id = subquery.video_id")
+      Video.not_hidden.from_active_channels.joins("INNER JOIN (#{subquery(term).to_sql}) AS subquery ON videos.id = subquery.video_id")
         .order("subquery.total_score DESC")
     end
 

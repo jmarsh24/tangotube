@@ -5,9 +5,8 @@
   right: 0;
   bottom: 0;
   display: none;
-  z-index: var(--z-index-window);
-  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg)
-    var(--spacing-lg);
+  z-index: var(--z-window);
+  padding: var(--spacing-md) 16px 128px 16px;
   display: none;
   height: 100%;
   overflow: scroll;
@@ -34,8 +33,8 @@
 
   &__close {
     position: absolute;
-    top: 35px;
-    left: var(--spacing-lg);
+    top: 32px;
+    left: 24px;
     cursor: pointer;
     z-index: var(--z-modal-close);
   }
@@ -47,7 +46,7 @@
   }
 
   @include breakpoint-tablet {
-    padding: var(--spacing-md) 72px 128px 72px;
+    padding: 20px 64px 128px 64px;
     &__mobile-search-input {
       display: none;
     }

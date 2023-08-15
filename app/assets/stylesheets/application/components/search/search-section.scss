@@ -12,7 +12,9 @@
   &--events,
   &--orchestras,
   &--songs {
-    min-height: 150px;
+    @include breakpoint-tablet {
+      min-height: 150px;
+    }
   }
 
   &--videos {

@@ -2,6 +2,7 @@
   position: sticky;
   z-index: var(--z-navbar);
   background-color: var(--color-neutral-100);
+  z-index: var(--z-navbar);
   top: 0;
 
   &__item {

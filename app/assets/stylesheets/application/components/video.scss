@@ -2,7 +2,7 @@
   position: sticky;
   top: 43px;
   aspect-ratio: 16 / 9;
-  z-index: var(--z-index-video-overlay);
+  z-index: var(--z-video-overlay);
 
   iframe {
     position: absolute;

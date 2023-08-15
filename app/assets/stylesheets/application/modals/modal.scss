@@ -110,6 +110,12 @@
   }
 }
 
+.modal.modal--loading {
+  .modal__content {
+    display: none;
+  }
+}
+
 .test .modal-blind,
 .test .modal__content {
   transition: none !important;

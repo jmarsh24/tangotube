@@ -97,12 +97,22 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --z-navbar-2: 3;
     --z-navbar-3: 4;
     --z-drawer: 1001;
-    --z-index-video-overlay: 1;
+    --z-video-overlay: 1;
     --z-cookies-modal: 999;
     --z-menu: 99;
     --z-footer: 99;
     --z-performance_number: 99;
+    --z-dialog: 800;
+    --z-modal-blind: 900;
+    --z-toast: 950;
     --z-search-modal: 999;
+    --z-tooltip: 1000;
+    --z-cookies: 1000;
+    --z-modal: 1000;
+    --z-window: 1100;
+    --z-toast: 1200;
+    --z-dropdown: 1300;
+    --z-navbar: 1400;
 
     --navbar-height: 56px;
     --video-aspect-ratio: 0.8;
@@ -141,17 +151,6 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --font-weight-bold: 700;
 
     --font-text: 'Cereal', 'Sans Serif'
-
-    --z-index-drawer: 700;
-    --z-index-dialog: 800;
-    --z-index-dropdown: 1300;
-    --z-index-toast: 950;
-    --z-index-tooltip: 1000;
-    --z-index-cookies: 1000;
-    --z-modal: 1000;
-    --z-modal-blind: 900;
-    --z-index-toast: 1200;
-    --z-index-window: 1100;
 
     --container-gap: var(--spacing-xxs);
     --grid-width: 1660px;
