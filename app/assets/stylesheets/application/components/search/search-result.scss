@@ -30,11 +30,23 @@
   &__title {
     color: var(--color-neutral-1000);
     font-size: 14px;
+    max-width: 200px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__subtitle {
     color: var(--color-neutral-1000);
     font-size: 14px;
+    max-width: 200px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__thumbnail {
