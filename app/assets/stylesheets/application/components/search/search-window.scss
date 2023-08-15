@@ -5,7 +5,6 @@
   right: 0;
   bottom: 0;
   display: none;
-  background-color: black;
   z-index: var(--z-index-window);
   padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg)
     var(--spacing-lg);
@@ -13,13 +12,49 @@
   height: 100%;
   overflow: scroll;
 
+  &::before {
+    content: '';
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: hsla(240, 5%, 10%, 0.85);
+    backdrop-filter: blur(15px);
+    z-index: -1;
+  }
+
+  &__title {
+    display: none;
+  }
+
+  &__mobile-search-input {
+    padding-left: var(--spacing-xxl);
+  }
+
   &__close {
+    position: absolute;
+    top: 36px;
+    left: var(--spacing-lg);
     cursor: pointer;
     z-index: var(--z-modal-close);
   }
 
   &--open {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  @include breakpoint-tablet {
+    padding: var(--spacing-md) 81px 128px 81px;
+    &__mobile-search-input {
+      display: none;
+    }
+
+    &__title {
+      display: block;
+    }
   }
 }
 

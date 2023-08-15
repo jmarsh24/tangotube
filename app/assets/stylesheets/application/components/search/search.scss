@@ -3,7 +3,6 @@
     background-color: var(--color-neutral-200);
     color: var(--color-neutral-1000);
     width: 100%;
-    font-weight: 500;
 
     @include breakpoint-tablet {
       width: 360px;

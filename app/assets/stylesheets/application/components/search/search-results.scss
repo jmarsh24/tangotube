@@ -1,9 +1,7 @@
 .search-results {
-  padding-top: 24px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-  padding-top: var(--spacing-lg);
   justify-content: center;
   margin: 0 auto;
 
@@ -12,10 +10,10 @@
     flex-direction: column;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background-color: rgb(20, 20, 20);
+    background-color: hsla(0, 0%, 0%, 0.4);
     border-radius: var(--border-radius-lg);
     overflow: hidden;
-    @include breakpoint-tablet {
+    @include breakpoint-desktop {
       width: 50vw;
     }
   }
@@ -23,15 +21,15 @@
     display: flex;
     flex-direction: column;
     padding: var(--spacing-md);
-    background-color: rgb(20, 20, 20);
+    background-color: hsla(0, 0%, 0%, 0.4);
     border-radius: var(--border-radius-lg);
     gap: var(--spacing-md);
-    @include breakpoint-tablet {
+    @include breakpoint-desktop {
       width: 40vw;
     }
   }
 
-  @include breakpoint-tablet {
+  @include breakpoint-desktop {
     flex-direction: row;
   }
 }
