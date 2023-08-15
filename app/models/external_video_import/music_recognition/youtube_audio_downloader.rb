@@ -16,6 +16,8 @@ module ExternalVideoImport
               yield file if block_given?
             end
           end
+        rescue => e
+          Rails.logger.error "Failed to download file: #{e.message}"
         end
       end
 

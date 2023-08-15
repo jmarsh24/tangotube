@@ -4,14 +4,17 @@ module ExternalVideoImport
   module MusicRecognition
     class AudioTrimmer
       def trim(file)
-        media = FFMPEG::Movie.new(file.path)
+        return unless File.exist?(file.path) && !File.zero?(file.path)
 
+        media = FFMPEG::Movie.new(file.path)
         file_to_trim = media.video_stream ? transcode_and_trim(media) : file
 
         Tempfile.create(["#{File.basename(file_to_trim.path, File.extname(file_to_trim.path))}_trimmed", ".mp3"]) do |trimmed_file|
           transcode_audio_file(file_to_trim, trimmed_file)
           yield trimmed_file
         end
+      rescue => e
+        Rails.logger.error "Failed to trim audio: #{e.message}"
       end
 
       private

@@ -28,7 +28,7 @@ module ExternalVideoImport
           channel: @channel_matcher.match_or_create(channel_metadata: metadata.youtube.channel),
           song:,
           couples: [couple].compact,
-          acr_response_code: metadata.music.code,
+          acr_response_code: metadata.music&.code,
           duration: metadata.youtube.duration,
           hd: metadata.youtube.hd,
           youtube_view_count: metadata.youtube.view_count,
