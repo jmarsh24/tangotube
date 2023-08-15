@@ -1,6 +1,9 @@
 .search-section {
   display: flex;
   flex-direction: column;
+  background-color: hsla(0, 0%, 0%, 0.4);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-md);
   gap: var(--spacing-md);
   position: relative;
   width: 100%;
@@ -9,12 +12,10 @@
   &--events,
   &--orchestras,
   &--songs {
-    min-width: 50vw;
     min-height: 150px;
   }
 
   &--videos {
-    min-width: 400px;
-    min-height: 40vw;
+    min-height: 100%;
   }
 }

@@ -1,5 +1,5 @@
 = turbo_frame_tag "couples_results", class: "search-section search-section--couples" do
   - if @couples.any?
-    h3.heading-3.search__header = t(".couples")
+    h3.heading-3 = t(".couples")
     .tablet-scrollable-content
       = render @couples

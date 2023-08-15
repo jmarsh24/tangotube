@@ -34,7 +34,7 @@
 
   &__close {
     position: absolute;
-    top: 36px;
+    top: 35px;
     left: var(--spacing-lg);
     cursor: pointer;
     z-index: var(--z-modal-close);
@@ -47,7 +47,7 @@
   }
 
   @include breakpoint-tablet {
-    padding: var(--spacing-md) 81px 128px 81px;
+    padding: var(--spacing-md) 72px 128px 72px;
     &__mobile-search-input {
       display: none;
     }
