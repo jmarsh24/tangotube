@@ -98,13 +98,13 @@ class Song < ApplicationRecord
     end
   end
 
-  private
-
-  def custom_titleize(name)
-    name&.split("'")&.map(&:titleize)&.join("'")
+  def formatted_artist
+    artist&.split("'")&.map(&:titleize)&.join("'")
   end
 
+  private
+
   def set_display_title
-    self.display_title = [title&.titleize, custom_titleize(orchestra&.name), genre&.titleize, date&.year].compact.join(" - ")
+    self.display_title = [title&.titleize, orchestra.name, genre&.titleize, date&.year].compact.join(" - ")
   end
 end

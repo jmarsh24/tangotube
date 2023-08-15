@@ -10,5 +10,6 @@
       - else
         = image_tag "default_avatar.jpg", class: "overlapping-avatar"
     .search-result__details
-      .search-result__title = couple.dancer_names
+      .search-result__title = couple.dancer.name
+      .search-result__subtitle = couple.partner.name
       .search-result__type = couple.class.to_s.singularize.titleize

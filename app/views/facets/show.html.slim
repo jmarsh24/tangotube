@@ -3,7 +3,7 @@
     .stack.stack--zero.scrollable-container
       .modal__header
         h3.heading-3 = @facet.name.titleize
-      .content-container.scrollable-container__content
+      .modal__body
         .list-box
           - if params[@facet.name.to_sym].present?
             = link_to root_path(filtering_params.except(@facet.name.to_sym, :filtering)), data: { turbo_frame: "_top" } do 

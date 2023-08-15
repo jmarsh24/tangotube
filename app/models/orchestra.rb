@@ -44,6 +44,10 @@ class Orchestra < ApplicationRecord
 
   scope :most_popular, -> { order(videos_count: :desc) }
 
+  def formatted_name
+    name&.split("'")&.map(&:titleize)&.join("'")
+  end
+
   def to_param
     "#{id}-#{slug}"
   end

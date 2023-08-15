@@ -17,6 +17,7 @@
   }
 
   &__image-circle {
+    flex-shrink: 0;
     width: 64px;
     height: 64px;
     border-radius: var(--border-radius-circle);
@@ -45,11 +46,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 200px;
+
     @include breakpoint-mobile {
-      max-width: 280px;
+      max-width: 230px;
     }
     @include breakpoint-tablet {
-      max-width: 420px;
+      max-width: 270px;
     }
   }
 
