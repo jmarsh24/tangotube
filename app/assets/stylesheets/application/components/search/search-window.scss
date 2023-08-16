@@ -11,7 +11,11 @@
   left: -100%;
   opacity: 0;
   pointer-events: none;
-  transition: left 0.5s ease, opacity 0.5s ease 0.3s;
+  transition: left 0.2s ease, opacity 0.2s ease;
+
+  @include breakpoint-tablet {
+    transition: left 0.5s ease, opacity 0.5s ease 0.3s;
+  }
 
   &::before {
     content: '';
@@ -23,7 +27,10 @@
     background-color: hsla(240, 5%, 10%, 0.85);
     backdrop-filter: blur(15px);
     z-index: -1;
-    transition: left 0.5s ease;
+    transition: left 0.2s ease;
+    @include breakpoint-tablet {
+      transition: left 0.5s ease;
+    }
   }
 
   &__title {
