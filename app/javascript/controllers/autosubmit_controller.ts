@@ -3,11 +3,10 @@ import debounce from 'lodash.debounce';
 
 export default class extends Controller {
   connect() {
-    this.submit = debounce(this.submit, 300);
+    this.submit = debounce(this.submit, 500);
   }
 
   submit() {
-    const event = new Event('submit', { bubbles: true });
-    this.element.dispatchEvent(event);
+    this.element.form?.requestSubmit();
   }
 }
