@@ -8,15 +8,6 @@
   position: relative;
   width: 100%;
 
-  &--dancers,
-  &--events,
-  &--orchestras,
-  &--songs {
-    @include breakpoint-tablet {
-      min-height: 50px;
-    }
-  }
-
   &--videos {
     min-height: 100%;
   }
