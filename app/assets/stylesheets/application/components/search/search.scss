@@ -11,6 +11,9 @@
     &::placeholder {
       color: var(--color-neutral-600);
     }
+
+    -webkit-appearance: none;
+    appearance: none;
   }
 
   &__results {
