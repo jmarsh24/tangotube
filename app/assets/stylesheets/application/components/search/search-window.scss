@@ -1,15 +1,17 @@
 .search-window {
   position: fixed;
   top: var(--header-height);
-  left: 0;
   right: 0;
   bottom: 0;
-  display: none;
   z-index: var(--z-window);
   padding: var(--spacing-md) 16px 128px 16px;
-  display: none;
   height: 100%;
   overflow: scroll;
+  display: flex;
+  left: -100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: left 0.5s ease, opacity 0.5s ease 0.3s;
 
   &::before {
     content: '';
@@ -17,10 +19,11 @@
     top: var(--header-height);
     right: 0;
     bottom: 0;
-    left: 0;
+    left: -100%;
     background-color: hsla(240, 5%, 10%, 0.85);
     backdrop-filter: blur(15px);
     z-index: -1;
+    transition: left 0.5s ease;
   }
 
   &__title {
@@ -43,6 +46,12 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
+    left: 0;
+    opacity: 1;
+    pointer-events: all;
+    &::before {
+      left: 0;
+    }
   }
 
   @include breakpoint-tablet {
@@ -59,4 +68,8 @@
 
 body.search-window--open {
   overflow: hidden;
+
+  .navbar__bottom {
+    display: none;
+  }
 }
