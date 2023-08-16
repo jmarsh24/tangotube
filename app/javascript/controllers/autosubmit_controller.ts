@@ -7,6 +7,6 @@ export default class extends Controller {
   }
 
   submit() {
-    this.element.form?.requestSubmit();
+    (this.element as HTMLInputElement).form?.requestSubmit();
   }
 }
