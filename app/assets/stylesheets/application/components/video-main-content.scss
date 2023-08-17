@@ -1,0 +1,5 @@
+.video-main-content {
+  @include breakpoint-tablet {
+    padding-top: var(--spacing-sm);
+  }
+}

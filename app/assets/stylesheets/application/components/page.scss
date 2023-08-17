@@ -11,9 +11,12 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 24px;
     max-width: var(--page-main-max-width);
+
+    @include breakpoint-tablet {
+      padding: 0 var(--spacing-md);
+    }
   }
 }

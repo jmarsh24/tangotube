@@ -1,0 +1,7 @@
+.video-side-bar {
+  padding: 0 var(--spacing-md);
+
+  @include breakpoint-tablet {
+    padding: var(--spacing-xs) 0;
+  }
+}

@@ -1,12 +1,12 @@
 #related-videos-links
   .stack.stack--line.stack--xs
     - if video.performance.present?
-      = link_to "Same Performance", related_video_path(id: video.id, type: "same_performance"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_performance" ? "active" : ""]
+      = link_to "Same Performance", related_video_path(id: video.id, type: "same_performance"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--md", type == "same_performance" ? "active" : ""]
     - if @video.leaders.present? || @video.followers.present?
-      = link_to "Same Dancers", related_video_path(id: video.id, type: "same_dancers"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_dancers" ? "active" : ""]
+      = link_to "Same Dancers", related_video_path(id: video.id, type: "same_dancers"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--md", type == "same_dancers" ? "active" : ""]
     - if video.song.present?
-      = link_to "Same Song", related_video_path(id: video.id, type: "same_song"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_song" ? "active" : ""]
+      = link_to "Same Song", related_video_path(id: video.id, type: "same_song"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--md", type == "same_song" ? "active" : ""]
     - if video.event.present?
-      = link_to "Same Event", related_video_path(id: video.id, type: "same_event"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_event" ? "active" : ""]
+      = link_to "Same Event", related_video_path(id: video.id, type: "same_event"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--md", type == "same_event" ? "active" : ""]
     - if video.channel.present? && @video.channel.videos_count > 1
-      = link_to "Same Channel", related_video_path(id: video.id, type: "same_channel"), "data-turbo-stream": true, class: ["button", "button--secondary", type == "same_channel" ? "active" : ""]
+      = link_to "Same Channel", related_video_path(id: video.id, type: "same_channel"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--md", type == "same_channel" ? "active" : ""]
