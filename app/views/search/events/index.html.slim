@@ -1,5 +1,6 @@
 = turbo_frame_tag "events_results", class: "search-section search-section--events" do
-  - if @events.any?
-    h3.heading-3 = t(".events")
-    .tablet-scrollable-content
-      = render @events
+  - cache(["search_window_event_results", params[:query]], expires_in: 1.hours) do
+    - if @events.any?
+      h3.heading-3 = t(".events")
+      .tablet-scrollable-content
+        = render @events

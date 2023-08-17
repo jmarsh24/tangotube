@@ -1,5 +1,6 @@
 = turbo_frame_tag "orchestras_results", class: "search-section search-section--orchestras" do
-  - if @orchestras.any?
-    h3.heading-3 = t(".orchestras")
-    .tablet-scrollable-content
-      = render @orchestras
+  - cache(["search_window_orchestra_results", params[:query]], expires_in: 1.hours) do
+    - if @orchestras.any?
+      h3.heading-3 = t(".orchestras")
+      .tablet-scrollable-content
+        = render @orchestras

@@ -1,5 +1,6 @@
 = turbo_frame_tag "dancers_results", class: "search-section search-section--dancers" do
-  - if @dancers.any?
-    h3.heading-3 = t(".dancers")
-    .tablet-scrollable-content
-      = render @dancers
+  - cache(["search_window_dancer_results", params[:query]], expires_in: 1.hours) do
+    - if @dancers.any?
+      h3.heading-3 = t(".dancers")
+      .tablet-scrollable-content
+        = render @dancers
