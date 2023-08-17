@@ -3,14 +3,10 @@
 class Search::VideosController < ApplicationController
   # @route GET /search/videos (search_videos)
   def index
-    @videos = Rails.cache.fetch(["search_videos", params[:query].presence], expires_in: 1.hour) do
-      if params[:query].present?
-        Video.search(params[:query])
-          .with_attached_thumbnail
-          .limit(12)
-      else
-        Video.all.limit(10).most_popular
-      end
+    @videos = if params[:query].present?
+      paginated(Video.search(params[:query]).not_hidden.from_active_channels.with_attached_thumbnail, per: 12, frame_id: "search_window_videos_results")
+    else
+      paginated(Video.not_hidden.from_active_channels.most_popular, per: 12, frame_id: "search_window_videos_results")
     end
   end
 end

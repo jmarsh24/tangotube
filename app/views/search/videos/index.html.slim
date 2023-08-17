@@ -1,4 +1,4 @@
-= turbo_frame_tag "videos_results", class: "search-section search-section--videos" do
+= turbo_frame_tag "search_window_videos_results", class: "search-section search-section--videos" do
   - if @videos.any?
     h3.heading-3 = t(".videos")
-    = render @videos
+    = paginated @videos, frame_id: "search_window_videos_results"

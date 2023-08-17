@@ -1,8 +1,11 @@
 .search {
   &__input {
-    background-color: var(--color-neutral-200);
+    font-size: 16px;
+    background-color: var(--color-neutral-100);
     color: var(--color-neutral-1000);
     width: 100%;
+    border-radius: var(--border-radius-pill);
+    padding: 8px 18px;
 
     @include breakpoint-tablet {
       width: 360px;
@@ -13,6 +16,11 @@
     }
 
     appearance: none;
+
+    &:hover {
+      background-color: var(--color-neutral-200);
+      border: 1px solid var(--color-neutral-300);
+    }
   }
 
   &__results {

@@ -37,16 +37,15 @@
     display: none;
   }
 
-  &__mobile-search-input {
-    padding-left: var(--spacing-xxl);
-  }
-
   &__close {
     position: absolute;
-    top: 32px;
-    left: 24px;
+    display: hidden;
+    top: calc(var((--header-height) / 2));
+    left: 12px;
     cursor: pointer;
     z-index: var(--z-modal-close);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   &--open {
@@ -56,6 +55,11 @@
     left: 0;
     opacity: 1;
     pointer-events: all;
+
+    .search-window__close {
+      display: block;
+      opacity: 1;
+    }
     &::before {
       left: 0;
     }

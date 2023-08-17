@@ -11,8 +11,6 @@ class VideosController < ApplicationController
     @sort_param = params[:sort]
     @search = Video::Search.new(filtering_params:, sort: params[:sort], user: current_user)
 
-    @current_page = params[:page]&.to_i || 1
-
     @videos = paginated(@search.videos.not_hidden.from_active_channels.preload(Video.search_includes), per: 12)
 
     if params[:filtering] == "true" && params[:pagination].nil?
@@ -22,8 +20,7 @@ class VideosController < ApplicationController
       new_params = @filtering_params.to_h
       new_params[:sort] = @sort_param if @sort_param.present?
       new_params.except(:filtering, :pagination)
-      url = url_for(new_params)
-      ui.run_javascript "history.pushState(history.state, '', '#{url}');"
+      ui.run_javascript "history.pushState(history.state, '', '#{url_for(new_params)}');"
     end
   end
 

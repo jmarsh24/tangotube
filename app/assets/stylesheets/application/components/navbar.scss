@@ -1,8 +1,8 @@
 .navbar {
   position: sticky;
-  z-index: var(--z-navbar);
   background-color: var(--color-neutral-100);
   z-index: var(--z-navbar);
+  height: var(--navbar-height);
   top: 0;
 
   &__item {
@@ -28,17 +28,6 @@
     }
   }
 
-  &__search-bar {
-    display: none;
-    align-items: center;
-    gap: var(--spacing-xs);
-    width: 500px;
-    border-radius: 5px;
-    height: 40px;
-    padding: 12px;
-    background: var(--color-neutral-300);
-  }
-
   &__logo {
     width: 112px;
     height: 22px;
@@ -53,7 +42,8 @@
   }
 
   &__top {
-    padding: var(--spacing-xxs) var(--spacing-md);
+    padding: var(--spacing-xxs) var(--spacing-md) var(--spacing-xxs)
+      var(--spacing-xxl);
     max-width: var(--page-main-max-width);
   }
 
