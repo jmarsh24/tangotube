@@ -1,6 +1,6 @@
 .devise
   .modal__header
-    h2.heading-2 = t(".login")
+    h2.heading-2.text-align-center = t(".login")
   .content-container
     .stack.stack--xs
       = form_with model: resource, as: resource_name, url: registration_path(resource_name) do |f|

@@ -1,6 +1,6 @@
 .devise
   .modal__header
-    h2.heading-2 = t(".new_password")
+    h2.heading-2.text-align-center = t(".new_password")
   .content-container
     .stack.stack--xs
       = form_for resource, as: resource_name, url: password_path(resource_name) do |f|
