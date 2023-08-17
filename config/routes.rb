@@ -38,6 +38,10 @@ Rails.application.routes.draw do
       get :details
       get :share
     end
+    collection do
+      get :filters
+      get :sort
+    end
   end
 
   resources :songs do
