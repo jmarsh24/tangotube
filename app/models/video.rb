@@ -31,6 +31,9 @@
 #  normalized_title    :string
 #
 class Video < ApplicationRecord
+  extend FriendlyId
+  friendly_id :youtube_id, use: :slugged
+
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
@@ -134,10 +137,6 @@ class Video < ApplicationRecord
 
   def featured?
     featured
-  end
-
-  def to_param
-    youtube_id || id
   end
 
   def hd_duration_data

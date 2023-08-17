@@ -31,22 +31,13 @@ Rails.application.routes.draw do
   get "/about", to: "pages#about"
   get "/contact", to: "pages#contact"
 
-  # Manifest route
   resource :manifest, only: :show
 
-  # Video routes
   resources :videos do
     member do
       get :details
-      post :like
-      delete :unlike
-      post :hide
       patch :featured
       get :share
-    end
-    collection do
-      get :filters
-      get :sort
     end
   end
 
@@ -54,14 +45,11 @@ Rails.application.routes.draw do
     resource :lyrics, only: [:show]
   end
 
-  # Facet route
   resources :facets, only: :show
 
   resources :related_videos, only: [:show]
 
-  # Like routes
   resources :likes, only: [:create, :destroy]
-
   resources :files, only: :show, controller: "shimmer/files"
 
   match "/webhooks/youtube", to: "webhooks#youtube", via: [:get, :post]

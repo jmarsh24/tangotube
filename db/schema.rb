@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_140930) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_092130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -179,6 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_140930) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
+    t.index ["user_id", "likeable_type", "likeable_id"], name: "index_likes_on_user_and_likeable", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
@@ -334,6 +335,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_140930) do
     t.text "youtube_tags", default: [], array: true
     t.datetime "metadata_updated_at"
     t.string "normalized_title"
+    t.string "slug"
     t.index ["acr_response_code"], name: "index_videos_on_acr_response_code"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
@@ -341,6 +343,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_140930) do
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
     t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gist_trgm_ops, using: :gist
+    t.index ["slug"], name: "index_videos_on_slug", unique: true
     t.index ["song_id"], name: "index_videos_on_song_id"
     t.index ["upload_date"], name: "index_videos_on_upload_date"
     t.index ["upload_date_year"], name: "index_videos_on_upload_date_year"

@@ -12,6 +12,7 @@ class Video::Search
 
   def videos
     filtered_videos = Video::Filter.new(Video, filtering_params:, user:).videos
+
     if sort.present?
       Video::Sort.new(filtered_videos, sort:).videos
     else

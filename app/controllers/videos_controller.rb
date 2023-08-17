@@ -52,29 +52,9 @@ class VideosController < ApplicationController
     current_user&.watches&.create(video: @video, watched_at: Time.now)
   end
 
-  # @route POST /videos/:id/hide (hide_video)
-  def hide
-    @video.hidden = true
-    @video.save
-    render turbo_stream: turbo_stream.remove("video_#{@video.youtube_id}")
-  end
-
   # @route PATCH /videos/:id/featured (featured_video)
   def featured
     @video.update!(featured: !@video.featured?)
-    ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
-  end
-
-  # @route POST /videos/:id/like (like_video)
-  def like
-    current_user.likes.create!(likeable: @video)
-    ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
-  end
-
-  # @route DELETE /videos/:id/unlike (unlike_video)
-  def unlike
-    like = current_user.likes.find_by(likeable: @video)
-    like&.destroy!
     ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
   end
 

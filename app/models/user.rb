@@ -27,13 +27,13 @@
 #  patreon_id             :string
 #
 class User < ApplicationRecord
+  include Likeable
+
   after_initialize :set_default_role, if: :new_record?
   before_save :tileize_name
 
   has_many :watches, dependent: :destroy
   has_many :watched_videos, through: :watches, source: :video
-  has_many :likes, dependent: :destroy
-  has_many :liked_videos, through: :likes, source: :likeable, source_type: "Video"
   has_many :clips, dependent: :nullify
   has_many :recent_searches, dependent: :destroy
 
@@ -57,31 +57,6 @@ class User < ApplicationRecord
   scope :admins, -> { where(role: :admin) }
   scope :non_admins, -> { where(role: :user) }
   scope :search, ->(term) { where("name ILIKE ? OR email ILIKE ?", "%#{term}%", "%#{term}%") }
-
-  def remember_me
-    true
-  end
-
-  def set_default_role
-    self.role ||= :user
-  end
-
-  def tileize_name
-    self.first_name = first_name.strip.titleize if name.present?
-    self.last_name = last_name.strip.titleize if name.present?
-  end
-
-  def like(video)
-    likes.find_or_create_by(likeable: video)
-  end
-
-  def unlike(video)
-    likes.where(likeable: video).destroy_all
-  end
-
-  def watch(video)
-    watches.create(video:, watched_at: DateTime.now)
-  end
 
   class << self
     def from_omniauth(auth)
@@ -117,5 +92,22 @@ class User < ApplicationRecord
         end
       end
     end
+  end
+
+  def remember_me
+    true
+  end
+
+  def set_default_role
+    self.role ||= :user
+  end
+
+  def tileize_name
+    self.first_name = first_name.strip.titleize if name.present?
+    self.last_name = last_name.strip.titleize if name.present?
+  end
+
+  def watch(video)
+    watches.create(video:, watched_at: DateTime.now)
   end
 end
