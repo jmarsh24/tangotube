@@ -74,7 +74,7 @@ class VideosController < ApplicationController
   end
 
   def set_video
-    @video = Video.fiendly.find(params[:v] || params[:id])
+    @video = Video.friendly.find(params[:v] || params[:id])
   end
 
   def filtering_params
