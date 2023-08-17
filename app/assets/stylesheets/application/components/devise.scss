@@ -1,4 +1,8 @@
 .devise {
   width: 100%;
   max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 80px;
 }
