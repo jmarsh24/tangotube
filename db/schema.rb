@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_092130) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_150614) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -172,6 +172,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_092130) do
     t.index ["title"], name: "index_events_on_title_trigram", opclass: :gist_trgm_ops, using: :gist
   end
 
+  create_table "features", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "featureable_type", null: false
+    t.bigint "featureable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["featureable_type", "featureable_id"], name: "index_features_on_featureable"
+    t.index ["featureable_type", "featureable_id"], name: "index_features_on_featureable_type_and_featureable_id"
+    t.index ["user_id", "featureable_type", "featureable_id"], name: "index_features_on_user_and_featureable", unique: true
+    t.index ["user_id"], name: "index_features_on_user_id"
+  end
+
   create_table "likes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "likeable_type", null: false
@@ -325,7 +337,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_092130) do
     t.boolean "hd", default: false
     t.integer "like_count", default: 0
     t.bigint "event_id"
-    t.boolean "featured", default: false
     t.jsonb "metadata"
     t.text "tags", default: [], array: true
     t.date "upload_date"
@@ -339,7 +350,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_092130) do
     t.index ["acr_response_code"], name: "index_videos_on_acr_response_code"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
-    t.index ["featured"], name: "index_videos_on_featured"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
     t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gist_trgm_ops, using: :gist
@@ -378,6 +388,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_092130) do
   add_foreign_key "couples", "dancers", column: "partner_id", on_delete: :cascade
   add_foreign_key "couples", "dancers", on_delete: :cascade
   add_foreign_key "dancers", "users"
+  add_foreign_key "features", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists", "videos", column: "videos_id"

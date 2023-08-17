@@ -1,5 +1,5 @@
 div id=dom_id(likeable, "like-button")
-  - if current_user.likes?(likeable)
-    = button_to "Like", like_path(current_user.like_for(likeable)), method: :delete, class: "button button--vote button--icon-thumbs-up-fill"
+  - if current_user&.likes?(likeable)
+    = button_to t(".like"), like_path(current_user.like_for(likeable)), method: :delete, class: "button button--vote button--icon-thumbs-up-fill"
   - else 
-    = button_to "Like", likes_path(likeable_id: likeable.id, likeable_type: likeable.class.to_s), class: "button button--vote button--icon-thumbs-up"
+    = button_to t(".like"), likes_path(likeable_id: likeable.id, likeable_type: likeable.class.to_s), class: "button button--vote button--icon-thumbs-up"

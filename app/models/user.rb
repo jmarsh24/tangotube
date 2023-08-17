@@ -27,6 +27,7 @@
 #  patreon_id             :string
 #
 class User < ApplicationRecord
+  include Featureable
   include Likeable
 
   after_initialize :set_default_role, if: :new_record?

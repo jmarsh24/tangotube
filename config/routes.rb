@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   resources :videos do
     member do
       get :details
-      patch :featured
       get :share
     end
   end
@@ -50,6 +49,8 @@ Rails.application.routes.draw do
   resources :related_videos, only: [:show]
 
   resources :likes, only: [:create, :destroy]
+  resources :features, only: [:create, :destroy]
+
   resources :files, only: :show, controller: "shimmer/files"
 
   match "/webhooks/youtube", to: "webhooks#youtube", via: [:get, :post]

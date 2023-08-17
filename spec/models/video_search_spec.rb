@@ -4,19 +4,21 @@
 #
 # Table name: video_searches
 #
-#  video_id       :bigint
-#  youtube_id     :string
-#  upload_date    :date
-#  dancer_names   :text
-#  channel_title  :text
-#  song_title     :text
-#  song_artist    :text
-#  orchestra_name :text
-#  event_city     :text
-#  event_title    :text
-#  event_country  :text
-#  video_title    :text
-#  score          :float
+#  video_id                 :bigint           primary key
+#  youtube_id               :string
+#  upload_date              :date
+#  video_description        :string
+#  video_description_vector :tsvector
+#  dancer_names             :text
+#  channel_title            :text
+#  song_title               :text
+#  song_artist              :text
+#  orchestra_name           :text
+#  event_city               :text
+#  event_title              :text
+#  event_country            :text
+#  video_title              :text
+#  score                    :float
 #
 RSpec.describe VideoSearch do
   fixtures :all

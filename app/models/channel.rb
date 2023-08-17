@@ -6,7 +6,7 @@
 #
 #  id                  :bigint           not null, primary key
 #  title               :string
-#  youtube_slug          :string           not null
+#  youtube_slug        :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  thumbnail_url       :string

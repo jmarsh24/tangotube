@@ -14,12 +14,11 @@
 #  view_count          :integer
 #  song_id             :bigint
 #  acr_response_code   :integer
-#  youtube_slug          :bigint
+#  channel_id          :bigint
 #  hidden              :boolean          default(FALSE)
 #  hd                  :boolean          default(FALSE)
 #  like_count          :integer          default(0)
 #  event_id            :bigint
-#  featured            :boolean          default(FALSE)
 #  metadata            :jsonb
 #  tags                :text             default([]), is an Array
 #  upload_date         :date
@@ -29,6 +28,7 @@
 #  youtube_tags        :text             default([]), is an Array
 #  metadata_updated_at :datetime
 #  normalized_title    :string
+#  slug                :string
 #
 class Video < ApplicationRecord
   extend FriendlyId
@@ -49,7 +49,7 @@ class Video < ApplicationRecord
   has_many :watches, dependent: :destroy
   has_many :watchers, through: :watches, source: :user
   has_many :likes, as: :likeable, dependent: :destroy
-  has_many :liking_users, through: :likes, source: :user
+  has_many :features, as: :featureable, dependent: :destroy
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video
@@ -65,8 +65,8 @@ class Video < ApplicationRecord
 
   scope :channel, ->(youtube_slug) { joins(:channel).where("channel.youtube_slug" => youtube_slug) }
   scope :exclude_youtube_id, ->(youtube_id) { where.not(youtube_id:) }
-  scope :featured, -> { where(featured: true) }
-  scope :not_featured, -> { where(featured: false) }
+  scope :featured, -> { joins(:features) }
+  scope :not_featured, -> { left_outer_joins(:features).where(features: {id: nil}) }
   scope :follower, ->(slug) {
                      joins("JOIN dancer_videos AS follower_dancer_videos ON follower_dancer_videos.video_id = videos.id")
                        .joins("JOIN dancers AS follower_dancers ON follower_dancers.id = follower_dancer_videos.dancer_id")
@@ -133,10 +133,6 @@ class Video < ApplicationRecord
 
   def normalize_title
     self.normalized_title = TextNormalizer.normalize(title)
-  end
-
-  def featured?
-    featured
   end
 
   def hd_duration_data

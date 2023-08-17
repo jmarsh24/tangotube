@@ -52,12 +52,6 @@ class VideosController < ApplicationController
     current_user&.watches&.create(video: @video, watched_at: Time.now)
   end
 
-  # @route PATCH /videos/:id/featured (featured_video)
-  def featured
-    @video.update!(featured: !@video.featured?)
-    ui.replace("video_#{@video.id}_vote", with: "videos/show/vote", video: @video)
-  end
-
   # @route GET /videos/filters (filters_videos)
   def filters
   end

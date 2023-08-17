@@ -19,7 +19,6 @@
 #  hd                  :boolean          default(FALSE)
 #  like_count          :integer          default(0)
 #  event_id            :bigint
-#  featured            :boolean          default(FALSE)
 #  metadata            :jsonb
 #  tags                :text             default([]), is an Array
 #  upload_date         :date
@@ -29,6 +28,7 @@
 #  youtube_tags        :text             default([]), is an Array
 #  metadata_updated_at :datetime
 #  normalized_title    :string
+#  slug                :string
 #
 require "rails_helper"
 

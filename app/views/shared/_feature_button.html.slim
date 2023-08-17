@@ -1,0 +1,5 @@
+div id=dom_id(featureable, "feature-button")
+  - if current_user.features?(featureable)
+    = button_to t(".feature"), feature_path(current_user.feature_for(featureable)), method: :delete, class: ["button button--vote", "button--icon-star-filled"]
+  - else 
+    = button_to t(".feature"), features_path(featureable_id: featureable.id, featureable_type: featureable.class.to_s), class: ["button button--vote", "button--icon-star"]
