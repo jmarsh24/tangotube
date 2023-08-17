@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 class VideosController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :share, :sort, :filters, :details]
-  before_action :current_search, only: [:index]
   before_action :check_for_clear, only: [:index]
-  before_action :set_video, except: [:index, :create, :destroy]
-  before_action :set_video, only: [:hide, :featured, :like, :unlike, :share, :details]
+  before_action :set_video, only: [:share, :details]
 
   # @route GET /videos (videos)
   # @route GET / (root)
@@ -33,13 +30,11 @@ class VideosController < ApplicationController
   # @route GET /videos/:id (video)
   # @route GET /watch (watch)
   def show
-    unless params[:v]
-      redirect_to root_path and return
-    end
+    redirect_to root_path unless params[:v].present?
 
     if @video.nil?
       ExternalVideoImport::Importer.new.import(params[:v])
-      @video = Video.includes(dancer_videos: :dancer).find_by(youtube_id: params[:v])
+      @video = Video.includes(dancer_videos: :dancer).friendly.find(params[:v])
     end
 
     @type = Video::RelatedVideos.new(@video).available_types.first
@@ -49,7 +44,7 @@ class VideosController < ApplicationController
     @root_url = root_url
     @playback_rate = params[:speed] || "1"
 
-    current_user&.watches&.create(video: @video, watched_at: Time.now)
+    current_user&.watches&.create!(video: @video, watched_at: Time.now)
   end
 
   # @route GET /videos/filters (filters_videos)
@@ -67,7 +62,7 @@ class VideosController < ApplicationController
 
   # @route GET /videos/:id/details (details_video)
   def details
-    @video = Video.find_by(youtube_id: params[:id])
+    @video = Video.friendly.find(params[:id])
   end
 
   def show_filter_bar?
@@ -83,18 +78,7 @@ class VideosController < ApplicationController
   end
 
   def set_video
-    @video = Video.find_by(youtube_id: params[:v]) || Video.find_by(youtube_id: params[:id])
-  end
-
-  def fetch_video_if_nil
-    return unless @video.nil?
-
-    ExternalVideoImport::Importer.new.import(params[:v])
-    @video = Video.find_by(youtube_id: params[:v])
-  end
-
-  def current_search
-    @current_search = params[:search]
+    @video = Video.fiendly.find(params[:v])
   end
 
   def filtering_params

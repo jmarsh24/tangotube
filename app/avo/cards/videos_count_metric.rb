@@ -43,15 +43,15 @@ class VideosCountMetric < Avo::Dashboards::MetricCard
     end
 
     if options[:visible_videos].present?
-      scope = scope.not_hidden
+      scope = scope.not_hidden.from_active_channels
     end
 
     if options[:music_recognized].present?
-      scope = scope.music_recognized
+      scope = scope.music_recognized.not_hidden.from_active_channels
     end
 
     if options[:music_unrecognized].present?
-      scope = scope.music_unrecognized
+      scope = scope.music_unrecognized.not_hidden.from_active_channels
     end
 
     result scope.where(created_at: from..to).count
