@@ -81,4 +81,5 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
 
   config.active_record.async_query_executor = :global_thread_pool
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end

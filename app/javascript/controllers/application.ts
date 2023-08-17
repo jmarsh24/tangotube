@@ -1,11 +1,7 @@
-import { Application } from "@hotwired/stimulus";
-import Hotkeys from "stimulus-hotkeys";
+import { Application } from '@hotwired/stimulus';
 
 const application = Application.start();
 
-application.register("hotkeys", Hotkeys);
-
-// Configure Stimulus development experience
 application.debug = false;
 window.Stimulus = application;
 

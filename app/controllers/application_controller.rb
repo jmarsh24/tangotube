@@ -12,12 +12,12 @@ class ApplicationController < ActionController::Base
   before_action :check_supporter
 
   def check_supporter
-    @show_support_modal = current_user && !current_user.supporter
+    @show_support_modal = current_user && !current_user&.supporter
   end
 
   private
 
-  def paginated(scope, per: 10)
+  def paginated(scope, per: 12)
     @current_page = params[:page]&.to_i || 1
     scope = scope.page(@current_page).per(per)
     @has_more_pages = !scope.next_page.nil? unless @has_more_pages == true
