@@ -1,5 +1,7 @@
 .video-card.video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
   .video-card__image-container data-duration="#{video.hd_duration_data}"
+    - if video.features.any?
+      .icon.icon--tomato
     - if video.performance.present?
       .card__performance-number
         = "#{video.performance_video.position} / #{video.performance.videos_count}"

@@ -92,7 +92,7 @@ class Video < ApplicationRecord
   scope :song, ->(slug) { joins(:song).where(songs: {slug:}) }
   scope :event, ->(slug) { joins(:event).where(events: {slug:}) }
   scope :couple, ->(slug) { joins(:couples).where(couples: {slug:}) }
-  scope :watched, ->(user_id) { joins(:watches).where(watches: {user_id:}) }
+  scope :watched, ->(user_id) { where(id: Watch.where(user_id:).select(:video_id)) }
   scope :not_watched, ->(user_id) { where.not(id: Watch.where(user_id:).select(:video_id)) }
   scope :year, ->(upload_date_year) { where(upload_date_year:) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
