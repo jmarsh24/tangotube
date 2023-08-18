@@ -16,46 +16,46 @@
 
   &__performance-number {
     position: absolute;
-    background-color: black;
-    color: var(--color-neutral-1000);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
     right: 5px;
     top: 5px;
     padding: 0.1em 0.3em;
     border-radius: 0.3em;
-    z-index: 1000;
+    z-index: var(--z-performance-number);
   }
 
-  &__image {
+  &__image-container {
     position: relative;
     aspect-ratio: 16 / 9;
-    background-color: var(--color-neutral-200);
     border-radius: var(--border-radius-lg);
     min-width: 220px;
     height: 100%;
-    overflow: hidden;
-
-    img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: transparent;
-      object-fit: cover;
-    }
 
     &::after {
       content: attr(data-duration);
       position: absolute;
-      background-color: black;
+      background-color: var(--color-neutral-0);
       color: var(--color-neutral-1000);
       right: 5px;
       bottom: 10px;
       padding: 0 0.3em;
       border-radius: 0.3em;
     }
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-neutral-200);
+    border-radius: var(--border-radius-lg);
+    object-fit: cover;
+    z-index: var(--z-video-card-image);
   }
 
   &__title {
@@ -105,7 +105,7 @@
       .video-card__metadata {
         font-size: 13px;
       }
-      .video-card__image {
+      .video-card__image-container {
         min-width: 300px;
       }
       .video-card__dancer {

@@ -20,7 +20,7 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
   'scissors-circle-fill', 'scissors-circle', 'scissors', 'share-facebook',
   'share-facebook', 'share-twitter', 'share-whatsapp', 'square-and-arrow-up',
   'star-filled', 'star', 'sun-max-fill', 'sun-max', 'thumbs-down-fill',
-  'thumbs-down', 'thumbs-up-fill', 'thumbs-up';
+  'thumbs-down', 'thumbs-up-fill', 'thumbs-up', 'tomato';
 
 // Breakpoints
 
@@ -86,6 +86,9 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --logo-height-modal: 80px;
 
     --z-search-window-background: 0;
+    --z-video-card-image: 0;
+    --z-tomato: 1;
+    --z-performance-number: 1;
     --z-video-overlay: 100;
     --z-navbar-1: 200;
     --z-navbar-2: 300;

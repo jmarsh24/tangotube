@@ -32,6 +32,9 @@
 #
 class Video < ApplicationRecord
   extend FriendlyId
+  include Featureable
+  include Likeable
+
   friendly_id :youtube_id, use: :slugged
 
   belongs_to :song, optional: true, counter_cache: true
@@ -122,6 +125,7 @@ class Video < ApplicationRecord
     def search_includes
       [
         :channel,
+        :features,
         :song,
         :performance,
         performance_video: :performance,

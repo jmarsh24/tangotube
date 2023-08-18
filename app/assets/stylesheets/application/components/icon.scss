@@ -22,7 +22,6 @@ $icon-padding-sizes: (
   height: map-get($icon-sizes, 'md');
   width: map-get($icon-sizes, 'md');
   flex-shrink: 0;
-  color: var(--color-neutral-1000);
 
   @each $size-name, $size-value in $icon-sizes {
     &--#{$size-name} {
@@ -38,7 +37,7 @@ $icon-padding-sizes: (
   }
 
   &--white {
-    color: white;
+    color: var(--color-neutral-1000);
   }
 
   &--neutral {
@@ -46,7 +45,7 @@ $icon-padding-sizes: (
   }
 
   &--black {
-    color: black;
+    color: var(--color-neutral-0);
   }
 
   &--youtube {
@@ -56,5 +55,23 @@ $icon-padding-sizes: (
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  &--tomato {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    background-image: url('@assets/images/icons/tomato.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: var(--z-tomato);
+
+    @include breakpoint-tablet {
+      top: -12px;
+      right: -12px;
+    }
   }
 }

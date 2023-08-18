@@ -1,15 +1,14 @@
 .video-card.video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
-  .video-card__image data-duration="#{video.hd_duration_data}"
+  .video-card__image-container data-duration="#{video.hd_duration_data}"
     - if video.performance.present?
-          .card__performance-number
-            = "#{video.performance_video.position} / #{video.performance.videos_count}"
+      .card__performance-number
+        = "#{video.performance_video.position} / #{video.performance.videos_count}"
     - thumbnail = video.thumbnail.attached? ? video.thumbnail : "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
     - if video.youtube_id == @video.youtube_id
-      - if video.youtube_id == @video.youtube_id
-      = image_tag thumbnail, width: 400
+      = image_tag thumbnail, width: 400, class: "video-card__image"
     - else
       = link_to watch_path(v: video.youtube_id) do
-        = image_tag thumbnail, width: 400
+        = image_tag thumbnail, width: 400, class: "video-card__image"
   .video-card__content
     .video-card__primary
       = link_to video.title, watch_path(v: video.youtube_id), class: "video-card__title"
