@@ -1,5 +1,7 @@
 = turbo_frame_tag "search-window", data: { "search-modal-target": "modal" }, class: "search-window"
-  h2.heading-2.search-window__title = t(".search_results")
+  .search-window__close.search-window__close--desktop.icon.icon--chevron-left.icon--lg data-action="click->search-modal#close"
   = form_with url: search_path, method: :get, class: "search-window__mobile-search-input" do |f|
-    = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autocomplete: "off", autocorrect: "off", autocapitalize: "none", data: { controller: "autosubmit", action: "input->autosubmit#submit" }, id: "mobile-search-input"
+    .stack.stack--line
+      .search-window__close.icon.icon--chevron-left.icon--lg data-action="click->search-modal#close"
+      = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autocomplete: "off", autocorrect: "off", autocapitalize: "none", data: { controller: "autosubmit", action: "input->autosubmit#submit" }, id: "mobile-search-input"
   = turbo_frame_tag "search-results", src: search_path, data: { "search-modal-target": "modal" }, class: "search-results"

@@ -11,7 +11,7 @@
       = render partial: "videos/show/vote", locals: { video: @video }
       = render partial: "videos/show/video_metadata", locals: { video: @video }
       = render partial: "videos/show/lyrics" if @video&.song&.lyrics.present?
-  .stack.stack--xs.video-side-bar
+  .stack.stack--sm.video-side-bar
     .scrollable-bar
       = render partial: "related_videos/links", locals: { video: @video, type: @type }
     = turbo_frame_tag "related-videos-card", src: related_video_path(id: @video.id, type: @type), target: "_top"

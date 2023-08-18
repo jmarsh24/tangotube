@@ -85,6 +85,7 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --logo-height-home: 100px;
     --logo-height-modal: 80px;
 
+    --z-search-window-background: 0;
     --z-video-overlay: 100;
     --z-navbar-1: 200;
     --z-navbar-2: 300;
@@ -102,10 +103,9 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --z-search: 1500;
     --z-tooltip: 1600;
     --z-cookies-modal: 1700;
-    --z-window: 1800;
-    --z-drawer: 1900;
-    --z-cookies: 2000;
-    --z-search-modal: 2100;
+    --z-search-window: 1900;
+    --z-drawer: 2000;
+    --z-cookies: 2100;
 
     --navbar-height: 56px;
     --video-aspect-ratio: 0.8;
