@@ -10,6 +10,7 @@
     height: 56px;
     border-radius: var(--border-radius-circle);
     object-fit: cover;
+    flex-shrink: 0;
 
     &::before {
       content: '';
