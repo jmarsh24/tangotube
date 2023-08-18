@@ -2,6 +2,7 @@
   position: fixed;
   right: 0;
   bottom: 0;
+  top: var(--navbar-height);
   z-index: var(--z-search-window);
   padding: var(--spacing-md) 16px 128px 16px;
   height: 100%;
