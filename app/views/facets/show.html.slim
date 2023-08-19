@@ -1,21 +1,20 @@
-= turbo_frame_tag "#{@facet.name}_facet"
-  - cache [@facet.name, filtering_params, current_user&.id] do
-    .stack.stack--zero.scrollable-container
-      .modal__header
-        h3.heading-3 = @facet.name.titleize
-      .content-container.scrollable-container__content
-        .list-box
-          - if params[@facet.name.to_sym].present?
-            = link_to root_path(filtering_params.except(@facet.name.to_sym, :filtering)), data: { turbo_frame: "_top" } do 
-              .list-box__item
-                .list-box__text = "All #{@facet.name.pluralize}"
-          - if @facet.options.present?
-            - @facet.options.each do |option|
-              = link_to root_path(filtering_params.merge(@facet.name => option.value, :filtering => true)), data: { turbo_frame: "_top" } do
-                .list-box__item class=(params[@facet.name.to_sym] == option.value ? "selected" : nil)
-                  .list-box__text
-                    = option.label
-                  .list-box__count 
-                    = option.count
-        - if @facet.options.empty?
-          h2.heading-2 No results
+- cache [@facet.name, filtering_params, current_user&.id] do
+  = turbo_frame_tag "#{@facet.name}_facet", class: "facet"
+    .modal__header
+      h3.modal__title = @facet.name.titleize
+    .modal__body
+      .list-box
+        - if params[@facet.name.to_sym].present?
+          = link_to root_path(filtering_params.except(@facet.name.to_sym, :filtering)), data: { turbo_frame: "_top" } do 
+            .list-box__item
+              .list-box__text = "All #{@facet.name.pluralize}"
+        - if @facet.options.present?
+          - @facet.options.each do |option|
+            = link_to root_path(filtering_params.merge(@facet.name => option.value, :filtering => true)), data: { turbo_frame: "_top" } do
+              .list-box__item class=(params[@facet.name.to_sym] == option.value ? "selected" : nil)
+                .list-box__text
+                  = option.label
+                .list-box__count 
+                  = option.count
+      - if @facet.options.empty?
+        h2.heading-2 No results

@@ -6,68 +6,32 @@
   bottom: 0;
   pointer-events: none;
   z-index: var(--z-modal);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  &--lyrics {
-    .modal__close {
-      background-color: unset;
-      &::before {
-        background-color: var(--color-neutral-1000);
-      }
-    }
-    .modal__content {
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-
-    .modal__frame {
-      max-height: unset;
-    }
-
-    @include breakpoint-tablet {
-      .modal__content {
-        top: unset;
-        bottom: unset;
-        left: unset;
-        right: unset;
-        max-width: 50vw;
-      }
-    }
-  }
-
-  &__header {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 24px 24px 16px 24px;
-  }
-
   &__content {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-neutral-0);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 16px 16px 16px 16px;
     transition: opacity 0.5s, transform 0.5s;
     opacity: 0;
     transform: translate(0, 80px);
-    max-height: 100%;
-    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: hidden;
+    background-color: var(--color-neutral-50);
+    bottom: 0;
   }
 
-  &__title {
-    font-weight: 600;
-    font-size: 20px;
-    margin-bottom: 16px;
-
-    &:empty {
-      display: none;
-    }
+  &__frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: auto;
+    max-height: 100vh;
   }
 
   &__close {
@@ -78,9 +42,8 @@
     top: var(--spacing-md);
     right: var(--spacing-md);
     cursor: pointer;
-    z-index: var(--z-modal-close);
     background-color: var(--color-neutral-200);
-    border-radius: 50%;
+    border-radius: var(--border-radius-circle);
     z-index: var(--z-modal-close);
 
     &::before {
@@ -100,25 +63,29 @@
     }
   }
 
-  &__frame {
-    width: 100%;
+  &__header {
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-    max-height: 60vh;
+    gap: 16px;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md)
+      var(--spacing-md);
   }
 
-  &__header {
-    padding: var(--spacing-md);
+  &__title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xxxl);
+    padding-bottom: 16px;
   }
 
   &__body {
     padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
     overflow-y: auto;
-    overflow-x: hidden;
+    scroll-behavior: smooth;
     white-space: normal;
     word-wrap: break-word;
+    flex-grow: 1;
+    overflow-x: hidden;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -126,41 +93,47 @@
     scrollbar-width: none; /* Firefox */
   }
 
-  &--small {
-    .modal__frame {
-      max-width: 360px;
-    }
-  }
-
+  // Open state
   &--open {
     pointer-events: all;
+
     .modal__content {
       opacity: 1;
       transform: none;
     }
   }
 
-  @include breakpoint-tablet {
-    &__content {
-      transition: none;
-      width: unset;
-      height: unset;
-      max-height: 75vh;
-      max-width: 30vw;
-      bottom: unset;
+  &--lyrics {
+    .modal__close {
+      background-color: unset;
+      &::before {
+        background-color: var(--color-neutral-1000);
+      }
     }
   }
-}
 
-.modal.modal--loading {
-  .modal__content {
-    display: none;
+  &--small {
+    .modal__content {
+      bottom: unset;
+      border-radius: var(--border-radius-xl);
+      max-width: 360px;
+    }
   }
-}
 
-.test .modal-blind,
-.test .modal__content {
-  transition: none !important;
+  // Responsive design: Full-screen for mobile, custom styling for larger screens
+  @include breakpoint-tablet {
+    &__content {
+      max-width: 620px;
+      border-radius: 16px;
+      bottom: unset;
+    }
+
+    .modal__frame {
+      max-width: 75vw;
+      max-height: 80vh;
+      border-radius: var(--border-radius-lg);
+    }
+  }
 }
 
 body.modal-open {

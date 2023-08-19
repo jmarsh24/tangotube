@@ -53,6 +53,8 @@ button {
   cursor: pointer;
 }
 
-turbo-frame:empty {
-  display: none;
+turbo-frame {
+  &:empty {
+    display: none;
+  }
 }

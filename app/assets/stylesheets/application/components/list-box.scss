@@ -28,6 +28,7 @@
       font-weight: var(--font-weight-bold);
     }
   }
+
   &__text {
     color: var(--color-gray-800);
   }
@@ -41,5 +42,12 @@
     border-radius: var(--border-radius-md);
     color: var(--color-gray-700);
     font-size: var(--font-size-xs);
+  }
+
+  .selected {
+    .list-box__count {
+      background-color: var(--color-gray-500);
+      color: var(--color-gray-100);
+    }
   }
 }
