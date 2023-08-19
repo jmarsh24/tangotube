@@ -3,7 +3,7 @@
 - meta.image = image(@video.thumbnail)
 - meta.canonical = watch_url(v: @video)
 .stack.stack--justify-left.stack--desktop-line.stack--desktop-align-top
-  .stack.video-main-content
+  .stack.stack--sm.video-main-content
     .video-block 
       div data-controller="youtube" data-youtube-video-id-value="#{@video.youtube_id}" data-youtube-start-seconds-value="#{@start_value}" data-youtube-end-seconds-value="#{@end_value}" data-youtube-playback-rate-value="#{@playback_rate}"
     .stack.stack--sm.video-details
