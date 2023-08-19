@@ -2,11 +2,11 @@
   = link_to root_path(couple: couple.slug), class: "search-result search-result--couple", data: { controller: "recent-search", "recent-search-gid-value": couple.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
     .overlapping-avatars
       - if couple.dancer.profile_image.attached?
-        = image_tag couple.dancer.profile_image, class: "overlapping-avatar"
+        = image_tag couple.dancer.profile_image, loading: :eager, class: "overlapping-avatar"
       - else
         = image_tag "default_avatar.jpg", class: "overlapping-avatar"
       - if couple.partner.profile_image.attached?
-        = image_tag couple.partner.profile_image, class: "overlapping-avatar"
+        = image_tag couple.partner.profile_image, loading: :eager, class: "overlapping-avatar"
       - else
         = image_tag "default_avatar.jpg", class: "overlapping-avatar"
     .search-result__details

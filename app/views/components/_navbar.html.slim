@@ -18,7 +18,7 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
         .dropdown data-controller="dropdown"
           button data-action="dropdown#toggle click@window->dropdown#hide"
             - if current_user&.avatar&.attached?
-              = image_tag current_user.avatar, width: 80, class: "avatar avatar--md"
+              = image_tag current_user.avatar, loading: :eager, width: 80, class: "avatar avatar--md"
             - else
               = image_tag "default_avatar.jpg", class: "avatar avatar--md"
           .menu.menu--right.hidden data-dropdown-target="menu" data-action="click->dropdown#toggle"
