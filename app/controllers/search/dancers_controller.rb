@@ -7,7 +7,7 @@ class Search::DancersController < ApplicationController
       if params[:query].present?
         Dancer.search(params[:query])
           .with_attached_profile_image
-          .limit(10)
+          .limit(100)
       else
         Dancer.all.limit(10).order(videos_count: :desc)
       end

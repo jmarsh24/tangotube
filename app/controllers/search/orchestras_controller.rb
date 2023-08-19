@@ -7,7 +7,7 @@ class Search::OrchestrasController < ApplicationController
       if params[:query].present?
         Orchestra.search(params[:query])
           .with_attached_profile_image
-          .limit(10)
+          .limit(100)
       else
         Orchestra.all.limit(10).order(videos_count: :desc)
       end

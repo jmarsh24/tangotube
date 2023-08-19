@@ -5,7 +5,7 @@ class Search::SongsController < ApplicationController
   def index
     @songs =
       if params[:query].present?
-        Song.search(params[:query]).preload(:orchestra).limit(10)
+        Song.search(params[:query]).preload(:orchestra).limit(100)
       else
         Song.all.limit(10).most_popular
       end

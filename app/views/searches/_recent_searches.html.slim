@@ -10,7 +10,9 @@
             = image_tag record.profile_image, class: "search-result__image-circle"
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
-          .search-result__title = record.title
+          .stach-result__details
+            .search-result__title = record.title
+            .search-result__type = "#{record.class.to_s.singularize.titleize} • #{record&.city&.titleize} • #{record&.country&.titleize}"
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Song"
@@ -20,7 +22,9 @@
             = image_tag record.orchestra.profile_image, class: "search-result__image-circle"
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
-          .search-result__title = record.full_title
+          .stach-result__details
+            .search-result__title = record.full_title
+            .search-result__type = "#{record.class.to_s.singularize.titleize} • #{record.formatted_artist} • #{record.genre.titleize}"
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Orchestra"
@@ -30,7 +34,9 @@
             = image_tag record.profile_image, class: "search-result__image-circle"
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
-          .search-result__title = record.name
+          .stach-result__details
+            .search-result__title = record.name
+            .search-result__type = record.class.to_s.singularize.titleize
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Channel"
@@ -40,7 +46,9 @@
             = image_tag record.thumbnail, class: "search-result__image-circle"
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
-          .search-result__title = record.title
+          .stach-result__details
+            .search-result__title = record.title
+            .search-result__type = record.class.to_s.singularize.titleize
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Video"
@@ -50,7 +58,9 @@
             = image_tag record.thumbnail, class: "search-result__image"
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image"
-          .search-result__title = record.title
+          .stach-result__details
+            .search-result__title = record.title
+            .search-result__type = record.class.to_s.singularize.titleize
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Dancer"
@@ -60,7 +70,9 @@
             = image_tag record.profile_image, class: "search-result__image-circle"
           - else
             = image_tag "default_avatar.jpg", class: "search-result__image-circle"
-          .search-result__title = record.name
+          .stach-result__details
+            .search-result__title = record.name
+            .search-result__type = record.class.to_s.singularize.titleize
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Couple"
@@ -75,8 +87,10 @@
               = image_tag record.partner.profile_image, class: "overlapping-avatar"
             - else
               = image_tag "default_avatar.jpg", class: "overlapping-avatar"
-
-          .search-result__title = record.dancer_names
+          .stach-result__details
+            .search-result__title = record.dancer.name
+            .search-result__title = record.partner.name
+            .search-result__type = record.class.to_s.singularize.titleize
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - else

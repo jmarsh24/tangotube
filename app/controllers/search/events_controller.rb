@@ -7,7 +7,7 @@ class Search::EventsController < ApplicationController
       if params[:query].present?
         Event.search(params[:query])
           .with_attached_profile_image
-          .limit(10)
+          .limit(100)
       else
         Event.all.limit(10).order(videos_count: :desc)
       end

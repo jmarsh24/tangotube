@@ -7,7 +7,7 @@ class Search::CouplesController < ApplicationController
       if params[:query].present?
         Couple.joins(:dancer, :partner).preload(dancer: {profile_image_attachment: :blob}, partner: {profile_image_attachment: :blob})
           .search(params[:query])
-          .limit(10)
+          .limit(100)
       else
         Couple.all.limit(10).order(videos_count: :desc)
       end
