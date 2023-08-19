@@ -1,14 +1,14 @@
 - cache [@song.lyrics, @song.lyrics_en] do
-  .stack.stack--zero.scrollable-container.lyrics-card data-controller="tabs" data-tabs-index="0"
+  .stack.stack--zero.lyrics-card data-controller="tabs" data-tabs-index="0"
     .lyrics-card__header
       h2.heading-2.heading-4--bold = t ".lyrics_header"
       .tabs
         .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t ".spanish"
         .tabs__tab data-tabs-target="tab" data={ action: "click->tabs#change" } = t ".english"
-    .scrollable-container__content
-        .tabs__panel data-tabs-target="tabPanel"
-          .lyrics-card__lyrics
-            = simple_format(@song.lyrics)
-        .tabs__panel data-tabs-target="tabPanel"
-          .lyrics-card__lyrics
-            = simple_format(@song.lyrics_en)
+    .lyrics-card__body
+      .tabs__panel data-tabs-target="tabPanel"
+        .lyrics-card__lyrics
+          = simple_format(@song.lyrics)
+      .tabs__panel data-tabs-target="tabPanel"
+        .lyrics-card__lyrics
+          = simple_format(@song.lyrics_en)

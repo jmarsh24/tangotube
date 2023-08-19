@@ -10,29 +10,48 @@
   position: relative;
   overflow: hidden;
 
-  &__header {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 24px 24px 24px 24px;
-    box-shadow: 0 20px 20px -20px rgba(70, 70, 70, 0.4);
-  }
-
-  &__lyrics {
-    position: relative;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-lg) var(--spacing-lg);
-  }
-
   &--preview {
-    padding: 24px;
+    position: relative;
+    padding: var(--spacing-lg);
     &::after {
       content: '';
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 150px;
+      height: 300px;
+      pointer-events: none;
+      background-image: linear-gradient(
+        to top,
+        rgba(183, 17, 33, 1),
+        rgba(183, 17, 33, 0)
+      );
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  &__lyrics {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    padding: 0 var(--spacing-lg) 80px var(--spacing-lg);
+  }
+
+  &__body {
+    overflow-y: auto;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
       pointer-events: none;
       background-image: linear-gradient(
         to top,

@@ -1,5 +1,5 @@
 - cache [@video.song.lyrics, @video.song.lyrics_en] do
-  a href=modal_path(song_lyrics_path(@video.song))
+  a href=modal_path(song_lyrics_path(@video.song), size: "lyrics")
     .lyrics-card.lyrics-card--preview
         .stack.stack--line.stack--justify-space-between
           h2.heading-2.heading-4--bold = t ".lyrics_header"

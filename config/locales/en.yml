@@ -53,6 +53,7 @@ en:
       contact: Contact
       google_privacy_policy: Google privacy policy
       privacy: Privacy
+      search: Search
       terms: Terms
   dancers:
     date:
@@ -149,7 +150,7 @@ en:
   lyrics:
     show:
       english: English
-      lyrics_header: Lyrics header
+      lyrics_header: Lyrics
       spanish: Spanish
   number:
     human:
@@ -165,13 +166,53 @@ en:
   pages:
     contact:
       contact_me: Contact Me
+  search:
+    channels:
+      index:
+        channels: Channels
+    couples:
+      index:
+        couples: Couples
+    dancers:
+      index:
+        dancers: Dancers
+    events:
+      index:
+        events: Events
+    orchestras:
+      index:
+        orchestras: Orchestras
+    songs:
+      index:
+        songs: Songs
+    videos:
+      index:
+        videos: Videos
+  searches:
+    recent_searches:
+      recent_searches: Recent searches
+    show:
+      channels: Channels
+      couples: Couples
+      dancers: Dancers
+      events: Events
+      orchestras: Orchestras
+      songs: Songs
+      videos: Videos
+  shared:
+    feature_button:
+      feature: Feature
+    like_button:
+      like: Like
   sign_out: Sign out
   sign_up: Sign up
   support:
     show:
       button_text: Become a Patron!
       heading: From dream to reality, it wasn't easy...
-      paragraph1: It's been a long journey to get here. Click below to see how you can be a part of that journey!
+      paragraph1:
+        It's been a long journey to get here. Click below to see how you
+        can be a part of that journey!
   time:
     formats:
       video_duration: "%M:%S"
@@ -198,6 +239,8 @@ en:
     show:
       lyrics:
         lyrics_header: Lyrics
+      video_info:
+        more: More
       video_info_primary:
         more: "...more"
       video_metadata:
