@@ -19,9 +19,9 @@
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to root_path(song: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record&.orchestra&.profile_image&.attached?
-            = image_tag record.orchestra.profile_image, class: "search-result__image-circle"
+            = image_tag record.orchestra.profile_image, class: "search-result__image"
           - else
-            = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+            = image_tag "default_avatar.jpg", class: "search-result__image"
           .stach-result__details
             .search-result__title = record.full_title
             .search-result__type = "#{record.class.to_s.singularize.titleize} • #{record.formatted_artist} • #{record.genre.titleize}"
@@ -55,9 +55,9 @@
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to watch_path(v: record.youtube_id), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.thumbnail.present?
-            = image_tag record.thumbnail, class: "search-result__image"
+            = image_tag record.thumbnail, class: "search-result__image--video"
           - else
-            = image_tag "default_avatar.jpg", class: "search-result__image"
+            = image_tag "default_avatar.jpg", class: "search-result__image--video"
           .stach-result__details
             .search-result__title = record.title
             .search-result__type = record.class.to_s.singularize.titleize
