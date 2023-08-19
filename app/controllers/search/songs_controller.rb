@@ -7,7 +7,7 @@ class Search::SongsController < ApplicationController
       if params[:query].present?
         Song.search(params[:query]).preload(:orchestra).limit(100)
       else
-        Song.all.limit(10).most_popular
+        Song.all.limit(100).most_popular
       end
   end
 end

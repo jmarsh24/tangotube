@@ -9,7 +9,7 @@ class Search::CouplesController < ApplicationController
           .search(params[:query])
           .limit(100)
       else
-        Couple.all.limit(10).order(videos_count: :desc)
+        Couple.all.limit(100).order(videos_count: :desc)
       end
     end
   end
