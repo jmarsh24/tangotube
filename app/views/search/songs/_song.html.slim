@@ -6,5 +6,4 @@
       = image_tag "default_avatar.jpg", class: "search-result__image-circle"
     .search-result__details
       .search-result__title = song.title
-      .search-result__subtitle = "#{song.formatted_artist} - #{song.genre.titleize}"
-      .search-result__type = song.class.to_s.singularize.titleize
+      .search-result__type = "#{song.class.to_s.singularize.titleize} • #{song.formatted_artist} • #{song.genre.titleize}"

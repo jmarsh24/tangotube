@@ -5,5 +5,5 @@
     - else
       = image_tag "default_avatar.jpg", class: "search-result__image-circle"
     .search-result-details
-      .search-result__title = orchestra.name
+      .search-result__title = orchestra.formatted_name
       .search-result__type = orchestra.class.to_s.singularize.titleize
