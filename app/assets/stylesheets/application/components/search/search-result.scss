@@ -6,6 +6,7 @@
   flex-shrink: 0;
   padding: var(--spacing-sm);
   border-radius: var(--border-radius-lg);
+  flex-grow: 1;
 
   &:hover {
     cursor: pointer;

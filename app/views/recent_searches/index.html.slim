@@ -1,6 +1,6 @@
-= turbo_frame_tag "search-results", target: "_top", class: "stack"
+= turbo_frame_tag "search-results", target: "_top", class: "stack search-section"
   h3.heading-3 = t(".recent_searches")
-  - recent_searches.each do |recent_search|
+  - @recent_searches.each do |recent_search|
     - record = recent_search.searchable
     - case recent_search.searchable_type
     - when "Event"

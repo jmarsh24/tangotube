@@ -20,7 +20,7 @@
       = render "components/spinner"
   .search-results__main-content
     - if user_signed_in? && params[:query].nil?
-      = render "searches/recent_searches", recent_searches: @recent_searches
+      = turbo_frame_tag "search-results", src: recent_searches_path, target: "_top", class: "search-section search-section"
     - else
       = turbo_frame_tag "search_window_videos_results", src: search_videos_path(query: @query), target: "_top", class: "search-section search-section--videos"
         h3.heading-3 = t(".videos")
