@@ -31,7 +31,7 @@ class VideosController < ApplicationController
 
     if @video.nil?
       ExternalVideoImport::Importer.new.import(params[:v])
-      @video = Video.preload(dancer_videos: :dancer).friendly.find(params[:v] || params[:id])
+      @video = Video.preload(dancer_videos: :dancer).find_by(youtube_id: params[:v] || params[:id])
     end
 
     @type = Video::RelatedVideos.new(@video).available_types.first
@@ -74,7 +74,7 @@ class VideosController < ApplicationController
   end
 
   def set_video
-    @video = Video.friendly.find(params[:v] || params[:id])
+    @video = Video.find_by(youtube_id: params[:v] || params[:id])
   end
 
   def filtering_params
