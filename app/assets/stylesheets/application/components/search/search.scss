@@ -4,7 +4,7 @@
     background-color: var(--color-neutral-100);
     color: var(--color-neutral-1000);
     width: 100%;
-    border: 1px solid var(--color-neutral-500);
+    border: 1px solid var(--color-neutral-300);
     border-radius: var(--border-radius-pill);
     padding: 8px 18px;
 
@@ -19,8 +19,8 @@
     appearance: none;
 
     &:hover {
-      background-color: var(--color-neutral-200);
-      border: 1px solid var(--color-neutral-300);
+      background-color: var(--color-neutral-100);
+      border: 1px solid var(--color-neutral-500);
     }
   }
 

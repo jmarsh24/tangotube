@@ -14,9 +14,10 @@
     align-items: center;
     gap: 24px;
     max-width: var(--page-main-max-width);
+    padding-bottom: var(--spacing-xxl);
 
     @include breakpoint-tablet {
-      padding: 0 var(--spacing-md);
+      padding: 0 var(--spacing-md) var(--spacing-mega-2) var(--spacing-md);
     }
   }
 }

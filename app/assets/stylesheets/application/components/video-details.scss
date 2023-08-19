@@ -1,6 +1,16 @@
 .video-details {
   padding: 0 var(--spacing-sm);
 
+  &__header {
+    color: var(--color-neutral-1000);
+  }
+
+  &__title,
+  &__description,
+  &__metadata {
+    color: var(--color-neutral-700);
+  }
+
   @include breakpoint-tablet {
     padding: 0;
   }

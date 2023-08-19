@@ -1,6 +1,6 @@
 .navbar {
   position: sticky;
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-neutral-50);
   z-index: var(--z-navbar);
   top: 0;
 
@@ -70,10 +70,6 @@
 
     #mobile-search {
       display: none;
-    }
-
-    &__search-bar {
-      display: flex;
     }
   }
 }
