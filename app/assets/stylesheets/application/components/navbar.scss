@@ -28,12 +28,12 @@
   }
 
   &__logo {
-    width: 130px;
-    height: 30px;
+    width: 150px;
+    height: 26px;
     mask-image: url('@assets/images/app_logo.svg');
     mask-size: contain;
-    mask-position: center;
     mask-repeat: no-repeat;
+    mask-position: center;
     background: var(--color-neutral-800);
     &:hover {
       background: var(--color-neutral-1000);
