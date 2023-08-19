@@ -28,8 +28,8 @@
   }
 
   &__logo {
-    width: 150px;
-    height: 26px;
+    width: 140px;
+    height: 24px;
     mask-image: url('@assets/images/app_logo.svg');
     mask-size: contain;
     mask-repeat: no-repeat;
@@ -41,7 +41,7 @@
   }
 
   &__top {
-    padding: var(--spacing-xxs) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
     max-width: var(--page-main-max-width);
   }
 
@@ -59,6 +59,10 @@
 
   @include breakpoint-tablet {
     top: 0 !important;
+
+    &__top {
+      padding: var(--spacing-xxs) var(--spacing-md);
+    }
 
     &__filters {
       padding: 0 var(--spacing-md);
