@@ -15,6 +15,14 @@
   &__type {
     font-size: 14px;
     color: var(--color-neutral-500);
+    max-width: 200px;
+    overflow: hidden;
+    @include breakpoint-mobile {
+      max-width: 230px;
+    }
+    @include breakpoint-tablet {
+      max-width: 270px;
+    }
   }
 
   &__image-circle {
@@ -40,7 +48,7 @@
 
   &__title,
   &__subtitle {
-    flex: 0 1 320px;
+    flex: 0 1;
     color: var(--color-neutral-1000);
     font-size: 16px;
     display: -webkit-box;
