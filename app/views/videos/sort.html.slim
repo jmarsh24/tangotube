@@ -10,10 +10,13 @@
    { value: "channel", label: "Channels A-Z" } \
  ]
 
+- sort_param = params[:sort] || "trending"
+
 .modal__header 
   h3.modal__title = t(".sorting")
 .modal__body
   .list-box
+  
     - options.each do |option|
       - selected = params[:sort] == option[:value] ? "selected" : nil
       .list-box__item class=("#{selected}")
