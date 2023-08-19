@@ -130,15 +130,15 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --line-height-loose: 2.2;
     --line-height-looser: 2.6;
 
-    --font-size-xxs: 0.625rem;
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-md: 1rem;
-    --font-size-lg: 1.25rem;
-    --font-size-xl: 1.5rem;
-    --font-size-xxl: 2.25rem;
-    --font-size-xxxl: 3rem;
-    --font-size-xxxxl: 4.5rem;
+    --font-size-xxs: 0.625rem; /* 10px */
+    --font-size-xs: 0.75rem; /* 12px */
+    --font-size-sm: 0.875rem; /* 14px */
+    --font-size-md: 1rem; /* 16px */
+    --font-size-lg: 1.25rem; /* 20px */
+    --font-size-xl: 1.5rem; /* 24px */
+    --font-size-xxl: 2.25rem; /* 36px */
+    --font-size-xxxl: 3rem; /* 48px */
+    --font-size-xxxxl: 4.5rem; /* 72px */
 
     --font-weight-light: 300;
     --font-weight-normal: 400;
@@ -152,7 +152,7 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --app-drawer-width: 200px;
     --header-height: 56px;
     --page-main-max-width: 1920px;
-    --page-main-padding: 48px;
+    --page-main-padding: var(--spacing-md);
   }
 
   @include breakpoint-tablet() {

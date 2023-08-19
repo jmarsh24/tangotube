@@ -1,45 +1,72 @@
 .video-card {
   display: flex;
   flex-direction: column;
-  font-size: 12px;
-  font-weight: 500;
-  gap: 8px;
   width: 100%;
+  gap: 8px;
+  font-size: var(--font-size-sm);
 
   &--compact {
-    flex-direction: row;
+    flex-direction: column;
 
     .video-card__image {
       min-width: 180px;
+    }
+
+    @include breakpoint-mobile {
+      flex-direction: row;
+    }
+
+    @include breakpoint-tablet {
+      gap: 10px;
+      font-size: var(--font-size-sm);
+
+      .video-card__title {
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-normal);
+      }
+
+      .video-card__metadata {
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-light);
+      }
+
+      .video-card__image-container {
+        min-width: 300px;
+      }
+
+      .video-card__dancer,
+      .video-card__song-metadata {
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-normal);
+      }
     }
   }
 
   &__performance-number {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.85);
-    color: white;
-    right: 5px;
     top: 5px;
+    right: 5px;
     padding: 0.1em 0.3em;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: var(--color-neutral-1000);
     border-radius: 0.3em;
     z-index: var(--z-performance-number);
   }
 
   &__image-container {
     position: relative;
+    min-width: 220px;
     aspect-ratio: 16 / 9;
     border-radius: var(--border-radius-lg);
-    min-width: 220px;
-    height: 100%;
 
     &::after {
       content: attr(data-duration);
       position: absolute;
+      bottom: 10px;
+      right: 5px;
+      padding: 0 0.3em;
       background-color: var(--color-neutral-0);
       color: var(--color-neutral-1000);
-      right: 5px;
-      bottom: 10px;
-      padding: 0 0.3em;
       border-radius: 0.3em;
     }
   }
@@ -52,17 +79,17 @@
     left: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
     background-color: var(--color-neutral-200);
     border-radius: var(--border-radius-lg);
-    object-fit: cover;
     z-index: var(--z-video-card-image);
   }
 
   &__title {
     color: var(--color-neutral-1000);
-    font-weight: 500;
+    font-weight: var(--font-weight-semibold);
     word-wrap: normal;
-    font-size: 12px;
+    font-size: var(--font-size-xxs);
   }
 
   &__primary {
@@ -75,14 +102,14 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
     overflow: hidden;
+    gap: 8px;
     padding: 0 12px;
   }
 
   &__dancer {
     color: var(--color-neutral-700);
-    font-size: 11px;
+    font-size: var(--font-size-xxs);
   }
 
   &__metadata {
@@ -91,29 +118,6 @@
 
   &__song-metadata {
     color: var(--color-neutral-700);
-    font-size: 11px;
-  }
-
-  @include breakpoint-tablet {
-    &--compact {
-      gap: 10px;
-      font-size: 13px;
-
-      .video-card__title {
-        font-size: 13px;
-      }
-      .video-card__metadata {
-        font-size: 13px;
-      }
-      .video-card__image-container {
-        min-width: 300px;
-      }
-      .video-card__dancer {
-        font-size: 11px;
-      }
-      .video-card__song-metadata {
-        font-size: 11px;
-      }
-    }
+    font-size: var(--font-size-xxs);
   }
 }
