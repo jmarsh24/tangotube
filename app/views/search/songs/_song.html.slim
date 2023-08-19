@@ -3,7 +3,7 @@
     - if song&.orchestra&.profile_image&.attached?
       = image_tag song.orchestra.profile_image, loading: :eager, class: "search-result__image"
     - else
-      = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+      = image_tag "default_avatar.jpg", class: "search-result__image"
     .search-result__details
       .search-result__title = song.title
       .search-result__type = "#{song.class.to_s.singularize.titleize} • #{song.formatted_artist} • #{song.genre.titleize}"
