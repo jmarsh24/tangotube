@@ -1,9 +1,8 @@
 - cache [video.youtube_id, video.song&.updated_at, video.performance_video&.position, video.performance&.updated_at, video.thumbnail, video.updated_at, video.features.any?], expires_in: 24.hours do
   .video-card id="video_#{video.youtube_id}"
     = link_to watch_path(v: video.youtube_id) do
-      .video-card__image-container data-duration="#{video.hd_duration_data}"
-        - if video.features.any?
-          .icon.icon--tomato
+      .video-card__image-container
+        .video-card__duration = video.hd_duration_data
         - if video.performance_video.present?
           .video-card__performance-number
             = "#{video.performance_video.position} / #{video.performance.videos_count}"
@@ -13,6 +12,8 @@
           = image_tag "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg", class: "video-card__image"
     .video-card__content
       .video-card__primary
+        - if video.features.any?
+          .video-card__tomato.icon.icon--tomato
         .video-card__title = link_to video.title, watch_path(v: video.youtube_id)
         .video-card__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
       - if video.dancer_videos.present?

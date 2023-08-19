@@ -3,7 +3,6 @@
   flex-direction: column;
   width: 100%;
   gap: 8px;
-  font-size: var(--font-size-sm);
 
   &--compact {
     flex-direction: column;
@@ -58,18 +57,17 @@
     min-width: 220px;
     aspect-ratio: 16 / 9;
     border-radius: var(--border-radius-lg);
+  }
 
-    &::after {
-      content: attr(data-duration);
-      position: absolute;
-      bottom: 10px;
-      right: 5px;
-      padding: 0 0.3em;
-      background-color: var(--color-neutral-0);
-      color: var(--color-neutral-1000);
-      border-radius: 0.3em;
-      font-size: var(--font-size-xs);
-    }
+  &__duration {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    padding: 0 0.3em;
+    background-color: var(--color-neutral-0);
+    border-radius: 0.3em;
+    font-size: var(--font-size-xs);
+    z-index: var(--z-duration);
   }
 
   &__image {
@@ -88,37 +86,47 @@
 
   &__title {
     color: var(--color-neutral-1000);
-    font-weight: var(--font-weight-semibold);
     word-wrap: normal;
-    font-size: var(--font-size-xxs);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    padding-right: 24px;
   }
 
   &__primary {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    position: relative;
+  }
+
+  &__tomato {
+    position: absolute;
+    top: 5px;
+    right: 0;
   }
 
   &__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    overflow: hidden;
     gap: 8px;
-    padding: 0 12px;
   }
 
   &__dancer {
     color: var(--color-neutral-700);
-    font-size: var(--font-size-xxs);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
   }
 
   &__metadata {
     color: var(--color-neutral-700);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-light);
   }
 
   &__song-metadata {
     color: var(--color-neutral-700);
-    font-size: var(--font-size-xxs);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
   }
 }

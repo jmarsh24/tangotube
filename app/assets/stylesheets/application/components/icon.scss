@@ -58,9 +58,6 @@ $icon-padding-sizes: (
   }
 
   &--tomato {
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 24px;
     height: 24px;
     background-image: url('@assets/images/icons/tomato.svg');
@@ -70,11 +67,6 @@ $icon-padding-sizes: (
     z-index: var(--z-tomato);
     transform-origin: center;
     animation: wiggle-jump 3s ease infinite;
-
-    @include breakpoint-tablet {
-      top: -12px;
-      right: -12px;
-    }
   }
 }
 
