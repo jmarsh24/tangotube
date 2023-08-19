@@ -1,0 +1,26 @@
+.video-info {
+  &__title {
+    overflow: hidden;
+  }
+
+  &__song-info {
+    font-size: 12px;
+  }
+  &__event-info {
+    font-size: 12px;
+  }
+
+  &__channel-info {
+    font-size: 12px;
+  }
+
+  &__metadata {
+    font-size: 12px;
+    color: var(--color-neutral-700);
+  }
+
+  &__more-link {
+    font-size: 12px;
+    color: var(--color-neutral-700);
+  }
+}
