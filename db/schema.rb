@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_20_080827) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_20_080828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -446,48 +446,47 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_080827) do
   add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
 
   create_view "video_scores", materialized: true, sql_definition: <<-SQL
-      WITH likes_count AS (
-           SELECT likes.likeable_id AS video_id,
-              sum(exp(('-0.000001'::numeric * EXTRACT(epoch FROM (now() - (likes.created_at)::timestamp with time zone))))) AS decayed_likes
-             FROM likes
-            WHERE ((likes.likeable_type)::text = 'Video'::text)
-            GROUP BY likes.likeable_id
-          ), watches_count AS (
-           SELECT watches.video_id,
-              sum(exp(('-0.00001'::numeric * EXTRACT(epoch FROM (now() - (watches.created_at)::timestamp with time zone))))) AS decayed_watches
-             FROM watches
-            GROUP BY watches.video_id
-          ), max_values AS (
-           SELECT GREATEST(max(lc.decayed_likes), (1)::numeric) AS max_likes,
-              GREATEST(max(wc.decayed_watches), (1)::numeric) AS max_watches
-             FROM (likes_count lc
-               CROSS JOIN watches_count wc)
-          ), videos_with_score AS (
-           SELECT videos.id AS video_id,
-              ((EXTRACT(epoch FROM videos.upload_date) - ( SELECT min(EXTRACT(epoch FROM videos_1.upload_date)) AS min
-                     FROM videos videos_1)) / (( SELECT max(EXTRACT(epoch FROM videos_1.upload_date)) AS max
-                     FROM videos videos_1) - ( SELECT min(EXTRACT(epoch FROM videos_1.upload_date)) AS min
-                     FROM videos videos_1))) AS normalized_upload_time,
-              COALESCE((lc.decayed_likes / mv.max_likes), (0)::numeric) AS decayed_normalized_likes,
-              COALESCE((wc.decayed_watches / mv.max_watches), (0)::numeric) AS decayed_normalized_watches,
+      WITH combined_counts AS (
+           SELECT v_1.id AS video_id,
+              COALESCE(count(likes.likeable_id), (0)::bigint) AS total_likes,
+              COALESCE(count(DISTINCT watches.user_id), (0)::bigint) AS total_watches,
+              COALESCE(count(features.featureable_id), (0)::bigint) AS total_features,
                   CASE
                       WHEN (EXISTS ( SELECT 1
-                         FROM dancer_videos
-                        WHERE (dancer_videos.video_id = videos.id))) THEN 0.1
+                         FROM dancer_videos dv
+                        WHERE (dv.video_id = v_1.id))) THEN 0.1
                       ELSE (0)::numeric
                   END AS dancer_score_adjustment
-             FROM (((videos
-               LEFT JOIN likes_count lc ON ((videos.id = lc.video_id)))
-               LEFT JOIN watches_count wc ON ((videos.id = wc.video_id)))
-               CROSS JOIN max_values mv)
+             FROM (((videos v_1
+               LEFT JOIN likes ON (((v_1.id = likes.likeable_id) AND ((likes.likeable_type)::text = 'Video'::text))))
+               LEFT JOIN watches ON ((v_1.id = watches.video_id)))
+               LEFT JOIN features ON (((v_1.id = features.featureable_id) AND ((features.featureable_type)::text = 'Video'::text))))
+            GROUP BY v_1.id
+          ), upload_date_range AS (
+           SELECT min(EXTRACT(epoch FROM videos.upload_date)) AS min_upload_epoch,
+              max(EXTRACT(epoch FROM videos.upload_date)) AS max_upload_epoch
+             FROM videos
+          ), norm_counts AS (
+           SELECT combined_counts.video_id,
+              ((combined_counts.total_likes)::double precision / (NULLIF(max(combined_counts.total_likes) OVER (), 0))::double precision) AS normalized_likes,
+              ((combined_counts.total_watches)::double precision / (NULLIF(max(combined_counts.total_watches) OVER (), 0))::double precision) AS normalized_watches,
+              ((combined_counts.total_features)::double precision / (NULLIF(max(combined_counts.total_features) OVER (), 0))::double precision) AS normalized_features,
+              combined_counts.dancer_score_adjustment,
+              combined_counts.total_likes,
+              combined_counts.total_watches,
+              combined_counts.total_features
+             FROM combined_counts
           )
-   SELECT videos_with_score.video_id,
-      ((((((0.4 * videos_with_score.normalized_upload_time) + (0.1 * videos_with_score.decayed_normalized_likes)) + (0.1 * videos_with_score.decayed_normalized_watches)))::double precision + ((0.4)::double precision * random())) + (videos_with_score.dancer_score_adjustment)::double precision) AS score_1,
-      ((((((0.4 * videos_with_score.normalized_upload_time) + (0.1 * videos_with_score.decayed_normalized_likes)) + (0.1 * videos_with_score.decayed_normalized_watches)))::double precision + ((0.4)::double precision * random())) + (videos_with_score.dancer_score_adjustment)::double precision) AS score_2,
-      ((((((0.4 * videos_with_score.normalized_upload_time) + (0.1 * videos_with_score.decayed_normalized_likes)) + (0.1 * videos_with_score.decayed_normalized_watches)))::double precision + ((0.4)::double precision * random())) + (videos_with_score.dancer_score_adjustment)::double precision) AS score_3,
-      ((((((0.4 * videos_with_score.normalized_upload_time) + (0.1 * videos_with_score.decayed_normalized_likes)) + (0.1 * videos_with_score.decayed_normalized_watches)))::double precision + ((0.4)::double precision * random())) + (videos_with_score.dancer_score_adjustment)::double precision) AS score_4,
-      ((((((0.4 * videos_with_score.normalized_upload_time) + (0.1 * videos_with_score.decayed_normalized_likes)) + (0.1 * videos_with_score.decayed_normalized_watches)))::double precision + ((0.4)::double precision * random())) + (videos_with_score.dancer_score_adjustment)::double precision) AS score_5
-     FROM videos_with_score;
+   SELECT cc.video_id,
+      v.title AS video_title,
+      ((((((((0.5 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.2)::double precision * cc.normalized_likes)) + ((0.15)::double precision * cc.normalized_watches)) + ((0.05)::double precision * cc.normalized_features)) + ((0.05)::double precision * random())) + (cc.dancer_score_adjustment)::double precision) AS score_1,
+      ((((((((0.15 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.35)::double precision * cc.normalized_likes)) + ((0.35)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.025)::double precision * random())) + (cc.dancer_score_adjustment)::double precision) AS score_2,
+      ((((((((0.1 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.25)::double precision * cc.normalized_likes)) + ((0.25)::double precision * cc.normalized_watches)) + ((0.15)::double precision * cc.normalized_features)) + ((0.2)::double precision * random())) + (cc.dancer_score_adjustment)::double precision) AS score_3,
+      ((((((((0.1 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.2)::double precision * cc.normalized_likes)) + ((0.2)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.1)::double precision * random())) + ((0.3 * cc.dancer_score_adjustment))::double precision) AS score_4,
+      ((((((((0.2 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.3)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.05)::double precision * random())) + ((0.05 * cc.dancer_score_adjustment))::double precision) AS score_5
+     FROM ((norm_counts cc
+       JOIN videos v ON ((cc.video_id = v.id)))
+       CROSS JOIN upload_date_range udr);
   SQL
   add_index "video_scores", ["score_1"], name: "index_video_scores_on_score_1"
   add_index "video_scores", ["score_2"], name: "index_video_scores_on_score_2"
