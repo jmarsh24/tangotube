@@ -30,27 +30,27 @@ class VideoSearch < ApplicationRecord
       select(
         "video_searches.video_id",
         "(0.2 * (dancer_names <-> '#{sanitized_term}') +
-      0.2 * (channel_title <-> '#{sanitized_term}') +
-      0.2 * (song_title <-> '#{sanitized_term}') +
-      0.2 * (song_artist <-> '#{sanitized_term}') +
-      0.2 * (orchestra_name <-> '#{sanitized_term}') +
-      0.2 * (event_city <-> '#{sanitized_term}') +
-      0.2 * (event_title <-> '#{sanitized_term}') +
-      0.2 * (event_country <-> '#{sanitized_term}') +
-      0.2 * (video_title <-> '#{sanitized_term}') +
+      0.2 * (video_searches.channel_title <-> '#{sanitized_term}') +
+      0.2 * (video_searches.song_title <-> '#{sanitized_term}') +
+      0.2 * (video_searches.song_artist <-> '#{sanitized_term}') +
+      0.2 * (video_searches.orchestra_name <-> '#{sanitized_term}') +
+      0.2 * (video_searches.event_city <-> '#{sanitized_term}') +
+      0.2 * (video_searches.event_title <-> '#{sanitized_term}') +
+      0.2 * (video_searches.event_country <-> '#{sanitized_term}') +
+      0.2 * (video_searches.video_title <-> '#{sanitized_term}') +
       0.2 * CAST((video_description_vector @@ plainto_tsquery('#{sanitized_term}')) AS INTEGER)) +
-      3.0 * video_scores.score_1 AS total_score"
+      0.4 * video_scores.score_1 AS total_score"
       )
         .joins("INNER JOIN video_scores ON video_scores.video_id = video_searches.video_id")
         .where("'#{sanitized_term}' % dancer_names OR
-     '#{sanitized_term}' % channel_title OR
-     '#{sanitized_term}' % song_title OR
-     '#{sanitized_term}' % song_artist OR
-     '#{sanitized_term}' % orchestra_name OR
-     '#{sanitized_term}' % event_city OR
-     '#{sanitized_term}' % event_title OR
-     '#{sanitized_term}' % event_country OR
-     '#{sanitized_term}' <% video_title OR
+     '#{sanitized_term}' % video_searches.channel_title OR
+     '#{sanitized_term}' % video_searches.song_title OR
+     '#{sanitized_term}' % video_searches.song_artist OR
+     '#{sanitized_term}' % video_searches.orchestra_name OR
+     '#{sanitized_term}' % video_searches.event_city OR
+     '#{sanitized_term}' % video_searches.event_title OR
+     '#{sanitized_term}' % video_searches.event_country OR
+     '#{sanitized_term}' % video_searches.video_title OR
      video_description_vector @@ plainto_tsquery('#{sanitized_term}')")
     end
 
