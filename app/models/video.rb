@@ -132,6 +132,10 @@ class Video < ApplicationRecord
     end
   end
 
+  def to_param
+    youtube_id || id
+  end
+
   def normalize_title
     self.normalized_title = TextNormalizer.normalize(title)
   end
