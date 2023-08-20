@@ -46,4 +46,4 @@
       every: ["10m"]
       class: RefreshVideoScoresJob
       queue: low_priority
-      enabled: false
+      enabled: <%= ENV['RAILS_ENV'] == 'production' %>
