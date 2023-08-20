@@ -20,7 +20,7 @@
     flex-direction: column;
     height: auto;
     width: 100%;
-    max-height: 100vh;
+    max-height: calc(100vh - 80px);
     overflow-y: hidden;
     background-color: var(--color-neutral-50);
     bottom: 0;
@@ -31,7 +31,7 @@
     flex-direction: column;
     height: 100%;
     width: auto;
-    max-height: 100vh;
+    max-height: calc(100vh - 80px);
   }
 
   &__close {
@@ -68,7 +68,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md)
+    padding: var(--spacing-xxl) var(--spacing-md) var(--spacing-md)
       var(--spacing-md);
   }
 
