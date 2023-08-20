@@ -31,11 +31,8 @@
 #  slug                :string
 #
 class Video < ApplicationRecord
-  extend FriendlyId
   include Featureable
   include Likeable
-
-  friendly_id :youtube_id, use: :slugged
 
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true

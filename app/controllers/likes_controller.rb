@@ -30,6 +30,6 @@ class LikesController < ApplicationController
 
   def set_likeable
     @likeable_type = params[:likeable_type].classify
-    @likeable = @likeable_type.constantize.friendly.find(params[:likeable_id])
+    @likeable = @likeable_type.constantize.find(params[:likeable_id])
   end
 end

@@ -30,6 +30,6 @@ class FeaturesController < ApplicationController
 
   def set_featureable
     @featureable_type = params[:featureable_type].classify
-    @featureable = @featureable_type.constantize.friendly.find(params[:featureable_id])
+    @featureable = @featureable_type.constantize.find(params[:featureable_id])
   end
 end

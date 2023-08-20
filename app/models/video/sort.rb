@@ -22,7 +22,7 @@ class Video::Sort
   end
 
   def videos
-    return video_relation.public_send([:trending_3].sample) if sort == :trending
+    return video_relation.public_send([:trending_1, :trending_2, :trending_3, :trending_4, :trending_5].sample) if sort == :trending
     return video_relation unless COLUMN_TRANSLATIONS.key?(sort)
 
     column = COLUMN_TRANSLATIONS[sort][:column]

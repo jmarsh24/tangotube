@@ -45,10 +45,19 @@ class Video::RelatedVideos
     return Video.none unless @video.performance.present?
 
     videos = Video.within_week_of(@video.upload_date)
-    leader = @video.leaders.first.slug if @video.leaders.present?
-    follower = @video.followers.first.slug if @video.followers.present?
+    leader = @video.leaders.first&.slug
+    follower = @video.followers.first&.slug
     channel = @video.channel.youtube_slug
-    filtered_videos = Video::Filter.new(videos, filtering_params: {channel:, leader:, follower:, hidden: false}).videos
+
+    filtering_params = {
+      channel:,
+      leader:,
+      follower:,
+      hidden: false
+    }
+
+    filtered_videos = Video::Filter.new(videos, filtering_params:).videos
+
     Video::Sort.new(filtered_videos, sort: "performance").videos
   end
 
