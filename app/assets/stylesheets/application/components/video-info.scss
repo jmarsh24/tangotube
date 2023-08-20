@@ -5,23 +5,23 @@
   }
 
   &__song-info {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
   }
   &__event-info {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
   }
 
   &__channel-info {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
   }
 
   &__metadata {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     color: var(--color-neutral-700);
   }
 
   &__more-link {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     color: var(--color-neutral-700);
   }
 
