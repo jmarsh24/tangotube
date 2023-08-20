@@ -16,8 +16,7 @@
   h3.modal__title = t(".sorting")
 .modal__body
   .list-box
-  
     - options.each do |option|
-      - selected = params[:sort] == option[:value] ? "selected" : nil
+      - selected = sort_param == option[:value] ? "selected" : nil
       .list-box__item class=("#{selected}")
         .list-box__text = link_to option[:label], root_path(@filtering_params.merge(sort: option[:value], filtering: true))
