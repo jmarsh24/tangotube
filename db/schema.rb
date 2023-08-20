@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_20_211332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
     t.datetime "metadata_updated_at"
     t.integer "videos_count", default: 0
     t.index ["active"], name: "index_channels_on_active"
-    t.index ["title"], name: "index_channels_on_title_trigram", opclass: :gist_trgm_ops, using: :gist
+    t.index ["title"], name: "index_channels_on_title_trigram", using: :gist
     t.index ["videos_count"], name: "index_channels_on_videos_count"
     t.index ["youtube_slug"], name: "index_channels_on_youtube_slug", unique: true
   end
@@ -138,7 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
     t.datetime "updated_at", null: false
     t.integer "videos_count", default: 0, null: false
     t.enum "gender", enum_type: "gender_new"
-    t.index ["name"], name: "index_dancers_on_name", opclass: :gist_trgm_ops, using: :gist
+    t.index ["name"], name: "index_dancers_on_name", using: :gist
     t.index ["slug"], name: "index_dancers_on_slug"
     t.index ["user_id"], name: "index_dancers_on_user_id"
   end
@@ -166,10 +166,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
     t.boolean "reviewed", default: false
     t.integer "videos_count", default: 0, null: false
     t.string "slug"
-    t.index ["city"], name: "index_events_on_city_trigram", opclass: :gist_trgm_ops, using: :gist
-    t.index ["country"], name: "index_events_on_country_trigram", opclass: :gist_trgm_ops, using: :gist
+    t.index ["city"], name: "index_events_on_city_trigram", using: :gist
+    t.index ["country"], name: "index_events_on_country_trigram", using: :gist
     t.index ["slug"], name: "index_events_on_slug", unique: true
-    t.index ["title"], name: "index_events_on_title_trigram", opclass: :gist_trgm_ops, using: :gist
+    t.index ["title"], name: "index_events_on_title_trigram", using: :gist
   end
 
   create_table "features", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -215,7 +215,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
     t.integer "videos_count", default: 0, null: false
     t.integer "songs_count", default: 0, null: false
     t.string "search_term"
-    t.index ["name"], name: "index_orchestras_on_name", opclass: :gist_trgm_ops, using: :gist
+    t.index ["name"], name: "index_orchestras_on_name", using: :gist
     t.index ["slug"], name: "index_orchestras_on_slug"
   end
 
@@ -297,11 +297,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
     t.string "display_title"
     t.string "spotify_track_id"
     t.index ["active"], name: "index_songs_on_active"
-    t.index ["artist"], name: "index_songs_on_artist", opclass: :gist_trgm_ops, using: :gist
-    t.index ["genre"], name: "index_songs_on_genre", opclass: :gist_trgm_ops, using: :gist
+    t.index ["artist"], name: "index_songs_on_artist", using: :gist
+    t.index ["genre"], name: "index_songs_on_genre", using: :gist
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
     t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
-    t.index ["title"], name: "index_songs_on_title", opclass: :gist_trgm_ops, using: :gist
+    t.index ["title"], name: "index_songs_on_title", using: :gist
     t.index ["videos_count"], name: "index_songs_on_videos_count"
   end
 
@@ -327,7 +327,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
     t.boolean "supporter", default: false
     t.string "patreon_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["patreon_id"], name: "index_users_on_patreon_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
@@ -358,15 +358,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
     t.datetime "metadata_updated_at"
     t.string "normalized_title"
     t.string "slug"
-    t.integer "likes_count", default: 0, null: false
-    t.integer "watches_count", default: 0, null: false
-    t.integer "features_count", default: 0, null: false
+    t.integer "likes_count", default: 0
+    t.integer "watches_count", default: 0
+    t.integer "features_count", default: 0
     t.index ["acr_response_code"], name: "index_videos_on_acr_response_code"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
-    t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gist_trgm_ops, using: :gist
+    t.index ["normalized_title"], name: "index_videos_on_normalized_title", using: :gist
     t.index ["slug"], name: "index_videos_on_slug", unique: true
     t.index ["song_id"], name: "index_videos_on_song_id"
     t.index ["upload_date"], name: "index_videos_on_upload_date"
@@ -410,43 +410,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
   add_foreign_key "videos", "events"
   add_foreign_key "watches", "users"
   add_foreign_key "watches", "videos"
-
-  create_view "video_searches", materialized: true, sql_definition: <<-SQL
-      SELECT videos.id AS video_id,
-      videos.youtube_id,
-      videos.upload_date,
-      videos.description AS video_description,
-      to_tsvector('english'::regconfig, (videos.description)::text) AS video_description_vector,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title
-     FROM ((((((videos
-       LEFT JOIN channels ON ((channels.id = videos.channel_id)))
-       LEFT JOIN songs ON ((songs.id = videos.song_id)))
-       LEFT JOIN events ON ((events.id = videos.event_id)))
-       LEFT JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
-       LEFT JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
-       LEFT JOIN orchestras ON ((orchestras.id = songs.orchestra_id)))
-    GROUP BY videos.id, videos.youtube_id
-    ORDER BY videos.id DESC;
-  SQL
-  add_index "video_searches", ["channel_title"], name: "index_video_searches_on_channel_title", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["dancer_names"], name: "index_video_searches_on_dancer_names", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["event_city"], name: "index_video_searches_on_event_city", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["event_country"], name: "index_video_searches_on_event_country", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["event_title"], name: "index_video_searches_on_event_title", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["orchestra_name"], name: "index_video_searches_on_orchestra_name", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["song_artist"], name: "index_video_searches_on_song_artist", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["song_title"], name: "index_video_searches_on_song_title", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["video_description_vector"], name: "index_video_searches_on_video_description_vector", using: :gin
-  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
-  add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
 
   create_view "video_scores", materialized: true, sql_definition: <<-SQL
       WITH combined_counts AS (
@@ -497,5 +460,43 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
   add_index "video_scores", ["score_4"], name: "index_video_scores_on_score_4"
   add_index "video_scores", ["score_5"], name: "index_video_scores_on_score_5"
   add_index "video_scores", ["video_id"], name: "index_video_scores_on_video_id", unique: true
+
+  create_view "video_searches", materialized: true, sql_definition: <<-SQL
+      SELECT videos.id AS video_id,
+      videos.youtube_id,
+      videos.upload_date,
+      videos.description AS video_description,
+      to_tsvector('english'::regconfig, (videos.description)::text) AS video_description_vector,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title
+     FROM ((((((videos
+       LEFT JOIN channels ON ((channels.id = videos.channel_id)))
+       LEFT JOIN songs ON ((songs.id = videos.song_id)))
+       LEFT JOIN events ON ((events.id = videos.event_id)))
+       LEFT JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
+       LEFT JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
+       LEFT JOIN orchestras ON ((orchestras.id = songs.orchestra_id)))
+    GROUP BY videos.id, videos.youtube_id
+    ORDER BY videos.id DESC;
+  SQL
+  add_index "video_searches", ["channel_title"], name: "index_video_searches_on_channel_title", using: :gist
+  add_index "video_searches", ["dancer_names"], name: "index_video_searches_on_dancer_names", using: :gist
+  add_index "video_searches", ["event_city"], name: "index_video_searches_on_event_city", using: :gist
+  add_index "video_searches", ["event_country"], name: "index_video_searches_on_event_country", using: :gist
+  add_index "video_searches", ["event_title"], name: "index_video_searches_on_event_title", using: :gist
+  add_index "video_searches", ["orchestra_name"], name: "index_video_searches_on_orchestra_name", using: :gist
+  add_index "video_searches", ["song_artist"], name: "index_video_searches_on_song_artist", using: :gist
+  add_index "video_searches", ["song_title"], name: "index_video_searches_on_song_title", using: :gist
+  add_index "video_searches", ["upload_date"], name: "index_video_searches_on_upload_date"
+  add_index "video_searches", ["video_description_vector"], name: "index_video_searches_on_video_description_vector", using: :gin
+  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
+  add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", using: :gist
 
 end

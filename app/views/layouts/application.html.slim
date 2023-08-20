@@ -4,6 +4,7 @@ html lang=I18n.locale
   body data-controller="search-modal supported toast#{' patreon-modal' unless current_user&.supporter?}" data-theme="dark" class=Rails.env
     .page class=(show_filter_bar? ? "page--with-filter-bar" : "")
       = render "components/navbar"
+      = render "components/flash_message"
       main.page__main
         = yield
       = render "components/cookie_consent"
