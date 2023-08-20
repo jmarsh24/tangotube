@@ -1,41 +1,62 @@
-/**  Cereal */
+/** Circular Font Definitions */
 @font-face {
-  font-family: 'Cereal';
-  font-weight: 300;
-  src: url('@assets/fonts/Cereal-Light.otf');
-}
-
-@font-face {
-  font-family: 'Cereal';
-  font-weight: 400;
-  src: url('@assets/fonts/Cereal-Book.otf');
-}
-
-@font-face {
-  font-family: 'Cereal';
-  font-weight: 500;
-  src: url('@assets/fonts/Cereal-Medium.otf');
-}
-
-@font-face {
-  font-family: 'Cereal';
-  font-weight: 700;
-  src: url('@assets/fonts/Cereal-Bold.otf');
-}
-
-@font-face {
-  font-family: 'Cereal';
-  font-weight: 800;
-  src: url('@assets/fonts/Cereal-ExtraBold.otf');
-}
-
-@font-face {
-  font-family: 'Cereal';
+  font-family: 'Circular';
   font-weight: 900;
-  src: url('@assets/fonts/Cereal-Black.otf');
+  font-style: italic;
+  src: url('@assets/fonts/circular-black-italic.otf');
+}
+
+@font-face {
+  font-family: 'Circular';
+  font-weight: 900;
+  src: url('@assets/fonts/circular-black.otf');
+}
+
+@font-face {
+  font-family: 'Circular';
+  font-weight: 700;
+  font-style: italic;
+  src: url('@assets/fonts/circular-bold-italic.otf');
+}
+
+@font-face {
+  font-family: 'Circular';
+  font-weight: 700;
+  src: url('@assets/fonts/circular-bold.otf');
+}
+
+@font-face {
+  font-family: 'Circular';
+  font-weight: 500;
+  font-style: italic;
+  src: url('@assets/fonts/circular-medium-italic.otf');
+}
+
+@font-face {
+  font-family: 'Circular';
+  font-weight: 500;
+  src: url('@assets/fonts/circular-medium.otf');
+}
+
+@font-face {
+  font-family: 'Circular';
+  font-weight: 400;
+  font-style: italic;
+  src: url('@assets/fonts/circular-book-italic.otf');
+}
+
+@font-face {
+  font-family: 'Circular';
+  font-weight: 400;
+  src: url('@assets/fonts/circular-book.otf');
 }
 
 body {
-  font-family: 'Cereal', sans-serif;
+  font-family: 'Circular', sans-serif;
+  color: var(--color-neutral-1000);
+}
+
+body {
+  font-family: 'Circular', sans-serif;
   color: var(--color-neutral-1000);
 }

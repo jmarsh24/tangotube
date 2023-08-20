@@ -53,11 +53,10 @@ $weights: (
   .#{$class} {
     font-size: map-get($properties, font);
     line-height: map-get($properties, line);
-    font-weight: 700; // since most of your classes had font-weight: 700
+    font-weight: 700;
   }
 }
 
-// Generate classes for font weights
 @each $class, $weight in $weights {
   .font-weight-#{$class} {
     font-weight: $weight;
