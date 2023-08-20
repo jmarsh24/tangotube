@@ -27,7 +27,7 @@ export default class NavbarController extends Controller {
 
   hideNavbar(filterBar: HTMLElement | null) {
     if (filterBar) {
-      (this.element as HTMLElement).style.top = '-46px';
+      (this.element as HTMLElement).style.top = '-56px';
     } else {
     }
   }
