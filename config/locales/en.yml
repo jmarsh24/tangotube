@@ -166,6 +166,9 @@ en:
   pages:
     contact:
       contact_me: Contact Me
+  recent_searches:
+    index:
+      recent_searches: Recent searches
   search:
     channels:
       index:
@@ -189,8 +192,6 @@ en:
       index:
         videos: Videos
   searches:
-    recent_searches:
-      recent_searches: Recent searches
     show:
       channels: Channels
       couples: Couples
@@ -218,10 +219,15 @@ en:
       video_duration: "%M:%S"
   videos:
     details:
+      acr_response_code: acr_esponse_code
       description: Description
+      features_count: features_count
+      json_metadata: metadata
+      likes_count: likes_count
       metadata: Metadata
       title: Title
       video_details: Video details
+      watches_count: watches_count
     index:
       meta_description:
         Tangotube.tv is a dedicated tango video platform that enhances
@@ -240,9 +246,7 @@ en:
       lyrics:
         lyrics_header: Lyrics
       video_info:
-        more: More
-      video_info_primary:
-        more: "...more"
+        more: more...
       video_metadata:
         follower_heading: Follower
         leader_heading: Leader
@@ -262,10 +266,7 @@ en:
         video_duration_heading: Duration
         video_upload_date_heading: Upload date
       vote:
-        featured_button: Featured
-        like: Like
         share_button: Share
-        unlike: Unlike
-      watchlist_link:
-        watch_later: Watch later
+    sort:
+      sorting: Sorting
   views_count: "%{count} views"
