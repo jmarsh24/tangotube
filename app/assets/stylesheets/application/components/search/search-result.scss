@@ -38,14 +38,6 @@
     width: 64px;
     height: 64px;
     border-radius: var(--border-radius-sm);
-
-    &--video {
-      aspect-ratio: 16/ 9;
-      width: 64px;
-      object-fit: cover;
-      width: 112px;
-      border-radius: var(--border-radius-sm);
-    }
   }
 
   &__details {
@@ -63,7 +55,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 220px;
+    max-width: 180px;
 
     @include breakpoint-mobile {
       max-width: 230px;
@@ -73,19 +65,18 @@
     }
   }
 
-  &__thumbnail {
-    border-radius: var(--border-radius-lg);
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    max-width: 120px;
-
-    @include breakpoint-tablet {
-      max-width: 200px;
-    }
-  }
-
   &__delete {
     padding: var(--spacing-sm);
+  }
+
+  &--video {
+    .search-result__image {
+      aspect-ratio: 16/ 9;
+      object-fit: cover;
+      width: 200px;
+      height: unset;
+      border-radius: var(--border-radius-md);
+    }
   }
 
   &--dancer,
