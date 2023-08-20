@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_20_080828) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_20_121844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -451,9 +451,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_080828) do
   create_view "video_scores", materialized: true, sql_definition: <<-SQL
       WITH combined_counts AS (
            SELECT v_1.id AS video_id,
-              COALESCE(count(likes.likeable_id), (0)::bigint) AS total_likes,
+              COALESCE(count(DISTINCT likes.likeable_id), (0)::bigint) AS total_likes,
               COALESCE(count(DISTINCT watches.user_id), (0)::bigint) AS total_watches,
-              COALESCE(count(features.featureable_id), (0)::bigint) AS total_features,
+              COALESCE(count(DISTINCT features.featureable_id), (0)::bigint) AS total_features,
                   CASE
                       WHEN (EXISTS ( SELECT 1
                          FROM dancer_videos dv
