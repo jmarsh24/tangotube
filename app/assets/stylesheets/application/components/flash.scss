@@ -15,7 +15,7 @@
   right: var(--spacing-md);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--border-radius-md);
-  z-index: var(--z-flash-message);
+  z-index: var(--z-flash);
   max-width: 400px;
   text-align: center;
   animation: appear-then-fade 4s both;
