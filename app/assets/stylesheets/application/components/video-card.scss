@@ -3,14 +3,13 @@
   flex-direction: column;
   width: 100%;
   gap: 8px;
-  padding: var(--spacing-xs);
-  border-radius: var(--border-radius-xl);
 
   &--active {
     background-color: var(--color-neutral-50);
   }
 
   &--compact {
+    border-radius: var(--border-radius-xl);
     flex-direction: column;
 
     .video-card .video-card__image {
@@ -24,6 +23,10 @@
     @include breakpoint-tablet {
       gap: 10px;
       font-size: var(--font-size-sm);
+
+      .video-card__content {
+        padding: var(--spacing-xs);
+      }
 
       .video-card__title {
         font-size: var(--font-size-sm);
