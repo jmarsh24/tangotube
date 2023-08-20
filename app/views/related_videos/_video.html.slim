@@ -1,4 +1,4 @@
-.video-card.video-card--compact class=(video.youtube_id == @video.youtube_id ? "active" : "")
+.video-card.video-card--compact class=(video.youtube_id == @video.youtube_id ? "video-card--active" : "")
   .video-card__image-container
     .video-card__duration = video.hd_duration_data
     - if video.performance.present?

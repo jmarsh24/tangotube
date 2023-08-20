@@ -3,11 +3,17 @@
   flex-direction: column;
   width: 100%;
   gap: 8px;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-xl);
+
+  &--active {
+    background-color: var(--color-neutral-100);
+  }
 
   &--compact {
     flex-direction: column;
 
-    .video-card__image {
+    .video-card .video-card__image {
       min-width: 180px;
     }
 
