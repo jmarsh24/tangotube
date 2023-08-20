@@ -14,4 +14,7 @@
 class Like < ApplicationRecord
   belongs_to :user
   belongs_to :likeable, polymorphic: true
+  counter_culture :likeable,
+    column_name: proc { |model| (model.likeable_type == "Video") ? "like_count" : nil },
+    column_names: {["likes.likeable_type = ?", "Video"] => "like_count"}
 end

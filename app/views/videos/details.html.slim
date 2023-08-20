@@ -13,3 +13,9 @@
       = @video.acr_response_code
       h4.heading-4.video-details__header = t(".json_metadata")
       = ap @video.metadata.as_json
+      h4.heading-4.video-details__header = t(".watches_count")
+      = @video.watches_count
+      h4.heading-4.video-details__header = t(".likes_count")
+      = @video.likes_count
+      h4.heading-4.video-details__header = t(".features_count")
+      = @video.features_count

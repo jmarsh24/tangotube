@@ -40,6 +40,10 @@ class Video < ApplicationRecord
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
+  has_many :watches, dependent: :destroy, counter_cache: true
+  has_many :watchers, through: :watches, source: :user
+  has_many :likes, as: :likeable, dependent: :destroy, counter_cache: true
+  has_many :features, as: :featureable, dependent: :destroy, counter_cache: true
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
@@ -49,10 +53,6 @@ class Video < ApplicationRecord
   has_many :followers, through: :follower_roles, source: :dancer
   has_many :couple_videos, dependent: :destroy
   has_many :couples, through: :couple_videos
-  has_many :watches, dependent: :destroy
-  has_many :watchers, through: :watches, source: :user
-  has_many :likes, as: :likeable, dependent: :destroy
-  has_many :features, as: :featureable, dependent: :destroy
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
   has_one :performance, through: :performance_video

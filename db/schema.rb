@@ -358,6 +358,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_080828) do
     t.datetime "metadata_updated_at"
     t.string "normalized_title"
     t.string "slug"
+    t.integer "likes_count", default: 0, null: false
+    t.integer "watches_count", default: 0, null: false
+    t.integer "features_count", default: 0, null: false
     t.index ["acr_response_code"], name: "index_videos_on_acr_response_code"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"

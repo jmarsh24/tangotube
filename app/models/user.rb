@@ -32,7 +32,8 @@ class User < ApplicationRecord
 
   after_initialize :set_default_role, if: :new_record?
   before_save :tileize_name
-
+  has_many :likes, dependent: :destroy
+  has_many :features, dependent: :destroy
   has_many :watches, dependent: :destroy
   has_many :watched_videos, through: :watches, source: :video
   has_many :clips, dependent: :nullify
