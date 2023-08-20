@@ -1,0 +1,3 @@
+- flash.each do |flash_type, message|
+  .flash class="flash--#{flash_type}" data-controller="removals" data-action="animationend->removals#remove"
+    = message

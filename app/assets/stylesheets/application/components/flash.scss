@@ -1,29 +1,24 @@
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-    visibility: visible;
-  }
-  99% {
-    opacity: 0;
-    visibility: visible;
-  }
+@keyframes appear-then-fade {
+  0%,
   100% {
     opacity: 0;
-    visibility: hidden;
+  }
+  5%,
+  60% {
+    opacity: 1;
   }
 }
 
 .flash-message {
-  align-self: flex-end;
+  position: absolute;
+  top: calc(var(--header-height) + var(--spacing-md));
+  right: var(--spacing-md);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--border-radius-md);
   z-index: var(--z-flash-message);
   max-width: 400px;
   text-align: center;
-  animation-name: fadeOut;
-  animation-duration: 0.3s;
-  animation-delay: 5s;
-  animation-fill-mode: forwards;
+  animation: appear-then-fade 4s both;
 
   background-color: var(--color-neutral-50);
   color: var(--color-neutral-1000);
