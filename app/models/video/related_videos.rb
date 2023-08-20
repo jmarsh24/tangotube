@@ -58,7 +58,7 @@ class Video::RelatedVideos
 
     filtered_videos = Video::Filter.new(videos, filtering_params:).videos
 
-    Video::Sort.new(filtered_videos, sort: "performance").videos
+    Video::Sort.new(filtered_videos).videos
   end
 
   def available_types
