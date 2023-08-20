@@ -39,7 +39,7 @@ class VideoSearch < ApplicationRecord
       0.2 * (video_searches.event_country <-> '#{sanitized_term}') +
       0.2 * (video_searches.video_title <-> '#{sanitized_term}') +
       0.2 * CAST((video_description_vector @@ plainto_tsquery('#{sanitized_term}')) AS INTEGER)) +
-      0.4 * video_scores.score_1 AS total_score"
+      0.8 * video_scores.score_1 AS total_score"
       )
         .joins("INNER JOIN video_scores ON video_scores.video_id = video_searches.video_id")
         .where("'#{sanitized_term}' % dancer_names OR
