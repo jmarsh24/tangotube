@@ -9,8 +9,8 @@
             = "#{video.performance_video.position} / #{video.performance.videos_count}"
       .stack.stack--xxs
         .video-card__title = video.title
-        - if video.features.any?
-          .video-card__tomato.icon.icon--tomato
+        / - if video.features.any?
+        /   .video-card__tomato.icon.icon--tomato
         .video-card__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
         - if video.dancer_videos.present?
           .scrollable-tags.scrollable-tags--small
