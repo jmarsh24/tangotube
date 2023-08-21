@@ -11,22 +11,9 @@ class ApplicationController < ActionController::Base
   helper_method :show_filter_bar?
 
   before_action :check_supporter
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def check_supporter
     @show_support_modal = current_user && !current_user&.supporter
-  end
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) do |u|
-      u.permit(:email, :password, :password_confirmation, :avatar)
-    end
-
-    devise_parameter_sanitizer.permit(:account_update) do |u|
-      u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :avatar)
-    end
   end
 
   private

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   # Devise routes
   devise_for :users, controllers: {
-    omniauth_callbacks: "users/omniauth_callbacks"
+    omniauth_callbacks: "users/omniauth_callbacks",
+    registrations: "users/registrations"
   }
 
   # Admin routes
