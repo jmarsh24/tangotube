@@ -13,10 +13,10 @@ en:
       not_found_in_database: "🕺 Looks like those moves don't match our records. Retry your %{authentication_keys} or password."
       timeout: "⌛ The music paused! Log back in to continue dancing."
       unauthenticated: "🎶 Before you hit the floor, you'll need to sign in or join the fiesta."
-      unconfirmed: "💌 First things first – confirm your email before you get grooving."
+      unconfirmed: "💌 First things first - confirm your email before you get grooving."
     mailer:
       confirmation_instructions:
-        subject: "🎶 Dance to your email beat – Confirm with Tangotube!"
+        subject: "🎶 Dance to your email beat - Confirm with Tangotube!"
       reset_password_instructions:
         subject: "🎭 New dance, new password. Reset steps inside!"
       unlock_instructions:
@@ -57,7 +57,7 @@ en:
       confirmation_period_expired: "⏳ This tango ticket expired within %{period}. Let's get a new one."
       expired: "⏰ Ah, the music's paused. Let's get you a fresh link."
       not_found: "🔍 Can't find that dance move here."
-      not_locked: "🔓 No need to unlock – you're free to dance!"
+      not_locked: "🔓 No need to unlock - you're free to dance!"
       not_saved:
         one: "🙈 Oops! A misstep stopped this %{resource} from being saved."
         other: "🙈 A couple of missteps! %{count} issues stopped this %{resource} from being saved."
