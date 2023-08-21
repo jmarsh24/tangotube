@@ -1,65 +1,63 @@
-# Additional translations at https://github.com/heartcombo/devise/wiki/I18n
-
 en:
   devise:
     confirmations:
-      confirmed: "Your email address has been successfully confirmed."
-      send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+      confirmed: "🎉 Bravo! You've confirmed your email. Let's tango!"
+      send_instructions: "💌 Check your inbox! A rhythm of instructions is waiting for you."
+      send_paranoid_instructions: "🎵 If you're in our dance hall, there'll be an email guiding your steps."
     failure:
-      already_authenticated: "You are already signed in."
-      inactive: "Your account is not activated yet."
-      invalid: "Invalid %{authentication_keys} or password."
-      locked: "Your account is locked."
-      last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "Invalid %{authentication_keys} or password."
-      timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
-      unconfirmed: "You have to confirm your email address before continuing."
+      already_authenticated: "💃 You're already on the dance floor!"
+      inactive: "🚫 Hold on, dancer! Your account needs to take its first step."
+      invalid: "🙈 Oops! Missed a beat? Double-check your %{authentication_keys} or password."
+      locked: "🔒 Your dance card's been locked. Let's resolve that!"
+      last_attempt: "⚠️ Easy now! One more misstep and you'll need a break."
+      not_found_in_database: "🕺 Looks like those moves don't match our records. Retry your %{authentication_keys} or password."
+      timeout: "⌛ The music paused! Log back in to continue dancing."
+      unauthenticated: "🎶 Before you hit the floor, you'll need to sign in or join the fiesta."
+      unconfirmed: "💌 First things first – confirm your email before you get grooving."
     mailer:
       confirmation_instructions:
-        subject: "Confirmation instructions"
+        subject: "🎶 Dance to your email beat – Confirm with Tangotube!"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "🎭 New dance, new password. Reset steps inside!"
       unlock_instructions:
-        subject: "Unlock instructions"
+        subject: "💡 Light's on! Unlock your Tangotube account."
       email_changed:
-        subject: "Email Changed"
+        subject: "📧 New rhythm, new email. We've got your update!"
       password_change:
-        subject: "Password Changed"
+        subject: "🔄 Tango twist! Password Updated."
     omniauth_callbacks:
-      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
-      success: "Successfully authenticated from %{kind} account."
+      failure: '😰 Couldn''t sync with the %{kind} beat. Here''s why: "%{reason}".'
+      success: "🎉 Perfect harmony! You're in tune with your %{kind} account."
     passwords:
-      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
-      send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
-      updated: "Your password has been changed successfully. You are now signed in."
-      updated_not_active: "Your password has been changed successfully."
+      no_token: "🚫 Oops! Can't waltz in from here. Make sure you're using the correct link."
+      send_instructions: "📩 Forgot a step? No worries, we'll guide you back."
+      send_paranoid_instructions: "🎵 If you've danced with us before, expect a reset link soon."
+      updated: "🎉 And... perfect twirl! New password set. Time to tango!"
+      updated_not_active: "🎉 New password, new dance. All set!"
     registrations:
-      destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
-      signed_up: "Welcome! You have signed up successfully."
-      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
-      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
-      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
-      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirmation link to confirm your new email address."
-      updated: "Your account has been updated successfully."
-      updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again."
+      destroyed: "😢 We hope you'll return for another dance. Account deleted successfully."
+      signed_up: "🥳 Welcome to Tangotube! Time to find your rhythm."
+      signed_up_but_inactive: "🎶 All set, but first... activate your account to join the ball."
+      signed_up_but_locked: "🥁 You're in, but your dance card's locked. Let's fix that."
+      signed_up_but_unconfirmed: "💌 We've sent a tango tune to your email. Click to join the party!"
+      update_needs_confirmation: "🎵 New tune alert! Confirm your new email with the link we sent."
+      updated: "🎬 Action! Your Tangotube profile's updated."
+      updated_but_not_signed_in: "🔄 Quick change! You changed your password, so let's log in again."
     sessions:
-      signed_in: "Signed in successfully."
-      signed_out: "Signed out successfully."
-      already_signed_out: "Signed out successfully."
+      signed_in: "🎵 Welcome back to Tangotube! What's today's rhythm?"
+      signed_out: "👋 Adiós! Return anytime for another dance."
+      already_signed_out: "👋 You've already stepped out. Until the next tango!"
     unlocks:
-      send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
-      send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
-      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+      send_instructions: "🔓 Unlocking steps are dancing to your inbox."
+      send_paranoid_instructions: "📧 If you're a Tangotube dancer, check your email for the next move."
+      unlocked: "🎉 Your dance card's open again! Let's tango."
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
-      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
-      expired: "has expired, please request a new one"
-      not_found: "not found"
-      not_locked: "was not locked"
+      already_confirmed: "✅ You're all set and ready to dance! Try logging in?"
+      confirmation_period_expired: "⏳ This tango ticket expired within %{period}. Let's get a new one."
+      expired: "⏰ Ah, the music's paused. Let's get you a fresh link."
+      not_found: "🔍 Can't find that dance move here."
+      not_locked: "🔓 No need to unlock – you're free to dance!"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "🙈 Oops! A misstep stopped this %{resource} from being saved."
+        other: "🙈 A couple of missteps! %{count} issues stopped this %{resource} from being saved."
