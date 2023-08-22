@@ -10,7 +10,8 @@ class Search::ChannelsController < ApplicationController
           .active
           .limit(100)
       else
-        Channel.all.limit(100).order(videos_count: :desc)
+        Channel.with_attached_thumbnail
+          .active.limit(100).order(videos_count: :desc)
       end
     end
   end

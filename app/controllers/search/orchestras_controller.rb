@@ -9,7 +9,7 @@ class Search::OrchestrasController < ApplicationController
           .with_attached_profile_image
           .limit(100)
       else
-        Orchestra.all.limit(100).order(videos_count: :desc)
+        Orchestra.all.with_attached_profile_image.limit(100).order(videos_count: :desc)
       end
     end
   end

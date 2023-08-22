@@ -9,7 +9,7 @@ class Search::EventsController < ApplicationController
           .with_attached_profile_image
           .limit(100)
       else
-        Event.all.limit(100).order(videos_count: :desc)
+        Event.all.with_attached_profile_image.limit(100).order(videos_count: :desc)
       end
     end
   end

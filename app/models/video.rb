@@ -122,7 +122,6 @@ class Video < ApplicationRecord
     def search_includes
       [
         :channel,
-        :features,
         :song,
         :performance,
         performance_video: :performance,

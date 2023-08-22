@@ -9,7 +9,7 @@ class Search::DancersController < ApplicationController
           .with_attached_profile_image
           .limit(100)
       else
-        Dancer.all.limit(100).order(videos_count: :desc)
+        Dancer.all.with_attached_profile_image.limit(100).order(videos_count: :desc)
       end
     end
   end

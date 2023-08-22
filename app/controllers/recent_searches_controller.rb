@@ -4,7 +4,30 @@ class RecentSearchesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @recent_searches = current_user.recent_searches.includes(:searchable).unique_by_searchable.limit(10) if current_user
+    if current_user
+      searchables_to_preload = {
+        "Event" => {profile_image_attachment: :blob},
+        "Song" => {orchestra: {profile_image_attachment: :blob}},
+        "Orchestra" => {profile_image_attachment: :blob},
+        "Channel" => {thumbnail_attachment: :blob},
+        "Video" => {thumbnail_attachment: :blob},
+        "Dancer" => {profile_image_attachment: :blob},
+        "Couple" => {profile_image_attachment: :blob}
+      }
+
+      distinct_searchable_types = current_user.recent_searches.select(:searchable_type).distinct.pluck(:searchable_type)
+
+      preloaded_searches = []
+
+      distinct_searchable_types.each do |type|
+        if searchables_to_preload[type]
+          type_searches = current_user.recent_searches.where(searchable_type: type).preload(searchable: searchables_to_preload[type])
+          preloaded_searches.concat(type_searches)
+        end
+      end
+
+      @recent_searches = preloaded_searches.uniq(&:searchable_id).sort_by(&:created_at).reverse.take(10)
+    end
   end
 
   # @route POST /recent_searches (recent_searches)
