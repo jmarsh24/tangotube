@@ -30,7 +30,7 @@ module ExternalVideoImport
 
       def find_song(orchestra_ids, text)
         text = text.map { |text| TextNormalizer.normalize(text.to_s) }
-        song_ids_title = Song.where(orchestra_id: orchestra_ids).pluck(:id, :title)
+        song_ids_title = Song.active.where(orchestra_id: orchestra_ids).pluck(:id, :title)
         song_ids_title = song_ids_title.map! { |id, title| [id, TextNormalizer.normalize(title)] }
 
         scores_and_songs = song_ids_title.flat_map do |id, title|
