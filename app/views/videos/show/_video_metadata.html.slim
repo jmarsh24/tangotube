@@ -30,6 +30,10 @@
               .metadata-item 
                 .metadata-item__label = t(".song_orchestra_heading")
                 .tag.tag--sm = link_to(video.song&.orchestra.name.split("'")&.map(&:titleize)&.join("'"), root_path(orchestra: video.song.orchestra.slug))
+            - if video.song.artist.present? && video.song.orchestra.nil?
+              .metadata-item 
+                .metadata-item__label = t(".song_artist_heading")
+                .metadata-item__value = video.song.artist
             - if video.song.artist_2.present?
               .metadata-item 
                 .metadata-item__label = t(".song_artist_2_heading")

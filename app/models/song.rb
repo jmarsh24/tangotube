@@ -105,6 +105,6 @@ class Song < ApplicationRecord
   private
 
   def set_display_title
-    self.display_title = [title&.titleize, orchestra.name, genre&.titleize, date&.year].compact.join(" - ")
+    self.display_title = [title&.titleize, orchestra&.name || artist, genre&.titleize, date&.year].compact.join(" - ")
   end
 end
