@@ -9,7 +9,7 @@ module ExternalVideoImport
         artist_ids = find_artists([song_artists, video_title, video_tags, video_description, song_albums])
         binding.irb
         if artist_ids.empty? && song_titles.first.present? && song_artists.first.present?
-          return Song.create!(title: song_titles.first, artist: song_artists.first)
+          return Song.create!(title: song_titles.first, artist: song_artists.first, genre: "Alternative")
         end
 
         find_song(artist_ids, [video_title, video_description, video_tags, song_titles])
