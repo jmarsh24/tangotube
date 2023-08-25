@@ -1,6 +1,6 @@
 = cache [video, "video-result"] do
   = link_to watch_path(v: video.youtube_id), class: ["search-result", "search-result--video"], data: { controller: "recent-search", "recent-search-gid-value": video.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
-    .stack.stack--line.stack--sm
+    .stack.stack--sm.stack--tablet-line
       .video-card__image-container
         = image_tag video.thumbnail, loading: :eager, width: 320, class: "video-card__image" if video.thumbnail.present?
         .video-card__duration = video.hd_duration_data
@@ -9,8 +9,6 @@
             = "#{video.performance_video.position} / #{video.performance.videos_count}"
       .stack.stack--xxs
         .video-card__title = video.title
-        / - if video.features.any?
-        /   .video-card__tomato.icon.icon--tomato
         .video-card__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
         - if video.dancer_videos.present?
           .scrollable-tags.scrollable-tags--small
