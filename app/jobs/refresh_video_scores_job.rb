@@ -5,6 +5,10 @@ class RefreshVideoScoresJob < ApplicationJob
   sidekiq_options retry: false
 
   def perform
+    ActiveRecord::Base.connection.execute("SET statement_timeout TO '5min';")
+
     VideoScore.refresh
+
+    ActiveRecord::Base.connection.execute("RESET statement_timeout;")
   end
 end

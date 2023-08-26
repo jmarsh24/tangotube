@@ -5,6 +5,11 @@ class RefreshVideoSearchesViewJob < ApplicationJob
   sidekiq_options retry: false
 
   def perform
-    VideoSearch.refresh
+    ActiveRecord::Base.connection.execute("SET statement_timeout TO '5min';")
+    begin
+      VideoSearch.refresh
+    ensure
+      ActiveRecord::Base.connection.execute("RESET statement_timeout;")
+    end
   end
 end
