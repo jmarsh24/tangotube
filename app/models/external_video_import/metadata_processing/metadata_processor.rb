@@ -50,10 +50,12 @@ module ExternalVideoImport
           song_artists: metadata.artist_names,
           song_albums: metadata.album_names
         )
-        if song && song.spotify_track_id.blank?
-          song.spotify_track_id = metadata.music.spotify_track_id
-          song.save!
+
+        if song && metadata.music
+          song.spotify_track_id ||= metadata.music.spotify_track_id
+          song.save! if song.changed?
         end
+
         song
       end
 
