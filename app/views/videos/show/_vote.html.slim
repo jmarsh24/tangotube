@@ -9,6 +9,6 @@
   = render "shared/feature_button", featureable: video if current_user&.admin?
   = link_to "", "vnd.youtube://www.youtube.com/watch?v=#{video.youtube_id}", class: "button icon--youtube youtube-app-link"
   = link_to "", "https://youtube.com/watch?v=#{video.youtube_id}", target: "_blank", class: "button icon--youtube youtube-web-link"
-  - if current_user&admin?
+  - if current_user&.admin?
     = button_to t(".reprocess"), process_metadata_video_path(video), class: "button button--vote button--icon-gear button--icon-left"
     = button_to t(".hide"), hide_video_path(video), class: "button button--vote button--icon-eye-slash button--icon-left"
