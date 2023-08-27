@@ -51,16 +51,29 @@
             .search-result__type = record.class.to_s.singularize.titleize
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
-    - when "Video"
+    - when "Video"  
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to watch_path(v: record.youtube_id), class: "search-result--video", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
-          - if record.thumbnail.present?
-            = image_tag record.thumbnail, loading: :eager, class: "search-result__image"
-          - else
-            = image_tag "default_avatar.jpg", class: "search-result__image"
-          .stach-result__details
-            .search-result__title = record.title
-            .search-result__type = record.class.to_s.singularize.titleize
+        = link_to watch_path(v: record.youtube_id), class: ["search-result", "search-result--video"], data: { controller: "recent-search", "recent-search-gid-value": record.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
+          .stack.stack--sm.stack--tablet-line
+            .video-card__image-container
+              = image_tag record.thumbnail, loading: :eager, width: 320, class: "video-card__image" if record.thumbnail.present?
+              .video-card__duration = record.hd_duration_data
+              - if record.performance_record.present?
+                .video-card__performance-number
+                  = "#{record.performance_record.position} / #{record.performance.videos_count}"
+            .stack.stack--xxs
+              .video-card__title = record.title
+              .video-card__metadata = [record.channel&.title,l(record.upload_date, format: :short_month_year),t('views_count', count: number_to_human(record.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
+              - if record.dancer_videos.present?
+                .scrollable-tags.scrollable-tags--small
+                  - record.dancer_videos.each do |dv|
+                    - if dv.role == "leader"  
+                      .tag.video-card__dancer = dv.dancer.name
+                    - elsif dv.role == "follower"
+                      .tag.video-card__dancer =dv.dancer.name
+              - if record.song.present?
+                .scrollable-tags.scrollable-tags--small
+                  .video-card__song-metadata.tag = record.song.full_title
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Dancer"
