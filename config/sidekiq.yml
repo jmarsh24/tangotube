@@ -1,9 +1,11 @@
-:concurrency: 3
+:concurrency: 5
 :queues:
-  - dispatch
+  - urgent
+  - high_priority
   - default
   - mailers
   - low_priority
+  - very_low_priority
   - active_storage_analysis
   - active_storage_purge
 :scheduler:
