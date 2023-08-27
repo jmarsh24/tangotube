@@ -30,9 +30,10 @@ RSpec.describe VideoSearch do
       expect(VideoSearch.search("carlitos espinoza")).to eq []
 
       VideoSearch.refresh
+      VideoScore.refresh
 
       results = VideoSearch.search("carlitos espinoza")
-      expect(results).to match_array(videos.map(&:id))
+      expect(results).to match_array(videos)
     end
   end
 end
