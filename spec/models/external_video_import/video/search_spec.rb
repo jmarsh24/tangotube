@@ -66,7 +66,8 @@ RSpec.describe Video::Search do
 
       user = users(:regular)
       video = videos(:video_1_featured)
-      user.like video
+      like = video.likes.new(user:)
+      like.save
 
       search = Video::Search.new(filtering_params: {liked: "true"}, user:)
 
