@@ -24,16 +24,17 @@ module ExternalVideoImport
       private
 
       def combined_match(video_title:, video_description:, video_tags: [], song_titles: [], song_artists: [])
-        normalized_texts = [video_title, video_description, video_tags].flatten.map { |text| TextNormalizer.normalize(text.to_s) }
+        all_texts = [video_title, video_description, *video_tags].join(" ")
+        normalized_text = TextNormalizer.normalize(all_texts)
 
         song_attributes = Song.active.most_popular.pluck(:id, :artist, :title)
         potential_matches = []
 
         song_attributes.each do |song_id, artist, title|
           combined_name = "#{artist} #{title}"
-          normalized_texts.reject(&:empty?).each do |normalized_text|
-            ratio = FuzzyText.new.jaro_winkler_score(needle: combined_name, haystack: normalized_text)
-            potential_matches << {song_id:, combined_name:, score: ratio} if ratio > MATCH_THRESHOLD
+          ratio = FuzzyText.new.jaro_winkler_score(needle: combined_name, haystack: normalized_text)
+          if ratio > MATCH_THRESHOLD
+            potential_matches << {song_id:, combined_name:, score: ratio}
           end
         end
 
