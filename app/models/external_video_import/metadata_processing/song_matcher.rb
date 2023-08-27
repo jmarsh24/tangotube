@@ -18,7 +18,7 @@ module ExternalVideoImport
           return Song.create!(title: song_titles.first, artist: song_artists.first, genre: "Alternative")
         end
 
-        potential_matches.first[:song]
+        Song.find(potential_matches.first[:song_id])
       end
 
       private
@@ -26,14 +26,14 @@ module ExternalVideoImport
       def combined_match(video_title:, video_description:, video_tags: [], song_titles: [], song_artists: [])
         normalized_texts = [video_title, video_description, video_tags].flatten.map { |text| TextNormalizer.normalize(text.to_s) }
 
-        songs = Song.active.most_popular
+        song_attributes = Song.active.most_popular.pluck(:id, :artist, :title)
         potential_matches = []
 
-        songs.each do |song|
-          combined_name = "#{song.artist} #{song.title}"
+        song_attributes.each do |song_id, artist, title|
+          combined_name = "#{artist} #{title}"
           normalized_texts.reject(&:empty?).each do |normalized_text|
             ratio = FuzzyText.new.jaro_winkler_score(needle: combined_name, haystack: normalized_text)
-            potential_matches << {song:, combined_name:, score: ratio} if ratio > MATCH_THRESHOLD
+            potential_matches << {song_id:, combined_name:, score: ratio} if ratio > MATCH_THRESHOLD
           end
         end
 
