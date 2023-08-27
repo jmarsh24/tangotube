@@ -14,6 +14,7 @@ module ExternalVideoImport
         else
           Rails.logger.debug "No dancers matched."
         end
+
         dancers
       end
 

@@ -7,7 +7,15 @@ module ExternalVideoImport
         return nil if dancers.size != 2
 
         dancers = dancers.sort_by(&:id)
-        Couple.find_or_create_by!(dancer: dancers.first, partner: dancers.second)
+        couple = Couple.find_or_create_by!(dancer: dancers.first, partner: dancers.second)
+
+        if couple.present?
+          Rails.logger.info "Matched couples: #{couple.dancers.map(&:name).join(" & ")}"
+        else
+          Rails.logger.info "No couples matched."
+        end
+
+        couple
       end
     end
   end

@@ -42,7 +42,9 @@ module ExternalVideoImport
       video_attributes = video_attributes.merge!(metadata_updated_at: Time.current, metadata: metadata.to_json)
       begin
         video.update!(video_attributes)
-        attach_thumbnail(video, metadata.youtube.thumbnail_url.highest_resolution)
+        if !video.thumbnail.attached?
+          attach_thumbnail(video, metadata.youtube.thumbnail_url.highest_resolution)
+        end
       end
 
       video
