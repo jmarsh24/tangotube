@@ -14,13 +14,14 @@ module ExternalVideoImport
           song_artists:
         )
 
-        if potential_matches.empty? && song_titles.first.present? && song_artists.first.present?
-          return Song.create!(title: song_titles.first, artist: song_artists.first, genre: "Alternative")
-        end
-
-        if song.present?
+        if potential_matches.present?
+          song = Song.find(potential_matches.first[:song_id])
           Rails.logger.info "Matched song: #{song.title} - #{song.artist}"
-          Song.find(potential_matches.first[:song_id])
+          song
+        elsif potential_matches.empty? && song_titles.first.present? && song_artists.first.present?
+          song = Song.create!(title: song_titles.first, artist: song_artists.first, genre: "Alternative")
+          Rails.logger.info "Song Created: #{song.title} - #{song.artist} - #{song.genre}"
+          song
         else
           Rails.logger.info "No song matched."
           nil
