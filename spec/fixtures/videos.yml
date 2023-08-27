@@ -35,7 +35,6 @@ video_1_featured:
   youtube_id: "AQ9Ri3kWa_4"
   song: "cuando_el_amor_muere"
   upload_date: <%= Date.parse("2014-10-26 15:21:29") %>
-  featured: true
   hidden: false
   hd: true
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_1_metadata.json")) %>
@@ -53,7 +52,6 @@ video_2_featured:
   youtube_id: "JaEsttvrXkY"
   upload_date: <%= Date.parse("2020-07-24 15:35:11") %>
   song: nueve_de_julio
-  featured: true
   hidden: false
   hd: true
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_2_metadata.json")) %>
@@ -85,7 +83,6 @@ video_3_featured:
   song: nueve_de_julio
   youtube_id: "9dVXhctAOnk"
   upload_date: <%= Date.parse("2021-10-31 08:00:02") %>
-  featured: true
   hidden: false
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_3_metadata.json")) %>
   youtube_like_count: 0
@@ -126,7 +123,6 @@ video_4_featured:
   song: violetas
   youtube_id: "xW8prLq6awc"
   upload_date: <%= Date.parse("2013-06-05 23:04:15") %>
-  featured: true
   hidden: false
   hd: true
   metadata: <%= File.read(Rails.root.join("spec", "fixtures", "files", "featured_video_4_metadata.json")) %>
