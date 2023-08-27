@@ -6,28 +6,28 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::Trigram do
   let(:items) { ["Pepito Avellaneda & Tete Rusconi", "Carlos Gavito & Marcela Durán", "Geraldine Rojas & Ezequiel Paludi"] }
 
   describe "#similarity" do
-    fit "returns the best matches for the given list" do
+    it "returns the best matches for the given list" do
       text = "Pepito Avellaneda y Tete Rusconi - Tango"
       similarity_ratio = items.map { |item| described_class.new(text).similarity(item) }.max
 
       expect(similarity_ratio).to be > 0.8
     end
 
-    fit "returns 0 when no match is found" do
+    it "returns 0 when no match is found" do
       text = "Random dancers - Tango"
       similarity_ratio = items.map { |item| described_class.new(text).similarity(item) }.max
 
       expect(similarity_ratio).to eq(0)
     end
 
-    fit "returns a non-zero match for partial names" do
+    it "returns a non-zero match for partial names" do
       text = "Pepito & Tete - Tango"
       similarity_ratio = items.map { |item| described_class.new(text).similarity(item) }.max
 
       expect(similarity_ratio).to be > 0
     end
 
-    fit "returns a non-zero match for accented characters" do
+    it "returns a non-zero match for accented characters" do
       items_with_accents = ["Martín Maldonado & Maurizio Ghella", "Esteban Cortez & Evelyn Rivera", "Gustavo Naveira & Giselle Anne"]
       text = "Martín Maldonado y Maurizio Ghella - Tango"
       similarity_ratio = items_with_accents.map { |item| described_class.new(text).similarity(item) }.max
