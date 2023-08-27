@@ -30,15 +30,15 @@ class VideoSearch < ApplicationRecord
       select(
         "video_searches.video_id",
         "(0.2 * (1 - (dancer_names <-> '#{sanitized_term}')) +
-      0.1 * (1 - (video_searches.channel_title <-> '#{sanitized_term}')) +
+      0.2 * (1 - (video_searches.channel_title <-> '#{sanitized_term}')) +
       0.2 * (1 - (video_searches.song_title <-> '#{sanitized_term}')) +
       0.1 * (1 - (video_searches.song_artist <-> '#{sanitized_term}')) +
-      0.1 * (1 - (video_searches.orchestra_name <-> '#{sanitized_term}')) +
-      0.1 * (1 - (video_searches.event_city <-> '#{sanitized_term}')) +
-      0.1 * (1 - (video_searches.event_title <-> '#{sanitized_term}')) +
-      0.1 * (1 - (video_searches.event_country <-> '#{sanitized_term}')) +
+      0.05 * (1 - (video_searches.orchestra_name <-> '#{sanitized_term}')) +
+      0.05 * (1 - (video_searches.event_city <-> '#{sanitized_term}')) +
+      0.05 * (1 - (video_searches.event_title <-> '#{sanitized_term}')) +
+      0.05 * (1 - (video_searches.event_country <-> '#{sanitized_term}')) +
       0.2 * (1 - (video_searches.video_title <-> '#{sanitized_term}')) +
-      0.1 * CAST((video_description_vector @@ plainto_tsquery('#{sanitized_term}')) AS INTEGER)) +
+      0.02 * CAST((video_description_vector @@ plainto_tsquery('#{sanitized_term}')) AS INTEGER)) +
       0.5 * video_scores.score_1 AS total_score"
       )
         .joins("INNER JOIN video_scores ON video_scores.video_id = video_searches.video_id")
