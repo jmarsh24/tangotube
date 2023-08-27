@@ -58,9 +58,9 @@
             .video-card__image-container
               = image_tag record.thumbnail, loading: :eager, width: 320, class: "video-card__image" if record.thumbnail.present?
               .video-card__duration = record.hd_duration_data
-              - if record.performance_record.present?
+              - if record.performance_video.present?
                 .video-card__performance-number
-                  = "#{record.performance_record.position} / #{record.performance.videos_count}"
+                  = "#{record.performance_video.position} / #{record.performance.videos_count}"
             .stack.stack--xxs
               .video-card__title = record.title
               .video-card__metadata = [record.channel&.title,l(record.upload_date, format: :short_month_year),t('views_count', count: number_to_human(record.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
