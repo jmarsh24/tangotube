@@ -41,7 +41,7 @@ module ExternalVideoImport
       end
 
       def calculate_similarity_score(query, target)
-        FuzzyStringMatch::JaroWinkler.create(:native).getDistance(query, target)
+        FuzzyStringMatch::JaroWinkler.create(:ruby).getDistance(query, target)
       end
 
       def count_words(str)
