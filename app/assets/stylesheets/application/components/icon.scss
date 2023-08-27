@@ -49,6 +49,7 @@ $icon-padding-sizes: (
   }
 
   &--youtube {
+    flex-shrink: 0;
     width: 90px;
     padding: 12px;
     background-image: url('@assets/images/icons/yt-logo-dark.svg');
