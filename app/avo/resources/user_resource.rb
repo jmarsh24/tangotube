@@ -12,6 +12,7 @@ class UserResource < Avo::BaseResource
     as: :gravatar,
     rounded: false,
     size: 60
+  field :email, as: :text, link_to_resource: true
   field :name, as: :text
   field :first_name, as: :text
   field :last_name, as: :text
