@@ -3,28 +3,30 @@
 module ExternalVideoImport
   module MetadataProcessing
     class Trigram
-      class << self
-        def similarity(needle:, haystack:)
-          tri1 = trigram(needle)
-          tri2 = trigram(haystack)
+      def initialize(haystack)
+        @haystack_trigrams = generate_trigrams(haystack)
+      end
 
-          return 0.0 if [tri1, tri2].any? { |arr| arr.size == 0 }
+      def similarity(needle)
+        tri1 = generate_trigrams(needle)
 
-          same_size = (tri1 & tri2).size
+        return 0.0 if tri1.empty?
 
-          same_size.to_f / tri1.size
-        end
+        common_trigrams = (tri1 & @haystack_trigrams).size
+        score = common_trigrams.to_f / tri1.size
 
-        private
+        adjusted_score = score * (1 + needle.length * 0.01)
 
-        def trigram(word)
-          return [] if word.strip == ""
+        [adjusted_score, 1.0].min
+      end
 
-          parts = []
-          padded = "  #{word} ".downcase
-          padded.chars.each_cons(3) { |w| parts << w.join }
-          parts
-        end
+      private
+
+      def generate_trigrams(word)
+        return [] if word.strip.empty?
+
+        padded = "  #{word.downcase}  "
+        padded.chars.each_cons(3).map(&:join)
       end
     end
   end

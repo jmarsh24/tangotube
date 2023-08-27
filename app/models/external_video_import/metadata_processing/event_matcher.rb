@@ -12,7 +12,8 @@ module ExternalVideoImport
 
         matched_event = nil
         event_id_titles.each do |id, title|
-          ratio = Trigram.similarity(needle: title, haystack: normalized_text)
+          trigram_instance = Trigram.new(normalized_text)
+          ratio = trigram_instance.similarity(title)
           if ratio > MATCH_THRESHOLD
             matched_event = Event.find(id)
             break

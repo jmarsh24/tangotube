@@ -3,17 +3,10 @@
 module ExternalVideoImport
   module MetadataProcessing
     class MetadataProcessor
-      def initialize(song_matcher: SongMatcher.new, channel_matcher: ChannelMatcher.new, dancer_matcher: DancerMatcher.new, couple_matcher: CoupleMatcher.new)
-        @song_matcher = song_matcher
-        @channel_matcher = channel_matcher
-        @dancer_matcher = dancer_matcher
-        @couple_matcher = couple_matcher
-      end
-
       def process(metadata)
-        dancers = @dancer_matcher.match(video_title: metadata.youtube.title)
+        dancers = DancerMatcher.new.match(video_title: metadata.youtube.title)
         log_matched_dancers(dancers)
-        couple = @couple_matcher.match_or_create(dancers:)
+        couple = CoupleMatcher.new.match_or_create(dancers:)
         log_matched_couples(couple)
 
         song = match_song(metadata)
@@ -25,8 +18,9 @@ module ExternalVideoImport
           upload_date_year: metadata.youtube.upload_date.year,
           title: metadata.youtube.title,
           description: metadata.youtube.description,
-          channel: @channel_matcher.match_or_create(channel_metadata: metadata.youtube.channel),
+          channel: ChannelMatcher.new.match_or_create(channel_metadata: metadata.youtube.channel),
           song:,
+          event: EventMatcher.new.match(video_title: metadata.youtube.title, video_description: metadata.youtube.description),
           couples: [couple].compact,
           acr_response_code: metadata.music&.code,
           duration: metadata.youtube.duration,
@@ -43,7 +37,7 @@ module ExternalVideoImport
       private
 
       def match_song(metadata)
-        song = @song_matcher.match(
+        song = SongMatcher.new.match(
           video_title: metadata.youtube.title,
           video_description: metadata.youtube.description,
           song_titles: metadata.song_titles,

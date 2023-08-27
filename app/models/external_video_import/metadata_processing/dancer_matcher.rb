@@ -27,11 +27,12 @@ module ExternalVideoImport
         end
         dancer_ids = []
         dancer_id_names.each do |id, name, nick_names|
+          trigram_instance = Trigram.new(normalized_title)
           nick_names&.each do |nick_name|
-            ratio = FuzzyText.new.trigram_score(needle: nick_name, haystack: normalized_title)
+            ratio = trigram_instance.similarity(nick_name)
             dancer_ids << id if ratio > MATCH_THRESHOLD
           end
-          ratio = FuzzyText.new.trigram_score(needle: name, haystack: normalized_title)
+          ratio = trigram_instance.similarity(name)
           dancer_ids << id if ratio > MATCH_THRESHOLD
         end
         dancer_ids.uniq

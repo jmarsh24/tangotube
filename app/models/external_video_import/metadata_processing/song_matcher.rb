@@ -32,7 +32,8 @@ module ExternalVideoImport
 
         song_attributes.each do |song_id, artist, title|
           combined_name = "#{artist} #{title}"
-          ratio = FuzzyText.new.jaro_winkler_score(needle: combined_name, haystack: normalized_text)
+          trigram_instance = Trigram.new(normalized_text)
+          ratio = trigram_instance.similarity(combined_name)
           if ratio > MATCH_THRESHOLD
             potential_matches << {song_id:, combined_name:, score: ratio}
           end
