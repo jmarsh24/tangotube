@@ -20,6 +20,7 @@ class Couple < ApplicationRecord
   has_many :couple_videos, dependent: :destroy
   has_many :videos, through: :couple_videos
 
+  validates :dancer_id, numericality: {less_than: :partner_id}
   after_validation :set_slug, only: [:create, :update]
   before_save :set_videos_count
   before_save :order_dancers
