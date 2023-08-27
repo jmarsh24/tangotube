@@ -34,7 +34,7 @@ RSpec.describe Video::Sort do
       it "sorts the videos by performance" do
         sorted_videos = Video::Sort.new(Video.all, sort: "performance").videos
 
-        expect(sorted_videos).to eq(Video.all.joins(:performance_video).order("performance_videos.performance_id": :desc))
+        expect(sorted_videos).to eq(Video.all.joins(:performance_video).order("performance_videos.position": :asc))
       end
     end
   end
