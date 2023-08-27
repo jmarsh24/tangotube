@@ -93,7 +93,8 @@ RSpec.describe Video::Filter do
       it "returns videos liked by user" do
         user = users(:regular)
         video = videos(:video_1_featured)
-        user.like(video)
+        like = video.likes.new(user:)
+        like.save
 
         filtered_videos = described_class.new(Video.all, filtering_params: {liked: true}, user:).videos
 
@@ -117,6 +118,7 @@ RSpec.describe Video::Filter do
     context "when filtering by query" do
       it "returns videos matching query" do
         VideoSearch.refresh
+        VideoScore.refresh
 
         filtered_videos = described_class.new(Video.all, filtering_params: {search: "carlitoss espinozza"}).videos
         expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
@@ -124,6 +126,7 @@ RSpec.describe Video::Filter do
 
       it "returns videos matching query with accents" do
         VideoSearch.refresh
+        VideoScore.refresh
 
         filtered_videos = described_class.new(Video.all, filtering_params: {search: "carlíitos espinozza"}).videos
 
@@ -132,6 +135,7 @@ RSpec.describe Video::Filter do
 
       it "returns videos matching query with a ' character" do
         VideoSearch.refresh
+        VideoScore.refresh
 
         filtered_videos = described_class.new(Video.all, filtering_params: {search: "juann darienzoo"}).videos
         expect(filtered_videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])

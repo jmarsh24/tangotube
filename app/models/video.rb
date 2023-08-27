@@ -112,7 +112,7 @@ class Video < ApplicationRecord
 
   class << self
     def search(term)
-      VideoSearch.search(term)
+      VideoSearch.search(TextNormalizer.normalize(term))
     end
 
     def index_query
