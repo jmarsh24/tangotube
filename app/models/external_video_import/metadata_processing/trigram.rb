@@ -15,9 +15,7 @@ module ExternalVideoImport
         common_trigrams = (tri1 & @haystack_trigrams).size
         score = common_trigrams.to_f / tri1.size
 
-        adjusted_score = score * (1 + needle.length * 0.01)
-
-        [adjusted_score, 1.0].min
+        score * (1 + needle.length * 0.01)
       end
 
       private
