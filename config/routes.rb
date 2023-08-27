@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     member do
       get :details
       get :share
+      post :hide
+      post :process_metadata
     end
     collection do
       get :filters

@@ -3,6 +3,9 @@
 module ExternalVideoImport
   module Youtube
     class ApiClient
+      TARGET_COUNTRIES = ["US", "GB", "FR", "DE", "IT", "ES", "NL", "SE", "NO", "DK",
+        "FI", "PT", "PL", "CZ", "RO", "BE", "GR", "IE", "HU", "AT"].freeze
+
       def metadata(slug)
         youtube_video = Yt::Video.new(id: slug)
 
@@ -20,7 +23,7 @@ module ExternalVideoImport
           like_count: youtube_video.like_count,
           thumbnail_url: extract_thumbnail_url(youtube_video),
           channel: fetch_channel_metadata(youtube_video.channel_id),
-          blocked: !!youtube_video.content_detail.data.dig("regionRestriction")
+          blocked: blocked_in_target_countries?(youtube_video)
         )
       end
 
@@ -44,6 +47,11 @@ module ExternalVideoImport
           standard: youtube_video.thumbnail_url(:standard),
           maxres: youtube_video.thumbnail_url(:maxres)
         )
+      end
+
+      def blocked_in_target_countries?(youtube_video)
+        blocked_countries = youtube_video.content_detail.data.dig("regionRestriction", "blocked") || []
+        (blocked_countries & TARGET_COUNTRIES).any?
       end
     end
   end

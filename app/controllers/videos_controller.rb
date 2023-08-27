@@ -2,7 +2,7 @@
 
 class VideosController < ApplicationController
   before_action :check_for_clear, only: [:index]
-  before_action :set_video, only: [:share, :details]
+  before_action :set_video, only: [:share, :details, :process_metadata, :hide]
 
   # @route GET /videos (videos)
   # @route GET / (root)
@@ -59,6 +59,16 @@ class VideosController < ApplicationController
 
   # @route GET /videos/:id/details (details_video)
   def details
+  end
+
+  def hide
+    @video.update(hidden: true)
+    redirect_to root_path
+  end
+
+  def process_metadata
+    UpdateVideoJob.set(queue: :high_priority).perform_later(@video, use_music_recognizer: true)
+    head :ok
   end
 
   def show_filter_bar?
