@@ -9,7 +9,11 @@ class SearchesController < ApplicationController
   # @route GET /search (search)
   def show
     @query = params[:query]
-    ui.replace("search-results", with: "show")
+    if turbo_frame_request?
+      render :show
+    else
+      redirect_to root_path
+    end
   end
 
   private

@@ -17,6 +17,7 @@ class VideosController < ApplicationController
     if params[:filtering] == "true" && params[:pagination].nil?
       ui.update "videos", with: "videos/videos", items: @videos
       ui.replace "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
+      ui.modal_close
       ui.run_javascript("history.pushState(history.state, '', '#{url_for(params.to_h.except(:filtering, :pagination))}');")
     end
   end
