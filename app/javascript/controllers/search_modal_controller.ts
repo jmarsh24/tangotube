@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ['modal', 'input', 'results'];
   modalTarget!: HTMLElement;
   inputTarget!: HTMLInputElement;
-  resultsTarget!: HTMLIFrameElement;
+  resultsTarget!: HTMLElement;
 
   connect(): void {
     this.submit = debounce(this.submit, 300);
@@ -26,12 +26,5 @@ export default class extends Controller {
     const query = this.inputTarget.value;
     const newSrc = `/search?query=${encodeURIComponent(query)}`;
     this.resultsTarget.setAttribute('src', newSrc);
-
-    const newValue = (event.target as HTMLInputElement).value;
-    this.inputElements.forEach((inputElem) => {
-      if (inputElem !== event.target) {
-        inputElem.value = newValue;
-      }
-    });
   }
 }
