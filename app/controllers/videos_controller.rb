@@ -10,17 +10,14 @@ class VideosController < ApplicationController
     @filtering_params = filtering_params
     @sort_param = params[:sort]
     @search = Video::Search.new(filtering_params:, sort: params[:sort], user: current_user)
+    @show_filter_bar = true
 
     @videos = paginated(@search.videos.not_hidden.from_active_channels.preload(Video.search_includes), per: 24)
 
     if params[:filtering] == "true" && params[:pagination].nil?
       ui.update "videos", with: "videos/videos", items: @videos
       ui.replace "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
-      ui.close_modal
-      new_params = @filtering_params.to_h
-      new_params[:sort] = @sort_param if @sort_param.present?
-      new_params.except(:filtering, :pagination)
-      ui.run_javascript "history.pushState(history.state, '', '#{url_for(new_params)}');"
+      ui.run_javascript("history.pushState(history.state, '', '#{url_for(params.to_h.except(:filtering, :pagination))}');")
     end
   end
 
@@ -69,10 +66,6 @@ class VideosController < ApplicationController
   def process_metadata
     UpdateVideoJob.set(queue: :high_priority).perform_later(@video, use_music_recognizer: true)
     head :ok
-  end
-
-  def show_filter_bar?
-    action_name == "index"
   end
 
   private

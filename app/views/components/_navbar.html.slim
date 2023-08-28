@@ -35,6 +35,6 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
             = link_to t(".about"), about_path, class: "menu-item"
             = link_to t(".google_privacy_policy"), "http://www.google.com/policies/privacy", target: "_blank", class: "menu-item"
             = link_to "Support The Project", "https://www.patreon.com/tangotube", class: "menu-item", target: "_blank", "aria-label": "Patreon"
-  - if show_filter_bar?
+  - if @show_filter_bar == true
     .stack.stack--justify-center.navbar__bottom
       = render partial: "videos/index/video_sorting_filters"

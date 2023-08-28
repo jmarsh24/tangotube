@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
 
   default_form_builder Shimmer::Form::Builder
 
-  helper_method :show_filter_bar?
-
   before_action :check_supporter
 
   def check_supporter
@@ -20,16 +18,12 @@ class ApplicationController < ActionController::Base
 
   def paginated(scope, per: 12, frame_id: "pagination-frame")
     @current_page = params[:page]&.to_i || 1
-    scope = scope.page(@current_page).per(per)
+    scope = scope.page(@current_page).per(per).without_count
     @has_more_pages = !scope.next_page.nil? unless @has_more_pages == true
     if @current_page > 1
       ui.remove "next-page-link-#{frame_id}"
       ui.append frame_id, with: "components/pagination", items: scope, partial: params[:partial], frame_id:
     end
     scope
-  end
-
-  def show_filter_bar?
-    false
   end
 end

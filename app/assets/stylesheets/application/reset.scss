@@ -52,9 +52,3 @@ button {
   border: none;
   cursor: pointer;
 }
-
-turbo-frame {
-  &:empty {
-    display: none;
-  }
-}

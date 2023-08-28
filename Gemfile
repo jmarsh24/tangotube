@@ -84,7 +84,6 @@ group :development, :test do
   gem "i18n-tasks"
   gem "chusaku", require: false
   gem "capybara-screenshot-diff"
-  gem "bullet"
 end
 
 group :test do

@@ -15,18 +15,18 @@ class RecentSearchesController < ApplicationController
         "Couple" => {profile_image_attachment: :blob}
       }
 
-      distinct_searchable_types = current_user.recent_searches.select(:searchable_type).distinct.pluck(:searchable_type)
+      distinct_searchable_types = current_user.recent_searches.pluck(:searchable_type).uniq
 
       preloaded_searches = []
 
       distinct_searchable_types.each do |type|
         if searchables_to_preload[type]
-          type_searches = current_user.recent_searches.where(searchable_type: type).preload(searchable: searchables_to_preload[type])
+          type_searches = current_user.recent_searches.where(searchable_type: type).preload(searchable: searchables_to_preload[type]).order(created_at: :desc).limit(10)
           preloaded_searches.concat(type_searches)
         end
       end
 
-      @recent_searches = preloaded_searches.uniq(&:searchable_id).sort_by(&:created_at).reverse.take(10)
+      @recent_searches = preloaded_searches.sort_by(&:created_at).reverse.take(10)
     end
   end
 
