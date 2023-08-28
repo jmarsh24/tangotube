@@ -1,2 +1,12 @@
 #videos
-   = paginated items, class: "grid grid--videos"
+   - if params[:sort].blank? && @videos.present? && params[:leader].present? || params[:follower].present? || params[:couple].present?
+      = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
+         = render "components/spinner"
+      = turbo_frame_tag :newest_videos, src: recent_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
+         = render "components/spinner"
+      = turbo_frame_tag :oldest_videos, src: oldest_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
+         = render "components/spinner"
+      = turbo_frame_tag :performance_videos, src: performances_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
+         = render "components/spinner"
+   - elsif @videos.present?
+      = paginated items, class: "grid grid--videos"

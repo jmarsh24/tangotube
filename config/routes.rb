@@ -45,6 +45,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :video_sections, only: [] do
+    collection do
+      get :recent
+      get :oldest
+      get :trending
+      get :performances
+    end
+  end
+
   resources :songs do
     resource :lyrics, only: [:show]
   end

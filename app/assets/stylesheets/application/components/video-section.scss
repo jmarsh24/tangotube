@@ -1,0 +1,25 @@
+.video-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+
+  &__header {
+  }
+
+  &__videos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 100%;
+    overflow: auto;
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include breakpoint-tablet {
+      flex-direction: row;
+    }
+  }
+}
