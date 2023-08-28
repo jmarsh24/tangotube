@@ -1,15 +1,17 @@
 import { Controller } from '@hotwired/stimulus';
 import debounce from 'lodash.debounce';
 
-// Connects to data-controller="search-modal"
 export default class extends Controller {
-  static targets = ['modal', 'input', 'results'];
+  static targets = ['modal', 'mobileInput', 'desktopInput', 'results'];
   modalTarget!: HTMLElement;
-  inputTarget!: HTMLInputElement;
+  mobileInputTarget!: HTMLInputElement;
+  desktopInputTarget!: HTMLInputElement;
   resultsTarget!: HTMLElement;
 
+  debouncedSubmit!: (query: string) => void; // Declare debouncedSubmit
+
   connect(): void {
-    this.submit = debounce(this.submit, 300);
+    this.debouncedSubmit = debounce(this.submit, 300); // No need for bind, since arrow functions are used.
   }
 
   show(): void {
@@ -22,9 +24,17 @@ export default class extends Controller {
     this.modalTarget.classList.remove('search-window--open');
   }
 
-  submit(): void {
-    const query = this.inputTarget.value;
+  search(event: Event): void {
+    const updatedValue = (event.target as HTMLInputElement).value;
+
+    this.desktopInputTarget.value = updatedValue;
+    this.mobileInputTarget.value = updatedValue;
+
+    this.debouncedSubmit(updatedValue);
+  }
+
+  private submit = (query: string): void => {
     const newSrc = `/search?query=${encodeURIComponent(query)}`;
     this.resultsTarget.setAttribute('src', newSrc);
-  }
+  };
 }
