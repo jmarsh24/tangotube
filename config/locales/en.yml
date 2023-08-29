@@ -250,6 +250,11 @@ en:
         or event. We also provide enriched metadata and song lyrics for a comprehensive
         viewing experience.
       meta_title: Tangotube.tv - Discover and Enjoy Tango Videos
+      newest: Newest
+      oldest: Oldest
+      performance: Performance
+      see_more: See more...
+      trending: Trending
     share:
       copy: Copy
       email: Email
@@ -286,4 +291,10 @@ en:
         share_button: Share
     sort:
       sorting: Sorting
+    videos:
+      newest: Newest
+      oldest: Oldest
+      performance: Performance
+      see_more: See more...
+      trending: Trending
   views_count: "%{count} views"

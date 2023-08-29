@@ -1,13 +1,33 @@
 #videos
    - if params[:sort].blank? && @videos.present? && params[:leader].present? || params[:follower].present? || params[:couple].present?
       = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
+         .video-section
+         .video-section__header
+            = link_to t(".trending"), root_path(filtering_params.merge(sort: "trending")), class: "heading-1"
          = render "components/spinner"
+         .video-section__link
+         = link_to t(".see_more"), root_path(filtering_params.merge(sort: "trending")), class: "heading-4"
       = turbo_frame_tag :newest_videos, src: recent_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
+         .video-section
+         .video-section__header
+            = link_to t(".newest"), root_path(filtering_params.merge(sort: "newest")), class: "heading-1"
          = render "components/spinner"
+         .video-section__link
+         = link_to t(".see_more"), root_path(filtering_params.merge(sort: "newest")), class: "heading-4"
       = turbo_frame_tag :oldest_videos, src: oldest_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
+         .video-section
+         .video-section__header
+            = link_to t(".oldest"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-1"
          = render "components/spinner"
+         .video-section__link
+         = link_to t(".see_more"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-4"
       = turbo_frame_tag :performance_videos, src: performances_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
+         .video-section
+         .video-section__header
+            = link_to t(".performance"), root_path(filtering_params.merge(sort: "performance")), class: "heading-1"
          = render "components/spinner"
+         .video-section__link
+         = link_to t(".see_more"), root_path(filtering_params.merge(sort: "performance")), class: "heading-4"
       = paginated @videos, class: "grid grid--videos"
    - elsif @videos.present?
       = paginated items, class: "grid grid--videos"

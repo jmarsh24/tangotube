@@ -3,6 +3,7 @@
 class VideosController < ApplicationController
   before_action :check_for_clear, only: [:index]
   before_action :set_video, only: [:share, :details, :process_metadata, :hide]
+  helper_method :filtering_params
 
   # @route GET /videos (videos)
   # @route GET / (root)
