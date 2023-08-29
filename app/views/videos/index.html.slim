@@ -4,22 +4,22 @@
 - meta.canonical = root_path
 = render "banner/index"
 #videos.stack
-  - if (params[:sort].blank? && params[:watched].blank? && @videos.present? && (params[:leader].present? || params[:follower].present? || params[:couple].present? || params[:orchestra].present?))
-    = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra]), target: "_top"
+  - if (params[:sort].blank? && @videos.present? && (params[:leader].present? || params[:follower].present? || params[:couple].present? || params[:orchestra].present?))
+    = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched]), target: "_top"
       .video-section
         .video-section__header
           = link_to t(".trending"), root_path(filtering_params.merge(sort: "trending")), class: "heading-2"
         = render "components/spinner"
         .video-section__link
           = link_to t(".see_more"), root_path(filtering_params.merge(sort: "trending")), class: "heading-4"
-    = turbo_frame_tag :newest_videos, src: recent_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra]), target: "_top"
+    = turbo_frame_tag :newest_videos, src: recent_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched]), target: "_top"
       .video-section
         .video-section__header
           = link_to t(".newest"), root_path(filtering_params.merge(sort: "newest")), class: "heading-2"
         = render "components/spinner"
         .video-section__link
           = link_to t(".see_more"), root_path(filtering_params.merge(sort: "newest")), class: "heading-4"
-    = turbo_frame_tag :oldest_videos, src: oldest_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra]), target: "_top"
+    = turbo_frame_tag :oldest_videos, src: oldest_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched]), target: "_top"
       .video-section
         .video-section__header
           = link_to t(".oldest"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
@@ -35,7 +35,7 @@
     /       = link_to t(".see_more"), root_path(filtering_params.merge(sort: "performance")), class: "heading-4"
     .video-section__header.heading-2 = t(".popular")
     = paginated @videos, class: "grid grid--videos"
-  - elsif @videos.present?
+  - elsif @videos.present? && !params[:leader].present? && params[:watched].blank?
     = turbo_frame_tag :trending_dancers, src: top_dancers_path, target: "_top"
       .video-section
         .video-section__header
@@ -52,5 +52,6 @@
     = turbo_frame_tag :alternative_videos, src: alternative_video_sections_path, target: "_top"
       .video-section
         = render "components/spinner"
+  - else
     .video-section__header.heading-2 = t(".popular")
     = paginated @videos, class: "grid grid--videos"
