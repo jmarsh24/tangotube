@@ -25,6 +25,7 @@
     }
 
     @include breakpoint-tablet {
+      max-width: unset;
       gap: 10px;
       font-size: var(--font-size-sm);
 
