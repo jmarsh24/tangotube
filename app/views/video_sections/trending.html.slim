@@ -1,8 +1,9 @@
 = turbo_frame_tag :trending_videos
-  .video-section
-    .video-section__header
-      = link_to t(".trending"), root_path(filtering_params.merge(sort: "most_popular")), class: "video-section__link heading-1"
-    .video-section__videos
-      = render @videos
-    .video-section__link
-      = link_to t(".see_more"), root_path(filtering_params.merge(sort: "most_popular")), class: "heading-4"
+  = cache [:trending_videos, params[:leader], params[:follower], params[:couple]], expires_in: 1.hours do
+    .video-section
+      .video-section__header
+        = link_to t(".trending"), root_path(filtering_params.merge(sort: "most_popular")), class: "video-section__link heading-1"
+      .video-section__videos
+        = render @videos
+      .video-section__link
+        = link_to t(".see_more"), root_path(filtering_params.merge(sort: "most_popular")), class: "heading-4"

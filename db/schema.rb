@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_28_091302) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_28_235338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -487,7 +487,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_091302) do
       ((((((((0.15 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.35)::double precision * cc.normalized_likes)) + ((0.35)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.025)::double precision * random())) + (cc.dancer_score_adjustment)::double precision) AS score_2,
       ((((((((0.1 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.25)::double precision * cc.normalized_likes)) + ((0.25)::double precision * cc.normalized_watches)) + ((0.15)::double precision * cc.normalized_features)) + ((0.2)::double precision * random())) + (cc.dancer_score_adjustment)::double precision) AS score_3,
       ((((((((0.1 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.2)::double precision * cc.normalized_likes)) + ((0.2)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.1)::double precision * random())) + ((0.3 * cc.dancer_score_adjustment))::double precision) AS score_4,
-      ((((((((0.2 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.3)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.05)::double precision * random())) + ((0.05 * cc.dancer_score_adjustment))::double precision) AS score_5
+      ((((((((0.2 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.3)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.05)::double precision * random())) + ((0.05 * cc.dancer_score_adjustment))::double precision) AS score_5,
+      (((((0.5 * ((1)::numeric - ((EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch) / (udr.max_upload_epoch - udr.min_upload_epoch)))))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.15)::double precision * cc.normalized_watches)) + ((0.05)::double precision * cc.normalized_features)) AS score_6
      FROM ((norm_counts cc
        JOIN videos v ON ((cc.video_id = v.id)))
        CROSS JOIN upload_date_range udr);
@@ -497,6 +498,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_091302) do
   add_index "video_scores", ["score_3"], name: "index_video_scores_on_score_3"
   add_index "video_scores", ["score_4"], name: "index_video_scores_on_score_4"
   add_index "video_scores", ["score_5"], name: "index_video_scores_on_score_5"
+  add_index "video_scores", ["score_6"], name: "index_video_scores_on_score_6"
   add_index "video_scores", ["video_id"], name: "index_video_scores_on_video_id", unique: true
 
 end

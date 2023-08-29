@@ -13,5 +13,6 @@
       = render "components/spinner"
     = turbo_frame_tag :performance_videos, src: performances_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
       = render "components/spinner"
+    = paginated @videos, class: "grid grid--videos"
   - elsif @videos.present?
     = paginated @videos, class: "grid grid--videos"

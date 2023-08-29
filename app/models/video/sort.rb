@@ -11,7 +11,12 @@ class Video::Sort
     performance: {column: "performance_videos.position", direction: "asc"},
     song: {column: "songs.title", direction: "asc"},
     orchestra: {column: "orchestras.name", direction: "asc"},
-    channel: {column: "channels.title", direction: "asc"}
+    channel: {column: "channels.title", direction: "asc"},
+    trending_1: {column: "video_scores.score_1", direction: "desc"},
+    trending_2: {column: "video_scores.score_2", direction: "desc"},
+    trending_3: {column: "video_scores.score_3", direction: "desc"},
+    trending_4: {column: "video_scores.score_4", direction: "desc"},
+    trending_5: {column: "video_scores.score_5", direction: "desc"}
   }.freeze
 
   attr_reader :video_relation, :sort
@@ -38,6 +43,8 @@ class Video::Sort
         video_relation.joins(:channel)
       when "orchestras.name"
         video_relation.joins(song: :orchestra)
+      when /^video_scores.score_\d$/
+        video_relation.joins(:video_score)
       else
         video_relation
       end

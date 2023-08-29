@@ -99,6 +99,7 @@ class Video < ApplicationRecord
   scope :trending_3, -> { joins(:video_score).order("video_score.score_3 DESC") }
   scope :trending_4, -> { joins(:video_score).order("video_score.score_4 DESC") }
   scope :trending_5, -> { joins(:video_score).order("video_score.score_5 DESC") }
+  scope :trending_6, -> { joins(:video_score).order("video_score.score_6 DESC") }
   scope :fuzzy_titles, ->(terms) do
                          terms = [terms] unless terms.is_a?(Array)
                          query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")
