@@ -1,6 +1,5 @@
 = turbo_frame_tag "couples_results", class: "search-section search-section--couples" do
-  - cache(["search_window_couple_results", params[:query]], expires_in: 1.hours) do
-    - if @couples.any?
-      h3.heading-3 = t(".couples")
-      .tablet-scrollable-content
-        = render @couples
+  - if @couples.any?
+    h3.heading-3 = t(".couples")
+    .tablet-scrollable-content
+      = render @couples

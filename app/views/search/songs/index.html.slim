@@ -1,6 +1,5 @@
 = turbo_frame_tag "songs_results", class: "search-section search-section--songs" do
-  - cache(["search_window_song_results", params[:query]], expires_in: 1.hours) do
-    - if @songs.any?
-      h3.heading-3 = t(".songs")
-      .tablet-scrollable-content
-        = render @songs
+  - if @songs.any?
+    h3.heading-3 = t(".songs")
+    .tablet-scrollable-content
+      = render @songs
