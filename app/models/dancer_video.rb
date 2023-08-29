@@ -13,7 +13,7 @@
 #
 class DancerVideo < ApplicationRecord
   belongs_to :dancer, counter_cache: :videos_count
-  belongs_to :video
+  belongs_to :video, touch: true
   counter_culture :dancer, column_name: "videos_count"
 
   validates :dancer, uniqueness: {scope: :video}

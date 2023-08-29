@@ -1,9 +1,8 @@
 = turbo_frame_tag :oldest_videos
-  = cache [:oldest_videos, params[:leader], params[:follower], params[:couple]], expires_in: 1.hours do
-    .video-section
-      .video-section__header
-        = link_to t(".oldest"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
-      .video-section__videos
-        = render @videos
-      .video-section__link
-        = link_to t(".see_more"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-4"
+  .video-section
+    .video-section__header
+      = link_to t(".oldest"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
+    .video-section__videos
+      = render @videos
+    .video-section__link
+      = link_to t(".see_more"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-4"
