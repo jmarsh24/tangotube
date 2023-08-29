@@ -24,7 +24,8 @@ class FacetsController < ApplicationController
       :dancer,
       :query,
       :watched,
-      :liked
+      :liked,
+      :couple
     ).to_h
   end
 end

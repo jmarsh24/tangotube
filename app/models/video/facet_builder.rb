@@ -100,6 +100,20 @@ class Video::FacetBuilder
     end
   end
 
+  def couple
+    Facet.new(name: "couple", option_builder: ->(data, count) { Option.new(label: data[0], value: data[1], count:) }) do
+      @video_relation
+        .joins(couple_videos: :couple)
+        .joins("INNER JOIN dancers AS leader ON leader.id = couples.dancer_id")
+        .joins("INNER JOIN dancers AS follower ON follower.id = couples.partner_id")
+        .group("leader.name", "follower.name", "couples.slug")
+        .order(Arel.sql("COUNT(couple_videos.id) DESC, leader.name, follower.name"))
+        .limit(30)
+        .count("couple_videos.id")
+        .map { |(leader_name, follower_name, slug), count| [["#{leader_name} & #{follower_name}", slug], count] }
+    end
+  end
+
   private
 
   def custom_titleize(name)
