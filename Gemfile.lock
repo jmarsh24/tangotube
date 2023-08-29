@@ -167,6 +167,7 @@ GEM
     cuprite (0.14.3)
       capybara (~> 3.0)
       ferrum (~> 0.13.0)
+    dalli (3.2.5)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -657,6 +658,7 @@ DEPENDENCIES
   counter_culture
   countries
   cuprite
+  dalli
   debug
   deepl-rb
   devise
