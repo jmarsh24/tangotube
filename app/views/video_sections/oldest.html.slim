@@ -2,7 +2,7 @@
   = cache [:oldest_videos, params[:leader], params[:follower], params[:couple]], expires_in: 1.hours do
     .video-section
       .video-section__header
-        = link_to t(".oldest"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-1"
+        = link_to t(".oldest"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
       .video-section__videos
         = render @videos
       .video-section__link

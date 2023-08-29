@@ -1,22 +1,22 @@
 - options = [ \
-   { value: "most_recent", label: "Recent" }, \
-   { value: "oldest", label: "Oldest" }, \
-   { value: "most_viewed", label: "Most Viewed" }, \
-   { value: "trending", label: "Trending" }, \
-   { value: "most_liked", label: "Most Liked" }, \
-   { value: "performance", label: "Performance" }, \
-   { value: "song", label: "Songs A-Z" }, \
-   { value: "orchestra", label: "Orchestras A-Z" }, \
-   { value: "channel", label: "Channels A-Z" } \
- ]
-
-- sort_param = params[:sort] || "trending"
+    { value: "", label: "All" }, \
+    { value: "most_recent", label: "Recent" }, \
+    { value: "oldest", label: "Oldest" }, \
+    { value: "most_viewed", label: "Most Viewed" }, \
+    { value: "trending", label: "Trending" }, \
+    { value: "most_liked", label: "Most Liked" }, \
+    { value: "performance", label: "Performance" }, \
+  ]
 
 .modal__header 
   h3.modal__title = t(".sorting")
 .modal__body
   .list-box
-    - options.each do |option|
-      - selected = sort_param == option[:value] ? "selected" : nil
-      .list-box__item class=("#{selected}")
-        .list-box__text = link_to option[:label], root_path(@filtering_params.merge(sort: option[:value], filtering: true))
+  - options.each do |option|
+    - selected = (params[:sort].presence || "") == option[:value] ? "selected" : nil
+    .list-box__item class=("#{selected}")
+      .list-box__text 
+        - if option[:value].blank?
+          = link_to option[:label], root_path(@filtering_params.except(:sort, :filtering))
+        - else
+          = link_to option[:label], root_path(@filtering_params.merge(sort: option[:value], filtering: true))
