@@ -217,11 +217,25 @@ en:
   time:
     formats:
       video_duration: "%M:%S"
+  video_sections:
+    oldest:
+      oldest: Oldest
+      see_more: See more...
+    performances:
+      performance: Performance
+      see_more: See more...
+    recent:
+      newest: Newest
+      see_more: See more...
+    trending:
+      see_more: See more...
+      trending: Trending
   videos:
     details:
       acr_response_code: acr_esponse_code
       description: Description
       features_count: features_count
+      hidden: Hidden
       json_metadata: metadata
       likes_count: likes_count
       metadata: Metadata
@@ -267,6 +281,8 @@ en:
         video_duration_heading: Duration
         video_upload_date_heading: Upload date
       vote:
+        hide: Hide
+        reprocess: Reprocess
         share_button: Share
     sort:
       sorting: Sorting

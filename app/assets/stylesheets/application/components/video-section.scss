@@ -4,11 +4,16 @@
   gap: var(--spacing-md);
 
   &__header {
+    padding-left: var(--spacing-sm);
+  }
+
+  &__link {
+    align-self: center;
   }
 
   &__videos {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: var(--spacing-md);
     width: 100%;
     overflow: auto;
@@ -16,10 +21,6 @@
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
-    }
-
-    @include breakpoint-tablet {
-      flex-direction: row;
     }
   }
 }
