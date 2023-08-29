@@ -1,0 +1,36 @@
+.card {
+  flex-shrink: 0;
+  display: flex;
+  gap: var(--spacing-md);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: var(--color-gray-100);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-xl);
+  width: 170px;
+  cursor: pointer;
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-gray-900);
+  }
+
+  &__subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-gray-700);
+  }
+
+  &:hover {
+    background-color: var(--color-gray-200);
+  }
+}

@@ -60,6 +60,7 @@ gem "ransack"
 gem "scenic"
 gem "patreon"
 gem "strip_attributes"
+gem "goldiloader"
 
 # Assets
 gem "vite_rails"

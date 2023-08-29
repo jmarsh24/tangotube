@@ -60,7 +60,7 @@ class Video::FacetBuilder
     Facet.new(name: "genre", option_builder: ->(name, count) { Option.new(label: name.titleize, value: name, count:) }) do
       @video_relation
         .joins(:song)
-        .where("LOWER(songs.genre) IN ('tango', 'milonga', 'vals')")
+        .where("LOWER(songs.genre) IN ('tango', 'milonga', 'vals', 'alternative')")
         .group("LOWER(songs.genre)")
         .order("count_all DESC", "LOWER(songs.genre)")
         .limit(30)

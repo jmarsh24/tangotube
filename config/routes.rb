@@ -32,6 +32,9 @@ Rails.application.routes.draw do
 
   resource :manifest, only: :show
 
+  get "dancers/top", to: "dancers#top_dancers", as: "top_dancers"
+  get "orchestras/top", to: "orchestras#top_orchestras", as: "top_orchestras"
+
   resources :videos do
     member do
       get :details
@@ -51,6 +54,8 @@ Rails.application.routes.draw do
       get :oldest
       get :trending
       get :performances
+      get :random_event
+      get :alternative
     end
   end
 

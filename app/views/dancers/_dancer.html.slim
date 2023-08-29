@@ -1,0 +1,6 @@
+- dancer_link = dancer.gender == "male" ? "leader" : "follower"
+= link_to root_path(dancer_link => dancer.slug), class: "card" do
+  = image_tag dancer.profile_image, width: 312, class: "avatar avatar--xxxl"
+  .card__content
+    .card__title = dancer.name
+    .card__subtitle = t(".dancer")
