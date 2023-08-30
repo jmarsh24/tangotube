@@ -46,6 +46,8 @@
         = render "components/spinner"
     = turbo_frame_tag :alternative_videos, src: alternative_video_sections_path, target: "_top"
       .video-section
+    .video-section__header.heading-2 = t(".popular")
+    = paginated @videos, class: "grid grid--videos"
   - else
     .video-section__header.heading-2 = t(".popular")
     = paginated items, class: "grid grid--videos"
