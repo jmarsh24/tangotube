@@ -35,7 +35,7 @@
     /       = link_to t(".see_more"), root_path(filtering_params.merge(sort: "performance")), class: "heading-4"
     .video-section__header.heading-2 = t(".popular")
     = paginated @videos, class: "grid grid--videos"
-  - elsif @videos.present? && params[:leader].blank? && params[:follower].blank? && params[:watched].blank? && params[:liked].blank? && !params[:song].blank? && !params[:orchestra].blank? 
+  - elsif @videos.present? && params[:leader].blank? && params[:follower].blank? && params[:watched].blank? && params[:liked].blank? && params[:song].blank? && params[:orchestra].blank? 
     = turbo_frame_tag :trending_dancers, src: top_dancers_path, target: "_top"
       .video-section
         .video-section__header
