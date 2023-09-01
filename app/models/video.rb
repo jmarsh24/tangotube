@@ -79,6 +79,7 @@ class Video < ApplicationRecord
                  }
   scope :has_leader, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'leader')") }
   scope :has_follower, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id AND role = 'follower')") }
+  scope :has_dancer, -> { where("EXISTS (SELECT 1 FROM dancer_videos WHERE dancer_videos.video_id = videos.id)") }
   scope :dancer, ->(slug) { joins(:dancers).where(dancers: {slug:}) }
   scope :genre, ->(value) { joins(:song).where("LOWER(genre) = ?", value.downcase) }
   scope :hd, ->(hd) { where(hd:) }
