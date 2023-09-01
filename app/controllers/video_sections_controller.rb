@@ -29,7 +29,7 @@ class VideoSectionsController < ApplicationController
   end
 
   def alternative
-    @videos = Video::Search.new(filtering_params: {genre: "alternative"}, user: current_user).videos
+    @videos = Video::Search.new(filtering_params: {genre: "alternative"}, user: current_user).videos.joins(:dancer_videos)
       .not_hidden.from_active_channels.limit(36).preload(Video.search_includes)
   end
 
