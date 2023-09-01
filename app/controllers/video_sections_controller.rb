@@ -35,20 +35,19 @@ class VideoSectionsController < ApplicationController
     @videos = Video::Search.new(filtering_params: {event: @event.slug, year: @year}, sort: "trending_5", user: current_user).videos
       .left_outer_joins(:dancer_videos)
       .where.not(dancer_videos: {id: nil})
+      .group("videos.id, video_scores.score_5")
       .not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
-      .uniq
   end
 
   def alternative
     @videos = Video::Search.new(filtering_params: {genre: "alternative"}, user: current_user).videos
       .left_outer_joins(:dancer_videos)
-      .where.not(dancer_videos: {id: nil})
       .not_hidden.from_active_channels
+      .group("videos.id, video_score.score_2, video_score.score_3, video_score.score_4, video_score.score_5")
       .limit(36)
       .preload(Video.search_includes)
-      .uniq
   end
 
   private
