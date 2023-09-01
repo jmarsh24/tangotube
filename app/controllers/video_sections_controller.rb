@@ -25,12 +25,12 @@ class VideoSectionsController < ApplicationController
     @event = Event.most_popular.limit(24).sample
     @year = @event.videos.pluck(:upload_date_year).uniq.sample
     @videos = Video::Search.new(filtering_params: {event: @event.slug, year: @year}, sort: "trending_5", user: current_user).videos
-      .not_hidden.from_active_channels.limit(36).preload(Video.search_includes)
+      .joins(:dancer_videos).not_hidden.from_active_channels.limit(36).preload(Video.search_includes)
   end
 
   def alternative
-    @videos = Video::Search.new(filtering_params: {genre: "alternative"}, user: current_user).videos.joins(:dancer_videos)
-      .not_hidden.from_active_channels.limit(36).preload(Video.search_includes)
+    @videos = Video::Search.new(filtering_params: {genre: "alternative"}, user: current_user).videos
+      .joins(:dancer_videos).not_hidden.from_active_channels.limit(36).preload(Video.search_includes)
   end
 
   private
