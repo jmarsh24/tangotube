@@ -30,7 +30,7 @@ class VideoSectionsController < ApplicationController
   end
 
   def random_event
-    @event = Event.most_popular.limit(24).sample
+    @event = Event.most_popular.limit(8).sample
     @year = @event.videos.pluck(:upload_date_year).uniq.sample
     @videos = Video::Search.new(filtering_params: {event: @event.slug, year: @year}, sort: "trending_5", user: current_user).videos
       .left_outer_joins(:dancer_videos)
