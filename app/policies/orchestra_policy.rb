@@ -26,7 +26,7 @@ class OrchestraPolicy < ApplicationPolicy
   end
 
   def search?
-    true
+    user&.admin?
   end
 
   def upload_profile_image?

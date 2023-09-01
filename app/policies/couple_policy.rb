@@ -25,6 +25,10 @@ class CouplePolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def search?
+    user&.admin?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

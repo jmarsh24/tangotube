@@ -2,9 +2,7 @@
 
 class ChannelResource < Avo::BaseResource
   self.title = :title
-  self.search_query = -> do
-    scope.search(params[:q])
-  end
+  self.search_query = -> { scope.search(params[:q]) }
   self.resolve_query_scope = ->(model_class:) do
     model_class.most_popular
   end

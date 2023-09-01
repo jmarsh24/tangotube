@@ -34,7 +34,7 @@ class VideoPolicy < ApplicationPolicy
   end
 
   def search?
-    true
+    user&.admin?
   end
 
   class Scope < Scope

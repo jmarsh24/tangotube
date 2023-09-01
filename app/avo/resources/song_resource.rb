@@ -3,13 +3,11 @@
 class SongResource < Avo::BaseResource
   self.title = :full_title
   self.includes = [:orchestra, :videos]
+  self.search_query = -> { scope.search(params[:q]) }
   self.resolve_query_scope = ->(model_class:) do
     model_class.most_popular
   end
 
-  self.search_query = -> do
-    scope.search(params[:q])
-  end
   self.find_record_method = ->(model_class:, id:, params:) {
     (!id.is_a?(Array) && id.to_i == 0) ? model_class.find_by(slug: id) : model_class.find(id)
   }

@@ -3,14 +3,7 @@
 class EventResource < Avo::BaseResource
   self.title = :title
   self.includes = []
-  self.search_query = -> {
-    scope.ransack(
-      title_cont: params[:q],
-      city_cont: params[:q],
-      country_cont: params[:q],
-      m: "or"
-    ).result(distinct: true)
-  }
+  self.search_query = -> { scope.search(params[:q]) }
   self.resolve_query_scope = ->(model_class:) do
     model_class.most_popular
   end

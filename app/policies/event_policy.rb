@@ -30,7 +30,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def search?
-    true
+    user&.admin?
   end
 
   def remove_profile_image?

@@ -3,9 +3,7 @@
 class CoupleResource < Avo::BaseResource
   self.title = :dancer_names
   self.includes = [:dancer, :partner]
-  self.search_query = -> do
-    scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-  end
+  self.search_query = -> { scope.search(params[:q]) }
   self.resolve_query_scope = ->(model_class:) do
     model_class.most_popular
   end
