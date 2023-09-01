@@ -45,7 +45,7 @@ class VideoSectionsController < ApplicationController
     @videos = Video::Search.new(filtering_params: {genre: "alternative"}, user: current_user).videos
       .left_outer_joins(:dancer_videos)
       .not_hidden.from_active_channels
-      .group("videos.id, video_score.score_2, video_score.score_3, video_score.score_4, video_score.score_5")
+      .group("videos.id, video_score.score_1, video_score.score_2, video_score.score_3, video_score.score_4, video_score.score_5")
       .limit(36)
       .preload(Video.search_includes)
   end
