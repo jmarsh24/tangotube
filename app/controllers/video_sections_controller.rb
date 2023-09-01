@@ -38,6 +38,7 @@ class VideoSectionsController < ApplicationController
       .not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .uniq
   end
 
   def alternative
@@ -47,6 +48,7 @@ class VideoSectionsController < ApplicationController
       .not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .uniq
   end
 
   private
