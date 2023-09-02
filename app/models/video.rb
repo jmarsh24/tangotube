@@ -108,7 +108,7 @@ class Video < ApplicationRecord
                        end
   scope :from_active_channels, -> { joins(:channel).where("channel.active" => true) }
   scope :music_recognized, -> { from_active_channels.where(acr_response_code: 0) }
-  scope :music_unrecognized, -> { from_active_channels.where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001, 2004])) }
+  scope :music_unrecognized, -> { from_active_channels.where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001, 2004, 3018])) }
 
   before_validation :normalize_title
 
