@@ -4,7 +4,7 @@
   justify-items: center;
   gap: var(--spacing-xxs);
   padding: var(--spacing-xxs) var(--spacing-xs);
-  background-color: var(--color-neutral-0);
+  background-color: var(--color-neutral-100);
   border: 1px solid var(--color-gray-300);
   border-radius: var(--border-radius-pill);
   font-size: var(--font-size-xs);
@@ -18,12 +18,17 @@
   }
 
   &.active {
-    background-color: var(--color-gray-800);
-    color: var(--color-neutral-0);
+    background-color: var(--color-red-300);
+    color: var(--color-neutral-1000);
+    border: unset;
+
+    .filter-chip__dropdown {
+      background-color: var(--color-red-100);
+    }
   }
 
   &:hover {
-    background-color: var(--color-gray-600);
+    background-color: var(--color-red-600);
     font-weight: 500;
   }
 
@@ -31,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-gray-500);
+    background-color: var(--color-red-500);
     border-radius: var(--border-radius-circle);
     width: 16px;
     height: 16px;
@@ -70,7 +75,7 @@
     position: relative;
     width: 14px;
     height: 14px;
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-neutral-300);
     border-radius: 50%;
     cursor: pointer;
 
@@ -80,8 +85,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       background-color: var(--color-neutral-1000);
       mask-image: url('@assets/images/icons/chevron-down.svg');
       mask-size: contain;
