@@ -4,11 +4,11 @@
   gap: var(--spacing-md);
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   background-color: var(--color-gray-100);
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
   border-radius: var(--border-radius-xl);
-  width: 170px;
+  width: 140px;
   cursor: pointer;
 
   &__content {

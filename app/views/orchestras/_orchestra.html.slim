@@ -1,5 +1,4 @@
 = link_to root_path(orchestra: orchestra.slug), class: "card" do
-  = image_tag orchestra.profile_image, width: 356, class: "avatar avatar--xxxl"
+  = image_tag orchestra.profile_image, width: 356, class: "avatar avatar--xxl"
   .card__content
     .card__title = orchestra.formatted_name
-    .card__subtitle = t(".orchestra")
