@@ -1,5 +1,5 @@
-#videos
-  - if (params[:sort].blank? && @videos.present? && (params[:leader].present? || params[:follower].present? || params[:couple].present? || params[:orchestra].present?))
+#videos.stack
+  - if (params[:sort].blank? && videos.present? && (params[:leader].present? || params[:follower].present? || params[:couple].present? || params[:orchestra].present?))
     = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched]), target: "_top"
       .video-section
         .video-section__header
@@ -21,25 +21,18 @@
         = render "components/spinner"
         .video-section__link
           = link_to t(".see_more"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-4"
-    / = turbo_frame_tag :performance_videos, src: performances_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple]), target: "_top"
-    /   .video-section
-    /     .video-section__header
-    /       = link_to t(".performance"), root_path(filtering_params.merge(sort: "performance")), class: "heading-2"
-    /     = render "components/spinner"
-    /     .video-section__link
-    /       = link_to t(".see_more"), root_path(filtering_params.merge(sort: "performance")), class: "heading-4"
     .video-section__header.heading-2 = t(".popular")
-    = paginated @videos, class: "grid grid--videos"
-  - elsif @videos.present? && !params[:leader].present? && params[:watched].blank?
+    = paginated videos, class: "grid grid--videos"
+  - elsif videos.present? && !params[:leader].present? && params[:watched].blank?
     = turbo_frame_tag :trending_dancers, src: top_dancers_path, target: "_top"
       .video-section
         .video-section__header
-          = link_to t(".trending_dancers"), class: "heading-2"
+          h2.heading-2 = t(".dancers")
         = render "components/spinner"
     = turbo_frame_tag :trending_orchestras, src: top_orchestras_path, target: "_top"
       .video-section
         .video-section__header
-          = link_to t(".orchestras"), class: "heading-2"
+          h2.heading-2 = t(".orchestras")
         = render "components/spinner"
     = turbo_frame_tag :random_event_videos, src: random_event_video_sections_path, target: "_top"
       .video-section
@@ -47,7 +40,7 @@
     = turbo_frame_tag :alternative_videos, src: alternative_video_sections_path, target: "_top"
       .video-section
     .video-section__header.heading-2 = t(".popular")
-    = paginated @videos, class: "grid grid--videos"
+    = paginated videos, class: "grid grid--videos"
   - else
     .video-section__header.heading-2 = t(".popular")
     = paginated items, class: "grid grid--videos"

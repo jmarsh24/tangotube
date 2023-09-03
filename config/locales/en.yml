@@ -51,8 +51,6 @@ en:
       search: Search
       terms: Terms
   dancers:
-    dancer:
-      dancer: Dancer
     date:
     top_dancers:
       trending_dancers: Trending dancers
@@ -251,13 +249,6 @@ en:
         or event. We also provide enriched metadata and song lyrics for a comprehensive
         viewing experience.
       meta_title: Tangotube.tv - Discover and Enjoy Tango Videos
-      newest: Newest
-      oldest: Oldest
-      orchestras: Orchestras
-      popular: Popular
-      see_more: See more...
-      trending: Trending
-      trending_dancers: Trending dancers
     share:
       copy: Copy
       email: Email
@@ -295,11 +286,11 @@ en:
     sort:
       sorting: Sorting
     videos:
+      dancers: Dancers
       newest: Newest
       oldest: Oldest
       orchestras: Orchestras
       popular: Popular
       see_more: See more...
       trending: Trending
-      trending_dancers: Trending dancers
   views_count: "%{count} views"
