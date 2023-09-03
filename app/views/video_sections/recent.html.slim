@@ -1,8 +1,6 @@
 = turbo_frame_tag :newest_videos
   .video-section
     .video-section__header
-      = link_to t(".newest"), root_path(filtering_params.merge(sort: "most_recent")), class: "video-section__link heading-2"
+      h2.heading-2 = t(".latest")
     .video-section__videos
       = render @videos
-    .video-section__link
-      = link_to t(".see_more"), root_path(filtering_params.merge(sort: "most_recent")), class: "heading-4"

@@ -17,6 +17,11 @@
     animation: rainbow-border 2s linear infinite;
   }
 
+  &:hover {
+    background-color: var(--color-neutral-500);
+    font-weight: 500;
+  }
+
   &.active {
     background-color: var(--color-red-300);
     color: var(--color-neutral-1000);
@@ -25,11 +30,10 @@
     .filter-chip__dropdown {
       background-color: var(--color-red-100);
     }
-  }
 
-  &:hover {
-    background-color: var(--color-red-600);
-    font-weight: 500;
+    .filter-chip:hover {
+      background-color: var(--color-red-500);
+    }
   }
 
   &__count {
