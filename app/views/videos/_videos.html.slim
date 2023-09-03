@@ -34,6 +34,9 @@
         .video-section__header
           h2.heading-2 = t(".orchestras")
         = render "components/spinner"
+    = turbo_frame_tag :newest_videos, src: recent_video_sections_path, target: "_top"
+      .video-section
+        = render "components/spinner"
     = turbo_frame_tag :random_event_videos, src: random_event_video_sections_path, target: "_top"
       .video-section
         = render "components/spinner"
