@@ -16,7 +16,7 @@ class VideosController < ApplicationController
     @videos = paginated(@search.videos.not_hidden.from_active_channels.preload(Video.search_includes), per: 24)
 
     if params[:filtering] == "true" && params[:pagination].nil?
-      ui.update "videos", with: "videos/videos", items: @videos
+      ui.update "videos", with: "videos/videos", videos: @videos
       ui.replace "filter-bar", with: "videos/index/video_sorting_filters", filtering_params:
       ui.close_modal
       ui.run_javascript("history.pushState(history.state, '', '#{url_for(params.to_h.except(:filtering, :pagination))}');")
