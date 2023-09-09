@@ -8,8 +8,8 @@ class VideoSectionsController < ApplicationController
       .preload(Video.search_includes)
   end
 
-  def oldest
-    @videos = Video::Search.new(filtering_params:, sort: "trending_6").videos
+  def older
+    @videos = Video::Search.new(filtering_params:, sort: "oldest").videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)

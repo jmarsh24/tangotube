@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_28_235338) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_09_093500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -366,7 +366,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_235338) do
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
-    t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gist_trgm_ops, using: :gist
     t.index ["slug"], name: "index_videos_on_slug", unique: true
     t.index ["song_id"], name: "index_videos_on_song_id"
     t.index ["upload_date"], name: "index_videos_on_upload_date"
@@ -417,15 +416,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_235338) do
       videos.upload_date,
       videos.description AS video_description,
       to_tsvector('english'::regconfig, (videos.description)::text) AS video_description_vector,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title
      FROM ((((((videos
        LEFT JOIN channels ON ((channels.id = videos.channel_id)))
        LEFT JOIN songs ON ((songs.id = videos.song_id)))
@@ -439,15 +438,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_235338) do
   add_index "video_searches", ["channel_title"], name: "index_video_searches_on_channel_title", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["dancer_names"], name: "index_video_searches_on_dancer_names", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["event_city"], name: "index_video_searches_on_event_city", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["event_country"], name: "index_video_searches_on_event_country", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["event_title"], name: "index_video_searches_on_event_title", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["orchestra_name"], name: "index_video_searches_on_orchestra_name", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["song_artist"], name: "index_video_searches_on_song_artist", opclass: :gist_trgm_ops, using: :gist
-  add_index "video_searches", ["song_title"], name: "index_video_searches_on_song_title", opclass: :gist_trgm_ops, using: :gist
   add_index "video_searches", ["upload_date"], name: "index_video_searches_on_upload_date"
   add_index "video_searches", ["video_description_vector"], name: "index_video_searches_on_video_description_vector", using: :gin
   add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
-  add_index "video_searches", ["video_title"], name: "index_video_searches_on_video_title", opclass: :gist_trgm_ops, using: :gist
 
   create_view "video_scores", materialized: true, sql_definition: <<-SQL
       WITH combined_counts AS (
@@ -467,8 +460,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_235338) do
                LEFT JOIN features ON (((v_1.id = features.featureable_id) AND ((features.featureable_type)::text = 'Video'::text))))
             GROUP BY v_1.id
           ), upload_date_range AS (
-           SELECT min(EXTRACT(epoch FROM videos.upload_date)) AS min_upload_epoch,
-              max(EXTRACT(epoch FROM videos.upload_date)) AS max_upload_epoch
+           SELECT min(EXTRACT(epoch FROM (videos.upload_date)::timestamp without time zone)) AS min_upload_epoch,
+              max(EXTRACT(epoch FROM (videos.upload_date)::timestamp without time zone)) AS max_upload_epoch
              FROM videos
           ), norm_counts AS (
            SELECT combined_counts.video_id,
@@ -488,7 +481,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_235338) do
       ((((((((0.1 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.25)::double precision * cc.normalized_likes)) + ((0.25)::double precision * cc.normalized_watches)) + ((0.15)::double precision * cc.normalized_features)) + ((0.2)::double precision * random())) + (cc.dancer_score_adjustment)::double precision) AS score_3,
       ((((((((0.1 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.2)::double precision * cc.normalized_likes)) + ((0.2)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.1)::double precision * random())) + ((0.3 * cc.dancer_score_adjustment))::double precision) AS score_4,
       ((((((((0.2 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.3)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.05)::double precision * random())) + ((0.05 * cc.dancer_score_adjustment))::double precision) AS score_5,
-      (((((0.5 * ((1)::numeric - ((EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch) / (udr.max_upload_epoch - udr.min_upload_epoch)))))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.15)::double precision * cc.normalized_watches)) + ((0.05)::double precision * cc.normalized_features)) AS score_6
+      (0.5 * ((1)::numeric - ((EXTRACT(epoch FROM (v.upload_date)::timestamp without time zone) - udr.min_upload_epoch) / (udr.max_upload_epoch - udr.min_upload_epoch)))) AS score_6
      FROM ((norm_counts cc
        JOIN videos v ON ((cc.video_id = v.id)))
        CROSS JOIN upload_date_range udr);

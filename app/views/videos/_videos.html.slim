@@ -1,5 +1,5 @@
 #videos.stack
-  - if (params[:sort].blank? && videos.present?)
+  - if videos.present? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:watched] || params[:channel] || params[:event])
     = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event]), target: "_top"
       .video-section
         .video-section__header
@@ -14,16 +14,16 @@
         = render "components/spinner"
         .video-section__link
           = link_to t(".see_more"), root_path(filtering_params.merge(sort: "newest")), class: "heading-4"
-    = turbo_frame_tag :oldest_videos, src: oldest_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event]), target: "_top"
+    = turbo_frame_tag :older_videos, src: older_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event]), target: "_top"
       .video-section
         .video-section__header
-          = link_to t(".oldest"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
+          = link_to t(".older"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
         = render "components/spinner"
         .video-section__link
           = link_to t(".see_more"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-4"
     .video-section__header.heading-2 = t(".popular")
     = paginated videos, class: "grid grid--videos"
-  - elsif videos.present? && params[:watched].blank? && params[:sort].blank? && params[:liked].blank?
+  - elsif videos.present? && (params[:sort].blank? || filtering_params.blank?)
     = turbo_frame_tag :trending_dancers, src: top_dancers_path, target: "_top"
       .video-section
         .video-section__header

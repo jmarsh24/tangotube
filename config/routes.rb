@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   resources :video_sections, only: [] do
     collection do
       get :recent
-      get :oldest
+      get :older
       get :trending
       get :performances
       get :random_event
