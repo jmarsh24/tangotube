@@ -1,5 +1,5 @@
 #videos.stack
-  - if videos.present? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:watched] || params[:channel] || params[:event] || params[:song] )
+  - if videos.present? && params[:sort].blank? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:watched] || params[:channel] || params[:event] || params[:song] )
     = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song] ), target: "_top"
       .video-section
         .video-section__header

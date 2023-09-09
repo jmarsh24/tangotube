@@ -4,3 +4,5 @@
       h2.heading-2 = t(".latest")
     .video-section__videos
       = render @videos
+    .video-section__link
+      = link_to t(".see_more"), root_path(filtering_params.merge(sort: "newest")), class: "heading-4"
