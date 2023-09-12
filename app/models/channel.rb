@@ -31,6 +31,7 @@ class Channel < ApplicationRecord
   has_many :dancers, through: :videos
   has_many :couples, through: :videos
   has_many :songs, through: :videos
+  has_many :recent_searches, as: :searchable, dependent: :destroy
 
   has_one_attached :thumbnail
 

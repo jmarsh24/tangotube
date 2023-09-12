@@ -19,6 +19,7 @@ class Couple < ApplicationRecord
   has_many :partnered_couples, class_name: "Couple", foreign_key: "partner_id", dependent: :destroy, inverse_of: :partner
   has_many :couple_videos, dependent: :destroy
   has_many :videos, through: :couple_videos
+  has_many :recent_searches, as: :searchable, dependent: :destroy
 
   validates :dancer_id, numericality: {less_than: :partner_id}
   after_validation :set_slug, only: [:create, :update]

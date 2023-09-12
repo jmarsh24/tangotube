@@ -57,6 +57,7 @@ class Video < ApplicationRecord
   has_one :video_score
   has_one :video_search
   # rubocop:enable Rails/HasManyOrHasOneDependent
+  has_many :recent_searches, as: :searchable, dependent: :destroy
 
   has_one_attached :thumbnail
 

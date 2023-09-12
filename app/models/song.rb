@@ -35,6 +35,7 @@ class Song < ApplicationRecord
   has_many :videos, dependent: :nullify
   has_many :leaders, through: :videos
   has_many :followers, through: :videos
+  has_many :recent_searches, as: :searchable, dependent: :destroy
 
   before_save :set_display_title
   after_validation :set_slug, only: [:create, :update]

@@ -25,6 +25,7 @@ class Dancer < ApplicationRecord
   has_many :videos, through: :dancer_videos
   has_many :orchestras, through: :videos
   has_many :songs, through: :videos
+  has_many :recent_searches, as: :searchable, dependent: :destroy
 
   has_many :couples, dependent: :destroy
   has_many :couple_videos, through: :couples

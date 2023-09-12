@@ -19,6 +19,7 @@ class Orchestra < ApplicationRecord
   has_many :videos, through: :songs
   has_many :dancers, through: :videos
   has_many :couples, through: :videos
+  has_many :recent_searches, as: :searchable, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 
