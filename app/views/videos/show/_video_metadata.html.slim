@@ -1,6 +1,6 @@
 - cache [video.youtube_id, video.song, video.event, video.dancers], expires_in: 24.hours do
   .video-metadata
-    .youtube-info-section.stack.stack--lg
+    .stack.stack--lg
       - if video.dancer_videos.present?
         .performers-section
           h3.heading-3.heading-3--bold = t(".performers_heading")
@@ -72,4 +72,4 @@
                 .metadata-item__label = t(".video_duration_heading")
                 .metadata-item__value = l(Time.at(video.duration), format: :video_duration)
     - if video&.song&.spotify_track_id.present?
-      iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/#{@video.song.spotify_track_id}?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"
+      iframe src="https://open.spotify.com/embed/track/#{@video.song.spotify_track_id}?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"

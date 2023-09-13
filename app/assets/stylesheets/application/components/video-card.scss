@@ -84,7 +84,9 @@
     position: relative;
     min-width: 220px;
     aspect-ratio: 16 / 9;
-    border-radius: var(--border-radius-lg);
+    @include breakpoint-tablet {
+      border-radius: var(--border-radius-lg);
+    }
   }
 
   &__duration {
@@ -110,7 +112,7 @@
     background-color: var(--color-neutral-200);
     z-index: var(--z-video-card-image);
 
-    @include breakpoint-mobile {
+    @include breakpoint-tablet {
       border-radius: var(--border-radius-lg);
     }
   }
