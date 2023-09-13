@@ -1,4 +1,3 @@
-- cache [@type, @related_videos] do
-  = turbo_frame_tag "related-videos-card", target: "_top"
-    = render partial: "videos", locals: { videos: @related_videos, type: @type, video: @video }
-    
+= turbo_frame_tag "related-videos-card", target: "_top"
+  = render "videos", videos: @related_videos, type: @type, video: @video
+  

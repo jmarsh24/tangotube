@@ -22,13 +22,7 @@ class RelatedVideosController < ApplicationController
       Video.none
     end
     @related_videos = related_videos.preload(Video.search_includes).limit(8)
-
-    respond_to do |format|
-      format.turbo_stream do
-        ui.replace "related-videos-links", with: "links", video: @video, type: @type
-        ui.replace "related-videos", with: "videos", videos: @related_videos, type: @type, video: @video
-      end
-      format.html
-    end
+    ui.replace "related-videos-links", with: "links", video: @video, type: @type
+    ui.replace "related-videos", with: "videos", videos: @related_videos, type: @type, video: @video
   end
 end

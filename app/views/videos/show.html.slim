@@ -15,5 +15,5 @@
     .scrollable-bar
       = render partial: "related_videos/links", locals: { video: @video, type: @type }
     = turbo_frame_tag "related-videos-card", src: related_video_path(id: @video.id, type: @type), target: "_top"
-      .stack.stack--justify-center.stack--line
-        = render "components/spinner"
+      #related-videos.related-videos.stack.stack--sm
+        = render "videos/skeleton_video_card", count: 6

@@ -18,4 +18,25 @@
     font-size: var(--font-size-lg);
     border-radius: 4px;
   }
+
+  &--blank {
+    background-color: var(--color-neutral-200);
+    color: transparent;
+    border: none;
+    pointer-events: none;
+    height: 20px;
+    @include shimmer-effect;
+  }
+
+  &--short {
+    width: 140px;
+  }
+
+  &--medium {
+    width: 200px;
+  }
+
+  &--wide {
+    width: 240px;
+  }
 }

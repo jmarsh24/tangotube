@@ -16,7 +16,7 @@
     border-radius: var(--border-radius-lg);
     flex-direction: column;
 
-    .video-card .video-card__image {
+    .video-card__image {
       min-width: 180px;
     }
 
@@ -52,6 +52,19 @@
         font-size: var(--font-size-xs);
         font-weight: var(--font-weight-normal);
       }
+    }
+  }
+
+  &--skeleton {
+    & .video-card__image-container {
+      background-color: var(--color-neutral-200);
+      @include shimmer-effect;
+    }
+    & .video-card__title,
+    & .video-card__dancer,
+    & .video-card__metadata,
+    & .video-card__song-metadata {
+      opacity: 0.6;
     }
   }
 
