@@ -23,4 +23,22 @@
       display: none;
     }
   }
+
+  &__cards {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-sm);
+    width: 100%;
+    padding-left: var(--spacing-sm);
+    overflow: auto;
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include breakpoint-tablet {
+      padding-left: 0;
+    }
+  }
 }
