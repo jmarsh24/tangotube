@@ -44,6 +44,10 @@
       .video-section  
         .video-section__videos
           = render "skeleton_video_card", count: 6
+    = turbo_frame_tag :random_event_videos, src: random_event_video_sections_path, target: "_top"
+      .video-section
+        .video-section__videos
+          = render "skeleton_video_card", count: 6
     .video-section__header.heading-2 = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - else
