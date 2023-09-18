@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   get "dancers/top", to: "dancers#top_dancers", as: "top_dancers"
   get "orchestras/top", to: "orchestras#top_orchestras", as: "top_orchestras"
+  get "events/top", to: "events#top_events", as: "top_events"
 
   resources :videos do
     member do
@@ -54,7 +55,6 @@ Rails.application.routes.draw do
       get :older
       get :trending
       get :performances
-      get :random_event
       get :alternative
     end
   end

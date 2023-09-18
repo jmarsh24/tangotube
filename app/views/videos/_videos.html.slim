@@ -35,11 +35,8 @@
       .video-section
         .video-section__header
           h2.heading-2 = t(".orchestras")
+    = turbo_frame_tag :trending_events, src: top_events_path, target: "_top"
     = turbo_frame_tag :newest_videos, src: recent_video_sections_path, target: "_top"
-      .video-section
-        .video-section__videos
-          = render "skeleton_video_card", count: 6
-    = turbo_frame_tag :random_event_videos, src: random_event_video_sections_path, target: "_top"
       .video-section
         .video-section__videos
           = render "skeleton_video_card", count: 6
