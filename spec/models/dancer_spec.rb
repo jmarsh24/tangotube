@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: dancers
@@ -18,3 +19,17 @@
 #  videos_count :integer          default(0), not null
 #  gender       :enum
 #
+require "rails_helper"
+
+RSpec.describe Dancer do
+  fixtures :all
+
+  describe ".search" do
+    it "returns dancers that match the search term" do
+      andrea = Dancer.create!(name: "Andrea Misse", videos_count: 1)
+      gabriel = Dancer.create!(name: "Gabriel Missé", videos_count: 2)
+
+      expect(Dancer.search("misse")).to match_array([andrea, gabriel])
+    end
+  end
+end

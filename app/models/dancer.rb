@@ -45,7 +45,7 @@ class Dancer < ApplicationRecord
 
     terms = TextNormalizer.normalize(search_term).split
 
-    where_conditions = terms.map { "dancers.name % ?" }.join(" OR ")
+    where_conditions = terms.map { "unaccent(dancers.name) % unaccent(?)" }.join(" OR ")
     order_sql = <<-SQL
       0.5 * (1 - ("dancers"."name" <-> '#{search_term}')) + 0.5 * (videos_count::float / #{max_videos_count}) DESC
     SQL
