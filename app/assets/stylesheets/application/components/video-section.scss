@@ -45,7 +45,7 @@
   .video-card {
     width: 76vw;
     @include breakpoint-tablet {
-      width: unset;
+      width: 100%;
     }
   }
 }
