@@ -9,9 +9,12 @@ module ExternalVideoImport
       end
 
       def group_to_performance
+        return if @video.leaders.empty? || @video.followers.empty?
+
         videos = Video.within_week_of(@video.upload_date)
-        leader = @video.leaders.first.slug
-        follower = @video.followers.first.slug
+
+        leader = @video.leaders&.first&.slug
+        follower = @video.followers&.first&.slug
         channel = @video.channel.youtube_slug
 
         filtering_params = {
