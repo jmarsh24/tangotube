@@ -6,11 +6,10 @@ module ExternalVideoImport
       def trim(file)
         return unless File.exist?(file.path) && !File.zero?(file.path)
 
-        media = FFMPEG::Movie.new(file.path)
-        file_to_trim = media.video_stream ? transcode_and_trim(media) : file
+        transcoded_file = transcode_to_mp3(file)
 
-        Tempfile.create(["#{File.basename(file_to_trim.path, File.extname(file_to_trim.path))}_trimmed", ".mp3"]) do |trimmed_file|
-          transcode_audio_file(file_to_trim, trimmed_file)
+        Tempfile.create(["#{File.basename(transcoded_file.path, File.extname(transcoded_file.path))}_trimmed", ".mp3"]) do |trimmed_file|
+          trim_audio_file(transcoded_file, trimmed_file)
           yield trimmed_file
         end
       rescue => e
@@ -19,13 +18,16 @@ module ExternalVideoImport
 
       private
 
-      def transcode_and_trim(media)
-        audio_file = Tempfile.new([File.basename(media.path, File.extname(media.path)), ".mp3"])
+      def transcode_to_mp3(file)
+        return file if File.extname(file.path).casecmp(".mp3").zero?
+
+        audio_file = Tempfile.new([File.basename(file.path, File.extname(file.path)), ".mp3"])
+        media = FFMPEG::Movie.new(file.path)
         media.transcode(audio_file.path, audio_codec: "mp3")
         audio_file
       end
 
-      def transcode_audio_file(input_file, output_file)
+      def trim_audio_file(input_file, output_file)
         audio_file = FFMPEG::Movie.new(input_file.path)
         start_time = audio_file.duration / 2
         end_time = start_time + 20

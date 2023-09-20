@@ -8,6 +8,13 @@ puts "---> FAKE YT_DLP <---"
 
 def download_audio
   audio_filepath = ARGV[ARGV.index("-o") + 1]
+
+  # Determine the extension based on other arguments or default to 'mp3'
+  ext = "mp3" # Default extension
+
+  # Replace format specifiers in the output path
+  audio_filepath.gsub!("%(ext)s", ext)
+
   puts "Downloading audio to #{audio_filepath}"
   FileUtils.mkdir_p(File.dirname(audio_filepath.to_s))
   FileUtils.cp "spec/fixtures/files/blank_audio.mp3", audio_filepath.to_s

@@ -6,25 +6,27 @@ module ExternalVideoImport
       YT_DLP_COMMAND_PREFIX = "https://www.youtube.com/watch?v="
 
       def download_file(slug)
-        Tempfile.create([slug.to_s, ".mp3"]) do |file|
-          audio_success = system(yt_dlp_command(file, slug, format: "-f bestaudio"))
-          if audio_success
-            yield file if block_given? && audio_success
-          else
-            Tempfile.create([slug.to_s, ".mp4"]) do |file|
-              system(yt_dlp_command(file, slug))
-              yield file if block_given?
+        Dir.mktmpdir do |dir|
+          output_template = "#{dir}/#{slug}.%(ext)s"
+          success = system(yt_dlp_command(output_template, slug, format: "-f bestaudio"))
+
+          if success
+            downloaded_file = Dir["#{dir}/#{slug}.*"].first
+
+            Tempfile.create([slug, File.extname(downloaded_file)]) do |tempfile|
+              FileUtils.move(downloaded_file, tempfile.path)
+              yield tempfile if block_given?
             end
           end
-        rescue => e
-          Rails.logger.error "Failed to download file: #{e.message}"
         end
+      rescue => e
+        Rails.logger.error "Failed to download file: #{e.message}"
       end
 
       private
 
-      def yt_dlp_command(file, slug, format: "")
-        "#{ENV["YT_DLP_BIN"]} '#{YT_DLP_COMMAND_PREFIX + slug}' #{format} --force-overwrites -o '#{file.path}'"
+      def yt_dlp_command(output_template, slug, format: "")
+        "#{ENV["YT_DLP_BIN"]} '#{YT_DLP_COMMAND_PREFIX + slug}' #{format} --force-overwrites -o '#{output_template}'"
       end
     end
   end
