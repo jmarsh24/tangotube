@@ -44,21 +44,7 @@ class Video::RelatedVideos
   def with_same_performance
     return Video.none unless @video.performance.present?
 
-    videos = Video.within_week_of(@video.upload_date)
-    leader = @video.leaders.first&.slug
-    follower = @video.followers.first&.slug
-    channel = @video.channel.youtube_slug
-
-    filtering_params = {
-      channel:,
-      leader:,
-      follower:,
-      hidden: false
-    }
-
-    filtered_videos = Video::Filter.new(videos, filtering_params:).videos
-
-    filtered_videos.joins(performance_video: :performance).order("performance_videos.position")
+    @video.performance.videos.preload(:dancers).order("performance_videos.position")
   end
 
   def available_types
