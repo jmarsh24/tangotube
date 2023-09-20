@@ -48,6 +48,6 @@ class VideoSectionsController < ApplicationController
   private
 
   def filtering_params
-    params.permit(:leader, :follower, :couple, :orchestra, :watched, :song, :channel, :event).to_h
+    params.permit(:leader, :follower, :couple, :orchestra, :watched, :song, :channel, :event, :genre).to_h
   end
 end
