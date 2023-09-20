@@ -41,4 +41,11 @@
       padding-left: 0;
     }
   }
+
+  .video-card {
+    width: 76vw;
+    @include breakpoint-tablet {
+      width: unset;
+    }
+  }
 }
