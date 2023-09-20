@@ -1,7 +1,11 @@
 = cache [video.youtube_id, video.dancer_ids, video.song, video.title], expires_in: 24.hours do
-  a href=modal_path(details_video_path(@video)) class="video-info"
-    .stack.stack--xxs
-      h1.heading-4.heading-4 = video.title
-      .stack.stack--line.stack--align-bottom.stack--justify-left
-        .video-info__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
-        .video-info__more-link = t(".more")
+  .stack.stack--zero
+    a href=modal_path(details_video_path(@video)) class="video-info"
+      .stack.stack--xxs
+        h1.heading-4.heading-4 = video.title
+        .stack.stack--line.stack--align-bottom.stack--justify-left
+          .video-info__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
+          .video-info__more-link = t(".more")
+    = link_to root_path(channel: video.channel&.youtube_slug), class: "channel" do
+      = image_tag video.channel&.thumbnail, class: "avatar avatar--small"
+      .channel__title = video.channel&.title
