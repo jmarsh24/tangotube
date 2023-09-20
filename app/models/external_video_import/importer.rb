@@ -18,6 +18,7 @@ module ExternalVideoImport
       Video.transaction do
         video = Video.create!(video_attributes)
         attach_thumbnail(video, metadata.youtube.thumbnail_url.highest_resolution)
+        ExternalVideoImport::Performance::VideoGrouper.new(video:).group_to_performance
         video
       end
     rescue => e
@@ -45,6 +46,7 @@ module ExternalVideoImport
         if !video.thumbnail.attached?
           attach_thumbnail(video, metadata.youtube.thumbnail_url.highest_resolution)
         end
+        ExternalVideoImport::Performance::VideoGrouper.new(video:).group_to_performance
       end
 
       video

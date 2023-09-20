@@ -67,7 +67,7 @@ RSpec.describe ExternalVideoImport::Importer do
      description: "Test video description featuring amazing dancers and great music.",
      channel: channels(:"030tango"),
      song: songs(:nueve_de_julio),
-     couples: [couples(:carlitos_noelia)],
+     couple_videos: [couple_videos(:couple_video_4)],
      acr_response_code: nil,
      duration: 180,
      hd: true,

@@ -17,7 +17,6 @@ module ExternalVideoImport
           channel: ChannelMatcher.new.match_or_create(channel_metadata: metadata.youtube.channel),
           song:,
           event: EventMatcher.new.match(video_title: metadata.youtube.title, video_description: metadata.youtube.description),
-          couples: [couple].compact,
           acr_response_code: metadata.music&.code,
           duration: metadata.youtube.duration,
           hd: metadata.youtube.hd,
@@ -30,6 +29,10 @@ module ExternalVideoImport
           role = (dancer.gender == "male") ? "leader" : "follower"
           DancerVideo.new(dancer:, role:)
         end
+        video_data[:couple_videos] = [couple].compact.map do
+          CoupleVideo.new(couple: _1)
+        end
+
         video_data
       end
 

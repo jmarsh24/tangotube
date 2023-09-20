@@ -9,4 +9,16 @@ guard :rspec, cmd: "bin/rspec" do
   # RSpec files
   rspec = dsl.rspec
   watch(rspec.spec_files)
+
+  # Ruby files
+  ruby = dsl.ruby
+  dsl.watch_spec_files_for(ruby.lib_files)
+
+  # Rails files
+  rails = dsl.rails
+  dsl.watch_spec_files_for(rails.app_files)
+  dsl.watch_spec_files_for(rails.views)
+
+  watch(%r{^app/controllers/(.+)s_(controller)\.rb}) { |m| "spec/system/#{m[1]}_spec.rb" }
+  watch(%r{^app/views/(.+)s/.+.html.slim}) { |m| "spec/system/#{m[1]}_spec.rb" }
 end
