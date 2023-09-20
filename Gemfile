@@ -61,6 +61,7 @@ gem "scenic"
 gem "patreon"
 gem "strip_attributes"
 gem "goldiloader"
+gem "browser"
 
 # Assets
 gem "vite_rails"

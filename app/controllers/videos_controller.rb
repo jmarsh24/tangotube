@@ -40,7 +40,7 @@ class VideosController < ApplicationController
     @root_url = root_url
     @playback_rate = params[:speed] || "1"
 
-    current_user&.watches&.create!(video: @video, watched_at: Time.now)
+    current_user&.watches&.create!(video: @video, watched_at: Time.now) unless is_bot?
   end
 
   # @route GET /videos/filters (filters_videos)
@@ -71,6 +71,11 @@ class VideosController < ApplicationController
   end
 
   private
+
+  def is_bot?
+    browser = Browser.new(request.user_agent)
+    browser.bot?
+  end
 
   def check_for_clear
     if params[:commit] == "Clear"
