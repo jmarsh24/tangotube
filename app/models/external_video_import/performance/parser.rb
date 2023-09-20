@@ -89,6 +89,8 @@ module ExternalVideoImport
           next unless match
 
           position = match[1].to_i
+          next if position > 8
+
           total = pattern[:total_group] ? match[pattern[:total_group]].to_i : nil
 
           return nil if total && (position > total || total == 1)
