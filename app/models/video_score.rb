@@ -4,12 +4,14 @@
 #
 # Table name: video_scores
 #
-#  video_id :bigint           primary key
-#  score_1  :float
-#  score_2  :float
-#  score_3  :float
-#  score_4  :float
-#  score_5  :float
+#  video_id    :bigint           primary key
+#  video_title :text
+#  score_1     :float
+#  score_2     :float
+#  score_3     :float
+#  score_4     :float
+#  score_5     :float
+#  score_6     :decimal(, )
 #
 class VideoScore < ApplicationRecord
   self.primary_key = :video_id

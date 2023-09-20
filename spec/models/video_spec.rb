@@ -29,6 +29,9 @@
 #  metadata_updated_at :datetime
 #  normalized_title    :string
 #  slug                :string
+#  likes_count         :integer          default(0)
+#  watches_count       :integer          default(0)
+#  features_count      :integer          default(0)
 #
 require "rails_helper"
 
@@ -57,9 +60,8 @@ RSpec.describe Video do
   describe ".featured" do
     it "returns videos that are featured" do
       featured_videos = Video.featured
-      Feature.create!(user: users(:regular), featureable: videos(:video_1_featured))
 
-      expect(featured_videos).to include(videos(:video_1_featured))
+      expect(featured_videos).to match_array([videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)])
       expect(featured_videos).not_to include(videos(:video_5))
     end
   end
@@ -67,7 +69,6 @@ RSpec.describe Video do
   describe ".not_featured" do
     it "returns videos that are not featured" do
       not_featured_videos = Video.not_featured
-      Feature.create!(user: users(:regular), featureable: videos(:video_1_featured))
 
       expect(not_featured_videos).to include(videos(:video_5))
       expect(not_featured_videos).not_to include(videos(:video_1_featured))

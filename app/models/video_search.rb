@@ -18,7 +18,6 @@
 #  event_title              :text
 #  event_country            :text
 #  video_title              :text
-#  score                    :float
 #
 class VideoSearch < ApplicationRecord
   self.primary_key = :video_id

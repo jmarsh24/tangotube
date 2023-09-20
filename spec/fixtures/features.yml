@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: features
+#
+#  id               :uuid             not null, primary key
+#  user_id          :bigint           not null
+#  featureable_type :string           not null
+#  featureable_id   :bigint           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+feature_for_video_1:
+  user: regular
+  featureable: video_1_featured (Video)
+
+feature_for_video_2:
+  user: regular
+  featureable: video_2_featured (Video)
+
+feature_for_video_3:
+  user: regular
+  featureable: video_3_featured (Video)
+
+feature_for_video_4:
+  user: regular
+  featureable: video_4_featured (Video)

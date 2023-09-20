@@ -10,4 +10,8 @@ module Featureable
   def feature_for(featureable)
     features.find_by(featureable:)
   end
+
+  def featured?
+    features.exists?
+  end
 end

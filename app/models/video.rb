@@ -29,6 +29,9 @@
 #  metadata_updated_at :datetime
 #  normalized_title    :string
 #  slug                :string
+#  likes_count         :integer          default(0)
+#  watches_count       :integer          default(0)
+#  features_count      :integer          default(0)
 #
 class Video < ApplicationRecord
   include Featureable
