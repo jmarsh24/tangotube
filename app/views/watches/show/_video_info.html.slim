@@ -1,0 +1,13 @@
+= cache [video, I18n.locale, "video_info"] do
+  .stack.stack--zero
+    a href=modal_path(details_video_path(@video)) class="video-info" aria-label="Information about #{video.title}"
+      .stack.stack--xxs
+        h1 = video.title
+        .stack.stack--line.stack--align-bottom.stack--justify-left
+          - metadata = [video.channel&.title, l(video.upload_date, format: :short_month_year), t('views_count', count: number_to_human(video.youtube_view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact
+          .video-info__metadata = metadata.join(" • ")
+          .video-info__more-link = t(".more")
+    - if video.channel
+      = link_to root_path(channel: video.channel.youtube_slug), class: "channel", aria_label: "Channel of #{video.channel.title}" do
+        = image_tag video.channel.thumbnail, alt: "Thumbnail of #{video.channel.title}", class: "avatar avatar--small"
+        .channel__title = video.channel.title

@@ -1,4 +1,4 @@
-- cache [video.youtube_id, video.song, video.event, video.dancers], expires_in: 24.hours do
+- cache [video, I18n.locale, "video_metadata"] do
   .video-metadata
     .stack.stack--lg
       - if video.dancer_videos.present?

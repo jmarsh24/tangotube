@@ -54,6 +54,7 @@ $weights: (
     font-size: map-get($properties, font);
     line-height: map-get($properties, line);
     font-weight: 700;
+    font-family: var(--font-heading);
   }
 }
 

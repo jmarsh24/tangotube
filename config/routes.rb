@@ -49,6 +49,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "watch", to: "watches#show", as: "watch"
+
   resources :video_sections, only: [] do
     collection do
       get :recent
@@ -96,7 +98,5 @@ Rails.application.routes.draw do
   post "banner", to: "banner#index"
   get "support_us", to: "support#show"
 
-  # Watch and root routes
-  get "/watch", to: "videos#show", as: "watch"
   root "videos#index"
 end
