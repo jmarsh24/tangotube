@@ -32,10 +32,9 @@ module ExternalVideoImport
           ::Performance.create!
         end
 
-        parsed_data = @parser.parse(text: @video.title)
-
         performance_videos.each do |video|
           if video.performance
+            parsed_data = @parser.parse(text: video.title)
             video.performance_video.update!(position: parsed_data.position) if parsed_data
           else
             PerformanceVideo.create!(performance:, video:, position: parsed_data&.position)
@@ -43,6 +42,7 @@ module ExternalVideoImport
         end
 
         unless @video.performance
+          parsed_data = @parser.parse(text: @video.title)
           PerformanceVideo.create!(performance:, video: @video, position: parsed_data.position) if parsed_data
         end
 
