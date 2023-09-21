@@ -114,6 +114,17 @@ class Video::FacetBuilder
     end
   end
 
+  def channel
+    Facet.new(name: "channel", option_builder: ->(name, count) { Option.new(label: name[0], value: name[1], count:) }) do
+      @video_relation
+        .joins(:channel)
+        .group("channels.title", "channels.youtube_slug", "channels.videos_count")
+        .order("count_all DESC", "channels.title")
+        .limit(30)
+        .count
+    end
+  end
+
   private
 
   def custom_titleize(name)
