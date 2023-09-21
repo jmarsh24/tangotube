@@ -11,10 +11,6 @@ module ExternalVideoImport
       # Example: Matches "4" in "[Milonga] 2023.09.09 - Maja Petrovic & Marko Miljevic - Show.No.4"
       SHOW_NO_REGEX = /Show\.No\.(\d+)/
 
-      # This regex matches performance numbers where the performance is mentioned by itself.
-      # Example: Matches "2" in "Agustina Piaggio & Carlitos Espinoza London Scottish House Performance 2"
-      PERFORMANCE_ONLY_REGEX = /Performance (\d+)$/
-
       # This regex matches lone performance numbers separated by a period.
       # Example: Matches "4" in "Carlos Espinoza & Noelia Hurtado. 4. PLANETANGO-XXI Tango Festival"
       PERFORMANCE_LONE_NUMBER_REGEX = /(?<=\.)\s*(?<!\d\.)(\d+)\s*\./

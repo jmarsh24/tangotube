@@ -36,9 +36,9 @@ module ExternalVideoImport
 
         performance_videos.each do |video|
           if video.performance
-            video.performance.update!(position: parsed_data.position) if parsed_data
-          elsif parsed_data
-            PerformanceVideo.create!(performance:, video:, position: parsed_data.position)
+            video.performance_video.update!(position: parsed_data.position) if parsed_data
+          else
+            PerformanceVideo.create!(performance:, video:, position: parsed_data&.position)
           end
         end
 
