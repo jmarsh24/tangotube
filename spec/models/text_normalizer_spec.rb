@@ -6,4 +6,8 @@ RSpec.describe TextNormalizer do
   it "normalizes text" do
     expect(TextNormalizer.normalize("Sábado inglés")).to eq("sabado ingles")
   end
+
+  it "normalizes text with apostrophes" do
+    expect(TextNormalizer.normalize("Тополиный пух")).to eq("")
+  end
 end

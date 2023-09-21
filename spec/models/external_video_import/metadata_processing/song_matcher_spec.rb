@@ -194,6 +194,46 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(que_peina_canas)
       end
 
+      it "returns a match for milonga qu peina canas" do
+        Song.create!(
+          genre: "Alternative",
+          title: "Тополиный пух",
+          artist: "Иванушки International"
+        )
+
+        illustion_de_mi_vida_song = Song.create!(
+          genre: "Alternative",
+          title: "Ilusión De Mi Vida",
+          artist: "Ariel Ramírez"
+        )
+
+        video_title = "13th Shanghai International Tango Festival Day 2 - Fernando Sanchez y Ariadna Naveira 2"
+        video_description = "曲目:Ilusión de mi vida - Ariel Ramírez"
+        song_titles = ["Ilusión De Mi Vida", "Ilusión De Mi Vida - Instrumental"]
+        song_artists = ["Ariel Ramírez", "Ariel Ramírez"]
+        song_albums = ["Acuarela Folklorica"]
+        expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(illustion_de_mi_vida_song)
+      end
+
+      it "returns a match for milonga qu peina canas" do
+        Song.create!(
+          genre: "Alternative",
+          title: "Тополиный пух",
+          artist: "Иванушки International"
+        )
+
+        video_title = "13th Shanghai International Tango Festival Day 2 - Fernando Sanchez y Ariadna Naveira 2"
+        video_description = "曲目:Ilusión de mi vida - Ariel Ramírez"
+        song_titles = ["Ilusión De Mi Vida", "Ilusión De Mi Vida - Instrumental"]
+        song_artists = ["Ariel Ramírez", "Ariel Ramírez"]
+        song_albums = ["Acuarela Folklorica"]
+
+        song = song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)
+        expect(song.artist).to eq "Ariel Ramírez"
+        expect(song.genre).to eq "Alternative"
+        expect(song.title).to eq "Ilusión De Mi Vida"
+      end
+
       it "returns a match for el chamuyo" do
         calo = Orchestra.create!(
           name: "Miguel Calo",

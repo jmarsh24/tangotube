@@ -38,6 +38,11 @@ module ExternalVideoImport
         potential_matches = []
 
         song_attributes.each do |song_id, artist, title|
+          normalized_artist = TextNormalizer.normalize(artist)
+          normalized_title = TextNormalizer.normalize(title)
+
+          next if normalized_artist.blank? || normalized_title.blank?
+
           converted_title = SongInWrittenFormConverter.new.convert(title)
           combined_name = TextNormalizer.normalize("#{artist} #{title}")
           converted_combined_name = TextNormalizer.normalize("#{artist} #{converted_title}")
