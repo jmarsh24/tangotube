@@ -194,6 +194,14 @@ RSpec.describe ExternalVideoImport::Performance::Parser do
       expect(performance.position).to eq 2
       expect(performance.total).to be_nil
     end
+
+    it "returns nil when performance information is invalid" do
+      text = "Carlitos Espinoza & Agustina Piaggio2"
+      performance = ExternalVideoImport::Performance::Parser.new.parse(text:)
+
+      expect(performance.position).to eq 2
+      expect(performance.total).to be_nil
+    end
     # rubocop:enable RSpec/RepeatedDescription
   end
 end

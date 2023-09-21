@@ -57,6 +57,8 @@ module ExternalVideoImport
 
       PERFORMANCE_OF_REGEX = /(?<=\D|^)(?:\()?(?:(\d+) of (\d+))(?:\))?(?=\s|$)/
 
+      SIMPLE_NUMBER_REGEX = /(?<!\d)([1-8])(?!\d)/
+
       Performance = Struct.new(:position, :total, keyword_init: true)
 
       def parse(text:)
@@ -76,6 +78,7 @@ module ExternalVideoImport
           {regex: PART_HYPHEN_NUMBER_REGEX, total_group: nil},
           {regex: PERFORMANCE_ONLY_REGEX, total_group: nil},
           {regex: PERFORMANCE_DE_REGEX, total_group: 2},
+          {regex: SIMPLE_NUMBER_REGEX, total_group: nil},
           {regex: PERFORMANCE_HYPHEN_REGEX, total_group: nil}
         ]
 
