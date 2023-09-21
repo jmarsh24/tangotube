@@ -9,5 +9,5 @@
           .video-info__more-link = t(".more")
     - if video.channel
       = link_to root_path(channel: video.channel.youtube_slug), class: "channel", aria_label: "Channel of #{video.channel.title}" do
-        = image_tag video.channel.thumbnail, alt: "Thumbnail of #{video.channel.title}", class: "avatar avatar--small"
+        = image_tag video.channel.thumbnail, alt: "Thumbnail of #{video.channel.title}", class: "avatar avatar--circle avatar--small"
         .channel__title = video.channel.title

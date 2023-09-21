@@ -1,21 +1,20 @@
 .card {
   flex-shrink: 0;
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(--color-gray-100);
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius-xl);
-  width: 140px;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-lg);
   cursor: pointer;
+  max-width: 140px;
 
   &__content {
-    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: center;
   }
 
   &__title {
@@ -31,6 +30,6 @@
   }
 
   &:hover {
-    background-color: var(--color-gray-200);
+    background-color: var(--color-gray-100);
   }
 }
