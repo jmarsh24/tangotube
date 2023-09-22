@@ -73,8 +73,8 @@
     top: 5px;
     right: 5px;
     padding: 0.1em 0.3em;
-    background-color: rgba(0, 0, 0, 0.85);
-    color: var(--color-neutral-1000);
+    background-color: black;
+    color: white;
     border-radius: 0.3em;
     z-index: var(--z-performance-number);
     font-size: var(--font-size-xs);
@@ -94,7 +94,8 @@
     right: 5px;
     bottom: 10px;
     padding: 0 0.3em;
-    background-color: var(--color-neutral-0);
+    background-color: black;
+    color: white;
     border-radius: 0.3em;
     font-size: var(--font-size-xs);
     z-index: var(--z-duration);
