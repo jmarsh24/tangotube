@@ -5,12 +5,10 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
       = form_with url: search_path, method: :get, html: { data: { turbo_stream: true } } do |f|
         = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autocomplete: "off", autocorrect: "off", autocapitalize: "none", data: { search_modal_target: "desktopInput", action: "input->search-modal#search focus->search-modal#show",  }, id: "desktop-search-input"
       .navbar__item.navbar__item--links data-controller="dropdown dark"
-        .button.icon.icon--magnifying-glass.icon--lg.icon--white data-action="click->search-modal#show" id="mobile-search"
-          button.button.icon.theme-icon data-action="dropdown#toggle click@window->dropdown#hide"
         .dropdown data-controller="dropdown"
           button data-action="dropdown#toggle click@window->dropdown#hide"
             - if current_user&.avatar&.attached?
-              = image_tag current_user.avatar, loading: :eager, width: 80, class: "avatar avatar--circleavatar--md"
+              = image_tag current_user.avatar, loading: :eager, width: 80, class: "avatar avatar--circle avatar--md"
             - else
               = image_tag "default_avatar.jpg", class: "avatar avatar--circleavatar--md"
           .menu.menu--right.hidden data-dropdown-target="menu" data-action="click->dropdown#toggle"

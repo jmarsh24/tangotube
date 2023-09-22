@@ -102,3 +102,8 @@ $icon-padding-sizes: (
     transform: translateY(0) rotate(0deg);
   }
 }
+
+/* Override with the light YouTube logo when data-theme is set to light */
+[data-theme='light'] .icon--youtube {
+  background-image: url('@assets/images/icons/yt-logo-light.svg');
+}

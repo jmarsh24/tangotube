@@ -3,47 +3,47 @@ $sizes: (
   mega: (
     font: 48px,
     line: 72px,
-    font-family: 'Limelight-Regular, serif',
+    font-family: 'Limelight-Regular',
   ),
   heading-1: (
     font: 32px,
     line: 48px,
-    font-family: 'Limelight-Regular, serif',
+    font-family: 'Limelight-Regular',
   ),
   heading-2: (
     font: 24px,
     line: 36px,
-    font-family: 'Limelight-Regular, serif',
+    font-family: 'Limelight-Regular',
   ),
   heading-3: (
     font: 20px,
     line: 30px,
-    font-family: 'Limelight-Regular, serif',
+    font-family: 'Limelight-Regular',
   ),
   heading-4: (
     font: 16px,
     line: 24px,
-    font-family: 'Limelight-Regular, serif',
+    font-family: 'Limelight-Regular',
   ),
   paragraph: (
     font: 16px,
     line: 24px,
-    font-family: 'Circular, sans-serif',
+    font-family: 'Circular',
   ),
   caption: (
     font: 12px,
     line: 18px,
-    font-family: 'Circular, sans-serif',
+    font-family: 'Circular',
   ),
   action-footer-link: (
     font: 14px,
     line: 21px,
-    font-family: 'Circular, sans-serif',
+    font-family: 'Circular',
   ),
   action-small-links: (
     font: 14px,
     line: 21px,
-    font-family: 'Circular, sans-serif',
+    font-family: 'Circular',
   ),
 );
 
@@ -73,7 +73,7 @@ $weights: (
 }
 
 .font-circular-heavy {
-  font-family: 'Circular', sans-serif;
+  font-family: 'Circular';
   font-weight: 700;
 }
 
