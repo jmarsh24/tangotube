@@ -3,38 +3,47 @@ $sizes: (
   mega: (
     font: 48px,
     line: 72px,
+    font-family: 'Limelight-Regular, serif',
   ),
   heading-1: (
     font: 32px,
     line: 48px,
+    font-family: 'Limelight-Regular, serif',
   ),
   heading-2: (
     font: 24px,
     line: 36px,
+    font-family: 'Limelight-Regular, serif',
   ),
   heading-3: (
     font: 20px,
     line: 30px,
+    font-family: 'Limelight-Regular, serif',
   ),
   heading-4: (
     font: 16px,
     line: 24px,
+    font-family: 'Limelight-Regular, serif',
   ),
   paragraph: (
     font: 16px,
     line: 24px,
+    font-family: 'Circular, sans-serif',
   ),
   caption: (
     font: 12px,
     line: 18px,
+    font-family: 'Circular, sans-serif',
   ),
   action-footer-link: (
     font: 14px,
     line: 21px,
+    font-family: 'Circular, sans-serif',
   ),
   action-small-links: (
     font: 14px,
     line: 21px,
+    font-family: 'Circular, sans-serif',
   ),
 );
 
@@ -53,7 +62,7 @@ $weights: (
   .#{$class} {
     font-size: map-get($properties, font);
     line-height: map-get($properties, line);
-    font-family: 'Limelight-Regular';
+    font-family: map-get($properties, font-family);
   }
 }
 
@@ -61,6 +70,11 @@ $weights: (
   .font-weight-#{$class} {
     font-weight: $weight;
   }
+}
+
+.font-circular-heavy {
+  font-family: 'Circular', sans-serif;
+  font-weight: 700;
 }
 
 .text-uppercase {
