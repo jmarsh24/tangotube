@@ -87,3 +87,7 @@ body.search-window--open {
     display: none;
   }
 }
+
+[data-theme='light'] .search-window::before {
+  background-color: hsla(0, 0%, 80%, 0.85);
+}
