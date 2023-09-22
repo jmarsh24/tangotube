@@ -50,8 +50,11 @@ en:
       terms: Terms
     navbar:
       about: About
+      auto_mode_link: Auto
       contact: Contact
+      dark_mode_link: Dark Mode
       google_privacy_policy: Google privacy policy
+      light_mode_link: Light Mode
       privacy: Privacy
       search: Search
       terms: Terms
@@ -228,10 +231,10 @@ en:
   video_sections:
     alternative:
       alternative: Alternative
-      see_more: See more
+      see_more: See more...
     older:
       older: Older
-      see_more: See more
+      see_more: See more...
     performances:
       performance: Performance
       see_more: See more...

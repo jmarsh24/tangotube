@@ -4,17 +4,9 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
       a.navbar__logo href=root_path
       = form_with url: search_path, method: :get, html: { data: { turbo_stream: true } } do |f|
         = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autocomplete: "off", autocorrect: "off", autocapitalize: "none", data: { search_modal_target: "desktopInput", action: "input->search-modal#search focus->search-modal#show",  }, id: "desktop-search-input"
-        / .navbar__search-bar
-        /   .icon.icon--magnifying-glass
-          span.navbar__search-bar__text = t(".search")
-      .navbar__item.navbar__item--links
+      .navbar__item.navbar__item--links data-controller="dropdown dark"
         .button.icon.icon--magnifying-glass.icon--lg.icon--white data-action="click->search-modal#show" id="mobile-search"
-        / .dropdown data-controller="dropdown dark"
-        /   button.button.icon.theme-icon data-action="dropdown#toggle click@window->dropdown#hide"
-        /   .menu.menu--right data-dropdown-target="menu"
-        /     .menu-item.theme-menu-item--light data-action="click->dark#light" = t(".light_mode_link")
-        /     .menu-item.theme-menu-item--dark data-action="click->dark#dark" = t(".dark_mode_link")
-        /     .menu-item.theme-menu-item--auto data-action="click->dark#auto" = t(".auto_mode_link")
+          button.button.icon.theme-icon data-action="dropdown#toggle click@window->dropdown#hide"
         .dropdown data-controller="dropdown"
           button data-action="dropdown#toggle click@window->dropdown#hide"
             - if current_user&.avatar&.attached?
@@ -29,6 +21,11 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
               = link_to t("login"), new_user_session_path, class: "menu-item", data_turbo_stream: true
               = link_to t("sign_up"), new_user_registration_path, class: "menu-item menu-item--bold", data_turbo_stream: true
             .divider
+            .menu-item.theme-menu-item--light data-action="click->dark#light" = t(".light_mode_link")
+            .menu-item.theme-menu-item--dark data-action="click->dark#dark" = t(".dark_mode_link")
+            .menu-item.theme-menu-item--auto data-action="click->dark#auto" = t(".auto_mode_link")
+            .divider
+            .menu.menu--right data-dropdown-target="menu"
             = link_to t(".privacy"), privacy_path, class: "menu-item"
             = link_to t(".terms"), terms_path, class: "menu-item"
             = link_to t(".contact"), contact_path, class: "menu-item"

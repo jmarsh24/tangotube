@@ -1,7 +1,7 @@
 doctype html
 html lang=I18n.locale
   = render "components/head"
-  body data-controller="search-modal supported toast#{' patreon-modal' unless current_user&.supporter?}" data-theme="dark" class=Rails.env
+  body data-controller="search-modal supported toast#{' patreon-modal' unless current_user&.supporter?}" data-theme="light" class=Rails.env
     .page class=(@show_filter_bar == true ? "page--with-filter-bar" : "")
       = render "components/navbar"
       = render "components/flash"

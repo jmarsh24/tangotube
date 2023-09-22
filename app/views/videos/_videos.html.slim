@@ -9,7 +9,7 @@
         .video-section__videos
           = render "skeleton_video_card", count: 6
         .video-section__link
-          = link_to t(".see_more"), root_path(filtering_params.merge(sort: "trending")), class: "heading-4"
+          = link_to t(".see_more"), root_path(filtering_params.merge(sort: "trending"))
     = turbo_frame_tag :newest_videos, src: recent_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song], genre: params[:genre] ), target: "_top"
       .video-section
         .video-section__header
@@ -17,7 +17,7 @@
         .video-section__videos
           = render "skeleton_video_card", count: 6
         .video-section__link
-          = link_to t(".see_more"), root_path(filtering_params.merge(sort: "most_recent")), class: "heading-4"
+          = link_to t(".see_more"), root_path(filtering_params.merge(sort: "most_recent"))
     = turbo_frame_tag :older_videos, src: older_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song], genre: params[:genre] ), target: "_top"
       .video-section
         .video-section__header
@@ -25,7 +25,7 @@
         .video-section__videos
           = render "skeleton_video_card", count: 6
         .video-section__link
-          = link_to t(".see_more"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-4"
+          = link_to t(".see_more"), root_path(filtering_params.merge(sort: "oldest"))
     .video-section__header.heading-2 = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - elsif videos.present? && (params[:sort].blank? || filtering_params.blank?)
