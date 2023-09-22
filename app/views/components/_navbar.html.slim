@@ -22,7 +22,7 @@ header.navbar.stack.stack--zero data-controller="toggle navbar"
             .divider
             .menu-item.theme-menu-item--light data-action="click->dark#light" = t(".light_mode_link")
             .menu-item.theme-menu-item--dark data-action="click->dark#dark" = t(".dark_mode_link")
-            .menu-item.theme-menu-item--auto data-action="click->dark#auto" = t(".auto_mode_link")
+            / .menu-item.theme-menu-item--auto data-action="click->dark#auto" = t(".auto_mode_link")
             .divider
             = link_to t(".privacy"), privacy_path, class: "menu-item"
             = link_to t(".terms"), terms_path, class: "menu-item"
