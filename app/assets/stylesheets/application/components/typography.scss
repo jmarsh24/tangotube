@@ -3,27 +3,27 @@ $sizes: (
   mega: (
     font: 48px,
     line: 72px,
-    font-family: 'Limelight-Regular',
+    font-family: 'Circular',
   ),
   heading-1: (
     font: 32px,
     line: 48px,
-    font-family: 'Limelight-Regular',
+    font-family: 'Circular',
   ),
   heading-2: (
     font: 24px,
     line: 36px,
-    font-family: 'Limelight-Regular',
+    font-family: 'Circular',
   ),
   heading-3: (
     font: 20px,
     line: 30px,
-    font-family: 'Limelight-Regular',
+    font-family: 'Circular',
   ),
   heading-4: (
     font: 16px,
     line: 24px,
-    font-family: 'Limelight-Regular',
+    font-family: 'Circular',
   ),
   paragraph: (
     font: 16px,
@@ -63,6 +63,7 @@ $weights: (
     font-size: map-get($properties, font);
     line-height: map-get($properties, line);
     font-family: map-get($properties, font-family);
+    font-weight: 700;
   }
 }
 
