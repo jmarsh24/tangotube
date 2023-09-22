@@ -51,6 +51,11 @@
   src: url('@assets/fonts/circular-book.otf');
 }
 
+@font-face {
+  font-family: 'Limelight-Regular';
+  src: url('@assets/fonts/Limelight-Regular.ttf');
+}
+
 body {
   font-family: 'Circular', sans-serif;
   color: var(--color-neutral-1000);
