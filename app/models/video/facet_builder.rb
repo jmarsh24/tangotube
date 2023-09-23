@@ -72,7 +72,7 @@ class Video::FacetBuilder
     Facet.new(name: "year", option_builder: ->(name, count) { Option.new(label: name, value: name, count:) }) do
       @video_relation
         .group(:upload_date_year)
-        .order("count_all DESC", upload_date_year: :desc)
+        .order(upload_date_year: :desc)
         .limit(30)
         .count
     end
