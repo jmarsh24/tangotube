@@ -15,7 +15,7 @@ export default class extends Controller {
         });
       },
       {
-        threshold: 0.1,
+        threshold: 0,
       }
     );
     this.#observer.observe(this.element);
