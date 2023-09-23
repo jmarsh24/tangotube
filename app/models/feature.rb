@@ -14,7 +14,4 @@
 class Feature < ApplicationRecord
   belongs_to :user
   belongs_to :featureable, polymorphic: true
-  counter_culture :featureable,
-    column_name: proc { |model| (model.featureable_type == "Video") ? "features_count" : nil },
-    column_names: {["features.featureable_type = ?", "Video"] => "features_count"}
 end

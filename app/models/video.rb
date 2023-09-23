@@ -43,7 +43,7 @@ class Video < ApplicationRecord
   has_many :watches, dependent: :destroy, counter_cache: true
   has_many :watchers, through: :watches, source: :user
   has_many :likes, as: :likeable, dependent: :destroy, counter_cache: true
-  has_many :features, as: :featureable, dependent: :destroy, counter_cache: true
+  has_many :features, as: :featureable, dependent: :destroy
   has_many :clips, dependent: :destroy
   has_many :dancer_videos, dependent: :destroy
   has_many :dancers, through: :dancer_videos
@@ -55,14 +55,14 @@ class Video < ApplicationRecord
   has_many :couples, through: :couple_videos
   has_one :orchestra, through: :song
   has_one :performance_video, dependent: :destroy
-  has_one :performance, through: :performance_video
+  has_one :performance, through: :performance_video, dependent: :destroy
   # rubocop:disable Rails/HasManyOrHasOneDependent
   has_one :video_score
   has_one :video_search
   # rubocop:enable Rails/HasManyOrHasOneDependent
   has_many :recent_searches, as: :searchable, dependent: :destroy
 
-  has_one_attached :thumbnail
+  has_one_attached :thumbnail, dependent: :destroy
 
   attribute :metadata, ExternalVideoImport::Metadata.to_type
   validates :youtube_id, presence: true, uniqueness: true

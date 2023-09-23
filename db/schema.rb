@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_153205) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_23_162918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -179,7 +179,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_153205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["featureable_type", "featureable_id"], name: "index_features_on_featureable"
-    t.index ["featureable_type", "featureable_id"], name: "index_features_on_featureable_type_and_featureable_id"
     t.index ["user_id", "featureable_type", "featureable_id"], name: "index_features_on_user_and_featureable", unique: true
     t.index ["user_id"], name: "index_features_on_user_id"
   end

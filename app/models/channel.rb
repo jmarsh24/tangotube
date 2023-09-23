@@ -33,7 +33,7 @@ class Channel < ApplicationRecord
   has_many :songs, through: :videos
   has_many :recent_searches, as: :searchable, dependent: :destroy
 
-  has_one_attached :thumbnail
+  has_one_attached :thumbnail, dependent: :destroy
 
   validates :youtube_slug, presence: true, uniqueness: true
 
@@ -55,16 +55,21 @@ class Channel < ApplicationRecord
                  }
   scope :most_popular, -> { order(videos_count: :desc) }
 
-  def new_video_ids
-    metadata.video_ids - videos.map(&:youtube_id)
-  end
+  def sync_videos(use_scraper: false, use_music_recognizer: false)
+    fetch_and_save_metadata!
 
-  def import_new_videos(use_scraper: false, use_music_recognizer: false)
     return nil unless active && metadata.present?
+
+    new_video_ids = metadata.video_ids - videos.map(&:youtube_id)
 
     new_video_ids.each do |video_id|
       ImportVideoJob.perform_later(video_id, use_scraper:, use_music_recognizer:)
     end
+
+    removed_video_ids = videos.map(&:youtube_id) - metadata.video_ids
+    removed_videos = videos.where(youtube_id: removed_video_ids)
+    removed_videos.destroy_all
+    true
   end
 
   def update_videos(use_scraper: false, use_music_recognizer: false)
