@@ -2,21 +2,21 @@ class VideoSectionsController < ApplicationController
   helper_method :filtering_params
 
   def recent
-    @videos = Video::Search.new(filtering_params:, sort: "most_recent").videos
+    @videos = Video::Search.new(filtering_params:, sort: "most_recent", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
   end
 
   def older
-    @videos = Video::Search.new(filtering_params:, sort: "oldest").videos
+    @videos = Video::Search.new(filtering_params:, sort: "oldest", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
   end
 
   def performances
-    @videos = Video::Search.new(filtering_params:, sort: "performance").videos
+    @videos = Video::Search.new(filtering_params:, sort: "performance", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -32,14 +32,14 @@ class VideoSectionsController < ApplicationController
   end
 
   def trending
-    @videos = Video::Search.new(filtering_params:, sort: "trending_5").videos
+    @videos = Video::Search.new(filtering_params:, sort: "trending_5", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
   end
 
   def alternative
-    @videos = Video::Search.new(filtering_params: {genre: "alternative"}).videos
+    @videos = Video::Search.new(filtering_params: {genre: "alternative"}, user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
