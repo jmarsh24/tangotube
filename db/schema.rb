@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_23_162918) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_23_173324) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -37,6 +37,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_23_162918) do
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", precision: nil, null: false
+    t.index ["record_id"], name: "index_on_record_id"
+    t.index ["record_type", "name", "record_id"], name: "index_on_record_type_name_and_id"
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -415,15 +417,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_23_162918) do
       videos.upload_date,
       videos.description AS video_description,
       to_tsvector('english'::regconfig, (videos.description)::text) AS video_description_vector,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title
      FROM ((((((videos
        LEFT JOIN channels ON ((channels.id = videos.channel_id)))
        LEFT JOIN songs ON ((songs.id = videos.song_id)))

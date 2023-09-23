@@ -10,6 +10,7 @@ export default class extends Controller {
           if (e.isIntersecting) {
             const link = e.target as HTMLLinkElement;
             link.click();
+            this.#observer.unobserve(link);
           }
         });
       },
