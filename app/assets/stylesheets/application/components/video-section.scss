@@ -43,6 +43,9 @@
 
   .video-card {
     width: 76vw;
+    &__image {
+      border-radius: var(--border-radius-lg);
+    }
     @include breakpoint-tablet {
       width: 100%;
     }

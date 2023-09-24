@@ -5,4 +5,4 @@
     .video-section__videos
       = render @videos
     .video-section__link
-      = link_to t(".see_more"), root_path(filtering_params.merge(sort: "trending"))
+      = link_to t(".see_more"), root_path(filtering_params.merge(sort: "trending")), class: "heading-4"

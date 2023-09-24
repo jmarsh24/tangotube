@@ -2,6 +2,7 @@
   article.video-card id="video_#{video.youtube_id}"
     = link_to watch_path(v: video.youtube_id), aria: { label: "Watch #{video.title}" } do
       .video-card__image-container
+        = turbo_frame_tag "watch_status_#{video.id}", src: watched_by_current_user_video_path(id: video.id)
         .video-card__duration = video.hd_duration_data
         - if video.performance_video.present?
           .video-card__performance-number

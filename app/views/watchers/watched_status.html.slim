@@ -1,0 +1,4 @@
+- cache ["watch_status", current_user, watched, video_id] do
+  = turbo_frame_tag "watch_status_#{video_id}"
+    - if watched 
+      .video-card__watched-bar

@@ -1,0 +1,8 @@
+.top-section {
+  background-color: var(--color-neutral-50);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  @include breakpoint-tablet {
+    padding: var(--spacing-md);
+  }
+}

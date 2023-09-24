@@ -68,6 +68,17 @@
     }
   }
 
+  &__watched-bar {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: red;
+    z-index: 50000;
+  }
+
   &__performance-number {
     position: absolute;
     top: 5px;
@@ -84,6 +95,7 @@
     position: relative;
     min-width: 220px;
     aspect-ratio: 16 / 9;
+    overflow: hidden;
     @include breakpoint-tablet {
       border-radius: var(--border-radius-lg);
     }
