@@ -6,7 +6,7 @@
         .video-card__duration = video.hd_duration_data
         - if video.performance_video.present?
           .video-card__performance-number
-            = "#{video.performance_video.position} / #{video.performance.videos_count}"
+            = "#{video.performance_video.position} / #{video.performance.videos_count}" if video.performance_video.position.present?
         - if video.thumbnail.present?
           = image_tag video.thumbnail, loading: :eager, width: 750, alt: "Performance by #{video.title}", class: "video-card__image"
         - else

@@ -75,8 +75,8 @@
     right: 0;
     bottom: 0;
     height: 3px;
-    background-color: red;
-    z-index: 50000;
+    background-color: var(--color-red-500);
+    z-index: var(--z-watched-status);
   }
 
   &__performance-number {

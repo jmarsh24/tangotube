@@ -6,7 +6,7 @@
         .video-card__duration = video.hd_duration_data
         - if video.performance_video.present?
           .video-card__performance-number
-            = "#{video.performance_video.position} / #{video.performance.videos_count}"
+            = "#{video.performance_video.position} / #{video.performance.videos_count}" if video.performance_video.position.present?
       .stack.stack--xxs
         .video-card__title = video.title
         .video-card__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")

@@ -3,7 +3,7 @@
     .video-card__duration = video.hd_duration_data
     - if video.performance.present?
       .video-card__performance-number
-        = "#{video.performance_video.position} / #{video.performance.videos_count}"
+        = "#{video.performance_video.position} / #{video.performance.videos_count}" if video.performance_video.position.present?
     - thumbnail = video.thumbnail.attached? ? video.thumbnail : "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
     - if video.youtube_id == @video.youtube_id
       = image_tag thumbnail, width: 400, loading: :eager, class: "video-card__image"

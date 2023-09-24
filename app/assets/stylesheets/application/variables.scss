@@ -86,28 +86,35 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --logo-height-home: 100px;
     --logo-height-modal: 80px;
 
-    --z-search-window-background: -1;
-    --z-video-card-image: 0;
-    --z-performance-number: 1;
-    --z-duration: 1;
-    --z-tomato: 2;
-    --z-search-window: 5;
-    --z-video-overlay: 3;
-    --z-flash: 200;
-    --z-navbar: 500;
-    --z-menu: 600;
-    --z-footer: 700;
-    --z-dropdown: 900;
-    --z-dialog: 1000;
-    --z-modal: 1200;
-    --z-modal-blind: 1100;
-    --z-modal-close: 1300;
-    --z-toast: 1400;
-    --z-search: 1500;
-    --z-tooltip: 1600;
-    --z-cookies-modal: 1700;
-    --z-drawer: 2000;
-    --z-cookies: 2100;
+    --z-search-window-background: 10;
+    --z-video-card-image: 20;
+
+    --z-duration: 30;
+    --z-performance-number: 30;
+    --z-tomato: 40;
+
+    --z-video-overlay: 50;
+    --z-watched-status: 60;
+
+    --z-search-window: 100;
+    --z-navbar: 110;
+    --z-menu: 120;
+    --z-footer: 130;
+
+    --z-dropdown: 200;
+    --z-dialog: 210;
+    --z-modal-blind: 220;
+    --z-modal: 230;
+    --z-modal-close: 240;
+    --z-toast: 250;
+    --z-search: 260;
+    --z-tooltip: 270;
+    --z-cookies-modal: 280;
+
+    --z-drawer: 300;
+    --z-cookies: 310;
+
+    --z-flash: 400;
 
     --navbar-height: 46px;
     --video-aspect-ratio: 0.8;
@@ -154,6 +161,8 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --header-height: 56px;
     --page-main-max-width: 1920px;
     --page-main-padding: var(--spacing-md);
+
+   
   }
 
   @include breakpoint-tablet() {
