@@ -284,6 +284,7 @@ en:
       popular: Popular
       see_more: See more...
       trending: Trending
+  videos_count: "%{count} videos"
   views_count: "%{count} views"
   watches:
     show:
