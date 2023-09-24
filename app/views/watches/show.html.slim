@@ -16,4 +16,4 @@
       = render "related_videos/links", video: @video, type: @type
     = turbo_frame_tag "related-videos-card", src: related_video_path(id: @video.id, type: @type), target: "_top"
       #related-videos.related-videos.stack.stack--sm
-        = render "videos/skeleton_video_card", count: 6
+        = render "videos/skeleton_video_card", count: 6, compact: true
