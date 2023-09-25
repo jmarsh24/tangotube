@@ -1,8 +1,8 @@
 = turbo_frame_tag :alternative_videos
-  .video-section
-    .video-section__header
+  .carousel.carousel--padded
+    .carousel.carousel__header
       = link_to t(".alternative"), root_path(filtering_params.merge(genre: "alternative")), class: "video-section__link heading-2"
-    .video-section__videos
+    .carousel.carousel__videos
       = render @videos
-    .video-section__link
-      = link_to t(".see_more"), root_path(filtering_params.merge(genre: "alternative")), class: "heading-4"
+    .carousel.carousel__link
+      = link_to t(".see_more"), root_path(filtering_params.merge(genre: "alternative")), class: "heading-4 text-red"

@@ -231,20 +231,20 @@ en:
   video_sections:
     alternative:
       alternative: Alternative
-      see_more: See more...
+      see_more: MORE
     older:
       older: Older
-      see_more: See more...
+      see_more: MORE
     performances:
       performance: Performance
-      see_more: See more...
+      see_more: MORE
     random_event:
-      see_more: See more...
+      see_more: MORE
     recent:
       latest: Latest
-      see_more: See more...
+      see_more: MORE
     trending:
-      see_more: See more...
+      see_more: MORE
       trending: Trending
   videos:
     details:
@@ -282,7 +282,7 @@ en:
       older: Older
       orchestras: Orchestras
       popular: Popular
-      see_more: See more...
+      see_more: MORE
       trending: Trending
   videos_count: "%{count} videos"
   views_count: "%{count} views"

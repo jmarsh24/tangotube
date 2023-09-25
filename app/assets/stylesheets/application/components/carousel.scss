@@ -1,7 +1,12 @@
-.video-section {
+.carousel {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-md);
+
+  &--padded {
+    padding: var(--spacing-lg) 0;
+    padding-left: var(--spacing-md);
+  }
 
   &__header {
     padding-left: var(--spacing-sm);

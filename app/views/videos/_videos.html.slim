@@ -3,56 +3,56 @@
     = paginated videos, class: "grid grid--videos"
   - elsif videos.present? && params[:sort].blank? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:watched] || params[:channel] || params[:event] || params[:song] || params[:genre] )
     = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song], genre: params[:genre] ), target: "_top"
-      .video-section
-        .video-section__header
-          = link_to t(".trending"), root_path(filtering_params.merge(sort: "trending")), class: "heading-2"
-        .video-section__videos
+      .carousel.carousel--padded
+        .carousel.carousel__header
+          = link_to t(".trending"), root_path(filtering_params.merge(sort: "trending")), class: "heading-2 text-red"
+        .carousel.carousel__videos
           = render "skeleton_video_card", count: 6
-        .video-section__link
+        .carousel.carousel__link
           = link_to t(".see_more"), root_path(filtering_params.merge(sort: "trending"))
     = turbo_frame_tag :newest_videos, src: recent_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song], genre: params[:genre] ), target: "_top"
-      .video-section
-        .video-section__header
-          = link_to t(".newest"), root_path(filtering_params.merge(sort: "most_recent")), class: "heading-2"
-        .video-section__videos
+      .carousel.carousel--padded
+        .carousel.carousel__header
+          = link_to t(".newest"), root_path(filtering_params.merge(sort: "most_recent")), class: "heading-2 text-red"
+        .carousel.carousel__videos
           = render "skeleton_video_card", count: 6
-        .video-section__link
+        .carousel.carousel__link
           = link_to t(".see_more"), root_path(filtering_params.merge(sort: "most_recent"))
     = turbo_frame_tag :older_videos, src: older_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song], genre: params[:genre] ), target: "_top"
-      .video-section
-        .video-section__header
-          = link_to t(".older"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
-        .video-section__videos
+      .carousel.carousel--padded
+        .carousel.carousel__header
+          = link_to t(".older"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2 text-red"
+        .carousel.carousel__videos
           = render "skeleton_video_card", count: 6
-        .video-section__link
+        .carousel.carousel__link
           = link_to t(".see_more"), root_path(filtering_params.merge(sort: "oldest"))
-    .video-section__header.heading-2 = t(".popular")
+    .carousel.carousel__header.heading-2 = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - elsif videos.present? && (params[:sort].blank? || filtering_params.blank?)
     .stack.stack--sm
       = turbo_frame_tag :newest_videos, src: recent_video_sections_path, target: "_top"
       .top-section
         = turbo_frame_tag :trending_dancers, src: top_dancers_path, target: "_top"
-          .video-section
-            .video-section__header
+          .carousel.carousel
+            .carousel.carousel__header
               h2.heading-2 = t(".dancers")
         = turbo_frame_tag :trending_orchestras, src: top_orchestras_path, target: "_top"
-          .video-section
-            .video-section__header
+          .carousel.carousel
+            .carousel.carousel__header
               h2.heading-2 = t(".orchestras")
         = turbo_frame_tag :trending_events, src: top_events_path, target: "_top"
-          .video-section
-            .video-section__videos
+          .carousel.carousel--padded
+            .carousel.carousel__videos
               = render "skeleton_video_card", count: 6
     = turbo_frame_tag :alternative_videos, src: alternative_video_sections_path, target: "_top"
-      .video-section  
-        .video-section__videos
+      .carousel.carousel--padded 
+        .carousel.carousel__videos
           = render "skeleton_video_card", count: 6
     = turbo_frame_tag :random_event_videos, src: random_event_video_sections_path, target: "_top"
-      .video-section
-        .video-section__videos
+      .carousel.carousel--padded
+        .carousel.carousel__videos
           = render "skeleton_video_card", count: 6
-    .video-section__header.heading-2 = t(".popular")
+    .carousel.carousel__header.heading-2 = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - else
     = paginated videos, class: "grid grid--videos"

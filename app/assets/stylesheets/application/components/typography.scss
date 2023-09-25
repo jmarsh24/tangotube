@@ -93,6 +93,10 @@ $weights: (
   font-weight: 700;
 }
 
+.text-red {
+  color: var(--color-red-500);
+}
+
 @include breakpoint-tablet {
   // Adjustments for tablet sizes
   $tablet-sizes: (
