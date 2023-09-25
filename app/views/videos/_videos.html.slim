@@ -5,7 +5,7 @@
     = turbo_frame_tag :trending_videos, src: trending_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song], genre: params[:genre] ), target: "_top"
       .carousel.carousel--padded
         .carousel.carousel__header
-          = link_to t(".trending"), root_path(filtering_params.merge(sort: "trending")), class: "heading-2 text-red"
+          = link_to t(".trending"), root_path(filtering_params.merge(sort: "trending")), class: "heading-2"
         .carousel.carousel__videos
           = render "skeleton_video_card", count: 6
         .carousel.carousel__link
@@ -13,7 +13,7 @@
     = turbo_frame_tag :newest_videos, src: recent_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song], genre: params[:genre] ), target: "_top"
       .carousel.carousel--padded
         .carousel.carousel__header
-          = link_to t(".newest"), root_path(filtering_params.merge(sort: "most_recent")), class: "heading-2 text-red"
+          = link_to t(".newest"), root_path(filtering_params.merge(sort: "most_recent")), class: "heading-2"
         .carousel.carousel__videos
           = render "skeleton_video_card", count: 6
         .carousel.carousel__link
@@ -21,7 +21,7 @@
     = turbo_frame_tag :older_videos, src: older_video_sections_path(leader: params[:leader], follower: params[:follower], couple: params[:couple], orchestra: params[:orchestra], watched: params[:watched], channel: params[:channel], event: params[:event], song: params[:song], genre: params[:genre] ), target: "_top"
       .carousel.carousel--padded
         .carousel.carousel__header
-          = link_to t(".older"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2 text-red"
+          = link_to t(".older"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
         .carousel.carousel__videos
           = render "skeleton_video_card", count: 6
         .carousel.carousel__link
