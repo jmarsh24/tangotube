@@ -1,5 +1,5 @@
 .navbar__filters id="filter-bar"
-  - if @filtering_params.present?
+  - if @filtering_params.present? || params[:sort].present?
     .scrollable-bar.scrollable-bar--padded
       - active_filters = @filtering_params.to_h.count
       = link_to  t(".clear_all"), root_path(filtering: true), class: ["filter-chip ", ("active" if @filtering_params.present?)]
