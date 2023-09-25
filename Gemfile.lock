@@ -711,6 +711,7 @@ DEPENDENCIES
   rubocop-rake
   rubocop-rspec
   ruby-lsp
+  ruby-vips
   safety_mailer
   scenic
   sentry-rails
