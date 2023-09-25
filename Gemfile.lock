@@ -685,7 +685,6 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen
-  mini_magick
   mrsk
   net-ssh
   newrelic_rpm
