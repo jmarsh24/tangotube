@@ -13,22 +13,24 @@ class CreateImagePreviewJob < ApplicationJob
 
     image = Vips::Image.new_from_buffer(preview.download, "")
 
+    attachment.blob.update!(preview_hash: preview_hash(image), primary_color: average_color_from_image(image))
+  end
+
+  private
+
+  def preview_hash(image)
     if image.bands == 3
       image = image.bandjoin(255)
     end
 
     flattened_pixels = image.write_to_memory.unpack("C*")
 
-    preview_hash = ThumbHash.rgba_to_thumb_hash(
+    ThumbHash.rgba_to_thumb_hash(
       image.width,
       image.height,
       flattened_pixels
     ).unpack1("H*")
-
-    attachment.blob.update!(preview_hash:, primary_color: average_color_from_image(image))
   end
-
-  private
 
   def average_color_from_image(image)
     red_band = image[0].avg
