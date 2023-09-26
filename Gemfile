@@ -61,7 +61,6 @@ gem "patreon"
 gem "strip_attributes"
 gem "goldiloader"
 gem "browser"
-gem "mini_magick"
 
 # Assets
 gem "vite_rails"
