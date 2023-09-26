@@ -8,7 +8,7 @@
           .video-card__performance-number
             = "#{video.performance_video.position} / #{video.performance.videos_count}" if video.performance_video.position.present?
         - if video.thumbnail.present?
-          = image_tag video.thumbnail, loading: :eager, width: 750, alt: "Performance by #{video.title}", class: "video-card__image"
+          = image_tag video.thumbnail, loading: :lazy, width: 750, alt: "Performance by #{video.title}", class: "video-card__image"
         - else
           = image_tag "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg", alt: "Thumbnail for #{video.title}", class: "video-card__image"
     section.video-card__content
