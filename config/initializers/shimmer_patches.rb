@@ -8,28 +8,30 @@ module Shimmer::FileAdditionsExtensions
       attachment = source
       width = options[:width]
       height = options[:height]
-      options[:style] = "background-image: url(#{preview_data_url(attachment)}); background-size: cover;" + (options[:style] || "")
+
       source = image_file_path(source, width:, height:)
       options[:loading] ||= :lazy
       if options[:loading] == :lazy
-        options[:class] = "#{options[:class]} loading".strip
-        options["data-controller"] = "image-loading"
-        options["data-action"] = "load->image-loading#loaded"
+        options["data-controller"] = "thumb-hash"
+        options[:style] = "background-color: ##{preview_primary_color(attachment)}; background-size: cover;"
+        options["data-thumb-hash-preview-hash-value"] = preview_hash(attachment)
       end
       options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width: width.to_i * 2, height: height ? height.to_i * 2 : nil)} 2x" if options[:width].present?
     end
     super source, **options
   end
 
-  def preview_data_url(attachment, width: 10, height: 10)
-    preview = attachment.variant(resize: "#{width}x#{height}").processed
-    return unless preview
-
+  def preview_hash(attachment)
     if attachment.blob.preview_hash
-      "data:image/webp;base64,#{attachment.blob.preview_hash}"
+      attachment.blob.preview_hash
     else
-      CreatePreviewHashJob.perform_later(attachment)
+      CreateImagePreviewJob.perform_later(attachment.id)
+      ""
     end
+  end
+
+  def preview_primary_color(attachment)
+    attachment.blob.primary_color || CreateImagePreviewJob.perform_later(attachment.id)
   end
 end
 
@@ -39,11 +41,6 @@ module Shimmer::FileProxyExtensions
   def variant
     transformations = resizeable ? {resize:, format: "webp"} : {format: "webp"}
     @variant ||= blob.representation(transformations).processed
-  end
-
-  def preview_variant
-    transformations = {resize: "10x10", format: "webp"}
-    blob.representation(transformations).processed
   end
 end
 

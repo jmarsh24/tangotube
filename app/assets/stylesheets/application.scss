@@ -7,11 +7,3 @@
 @import 'application/components/**/*';
 @import 'application/modals/**/*';
 @import 'application/views/**/*';
-
-img {
-  transition: filter 0.3s;
-}
-
-.loading {
-  filter: blur(10px);
-}
