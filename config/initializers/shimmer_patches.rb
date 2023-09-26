@@ -11,10 +11,17 @@ module Shimmer::FileAdditionsExtensions
 
       source = image_file_path(source, width:, height:)
       options[:loading] ||= :lazy
-      if options[:loading] == :lazy && preview_hash(attachment).present?
+
+      hash_value = preview_hash(attachment)
+      primary_color = preview_primary_color(attachment)
+
+      if hash_value.present?
         options["data-controller"] = "thumb-hash"
-        options[:style] = "background-color: ##{preview_primary_color(attachment)}; background-size: cover;"
-        options["data-thumb-hash-preview-hash-value"] = preview_hash(attachment)
+        options["data-thumb-hash-preview-hash-value"] = hash_value
+      end
+
+      if primary_color.present?
+        options[:style] = "background-color: ##{primary_color}; background-size: cover;"
       end
       options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width: width.to_i * 2, height: height ? height.to_i * 2 : nil)} 2x" if options[:width].present?
     end
@@ -31,7 +38,12 @@ module Shimmer::FileAdditionsExtensions
   end
 
   def preview_primary_color(attachment)
-    attachment.blob.primary_color || CreateImagePreviewJob.perform_later(attachment.id)
+    if attachment.blob.primary_color
+      attachment.blob.primary_color
+    else
+      CreateImagePreviewJob.perform_later(attachment.id)
+      ""
+    end
   end
 end
 
