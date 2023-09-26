@@ -46,21 +46,21 @@ class Song < ApplicationRecord
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(search_term) {
-    terms = TextNormalizer.normalize(search_term).split(" ")
+                   terms = TextNormalizer.normalize(search_term).split(" ")
 
-    trigram_queries = terms.map do |term|
-      sanitized_term = ActiveRecord::Base.connection.quote_string(term)
-      "(title % '#{sanitized_term}' OR artist % '#{sanitized_term}' OR genre % '#{sanitized_term}')"
-    end
+                   trigram_queries = terms.map do |term|
+                     sanitized_term = ActiveRecord::Base.connection.quote_string(term)
+                     "(unaccent(title) % unaccent('#{sanitized_term}') OR unaccent(artist) % unaccent('#{sanitized_term}') OR unaccent(genre) % unaccent('#{sanitized_term}'))"
+                   end
 
-    similarity_scores = terms.map do |term|
-      sanitized_term = ActiveRecord::Base.connection.quote_string(term)
-      "((title <-> '#{sanitized_term}') + (artist <-> '#{sanitized_term}') + (genre <-> '#{sanitized_term}'))"
-    end.join(" + ")
+                   similarity_scores = terms.map do |term|
+                     sanitized_term = ActiveRecord::Base.connection.quote_string(term)
+                     "((unaccent(title) <-> unaccent('#{sanitized_term}')) + (unaccent(artist) <-> unaccent('#{sanitized_term}')) + (unaccent(genre) <-> unaccent('#{sanitized_term}')))"
+                   end.join(" + ")
 
-    where(trigram_queries.join(" OR "))
-      .order(Arel.sql("#{similarity_scores} ASC, videos_count DESC"))
-  }
+                   where(trigram_queries.join(" OR "))
+                     .order(Arel.sql("#{similarity_scores} ASC, videos_count DESC"))
+                 }
 
   def full_title
     title_part = title&.titleize
