@@ -21,14 +21,8 @@ module Shimmer::FileAdditionsExtensions
     super source, **options
   end
 
-  def preview_image(attachment, width: 10, height: 10)
-    return unless attachment.respond_to?(:variant)
-
-    attachment.variant(resize: "#{width}x#{height}").processed
-  end
-
   def preview_data_url(attachment, width: 10, height: 10)
-    preview = preview_image(attachment, width:, height:)
+    preview = attachment.variant(resize: "#{width}x#{height}").processed
     return unless preview
 
     if attachment.blob.preview_hash
