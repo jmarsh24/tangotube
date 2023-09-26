@@ -11,7 +11,7 @@ module Shimmer::FileAdditionsExtensions
 
       source = image_file_path(source, width:, height:)
       options[:loading] ||= :lazy
-      if options[:loading] == :lazy
+      if options[:loading] == :lazy && preview_hash(attachment).present?
         options["data-controller"] = "thumb-hash"
         options[:style] = "background-color: ##{preview_primary_color(attachment)}; background-size: cover;"
         options["data-thumb-hash-preview-hash-value"] = preview_hash(attachment)
