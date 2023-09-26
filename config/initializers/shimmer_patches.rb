@@ -50,7 +50,7 @@ module Shimmer::FileProxyExtensions
   end
 
   def preview_variant
-    transformations = {resize: "100x100", format: "webp"}
+    transformations = {resize: "10x10", format: "webp"}
     blob.representation(transformations).processed
   end
 end
