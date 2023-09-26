@@ -26,11 +26,9 @@ module Shimmer::FileAdditionsExtensions
     return unless preview
 
     if attachment.blob.preview_hash
-      "data:image/jpeg;base64,#{attachment.blob.preview_hash}"
+      "data:image/webp;base64,#{attachment.blob.preview_hash}"
     else
-      preview_hash = Base64.encode64(preview.download)
-      attachment.blob.update(preview_hash:)
-      "data:image/jpeg;base64,#{preview_hash}"
+      CreatePreviewHashJob.perform_later(attachment)
     end
   end
 end
