@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181035) do
     t.string "checksum"
     t.datetime "created_at", null: false
     t.string "preview_hash"
+    t.string "primary_color"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -418,15 +419,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181035) do
       videos.upload_date,
       videos.description AS video_description,
       to_tsvector('english'::regconfig, (videos.description)::text) AS video_description_vector,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
+      TRIM(BOTH FROM lower(heroku_ext.unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title
      FROM ((((((videos
        LEFT JOIN channels ON ((channels.id = videos.channel_id)))
        LEFT JOIN songs ON ((songs.id = videos.song_id)))
