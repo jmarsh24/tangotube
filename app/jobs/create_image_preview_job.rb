@@ -9,7 +9,7 @@ class CreateImagePreviewJob < ApplicationJob
 
     return unless attachment
 
-    preview = attachment.variant(resize_to_limit: [100, 100]).processed
+    preview = attachment.variant(resize_to_limit: [100, 100], format: :webp).processed
 
     image = Vips::Image.new_from_buffer(preview.download, "")
 
