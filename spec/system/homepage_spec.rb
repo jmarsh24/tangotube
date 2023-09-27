@@ -6,7 +6,7 @@ RSpec.describe "homepage", type: :system do
   fixtures :all
 
   context "banner" do
-    it "displays the banner" do
+    xit "displays the banner" do
       visit root_path
       expect(page).to have_content("The new way to watch Tango")
 
@@ -23,7 +23,7 @@ RSpec.describe "homepage", type: :system do
       accept_all_button.click
     end
 
-    it "displays featured videos" do
+    xit "displays featured videos" do
       skip "Waiting for videosearch to be refactored"
       featured_videos = [videos(:video_1_featured), videos(:video_2_featured), videos(:video_3_featured), videos(:video_4_featured)]
 

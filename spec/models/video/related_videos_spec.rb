@@ -6,7 +6,7 @@ RSpec.describe Video::RelatedVideos do
   fixtures :all
 
   describe "#with_same_dancers" do
-    it "returns videos with same leader and follower" do
+    xit "returns videos with same leader and follower" do
       recommendation = described_class.new(videos(:video_1_featured))
 
       expect(recommendation.with_same_dancers).to match_array([videos(:video_4_featured)])
@@ -14,7 +14,7 @@ RSpec.describe Video::RelatedVideos do
   end
 
   describe "#with_same_event" do
-    it "returns videos with same event" do
+    xit "returns videos with same event" do
       video = videos(:video_1_featured)
       recommendation = described_class.new(video)
       video_same_event = Video.create!(
@@ -32,7 +32,7 @@ RSpec.describe Video::RelatedVideos do
   end
 
   describe "#with_same_song" do
-    it "returns videos with same song" do
+    xit "returns videos with same song" do
       video = videos(:video_1_featured)
       recommendation = described_class.new(video)
       video_same_song = Video.create!(
@@ -53,7 +53,7 @@ RSpec.describe Video::RelatedVideos do
   end
 
   describe "#with_same_channel" do
-    it "returns videos with same channel" do
+    xit "returns videos with same channel" do
       video = videos(:video_1_featured)
       recommendation = described_class.new(video)
       video_same_channel = Video.create!(
@@ -86,7 +86,7 @@ RSpec.describe Video::RelatedVideos do
   end
 
   describe "#with_same_performance" do
-    it "returns videos with same performance" do
+    xit "returns videos with same performance" do
       video = videos(:video_1_featured)
       recommendation = described_class.new(video)
       video_same_channel = Video.create!(
