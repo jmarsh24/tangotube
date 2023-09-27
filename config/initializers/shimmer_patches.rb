@@ -30,21 +30,17 @@ module Shimmer::FileAdditionsExtensions
   end
 
   def preview_hash(attachment)
-    if attachment.blob.preview_hash
-      attachment.blob.preview_hash
-    else
-      CreateImagePreviewJob.perform_later(attachment.id)
-      ""
-    end
+    return attachment.blob.preview_hash if attachment.blob.preview_hash
+
+    CreateImagePreviewJob.perform_later(attachment.id)
+    ""
   end
 
   def preview_primary_color(attachment)
-    if attachment.blob.primary_color
-      attachment.blob.primary_color
-    else
-      CreateImagePreviewJob.perform_later(attachment.id)
-      ""
-    end
+    return attachment.blob.primary_color if attachment.blob.primary_color
+
+    CreateImagePreviewJob.perform_later(attachment.id)
+    ""
   end
 end
 
