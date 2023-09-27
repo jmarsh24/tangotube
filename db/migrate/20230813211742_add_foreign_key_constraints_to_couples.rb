@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddForeignKeyConstraintsToCouples < ActiveRecord::Migration[7.0]
   def up
     remove_foreign_key :couples, column: :dancer_id

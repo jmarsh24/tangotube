@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WatchersController < ApplicationController
   # GET /videos/:video_id/has_been_watched
   def has_been_watched

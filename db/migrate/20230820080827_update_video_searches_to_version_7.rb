@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateVideoSearchesToVersion7 < ActiveRecord::Migration[7.0]
   def change
     ActiveRecord::Base.connection.execute("SET statement_timeout TO 0")

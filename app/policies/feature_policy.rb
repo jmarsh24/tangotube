@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FeaturePolicy < ApplicationPolicy
   def create?
     user_is_admin?
