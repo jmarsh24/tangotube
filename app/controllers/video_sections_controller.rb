@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VideoSectionsController < ApplicationController
   helper_method :filtering_params
 

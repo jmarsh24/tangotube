@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MigrateFeaturedData < ActiveRecord::Migration[7.0]
   def up
     user = User.find_by(email: "jmarsh24@gmail.com")

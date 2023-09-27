@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RecentSearchPolicy < ApplicationPolicy
   def create?
     user.present?

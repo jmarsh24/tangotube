@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTrigramIndexToOrchestras < ActiveRecord::Migration[7.0]
   def change
     remove_index :orchestras, :name
