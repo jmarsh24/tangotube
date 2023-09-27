@@ -50,8 +50,20 @@ end
 Shimmer::FileAdditions.prepend(Shimmer::FileAdditionsExtensions)
 
 module Shimmer::FileProxyExtensions
+  def initialize(blob_id:, resize: nil, width: nil, height: nil)
+    @blob_id = blob_id
+    if !resize && width
+      resize = if height
+        [width, height]
+      else
+        [width, nil]
+      end
+    end
+    @resize = resize
+  end
+
   def variant
-    transformations = resizeable ? {resize:, format: :webp} : {format: :webp}
+    transformations = resizeable ? {resize_to_limit: resize, format: :webp} : {format: :webp}
     @variant ||= blob.representation(transformations).processed
   end
 end
