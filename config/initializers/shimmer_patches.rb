@@ -51,7 +51,7 @@ Shimmer::FileAdditions.prepend(Shimmer::FileAdditionsExtensions)
 
 module Shimmer::FileProxyExtensions
   def variant
-    transformations = resizeable ? {resize:, format: "webp"} : {format: "webp"}
+    transformations = resizeable ? {resize:, convert: :webp} : {convert: :webp}
     @variant ||= blob.representation(transformations).processed
   end
 end
