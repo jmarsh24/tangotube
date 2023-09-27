@@ -6,6 +6,7 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_likeable, only: [:create]
 
+  # @route POST /likes (likes)
   def create
     @like = @likeable.likes.new(user: current_user)
     if @like.save
@@ -16,6 +17,7 @@ class LikesController < ApplicationController
     end
   end
 
+  # @route DELETE /likes/:id (like)
   def destroy
     @like = current_user.likes.find(params[:id])
 

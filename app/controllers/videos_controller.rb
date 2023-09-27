@@ -24,7 +24,6 @@ class VideosController < ApplicationController
   end
 
   # @route GET /videos/:id (video)
-  # @route GET /watch (watch)
   def show
     redirect_to root_path unless params[:v].present?
 
@@ -60,11 +59,13 @@ class VideosController < ApplicationController
   def details
   end
 
+  # @route POST /videos/:id/hide (hide_video)
   def hide
     @video.update(hidden: true)
     redirect_to root_path
   end
 
+  # @route POST /videos/:id/process_metadata (process_metadata_video)
   def process_metadata
     UpdateVideoJob.set(queue: :high_priority).perform_later(@video, use_music_recognizer: true)
     head :ok

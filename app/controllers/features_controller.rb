@@ -6,6 +6,7 @@ class FeaturesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_featureable, only: [:create]
 
+  # @route POST /features (features)
   def create
     @feature = @featureable.features.new(user: current_user)
     if @feature.save
@@ -16,6 +17,7 @@ class FeaturesController < ApplicationController
     end
   end
 
+  # @route DELETE /features/:id (feature)
   def destroy
     @feature = current_user.features.find(params[:id])
 

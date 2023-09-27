@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WatchersController < ApplicationController
-  # GET /videos/:video_id/has_been_watched
+  # @route GET /videos/:id/watched_by_current_user (watched_by_current_user_video)
   def has_been_watched
     if turbo_frame_request?
       video_id = params[:id]

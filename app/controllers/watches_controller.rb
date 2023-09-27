@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class WatchesController < ApplicationController
-  # @route GET /videos/:id (video)
   # @route GET /watch (watch)
   def show
     redirect_to root_path unless params[:v].present?
