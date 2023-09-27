@@ -194,7 +194,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(que_peina_canas)
       end
 
-      it "returns a match for milonga qu peina canas" do
+      it "returns a match for Ilusión De Mi Vida" do
         Song.create!(
           genre: "Alternative",
           title: "Тополиный пух",
@@ -215,7 +215,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:, song_titles:, song_albums:, song_artists:)).to eq(illustion_de_mi_vida_song)
       end
 
-      it "returns a match for milonga qu peina canas" do
+      it "returns a match for Ilusión De Mi Vida and not russian song" do
         Song.create!(
           genre: "Alternative",
           title: "Тополиный пух",
