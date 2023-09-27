@@ -64,8 +64,7 @@ module Shimmer::FileProxyExtensions
   end
 
   def variant
-    transformations = resizeable ? {resize_to_limit: resize, format: :webp} : {format: :webp}
-    @variant ||= resizeable ? blob.representation(transformations).processed : blob
+    @variant ||= resizeable ? blob.representation({resize_to_limit: resize, format: :webp}).processed : blob
   end
 end
 
