@@ -3,6 +3,7 @@
 class RecentSearchesController < ApplicationController
   before_action :authenticate_user!
 
+  # @route GET /recent_searches (recent_searches)
   def index
     if current_user
       searchables_to_preload = {
