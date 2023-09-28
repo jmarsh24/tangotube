@@ -9,9 +9,14 @@ module Shimmer::FileAdditionsExtensions
       raise ArgumentError, "Either width or height is required for image_tag" if options[:width].blank? && options[:height].blank?
 
       attachment = source
+      width = options[:width]
+      height = options[:height]
       options[:loading] ||= :lazy
 
-      calculate_missing_dimensions!(attachment, options)
+      width, height = calculate_missing_dimensions!(attachment:, width:, height:)
+
+      options[:width] = width
+      options[:height] = height
 
       if options[:loading] == :lazy
         hash_value = preview_hash(attachment)
@@ -25,7 +30,7 @@ module Shimmer::FileAdditionsExtensions
       end
 
       if options[:width].present?
-        options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width: options[:width].to_i * 2, height: options[:height] ? options[:height].to_i * 2 : nil)} 2x"
+        options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width: width.to_i * 2, height: height ? options[:height].to_i * 2 : nil)} 2x"
       end
     end
 
@@ -34,17 +39,24 @@ module Shimmer::FileAdditionsExtensions
 
   private
 
-  def calculate_missing_dimensions!(attachment, options)
-    return unless attachment.blob.metadata["width"] && attachment.blob.metadata["height"]
+  def calculate_missing_dimensions!(attachment:, width:, height:)
+    return [width, height] if width && height
 
-    original_width = attachment.blob.metadata["width"].to_f
-    original_height = attachment.blob.metadata["height"].to_f
+    original_width = attachment.blob.metadata["width"]&.to_f
+    original_height = attachment.blob.metadata["height"]&.to_f
+
+    return [width, height] unless original_width && original_height
+
     aspect_ratio = original_width / original_height
 
-    if options[:width].present? && options[:height].blank?
-      options[:height] = (options[:width].to_i / aspect_ratio).round
-    elsif options[:height].present? && options[:width].blank?
-      options[:width] = (options[:height].to_i * aspect_ratio).round
+    if width.nil? && height.nil?
+      [original_width.round, original_height.round]
+    elsif width.nil?
+      [nil, (height.to_i * aspect_ratio).round]
+    elsif height.nil?
+      [width, (width.to_i / aspect_ratio).round]
+    else
+      [width, height]
     end
   end
 
