@@ -13,12 +13,8 @@
     display: flex;
     flex-direction: row;
     gap: var(--spacing-md);
-    padding-left: var(--spacing-md);
     width: 100%;
     overflow: auto;
-    @include breakpoint-tablet {
-      padding-left: 0;
-    }
 
     scrollbar-width: none;
     &::-webkit-scrollbar {
