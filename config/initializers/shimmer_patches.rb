@@ -9,6 +9,8 @@ module Shimmer::FileAdditionsExtensions
       raise ArgumentError, "Either width or height is required for image_tag" if options[:width].blank? && options[:height].blank?
 
       attachment = source
+      options[:loading] ||= :lazy
+
       calculate_missing_dimensions!(attachment, options)
 
       if options[:loading] == :lazy
