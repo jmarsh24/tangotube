@@ -27,7 +27,7 @@ class VideoSectionsController < ApplicationController
       .preload(Video.search_includes)
   end
 
-  # @route GET /video_sections/random_event (random_event_video_sections)
+  # @route GET /video_sections/event (event_video_sections)
   def event
     @events = Event.most_popular.limit(8)
     @event = @events.sample
@@ -53,6 +53,7 @@ class VideoSectionsController < ApplicationController
       .preload(Video.search_includes)
   end
 
+  # @route GET /video_sections/dancer (dancer_video_sections)
   def dancer
     @dancers = Dancer.most_popular.with_attached_profile_image.limit(128).shuffle.take(24)
     @dancer = @dancers.sample
@@ -62,6 +63,7 @@ class VideoSectionsController < ApplicationController
       .preload(Video.search_includes)
   end
 
+  # @route GET /video_sections/song (song_video_sections)
   def song
     @songs = Song.most_popular.preload(:orchestra).where(
       Video.joins(:dancer_videos)
@@ -75,6 +77,7 @@ class VideoSectionsController < ApplicationController
       .preload(Video.search_includes)
   end
 
+  # @route GET /video_sections/channel (channel_video_sections)
   def channel
     @channels = Channel.most_popular.active.with_attached_thumbnail.limit(12).shuffle
     @channel = @channels.sample
@@ -84,6 +87,7 @@ class VideoSectionsController < ApplicationController
       .preload(Video.search_includes)
   end
 
+  # @route GET /video_sections/orchestra (orchestra_video_sections)
   def orchestra
     @orchestras = Orchestra.most_popular.with_attached_profile_image.limit(24).shuffle
     @orchestra = @orchestras.sample
