@@ -2,7 +2,7 @@
   = link_to watch_path(v: video.youtube_id), class: ["search-result", "search-result--video"], data: { controller: "recent-search", "recent-search-gid-value": video.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
     .stack.stack--sm.stack--tablet-line
       .video-card__image-container
-        = image_tag video.thumbnail, alt: t(".video_thumbnail_alt", video_title: video.title), width: 320, class: "video-card__image" if video.thumbnail.present?
+        = image_tag video.thumbnail, width: 320, alt: t(".video_thumbnail_alt", video_title: video.title), class: "video-card__image" if video.thumbnail.present?
         .video-card__duration = video.hd_duration_data
         - if video.performance_video&.position&.present?
           .video-card__performance-number
