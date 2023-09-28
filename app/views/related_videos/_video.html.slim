@@ -1,7 +1,7 @@
 .video-card.video-card--compact class=(video.youtube_id == @video.youtube_id ? "video-card--active" : "")
   .video-card__image-container
     .video-card__duration = video.hd_duration_data
-    - if video.performance.present?
+    - if video.performance_video&.position&.present?
       .video-card__performance-number
         = "#{video.performance_video.position} / #{video.performance.videos_count}" if video.performance_video.position.present?
     - thumbnail = video.thumbnail.attached? ? video.thumbnail : "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
