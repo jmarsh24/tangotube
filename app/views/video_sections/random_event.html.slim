@@ -1,8 +1,6 @@
 = turbo_frame_tag :random_event_videos
-  .carousel.carousel--padded
-    .carousel.carousel__header
-      = link_to "#{@event.title.titleize} - #{@year}", root_path(filtering_params.merge(event: @event.slug)), class: "video-section__link heading-2"
-    .carousel.carousel__videos
+  .carousel
+    .carousel__header
+      = link_to @event.title.titleize, root_path(filtering_params.merge(event: @event.slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
+    .carousel__videos
       = render @videos
-    .carousel.carousel__link
-      = link_to t(".see_more"), root_path(filtering_params.merge(event: @event.slug)), class: "heading-4 text-red"

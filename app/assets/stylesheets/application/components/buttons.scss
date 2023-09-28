@@ -182,9 +182,8 @@
         mask-image: url('@assets/images/icons/#{$icon}.svg');
       }
 
-      &.button--icon-left {
-        display: flex;
-        flex-direction: row;
+      &.button--icon-right {
+        flex-direction: row-reverse;
       }
     }
   }

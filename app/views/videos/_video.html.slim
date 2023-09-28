@@ -4,7 +4,7 @@
       .video-card__image-container
         = turbo_frame_tag "watch_status_#{video.id}", src: watched_by_current_user_video_path(id: video.id)
         .video-card__duration = video.hd_duration_data
-        - if video.performance_video.present?
+        - if video.performance_video&.position&.present?
           .video-card__performance-number
             = "#{video.performance_video.position} / #{video.performance.videos_count}" if video.performance_video.position.present?
         = image_tag video.thumbnail,  width: 750, alt: t("video_thumbnail_alt", video_title: video.title), class: "video-card__image" if video.thumbnail.present?
