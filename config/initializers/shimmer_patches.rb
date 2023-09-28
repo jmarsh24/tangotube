@@ -5,35 +5,37 @@ module Shimmer::FileAdditionsExtensions
     return nil if source.blank?
 
     if source.is_a?(ActiveStorage::Variant) || source.is_a?(ActiveStorage::Attached) || source.is_a?(ActiveStorage::Attachment) || source.is_a?(ActionText::Attachment)
-      raise ArgumentError, "The 'alt' attribute is required for image_tag" if options[:alt].blank?
-      raise ArgumentError, "Either width or height is required for image_tag" if options[:width].blank? && options[:height].blank?
-
       attachment = source
       width = options[:width]
       height = options[:height]
+      quality = options[:quality]
+
       options[:loading] ||= :lazy
-
-      width, height = calculate_missing_dimensions!(attachment:, width:, height:)
-
-      options[:width] = width
-      options[:height] = height
+      options[:width], options[:height] = calculate_missing_dimensions!(attachment:, width:, height:)
 
       if options[:loading] == :lazy
-        hash_value = preview_hash(attachment)
-        primary_color = preview_primary_color(attachment)
-
-        options.merge!({
-          "data-controller": "thumb-hash",
-          "data-thumb-hash-preview-hash-value": hash_value,
-          style: "background-color: ##{primary_color}; background-size: cover;"
-        })
+        hash_value, primary_color = preview_values(attachment)
+        if hash_value.present?
+          options.merge!({
+            "data-controller": "thumb-hash",
+            "data-thumb-hash-preview-hash-value": hash_value
+          })
+        end
+        if primary_color.present?
+          options.merge!({
+            style: "background-color: ##{primary_color}; background-size: cover;"
+          })
+        end
       end
+
+      source = image_file_path(source, width:, height:, quality:)
 
       if options[:width].present?
-        options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width: width.to_i * 2, height: height ? options[:height].to_i * 2 : nil)} 2x"
+        width = width.to_i * 2
+        height = height ? options[:height].to_i * 2 : nil
+        options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width:, height:, quality:)} 2x"
       end
     end
-
     super source, **options
   end
 
@@ -60,25 +62,42 @@ module Shimmer::FileAdditionsExtensions
     end
   end
 
-  def preview_hash(attachment)
-    return attachment.blob.preview_hash if attachment.blob.preview_hash
+  def preview_values(attachment, quality: nil)
+    return [attachment.blob.preview_hash, attachment.blob.primary_color] if attachment.blob.preview_hash && attachment.blob.primary_color
 
-    CreateImagePreviewJob.perform_later(attachment.id)
-    ""
+    CreateImagePreviewJob.perform_later(attachment.id, quality:)
+    ["", ""]
   end
 
-  def preview_primary_color(attachment)
-    return attachment.blob.primary_color if attachment.blob.primary_color
+  def image_file_path(source, width: nil, height: nil, quality: nil)
+    image_file_proxy(source, width:, height:, return_type: :path)
+  end
 
-    CreateImagePreviewJob.perform_later(attachment.id)
-    ""
+  def image_file_url(source, width: nil, height: nil, quality: nil)
+    image_file_proxy(source, width:, height:, return_type: :url)
+  end
+
+  def image_file_proxy(source, width: nil, height: nil, return_type: nil, quality: nil)
+    return if source.blank?
+    return source if source.is_a?(String)
+
+    blob = source.try(:blob) || source
+    proxy = Shimmer::FileProxy.new(blob_id: blob.id, width:, height:, quality:)
+    case return_type
+    when nil
+      proxy
+    when :path
+      proxy.path
+    when :url
+      proxy.url
+    end
   end
 end
 
-Shimmer::FileAdditions.prepend(Shimmer::FileAdditionsExtensions)
-
 module Shimmer::FileProxyExtensions
-  def initialize(blob_id:, resize: nil, width: nil, height: nil)
+  attr_reader :quality
+
+  def initialize(blob_id:, resize: nil, width: nil, height: nil, quality: nil)
     @blob_id = blob_id
     if !resize && width
       resize = if height
@@ -88,11 +107,38 @@ module Shimmer::FileProxyExtensions
       end
     end
     @resize = resize
+    @quality = quality
   end
 
   def variant
-    @variant ||= resizeable ? blob.representation({resize_to_limit: resize, format: :webp}).processed : blob
+    transformation_options = {resize_to_limit: resize, format: :webp}
+    transformation_options[:quality] = quality if quality
+
+    @variant ||= resizeable ? blob.representation(transformation_options).processed : blob
+  end
+
+  def variant_content_type
+    resizeable ? "image/webp" : content_type
+  end
+
+  def variant_filename
+    resizeable ? "#{filename.base}.webp" : filename.to_s
   end
 end
 
 Shimmer::FileProxy.prepend(Shimmer::FileProxyExtensions)
+Shimmer::FileAdditions.prepend(Shimmer::FileAdditionsExtensions)
+
+module Shimmer
+  class FilesController < ActionController::Base
+    def show
+      expires_in 1.year, public: true
+      request.session_options[:skip] = true
+      proxy = FileProxy.restore(params.require(:id))
+      send_data proxy.file,
+        filename: proxy.variant_filename,
+        type: proxy.variant_content_type,
+        disposition: "inline"
+    end
+  end
+end
