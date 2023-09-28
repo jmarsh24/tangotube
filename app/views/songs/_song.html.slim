@@ -1,5 +1,4 @@
 = link_to root_path(song: song.slug), class: "card" do
-  = image_tag song&.orchestra&.profile_image, width: 356, class: "avatar avatar--xxl"
   .card__content
     .card__title = song.title
     .card__subtitle = song.artist.titleize

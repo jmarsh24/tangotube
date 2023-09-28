@@ -7,9 +7,9 @@
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to root_path(event: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.profile_image.attached?
-            = image_tag record.profile_image, loading: :eager, class: "search-result__image-circle"
+            = image_tag record.profile_image, width: 80, alt: t(".event_thumbnail_alt", event_title: record.title), class: "search-result__image-circle"
           - else
-            = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+            = image_tag "default_avatar.jpg", width: 80, alt: t(".default_event_thumbnail_alt"), class: "search-result__image-circle"
           .stach-result__details
             .search-result__title = record.title
             .search-result__type = "#{record.class.to_s.singularize.titleize} • #{record&.city&.titleize} • #{record&.country&.titleize}"
@@ -18,10 +18,6 @@
     - when "Song"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to root_path(song: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
-          - if record&.orchestra&.profile_image&.attached?
-            = image_tag record.orchestra.profile_image, loading: :eager, class: "search-result__image"
-          - else
-            = image_tag "default_avatar.jpg", class: "search-result__image"
           .stach-result__details
             .search-result__title = record.full_title
             .search-result__type = "#{record.class.to_s.singularize.titleize} • #{record.formatted_artist} • #{record.genre.titleize}"
@@ -31,9 +27,9 @@
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to root_path(orchestra: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.profile_image.attached?
-            = image_tag record.profile_image, loading: :eager, class: "search-result__image-circle"
+            = image_tag record.profile_image, width: 80, alt: t(".orchestra_thumbnail_alt", orchestra_title: record.title),  class: "search-result__image-circle"
           - else
-            = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+            = image_tag "default_avatar.jpg", width: 80, alt: t(".default_orchestra_thumbnail_alt"), class: "search-result__image-circle"
           .stach-result__details
             .search-result__title = record.name
             .search-result__type = record.class.to_s.singularize.titleize
@@ -41,11 +37,11 @@
           .icon.icon--close.icon--md
     - when "Channel"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to root_path(channel: record.youtube_slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
+        = link_to root_path(channel: record.youtube_slug), alt: t(".channel_thumbnail_alt", channel_title: channel.title), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.thumbnail.present?
-            = image_tag record.thumbnail, loading: :eager, class: "search-result__image-circle"
+            = image_tag record.thumbnail, width: 80, alt: t(".channel_thumbnail_alt"), class: "search-result__image-circle"
           - else
-            = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+            = image_tag "default_avatar.jpg", width: 80, class: "search-result__image-circle"
           .stach-result__details
             .search-result__title = record.title
             .search-result__type = record.class.to_s.singularize.titleize
@@ -56,7 +52,7 @@
         = link_to watch_path(v: record.youtube_id), class: ["search-result", "search-result--video"], data: { controller: "recent-search", "recent-search-gid-value": record.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
           .stack.stack--sm.stack--tablet-line
             .video-card__image-container
-              = image_tag record.thumbnail, loading: :eager, width: 320, class: "video-card__image" if record.thumbnail.present?
+              = image_tag record.thumbnail, width: 320, alt: t(".video_thumbnail_alt", video_title: record.title), class: "video-card__image" if record.thumbnail.present?
               .video-card__duration = record.hd_duration_data
               - if record.performance_video.present?
                 .video-card__performance-number
@@ -80,9 +76,9 @@
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to root_path(dancer: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.profile_image.attached?
-            = image_tag record.profile_image, loading: :eager, class: "search-result__image-circle"
+            = image_tag record.profile_image, width: 80, alt: t(".dancer_avatar_alt", dancer_name: record.name), class: "search-result__image-circle"
           - else
-            = image_tag "default_avatar.jpg", class: "search-result__image-circle"
+            = image_tag "default_avatar.jpg", width: 80, alt: t(".default_dancer_avatar_alt"), class: "search-result__image-circle"
           .stach-result__details
             .search-result__title = record.name
             .search-result__type = record.class.to_s.singularize.titleize
@@ -93,11 +89,11 @@
         = link_to root_path(couple: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           .overlapping-avatars
             - if record.dancer.profile_image.attached?
-              = image_tag record.dancer.profile_image, loading: :eager, class: "overlapping-avatar"
+              = image_tag record.dancer.profile_image, width: 80, alt: t(".dancer_thumbnail_alt", dancer_name: record.dancer.name),  class: "overlapping-avatar"
             - else
               = image_tag "default_avatar.jpg", class: "overlapping-avatar"
             - if record.partner.profile_image.attached?
-              = image_tag record.partner.profile_image, loading: :eager, class: "overlapping-avatar"
+              = image_tag record.partner.profile_image, width: 80, alt: t(".dancer_thumbnail_alt", dancer_name: record.partner.name),  class: "overlapping-avatar"
             - else
               = image_tag "default_avatar.jpg", class: "overlapping-avatar"
           .stach-result__details
