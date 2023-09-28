@@ -5,6 +5,10 @@ module Shimmer::FileAdditionsExtensions
     return nil if source.blank?
 
     if source.is_a?(ActiveStorage::Variant) || source.is_a?(ActiveStorage::Attached) || source.is_a?(ActiveStorage::Attachment) || source.is_a?(ActionText::Attachment)
+      raise ArgumentError, "The 'alt' attribute is required for image_tag" if options[:alt].blank?
+
+      return nil if source.blank?
+
       attachment = source
       width = options[:width]
       height = options[:height]
