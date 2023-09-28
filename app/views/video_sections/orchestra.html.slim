@@ -1,0 +1,16 @@
+= turbo_frame_tag :orchestra_videos
+  .top-section
+    .carousel__header
+      h2.heading-2 = t(".orchestra")
+    .carousel
+      .carousel__header
+        = link_to root_path(filtering_params.merge(orchestra: @orchestra.slug)) do
+          = image_tag @orchestra.profile_image, width: 80, alt: t("orchestra_alt", orchestra_name: @orchestra.name),class: "avatar avatar--lg avatar--circle" if @orchestra.profile_image.attached?
+        = link_to @orchestra.name.titleize, root_path(filtering_params.merge(orchestra: @orchestra.slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
+      .carousel__videos
+        = render @videos
+    .carousel
+      .carousel__header
+        h2.heading-2 = t(".more_orchestras")
+      .carousel__videos
+        = render @orchestras

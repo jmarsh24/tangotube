@@ -59,8 +59,12 @@ Rails.application.routes.draw do
       get :older
       get :trending
       get :performances
-      get :random_event
+      get :event
       get :alternative
+      get :dancer
+      get :song
+      get :orchestra
+      get :channel
     end
   end
 

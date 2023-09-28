@@ -1,7 +1,8 @@
 = turbo_frame_tag :newest_videos
-  .carousel.
-    .carousel.carousel__header
-      = link_to t(".latest"), root_path(filtering_params.merge(sort: "most_recent")), class: "button button--icon-chevron-right button--icon-right heading-2"
-      h2.heading-2 = 
-    .carousel.carousel__videos
-      = render @videos
+  .top-section
+    .carousel
+      .carousel__header
+        = link_to t(".latest"), root_path(filtering_params.merge(sort: "most_recent")), class: "button button--icon-chevron-right button--icon-right heading-2"
+        h2.heading-2 = 
+      .carousel__videos
+        = render @videos

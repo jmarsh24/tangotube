@@ -1,6 +1,7 @@
 = turbo_frame_tag :performance_videos
-  .carousel
-    .carousel__header
-    = link_to t(".performance"), root_path(filtering_params, sort: "performance"), class: "button button--icon-chevron-right button--icon-right heading-2"
-    .carousel__videos
-      = render @videos
+  .top-section
+    .carousel
+      .carousel__header
+      = link_to t(".performance"), root_path(filtering_params, sort: "performance"), class: "button button--icon-chevron-right button--icon-right heading-2"
+      .carousel__videos
+        = render @videos

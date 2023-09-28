@@ -1,5 +1,5 @@
 = link_to root_path(song: song.slug), class: "card" do
   .card__content
-    .card__title = song.title
+    .card__title = song.display_title
     .card__subtitle = song.artist.titleize
     .card__subtitle = song.genre

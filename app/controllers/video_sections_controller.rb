@@ -28,9 +28,9 @@ class VideoSectionsController < ApplicationController
   end
 
   # @route GET /video_sections/random_event (random_event_video_sections)
-  def random_event
-    @event = Event.most_popular.limit(8).sample
-    @year = @event.videos.pluck(:upload_date_year).uniq.sample
+  def event
+    @events = Event.most_popular.limit(8)
+    @event = @events.sample
     @videos = Video::Search.new(filtering_params: {event: @event.slug, year: @year}, sort: "trending_5").videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
@@ -92,6 +92,6 @@ class VideoSectionsController < ApplicationController
   private
 
   def filtering_params
-    params.permit(:leader, :follower, :couple, :orchestra, :watched, :song, :channel, :event, :genre).to_h
+    params.permit(:dancer, :leader, :follower, :couple, :orchestra, :watched, :song, :channel, :event, :genre).to_h
   end
 end

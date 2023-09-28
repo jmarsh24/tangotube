@@ -1,6 +1,7 @@
 = turbo_frame_tag :alternative_videos
-  .carousel
-    .carousel__header
-      = link_to t(".alternative"), root_path(filtering_params.merge(genre: "alternative")), class: "button button--icon-chevron-right button--icon-right heading-2"
-    .carousel__videos
-      = render @videos
+  .top-section
+    .carousel
+      .carousel__header
+        = link_to t(".alternative"), root_path(filtering_params.merge(genre: "alternative")), class: "button button--icon-chevron-right button--icon-right heading-2"
+      .carousel__videos
+        = render @videos

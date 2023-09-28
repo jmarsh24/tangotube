@@ -64,10 +64,18 @@ class Song < ApplicationRecord
 
   def full_title
     title_part = title&.titleize
+    max_length = 20
+    title_part = (title_part.length > max_length) ? "#{title_part[0...max_length - 3]}..." : title_part
+
     artist_part = artist&.split("'")&.map(&:titleize)&.join("'")
     genre_part = genre&.titleize
 
     [title_part, artist_part, genre_part].compact.join(" - ")
+  end
+
+  def display_title
+    max_length = 20
+    (title.length > max_length) ? "#{title[0...max_length - 3]}..." : title
   end
 
   def translate_to_english
