@@ -63,7 +63,11 @@ class VideoSectionsController < ApplicationController
   end
 
   def song
-    @songs = Song.most_popular.joins(:leaders, :followers).preload(:orchestra).distinct.limit(24).shuffle
+    @songs = Song.most_popular.preload(:orchestra).where(
+      Video.joins(:dancer_videos)
+        .where("videos.song_id = songs.id")
+        .arel.exists
+    ).order(videos_count: :desc).limit(48).take(24).shuffle
     @song = @songs.sample
     @videos = Video::Search.new(filtering_params: {song: @song.slug}, user: current_user).videos
       .has_leader.has_follower.not_hidden.from_active_channels
