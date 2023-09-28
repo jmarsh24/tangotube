@@ -6,31 +6,44 @@ module Shimmer::FileAdditionsExtensions
 
     if source.is_a?(ActiveStorage::Variant) || source.is_a?(ActiveStorage::Attached) || source.is_a?(ActiveStorage::Attachment) || source.is_a?(ActionText::Attachment)
       raise ArgumentError, "The 'alt' attribute is required for image_tag" if options[:alt].blank?
-
-      return nil if source.blank?
+      raise ArgumentError, "Either width or height is required for image_tag" if options[:width].blank? && options[:height].blank?
 
       attachment = source
-      width = options[:width]
-      height = options[:height]
+      calculate_missing_dimensions!(attachment, options)
 
-      source = image_file_path(source, width:, height:)
-      options[:loading] ||= :lazy
       if options[:loading] == :lazy
         hash_value = preview_hash(attachment)
         primary_color = preview_primary_color(attachment)
 
-        if hash_value.present?
-          options["data-controller"] = "thumb-hash"
-          options["data-thumb-hash-preview-hash-value"] = hash_value
-        end
-
-        if primary_color.present?
-          options[:style] = "background-color: ##{primary_color}; background-size: cover;"
-        end
+        options.merge!({
+          "data-controller": "thumb-hash",
+          "data-thumb-hash-preview-hash-value": hash_value,
+          style: "background-color: ##{primary_color}; background-size: cover;"
+        })
       end
-      options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width: width.to_i * 2, height: height ? height.to_i * 2 : nil)} 2x" if options[:width].present?
+
+      if options[:width].present?
+        options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width: options[:width].to_i * 2, height: options[:height] ? options[:height].to_i * 2 : nil)} 2x"
+      end
     end
+
     super source, **options
+  end
+
+  private
+
+  def calculate_missing_dimensions!(attachment, options)
+    return unless attachment.blob.metadata["width"] && attachment.blob.metadata["height"]
+
+    original_width = attachment.blob.metadata["width"].to_f
+    original_height = attachment.blob.metadata["height"].to_f
+    aspect_ratio = original_width / original_height
+
+    if options[:width].present? && options[:height].blank?
+      options[:height] = (options[:width].to_i / aspect_ratio).round
+    elsif options[:height].present? && options[:width].blank?
+      options[:width] = (options[:height].to_i * aspect_ratio).round
+    end
   end
 
   def preview_hash(attachment)
