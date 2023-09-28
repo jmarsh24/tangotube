@@ -50,15 +50,17 @@ en:
       terms: Terms
     navbar:
       about: About
-      auto_mode_link: Auto
       contact: Contact
       dark_mode_link: Dark Mode
+      default_user_avatar: Default user avatar
       google_privacy_policy: Google privacy policy
       light_mode_link: Light Mode
       privacy: Privacy
-      search: Search
       terms: Terms
+      user_avatar: User avatar
   dancers:
+    dancer:
+      dancer_image_alt: Dancer image %{dancer_name}
     date:
     top_dancers:
       trending_dancers: Trending dancers
@@ -152,6 +154,8 @@ en:
         gone for a quick tango break.
   event_info_heading: Event Info
   events:
+    event:
+      event_image_alt: Event image of %{event_title}
     top_events:
       trending_events: Trending events
   login: Login
@@ -172,6 +176,8 @@ en:
           million: M
           thousand: K
   orchestras:
+    orchestra:
+      orchestra_image_alt: Orchestra image of %{orchestra_name}
     top_orchestras:
       orchestras: Orchestras
   pages:
@@ -179,29 +185,63 @@ en:
       contact_me: Contact Me
   recent_searches:
     index:
+      channel_thumbnail_alt: Channel thumbnail of %{channel_title}
+      dancer_avatar_alt: Dancer avatar of %{dancer_name}
+      dancer_thumbnail_alt: Dancer thumbnail of %{dancer_name}
+      default_dancer_avatar_alt: Default dancer avatar
+      default_event_thumbnail_alt: Default event thumbnail
+      default_orchestra_thumbnail_alt: Default orchestra thumbnail
+      event_thumbnail_alt: Event thumbnail of %{event_name}
+      orchestra_thumbnail_alt: Orchestra thumbnail %{orchestra_name}
       recent_searches: Recent searches
+      video_thumbnail_alt: Video thumbnail of %{video_title}
+  related_videos:
+    video:
+      video_thumbnail_alt: Video thumbnail of %{video_title}
   search:
     channels:
+      channel:
+        channel_thumbnail_alt: Channel thumbnail of %{channel_title}
+        default_channel_thumbnail_alt: Default channel thumbnail
       index:
         channels: Channels
     couples:
+      couple:
+        couple:
+          dancer_avatar_alt: Dancer avatar of %{dancer_name}
+          partner_avatar_alt: Partner avatar of %{partner_name}
+        default_couple_avatar_alt: Default couple avatar
       index:
         couples: Couples
     dancers:
+      dancer:
+        dancer_avatar_alt: Dancer avatar of %{dancer_name}
+        default_avatar_alt: Default avatar
       index:
         dancers: Dancers
     events:
+      event:
+        default_event_thumbnail_alt: Default event thumbnail
+        event_thumbnail_alt: Event thumbnail of %{event_title}
       index:
         events: Events
     orchestras:
       index:
         orchestras: Orchestras
+      orchestra:
+        default_orchestra_thumbnail_alt: Default orchestra thumbnail
+        orchestra_thubmail_alt: Orchestra thubmail of %{orchestra_name}
     songs:
       index:
         songs: Songs
+      song:
+        default_orchestra_avatar_alt: Default orchestra avatar
+        orchestra_avatar_alt: Orchestra avatar of %{orchestra_name}
     videos:
       index:
         videos: Videos
+      video:
+        video_thumbnail_alt: Video thumbnail of %{video_title}
   searches:
     show:
       channels: Channels
@@ -218,6 +258,9 @@ en:
       like: Like
   sign_out: Sign out
   sign_up: Sign up
+  songs:
+    top_songs:
+      trending_songs: Trending songs
   support:
     show:
       button_text: Become a Patron!
@@ -246,6 +289,7 @@ en:
     trending:
       see_more: MORE
       trending: Trending
+  video_thumbnail_alt: Video thumbnail for %{video_title}
   videos:
     details:
       acr_response_code: acr_esponse_code
@@ -278,11 +322,13 @@ en:
       sorting: Sorting
     videos:
       dancers: Dancers
+      events: Events
       newest: Newest
       older: Older
       orchestras: Orchestras
       popular: Popular
       see_more: MORE
+      songs: Songs
       trending: Trending
   videos_count: "%{count} videos"
   views_count: "%{count} views"

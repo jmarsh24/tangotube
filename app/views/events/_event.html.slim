@@ -1,4 +1,4 @@
 = link_to root_path(event: event.slug), class: "card" do
-  = image_tag event.profile_image, width: 312, class: "avatar avatar--xxl"
+  = image_tag event.profile_image, width: 312, alt: t(".event_image_alt", event_title: event.title), class: "avatar avatar--xxl"
   .card__content
     .card__title = event.title

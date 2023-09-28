@@ -7,10 +7,7 @@
         - if video.performance_video.present?
           .video-card__performance-number
             = "#{video.performance_video.position} / #{video.performance.videos_count}" if video.performance_video.position.present?
-        - if video.thumbnail.present?
-          = image_tag video.thumbnail, loading: :eager, width: 750, alt: "Performance by #{video.title}", class: "video-card__image"
-        - else
-          = image_tag "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg", alt: "Thumbnail for #{video.title}", class: "video-card__image"
+        = image_tag video.thumbnail,  width: 750, alt: t("video_thumbnail_alt", video_title: video.title), class: "video-card__image" if video.thumbnail.present?
     section.video-card__content
       header.video-card__primary
         .stack.stack--line

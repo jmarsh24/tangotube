@@ -1,6 +1,6 @@
 - dancer_link = dancer.gender == "male" ? "leader" : "follower"
 = link_to root_path(dancer_link => dancer.slug), class: "card" do
-  = image_tag dancer.profile_image, width: 312, class: "avatar avatar--circle avatar--xxl"
+  = image_tag dancer.profile_image, width: 312, alt: t(".dancer_image_alt", dancer_name: dancer.name), class: "avatar avatar--circle avatar--xxl"
   .card__content
     .card__title = dancer.name.split.first
     .card__title = dancer.name.split[1..-1].join(" ")

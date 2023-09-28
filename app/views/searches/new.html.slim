@@ -4,4 +4,4 @@
     .stack.stack--line
       .search-window__close.icon.icon--chevron-left.icon--lg data-action="click->search-modal#close"
       = f.search_field :query, placeholder: "Search...", class: "search__input input input__input", autocomplete: "off", autocorrect: "off", autocapitalize: "none", data: { search_modal_target: "mobileInput", action: "input->search-modal#search" }, id: "mobile-search-input"
-  = turbo_frame_tag "search-results", src: search_path, loading: :lazy, data: { "search-modal-target": "results" }, class: "search-results"
+  = turbo_frame_tag "search-results", src: search_path,  data: { "search-modal-target": "results" }, class: "search-results"
