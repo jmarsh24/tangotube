@@ -25,30 +25,26 @@
   - elsif videos.present? && (params[:sort].blank? || filtering_params.blank?)
     .stack.stack--sm
       = turbo_frame_tag :newest_videos, src: recent_video_sections_path, target: "_top"
-      .top-section
-        = turbo_frame_tag :trending_dancers, src: top_dancers_path, target: "_top"
-          .carousel
-            .carousel__header
-              h2.heading-2 = t(".dancers")
-        = turbo_frame_tag :trending_orchestras, src: top_orchestras_path, target: "_top"
-          .carousel
-            carousel__header
-              h2.heading-2 = t(".orchestras")
-        = turbo_frame_tag :trending_events, src: top_events_path, target: "_top"
-          .carousel
-            .carousel__header
-              h2.heading-2 = t(".events")
-        = turbo_frame_tag :trending_songs, src: top_songs_path, target: "_top"
-          .carousel__header
-            h2.heading-2 = t(".songs")
-    = turbo_frame_tag :alternative_videos, src: alternative_video_sections_path, target: "_top"
-      .carousel
-        .carousel__videos
-          = render "skeleton_video_card", count: 6
-    = turbo_frame_tag :random_event_videos, src: random_event_video_sections_path, target: "_top"
-      .carousel
-        .carousel__videos
-          = render "skeleton_video_card", count: 6
+      = turbo_frame_tag :dancer_videos, src: dancer_video_sections_path, target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6
+      = turbo_frame_tag :orchestra_videos, src: orchestra_video_sections_path, target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6
+      = turbo_frame_tag :song_videos, src: song_video_sections_path, target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6
+      = turbo_frame_tag :alternative_videos, src: alternative_video_sections_path, target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6
+      = turbo_frame_tag :event_videos, src: event_video_sections_path, target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6
     .carousel__header.heading-2 = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - else

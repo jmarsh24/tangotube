@@ -1,0 +1,15 @@
+= turbo_frame_tag :channel_videos
+  .top-section
+    h2.heading-2.carousel__header = t(".channel")
+    .carousel
+      .carousel__header
+        = link_to root_path(filtering_params.merge(channel: @channel.youtube_slug)) do
+          = image_tag @channel.thumbnail, width: 80, alt: t("channel_alt", channel_title: @channel.title),class: "avatar avatar--lg avatar--circle" if @channel.thumbnail.attached?
+        = link_to @channel.title.titleize, root_path(filtering_params.merge(channel: @channel.youtube_slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
+      .carousel__videos
+        = render @videos
+    .carousel
+      .carousel__header
+        h2.heading-2 = t(".more_channels")
+      .carousel__videos
+        = render @channels

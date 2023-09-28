@@ -1,6 +1,0 @@
-= turbo_frame_tag :random_event_videos
-  .carousel
-    .carousel__header
-      = link_to @event.title.titleize, root_path(filtering_params.merge(event: @event.slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
-    .carousel__videos
-      = render @videos

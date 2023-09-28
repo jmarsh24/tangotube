@@ -1,0 +1,16 @@
+= turbo_frame_tag :dancer_videos
+  - dancer_link = @dancer.gender == "male" ? "leader" : "follower"
+  .top-section
+    h2.heading-2.carousel__header = t(".dancer")
+    .carousel
+      .carousel__header
+        = link_to root_path(filtering_params.merge(dancer_link => @dancer.slug)) do
+          = image_tag @dancer.profile_image, width: 80, alt: t("dancer_alt", dancer_name: @dancer.name),class: "avatar avatar--lg avatar--circle" if @dancer.profile_image.attached?
+        = link_to @dancer.name, root_path(filtering_params.merge(dancer_link => @dancer.slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
+      .carousel__videos
+        = render @videos
+    .carousel
+      .carousel__header
+        h2.heading-2 = t(".more_dancers")
+      .carousel__videos
+        = render @dancers

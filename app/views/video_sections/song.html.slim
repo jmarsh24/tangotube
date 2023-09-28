@@ -1,0 +1,14 @@
+= turbo_frame_tag :song_videos
+  .top-section
+    .carousel__header
+      h2.heading-2 = t(".song")
+    .carousel
+      .carousel__header
+        = link_to @song.full_title, root_path(filtering_params.merge(song: @song.slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
+      .carousel__videos
+        = render @videos
+    .carousel
+      .carousel__header
+        h2.heading-2 = t(".more_songs")
+      .carousel__videos
+        = render @songs
