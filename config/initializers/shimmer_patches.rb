@@ -124,6 +124,24 @@ module Shimmer::FileProxyExtensions
   def variant_filename
     resizeable ? "#{filename.base}.webp" : filename.to_s
   end
+
+  def path
+    Rails.application.routes.url_helpers.file_path("#{id}.#{file_extension}", locale: nil)
+  end
+
+  def url(protocol: Rails.env.production? ? :https : :http)
+    Rails.application.routes.url_helpers.file_url("#{id}.#{file_extension}", locale: nil, protocol:)
+  end
+
+  private
+
+  def id
+    @id ||= message_verifier.generate([blob_id, resize, quality])
+  end
+
+  def file_extension
+    File.extname(variant_filename).from(1)
+  end
 end
 
 Shimmer::FileProxy.prepend(Shimmer::FileProxyExtensions)
