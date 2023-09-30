@@ -59,7 +59,7 @@ class Channel < ApplicationRecord
     fetch_and_save_metadata!
 
     return nil unless active && metadata.present?
-    binding.irb
+
     new_video_ids = metadata.video_ids - videos.map(&:youtube_id)
 
     new_video_ids.each do |video_id|
