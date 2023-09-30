@@ -45,6 +45,19 @@
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6
+      = turbo_frame_tag :interview_videos, src: interview_video_sections_path, target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6      
+      = turbo_frame_tag :workshop_videos, src: workshop_video_sections_path, target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6      
+      = turbo_frame_tag :mundial_videos, src: mundial_video_sections_path, target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6
+      
     .carousel__header.heading-2 = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - else

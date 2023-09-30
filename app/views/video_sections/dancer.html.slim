@@ -1,7 +1,7 @@
 = turbo_frame_tag :dancer_videos
   - dancer_link = @dancer.gender == "male" ? "leader" : "follower"
   .top-section
-    h2.heading-2.carousel__header = t(".dancer")
+    h2.heading-2.carousel__header = t(".featured_dancer")
     .carousel
       .carousel__header
         = link_to root_path(filtering_params.merge(dancer_link => @dancer.slug)) do

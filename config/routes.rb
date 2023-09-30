@@ -65,6 +65,9 @@ Rails.application.routes.draw do
       get :song
       get :orchestra
       get :channel
+      get :interview
+      get :workshop
+      get :mundial
     end
   end
 

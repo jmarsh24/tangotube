@@ -1,0 +1,8 @@
+= turbo_frame_tag :workshop_videos
+  .top-section
+    .carousel
+      .carousel__header
+        = link_to root_path(filtering_params.merge(query: "workshop")) do
+        = link_to t(".featured_workshops"), root_path(filtering_params.merge(query: "workshop")), class: "button button--icon-chevron-right button--icon-right heading-2"
+      .carousel__videos
+        = render @videos

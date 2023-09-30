@@ -1,16 +1,8 @@
 = turbo_frame_tag :interview_videos
   .top-section
-    .carousel__header
-      h2.heading-2 = t(".interview")
     .carousel
       .carousel__header
-        = link_to root_path(filtering_params.merge(interview: @interview.slug)) do
-          = image_tag @interview.profile_image, width: 80, alt: t("interview_alt", interview_title: @interview.title),class: "avatar avatar--lg avatar--circle" if @interview.profile_image.attached?
-        = link_to @interview.title.titleize, root_path(filtering_params.merge(interview: @interview.slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
+        = link_to root_path(filtering_params.merge(query: "interview")) do
+        = link_to t(".featured_interviews"), root_path(filtering_params.merge(query: "interview")), class: "button button--icon-chevron-right button--icon-right heading-2"
       .carousel__videos
         = render @videos
-    .carousel
-      .carousel__header
-        h2.heading-2 = t(".more_interviews")
-      .carousel__videos
-        = render @interviews
