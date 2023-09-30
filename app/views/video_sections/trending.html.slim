@@ -1,7 +1,8 @@
 = turbo_frame_tag :trending_videos
-  .top-section
-    .carousel
-      .carousel__header
-        = link_to t(".featured_trending"), root_path(filtering_params.merge(sort: "trending")), class: "button button--icon-chevron-right button--icon-right heading-2"
-      .carousel__videos
-        = render @videos
+  - if @videos.present?
+    .top-section
+      .carousel
+        .carousel__header
+          = link_to t(".featured_trending"), root_path(filtering_params.merge(sort: "trending")), class: "button button--icon-chevron-right button--icon-right heading-2"
+        .carousel__videos
+          = render @videos
