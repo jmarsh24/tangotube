@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ImportNewVideosForAllChannelsJob < ApplicationJob
-  queue_as :default
+  queue_as :import
 
   def perform(options = {})
     use_scraper = options.fetch(:use_scraper, false)

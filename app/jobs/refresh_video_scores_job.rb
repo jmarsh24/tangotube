@@ -2,7 +2,6 @@
 
 class RefreshVideoScoresJob < ApplicationJob
   queue_as :default
-  sidekiq_options retry: false
 
   def perform
     ActiveRecord::Base.connection.execute("SET statement_timeout TO '5min';")

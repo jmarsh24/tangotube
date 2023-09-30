@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SyncVideosForChannelJob < ApplicationJob
-  queue_as :default
+  queue_as :import
 
   def perform(channel_id, use_scraper:, use_music_recognizer:)
     channel = Channel.find(channel_id)

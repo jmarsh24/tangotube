@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ImportChannelMetadataJob < ApplicationJob
-  queue_as :default
+  queue_as :import
 
   def perform(channel)
     channel.fetch_and_save_metadata!

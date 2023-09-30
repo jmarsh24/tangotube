@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UpdateIndexJob < ApplicationJob
-  queue_as :low_priority
+  queue_as :refresh
 
   def perform(class_name, ids)
     query = class_name.constantize.index_query
