@@ -268,37 +268,36 @@ en:
       video_duration: "%M:%S"
   video_sections:
     alternative:
-      alternative: Alternative
-      see_more: MORE
+      featured_alternative: Featured Alternative
     channel:
-      channel: Channel
-      more_channels: More channels
+      featured_channel: Featured Channel
+      more_channels: More Channels
     dancer:
-      dancer: Dancer
-      more_dancers: More dancers
+      featured_dancer: Featured Dancer
+      more_dancers: More Dancers
     event:
-      event: Event
-      more_events: More events
+      featured_event: Featured Event
+      more_events: More Events
+    interview:
+      featured_interviews: Featured Interviews
+    mundial:
+      featured_mundial_de_tango: Featured mundial de tango
     older:
-      older: Older
-      see_more: MORE
+      featured_older: Featured Older
     orchestra:
-      more_orchestras: More orchestras
-      orchestra: Orchestra
+      featured_orchestra: Featured Orchestra
+      more_orchestras: More Orchestras
     performances:
       performance: Performance
-      see_more: MORE
-    random_event:
-      see_more: MORE
     recent:
-      latest: Latest
-      see_more: MORE
+      featured_latest: Featured Latest
     song:
-      more_songs: More songs
-      song: Song
+      featured_song: Featured Song
+      more_songs: More Songs
     trending:
-      see_more: MORE
-      trending: Trending
+      featured_trending: Featured trending
+    workshop:
+      featured_workshops: Featured workshops
   video_thumbnail_alt: Video thumbnail for %{video_title}
   videos:
     details:
@@ -330,14 +329,9 @@ en:
     sort:
       sorting: Sorting
     videos:
-      dancers: Dancers
-      events: Events
       newest: Newest
       older: Older
-      orchestras: Orchestras
       popular: Popular
-      see_more: MORE
-      songs: Songs
       trending: Trending
   videos_count: "%{count} videos"
   views_count: "%{count} views"

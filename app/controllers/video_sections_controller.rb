@@ -97,6 +97,33 @@ class VideoSectionsController < ApplicationController
       .preload(Video.search_includes)
   end
 
+  def interview
+    interview_videos = Video.title_match(["entrevista", "interview", "tengo una pregunta para vos", "podcast", "tango musicality", "documentary", "tango history", "opinions", "tango music visualization", "tango magazine", "what is tango freestyle"])
+    @videos = Video::Filter.new(interview_videos, user: current_user).videos
+      .has_dancer.not_hidden.from_active_channels
+      .limit(500)
+      .preload(Video.search_includes)
+      .shuffle.take(36)
+  end
+
+  def workshop
+    class_videos = Video.title_match(["workshop", "class", "clase", "resume", "musicality", "demo", "sacadas", "giros", "colgadas", "technique", "variacion"])
+    @videos = Video::Filter.new(class_videos, user: current_user).videos
+      .not_hidden.from_active_channels
+      .limit(500)
+      .preload(Video.search_includes)
+      .shuffle.take(36)
+  end
+
+  def mundial
+    mundial_videos = Video.where("videos.title ILIKE ?", "%mundial de tango 2023%")
+    @videos = Video::Filter.new(mundial_videos, user: current_user).videos
+      .not_hidden.from_active_channels
+      .limit(500)
+      .preload(Video.search_includes)
+      .shuffle.take(36)
+  end
+
   private
 
   def filtering_params

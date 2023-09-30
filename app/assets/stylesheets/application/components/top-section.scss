@@ -3,4 +3,7 @@
   padding: var(--spacing-md) 0;
   padding-left: var(--spacing-md);
   border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
