@@ -9,6 +9,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .shuffle
     @videos = (videos.count >= 24) ? videos : Video.none
   end
 
@@ -18,6 +19,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .shuffle
     @videos = (videos.count >= 24) ? videos : Video.none
   end
 
@@ -27,6 +29,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .shuffle
     @videos = (videos.count >= 24) ? videos : Video.none
   end
 
@@ -46,6 +49,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .shuffle
   end
 
   # @route GET /video_sections/alternative (alternative_video_sections)
@@ -54,6 +58,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .shuffle
   end
 
   # @route GET /video_sections/dancer (dancer_video_sections)
