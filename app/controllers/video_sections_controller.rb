@@ -132,6 +132,23 @@ class VideoSectionsController < ApplicationController
       .shuffle.take(36)
   end
 
+  def dancer_song
+    @dancer = Dancer.find_by(slug: params[:leader]) || Dancer.find_by(slug: params[:follower])
+    videos = Video::Search.new(filtering_params: {dancer: @dancer.slug}, user: current_user).videos
+      .not_hidden.from_active_channels
+      .preload(Video.search_includes)
+
+    videos_grouped_by_song = videos.group_by(&:song_id)
+    filtered_grouped_by_song = videos_grouped_by_song.select { |song_id, videos| videos.length >= 4 }
+    shuffled_grouped_by_song = filtered_grouped_by_song.transform_values(&:shuffle)
+
+    random_song_id = shuffled_grouped_by_song.keys.sample
+
+    @videos = shuffled_grouped_by_song[random_song_id]
+    @song = Song.find(random_song_id)
+    @songs = Song.where(id: shuffled_grouped_by_song.keys).limit(24).shuffle
+  end
+
   private
 
   def filtering_params

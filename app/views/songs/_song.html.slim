@@ -1,4 +1,8 @@
-= link_to root_path(song: song.slug), class: "song" do
+- link_params = { song: song.slug }
+- link_params[:leader] = leader if local_assigns[:leader]
+- link_params[:follower] = follower if local_assigns[:follower]
+
+= link_to root_path(link_params), class: "song" do
   .song__title = song.display_title.titleize
   .song__details
     = "#{song.artist.titleize} - #{song.genre.titleize}"

@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       get :interview
       get :workshop
       get :mundial
+      get :dancer_song
     end
   end
 
