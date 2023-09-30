@@ -13,6 +13,5 @@
 #
 class Watch < ApplicationRecord
   belongs_to :user
-  belongs_to :video
-  counter_culture :video
+  belongs_to :video, counter_cache: true
 end
