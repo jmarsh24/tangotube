@@ -1,5 +1,4 @@
-= link_to root_path(song: song.slug), class: "card" do
-  .card__content
-    .card__title = song.display_title
-    .card__subtitle = song.artist.titleize
-    .card__subtitle = song.genre
+= link_to root_path(song: song.slug), class: "song" do
+  .song__title = song.display_title.titleize
+  .song__details
+    = "#{song.artist.titleize} - #{song.genre.titleize}"

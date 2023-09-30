@@ -4,7 +4,11 @@
       h2.heading-2 = t(".featured_song")
     .carousel
       .carousel__header
-        = link_to @song.full_title, root_path(filtering_params.merge(song: @song.slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
+        = link_to root_path(filtering_params.merge(song: @song.slug)), class: "button button--icon-chevron-right button--icon-right" do
+          .song
+            .song__title = @song.title
+            .song__details 
+              = "#{@song.genre} - #{@song.artist}".titleize
       .carousel__videos
         = render @videos
     .carousel
