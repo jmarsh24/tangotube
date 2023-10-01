@@ -105,6 +105,7 @@ class VideoSectionsController < ApplicationController
       .preload(Video.search_includes)
   end
 
+  # @route GET /video_sections/interview (interview_video_sections)
   def interview
     interview_videos = Video.title_match(["entrevista", "interview", "tengo una pregunta para vos", "podcast", "tango musicality", "documentary", "tango history", "opinions", "tango music visualization", "tango magazine", "what is tango freestyle"])
     @videos = Video::Filter.new(interview_videos, filtering_params:, user: current_user).videos
@@ -114,6 +115,7 @@ class VideoSectionsController < ApplicationController
       .shuffle.take(36)
   end
 
+  # @route GET /video_sections/workshop (workshop_video_sections)
   def workshop
     class_videos = Video.title_match(["workshop", "class", "clase", "resume", "musicality", "demo", "sacadas", "giros", "colgadas", "technique", "variacion"])
     @videos = Video::Filter.new(class_videos, filtering_params:, user: current_user).videos
@@ -123,6 +125,7 @@ class VideoSectionsController < ApplicationController
       .shuffle.take(36)
   end
 
+  # @route GET /video_sections/mundial (mundial_video_sections)
   def mundial
     mundial_videos = Video.where("videos.title ILIKE ?", "%mundial de tango 2023%")
     @videos = Video::Filter.new(mundial_videos, filtering_params:, user: current_user).videos
@@ -132,6 +135,7 @@ class VideoSectionsController < ApplicationController
       .shuffle.take(36)
   end
 
+  # @route GET /video_sections/dancer_song (dancer_song_video_sections)
   def dancer_song
     @dancer = Dancer.find_by(slug: params[:leader]) || Dancer.find_by(slug: params[:follower])
     videos = Video::Search.new(filtering_params: {dancer: @dancer.slug}, user: current_user).videos
