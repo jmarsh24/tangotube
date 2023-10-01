@@ -31,10 +31,20 @@ module ExternalVideoImport
       private
 
       def combined_match(video_title:, video_description:, video_tags: [], song_titles: [], song_artists: [])
-        all_texts = [video_title, video_description, *video_tags, *song_titles, *song_artists].join(" ")
-        normalized_text = TextNormalizer.normalize(all_texts)
-
         song_attributes = Song.active.most_popular.pluck(:id, :artist, :title)
+
+        # First, prioritize song_titles and song_artists matches
+        prioritized_texts = [*song_titles, *song_artists].join(" ")
+        prioritized_matches = find_matches_for_text(prioritized_texts, song_attributes)
+        return prioritized_matches unless prioritized_matches.empty?
+
+        # If no prioritized matches found, then search other fields
+        other_texts = [video_title, video_description, *video_tags].join(" ")
+        find_matches_for_text(other_texts, song_attributes)
+      end
+
+      def find_matches_for_text(text, song_attributes)
+        normalized_text = TextNormalizer.normalize(text)
         potential_matches = []
 
         song_attributes.each do |song_id, artist, title|
