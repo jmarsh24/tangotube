@@ -40,5 +40,10 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::DancerMatcher do
 
       expect(dancer_matcher.match(video_title:)).to match_array([dancers(:carlitos), augustina_piaggio])
     end
+
+    it "matches corina herrera and inez muzzopappa" do
+      video_title = "CORINA HERRERA & INÉS MUZOPPAPA - RELIQUIAS PORTEÑAS - MUY MARTES TANGO"
+      expect(dancer_matcher.match(video_title:)).to match_array([dancers(:corina), dancers(:inez)])
+    end
   end
 end

@@ -3,10 +3,11 @@
 module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
-      MATCH_THRESHOLD = 0.8
+      MATCH_THRESHOLD = 0.78
 
       def match(video_title:)
         dancer_ids = find_dancers(video_title)
+
         dancers = Dancer.where(id: dancer_ids)
         if dancers.any?
           Rails.logger.debug "Matched dancers:"
