@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RefreshVideoScoresJob < ApplicationJob
-  queue_as :default
+  queue_as :refresh
 
   def perform
     ActiveRecord::Base.connection.execute("SET statement_timeout TO '5min';")
