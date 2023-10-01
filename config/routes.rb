@@ -86,11 +86,11 @@ Rails.application.routes.draw do
   resources :files, only: :show, controller: "shimmer/files"
 
   namespace :webhooks do
-    match :youtube, to: "webhooks#youtube", via: [:get, :post]
-    post :patreon, to: "webhooks#patreon"
-    post :data_deletion, to: "webhooks#data_deletion"
+    match :youtube, via: [:get, :post]
+    post :patreon
+
     namespace :facebook do
-      post :data_deletion, to: "webhooks#facebook_user_deletion"
+      post :data_deletion, to: "#facebook_user_deletion"
     end
   end
 
