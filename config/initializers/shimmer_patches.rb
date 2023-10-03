@@ -63,7 +63,9 @@ module Shimmer::FileAdditionsExtensions
   end
 
   def preview_values(attachment, quality: nil)
-    return [attachment.blob.preview_hash, attachment.blob.primary_color] if attachment.blob.preview_hash && attachment.blob.primary_color
+    if attachment.blob.metadata["preview_hash"] && attachment.blob.metadata["primary_color"]
+      return [attachment.blob.metadata["preview_hash"], attachment.blob.metadata["primary_color"]]
+    end
 
     CreateImagePreviewJob.perform_later(attachment.id, quality:)
     ["", ""]

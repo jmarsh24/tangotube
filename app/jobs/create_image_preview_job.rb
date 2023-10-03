@@ -6,13 +6,18 @@
     def perform(attachment_id, quality: nil)
       attachment = ActiveStorage::Attachment.find(attachment_id)
 
-      return unless attachment
-
       preview = attachment.variant(resize_to_limit: [100, 100], format: :webp, quality: quality).processed
 
       image = Vips::Image.new_from_buffer(preview.download, "")
 
-      attachment.blob.update!(preview_hash: preview_hash(image), primary_color: average_color_from_image(image))
+      attachment.blob.metadata.merge!({
+        preview_hash: preview_hash(image),
+        primary_color: average_color_from_image(image)
+      })
+
+      attachment.blob.save!
+    rescue ActiveStorage::FileNotFoundError => e
+      Rails.logger.error("ActiveStorage::FileNotFoundError: #{e.message}")
     end
 
     private
