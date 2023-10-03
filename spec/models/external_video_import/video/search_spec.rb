@@ -29,7 +29,7 @@ RSpec.describe Video::Search do
         Video::FacetBuilder::Option.new(label: "Octavio Fernandez", value: "octavio-fernandez", count: 1)
       ]
 
-      followers_facet = [Video::FacetBuilder::Option.new(label: "Inez Muzzopapa", value: "inez-muzzopapa", count: 1)]
+      followers_facet = [Video::FacetBuilder::Option.new(label: "Ines Muzzopapa", value: "ines-muzzopapa", count: 1)]
 
       orchestras_facet = [Video::FacetBuilder::Option.new(label: "Juan D'Arienzo", value: "juan-darienzo", count: 1)]
 

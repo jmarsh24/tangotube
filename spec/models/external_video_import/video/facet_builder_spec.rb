@@ -28,7 +28,7 @@ RSpec.describe Video::FacetBuilder do
         Video::FacetBuilder::Option.new(value: "noelia-hurtado", label: "Noelia Hurtado", count: 2),
         Video::FacetBuilder::Option.new(value: "clarisa-aragon", label: "Clarisa Aragon", count: 1),
         Video::FacetBuilder::Option.new(value: "corina-herrera", label: "Corina Herrera", count: 1),
-        Video::FacetBuilder::Option.new(value: "inez-muzzopapa", label: "Inez Muzzopapa", count: 1),
+        Video::FacetBuilder::Option.new(value: "ines-muzzopapa", label: "Ines Muzzopapa", count: 1),
         Video::FacetBuilder::Option.new(value: "lorena-tarrantino", label: "Lorena Tarrantino", count: 1)
       ]
 
