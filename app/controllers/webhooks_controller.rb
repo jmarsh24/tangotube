@@ -45,7 +45,7 @@ class WebhooksController < ApplicationController
     secret = Config.facebook_app_secret!
 
     decoded_sig = Base64.urlsafe_decode64(encoded_sig)
-    data = JSON.load(Base64.urlsafe_decode64(payload))
+    data = JSON.parse(Base64.urlsafe_decode64(payload))
 
     expected_sig = OpenSSL::HMAC.digest("SHA256", secret, payload)
 
