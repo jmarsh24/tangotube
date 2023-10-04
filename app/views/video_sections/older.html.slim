@@ -1,7 +1,8 @@
 = turbo_frame_tag :older_videos
-  .top-section
-    .carousel
-      .carousel__header
-        = link_to t(".featured_older"), root_path(filtering_params.merge(sort: "oldest")), class: "button button--icon-chevron-right button--icon-right heading-2"
-      .carousel__videos
-        = render @videos
+  - if @videos.present?
+    .top-section
+      .carousel
+        .carousel__header
+          = link_to t(".featured_older"), root_path(filtering_params.merge(sort: "oldest")), class: "button button--icon-chevron-right button--icon-right heading-2"
+        .carousel__videos
+          = render @videos

@@ -576,7 +576,7 @@ GEM
     statsd-ruby (1.5.0)
     stimulus-rails (1.2.2)
       railties (>= 6.0.0)
-    store_model (2.1.0)
+    store_model (2.1.1)
       activerecord (>= 5.2)
     streamio-ffmpeg (3.0.2)
       multi_json (~> 1.8)
@@ -589,6 +589,7 @@ GEM
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.2.2)
     thread_safe (0.3.6)
+    thumbhash (0.0.1)
     tilt (2.2.0)
     timeout (0.4.0)
     translate_client (0.0.1)
@@ -685,7 +686,6 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen
-  mini_magick
   mrsk
   net-ssh
   newrelic_rpm
@@ -727,6 +727,7 @@ DEPENDENCIES
   store_model
   streamio-ffmpeg
   strip_attributes
+  thumbhash
   translate_client
   turbo-rails
   vcr

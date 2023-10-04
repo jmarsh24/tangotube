@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UpdateVideoMetadataJob < ApplicationJob
-  queue_as :default
+  queue_as :update
 
   def perform
     batch_size = 500

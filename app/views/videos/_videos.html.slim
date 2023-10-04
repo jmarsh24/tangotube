@@ -1,59 +1,58 @@
 #videos.stack.stack--xs
   - if params[:sort].present?
     = paginated videos, class: "grid grid--videos"
-  - elsif videos.present? && params[:sort].blank? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:watched] || params[:channel] || params[:event] || params[:song] || params[:genre] )
+  - elsif videos.present? && params[:sort].blank? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:channel] || params[:event] || params[:song] || params[:genre] )
     = turbo_frame_tag :trending_videos, src: trending_video_sections_path(filtering_params), target: "_top"
       .carousel
-        .carousel__header
-          = link_to t(".trending"), root_path(filtering_params.merge(sort: "trending")), class: "heading-2"
         .carousel__videos
           = render "skeleton_video_card", count: 6
     = turbo_frame_tag :newest_videos, src: recent_video_sections_path(filtering_params), target: "_top"
       .carousel
-        .carousel__header
-          = link_to t(".newest"), root_path(filtering_params.merge(sort: "most_recent")), class: "heading-2"
         .carousel__videos
           = render "skeleton_video_card", count: 6
     = turbo_frame_tag :older_videos, src: older_video_sections_path(filtering_params), target: "_top"
       .carousel
-        .carousel__header
-          = link_to t(".older"), root_path(filtering_params.merge(sort: "oldest")), class: "heading-2"
         .carousel__videos
           = render "skeleton_video_card", count: 6
+    - if (params[:dancer] || params[:follower] || params[:leader]) && (!params[:song].present? || !params[:orchestra].present? || !params[:genre].present?)
+      = turbo_frame_tag :song_videos, src: dancer_song_video_sections_path(filtering_params), target: "_top"
+        .carousel
+          .carousel__videos
+            = render "skeleton_video_card", count: 6
     .carousel__header.heading-2 = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - elsif videos.present? && (params[:sort].blank? || filtering_params.blank?)
     .stack.stack--sm
-      = turbo_frame_tag :newest_videos, src: recent_video_sections_path, target: "_top"
-      = turbo_frame_tag :dancer_videos, src: dancer_video_sections_path, target: "_top"
+      = turbo_frame_tag :newest_videos, src: recent_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
+      = turbo_frame_tag :dancer_videos, src: dancer_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6
-      = turbo_frame_tag :orchestra_videos, src: orchestra_video_sections_path, target: "_top"
+      = turbo_frame_tag :orchestra_videos, src: orchestra_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6
-      = turbo_frame_tag :song_videos, src: song_video_sections_path, target: "_top"
+      = turbo_frame_tag :song_videos, src: song_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6
-      = turbo_frame_tag :alternative_videos, src: alternative_video_sections_path, target: "_top"
+      = turbo_frame_tag :alternative_videos, src: alternative_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6
-      = turbo_frame_tag :event_videos, src: event_video_sections_path, target: "_top"
+      = turbo_frame_tag :event_videos, src: event_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6
-      = turbo_frame_tag :interview_videos, src: interview_video_sections_path, target: "_top"
+      = turbo_frame_tag :interview_videos, src: interview_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6      
-      = turbo_frame_tag :workshop_videos, src: workshop_video_sections_path, target: "_top"
+      = turbo_frame_tag :workshop_videos, src: workshop_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6      
-      = turbo_frame_tag :mundial_videos, src: mundial_video_sections_path, target: "_top"
+      = turbo_frame_tag :mundial_videos, src: mundial_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6

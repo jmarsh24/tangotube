@@ -275,13 +275,16 @@ en:
     dancer:
       featured_dancer: Featured Dancer
       more_dancers: More Dancers
+    dancer_song:
+      featured_song: Featured song
+      more_songs: More songs
     event:
       featured_event: Featured Event
       more_events: More Events
     interview:
       featured_interviews: Featured Interviews
     mundial:
-      featured_mundial_de_tango: Featured mundial de tango
+      featured_mundial_de_tango: Mundial de Tango
     older:
       featured_older: Featured Older
     orchestra:
@@ -295,9 +298,9 @@ en:
       featured_song: Featured Song
       more_songs: More Songs
     trending:
-      featured_trending: Featured trending
+      featured_trending: Featured Trending
     workshop:
-      featured_workshops: Featured workshops
+      featured_workshops: Featured Workshops
   video_thumbnail_alt: Video thumbnail for %{video_title}
   videos:
     details:
@@ -329,10 +332,7 @@ en:
     sort:
       sorting: Sorting
     videos:
-      newest: Newest
-      older: Older
       popular: Popular
-      trending: Trending
   videos_count: "%{count} videos"
   views_count: "%{count} views"
   watches:

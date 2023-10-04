@@ -15,4 +15,7 @@
       .carousel__header
         h2.heading-2 = t(".more_songs")
       .carousel__videos
-        = render @songs
+        - if @dancer.gender == "male" 
+          = render @songs, { leader: @dancer.slug }
+        - elsif @dancer.gender == "female"
+          = render @songs, { follower: @dancer.slug }

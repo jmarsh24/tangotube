@@ -1,5 +1,8 @@
-= link_to root_path(song: song.slug), class: "card" do
-  .card__content
-    .card__title = song.display_title
-    .card__subtitle = song.artist.titleize
-    .card__subtitle = song.genre
+- link_params = { song: song.slug }
+- link_params[:leader] = leader if local_assigns[:leader]
+- link_params[:follower] = follower if local_assigns[:follower]
+
+= link_to root_path(link_params), class: "song" do
+  .song__title = song.display_title.titleize
+  .song__details
+    = "#{song.artist.titleize} - #{song.genre.titleize}"

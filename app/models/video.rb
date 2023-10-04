@@ -40,29 +40,29 @@ class Video < ApplicationRecord
   belongs_to :song, optional: true, counter_cache: true
   belongs_to :channel, optional: false, counter_cache: true
   belongs_to :event, optional: true, counter_cache: true
-  has_many :watches, dependent: :destroy, counter_cache: true
+  has_many :watches, dependent: :delete_all
   has_many :watchers, through: :watches, source: :user
-  has_many :likes, as: :likeable, dependent: :destroy, counter_cache: true
-  has_many :features, as: :featureable, dependent: :destroy
-  has_many :clips, dependent: :destroy
-  has_many :dancer_videos, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :delete_all
+  has_many :features, as: :featureable, dependent: :delete_all
+  has_many :clips, dependent: :delete_all
+  has_many :dancer_videos, dependent: :delete_all
   has_many :dancers, through: :dancer_videos
   has_many :leader_roles, -> { where(role: :leader) }, class_name: "DancerVideo", inverse_of: :video, dependent: :destroy
   has_many :leaders, through: :leader_roles, source: :dancer
   has_many :follower_roles, -> { where(role: :follower) }, class_name: "DancerVideo", inverse_of: :video, dependent: :destroy
   has_many :followers, through: :follower_roles, source: :dancer
-  has_many :couple_videos, dependent: :destroy
+  has_many :couple_videos, dependent: :delete_all
   has_many :couples, through: :couple_videos
   has_one :orchestra, through: :song
-  has_one :performance_video, dependent: :destroy
-  has_one :performance, through: :performance_video, dependent: :destroy
+  has_one :performance_video, dependent: :delete
+  has_one :performance, through: :performance_video, dependent: :delete
   # rubocop:disable Rails/HasManyOrHasOneDependent
   has_one :video_score
   has_one :video_search
   # rubocop:enable Rails/HasManyOrHasOneDependent
-  has_many :recent_searches, as: :searchable, dependent: :destroy
+  has_many :recent_searches, as: :searchable, dependent: :delete_all
 
-  has_one_attached :thumbnail, dependent: :destroy
+  has_one_attached :thumbnail, dependent: :purge_later
 
   attribute :metadata, ExternalVideoImport::Metadata.to_type
   validates :youtube_id, presence: true, uniqueness: true

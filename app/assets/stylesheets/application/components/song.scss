@@ -1,0 +1,20 @@
+.song {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  flex-shrink: 0;
+  max-width: 300px;
+
+  &__title {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &__details {
+    display: flex;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-gray-700);
+  }
+}

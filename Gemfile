@@ -61,7 +61,6 @@ gem "patreon"
 gem "strip_attributes"
 gem "goldiloader"
 gem "browser"
-gem "mini_magick"
 
 # Assets
 gem "vite_rails"
@@ -69,6 +68,7 @@ gem "propshaft"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "serviceworker-rails"
+gem "thumbhash"
 
 # External Services
 gem "aws-sdk-s3"

@@ -4,9 +4,10 @@
       h2.heading-2 = t(".featured_event")
     .carousel
       .carousel__header
-        = link_to root_path(filtering_params.merge(event: @event.slug)) do
-          = image_tag @event.profile_image, width: 80, alt: t("event_alt", event_title: @event.title),class: "avatar avatar--lg avatar--circle" if @event.profile_image.attached?
-        = link_to @event.title.titleize, root_path(filtering_params.merge(event: @event.slug)), class: "button button--icon-chevron-right button--icon-right heading-2"
+        = link_to root_path(filtering_params.merge(event: @event.slug)), class: "button button--icon-chevron-right button--icon-right" do
+          .stack.stack--line.stack--sm
+            = image_tag @event.profile_image, width: 80, alt: t("event_alt", event_title: @event.title), class: "avatar avatar--lg" if @event.profile_image.attached?
+            h3.heading-3 = @event.title.titleize
       .carousel__videos
         = render @videos
     .carousel

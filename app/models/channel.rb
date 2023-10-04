@@ -82,6 +82,7 @@ class Channel < ApplicationRecord
 
   def fetch_and_save_metadata!
     metadata = ExternalChannelImporter.new.fetch_metadata(youtube_slug)
+
     update!(metadata:, metadata_updated_at: Time.current)
   rescue Yt::Errors::NoItems
     destroy!

@@ -65,7 +65,7 @@ gianpiero:
   last_name: "Galdi"
   nick_name: ["Gianpiero Galdi"]
   reviewed: true
-  gender: "female"
+  gender: "male"
   slug: "gianpiero-ya-galdi"
 
 lorena:
@@ -80,16 +80,16 @@ corina:
   name: "Corina Herrera"
   first_name: "Corina"
   last_name: "Herrera"
-  gender: "male"
+  gender: "female"
   slug: "corina-herrera"
   reviewed: true
 
 inez:
-  name: "Inez Muzzopapa"
-  first_name: "Inez"
+  name: "Ines Muzzopapa"
+  first_name: "Ines"
   last_name: "Muzzopapa"
-  gender: "male"
-  slug: "inez-muzzopapa"
+  gender: "female"
+  slug: "ines-muzzopapa"
   reviewed: true
 
 octavio:
@@ -104,6 +104,7 @@ facundo:
   name: "Facundo Pinero"
   first_name: "Facundo"
   last_name: "Pinero"
+  gender: "female"
   reviewed: true
   slug: "facundo-pinero"
 
@@ -118,5 +119,6 @@ facundo_gil:
   name: "Facundo Gil"
   first_name: "Facundo"
   last_name: "Gil"
+  gender: "female"
   reviewed: "true"
   slug: "facundo-gil"

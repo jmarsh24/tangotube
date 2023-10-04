@@ -2,12 +2,16 @@
 :queues:
   - urgent
   - high_priority
-  - default
   - mailers
+  - refresh
+  - import
+  - update
+  - default
   - low_priority
   - very_low_priority
   - active_storage_analysis
   - active_storage_purge
+
 :scheduler:
   :schedule:
     enqueue_channel_video_fetcher_for_all_channels_with_music_recognizer:

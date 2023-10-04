@@ -74,7 +74,7 @@ class Song < ApplicationRecord
   end
 
   def display_title
-    max_length = 20
+    max_length = 48
     (title.length > max_length) ? "#{title[0...max_length - 3]}..." : title
   end
 
