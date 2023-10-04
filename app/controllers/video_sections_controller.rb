@@ -63,7 +63,7 @@ class VideoSectionsController < ApplicationController
   end
 
   def song
-    @songs = Song.most_popular.joins(:leaders, :followers).preload(:orchestra).limit(24).shuffle.take(1)
+    @songs = Song.most_popular.preload(:orchestra).limit(24).shuffle
     @song = @songs.sample
     @videos = Video::Search.new(filtering_params: {song: @song.slug}, user: current_user).videos
       .has_leader.has_follower.not_hidden.from_active_channels
@@ -72,7 +72,7 @@ class VideoSectionsController < ApplicationController
   end
 
   def channel
-    @channels = Channel.most_popular.active.with_attached_thumbnail.limit(12).shuffle.take(1)
+    @channels = Channel.most_popular.active.with_attached_thumbnail.limit(12).shuffle
     @channel = @channels.sample
     @videos = Video::Search.new(filtering_params: {channel: @channel.youtube_slug}, user: current_user).videos
       .has_leader.has_follower.not_hidden.from_active_channels
@@ -81,7 +81,7 @@ class VideoSectionsController < ApplicationController
   end
 
   def orchestra
-    @orchestras = Orchestra.most_popular.with_attached_profile_image.limit(24).shuffle.take(1)
+    @orchestras = Orchestra.most_popular.with_attached_profile_image.limit(24).shuffle
     @orchestra = @orchestras.sample
     @videos = Video::Search.new(filtering_params: {orchestra: @orchestra.slug}, user: current_user).videos
       .has_leader.has_follower.not_hidden.from_active_channels
