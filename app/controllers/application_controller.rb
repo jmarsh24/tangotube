@@ -14,9 +14,13 @@ class ApplicationController < ActionController::Base
     @show_support_modal = current_user && !current_user&.supporter
   end
 
+  def require_turbo_frame
+    head :unprocessable_entity unless turbo_frame_request?
+  end
+
   private
 
-  def paginated(scope, per: 12, frame_id: "pagination-frame")
+  def paginated(scope, per: 24, frame_id: "pagination-frame")
     @current_page = params[:page]&.to_i || 1
     scope = scope.page(@current_page).per(per).without_count
     @has_more_pages = !scope.next_page.nil? unless @has_more_pages == true

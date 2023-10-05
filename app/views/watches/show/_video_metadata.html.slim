@@ -41,7 +41,7 @@
             - if video.song.date.present?
               .metadata-item 
                 .metadata-item__label = t(".song_recording_date_heading")
-                .metadata-item__value = t(".song_recording_date", date: l(video.song.date, format: :song_recording_date))
+                .metadata-item__value = l(video.song.date, format: :song_recording_date)
             - if video.song.composer.present?
               .metadata-item 
                 .metadata-item__label = t(".song_composer_heading")
@@ -66,10 +66,10 @@
             - if video.upload_date.present?
               .metadata-item 
                 .metadata-item__label = t(".video_upload_date_heading")
-                .metadata-item__value = t(".upload_date", date: video.upload_date)
+                .metadata-item__value = l(video.upload_date, format: :upload_date)
             - if video.duration.present?
               .metadata-item 
                 .metadata-item__label = t(".video_duration_heading")
                 .metadata-item__value = l(Time.at(video.duration), format: :video_duration)
     - if video&.song&.spotify_track_id.present?
-      iframe src="https://open.spotify.com/embed/track/#{@video.song.spotify_track_id}?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"
+      iframe src="https://open.spotify.com/embed/track/#{@video.song.spotify_track_id}?utm_source=generator&theme=0" height="152" frameborder="0" loading="lazy" style="border-radius: 14px;"

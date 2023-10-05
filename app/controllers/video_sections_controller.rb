@@ -45,7 +45,7 @@ class VideoSectionsController < ApplicationController
   def event
     @events = Event.most_popular.limit(8)
     @event = @events.sample
-    @videos = Video::Search.new(filtering_params: {event: @event.slug, year: @year}, sort: "trending_5", user: current_user).videos
+    @videos = Video::Search.new(filtering_params: filtering_params.merge(event: @event.slug, year: @year), sort: "trending_5", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -54,7 +54,7 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/alternative (alternative_video_sections)
   def alternative
-    @videos = Video::Search.new(filtering_params: {genre: "alternative"}, user: current_user).videos
+    @videos = Video::Search.new(filtering_params: filtering_params.merge(genre: "alternative"), user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -65,7 +65,7 @@ class VideoSectionsController < ApplicationController
   def dancer
     @dancers = Dancer.most_popular.with_attached_profile_image.limit(128).shuffle.take(24)
     @dancer = @dancers.sample
-    @videos = Video::Search.new(filtering_params: {dancer: @dancer.slug}, user: current_user).videos
+    @videos = Video::Search.new(filtering_params: filtering_params.merge(dancer: @dancer.slug), user: current_user).videos
       .has_leader.has_follower.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -79,7 +79,7 @@ class VideoSectionsController < ApplicationController
         .arel.exists
     ).order(videos_count: :desc).limit(48).take(24).shuffle
     @song = @songs.sample
-    @videos = Video::Search.new(filtering_params: {song: @song.slug}, user: current_user).videos
+    @videos = Video::Search.new(filtering_params: filtering_params.merge(song: @song.slug), user: current_user).videos
       .has_leader.has_follower.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -89,7 +89,7 @@ class VideoSectionsController < ApplicationController
   def channel
     @channels = Channel.most_popular.active.with_attached_thumbnail.limit(12).shuffle
     @channel = @channels.sample
-    @videos = Video::Search.new(filtering_params: {channel: @channel.youtube_slug}, user: current_user).videos
+    @videos = Video::Search.new(filtering_params: filtering_params.merge(channel: @channel.youtube_slug), user: current_user).videos
       .has_leader.has_follower.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -99,7 +99,7 @@ class VideoSectionsController < ApplicationController
   def orchestra
     @orchestras = Orchestra.most_popular.with_attached_profile_image.limit(24).shuffle
     @orchestra = @orchestras.sample
-    @videos = Video::Search.new(filtering_params: {orchestra: @orchestra.slug}, user: current_user).videos
+    @videos = Video::Search.new(filtering_params: filtering_params.merge(orchestra: @orchestra.slug), user: current_user).videos
       .has_leader.has_follower.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -138,7 +138,7 @@ class VideoSectionsController < ApplicationController
   # @route GET /video_sections/dancer_song (dancer_song_video_sections)
   def dancer_song
     @dancer = Dancer.find_by(slug: params[:leader]) || Dancer.find_by(slug: params[:follower])
-    videos = Video::Search.new(filtering_params: {dancer: @dancer.slug}, user: current_user).videos
+    videos = Video::Search.new(filtering_params: filtering_params.merge(dancer: @dancer.slug), user: current_user).videos
       .not_hidden.from_active_channels
       .preload(Video.search_includes)
 
