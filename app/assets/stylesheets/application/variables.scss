@@ -97,7 +97,8 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --z-flash: 200;
     --z-navbar: 500;
     --z-menu: 600;
-    --z-footer: 700;
+    --z-index-support-button: 700;
+    --z-footer: 800;
     --z-dropdown: 900;
     --z-dialog: 1000;
     --z-modal: 1200;
@@ -155,8 +156,6 @@ $icons: 'arrow-down', 'arrow-up', 'arrows-expand', 'bookmark-fill', 'bookmark', 
     --header-height: 56px;
     --page-main-max-width: 1920px;
     --page-main-padding: var(--spacing-md);
-
-   
   }
 
   @include breakpoint-tablet() {

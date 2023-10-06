@@ -123,6 +123,18 @@
     }
   }
 
+  &--support {
+    background: var(--color-red-500);
+    position: fixed;
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    z-index: var(--z-index-support-button);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    &:hover {
+      background: var(--color-red-600);
+    }
+  }
+
   &--link {
     background-color: transparent;
     color: var(--text-link-primary-base);
