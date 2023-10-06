@@ -14,7 +14,7 @@
       .carousel
         .carousel__videos
           = render "skeleton_video_card", count: 6
-    - if (params[:dancer] || params[:follower] || params[:leader]) && (!params[:song].present? || !params[:orchestra].present? || !params[:genre].present?)
+    - if (params[:dancer] || params[:follower] || params[:leader]) && (params[:song].blank? && params[:orchestra].blank? && params[:genre].blank?)
       = turbo_frame_tag :song_videos, src: dancer_song_video_sections_path(filtering_params), target: "_top"
         .carousel
           .carousel__videos
