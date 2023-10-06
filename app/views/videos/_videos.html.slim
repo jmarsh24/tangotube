@@ -1,7 +1,7 @@
 #videos.stack.stack--xs
   - if params[:sort].present?
     = paginated videos, class: "grid grid--videos"
-  - elsif videos.present? && params[:sort].blank? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:channel] || params[:event] || params[:song] || params[:genre] )
+  - elsif videos.present? && params[:sort].blank? && params[:year].blank? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:channel] || params[:event] || params[:song] || params[:genre] )
     = turbo_frame_tag :trending_videos, src: trending_video_sections_path(filtering_params), target: "_top"
       .carousel
         .carousel__videos
@@ -21,7 +21,7 @@
             = render "skeleton_video_card", count: 6
     .heading-2.heading--padded = t(".popular")
     = paginated videos, class: "grid grid--videos"
-  - elsif videos.present? && (params[:sort].blank? || filtering_params.blank?)
+  - elsif videos.present? && params[:year].blank? && (params[:sort].blank? || filtering_params.blank?)
     .stack.stack--sm
       = turbo_frame_tag :newest_videos, src: recent_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"
       = turbo_frame_tag :dancer_videos, src: dancer_video_sections_path(watched: params[:watched], liked: params[:liked]), target: "_top"

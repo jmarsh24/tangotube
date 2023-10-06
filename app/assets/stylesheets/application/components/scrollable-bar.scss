@@ -18,13 +18,7 @@
   }
 
   & > :first-child {
-    margin-left: var(--spacing-xs);
-  }
-
-  @include breakpoint-tablet {
-    & > :first-child {
-      margin-left: 0;
-    }
+    margin-left: var(--spacing-xxs);
   }
 
   &--vote {
