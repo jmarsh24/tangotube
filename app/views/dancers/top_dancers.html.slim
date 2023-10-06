@@ -1,6 +1,5 @@
 = turbo_frame_tag :trending_dancers
   .carousel
-    .carousel.carousel__header 
-      h3.heading-3 = t(".trending_dancers")
-    .carousel.carousel__cards
+    h3.heading-3 = t(".trending_dancers")
+    .carousel__cards
       = render @dancers

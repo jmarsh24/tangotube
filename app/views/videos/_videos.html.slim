@@ -19,7 +19,7 @@
         .carousel
           .carousel__videos
             = render "skeleton_video_card", count: 6
-    .carousel__header.heading-2 = t(".popular")
+    .heading-2.heading--padded = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - elsif videos.present? && (params[:sort].blank? || filtering_params.blank?)
     .stack.stack--sm
@@ -57,7 +57,7 @@
           .carousel__videos
             = render "skeleton_video_card", count: 6
       
-    .carousel__header.heading-2 = t(".popular")
+    .heading-2.heading--padded = t(".popular")
     = paginated videos, class: "grid grid--videos"
   - else
     = paginated videos, class: "grid grid--videos"

@@ -93,6 +93,10 @@ $weights: (
   font-weight: 700;
 }
 
+.heading--padded {
+  padding-left: var(--spacing-sm);
+}
+
 .text-red {
   color: var(--color-red-500);
 }

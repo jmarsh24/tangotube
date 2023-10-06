@@ -1,6 +1,5 @@
 = turbo_frame_tag :trending_orchestras
   .carousel
-    .carousel.carousel__header
-      h3.heading-3 = t(".orchestras")
-    .carousel.carousel__cards
+    h3.heading-3 = t(".orchestras")
+    .carousel__cards
       = render @orchestras
