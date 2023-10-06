@@ -17,16 +17,21 @@
     display: none;
   }
 
+  & > :first-child {
+    margin-left: var(--spacing-xs);
+  }
+
+  @include breakpoint-tablet {
+    & > :first-child {
+      margin-left: 0;
+    }
+  }
+
   &--vote {
-    padding-left: var(--spacing-xs);
     gap: var(--spacing-xs);
   }
 
   &--padded {
     padding: var(--spacing-xxs) 0;
-  }
-
-  &--recommended-videos {
-    padding-left: var(--spacing-xs);
   }
 }
