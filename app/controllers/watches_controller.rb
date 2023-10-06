@@ -3,6 +3,7 @@
 class WatchesController < ApplicationController
   # @route GET /watch (watch)
   def show
+    require_turbo_frame
     redirect_to root_path unless params[:v].present?
 
     if @video.nil?
