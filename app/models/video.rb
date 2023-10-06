@@ -120,6 +120,8 @@ class Video < ApplicationRecord
 
   before_validation :normalize_title
 
+  delegate :formatted_position, to: :performance_video, allow_nil: true
+
   class << self
     def search(term)
       VideoSearch.search(TextNormalizer.normalize(term))

@@ -2,8 +2,9 @@
   .video-card__image-container
     .video-card__duration = video.hd_duration_data
     - if video.performance_video&.position&.present?
-      .video-card__performance-number
-        = "#{video.performance_video.position} / #{video.performance.videos_count}" if video.performance_video.position.present?
+      - if video.formatted_position.present?
+        .video-card__performance-number
+          = video.formatted_position 
     - thumbnail = video.thumbnail.attached? ? video.thumbnail : "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
     - if video.youtube_id == @video.youtube_id
       = image_tag thumbnail, width: 400,  alt: t(".video_thumbnail_alt", video_title: video.title), class: "video-card__image"

@@ -16,4 +16,12 @@ class PerformanceVideo < ApplicationRecord
   belongs_to :performance, counter_cache: :videos_count
 
   delegate :videos_count, to: :performance, prefix: true
+
+  def total
+    [position, performance.videos_count].max
+  end
+
+  def formatted_position
+    position.present? ? "#{position} / #{total}" : ""
+  end
 end
