@@ -13,7 +13,6 @@
   }
 
   &--compact {
-    border-radius: var(--border-radius-lg);
     flex-direction: column;
 
     .video-card__image {
@@ -22,6 +21,11 @@
 
     @include breakpoint-mobile {
       flex-direction: row;
+      border-radius: var(--border-radius-lg);
+      padding: var(--spacing-xs);
+      &:hover {
+        background: var(--color-neutral-50);
+      }
     }
 
     @include breakpoint-tablet {

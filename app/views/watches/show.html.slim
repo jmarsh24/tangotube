@@ -10,10 +10,9 @@
       = render "watches/show/video_info", video: @video 
       = render "watches/show/vote", video: @video 
       = render "watches/show/video_metadata", video: @video 
-      = render "watches/show/lyrics", video: @video if @video&.song&.lyrics.present?
   .stack.stack--sm.video-side-bar
-    .scrollable-bar
+    .scrollable-bar.scrollable-bar--recommended-videos
       = render "related_videos/links", video: @video, type: @type
     = turbo_frame_tag "related-videos-card", src: related_video_path(id: @video.id, type: @type), target: "_top"
-      #related-videos.related-videos.stack.stack--sm
+      #related-videos.related-videos.stack.stack--zero
         = render "videos/skeleton_video_card", count: 6, compact: true

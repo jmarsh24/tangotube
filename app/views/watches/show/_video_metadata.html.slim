@@ -73,3 +73,4 @@
                 .metadata-item__value = l(Time.at(video.duration), format: :video_duration)
     - if video&.song&.spotify_track_id.present?
       iframe src="https://open.spotify.com/embed/track/#{@video.song.spotify_track_id}?utm_source=generator&theme=0" height="152" frameborder="0" loading="lazy" style="border-radius: 14px;"
+    = render "watches/show/lyrics", video: @video if @video&.song&.lyrics.present?
