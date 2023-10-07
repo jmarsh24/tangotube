@@ -3,6 +3,7 @@ class AddSearchTextToDancerAndUser < ActiveRecord::Migration[7.1]
     add_column :dancers, :search_text, :text
     add_column :users, :search_text, :text
     add_column :dancers, :match_terms, :text, array: true, default: []
+    add_column :dancers, :nickname, :string
 
     Dancer.find_each do |dancer|
       next unless dancer.nick_name && dancer.nick_name.length > 2
@@ -22,8 +23,6 @@ class AddSearchTextToDancerAndUser < ActiveRecord::Migration[7.1]
     end
 
     remove_column :dancers, :nick_name, :string
-    add_column :dancers, :nickname, :string
-
     remove_column :dancers, :first_name, :string
     remove_column :dancers, :last_name, :string
     remove_column :dancers, :middle_name, :string
