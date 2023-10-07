@@ -25,6 +25,7 @@
 #  role                   :integer
 #  supporter              :boolean          default(FALSE)
 #  patreon_id             :string
+#  search_text            :text
 #
 
 require "rails_helper"

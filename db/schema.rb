@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_03_124246) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_07_184935) do
+  create_schema "heroku_ext"
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -127,10 +129,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_124246) do
 
   create_table "dancers", force: :cascade do |t|
     t.string "name", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "middle_name"
-    t.string "nick_name", default: [], array: true
     t.bigint "user_id"
     t.text "bio"
     t.string "slug"
@@ -139,6 +137,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_124246) do
     t.datetime "updated_at", null: false
     t.integer "videos_count", default: 0, null: false
     t.enum "gender", enum_type: "gender_new"
+    t.text "search_text"
+    t.text "match_terms", default: [], array: true
+    t.string "nickname"
+    t.index ["search_text"], name: "index_dancers_on_search_text", opclass: :gist_trgm_ops, using: :gist
     t.index ["slug"], name: "index_dancers_on_slug"
     t.index ["user_id"], name: "index_dancers_on_user_id"
   end
@@ -318,10 +320,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_124246) do
     t.integer "role"
     t.boolean "supporter", default: false
     t.string "patreon_id"
+    t.text "search_text"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["patreon_id"], name: "index_users_on_patreon_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["search_text"], name: "index_users_on_search_text", opclass: :gist_trgm_ops, using: :gist
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 

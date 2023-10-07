@@ -6,10 +6,6 @@
 #
 #  id           :bigint           not null, primary key
 #  name         :string           not null
-#  first_name   :string
-#  last_name    :string
-#  middle_name  :string
-#  nick_name    :string           default([]), is an Array
 #  user_id      :bigint
 #  bio          :text
 #  slug         :string
@@ -18,6 +14,9 @@
 #  updated_at   :datetime         not null
 #  videos_count :integer          default(0), not null
 #  gender       :enum
+#  search_text  :text
+#  match_terms  :text             default([]), is an Array
+#  nickname     :string
 #
 require "rails_helper"
 

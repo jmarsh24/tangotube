@@ -25,6 +25,7 @@
 #  role                   :integer
 #  supporter              :boolean          default(FALSE)
 #  patreon_id             :string
+#  search_text            :text
 #
 class User < ApplicationRecord
   include Featureable
@@ -44,8 +45,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates_confirmation_of :password
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :confirmable,
     :database_authenticatable,
     :registerable,

@@ -23,15 +23,15 @@ module ExternalVideoImport
 
       def find_dancers(video_title)
         normalized_title = TextNormalizer.normalize(video_title)
-        dancer_id_names = Dancer.all.pluck(:id, :name, :nick_name)
-        dancer_id_names.map! do |id, name, nick_name|
-          [id, TextNormalizer.normalize(name), nick_name&.map { |nick| TextNormalizer.normalize(nick) }]
+        dancer_id_names = Dancer.all.pluck(:id, :name, :match_terms)
+        dancer_id_names.map! do |id, name, match_terms|
+          [id, TextNormalizer.normalize(name), match_terms&.map { TextNormalizer.normalize(_1) }]
         end
         dancer_ids = []
-        dancer_id_names.each do |id, name, nick_names|
+        dancer_id_names.each do |id, name, match_termss|
           trigram_instance = Trigram.new(normalized_title)
-          nick_names&.each do |nick_name|
-            ratio = trigram_instance.similarity(nick_name)
+          match_termss&.each do |match_terms|
+            ratio = trigram_instance.similarity(match_terms)
             dancer_ids << id if ratio > MATCH_THRESHOLD
           end
           ratio = trigram_instance.similarity(name)

@@ -15,7 +15,7 @@ class DancerResource < Avo::BaseResource
   field :first_name, as: :text
   field :last_name, as: :text
   field :middle_name, as: :text
-  field :nick_name, as: :tags
+  field :nickname, as: :tags
   field :videos_count, as: :number, sortable: true, read_only: true, only_on: [:index, :show]
   field :bio, as: :textarea, only_on: [:edit, :new, :show]
   field :slug, as: :text

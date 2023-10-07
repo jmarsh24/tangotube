@@ -6,10 +6,6 @@
 #
 #  id           :bigint           not null, primary key
 #  name         :string           not null
-#  first_name   :string
-#  last_name    :string
-#  middle_name  :string
-#  nick_name    :string           default([]), is an Array
 #  user_id      :bigint
 #  bio          :text
 #  slug         :string
@@ -18,6 +14,9 @@
 #  updated_at   :datetime         not null
 #  videos_count :integer          default(0), not null
 #  gender       :enum
+#  search_text  :text
+#  match_terms  :text             default([]), is an Array
+#  nickname     :string
 #
 class Dancer < ApplicationRecord
   belongs_to :user, optional: true
@@ -37,39 +36,50 @@ class Dancer < ApplicationRecord
   enum gender: {male: "male", female: "female"}
 
   after_validation :set_slug, only: [:create, :update]
+  before_save :update_search_text
+
+  def update_search_text
+    self.search_text = Dancer.normalize(name, nickname)
+  end
+
+  def self.normalize(*strings)
+    combined_string = strings.join(" ")
+    I18n.transliterate(combined_string)
+      .downcase
+      .strip
+      .gsub(/\s+/, " ")
+  end
 
   scope :reviewed, -> { where(reviewed: true) }
   scope :unreviewed, -> { where(reviewed: false) }
   scope :search, ->(search_term) {
-    max_videos_count = Dancer.maximum(:videos_count).to_f
+                   max_videos_count = Dancer.maximum(:videos_count).to_f
+                   normalized_term = TextNormalizer.normalize(search_term)
+                   terms = normalized_term.split
 
-    terms = TextNormalizer.normalize(search_term).split
+                   where_conditions = terms.map { "search_text % ?" }.join(" OR ")
 
-    where_conditions = terms.map { "unaccent(dancers.name) % unaccent(?)" }.join(" OR ")
-    order_sql = <<-SQL
-      0.5 * (1 - ("dancers"."name" <-> '#{search_term}')) + 0.5 * (videos_count::float / #{max_videos_count}) DESC
-    SQL
+                   order_sql = <<-SQL
+    0.5 * (1 - ("dancers"."search_text" <-> '#{normalized_term}')) + 
+    0.5 * (videos_count::float / #{max_videos_count}) DESC
+                   SQL
 
-    Dancer
-      .where(where_conditions, *terms)
-      .order(Arel.sql(order_sql))
-  }
+                   Dancer
+                     .where(where_conditions, *terms)
+                     .order(Arel.sql(order_sql))
+                 }
 
   scope :most_popular, -> { order(videos_count: :desc) }
 
   def update_video_matches
     search_terms = [TextNormalizer.normalize(name)]
-    search_terms.concat(nick_name.map { |term| TextNormalizer.normalize(term) }) if nick_name.present?
+    search_terms.concat(match_terms.map { |term| TextNormalizer.normalize(term) }) if match_terms.present?
     matching_videos = Video.fuzzy_titles(search_terms)
 
     matching_videos.find_each do |video|
       role = (gender == "male") ? "leader" : "follower"
       DancerVideo.find_or_create_by(dancer: self, video:, role:)
     end
-  end
-
-  def full_name
-    "#{first_name} #{last_name}"
   end
 
   def to_param
