@@ -1,4 +1,4 @@
 = link_to root_path(channel: channel.youtube_slug), class: "card" do
-  = image_tag channel.thumbnail, width: 80, alt: t(".channel_image_alt", channel_title: channel.title), class: "avatar avatar--circle avatar--xxl"
+  = image_tag channel.thumbnail, width: 80, alt: t(".channel_image_alt", channel_title: channel.title), class: "avatar avatar--circle avatar--xl"
   .card__content
     .card__title = channel.title

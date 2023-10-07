@@ -14,6 +14,7 @@
 
   &--compact {
     flex-direction: column;
+    padding: var(--spacing-xs) 0;
 
     .video-card__image {
       min-width: 180px;
@@ -21,8 +22,8 @@
 
     @include breakpoint-mobile {
       flex-direction: row;
-      border-radius: var(--border-radius-lg);
       padding: var(--spacing-xs);
+      border-radius: var(--border-radius-lg);
       &:hover {
         background: var(--color-neutral-50);
       }
