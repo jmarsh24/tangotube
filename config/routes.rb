@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     member do
       get :details
       get :share
-      get :watched_by_current_user, to: "watchers#has_been_watched"
+      get :watched_by_current_user, to: "watchers#watched_status"
       post :hide
       post :process_metadata
     end

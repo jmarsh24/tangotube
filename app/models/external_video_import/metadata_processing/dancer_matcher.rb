@@ -3,41 +3,39 @@
 module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
-      MATCH_THRESHOLD = 0.78
+      MATCH_THRESHOLD = 0.75
 
-      def match(video_title:)
-        dancer_ids = find_dancers(video_title)
+      def initialize(video_title:)
+        @normalized_title = TextNormalizer.normalize(video_title)
+      end
 
-        dancers = Dancer.where(id: dancer_ids)
-        if dancers.any?
+      def dancers
+        matching_dancers = dancers_matched_by_name.or(dancers_matched_by_terms)
+
+        if matching_dancers.any?
           Rails.logger.debug "Matched dancers:"
-          dancers.each { |dancer| Rails.logger.debug "- #{dancer.name}" }
+          matching_dancers.each { Rails.logger.debug "- #{_1.name}" }
         else
           Rails.logger.debug "No dancers matched."
         end
 
-        dancers
+        matching_dancers
       end
 
       private
 
-      def find_dancers(video_title)
-        normalized_title = TextNormalizer.normalize(video_title)
-        dancer_id_names = Dancer.all.pluck(:id, :name, :match_terms)
-        dancer_id_names.map! do |id, name, match_terms|
-          [id, TextNormalizer.normalize(name), match_terms&.map { TextNormalizer.normalize(_1) }]
-        end
-        dancer_ids = []
-        dancer_id_names.each do |id, name, match_termss|
-          trigram_instance = Trigram.new(normalized_title)
-          match_termss&.each do |match_terms|
-            ratio = trigram_instance.similarity(match_terms)
-            dancer_ids << id if ratio > MATCH_THRESHOLD
-          end
-          ratio = trigram_instance.similarity(name)
-          dancer_ids << id if ratio > MATCH_THRESHOLD
-        end
-        dancer_ids.uniq
+      attr_reader :normalized_title
+
+      def dancers_matched_by_name
+        Dancer.where("word_similarity(name, ?) > ?", normalized_title, MATCH_THRESHOLD)
+      end
+
+      def dancers_matched_by_terms
+        Dancer.where("EXISTS (
+          SELECT 1
+          FROM unnest(match_terms) as term
+          WHERE word_similarity(term, ?) > ?
+        )", normalized_title, MATCH_THRESHOLD)
       end
     end
   end
