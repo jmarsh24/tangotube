@@ -57,7 +57,7 @@ class Dancer < ApplicationRecord
                    normalized_term = TextNormalizer.normalize(search_term)
                    terms = normalized_term.split
 
-                   where_conditions = terms.map { "search_text % ?" }.join(" OR ")
+                   where_conditions = terms.map { "? <% search_text" }.join(" OR ")
 
                    order_sql = <<-SQL
     0.5 * (1 - ("dancers"."search_text" <-> '#{normalized_term}')) + 
