@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSearchTextToDancerAndUser < ActiveRecord::Migration[7.1]
   def change
     add_column :dancers, :search_text, :text
