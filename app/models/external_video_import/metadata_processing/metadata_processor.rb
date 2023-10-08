@@ -4,7 +4,7 @@ module ExternalVideoImport
   module MetadataProcessing
     class MetadataProcessor
       def process(metadata)
-        dancers = DancerMatcher.new.match(video_title: metadata.youtube.title)
+        dancers = DancerMatcher.new(video_title: metadata.youtube.title).dancers
         couple = CoupleMatcher.new.match_or_create(dancers:)
         song = match_song(metadata)
 
