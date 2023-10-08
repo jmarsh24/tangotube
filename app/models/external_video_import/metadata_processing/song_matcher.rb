@@ -69,7 +69,7 @@ module ExternalVideoImport
               name: (best_ratio == converted_combined_name_ratio) ? converted_combined_name : combined_name,
               score: best_ratio
             }
-          endw
+          end
         end
 
         potential_matches.sort_by { |match| -match[:score] }
