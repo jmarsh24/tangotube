@@ -13,7 +13,7 @@ class DancerResource < Avo::BaseResource
   field :profile_image, as: :file, is_image: true, as_avatar: :circle
   field :name, as: :text
   field :nickname, as: :text
-  field :matching_tags, as: :tags
+  field :match_terms, as: :tags
   field :bio, as: :textarea, only_on: [:edit, :new, :show]
   field :slug, as: :text, read_only: true, only_on: [:index, :show]
   field :gender, as: :select, enum: ::Dancer.genders
