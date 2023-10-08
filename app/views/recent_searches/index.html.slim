@@ -48,9 +48,9 @@
         = button_to recent_search_path(recent_search), method: :delete, class: "search-result__delete" do
           .icon.icon--close.icon--md
     - when "Video"  
-      .stack.stack--sm.stack--tablet-line id=dom_id(recent_search)
+      .stack.stack--sm.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to watch_path(v: record.youtube_id), class: ["search-result", "search-result--video"], data: { controller: "recent-search", "recent-search-gid-value": record.to_global_id.to_s, "recent-search-query-value": params[:query], "recent-search-category-value": params[:category], action: "click->recent-search#handleClick" } do
-          .stack.stack--sm.stack--tablet-line
+          .stack.stack--sm.stack--line
             .video-card__image-container
               = image_tag record.thumbnail, width: 320, alt: t(".video_thumbnail_alt", video_title: record.title), class: "video-card__image" if record.thumbnail.present?
               .video-card__duration = record.hd_duration_data

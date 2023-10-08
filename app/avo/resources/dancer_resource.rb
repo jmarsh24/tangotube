@@ -12,16 +12,14 @@ class DancerResource < Avo::BaseResource
   field :reviewed, as: :boolean
   field :profile_image, as: :file, is_image: true, as_avatar: :circle
   field :name, as: :text
-  field :first_name, as: :text
-  field :last_name, as: :text
-  field :middle_name, as: :text
-  field :nickname, as: :tags
-  field :videos_count, as: :number, sortable: true, read_only: true, only_on: [:index, :show]
+  field :nickname, as: :text
+  field :matching_tags, as: :tags
   field :bio, as: :textarea, only_on: [:edit, :new, :show]
-  field :slug, as: :text
+  field :slug, as: :text, read_only: true, only_on: [:index, :show]
   field :gender, as: :select, enum: ::Dancer.genders
   field :cover_image, as: :file, is_image: true, hide_on: [:index]
   field :user, as: :belongs_to, hide_on: [:index, :show]
+  field :videos_count, as: :number, sortable: true, read_only: true, only_on: [:index, :show]
   field :dancer_videos, as: :has_many
   field :videos, as: :has_many, through: :dancer_videos
   field :orchestras, as: :has_many, through: :videos

@@ -71,6 +71,7 @@
   }
 
   &--video {
+    flex: 1;
     .search-result__image {
       aspect-ratio: 16/ 9;
       object-fit: cover;

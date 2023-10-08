@@ -14,11 +14,11 @@ module ExternalVideoImport
           song_artists:
         )
 
-        if potential_matches.present?
+        if potential_matches.any?
           song = Song.find(potential_matches.first[:song_id])
           Rails.logger.info "Matched song: #{song.title} - #{song.artist}"
           song
-        elsif potential_matches.empty? && song_titles.first.present? && song_artists.first.present?
+        elsif potential_matches.empty? && song_titles.first && song_artists.first
           song = Song.create!(title: song_titles.first, artist: song_artists.first, genre: "Alternative")
           Rails.logger.info "Song Created: #{song.title} - #{song.artist} - #{song.genre}"
           song
@@ -34,12 +34,12 @@ module ExternalVideoImport
         song_attributes = Song.active.most_popular.pluck(:id, :artist, :title)
 
         # First, prioritize song_titles and song_artists matches
-        prioritized_texts = [*song_titles, *song_artists].join(" ")
+        prioritized_texts = [song_titles, song_artists].flatten.join(" ")
         prioritized_matches = find_matches_for_text(prioritized_texts, song_attributes)
         return prioritized_matches unless prioritized_matches.empty?
 
         # If no prioritized matches found, then search other fields
-        other_texts = [video_title, video_description, *video_tags].join(" ")
+        other_texts = [video_title, video_description, video_tags].flatten.join(" ")
         find_matches_for_text(other_texts, song_attributes)
       end
 
@@ -69,7 +69,7 @@ module ExternalVideoImport
               name: (best_ratio == converted_combined_name_ratio) ? converted_combined_name : combined_name,
               score: best_ratio
             }
-          end
+          endw
         end
 
         potential_matches.sort_by { |match| -match[:score] }
