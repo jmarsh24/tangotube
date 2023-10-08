@@ -57,8 +57,9 @@ module ExternalVideoImport
           combined_name = TextNormalizer.normalize("#{artist} #{title}")
           converted_combined_name = TextNormalizer.normalize("#{artist} #{converted_title}")
 
-          combined_name_ratio = Jaccard.coefficient([normalized_text], [normalized_title])
-          converted_combined_name_ratio = Jaccard.coefficient([normalized_text], [converted_combined_name])
+          trigram_instance = Trigram.new(normalized_text)
+          combined_name_ratio = trigram_instance.similarity(combined_name)
+          converted_combined_name_ratio = trigram_instance.similarity(converted_combined_name)
 
           best_ratio = [combined_name_ratio, converted_combined_name_ratio].max
 
