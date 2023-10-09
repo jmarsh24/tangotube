@@ -5,12 +5,9 @@ module ExternalVideoImport
     class DancerMatcher
       MATCH_THRESHOLD = 0.8
 
-      def initialize(video_title:)
-        @normalized_title = TextNormalizer.normalize(video_title)
-      end
-
-      def dancers
-        matching_dancers = dancers_matched_by_name.or(dancers_matched_by_terms)
+      def match(video_title:)
+        normalized_title = TextNormalizer.normalize(video_title)
+        matching_dancers = dancers_matched_by_name(normalized_title).or(dancers_matched_by_terms(normalized_title))
 
         if matching_dancers.any?
           Rails.logger.debug "Matched dancers:"
@@ -24,13 +21,11 @@ module ExternalVideoImport
 
       private
 
-      attr_reader :normalized_title
-
-      def dancers_matched_by_name
+      def dancers_matched_by_name(normalized_title)
         Dancer.where("word_similarity(name, ?) > ?", normalized_title, MATCH_THRESHOLD)
       end
 
-      def dancers_matched_by_terms
+      def dancers_matched_by_terms(normalized_title)
         Dancer.where("EXISTS (
           SELECT 1
           FROM unnest(match_terms) as term

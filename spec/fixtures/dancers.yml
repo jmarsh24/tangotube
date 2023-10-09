@@ -80,7 +80,7 @@ octavio:
 
 facundo:
   name: "Facundo Pinero"
-  gender: "female"
+  gender: "male"
   reviewed: true
   slug: "facundo-pinero"
 
@@ -91,6 +91,6 @@ vanessa:
 
 facundo_gil:
   name: "Facundo Gil"
-  gender: "female"
+  gender: "male"
   reviewed: "true"
   slug: "facundo-gil"
