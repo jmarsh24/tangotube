@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_07_184935) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_09_143727) do
   create_schema "heroku_ext"
 
   # These are extensions that must be enabled in order to support this database
@@ -293,9 +293,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_07_184935) do
     t.bigint "orchestra_id"
     t.string "display_title"
     t.string "spotify_track_id"
+    t.text "search_text"
     t.index ["active"], name: "index_songs_on_active"
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
     t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
+    t.index ["search_text"], name: "index_songs_on_search_text", opclass: :gist_trgm_ops, using: :gist
     t.index ["videos_count"], name: "index_songs_on_videos_count"
   end
 

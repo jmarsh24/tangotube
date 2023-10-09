@@ -38,18 +38,6 @@ class Dancer < ApplicationRecord
   after_validation :set_slug, only: [:create, :update]
   before_save :update_search_text
 
-  def update_search_text
-    self.search_text = Dancer.normalize(name, nickname)
-  end
-
-  def self.normalize(*strings)
-    combined_string = strings.join(" ")
-    I18n.transliterate(combined_string)
-      .downcase
-      .strip
-      .gsub(/\s+/, " ")
-  end
-
   scope :reviewed, -> { where(reviewed: true) }
   scope :unreviewed, -> { where(reviewed: false) }
   scope :search, ->(search_term) {
@@ -70,6 +58,20 @@ class Dancer < ApplicationRecord
                  }
 
   scope :most_popular, -> { order(videos_count: :desc) }
+
+  class << self
+    def self.normalize(*strings)
+      combined_string = strings.join(" ")
+      I18n.transliterate(combined_string)
+        .downcase
+        .strip
+        .gsub(/\s+/, " ")
+    end
+  end
+
+  def update_search_text
+    self.search_text = Dancer.normalize(name, nickname)
+  end
 
   def update_video_matches
     search_terms = [TextNormalizer.normalize(name)]

@@ -38,6 +38,7 @@ class Song < ApplicationRecord
   has_many :recent_searches, as: :searchable, dependent: :destroy
 
   before_save :set_display_title
+  before_save :update_search_text
   after_validation :set_slug, only: [:create, :update]
 
   scope :sort_by_popularity, -> { order(popularity: :desc) }
@@ -46,21 +47,31 @@ class Song < ApplicationRecord
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(search_term) {
-                   terms = TextNormalizer.normalize(search_term).split(" ")
+                   normalized_term = normalize(search_term)
 
-                   trigram_queries = terms.map do |term|
-                     sanitized_term = ActiveRecord::Base.connection.quote_string(term)
-                     "(unaccent(title) % unaccent('#{sanitized_term}') OR unaccent(artist) % unaccent('#{sanitized_term}') OR unaccent(genre) % unaccent('#{sanitized_term}'))"
-                   end
+                   order_sql = <<-SQL
+    0.7 * (1 - ("songs"."search_text" <-> #{ActiveRecord::Base.connection.quote(normalized_term)})) + 
+    0.3 * (videos_count::float / (SELECT MAX(videos_count) FROM songs)) DESC
+                   SQL
 
-                   similarity_scores = terms.map do |term|
-                     sanitized_term = ActiveRecord::Base.connection.quote_string(term)
-                     "((unaccent(title) <-> unaccent('#{sanitized_term}')) + (unaccent(artist) <-> unaccent('#{sanitized_term}')) + (unaccent(genre) <-> unaccent('#{sanitized_term}')))"
-                   end.join(" + ")
-
-                   where(trigram_queries.join(" OR "))
-                     .order(Arel.sql("#{similarity_scores} ASC, videos_count DESC"))
+                   Song
+                     .where("? <% search_text", normalized_term)
+                     .order(Arel.sql(order_sql))
                  }
+
+  class << self
+    def normalize(*strings)
+      combined_string = strings.join(" ")
+      I18n.transliterate(combined_string)
+        .downcase
+        .strip
+        .gsub(/\s+/, " ")
+    end
+  end
+
+  def update_search_text
+    self.search_text = Song.normalize(title, artist, genre, orchestra&.name, date&.year)
+  end
 
   def full_title
     title_part = title&.titleize
