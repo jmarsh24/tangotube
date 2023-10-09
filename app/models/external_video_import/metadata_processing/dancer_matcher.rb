@@ -3,7 +3,7 @@
 module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
-      MATCH_THRESHOLD = 0.8
+      MATCH_THRESHOLD = 0.70
 
       def match(video_title:)
         normalized_title = TextNormalizer.normalize(video_title)
