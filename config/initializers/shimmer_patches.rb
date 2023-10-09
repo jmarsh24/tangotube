@@ -17,7 +17,7 @@ module Shimmer::FileAdditionsExtensions
         hash_value, primary_color = preview_values(attachment)
         if hash_value.present?
           options.merge!({
-            # "data-controller": "thumb-hash",
+            "data-controller": "thumb-hash",
             "data-thumb-hash-preview-hash-value": hash_value
           })
         end
