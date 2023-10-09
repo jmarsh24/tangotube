@@ -60,7 +60,7 @@ class Dancer < ApplicationRecord
   scope :most_popular, -> { order(videos_count: :desc) }
 
   class << self
-    def self.normalize(*strings)
+    def normalize(*strings)
       combined_string = strings.join(" ")
       I18n.transliterate(combined_string)
         .downcase
