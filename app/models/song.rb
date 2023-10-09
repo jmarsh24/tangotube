@@ -50,8 +50,8 @@ class Song < ApplicationRecord
                    normalized_term = normalize(search_term)
 
                    order_sql = <<-SQL
-    0.7 * (1 - ("songs"."search_text" <-> #{ActiveRecord::Base.connection.quote(normalized_term)})) + 
-    0.3 * (videos_count::float / (SELECT MAX(videos_count) FROM songs)) DESC
+    0.5 * (1 - ("songs"."search_text" <-> #{ActiveRecord::Base.connection.quote(normalized_term)})) + 
+    0.5 * (videos_count::float / (SELECT MAX(videos_count) FROM songs)) DESC
                    SQL
 
                    Song
