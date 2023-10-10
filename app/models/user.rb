@@ -37,7 +37,6 @@ class User < ApplicationRecord
   has_many :features, dependent: :destroy
   has_many :watches, dependent: :destroy
   has_many :watched_videos, through: :watches, source: :video
-  has_many :clips, dependent: :nullify
   has_many :recent_searches, dependent: :destroy
 
   has_one_attached :avatar
