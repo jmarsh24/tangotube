@@ -177,7 +177,6 @@ GEM
     cuprite (0.14.3)
       capybara (~> 3.0)
       ferrum (~> 0.13.0)
-    dalli (3.2.6)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -579,6 +578,8 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
+    solid_cache (0.1.0)
+      rails (>= 7)
     sorbet-runtime (0.5.11064)
     sshkit (1.21.5)
       net-scp (>= 1.1.2)
@@ -688,7 +689,6 @@ DEPENDENCIES
   counter_culture
   countries
   cuprite
-  dalli
   debug
   deepl-rb
   devise
@@ -743,6 +743,7 @@ DEPENDENCIES
   sidekiq-scheduler
   sitemap_generator
   slim-rails
+  solid_cache
   standard
   stimulus-rails
   store_model
