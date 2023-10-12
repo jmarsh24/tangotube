@@ -31,7 +31,6 @@ module TangoTube
     config.autoload_paths << "#{root}/app/policies/concerns"
     config.autoload_paths << "#{root}/app/presenters"
     config.autoload_paths += Dir[Rails.root.join("app/models/types/*.rb")].each { |file| require file }
-    config.autoload_paths << Rails.root.join("lib")
 
     config.middleware.use Shimmer::CloudflareProxy
 

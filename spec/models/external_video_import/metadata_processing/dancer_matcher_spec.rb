@@ -41,7 +41,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::DancerMatcher do
       it "matches only the correct dancers" do
         video_title = "Carlitos Espinoza & Agustina Piaggio - Sobre el Pucho - MSTF 2022 "
         augustina_piaggio = Dancer.create!(name: "Augustina Piaggio", gender: "female")
-        Dancer.create!(name: "Augustina Paez", gender: "female")
+        Dancer.create!(name: "Agustina Paez", gender: "female")
         expect(dancer_matcher.match(video_title:).map(&:name)).to match_array([dancers(:carlitos).name, augustina_piaggio.name])
       end
     end
