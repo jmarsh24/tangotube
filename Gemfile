@@ -85,6 +85,8 @@ group :development, :test do
   gem "i18n-tasks"
   gem "chusaku", require: false
   gem "capybara-screenshot-diff"
+  gem "guard"
+  gem "guard-rspec"
 end
 
 group :test do
@@ -100,8 +102,6 @@ group :development do
   gem "annotate"
   gem "rb-fsevent"
   gem "letter_opener"
-  gem "guard"
-  gem "guard-rspec"
   gem "ruby-lsp", require: false
   gem "rubocop-rails"
   gem "rubocop-performance"
