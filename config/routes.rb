@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "sidekiq/web"
-require "sidekiq-scheduler/web"
-
 Rails.application.routes.draw do
   # Health check routes
   get "up", to: "rails/health#show", as: :rails_health_check
@@ -21,7 +18,7 @@ Rails.application.routes.draw do
   # Admin routes
   authenticate :user, ->(user) { user.admin? } do
     mount Avo::Engine, at: Avo.configuration.root_path
-    mount Sidekiq::Web, at: "sidekiq", as: :sidekiq
+    mount GoodJob::Engine => "good_job"
   end
 
   # Static pages

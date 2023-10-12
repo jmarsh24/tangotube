@@ -69,7 +69,7 @@ Rails.application.configure do
   config.hosts = nil
 
   config.action_mailer.delivery_method = :letter_opener
-  config.active_job.queue_adapter = :sidekiq
+  config.active_job.queue_adapter = :good_job
 
   config.active_record.async_query_executor = :global_thread_pool
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker

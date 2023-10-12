@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSearchTextToSongs < ActiveRecord::Migration[7.1]
   def change
     add_column :songs, :search_text, :text
