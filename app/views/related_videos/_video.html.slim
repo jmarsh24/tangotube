@@ -15,7 +15,7 @@
     .video-card__primary
       .stack.stack--line
         = link_to video.title, watch_path(v: video.youtube_id), class: "video-card__title"
-      .video-card__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
+      .video-card__metadata = [video.channel&.title,l(video.upload_date, format: :short_month_year),t('.views_count', count: number_to_human(video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
     - if video.dancers.present?
       .scrollable-tags.scrollable-tags--small
         - video.dancer_videos.each do |dv|

@@ -63,7 +63,7 @@ en:
       terms: Terms
       user_avatar: User avatar
     support_button:
-      support_tangotube: 💃🏻 Support TangoTube
+      support_tangotube: "💃🏻 Support TangoTube"
   dancer_alt: Dancer alt
   dancers:
     dancer:
@@ -75,7 +75,6 @@ en:
     formats:
       short_month_year: "%b %Y"
       song_recording_date: "%B %e, %Y"
-      upload_date: "%B %e, %Y"
   devise:
     confirmations:
       new:
@@ -208,6 +207,7 @@ en:
   related_videos:
     video:
       video_thumbnail_alt: Video thumbnail of %{video_title}
+      views_count: "%{count} views"
   search:
     channels:
       channel:
@@ -347,6 +347,8 @@ en:
       whatsapp: Whatsapp
     sort:
       sorting: Sorting
+    video:
+      views_count: "%{count} views"
     videos:
       popular: Popular
   videos_count: "%{count} videos"
@@ -369,11 +371,9 @@ en:
         song_composer_heading: Composer
         song_genre_heading: Genre
         song_orchestra_heading: Orchestra
-        song_recording_date: Recording Date
         song_recording_date_heading: Recording Date
         song_title_heading: Title
         title_heading: Title
-        upload_date: Upload date
         video_duration_heading: Duration
         video_upload_date_heading: Upload Date
       vote:
