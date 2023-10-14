@@ -60,6 +60,7 @@ gem "goldiloader"
 gem "browser"
 gem "solid_cache"
 gem "good_job"
+gem "kamal"
 
 # Assets
 gem "vite_rails"

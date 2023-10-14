@@ -13,5 +13,8 @@
   "[ruby]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "Shopify.ruby-lsp"
+  },
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/deployphp/deployer/master/src/schema.json": "file:///Users/jm_mbp/Developer/tangotube/config/deploy.yml"
   }
 }

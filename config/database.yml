@@ -21,4 +21,6 @@ test:
 
 production:
   <<: *default
+  database: tangotube_production
+  username: postgres
   url: <%= ENV["DATABASE_URL"] %>
