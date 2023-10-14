@@ -20,6 +20,7 @@ env:
     DB_HOST: 128.140.105.113
   secret:
     - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
 
 accessories:
   db:
@@ -30,11 +31,11 @@ accessories:
       clear:
         POSTGRES_USER: "postgres"
         POSTGRES_DB: "tangotube_production"
+      secret:
+        - POSTGRES_PASSWORD
     files:
       # - config/postgres/production.cnf:/etc/postgresql/my.conf
       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-    secret:
-      - POSTGRES_PASSWORD
     directories:
       - data:/var/lib/postgresql/data
 
