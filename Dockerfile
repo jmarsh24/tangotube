@@ -15,12 +15,27 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y build-essential git libvips pkg-config
+  apt-get install --no-install-recommends -y build-essential git libvips libpq-dev postgresql-client pkg-config
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
   rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
   bundle exec bootsnap precompile --gemfile
+
+COPY . .
+
+RUN bundle exec bootsnap precompile app/ lib/
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+FROM base
+
+RUN apt-get update -qq && \
+  apt-get install --no-install-recommends -y curl libpq-dev libvips ffmpeg postgresql-client python3-pip python3-venv && \
+  python3 -m venv /opt/venv && \
+  /opt/venv/bin/pip install yt-dlp && \
+  rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Install Node.js & Yarn
 RUN apt-get update -qq && apt-get install -y curl && \
@@ -31,21 +46,6 @@ RUN apt-get update -qq && apt-get install -y curl && \
 # Copy over package.json and yarn.lock and install npm packages
 COPY package.json yarn.lock ./
 RUN yarn install
-
-COPY . .
-
-RUN bundle exec bootsnap precompile app/ lib/
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-FROM base
-
-RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y curl libsqlite3-0 libvips ffmpeg postgresql-client python3-pip python3-venv && \
-  python3 -m venv /opt/venv && \
-  /opt/venv/bin/pip install yt-dlp && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-ENV PATH="/opt/venv/bin:$PATH"
 
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
