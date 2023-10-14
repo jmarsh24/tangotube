@@ -13,13 +13,9 @@ ENV RAILS_ENV="production" \
 
 FROM base as build
 
+# Install packages needed to build gems
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y build-essential libpq-dev postgresql-client ffmpeg python3-pip python3-venv && \
-  python3 -m venv /opt/venv && \
-  /opt/venv/bin/pip install yt-dlp && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-ENV PATH="/opt/venv/bin:$PATH"
+  apt-get install --no-install-recommends -y build-essential git libvips pkg-config
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
@@ -44,8 +40,12 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 FROM base
 
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
-  rm -rf /var/lib/apt/lists /var/cache/apt/archives
+  apt-get install --no-install-recommends -y curl libsqlite3-0 libvips ffmpeg postgresql-client python3-pip python3-venv && \
+  python3 -m venv /opt/venv && \
+  /opt/venv/bin/pip install yt-dlp && \
+  rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+ENV PATH="/opt/venv/bin:$PATH"
 
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
