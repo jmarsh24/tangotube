@@ -1,6 +1,7 @@
 # syntax = docker/dockerfile:1
 
 ARG RUBY_VERSION=3.2.2
+
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
 WORKDIR /rails
@@ -15,7 +16,8 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y build-essential git libvips libpq-dev postgresql-client pkg-config
+  apt-get install --no-install-recommends -y build-essential git libvips libpq-dev postgresql-client pkg-config && \
+  rm -rf /var/lib/apt/lists/*
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
@@ -29,19 +31,17 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 FROM base
 
+# Install packages and tools
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y curl libpq-dev libvips ffmpeg postgresql-client python3-pip python3-venv && \
+  apt-get install --no-install-recommends -y curl libpq-dev libvips ffmpeg postgresql-client python3-pip python3-venv nodejs && \
   python3 -m venv /opt/venv && \
   /opt/venv/bin/pip install yt-dlp && \
+  curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+  apt-get install -y nodejs && \
+  npm install -g yarn && \
   rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ENV PATH="/opt/venv/bin:$PATH"
-
-# Install Node.js & Yarn
-RUN apt-get update -qq && apt-get install -y curl && \
-  curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-  apt-get install -y nodejs && \
-  npm install -g yarn
 
 # Copy over package.json and yarn.lock and install npm packages
 COPY package.json yarn.lock ./
@@ -52,6 +52,7 @@ COPY --from=build /rails /rails
 
 RUN useradd rails --create-home --shell /bin/bash && \
   chown -R rails:rails db log storage tmp
+
 USER rails:rails
 
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
