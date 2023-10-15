@@ -21,6 +21,7 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
+    - HEROKU_DATABASE_URL
 
 builder:
   args:
@@ -44,8 +45,8 @@ accessories:
     files:
       # - config/postgres/production.cnf:/etc/postgresql/my.conf
       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-    directories:
-      - data:/var/lib/postgresql/data
+    volumes:
+      - /var/postgres/data:/var/lib/postgresql/data
 
 healthcheck:
   path: /up
