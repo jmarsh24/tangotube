@@ -1,8 +1,8 @@
 # syntax = docker/dockerfile:1
 
-ARG RUBY_VERSION=3.2.2
+ARG RUBY_VERSION
 
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM ruby:$RUBY_VERSION-slim as base
 
 WORKDIR /rails
 
@@ -20,8 +20,8 @@ RUN apt-get update -qq && \
   rm -rf /var/lib/apt/lists/*
 
 # Install JavaScript dependencies
-ARG NODE_VERSION=18.12.0
-ARG YARN_VERSION=1.22.19
+ARG NODE_VERSION
+ARG YARN_VERSION
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
   /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
@@ -39,6 +39,8 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 COPY . .
+
+ARG RAILS_ENV
 
 RUN bundle exec bootsnap precompile app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile

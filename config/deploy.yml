@@ -22,6 +22,18 @@ env:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
 
+builder:
+  args:
+    RUBY_VERSION: 3.2.2
+    RAILS_ENV: production
+    NODE_VERSION: 18.12.0
+    YARN_VERSION: 1.22.19
+  multiarch: false
+  cache:
+    type: registry
+    image: tangotube-build-cache
+    options: mode=max,image-manifest=true,oci-mediatypes=true
+
 accessories:
   db:
     image: postgres:15
