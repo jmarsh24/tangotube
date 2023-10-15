@@ -25,3 +25,4 @@ production:
   database: tangotube_production
   username: postgres
   password: <%= ENV["POSTGRES_PASSWORD"] %>
+  port: 5432
