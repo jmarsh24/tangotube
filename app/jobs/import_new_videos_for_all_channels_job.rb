@@ -3,12 +3,9 @@
 class ImportNewVideosForAllChannelsJob < ApplicationJob
   queue_as :import
 
-  def perform(options = {})
-    use_scraper = options.fetch(:use_scraper, false)
-    use_music_recognizer = options.fetch(:use_music_recognizer, false)
-
+  def perform
     Channel.active.find_each do |channel|
-      SyncVideosForChannelJob.perform_later(channel.id, use_scraper:, use_music_recognizer:)
+      SyncVideosForChannelJob.perform_later(channel.id, use_music_recognizer: false)
     end
   end
 end
