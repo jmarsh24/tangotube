@@ -14,7 +14,7 @@ Rails.application.configure do
   config.good_job.cron = {
     channel_video_sync: {
       cron: "0 5 * * *",
-      class: "ImportNewVideosForAllChannelsJob"
+      class: "SyncAllChannelsVideosJob"
     },
     update_active_channels_job: {
       cron: "0 3 * * *",
