@@ -33,6 +33,7 @@ env:
     - AWS_REGION
     - AWS_BUCKET
     - YT_DLP_BIN
+    - CLOUDFLARE_BUCKET
 
 builder:
   args:
