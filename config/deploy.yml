@@ -12,7 +12,9 @@ servers:
       - 159.69.149.32
     cmd: bundle exec good_job start
 registry:
-  username: jmarsh24
+  server: ghcr.io
+  username:
+    - KAMAL_REGISTRY_USERNAME
   password:
     - KAMAL_REGISTRY_PASSWORD
 env:
