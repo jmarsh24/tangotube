@@ -7,7 +7,7 @@ servers:
     hosts:
       - 168.119.239.114
     cmd: bundle exec puma -C config/puma.rb
-  job:
+  worker:
     hosts:
       - 159.69.149.32
     cmd: bundle exec good_job start
