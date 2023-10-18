@@ -54,12 +54,8 @@ accessories:
         POSTGRES_DB: "tangotube_production"
       secret:
         - POSTGRES_PASSWORD
-    files:
-      # - config/postgres/production.cnf:/etc/postgresql/my.conf
-      - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
     volumes:
       - /var/postgres/data:/var/lib/postgresql/data
 
 healthcheck:
-  path: /up
-  port: 3000
+  log_lines: 10_000
