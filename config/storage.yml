@@ -12,3 +12,11 @@ s3:
   secret_access_key: <%= Config.aws_secret_access_key! %>
   region: <%= Config.aws_region! %>
   bucket: <%= Config.aws_bucket! %>
+
+r2:
+  service: R2
+  endpoint: https://<%= Config.cloudflare_account_id! %>.r2.cloudflarestorage.com
+  access_key_id: <%= Config.cloudflare_access_key_id! %>
+  secret_access_key: <%= Config.cloudflare_secret_access_key! %>
+  region: auto
+  bucket: <%= Config.cloudflare_bucket %>
