@@ -16,7 +16,7 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y build-essential curl git libvips libpq-dev postgresql-client pkg-config nodejs && \
+  apt-get install --no-install-recommends -y build-essential curl git libvips libpq-dev pkg-config nodejs && \
   rm -rf /var/lib/apt/lists/*
 
 # Install JavaScript dependencies
