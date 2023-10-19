@@ -54,6 +54,8 @@ accessories:
         POSTGRES_DB: "tangotube_production"
       secret:
         - POSTGRES_PASSWORD
+    files:
+      - config/postgres/production.cnf:/etc/postgresql/postgres.conf
     volumes:
       - /var/postgres/data:/var/lib/postgresql/data
 
