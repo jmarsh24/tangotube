@@ -31,6 +31,10 @@ Rails.application.configure do
     refresh_video_scores_scores: {
       cron: "*/10 * * * *", # every 10 minutes
       class: "RefreshVideoScoresJob"
+    },
+    refresh_query_stats: {
+      cron: "*/5 * * * *", # every 5 minutes
+      class: "CaptureQueryStatsJob"
     }
   }
 end

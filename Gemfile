@@ -61,6 +61,9 @@ gem "browser"
 gem "solid_cache"
 gem "good_job"
 gem "kamal"
+gem "pghero"
+gem "strong_migrations"
+gem "pg_query", ">= 2"
 
 # Assets
 gem "vite_rails"
