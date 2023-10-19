@@ -336,15 +336,6 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.20.0)
-    mrsk (0.15.1)
-      activesupport (>= 7.0)
-      bcrypt_pbkdf (~> 1.0)
-      dotenv (~> 2.8)
-      ed25519 (~> 1.2)
-      net-ssh (~> 7.0)
-      sshkit (~> 1.21)
-      thor (~> 1.2)
-      zeitwerk (~> 2.5)
     msgpack (1.7.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -428,6 +419,8 @@ GEM
     raabro (1.4.0)
     racc (1.7.1)
     rack (2.2.8)
+    rack-mini-profiler (3.1.1)
+      rack (>= 1.2.0)
     rack-protection (3.1.0)
       rack (~> 2.2, >= 2.2.4)
     rack-proxy (0.7.7)
@@ -715,7 +708,6 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen
-  mrsk
   net-ssh
   newrelic_rpm
   oj
@@ -728,6 +720,7 @@ DEPENDENCIES
   puma
   pundit
   rack
+  rack-mini-profiler
   rack_session_access
   rails (= 7.1)
   rails-i18n
