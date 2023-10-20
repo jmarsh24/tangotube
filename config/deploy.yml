@@ -33,6 +33,7 @@ env:
     - AWS_BUCKET
     - YT_DLP_BIN
     - CLOUDFLARE_BUCKET
+    - DB_POOL
 
 builder:
   args:
