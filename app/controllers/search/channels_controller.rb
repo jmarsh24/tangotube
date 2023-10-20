@@ -9,9 +9,10 @@ class Search::ChannelsController < ApplicationController
           .with_attached_thumbnail
           .active
           .limit(100)
+          .load_async
       else
         Channel.with_attached_thumbnail
-          .active.limit(100).order(videos_count: :desc)
+          .active.limit(100).order(videos_count: :desc).load_async
       end
     end
   end

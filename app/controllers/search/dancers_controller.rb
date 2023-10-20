@@ -8,8 +8,9 @@ class Search::DancersController < ApplicationController
         Dancer.search(params[:query])
           .with_attached_profile_image
           .limit(100)
+          .load_async
       else
-        Dancer.all.with_attached_profile_image.limit(100).order(videos_count: :desc)
+        Dancer.all.with_attached_profile_image.limit(100).order(videos_count: :desc).load_async
       end
     end
   end

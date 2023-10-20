@@ -13,7 +13,7 @@ class VideosController < ApplicationController
     @search = Video::Search.new(filtering_params:, sort: params[:sort], user: current_user)
     @show_filter_bar = true
 
-    @videos = paginated(@search.videos.not_hidden.from_active_channels.preload(Video.search_includes), per: 24)
+    @videos = paginated(@search.videos.not_hidden.from_active_channels.preload(Video.search_includes).load_async, per: 24)
 
     if params[:filtering] == "true" && params[:pagination].nil?
       ui.update "videos", with: "videos/videos", videos: @videos

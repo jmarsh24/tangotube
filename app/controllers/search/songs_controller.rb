@@ -5,9 +5,9 @@ class Search::SongsController < ApplicationController
   def index
     @songs =
       if params[:query].present?
-        Song.search(params[:query]).preload(orchestra: {profile_image_attachment: :blob}).limit(100)
+        Song.search(params[:query]).preload(orchestra: {profile_image_attachment: :blob}).limit(100).load_async
       else
-        Song.all.preload(orchestra: {profile_image_attachment: :blob}).limit(100).most_popular
+        Song.all.preload(orchestra: {profile_image_attachment: :blob}).limit(100).most_popular.load_async
       end
   end
 end

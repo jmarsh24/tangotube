@@ -7,7 +7,7 @@ class WatchersController < ApplicationController
     if current_user
       @current_user = current_user
       @video_id = params[:id]
-      @watched = current_user.watches.exists?(video_id: @video_id)
+      @watched = current_user.watches.exists?(video_id: @video_id).load_async
     end
   end
 end

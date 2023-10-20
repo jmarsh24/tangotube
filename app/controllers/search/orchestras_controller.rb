@@ -8,8 +8,9 @@ class Search::OrchestrasController < ApplicationController
         Orchestra.search(params[:query])
           .with_attached_profile_image
           .limit(100)
+          .load_async
       else
-        Orchestra.all.with_attached_profile_image.limit(100).order(videos_count: :desc)
+        Orchestra.all.with_attached_profile_image.limit(100).order(videos_count: :desc).load_async
       end
     end
   end
