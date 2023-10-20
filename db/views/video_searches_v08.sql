@@ -140,6 +140,9 @@ FROM
     LEFT JOIN orchestras ON orchestras.id = songs.orchestra_id
 GROUP BY
     videos.id,
-    videos.youtube_id
+    videos.youtube_id,
+    videos.upload_date,
+    videos.description,
+    videos.title
 ORDER BY
     video_id DESC;
