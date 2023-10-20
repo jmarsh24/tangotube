@@ -54,7 +54,7 @@ accessories:
       secret:
         - POSTGRES_PASSWORD
     files:
-      - config/postgres/production.cnf:/etc/postgresql/postgres.conf
+      - config/postgres/production.cnf:/etc/postgresql/postgresql.conf
     volumes:
       - /var/postgres/data:/var/lib/postgresql/data
 
