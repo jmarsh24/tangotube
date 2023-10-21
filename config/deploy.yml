@@ -48,6 +48,7 @@ accessories:
     image: postgres:15
     host: 128.140.105.113
     port: 5432
+    cmd: "postgres -c config_file=/etc/postgresql/postgresql.conf"
     env:
       clear:
         POSTGRES_USER: "postgres"
@@ -55,7 +56,7 @@ accessories:
       secret:
         - POSTGRES_PASSWORD
     files:
-      - config/postgres/production.cnf:/etc/postgresql/15.4/main/postgresql.conf
+      - config/postgres/production.cnf:/etc/postgresql/postgresql.conf
     volumes:
       - /var/postgres/data:/var/lib/postgresql/data
 
