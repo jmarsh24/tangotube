@@ -58,6 +58,7 @@ accessories:
       - config/postgres/production.cnf:/etc/postgresql/postgresql.conf
     volumes:
       - /var/postgres/data:/var/lib/postgresql/data
+      - /home/<user>/<service>-<accessory>/etc/postgresql/postgresql.conf:/etc/postgresql/postgresql.conf
 
 healthcheck:
   log_lines: 10_000
