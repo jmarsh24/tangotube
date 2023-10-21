@@ -1,5 +1,6 @@
 .video-card.video-card--compact class=(video.youtube_id == @video.youtube_id ? "video-card--active" : "")
   .video-card__image-container
+    = turbo_frame_tag "watch_status_#{video.id}", src: watched_by_current_user_video_path(id: video.id), loading: "lazy"
     .video-card__duration = video.hd_duration_data
     - if video.performance_video&.position&.present?
       - if video.formatted_position.present?
