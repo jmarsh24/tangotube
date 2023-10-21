@@ -3,7 +3,7 @@
 class Search::ChannelsController < ApplicationController
   # @route GET /search/channels (search_channels)
   def index
-    @channels = Rails.cache.fetch(["search_channels", params[:query].presence], expires_in: 1.hour) do
+    @channels =
       if params[:query].present?
         Channel.search(params[:query])
           .with_attached_thumbnail
@@ -14,6 +14,5 @@ class Search::ChannelsController < ApplicationController
         Channel.with_attached_thumbnail
           .active.limit(100).order(videos_count: :desc).load_async
       end
-    end
   end
 end

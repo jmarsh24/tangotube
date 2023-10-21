@@ -3,7 +3,7 @@
 class Search::DancersController < ApplicationController
   # @route GET /search/dancers (search_dancers)
   def index
-    @dancers = Rails.cache.fetch(["search_dancers", params[:query].presence], expires_in: 1.hour) do
+    @dancers =
       if params[:query].present?
         Dancer.search(params[:query])
           .with_attached_profile_image
@@ -12,6 +12,5 @@ class Search::DancersController < ApplicationController
       else
         Dancer.all.with_attached_profile_image.limit(100).order(videos_count: :desc).load_async
       end
-    end
   end
 end
