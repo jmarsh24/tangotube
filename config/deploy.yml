@@ -55,10 +55,9 @@ accessories:
       secret:
         - POSTGRES_PASSWORD
     files:
-      - config/postgres/production.cnf:/etc/postgresql/postgresql.conf
+      - config/postgres/production.cnf:/etc/postgresql/15/main/postgresql.conf
     volumes:
       - /var/postgres/data:/var/lib/postgresql/data
-      - /home/<user>/<service>-<accessory>/etc/postgresql/postgresql.conf:/etc/postgresql/postgresql.conf
 
 healthcheck:
   log_lines: 10_000
