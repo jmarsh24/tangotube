@@ -18,6 +18,7 @@
 #  event_title              :text
 #  event_country            :text
 #  video_title              :text
+#  search_text              :text
 #
 require "rails_helper"
 
