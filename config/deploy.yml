@@ -48,7 +48,6 @@ accessories:
     image: postgres:15
     host: 128.140.105.113
     port: 5432
-    cmd: "postgres -c config_file=/etc/postgresql/postgresql.conf"
     env:
       clear:
         POSTGRES_USER: "postgres"
