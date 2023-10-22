@@ -11,7 +11,7 @@ RSpec.describe Video::Search do
       VideoScore.refresh
     end
 
-    xit "returns all videos with facets" do
+    it "returns all videos with facets" do
       expect(Video::Search.new.facet(name: "leader").options).to eq(Video::FacetBuilder.new(Video.all).leader.options)
       expect(Video::Search.new.facet(name: "follower").options).to eq(Video::FacetBuilder.new(Video.all).follower.options)
       expect(Video::Search.new.facet(name: "orchestra").options).to eq(Video::FacetBuilder.new(Video.all).orchestra.options)
@@ -20,7 +20,7 @@ RSpec.describe Video::Search do
       expect(Video::Search.new.facet(name: "song").options).to eq(Video::FacetBuilder.new(Video.all).song.options)
     end
 
-    xit "returns all videos when filtering with leader and sorting" do
+    it "returns all videos when filtering with leader and sorting" do
       leaders_facet = [
         Video::FacetBuilder::Option.new(label: "Carlitos Espinoza", value: "carlitos-espinoza", count: 2),
         Video::FacetBuilder::Option.new(label: "Corina Herrera", value: "corina-herrera", count: 1),
@@ -51,7 +51,7 @@ RSpec.describe Video::Search do
       expect(search.facet(name: "song").options).to match_array(songs_facet)
     end
 
-    xit "returns all videos when filtering with liked" do
+    it "returns all videos when filtering with liked" do
       leaders_facet = [Video::FacetBuilder::Option.new(label: "Carlitos Espinoza", value: "carlitos-espinoza", count: 1)]
 
       followers_facet = [Video::FacetBuilder::Option.new(label: "Noelia Hurtado", value: "noelia-hurtado", count: 1)]

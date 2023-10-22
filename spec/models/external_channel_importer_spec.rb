@@ -25,7 +25,7 @@ RSpec.describe ExternalChannelImporter do
   end
 
   describe "#import" do
-    xit "creates a new channel with correct attributes" do
+    it "creates a new channel with correct attributes" do
       channel = ExternalChannelImporter.new.import(slug)
       expect(channel.metadata).to be_present
       expect(channel.title).to eq(yt_channel.title)
@@ -37,7 +37,7 @@ RSpec.describe ExternalChannelImporter do
   end
 
   describe "#fetch_metadata" do
-    xit "returns ChannelMetadata with correct attributes" do
+    it "returns ChannelMetadata with correct attributes" do
       metadata = ExternalChannelImporter.new.fetch_metadata(slug)
       expect(metadata.id).to eq(yt_channel.id)
       expect(metadata.title).to eq(yt_channel.title)
