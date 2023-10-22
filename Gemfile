@@ -72,13 +72,13 @@ gem "stimulus-rails"
 gem "turbo-rails"
 gem "serviceworker-rails"
 gem "thumbhash"
+gem "ruby-lsp-rails"
 
 # External Services
 gem "aws-sdk-s3"
 gem "deepl-rb", require: "deepl"
 gem "yt"
 gem "newrelic_rpm"
-gem "barnes" # enables detailed metrics within heroku
 gem "sentry-ruby"
 gem "sentry-rails"
 
@@ -106,7 +106,6 @@ group :development do
   gem "annotate"
   gem "rb-fsevent"
   gem "letter_opener"
-  gem "ruby-lsp", require: false
   gem "rubocop-rails"
   gem "rubocop-performance"
   gem "rubocop-rspec"
