@@ -246,7 +246,7 @@ RSpec.describe Video do
   end
 
   describe ".search" do
-    xit "returns videos that match the search term" do
+    it "returns videos that match the search term" do
       VideoSearch.refresh
       VideoScore.refresh
 

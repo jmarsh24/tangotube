@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_19_172125) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_22_200941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -577,5 +577,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_19_172125) do
     ORDER BY videos.id DESC;
   SQL
   add_index "video_searches", ["search_text"], name: "index_video_searches_on_search_text", opclass: :gin_trgm_ops, using: :gin
+  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
 
 end
