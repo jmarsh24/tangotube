@@ -116,7 +116,7 @@ RSpec.describe Video::Filter do
     end
 
     context "when filtering by query" do
-      xit "returns videos matching query" do
+      it "returns videos matching query" do
         VideoSearch.refresh
         VideoScore.refresh
 
@@ -124,7 +124,7 @@ RSpec.describe Video::Filter do
         expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
       end
 
-      xit "returns videos matching query with accents" do
+      it "returns videos matching query with accents" do
         VideoSearch.refresh
         VideoScore.refresh
 
@@ -133,11 +133,11 @@ RSpec.describe Video::Filter do
         expect(filtered_videos).to match_array([videos(:video_1_featured), videos(:video_4_featured)])
       end
 
-      xit "returns videos matching query with a ' character" do
+      it "returns videos matching query with a ' character" do
         VideoSearch.refresh
         VideoScore.refresh
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {search: "juann darienzoo"}).videos
+        filtered_videos = described_class.new(Video.all, filtering_params: {search: "juan darienzo"}).videos
         expect(filtered_videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
       end
     end
