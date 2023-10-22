@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-
-ruby "3.2.2"
+ruby File.read(File.join(__dir__, ".ruby-version")).strip
 
 gem "rails", "7.1"
-gem "rack"
 gem "puma"
 
 # databases
 gem "pg"
-gem "redis"
 
 gem "oj"
 gem "bootsnap", require: false
