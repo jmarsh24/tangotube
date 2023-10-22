@@ -5,6 +5,7 @@ ruby File.read(File.join(__dir__, ".ruby-version")).strip
 
 gem "rails", "7.1"
 gem "puma"
+gem "rack"
 
 # databases
 gem "pg"
