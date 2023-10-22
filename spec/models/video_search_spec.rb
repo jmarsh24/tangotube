@@ -26,7 +26,7 @@ RSpec.describe VideoSearch do
   fixtures :all
 
   describe "#search" do
-    xit "finds results" do
+    it "finds results" do
       videos = [videos(:video_1_featured), videos(:video_4_featured)]
 
       VideoSearch.refresh
