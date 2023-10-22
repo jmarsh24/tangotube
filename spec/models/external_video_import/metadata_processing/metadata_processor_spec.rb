@@ -9,43 +9,72 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
     described_class.new
   end
 
-  describe "#process" do
-    let(:couple) { couples(:carlitos_noelia) }
+  let(:couple) { couples(:carlitos_noelia) }
+  let(:song_metadata) do
+    ExternalVideoImport::Youtube::SongMetadata.new(
+      titles: ["Test Song Title"],
+      song_url: "https://open.spotify.com/track/1234567890",
+      artist: "Test Song Artist",
+      artist_url: "https://open.spotify.com/artist/1234567890",
+      writers: ["Test Song Writer"],
+      album: "Test Song Album"
+    )
+  end
+  let(:channel_metadata) do
+    ExternalVideoImport::Youtube::ChannelMetadata.new(
+      id: "test_channel_slug",
+      title: "Test Channel Title",
+      thumbnail_url: "https://i.ytimg.com/vi/test_channel_slug/hqdefault.jpg"
+    )
+  end
+  let(:thumbnail_url) do
+    ExternalVideoImport::Youtube::ThumbnailUrl.new(
+      default: "https://i.ytimg.com/vi/test_video_slug/default.jpg",
+      medium: "https://i.ytimg.com/vi/test_video_slug/mqdefault.jpg",
+      high: "https://i.ytimg.com/vi/test_video_slug/hqdefault.jpg",
+      standard: "https://i.ytimg.com/vi/test_video_slug/sddefault.jpg",
+      maxres: "https://i.ytimg.com/vi/test_video_slug/maxresdefault.jpg"
+    )
+  end
+  let(:youtube_metadata) do
+    ExternalVideoImport::Youtube::VideoMetadata.new(
+      slug: "123456",
+      title: "carlitos espinoza and noelia hurtado",
+      description: "Test Video Description",
+      upload_date: "2022-01-01".to_date,
+      duration: 100,
+      tags: ["test", "video", "tags"],
+      hd: true,
+      view_count: 100,
+      favorite_count: 100,
+      comment_count: 100,
+      like_count: 100,
+      song: song_metadata,
+      thumbnail_url: "https://i.ytimg.com/vi/test_video_slug/hqdefault.jpg",
+      recommended_video_ids: ["test_video_slug_1", "test_video_slug_2"],
+      channel: channel_metadata,
+      blocked: false
+    )
+  end
+  let(:music_metadata) do
+    ExternalVideoImport::MusicRecognition::Metadata.new
+  end
+  let(:metadata) do
+    ExternalVideoImport::Metadata.new(
+      youtube: youtube_metadata,
+      music: music_metadata
+    )
+  end
 
-    xit "processes the metadata and returns the video attributes" do
+  describe "#process" do
+    it "processes the metadata and returns the video attributes" do
       attributes = metadata_processor.process(metadata)
 
-      expect(attributes[:youtube_id]).to eq("test_video_slug")
+      expect(attributes[:youtube_id]).to eq("123456")
       expect(attributes[:upload_date]).to eq("2022-01-01".to_date)
       expect(attributes[:upload_date_year]).to eq(2022)
-      expect(attributes[:song]).to eq(song_metadata)
-      expect(attributes[:couples]).to eq([couple])
-    end
-
-    context "when couple is nil" do
-      before do
-        allow(couple_matcher).to receive(:match_or_create).and_return(nil)
-      end
-
-      xit "returns nil for the couples attribute" do
-        attributes = metadata_processor.process(metadata)
-
-        expect(attributes[:couple]).to be_nil
-      end
-    end
-
-    context "when dancers are an empty array and couple is nil" do
-      before do
-        allow(dancer_matcher).to receive(:match).with(video_title: youtube_metadata.title).and_return([])
-        allow(couple_matcher).to receive(:match_or_create).and_return(nil)
-      end
-
-      xit "returns nil for the couples attribute" do
-        attributes = metadata_processor.process(metadata)
-
-        expect(attributes[:dancers]).to be_nil
-        expect(attributes[:couple]).to be_nil
-      end
+      expect(attributes[:song].title).to eq("Test Song Title")
+      expect(attributes[:couple_videos].first.couple_id).to eq(couple.id)
     end
   end
 end
