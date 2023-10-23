@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1
-
-FROM ruby:3.2.2-slim as base
+ARG RUBY_VERSION=3.2.2
+FROM ruby:${RUBY_VERSION}-slim as base
 
 WORKDIR /rails
 
@@ -17,11 +17,13 @@ RUN apt-get update -qq && \
   apt-get install --no-install-recommends -y build-essential curl git libvips libpq-dev pkg-config nodejs && \
   rm -rf /var/lib/apt/lists/*
 
+ARG NODE_VERSION=18.12.0
+ARG YARN_VERSION=1.22.19
 # Install JavaScript dependencies
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-  /tmp/node-build-master/bin/node-build "18.12.0" /usr/local/node && \
-  npm install -g yarn@1.22.19 && \
+  /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+  npm install -g yarn@"${YARN_VERSION}" && \
   npm install -g mjml && \
   rm -rf /tmp/node-build-master
 
