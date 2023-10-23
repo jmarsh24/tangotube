@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Search
-  Result = Data.define(:type, :record, :score)
+  Result = Data.define(:type, :record, :score).freeze
 
   DEFAULT_LIMIT = 50
 

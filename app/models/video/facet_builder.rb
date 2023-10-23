@@ -17,7 +17,7 @@ class Video::FacetBuilder
     end
   end
 
-  Option = Data.define(:value, :label, :count)
+  Option = Data.define(:value, :label, :count).freeze
 
   def initialize(video_relation)
     @video_relation = video_relation
