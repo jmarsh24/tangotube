@@ -59,7 +59,7 @@ module ExternalVideoImport
 
       SIMPLE_NUMBER_REGEX = /(?<!\d)([1-8])(?!\d)/
 
-      Performance = Struct.new(:position, :total, keyword_init: true)
+      Performance = Data.define(:position, :total)
 
       def parse(text:)
         sanitized_text = sanitize_dates(text)

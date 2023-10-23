@@ -17,7 +17,7 @@ class Video::FacetBuilder
     end
   end
 
-  Option = Struct.new(:value, :label, :count, keyword_init: true)
+  Option = Data.define(:value, :label, :count)
 
   def initialize(video_relation)
     @video_relation = video_relation
