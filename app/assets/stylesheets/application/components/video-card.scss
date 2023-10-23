@@ -129,6 +129,7 @@
     object-fit: cover;
     background-color: var(--color-neutral-200);
     z-index: var(--z-video-card-image);
+    filter: blur(5px);
 
     @include breakpoint-tablet {
       border-radius: var(--border-radius-lg);
