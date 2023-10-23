@@ -23,17 +23,6 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
-    - ENABLE_MAILERS
-    - RAILS_MAX_THREADS
-    - NEW_RELIC_AGENT_ENABLED
-    - NEW_RELIC_APP_NAME
-    - NEW_RELIC_LOG
-    - BASE_URI
-    - AWS_REGION
-    - AWS_BUCKET
-    - YT_DLP_BIN
-    - CLOUDFLARE_BUCKET
-    - DB_POOL
 
 builder:
   multiarch: false
