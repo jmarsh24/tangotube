@@ -17,15 +17,15 @@ RUN apt-get update -qq && \
   apt-get install --no-install-recommends -y build-essential curl git libvips libpq-dev pkg-config nodejs && \
   rm -rf /var/lib/apt/lists/*
 
-ARG NODE_VERSION=18.12.0
-ARG YARN_VERSION=1.22.19
 # Install JavaScript dependencies
+ARG NODE_VERSION=18.17.1
+ARG YARN_VERSION=1.22.19
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
   /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-  npm install -g yarn@"${YARN_VERSION}" && \
-  npm install -g mjml && \
+  npm install -g yarn@$YARN_VERSION && \
   rm -rf /tmp/node-build-master
+
 
 COPY .ruby-version Gemfile Gemfile.lock ./
 RUN bundle install && \
