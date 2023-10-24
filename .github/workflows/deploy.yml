@@ -36,11 +36,14 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3
         with:
-          platforms: linux/amd64
+          platforms: linux/arm64
 
       - uses: docker/build-push-action@v5
         with:
           context: .
+          platforms: linux/arm64
+          tags: your-docker-repo/your-image-name:latest
+          push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
