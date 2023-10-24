@@ -70,7 +70,6 @@ en:
     formats:
       short_month_year: "%b %Y"
       song_recording_date: "%B %e, %Y"
-      upload_date: "%B %e, %Y"
   devise:
     confirmations:
       new:
