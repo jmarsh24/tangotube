@@ -27,7 +27,7 @@ pidfile ENV.fetch("PIDFILE", "tmp/pids/server.pid")
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-workers ENV.fetch("WEB_CONCURRENCY", 1)
+workers ENV.fetch("WEB_CONCURRENCY", 2)
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code
 # before forking the application. This takes advantage of Copy On Write
@@ -36,3 +36,4 @@ workers ENV.fetch("WEB_CONCURRENCY", 1)
 preload_app!
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+w

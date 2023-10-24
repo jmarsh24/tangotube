@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_12_072844) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_23_152201) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_stat_statements"
@@ -326,6 +326,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_12_072844) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "user"
+    t.text "query"
+    t.bigint "query_hash"
+    t.float "total_time"
+    t.bigint "calls"
+    t.datetime "captured_at", precision: nil
+    t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
+  end
+
   create_table "playlists", force: :cascade do |t|
     t.string "slug"
     t.string "title"
@@ -359,7 +370,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_12_072844) do
     t.binary "key", null: false
     t.binary "value", null: false
     t.datetime "created_at", null: false
-    t.index ["key"], name: "index_solid_cache_entries_on_key", unique: true
+    t.index ["key"], name: "index_solid_cache_entries_on_key", using: :hash
   end
 
   create_table "songs", force: :cascade do |t|
@@ -580,7 +591,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_12_072844) do
        LEFT JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
        LEFT JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
        LEFT JOIN orchestras ON ((orchestras.id = songs.orchestra_id)))
-    GROUP BY videos.id, videos.youtube_id
+    GROUP BY videos.id, videos.youtube_id, videos.upload_date, videos.description, videos.title
     ORDER BY videos.id DESC;
   SQL
   add_index "video_searches", ["channel_title"], name: "index_video_searches_on_channel_title", opclass: :gist_trgm_ops, using: :gist

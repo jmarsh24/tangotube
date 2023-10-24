@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-
-ruby "3.2.2"
+ruby File.read(File.join(__dir__, ".ruby-version")).strip
 
 gem "rails", "7.1"
-gem "rack"
 gem "puma"
+gem "rack"
 
 # databases
 gem "pg"
-gem "redis"
 
 gem "oj"
 gem "bootsnap", require: false
@@ -60,6 +58,10 @@ gem "goldiloader"
 gem "browser"
 gem "solid_cache"
 gem "good_job"
+gem "kamal"
+gem "pghero"
+gem "strong_migrations"
+gem "pg_query", ">= 2"
 
 # Assets
 gem "vite_rails"
@@ -68,13 +70,13 @@ gem "stimulus-rails"
 gem "turbo-rails"
 gem "serviceworker-rails"
 gem "thumbhash"
+gem "ruby-lsp-rails"
 
 # External Services
 gem "aws-sdk-s3"
 gem "deepl-rb", require: "deepl"
 gem "yt"
 gem "newrelic_rpm"
-gem "barnes" # enables detailed metrics within heroku
 gem "sentry-ruby"
 gem "sentry-rails"
 
@@ -102,10 +104,9 @@ group :development do
   gem "annotate"
   gem "rb-fsevent"
   gem "letter_opener"
-  gem "ruby-lsp", require: false
   gem "rubocop-rails"
   gem "rubocop-performance"
   gem "rubocop-rspec"
   gem "rubocop-rake"
-  gem "mrsk"
+  gem "rack-mini-profiler"
 end

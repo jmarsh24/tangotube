@@ -1,16 +1,16 @@
 import { Controller } from '@hotwired/stimulus';
 import { thumbHashToDataURL } from 'thumbhash';
 
-// thumb_hash_controller.ts
 export default class extends Controller {
   static values = { previewHash: String };
   previewHashValue!: string;
 
   connect() {
     const byteArray = this.hexToBytes(this.previewHashValue);
-    (
-      this.element as HTMLElement
-    ).style.backgroundImage = `url(${thumbHashToDataURL(byteArray)})`;
+    const dataURL = thumbHashToDataURL(byteArray);
+
+    (this.element as HTMLElement).style.backgroundImage = `url(${dataURL})`;
+    this.element.classList.add('fade-in');
   }
 
   hexToBytes(hex: string): Array<number> {

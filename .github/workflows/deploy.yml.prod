@@ -1,0 +1,48 @@
+service: tangotube
+
+image: jmarsh24/tangotube
+
+servers:
+  web:
+    hosts:
+      - 168.119.239.114
+    cmd: bundle exec puma -C config/puma.rb
+  worker:
+    hosts:
+      - 159.69.149.32
+    cmd: bundle exec good_job start
+registry:
+  server: ghcr.io
+  username:
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+env:
+  clear:
+    DB_HOST: 128.140.105.113
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
+
+builder:
+  cache:
+    type: gha
+  multiarch: false
+
+accessories:
+  db:
+    image: postgres:15
+    host: 128.140.105.113
+    port: 5432
+    env:
+      clear:
+        POSTGRES_USER: "postgres"
+        POSTGRES_DB: "tangotube_production"
+      secret:
+        - POSTGRES_PASSWORD
+    volumes:
+      - /root/tangotube-db/etc/postgresql/15.4/main/postgresql.conf:/etc/postgresql/15.4/main/postgresql.conf
+      - /var/postgres/data:/var/lib/postgresql/data
+
+healthcheck:
+  log_lines: 10_000

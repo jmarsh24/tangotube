@@ -14,7 +14,7 @@ RSpec.describe ExternalVideoImport::Performance::VideoGrouper do
   let(:follower) { dancers(:noelia) }
 
   describe "#group_to_performance" do
-    xit "groups videos with existing performance" do
+    it "groups videos with existing performance" do
       DancerVideo.create!(dancer: leader, video: performance_video_2, role: :leader)
       DancerVideo.create!(dancer: follower, video: performance_video_2, role: :follower)
       performance = ExternalVideoImport::Performance::VideoGrouper.new(video: performance_video_2).group_to_performance
@@ -23,7 +23,7 @@ RSpec.describe ExternalVideoImport::Performance::VideoGrouper do
       expect(performance_video_2.performance_video.position).to eq(2)
     end
 
-    xit "groups videos with non-existing performance" do
+    it "groups videos with non-existing performance" do
       performance_1.destroy!
       DancerVideo.create!(dancer: leader, video: performance_video_2, role: :leader)
       DancerVideo.create!(dancer: follower, video: performance_video_2, role: :follower)

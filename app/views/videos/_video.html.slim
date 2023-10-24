@@ -7,7 +7,7 @@
         - if video.formatted_position.present?
           .video-card__performance-number
             = video.formatted_position
-        = image_tag video.thumbnail, width: 400, alt: t("video_thumbnail_alt", video_title: video.title), class: "video-card__image" if video.thumbnail.present?
+        = image_tag video.thumbnail, width: 400, alt: t("video_thumbnail_alt", video_title: video.title), class: ["video-card__image", "fade-in"] if video.thumbnail.present?
     section.video-card__content
       header.video-card__primary
         .stack.stack--line

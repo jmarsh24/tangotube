@@ -9,14 +9,11 @@ module ExternalVideoImport
         Dir.mktmpdir do |dir|
           output_template = "#{dir}/#{slug}.%(ext)s"
           success = system(yt_dlp_command(output_template, slug, format: "-f bestaudio"))
-
           if success
             downloaded_file = Dir["#{dir}/#{slug}.*"].first
 
-            Tempfile.create([slug, File.extname(downloaded_file)]) do |tempfile|
-              FileUtils.move(downloaded_file, tempfile.path)
-              yield tempfile if block_given?
-            end
+            yield downloaded_file
+            File.delete(downloaded_file) if File.exist?(downloaded_file)
           end
         end
       rescue => e

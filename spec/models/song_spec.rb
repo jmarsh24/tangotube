@@ -26,6 +26,7 @@
 #  orchestra_id      :bigint
 #  display_title     :string
 #  spotify_track_id  :string
+#  search_text       :text
 #
 require "rails_helper"
 

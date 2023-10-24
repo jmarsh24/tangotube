@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Avo::Engine, at: Avo.configuration.root_path
     mount GoodJob::Engine => "good_job"
+    mount PgHero::Engine, at: "pghero"
   end
 
   # Static pages

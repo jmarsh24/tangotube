@@ -4,7 +4,7 @@ class ExternalChannelImporter
   def import(slug)
     Rails.logger.info("Starting import for channel: #{slug}")
 
-    channel_metadata = create_metadata(slug)
+    channel_metadata = fetch_metadata(slug)
     Channel.create!(
       title: channel_metadata.title,
       youtube_slug: channel_metadata.id,

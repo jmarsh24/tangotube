@@ -49,3 +49,5 @@ config/deploy.rb
 Dockerfile
 /coverage
 /*.md
+
+/*.dump

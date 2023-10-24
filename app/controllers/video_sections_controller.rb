@@ -9,6 +9,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
       .shuffle
     @videos = (videos.count >= 24) ? videos : Video.none
   end
@@ -19,6 +20,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
       .shuffle
     @videos = (videos.count >= 24) ? videos : Video.none
   end
@@ -29,6 +31,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
       .shuffle
     @videos = (videos.count >= 24) ? videos : Video.none
   end
@@ -39,6 +42,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
   end
 
   # @route GET /video_sections/event (event_video_sections)
@@ -49,6 +53,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
       .shuffle
   end
 
@@ -58,6 +63,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
       .shuffle
   end
 
@@ -69,6 +75,7 @@ class VideoSectionsController < ApplicationController
       .has_leader.has_follower.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
   end
 
   # @route GET /video_sections/song (song_video_sections)
@@ -83,6 +90,7 @@ class VideoSectionsController < ApplicationController
       .has_leader.has_follower.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
   end
 
   # @route GET /video_sections/channel (channel_video_sections)
@@ -93,6 +101,7 @@ class VideoSectionsController < ApplicationController
       .has_leader.has_follower.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
   end
 
   # @route GET /video_sections/orchestra (orchestra_video_sections)
@@ -103,6 +112,7 @@ class VideoSectionsController < ApplicationController
       .has_leader.has_follower.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
+      .load_async
   end
 
   # @route GET /video_sections/interview (interview_video_sections)
@@ -112,6 +122,7 @@ class VideoSectionsController < ApplicationController
       .has_dancer.not_hidden.from_active_channels
       .limit(500)
       .preload(Video.search_includes)
+      .load_async
       .shuffle.take(36)
   end
 
@@ -122,6 +133,7 @@ class VideoSectionsController < ApplicationController
       .not_hidden.from_active_channels
       .limit(500)
       .preload(Video.search_includes)
+      .load_async
       .shuffle.take(36)
   end
 
@@ -132,6 +144,7 @@ class VideoSectionsController < ApplicationController
       .not_hidden.from_active_channels
       .limit(500)
       .preload(Video.search_includes)
+      .load_async
       .shuffle.take(36)
   end
 
@@ -143,6 +156,7 @@ class VideoSectionsController < ApplicationController
       filtering_params: filtering_params.merge(dancer: @dancer.slug),
       user: current_user
     ).videos.not_hidden.from_active_channels.preload(Video.search_includes)
+      .load_async
 
     shuffled_grouped_by_song = videos.group_by(&:song_id)
       .select { |_, v| v.length >= 4 }

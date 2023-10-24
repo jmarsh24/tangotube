@@ -49,6 +49,7 @@ scratchpad.*
 # Ignore .env files
 .env
 .env.production
+.env.erb
 
 docker-config.json
 *.dump

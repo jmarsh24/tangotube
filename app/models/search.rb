@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Search
-  Result = Struct.new(:type, :record, :score, keyword_init: true)
+  Result = Data.define(:type, :record, :score).freeze
 
   DEFAULT_LIMIT = 50
 
@@ -54,9 +54,9 @@ class Search
           WHERE d1.name % :query OR d2.name % :query
         )
 
-        SELECT 
-          record_type, 
-          record_id, 
+        SELECT
+          record_type,
+          record_id,
           CASE
             WHEN record_type = 'channels' THEN ((1 - (title <-> :query)) * 0.2 + (videos_count::float / (SELECT MAX(videos_count)::float FROM channels)) * 0.8)
             WHEN record_type = 'dancers' THEN ((1 - (title <-> :query)) * 0.2 + (videos_count::float / (SELECT MAX(videos_count)::float FROM dancers)) * 0.8)
@@ -68,9 +68,9 @@ class Search
         FROM FilteredResults
         UNION ALL
         (
-          SELECT 
-            'videos' AS record_type, 
-            vs.video_id AS record_id, 
+          SELECT
+            'videos' AS record_type,
+            vs.video_id AS record_id,
             (vscore.score_1 * 0.8) AS score
           FROM video_searches vs
           JOIN video_scores vscore ON vs.video_id = vscore.video_id

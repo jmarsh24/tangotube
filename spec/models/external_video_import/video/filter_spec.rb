@@ -137,7 +137,7 @@ RSpec.describe Video::Filter do
         VideoSearch.refresh
         VideoScore.refresh
 
-        filtered_videos = described_class.new(Video.all, filtering_params: {search: "juann darienzoo"}).videos
+        filtered_videos = described_class.new(Video.all, filtering_params: {search: "juan darienzo"}).videos
         expect(filtered_videos).to match_array([videos(:video_2_featured), videos(:video_3_featured), videos(:video_5)])
       end
     end

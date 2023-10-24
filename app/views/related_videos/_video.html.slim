@@ -1,5 +1,6 @@
 .video-card.video-card--compact class=(video.youtube_id == @video.youtube_id ? "video-card--active" : "")
   .video-card__image-container
+    = turbo_frame_tag "watch_status_#{video.id}", src: watched_by_current_user_video_path(id: video.id), loading: "lazy"
     .video-card__duration = video.hd_duration_data
     - if video.performance_video&.position&.present?
       - if video.formatted_position.present?
@@ -7,10 +8,10 @@
           = video.formatted_position 
     - thumbnail = video.thumbnail.attached? ? video.thumbnail : "https://img.youtube.com/vi/#{video.youtube_id}/maxresdefault.jpg"
     - if video.youtube_id == @video.youtube_id
-      = image_tag thumbnail, width: 400,  alt: t(".video_thumbnail_alt", video_title: video.title), class: "video-card__image"
+      = image_tag thumbnail, width: 400,  alt: t(".video_thumbnail_alt", video_title: video.title), class: "video-card__image fade-in"
     - else
       = link_to watch_path(v: video.youtube_id) do
-        = image_tag thumbnail, width: 400,  alt: t(".video_thumbnail_alt", video_title: video.title), class: "video-card__image"
+        = image_tag thumbnail, width: 400,  alt: t(".video_thumbnail_alt", video_title: video.title), class: "video-card__image fade-in"
   .video-card__content
     .video-card__primary
       .stack.stack--line
