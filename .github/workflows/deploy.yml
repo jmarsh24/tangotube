@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, Linux, ARM64]
+    runs-on: self-hosted
 
     env:
       DOCKER_BUILDKIT: 1
