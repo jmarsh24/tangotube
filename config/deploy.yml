@@ -20,6 +20,9 @@ registry:
 env:
   clear:
     DB_HOST: 128.140.105.113
+    RUBY_YJIT_ENABLE: 1
+    LD_PRELOAD: "libjemalloc.so.2"
+    MALLOC_CONF: "dirty_decay_ms:1000,narenas:2,background_thread:true"
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
