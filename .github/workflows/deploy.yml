@@ -20,28 +20,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependencies
+      - name: Install Ruby dependencies
         run: |
           sudo apt update
           sudo apt install -y libssl-dev libreadline-dev zlib1g-dev
 
-      - name: Install rbenv and ruby-build
+      - name: Install Ruby from source
         run: |
-          git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-          echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-          source ~/.bashrc
-          git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-          PATH="$HOME/.rbenv/bin:$PATH"
-          eval "$(rbenv init -)"
+          wget https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.2.tar.gz
+          tar xzf ruby-3.2.2.tar.gz
+          cd ruby-3.2.2
+          ./configure
+          make
+          sudo make install
 
-      - name: Install Ruby
+      - name: Check Ruby and Bundler version
         run: |
-          rbenv install 3.2.2
-          rbenv global 3.2.2
-
-      - name: Install Bundler
-        run: gem install bundler
+          ruby --version
+          gem install bundler
+          bundle --version
 
       - name: Install kamal
         run: gem install kamal
