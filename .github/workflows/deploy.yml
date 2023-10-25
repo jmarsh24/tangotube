@@ -20,55 +20,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Install necessary dependencies and build tools
-      - name: Install build dependencies
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install --no-install-recommends -y build-essential curl git libvips libpq-dev pkg-config nodejs
-
-      # Install specific Node and Yarn versions
-      - name: Install Node and Yarn
-        env:
-          NODE_VERSION: 18.17.1
-          YARN_VERSION: 1.22.19
-        run: |
-          sudo curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | sudo tar xz -C /tmp/
-          sudo /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node
-          sudo npm install -g yarn@$YARN_VERSION
-
-      # Install Ruby from source
-      - name: Install Ruby
-        run: |
-          wget https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.2.tar.gz
-          tar xzf ruby-3.2.2.tar.gz
-          cd ruby-3.2.2
-          ./configure
-          make
-          sudo make install
-
-      # Check Ruby and Bundler version
-      - name: Check Ruby and Bundler version
-        run: |
-          ruby --version
-          gem install bundler
-          bundle --version
-
-      # Bundle install
-      - name: Install gems
-        run: |
-          bundle install
-          bundle exec bootsnap precompile --gemfile
-
-      # Install npm packages
-      - name: Install npm packages
-        run: |
-          yarn install
-
-      # Compile application assets
-      - name: Compile assets
-        run: |
-          bundle exec bootsnap precompile app/ lib/
-          SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
 
       - name: Install kamal
         run: gem install kamal
