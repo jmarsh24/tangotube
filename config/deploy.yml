@@ -11,6 +11,9 @@ servers:
     hosts:
       - 159.69.149.32
     cmd: bundle exec good_job start
+  runner:
+    hosts:
+      - 168.119.165.236
 registry:
   server: ghcr.io
   username:
