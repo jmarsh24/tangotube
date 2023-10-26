@@ -20,18 +20,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install rbenv and ruby-build
+      - name: Install rbenv, ruby-build, and Ruby
         run: |
+          # Install rbenv and ruby-build
           git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-          echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-          source ~/.bashrc
           git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-          PATH="$HOME/.rbenv/bin:$PATH"
+
+          # Modify the PATH and initialize rbenv for the current step
+          export PATH="$HOME/.rbenv/bin:$PATH"
           eval "$(rbenv init -)"
 
-      - name: Install Ruby
-        run: |
+          # Install Ruby
           rbenv install 3.2.2
           rbenv global 3.2.2
 
