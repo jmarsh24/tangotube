@@ -20,28 +20,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install essential build tools and dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc make libssl-dev libreadline-dev zlib1g-dev git libyaml-dev libpq-dev
-
-      - name: Install rbenv and ruby-build
-        run: |
-          # Remove existing rbenv directory if it exists
-          [[ -d ~/.rbenv ]] && rm -rf ~/.rbenv
-          git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-          git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-          echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-          export PATH="$HOME/.rbenv/bin:$PATH"
-          eval "$(rbenv init -)"
-
-      - name: Install Ruby
-        run: |
-          export PATH="$HOME/.rbenv/bin:$PATH"
-          eval "$(rbenv init -)"
-          rbenv install 3.2.2 -s
-          rbenv global 3.2.2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
 
       - name: Install kamal
         run: gem install kamal
@@ -49,12 +32,6 @@ jobs:
       - uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Manually Set up Docker for Buildx
-        run: |
-          docker buildx create --name mybuilder --use
-          docker buildx inspect --bootstrap
-          docker buildx use mybuilder
 
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3
