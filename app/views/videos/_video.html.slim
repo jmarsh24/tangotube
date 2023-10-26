@@ -1,4 +1,4 @@
-- cache [video, I18n.locale] do
+/ - cache [video, I18n.locale] do
 article.video-card id="video_#{video.youtube_id}"
   = link_to watch_path(v: video.youtube_id), aria: { label: "Watch #{video.title}" } do
     .video-card__image-container
