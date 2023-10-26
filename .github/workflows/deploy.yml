@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: buildjet-4vcpu-ubuntu-2204
 
     env:
       DOCKER_BUILDKIT: 1
@@ -36,8 +36,8 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           context: .
-          # cache-from: type=gha
-          # cache-to: type=gha,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Copy Config
         run: cp config/deploy.yml.prod config/deploy.yml
