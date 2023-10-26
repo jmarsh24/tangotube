@@ -10,7 +10,6 @@ ENV RAILS_ENV="production" \
   BUNDLE_PATH="/usr/local/bundle" \
   BUNDLE_WITHOUT="development" \
   RUBY_YJIT_ENABLE="1" \
-  LD_PRELOAD="libjemalloc.so.2" \
   MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true"
 
 FROM base as build
@@ -48,7 +47,7 @@ FROM base
 
 # Install packages and tools
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y curl libvips ffmpeg postgresql-client python3-pip python3-venv libjemalloc2
+  apt-get install --no-install-recommends -y curl libvips ffmpeg postgresql-client python3-pip python3-venv
 
 RUN python3 -m venv /opt/venv 
 
