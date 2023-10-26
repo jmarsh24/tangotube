@@ -26,8 +26,8 @@ jobs:
           ruby-version: 3.2.2
           bundler-cache: true
 
-      # - name: Install kamal
-      #   run: gem install kamal
+      - name: Install kamal
+        run: command -v kamal &> /dev/null || gem install kamal
 
       - uses: webfactory/ssh-agent@v0.8.0
         with:
