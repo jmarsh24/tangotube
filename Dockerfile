@@ -9,8 +9,7 @@ ENV RAILS_ENV="production" \
   BUNDLE_DEPLOYMENT="1" \
   BUNDLE_PATH="/usr/local/bundle" \
   BUNDLE_WITHOUT="development" \
-  RUBY_YJIT_ENABLE="1" \
-  MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true"
+  RUBY_YJIT_ENABLE="1"
 
 FROM base as build
 
