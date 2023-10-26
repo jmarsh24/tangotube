@@ -23,33 +23,29 @@ jobs:
       - name: Install essential build tools and dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y gcc make libssl-dev libreadline-dev zlib1g-dev
+          sudo apt-get install -y gcc make libssl-dev libreadline-dev zlib1g-dev git
 
       - name: Install rbenv and ruby-build
         run: |
-          # Check if rbenv is already installed, if not then install it
-          if [ ! -d "$HOME/.rbenv" ]; then
-            git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-          fi
-
-          # Check if ruby-build is already installed, if not then install it
-          if [ ! -d "$HOME/.rbenv/plugins/ruby-build" ]; then
-            git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-          fi
-
-          # Modify the PATH for the current step
+          git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+          git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+          echo 'eval "$(rbenv init -)"' >> ~/.bashrc
           export PATH="$HOME/.rbenv/bin:$PATH"
           eval "$(rbenv init -)"
 
-      - name: Install Ruby using rbenv
+      - name: Install Ruby
         run: |
-          # Modify the PATH for the current step
           export PATH="$HOME/.rbenv/bin:$PATH"
           eval "$(rbenv init -)"
-
-          # Install Ruby
-          rbenv install 3.2.2 -s  # The -s flag skips installation if the specified version is already installed
+          rbenv install 3.2.2 -s
           rbenv global 3.2.2
+
+      - name: Cache Ruby binaries
+        uses: actions/cache@v3
+        with:
+          path: ~/.rbenv/versions
+          key: ${{ runner.os }}-ruby-3.2.2
 
       - name: Install kamal
         run: gem install kamal
