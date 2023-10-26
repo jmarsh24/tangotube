@@ -43,11 +43,11 @@ jobs:
           rbenv install 3.2.2 -s
           rbenv global 3.2.2
 
-      - name: Cache Ruby binaries
-        uses: actions/cache@v3
-        with:
-          path: ~/.rbenv/versions
-          key: ${{ runner.os }}-ruby-3.2.2
+      # - name: Cache Ruby binaries
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.rbenv/versions
+      #     key: ${{ runner.os }}-ruby-3.2.2
 
       - name: Install kamal
         run: gem install kamal
