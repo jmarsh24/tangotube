@@ -27,11 +27,16 @@ jobs:
           bundler-cache: true
 
       - name: Install kamal
-        run: command -v kamal &> /dev/null || gem install kamal
+        run: gem install kamal
 
       - uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+        with:
+          platforms: linux/arm64
 
       - uses: docker/build-push-action@v5
         with:
