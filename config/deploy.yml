@@ -26,6 +26,8 @@ env:
       - WEB_CONCURRENCY
     DB_POOL:
       - DB_POOL
+    WORKER_THREADS:
+      - WORKER_THREADS
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
