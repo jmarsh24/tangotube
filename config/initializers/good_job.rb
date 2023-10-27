@@ -29,7 +29,7 @@ Rails.application.configure do
       class: "RefreshVideoSearchesViewJob"
     },
     refresh_video_scores_scores: {
-      cron: "*/10 * * * *", # every 10 minutes
+      cron: "*/30 * * * *", # every 10 minutes
       class: "RefreshVideoScoresJob"
     },
     refresh_query_stats: {
