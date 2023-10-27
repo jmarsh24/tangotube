@@ -6,7 +6,7 @@ Rails.application.configure do
   config.good_job.on_thread_error = ->(exception) { Rails.error.report(exception) }
   config.good_job.execution_mode = :external
   config.good_job.queues = "*"
-  config.good_job.max_threads = Config.worker_threads! || Config.rails_max_threads || 5
+  config.good_job.max_threads = Config.worker_max_threads || Config.rails_max_threads || 5
   config.good_job.poll_interval = 5 # seconds
   config.good_job.shutdown_timeout = 60 # seconds
   config.good_job.enable_cron = true
