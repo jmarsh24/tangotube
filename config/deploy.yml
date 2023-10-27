@@ -20,6 +20,12 @@ registry:
 env:
   clear:
     DB_HOST: 128.140.105.113
+    RAILS_MAX_THREADS:
+      - RAILS_MAX_THREADS
+    WEB_CONCURRENCY:
+      - WEB_CONCURRENCY
+    DB_POOL:
+      - DB_POOL
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
