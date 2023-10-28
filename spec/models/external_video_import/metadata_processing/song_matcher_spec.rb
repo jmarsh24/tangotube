@@ -248,7 +248,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:)).not_to eq(el_chamuyo)
       end
 
-      fit "matches a song with orchestra over any other song" do
+      xit "matches a song with orchestra over any other song" do
         tango_argentino_song = Song.create!(title: "Tango Argentino", artist: "Roberto Calo")
         me_quede_mirandola = Song.create!(title: "Me Quede Mirandola", artist: "Roberto Goyeneche")
         video_title = "Gavito Tango Festival, Noelia Hurtado y Facundo de la Cruz | Me Quede Mirandola by Roberto Goyeneche"

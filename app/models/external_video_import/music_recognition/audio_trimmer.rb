@@ -10,7 +10,7 @@ module ExternalVideoImport
 
         Tempfile.create(["#{File.basename(transcoded_file.path, File.extname(transcoded_file.path))}_trimmed", ".mp3"]) do |trimmed_file|
           trim_audio_file(transcoded_file, trimmed_file)
-          yield trimmed_file
+          yield trimmed_file if block_given?
         end
       rescue => e
         Rails.logger.error "Failed to trim audio: #{e.message}"

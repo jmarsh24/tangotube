@@ -10,10 +10,11 @@ module ExternalVideoImport
           output_template = "#{dir}/#{slug}.%(ext)s"
           success = system(yt_dlp_command(output_template, slug, format: "-f bestaudio"))
           if success
-            downloaded_file = Dir["#{dir}/#{slug}.*"].first
+            downloaded_file_path = Dir["#{dir}/#{slug}.*"].first
 
-            yield downloaded_file
-            File.delete(downloaded_file) if File.exist?(downloaded_file)
+            File.open(downloaded_file_path) do |file|
+              yield file
+            end
           end
         end
       rescue => e
