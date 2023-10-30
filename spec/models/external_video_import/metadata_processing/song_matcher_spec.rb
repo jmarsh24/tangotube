@@ -249,7 +249,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
       end
 
       xit "matches a song with orchestra over any other song" do
-        tango_argentino_song = Song.create!(title: "Tango Argentino", artist: "Roberto Calo")
+        Song.create!(title: "Tango Argentino", artist: "Roberto Calo")
         me_quede_mirandola = Song.create!(title: "Me Quede Mirandola", artist: "Roberto Goyeneche")
         video_title = "Gavito Tango Festival, Noelia Hurtado y Facundo de la Cruz | Me Quede Mirandola by Roberto Goyeneche"
         video_description = "Dancers: Noelia Hurtado y Facundo de la Cruz Music: Me Quedé Mirandola by Roberto Goyeneche Event: Gavito Tango Festival 2023, Los Angeles, at Biltmore hotel Los Angeles If you like the contents, please subscribe to support the channel! #argentinetango #tango #アルゼンチンタンゴ #タンゴ #아르헨티나탱고 #탱고 #tangoargentino #noeliayfacundo"
