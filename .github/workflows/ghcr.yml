@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 env:
   IMAGE_NAME: tangotube
   REGISTRY: ghcr.io
+  DOCKERFILE: Dockerfile
+  DEFAULT_BRANCH: main
 
 jobs:
   push:
@@ -20,13 +23,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker Image
-        run: docker build . --tag $IMAGE_NAME
+        run: docker build . --file $DOCKERFILE --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
 
       - name: Login to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login $REGISTRY -u ${{ github.actor }} --password-stdin
 
       - name: Push Docker Image to GHCR
         run: |
+          # Normalize image name to lowercase as Docker requires.
           IMAGE_ID=$REGISTRY/${{ github.repository_owner }}/${IMAGE_NAME,,}
-          docker tag $IMAGE_NAME $IMAGE_ID:latest
-          docker push $IMAGE_ID:latest
+
+          # Extract version from git tag or branch name, 'v' prefix is stripped.
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,' -e 's/^v//')
+
+          # Use 'latest' tag for main branch.
+          [ "$VERSION" == "$DEFAULT_BRANCH" ] && VERSION=latest
+
+          echo "IMAGE_ID=$IMAGE_ID"
+          echo "VERSION=$VERSION"
+
+          # Tag and push the image to GHCR.
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
