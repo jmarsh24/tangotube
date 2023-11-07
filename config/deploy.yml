@@ -20,6 +20,7 @@ registry:
 env:
   clear:
     DB_HOST: 128.140.105.113
+    HOST: tangotube.tv
     # RAILS_MAX_THREADS: <%= ENV['RAILS_MAX_THREADS']
     # WEB_CONCURRENCY: <%= ENV['WEB_CONCURRENCY']
     # DB_POOL: <%= ENV['DB_POOL']
