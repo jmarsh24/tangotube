@@ -20,11 +20,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2.2
-          bundler-cache: true
+      - name: Install ruby-build
+        run: |
+          git clone https://github.com/rbenv/ruby-build.git
+          PREFIX=/usr/local sudo ./ruby-build/install.sh
+
+      - name: Install Ruby
+        run: |
+          ruby-build 3.2.2 /opt/hostedtoolcache/Ruby/3.2.2/arm64
+          touch /opt/hostedtoolcache/Ruby/3.2.2/arm64.complete
+
+      - name: Set up Ruby Environment
+        run: |
+          echo "/opt/hostedtoolcache/Ruby/3.2.2/arm64/bin" >> $GITHUB_PATH
+          echo "GEM_HOME=$RUNNER_HOME/.gem/ruby/3.2.2" >> $GITHUB_ENV
+          echo "GEM_PATH=$GEM_HOME" >> $GITHUB_ENV
 
       - name: Install kamal
         run: command -v kamal &> /dev/null || gem install kamal
