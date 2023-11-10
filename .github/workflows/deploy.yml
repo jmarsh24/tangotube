@@ -20,11 +20,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Ruby
-        uses: buildjet/setup-ruby@v1
-        with:
-          ruby-version: 3.2.2
-          bundler-cache: true
+      - name: Install ruby-build
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ruby-build
+
+      - name: Install Ruby
+        run: |
+          ruby-build 3.2.2 $RUNNER_TOOL_CACHE/ruby/3.2.2
 
       - name: Install kamal
         run: command -v kamal &> /dev/null || gem install kamal
