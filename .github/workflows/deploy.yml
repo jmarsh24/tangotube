@@ -27,6 +27,10 @@ jobs:
           echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
           echo 'eval "$(rbenv init -)"' >> ~/.bashrc
           source ~/.bashrc
+      - name: Install the Latest ruby-build
+        run: |
+          mkdir -p "$(rbenv root)"/plugins
+          git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 
       - name: Install Ruby
         run: |
