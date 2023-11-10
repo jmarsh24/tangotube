@@ -20,19 +20,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install rbenv and ruby-build
+      - name: Install ruby-build
         run: |
           sudo apt-get update
-          sudo apt-get install -y rbenv ruby-build
-          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-          source ~/.bashrc
-          rbenv init
+          sudo apt-get install -y ruby-build
 
       - name: Install Ruby
         run: |
-          rbenv install 3.2.2
-          rbenv global 3.2.2
-          ruby -v
+          ruby-build 3.2.2 $RUNNER_TOOL_CACHE/ruby/3.2.2
 
       - name: Install kamal
         run: command -v kamal &> /dev/null || gem install kamal
