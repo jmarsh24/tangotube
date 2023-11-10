@@ -33,13 +33,13 @@ jobs:
           git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 
       - name: Install Ruby
-          run: |
-            RUBY_VERSION=3.2.2
-            RUBY_PATH=$RUNNER_TOOL_CACHE/ruby/$RUBY_VERSION
-            rbenv install $RUBY_VERSION --skip-existing
-            rbenv global $RUBY_VERSION
-            rbenv rehash
-            echo "export PATH=$RUBY_PATH/bin:$PATH" >> $GITHUB_ENV
+        run: |
+          RUBY_VERSION=3.2.2
+          RUBY_PATH=$RUNNER_TOOL_CACHE/ruby/$RUBY_VERSION
+          rbenv install $RUBY_VERSION --skip-existing
+          rbenv global $RUBY_VERSION
+          rbenv rehash
+          echo "export PATH=$RUBY_PATH/bin:$PATH" >> $GITHUB_ENV
 
       - name: Install kamal
         run: command -v kamal &> /dev/null || gem install kamal
