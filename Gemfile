@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 ruby File.read(File.join(__dir__, ".ruby-version")).strip
 
-gem "rails", "7.1"
+gem "rails", "7.1.2"
 gem "puma"
 gem "rack"
 
