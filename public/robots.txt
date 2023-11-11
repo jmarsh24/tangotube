@@ -1,2 +1,4 @@
 User-agent: Googlebot
 Disallow: /videos/*/clips
+Disallow: /videos/*/downvote
+Disallow: /videos/*/upvote
