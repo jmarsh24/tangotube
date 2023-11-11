@@ -22,7 +22,7 @@ Rails.application.configure do
     },
     update_unrecognized_videos_job: {
       cron: "0 4 * * *",
-      class: "UpdateUnrecognizedVideosJob"
+      class: "UpdateUnrecognizedMusicVideosJob"
     },
     sitemap: {
       cron: "0 0 12 * *",
