@@ -20,6 +20,10 @@ Rails.application.configure do
       cron: "0 3 * * *",
       class: "UpdateActiveChannelsJob"
     },
+    update_unrecognized_videos_job: {
+      cron: "0 4 * * *",
+      class: "UpdateUnrecognizedVideosJob"
+    },
     sitemap: {
       cron: "0 0 12 * *",
       class: "Shimmer::SitemapJob"
