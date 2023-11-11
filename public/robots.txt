@@ -2,3 +2,5 @@ User-agent: Googlebot
 Disallow: /videos/*/clips
 Disallow: /videos/*/downvote
 Disallow: /videos/*/upvote
+Disallow: /videos/*/bookmark
+Disallow: /videos/*/watchlist
