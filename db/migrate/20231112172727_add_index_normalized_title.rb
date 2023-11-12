@@ -7,7 +7,7 @@ class AddIndexNormalizedTitle < ActiveRecord::Migration[7.1]
     safety_assured {
       execute "SET statement_timeout = 0"
       add_index :videos, :normalized_title, opclass: :gin_trgm_ops, using: :gin, algorithm: :concurrently
-      execute "SET statement_timeout = 'default'"
+      execute "SET statement_timeout = '60000'"
     }
   end
 
