@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_12_172727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -73,7 +73,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     t.integer "videos_count", default: 0
     t.index ["active"], name: "index_channels_on_active"
     t.index ["videos_count"], name: "index_channels_on_videos_count"
-    t.index ["youtube_slug"], name: "index_channels_on_youtube_slug", unique: true
   end
 
   create_table "clips", force: :cascade do |t|
@@ -138,6 +137,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     t.text "search_text"
     t.text "match_terms", default: [], array: true
     t.string "nickname"
+    t.index ["search_text"], name: "dancers_search_text_gist_idx", opclass: :gist_trgm_ops, using: :gist
     t.index ["slug"], name: "index_dancers_on_slug"
     t.index ["user_id"], name: "index_dancers_on_user_id"
   end
@@ -287,6 +287,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     t.integer "videos_count", default: 0, null: false
     t.integer "songs_count", default: 0, null: false
     t.string "search_term"
+    t.index ["name"], name: "orchestras_name_gist_idx", opclass: :gist_trgm_ops, using: :gist
     t.index ["slug"], name: "index_orchestras_on_slug"
   end
 
@@ -389,6 +390,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     t.index ["active"], name: "index_songs_on_active"
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
     t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
+    t.index ["search_text"], name: "songs_search_text_gist_idx", opclass: :gist_trgm_ops, using: :gist
     t.index ["videos_count"], name: "index_songs_on_videos_count"
   end
 
@@ -418,6 +420,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["patreon_id"], name: "index_users_on_patreon_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["search_text"], name: "users_search_text_gist_idx", opclass: :gist_trgm_ops, using: :gist
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
@@ -454,6 +457,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
+    t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gin_trgm_ops, using: :gin
     t.index ["slug"], name: "index_videos_on_slug", unique: true
     t.index ["song_id"], name: "index_videos_on_song_id"
     t.index ["upload_date"], name: "index_videos_on_upload_date"
@@ -577,6 +581,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     ORDER BY videos.id DESC;
   SQL
   add_index "video_searches", ["search_text"], name: "index_video_searches_on_search_text", opclass: :gin_trgm_ops, using: :gin
-  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
 
 end
