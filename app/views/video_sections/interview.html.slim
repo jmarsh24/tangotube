@@ -3,6 +3,6 @@
     .carousel
       .carousel__header
         = link_to root_path(filtering_params.merge(query: "interview")) do
-        = link_to t(".featured_interviews"), root_path(filtering_params.merge(query: "interview")), class: "button button--icon-chevron-right button--icon-right heading-2"
+        = link_to t(".interview_videos_header"), root_path(filtering_params.merge(query: "interview")), class: "button button--icon-chevron-right button--icon-right heading-2"
       .carousel__videos
         = render @videos

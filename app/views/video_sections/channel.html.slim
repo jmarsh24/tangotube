@@ -1,6 +1,6 @@
 = turbo_frame_tag :channel_videos
   .top-section
-    h2.heading-2.carousel__header = t(".featured_channel")
+    h2.heading-2.carousel__header = t(".channel_videos_header")
     .carousel
       .carousel__header
         = link_to root_path(filtering_params.merge(channel: @channel.youtube_slug)) do

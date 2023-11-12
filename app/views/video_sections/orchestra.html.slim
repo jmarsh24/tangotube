@@ -1,7 +1,7 @@
 = turbo_frame_tag :orchestra_videos
   .top-section
     .carousel__header
-      h2.heading-2 = t(".featured_orchestra")
+      h2.heading-2 = t(".orchestra_videos_header")
     .carousel
       .carousel__header
         = link_to root_path(filtering_params.merge(orchestra: @orchestra.slug)), class: "button button--icon-chevron-right button--icon-right heading-2" do

@@ -1,7 +1,7 @@
 = turbo_frame_tag :event_videos
   .top-section
     .carousel__header
-      h2.heading-2 = t(".featured_event")
+      h2.heading-2 = t(".event_videos_header")
     .carousel
       .carousel__header
         = link_to root_path(filtering_params.merge(event: @event.slug)), class: "button button--icon-chevron-right button--icon-right" do

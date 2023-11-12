@@ -15,16 +15,19 @@ en:
   components:
     cookie_consent:
       accept_all: Accept all
-      banner_description_html: Dear Tango enthusiasts! Our cookies are like subtle
+      banner_description_html:
+        Dear Tango enthusiasts! Our cookies are like subtle
         cues in our dance with you—not for eating, but for perfecting your site experience.
         No stepping on your personal info's toes. Skip this dance if you wish, though
         some twirls may miss the beat. Swing by our %{privacy} for all the details!
       deny: Decline
       essential: Essential cookies
-      essential_description: Allow essential cookies for basic website functions and
+      essential_description:
+        Allow essential cookies for basic website functions and
         proper functioning.
       manage: Change settings
-      manage_description: We use cookies and other analytics technologies to better
+      manage_description:
+        We use cookies and other analytics technologies to better
         understand how you use our website. By anonymously analyzing the movement
         and search behavior of users on our website, we can optimize our website and
         further improve interaction with users.
@@ -32,12 +35,14 @@ en:
       privacy: Privacy statement
       save_preferences: Save preferences
       statistic: Analytics and statistics cookies
-      statistic_description: We use cookies and other analytics technologies to better
+      statistic_description:
+        We use cookies and other analytics technologies to better
         understand how you use our website. By anonymously analyzing the movement
         and search behavior of users on our website, we can optimize our website and
         further improve interaction with users.
       targeting: Targeting
-      targeting_description: Our recommendation tool is based on your individual user
+      targeting_description:
+        Our recommendation tool is based on your individual user
         behavior. We collect and analyze your user data to provide personalized recommendations.
         We use our own software for this service which works without a third-party
         tool.
@@ -76,16 +81,19 @@ en:
       new:
         new_confirmation: New Confirmation
         resend_confirmation_instructions: Resend confirmation instructions
-        resend_confirmation_instructions_button: Resend confirmation instructions
+        resend_confirmation_instructions_button:
+          Resend confirmation instructions
           button
     mailer:
       confirmation_instructions:
         confirm: Confirm
-        confirm_your_account_here: 'You can confirm your account email through the
-          link below:'
+        confirm_your_account_here:
+          "You can confirm your account email through the
+          link below:"
         welcome: Welcome
       email_changed:
-        email_changed: We're contacting you to notify you that your email is being
+        email_changed:
+          We're contacting you to notify you that your email is being
           changed to %{email}.
         greeting: Hello %{email}
       password_change:
@@ -95,7 +103,8 @@ en:
         change_my_password: Change my password
         greeting: Hello %{email}
         if_didnt_request: If didnt request
-        somebody_requested_to_change_your_password: Someone has requested a link to
+        somebody_requested_to_change_your_password:
+          Someone has requested a link to
           change your password. You can do this through the link below.
       unlock_instructions:
         click_link_to_unlock: Click link to unlock
@@ -145,9 +154,11 @@ en:
       not_saved: Bummer! We couldn't save that...let's try that step again.
     not_found:
       meta_title: Missing Tango Step | TangoTube.tv
-      page_does_not_exist: Hmmm... it seems like we missed a step. This page doesn't
+      page_does_not_exist:
+        Hmmm... it seems like we missed a step. This page doesn't
         exist.
-      page_not_found: We couldn't find the page you're looking for. It might have
+      page_not_found:
+        We couldn't find the page you're looking for. It might have
         gone for a quick tango break.
   event_alt: Event alt
   event_info_heading: Event Info
@@ -165,7 +176,7 @@ en:
   number:
     human:
       format:
-        delimiter: ''
+        delimiter: ""
         precision: 2
         short: "%n%u"
       storage_units:
@@ -265,46 +276,47 @@ en:
     show:
       button_text: Become a Patron!
       heading: From dream to reality, it wasn't easy...
-      paragraph1: It's been a long journey to get here. Click below to see how you
+      paragraph1:
+        It's been a long journey to get here. Click below to see how you
         can be a part of that journey!
   time:
     formats:
       video_duration: "%M:%S"
   video_sections:
     alternative:
-      featured_alternative: Featured Alternative
+      alternative_videos_header: Alternative Performances
     channel:
-      featured_channel: Featured Channel
+      channel_videos_header: Featured Channel
       more_channels: More Channels
     dancer:
-      featured_dancer: Featured Dancer
-      more_dancers: More Dancers
+      dancer_videos_header: Featured Dancer
+      more_dancers: More dancers
     dancer_song:
-      featured_song: Featured song
       more_songs: More songs
+      song_videos_header: Featured Song
     event:
-      featured_event: Featured Event
-      more_events: More Events
+      event_videos_header: Featured Event
+      more_events: More events
     interview:
-      featured_interviews: Featured Interviews
+      interview_videos_header: Interviews
     mundial:
-      featured_mundial_de_tango: Mundial de Tango
+      mundial_videos_header: Mundial de Tango
     older:
-      featured_older: Featured Older
+      oldest_videos_header: Oldest videos
     orchestra:
-      featured_orchestra: Featured Orchestra
-      more_orchestras: More Orchestras
+      more_orchestras: More orchestras
+      orchestra_videos_header: Orchestra videos
     performances:
-      performance: Performance
+      featured_performance_header: Featured Performance
     recent:
-      featured_latest: Featured Latest
+      latest_videos_header: Latest videos
     song:
-      featured_song: Featured Song
-      more_songs: More Songs
+      featured_song_header: Featured Song
+      more_songs: More songs
     trending:
-      featured_trending: Featured Trending
+      trending_videos_header: Trending videos
     workshop:
-      featured_workshops: Featured Workshops
+      featured_workshops_header: Workshop & Classes
   video_thumbnail_alt: Video thumbnail for %{video_title}
   videos:
     details:
@@ -319,7 +331,8 @@ en:
       video_details: Video details
       watches_count: watches_count
     index:
-      meta_description: Tangotube.tv is a dedicated tango video platform that enhances
+      meta_description:
+        Tangotube.tv is a dedicated tango video platform that enhances
         your discovery and viewing experience. Our advanced search engine allows you
         to effortlessly find tango videos by title, artist, orchestra, dancer, couple,
         or event. We also provide enriched metadata and song lyrics for a comprehensive
