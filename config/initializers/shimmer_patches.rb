@@ -36,7 +36,7 @@ module Shimmer::FileAdditionsExtensions
         options[:srcset] = "#{source} 1x, #{image_file_path(attachment, width:, height:, quality:)} 2x"
       end
     end
-    super source, options
+    super source, **options
   end
 
   private
