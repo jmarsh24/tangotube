@@ -15,7 +15,7 @@ export default class extends Controller {
 
   shouldShowModal(): boolean {
     const elapsedMinutes = this.getMinutesSinceLastTimestamp();
-    return elapsedMinutes > 30 && !this.isModalOpen();
+    return elapsedMinutes > 1440 && !this.isModalOpen();
   }
 
   getMinutesSinceLastTimestamp(): number {
