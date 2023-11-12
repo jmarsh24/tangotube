@@ -115,7 +115,7 @@ class Video < ApplicationRecord
   scope :music_unrecognized, -> { from_active_channels.where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001, 2004, 3018])) }
   scope :title_match, ->(*phrases) {
                         flattened_phrases = phrases.flatten
-                        where(flattened_phrases.map { "videos.normalized_title <% ?" }.join(" OR "), *flattened_phrases)
+                        where(flattened_phrases.map { "? <% videos.normalized_title" }.join(" OR "), *flattened_phrases)
                       }
 
   before_validation :normalize_title
