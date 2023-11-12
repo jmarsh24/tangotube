@@ -24,7 +24,7 @@ module ExternalVideoImport
       private
 
       def yt_dlp_command(output_template, slug, format: "")
-        "#{ENV["YT_DLP_BIN"]} '#{YT_DLP_COMMAND_PREFIX + slug}' #{format} --force-overwrites -o '#{output_template}'"
+        "#{Config.yt_dlp_bin!} '#{YT_DLP_COMMAND_PREFIX + slug}' #{format} --force-overwrites -o '#{output_template}'"
       end
     end
   end
