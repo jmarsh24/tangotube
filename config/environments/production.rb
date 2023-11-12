@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "active_support/core_ext/integer/time"
+require_relative '../../lib/silent_logger_middleware'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -109,4 +110,7 @@ Rails.application.configure do
   end
 
   config.active_record.async_query_executor = :global_thread_pool
+
+  config.log_tags = [ :request_id ]
+  config.middleware.swap(Rails::Rack::Logger, SilentLoggerMiddleware, config.log_tags)
 end
