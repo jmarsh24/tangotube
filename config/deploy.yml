@@ -10,7 +10,7 @@ servers:
   worker:
     hosts:
       - 159.69.149.32
-    cmd: bundle exec good_job start --queues="update:3;*"
+    cmd: bundle exec good_job start
 registry:
   server: ghcr.io
   username:
