@@ -26,7 +26,7 @@ class Dancer < ApplicationRecord
   has_many :songs, through: :videos
   has_many :recent_searches, as: :searchable, dependent: :destroy
 
-  has_many :couples, dependent: :destroy
+  has_many :couples, dependent: :destroy, touch: true
   has_many :couple_videos, through: :couples
   has_many :partners, through: :couples
   has_many :performances, through: :videos
@@ -48,7 +48,7 @@ class Dancer < ApplicationRecord
                    where_conditions = terms.map { "? <% search_text" }.join(" OR ")
 
                    order_sql = <<-SQL
-    0.5 * (1 - ("dancers"."search_text" <-> '#{normalized_term}')) + 
+    0.5 * (1 - ("dancers"."search_text" <-> '#{normalized_term}')) +
     0.5 * (videos_count::float / #{max_videos_count}) DESC
                    SQL
 
