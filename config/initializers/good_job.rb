@@ -7,7 +7,7 @@ Rails.application.configure do
   config.good_job.execution_mode = :external
   config.good_job.queues = {
     update: 5,
-    "*": 15
+    "*": 5
   }
   config.good_job.max_threads = ENV.fetch("WORKER_MAX_THREADS", 3)
   config.good_job.poll_interval = 5 # seconds
