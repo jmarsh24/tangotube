@@ -2,12 +2,13 @@
   h3.heading-3 = t(".recent_searches")
   - @recent_searches.each do |recent_search|
     - record = recent_search.searchable
+    - next unless record.present?
     - case recent_search.searchable_type
     - when "Event"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to root_path(event: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.profile_image.attached?
-            = image_tag record.profile_image, width: 80, alt: t(".event_thumbnail_alt", event_title: record.title), class: "search-result__image-circle fade-in"
+            = image_tag record.profile_image, width: 80, alt: t(".event_thumbnail_alt", event_name: record.title), class: "search-result__image-circle fade-in"
           - else
             = image_tag "default_avatar.jpg", width: 80, alt: t(".default_event_thumbnail_alt"), class: "search-result__image-circle fade-in"
           .stach-result__details
