@@ -37,6 +37,7 @@ class Dancer < ApplicationRecord
 
   after_validation :set_slug, only: [:create, :update]
   before_save :update_search_text
+  after_save { couples.touch_all }
 
   scope :reviewed, -> { where(reviewed: true) }
   scope :unreviewed, -> { where(reviewed: false) }
