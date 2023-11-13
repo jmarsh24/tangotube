@@ -27,7 +27,7 @@
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
         = link_to root_path(orchestra: record.slug), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.profile_image.attached?
-            = image_tag record.profile_image, width: 80, alt: t(".orchestra_thumbnail_alt", orchestra_title: record.title),  class: "search-result__image-circle fade-in"
+            = image_tag record.profile_image, width: 80, alt: t(".orchestra_thumbnail_alt", orchestra_name: record.name),  class: "search-result__image-circle fade-in"
           - else
             = image_tag "default_avatar.jpg", width: 80, alt: t(".default_orchestra_thumbnail_alt"), class: "search-result__image-circle fade-in"
           .stach-result__details
@@ -37,7 +37,7 @@
           .icon.icon--close.icon--md
     - when "Channel"
       .stack.stack--line.stack--justify-space-between id=dom_id(recent_search)
-        = link_to root_path(channel: record.youtube_slug), alt: t(".channel_thumbnail_alt", channel_title: channel.title), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
+        = link_to root_path(channel: record.youtube_slug), alt: t(".channel_thumbnail_alt", channel_title: record.title), class: "search-result", data: { controller: "recent-search", action: "click->recent-search#handleClick" } do
           - if record.thumbnail.present?
             = image_tag record.thumbnail, width: 80, alt: t(".channel_thumbnail_alt"), class: "search-result__image-circle fade-in"
           - else
