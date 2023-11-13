@@ -22,11 +22,6 @@ env:
     DB_HOST: 128.140.105.113
     HOST: tangotube.tv
     YT_DLP_BIN: /opt/venv/bin/yt-dlp
-    # RAILS_MAX_THREADS: <%= ENV['RAILS_MAX_THREADS']
-    # WEB_CONCURRENCY: <%= ENV['WEB_CONCURRENCY']
-    # DB_POOL: <%= ENV['DB_POOL']
-    # WORKER_MAX_THREADS: <%= ENV['WORKER_MAX_THREADS']
-    # STATEMENT_TIMEOUT: STATEMENT_TIMEOUT
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -35,6 +30,7 @@ env:
     - DB_POOL
     - WORKER_MAX_THREADS
     - STATEMENT_TIMEOUT
+    - GOOD_JOB_QUEUES
 
 builder:
   multiarch: false
