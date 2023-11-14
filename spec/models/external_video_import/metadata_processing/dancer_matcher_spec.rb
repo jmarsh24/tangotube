@@ -64,5 +64,11 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::DancerMatcher do
         expect(dancer_matcher.match(video_title:).map(&:name)).to match_array(["Pablo Rodriguez", "Majo Martirena"])
       end
     end
+
+    it "matches michael nadtochi" do
+      Dancer.create!(name: "Michael Nadtochi", match_terms: ["micheal nadtochi"])
+      video_title = 'Corazón de Oro (Francisco Canaro) - Micheal "El Gato" Nadtochi & Elvira Lambo'
+      expect(dancer_matcher.match(video_title:).map(&:name)).to match_array(["Michael Nadtochi"])
+    end
   end
 end

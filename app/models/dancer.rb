@@ -38,6 +38,7 @@ class Dancer < ApplicationRecord
   normalizes :match_terms, with: ->(match_terms) {
                                    match_terms.map { _1.strip.downcase }
                                  }
+  normalizes :name, with: ->(name) { name.strip }
 
   after_validation :set_slug, only: [:create, :update]
   before_save :update_search_text
@@ -63,19 +64,22 @@ class Dancer < ApplicationRecord
                  }
 
   scope :most_popular, -> { order(videos_count: :desc) }
-
-  class << self
-    def normalize(*strings)
-      combined_string = strings.join(" ")
-      I18n.transliterate(combined_string)
-        .downcase
-        .strip
-        .gsub(/\s+/, " ")
-    end
-  end
+  scope :match_by_name, ->(text:, threshold: 0.75) {
+                          where("word_similarity(name, :text) > :threshold", text:, threshold:)
+                        }
+  scope :match_by_terms, ->(text:, threshold: 0.75) {
+    where("EXISTS (
+      SELECT 1
+      FROM unnest(match_terms) as term
+      WHERE word_similarity(term, :text) > :threshold
+    )", text:, threshold: 0.75)
+  }
 
   def update_search_text
-    self.search_text = Dancer.normalize(name, nickname)
+    self.search_text = I18n.transliterate([name, nickname].join(" "))
+      .downcase
+      .strip
+      .gsub(/\s+/, " ")
   end
 
   def update_video_matches

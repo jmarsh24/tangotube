@@ -3,11 +3,10 @@
 module ExternalVideoImport
   module MetadataProcessing
     class DancerMatcher
-      MATCH_THRESHOLD = 0.75
-
       def match(video_title:)
-        normalized_title = TextNormalizer.normalize(video_title)
-        matching_dancers = dancers_matched_by_name(normalized_title).or(dancers_matched_by_terms(normalized_title))
+        normalized_title = TextNormalizer.normalize(remove_nicknames(video_title))
+
+        matching_dancers = Dancer.match_by_name(text: normalized_title).or(Dancer.match_by_terms(text: normalized_title))
 
         if matching_dancers.any?
           Rails.logger.debug "Matched dancers:"
@@ -21,16 +20,8 @@ module ExternalVideoImport
 
       private
 
-      def dancers_matched_by_name(normalized_title)
-        Dancer.where("word_similarity(name, ?) > ?", normalized_title, MATCH_THRESHOLD)
-      end
-
-      def dancers_matched_by_terms(normalized_title)
-        Dancer.where("EXISTS (
-          SELECT 1
-          FROM unnest(match_terms) as term
-          WHERE word_similarity(term, ?) > ?
-        )", normalized_title, MATCH_THRESHOLD)
+      def remove_nicknames(video_title)
+        video_title.gsub(/["'].*?["']/, "")
       end
     end
   end
