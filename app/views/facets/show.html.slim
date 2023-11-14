@@ -1,4 +1,4 @@
-- cache [@facet.name, filtering_params] do
+- cache [@facet.name, filtering_params], expires_in: 24.hours do
   = turbo_frame_tag "#{@facet.name}_facet", class: "facet"
     .modal__header
       h3.modal__title = @facet.name.titleize
