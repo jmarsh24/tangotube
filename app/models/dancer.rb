@@ -77,7 +77,7 @@ class Dancer < ApplicationRecord
   def update_video_matches
     search_terms = [TextNormalizer.normalize(name)]
     search_terms.concat(match_terms.map { |term| TextNormalizer.normalize(term) }) if match_terms.present?
-    matching_videos = Video.fuzzy_titles(search_terms)
+    matching_videos = Video.title_match(search_terms)
 
     matching_videos.find_each do |video|
       role = (gender == "male") ? "leader" : "follower"

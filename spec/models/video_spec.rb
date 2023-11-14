@@ -257,19 +257,6 @@ RSpec.describe Video do
     end
   end
 
-  describe ".fuzzy_titles" do
-    it "returns videos that match the search term" do
-      video = Video.create!(
-        youtube_id: "123",
-        title: "Pablo Rodriguez & Corina Herrera - La Vi Llegar - Miguel Calo - MSTF 2016",
-        channel: channels(:"030tango")
-      )
-      results = Video.fuzzy_titles("Miguel Calvo")
-
-      expect(results).not_to include(video)
-    end
-  end
-
   describe ".music_recognized" do
     context "when video has acr_response code of 1001" do
       it "does not include the video" do

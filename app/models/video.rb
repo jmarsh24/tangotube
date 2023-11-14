@@ -105,18 +105,18 @@ class Video < ApplicationRecord
   scope :trending_4, -> { joins(:video_score).order("video_score.score_4 DESC") }
   scope :trending_5, -> { joins(:video_score).order("video_score.score_5 DESC") }
   scope :trending_6, -> { joins(:video_score).order("video_score.score_6 DESC") }
-  scope :fuzzy_titles, ->(terms) do
-                         terms = [terms] unless terms.is_a?(Array)
-                         query = terms.map { |term| sanitize_sql(["word_similarity(?, normalized_title) > 0.95", term]) }.join(" OR ")
-                         where(query)
-                       end
   scope :from_active_channels, -> { joins(:channel).where("channel.active" => true) }
   scope :music_recognized, -> { from_active_channels.where(acr_response_code: 0) }
   scope :music_unrecognized, -> { from_active_channels.where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001, 2004, 3018])) }
-  scope :title_match, ->(*phrases) {
-                        flattened_phrases = phrases.flatten
-                        where(flattened_phrases.map { "? <% videos.normalized_title" }.join(" OR "), *flattened_phrases)
-                      }
+  scope :title_match, ->(terms) do
+                        terms = [terms] unless terms.is_a?(Array)
+                        query = terms.map { |term| sanitize_sql(["normalized_title LIKE ?", I18n.transliterate(term).downcase]) }.join(" OR ")
+                        where(query)
+                      end
+  scope :fuzzy_title_match, ->(*phrases) {
+                              flattened_phrases = phrases.flatten
+                              where(flattened_phrases.map { "? <% videos.normalized_title" }.join(" OR "), *flattened_phrases)
+                            }
 
   before_validation :normalize_title
 
