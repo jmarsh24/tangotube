@@ -24,6 +24,7 @@ module ExternalVideoImport
           thumbnail_url: channel_metadata.thumbnail_url
         )
         attach_avatar_thumbnail(channel, channel_metadata.thumbnail_url)
+        channel.sync_videos(use_music_recognizer: true)
         channel
       end
 
