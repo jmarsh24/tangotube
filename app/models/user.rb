@@ -44,6 +44,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates_confirmation_of :password
 
+  normalizes :email, with: ->(email) { email.downcase.strip }
+
   devise :confirmable,
     :database_authenticatable,
     :registerable,

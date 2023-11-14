@@ -35,6 +35,10 @@ class Dancer < ApplicationRecord
   has_one_attached :cover_image
   enum gender: {male: "male", female: "female"}
 
+  normalizes :match_terms, with: ->(match_terms) {
+                                   match_terms.map { _1.strip.downcase }
+                                 }
+
   after_validation :set_slug, only: [:create, :update]
   before_save :update_search_text
   after_save { couples.touch_all }
