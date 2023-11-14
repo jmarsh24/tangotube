@@ -30,7 +30,6 @@ env:
     - DB_POOL
     - WORKER_MAX_THREADS
     - STATEMENT_TIMEOUT
-    - GOOD_JOB_QUEUES
 
 builder:
   multiarch: false
