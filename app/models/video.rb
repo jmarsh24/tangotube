@@ -110,7 +110,7 @@ class Video < ApplicationRecord
   scope :music_unrecognized, -> { from_active_channels.where(acr_response_code: [nil]).or(where.not(acr_response_code: [0, 1001, 2004, 3018])) }
   scope :title_match, ->(terms) do
                         terms = Array(terms).map { |term| I18n.transliterate(term).downcase }
-                        where(terms.map { |term| "normalized_title LIKE ?" }.join(" OR "), *terms.map { |term| "%#{term}%" })
+                        where(terms.map { |term| "normalized_title LIKE ?" }.join(" AND "), *terms.map { |term| "%#{term}%" })
                       end
   scope :fuzzy_title_match, ->(*phrases) {
                               flattened_phrases = phrases.flatten
