@@ -36,12 +36,13 @@ class Dancer < ApplicationRecord
   enum gender: {male: "male", female: "female"}
 
   normalizes :match_terms, with: ->(match_terms) {
-                                   match_terms.map { _1.strip.downcase }
+                                   match_terms.map { I18n.transliterate(_1).strip.downcase }
                                  }
   normalizes :name, with: ->(name) { name.strip }
 
   after_validation :set_slug, only: [:create, :update]
   before_save :update_search_text
+  before_validation :update_normalized_name
   after_save { couples.touch_all }
 
   scope :reviewed, -> { where(reviewed: true) }
@@ -65,7 +66,7 @@ class Dancer < ApplicationRecord
 
   scope :most_popular, -> { order(videos_count: :desc) }
   scope :match_by_name, ->(text:, threshold: 0.75) {
-                          where("word_similarity(name, :text) > :threshold", text:, threshold:)
+                          where("word_similarity(normalized_name, :text) > :threshold", text:, threshold:)
                         }
   scope :match_by_terms, ->(text:, threshold: 0.75) {
     where("EXISTS (
@@ -95,6 +96,10 @@ class Dancer < ApplicationRecord
 
   def to_param
     "#{id}-#{slug}"
+  end
+
+  def update_normalized_name
+    self.normalized_name = I18n.transliterate(name).downcase.strip
   end
 
   private

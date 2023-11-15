@@ -22,6 +22,7 @@ unreviewed_dancer:
   reviewed: false
   gender: "male"
   slug: "john-doe"
+  normalized_name: "john doe"
 
 carlitos:
   name: "Carlitos Espinoza"
@@ -29,68 +30,80 @@ carlitos:
   reviewed: true
   gender: "male"
   slug: "carlitos-espinoza"
+  normalized_name: "carlitos espinoza"
 
 noelia:
   name: "Noelia Hurtado"
   reviewed: true
   gender: "female"
   slug: "noelia-hurtado"
+  normalized_name: "noelia hurtado"
 
 jonathan:
   name: "Jonathan Saavedra"
   reviewed: true
   gender: "male"
   slug: "jonathan-saavedra"
+  normalized_name: "jonathan saavedra"
 
 clarisa:
   name: "Clarisa Aragon"
   reviewed: true
   gender: "female"
   slug: "clarisa-aragon"
+  normalized_name: "clarisa aragon"
 
 gianpiero:
   name: "Gianpiero Ya Galdi"
   reviewed: true
   gender: "male"
   slug: "gianpiero-ya-galdi"
+  normalized_name: "gianpiero ya galdi"
 
 lorena:
   name: "Lorena Tarrantino"
   reviewed: true
   gender: "female"
   slug: "lorena-tarrantino"
+  normalized_name: "lorena tarrantino"
 
 corina:
   name: "Corina Herrera"
   gender: "female"
   slug: "corina-herrera"
   reviewed: true
+  normalized_name: "corina herrera"
 
 inez:
   name: "Ines Muzzopapa"
   gender: "female"
   slug: "ines-muzzopapa"
   reviewed: true
+  normalized_name: "ines muzzopapa"
 
 octavio:
   name: "Octavio Fernandez"
   gender: "male"
   slug: "octavio-fernandez"
   reviewed: true
+  normalized_name: "octavio fernandez"
 
 facundo:
   name: "Facundo Pinero"
   gender: "male"
   reviewed: true
   slug: "facundo-pinero"
+  normalized_name: "facundo pinero"
 
 vanessa:
   name: "Vanessa Villalba"
   reviewed: true
   slug: "vanessa-villalba"
+  normalized_name: "vanessa villalba"
 
 facundo_gil:
   name: "Facundo Gil"
   gender: "male"
   reviewed: "true"
   slug: "facundo-gil"
+  normalized_name: "facundo gil"

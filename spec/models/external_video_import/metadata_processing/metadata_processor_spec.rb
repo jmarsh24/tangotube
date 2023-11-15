@@ -22,7 +22,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
   end
   let(:channel_metadata) do
     ExternalVideoImport::Youtube::ChannelMetadata.new(
-      id: "test_channel_slug",
+      id: "UCvnY4F-CJVgYdQuIv8sqp-A",
       title: "Test Channel Title",
       thumbnail_url: "https://i.ytimg.com/vi/test_channel_slug/hqdefault.jpg"
     )
@@ -38,7 +38,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
   end
   let(:youtube_metadata) do
     ExternalVideoImport::Youtube::VideoMetadata.new(
-      slug: "123456",
+      slug: "AQ9Ri3kWa_4",
       title: "carlitos espinoza and noelia hurtado",
       description: "Test Video Description",
       upload_date: "2022-01-01".to_date,
@@ -70,7 +70,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::MetadataProcessor do
     it "processes the metadata and returns the video attributes" do
       attributes = metadata_processor.process(metadata)
 
-      expect(attributes[:youtube_id]).to eq("123456")
+      expect(attributes[:youtube_id]).to eq("AQ9Ri3kWa_4")
       expect(attributes[:upload_date]).to eq("2022-01-01".to_date)
       expect(attributes[:upload_date_year]).to eq(2022)
       expect(attributes[:song].title).to eq("Test Song Title")

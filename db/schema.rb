@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_15_170255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -138,6 +138,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     t.text "search_text"
     t.text "match_terms", default: [], array: true
     t.string "nickname"
+    t.string "normalized_name"
     t.index ["search_text"], name: "dancers_search_text_gist_idx", opclass: :gist_trgm_ops, using: :gist
     t.index ["slug"], name: "index_dancers_on_slug"
     t.index ["user_id"], name: "index_dancers_on_user_id"
@@ -458,6 +459,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["hd"], name: "index_videos_on_hd"
     t.index ["hidden"], name: "index_videos_on_hidden"
+    t.index ["normalized_title"], name: "index_videos_on_normalized_title", opclass: :gin_trgm_ops, using: :gin
     t.index ["slug"], name: "index_videos_on_slug", unique: true
     t.index ["song_id"], name: "index_videos_on_song_id"
     t.index ["upload_date"], name: "index_videos_on_upload_date"
@@ -581,5 +583,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202228) do
     ORDER BY videos.id DESC;
   SQL
   add_index "video_searches", ["search_text"], name: "index_video_searches_on_search_text", opclass: :gin_trgm_ops, using: :gin
+  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
 
 end

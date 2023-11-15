@@ -22,7 +22,6 @@ class Channel < ApplicationRecord
   include Importable
 
   attribute :metadata, ChannelMetadata.to_type
-  strip_attributes only: :youtube_slug
 
   has_many :videos, dependent: :destroy
   has_many :performance_videos, through: :videos
@@ -36,9 +35,11 @@ class Channel < ApplicationRecord
   has_one_attached :thumbnail, dependent: :destroy
 
   validates :youtube_slug, presence: true, uniqueness: true
+  normalizes :youtube_slug, with: -> { _1.strip }
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
+  scope :most_popular, -> { order(videos_count: :desc) }
   scope :search, ->(search_term) {
                    max_videos_count = Channel.maximum(:videos_count).to_f
 
@@ -53,7 +54,6 @@ class Channel < ApplicationRecord
                      .where(where_conditions, *terms)
                      .order(Arel.sql(order_sql))
                  }
-  scope :most_popular, -> { order(videos_count: :desc) }
 
   def sync_videos(use_scraper: false, use_music_recognizer: false)
     fetch_and_save_metadata!

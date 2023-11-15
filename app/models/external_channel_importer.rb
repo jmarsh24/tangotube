@@ -5,7 +5,7 @@ class ExternalChannelImporter
     Rails.logger.info("Starting import for channel: #{slug}")
 
     channel_metadata = fetch_metadata(slug)
-    Channel.create!(
+    channel = Channel.create!(
       title: channel_metadata.title,
       youtube_slug: channel_metadata.id,
       description: channel_metadata.description,
@@ -13,13 +13,15 @@ class ExternalChannelImporter
       metadata: channel_metadata,
       metadata_updated_at: Time.current
     )
-  rescue => e
-    Rails.logger.info("Error while processing channel with slug: #{slug}. Error: #{e.message}")
-    raise e
+    ThumbnailAttacher.new.attach_thumbnail(channel, channel_metadata.thumbnail_url)
+
+    channel.sync_videos(use_music_recognizer: true)
+
+    channel
   end
 
   def fetch_metadata(slug)
-    youtube_channel = Yt::Channel.new(id: slug.strip)
+    youtube_channel = Yt::Channel.new(id: slug)
 
     ChannelMetadata.new(
       id: youtube_channel.id,
@@ -35,9 +37,6 @@ class ExternalChannelImporter
       subscriber_count: youtube_channel.subscriber_count,
       privacy_status: youtube_channel.privacy_status
     )
-  rescue => e
-    Rails.logger.info("Error while processing channel with slug: #{slug}. Error: #{e.message}")
-    raise e
   end
 
   private

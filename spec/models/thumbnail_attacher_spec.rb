@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe ExternalVideoImport::MetadataProcessing::ThumbnailAttacher do
+RSpec.describe ThumbnailAttacher do
   let(:object) { double("Object", thumbnail: double("Thumbnail")) }
   let(:thumbnail_url) { "https://example.com/thumbnail.jpg" }
 
