@@ -67,8 +67,7 @@ class Channel < ApplicationRecord
     end
 
     removed_video_ids = videos.map(&:youtube_id) - metadata.video_ids
-    removed_videos = videos.where(youtube_id: removed_video_ids)
-    removed_videos.destroy_all
+    videos.where(youtube_id: removed_video_ids).destroy_all
     true
   end
 
