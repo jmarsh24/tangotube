@@ -31,7 +31,7 @@ module ExternalVideoImport
       private
 
       def combined_match(video_title:, video_description:, video_tags: [], song_titles: [], song_artists: [])
-        song_attributes = Song.active.most_popular.pluck(:id, :artist, :title)
+        song_attributes = Song.active.by_orchestra_and_popularity.pluck(:id, :artist, :title)
 
         # First, prioritize song_titles and song_artists matches
         prioritized_texts = [song_titles, song_artists].flatten.join(" ")
