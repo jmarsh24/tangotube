@@ -33,6 +33,13 @@ require "rails_helper"
 RSpec.describe Song do
   fixtures :all
 
+  describe ".by_orchestra_and_popularity" do
+    it "returns songs ordered by orchestra and popularity" do
+      song_without_orchestra = Song.create!(title: "Song Without Orchestra", artist: "Artist")
+      expect(Song.by_orchestra_and_popularity.last).to eq(song_without_orchestra)
+    end
+  end
+
   describe "#full_title" do
     it "returns correct title when all attributes are present" do
       song = songs(:nueve_de_julio)

@@ -47,12 +47,22 @@ class Song < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
+  scope :by_orchestra_and_popularity, -> {
+    left_joins(:orchestra)
+      .order Arel.sql <<~SQL
+          CASE
+            WHEN orchestras.id IS NOT NULL THEN 0
+            ELSE 1
+          END ASC,
+        songs.videos_count DESC
+      SQL
+  }
   scope :search, ->(search_term) {
                    normalized_term = normalize(search_term)
 
                    order_sql = <<-SQL
-    0.5 * (1 - ("songs"."search_text" <-> #{ActiveRecord::Base.connection.quote(normalized_term)})) + 
-    0.5 * (videos_count::float / (SELECT MAX(videos_count) FROM songs)) DESC
+                                              0.5 * (1 - ("songs"."search_text" <-> #{ActiveRecord::Base.connection.quote(normalized_term)})) +
+                                              0.5 * (videos_count::float / (SELECT MAX(videos_count) FROM songs)) DESC
                    SQL
 
                    Song
