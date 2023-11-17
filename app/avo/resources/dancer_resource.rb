@@ -14,6 +14,7 @@ class DancerResource < Avo::BaseResource
   field :name, as: :text
   field :nickname, as: :text
   field :match_terms, as: :tags
+  field :use_trigram, as: :boolean
   field :bio, as: :textarea, only_on: [:edit, :new, :show]
   field :slug, as: :text, read_only: true, only_on: [:index, :show]
   field :gender, as: :select, enum: ::Dancer.genders

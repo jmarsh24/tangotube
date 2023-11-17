@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_15_170255) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_17_165822) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -139,6 +139,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_15_170255) do
     t.text "match_terms", default: [], array: true
     t.string "nickname"
     t.string "normalized_name"
+    t.boolean "use_trigram", default: true, null: false
     t.index ["search_text"], name: "dancers_search_text_gist_idx", opclass: :gist_trgm_ops, using: :gist
     t.index ["slug"], name: "index_dancers_on_slug"
     t.index ["user_id"], name: "index_dancers_on_user_id"

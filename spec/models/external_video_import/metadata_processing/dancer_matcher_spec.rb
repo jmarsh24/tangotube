@@ -57,7 +57,7 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::DancerMatcher do
 
     context "matching dancers with 'majo' and 'pablo' in the title" do
       it "returns the matched dancers" do
-        Dancer.create!(name: "Pablo Martin")
+        Dancer.create!(name: "Pablo Martin", use_trigram: false)
         Dancer.create!(name: "Majo Martirena")
         Dancer.create!(name: "Pablo Rodriguez")
         video_title = "Pablo Rodriguez y Majo Martirena, 2-5 (Almaty, Kazakhstan)"

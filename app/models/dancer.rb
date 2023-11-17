@@ -41,7 +41,7 @@ class Dancer < ApplicationRecord
   normalizes :name, with: ->(name) { name.strip }
 
   after_validation :set_slug, only: [:create, :update]
-  before_save :update_search_text
+  before_validation :update_search_text
   before_validation :update_normalized_name
   after_save { couples.touch_all }
 
@@ -65,8 +65,8 @@ class Dancer < ApplicationRecord
                  }
 
   scope :most_popular, -> { order(videos_count: :desc) }
-  scope :match_by_name, ->(text:, threshold: 0.75) {
-                          where("word_similarity(normalized_name, :text) > :threshold", text:, threshold:)
+  scope :match_by_name, ->(text) {
+                          where("position(normalized_name in :text)>0", text:)
                         }
   scope :match_by_terms, ->(text:, threshold: 0.75) {
     where("EXISTS (
