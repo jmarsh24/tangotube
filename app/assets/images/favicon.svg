@@ -1,4 +1,22 @@
-<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0.1" y="0.1" width="20" height="24"/>
-  <path d="M3.9,0v3.8h6.2v15h3.8v-15h6.2V0H3.9z" fill="#000000"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 501 501">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        opacity: .9;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x=".5" y=".5" width="500" height="500" rx="250" ry="250"/>
+  <polygon class="cls-2" points="133.32 193.19 288.6 385.14 316.38 138.53 133.32 193.19"/>
+  <circle class="cls-2" cx="212.7" cy="130.27" r="21.3"/>
+  <circle class="cls-2" cx="275.39" cy="112.45" r="20.93"/>
+  <polygon class="cls-2" points="257.48 156.12 166.58 385.14 353.43 385.14 257.48 156.12"/>
 </svg>
