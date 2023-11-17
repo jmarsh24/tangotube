@@ -248,13 +248,22 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::SongMatcher do
         expect(song_matcher.match(video_title:, video_description:)).not_to eq(el_chamuyo)
       end
 
-      xit "matches a song with orchestra over any other song" do
+      it "matches a song with orchestra over any other song" do
         Song.create!(title: "Tango Argentino", artist: "Roberto Calo")
         me_quede_mirandola = Song.create!(title: "Me Quede Mirandola", artist: "Roberto Goyeneche")
         video_title = "Gavito Tango Festival, Noelia Hurtado y Facundo de la Cruz | Me Quede Mirandola by Roberto Goyeneche"
         video_description = "Dancers: Noelia Hurtado y Facundo de la Cruz Music: Me Quedé Mirandola by Roberto Goyeneche Event: Gavito Tango Festival 2023, Los Angeles, at Biltmore hotel Los Angeles If you like the contents, please subscribe to support the channel! #argentinetango #tango #アルゼンチンタンゴ #タンゴ #아르헨티나탱고 #탱고 #tangoargentino #noeliayfacundo"
         video_tags = ["Noelia Hurtado", "Facundo de la Cruz", "Noelia y Facundo tango", "Noelia y Facundo", "carlitos y noelia", "Noelia stage", "Noelia Hurtado y Facundo de la Cruz", "tango", "tango argentino", "argentine tango", "gavito tango", "gavito tango festival", "tango performance", "argentine tango performance", "アルゼンチンタンゴ", "タンゴ", "社交ダンス", "아르헨티나탱고", "탱고"]
+
         expect(song_matcher.match(video_title:, video_description:, video_tags:)).to eq(me_quede_mirandola)
+      end
+
+      xit "matches Cuando tú no estás" do
+        cuestion_de_ganas = Song.create!(title: "Cuestión De Ganas", artist: "Rubén Juárez")
+        video_title = "Natacha Lockwood & Andrés Molina - ”Cuando tú no estás” (4/5)"
+        video_description = "Natacha Lockwood & Andrés Molina dancing ”Cuando tú no estás” by Rubén Juárez@GANAS de TANGO: a weekend with Natacha & Andrés. Bucharest, 3-5 nov 2023."
+
+        expect(song_matcher.match(video_title:, video_description:)).not_to eq(cuestion_de_ganas)
       end
     end
   end

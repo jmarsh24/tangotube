@@ -351,4 +351,59 @@ RSpec.describe Video do
       expect(video.reload.normalized_title).to eq("noelia hurtado carlitos espinoza amsterdam 2014 1")
     end
   end
+
+  describe "#music_recognized?" do
+    it "returns true when acr_response_code is 0" do
+      video = videos(:video_1_featured)
+      video.update!(acr_response_code: 0)
+
+      expect(video.music_recognized?).to be(true)
+    end
+
+    it "returns false when acr_response_code is 1001" do
+      video = videos(:video_1_featured)
+      video.update!(acr_response_code: 1001)
+
+      expect(video.music_recognized?).to be(false)
+    end
+  end
+
+  describe "#music_unrecognized?" do
+    it "returns true when acr_response_code is nil" do
+      video = videos(:video_1_featured)
+      video.update!(acr_response_code: nil)
+
+      expect(video.music_unrecognized?).to be(true)
+    end
+
+    it "returns true when acr_response_code is 3003" do
+      video = videos(:video_1_featured)
+      video.update!(acr_response_code: 3003)
+
+      expect(video.music_unrecognized?).to be(true)
+    end
+  end
+
+  describe "#music_scanned?" do
+    it "returns true when acr_response_code is 0" do
+      video = videos(:video_1_featured)
+      video.update!(acr_response_code: 0)
+
+      expect(video.music_scanned?).to be(true)
+    end
+
+    it "returns true when acr_response_code is 1001" do
+      video = videos(:video_1_featured)
+      video.update!(acr_response_code: 1001)
+
+      expect(video.music_scanned?).to be(true)
+    end
+
+    it "returns false when acr_response_code is nil" do
+      video = videos(:video_1_featured)
+      video.update!(acr_response_code: nil)
+
+      expect(video.music_scanned?).to be(false)
+    end
+  end
 end

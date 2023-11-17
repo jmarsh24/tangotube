@@ -78,5 +78,16 @@ RSpec.describe ExternalVideoImport::MetadataProcessing::DancerMatcher do
 
       expect(dancer_matcher.match(video_title:)).to match_array([michael_nadotchi])
     end
+
+    xit "doesn't match gavito" do
+      video_title = "Marcela Duran & Carlos Barrionuevo at Gavito Tango Festival 1/3"
+      marcela_duran = Dancer.create!(name: "Marcela Duran")
+      carlos_barrionuevo = Dancer.create!(name: "Carlos Barrionuevo")
+      carlos_gavito = Dancer.create!(name: "Carlos Gavito")
+      matched_dancers = dancer_matcher.match(video_title:)
+
+      expect(matched_dancers).to eq([marcela_duran, carlos_barrionuevo])
+      expect(matched_dancers).not_to include(carlos_gavito)
+    end
   end
 end

@@ -142,6 +142,18 @@ class Video < ApplicationRecord
     end
   end
 
+  def music_scanned?
+    acr_response_code == 0 || acr_response_code == 1001
+  end
+
+  def music_recognized?
+    acr_response_code == 0
+  end
+
+  def music_unrecognized?
+    acr_response_code.nil? || !music_recognized?
+  end
+
   def to_param
     youtube_id || id
   end
