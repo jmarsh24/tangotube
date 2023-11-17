@@ -3,7 +3,7 @@
 module ExternalVideoImport
   module MetadataProcessing
     class SongMatcher
-      MATCH_THRESHOLD = 0.8
+      MATCH_THRESHOLD = 0.80
 
       def match(video_title:, video_description:, video_tags: [], song_titles: [], song_albums: [], song_artists: [])
         potential_matches = combined_match(
@@ -31,16 +31,17 @@ module ExternalVideoImport
       private
 
       def combined_match(video_title:, video_description:, video_tags: [], song_titles: [], song_artists: [])
-        song_attributes = Song.active.by_orchestra_and_popularity.pluck(:id, :artist, :title)
+        song_attributes_with_orchestra = Song.has_orchestra.active.pluck(:id, :artist, :title)
+        all_texts = [video_title, video_description, video_tags, song_titles, song_artists].flatten.join(" ")
 
-        # First, prioritize song_titles and song_artists matches
-        prioritized_texts = [song_titles, song_artists].flatten.join(" ")
-        prioritized_matches = find_matches_for_text(prioritized_texts, song_attributes)
-        return prioritized_matches unless prioritized_matches.empty?
+        # First, attempt to match with songs that have an orchestra
+        matches_with_orchestra = find_matches_for_text(all_texts, song_attributes_with_orchestra)
 
-        # If no prioritized matches found, then search other fields
-        other_texts = [video_title, video_description, video_tags].flatten.join(" ")
-        find_matches_for_text(other_texts, song_attributes)
+        return matches_with_orchestra unless matches_with_orchestra.empty?
+
+        # If no matches found with orchestra, then search without orchestra
+        song_attributes_without_orchestra = Song.without_orchestra.active.pluck(:id, :artist, :title)
+        find_matches_for_text(all_texts, song_attributes_without_orchestra)
       end
 
       def find_matches_for_text(text, song_attributes)

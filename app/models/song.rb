@@ -42,11 +42,11 @@ class Song < ApplicationRecord
   before_save :update_search_text
   after_validation :set_slug, only: [:create, :update]
 
-  scope :sort_by_popularity, -> { order(popularity: :desc) }
-  scope :popularity, -> { where.not(popularity: nil) }
   scope :active, -> { where(active: true) }
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
+  scope :has_orchestra, -> { where.not(orchestra_id: nil) }
+  scope :without_orchestra, -> { where(orchestra_id: nil) }
   scope :by_orchestra_and_popularity, -> {
     left_joins(:orchestra)
       .order Arel.sql <<~SQL
