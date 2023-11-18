@@ -34,7 +34,7 @@ module ExternalVideoImport
         metadata.youtube.recommended_video_ids = video.metadata&.youtube&.recommended_video_ids.presence
       end
 
-      if use_music_recognizer == true
+      if !use_music_recognizer
         metadata.music = video.metadata&.music&.attributes.presence
       end
 
