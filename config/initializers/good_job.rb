@@ -36,10 +36,11 @@ Rails.application.configure do
     refresh_video_scores_scores: {
       cron: "*/30 * * * *", # every 10 minutes
       class: "RefreshVideoScoresJob"
-    },
-    refresh_query_stats: {
-      cron: "*/5 * * * *", # every 5 minutes
-      class: "CaptureQueryStatsJob"
     }
+    # TODO: re-enable this when we can update the postgres config
+    # refresh_query_stats: {
+    #   cron: "*/5 * * * *", # every 5 minutes
+    #   class: "CaptureQueryStatsJob"
+    # }
   }
 end
