@@ -155,10 +155,13 @@ module Shimmer
       expires_in 1.year, public: true
       request.session_options[:skip] = true
       proxy = FileProxy.restore(params.require(:id))
+
       send_data proxy.file,
         filename: proxy.variant_filename,
         type: proxy.variant_content_type,
         disposition: "inline"
+    rescue ActiveRecord::RecordNotFound, ActiveStorage::FileNotFoundError
+      head :not_found
     end
   end
 end
