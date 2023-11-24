@@ -12,6 +12,8 @@ class WatchesController < ApplicationController
       @video = Video.preload(dancer_videos: :dancer).find_by(youtube_id: params[:v])
     end
 
+    return redirect_to root_path if @video.nil?
+
     @type = Video::RelatedVideos.new(@video).available_types.first
 
     @start_value = params[:start]
