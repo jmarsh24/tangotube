@@ -4,9 +4,11 @@ class WatchesController < ApplicationController
   # @route GET /watch (watch)
   def show
     redirect_to root_path unless params[:v].present?
+    @video = Video.find_by(youtube_id: params[:v])
 
     if @video.nil?
-      ExternalVideoImport::Importer.new.import(params[:v])
+      @video = ExternalVideoImport::Importer.new.import(params[:v])
+      UpdateVideoJob.perform_later(@video, use_music_recognizer: true)
       @video = Video.preload(dancer_videos: :dancer).find_by(youtube_id: params[:v])
     end
 
