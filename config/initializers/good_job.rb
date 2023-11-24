@@ -11,6 +11,7 @@ Rails.application.configure do
   config.good_job.shutdown_timeout = 60 # seconds
   config.good_job.enable_cron = true
   config.good_job.dashboard_default_locale = :en
+  config.good_job.enable_cron = Rails.env.production?
   config.good_job.cron = {
     channel_video_sync: {
       cron: "0 5 * * *",
