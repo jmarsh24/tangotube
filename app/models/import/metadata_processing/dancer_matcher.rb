@@ -12,8 +12,8 @@ module Import
 
           if dancer.use_trigram
             # Use trigram similarity for matching
-            name_match = video_title_trigram.similarity(dancer.normalized_name) > 0.8
-            term_match = dancer.match_terms.any? { |term| video_title_trigram.similarity(term) > 0.8 }
+            name_match = video_title_trigram.similarity(dancer.normalized_name) > 0.85
+            term_match = dancer.match_terms.any? { |term| video_title_trigram.similarity(term) > 0.85 }
           else
             # Require exact match
             name_match = normalized_title.include?(dancer.normalized_name)

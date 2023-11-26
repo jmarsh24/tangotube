@@ -79,7 +79,19 @@ RSpec.describe Import::MetadataProcessing::DancerMatcher do
       expect(dancer_matcher.match(video_title:)).to match_array([michael_nadotchi])
     end
 
-    xit "doesn't match gavito" do
+    it "matches carlitos and noelia" do
+      video_title = "Carlitos & Noelia Tango #2 (2016 August)"
+      augustina_piaggio = Dancer.create!(name: "Augustina Piaggio", gender: "female", match_terms: ["Carlitos Augustina", "Carlito Augustina"])
+      carlitos = dancers(:carlitos)
+      noelia = dancers(:noelia)
+
+      carlitos.update!(match_terms: ["Carlitos Augustina", "Carlito Augustina", "carlitos noelia"])
+      noelia.update!(match_terms: ["carlitos noelia"])
+      expect(dancer_matcher.match(video_title:)).to match_array([carlitos, noelia])
+      expect(dancer_matcher.match(video_title:)).not_to include(augustina_piaggio)
+    end
+
+    it "doesn't match gavito" do
       video_title = "Marcela Duran & Carlos Barrionuevo at Gavito Tango Festival 1/3"
       marcela_duran = Dancer.create!(name: "Marcela Duran")
       carlos_barrionuevo = Dancer.create!(name: "Carlos Barrionuevo")
