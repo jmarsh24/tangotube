@@ -6,6 +6,7 @@ module Import
 
     attribute :youtube, Youtube::VideoMetadata.to_type
     attribute :music, MusicRecognition::Metadata.to_type
+    attribute :chat_gpt, TitleDescriptionExtractor::Metadata.to_type
 
     def song_titles
       [

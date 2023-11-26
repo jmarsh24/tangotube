@@ -7,10 +7,10 @@ module Import
       @metadata_processor = metadata_processor
     end
 
-    def import(youtube_id, use_scraper: false, use_music_recognizer: false)
+    def import(youtube_id, use_scraper: false, use_music_recognizer: false, use_chat_gpt: false)
       return if Video.exists?(youtube_id:)
 
-      metadata = @video_crawler.metadata(youtube_id, use_scraper:, use_music_recognizer:)
+      metadata = @video_crawler.metadata(youtube_id, use_scraper:, use_music_recognizer:, use_chat_gpt:)
 
       video_attributes = @metadata_processor.process(metadata)
       video_attributes = video_attributes.merge!(metadata_updated_at: Time.current, metadata: metadata.to_json)
