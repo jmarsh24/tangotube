@@ -2,7 +2,7 @@
 
 class MetadataBuilder
   def self.build_metadata(video)
-    youtube_metadata = ExternalVideoImport::Youtube::VideoMetadata.new(
+    youtube_metadata = Import::Youtube::VideoMetadata.new(
       slug: video.youtube_id,
       title: video.title,
       description: video.description,
@@ -14,13 +14,13 @@ class MetadataBuilder
       favorite_count: video.favorite_count,
       comment_count: video.comment_count,
       like_count: video.like_count,
-      song: ExternalVideoImport::Youtube::SongMetadata.new(titles: [video.youtube_song], artist: video.youtube_artist),
+      song: Import::Youtube::SongMetadata.new(titles: [video.youtube_song], artist: video.youtube_artist),
       thumbnail_url: nil,
       recommended_video_ids: [],
-      channel: ExternalVideoImport::Youtube::ChannelMetadata.new(id: video.channel.youtube_slug, title: video.channel.title, thumbnail_url: video.channel.thumbnail_url)
+      channel: Import::Youtube::ChannelMetadata.new(id: video.channel.youtube_slug, title: video.channel.title, thumbnail_url: video.channel.thumbnail_url)
     )
 
-    music_recognition_metadata = ExternalVideoImport::MusicRecognition::Metadata.new(
+    music_recognition_metadata = Import::MusicRecognition::Metadata.new(
       code: video.acr_response_code,
       acr_song_title: video.acr_cloud_track_name,
       acr_artist_names: [video.acr_cloud_artist_name, video.acr_cloud_artist_name_1],
@@ -37,7 +37,7 @@ class MetadataBuilder
       youtube_vid: video.youtube_song_id
     )
 
-    ExternalVideoImport::Metadata.new(
+    Import::Metadata.new(
       youtube: youtube_metadata,
       music: music_recognition_metadata
     )

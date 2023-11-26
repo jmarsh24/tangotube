@@ -64,7 +64,7 @@ class Video < ApplicationRecord
 
   has_one_attached :thumbnail, dependent: :purge_later
 
-  attribute :metadata, ExternalVideoImport::Metadata.to_type
+  attribute :metadata, Import::Metadata.to_type
   validates :youtube_id, presence: true, uniqueness: true
 
   scope :channel, ->(youtube_slug) { joins(:channel).where("channel.youtube_slug" => youtube_slug) }

@@ -7,27 +7,24 @@ class WatchesController < ApplicationController
     @video = Video.find_by(youtube_id: params[:v])
 
     if @video.nil?
-      @video = ExternalVideoImport::Importer.new.import(params[:v])
-      UpdateVideoJob.perform_later(@video, use_music_recognizer: true)
-      @video = Video.preload(dancer_videos: :dancer).find_by(youtube_id: params[:v])
+      @video = Import::Importer.new.import(params[:v])
+      if @video.present?
+        UpdateVideoJob.perform_later(@video, use_music_recognizer: true)
+      else
+        flash[:error] = "Video not found"
+        redirect_to root_path
+      end
+    else
+      @type = Video::RelatedVideos.new(@video).available_types.first
+
+      @playback_options = Watch::PlaybackOptions.new(
+        start_time: params[:start],
+        end_time: params[:end],
+        speed: params[:speed] || "1"
+      )
+      unless is_bot?
+        current_user&.watches&.create!(video: @video, watched_at: Time.now)
+      end
     end
-
-    return redirect_to root_path if @video.nil?
-
-    @type = Video::RelatedVideos.new(@video).available_types.first
-
-    @start_value = params[:start]
-    @end_value = params[:end]
-    @root_url = root_url
-    @playback_rate = params[:speed] || "1"
-
-    current_user&.watches&.create!(video: @video, watched_at: Time.now) unless is_bot?
-  end
-
-  private
-
-  def is_bot?
-    browser = Browser.new(request.user_agent)
-    browser.bot?
   end
 end

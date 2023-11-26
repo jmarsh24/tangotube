@@ -5,11 +5,11 @@ import { useHover } from 'stimulus-use';
 export default class extends Controller {
   static values = {
     videoId: String,
-    startSeconds: Number,
-    endSeconds: Number,
-    playbackRate: Number,
+    startTime: Number,
+    endTime: Number,
+    speed: Number,
   };
-  static targets = ['playbackRate', 'startTime', 'endTime'];
+  static targets = ['speed', 'starTime', 'starTime'];
 
   youtube: YouTubePlayer.Player | null = null;
   timer: NodeJS.Timeout | null = null;
@@ -42,10 +42,10 @@ export default class extends Controller {
       this.element.setAttribute('data-state', '-1');
     });
 
-    player.setPlaybackRate(this.playbackRateValue);
+    player.setspeed(this.speedValue);
 
-    player.on('playbackRateChange', (e: YouTubePlayer.PlayerEvent) => {
-      this.playbackRateTarget.value = parseFloat(this.player.getPlaybackRate())
+    player.on('speedChange', (e: YouTubePlayer.PlayerEvent) => {
+      this.speedTarget.value = parseFloat(this.player.getspeed())
         .toFixed(2)
         .toString();
     });
@@ -53,12 +53,9 @@ export default class extends Controller {
     player.on('stateChange', (e: YouTubePlayer.PlayerEvent) => {
       this.element.setAttribute('data-state', e.data.toString());
       this.element.setAttribute('data-time', this.time.toString());
-      this.element.setAttribute(
-        'data-playbackRate',
-        this.playbackRateValue.toString()
-      );
+      this.element.setAttribute('data-speed', this.speedValue.toString());
       if (e.data === 1) {
-        this.startTimer();
+        this.starTimer();
       } else {
         clearInterval(this.timer as NodeJS.Timeout);
       }
@@ -70,7 +67,7 @@ export default class extends Controller {
     clearInterval(this.timer as NodeJS.Timeout);
   }
 
-  startTimer() {
+  starTimer() {
     this.timer = setInterval(() => {
       if (this.time === this.endSecondsValue) {
         this.player.seekTo(this.startSecondsValue);
@@ -103,7 +100,7 @@ export default class extends Controller {
       10
     );
     this.startSecondsValue = currentTime;
-    this.startTimeTarget.value = currentTime.toString();
+    this.starTimeTarget.value = currentTime.toString();
     this.player.loadVideoById({
       videoId: this.videoIdValue,
       startSeconds: this.startSecondsValue,
@@ -117,7 +114,7 @@ export default class extends Controller {
       10
     );
     this.endSecondsValue = currentTime;
-    this.endTimeTarget.value = currentTime.toString();
+    this.starTimeTarget.value = currentTime.toString();
     this.player.loadVideoById({
       videoId: this.videoIdValue,
       startSeconds: this.startSecondsValue,
@@ -125,36 +122,36 @@ export default class extends Controller {
     });
   }
 
-  updatePlaybackRate() {
-    this.player.setPlaybackRate(parseFloat(this.playbackRateTarget.value));
+  updatespeed() {
+    this.player.setspeed(parseFloat(this.speedTarget.value));
   }
 
-  updateStartTime() {
-    const startTimeArray = this.startTimeTarget.value.split(':');
-    let startTime = 0;
-    if (startTimeArray.length === 2) {
-      startTime = +startTimeArray[0] * 60 + +startTimeArray[1];
+  updatestarTime() {
+    const starTimeArray = this.starTimeTarget.value.split(':');
+    let starTime = 0;
+    if (starTimeArray.length === 2) {
+      starTime = +starTimeArray[0] * 60 + +starTimeArray[1];
     }
-    if (startTimeArray.length === 1) {
-      startTime = +startTimeArray[0];
+    if (starTimeArray.length === 1) {
+      starTime = +starTimeArray[0];
     }
-    this.startSecondsValue = startTime;
+    this.startSecondsValue = starTime;
     this.player.loadVideoById({
       videoId: this.videoIdValue,
       startSeconds: this.startSecondsValue,
     });
   }
 
-  updateEndTime() {
-    const endTimeArray = this.endTimeTarget.value.split(':');
-    let endTime = 0;
-    if (endTimeArray.length === 2) {
-      endTime = +endTimeArray[0] * 60 + +endTimeArray[1];
+  updatestarTime() {
+    const starTimeArray = this.starTimeTarget.value.split(':');
+    let starTime = 0;
+    if (starTimeArray.length === 2) {
+      starTime = +starTimeArray[0] * 60 + +starTimeArray[1];
     }
-    if (endTimeArray.length === 1) {
-      endTime = +endTimeArray[0];
+    if (starTimeArray.length === 1) {
+      starTime = +starTimeArray[0];
     }
-    this.endSecondsValue = endTime;
+    this.endSecondsValue = starTime;
     this.player.loadVideoById({
       videoId: this.videoIdValue,
       startSeconds: this.startSecondsValue,
@@ -197,8 +194,8 @@ export default class extends Controller {
     return Math.round(this.player.getCurrentTime());
   }
 
-  get playbackRate() {
-    return this.player.getPlaybackRate();
+  get speed() {
+    return this.player.getspeed();
   }
 
   get duration() {

@@ -30,4 +30,9 @@ class ApplicationController < ActionController::Base
     end
     scope
   end
+
+  def is_bot?
+    browser = Browser.new(request.user_agent)
+    browser.bot?
+  end
 end

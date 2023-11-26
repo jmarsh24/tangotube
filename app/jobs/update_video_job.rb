@@ -4,6 +4,6 @@ class UpdateVideoJob < ApplicationJob
   queue_as :update
 
   def perform(video, use_scraper: false, use_music_recognizer: false)
-    ExternalVideoImport::Importer.new.update(video, use_scraper:, use_music_recognizer:)
+    Import::Importer.new.update(video, use_scraper:, use_music_recognizer:)
   end
 end

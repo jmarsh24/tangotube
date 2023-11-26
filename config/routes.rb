@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get "events/top", to: "events#top_events", as: "top_events"
   get "songs/top", to: "songs#top_songs", as: "top_songs"
 
-  resources :videos do
+  resources :videos, except: [:show] do
     member do
       get :details
       get :share
