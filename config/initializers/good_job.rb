@@ -6,7 +6,7 @@ Rails.application.configure do
   config.good_job.on_thread_error = ->(exception) { Rails.error.report(exception) }
   config.good_job.execution_mode = :external
   config.good_job.queues = "high_priority,refresh,low_priority,default,active_storage_analysis,update:3;import:3;-update,-import"
-  config.good_job.max_threads = 1
+  config.good_job.max_threads = 3
   config.good_job.poll_interval = 5 # seconds
   config.good_job.shutdown_timeout = 120 # seconds
   config.good_job.dashboard_default_locale = :en
