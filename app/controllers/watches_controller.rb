@@ -10,7 +10,7 @@ class WatchesController < ApplicationController
     @video = Video.find_by(youtube_id: params[:v]) || Import::Importer.new.import(params[:v])
 
     if @video
-      UpdateVideoJob.perform_later(@video, use_music_recognizer: true)
+      UpdateVideoJob.perform_later(@video, use_music_recognizer: !@video.music_scanned?)
       @type = Video::RelatedVideos.new(@video).available_types.first
       @playback_options = Watch::PlaybackOptions.new(
         start_time: params[:start],
