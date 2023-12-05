@@ -81,27 +81,27 @@
     }
   }
 
-  &--dancer,
-  &--couple,
-  &--song,
-  &--channel,
-  &--event,
-  &--orchestra {
-    &:nth-child(n + 4) {
-      display: none;
-    }
-  }
+  // &--dancer,
+  // &--couple,
+  // &--song,
+  // &--channel,
+  // &--event,
+  // &--orchestra {
+  //   &:nth-child(n + 4) {
+  //     display: none;
+  //   }
+  // }
 
-  @include breakpoint-tablet {
-    &--dancer,
-    &--couple,
-    &--song,
-    &--channel,
-    &--event,
-    &--orchestra {
-      &:nth-child(n + 4) {
-        display: flex;
-      }
-    }
-  }
+  // @include breakpoint-tablet {
+  //   &--dancer,
+  //   &--couple,
+  //   &--song,
+  //   &--channel,
+  //   &--event,
+  //   &--orchestra {
+  //     &:nth-child(n + 4) {
+  //       display: flex;
+  //     }
+  //   }
+  // }
 }

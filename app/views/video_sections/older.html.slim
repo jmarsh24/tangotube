@@ -3,6 +3,6 @@
     .top-section
       .carousel
         .carousel__header
-          = link_to t(".oldest_videos_header"), root_path(filtering_params.merge(sort: "oldest")), class: "button button--icon-chevron-right button--icon-right heading-2"
+          = link_to t(".oldest_videos_header"), root_path(filtering_params.merge(sort: "oldest")), class: "button button--icon-chevron-right button--icon-right heading-4"
         .carousel__videos
           = render @videos

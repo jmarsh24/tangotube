@@ -2,22 +2,22 @@
   h2.heading-2 = t(".video_details")
 .modal__body
   .stack
-    h4.heading-4.video-details__header = t(".title")
+    h3.heading-3.video-details__header = t(".title")
     .video-details__title = @video.title
-    h4.heading-4.video-details__header = t(".description")
+    h3.heading-3.video-details__header = t(".description")
     .video-details__description = @video.description
-    h4.heading-4.video-details__header = t(".metadata")
+    h3.heading-3.video-details__header = t(".metadata")
     .video-details__metadata = [@video.channel&.title,l(@video.upload_date, format: :short_month_year),t('views_count', count: number_to_human(@video.view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
     - if current_user&.admin?
-      h4.heading-4.video-details__header = t(".acr_response_code")
+      h3.heading-3.video-details__header = t(".acr_response_code")
       = @video.acr_response_code
-      h4.heading-4.video-details__header = t(".json_metadata")
+      h3.heading-3.video-details__header = t(".json_metadata")
       = ap @video.metadata.as_json
-      h4.heading-4.video-details__header = t(".watches_count")
+      h3.heading-3.video-details__header = t(".watches_count")
       = @video.watches_count
-      h4.heading-4.video-details__header = t(".likes_count")
+      h3.heading-3.video-details__header = t(".likes_count")
       = @video.likes_count
-      h4.heading-4.video-details__header = t(".features_count")
+      h3.heading-3.video-details__header = t(".features_count")
       = @video.features_count
-      h4.heading-4.video-details__header = t(".hidden")
+      h3.heading-3.video-details__header = t(".hidden")
       = @video.hidden
