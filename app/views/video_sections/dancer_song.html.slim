@@ -2,7 +2,7 @@
   - if @videos.any? 
     .top-section
       .carousel__header
-        h3.heading-3 = t(".song_videos_header")
+        h4.heading-4 = t(".song_videos_header")
       .carousel
         .carousel__header
           = link_to root_path(filtering_params.merge(song: @song.slug)), class: "button button--icon-chevron-right button--icon-right" do
@@ -14,7 +14,7 @@
           = render @videos
       .carousel
         .carousel__header
-          h3.heading-3 = t(".more_songs")
+          h4.heading-4 = t(".more_songs")
         .carousel__videos
           - if @dancer.gender == "male" 
             = render @songs, { leader: @dancer.slug }

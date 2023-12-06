@@ -1,17 +1,17 @@
 = turbo_frame_tag :event_videos
   .top-section
     .carousel__header
-      h3.heading-3 = t(".event_videos_header")
+      h4.heading-4 = t(".event_videos_header")
     .carousel
       .carousel__header
         = link_to root_path(filtering_params.merge(event: @event.slug)), class: "button button--icon-chevron-right button--icon-right" do
           .stack.stack--line.stack--sm
             = image_tag @event.profile_image, width: 80, alt: t("event_alt", event_title: @event.title), class: "avatar avatar--lg" if @event.profile_image.attached?
-            h3.heading-3 = @event.title.titleize
+            h4.heading-4 = @event.title.titleize
       .carousel__videos
         = render @videos
     .carousel
       .carousel__header
-        h3.heading-3 = t(".more_events")
+        h4.heading-4 = t(".more_events")
       .carousel__videos
         = render @events
