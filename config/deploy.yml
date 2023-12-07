@@ -22,14 +22,18 @@ env:
     DB_HOST: 128.140.105.113
     HOST: tangotube.tv
     YT_DLP_BIN: /opt/venv/bin/yt-dlp
+    KAMAL_CONTAINER_NAME: tangotube
+    STATEMENT_TIMEOUT: 15000
+    LOCK_TIMEOUT: 5000
+    RAILS_MAX_THREADS: 20
+    DB_POOL: 10
+    WEB_CONCURRENCY: 3
+    GOOD_JOB_MAX_THREADS: 3
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
-    - RAILS_MAX_THREADS
-    - WEB_CONCURRENCY
-    - DB_POOL
-    - WORKER_MAX_THREADS
-    - STATEMENT_TIMEOUT
+    - ACR_CLOUD_ACCESS_KEY
+    - ACR_CLOUD_SECRET_KEY
 
 builder:
   multiarch: false
