@@ -11,8 +11,6 @@ servers:
     hosts:
       - 49.13.156.244
     cmd: bundle exec good_job start
-    healthcheck:
-      cmd: bin/check
 registry:
   server: ghcr.io
   username:
