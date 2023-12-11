@@ -3,7 +3,7 @@ default: &default
   encoding: unicode
   host: 127.0.0.1
   port: 54315
-  pool: <%= ENV["DB_POOL"] || ENV["RAILS_MAX_THREADS"] || 5 %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5).to_i + 1 + 2 + ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i %>
   username: <%= ENV["PG_USER"] || "postgres" %>
   schema_search_path: "public"
   variables:
