@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddIndexToVideoIdForVideoSearches < ActiveRecord::Migration[7.1]
   disable_ddl_transaction!
 

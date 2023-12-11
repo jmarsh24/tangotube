@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThumbnailAttacher
   def attach_thumbnail(object, thumbnail_url)
     return if thumbnail_url.blank?

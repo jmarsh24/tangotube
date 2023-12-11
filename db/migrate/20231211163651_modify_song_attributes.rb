@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ModifySongAttributes < ActiveRecord::Migration[7.1]
   disable_ddl_transaction!
 
@@ -7,5 +9,6 @@ class ModifySongAttributes < ActiveRecord::Migration[7.1]
     add_index :songs, :normalized_title, using: :gin, opclass: :gin_trgm_ops, algorithm: :concurrently
     add_index :songs, :normalized_artist, using: :gin, opclass: :gin_trgm_ops, algorithm: :concurrently
     add_index :songs, :artist_2, using: :gin, opclass: :gin_trgm_ops, algorithm: :concurrently
+    add_index :songs, :spotify_track_id, algorithm: :concurrently
   end
 end
