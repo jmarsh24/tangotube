@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_17_165822) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -390,10 +390,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_17_165822) do
     t.string "display_title"
     t.string "spotify_track_id"
     t.text "search_text"
+    t.string "normalized_title"
+    t.string "normalized_artist"
     t.index ["active"], name: "index_songs_on_active"
+    t.index ["artist"], name: "index_songs_on_artist", opclass: :gist_trgm_ops, using: :gist
+    t.index ["artist_2"], name: "index_songs_on_artist_2", opclass: :gin_trgm_ops, using: :gin
     t.index ["last_name_search"], name: "index_songs_on_last_name_search"
+    t.index ["normalized_artist"], name: "index_songs_on_normalized_artist", opclass: :gin_trgm_ops, using: :gin
+    t.index ["normalized_title"], name: "index_songs_on_normalized_title", opclass: :gin_trgm_ops, using: :gin
     t.index ["orchestra_id"], name: "index_songs_on_orchestra_id"
     t.index ["search_text"], name: "songs_search_text_gist_idx", opclass: :gist_trgm_ops, using: :gist
+    t.index ["title"], name: "index_songs_on_title", opclass: :gist_trgm_ops, using: :gist
     t.index ["videos_count"], name: "index_songs_on_videos_count"
   end
 

@@ -44,7 +44,8 @@ module Import
           video_description: metadata.youtube.description,
           song_titles: metadata.song_titles,
           song_artists: metadata.artist_names,
-          song_albums: metadata.album_names
+          song_albums: metadata.album_names,
+          spotify_track_id: metadata.music&.spotify_track_id
         )
 
         if song && metadata.music

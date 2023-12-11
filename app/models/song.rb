@@ -40,6 +40,8 @@ class Song < ApplicationRecord
 
   before_save :set_display_title
   before_save :update_search_text
+  before_validation :normalize_title
+  before_validation :normalize_artist
   after_validation :set_slug, only: [:create, :update]
 
   scope :active, -> { where(active: true) }
@@ -77,6 +79,10 @@ class Song < ApplicationRecord
         .downcase
         .strip
         .gsub(/\s+/, " ")
+        .gsub("' ", "")
+        .gsub("'", "")
+        .gsub(/\(.*?\)/, "")  # Add this line to remove content within parentheses
+        .strip  # Add an additional strip in case the removal leaves trailing spaces
     end
   end
 
@@ -119,21 +125,19 @@ class Song < ApplicationRecord
     update(spotify_track_id: track.dig("id"))
   end
 
-  class << self
-    def index_query
-      INDEX_QUERY
-    end
-
-    def missing_english_translation
-      where.not(lyrics: nil).where(lyrics_en: nil)
-    end
-  end
-
   def formatted_artist
     artist&.split("'")&.map(&:titleize)&.join("'")
   end
 
   private
+
+  def normalize_title
+    self.normalized_title = Song.normalize(title) if title.present?
+  end
+
+  def normalize_artist
+    self.normalized_artist = Song.normalize(artist) if artist.present?
+  end
 
   def set_display_title
     self.display_title = [title&.titleize, orchestra&.name || artist, genre&.titleize, date&.year].compact.join(" - ")

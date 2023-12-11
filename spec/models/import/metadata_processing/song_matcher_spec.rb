@@ -30,19 +30,15 @@ RSpec.describe Import::MetadataProcessing::SongMatcher do
           genre: "TANGO",
           artist: "José BASSO",
           orchestra:,
-          title: "Recordándote",
-          active: true
+          title: "Recordándote"
         )
 
         song_quedemos_aqui = Song.create!(
           genre: "TANGO",
           artist: "José BASSO",
           orchestra:,
-          title: "Quedémonos aquí",
-          active: true
+          title: "Quedémonos aquí"
         )
-
-        song_matcher = described_class.new
 
         video_title = "Noelia Hurtado and Gaston Torelli - Quedémonos aquí"
         video_description = "Noelia Hurtado and Gaston Torelli dance “Quedémonos aquí” by José Basso, sung by Floreal Ruíz, at the Berlin New Year's Marathon in Berlin, Germany.\n\nIf you love Tango videos, help us create more on\nhttp://www.patreon.com/030tango\n\nVisit 030tango at\nhttp://www.030tango.com\n\nRecorded on 2016/01/02\n#030tango #tango"
@@ -59,8 +55,7 @@ RSpec.describe Import::MetadataProcessing::SongMatcher do
           genre: "TANGO",
           orchestra: orchestras(:darienzo),
           title: "Ya lo ves",
-          artist: "Juan D'ARIENZO",
-          active: true
+          artist: "Juan D'ARIENZO"
         )
 
         song_matcher = described_class.new
@@ -82,8 +77,7 @@ RSpec.describe Import::MetadataProcessing::SongMatcher do
           genre: "TANGO",
           orchestra:,
           title: "Bajo El Cono Azul",
-          artist: "Alfredo De Angelis",
-          active: true
+          artist: "Alfredo De Angelis"
         )
 
         video_title = "Carlitos Espinoza and Noelia Hurtado performance 1 @ All Night Milonga NYC June 25, 2016"
@@ -114,7 +108,7 @@ RSpec.describe Import::MetadataProcessing::SongMatcher do
           orchestra: tanturi,
           title: "Mozo guapo",
           artist: "Ricardo Tanturi",
-          active: true
+          artist_2: "Alberto Castillo"
         )
 
         video_title = "Mirella and Carlos Santos David - Mozo guapo"
@@ -264,6 +258,19 @@ RSpec.describe Import::MetadataProcessing::SongMatcher do
         video_description = "Natacha Lockwood & Andrés Molina dancing ”Cuando tú no estás” by Rubén Juárez@GANAS de TANGO: a weekend with Natacha & Andrés. Bucharest, 3-5 nov 2023."
 
         expect(song_matcher.match(video_title:, video_description:)).not_to eq(cuestion_de_ganas)
+      end
+
+      it "creates a song if it doesn't exist" do
+        video_title = "Carlitos & Agustina - Japan Tour 2023, Gran Milonga - 5/6 | Dos Extranos"
+        video_description = "Argentine Tango Performance アルゼンチンタンゴパフォーマンス Dancers: Carlitos Espinoza & Agustina Piaggio Music: Dos Extranos, Juan Carlos Caceres Date: 2023/11/10 Event: Carlitos & Agustina 2023 Japan Tour, Gran Milonga Organizers: ICA Studio, Ike, Tzu-Han & Kyoko Full Playlist: #1 https://youtu.be/3Epkh2NjJ7o #2 https://youtu.be/I0ZSJPbhKAs #3 https://youtu.be/mm39U5A6nis #4 https://youtu.be/Y6M30xoIlpY #5 https://youtu.be/sV_kgRXes4o #6 https://youtu.be/aAVX62hcbK0 #tango #argentinetango #tangoargentino #アルゼンチンタンゴ #タンゴ #아르헨티나탱고 #탱고 #carlitosyagustina #ズーハン京子 #ズー京 #juandarienzo #darienzo"
+        song_titles = ["Dos Extranos"]
+        song_artists = ["Juan Carlos Caceres"]
+
+        matched_song = song_matcher.match(video_title:, video_description:, song_titles:, song_artists:)
+
+        expect(matched_song.title).to eq("Dos Extranos")
+        expect(matched_song.artist).to eq("Juan Carlos Caceres")
+        expect(matched_song.genre).to eq("Alternative")
       end
     end
   end
