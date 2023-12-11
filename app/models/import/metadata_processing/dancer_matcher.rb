@@ -9,7 +9,6 @@ module Import
 
         matching_dancers = Dancer.all.select do |dancer|
           next if dancer.normalized_name.blank?
-
           if dancer.use_trigram
             # Use trigram similarity for matching
             name_match = video_title_trigram.similarity(dancer.normalized_name) > 0.85
