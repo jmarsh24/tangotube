@@ -71,11 +71,11 @@ class Channel < ApplicationRecord
     true
   end
 
-  def update_videos(use_scraper: false, use_music_recognizer: false)
+  def update_videos
     return unless active
 
     videos.find_each do |video|
-      UpdateVideoJob.perform_later(video, use_scraper:, use_music_recognizer:)
+      UpdateVideoJob.perform_later(video)
     end
   end
 

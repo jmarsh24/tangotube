@@ -48,8 +48,11 @@ class VideosController < ApplicationController
 
   # @route POST /videos/:id/process_metadata (process_metadata_video)
   def process_metadata
-    use_music_recognizer = !(@video.acr_response_code == 0 || @video.acr_response_code == 1001)
-    UpdateVideoJob.set(queue: :high_priority).perform_later(@video, use_music_recognizer:)
+    if !(@video.acr_response_code == 0 || @video.acr_response_code == 1001)
+      UpdateVideoJob.perform_later(@video)
+    else
+      UpdateWithMusicRecognizerVideoJob.perform_later(@video)
+    end
     head :ok
   end
 
