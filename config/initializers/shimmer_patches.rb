@@ -128,11 +128,11 @@ module Shimmer::FileProxyExtensions
   end
 
   def path
-    Rails.application.routes.url_helpers.file_path("#{id}.#{file_extension}", locale: nil)
+    Rails.application.routes.url_helpers.file_path(id, locale: nil)
   end
 
   def url(protocol: Rails.env.production? ? :https : :http)
-    Rails.application.routes.url_helpers.file_url("#{id}.#{file_extension}", locale: nil, protocol:)
+    Rails.application.routes.url_helpers.file_url(id, locale: nil, protocol:)
   end
 
   private
