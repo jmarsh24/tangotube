@@ -46,7 +46,7 @@ module TangoTube
     Rails.application.routes.default_url_options[:host] = host
     config.action_mailer.default_url_options({host:})
     config.action_mailer.asset_host = "#{protocol}://#{host}"
-    config.active_storage.variant_processor = :vips
+    config.active_storage.variant_processor = :minimagick
 
     ActiveRecord::Tasks::DatabaseTasks.fixtures_path = Rails.root.join("spec/fixtures")
   end
