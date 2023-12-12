@@ -5,7 +5,7 @@ Rails.application.configure do
   config.good_job.retry_on_unhandled_error = false
   config.good_job.on_thread_error = ->(exception) { Rails.error.report(exception) }
   config.good_job.execution_mode = :external
-  config.good_job.queues = "music_recognizer:3;-music_recognizer"
+  config.good_job.queues = "music_recognizer:2;-music_recognizer"
   config.good_job.poll_interval = 5 # seconds
   config.good_job.shutdown_timeout = 120 # seconds
   config.good_job.dashboard_default_locale = :en
