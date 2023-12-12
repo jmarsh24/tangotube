@@ -4,6 +4,8 @@ Disallow: /videos/*/downvote
 Disallow: /videos/*/upvote
 Disallow: /videos/*/bookmark
 Disallow: /videos/*/watchlist
+Disallow: /videos/*/watched_by_current_user
+Disallow: /related_videos/*
 Disallow: /dancers/*
 Disallow: /events/*
 Disallow: /songs/*
