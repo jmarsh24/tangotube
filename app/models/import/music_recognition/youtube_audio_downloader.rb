@@ -8,7 +8,7 @@ module Import
       def download_file(slug)
         Dir.mktmpdir do |dir|
           output_template = "#{dir}/#{slug}.%(ext)s"
-          success = system(yt_dlp_command(output_template, slug, format: "-f bestaudio"))
+          success = system(yt_dlp_command(output_template, slug))
           if success
             downloaded_file_path = Dir["#{dir}/#{slug}.*"].first
 
@@ -23,8 +23,8 @@ module Import
 
       private
 
-      def yt_dlp_command(output_template, slug, format: "")
-        "#{Config.yt_dlp_bin!} '#{YT_DLP_COMMAND_PREFIX + slug}' #{format} --force-overwrites -o '#{output_template}'"
+      def yt_dlp_command(output_template, slug)
+        "#{Config.yt_dlp_bin!} '#{YT_DLP_COMMAND_PREFIX + slug}' -f bestaudio --force-overwrites -o '#{output_template}'"
       end
     end
   end
