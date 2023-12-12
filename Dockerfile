@@ -15,7 +15,7 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y build-essential curl git libvips libpq-dev pkg-config nodejs && \
+  apt-get install --no-install-recommends -y build-essential curl git libvips imagemagick libpq-dev pkg-config nodejs && \
   rm -rf /var/lib/apt/lists/*
 
 # Install JavaScript dependencies
@@ -46,7 +46,7 @@ FROM base
 
 # Install packages and tools
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y curl libvips ffmpeg postgresql-client python3-pip python3-venv
+  apt-get install --no-install-recommends -y curl libvips imagemagick ffmpeg postgresql-client python3-pip python3-venv
 
 RUN python3 -m venv /opt/venv 
 
