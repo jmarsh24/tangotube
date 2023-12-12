@@ -9,7 +9,7 @@ servers:
     cmd: bundle exec puma -C config/puma.rb
   worker:
     hosts:
-      - 49.13.165.215
+      - 91.107.226.121
     cmd: bundle exec good_job start
 registry:
   server: ghcr.io
@@ -28,7 +28,7 @@ env:
     RAILS_MAX_THREADS: 5
     DB_POOL: 40
     WEB_CONCURRENCY: 4
-    GOOD_JOB_MAX_THREADS: 8
+    GOOD_JOB_MAX_THREADS: 4
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
