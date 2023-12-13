@@ -37,12 +37,13 @@ env:
     ENABLED_MAILERS: 1
     BASE_URI: tangotube.tv
     CLOUDFLARE_BUCKET: tangotube
+    AWS_REGION: eu-central-1
+    AWS_BUCKET: tangotube
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
     - ACR_CLOUD_ACCESS_KEY
     - ACR_CLOUD_SECRET_KEY
-    - NEW_RELIC_API_KEY
 
 builder:
   multiarch: false
