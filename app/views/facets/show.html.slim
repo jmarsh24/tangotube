@@ -1,16 +1,16 @@
 - cache [@facet.name, filtering_params], expires_in: 24.hours do
-  = turbo_frame_tag "#{@facet.name}_facet", class: "facet"
+  .facet id="#{@facet.name}_facet"
     .modal__header
       h3.modal__title = @facet.name.titleize
     .modal__body
       .list-box
         - if params[@facet.name.to_sym].present?
-          = link_to root_path(filtering_params.except(@facet.name.to_sym, :filtering)), data: { turbo_frame: "_top" } do 
+          = link_to root_path(filtering_params.except(@facet.name.to_sym, :filtering)), data: { turbo_frame: "_top", turbo_stream: "true" } do 
             .list-box__item
               .list-box__text = "All #{@facet.name.pluralize}"
         - if @facet.options.present?
           - @facet.options.each do |option|
-            = link_to root_path(filtering_params.merge(@facet.name => option.value, :filtering => true)), data: { turbo_frame: "_top" } do
+            = link_to root_path(filtering_params.merge(@facet.name => option.value, :filtering => true)), data: { turbo_frame: "_top", turbo_stream: "true" } do
               .list-box__item class=(params[@facet.name.to_sym] == option.value ? "selected" : nil)
                 .list-box__text
                   = option.label
