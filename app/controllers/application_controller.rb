@@ -24,9 +24,14 @@ class ApplicationController < ActionController::Base
     @current_page = params[:page]&.to_i || 1
     scope = scope.page(@current_page).per(per).without_count
     @has_more_pages = !scope.next_page.nil? unless @has_more_pages == true
-    if @current_page > 1
-      ui.remove "next-page-link-#{frame_id}"
-      ui.append frame_id, with: "components/pagination", items: scope, partial: params[:partial], frame_id:
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        if @current_page > 1
+          ui.remove "next-page-link-#{frame_id}"
+          ui.append frame_id, with: "components/pagination", items: scope, partial: params[:partial], frame_id:
+        end
+      end
     end
     scope
   end
