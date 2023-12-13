@@ -29,11 +29,20 @@ env:
     DB_POOL: 40
     WEB_CONCURRENCY: 4
     GOOD_JOB_MAX_THREADS: 4
+    NEW_RELIC_APP_NAME: tangotube
+    NEW_RELIC_REGION: EU
+    NEW_RELIC_ACCOUNT_ID: 3766249
+    NEW_RELIC_AGENT_ENABLED: true
+    NEW_RELIC_LOG: stdout
+    ENABLED_MAILERS: 1
+    BASE_URI: tangotube.tv
+    CLOUDFLARE_BUCKET: tangotube
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
     - ACR_CLOUD_ACCESS_KEY
     - ACR_CLOUD_SECRET_KEY
+    - NEW_RELIC_API_KEY
 
 builder:
   multiarch: false
