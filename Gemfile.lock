@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/jmarsh24/shimmer.git
+  revision: 16be1ed2d88db747b0de76e165b4bb64a785a10b
+  branch: feature/refactor_file_helper
+  specs:
+    shimmer (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -575,7 +582,6 @@ GEM
     serviceworker-rails (0.6.0)
       railties (>= 3.1)
     shellany (0.0.1)
-    shimmer (0.0.34)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
     slim (5.2.0)
@@ -754,7 +760,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   serviceworker-rails
-  shimmer
+  shimmer!
   sitemap_generator
   slim-rails
   solid_cache

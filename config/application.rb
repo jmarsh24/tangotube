@@ -47,6 +47,8 @@ module TangoTube
     config.action_mailer.default_url_options({host:})
     config.action_mailer.asset_host = "#{protocol}://#{host}"
     config.active_storage.variant_processor = :vips
+    # config.active_storage.resolve_model_to_route = :rails_storage_proxy
+    # config.active_storage.web_image_content_types = ["image/jpeg", "image/png", "image/webp", "image/jpg", "image/avif"]
 
     ActiveRecord::Tasks::DatabaseTasks.fixtures_path = Rails.root.join("spec/fixtures")
   end
