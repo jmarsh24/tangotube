@@ -11,8 +11,7 @@
     section.video-card__content
       header.video-card__primary
         .stack.stack--line
-          h2.video-card__title
-            = link_to video.title, watch_path(v: video.youtube_id)
+          = link_to video.title, watch_path(v: video.youtube_id), class: "video-card__title"
         .video-card__metadata
           = link_to video.channel&.title, root_path(channel: video.channel&.youtube_slug), title: "Channel for #{video.channel&.title}"
           = [" ", l(video.upload_date, format: :short_month_year),t('.views_count', count: number_to_human(video.youtube_view_count, format: "%n%u", precision: 2, units: {thousand: "K", million: "M", billion: "B"}))].compact.join(" • ")
