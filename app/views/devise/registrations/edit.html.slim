@@ -19,3 +19,4 @@
             = f.input :password, as: :password, class: "input input__input input--text  input--block"
             = f.input :password_confirmation, class: "input input__input input--text input--block"
             = f.submit t(".save"), "data-action": "click->cropper#submit", class: "button button--primary button--fill"
+            = link_to "Sign in with Spotify", user_spotify_omniauth_authorize_path, class: "button button--secondary button--fill"

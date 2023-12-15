@@ -52,7 +52,7 @@ class User < ApplicationRecord
     :recoverable,
     :rememberable,
     :timeoutable,
-    :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
+    :omniauthable, omniauth_providers: [:google_oauth2, :facebook, :spotify]
 
   enum role: {user: 0, admin: 1}
 

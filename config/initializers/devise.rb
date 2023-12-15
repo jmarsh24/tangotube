@@ -272,7 +272,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :google_oauth2, Config.google_client_id!, Config.google_client_secret! if Config.google_client_id? && Config.google_client_secret?
-
+  config.omniauth :spotify, Config.spotify_client_id!, Config.spotify_secret_key! if Config.spotify_client_id? && Config.spotify_secret_key?
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
