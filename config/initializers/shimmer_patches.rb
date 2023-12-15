@@ -144,8 +144,10 @@ module Shimmer::FileProxyExtensions
   def process_resize(resize)
     return nil unless resize
 
-    if resize.is_a?(String) && resize.include?("x")
-      resize.split("x").map(&:to_i)
+    if resize.is_a?(String)
+      # Split the string and convert to integers. If height is missing, it will be nil
+      dimensions = resize.split("x").map { |dim| dim.empty? ? nil : dim.to_i }
+      (dimensions.length == 1) ? [dimensions.first, nil] : dimensions
     elsif resize.is_a?(Array)
       resize
     end
