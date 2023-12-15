@@ -5,6 +5,7 @@ class FacetsController < ApplicationController
 
   # @route GET /facets/:id (facet)
   def show
+    require_turbo_frame
     @facet = Video::Search.new(filtering_params:, user: current_user).facet(name: params[:id])
   end
 
