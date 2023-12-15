@@ -116,6 +116,8 @@ module Shimmer::FileProxyExtensions
     transformation_options = {resize_to_limit: resize, format: :webp}
     transformation_options[:quality] = quality if quality
 
+    Rails.logger.info "Transformation options: #{transformation_options.inspect}"
+
     @variant ||= resizeable ? blob.representation(transformation_options).processed : blob
   end
 
