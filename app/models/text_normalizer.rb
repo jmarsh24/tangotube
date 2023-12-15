@@ -3,7 +3,7 @@
 class TextNormalizer
   STOP_WORDS = {
     en: /\b(?:a|an|and|are|as|at|be|but|by|for|if|in|into|is|it|no|not|of|on|or|such|that|the|their|then|there|these|they|this|to|was|will|with)\b/i,
-    es: /\b(?:un|una|unos|unas|y|o|pero|por|para|como|al|de|del|los|las)\b/i
+    es: /\b(?:un|una|unos|unas|y|o|pero|por|para|como|al|del|los|las)\b/i
   }.freeze
 
   def self.normalize(text)
