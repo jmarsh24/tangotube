@@ -2,6 +2,7 @@
 
 class VideoSectionsController < ApplicationController
   helper_method :filtering_params
+  before_action :require_turbo_frame
 
   # @route GET /video_sections/trending (trending_video_sections)
   def trending
