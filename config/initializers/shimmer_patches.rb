@@ -113,7 +113,9 @@ module Shimmer::FileProxyExtensions
   end
 
   def variant
-    transformation_options = {resize_to_limit: resize, format: :webp}
+    resize_array = process_resize(resize)
+
+    transformation_options = {resize_to_limit: resize_array, format: :webp}
     transformation_options[:quality] = quality if quality
 
     Rails.logger.info "Transformation options: #{transformation_options.inspect} for #{blob.id} with resize: #{resize.inspect} and quality: #{quality.inspect}"
@@ -138,6 +140,16 @@ module Shimmer::FileProxyExtensions
   end
 
   private
+
+  def process_resize(resize)
+    return nil unless resize
+
+    if resize.is_a?(String) && resize.include?("x")
+      resize.split("x").map(&:to_i)
+    elsif resize.is_a?(Array)
+      resize
+    end
+  end
 
   def id
     @id ||= message_verifier.generate([blob_id, resize, quality])
