@@ -118,9 +118,8 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/interview (interview_video_sections)
   def interview
-    interview_videos = Video.where(category: "interview")
-    @videos = Video::Filter.new(interview_videos, filtering_params:, user: current_user).videos
-      .has_dancer.not_hidden.from_active_channels
+    @videos = Video.where(category: "interview")
+      .has_dancer.not_hidden.from_active_channels.recent_trending
       .limit(500)
       .preload(Video.search_includes)
       .load_async
@@ -129,9 +128,8 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/workshop (workshop_video_sections)
   def workshop
-    class_videos = Video.where(category: ["class", "workshop"])
-    @videos = Video::Filter.new(class_videos, filtering_params:, user: current_user).videos
-      .not_hidden.from_active_channels
+    @videos = Video.where(category: ["class", "workshop"])
+      .not_hidden.from_active_channels.recent_trending
       .limit(500)
       .preload(Video.search_includes)
       .load_async
