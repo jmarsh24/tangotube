@@ -35,7 +35,7 @@ namespace :videos do
       .update_all(category: "class")
 
     Video.where(category: nil)
-      .where("normalized_title LIKE ?", "#workshop")
+      .where("normalized_title LIKE ?", "%workshop%")
       .update_all(category: "workshop")
   end
 end
