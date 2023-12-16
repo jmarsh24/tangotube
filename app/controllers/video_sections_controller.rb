@@ -6,7 +6,7 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/trending (trending_video_sections)
   def trending
-    videos = Video::Search.new(filtering_params:, sort: "trending_5", user: current_user).videos
+    videos = Video::Search.new(filtering_params:, sort: "older_trending", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -50,7 +50,7 @@ class VideoSectionsController < ApplicationController
   def event
     @events = Event.most_popular.limit(24)
     @event = @events.sample
-    @videos = Video::Search.new(filtering_params: filtering_params.merge(event: @event.slug, year: @year), sort: "trending_5", user: current_user).videos
+    @videos = Video::Search.new(filtering_params: filtering_params.merge(event: @event.slug, year: @year), sort: "older_trending", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)

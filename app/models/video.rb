@@ -98,12 +98,12 @@ class Video < ApplicationRecord
   scope :not_watched, ->(user_id) { where.not(id: Watch.where(user_id:).select(:video_id)) }
   scope :year, ->(upload_date_year) { where(upload_date_year:) }
   scope :within_week_of, ->(date) { where(upload_date: (date - 7.days)..(date + 7.days)) }
-  scope :most_popular, -> { trending_1 }
-  scope :trending_1, -> { joins(:video_score).order("video_score.score_1 DESC") }
-  scope :trending_2, -> { joins(:video_score).order("video_score.score_2 DESC") }
-  scope :trending_3, -> { joins(:video_score).order("video_score.score_3 DESC") }
-  scope :trending_4, -> { joins(:video_score).order("video_score.score_4 DESC") }
-  scope :trending_5, -> { joins(:video_score).order("video_score.score_5 DESC") }
+  scope :most_popular, -> { recent_trending }
+  scope :recent_trending, -> { joins(:video_score).order("video_score.score_1 DESC") }
+  scope :popular_trending, -> { joins(:video_score).order("video_score.score_2 DESC") }
+  scope :randomized_trending, -> { joins(:video_score).order("video_score.score_3 DESC") }
+  scope :balanced_trending, -> { joins(:video_score).order("video_score.score_4 DESC") }
+  scope :older_trending, -> { joins(:video_score).order("video_score.score_5 DESC") }
   scope :trending_6, -> { joins(:video_score).order("video_score.score_6 DESC") }
   scope :from_active_channels, -> { joins(:channel).where("channel.active" => true) }
   scope :music_recognized, -> { from_active_channels.where(acr_response_code: 0) }
