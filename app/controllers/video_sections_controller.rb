@@ -129,7 +129,7 @@ class VideoSectionsController < ApplicationController
   # @route GET /video_sections/workshop (workshop_video_sections)
   def workshop
     @videos = Video.where(category: ["class", "workshop"])
-      .not_hidden.from_active_channels.recent_trending
+      .has_dancer.not_hidden.from_active_channels.recent_trending
       .limit(500)
       .preload(Video.search_includes)
       .load_async
