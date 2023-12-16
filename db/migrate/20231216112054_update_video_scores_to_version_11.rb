@@ -3,6 +3,5 @@
 class UpdateVideoScoresToVersion11 < ActiveRecord::Migration[7.1]
   def change
     update_view :video_scores, version: 11, revert_to_version: 10, materialized: true
-    remove_index :video_scores, :score_6
   end
 end
