@@ -9,9 +9,9 @@ namespace :videos do
 
   desc "update categories"
   task update_categories: :environment do
-    Video.where("normalized_title LIKE ?", 'entrevista')
-      .or(Video.where("normalized_title LIKE ?", 'interview'))
-      .or(Video.where("normalized_title LIKE ?", "tengo una pregunta para vos"))
+    Video.where("normalized_title LIKE ?", "%entrevista%")
+      .or(Video.where("normalized_title LIKE ?", "%interview%"))
+      .or(Video.where("normalized_title LIKE ?", "%tengo una pregunta para vos%"))
       .where(song_id: nil)
       .update_all(category: "interview")
 
@@ -22,20 +22,20 @@ namespace :videos do
       .update_all(category: "performance")
 
     Video.where(category: nil)
-      .where("normalized_title LIKE ?", 'class')
-      .where("normalized_title LIKE ?", 'clase')
-      .where("normalized_title LIKE ?", 'resume')
-      .where("normalized_title LIKE ?", 'musicality')
-      .where("normalized_title LIKE ?", 'demo')
-      .where("normalized_title LIKE ?", 'sacadas')
-      .where("normalized_title LIKE ?", 'giros')
-      .where("normalized_title LIKE ?", 'colgadas')
-      .where("normalized_title LIKE ?", 'technique')
-      .where("normalized_title LIKE ?", 'variacion')
+      .where("normalized_title LIKE ?", "%class%")
+      .where("normalized_title LIKE ?", "%clase%")
+      .where("normalized_title LIKE ?", "%resume%")
+      .where("normalized_title LIKE ?", "%musicality%")
+      .where("normalized_title LIKE ?", "%demo%")
+      .where("normalized_title LIKE ?", "%sacadas%")
+      .where("normalized_title LIKE ?", "%giros%")
+      .where("normalized_title LIKE ?", "%colgadas%")
+      .where("normalized_title LIKE ?", "%technique%")
+      .where("normalized_title LIKE ?", "%variacion%")
       .update_all(category: "class")
 
     Video.where(category: nil)
-      .where("normalized_title LIKE ?", 'workshop')
+      .where("normalized_title LIKE ?", "#workshop")
       .update_all(category: "workshop")
   end
 end
