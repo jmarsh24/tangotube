@@ -118,7 +118,7 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/interview (interview_video_sections)
   def interview
-    interview_videos = Video.fuzzy_title_match(["entrevista", "interview", "tengo una pregunta para vos", "podcast", "tango musicality", "documentary", "tango history", "opinions", "tango music visualization", "tango magazine", "what is tango freestyle"])
+    interview_videos = Video.where(category: "interview")
     @videos = Video::Filter.new(interview_videos, filtering_params:, user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(500)
@@ -129,7 +129,7 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/workshop (workshop_video_sections)
   def workshop
-    class_videos = Video.fuzzy_title_match(["workshop", "class", "clase", "resume", "musicality", "demo", "sacadas", "giros", "colgadas", "technique", "variacion"])
+    class_videos = Video.where(category: ["class", "workshop"])
     @videos = Video::Filter.new(class_videos, filtering_params:, user: current_user).videos
       .not_hidden.from_active_channels
       .limit(500)
