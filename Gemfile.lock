@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/jmarsh24/shimmer
-  revision: 35531de6c01d97d9cb69b82841eb1a729ff0bd9d
+  revision: d6a84e2856a020b19fb22d6078b26e78d5c3fea5
   branch: feature/refactor_file_helper
   specs:
     shimmer (0.0.1)
