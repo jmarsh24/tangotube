@@ -47,6 +47,8 @@ module TangoTube
     config.action_mailer.default_url_options({host:})
     config.action_mailer.asset_host = "#{protocol}://#{host}"
     config.active_storage.variant_processor = :vips
+    # Enable strict loading to avoid N+1 queries
+    config.active_record.strict_loading_by_default = true
 
     ActiveRecord::Tasks::DatabaseTasks.fixtures_path = Rails.root.join("spec/fixtures")
   end

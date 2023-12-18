@@ -74,7 +74,7 @@ class VideosController < ApplicationController
   end
 
   def set_video
-    @video = Video.find_by(youtube_id: params[:v] || params[:id])
+    @video = Video.includes(:channel).find_by(youtube_id: params[:v] || params[:id])
   end
 
   def filtering_params

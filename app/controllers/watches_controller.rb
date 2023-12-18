@@ -7,7 +7,10 @@ class WatchesController < ApplicationController
       redirect_to root_path and return
     end
 
-    @video = Video.find_by(youtube_id: params[:v]) || Import::Importer.new.import(params[:v])
+    @video = Video.includes(:performance_video, :performance, :leaders, :followers, :song, :event, :dancer_videos, :dancers, :song, :orchestra,
+      thumbnail_attachment: :blob, # Eager load video's thumbnail
+      channel: {thumbnail_attachment: :blob})
+      .find_by(youtube_id: params[:v]) || Import::Importer.new.import(params[:v])
 
     if @video
       if @video.music_scanned? && @video.updated_at < 1.week.ago

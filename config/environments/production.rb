@@ -113,4 +113,6 @@ Rails.application.configure do
 
   config.log_tags = [:request_id]
   config.middleware.swap(Rails::Rack::Logger, SilentLoggerMiddleware, config.log_tags)
+  # Don't raise in production, please
+  config.active_record.action_on_strict_loading_violation = :log
 end

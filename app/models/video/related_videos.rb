@@ -14,31 +14,34 @@ class Video::RelatedVideos
     filtering_params[:leader] = @video.leaders.first.slug if @video.leaders.present?
     filtering_params[:follower] = @video.followers.first.slug if @video.followers.present?
 
-    Video::Filter.new(Video.all.includes(:dancers), filtering_params:, excluded_youtube_id: @video.youtube_id).videos
+    Video::Filter.new(Video.includes(:dancers), filtering_params:, excluded_youtube_id: @video.youtube_id).videos
   end
 
   def with_same_event
     return Video.none unless @video.event.present?
 
-    videos = Video.within_week_of(@video.upload_date)
-    event = @video.event.slug
-    Video::Filter.new(videos, filtering_params: {event:, hidden: false}, excluded_youtube_id: @video.youtube_id).videos
+    event_id = @video.event.id
+    Video.includes(:dancers).within_week_of(@video.upload_date)
+      .where(event_id:, hidden: false)
+      .where.not(youtube_id: @video.youtube_id)
   end
 
   def with_same_song
     return Video.none unless @video.song.present?
 
-    videos = Video.joins(:dancer_videos)
-    song = @video.song.slug
-    video_ids = Video::Filter.new(videos, filtering_params: {song:, hidden: false}, excluded_youtube_id: @video.youtube_id).videos.pluck(:id)
-    Video.where(id: video_ids)
+    song_id = @video.song.id
+    Video.includes(:dancers)
+      .where(song_id:, hidden: false)
+      .where.not(youtube_id: @video.youtube_id)
   end
 
   def with_same_channel
     return Video.none unless @video.channel.present? && @video.channel.videos_count > 1
 
-    channel = @video.channel.youtube_slug
-    Video::Filter.new(Video.all, filtering_params: {channel:, hidden: false}, excluded_youtube_id: @video.youtube_id).videos
+    channel_id = @video.channel_id
+    Video.includes(:dancers)
+      .where(channel_id:, hidden: false)
+      .where.not(youtube_id: @video.youtube_id)
   end
 
   def with_same_performance

@@ -3,7 +3,7 @@
 class RelatedVideosController < ApplicationController
   # @route GET /related_videos/:id (related_video)
   def show
-    @video = Video.find(params[:id])
+    @video = Video.includes(:leaders, :followers, :performance, :song, :channel, :event, :dancer_videos, :dancers).find(params[:id])
     related_videos = Video::RelatedVideos.new(@video)
     @type = params[:type] || related_videos.available_types.first
 
