@@ -60,7 +60,6 @@ accessories:
       secret:
         - POSTGRES_PASSWORD
     volumes:
-      - /root/tangotube-db/etc/postgresql/15.4/main/postgresql.conf:/etc/postgresql/15.4/main/postgresql.conf
       - /var/postgres/data:/var/lib/postgresql/data
 
 healthcheck:
