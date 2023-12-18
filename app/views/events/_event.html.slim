@@ -1,4 +1,5 @@
 = link_to root_path(event: event.slug), class: "card" do
   = image_tag event.profile_image, width: 312, alt: t(".event_image_alt", event_title: event.title), class: "avatar avatar--xl"
   .card__content
-    .card__title = event.title
+    .card__title = event.title.split.first
+    .card__title = event.title.split[1..-1].join(" ")
