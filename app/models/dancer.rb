@@ -31,8 +31,8 @@ class Dancer < ApplicationRecord
   has_many :partners, through: :couples
   has_many :performances, through: :videos
 
-  has_one_attached :profile_image
-  has_one_attached :cover_image
+  has_one_attached :profile_image, dependent: :purge_later
+  has_one_attached :cover_image, dependent: :purge_later
   enum gender: {male: "male", female: "female"}
 
   normalizes :match_terms, with: ->(match_terms) {

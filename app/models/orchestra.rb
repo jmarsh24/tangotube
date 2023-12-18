@@ -23,8 +23,8 @@ class Orchestra < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  has_one_attached :profile_image
-  has_one_attached :cover_image
+  has_one_attached :profile_image, dependent: :purge_later
+  has_one_attached :cover_image, dependent: :purge_later
 
   after_validation :set_slug, only: [:create, :update]
 

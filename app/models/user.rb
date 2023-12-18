@@ -39,7 +39,7 @@ class User < ApplicationRecord
   has_many :watched_videos, through: :watches, source: :video
   has_many :recent_searches, dependent: :destroy
 
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :purge_later
 
   validates :email, presence: true, uniqueness: true
   validates_confirmation_of :password
