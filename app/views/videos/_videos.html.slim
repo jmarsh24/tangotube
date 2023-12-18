@@ -1,7 +1,7 @@
 #videos.stack.stack--xs
   - if params[:sort].present?
     = paginated videos, class: "grid grid--videos"
-  - elsif videos.present? && params[:sort].blank? && params[:year].blank? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:channel] || params[:event] || params[:song] || params[:genre] || params[:type]  )
+  - elsif videos.present? && params[:sort].blank? && params[:year].blank? && (params[:leader] || params[:follower] || params[:couple] || params[:orchestra] || params[:channel] || params[:event] || params[:song] || params[:genre] || params[:category]  )
     = turbo_frame_tag :trending_videos, src: trending_video_sections_path(filtering_params), target: "_top"
       .carousel
         .carousel__videos

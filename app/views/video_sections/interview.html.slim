@@ -2,7 +2,7 @@
   .top-section
     .carousel
       .carousel__header
-        = link_to root_path(filtering_params.merge(type: "interview")) do
-        = link_to t(".interview_videos_header"), root_path(filtering_params.merge(type: "interview")), class: "button button--icon-chevron-right button--icon-right heading-4"
+        = link_to root_path(filtering_params.merge(category: "interview")) do
+        = link_to t(".interview_videos_header"), root_path(filtering_params.merge(category: "interview")), class: "button button--icon-chevron-right button--icon-right heading-4"
       .carousel__videos
         = render @videos
