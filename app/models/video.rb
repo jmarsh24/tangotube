@@ -32,6 +32,7 @@
 #  likes_count         :integer          default(0)
 #  watches_count       :integer          default(0)
 #  features_count      :integer          default(0)
+#  category            :enum
 #
 class Video < ApplicationRecord
   include Featureable
@@ -89,6 +90,7 @@ class Video < ApplicationRecord
   scope :hd, ->(hd) { where(hd:) }
   scope :hidden, -> { where(hidden: true) }
   scope :not_hidden, -> { where(hidden: false) }
+  scope :type, ->(category) { where(category:) }
   scope :liked, ->(user) { joins(:likes).where(likes: {likeable_type: "Video", user_id: user.id}) }
   scope :orchestra, ->(slug) { joins(song: :orchestra).where(orchestras: {slug:}) }
   scope :song, ->(slug) { joins(:song).where(songs: {slug:}) }

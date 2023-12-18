@@ -92,7 +92,8 @@ class VideosController < ApplicationController
       :liked,
       :search,
       :dancer,
-      :couple
+      :couple,
+      :type
     ).to_h
   end
 end
