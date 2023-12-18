@@ -11,8 +11,8 @@ namespace :videos do
   task update_categories: :environment do
     Video.where("normalized_title LIKE ?", "%entrevista%")
       .or(Video.where("normalized_title LIKE ?", "%interview%"))
-      .or(Video.where("normalized_title LIKE ?", "%tengo una pregunta para vos%"))
-      .where(song_id: nil)
+      .or(Video.where("? <% normalized_title LIKE ?", "tengo una pregunta para vos"))
+      .or(Video.where("? <% normalized_title LIKE ?", "documentary"))
       .update_all(category: "interview")
 
     Video.joins(:dancer_videos)
