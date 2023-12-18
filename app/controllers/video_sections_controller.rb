@@ -6,7 +6,7 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/trending (trending_video_sections)
   def trending
-    videos = Video::Search.new(filtering_params:, sort: "older_trending", user: current_user).videos
+    videos = Video::Search.new(filtering_params:, sort: "popular_trending", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -28,7 +28,7 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/older (older_video_sections)
   def older
-    videos = Video::Search.new(filtering_params:, sort: "oldest", user: current_user).videos
+    videos = Video::Search.new(filtering_params:, sort: "older_trending", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
