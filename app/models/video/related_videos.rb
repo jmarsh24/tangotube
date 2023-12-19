@@ -9,9 +9,9 @@ class Video::RelatedVideos
 
   def with_same_dancers
     return Video.none unless @video.leaders.present? || @video.followers.present?
-
+    dancer_id = @video.leaders.pluck(:id) + @video.followers.pluck(:id)
     Video.includes(:dancer_videos)
-      .where(dancer_videos: {dancer_id: [@video.leaders.first.id, @video.followers.first.id]})
+      .where(dancer_videos: {dancer_id:})
       .where.not(youtube_id: @video.youtube_id)
       .recent_trending
   end
