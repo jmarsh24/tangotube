@@ -31,6 +31,7 @@ class Video::RelatedVideos
 
     song_id = @video.song.id
     Video.includes(:dancers)
+      .has_dancer
       .where(song_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
       .recent_trending
