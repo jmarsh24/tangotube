@@ -9,9 +9,11 @@ class Video::RelatedVideos
 
   def with_same_dancers
     return Video.none unless @video.leaders.present? || @video.followers.present?
-    dancer_id = @video.leaders.pluck(:id) + @video.followers.pluck(:id)
-    Video.includes(:dancer_videos)
-      .where(dancer_videos: {dancer_id:})
+
+    dancer_ids = @video.leaders.pluck(:id) + @video.followers.pluck(:id)
+
+    Video.includes(Video.search_includes)
+      .where(id: DancerVideo.select(:video_id).where(dancer_id: dancer_ids))
       .where.not(youtube_id: @video.youtube_id)
       .recent_trending
   end
@@ -20,7 +22,7 @@ class Video::RelatedVideos
     return Video.none unless @video.event.present?
 
     event_id = @video.event.id
-    Video.includes(:dancers).within_week_of(@video.upload_date)
+    Video.includes(Video.search_includes).within_week_of(@video.upload_date)
       .has_dancer
       .where(event_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
@@ -31,7 +33,7 @@ class Video::RelatedVideos
     return Video.none unless @video.song.present?
 
     song_id = @video.song.id
-    Video.includes(:dancers)
+    Video.includes(Video.search_includes)
       .has_dancer
       .where(song_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
@@ -42,7 +44,7 @@ class Video::RelatedVideos
     return Video.none unless @video.channel.present? && @video.channel.videos_count > 1
 
     channel_id = @video.channel_id
-    Video.includes(:dancers)
+    Video.includes(Video.search_includes)
       .has_dancer
       .where(channel_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
@@ -52,7 +54,7 @@ class Video::RelatedVideos
   def with_same_performance
     return Video.none unless @video.performance.present?
 
-    @video.performance.videos.preload(:dancers).order("performance_videos.position")
+    @video.performance.videos.preload(Video.search_includes).order("performance_videos.position")
   end
 
   def with_same_orchestra
@@ -62,7 +64,7 @@ class Video::RelatedVideos
     orchestra_id = @video.song.orchestra_id
 
     # Return videos with the same orchestra, excluding the current video
-    Video.includes(:dancers)
+    Video.includes(Video.search_includes)
       .joins(:song, :video_score)
       .has_dancer
       .where(songs: {orchestra_id:}, hidden: false)
