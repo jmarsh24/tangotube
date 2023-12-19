@@ -21,6 +21,7 @@ class Video::RelatedVideos
 
     event_id = @video.event.id
     Video.includes(:dancers).within_week_of(@video.upload_date)
+      .has_dancer
       .where(event_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
       .recent_trending
@@ -42,6 +43,7 @@ class Video::RelatedVideos
 
     channel_id = @video.channel_id
     Video.includes(:dancers)
+      .has_dancer
       .where(channel_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
       .recent_trending
@@ -62,6 +64,7 @@ class Video::RelatedVideos
     # Return videos with the same orchestra, excluding the current video
     Video.includes(:dancers)
       .joins(:song, :video_score)
+      .has_dancer
       .where(songs: {orchestra_id:}, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
       .recent_trending
