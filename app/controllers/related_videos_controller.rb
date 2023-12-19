@@ -18,6 +18,8 @@ class RelatedVideosController < ApplicationController
       related_videos.with_same_channel
     when "same_performance"
       related_videos.with_same_performance
+    when "same_orchestra"
+      related_videos.with_same_orchestra
     else
       Video.none
     end

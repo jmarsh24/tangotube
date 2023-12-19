@@ -1,12 +1,14 @@
 #related-videos-links
   .stack.stack--line.stack--sm
-    - if video.performance.present?
+    - if video.performance.present? && @video.performance.videos_count > 1
       = link_to "Same Performance", related_video_path(id: video.id, type: "same_performance"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--sm", type == "same_performance" ? "active" : ""]
     - if @video.leaders.present? || @video.followers.present?
       = link_to "Same Dancers", related_video_path(id: video.id, type: "same_dancers"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--sm", type == "same_dancers" ? "active" : ""]
-    - if video.song.present?
+    - if video.song.present? && @video.song.videos_count > 2
       = link_to "Same Song", related_video_path(id: video.id, type: "same_song"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--sm", type == "same_song" ? "active" : ""]
-    - if video.event.present?
+    - if video.event.present? && @video.event.videos_count > 2
       = link_to "Same Event", related_video_path(id: video.id, type: "same_event"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--sm", type == "same_event" ? "active" : ""]
     - if video.channel.present? && @video.channel.videos_count > 1
       = link_to "Same Channel", related_video_path(id: video.id, type: "same_channel"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--sm", type == "same_channel" ? "active" : ""]
+    - if video.orchestra.present? && @video.orchestra.videos_count > 1
+      = link_to "Same Orchestra", related_video_path(id: video.id, type: "same_orchestra"), "data-turbo-stream": true, class: ["button", "button--secondary", "button--sm", type == "same_orchestra" ? "active" : ""]

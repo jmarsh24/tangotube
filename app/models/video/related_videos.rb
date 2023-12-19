@@ -10,11 +10,10 @@ class Video::RelatedVideos
   def with_same_dancers
     return Video.none unless @video.leaders.present? || @video.followers.present?
 
-    filtering_params = {hidden: false}
-    filtering_params[:leader] = @video.leaders.first.slug if @video.leaders.present?
-    filtering_params[:follower] = @video.followers.first.slug if @video.followers.present?
-
-    Video::Filter.new(Video.includes(:dancers), filtering_params:, excluded_youtube_id: @video.youtube_id).videos
+    Video.includes(:dancer_videos)
+      .where(dancer_videos: {dancer_id: [@video.leaders.first.id, @video.followers.first.id]})
+      .where.not(youtube_id: @video.youtube_id)
+      .recent_trending
   end
 
   def with_same_event
@@ -24,6 +23,7 @@ class Video::RelatedVideos
     Video.includes(:dancers).within_week_of(@video.upload_date)
       .where(event_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
+      .recent_trending
   end
 
   def with_same_song
@@ -33,6 +33,7 @@ class Video::RelatedVideos
     Video.includes(:dancers)
       .where(song_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
+      .recent_trending
   end
 
   def with_same_channel
@@ -42,6 +43,7 @@ class Video::RelatedVideos
     Video.includes(:dancers)
       .where(channel_id:, hidden: false)
       .where.not(youtube_id: @video.youtube_id)
+      .recent_trending
   end
 
   def with_same_performance
@@ -50,13 +52,28 @@ class Video::RelatedVideos
     @video.performance.videos.preload(:dancers).order("performance_videos.position")
   end
 
+  def with_same_orchestra
+    return Video.none unless @video&.song&.orchestra.present? && @video.song.orchestra.videos_count > 1
+
+    # Fetch the orchestra_id from @video's song
+    orchestra_id = @video.song.orchestra_id
+
+    # Return videos with the same orchestra, excluding the current video
+    Video.includes(:dancers)
+      .joins(:song, :video_score)
+      .where(songs: {orchestra_id:}, hidden: false)
+      .where.not(youtube_id: @video.youtube_id)
+      .recent_trending
+  end
+
   def available_types
     types = []
-    types << "same_performance" if @video.performance.present? && @video.performance.videos_count > 1
-    types << "same_dancers" if @video.leaders.present? || @video.followers.present? && Video.where(leader: @video.leaders.first, follower: @video.followers.first).count > 1
-    types << "same_song" if @video.song.present? && @video.song.videos_count > 1
-    types << "same_event" if @video.event.present? && @video.event.videos_count > 1
-    types << "same_channel" if @video.channel.present? && @video.channel.videos_count > 1
+    types << "same_performance" if @video.performance.present?
+    types << "same_dancers" if @video.leaders.present? || @video.followers.present?
+    types << "same_song" if @video.song.present?
+    types << "same_event" if @video.event.present?
+    types << "same_channel" if @video.channel.present?
+    types << "same_orchestra" if @video.orchestra.present?
     types
   end
 end
