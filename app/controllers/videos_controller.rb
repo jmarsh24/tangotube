@@ -53,9 +53,9 @@ class VideosController < ApplicationController
   # @route POST /videos/:id/process_metadata (process_metadata_video)
   def process_metadata
     if !(@video.acr_response_code == 0 || @video.acr_response_code == 1001)
-      UpdateVideoJob.perform_later(@video)
-    else
       UpdateWithMusicRecognizerVideoJob.perform_later(@video)
+    else
+      UpdateVideoJob.perform_later(@video)
     end
     head :ok
   end
