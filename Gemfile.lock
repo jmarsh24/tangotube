@@ -774,6 +774,7 @@ DEPENDENCIES
   translate_client
   turbo-rails
   vcr
+  view_component
   vite_rails
   web-console
   webmock

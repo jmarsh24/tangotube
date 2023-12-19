@@ -1,0 +1,6 @@
+= link_to @link_path, class: ["filter-chip", ("filter-chip--highlighted" if @highlighted), ("active" if @active)], data: { turbo_stream: true } do
+  = @name
+  - if @active && @closeable
+    .filter-chip__close
+  - else
+    .filter-chip__dropdown

@@ -33,6 +33,10 @@
     .filter-chip:hover {
       background-color: var(--color-red-500);
     }
+
+    .filter-chip__close {
+      background-color: var(--color-red-100);
+    }
   }
 
   &__count {
@@ -53,7 +57,7 @@
     position: relative;
     width: 14px;
     height: 14px;
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-neutral-0);
     border-radius: 50%;
     cursor: pointer;
 

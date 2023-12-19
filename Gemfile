@@ -63,6 +63,8 @@ gem "pghero"
 gem "strong_migrations"
 gem "pg_query", ">= 2"
 
+gem "view_component"
+
 # Assets
 gem "vite_rails"
 gem "propshaft"

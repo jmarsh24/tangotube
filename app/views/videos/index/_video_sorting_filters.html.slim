@@ -17,18 +17,17 @@
         - filter_chips << [label, link_path, active, false, closeable]
 
     - [:leader, :follower, :orchestra, :song, :genre, :year, :event, :channel].each do |param_key|
-      - if param_key == :channel && params[param_key].present?
-        - channel = Channel.find_by(youtube_slug: params[param_key])
-        - name = channel ? channel.title : "Unknown Channel"
-        - link_path = modal_path facet_path(id: param_key.to_s, params: @filtering_params)
+      - if params[param_key].present?
+        - name = params[param_key].titleize
+        - link_path = root_path(params: @filtering_params.except(param_key).merge(filtering: true))
         - active = params[param_key].present?
-        - filter_chips << [name, link_path, active, false, false]
+        - filter_chips << [name, link_path, active, false, true]
       - else
         - name = params[param_key].present? ? params[param_key].titleize : param_key.to_s.titleize
         - link_path = modal_path facet_path(id: param_key.to_s, params: @filtering_params)
-        - active = params[param_key].present?
+        - active = params[param_key].present? 
         - filter_chips << [name, link_path, active, false, false]
 
     - filter_chips.sort_by! { |name, link_path, active, highlighted, closeable| active ? 0 : 1 } if @filtering_params.present?
     - filter_chips.each do |name, link_path, active, highlighted, closeable|
-      = render "components/filter_chip", name:, link_path:, active:, highlighted:, closeable:
+      = render FilterChipComponent.new(name:, link_path:, active:, highlighted:, closeable:)
