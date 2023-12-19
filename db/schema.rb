@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_19_132135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -107,7 +107,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
     t.datetime "updated_at", null: false
     t.index ["couple_id"], name: "index_couple_videos_on_couple_id"
     t.index ["video_id", "couple_id"], name: "index_couple_videos_on_video_id_and_couple_id", unique: true
-    t.index ["video_id"], name: "index_couple_videos_on_video_id"
   end
 
   create_table "couples", force: :cascade do |t|
@@ -119,7 +118,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
     t.string "slug"
     t.string "unique_couple_id"
     t.index ["dancer_id", "partner_id"], name: "index_couples_on_dancer_id_and_partner_id", unique: true
-    t.index ["dancer_id"], name: "index_couples_on_dancer_id"
     t.index ["partner_id"], name: "index_couples_on_partner_id"
     t.index ["unique_couple_id"], name: "index_couples_on_unique_couple_id"
   end
@@ -131,7 +129,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
     t.datetime "updated_at", null: false
     t.enum "role", enum_type: "role_new"
     t.index ["dancer_id", "video_id"], name: "index_dancer_videos_on_dancer_id_and_video_id", unique: true
-    t.index ["dancer_id"], name: "index_dancer_videos_on_dancer_id"
     t.index ["video_id"], name: "index_dancer_videos_on_video_id"
   end
 
@@ -189,7 +186,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
     t.datetime "updated_at", null: false
     t.index ["featureable_type", "featureable_id"], name: "index_features_on_featureable"
     t.index ["user_id", "featureable_type", "featureable_id"], name: "index_features_on_user_and_featureable", unique: true
-    t.index ["user_id"], name: "index_features_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -199,7 +195,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
     t.string "scope"
     t.datetime "created_at"
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
@@ -268,7 +263,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
     t.text "job_class"
     t.integer "error_event", limit: 2
     t.index ["active_job_id", "created_at"], name: "index_good_jobs_on_active_job_id_and_created_at"
-    t.index ["active_job_id"], name: "index_good_jobs_on_active_job_id"
     t.index ["batch_callback_id"], name: "index_good_jobs_on_batch_callback_id", where: "(batch_callback_id IS NOT NULL)"
     t.index ["batch_id"], name: "index_good_jobs_on_batch_id", where: "(batch_id IS NOT NULL)"
     t.index ["concurrency_key"], name: "index_good_jobs_on_concurrency_key_when_unfinished", where: "(finished_at IS NULL)"
@@ -288,7 +282,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
     t.datetime "updated_at", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
     t.index ["user_id", "likeable_type", "likeable_id"], name: "index_likes_on_user_and_likeable", unique: true
-    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "orchestras", force: :cascade do |t|
@@ -318,7 +311,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_16_121755) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["performance_id", "video_id"], name: "index_performance_videos_on_performance_id_and_video_id"
-    t.index ["performance_id"], name: "index_performance_videos_on_performance_id"
     t.index ["video_id"], name: "index_performance_videos_on_video_id"
   end
 
