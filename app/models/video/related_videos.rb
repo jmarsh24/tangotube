@@ -53,7 +53,7 @@ class Video::RelatedVideos
   def available_types
     types = []
     types << "same_performance" if @video.performance.present? && @video.performance.videos_count > 1
-    types << "same_dancers" if @video.leaders.present? || @video.followers.present? && @video.where(leader: @video.leaders.first, follower: @video.followers.first).count > 1
+    types << "same_dancers" if @video.leaders.present? || @video.followers.present? && Video.where(leader: @video.leaders.first, follower: @video.followers.first).count > 1
     types << "same_song" if @video.song.present? && @video.song.videos_count > 1
     types << "same_event" if @video.event.present? && @video.event.videos_count > 1
     types << "same_channel" if @video.channel.present? && @video.channel.videos_count > 1
