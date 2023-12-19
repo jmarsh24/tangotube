@@ -5,7 +5,7 @@ class SyncAllChannelVideosJob < ApplicationJob
 
   def perform
     Channel.active.find_each do |channel|
-      SyncVideosForChannelJob.perform_later(channel, use_scraper: false, use_music_recognizer: true)
+      SyncVideosForChannelJob.perform_later(channel)
     end
   end
 end
