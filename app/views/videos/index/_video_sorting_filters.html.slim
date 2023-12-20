@@ -2,7 +2,7 @@
   .scrollable-bar.scrollable-bar--padded
     - active_filters = @filtering_params.to_h.count
     - if @filtering_params.present? || params[:sort].present?
-      = link_to  t(".clear_all"), root_path(filtering: true), class: ["filter-chip ", ("active" if @filtering_params.present?)]
+      = link_to  t(".clear_all"), root_path(filtering: true), class: ["filter-chip ", ("active" if @sorting_params.present?)]
     - filter_chips = []
 
     - if @filtering_params.present? || params[:sort].present?

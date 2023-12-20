@@ -2,5 +2,5 @@
   = @name
   - if @active && @closeable
     .filter-chip__close
-  - else
+  - elsif !@active && !@closeable
     .filter-chip__dropdown
