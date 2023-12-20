@@ -4,18 +4,14 @@
       h2.heading-2.text-align-center = t(".edit_user")
     .content-container.scrollable-container__content
       .stack.stack--xs
-        = form_with model: resource, url: registration_path(resource_name), html: { data: { controller: "cropper" } } do |f|
+        = form_with model: resource, url: registration_path(resource_name) do |f|
           .stack.stack--xs
-            .file-upload
-              = f.file_field :avatar, class: 'file-upload__input', id: 'user_avatar', "data-cropper-target": "input", "data-action": "cropper#updateImage"
-              label#drag_and_drop.file-upload__label for="user_avatar" = t(".drag_and_drop_avatar")
-              .stack#replace_image class=(resource.avatar.attached? ? '' : 'hidden')
-                img.w-picker data-cropper-target="image" src=image_file_path(resource.avatar, width: 300)
-                footer.stack.stack--line.stack--justify-right
-                  label.button.button--link.button--sm.button--tablet-md for="user_avatar" = t(".replace_image")
+            .stack.stack-sm.stack--justify-center
+              = image_tag current_user.avatar_thumbnail, width: 80, class: "avatar avatar--xxl avatar--circle"
+              = f.file_field :avatar
             = f.input :first_name, as: :string, autocomplete: "off", class: "input input__input input--text input--block"
             = f.input :last_name, as: :string, autocomplete: "off", class: "input input__input input--text input--block"
             = f.input :email, as: :email, class: "input input__input input--email input--block"
             = f.input :password, as: :password, class: "input input__input input--text  input--block"
             = f.input :password_confirmation, class: "input input__input input--text input--block"
-            = f.submit t(".save"), "data-action": "click->cropper#submit", class: "button button--primary button--fill"
+            = f.submit t(".save"), class: "button button--primary button--fill"

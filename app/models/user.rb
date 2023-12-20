@@ -112,4 +112,12 @@ class User < ApplicationRecord
   def watch(video)
     watches.create(video:, watched_at: DateTime.now)
   end
+
+  def avatar_thumbnail(width: 80)
+    if avatar.attached?
+      avatar
+    else
+      Gravatar.new(email).url(width:)
+    end
+  end
 end
