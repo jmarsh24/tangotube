@@ -9,7 +9,7 @@ servers:
     cmd: bundle exec puma -C config/puma.rb
   worker:
     hosts:
-      - 91.107.226.121
+      - 49.13.145.88
     cmd: bundle exec good_job start
 registry:
   server: ghcr.io
