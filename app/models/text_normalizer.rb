@@ -9,7 +9,7 @@ class TextNormalizer
   def self.normalize(text)
     return "" if text.nil?
 
-    ascii_text = I18n.transliterate(text)
+    ascii_text = I18n.transliterate(text).gsub("?", "") # fix issue with í not transliterating properly
     # Replace hyphens with spaces instead of just removing them
     normalized_text = ascii_text.gsub("'", "").gsub("-", " ").parameterize(separator: " ").downcase
     STOP_WORDS.each { |_lang, regex| normalized_text.gsub!(regex, "") }

@@ -112,5 +112,13 @@ RSpec.describe Import::MetadataProcessing::DancerMatcher do
       matched_dancers = dancer_matcher.match(video_title:)
       expect(matched_dancers).to eq([agustin_agnez, barbara_ferreyra])
     end
+
+    it "matches names with accents" do
+      video_title = "Bruno Tombari y Rocío Lequio Tears in heaven Frederik Konradsen"
+      bruno_tombari = Dancer.create!(name: "Bruno Tombari")
+      rocio_lequio = Dancer.create!(name: "Rocio Lequio")
+      matched_dancers = dancer_matcher.match(video_title:)
+      expect(matched_dancers).to eq([bruno_tombari, rocio_lequio])
+    end
   end
 end
