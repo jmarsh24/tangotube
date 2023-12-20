@@ -3,7 +3,7 @@
     h2.heading-2.text-align-center = t(".login")
   .content-container
     .stack.stack--xs
-      = form_with model: resource, as: resource_name, url: registration_path(resource_name) do |f|
+      = form_with model: resource, as: resource_name, url: registration_path(resource_name), html: { data: { turbo: false } } do |f|
         .stack.stack--xs
           = f.input :email, as: :email, class: "input input__input input--email input--block"
           = f.input :password, as: :password, class: "input input__input input--text input--block"
