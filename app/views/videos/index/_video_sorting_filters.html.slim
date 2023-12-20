@@ -2,13 +2,16 @@
   .scrollable-bar.scrollable-bar--padded
     - active_filters = @filtering_params.to_h.count
     - if @filtering_params.present? || params[:sort].present?
-      = link_to  t(".clear_all"), root_path(filtering: true), class: ["filter-chip ", ("active" if @sorting_params.present?)]
+      = link_to root_path(filtering: true), class: ["filter-chip ", ("active" if @filtering_params.present?)] do
+        = t(".clear_all")
+        .filter-chip__close
     - filter_chips = []
 
     - if @filtering_params.present? || params[:sort].present?
       - sort_name = params[:sort].present? ? "Sort: #{params[:sort].titleize}" : "Sort: All"
       - sort_link_path = modal_path(sort_videos_path(params))
-      = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: true, highlighted: false, closeable: false
+      - active = params[:sort].present?
+      = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active:, highlighted: false, closeable: false
 
     - if current_user
       - [["New To You", :watched, false, true, true], ["Watched", :watched, true, true, true], ["Liked", :liked, true, true, true]].each do |label, param_key, value, highlighted, closeable|

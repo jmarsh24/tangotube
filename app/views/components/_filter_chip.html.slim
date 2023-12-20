@@ -2,5 +2,7 @@
   = name
   - if active && closeable
     .filter-chip__close
-  - elsif !active && closeable
+  - elsif !active && !closeable
+    .filter-chip__dropdown
+  - else
     .filter-chip__dropdown
