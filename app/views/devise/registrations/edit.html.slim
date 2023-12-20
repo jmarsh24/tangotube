@@ -4,7 +4,7 @@
       h2.heading-2.text-align-center = t(".edit_user")
     .content-container.scrollable-container__content
       .stack.stack--xs
-        = form_with model: resource, url: registration_path(resource_name) do |f|
+        = form_with model: resource, url: registration_path(resource_name), html: { data: { turbo: false } }  do |f|
           .stack.stack--xs
             .stack.stack-sm.stack--justify-center
               = image_tag current_user.avatar_thumbnail, width: 80, class: "avatar avatar--xxl avatar--circle"
