@@ -11,21 +11,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-
+  padding: var(--spacing-xxs);
   &::-webkit-scrollbar {
     width: 0;
     display: none;
-  }
-
-  & > :first-child {
-    padding-left: var(--spacing-xs);
   }
 
   &--vote {
     gap: var(--spacing-xs);
   }
 
-  &--padded {
-    padding: var(--spacing-xxs) 0;
+  &--tablet-unpadded {
+    @include breakpoint-tablet {
+      padding: var(--spacing-xxs) 0;
+    }
   }
 }
