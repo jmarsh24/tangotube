@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DropDuplicateIndexes < ActiveRecord::Migration[7.1]
   def change
     remove_index :couple_videos, column: :video_id
