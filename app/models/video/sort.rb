@@ -12,22 +12,22 @@ class Video::Sort
     song: {column: "songs.title", direction: "asc"},
     orchestra: {column: "orchestras.name", direction: "asc"},
     channel: {column: "channels.title", direction: "asc"},
-    trending_1: {column: "video_scores.score_1", direction: "desc"},
-    trending_2: {column: "video_scores.score_2", direction: "desc"},
-    trending_3: {column: "video_scores.score_3", direction: "desc"},
-    trending_4: {column: "video_scores.score_4", direction: "desc"},
-    trending_5: {column: "video_scores.score_5", direction: "desc"}
+    recent_trending: {column: "video_scores.score_1", direction: "desc"},
+    popular_trending: {column: "video_scores.score_2", direction: "desc"},
+    randomized_trending: {column: "video_scores.score_3", direction: "desc"},
+    balanced_trending: {column: "video_scores.score_4", direction: "desc"},
+    older_trending: {column: "video_scores.score_5", direction: "desc"}
   }.freeze
 
   attr_reader :video_relation, :sort
 
-  def initialize(video_relation, sort: "trending")
+  def initialize(video_relation, sort: "recent_trending")
     @video_relation = video_relation
     @sort = sort.to_sym
   end
 
   def videos
-    return video_relation.public_send([:trending_1, :trending_2, :trending_3, :trending_4, :trending_5].sample) if sort == :trending
+    return video_relation.public_send([:recent_trending, :popular_trending, :randomized_trending, :balanced_trending, :older_trending].sample) if sort == :trending
     return video_relation unless COLUMN_TRANSLATIONS.key?(sort)
 
     column = COLUMN_TRANSLATIONS[sort][:column]

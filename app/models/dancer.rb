@@ -4,19 +4,21 @@
 #
 # Table name: dancers
 #
-#  id           :bigint           not null, primary key
-#  name         :string           not null
-#  user_id      :bigint
-#  bio          :text
-#  slug         :string
-#  reviewed     :boolean          default(FALSE), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  videos_count :integer          default(0), not null
-#  gender       :enum
-#  search_text  :text
-#  match_terms  :text             default([]), is an Array
-#  nickname     :string
+#  id              :bigint           not null, primary key
+#  name            :string           not null
+#  user_id         :bigint
+#  bio             :text
+#  slug            :string
+#  reviewed        :boolean          default(FALSE), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  videos_count    :integer          default(0), not null
+#  gender          :enum
+#  search_text     :text
+#  match_terms     :text             default([]), is an Array
+#  nickname        :string
+#  normalized_name :string
+#  use_trigram     :boolean          default(TRUE), not null
 #
 class Dancer < ApplicationRecord
   belongs_to :user, optional: true
@@ -31,8 +33,8 @@ class Dancer < ApplicationRecord
   has_many :partners, through: :couples
   has_many :performances, through: :videos
 
-  has_one_attached :profile_image
-  has_one_attached :cover_image
+  has_one_attached :profile_image, dependent: :purge_later
+  has_one_attached :cover_image, dependent: :purge_later
   enum gender: {male: "male", female: "female"}
 
   normalizes :match_terms, with: ->(match_terms) {

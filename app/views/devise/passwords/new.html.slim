@@ -3,7 +3,7 @@
     h2.heading-2.text-align-center = t(".new_password")
   .content-container
     .stack.stack--xs
-      = form_for resource, as: resource_name, url: password_path(resource_name) do |f|
+      = form_for resource, as: resource_name, url: password_path(resource_name), html: { data: { turbo: false } } do |f|
         .stack.stack--xs
           = f.input :email, as: :email, autofocus: true, class: "input input__input input--text input--block"
           = f.submit t(".send"), class: "button button--primary button--fill"

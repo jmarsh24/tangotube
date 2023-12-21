@@ -4,6 +4,7 @@
   align-items: flex-start;
 
   &__header {
+    padding: 0 var(--spacing-sm);
   }
 
   &__videos {
@@ -12,6 +13,7 @@
     gap: var(--spacing-md);
     width: 100%;
     overflow: auto;
+    padding: 0 var(--spacing-xs);
 
     scrollbar-width: none;
     &::-webkit-scrollbar {

@@ -1,0 +1,26 @@
+.stack.content-container
+  h1.heading-1.heading-1--bold = t(".contact")
+  = link_to t(".email_me"), "mailto: jmarsh24@gmail.com", class: "email-link"
+
+  .contact-form-section.stack.stack--xs
+    p = t(".contact_form_intro")
+
+    = form_with model: @contact do |f|
+      .stack.stack--xs 
+        = f.label :name
+        = f.text_field :name, required: true, class: "input input__input input--text input--block"
+
+        = f.label :email
+        = f.email_field :email, required: true, class: "input input__input input--email input--block"
+
+        = f.label :message
+        = f.text_area :message, required: true, rows: 10, class: "input input__input input--text input--block"
+
+        = f.submit t(".send_message"), class: "button button--primary button--fill"
+
+  .stack.stack--xs.stack--justify-center
+    h2.heading-2.heading-2-bold = t(".follow_us_on_social_media")
+    .stack.stack--line.stack--justify-center
+      = link_to t(".youtube"), "https://www.youtube.com/tangtubetv", class: "social-link"
+      = link_to t(".twitter"), "https://instagram.com/tangotubetv", class: "social-link"
+      = link_to t(".github"), "https://github.com/jmarsh24/tangotube", class: "social-link"

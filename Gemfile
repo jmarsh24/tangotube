@@ -39,7 +39,7 @@ gem "kaminari"
 gem "pundit"
 gem "rails-i18n"
 gem "safety_mailer"
-gem "shimmer"
+gem "shimmer", git: "https://github.com/jmarsh24/shimmer", branch: "feature/refactor_file_helper"
 gem "slim-rails"
 gem "sitemap_generator"
 gem "streamio-ffmpeg"
@@ -63,6 +63,8 @@ gem "kamal"
 gem "pghero"
 gem "strong_migrations"
 gem "pg_query", ">= 2"
+
+gem "view_component"
 
 # Assets
 gem "vite_rails"

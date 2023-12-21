@@ -13,7 +13,7 @@ class VideosController < ApplicationController
     @search = Video::Search.new(filtering_params:, sort: params[:sort], user: current_user)
     @show_filter_bar = true
 
-    @videos = paginated(@search.videos.not_hidden.from_active_channels.preload(Video.search_includes).load_async, per: 24)
+    @videos = paginated(@search.videos.has_dancer.not_hidden.from_active_channels.preload(Video.search_includes).load_async, per: 24)
     respond_to do |format|
       format.html
       format.turbo_stream do
@@ -52,7 +52,7 @@ class VideosController < ApplicationController
 
   # @route POST /videos/:id/process_metadata (process_metadata_video)
   def process_metadata
-    if !(@video.acr_response_code == 0 || @video.acr_response_code == 1001)
+    if @video.acr_response_code == 0 || @video.acr_response_code == 1001
       UpdateVideoJob.perform_later(@video)
     else
       UpdateWithMusicRecognizerVideoJob.perform_later(@video)
@@ -74,7 +74,7 @@ class VideosController < ApplicationController
   end
 
   def set_video
-    @video = Video.find_by(youtube_id: params[:v] || params[:id])
+    @video = Video.includes(:channel).find_by(youtube_id: params[:v] || params[:id])
   end
 
   def filtering_params
@@ -92,7 +92,8 @@ class VideosController < ApplicationController
       :liked,
       :search,
       :dancer,
-      :couple
+      :couple,
+      :category
     ).to_h
   end
 end

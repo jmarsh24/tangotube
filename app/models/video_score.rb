@@ -11,7 +11,6 @@
 #  score_3     :float
 #  score_4     :float
 #  score_5     :float
-#  score_6     :float
 #
 class VideoScore < ApplicationRecord
   self.primary_key = :video_id

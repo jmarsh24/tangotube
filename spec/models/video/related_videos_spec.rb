@@ -7,8 +7,9 @@ RSpec.describe Video::RelatedVideos do
 
   describe "#with_same_dancers" do
     it "returns videos with same leader and follower" do
-      recommendation = described_class.new(videos(:video_1_featured))
+      VideoScore.refresh
 
+      recommendation = described_class.new(videos(:video_1_featured))
       expect(recommendation.with_same_dancers).to match_array([videos(:video_4_featured)])
     end
   end
@@ -16,24 +17,26 @@ RSpec.describe Video::RelatedVideos do
   describe "#with_same_event" do
     it "returns videos with same event" do
       video = videos(:video_1_featured)
-      recommendation = described_class.new(video)
+
       video_same_event = Video.create!(
         event: video.event,
         channel: video.channel,
         youtube_id: SecureRandom.hex,
         upload_date: video.upload_date + 5.days,
         hidden: false,
-        title: "unnecessary",
-        description: "unnecessary"
+        title: "unnecessary"
       )
+      DancerVideo.create!(dancer: dancers(:carlitos), video: video_same_event, role: "leader")
+      VideoScore.refresh
 
-      expect(recommendation.with_same_event).to match_array([video_same_event])
+      expect(described_class.new(video).with_same_event).to match_array([video_same_event])
     end
   end
 
   describe "#with_same_song" do
     it "returns videos with same song" do
       video = videos(:video_1_featured)
+
       recommendation = described_class.new(video)
       video_same_song = Video.create!(
         event: video.event,
@@ -47,6 +50,7 @@ RSpec.describe Video::RelatedVideos do
       )
       DancerVideo.create!(dancer: video.leaders.first, video: video_same_song, role: "leader")
       DancerVideo.create!(dancer: video.followers.first, video: video_same_song, role: "follower")
+      VideoScore.refresh
 
       expect(recommendation.with_same_song).to match_array([video_same_song])
     end
@@ -55,6 +59,7 @@ RSpec.describe Video::RelatedVideos do
   describe "#with_same_channel" do
     it "returns videos with same channel" do
       video = videos(:video_1_featured)
+
       recommendation = described_class.new(video)
       video_same_channel = Video.create!(
         event: video.event,
@@ -80,6 +85,7 @@ RSpec.describe Video::RelatedVideos do
       )
       DancerVideo.create!(dancer: video.leaders.first, video: video_same_channel_2, role: "leader")
       DancerVideo.create!(dancer: video.followers.first, video: video_same_channel_2, role: "follower")
+      VideoScore.refresh
 
       expect(recommendation.with_same_channel).to match_array([video_same_channel, video_same_channel_2])
     end
@@ -88,6 +94,7 @@ RSpec.describe Video::RelatedVideos do
   describe "#with_same_performance" do
     it "returns videos with same performance" do
       video = videos(:video_1_featured)
+
       recommendation = described_class.new(video)
       video_same_channel = Video.create!(
         event: video.event,

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get "/privacy", to: "pages#privacy"
   get "/terms", to: "pages#terms"
   get "/about", to: "pages#about"
-  get "/contact", to: "pages#contact"
+  get "/support", to: redirect("https://www.patreon.com/tangotube")
 
   resource :manifest, only: :show
 
@@ -95,6 +95,8 @@ Rails.application.routes.draw do
   resources :recent_searches, only: [:index, :create, :destroy]
 
   resource :search, only: [:new, :show]
+
+  resource :contacts, only: [:new, :create]
 
   namespace :search do
     resources :dancers, only: [:index]

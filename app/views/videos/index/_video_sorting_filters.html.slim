@@ -1,14 +1,17 @@
 .navbar__filters id="filter-bar"
-  .scrollable-bar.scrollable-bar--padded
+  .scrollable-bar.scrollable-bar--tablet-unpadded
     - active_filters = @filtering_params.to_h.count
     - if @filtering_params.present? || params[:sort].present?
-      = link_to  t(".clear_all"), root_path(filtering: true), class: ["filter-chip ", ("active" if @filtering_params.present?)]
+      = link_to root_path(filtering: true), class: ["filter-chip ", ("active" if @filtering_params.present?)] do
+        = t(".clear_all")
+        .filter-chip__close
     - filter_chips = []
 
     - if @filtering_params.present? || params[:sort].present?
       - sort_name = params[:sort].present? ? "Sort: #{params[:sort].titleize}" : "Sort: All"
       - sort_link_path = modal_path(sort_videos_path(params))
-      = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active: true, highlighted: false, closeable: false
+      - active = params[:sort].present?
+      = render "components/filter_chip", name: sort_name, link_path: sort_link_path, active:, highlighted: false, closeable: false
 
     - if current_user
       - [["New To You", :watched, false, true, true], ["Watched", :watched, true, true, true], ["Liked", :liked, true, true, true]].each do |label, param_key, value, highlighted, closeable|
@@ -17,18 +20,17 @@
         - filter_chips << [label, link_path, active, false, closeable]
 
     - [:leader, :follower, :orchestra, :song, :genre, :year, :event, :channel].each do |param_key|
-      - if param_key == :channel && params[param_key].present?
-        - channel = Channel.find_by(youtube_slug: params[param_key])
-        - name = channel ? channel.title : "Unknown Channel"
-        - link_path = modal_path facet_path(id: param_key.to_s, params: @filtering_params)
+      - if params[param_key].present?
+        - name = params[param_key].titleize
+        - link_path = root_path(params: @filtering_params.except(param_key).merge(filtering: true))
         - active = params[param_key].present?
-        - filter_chips << [name, link_path, active, false, false]
+        - filter_chips << [name, link_path, active, false, true]
       - else
         - name = params[param_key].present? ? params[param_key].titleize : param_key.to_s.titleize
         - link_path = modal_path facet_path(id: param_key.to_s, params: @filtering_params)
-        - active = params[param_key].present?
+        - active = params[param_key].present? 
         - filter_chips << [name, link_path, active, false, false]
 
     - filter_chips.sort_by! { |name, link_path, active, highlighted, closeable| active ? 0 : 1 } if @filtering_params.present?
     - filter_chips.each do |name, link_path, active, highlighted, closeable|
-      = render "components/filter_chip", name:, link_path:, active:, highlighted:, closeable:
+      = render FilterChipComponent.new(name:, link_path:, active:, highlighted:, closeable:)

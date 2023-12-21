@@ -23,7 +23,8 @@ module Import
           youtube_view_count: metadata.youtube.view_count,
           youtube_like_count: metadata.youtube.like_count,
           youtube_tags: metadata.youtube.tags,
-          hidden: metadata.youtube.blocked
+          hidden: metadata.youtube.blocked,
+          category: CategoryMatcher.new(video_title: metadata.youtube.title, dancer_count: dancers.count).category
         }
         video_data[:dancer_videos] = dancers.map do |dancer|
           role = (dancer.gender == "male") ? "leader" : "follower"

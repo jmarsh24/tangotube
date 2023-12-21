@@ -27,6 +27,8 @@
 #  display_title     :string
 #  spotify_track_id  :string
 #  search_text       :text
+#  normalized_title  :string
+#  normalized_artist :string
 #
 require "rails_helper"
 

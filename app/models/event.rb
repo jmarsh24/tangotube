@@ -21,8 +21,8 @@
 class Event < ApplicationRecord
   has_many :videos, dependent: :nullify
   has_many :dancers, through: :videos
-  has_one_attached :profile_image
-  has_one_attached :cover_image
+  has_one_attached :profile_image, dependent: :purge_later
+  has_one_attached :cover_image, dependent: :purge_later
   has_many :recent_searches, as: :searchable, dependent: :destroy
 
   validates :title, presence: true, uniqueness: true

@@ -2,19 +2,21 @@
 #
 # Table name: dancers
 #
-#  id           :bigint           not null, primary key
-#  name         :string           not null
-#  user_id      :bigint
-#  bio          :text
-#  slug         :string
-#  reviewed     :boolean          default(FALSE), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  videos_count :integer          default(0), not null
-#  gender       :enum
-#  search_text  :text
-#  match_terms  :text             default([]), is an Array
-#  nickname     :string
+#  id              :bigint           not null, primary key
+#  name            :string           not null
+#  user_id         :bigint
+#  bio             :text
+#  slug            :string
+#  reviewed        :boolean          default(FALSE), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  videos_count    :integer          default(0), not null
+#  gender          :enum
+#  search_text     :text
+#  match_terms     :text             default([]), is an Array
+#  nickname        :string
+#  normalized_name :string
+#  use_trigram     :boolean          default(TRUE), not null
 #
 
 unreviewed_dancer:

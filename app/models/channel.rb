@@ -63,7 +63,7 @@ class Channel < ApplicationRecord
     new_video_ids = metadata.video_ids - videos.map(&:youtube_id)
 
     new_video_ids.each do |video_id|
-      ImportVideoJob.perform_later(video_id, use_scraper:, use_music_recognizer:)
+      ImportVideoJob.perform_later(video_id)
     end
 
     removed_video_ids = videos.map(&:youtube_id) - metadata.video_ids

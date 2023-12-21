@@ -3,7 +3,7 @@
 module Import
   module MetadataProcessing
     class EventMatcher
-      MATCH_THRESHOLD = 0.8
+      MATCH_THRESHOLD = 0.9
 
       def match(video_title: nil, video_description: nil)
         normalized_text = TextNormalizer.normalize(video_title + video_description)

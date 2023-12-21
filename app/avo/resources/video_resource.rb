@@ -5,7 +5,7 @@ class VideoResource < Avo::BaseResource
   self.includes = [:channel, :song, :event, :video_score]
   self.search_query = -> { scope.search(params[:q]) }
   self.resolve_query_scope = ->(model_class:) do
-    model_class.trending_1.from_active_channels
+    model_class.recent_trending.from_active_channels
   end
 
   self.find_record_method = ->(model_class:, id:, params:) {

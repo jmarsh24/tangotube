@@ -32,6 +32,7 @@
 #  likes_count         :integer          default(0)
 #  watches_count       :integer          default(0)
 #  features_count      :integer          default(0)
+#  category            :enum
 #
 require "rails_helper"
 

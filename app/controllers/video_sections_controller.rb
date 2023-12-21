@@ -2,10 +2,11 @@
 
 class VideoSectionsController < ApplicationController
   helper_method :filtering_params
+  before_action :require_turbo_frame
 
   # @route GET /video_sections/trending (trending_video_sections)
   def trending
-    videos = Video::Search.new(filtering_params:, sort: "trending_5", user: current_user).videos
+    videos = Video::Search.new(filtering_params:, sort: "popular_trending", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -27,7 +28,7 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/older (older_video_sections)
   def older
-    videos = Video::Search.new(filtering_params:, sort: "oldest", user: current_user).videos
+    videos = Video::Search.new(filtering_params:, sort: "older_trending", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -49,7 +50,7 @@ class VideoSectionsController < ApplicationController
   def event
     @events = Event.most_popular.limit(24)
     @event = @events.sample
-    @videos = Video::Search.new(filtering_params: filtering_params.merge(event: @event.slug, year: @year), sort: "trending_5", user: current_user).videos
+    @videos = Video::Search.new(filtering_params: filtering_params.merge(event: @event.slug, year: @year), sort: "older_trending", user: current_user).videos
       .has_dancer.not_hidden.from_active_channels
       .limit(36)
       .preload(Video.search_includes)
@@ -117,9 +118,8 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/interview (interview_video_sections)
   def interview
-    interview_videos = Video.fuzzy_title_match(["entrevista", "interview", "tengo una pregunta para vos", "podcast", "tango musicality", "documentary", "tango history", "opinions", "tango music visualization", "tango magazine", "what is tango freestyle"])
-    @videos = Video::Filter.new(interview_videos, filtering_params:, user: current_user).videos
-      .has_dancer.not_hidden.from_active_channels
+    @videos = Video.where(category: "interview")
+      .has_dancer.not_hidden.from_active_channels.recent_trending
       .limit(500)
       .preload(Video.search_includes)
       .load_async
@@ -128,9 +128,8 @@ class VideoSectionsController < ApplicationController
 
   # @route GET /video_sections/workshop (workshop_video_sections)
   def workshop
-    class_videos = Video.fuzzy_title_match(["workshop", "class", "clase", "resume", "musicality", "demo", "sacadas", "giros", "colgadas", "technique", "variacion"])
-    @videos = Video::Filter.new(class_videos, filtering_params:, user: current_user).videos
-      .not_hidden.from_active_channels
+    @videos = Video.where(category: ["class", "workshop"])
+      .has_dancer.not_hidden.from_active_channels.recent_trending
       .limit(500)
       .preload(Video.search_includes)
       .load_async
@@ -176,6 +175,6 @@ class VideoSectionsController < ApplicationController
   private
 
   def filtering_params
-    params.permit(:dancer, :leader, :follower, :couple, :orchestra, :watched, :song, :channel, :event, :genre).to_h
+    params.permit(:dancer, :leader, :follower, :couple, :orchestra, :watched, :song, :channel, :event, :genre, :category).to_h
   end
 end

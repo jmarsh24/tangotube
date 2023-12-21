@@ -29,7 +29,6 @@ class Video::FacetBuilder
         .where(dancer_videos: {role: "leader", video_id: @video_relation.select(:id)})
         .group("dancers.name", "dancers.slug", "dancers.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
-        .limit(30)
         .count
     end
   end
@@ -40,7 +39,6 @@ class Video::FacetBuilder
         .where(dancer_videos: {role: "follower", video_id: @video_relation.select(:id)})
         .group("dancers.name", "dancers.slug", "dancers.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "dancers.videos_count DESC")
-        .limit(30)
         .count
     end
   end
@@ -51,7 +49,6 @@ class Video::FacetBuilder
         .joins(song: :orchestra)
         .group("orchestras.name", "orchestras.slug", "orchestras.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "orchestras.videos_count DESC")
-        .limit(30)
         .count
     end
   end
@@ -63,7 +60,6 @@ class Video::FacetBuilder
         .where("LOWER(songs.genre) IN ('tango', 'milonga', 'vals', 'alternative')")
         .group("LOWER(songs.genre)")
         .order("count_all DESC", "LOWER(songs.genre)")
-        .limit(30)
         .count
     end
   end
@@ -73,7 +69,6 @@ class Video::FacetBuilder
       @video_relation
         .group(:upload_date_year)
         .order(upload_date_year: :desc)
-        .limit(30)
         .count
     end
   end
@@ -84,7 +79,6 @@ class Video::FacetBuilder
         .joins(song: :orchestra)
         .group("songs.display_title", "songs.slug", "songs.videos_count")
         .order(Arel.sql("COUNT(*) DESC"), "songs.videos_count DESC")
-        .limit(30)
         .count
     end
   end
@@ -95,7 +89,6 @@ class Video::FacetBuilder
         .joins(:event)
         .group("events.title", "events.slug", "events.videos_count")
         .order("count_all DESC", "events.title")
-        .limit(30)
         .count
     end
   end
@@ -108,7 +101,6 @@ class Video::FacetBuilder
         .joins("INNER JOIN dancers AS follower ON follower.id = couples.partner_id")
         .group("leader.name", "follower.name", "couples.slug")
         .order(Arel.sql("COUNT(couple_videos.id) DESC, leader.name, follower.name"))
-        .limit(30)
         .count("couple_videos.id")
         .map { |(leader_name, follower_name, slug), count| [["#{leader_name} & #{follower_name}", slug], count] }
     end
@@ -120,7 +112,6 @@ class Video::FacetBuilder
         .joins(:channel)
         .group("channels.title", "channels.youtube_slug", "channels.videos_count")
         .order("count_all DESC", "channels.title")
-        .limit(30)
         .count
     end
   end

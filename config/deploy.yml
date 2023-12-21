@@ -9,7 +9,7 @@ servers:
     cmd: bundle exec puma -C config/puma.rb
   worker:
     hosts:
-      - 91.107.226.121
+      - 49.13.145.88
     cmd: bundle exec good_job start
 registry:
   server: ghcr.io
@@ -34,7 +34,7 @@ env:
     NEW_RELIC_ACCOUNT_ID: 3766249
     NEW_RELIC_AGENT_ENABLED: true
     NEW_RELIC_LOG: stdout
-    ENABLED_MAILERS: 1
+    ENABLE_MAILERS: 1
     BASE_URI: tangotube.tv
     CLOUDFLARE_BUCKET: tangotube
     AWS_REGION: eu-central-1
@@ -60,7 +60,6 @@ accessories:
       secret:
         - POSTGRES_PASSWORD
     volumes:
-      - /root/tangotube-db/etc/postgresql/15.4/main/postgresql.conf:/etc/postgresql/15.4/main/postgresql.conf
       - /var/postgres/data:/var/lib/postgresql/data
 
 healthcheck:

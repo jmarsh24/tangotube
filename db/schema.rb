@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_20_224301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_stat_statements"
@@ -29,6 +29,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     "leader",
     "follower",
     "both",
+  ], force: :cascade
+
+  create_enum :video_category, [
+    "performance",
+    "workshop",
+    "class",
+    "demo",
+    "interview",
+    "podcast",
+    "competition",
   ], force: :cascade
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -90,6 +100,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.index ["video_id"], name: "index_clips_on_video_id"
   end
 
+  create_table "contacts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "couple_videos", force: :cascade do |t|
     t.bigint "video_id", null: false
     t.bigint "couple_id", null: false
@@ -97,7 +115,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.datetime "updated_at", null: false
     t.index ["couple_id"], name: "index_couple_videos_on_couple_id"
     t.index ["video_id", "couple_id"], name: "index_couple_videos_on_video_id_and_couple_id", unique: true
-    t.index ["video_id"], name: "index_couple_videos_on_video_id"
   end
 
   create_table "couples", force: :cascade do |t|
@@ -109,7 +126,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.string "slug"
     t.string "unique_couple_id"
     t.index ["dancer_id", "partner_id"], name: "index_couples_on_dancer_id_and_partner_id", unique: true
-    t.index ["dancer_id"], name: "index_couples_on_dancer_id"
     t.index ["partner_id"], name: "index_couples_on_partner_id"
     t.index ["unique_couple_id"], name: "index_couples_on_unique_couple_id"
   end
@@ -121,7 +137,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.datetime "updated_at", null: false
     t.enum "role", enum_type: "role_new"
     t.index ["dancer_id", "video_id"], name: "index_dancer_videos_on_dancer_id_and_video_id", unique: true
-    t.index ["dancer_id"], name: "index_dancer_videos_on_dancer_id"
     t.index ["video_id"], name: "index_dancer_videos_on_video_id"
   end
 
@@ -179,7 +194,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.datetime "updated_at", null: false
     t.index ["featureable_type", "featureable_id"], name: "index_features_on_featureable"
     t.index ["user_id", "featureable_type", "featureable_id"], name: "index_features_on_user_and_featureable", unique: true
-    t.index ["user_id"], name: "index_features_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -189,7 +203,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.string "scope"
     t.datetime "created_at"
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
@@ -258,7 +271,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.text "job_class"
     t.integer "error_event", limit: 2
     t.index ["active_job_id", "created_at"], name: "index_good_jobs_on_active_job_id_and_created_at"
-    t.index ["active_job_id"], name: "index_good_jobs_on_active_job_id"
     t.index ["batch_callback_id"], name: "index_good_jobs_on_batch_callback_id", where: "(batch_callback_id IS NOT NULL)"
     t.index ["batch_id"], name: "index_good_jobs_on_batch_id", where: "(batch_id IS NOT NULL)"
     t.index ["concurrency_key"], name: "index_good_jobs_on_concurrency_key_when_unfinished", where: "(finished_at IS NULL)"
@@ -278,7 +290,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.datetime "updated_at", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
     t.index ["user_id", "likeable_type", "likeable_id"], name: "index_likes_on_user_and_likeable", unique: true
-    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "orchestras", force: :cascade do |t|
@@ -308,7 +319,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["performance_id", "video_id"], name: "index_performance_videos_on_performance_id_and_video_id"
-    t.index ["performance_id"], name: "index_performance_videos_on_performance_id"
     t.index ["video_id"], name: "index_performance_videos_on_video_id"
   end
 
@@ -463,7 +473,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
     t.integer "likes_count", default: 0
     t.integer "watches_count", default: 0
     t.integer "features_count", default: 0
+    t.enum "category", enum_type: "video_category"
     t.index ["acr_response_code"], name: "index_videos_on_acr_response_code"
+    t.index ["category"], name: "index_videos_on_category"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["event_id"], name: "index_videos_on_event_id"
     t.index ["hd"], name: "index_videos_on_hd"
@@ -513,6 +525,35 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
   add_foreign_key "watches", "users"
   add_foreign_key "watches", "videos"
 
+  create_view "video_searches", materialized: true, sql_definition: <<-SQL
+      SELECT videos.id AS video_id,
+      videos.youtube_id,
+      videos.upload_date,
+      videos.description AS video_description,
+      to_tsvector('english'::regconfig, (videos.description)::text) AS video_description_vector,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title,
+      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text), string_agg(DISTINCT (channels.title)::text, ' '::text), string_agg(DISTINCT (songs.title)::text, ' '::text), string_agg(DISTINCT (songs.artist)::text, ' '::text), string_agg(DISTINCT (orchestras.name)::text, ' '::text), string_agg(DISTINCT (events.city)::text, ' '::text), string_agg(DISTINCT (events.title)::text, ' '::text), string_agg(DISTINCT (events.country)::text, ' '::text), NORMALIZE(videos.title)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS search_text
+     FROM ((((((videos
+       LEFT JOIN channels ON ((channels.id = videos.channel_id)))
+       LEFT JOIN songs ON ((songs.id = videos.song_id)))
+       LEFT JOIN events ON ((events.id = videos.event_id)))
+       LEFT JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
+       LEFT JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
+       LEFT JOIN orchestras ON ((orchestras.id = songs.orchestra_id)))
+    GROUP BY videos.id, videos.youtube_id, videos.upload_date, videos.description, videos.title
+    ORDER BY videos.id DESC;
+  SQL
+  add_index "video_searches", ["search_text"], name: "index_video_searches_on_search_text", opclass: :gin_trgm_ops, using: :gin
+  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
+
   create_view "video_scores", materialized: true, sql_definition: <<-SQL
       WITH combined_counts AS (
            SELECT v_1.id AS video_id,
@@ -550,9 +591,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
       (((((((0.5 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.2)::double precision * cc.normalized_likes)) + ((0.15)::double precision * cc.normalized_watches)) + ((0.05)::double precision * cc.normalized_features)) + ((0.05)::double precision * random())) AS score_1,
       (((((((0.15 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.35)::double precision * cc.normalized_likes)) + ((0.35)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.025)::double precision * random())) AS score_2,
       (((((((0.1 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.25)::double precision * cc.normalized_likes)) + ((0.25)::double precision * cc.normalized_watches)) + ((0.15)::double precision * cc.normalized_features)) + ((0.2)::double precision * random())) AS score_3,
-      (((((((0.1 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.2)::double precision * cc.normalized_likes)) + ((0.2)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.1)::double precision * random())) AS score_4,
-      (((((((0.2 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.3)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.05)::double precision * random())) AS score_5,
-      (((((0.5 * ((1)::numeric - ((EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch) / (udr.max_upload_epoch - udr.min_upload_epoch)))))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.15)::double precision * cc.normalized_watches)) + ((0.05)::double precision * cc.normalized_features)) AS score_6
+      (((((((0.2 * (EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch)) / (udr.max_upload_epoch - udr.min_upload_epoch)))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.3)::double precision * cc.normalized_watches)) + ((0.1)::double precision * cc.normalized_features)) + ((0.05)::double precision * random())) AS score_4,
+      (((((0.5 * ((1)::numeric - ((EXTRACT(epoch FROM v.upload_date) - udr.min_upload_epoch) / (udr.max_upload_epoch - udr.min_upload_epoch)))))::double precision + ((0.3)::double precision * cc.normalized_likes)) + ((0.15)::double precision * cc.normalized_watches)) + ((0.05)::double precision * cc.normalized_features)) AS score_5
      FROM ((norm_counts cc
        JOIN videos v ON ((cc.video_id = v.id)))
        CROSS JOIN upload_date_range udr);
@@ -562,36 +602,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163651) do
   add_index "video_scores", ["score_3"], name: "index_video_scores_on_score_3"
   add_index "video_scores", ["score_4"], name: "index_video_scores_on_score_4"
   add_index "video_scores", ["score_5"], name: "index_video_scores_on_score_5"
-  add_index "video_scores", ["score_6"], name: "index_video_scores_on_score_6"
   add_index "video_scores", ["video_id"], name: "index_video_scores_on_video_id", unique: true
-
-  create_view "video_searches", materialized: true, sql_definition: <<-SQL
-      SELECT videos.id AS video_id,
-      videos.youtube_id,
-      videos.upload_date,
-      videos.description AS video_description,
-      to_tsvector('english'::regconfig, (videos.description)::text) AS video_description_vector,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS dancer_names,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (channels.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS channel_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (songs.artist)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS song_artist,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (orchestras.name)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS orchestra_name,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.city)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_city,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.title)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (events.country)::text, ' '::text)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS event_country,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(NORMALIZE(videos.title), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS video_title,
-      TRIM(BOTH FROM lower(unaccent(regexp_replace(concat_ws(' '::text, string_agg(DISTINCT (dancers.name)::text, ' '::text), string_agg(DISTINCT (channels.title)::text, ' '::text), string_agg(DISTINCT (songs.title)::text, ' '::text), string_agg(DISTINCT (songs.artist)::text, ' '::text), string_agg(DISTINCT (orchestras.name)::text, ' '::text), string_agg(DISTINCT (events.city)::text, ' '::text), string_agg(DISTINCT (events.title)::text, ' '::text), string_agg(DISTINCT (events.country)::text, ' '::text), NORMALIZE(videos.title)), '[^\\w\\s]'::text, ' '::text, 'g'::text)))) AS search_text
-     FROM ((((((videos
-       LEFT JOIN channels ON ((channels.id = videos.channel_id)))
-       LEFT JOIN songs ON ((songs.id = videos.song_id)))
-       LEFT JOIN events ON ((events.id = videos.event_id)))
-       LEFT JOIN dancer_videos ON ((dancer_videos.video_id = videos.id)))
-       LEFT JOIN dancers ON ((dancers.id = dancer_videos.dancer_id)))
-       LEFT JOIN orchestras ON ((orchestras.id = songs.orchestra_id)))
-    GROUP BY videos.id, videos.youtube_id, videos.upload_date, videos.description, videos.title
-    ORDER BY videos.id DESC;
-  SQL
-  add_index "video_searches", ["search_text"], name: "index_video_searches_on_search_text", opclass: :gin_trgm_ops, using: :gin
-  add_index "video_searches", ["video_id"], name: "index_video_searches_on_video_id", unique: true
 
 end

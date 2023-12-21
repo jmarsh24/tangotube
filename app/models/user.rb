@@ -39,7 +39,7 @@ class User < ApplicationRecord
   has_many :watched_videos, through: :watches, source: :video
   has_many :recent_searches, dependent: :destroy
 
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :purge_later
 
   validates :email, presence: true, uniqueness: true
   validates_confirmation_of :password
@@ -105,11 +105,19 @@ class User < ApplicationRecord
   end
 
   def tileize_name
-    self.first_name = first_name.strip.titleize if name.present?
-    self.last_name = last_name.strip.titleize if name.present?
+    self.first_name = first_name&.strip&.titleize if name.present?
+    self.last_name = last_name&.strip&.titleize if name.present?
   end
 
   def watch(video)
     watches.create(video:, watched_at: DateTime.now)
+  end
+
+  def avatar_thumbnail(width: 80)
+    if avatar.attached?
+      avatar
+    else
+      Gravatar.new(email).url(width:)
+    end
   end
 end

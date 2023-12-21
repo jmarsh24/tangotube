@@ -64,6 +64,26 @@ en:
       user_avatar: User avatar
     support_button:
       support_tangotube: "💃🏻 Support TangoTube"
+  contacts:
+    create:
+      thank_you_for_reaching_out:
+        Thank you for reaching out! We will get back to
+        you soon.
+      there_was_an_error_with_your_submission:
+        There was an error with your submission.
+        Please check your details and try again.
+    new:
+      contact_form_intro:
+        If you have questions about the project, feature requests,
+        or want to report bugs, I would love to hear from you. Your feedback is invaluable
+        in helping improve and grow this project. Don't hesitate to reach out!
+      contact: Contact Us
+      email_me: Email Me! 📫
+      follow_us_on_social_media: Follow us on social media
+      github: Github
+      send_message: Send message
+      twitter: Twitter
+      youtube: Youtube
   dancer_alt: Dancer alt
   dancers:
     dancer:
@@ -123,9 +143,7 @@ en:
         send: Send
     registrations:
       edit:
-        drag_and_drop_avatar: Drag and drop avatar
         edit_user: Edit User
-        replace_image: Replace image
         save: Save
       new:
         login: Login
@@ -190,9 +208,6 @@ en:
       orchestra_image_alt: Orchestra image of %{orchestra_name}
     top_orchestras:
       orchestras: Orchestras
-  pages:
-    contact:
-      contact_me: Contact Me
   recent_searches:
     index:
       channel_thumbnail_alt: Channel thumbnail of %{channel_title}
@@ -206,9 +221,16 @@ en:
       recent_searches: Recent searches
       video_thumbnail_alt: Video thumbnail of %{video_title}
   related_videos:
+    links:
+      same_channel: Same channel
+      same_dancers: Same dancers
+      same_event: Same event
+      same_orchestra: Same orchestra
+      same_song: Same song
     video:
       video_thumbnail_alt: Video thumbnail of %{video_title}
       views_count: "%{count} views"
+  same_performance: Same performance
   search:
     channels:
       channel:
