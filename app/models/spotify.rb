@@ -8,7 +8,7 @@ class Spotify
   def initialize(client_id: Config.spotify_client_id!, client_secret: Config.spotify_secret_key!)
     @token = get_token(client_id:, client_secret:)
     @conn = Faraday.new do |conn|
-      conn.request :authorization, "Bearer", "BQCD1GTqkKuP0-lyps5fyQaXdWRk2owHJQBqwU27BAIrtpSLIObzzT4ajDBSVswtikgleO7AzIk4ZWeNVUL5exCYuVsG_RhG0tbw0pcLll9DqUZjjZxbaVmEvPMDJZW31bhVyGQdf06e4NIBiOKXQBsYsz_n--H5nw6cLXJ79Gg2CahXartrS-6Wi2TmR-CkB6YBF9ar0a9_iuaP5Zn-VR36xxnkbHpXFUKpDZANSTuvVmqU9HU9M5kO-AKCsjgGMs8Y"
+      conn.request :authorization, "Bearer", "BQC6kHkFi-zb_0aKe3Ps8IfooWWUV1__DdV4rKYPbi22kGZB0KgyJHLfRhyb4tvMpgBHHj5KjKjtPjugkqxcONsCj5_VDUinkb4dFgFQPSwvXPFlfL1uvXyck19I7Q7LryOQEF4AGir29UbMZ_LgEhjw0NNRVkmF1fVUs7v2uJA9EL-DNwUriPnLB_oVXqn1-cGUfQchDS5js54FE9trrK98XBvwuz4TmAvn30VdIEgCfPg0YqE4yENPkEJjffvaVXwX"
       conn.request :json
       conn.response :json
       conn.response :raise_error
@@ -24,6 +24,18 @@ class Spotify
     @conn.post(url, payload)
   rescue Faraday::Error => e
     puts "Error adding tracks to playlist: #{e.message}"
+  end
+
+  def get_album_cover_url(track_id)
+    track_details = @conn.get("#{SPOTIFY_API_URL}/v1/tracks/#{track_id}").body
+
+    album_id = track_details["album"]["id"]
+    album_details = @conn.get("#{SPOTIFY_API_URL}/v1/albums/#{album_id}").body
+
+    album_details["images"].first["url"]
+  rescue Faraday::Error => e
+    puts "Error retrieving album cover URL: #{e.message}"
+    nil
   end
 
   private
