@@ -44,6 +44,8 @@ class Song < ApplicationRecord
   before_validation :normalize_artist
   after_validation :set_slug, only: [:create, :update]
 
+  has_one_attached :album_cover, dependent: :purge_later
+
   scope :active, -> { where(active: true) }
   scope :not_active, -> { where(active: false) }
   scope :most_popular, -> { order(videos_count: :desc) }
